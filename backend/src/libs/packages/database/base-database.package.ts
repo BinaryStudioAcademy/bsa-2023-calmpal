@@ -6,7 +6,7 @@ import { type Config } from '#libs/packages/config/config.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 
 import { DatabaseTableName } from './libs/enums/enums.js';
-import { type Database } from './libs/interfaces/interfaces.js';
+import { type Database } from './libs/types/types.js';
 
 class BaseDatabase implements Database {
   private appConfig: Config;
@@ -54,5 +54,3 @@ class BaseDatabase implements Database {
 }
 
 export { BaseDatabase };
-export { DatabaseTableName } from './libs/enums/enums.js';
-export { type Database } from './libs/interfaces/interfaces.js';

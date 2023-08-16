@@ -50,8 +50,8 @@ const App: React.FC = () => {
           <h2>Users:</h2>
           <h3>Status: {dataStatus}</h3>
           <ul>
-            {users.map((item) => (
-              <li key={item.id}>{item.email}</li>
+            {users.map((user) => (
+              <li key={user.id}>{user.email}</li>
             ))}
           </ul>
         </>

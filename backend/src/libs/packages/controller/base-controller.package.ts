@@ -1,10 +1,10 @@
 import { type Logger } from '#libs/packages/logger/logger.js';
 import { type ServerApplicationRouteParameters } from '#libs/packages/server-application/server-application.js';
 
-import { type Controller } from './libs/interfaces/interface.js';
 import {
   type APIHandler,
   type APIHandlerOptions,
+  type Controller,
   type ControllerRouteParameters,
 } from './libs/types/types.js';
 

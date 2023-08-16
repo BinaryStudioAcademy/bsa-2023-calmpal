@@ -5,8 +5,8 @@ import { HTTPError, HTTPHeader } from '#libs/packages/http/http.js';
 import { type Storage, StorageKey } from '#libs/packages/storage/storage.js';
 import { type ServerErrorResponse, type ValueOf } from '#libs/types/types.js';
 
-import { type HTTPApi } from './libs/interfaces/interfaces.js';
 import {
+  type HTTPApi,
   type HTTPApiOptions,
   type HTTPApiResponse,
 } from './libs/types/types.js';

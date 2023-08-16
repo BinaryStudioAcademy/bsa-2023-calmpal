@@ -1,7 +1,7 @@
-import { type HTTPApiOptions } from '../types/types.js';
+import { type HTTPApiOptions } from './types.js';
 
-interface HTTPApi {
+type HTTPApi = {
   load(path: string, options: HTTPApiOptions): Promise<Response>;
-}
+};
 
 export { type HTTPApi };

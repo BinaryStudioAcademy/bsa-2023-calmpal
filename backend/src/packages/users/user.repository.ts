@@ -1,4 +1,4 @@
-import { type Repository } from '#libs/interfaces/interfaces.js';
+import { type Repository } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/user.model.js';
 
@@ -16,13 +16,13 @@ class UserRepository implements Repository {
   public async findAll(): Promise<UserEntity[]> {
     const users = await this.userModel.query().execute();
 
-    return users.map((item) => UserEntity.initialize(item));
+    return users.map((user) => UserEntity.initialize(user));
   }
 
   public async create(entity: UserEntity): Promise<UserEntity> {
     const { email, passwordSalt, passwordHash } = entity.toNewObject();
 
-    const item = await this.userModel
+    const user = await this.userModel
       .query()
       .insert({
         email,
@@ -32,7 +32,7 @@ class UserRepository implements Repository {
       .returning('*')
       .execute();
 
-    return UserEntity.initialize(item);
+    return UserEntity.initialize(user);
   }
 
   public update(): ReturnType<Repository['update']> {

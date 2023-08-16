@@ -1,13 +1,13 @@
-import { type Entity } from '#libs/interfaces/interfaces.js';
+import { type Entity } from '#libs/types/types.js';
 
 class UserEntity implements Entity {
-  private 'id': number | null;
+  private id: number | null;
 
-  private 'email': string;
+  private email: string;
 
-  private 'passwordHash': string;
+  private passwordHash: string;
 
-  private 'passwordSalt': string;
+  private passwordSalt: string;
 
   private constructor({
     id,

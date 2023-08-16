@@ -75,7 +75,8 @@ rules:
         - class
       next: export
   '@typescript-eslint/consistent-type-definitions':
-    - off
+    - error
+    - type
   '@typescript-eslint/non-nullable-type-assertion-style':
     - off
   '@typescript-eslint/return-await':
@@ -109,6 +110,8 @@ rules:
       ignoreReadonlyClassProperties: true
       ignoreTypeIndexes: true
   unicorn/no-null:
+    - off
+  unicorn/no-array-for-each:
     - off
   simple-import-sort/imports:
     - error

@@ -1,6 +1,6 @@
-# Serenity
+# CalmPal
 
-Mental health app.
+AI-powered mental health app.
 
 ## 1. Introduction
 
@@ -12,7 +12,7 @@ TODO: Add development deployment link
 
 ## 2. Domain
 
-TODO: explain domain
+The product is an AI-based mental health app with the main feature being a highly engaged and supportive chatbot, along with additional features like a meditation function, journal, and mood tracker.
 
 ## 3. Requirements
 
@@ -82,9 +82,7 @@ TODO: add application schema
 
    2.3 helpers
 
-   2.4 interfaces
-
-   2.5 packages - separate features or functionalities
+   2.4 packages - separate features or functionalities
 
    2.6 types
 
@@ -133,7 +131,7 @@ You should use .env.example folder as a reference.
 
 Examples:
 
-- `sn-5: Add User Dashboard`
+- `cp-5: Add User Dashboard`
 
 ### 7.2 Branch Flow
 
@@ -148,9 +146,9 @@ Types:
 
 Examples:
 
-- `task/sn-5-add-user-dashboard`
-- `task/sn-12-add-user-flow`
-- `fix/sn-16-fix-user-flow`
+- `task/cp-5-add-user-dashboard`
+- `task/cp-12-add-user-flow`
+- `fix/cp-16-fix-user-flow`
 
 ### 7.3 Commit Flow
 
@@ -166,9 +164,9 @@ Modifiers:
 
 Examples:
 
-- `sn-5: + title for dashboard`
-- `sn-12: * dashboard title`
-- `sn-16: - dashboard title`
+- `cp-5: + title for dashboard`
+- `cp-12: * dashboard title`
+- `cp-16: - dashboard title`
 
 ## 8. Deployment
 

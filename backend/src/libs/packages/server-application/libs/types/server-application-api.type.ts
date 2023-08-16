@@ -1,9 +1,9 @@
-import { type ServerApplicationRouteParameters } from '../types/types.js';
+import { type ServerApplicationRouteParameters } from './types.js';
 
-interface ServerApplicationApi {
+type ServerApplicationApi = {
   version: string;
   routes: ServerApplicationRouteParameters[];
   generateDoc(title: string): object;
-}
+};
 
 export { type ServerApplicationApi };

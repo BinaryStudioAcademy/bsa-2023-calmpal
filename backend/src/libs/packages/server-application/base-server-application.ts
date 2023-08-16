@@ -21,8 +21,8 @@ import {
 import {
   type ServerApplication,
   type ServerApplicationApi,
-} from './libs/interfaces/interfaces.js';
-import { type ServerApplicationRouteParameters } from './libs/types/types.js';
+  type ServerApplicationRouteParameters,
+} from './libs/types/types.js';
 
 type Constructor = {
   title: string;
@@ -73,35 +73,35 @@ class BaseServerApplication implements ServerApplication {
   }
 
   public addRoutes(parameters: ServerApplicationRouteParameters[]): void {
-    for (const item of parameters) {
-      this.addRoute(item);
-    }
+    parameters.forEach((parameter) => {
+      this.addRoute(parameter);
+    });
   }
 
   public initRoutes(): void {
-    const routers = this.apis.flatMap((item) => item.routes);
+    const routers = this.apis.flatMap((api) => api.routes);
 
     this.addRoutes(routers);
   }
 
   public async initMiddlewares(): Promise<void> {
     await Promise.all(
-      this.apis.map(async (item) => {
+      this.apis.map(async (api) => {
         this.logger.info(
-          `Generate swagger documentation for API ${item.version}`,
+          `Generate swagger documentation for API ${api.version}`,
         );
 
         await this.app.register(swagger, {
           mode: 'static',
           specification: {
-            document: item.generateDoc(
+            document: api.generateDoc(
               this.title,
             ) as StaticDocumentSpec['document'],
           },
         });
 
         await this.app.register(swaggerUi, {
-          routePrefix: `${item.version}/documentation`,
+          routePrefix: `${api.version}/documentation`,
         });
       }),
     );
@@ -135,24 +135,26 @@ class BaseServerApplication implements ServerApplication {
 
   private initErrorHandler(): void {
     this.app.setErrorHandler(
-      (error: FastifyError | ValidationError, _request, replay) => {
+      (error: FastifyError | ValidationError, _request, reply) => {
         if ('isJoi' in error) {
           this.logger.error(`[Validation Error]: ${error.message}`);
 
-          for (const item of error.details) {
-            this.logger.error(`[${item.path.toString()}] — ${item.message}`);
-          }
+          error.details.forEach((detail) => {
+            this.logger.error(
+              `[${detail.path.toString()}] — ${detail.message}`,
+            );
+          });
 
           const response: ServerValidationErrorResponse = {
             errorType: ServerErrorType.VALIDATION,
             message: error.message,
-            details: error.details.map((item) => ({
-              path: item.path,
-              message: item.message,
+            details: error.details.map((detail) => ({
+              path: detail.path,
+              message: detail.message,
             })),
           };
 
-          return replay.status(HTTPCode.UNPROCESSED_ENTITY).send(response);
+          return reply.status(HTTPCode.UNPROCESSED_ENTITY).send(response);
         }
 
         if (error instanceof HTTPError) {
@@ -163,7 +165,7 @@ class BaseServerApplication implements ServerApplication {
             message: error.message,
           };
 
-          return replay.status(error.status).send(response);
+          return reply.status(error.status).send(response);
         }
 
         this.logger.error(error.message);
@@ -173,7 +175,7 @@ class BaseServerApplication implements ServerApplication {
           message: error.message,
         };
 
-        return replay.status(HTTPCode.INTERNAL_SERVER_ERROR).send(response);
+        return reply.status(HTTPCode.INTERNAL_SERVER_ERROR).send(response);
       },
     );
   }

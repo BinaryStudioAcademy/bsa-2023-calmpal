@@ -3,8 +3,10 @@ import swaggerJsdoc from 'swagger-jsdoc';
 import { AppEnvironment } from '#libs/enums/enums.js';
 import { type Config } from '#libs/packages/config/config.js';
 
-import { type ServerApplicationApi } from './libs/interfaces/interfaces.js';
-import { type ServerApplicationRouteParameters } from './libs/types/types.js';
+import {
+  type ServerApplicationApi,
+  type ServerApplicationRouteParameters,
+} from './libs/types/types.js';
 
 class BaseServerApplicationApi implements ServerApplicationApi {
   public version: string;
@@ -20,9 +22,9 @@ class BaseServerApplicationApi implements ServerApplicationApi {
   ) {
     this.version = version;
     this.config = config;
-    this.routes = handlers.map((item) => ({
-      ...item,
-      path: `/api/${this.version}${item.path}`,
+    this.routes = handlers.map((handler) => ({
+      ...handler,
+      path: `/api/${this.version}${handler.path}`,
     }));
   }
 

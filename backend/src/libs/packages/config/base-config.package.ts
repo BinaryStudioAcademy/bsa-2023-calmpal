@@ -4,8 +4,7 @@ import { config } from 'dotenv';
 import { AppEnvironment } from '#libs/enums/enums.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 
-import { type Config } from './libs/interfaces/interfaces.js';
-import { type EnvironmentSchema } from './libs/types/types.js';
+import { type Config, type EnvironmentSchema } from './libs/types/types.js';
 
 class BaseConfig implements Config {
   private logger: Logger;
