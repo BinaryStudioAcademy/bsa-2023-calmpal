@@ -14,7 +14,7 @@ const apiV1 = new BaseServerApplicationApi(
   ...userController.routes,
 );
 const serverApplication = new BaseServerApplication({
-  title: 'Serenity',
+  title: 'CalmPal',
   config,
   logger,
   database,

@@ -8,4 +8,4 @@ services:
     environment:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: postgres
-      POSTGRES_DB: serenity
+      POSTGRES_DB: calmpal
