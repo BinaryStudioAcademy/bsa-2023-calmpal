@@ -1,0 +1,21 @@
+{
+  "name": "shared",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": "18.x.x",
+    "npm": "9.x.x"
+  },
+  "imports": {
+    "#*": "./src/*"
+  },
+  "scripts": {
+    "lint:type": "npx tsc --noEmit",
+    "lint:js": "npx eslint \"src/**/*.ts\"",
+    "build": "tsc && npm run build:copy",
+    "build:copy": "cp -r package.json build"
+  },
+  "dependencies": {
+    "joi": "17.9.2"
+  }
+}
