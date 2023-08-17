@@ -1,0 +1,6 @@
+'*': npm run lint:editor && npm run lint:fs
+'*.{ts,tsx,json,md,scss,html}': prettier --write
+'shared/src/**/*.ts': npm run lint:js -w shared
+'backend/src/**/*.ts': npm run lint:js -w backend
+'frontend/src/**/*.scss': npm run lint:css -w frontend
+'frontend/src/**/*.{ts,tsx}': npm run lint:js -w frontend
