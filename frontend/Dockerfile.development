@@ -1,0 +1,25 @@
+FROM node:18.16.0 as frontend-builder
+
+ARG VITE_APP_API_ORIGIN_URL
+ENV VITE_APP_API_ORIGIN_URL=$VITE_APP_API_ORIGIN_URL
+ARG VITE_APP_PROXY_SERVER_URL
+ENV VITE_APP_PROXY_SERVER_URL=$VITE_APP_PROXY_SERVER_URL
+
+WORKDIR /app
+COPY ./package*.json ./tsconfig.json  ./
+COPY ./shared/ ./shared/
+COPY ./frontend/package.json ./frontend/package.json
+RUN npm ci
+
+COPY ./frontend ./frontend/
+RUN npm run build:frontend
+
+FROM nginx:1.22.0-alpine
+
+COPY ./nginx/nginx.development.conf /etc/nginx/nginx.conf
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=frontend-builder /app/frontend/build/ /usr/share/nginx/html
+
+EXPOSE 80
+
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

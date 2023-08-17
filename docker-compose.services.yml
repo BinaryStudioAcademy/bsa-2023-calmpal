@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  calmpal_db:
+    container_name: calmpal_db
+    image: postgres:15.2
+    environment:
+      - POSTGRES_DB=$(echo "$DB_CONNECTION_STRING" | awk -F[@/:] '{print $8}')
+      - POSTGRES_USER=$(echo "$DB_CONNECTION_STRING" | awk -F[@/:] '{print $4}')
+      - POSTGRES_PASSWORD=$(echo "$DB_CONNECTION_STRING" | awk -F[@/:] '{print $5}')
+    ports:
+      - 5434:5432
+    networks:
+      - calmpal_network
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: on-failure
+
+networks:
+  calmpal_network:
+    driver: bridge
+
+volumes:
+  pgdata:
+    driver: local
