@@ -3,8 +3,8 @@ import React from 'react';
 import { Button, Input, Link, Text, View } from '#libs/components/components';
 import { RootScreenName } from '#libs/enums/enums';
 import { useAppForm } from '#libs/hooks/hooks';
+import { userSignUpValidationSchema } from '#packages/users/libs/validation-schemas/validation-schemas';
 import { type UserSignUpRequestDto } from '#packages/users/users';
-import { userSignUpValidationSchema } from '#validation-schemas/validation-schemas';
 
 import { USER_SIGN_UP_DEFAULT_VALUES } from './libs/constants';
 

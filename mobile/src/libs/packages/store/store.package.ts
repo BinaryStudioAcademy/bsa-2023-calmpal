@@ -7,6 +7,7 @@ import {
 
 import { AppEnvironment } from '#libs/enums/enums';
 import { authApi } from '#packages/auth/auth';
+import { userApi } from '#packages/users/users';
 import { reducer as authReducer } from '#slices/auth/auth';
 
 import { type Config } from '../config/config';
@@ -17,6 +18,7 @@ type RootReducer = {
 
 type ExtraArguments = {
   authApi: typeof authApi;
+  userApi: typeof userApi;
 };
 
 class Store {
@@ -47,6 +49,7 @@ class Store {
   public get extraArguments(): ExtraArguments {
     return {
       authApi,
+      userApi,
     };
   }
 }

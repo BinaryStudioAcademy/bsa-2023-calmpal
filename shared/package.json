@@ -19,8 +19,8 @@
   "scripts": {
     "lint:type": "npx tsc --noEmit",
     "lint:js": "npx eslint \"src/**/*.ts\"",
-    "build": "tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json",
-    "build:copy": "cp -r package.json build/esm && cp -r package.json build/cjs"
+    "build:ts": "tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json",
+    "build": "npm run build:ts"
   },
   "dependencies": {
     "joi": "17.9.2"
