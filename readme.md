@@ -84,7 +84,7 @@ TODO: add application schema
 
    2.4 packages - separate features or functionalities
 
-   2.6 types
+   2.5 types
 
 3. packages - separate app features or functionalities
 
