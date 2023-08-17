@@ -1,0 +1,66 @@
+name: Continuous Delivery
+
+on:
+  push:
+    branches:
+      - development
+    paths:
+      - frontend/**/*.*
+      - backend/**/*.*
+      - shared/**/*.*
+      - .github/workflows/cd.yml
+  workflow_dispatch:
+
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create Deployment
+        uses: chrnorm/deployment-action@v2
+        id: deployment
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment-url: ${{ env.DEVELOPMENT_APP_URL }}
+          environment: ${{ github.ref_name }}
+
+      - name: Checkout Source Code
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push backend image
+        uses: whoan/docker-build-with-cache-action@v5
+        with:
+          image_name: ${{ secrets.ECR_BACKEND_REPOSITORY }}
+          registry: ${{ steps.login-ecr.outputs.registry }}
+          image_tag: ${{ github.sha }}
+          context: ./
+          dockerfile: ./backend/Dockerfile.development
+      - name: Build, tag, and push frontend image
+        uses: whoan/docker-build-with-cache-action@v5
+        with:
+          image_name: ${{ secrets.ECR_FRONTEND_REPOSITORY }}
+          registry: ${{ steps.login-ecr.outputs.registry }}
+          image_tag: ${{ github.sha }}
+          context: ./
+          dockerfile: ./frontend/Dockerfile.development
+          build_extra_args: '--build-arg VITE_APP_API_ORIGIN_URL=/api/v1 --build-arg VITE_APP_PROXY_SERVER_URL=http://localhost:3001'
+
+      - name: Update Deployment Status
+        if: ${{ always() }}
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: '${{ secrets.GITHUB_TOKEN }}'
+          environment-url: ${{ steps.deployment.outputs.environment_url }}
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+          state: ${{ job.status }}
