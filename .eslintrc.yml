@@ -8,6 +8,7 @@ parserOptions:
     - ./shared/tsconfig.json
     - ./backend/tsconfig.json
     - ./frontend/tsconfig.json
+    - ./mobile/tsconfig.json
 
 settings:
   typescript: true

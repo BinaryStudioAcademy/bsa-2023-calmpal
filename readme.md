@@ -88,6 +88,34 @@ TODO: add application schema
 
 3. packages - separate app features or functionalities
 
+### 5.2 Mobile
+
+#### 5.2.1 Technologies
+
+1. [React Native](https://reactnative.dev/) — a mobile library
+2. [Redux](https://redux.js.org/) + [Redux Toolkit](https://redux-toolkit.js.org/) — a state manager
+
+#### 5.2.2 Folder Structure
+
+1. assets - static assets (images)
+2. libs - shared libraries and utilities
+
+   2.1 components - plain react components
+
+   2.2 enums
+
+   2.3 helpers
+
+   2.4 hooks
+
+   2.5 packages - separate features or functionalities
+
+   2.6 types
+
+3. packages - separate app features or functionalities
+4. pages - app pages
+5. slices - redux slices
+
 ### 5.4 Shared Package
 
 #### 5.4.1 Reason
@@ -106,6 +134,7 @@ As we are already using js on both frontend and backend it would be useful to sh
 
 - frontend/.env
 - backend/.env
+- mobile/.env
 
 You should use .env.example folder as a reference.
 
@@ -120,6 +149,8 @@ You should use .env.example folder as a reference.
 5. Run backend: `npm run start:dev -w backend`
 
 6. Run frontend: `npm run start -w frontend`
+
+7. Run mobile: `npm run start -w mobile`
 
 ## 7. Development Flow
 

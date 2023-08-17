@@ -4,3 +4,4 @@
 'backend/src/**/*.ts': npm run lint:js -w backend
 'frontend/src/**/*.scss': npm run lint:css -w frontend
 'frontend/src/**/*.{ts,tsx}': npm run lint:js -w frontend
+'mobile/src/**/*.{ts,tsx}': npm run lint:js -w mobile

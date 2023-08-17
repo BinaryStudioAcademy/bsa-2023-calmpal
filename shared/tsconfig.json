@@ -4,14 +4,12 @@
   "exclude": ["node_modules"],
   "compilerOptions": {
     "target": "ESNext",
-    "module": "ESNext",
     "moduleResolution": "NodeNext",
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
       "#*": ["./src/*"]
     },
-    "outDir": "build",
     "declaration": true
   }
 }

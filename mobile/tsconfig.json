@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.json",
+  "include": ["src"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "moduleResolution": "NodeNext",
+    "skipLibCheck": true,
+    "jsx": "react-native",
+    "baseUrl": ".",
+    "paths": {
+      "#*": ["./src/*"]
+    }
+  }
+}
