@@ -89,14 +89,16 @@ TODO: add application schema
 
 3. packages - separate app features or functionalities
 
-### 5.2 Mobile
+### 5.4 Mobile
 
-#### 5.2.1 Technologies
+This project is mainly focused on Android platform.
+
+#### 5.4.1 Technologies
 
 1. [React Native](https://reactnative.dev/) — a mobile library
 2. [Redux](https://redux.js.org/) + [Redux Toolkit](https://redux-toolkit.js.org/) — a state manager
 
-#### 5.2.2 Folder Structure
+#### 5.4.2 Folder Structure
 
 1. assets - static assets (images)
 2. libs - shared libraries and utilities
@@ -118,13 +120,13 @@ TODO: add application schema
 5. screens - app screens
 6. slices - redux slices
 
-### 5.4 Shared Package
+### 5.5 Shared Package
 
-#### 5.4.1 Reason
+#### 5.5.1 Reason
 
 As we are already using js on both frontend and backend it would be useful to share some contracts and code between them.
 
-#### 5.4.2 Technologies
+#### 5.5.2 Technologies
 
 1. [Joi](https://github.com/sideway/joi) — a schema validator
 
@@ -152,7 +154,7 @@ You should use .env.example folder as a reference.
 
 6. Run frontend: `npm run start:dev -w frontend`
 
-7. Run mobile: `npm run start -w mobile`
+7. Run mobile: `npm run start:dev -w mobile`
 
 ## 7. Development Flow
 
