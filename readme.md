@@ -22,7 +22,115 @@ The product is an AI-based mental health app with the main feature being a highl
 
 ## 4. Database Schema
 
-TODO: add database schema
+```mermaid
+
+erDiagram
+   users {
+      int id PK
+      dateTime created_at
+      dateTime updated_at
+      citext email "unique constraint"
+      text password_hash
+      text password_salt
+      int role_id FK
+   }
+   user_roles {
+      int id PK
+      dateTime created_at
+      dateTime updated_at
+      varchar name
+      varchar key "chatbot and user"
+   }
+   user_details {
+      int id PK
+      dateTime created_at
+      dateTime updated_at
+      int user_id FK
+      varchar full_name
+      int avatar_id FK "may be null if user has no avatar"
+      text survey
+   }
+   files {
+      int id PK
+      dateTime created_at
+      dateTime update_at
+      varchar url
+      varchar content_type
+   }
+   user_preferences {
+      int id PK
+      int user_id FK
+      dateTime created_at
+      dateTime update_at
+      is_notification_allowed boolean "may be altered later"
+      is_meditation_reminder_enabled boolean "may be altered later"
+      are_mood_notifications_emabled boolean "may be altered later"
+      are_notes_reminder_enabled boolean "may be altered later"
+   }
+   chat_topics {
+      int id PK
+      dateTime created_at
+      dateTime update_at
+      varchar name
+      int image_id FK
+   }
+   chats {
+      int id PK
+      dateTime created_at
+      dateTime update_at
+      varchar name
+      int topic_id FK
+   }
+   chat_messages {
+      int id PK
+      varchar name
+      int chat_id FK
+      int sender_id FK "create a user"
+      dateTime created_at
+      dateTime update_at
+      text message
+   }
+   meditation_topics {
+      int id PK
+      dateTime created_at
+      dateTime update_at
+      varchar name
+      int image_id FK
+   }
+   meditation_entries {
+      int id PK
+      dateTime created_at
+      dateTime update_at
+      int topic_id FK
+   }
+   journal_topics {
+      int id PK
+      dateTime created_at
+      dateTime update_at
+      varchar name
+      int image_id FK
+   }
+   journal_entries {
+      int id PK
+      dateTime created_at
+      dateTime update_at
+      int topic_id FK
+      text content
+   }
+   user_roles ||--|{ users : user_role_id
+   user_details ||--|| users : user_id
+   user_preferences ||--|| users : user_id
+   user_details ||..|o files : avatar_id
+   chat_topics ||--|{ chats : chat_topic_id
+   chat_topics ||..|o files : chat_topic_image_id
+   chats ||--|{ chat_messages : chat_id
+   users ||--|{ chat_messages : user_id
+   meditation_topics ||..|o files : meditation_topic_image_id
+   meditation_topics ||--|{ meditation_entries : meditation_topic_id
+   journal_topics ||--|o files : journal_topic_image_id
+   journal_topics ||--|{ journal_entries : journal_topic_id
+
+```
 
 ## 5. Architecture
 
