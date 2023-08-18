@@ -1,0 +1,13 @@
+parserOptions:
+  project:
+    - ./tsconfig.json
+
+extends:
+  - ../.eslintrc.yml
+
+settings:
+  import/ignore:
+    - "node_modules/react-native/index\\.js$"
+
+rules:
+  import/extensions: off
