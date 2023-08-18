@@ -53,7 +53,7 @@ erDiagram
    files {
       int id PK
       dateTime created_at
-      dateTime update_at
+      dateTime updated_at
       varchar url
       varchar content_type
    }
@@ -61,7 +61,7 @@ erDiagram
       int id PK
       int user_id FK
       dateTime created_at
-      dateTime update_at
+      dateTime updated_at
       boolean is_notification_allowed  "may be altered later"
       boolean is_meditation_reminder_enabled "may be altered later"
       boolean are_mood_notifications_emabled "may be altered later"
@@ -70,14 +70,14 @@ erDiagram
    chat_topics {
       int id PK
       dateTime created_at
-      dateTime update_at
+      dateTime updated_at
       varchar name
       int image_id FK
    }
    chats {
       int id PK
       dateTime created_at
-      dateTime update_at
+      dateTime updated_at
       varchar name
       int topic_id FK
    }
@@ -87,33 +87,33 @@ erDiagram
       int chat_id FK
       int sender_id FK "create a user"
       dateTime created_at
-      dateTime update_at
+      dateTime updated_at
       text message
    }
    meditation_topics {
       int id PK
       dateTime created_at
-      dateTime update_at
+      dateTime updated_at
       varchar name
       int image_id FK
    }
    meditation_entries {
       int id PK
       dateTime created_at
-      dateTime update_at
+      dateTime updated_at
       int topic_id FK
    }
    journal_topics {
       int id PK
       dateTime created_at
-      dateTime update_at
+      dateTime updated_at
       varchar name
       int image_id FK
    }
    journal_entries {
       int id PK
       dateTime created_at
-      dateTime update_at
+      dateTime updated_at
       int topic_id FK
       text content
    }
