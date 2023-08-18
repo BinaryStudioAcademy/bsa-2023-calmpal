@@ -11,6 +11,8 @@ on:
 permissions:
   id-token: write
   contents: read
+  deployments: write
+  statuses: write
 
 jobs:
   cd:
