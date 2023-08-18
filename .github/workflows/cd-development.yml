@@ -41,6 +41,8 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+      - uses: hmarr/debug-action@v2
+
       - name: Build, tag, and push backend image
         uses: whoan/docker-build-with-cache-action@v5
         with:
