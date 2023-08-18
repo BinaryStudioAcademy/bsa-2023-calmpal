@@ -8,6 +8,10 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   cd:
     runs-on: ubuntu-latest
