@@ -19,6 +19,7 @@ The product is an AI-based mental health app with the main feature being a highl
 - [NodeJS](https://nodejs.org/en) (18.x.x);
 - [npm](https://www.npmjs.com/) (9.x.x);
 - [PostgreSQL](https://www.postgresql.org/) (15.4)
+- EsLint plugin is not supported - we use additional rules to check the code quality, some of which are not supported by the plugin
 
 ## 4. Database Schema
 
@@ -112,9 +113,10 @@ TODO: add application schema
 
    2.6 types
 
-3. packages - separate app features or functionalities
-4. pages - app pages
-5. slices - redux slices
+3. navigations - app navigators
+4. packages - separate app features or functionalities
+5. screens - app screens
+6. slices - redux slices
 
 ### 5.4 Shared Package
 
