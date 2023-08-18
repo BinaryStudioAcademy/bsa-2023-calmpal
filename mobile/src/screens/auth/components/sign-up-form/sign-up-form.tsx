@@ -39,7 +39,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
         placeholder="Enter your password"
       />
       <Button label="Sign up" onPress={handleFormSubmit} />
-      <Link label="Go to Sign Up" to={RootScreenName.SIGN_UP} />
+      <Link label="Go to Sign In" to={`/${RootScreenName.SIGN_IN}`} />
     </View>
   );
 };

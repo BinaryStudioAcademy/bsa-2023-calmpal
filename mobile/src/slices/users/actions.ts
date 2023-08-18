@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { type AsyncThunkConfig } from '#libs/types/types.js';
-import { type UserGetAllResponseDto } from '#packages/users/users.js';
+import { type AsyncThunkConfig } from '#libs/types/types';
+import { type UserGetAllResponseDto } from '#packages/users/users';
 
-import { name as sliceName } from './users.slice.js';
+import { name as sliceName } from './users.slice';
 
 const loadAll = createAsyncThunk<
   UserGetAllResponseDto,

@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
     alignItems: 'center',
   },
+  label: {
+    color: 'white',
+  },
 });
 
 export { styles };

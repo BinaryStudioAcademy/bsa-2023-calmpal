@@ -13,7 +13,7 @@ type Properties = {
 const Button: React.FC<Properties> = ({ label, onPress }) => {
   return (
     <Pressable style={styles.btn} onPress={onPress}>
-      <Text>{label}</Text>
+      <Text style={styles.label}>{label}</Text>
     </Pressable>
   );
 };

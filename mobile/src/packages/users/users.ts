@@ -1,8 +1,8 @@
-import { config } from '#libs/packages/config/config.js';
-import { http } from '#libs/packages/http/http.js';
-import { storage } from '#libs/packages/storage/storage.js';
+import { config } from '#libs/packages/config/config';
+import { http } from '#libs/packages/http/http';
+import { storage } from '#libs/packages/storage/storage';
 
-import { UserApi } from './users-api.js';
+import { UserApi } from './users-api';
 
 const userApi = new UserApi({
   baseUrl: config.ENV.API.ORIGIN_URL,
@@ -16,5 +16,5 @@ export {
   type UserGetAllResponseDto,
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
-} from './libs/types/types.js';
-export { userSignUpValidationSchema } from './libs/validation-schemas/validation-schemas.js';
+} from './libs/types/types';
+export { userSignUpValidationSchema } from './libs/validation-schemas/validation-schemas';
