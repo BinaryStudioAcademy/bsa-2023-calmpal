@@ -4,18 +4,8 @@ const {
 } = require('../node_modules/@react-native/metro-config');
 const path = require('node:path');
 
-const PATH_TO_WORKSPACE_NODE_MODULES = path.resolve(
-  __dirname,
-  '../node_modules',
-);
-const PATH_TO_SHARED = path.resolve(
-  __dirname,
-  '../node_modules/shared/build/cjs',
-);
-
-const extraNodeModules = {
-  'shared': PATH_TO_SHARED,
-};
+const pathToShared = path.resolve(__dirname, '../shared/build/cjs');
+const pathToWorkspaceNodeModules = path.resolve(__dirname, '../node_modules');
 
 /**
  * Metro configuration
@@ -24,14 +14,7 @@ const extraNodeModules = {
  * @type {import('metro-config').MetroConfig}
  */
 const config = {
-  resolver: {
-    extraNodeModules: new Proxy(extraNodeModules, {
-      get: (target, name) => {
-        return target[name] ?? path.join(PATH_TO_SHARED, name);
-      },
-    }),
-  },
-  watchFolders: [PATH_TO_WORKSPACE_NODE_MODULES, PATH_TO_SHARED],
+  watchFolders: [pathToShared, pathToWorkspaceNodeModules],
 };
 
 module.exports = mergeConfig(getDefaultConfig(__dirname), config);

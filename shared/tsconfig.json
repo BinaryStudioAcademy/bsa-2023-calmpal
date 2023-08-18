@@ -4,7 +4,7 @@
   "exclude": ["node_modules"],
   "compilerOptions": {
     "target": "ESNext",
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "Node16",
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
