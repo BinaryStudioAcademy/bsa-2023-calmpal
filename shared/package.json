@@ -1,7 +1,8 @@
 {
   "name": "shared",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "private": true,
+  "type": "module",
   "engines": {
     "node": "18.x.x",
     "npm": "9.x.x"
@@ -10,17 +11,17 @@
     "#*": "./src/*"
   },
   "exports": {
-    "./build/": {
-      "import": "./build/esm/",
-      "require": "./build/cjs/",
-      "default": "./build/esm/"
+    "./build/*": {
+      "import": "./build/esm/*",
+      "require": "./build/cjs/*",
+      "default": "./build/esm/*"
     }
   },
   "scripts": {
     "lint:type": "npx tsc --noEmit",
     "lint:js": "npx eslint \"src/**/*.ts\"",
-    "build:ts": "tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json",
-    "build": "npm run build:ts"
+    "build:copy": "cp -r package.json build/esm && cp -r package.json build/cjs",
+    "build": "tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json && npm run build:copy"
   },
   "dependencies": {
     "joi": "17.9.2"

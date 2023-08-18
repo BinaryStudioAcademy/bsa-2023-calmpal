@@ -1,5 +1,6 @@
 {
   "name": "backend",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "engines": {
@@ -17,8 +18,8 @@
     "migrate:dev:make": "node --loader ts-paths-esm-loader ../node_modules/knex/bin/cli.js migrate:make -x ts",
     "migrate:dev:down": "node --loader ts-paths-esm-loader ../node_modules/knex/bin/cli.js migrate:down",
     "migrate:dev:rollback": "node --loader ts-paths-esm-loader ../node_modules/knex/bin/cli.js migrate:rollback --all",
-    "build": "tsc && npm run build:copy",
     "build:copy": "cp -r package.json build",
+    "build": "tsc && npm run build:copy",
     "prestart": "npm run migrate",
     "migrate": "knex migrate:latest",
     "start": "node ./src/index.js"
