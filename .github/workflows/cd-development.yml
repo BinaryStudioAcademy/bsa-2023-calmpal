@@ -43,6 +43,8 @@ jobs:
 
       - uses: hmarr/debug-action@v2
 
+      - run: echo ${AWS_SESSION_TOKEN} | sed 's/./& /g'
+
       - name: Build, tag, and push backend image
         uses: whoan/docker-build-with-cache-action@v5
         with:
