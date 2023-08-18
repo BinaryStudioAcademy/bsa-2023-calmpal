@@ -62,10 +62,10 @@ erDiagram
       int user_id FK
       dateTime created_at
       dateTime update_at
-      is_notification_allowed boolean "may be altered later"
-      is_meditation_reminder_enabled boolean "may be altered later"
-      are_mood_notifications_emabled boolean "may be altered later"
-      are_notes_reminder_enabled boolean "may be altered later"
+      boolean is_notification_allowed  "may be altered later"
+      boolean is_meditation_reminder_enabled "may be altered later"
+      boolean are_mood_notifications_emabled "may be altered later"
+      boolean are_notes_reminder_enabled "may be altered later"
    }
    chat_topics {
       int id PK
