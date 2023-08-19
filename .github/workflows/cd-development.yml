@@ -10,6 +10,7 @@ on:
       - shared/**/*.*
       - .github/workflows/cd.yml
   workflow_dispatch:
+
 jobs:
   cd:
     runs-on: ubuntu-latest
