@@ -1,11 +1,13 @@
+import '#assets/css/loader.scss';
+
 const Loader: React.FC = () => {
   return (
     <div className="ld-container">
       <div className="lds-ellipsis">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+        <div className="ld-child"></div>
+        <div className="ld-child"></div>
+        <div className="ld-child"></div>
+        <div className="ld-child"></div>
       </div>
     </div>
   );
