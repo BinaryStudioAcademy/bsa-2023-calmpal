@@ -37,24 +37,25 @@ jobs:
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+      # - name: Login to Amazon ECR
+      #   id: login-ecr
+      #   uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build, tag, and push backend image
         uses: whoan/docker-build-with-cache-action@v5
         with:
           image_name: ${{ secrets.ECR_BACKEND_REPOSITORY }}
-          registry: ${{ steps.login-ecr.outputs.registry }}
+          registry: ${{ secrets.ECR_REGISTRY }}
           image_tag: ${{ github.sha }}
           context: ./
           dockerfile: ./backend/Dockerfile.development
       - name: Build, tag, and push frontend image
         uses: whoan/docker-build-with-cache-action@v5
         with:
+          # username: "${{ steps.AWS_ACCESS_KEY_ID }}"  # no need to provide it if you already logged in with aws-actions/configure-aws-credentials
+          # password: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
           image_name: ${{ secrets.ECR_FRONTEND_REPOSITORY }}
-          registry: ${{ steps.login-ecr.outputs.registry }}
-          session:  "${{ secrets.AWS_SESSION_TOKEN }}"
+          registry: ${{ secrets.ECR_REGISTRY }}
           image_tag: ${{ github.sha }}
           context: ./
           dockerfile: ./frontend/Dockerfile.development
