@@ -14,8 +14,9 @@ const userSignUp = joi.object<UserSignUpRequestDto, true>({
     })
     .required()
     .messages({
+      'any.required': UserValidationMessage.EMAIL_REQUIRED,
+      'string.empty': UserValidationMessage.EMAIL_REQUIRED,
       'string.email': UserValidationMessage.EMAIL_WRONG,
-      'string.empty': UserValidationMessage.EMAIL_REQUIRE,
     }),
   password: joi.string().trim().required(),
 });
