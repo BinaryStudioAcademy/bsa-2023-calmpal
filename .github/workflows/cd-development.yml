@@ -31,7 +31,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@master
+        uses: aws-actions/configure-aws-credentials@2
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_DEPLOY_ROLE }}
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
@@ -41,19 +41,15 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      # - name: Build, tag, and push backend image
-      #   uses: whoan/docker-build-with-cache-action@v5
-      #   with:
-      #     image_name: ${{ secrets.ECR_BACKEND_REPOSITORY }}
-      #     registry: ${{ secrets.ECR_REGISTRY }}
-      #     image_tag: ${{ github.sha }}
-      #     context: ./
-      #     dockerfile: ./backend/Dockerfile.development
       - name: Build, tag, and push backend image
-        run: |
-          docker build -f ./backend/Dockerfile.development -t ${{ github.sha }} .
-          docker tag ${{ github.sha }}:latest ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_BACKEND_REPOSITORY }}:${{ github.sha }}
-          docker push ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_BACKEND_REPOSITORY }}:${{ github.sha }}
+        uses: whoan/docker-build-with-cache-action@v5
+        with:
+          image_name: ${{ secrets.ECR_BACKEND_REPOSITORY }}
+          registry: ${{ steps.login-ecr.outputs.registry }}
+          image_tag: ${{ github.sha }}
+          context: ./
+          dockerfile: ./backend/Dockerfile.development
+
       - name: Build, tag, and push frontend image
         uses: whoan/docker-build-with-cache-action@v6
         with:
