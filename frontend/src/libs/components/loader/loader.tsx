@@ -1,18 +1,13 @@
-type LoaderProperties = {
-  loading: boolean;
-};
-const Loader: React.FC<LoaderProperties> = ({ loading }: LoaderProperties) => {
+const Loader: React.FC = () => {
   return (
-    loading && (
-      <div className="ld-container">
-        <div className="lds-ellipsis">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+    <div className="ld-container">
+      <div className="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
-    )
+    </div>
   );
 };
 
