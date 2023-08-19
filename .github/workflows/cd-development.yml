@@ -41,6 +41,11 @@ jobs:
       #   id: login-ecr
       #   uses: aws-actions/amazon-ecr-login@v1
 
+      # Hello from AWS: WhoAmI
+      - name: Sts GetCallerIdentity
+        run: |
+          aws sts get-caller-identity
+
       - name: Build, tag, and push backend image
         uses: whoan/docker-build-with-cache-action@v5
         with:
