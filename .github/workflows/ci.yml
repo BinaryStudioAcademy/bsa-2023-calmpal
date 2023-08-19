@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  linter:
+  ci:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,24 +32,3 @@ jobs:
       - name: Code Linting
         run: |
           npm run lint
-  build-docker-images:
-    name: Build backend and frontend docker images
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout project
-        uses: actions/checkout@v3
-      - name: Build backend image
-        uses: whoan/docker-build-with-cache-action@v5
-        with:
-          image_name: calmpal-backend
-          push_image_and_stages: false
-          context: ./
-          dockerfile: ./backend/Dockerfile.development
-      - name: Build frontend image
-        uses: whoan/docker-build-with-cache-action@v5
-        with:
-          image_name: calmpal-frontend
-          push_image_and_stages: false
-          context: ./
-          dockerfile: ./frontend/Dockerfile.development
-          build_extra_args: "--build-arg VITE_APP_API_ORIGIN_URL=/api/v1 --build-arg VITE_APP_PROXY_SERVER_URL=http://localhost:3001"
