@@ -29,13 +29,21 @@ const Input = <T extends FieldValues>({
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
 
+  const { value, onChange, onBlur } = field;
+
   const error = errors[name]?.message;
   const hasError = Boolean(error);
 
   return (
     <View>
       <Text>{label}</Text>
-      <TextInput {...field} placeholder={placeholder} style={styles.input} />
+      <TextInput
+        onChangeText={onChange}
+        value={value}
+        onBlur={onBlur}
+        placeholder={placeholder}
+        style={styles.input}
+      />
       <Text>{hasError && (error as string)}</Text>
     </View>
   );
