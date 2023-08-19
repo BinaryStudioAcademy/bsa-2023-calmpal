@@ -55,7 +55,7 @@ jobs:
           context: ./
           dockerfile: ./backend/Dockerfile.development
       - name: Build, tag, and push frontend image
-        uses: whoan/docker-build-with-cache-action@v5
+        uses: whoan/docker-build-with-cache-action@v6
         with:
           # username: "${{ steps.AWS_ACCESS_KEY_ID }}"  # no need to provide it if you already logged in with aws-actions/configure-aws-credentials
           # password: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
