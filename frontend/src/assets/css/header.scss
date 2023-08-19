@@ -1,0 +1,31 @@
+$navbar-bg: #f8f9fa;
+$navbar-shadow: 0 2px 4px #0000001a;
+$navbar-hover-bg: #e2e3e5;
+
+.navbar {
+  margin: 10px;
+  padding: 10px 0;
+  background-color: $navbar-bg;
+  border-radius: 5px;
+  box-shadow: $navbar-shadow;
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10%;
+  padding-left: 10px;
+}
+
+.nav-link {
+  padding: 5px 10px;
+  color: dimgray;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: black;
+  background-color: $navbar-hover-bg;
+}
