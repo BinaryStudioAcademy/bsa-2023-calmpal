@@ -51,7 +51,7 @@ jobs:
       #     dockerfile: ./backend/Dockerfile.development
       - name: Build, tag, and push backend image
         run: |
-          docker build -t ${{ github.sha }} .
+          docker build -f ./backend/Dockerfile.development -t ${{ github.sha }} .
           docker tag ${{ github.sha }}:latest ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_BACKEND_REPOSITORY }}:${{ github.sha }}
           docker push ${{ secrets.ECR_BACKEND_REPOSITORY }}/${{ secrets.ECR_BACKEND_REPOSITORY }}:${{ github.sha }}
       - name: Build, tag, and push frontend image
