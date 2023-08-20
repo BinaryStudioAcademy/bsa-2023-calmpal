@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 
 import { type AppRoute } from '#libs/enums/enums.js';
-import { mergeStyles } from '#libs/helpers/helpers.js';
+import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { type ValueOf } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
@@ -18,7 +18,7 @@ const Link: React.FC<Properties> = ({
   className = '',
 }: Properties) => {
   const { link } = styles;
-  const mergedStyles = mergeStyles(className, link);
+  const mergedStyles = getValidClassNames(className, link);
   return (
     <NavLink className={mergedStyles} to={to}>
       {children}

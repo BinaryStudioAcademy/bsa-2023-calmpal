@@ -1,5 +1,5 @@
 import headerLogo from '#assets/img/logo.svg';
-import { AppRoute } from '#libs/enums/app-route.enum.js';
+import { AppRoute } from '#libs/enums/enums.js';
 
 import { Link } from '../components.js';
 import styles from './styles.module.scss';
