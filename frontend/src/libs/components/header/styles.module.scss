@@ -4,9 +4,9 @@
   align-items: center;
   margin: 10px;
   padding: 10px;
-  background-color: var(--white-pale);
+  background-color: var(--white);
   border-radius: 5px;
-  box-shadow: var(--black-shadow);
+  box-shadow: var(--shadow);
 }
 
 .nav {
@@ -21,5 +21,5 @@
 
 .link:hover {
   color: var(--black);
-  background-color: var(--lightgray);
+  background-color: var(--gray-100);
 }

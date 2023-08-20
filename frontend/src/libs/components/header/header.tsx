@@ -1,4 +1,4 @@
-import headerLogo from '#assets/img/header-logo.svg';
+import headerLogo from '#assets/img/logo.svg';
 import { AppRoute } from '#libs/enums/app-route.enum.js';
 
 import { Link } from '../components.js';
