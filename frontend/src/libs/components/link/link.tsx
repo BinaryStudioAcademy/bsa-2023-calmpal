@@ -16,10 +16,13 @@ const Link: React.FC<Properties> = ({
   children,
   to,
   className = '',
-}: Properties) => (
-  <NavLink className={mergeStyles(className, styles.link)} to={to}>
-    {children}
-  </NavLink>
-);
+}: Properties) => {
+  const { link } = styles;
+  return (
+    <NavLink className={mergeStyles(className, link)} to={to}>
+      {children}
+    </NavLink>
+  );
+};
 
 export { Link };
