@@ -2,13 +2,19 @@ parserOptions:
   project:
     - ./tsconfig.json
 
-extends:
-  - ../.eslintrc.yml
-  - plugin:react-hooks/recommended
-
 settings:
+  react:
+    version: 'detect'
   import/ignore:
     - "node_modules/react-native/index\\.js$"
 
+extends:
+  - ../.eslintrc.yml
+  - plugin:react/recommended
+  - plugin:react-hooks/recommended
+
 rules:
-  import/extensions: off
+  import/extensions:
+    - off
+  react/self-closing-comp:
+    - error
