@@ -1,5 +1,5 @@
 import reactLogo from '#assets/img/react.svg';
-import { Link, Loader, RouterOutlet } from '#libs/components/components.js';
+import { Link, RouterOutlet } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
@@ -27,7 +27,6 @@ const App: React.FC = () => {
 
   return (
     <>
-      <Loader />
       <img src={reactLogo} className="App-logo" width="30" alt="logo" />
 
       <ul className="App-navigation-list">

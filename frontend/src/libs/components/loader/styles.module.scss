@@ -4,10 +4,9 @@ $loader-bg-color: #ffffff80;
 $loader-color: #cceeff;
 
 .container {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  z-index: 9;
   display: flex;
   justify-content: center;
   align-items: center;
