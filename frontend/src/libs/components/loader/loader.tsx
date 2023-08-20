@@ -1,13 +1,13 @@
-import '#assets/css/loader.scss';
+import styles from './styles.module.scss';
 
 const Loader: React.FC = () => {
   return (
-    <div className="ld-container">
-      <div className="lds-ellipsis">
-        <div className="ld-child"></div>
-        <div className="ld-child"></div>
-        <div className="ld-child"></div>
-        <div className="ld-child"></div>
+    <div className={styles.container}>
+      <div className={styles.ellipsis}>
+        <div className={styles.child}></div>
+        <div className={styles.child}></div>
+        <div className={styles.child}></div>
+        <div className={styles.child}></div>
       </div>
     </div>
   );

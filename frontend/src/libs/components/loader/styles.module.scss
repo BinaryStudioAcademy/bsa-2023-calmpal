@@ -1,7 +1,9 @@
+// @import "../../../assets/css/variables.scss";
+
 $loader-bg-color: #ffffff80;
 $loader-color: #cceeff;
 
-.ld-container {
+.container {
   position: fixed;
   top: 0;
   left: 0;
@@ -14,14 +16,14 @@ $loader-color: #cceeff;
   background-color: $loader-bg-color;
 }
 
-.lds-ellipsis {
+.ellipsis {
   position: relative;
   display: inline-block;
   width: 80px;
   height: 80px;
 }
 
-.lds-ellipsis .ld-child {
+.ellipsis .child {
   position: absolute;
   top: 33px;
   width: 13px;
@@ -31,27 +33,27 @@ $loader-color: #cceeff;
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 
-.lds-ellipsis .ld-child:nth-child(1) {
+.ellipsis .child:nth-child(1) {
   left: 8px;
-  animation: lds-ellipsis1 0.6s infinite;
+  animation: ellipsis1 0.6s infinite;
 }
 
-.lds-ellipsis .ld-child:nth-child(2) {
+.ellipsis .child:nth-child(2) {
   left: 8px;
-  animation: lds-ellipsis2 0.6s infinite;
+  animation: ellipsis2 0.6s infinite;
 }
 
-.lds-ellipsis .ld-child:nth-child(3) {
+.ellipsis .child:nth-child(3) {
   left: 32px;
-  animation: lds-ellipsis2 0.6s infinite;
+  animation: ellipsis2 0.6s infinite;
 }
 
-.lds-ellipsis .ld-child:nth-child(4) {
+.ellipsis .child:nth-child(4) {
   left: 56px;
-  animation: lds-ellipsis3 0.6s infinite;
+  animation: ellipsis3 0.6s infinite;
 }
 
-@keyframes lds-ellipsis1 {
+@keyframes ellipsis1 {
   0% {
     transform: scale(0);
   }
@@ -61,7 +63,7 @@ $loader-color: #cceeff;
   }
 }
 
-@keyframes lds-ellipsis3 {
+@keyframes ellipsis3 {
   0% {
     transform: scale(1);
   }
@@ -71,7 +73,7 @@ $loader-color: #cceeff;
   }
 }
 
-@keyframes lds-ellipsis2 {
+@keyframes ellipsis2 {
   0% {
     transform: translate(0, 0);
   }
