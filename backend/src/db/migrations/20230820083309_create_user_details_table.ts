@@ -24,8 +24,6 @@ function up(knex: Knex): Promise<void> {
       .inTable(DatabaseTableName.USERS)
       .onDelete('CASCADE');
     table.string(ColumnName.FULL_NAME).notNullable();
-    table.integer(ColumnName.AVATAR_ID);
-    table.text(ColumnName.SURVEY).notNullable();
     table
       .dateTime(ColumnName.CREATED_AT)
       .notNullable()
