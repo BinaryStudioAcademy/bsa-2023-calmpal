@@ -76,6 +76,14 @@ class BaseConfig implements Config {
           default: null,
         },
       },
+      AUTH: {
+        JWT_SECRET: {
+          doc: 'Secret key for JWT token generation',
+          format: String,
+          env: 'JWT_SECRET',
+          default: null,
+        },
+      },
     });
   }
 }
