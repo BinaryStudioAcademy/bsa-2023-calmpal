@@ -1,7 +1,7 @@
-$text-color: #7c7f89;
+@import url("../../../assets/css/variables.scss");
 
 .link {
-  color: $text-color;
+  color: var(--link-text-color);
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;

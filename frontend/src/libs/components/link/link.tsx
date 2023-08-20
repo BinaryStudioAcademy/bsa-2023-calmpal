@@ -1,9 +1,10 @@
 import { NavLink } from 'react-router-dom';
 
 import { type AppRoute } from '#libs/enums/enums.js';
+import { mergeStyles } from '#libs/helpers/helpers.js';
 import { type ValueOf } from '#libs/types/types.js';
 
-import styles from './link.module.scss';
+import styles from './styles.module.scss';
 
 type Properties = {
   to: ValueOf<typeof AppRoute>;
@@ -11,14 +12,12 @@ type Properties = {
   className?: string;
 };
 
-const stylePatcher = (newStyle: string): string => `${styles.link} ${newStyle}`;
-
 const Link: React.FC<Properties> = ({
   children,
   to,
   className = '',
 }: Properties) => (
-  <NavLink className={stylePatcher(className)} to={to}>
+  <NavLink className={mergeStyles(className, styles.link)} to={to}>
     {children}
   </NavLink>
 );

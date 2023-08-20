@@ -1,7 +1,4 @@
-$navbar-bg: #f8f9fa;
-$navbar-shadow: 0 2px 4px #0000001a;
-$navbar-hover-bg: #e2e3e5;
-$hover-color: #000000;
+@import url("../../../assets/css/variables.scss");
 
 .header {
   display: flex;
@@ -9,9 +6,9 @@ $hover-color: #000000;
   align-items: center;
   margin: 10px;
   padding: 10px;
-  background-color: $navbar-bg;
+  background-color: var(--navbar-bg);
   border-radius: 5px;
-  box-shadow: $navbar-shadow;
+  box-shadow: var(--navbar-shadow);
 }
 
 .nav {
@@ -25,6 +22,6 @@ $hover-color: #000000;
 }
 
 .link:hover {
-  color: $hover-color;
-  background-color: $navbar-hover-bg;
+  color: var(--hover-color);
+  background-color: var(--navbar-hover-bg);
 }
