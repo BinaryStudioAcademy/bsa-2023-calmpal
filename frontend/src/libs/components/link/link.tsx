@@ -9,7 +9,7 @@ import styles from './styles.module.scss';
 type Properties = {
   to: ValueOf<typeof AppRoute>;
   children: React.ReactNode;
-  className?: string;
+  className?: string | undefined;
 };
 
 const Link: React.FC<Properties> = ({
@@ -18,8 +18,9 @@ const Link: React.FC<Properties> = ({
   className = '',
 }: Properties) => {
   const { link } = styles;
+  const mergedStyles = mergeStyles(className, link);
   return (
-    <NavLink className={mergeStyles(className, link)} to={to}>
+    <NavLink className={mergedStyles} to={to}>
       {children}
     </NavLink>
   );
