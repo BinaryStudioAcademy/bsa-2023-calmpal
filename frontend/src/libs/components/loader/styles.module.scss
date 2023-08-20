@@ -1,5 +1,3 @@
-@import url("../../../assets/css/variables.scss");
-
 .container {
   position: absolute;
   top: 0;
@@ -9,7 +7,7 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: var(--loader-bg-color);
+  background-color: var(--white-50);
 }
 
 .ellipsis {
@@ -24,7 +22,7 @@
   top: 33px;
   width: 13px;
   height: 13px;
-  background-color: var(--loader-color);
+  background-color: var(--blue-100);
   border-radius: 0.5;
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
