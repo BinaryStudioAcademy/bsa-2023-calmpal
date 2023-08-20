@@ -1,7 +1,4 @@
-// @import "../../../assets/css/variables.scss";
-
-$loader-bg-color: #ffffff80;
-$loader-color: #cceeff;
+@import url("../../../assets/css/variables.scss");
 
 .container {
   position: absolute;
@@ -12,7 +9,7 @@ $loader-color: #cceeff;
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: $loader-bg-color;
+  background-color: var(--loader-bg-color);
 }
 
 .ellipsis {
@@ -27,7 +24,7 @@ $loader-color: #cceeff;
   top: 33px;
   width: 13px;
   height: 13px;
-  background-color: $loader-color;
+  background-color: var(--loader-color);
   border-radius: 0.5;
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
