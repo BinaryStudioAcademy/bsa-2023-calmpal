@@ -1,4 +1,4 @@
-const AppColors = {
+const AppColor = {
   BLUE_100: '#4E80FF',
   BLUE_200: '#507CEB',
   PINK_100: '#E1A7D5',
@@ -7,6 +7,6 @@ const AppColors = {
   GRAY_200: '#CCDDF3',
   GRAY_300: '#ACB4D0',
   GRAY_400: '#302E36',
-};
+} as const;
 
-export { AppColors };
+export { AppColor };
