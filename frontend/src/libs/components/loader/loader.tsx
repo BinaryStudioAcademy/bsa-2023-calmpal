@@ -1,13 +1,14 @@
 import styles from './styles.module.scss';
 
 const Loader: React.FC = () => {
+  const { container, ellipsis, child } = styles;
   return (
-    <div className={styles.container}>
-      <div className={styles.ellipsis}>
-        <div className={styles.child} />
-        <div className={styles.child} />
-        <div className={styles.child} />
-        <div className={styles.child} />
+    <div className={container}>
+      <div className={ellipsis}>
+        <div className={child} />
+        <div className={child} />
+        <div className={child} />
+        <div className={child} />
       </div>
     </div>
   );
