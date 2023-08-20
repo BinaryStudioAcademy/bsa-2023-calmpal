@@ -17,18 +17,14 @@ const ColumnName = {
 function up(knex: Knex): Promise<void> {
   return knex.schema.createTable(TABLE_NAME, (table) => {
     table.increments(ColumnName.ID).primary();
+    table.integer(ColumnName.USER_ID).unique().notNullable();
     table
       .foreign(ColumnName.USER_ID)
       .references(ColumnName.ID)
       .inTable(DatabaseTableName.USERS)
-      .notNullable()
-      .unique()
       .onDelete('CASCADE');
     table.string(ColumnName.FULL_NAME).notNullable();
-    table
-      .foreign(ColumnName.AVATAR_ID)
-      .references(ColumnName.ID)
-      .inTable(DatabaseTableName.FILES);
+    table.integer(ColumnName.AVATAR_ID);
     table.text(ColumnName.SURVEY).notNullable();
     table
       .dateTime(ColumnName.CREATED_AT)
