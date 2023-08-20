@@ -14,6 +14,10 @@ body {
 }
 
 #root {
+  --toastify-color-error: #d51a52;
+  --toastify-icon-color-error: var(--toastify-color-error);
+  --toastify-color-progress-error: var(--toastify-color-error);
+
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -30,4 +34,14 @@ body {
   border: 0;
   clip: rect(0 0 0 0);
   clip-path: inset(100%);
+}
+
+.Toastify__toast--error {
+  color: #222222;
+  font-weight: 400;
+  font-size: 12px;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  line-height: normal;
+  border-radius: 20px;
 }

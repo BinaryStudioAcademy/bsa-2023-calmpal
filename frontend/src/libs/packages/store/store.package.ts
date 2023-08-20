@@ -7,6 +7,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import { AppEnvironment } from '#libs/enums/enums.js';
 import { type Config } from '#libs/packages/config/config.js';
+import { errorHandlingMiddleware } from '#middlewares/errorHandling/error-handling-middleware.js';
 import { authApi } from '#packages/auth/auth.js';
 import { userApi } from '#packages/users/users.js';
 import { reducer as authReducer } from '#slices/auth/auth.js';
@@ -38,13 +39,14 @@ class Store {
         auth: authReducer,
         users: usersReducer,
       },
-      middleware: (getDefaultMiddleware) => {
-        return getDefaultMiddleware({
+      middleware: (getDefaultMiddleware) => [
+        ...getDefaultMiddleware({
           thunk: {
             extraArgument: this.extraArguments,
           },
-        });
-      },
+        }),
+        errorHandlingMiddleware,
+      ],
     });
   }
 
