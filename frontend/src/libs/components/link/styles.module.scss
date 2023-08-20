@@ -1,6 +1,9 @@
 @import url("../../../assets/css/variables.scss");
 
 .link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: var(--link-text-color);
   text-decoration: none;
   border-radius: 5px;

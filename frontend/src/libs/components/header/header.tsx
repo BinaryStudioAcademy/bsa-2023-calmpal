@@ -9,7 +9,7 @@ const Header: React.FC = () => {
   return (
     <header className={header}>
       <Link to={AppRoute.ROOT}>
-        <img src={headerLogo} width="40" alt="logo" />
+        <img src={headerLogo} width="45" alt="logo" />
       </Link>
       <nav className={nav}>
         <Link className={link} to={AppRoute.SIGN_IN}>
