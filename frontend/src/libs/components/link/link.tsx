@@ -18,8 +18,8 @@ const Link: React.FC<Properties> = ({
   className = '',
 }: Properties) => {
   const { link } = styles;
-  const mergedStyles =
-    typeof className === 'string' ? mergeStyles(className, link) : link;
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  const mergedStyles = mergeStyles(className ?? '', link);
   return (
     <NavLink className={mergedStyles} to={to}>
       {children}
