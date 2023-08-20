@@ -18,7 +18,8 @@ const Link: React.FC<Properties> = ({
   className = '',
 }: Properties) => {
   const { link } = styles;
-  const mergedStyles = mergeStyles(className, link);
+  const mergedStyles =
+    typeof className === 'string' ? mergeStyles(className, link) : link;
   return (
     <NavLink className={mergedStyles} to={to}>
       {children}
