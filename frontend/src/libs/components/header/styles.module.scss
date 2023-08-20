@@ -1,14 +1,12 @@
-@import url("../../../assets/css/variables.scss");
-
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 10px;
   padding: 10px;
-  background-color: var(--navbar-bg);
+  background-color: var(--white-pale);
   border-radius: 5px;
-  box-shadow: var(--navbar-shadow);
+  box-shadow: var(--black-shadow);
 }
 
 .nav {
@@ -22,6 +20,6 @@
 }
 
 .link:hover {
-  color: var(--hover-color);
-  background-color: var(--navbar-hover-bg);
+  color: var(--black);
+  background-color: var(--lightgray);
 }

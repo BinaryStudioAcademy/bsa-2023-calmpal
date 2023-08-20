@@ -1,6 +1,4 @@
-type Style = string | undefined;
-
-const mergeStyles = (newStyle: Style, defaultStyle: Style): string =>
+const mergeStyles = (newStyle?: string, defaultStyle?: string): string =>
   `${defaultStyle ?? ''} ${newStyle ?? ''}`;
 
 export { mergeStyles };
