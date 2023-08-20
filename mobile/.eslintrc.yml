@@ -6,7 +6,7 @@ settings:
   react:
     version: 'detect'
   import/ignore:
-    - "node_modules/react-native/index\\.js$"
+    - 'react-native'
 
 extends:
   - ../.eslintrc.yml
