@@ -22,4 +22,14 @@ const signUp = createAsyncThunk<
   return response;
 });
 
-export { signUp };
+const getUser = createAsyncThunk<
+  UserSignUpResponseDto,
+  undefined,
+  AsyncThunkConfig
+>(`${sliceName}/get-user`, (_, { extra }) => {
+  const { authApi } = extra;
+
+  return authApi.getUser();
+});
+
+export { getUser, signUp };

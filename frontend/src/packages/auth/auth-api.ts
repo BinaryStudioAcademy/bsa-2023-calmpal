@@ -3,6 +3,7 @@ import { BaseHttpApi } from '#libs/packages/api/api.js';
 import { type HTTP } from '#libs/packages/http/http.js';
 import { type Storage } from '#libs/packages/storage/storage.js';
 import {
+  type UserGetAllItemResponseDto,
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
 } from '#packages/users/users.js';
@@ -34,6 +35,19 @@ class AuthApi extends BaseHttpApi {
     );
 
     return await response.json<UserSignUpResponseDto>();
+  }
+
+  public async getUser(): Promise<UserGetAllItemResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(AuthApiPath.USER, {}),
+      {
+        method: 'GET',
+        contentType: ContentType.JSON,
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<UserGetAllItemResponseDto>();
   }
 }
 
