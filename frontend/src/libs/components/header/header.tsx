@@ -6,15 +6,15 @@ import styles from './styles.module.scss';
 
 const Header: React.FC = () => {
   return (
-    <header className={styles.header}>
-      <nav className={styles.nav}>
+    <header className={styles['header']}>
+      <nav className={styles['nav']}>
         <Link to={AppRoute.ROOT}>
-          <div className={styles.image}>
+          <div className={styles['image']}>
             <img src={logo} alt="logo" />
           </div>
         </Link>
       </nav>
-      <nav className={styles.nav}>
+      <nav className={styles['nav']}>
         <Link to={AppRoute.SIGN_IN}>Sign In</Link>
       </nav>
     </header>

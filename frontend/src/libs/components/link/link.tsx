@@ -17,7 +17,7 @@ const Link: React.FC<Properties> = ({
   to,
   className = '',
 }: Properties) => {
-  const classNames = getValidClassNames(className, styles.link);
+  const classNames = getValidClassNames(className, styles['link']);
   return (
     <NavLink className={classNames} to={to}>
       {children}
