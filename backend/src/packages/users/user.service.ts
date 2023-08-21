@@ -15,14 +15,18 @@ class UserService implements Service {
     this.userRepository = userRepository;
   }
 
-  public async find(id: number): Promise<UserSignUpResponseDto | null> {
-    const item = await this.userRepository.find(id);
+  public find(): ReturnType<Service['find']> {
+    return Promise.resolve(null);
+  }
 
-    if (!item) {
+  public async findById(id: number): Promise<UserSignUpResponseDto | null> {
+    const user = await this.userRepository.findById(id);
+
+    if (!user) {
       return null;
     }
 
-    return item.toObject();
+    return user.toObject();
   }
 
   public async findAll(): Promise<UserGetAllResponseDto> {

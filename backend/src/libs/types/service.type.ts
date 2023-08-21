@@ -1,5 +1,5 @@
 type Service<T = unknown> = {
-  find(id: number): Promise<T>;
+  find(): Promise<T>;
   findAll(): Promise<{
     items: T[];
   }>;

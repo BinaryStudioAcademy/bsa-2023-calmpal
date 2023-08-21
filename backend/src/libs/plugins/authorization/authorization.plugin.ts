@@ -31,7 +31,7 @@ const authorization = fp<PluginOptions>((fastify, { services }, done) => {
 
     const { authService, userService } = services;
     const { id } = await authService.verifyToken(token);
-    const authorizedUser = await userService.find(id);
+    const authorizedUser = await userService.findById(id);
 
     if (!authorizedUser) {
       throw new AuthError({ message: ExceptionMessage.INVALID_TOKEN });
