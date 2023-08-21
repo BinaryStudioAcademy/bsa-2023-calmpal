@@ -1,0 +1,46 @@
+import fp from 'fastify-plugin';
+
+import { ExceptionMessage } from '#libs/enums/enums.js';
+import { AuthError } from '#libs/exceptions/exceptions.js';
+import { isWhiteRoute } from '#libs/packages/server-application/libs/helpers/helpers.js';
+import { type AuthService } from '#packages/auth/auth.service.js';
+import { type UserService } from '#packages/users/user.service.js';
+
+type PluginOptions = {
+  services: {
+    userService: UserService;
+    authService: AuthService;
+  };
+};
+
+const authorization = fp<PluginOptions>((fastify, { services }, done) => {
+  fastify.decorateRequest('user', null);
+
+  fastify.addHook('onRequest', async (request) => {
+    if (isWhiteRoute(request.routerPath)) {
+      return;
+    }
+
+    const [, token] = request.headers.authorization?.split(' ') ?? [];
+
+    if (!token) {
+      throw new AuthError({
+        message: ExceptionMessage.NOT_PROVIDED_TOKEN,
+      });
+    }
+
+    const { authService, userService } = services;
+    const { id } = await authService.verifyToken(token);
+    const authorizedUser = await userService.find(id);
+
+    if (!authorizedUser) {
+      throw new AuthError({ message: ExceptionMessage.INVALID_TOKEN });
+    }
+
+    request.user = authorizedUser;
+  });
+
+  done();
+});
+
+export { authorization };
