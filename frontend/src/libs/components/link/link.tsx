@@ -8,7 +8,7 @@ type Properties = {
   children: React.ReactNode;
 };
 
-const Link: React.FC<Properties> = ({ children, to }: Properties) => (
+const Link: React.FC<Properties> = ({ children, to }) => (
   <NavLink to={to}>{children}</NavLink>
 );
 
