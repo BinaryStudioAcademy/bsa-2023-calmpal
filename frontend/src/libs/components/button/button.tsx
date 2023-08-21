@@ -3,9 +3,8 @@ type Properties = {
   type?: 'button' | 'submit';
 };
 
-const Button: React.FC<Properties> = ({
-  type = 'button',
-  label,
-}: Properties) => <button type={type}>{label}</button>;
+const Button: React.FC<Properties> = ({ type = 'button', label }) => (
+  <button type={type}>{label}</button>
+);
 
 export { Button };
