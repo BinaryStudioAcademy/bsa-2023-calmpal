@@ -104,6 +104,8 @@ rules:
   '@typescript-eslint/semi':
     - error
     - always
+  '@typescript-eslint/dot-notation':
+    - off
   '@typescript-eslint/no-magic-numbers':
     - error
     - ignoreEnums: true
