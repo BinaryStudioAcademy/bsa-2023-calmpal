@@ -32,8 +32,12 @@ class AuthApi extends BaseHttpApi {
         hasAuth: false,
       },
     );
+    const parsedResponse = await response.json<UserSignUpResponseDto>();
 
-    return await response.json<UserSignUpResponseDto>();
+    // Saving the token into the local storage
+    localStorage.setItem('token', parsedResponse.token);
+
+    return parsedResponse;
   }
 }
 
