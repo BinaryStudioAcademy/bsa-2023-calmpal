@@ -27,24 +27,32 @@ const Input = <T extends FieldValues>({
   name,
   placeholder,
 }: Properties<T>): JSX.Element => {
-  const { field } = useFormController({ name, control });
+  const { field, fieldState } = useFormController({ name, control });
 
   const { value, onChange, onBlur } = field;
 
   const error = errors[name]?.message;
   const hasError = Boolean(error);
 
+  const isFieldTouched = fieldState.isDirty;
+  const isFieldFilled = !!value;
+
   return (
     <View>
-      <Text>{label}</Text>
+      <Text style={styles.label}>{label}</Text>
       <TextInput
         onChangeText={onChange}
         value={value}
         onBlur={onBlur}
         placeholder={placeholder}
-        style={styles.input}
+        style={[
+          styles.input,
+          !hasError && (isFieldTouched || isFieldFilled) && styles.filledInput,
+          hasError && styles.errorInput,
+        ]}
+        placeholderTextColor={styles.placeholder.color}
       />
-      <Text>{hasError && (error as string)}</Text>
+      <Text style={styles.errorText}>{hasError && (error as string)}</Text>
     </View>
   );
 };
