@@ -9,7 +9,9 @@ const Header: React.FC = () => {
     <header className={styles.header}>
       <nav className={styles.nav}>
         <Link to={AppRoute.ROOT}>
-          <img src={logo} width={56} height={56} alt="logo" />
+          <div className={styles.image}>
+            <img src={logo} alt="logo" />
+          </div>
         </Link>
       </nav>
       <nav className={styles.nav}>
