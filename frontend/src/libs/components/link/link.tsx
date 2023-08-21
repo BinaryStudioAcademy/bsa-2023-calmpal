@@ -12,11 +12,7 @@ type Properties = {
   className?: string;
 };
 
-const Link: React.FC<Properties> = ({
-  children,
-  to,
-  className = '',
-}: Properties) => {
+const Link: React.FC<Properties> = ({ children, to, className = '' }) => {
   const classNames = getValidClassNames(className, styles['link']);
   return (
     <NavLink className={classNames} to={to}>
