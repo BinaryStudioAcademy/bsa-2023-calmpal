@@ -5,8 +5,8 @@ import {
   Input,
   Label,
   Link,
+  ScrollView,
   Text,
-  View,
 } from '#libs/components/components';
 import { RootScreenName } from '#libs/enums/enums';
 import { useAppForm, useCallback } from '#libs/hooks/hooks';
@@ -31,11 +31,21 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 
   return (
     <React.Fragment>
-      <View style={styles.formContainer}>
+      <ScrollView
+        style={styles.formContainer}
+        showsVerticalScrollIndicator={false}
+      >
         <Label />
         <Text style={styles.titleText}>
           Create a free account to save your preferences
         </Text>
+        <Input
+          control={control}
+          errors={errors}
+          label="Name"
+          name="name"
+          placeholder="Enter your full name"
+        />
         <Input
           control={control}
           errors={errors}
@@ -60,7 +70,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
           }
           to={`/${RootScreenName.SIGN_IN}`}
         />
-      </View>
+      </ScrollView>
     </React.Fragment>
   );
 };
