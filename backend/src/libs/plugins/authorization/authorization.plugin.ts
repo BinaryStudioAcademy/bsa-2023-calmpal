@@ -2,6 +2,7 @@ import fp from 'fastify-plugin';
 
 import { ExceptionMessage } from '#libs/enums/enums.js';
 import { AuthError } from '#libs/exceptions/exceptions.js';
+import { ControllerHook } from '#libs/packages/controller/controller.js';
 import { checkIsWhiteRoute } from '#libs/packages/server-application/server-application.js';
 import { type AuthService } from '#packages/auth/auth.service.js';
 import { type UserService } from '#packages/users/user.service.js';
@@ -16,7 +17,7 @@ type PluginOptions = {
 const authorization = fp<PluginOptions>((fastify, { services }, done) => {
   fastify.decorateRequest('user', null);
 
-  fastify.addHook('onRequest', async (request) => {
+  fastify.addHook(ControllerHook.ON_REQUEST, async (request) => {
     if (checkIsWhiteRoute(request.routerPath)) {
       return;
     }
