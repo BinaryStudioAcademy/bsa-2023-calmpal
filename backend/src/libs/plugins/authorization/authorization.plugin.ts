@@ -25,7 +25,7 @@ const authorization = fp<PluginOptions>((fastify, { services }, done) => {
 
     if (!token) {
       throw new AuthError({
-        message: ExceptionMessage.NOT_PROVIDED_TOKEN,
+        message: ExceptionMessage.UNAUTHORIZED_USER,
       });
     }
 
