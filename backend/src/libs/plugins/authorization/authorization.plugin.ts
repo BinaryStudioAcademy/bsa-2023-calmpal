@@ -2,7 +2,7 @@ import fp from 'fastify-plugin';
 
 import { ExceptionMessage } from '#libs/enums/enums.js';
 import { AuthError } from '#libs/exceptions/exceptions.js';
-import { isWhiteRoute } from '#libs/packages/server-application/libs/helpers/helpers.js';
+import { isWhiteRoute } from '#libs/packages/server-application/server-application.js';
 import { type AuthService } from '#packages/auth/auth.service.js';
 import { type UserService } from '#packages/users/user.service.js';
 

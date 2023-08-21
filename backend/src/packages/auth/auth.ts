@@ -8,3 +8,4 @@ const authService = new AuthService(userService);
 const authController = new AuthController(logger, authService);
 
 export { authController, authService };
+export { verifyToken } from './libs/helpers/helpers.js';
