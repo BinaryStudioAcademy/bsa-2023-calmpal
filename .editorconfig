@@ -11,5 +11,3 @@ charset = utf-8
 [*.md]
 indent_size = unset
 
-[/mobile/Gemfile.lock]
-indent_size = unset
