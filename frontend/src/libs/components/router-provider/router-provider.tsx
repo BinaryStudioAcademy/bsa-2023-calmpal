@@ -8,7 +8,7 @@ type Properties = {
   routes: RouteObject[];
 };
 
-const RouterProvider: React.FC<Properties> = ({ routes }: Properties) => (
+const RouterProvider: React.FC<Properties> = ({ routes }) => (
   <LibraryRouterProvider router={createBrowserRouter(routes)} />
 );
 
