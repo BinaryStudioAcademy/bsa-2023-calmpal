@@ -12,11 +12,14 @@ import { type Config } from '#libs/packages/config/config.js';
 import { type Database } from '#libs/packages/database/database.js';
 import { HTTPCode, HTTPError } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
+import { authorization as authorizationPlugin } from '#libs/plugins/plugins.js';
 import {
   type ServerCommonErrorResponse,
   type ServerValidationErrorResponse,
   type ValidationSchema,
 } from '#libs/types/types.js';
+import { authService } from '#packages/auth/auth.js';
+import { userService } from '#packages/users/users.js';
 
 import {
   type ServerApplication,
@@ -107,6 +110,15 @@ class BaseServerApplication implements ServerApplication {
     );
   }
 
+  private async initPlugins(): Promise<void> {
+    await this.app.register(authorizationPlugin, {
+      services: {
+        authService,
+        userService,
+      },
+    });
+  }
+
   private async initServe(): Promise<void> {
     const staticPath = join(
       dirname(fileURLToPath(import.meta.url)),
@@ -186,6 +198,8 @@ class BaseServerApplication implements ServerApplication {
     await this.initServe();
 
     await this.initMiddlewares();
+
+    await this.initPlugins();
 
     this.initValidationCompiler();
 
