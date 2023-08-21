@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noPropertyAccessFromIndexSignature": true
   }
 }
