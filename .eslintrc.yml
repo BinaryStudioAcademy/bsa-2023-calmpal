@@ -8,6 +8,7 @@ parserOptions:
     - ./shared/tsconfig.json
     - ./backend/tsconfig.json
     - ./frontend/tsconfig.json
+    - ./mobile/tsconfig.json
 
 settings:
   typescript: true
@@ -103,6 +104,8 @@ rules:
   '@typescript-eslint/semi':
     - error
     - always
+  '@typescript-eslint/dot-notation':
+    - off
   '@typescript-eslint/no-magic-numbers':
     - error
     - ignoreEnums: true

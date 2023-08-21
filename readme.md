@@ -19,10 +19,119 @@ The product is an AI-based mental health app with the main feature being a highl
 - [NodeJS](https://nodejs.org/en) (18.x.x);
 - [npm](https://www.npmjs.com/) (9.x.x);
 - [PostgreSQL](https://www.postgresql.org/) (15.4)
+- EsLint plugin is not supported - we use additional rules to check the code quality, some of which are not supported by the plugin
 
 ## 4. Database Schema
 
-TODO: add database schema
+```mermaid
+
+erDiagram
+   users {
+      int id PK
+      dateTime created_at
+      dateTime updated_at
+      citext email "unique constraint"
+      text password_hash
+      text password_salt
+      int role_id FK
+   }
+   user_roles {
+      int id PK
+      dateTime created_at
+      dateTime updated_at
+      varchar name
+      varchar key "chatbot and user"
+   }
+   user_details {
+      int id PK
+      dateTime created_at
+      dateTime updated_at
+      int user_id FK
+      varchar full_name
+      int avatar_id FK "may be null if user has no avatar"
+      text survey
+   }
+   files {
+      int id PK
+      dateTime created_at
+      dateTime updated_at
+      varchar url
+      varchar content_type
+   }
+   user_preferences {
+      int id PK
+      int user_id FK
+      dateTime created_at
+      dateTime updated_at
+      boolean is_notification_allowed  "may be altered later"
+      boolean is_meditation_reminder_enabled "may be altered later"
+      boolean are_mood_notifications_emabled "may be altered later"
+      boolean are_notes_reminder_enabled "may be altered later"
+   }
+   chat_topics {
+      int id PK
+      dateTime created_at
+      dateTime updated_at
+      varchar name
+      int image_id FK
+   }
+   chats {
+      int id PK
+      dateTime created_at
+      dateTime updated_at
+      varchar name
+      int topic_id FK
+   }
+   chat_messages {
+      int id PK
+      varchar name
+      int chat_id FK
+      int sender_id FK "create a user"
+      dateTime created_at
+      dateTime updated_at
+      text message
+   }
+   meditation_topics {
+      int id PK
+      dateTime created_at
+      dateTime updated_at
+      varchar name
+      int image_id FK
+   }
+   meditation_entries {
+      int id PK
+      dateTime created_at
+      dateTime updated_at
+      int topic_id FK
+   }
+   journal_topics {
+      int id PK
+      dateTime created_at
+      dateTime updated_at
+      varchar name
+      int image_id FK
+   }
+   journal_entries {
+      int id PK
+      dateTime created_at
+      dateTime updated_at
+      int topic_id FK
+      text content
+   }
+   user_roles ||--|{ users : user_role_id
+   user_details ||--|| users : user_id
+   user_preferences ||--|| users : user_id
+   user_details ||..|o files : avatar_id
+   chat_topics ||--|{ chats : chat_topic_id
+   chat_topics ||..|o files : chat_topic_image_id
+   chats ||--|{ chat_messages : chat_id
+   users ||--|{ chat_messages : user_id
+   meditation_topics ||..|o files : meditation_topic_image_id
+   meditation_topics ||--|{ meditation_entries : meditation_topic_id
+   journal_topics ||--|o files : journal_topic_image_id
+   journal_topics ||--|{ journal_entries : journal_topic_id
+
+```
 
 ## 5. Architecture
 
@@ -88,13 +197,44 @@ TODO: add application schema
 
 3. packages - separate app features or functionalities
 
-### 5.4 Shared Package
+### 5.4 Mobile
 
-#### 5.4.1 Reason
+This project is mainly focused on Android platform.
+
+#### 5.4.1 Technologies
+
+1. [React Native](https://reactnative.dev/) — a mobile library
+2. [Redux](https://redux.js.org/) + [Redux Toolkit](https://redux-toolkit.js.org/) — a state manager
+
+#### 5.4.2 Folder Structure
+
+1. assets - static assets (images)
+2. libs - shared libraries and utilities
+
+   2.1 components - plain react components
+
+   2.2 enums
+
+   2.3 helpers
+
+   2.4 hooks
+
+   2.5 packages - separate features or functionalities
+
+   2.6 types
+
+3. navigations - app navigators
+4. packages - separate app features or functionalities
+5. screens - app screens
+6. slices - redux slices
+
+### 5.5 Shared Package
+
+#### 5.5.1 Reason
 
 As we are already using js on both frontend and backend it would be useful to share some contracts and code between them.
 
-#### 5.4.2 Technologies
+#### 5.5.2 Technologies
 
 1. [Joi](https://github.com/sideway/joi) — a schema validator
 
@@ -106,6 +246,7 @@ As we are already using js on both frontend and backend it would be useful to sh
 
 - frontend/.env
 - backend/.env
+- mobile/.env
 
 You should use .env.example folder as a reference.
 
@@ -119,7 +260,9 @@ You should use .env.example folder as a reference.
 
 5. Run backend: `npm run start:dev -w backend`
 
-6. Run frontend: `npm run start -w frontend`
+6. Run frontend: `npm run start:dev -w frontend`
+
+7. Run mobile: `npm run start:dev -w mobile`
 
 ## 7. Development Flow
 
