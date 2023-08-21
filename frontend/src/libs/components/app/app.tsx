@@ -2,7 +2,15 @@ import home from '#assets/img/home.svg';
 import reactLogo from '#assets/img/react.svg';
 import { Header, Link, RouterOutlet } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/enums.js';
-import { useAppDispatch, useEffect, useLocation } from '#libs/hooks/hooks.js';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useEffect,
+  useLocation,
+  useNavigate,
+} from '#libs/hooks/hooks.js';
+import { StorageKey } from '#libs/packages/storage/storage.js';
+import { actions as authActions } from '#slices/auth/auth.js';
 import { actions as userActions } from '#slices/users/users.js';
 
 import { Sidebar } from '../sidebar/sidebar.js';
@@ -11,6 +19,15 @@ import styles from './styles.module.scss';
 const App: React.FC = () => {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { users, dataStatus, user, userDataStatus } = useAppSelector(
+    ({ users, auth }) => ({
+      users: users.users,
+      dataStatus: users.dataStatus,
+      user: auth.user,
+      userDataStatus: auth.dataStatus,
+    }),
+  );
 
   const isRoot = pathname === AppRoute.ROOT;
 
@@ -19,6 +36,17 @@ const App: React.FC = () => {
       void dispatch(userActions.loadAll());
     }
   }, [isRoot, dispatch]);
+
+  useEffect(() => {
+    if (!localStorage.getItem(StorageKey.TOKEN)) {
+      navigate(AppRoute.SIGN_IN);
+    }
+    void dispatch(authActions.getUser())
+      .unwrap()
+      .catch(() => {
+        navigate(AppRoute.SIGN_IN);
+      });
+  }, []);
 
   return (
     <div className={styles['app-container']}>
