@@ -25,7 +25,11 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
             children: [
               {
                 path: AppRoute.ROOT,
-                element: <ProtectedRoute component={Root} />,
+                element: (
+                  <ProtectedRoute>
+                    <Root />
+                  </ProtectedRoute>
+                ),
               },
               {
                 path: AppRoute.SIGN_IN,
