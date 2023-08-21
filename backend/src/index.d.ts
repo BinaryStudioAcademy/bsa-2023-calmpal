@@ -7,3 +7,9 @@ declare module 'fastify' {
     user: UserSignUpResponseDto | null;
   }
 }
+
+declare module 'jose' {
+  interface JWTPayload {
+    user_id: number;
+  }
+}
