@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     height: 44,
     borderRadius: 8,
     gap: 10,
+    marginVertical: 10,
   },
   label: {
     color: 'white',
