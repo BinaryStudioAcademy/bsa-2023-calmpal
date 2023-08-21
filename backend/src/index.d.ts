@@ -1,8 +1,9 @@
 import 'fastify';
 
+import { type UserSignUpResponseDto } from '#packages/users/users.ts';
+
 declare module 'fastify' {
   interface FastifyRequest {
-    // TODO: change mocked user to user data type
-    user: { email: string; name: string } | null;
+    user: UserSignUpResponseDto | null;
   }
 }
