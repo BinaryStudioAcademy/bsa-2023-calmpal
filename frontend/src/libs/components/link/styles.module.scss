@@ -1,18 +1,12 @@
 .link {
-  display: flex;
-  align-items: center;
-  padding: 5px 10 px;
   color: var(--gray-200);
   font-weight: 600;
   font-size: 14px;
   font-family: Montserrat, sans-serif;
-  line-height: 146%;
   text-decoration: none;
-  border-radius: 5px;
   transition: background-color 0.3s ease;
 }
 
 .link:hover {
   color: var(--black);
-  background-color: var(--gray-100);
 }

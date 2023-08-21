@@ -1,6 +1,6 @@
+import { type ClassValue } from 'clsx';
 import clsx from 'clsx';
 
-const getValidClassNames = (newStyle?: string, defaultStyle?: string): string =>
-  clsx(defaultStyle, newStyle);
+const getValidClassNames = (...inputs: ClassValue[]): string => clsx(...inputs);
 
 export { getValidClassNames };
