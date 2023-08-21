@@ -24,8 +24,6 @@ rules:
     - ignoreRefs: true
   react/self-closing-comp:
     - error
-  react/prop-types:
-    - off
 
 overrides:
   - files:
