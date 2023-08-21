@@ -46,7 +46,7 @@ const App: React.FC = () => {
       .catch(() => {
         navigate(AppRoute.SIGN_IN);
       });
-  }, []);
+  }, [dispatch, navigate]);
 
   return (
     <div className={styles['app-container']}>
