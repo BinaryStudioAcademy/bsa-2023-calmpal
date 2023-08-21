@@ -22,5 +22,5 @@ const serverApplication = new BaseServerApplication({
 });
 
 export { serverApplication };
-export { isWhiteRoute } from './libs/helpers/helpers.js';
+export { checkIsWhiteRoute } from './libs/helpers/helpers.js';
 export { type ServerApplicationRouteParameters } from './libs/types/types.js';
