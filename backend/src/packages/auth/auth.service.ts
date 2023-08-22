@@ -1,4 +1,6 @@
 import {
+  type UserSignInRequestDto,
+  type UserSignInResponseDto,
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
 } from '#packages/users/libs/types/types.js';
@@ -15,6 +17,16 @@ class AuthService {
     userRequestDto: UserSignUpRequestDto,
   ): Promise<UserSignUpResponseDto> {
     return this.userService.create(userRequestDto);
+  }
+
+  public async verifyLoginCredentials({
+    email, // password, --> should be used for password comparison
+  }: UserSignInRequestDto): Promise<UserSignInResponseDto> {
+    return await this.userService.findByEmail(email);
+  }
+
+  public async signIn(id: number): Promise<UserSignInResponseDto> {
+    return await this.userService.findById(id);
   }
 }
 
