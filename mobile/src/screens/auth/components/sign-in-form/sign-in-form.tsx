@@ -16,7 +16,6 @@ const SignInForm: React.FC<Properties> = () => {
       <View style={styles.formContainer}>
         <Label />
         <Text style={styles.titleText}>Sign In to your account</Text>
-
         <TextInput
           style={{
             borderWidth: 1,
