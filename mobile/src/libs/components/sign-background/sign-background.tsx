@@ -1,7 +1,5 @@
-import { type FC, type ReactNode } from 'react';
-import React from 'react';
-import { type ImageSourcePropType } from 'react-native';
-import { Image } from 'react-native';
+import React, { type FC, type ReactNode } from 'react';
+import { Image, type ImageSourcePropType } from 'react-native';
 
 import bottomBubbleImg from '#assets/bottom-bubble.png';
 import backgroundImg from '#assets/sign-background.png';
