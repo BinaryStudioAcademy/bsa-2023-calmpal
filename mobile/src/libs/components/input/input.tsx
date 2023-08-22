@@ -8,7 +8,7 @@ import {
 import { TextInput } from 'react-native';
 
 import { Text, View } from '#libs/components/components';
-import { useFormController } from '#libs/hooks/hooks';
+import { useFormController, useState } from '#libs/hooks/hooks';
 
 import { styles } from './styles';
 
@@ -27,15 +27,24 @@ const Input = <T extends FieldValues>({
   name,
   placeholder,
 }: Properties<T>): JSX.Element => {
-  const { field, fieldState } = useFormController({ name, control });
+  const [isFocused, setIsFocused] = useState(false);
+  const { field } = useFormController({ name, control });
 
   const { value, onChange, onBlur } = field;
 
   const error = errors[name]?.message;
   const hasError = Boolean(error);
 
-  const isFieldTouched = fieldState.isDirty;
   const isFieldFilled = Boolean(value);
+
+  const onFocusHandler = (): void => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = (): void => {
+    setIsFocused(false);
+    onBlur();
+  };
 
   return (
     <View>
@@ -43,11 +52,12 @@ const Input = <T extends FieldValues>({
       <TextInput
         onChangeText={onChange}
         value={value}
-        onBlur={onBlur}
+        onFocus={onFocusHandler}
+        onBlur={handleBlur}
         placeholder={placeholder}
         style={[
           styles.input,
-          !hasError && (isFieldTouched || isFieldFilled) && styles.filledInput,
+          !hasError && (isFocused || isFieldFilled) && styles.filledInput,
           hasError && styles.errorInput,
         ]}
         placeholderTextColor={styles.placeholder.color}
