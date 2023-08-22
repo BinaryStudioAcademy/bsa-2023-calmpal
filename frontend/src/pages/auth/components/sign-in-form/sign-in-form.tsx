@@ -20,8 +20,8 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
   });
 
   const handleFormSubmit = useCallback(
-    (event_: React.BaseSyntheticEvent): void => {
-      void handleSubmit(onSubmit)(event_);
+    (event: React.BaseSyntheticEvent): void => {
+      void handleSubmit(onSubmit)(event);
     },
     [handleSubmit, onSubmit],
   );
