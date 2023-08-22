@@ -6,8 +6,14 @@ import {
 } from '#libs/packages/controller/controller.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
-import { type UserSignUpRequestDto } from '#packages/users/users.js';
-import { userSignUpValidationSchema } from '#packages/users/users.js';
+import {
+  type UserSignInRequestDto,
+  type UserSignUpRequestDto,
+} from '#packages/users/users.js';
+import {
+  userSignInValidationSchema,
+  userSignUpValidationSchema,
+} from '#packages/users/users.js';
 
 import { type AuthService } from './auth.service.js';
 import { AuthApiPath } from './libs/enums/enums.js';
@@ -30,6 +36,19 @@ class AuthController extends BaseController {
         this.signUp(
           options as APIHandlerOptions<{
             body: UserSignUpRequestDto;
+          }>,
+        ),
+    });
+    this.addRoute({
+      path: AuthApiPath.SIGN_IN,
+      method: 'POST',
+      validation: {
+        body: userSignInValidationSchema,
+      },
+      handler: (options) =>
+        this.signIn(
+          options as APIHandlerOptions<{
+            body: UserSignInRequestDto;
           }>,
         ),
     });
@@ -73,6 +92,21 @@ class AuthController extends BaseController {
     return {
       status: HTTPCode.CREATED,
       payload: await this.authService.signUp(options.body),
+    };
+  }
+
+  private async signIn(
+    options: APIHandlerOptions<{
+      body: UserSignInRequestDto;
+    }>,
+  ): Promise<APIHandlerResponse> {
+    const user = await this.authService.verifyLoginCredentials(options.body);
+
+    await this.authService.signIn(user.id);
+
+    return {
+      status: HTTPCode.OK,
+      payload: user,
     };
   }
 }
