@@ -1,7 +1,7 @@
 type UserSignUpResponseDto = {
   id: number;
   email: string;
-  name: string;
+  fullName: string;
   createdAt: string;
   updatedAt: string;
 };
