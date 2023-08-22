@@ -42,7 +42,6 @@ class AuthApi extends BaseHttpApi {
       this.getFullEndpoint(AuthApiPath.USER, {}),
       {
         method: 'GET',
-        contentType: ContentType.JSON,
         hasAuth: true,
       },
     );

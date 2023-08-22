@@ -12,9 +12,7 @@ import {
   useAppSelector,
   useEffect,
   useLocation,
-  useNavigate,
 } from '#libs/hooks/hooks.js';
-import { storage, StorageKey } from '#libs/packages/storage/storage.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 import { actions as userActions } from '#slices/users/users.js';
 
@@ -24,11 +22,10 @@ import styles from './styles.module.scss';
 const App: React.FC = () => {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const { authenticatedUserDataStatus } = useAppSelector(({ users, auth }) => ({
     users: users.users,
     dataStatus: users.dataStatus,
-    user: auth.user,
+    authenticatedUser: auth.authenticatedUser,
     authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
   }));
 
@@ -41,16 +38,12 @@ const App: React.FC = () => {
   }, [isRoot, dispatch]);
 
   useEffect(() => {
-    const checkTokenAndFetchUser = async (): Promise<void> => {
-      if (!(await storage.has(StorageKey.TOKEN))) {
-        navigate(AppRoute.SIGN_IN);
-      }
+    void dispatch(authActions.getAuthenticatedUser());
+  }, [dispatch]);
 
-      void dispatch(authActions.getAuthenticatedUser());
-    };
-
-    void checkTokenAndFetchUser();
-  }, [dispatch, navigate]);
+  if (authenticatedUserDataStatus !== DataStatus.FULFILLED) {
+    return <Loader />;
+  }
 
   return (
     <div className={styles['app-container']}>

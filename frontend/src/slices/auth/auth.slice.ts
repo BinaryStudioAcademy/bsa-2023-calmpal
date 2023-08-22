@@ -7,13 +7,13 @@ import { type UserGetAllItemResponseDto } from '#packages/users/users.js';
 import { getAuthenticatedUser, signUp } from './actions.js';
 
 type State = {
-  user: UserGetAllItemResponseDto | null;
+  authenticatedUser: UserGetAllItemResponseDto | null;
   authenticatedUserDataStatus: ValueOf<typeof DataStatus>;
   dataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
-  user: null,
+  authenticatedUser: null,
   authenticatedUserDataStatus: DataStatus.IDLE,
   dataStatus: DataStatus.IDLE,
 };
@@ -37,7 +37,7 @@ const { reducer, actions, name } = createSlice({
       state.authenticatedUserDataStatus = DataStatus.PENDING;
     });
     builder.addCase(getAuthenticatedUser.fulfilled, (state, action) => {
-      state.user = action.payload;
+      state.authenticatedUser = action.payload;
       state.authenticatedUserDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(getAuthenticatedUser.rejected, (state) => {
