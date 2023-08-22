@@ -1,10 +1,15 @@
 import { jwtVerify, SignJWT } from 'jose';
 
+type Constructor = {
+  secret: string;
+  alg: string;
+};
+
 class JWTService {
   private secret: Buffer;
   private alg: string;
 
-  public constructor(secret: string, alg: string) {
+  public constructor({ secret, alg }: Constructor) {
     this.secret = Buffer.from(secret, 'utf8');
     this.alg = alg;
   }

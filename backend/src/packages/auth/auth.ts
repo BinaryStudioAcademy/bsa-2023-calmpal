@@ -6,10 +6,10 @@ import { AuthController } from './auth.controller.js';
 import { AuthService } from './auth.service.js';
 import { JWTService } from './jwt.service.js';
 
-const jwtService = new JWTService(
-  config.ENV.JWT.SECRET_KEY,
-  config.ENV.JWT.ALG,
-);
+const jwtService = new JWTService({
+  secret: config.ENV.JWT.SECRET_KEY,
+  alg: config.ENV.JWT.ALG,
+});
 const authService = new AuthService(userService);
 const authController = new AuthController(logger, authService);
 
