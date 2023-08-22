@@ -8,7 +8,7 @@ import { RootScreenName } from '#libs/enums/enums';
 import { type RootNavigationParameterList } from '#libs/types/types';
 import { Auth } from '#screens/auth/auth';
 
-import { MainStack } from './main/main';
+import { MainStack } from '../main/main';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParameterList>();
 
