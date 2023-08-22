@@ -29,7 +29,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
   return (
     <>
       <form className={styles['authForm']} onSubmit={handleFormSubmit}>
-        <h1>Sign In to your account</h1>
+        <h1 className={styles['greeting']}>Sign In to your account</h1>
 
         <Input
           type="text"
@@ -51,7 +51,9 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
 
         <span className={styles['authFormLink']}>
           Don&apos;t have an account? Go to
-          <Link to={AppRoute.SIGN_UP}>Sign up</Link>
+          <Link to={AppRoute.SIGN_UP}>
+            <span className={styles['text']}>Sign up</span>
+          </Link>
         </span>
       </form>
     </>

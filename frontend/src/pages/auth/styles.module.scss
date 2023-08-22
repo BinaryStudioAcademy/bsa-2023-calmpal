@@ -36,12 +36,12 @@
   text-align: center;
 }
 
-.authName > p:first-child {
+.authName .secondary {
   margin: 0.1px;
   font-size: 30px;
 }
 
-.authName > p:last-child {
+.authName .primary {
   margin: 0.1px;
   font-weight: var(--semibold);
   font-size: 83px;
@@ -69,7 +69,7 @@
   width: 280px;
 }
 
-.authForm h1 {
+.authForm .greeting {
   margin: 0;
   font-weight: var(--semibold);
   font-size: 30px;
@@ -99,7 +99,7 @@
   font-size: 14px;
 }
 
-.authFormLink a {
+.authFormLink .text {
   margin-left: 5px;
   color: white;
   font-weight: var(--semibold);
