@@ -83,6 +83,11 @@ class BaseConfig implements Config {
           env: 'JWT_SECRET_KEY',
           default: null,
         },
+        ALG: {
+          doc: 'Algorithm for JWT token generation',
+          format: String,
+          default: 'HS256',
+        },
       },
     });
   }
