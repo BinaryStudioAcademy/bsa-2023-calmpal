@@ -1,0 +1,43 @@
+.authForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 280px;
+}
+
+.authForm .greeting {
+  margin: 0;
+  font-weight: var(--semibold);
+  font-size: 30px;
+}
+
+.authForm .btn {
+  display: inline-block;
+  width: 100%;
+  margin-top: 30px;
+  padding: 15px 0;
+  color: white;
+  font-weight: var(--semibold);
+  font-size: 16px;
+  white-space: nowrap;
+  background-color: var(--gray-300);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.authFormLink {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 14px 0;
+  font-size: 14px;
+}
+
+.authFormLink .text {
+  margin-left: 5px;
+  color: white;
+  font-weight: var(--semibold);
+  text-decoration: none;
+}

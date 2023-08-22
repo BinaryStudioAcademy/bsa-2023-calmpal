@@ -6,8 +6,8 @@ import {
   userSignUpValidationSchema,
 } from '#packages/users/users.js';
 
-import styles from '../../styles.module.scss';
 import { DEFAULT_SIGN_UP_PAYLOAD } from './libs/constants.js';
+import styles from './styles.module.scss';
 
 type Properties = {
   onSubmit: (payload: UserSignUpRequestDto) => void;
@@ -54,14 +54,18 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
         </p>
         <p>
           <Input
-            type="text"
+            type="password"
             label="Password"
             name="password"
             control={control}
             errors={errors}
           />
         </p>
-        <Button type="submit" label="Sign up" className={styles['btn']} />
+        <Button
+          type="submit"
+          label="Sign up"
+          className={styles['btn'] as string}
+        />
         <span className={styles['authFormLink']}>
           Already have an account? Go to
           <Link to={AppRoute.SIGN_IN}>
