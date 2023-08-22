@@ -1,16 +1,24 @@
-import { SignJWT } from 'jose';
+import { jwtVerify, SignJWT } from 'jose';
 
 class JWTService {
   private secret: Buffer;
+  private alg: string;
 
-  public constructor(secret: string) {
+  public constructor(secret: string, alg: string) {
     this.secret = Buffer.from(secret, 'utf8');
+    this.alg = alg;
   }
 
   public async signJWT(payload: Record<string, number>): Promise<string> {
     return await new SignJWT(payload)
-      .setProtectedHeader({ alg: 'HS256' })
+      .setProtectedHeader({ alg: this.alg })
       .sign(this.secret);
+  }
+
+  public async decode<TokenPayload>(token: string): Promise<TokenPayload> {
+    const { payload } = await jwtVerify(token, this.secret);
+
+    return payload as TokenPayload;
   }
 }
 

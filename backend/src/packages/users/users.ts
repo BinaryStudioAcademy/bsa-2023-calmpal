@@ -1,6 +1,5 @@
-import { config } from '#libs/packages/config/config.js';
 import { logger } from '#libs/packages/logger/logger.js';
-import { JWTService } from '#packages/auth/jwt.service.js';
+import { jwtService } from '#packages/auth/auth.js';
 
 import { UserController } from './user.controller.js';
 import { UserModel } from './user.model.js';
@@ -8,7 +7,6 @@ import { UserRepository } from './user.repository.js';
 import { UserService } from './user.service.js';
 
 const userRepository = new UserRepository(UserModel);
-const jwtService = new JWTService(config.ENV.JWT.SECRET_KEY);
 const userService = new UserService(userRepository, jwtService);
 const userController = new UserController(logger, userService);
 
