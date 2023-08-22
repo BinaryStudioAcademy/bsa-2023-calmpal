@@ -29,7 +29,9 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
   return (
     <>
       <form onSubmit={handleFormSubmit} className={styles['authForm']}>
-        <h1>Create a free account to save your preferences</h1>
+        <h1 className={styles['greeting']}>
+          Create a free account to save your preferences
+        </h1>
         <p>
           <Input
             type="text"
@@ -63,7 +65,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
         <span className={styles['authFormLink']}>
           Already have an account? Go to
           <Link to={AppRoute.SIGN_IN}>
-            <p>Sign in</p>
+            <span className={styles['text']}>Sign in</span>
           </Link>
         </span>
       </form>

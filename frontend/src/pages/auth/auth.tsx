@@ -41,8 +41,8 @@ const Auth: React.FC = () => {
       <div className={styles['logo']}>Calmpal</div>
 
       <div className={styles['authName']}>
-        <p>Welcome to</p>
-        <p>Calmpal</p>
+        <p className={styles['secondary']}>Welcome to</p>
+        <p className={styles['primary']}>Calmpal</p>
       </div>
       <div className={styles['overlay']}>{getScreen(pathname)}</div>
 

@@ -33,7 +33,7 @@ const Input = <T extends FieldValues>({
 
   return (
     <label className={styles['input']}>
-      <span>{label}</span>
+      <span className={styles['label']}>{label}</span>
       <input
         {...field}
         className={hasError ? styles['error'] : styles['default']}
