@@ -17,16 +17,16 @@ const SignBackground: FC<Properties> = ({ children }) => {
       <View style={styles.backgroundWrapper}>
         <Image
           source={backgroundImg as ImageSourcePropType}
-          style={{ width: '100%', height: '100%' }}
+          style={styles.backgroundImg}
         />
       </View>
       <Image
         source={topBubbleImg as ImageSourcePropType}
-        style={{ position: 'absolute', top: 30, right: 0 }}
+        style={styles.topBubbleImg}
       />
       <Image
         source={bottomBubbleImg as ImageSourcePropType}
-        style={{ position: 'absolute', bottom: 60, left: 0 }}
+        style={styles.bottomBubbleImg}
       />
       {children}
     </View>
