@@ -3,7 +3,7 @@ import { type ValueOf } from '#libs/types/types.js';
 
 type Constructor = {
   message: string;
-  status: ValueOf<typeof HTTPCode>;
+  status?: ValueOf<typeof HTTPCode>;
   cause?: unknown;
 };
 
