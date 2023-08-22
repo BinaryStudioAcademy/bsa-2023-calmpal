@@ -1,9 +1,11 @@
 import { StyleSheet } from 'react-native';
 
+import { AppColor } from '#libs/enums/enums';
+
 const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
-    borderColor: '#ACB4D0',
+    borderColor: AppColor.GRAY_300,
     height: 44,
     padding: 12,
     borderRadius: 8,
@@ -16,37 +18,37 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#EBF3FF',
+    color: AppColor.GRAY_100,
     marginTop: 4,
   },
 
   placeholder: {
-    color: '#ACB4D0',
+    color: AppColor.GRAY_300,
   },
   filledInput: {
     borderWidth: 1,
-    borderColor: '#507CEB',
+    borderColor: AppColor.BLUE_200,
     borderRadius: 8,
     fontSize: 16,
     padding: 12,
     backgroundColor: 'white',
     elevation: 10,
-    shadowColor: '#507CEB',
+    shadowColor: AppColor.BLUE_200,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
     shadowOpacity: 0.25,
   },
 
   disabledInput: {
-    borderColor: '#CCDDF3',
+    borderColor: AppColor.GRAY_200,
   },
 
   errorInput: {
-    borderColor: '#D51A52',
+    borderColor: AppColor.RED_100,
   },
 
   errorText: {
-    color: '#D51A52',
+    color: AppColor.RED_100,
     fontSize: 14,
     marginBottom: 4,
   },
