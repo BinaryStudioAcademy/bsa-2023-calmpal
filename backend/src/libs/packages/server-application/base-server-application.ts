@@ -18,7 +18,7 @@ import {
   type ServerValidationErrorResponse,
   type ValidationSchema,
 } from '#libs/types/types.js';
-import { authService } from '#packages/auth/auth.js';
+import { jwtService } from '#packages/auth/auth.js';
 import { userService } from '#packages/users/users.js';
 
 import {
@@ -113,7 +113,7 @@ class BaseServerApplication implements ServerApplication {
   private async initPlugins(): Promise<void> {
     await this.app.register(authorizationPlugin, {
       services: {
-        authService,
+        jwtService,
         userService,
       },
     });

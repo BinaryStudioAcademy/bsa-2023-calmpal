@@ -5,13 +5,13 @@ import { AuthError } from '#libs/exceptions/exceptions.js';
 import { ControllerHook } from '#libs/packages/controller/controller.js';
 import { HTTPCode, type HTTPMethod } from '#libs/packages/http/http.js';
 import { checkIsWhiteRoute } from '#libs/packages/server-application/server-application.js';
-import { type AuthService } from '#packages/auth/auth.js';
+import { type AuthTokenPayload, type JWTService } from '#packages/auth/auth.js';
 import { type UserService } from '#packages/users/users.js';
 
 type Options = {
   services: {
     userService: UserService;
-    authService: AuthService;
+    jwtService: JWTService;
   };
 };
 
@@ -37,9 +37,9 @@ const authorization = fp<Options>((fastify, { services }, done) => {
       });
     }
 
-    const { authService, userService } = services;
-    const { id } = await authService.verifyToken(token);
-    const authorizedUser = await userService.findById(id);
+    const { jwtService, userService } = services;
+    const { userId } = await jwtService.decode<AuthTokenPayload>(token);
+    const authorizedUser = await userService.findById(userId);
 
     if (!authorizedUser) {
       throw new AuthError({
