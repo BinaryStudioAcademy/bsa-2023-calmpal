@@ -1,8 +1,10 @@
 import { StyleSheet } from 'react-native';
 
+import { AppColor } from '#libs/enums/enums';
+
 const styles = StyleSheet.create({
   btn: {
-    backgroundColor: '#302E36',
+    backgroundColor: AppColor.GRAY_400,
     alignItems: 'center',
     justifyContent: 'center',
     height: 44,

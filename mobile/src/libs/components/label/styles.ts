@@ -1,8 +1,10 @@
 import { StyleSheet } from 'react-native';
 
+import { AppColor } from '#libs/enums/enums';
+
 const styles = StyleSheet.create({
   labelContainer: {
-    backgroundColor: '#507CEB',
+    backgroundColor: AppColor.BLUE_200,
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 6,
