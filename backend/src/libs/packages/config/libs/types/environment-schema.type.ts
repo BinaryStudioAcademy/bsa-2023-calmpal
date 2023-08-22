@@ -15,9 +15,7 @@ type EnvironmentSchema = {
   };
   JWT: {
     SECRET_KEY: string;
-    ALG: {
-      JWT_ALG: string;
-    };
+    ALG: string;
   };
 };
 
