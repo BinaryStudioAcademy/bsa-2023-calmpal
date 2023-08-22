@@ -8,6 +8,10 @@ const checkIsWhiteRoute = ({
   path: string;
   method: HTTPMethod;
 }): boolean =>
-  WHITE_ROUTES.some((route) => route.path === path && route.method === method);
+  WHITE_ROUTES.some(
+    (route) =>
+      route.path === path &&
+      (route.methods as readonly HTTPMethod[]).includes(method),
+  );
 
 export { checkIsWhiteRoute };
