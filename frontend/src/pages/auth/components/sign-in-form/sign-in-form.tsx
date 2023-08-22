@@ -1,13 +1,13 @@
 import { Button, Input, Link } from '#libs/components/components.js';
-import { AppRoute } from '#libs/enums/app-route.enum.js';
+import { AppRoute } from '#libs/enums/enums.js';
 import { useAppForm, useCallback } from '#libs/hooks/hooks.js';
 import {
   type UserSignInRequestDto,
   userSignInValidationSchema,
 } from '#packages/users/users.js';
 
-import styles from '../../styles.module.scss';
 import { DEFAULT_SIGN_IN_PAYLOAD } from './libs/constants.js';
+import styles from './styles.module.scss';
 
 type Properties = {
   onSubmit: (payload: UserSignInRequestDto) => void;
@@ -40,14 +40,18 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
           errors={errors}
         />
         <Input
-          type="text"
+          type="password"
           label="Password"
           placeholder=""
           name="password"
           control={control}
           errors={errors}
         />
-        <Button type="submit" label="Sign in" className={styles['btn']} />
+        <Button
+          type="submit"
+          label="Sign in"
+          className={styles['btn'] as string}
+        />
 
         <span className={styles['authFormLink']}>
           Don&apos;t have an account? Go to
