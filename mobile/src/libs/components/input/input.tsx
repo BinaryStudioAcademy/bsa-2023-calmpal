@@ -35,7 +35,7 @@ const Input = <T extends FieldValues>({
   const hasError = Boolean(error);
 
   const isFieldTouched = fieldState.isDirty;
-  const isFieldFilled = !!value;
+  const isFieldFilled = Boolean(value);
 
   return (
     <View>
