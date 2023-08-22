@@ -1,6 +1,8 @@
+import { type UserDetailsDto } from './user-details-dto.type.js';
+
 type UserSignUpResponseDto = {
-  id: number;
-  email: string;
+  user: UserDetailsDto;
+  token: string;
 };
 
 export { type UserSignUpResponseDto };

@@ -38,7 +38,7 @@ class UserService implements Service {
       }),
     );
 
-    return item.toObject();
+    return { user: item.toObject(), token: 'token' };
   }
 
   public update(): ReturnType<Service['update']> {

@@ -2,20 +2,25 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { type AsyncThunkConfig } from '#libs/types/types';
 import {
+  type UserDetailsDto,
   type UserSignUpRequestDto,
-  type UserSignUpResponseDto,
 } from '#packages/users/users';
 
 import { name as sliceName } from './auth.slice';
 
 const signUp = createAsyncThunk<
-  UserSignUpResponseDto,
+  UserDetailsDto,
   UserSignUpRequestDto,
   AsyncThunkConfig
->(`${sliceName}/sign-up`, (signUpPayload, { extra }) => {
-  const { authApi } = extra;
-
-  return authApi.signUp(signUpPayload);
+>(`${sliceName}/sign-up`, async (signUpPayload, { extra, rejectWithValue }) => {
+  try {
+    const { authApi, storage } = extra;
+    const { user, token } = await authApi.signUp(signUpPayload);
+    await storage.set('token', token);
+    return user;
+  } catch (error) {
+    return rejectWithValue(error);
+  }
 });
 
 export { signUp };

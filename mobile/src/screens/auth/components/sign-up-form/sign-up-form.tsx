@@ -43,7 +43,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
           control={control}
           errors={errors}
           label="Name"
-          name="name"
+          name="fullName"
           placeholder="Enter your full name"
         />
         <Input
