@@ -2,6 +2,7 @@ import { APIPath, ContentType } from '#libs/enums/enums.js';
 import { BaseHttpApi } from '#libs/packages/api/api.js';
 import { type HTTP } from '#libs/packages/http/http.js';
 import { type Storage } from '#libs/packages/storage/storage.js';
+import { StorageKey } from '#libs/packages/storage/storage.js';
 import {
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
@@ -16,8 +17,11 @@ type Constructor = {
 };
 
 class AuthApi extends BaseHttpApi {
+  private authStorage: Storage;
+
   public constructor({ baseUrl, http, storage }: Constructor) {
     super({ path: APIPath.AUTH, baseUrl, http, storage });
+    this.authStorage = storage;
   }
 
   public async signUp(
@@ -34,7 +38,7 @@ class AuthApi extends BaseHttpApi {
     );
     const parsedResponse = await response.json<UserSignUpResponseDto>();
 
-    localStorage.setItem('token', parsedResponse.token);
+    await this.authStorage.set(StorageKey.TOKEN, parsedResponse.token);
 
     return parsedResponse;
   }
