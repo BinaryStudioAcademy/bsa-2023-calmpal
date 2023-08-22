@@ -49,5 +49,8 @@
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged && npm run lint:type",
     "commit-msg": "npx commitlint --edit $1"
+  },
+  "dependencies": {
+    "bcrypt": "5.1.1"
   }
 }

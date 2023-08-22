@@ -9,8 +9,10 @@ class UserRepository implements Repository {
   private userModel: typeof UserModel;
   private userDetailsModel: typeof UserDetailsModel;
 
-  public constructor(userModel: typeof UserModel,
-    userDetailsModel: typeof UserDetailsModel) {
+  public constructor(
+    userModel: typeof UserModel,
+    userDetailsModel: typeof UserDetailsModel,
+  ) {
     this.userModel = userModel;
     this.userDetailsModel = userDetailsModel;
   }
@@ -22,29 +24,33 @@ class UserRepository implements Repository {
   public async findAll(): Promise<UserEntity[]> {
     const users = await this.userModel.query().execute();
 
-    return users.map((user) => UserEntity.initialize({ ...user, fullName:'FullName' }));
+    return users.map((user) =>
+      UserEntity.initialize({ ...user, fullName: 'FullName' }),
+    );
   }
 
   public async create(entity: UserEntity): Promise<UserEntity> {
-    const { email, passwordSalt, passwordHash, fullName } = entity.toNewObject();
+    const { email, passwordSalt, passwordHash, fullName } =
+      entity.toNewObject();
 
     const user = await this.userModel
       .query()
       .insert({
         email,
         passwordSalt,
-        passwordHash
+        passwordHash,
       })
       .returning('*')
       .execute();
-      const user_details = await this.userDetailsModel
+    const user_details = await this.userDetailsModel
       .query()
       .insert({
-        fullName
-      }).returning('*')
+        fullName,
+      })
+      .returning('*')
       .execute();
-     
-      await user_details.$relatedQuery('user').relate(user);
+
+    await user_details.$relatedQuery('user').relate(user);
 
     return UserEntity.initialize(mapTwoObjectsIntoOne(user, user_details));
   }
