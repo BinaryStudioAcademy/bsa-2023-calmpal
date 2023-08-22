@@ -1,7 +1,5 @@
-import { SignJWT } from 'jose';
-
-import { type BaseConfig } from '#libs/packages/config/base-config.package.js';
 import { type Service } from '#libs/types/types.js';
+import { type JWTService } from '#packages/auth/jwt.service.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserRepository } from '#packages/users/user.repository.js';
 
@@ -13,11 +11,11 @@ import {
 
 class UserService implements Service {
   private userRepository: UserRepository;
-  private config: BaseConfig;
+  private jwtService: JWTService;
 
-  public constructor(userRepository: UserRepository, config: BaseConfig) {
+  public constructor(userRepository: UserRepository, jwtService: JWTService) {
     this.userRepository = userRepository;
-    this.config = config;
+    this.jwtService = jwtService;
   }
 
   public find(): ReturnType<Service['find']> {
@@ -43,11 +41,8 @@ class UserService implements Service {
       }),
     );
 
-    const secret = Buffer.from(this.config.ENV.AUTH.JWT_SECRET, 'utf8');
     const userObject = item.toObject();
-    const jwt = await new SignJWT({ user_id: userObject.id })
-      .setProtectedHeader({ alg: 'HS256' })
-      .sign(secret);
+    const jwt = await this.jwtService.signJWT({ userId: userObject.id });
 
     return {
       ...item.toObject(),
