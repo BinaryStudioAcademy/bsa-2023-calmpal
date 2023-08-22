@@ -1,6 +1,6 @@
 import reactPlugin from '@vitejs/plugin-react';
 import { type ConfigEnv, defineConfig, loadEnv } from 'vite';
-import { VitePWA as VitePWAPlugin } from 'vite-plugin-pwa';
+import { VitePWA as vitePWAPlugin } from 'vite-plugin-pwa';
 
 const config = ({ mode }: ConfigEnv): ReturnType<typeof defineConfig> => {
   const {
