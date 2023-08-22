@@ -1,4 +1,3 @@
-import { verifyToken } from '#packages/auth/libs/helpers/helpers.js';
 import {
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
@@ -16,12 +15,6 @@ class AuthService {
     userRequestDto: UserSignUpRequestDto,
   ): Promise<UserSignUpResponseDto> {
     return this.userService.create(userRequestDto);
-  }
-
-  public async verifyToken(token: string): Promise<{ id: number }> {
-    const { payload } = await verifyToken(token);
-
-    return { id: payload.user_id };
   }
 }
 
