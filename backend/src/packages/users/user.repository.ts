@@ -2,11 +2,16 @@ import { type Repository } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/user.model.js';
 
+import { type UserDetailsModel } from './user-details.model.js';
+
 class UserRepository implements Repository {
   private userModel: typeof UserModel;
+  private userDetailsModel: typeof UserDetailsModel;
 
-  public constructor(userModel: typeof UserModel) {
+  public constructor(userModel: typeof UserModel,
+    userDetailsModel: typeof UserDetailsModel) {
     this.userModel = userModel;
+    this.userDetailsModel = userDetailsModel;
   }
 
   public find(): ReturnType<Repository['find']> {
@@ -16,23 +21,31 @@ class UserRepository implements Repository {
   public async findAll(): Promise<UserEntity[]> {
     const users = await this.userModel.query().execute();
 
-    return users.map((user) => UserEntity.initialize(user));
+    return users.map((user) => UserEntity.initialize({ ...user, name:'FullName' }));
   }
 
   public async create(entity: UserEntity): Promise<UserEntity> {
-    const { email, passwordSalt, passwordHash } = entity.toNewObject();
+    const { email, passwordSalt, passwordHash, name } = entity.toNewObject();
 
     const user = await this.userModel
       .query()
       .insert({
         email,
         passwordSalt,
-        passwordHash,
+        passwordHash
       })
       .returning('*')
       .execute();
-
-    return UserEntity.initialize(user);
+      const user_details = await this.userDetailsModel
+      .query()
+      .insert({
+        fullName: name
+      }).returning('*')
+      .execute();
+      
+      await user_details.$relatedQuery('user').relate(user);
+      
+    return UserEntity.initialize({ ...user, name });
   }
 
   public update(): ReturnType<Repository['update']> {
