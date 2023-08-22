@@ -8,14 +8,14 @@ import { checkIsWhiteRoute } from '#libs/packages/server-application/server-appl
 import { type AuthService } from '#packages/auth/auth.js';
 import { type UserService } from '#packages/users/users.js';
 
-type PluginOptions = {
+type Options = {
   services: {
     userService: UserService;
     authService: AuthService;
   };
 };
 
-const authorization = fp<PluginOptions>((fastify, { services }, done) => {
+const authorization = fp<Options>((fastify, { services }, done) => {
   fastify.decorateRequest('user', null);
 
   fastify.addHook(ControllerHook.ON_REQUEST, async (request) => {
