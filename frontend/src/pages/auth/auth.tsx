@@ -1,5 +1,5 @@
 import { AppRoute } from '#libs/enums/enums.js';
-import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
+import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useAppDispatch, useCallback, useLocation } from '#libs/hooks/hooks.js';
 import {
   type UserSignInRequestDto,
