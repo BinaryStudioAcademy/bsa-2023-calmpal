@@ -102,6 +102,13 @@ class AuthController extends BaseController {
   ): Promise<APIHandlerResponse> {
     const user = await this.authService.verifyLoginCredentials(options.body);
 
+    if (!user) {
+      return {
+        status: HTTPCode.UNAUTHORIZED,
+        payload: { message: 'Unauthorized' },
+      };
+    }
+
     await this.authService.signIn(user.id);
 
     return {

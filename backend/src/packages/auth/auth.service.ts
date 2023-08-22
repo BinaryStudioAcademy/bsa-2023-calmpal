@@ -21,11 +21,11 @@ class AuthService {
 
   public async verifyLoginCredentials({
     email, // password, --> should be used for password comparison
-  }: UserSignInRequestDto): Promise<UserSignInResponseDto> {
+  }: UserSignInRequestDto): Promise<UserSignInResponseDto | null> {
     return await this.userService.findByEmail(email);
   }
 
-  public async signIn(id: number): Promise<UserSignInResponseDto> {
+  public async signIn(id: number): Promise<UserSignInResponseDto | null> {
     return await this.userService.findById(id);
   }
 }

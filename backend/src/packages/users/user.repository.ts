@@ -53,11 +53,11 @@ class UserRepository implements Repository {
     return Promise.resolve(true);
   }
 
-  public async findByEmail(email: string): Promise<UserEntity> {
+  public async findByEmail(email: string): Promise<UserEntity | null> {
     const user = await this.userModel.query().findOne({ email }).execute();
 
     if (!user) {
-      throw new Error('User not found');
+      return null;
     }
 
     return UserEntity.initialize({
@@ -67,11 +67,11 @@ class UserRepository implements Repository {
     });
   }
 
-  public async findById(id: number): Promise<UserEntity> {
+  public async findById(id: number): Promise<UserEntity | null> {
     const user = await this.userModel.query().findOne({ id }).execute();
 
     if (!user) {
-      throw new Error('User not found');
+      return null;
     }
 
     return UserEntity.initialize({
