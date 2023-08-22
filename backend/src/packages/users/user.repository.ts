@@ -16,7 +16,13 @@ class UserRepository implements Repository {
   public async findAll(): Promise<UserEntity[]> {
     const users = await this.userModel.query().execute();
 
-    return users.map((user) => UserEntity.initialize(user));
+    return users.map((user) =>
+      UserEntity.initialize({
+        ...user,
+        createdAt: new Date(user.createdAt),
+        updatedAt: new Date(user.updatedAt),
+      }),
+    );
   }
 
   public async create(entity: UserEntity): Promise<UserEntity> {
@@ -32,7 +38,11 @@ class UserRepository implements Repository {
       .returning('*')
       .execute();
 
-    return UserEntity.initialize(user);
+    return UserEntity.initialize({
+      ...user,
+      createdAt: new Date(user.createdAt),
+      updatedAt: new Date(user.updatedAt),
+    });
   }
 
   public update(): ReturnType<Repository['update']> {
@@ -50,7 +60,11 @@ class UserRepository implements Repository {
       throw new Error('User not found');
     }
 
-    return UserEntity.initialize(user);
+    return UserEntity.initialize({
+      ...user,
+      createdAt: new Date(user.createdAt),
+      updatedAt: new Date(user.updatedAt),
+    });
   }
 
   public async findById(id: number): Promise<UserEntity> {
@@ -60,7 +74,11 @@ class UserRepository implements Repository {
       throw new Error('User not found');
     }
 
-    return UserEntity.initialize(user);
+    return UserEntity.initialize({
+      ...user,
+      createdAt: new Date(user.createdAt),
+      updatedAt: new Date(user.updatedAt),
+    });
   }
 }
 
