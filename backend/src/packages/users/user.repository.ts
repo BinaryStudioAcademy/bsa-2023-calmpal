@@ -42,6 +42,26 @@ class UserRepository implements Repository {
   public delete(): ReturnType<Repository['delete']> {
     return Promise.resolve(true);
   }
+
+  public async findByEmail(email: string): Promise<UserEntity> {
+    const user = await this.userModel.query().findOne({ email }).execute();
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    return UserEntity.initialize(user);
+  }
+
+  public async findById(id: number): Promise<UserEntity> {
+    const user = await this.userModel.query().findOne({ id }).execute();
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    return UserEntity.initialize(user);
+  }
 }
 
 export { UserRepository };
