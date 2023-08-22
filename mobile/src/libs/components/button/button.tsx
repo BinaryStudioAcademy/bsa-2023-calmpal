@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Pressable } from 'react-native';
 
 import { Text } from '#libs/components/components';
+import { useState } from '#libs/hooks/hooks';
 
 import { styles } from './styles';
 
