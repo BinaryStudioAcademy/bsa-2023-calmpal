@@ -1,6 +1,6 @@
 import reactPlugin from '@vitejs/plugin-react';
 import { type ConfigEnv, defineConfig, loadEnv } from 'vite';
-import { VitePWA } from 'vite-plugin-pwa';
+import { VitePWA as VitePWAPlugin } from 'vite-plugin-pwa';
 
 const config = ({ mode }: ConfigEnv): ReturnType<typeof defineConfig> => {
   const {
@@ -15,7 +15,7 @@ const config = ({ mode }: ConfigEnv): ReturnType<typeof defineConfig> => {
     },
     plugins: [
       reactPlugin(),
-      VitePWA({
+      VitePWAPlugin({
         registerType: 'autoUpdate',
       }),
     ],
