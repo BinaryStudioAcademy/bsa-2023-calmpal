@@ -7,10 +7,12 @@ import {
 
 import { useFormController } from '#libs/hooks/hooks.js';
 
+import styles from './styles.module.scss';
+
 type Properties<T extends FieldValues> = {
   control: Control<T, null>;
   errors: FieldErrors<T>;
-  label: string;
+  label?: string;
   name: FieldPath<T>;
   placeholder?: string;
   type?: 'text' | 'email';
@@ -30,10 +32,17 @@ const Input = <T extends FieldValues>({
   const hasError = Boolean(error);
 
   return (
-    <label>
+    <label className={styles['input']}>
       <span>{label}</span>
-      <input {...field} type={type} placeholder={placeholder} />
-      {hasError && <span>{error as string}</span>}
+      <input
+        {...field}
+        className={hasError ? styles['error'] : styles['default']}
+        type={type}
+        placeholder={placeholder}
+      />
+      {hasError && (
+        <span className={styles['errorMessage']}>{error as string}</span>
+      )}
     </label>
   );
 };
