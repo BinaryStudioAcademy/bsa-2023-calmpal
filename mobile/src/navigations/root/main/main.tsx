@@ -5,7 +5,7 @@ import {
 import React from 'react';
 
 import { HomeIcon } from '#assets/img/icons/icons';
-import { AppColor, RootScreenName } from '#libs/enums/enums';
+import { AppColor, MainScreenName } from '#libs/enums/enums';
 import { type TabNavigationParameterList } from '#libs/types/types';
 import { Home } from '#screens/main/home';
 
@@ -24,7 +24,7 @@ const tabNavigatorOptions: BottomTabNavigationOptions = {
 const MainStack: React.FC = () => {
   return (
     <BottomTab.Navigator screenOptions={tabNavigatorOptions}>
-      <BottomTab.Screen name={RootScreenName.HOME} component={Home} />
+      <BottomTab.Screen name={MainScreenName.HOME} component={Home} />
     </BottomTab.Navigator>
   );
 };
