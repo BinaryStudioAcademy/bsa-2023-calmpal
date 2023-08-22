@@ -12,15 +12,11 @@ const signUp = createAsyncThunk<
   UserDetailsDto,
   UserSignUpRequestDto,
   AsyncThunkConfig
->(`${sliceName}/sign-up`, async (signUpPayload, { extra, rejectWithValue }) => {
-  try {
-    const { authApi, storage } = extra;
-    const { user, token } = await authApi.signUp(signUpPayload);
-    await storage.set('token', token);
-    return user;
-  } catch (error) {
-    return rejectWithValue(error);
-  }
+>(`${sliceName}/sign-up`, async (signUpPayload, { extra }) => {
+  const { authApi, storage } = extra;
+  const { user, token } = await authApi.signUp(signUpPayload);
+  await storage.set('token', token);
+  return user;
 });
 
 export { signUp };
