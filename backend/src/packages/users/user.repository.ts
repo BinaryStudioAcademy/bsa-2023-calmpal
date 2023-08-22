@@ -1,3 +1,4 @@
+import { mapTwoObjectsIntoOne } from '#libs/helpers/map-two-object-into-one.helper.js';
 import { type Repository } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/user.model.js';
@@ -21,11 +22,11 @@ class UserRepository implements Repository {
   public async findAll(): Promise<UserEntity[]> {
     const users = await this.userModel.query().execute();
 
-    return users.map((user) => UserEntity.initialize({ ...user, name:'FullName' }));
+    return users.map((user) => UserEntity.initialize({ ...user, fullName:'FullName' }));
   }
 
   public async create(entity: UserEntity): Promise<UserEntity> {
-    const { email, passwordSalt, passwordHash, name } = entity.toNewObject();
+    const { email, passwordSalt, passwordHash, fullName } = entity.toNewObject();
 
     const user = await this.userModel
       .query()
@@ -39,13 +40,13 @@ class UserRepository implements Repository {
       const user_details = await this.userDetailsModel
       .query()
       .insert({
-        fullName: name
+        fullName
       }).returning('*')
       .execute();
-      
+     
       await user_details.$relatedQuery('user').relate(user);
-      
-    return UserEntity.initialize({ ...user, name });
+
+    return UserEntity.initialize(mapTwoObjectsIntoOne(user, user_details));
   }
 
   public update(): ReturnType<Repository['update']> {
