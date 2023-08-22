@@ -17,7 +17,7 @@
     "build:shared": "npm run build -w shared",
     "build:frontend": "npm run build -w frontend",
     "build:backend": "npm run build -w backend",
-    "lint:editor": "editorconfig-checker",
+    "lint:editor": "editorconfig-checker --exclude \"mobile/ios|mobile/android|mobile/Gemfile.lock\"",
     "lint:fs": "ls-lint",
     "lint:type": "npm run lint:type --workspaces --if-present",
     "lint:js": "npm run lint:js --workspaces --if-present -- --max-warnings=0",
@@ -30,6 +30,7 @@
     "@commitlint/cli": "17.7.1",
     "@ls-lint/ls-lint": "2.0.1",
     "@typescript-eslint/eslint-plugin": "6.3.0",
+    "@typescript-eslint/parser": "6.4.0",
     "danger": "11.2.8",
     "editorconfig-checker": "5.1.1",
     "eslint": "8.47.0",
@@ -46,7 +47,7 @@
     "typescript": "5.1.6"
   },
   "simple-git-hooks": {
-    "pre-commit": "npm run lint:type && npx lint-staged",
+    "pre-commit": "npx lint-staged && npm run lint:type",
     "commit-msg": "npx commitlint --edit $1"
   }
 }
