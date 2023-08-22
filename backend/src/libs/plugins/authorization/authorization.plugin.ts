@@ -5,8 +5,8 @@ import { AuthError } from '#libs/exceptions/exceptions.js';
 import { ControllerHook } from '#libs/packages/controller/controller.js';
 import { type HTTPMethod } from '#libs/packages/http/http.js';
 import { checkIsWhiteRoute } from '#libs/packages/server-application/server-application.js';
-import { type AuthService } from '#packages/auth/auth.service.js';
-import { type UserService } from '#packages/users/user.service.js';
+import { type AuthService } from '#packages/auth/auth.js';
+import { type UserService } from '#packages/users/users.js';
 
 type PluginOptions = {
   services: {

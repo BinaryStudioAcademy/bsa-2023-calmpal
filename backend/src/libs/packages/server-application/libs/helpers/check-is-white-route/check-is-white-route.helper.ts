@@ -1,5 +1,5 @@
 import { type HTTPMethod } from '#libs/packages/http/http.js';
-import { WHITE_ROUTES } from '#libs/packages/server-application/libs/constants/constants.js';
+import { WHITE_ROUTES } from '#libs/packages/server-application/server-application.js';
 
 const checkIsWhiteRoute = ({
   path,
