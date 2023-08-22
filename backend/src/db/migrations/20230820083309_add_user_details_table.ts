@@ -17,12 +17,13 @@ const ColumnName = {
 function up(knex: Knex): Promise<void> {
   return knex.schema.createTable(TABLE_NAME, (table) => {
     table.increments(ColumnName.ID).primary();
-    table.integer(ColumnName.USER_ID).unique().notNullable();
+    table.integer(ColumnName.USER_ID);
     table
       .foreign(ColumnName.USER_ID)
       .references(ColumnName.ID)
       .inTable(DatabaseTableName.USERS)
-      .onDelete('CASCADE');
+      .onUpdate('CASCADE')
+      .onDelete('SET NULL');
     table.string(ColumnName.FULL_NAME).notNullable();
     table
       .dateTime(ColumnName.CREATED_AT)
