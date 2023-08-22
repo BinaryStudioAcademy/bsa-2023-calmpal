@@ -8,7 +8,7 @@ import { UserRepository } from './user.repository.js';
 import { UserService } from './user.service.js';
 
 const userRepository = new UserRepository(UserModel);
-const jwtService = new JWTService(config.ENV.AUTH.JWT_SECRET);
+const jwtService = new JWTService(config.ENV.JWT.SECRET_KEY);
 const userService = new UserService(userRepository, jwtService);
 const userController = new UserController(logger, userService);
 

@@ -13,8 +13,11 @@ type EnvironmentSchema = {
     POOL_MIN: number;
     POOL_MAX: number;
   };
-  AUTH: {
-    JWT_SECRET: string;
+  JWT: {
+    SECRET_KEY: string;
+    ALG: {
+      JWT_ALG: string;
+    };
   };
 };
 
