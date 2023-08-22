@@ -51,11 +51,6 @@ class AuthApi extends BaseHttpApi {
       },
     );
 
-    if (!response.ok) {
-      const error = await response.json<{ code: number; message: string }>();
-      throw new Error(error.message);
-    }
-
     return await response.json<UserSignInResponseDto>();
   }
 }
