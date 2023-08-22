@@ -1,3 +1,4 @@
+export { CommonColumns } from './common-columns.js';
 export {
   APIPath,
   AppEnvironment,
