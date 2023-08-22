@@ -70,19 +70,17 @@ class AuthController extends BaseController {
       body: UserSignUpRequestDto;
     }>,
   ): Promise<APIHandlerResponse> {
-    
-    try{
+    try {
       return {
         status: HTTPCode.CREATED,
-        payload: await this.authService.signUp(options.body)
-      }
-    }catch(error){
+        payload: await this.authService.signUp(options.body),
+      };
+    } catch (error) {
       return {
         status: HTTPCode.INTERNAL_SERVER_ERROR,
-        payload: error
-      }
+        payload: error,
+      };
     }
-    
   }
 }
 

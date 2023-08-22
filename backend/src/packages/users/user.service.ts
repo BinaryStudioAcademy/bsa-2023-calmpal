@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
 
 import { type Service } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
@@ -32,14 +32,14 @@ class UserService implements Service {
   public async create(
     payload: UserSignUpRequestDto,
   ): Promise<UserSignUpResponseDto> {
-    const passwordSalt = await bcrypt.genSalt()
-    const passwordHash = await bcrypt.hash(payload.password, passwordSalt)
+    const passwordSalt = await bcrypt.genSalt();
+    const passwordHash = await bcrypt.hash(payload.password, passwordSalt);
     const item = await this.userRepository.create(
       UserEntity.initializeNew({
         fullName: payload.fullName,
         email: payload.email,
         passwordSalt,
-        passwordHash
+        passwordHash,
       }),
     );
 
