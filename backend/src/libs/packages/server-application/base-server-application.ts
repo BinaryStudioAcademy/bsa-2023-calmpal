@@ -6,21 +6,23 @@ import swagger, { type StaticDocumentSpec } from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
 import Fastify, { type FastifyError } from 'fastify';
 
-import { ServerErrorType } from '#libs/enums/enums.js';
-import { type ValidationError } from '#libs/exceptions/exceptions.js';
+import {
+  AuthError,
+  type ValidationError,
+} from '#libs/exceptions/exceptions.js';
 import { type Config } from '#libs/packages/config/config.js';
 import { type Database } from '#libs/packages/database/database.js';
-import { HTTPCode, HTTPError } from '#libs/packages/http/http.js';
+import { HTTPError } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 import { authorization as authorizationPlugin } from '#libs/plugins/plugins.js';
 import {
-  type ServerCommonErrorResponse,
   type ServerValidationErrorResponse,
   type ValidationSchema,
 } from '#libs/types/types.js';
 import { jwtService } from '#packages/auth/auth.js';
 import { userService } from '#packages/users/users.js';
 
+import { createErrorResponse } from './libs/helpers/helpers.js';
 import {
   type ServerApplication,
   type ServerApplicationApi,
@@ -148,46 +150,27 @@ class BaseServerApplication implements ServerApplication {
   private initErrorHandler(): void {
     this.app.setErrorHandler(
       (error: FastifyError | ValidationError, _request, reply) => {
+        const { status, response } = createErrorResponse(error);
+
         if ('isJoi' in error) {
-          this.logger.error(`[Validation Error]: ${error.message}`);
+          this.logger.error(`[Validation Error]: ${response.message}`);
 
-          error.details.forEach((detail) => {
-            this.logger.error(
-              `[${detail.path.toString()}] — ${detail.message}`,
-            );
-          });
-
-          const response: ServerValidationErrorResponse = {
-            errorType: ServerErrorType.VALIDATION,
-            message: error.message,
-            details: error.details.map((detail) => ({
-              path: detail.path,
-              message: detail.message,
-            })),
-          };
-
-          return reply.status(HTTPCode.UNPROCESSED_ENTITY).send(response);
+          (response as ServerValidationErrorResponse).details.forEach(
+            (detail) => {
+              this.logger.error(
+                `[${detail.path.toString()}] — ${detail.message}`,
+              );
+            },
+          );
+        } else if (error instanceof AuthError) {
+          this.logger.error(`[Auth Error]: ${status} — ${response.message}`);
+        } else if (error instanceof HTTPError) {
+          this.logger.error(`[HTTP Error]: ${status} — ${response.message}`);
+        } else {
+          this.logger.error(response.message);
         }
 
-        if (error instanceof HTTPError) {
-          this.logger.error(`[HTTP Error]: ${error.status} – ${error.message}`);
-
-          const response: ServerCommonErrorResponse = {
-            errorType: ServerErrorType.COMMON,
-            message: error.message,
-          };
-
-          return reply.status(error.status).send(response);
-        }
-
-        this.logger.error(error.message);
-
-        const response: ServerCommonErrorResponse = {
-          errorType: ServerErrorType.COMMON,
-          message: error.message,
-        };
-
-        return reply.status(HTTPCode.INTERNAL_SERVER_ERROR).send(response);
+        return reply.status(status).send(response);
       },
     );
   }
