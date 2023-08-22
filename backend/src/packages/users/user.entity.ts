@@ -3,7 +3,7 @@ import { type Entity } from '#libs/types/types.js';
 class UserEntity implements Entity {
   private id: number | null;
 
-  private createdAt: string  | null;
+  private createdAt: string | null;
 
   private updatedAt: string | null;
 
@@ -22,7 +22,7 @@ class UserEntity implements Entity {
     passwordHash,
     passwordSalt,
     createdAt,
-    updatedAt
+    updatedAt,
   }: {
     id: number | null;
     email: string;
@@ -48,11 +48,11 @@ class UserEntity implements Entity {
     passwordHash,
     passwordSalt,
     createdAt,
-    updatedAt
+    updatedAt,
   }: {
     id: number;
     email: string;
-    fullName: string,
+    fullName: string;
     passwordHash: string;
     passwordSalt: string;
     createdAt: string;
@@ -65,7 +65,7 @@ class UserEntity implements Entity {
       passwordHash,
       passwordSalt,
       createdAt,
-      updatedAt
+      updatedAt,
     });
   }
 
@@ -87,7 +87,7 @@ class UserEntity implements Entity {
       passwordHash,
       passwordSalt,
       createdAt: null,
-      updatedAt: null
+      updatedAt: null,
     });
   }
 
@@ -103,7 +103,7 @@ class UserEntity implements Entity {
       email: this.email,
       fullName: this.fullName,
       createdAt: this.createdAt as string,
-      updatedAt: this.updatedAt as string
+      updatedAt: this.updatedAt as string,
     };
   }
 
