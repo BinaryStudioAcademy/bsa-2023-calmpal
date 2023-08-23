@@ -5,11 +5,11 @@ class SurveyEntity implements Entity {
 
   private userId: number | null;
 
-  private preferences: string[] | null;
+  private preferences: string[];
 
-  private createdAt: string | null;
+  private createdAt: Date | null;
 
-  private updatedAt: string | null;
+  private updatedAt: Date | null;
 
   private constructor({
     id,
@@ -20,15 +20,15 @@ class SurveyEntity implements Entity {
   }: {
     id: number | null;
     userId: number;
-    preferences: string[] | null;
+    preferences: string[];
     createdAt: string | null;
     updatedAt: string | null;
   }) {
     this.id = id;
     this.userId = userId;
     this.preferences = preferences;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
+    this.createdAt = createdAt ? new Date(createdAt) : null;
+    this.updatedAt = updatedAt ? new Date(updatedAt) : null;
   }
 
   public static initialize({
@@ -73,15 +73,15 @@ class SurveyEntity implements Entity {
     id: number;
     userId: number;
     preferences: string[];
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
   } {
     return {
       id: this.id as number,
       userId: this.userId as number,
-      preferences: this.preferences as string[],
-      createdAt: this.createdAt as string,
-      updatedAt: this.updatedAt as string,
+      preferences: this.preferences,
+      createdAt: this.createdAt as Date,
+      updatedAt: this.updatedAt as Date,
     };
   }
 
@@ -91,7 +91,7 @@ class SurveyEntity implements Entity {
   } {
     return {
       userId: this.userId as number,
-      preferences: this.preferences as string[],
+      preferences: this.preferences,
     };
   }
 }
