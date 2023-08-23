@@ -1,17 +1,17 @@
-.authForm {
+.auth-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 280px;
 }
 
-.authForm .greeting {
+.auth-form .greeting {
   margin: 0;
   font-weight: var(--semibold);
   font-size: 30px;
 }
 
-.authForm .btn {
+.auth-form .btn {
   display: inline-block;
   width: 100%;
   margin-top: 30px;
@@ -26,7 +26,7 @@
   cursor: pointer;
 }
 
-.authFormLink {
+.auth-form-link {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -35,7 +35,7 @@
   font-size: 14px;
 }
 
-.authFormLink .text {
+.auth-form-link .text {
   margin-left: 5px;
   color: white;
   font-weight: var(--semibold);

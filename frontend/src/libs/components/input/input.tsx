@@ -41,7 +41,7 @@ const Input = <T extends FieldValues>({
         placeholder={placeholder}
       />
       {hasError && (
-        <span className={styles['errorMessage']}>{error as string}</span>
+        <span className={styles['error-message']}>{error as string}</span>
       )}
     </label>
   );
