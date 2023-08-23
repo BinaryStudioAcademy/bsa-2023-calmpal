@@ -20,3 +20,4 @@ export {
   type UserSignUpResponseDto,
 } from 'shared/build/index.js';
 export { type RelationMappingsType };
+export { type UserInsertData } from './user-insert-data.type.js';
