@@ -4,9 +4,9 @@ import {
   AbstractModel,
   CommonTableColumn,
   DatabaseTableName,
-  UserDetailsTableColumn,
 } from '#libs/packages/database/database.js';
 
+import { UserDetailsTableColumn } from './libs/enums/enums.js';
 import { UserModel } from './user.model.js';
 
 class UserDetailsModel extends AbstractModel {

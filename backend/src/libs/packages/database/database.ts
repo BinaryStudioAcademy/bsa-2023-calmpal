@@ -7,10 +7,5 @@ const database = new BaseDatabase(config, logger);
 
 export { database };
 export { Abstract as AbstractModel } from './abstract.model.js';
-export {
-  CommonTableColumn,
-  DatabaseTableName,
-  UserDetailsTableColumn,
-} from './libs/enums/enums.js';
-export { UsersTableColumn } from './libs/enums/enums.js';
+export { CommonTableColumn, DatabaseTableName } from './libs/enums/enums.js';
 export { type Database } from './libs/types/types.js';
