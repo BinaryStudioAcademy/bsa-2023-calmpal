@@ -1,7 +1,7 @@
 import { ServerErrorType } from '#libs/enums/enums.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 
-import { errorInfoLabelMapper } from '../../helpers.js';
+import { errorInfoLabelMap } from '../../error-info-label-map/error-info-label-map.js';
 import { type ErrorHandler } from '../types/types.js';
 
 const handleValidationErrorResponse: ErrorHandler = (error) => {
@@ -9,7 +9,7 @@ const handleValidationErrorResponse: ErrorHandler = (error) => {
     const { message, details } = error;
 
     return {
-      info: `${errorInfoLabelMapper[error.constructor.name]}${message}`,
+      info: `${errorInfoLabelMap[error.constructor.name]}${message}`,
       status: HTTPCode.UNPROCESSED_ENTITY,
       response: {
         message,

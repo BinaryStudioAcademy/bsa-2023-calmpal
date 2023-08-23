@@ -2,7 +2,7 @@ import { ServerErrorType } from '#libs/enums/enums.js';
 import { AuthError } from '#libs/exceptions/exceptions.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 
-import { errorInfoLabelMapper } from '../../helpers.js';
+import { errorInfoLabelMap } from '../../error-info-label-map/error-info-label-map.js';
 import { type ErrorHandler } from '../types/types.js';
 
 const handleAuthErrorResponse: ErrorHandler = (error) => {
@@ -13,7 +13,7 @@ const handleAuthErrorResponse: ErrorHandler = (error) => {
     return {
       status,
       info: `${
-        errorInfoLabelMapper[error.constructor.name]
+        errorInfoLabelMap[error.constructor.name]
       }${status} — ${message}`,
       response: {
         message,

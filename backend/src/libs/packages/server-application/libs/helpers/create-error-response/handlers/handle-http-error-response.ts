@@ -2,7 +2,7 @@ import { ServerErrorType } from '#libs/enums/enums.js';
 import { type HTTPCode, HTTPError } from '#libs/packages/http/http.js';
 import { type ValueOf } from '#libs/types/types.js';
 
-import { errorInfoLabelMapper } from '../../helpers.js';
+import { errorInfoLabelMap } from '../../error-info-label-map/error-info-label-map.js';
 import { type ErrorHandler } from '../types/types.js';
 
 const handleHttpErrorResponse: ErrorHandler = (error) => {
@@ -12,7 +12,7 @@ const handleHttpErrorResponse: ErrorHandler = (error) => {
 
     return {
       info: `${
-        errorInfoLabelMapper[error.constructor.name]
+        errorInfoLabelMap[error.constructor.name]
       }${status} — ${message}`,
       status,
       response: {
