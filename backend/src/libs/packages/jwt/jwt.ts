@@ -7,4 +7,3 @@ const jwtService = new JWTService({
 });
 
 export { jwtService };
-export { type JWTService } from '#libs/packages/jwt/jwt.service.js';
