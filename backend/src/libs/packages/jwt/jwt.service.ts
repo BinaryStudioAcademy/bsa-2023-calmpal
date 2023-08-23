@@ -14,8 +14,8 @@ class JWTService {
     this.alg = alg;
   }
 
-  public async signJWT(payload: Record<string, number>): Promise<string> {
-    return await new SignJWT(payload)
+  public signJWT(payload: Record<string, number>): Promise<string> {
+    return new SignJWT(payload)
       .setProtectedHeader({ alg: this.alg })
       .sign(this.secret);
   }
