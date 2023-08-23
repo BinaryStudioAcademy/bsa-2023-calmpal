@@ -107,8 +107,6 @@ class AuthController extends BaseController {
       };
     }
 
-    await this.authService.signIn(user.id);
-
     return {
       status: HTTPCode.OK,
       payload: user,
