@@ -47,11 +47,11 @@ class UserService implements Service {
     );
 
     const user = item.toObject();
-    const jwt = await this.jwtService.signJWT({ userId: user.id });
+    const token = await this.jwtService.signJWT({ userId: user.id });
 
     return {
       user,
-      token: jwt,
+      token,
     };
   }
 
