@@ -2,7 +2,7 @@ import joi from 'joi';
 
 import { UserValidationMessage } from '../enums/user-validation-message.enum.js';
 
-const commonUserFields = {
+const commonAuthFields = {
   email: joi
     .string()
     .trim()
@@ -20,4 +20,4 @@ const commonUserFields = {
   password: joi.string().trim().required(),
 };
 
-export { commonUserFields };
+export { commonAuthFields };
