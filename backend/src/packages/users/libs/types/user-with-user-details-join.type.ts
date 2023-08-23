@@ -5,7 +5,7 @@ type UserWithUserDetailsJoin = {
     email: string;
     passwordSalt: string;
     passwordHash: string;
-    details: {
+    details?: {
       fullName: string;
     }
   };

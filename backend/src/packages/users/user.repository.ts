@@ -1,20 +1,19 @@
 import { type Repository } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/user.model.js';
+import { DatabaseTableName } from '#libs/packages/database/database.js';
+import { CommonTableColumns } from '#libs/packages/database/libs/enums/enums.js';
 
-import { type UserDetailsModel } from './user-details.model.js';
-import { type UserInsertData } from './libs/types/types.js';
+import { UserWithUserDetailsJoin, type UserInsertData, UserColumns } from './libs/types/types.js';
+
 
 class UserRepository implements Repository {
   private userModel: typeof UserModel;
-  private userDetailsModel: typeof UserDetailsModel;
 
   public constructor(
     userModel: typeof UserModel,
-    userDetailsModel: typeof UserDetailsModel,
   ) {
     this.userModel = userModel;
-    this.userDetailsModel = userDetailsModel;
   }
 
   public find(): ReturnType<Repository['find']> {
@@ -28,6 +27,26 @@ class UserRepository implements Repository {
       UserEntity.initialize({ ...user, fullName: 'FullName' }),
     );
   }
+
+  private flattenUserJoinWithUserDetails(join: UserWithUserDetailsJoin): UserColumns{
+    const newObject = {...join};
+    let fullName = '';
+    if(newObject.details){
+      fullName = newObject.details.fullName
+    };
+    delete newObject.details;
+    return { ...newObject, fullName };
+  }
+
+  private async getUserJoinWithUserDetails(userId: number): Promise<UserColumns>{
+    const join = await this.userModel.query()
+    .withGraphJoined('details')
+    .where(`${DatabaseTableName.USERS}.${CommonTableColumns.ID}`, '=', userId)
+    .first().castTo<UserWithUserDetailsJoin>()
+    return this.flattenUserJoinWithUserDetails(join)
+  }
+
+ 
 
   public async create(entity: UserEntity): Promise<UserEntity> {
     const { email, passwordSalt, passwordHash, fullName } =
@@ -47,8 +66,7 @@ class UserRepository implements Repository {
       .insertGraph(userData)
       .returning('*')
       .execute();
-
-    return UserEntity.initialize(({ ...user, fullName}));
+    return UserEntity.initialize(await this.getUserJoinWithUserDetails(user.id));
   }
 
   public update(): ReturnType<Repository['update']> {
