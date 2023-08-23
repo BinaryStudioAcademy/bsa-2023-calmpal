@@ -45,50 +45,58 @@ const Auth: React.FC = () => {
     <div className={styles['auth']}>
       <div className={styles['logo']}>Calmpal</div>
 
-      <div className={styles['authName']}>
+      <div className={styles['auth-name']}>
         <p className={styles['secondary']}>Welcome to</p>
         <p className={styles['primary']}>Calmpal</p>
       </div>
       <div className={styles['overlay']}>{getScreen(pathname)}</div>
-
       <span
         className={getValidClassNames(
           styles['shadow'],
-          styles['shadowTopRight'],
+          styles['shadow-top-right'],
         )}
       />
       <span
         className={getValidClassNames(
           styles['shadow'],
-          styles['shadowBottomRight'],
+          styles['shadow-bottom-right'],
         )}
       />
       <span
         className={getValidClassNames(
           styles['shadow'],
-          styles['shadowBottomLeft'],
+          styles['shadow-bottom-left'],
         )}
       />
       <span
         className={getValidClassNames(
           styles['shadow'],
-          styles['shadowCornerBottomLeft'],
+          styles['shadow-corner-bottom-left'],
         )}
       />
       <span
-        className={getValidClassNames(styles['shadow'], styles['shadowCenter'])}
+        className={getValidClassNames(
+          styles['shadow'],
+          styles['shadow-center'],
+        )}
       />
       <span
-        className={getValidClassNames(styles['bubble'], styles['bubbleBottom'])}
+        className={getValidClassNames(
+          styles['bubble'],
+          styles['bubble-bottom'],
+        )}
       />
       <span
-        className={getValidClassNames(styles['bubble'], styles['bubbleRight'])}
+        className={getValidClassNames(styles['bubble'], styles['bubble-right'])}
       />
       <span
-        className={getValidClassNames(styles['bubble'], styles['bubbleCenter'])}
+        className={getValidClassNames(
+          styles['bubble'],
+          styles['bubble-center'],
+        )}
       />
       <span
-        className={getValidClassNames(styles['bubble'], styles['bubbleTop'])}
+        className={getValidClassNames(styles['bubble'], styles['bubble-top'])}
       />
     </div>
   );
