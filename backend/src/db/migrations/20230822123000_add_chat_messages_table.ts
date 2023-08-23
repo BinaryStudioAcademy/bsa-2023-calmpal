@@ -1,33 +1,54 @@
 import { type Knex } from 'knex';
 
-import {
-  createTableWithCommonColumns,
-  dropTableIfExists,
-} from '#db/helpers/migration-helper.js';
-import {
-  ChatMessagesTableColumns,
-  CommonTableColumns,
-  TableNames,
-} from '#libs/enums/enums.js';
+const TABLE_NAME = 'chat_messages';
 
-const up = createTableWithCommonColumns(
-  TableNames.CHAT_MESSAGES,
-  (table: Knex.CreateTableBuilder) => {
-    table.string(ChatMessagesTableColumns.NAME).notNullable();
-    table
-      .integer(ChatMessagesTableColumns.CHAT_ID)
-      .notNullable()
-      .references(CommonTableColumns.ID)
-      .inTable(TableNames.CHATS);
-    table
-      .integer(ChatMessagesTableColumns.SENDER_ID)
-      .notNullable()
-      .references(CommonTableColumns.ID)
-      .inTable(TableNames.USERS);
-    table.text(ChatMessagesTableColumns.MESSAGE).notNullable();
-  },
-);
+const ColumnName = {
+  ID: 'id',
+  NAME: 'name',
+  CHAT_ID: 'chat_id',
+  SENDER_ID: 'sender_id',
+  MESSAGE: 'message',
+  CREATED_AT: 'created_at',
+  UPDATED_AT: 'updated_at',
+} as const;
 
-const down = dropTableIfExists(TableNames.CHAT_MESSAGES);
+const ForeignTable = {
+  CHATS: 'chats',
+  USERS: 'users',
+} as const;
+
+function up(knex: Knex): Promise<void> {
+  return knex.schema.createTable(TABLE_NAME, (table) => {
+    table.increments(ColumnName.ID).primary();
+    table.string(ColumnName.NAME).unique().notNullable();
+    table
+      .integer(ColumnName.CHAT_ID)
+      .notNullable()
+      .references(ColumnName.ID)
+      .inTable(ForeignTable.CHATS)
+      .onDelete('CASCADE')
+      .onUpdate('CASCADE');
+    table
+      .integer(ColumnName.SENDER_ID)
+      .notNullable()
+      .references(ColumnName.ID)
+      .inTable(ForeignTable.USERS)
+      .onDelete('CASCADE')
+      .onUpdate('CASCADE');
+    table.text(ColumnName.MESSAGE).notNullable();
+    table
+      .dateTime(ColumnName.CREATED_AT)
+      .notNullable()
+      .defaultTo(knex.fn.now());
+    table
+      .dateTime(ColumnName.UPDATED_AT)
+      .notNullable()
+      .defaultTo(knex.fn.now());
+  });
+}
+
+function down(knex: Knex): Promise<void> {
+  return knex.schema.dropTableIfExists(TABLE_NAME);
+}
 
 export { down, up };
