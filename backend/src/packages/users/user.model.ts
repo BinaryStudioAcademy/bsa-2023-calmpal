@@ -10,8 +10,6 @@ class UserModel extends AbstractModel {
 
   public passwordSalt!: string;
 
-  public fullName!: string;
-
   public static override get tableName(): string {
     return DatabaseTableName.USERS;
   }
