@@ -2,9 +2,9 @@ import { Model, type RelationMappings } from 'objection';
 
 import {
   AbstractModel,
+  CommonTableColumn,
   DatabaseTableName,
-  CommonTableColumns,
-  UserDetailsTableColumns
+  UserDetailsTableColumn,
 } from '#libs/packages/database/database.js';
 
 import { UserModel } from './user.model.js';
@@ -22,8 +22,8 @@ class UserDetailsModel extends AbstractModel {
         relation: Model.BelongsToOneRelation,
         modelClass: UserModel,
         join: {
-          from: `${DatabaseTableName.USER_DETAILS}.${UserDetailsTableColumns.USER_ID}`,
-          to: `${DatabaseTableName.USERS}.${CommonTableColumns.ID}`,
+          from: `${DatabaseTableName.USER_DETAILS}.${UserDetailsTableColumn.USER_ID}`,
+          to: `${DatabaseTableName.USERS}.${CommonTableColumn.ID}`,
         },
       },
     };

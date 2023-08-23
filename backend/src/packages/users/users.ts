@@ -1,3 +1,4 @@
+import { encryptService } from '#libs/packages/encrypt/encrypt.js';
 import { jwtService } from '#libs/packages/jwt/jwt.js';
 import { logger } from '#libs/packages/logger/logger.js';
 
@@ -7,7 +8,11 @@ import { UserRepository } from './user.repository.js';
 import { UserService } from './user.service.js';
 
 const userRepository = new UserRepository(UserModel);
-const userService = new UserService({ userRepository, jwtService });
+const userService = new UserService({
+  userRepository,
+  jwtService,
+  encryptService,
+});
 const userController = new UserController(logger, userService);
 
 export { userController, userService };

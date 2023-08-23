@@ -1,5 +1,4 @@
-import bcrypt from 'bcryptjs';
-
+import { type EncryptService } from '#libs/packages/encrypt/encrypt.service.js';
 import { type JWTService } from '#libs/packages/jwt/jwt.service.js';
 import { type Service } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
@@ -14,15 +13,22 @@ import {
 type UserServiceDependencies = {
   userRepository: UserRepository;
   jwtService: JWTService;
+  encryptService: EncryptService;
 };
 
 class UserService implements Service {
   private userRepository: UserRepository;
   private jwtService: JWTService;
+  private encryptService: EncryptService;
 
-  public constructor({ userRepository, jwtService }: UserServiceDependencies) {
+  public constructor({
+    userRepository,
+    jwtService,
+    encryptService,
+  }: UserServiceDependencies) {
     this.userRepository = userRepository;
     this.jwtService = jwtService;
+    this.encryptService = encryptService;
   }
 
   public find(): ReturnType<Service['find']> {
@@ -40,8 +46,11 @@ class UserService implements Service {
   public async create(
     payload: UserSignUpRequestDto,
   ): Promise<UserSignUpResponseDto> {
-    const passwordSalt = await bcrypt.genSalt();
-    const passwordHash = await bcrypt.hash(payload.password, passwordSalt);
+    const passwordSalt = await this.encryptService.generateSalt();
+    const passwordHash = await this.encryptService.generateHash(
+      payload.password,
+      passwordSalt,
+    );
     const item = await this.userRepository.create(
       UserEntity.initializeNew({
         fullName: payload.fullName,

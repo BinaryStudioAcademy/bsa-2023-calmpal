@@ -1,4 +1,7 @@
-import { DatabaseTableName, CommonTableColumns } from '#libs/packages/database/database.js';
+import {
+  CommonTableColumn,
+  DatabaseTableName,
+} from '#libs/packages/database/database.js';
 import { type Repository } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/user.model.js';
@@ -47,7 +50,7 @@ class UserRepository implements Repository {
     const join = await this.userModel
       .query()
       .withGraphJoined('details')
-      .where(`${DatabaseTableName.USERS}.${CommonTableColumns.ID}`, '=', userId)
+      .where(`${DatabaseTableName.USERS}.${CommonTableColumn.ID}`, '=', userId)
       .first()
       .castTo<UserWithUserDetailsJoin>();
     return this.flattenUserJoinWithUserDetails(join);
