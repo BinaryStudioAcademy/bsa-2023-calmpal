@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 import { type Service } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
