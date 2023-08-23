@@ -1,0 +1,13 @@
+.link {
+  color: var(--gray-200);
+  font-weight: 600;
+  font-size: 14px;
+  font-family: Montserrat, sans-serif;
+  line-height: 20.44px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.link:hover {
+  color: var(--black);
+}

@@ -17,7 +17,7 @@
     "build:shared": "npm run build -w shared",
     "build:frontend": "npm run build -w frontend",
     "build:backend": "npm run build -w backend",
-    "lint:editor": "editorconfig-checker",
+    "lint:editor": "editorconfig-checker --exclude \"mobile/ios|mobile/android|mobile/Gemfile.lock|frontend/public\"",
     "lint:fs": "ls-lint",
     "lint:type": "npm run lint:type --workspaces --if-present",
     "lint:js": "npm run lint:js --workspaces --if-present -- --max-warnings=0",
