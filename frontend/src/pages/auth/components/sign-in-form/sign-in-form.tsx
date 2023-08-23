@@ -27,14 +27,14 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
   );
 
   return (
-    <>
-      <form className={styles['auth-form']} onSubmit={handleFormSubmit}>
-        <h1 className={styles['greeting']}>Sign In to your account</h1>
+    <div className={styles['container']}>
+      <h1 className={styles['title']}>Sign In to your account</h1>
 
+      <form className={styles['form']} onSubmit={handleFormSubmit}>
         <Input
           type="text"
           label="Email"
-          placeholder="name@gmail.com"
+          placeholder="Enter your email"
           name="email"
           control={control}
           errors={errors}
@@ -50,17 +50,17 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
         <Button
           type="submit"
           label="Sign in"
-          className={styles['btn'] as string}
+          className={styles['submit'] as string}
         />
 
-        <span className={styles['auth-form-link']}>
+        <span className={styles['form-link']}>
           Don&apos;t have an account? Go to
           <Link to={AppRoute.SIGN_UP}>
             <span className={styles['text']}>Sign up</span>
           </Link>
         </span>
       </form>
-    </>
+    </div>
   );
 };
 
