@@ -1,3 +1,4 @@
+import { type JWTService } from '#libs/packages/jwt/jwt.service.js';
 import { type Service } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserRepository } from '#packages/users/user.repository.js';
@@ -8,11 +9,18 @@ import {
   type UserSignUpResponseDto,
 } from './libs/types/types.js';
 
+type UserServiceDependencies = {
+  userRepository: UserRepository;
+  jwtService: JWTService;
+};
+
 class UserService implements Service {
   private userRepository: UserRepository;
+  private jwtService: JWTService;
 
-  public constructor(userRepository: UserRepository) {
+  public constructor({ userRepository, jwtService }: UserServiceDependencies) {
     this.userRepository = userRepository;
+    this.jwtService = jwtService;
   }
 
   public find(): ReturnType<Service['find']> {
@@ -37,8 +45,14 @@ class UserService implements Service {
         passwordHash: 'HASH', // TODO
       }),
     );
+      
+    const user = item.toObject();
+    const token = await this.jwtService.signJWT({ userId: user.id });
 
-    return { user: item.toObject(), token: 'token' };
+    return {
+      user,
+      token,
+    };
   }
 
   public update(): ReturnType<Service['update']> {
