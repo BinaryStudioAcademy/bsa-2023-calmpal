@@ -1,19 +1,15 @@
 import React from 'react';
 import Toast, { ErrorToast } from 'react-native-toast-message';
 
-import { AppColor } from '#libs/enums/enums';
+import { toastStyles } from './styles';
 
 const toastConfig = {
   error: (properties: object): React.ReactNode => (
     <ErrorToast
       {...properties}
-      style={{ borderColor: AppColor.RED_100 }}
-      text1Style={{
-        fontSize: 15,
-      }}
-      text2Style={{
-        color: AppColor.GRAY_400,
-      }}
+      style={toastStyles.errorToast}
+      text1Style={toastStyles.text1}
+      text2Style={toastStyles.text2}
     />
   ),
 };
