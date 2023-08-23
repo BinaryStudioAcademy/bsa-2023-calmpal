@@ -8,14 +8,14 @@ import { AppColor, MainScreenName } from '#libs/enums/enums';
 import { type TabNavigationParameterList } from '#libs/types/types';
 import { Home } from '#screens/main/home';
 
-//import HomeIcon from '../../assets/img/icons/home.svg';
+import HomeIcon from '../../assets/img/icons/home.svg';
 import { styles } from './styles';
 
 const BottomTab = createBottomTabNavigator<TabNavigationParameterList>();
 
 const tabNavigatorOptions: BottomTabNavigationOptions = {
   tabBarActiveTintColor: AppColor.BLUE_200,
-  //tabBarIcon: ({ color }) => <HomeIcon color={color} />,
+  tabBarIcon: ({ color }) => <HomeIcon color={color} />,
   tabBarInactiveTintColor: AppColor.GRAY_300,
   tabBarShowLabel: false,
   tabBarStyle: styles.tabBarStyle,

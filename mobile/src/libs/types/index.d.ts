@@ -1,7 +1,7 @@
 declare module '*.svg' {
-  import { type ComponentType, type SVGProps } from 'react';
+  import { type SvgProps } from 'react-native-svg';
 
-  const content: ComponentType<SVGProps>;
+  const content: React.FC<SvgProps>;
 
-  export { content };
+  export = content;
 }
