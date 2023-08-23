@@ -4,7 +4,7 @@ import { type UserSignInRequestDto } from '../types/types.js';
 import { commonUserFields } from './common-auth-fields.js';
 
 const userSignIn = joi.object<UserSignInRequestDto, true>({
-    ...commonUserFields
+  ...commonUserFields,
 });
 
 export { userSignIn };
