@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import {
   Button,
+  SurveyCategory,
   Text,
   TextInput,
   TouchableOpacity,
@@ -12,6 +13,11 @@ const PreferencesStep = (): JSX.Element => {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [otherText, setOtherText] = useState<string>('');
   const [isOtherSelected, setIsOtherSelected] = useState<boolean>(false);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const handleCategorySelect = (category: string): void => {
+    setSelectedCategory(category);
+  };
 
   const handleItemSelected = (item: string): void => {
     if (item === 'Other') {
@@ -39,13 +45,21 @@ const PreferencesStep = (): JSX.Element => {
   return (
     <View style={{ flex: 1, padding: 20 }}>
       <Text>Select items:</Text>
-      <TouchableOpacity
-        onPress={(): void => {
-          handleItemSelected('Item 1');
-        }}
-      >
-        <Text>Item 1</Text>
-      </TouchableOpacity>
+      <SurveyCategory
+        category="Category 1"
+        selected={selectedCategory === 'Category 1'}
+        onSelect={handleCategorySelect}
+      />
+      <SurveyCategory
+        category="Category 2"
+        selected={selectedCategory === 'Category 2'}
+        onSelect={handleCategorySelect}
+      />
+      <SurveyCategory
+        category="Other"
+        selected={selectedCategory === 'Other'}
+        onSelect={handleCategorySelect}
+      />
       <TouchableOpacity
         onPress={(): void => {
           handleItemSelected('Item 2');
