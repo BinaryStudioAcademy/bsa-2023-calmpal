@@ -45,7 +45,6 @@ class UserService implements Service {
         passwordHash: 'HASH', // TODO
       }),
     );
-      
     const user = item.toObject();
     const token = await this.jwtService.signJWT({ userId: user.id });
 
