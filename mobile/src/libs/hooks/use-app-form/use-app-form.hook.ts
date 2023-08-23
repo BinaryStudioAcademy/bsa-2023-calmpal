@@ -6,18 +6,19 @@ import {
   type FieldValues,
   useForm,
   type UseFormHandleSubmit,
+  type UseFormProps,
   type ValidationMode,
 } from 'react-hook-form';
 
 import { type ValidationSchema } from '#libs/types/types';
 
-type Arguments<T extends FieldValues = FieldValues> = {
+type Parameters<T extends FieldValues = FieldValues> = {
   defaultValues: DefaultValues<T>;
   validationSchema?: ValidationSchema;
   mode?: keyof ValidationMode;
 };
 
-type Results<T extends FieldValues = FieldValues> = {
+type ReturnValue<T extends FieldValues = FieldValues> = {
   control: Control<T, null>;
   errors: FieldErrors<T>;
   handleSubmit: UseFormHandleSubmit<T>;
@@ -25,23 +26,31 @@ type Results<T extends FieldValues = FieldValues> = {
 
 const useAppForm = <T extends FieldValues = FieldValues>({
   defaultValues,
-  mode,
+  mode = 'onSubmit',
   validationSchema,
-}: Arguments<T>): Results<T> => {
+}: Parameters<T>): ReturnValue<T> => {
+  let parameters: UseFormProps<T> = {
+    mode,
+    defaultValues,
+  };
+
+  if (validationSchema) {
+    parameters = {
+      ...parameters,
+      resolver: joiResolver(validationSchema),
+    };
+  }
+
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<T>({
-    defaultValues,
-    mode,
-    resolver: validationSchema ? joiResolver(validationSchema) : undefined,
-  });
+  } = useForm<T>(parameters);
 
   return {
     control,
-    handleSubmit,
     errors,
+    handleSubmit,
   };
 };
 

@@ -30,6 +30,7 @@
     "@commitlint/cli": "17.7.1",
     "@ls-lint/ls-lint": "2.0.1",
     "@typescript-eslint/eslint-plugin": "6.3.0",
+    "@typescript-eslint/parser": "6.4.0",
     "danger": "11.2.8",
     "editorconfig-checker": "5.1.1",
     "eslint": "8.47.0",
@@ -46,7 +47,7 @@
     "typescript": "5.1.6"
   },
   "simple-git-hooks": {
-    "pre-commit": "npm run lint:type && npx lint-staged",
+    "pre-commit": "npx lint-staged && npm run lint:type",
     "commit-msg": "npx commitlint --edit $1"
   }
 }
