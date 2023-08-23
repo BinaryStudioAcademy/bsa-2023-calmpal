@@ -7,6 +7,8 @@ import {
 import { UserModel } from '#packages/users/user.model.js';
 
 class SurveyModel extends AbstractModel {
+  public userId!: number;
+
   public preferences!: string[];
 
   public static override get tableName(): string {
