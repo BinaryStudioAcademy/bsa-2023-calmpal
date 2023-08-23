@@ -1,7 +1,5 @@
-import { type FC, type ReactNode } from 'react';
-import React from 'react';
-import { type ImageSourcePropType } from 'react-native';
-import { Image } from 'react-native';
+import React, { type FC, type ReactNode } from 'react';
+import { Image, type ImageSourcePropType } from 'react-native';
 
 import bottomBubbleImg from '#assets/bottom-bubble.png';
 import backgroundImg from '#assets/sign-background.png';
@@ -20,16 +18,16 @@ const SignBackground: FC<Properties> = ({ children }) => {
       <View style={styles.backgroundWrapper}>
         <Image
           source={backgroundImg as ImageSourcePropType}
-          style={{ width: '100%', height: '100%' }}
+          style={styles.backgroundImg}
         />
       </View>
       <Image
         source={topBubbleImg as ImageSourcePropType}
-        style={{ position: 'absolute', top: 30, right: 0 }}
+        style={styles.topBubbleImg}
       />
       <Image
         source={bottomBubbleImg as ImageSourcePropType}
-        style={{ position: 'absolute', bottom: 60, left: 0 }}
+        style={styles.bottomBubbleImg}
       />
 
       {children}

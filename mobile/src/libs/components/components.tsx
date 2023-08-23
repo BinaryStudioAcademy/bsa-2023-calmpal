@@ -5,4 +5,4 @@ export { Label } from './label/label';
 export { Link } from './link/link';
 export { Loader } from './loader/loader';
 export { SignBackground } from './sign-background/sign-background';
-export { Text, View } from 'react-native';
+export { ScrollView, Text, View } from 'react-native';
