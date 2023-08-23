@@ -4,20 +4,15 @@ import {
   createTableWithCommonColumns,
   dropTableIfExists,
 } from '#db/helpers/migration-helper.js';
-
-const TABLE_NAME = 'chats';
-
-const ColumnName = {
-  NAME: 'name',
-};
+import { ChatsTableColumns, TableNames } from '#libs/enums/enums.js';
 
 const up = createTableWithCommonColumns(
-  TABLE_NAME,
+  TableNames.CHATS,
   (table: Knex.CreateTableBuilder) => {
-    table.string(ColumnName.NAME).notNullable();
+    table.string(ChatsTableColumns.NAME).notNullable();
   },
 );
 
-const down = dropTableIfExists(TABLE_NAME);
+const down = dropTableIfExists(TableNames.CHATS);
 
 export { down, up };

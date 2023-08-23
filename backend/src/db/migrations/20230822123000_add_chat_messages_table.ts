@@ -4,34 +4,30 @@ import {
   createTableWithCommonColumns,
   dropTableIfExists,
 } from '#db/helpers/migration-helper.js';
-
-const TABLE_NAME = 'chat_messages';
-
-const ColumnName = {
-  NAME: 'name',
-  CHAT_ID: 'chat_id',
-  SENDER_ID: 'sender_id',
-  MESSAGE: 'message',
-};
+import {
+  ChatMessagesTableColumns,
+  CommonTableColumns,
+  TableNames,
+} from '#libs/enums/enums.js';
 
 const up = createTableWithCommonColumns(
-  TABLE_NAME,
+  TableNames.CHAT_MESSAGES,
   (table: Knex.CreateTableBuilder) => {
-    table.string(ColumnName.NAME).notNullable();
+    table.string(ChatMessagesTableColumns.NAME).notNullable();
     table
-      .integer(ColumnName.CHAT_ID)
+      .integer(ChatMessagesTableColumns.CHAT_ID)
       .notNullable()
-      .references('id')
-      .inTable('chats');
+      .references(CommonTableColumns.ID)
+      .inTable(TableNames.CHATS);
     table
-      .integer(ColumnName.SENDER_ID)
+      .integer(ChatMessagesTableColumns.SENDER_ID)
       .notNullable()
-      .references('id')
-      .inTable('users');
-    table.text(ColumnName.MESSAGE).notNullable();
+      .references(CommonTableColumns.ID)
+      .inTable(TableNames.USERS);
+    table.text(ChatMessagesTableColumns.MESSAGE).notNullable();
   },
 );
 
-const down = dropTableIfExists(TABLE_NAME);
+const down = dropTableIfExists(TableNames.CHAT_MESSAGES);
 
 export { down, up };

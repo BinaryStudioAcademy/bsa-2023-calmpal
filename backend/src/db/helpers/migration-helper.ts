@@ -1,6 +1,6 @@
 import { type Knex } from 'knex';
 
-import { CommonColumns } from '#libs/enums/enums.js';
+import { CommonTableColumns } from '#libs/enums/enums.js';
 
 function createTableWithCommonColumns(
   tableName: string,
@@ -8,15 +8,15 @@ function createTableWithCommonColumns(
 ): (knex: Knex) => Promise<void> {
   return async function (knex: Knex): Promise<void> {
     await knex.schema.createTable(tableName, (table) => {
-      table.increments(CommonColumns.ID).primary();
+      table.increments(CommonTableColumns.ID).primary();
 
       table
-        .dateTime(CommonColumns.CREATED_AT)
+        .dateTime(CommonTableColumns.CREATED_AT)
         .notNullable()
         .defaultTo(knex.fn.now());
 
       table
-        .dateTime(CommonColumns.UPDATED_AT)
+        .dateTime(CommonTableColumns.UPDATED_AT)
         .notNullable()
         .defaultTo(knex.fn.now());
 

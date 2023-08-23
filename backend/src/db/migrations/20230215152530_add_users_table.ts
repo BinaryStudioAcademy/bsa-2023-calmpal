@@ -4,24 +4,17 @@ import {
   createTableWithCommonColumns,
   dropTableIfExists,
 } from '#db/helpers/migration-helper.js';
-
-const TABLE_NAME = 'users';
-
-const ColumnName = {
-  EMAIL: 'email',
-  PASSWORD_HASH: 'password_hash',
-  PASSWORD_SALT: 'password_salt',
-};
+import { TableNames, UserTableColumns } from '#libs/enums/enums.js';
 
 const up = createTableWithCommonColumns(
-  TABLE_NAME,
+  TableNames.USERS,
   (table: Knex.CreateTableBuilder) => {
-    table.string(ColumnName.EMAIL).unique().notNullable();
-    table.text(ColumnName.PASSWORD_HASH).notNullable();
-    table.text(ColumnName.PASSWORD_SALT).notNullable();
+    table.string(UserTableColumns.EMAIL).unique().notNullable();
+    table.text(UserTableColumns.PASSWORD_HASH).notNullable();
+    table.text(UserTableColumns.PASSWORD_SALT).notNullable();
   },
 );
 
-const down = dropTableIfExists(TABLE_NAME);
+const down = dropTableIfExists(TableNames.USERS);
 
 export { down, up };
