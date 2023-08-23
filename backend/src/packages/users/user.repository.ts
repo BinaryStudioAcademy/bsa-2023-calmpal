@@ -54,7 +54,7 @@ class UserRepository implements Repository {
   }
 
   public async findByEmail(email: string): Promise<UserEntity | null> {
-    const user = await this.userModel.query().findOne({ email }).execute();
+    const user = await this.userModel.query().findOne({ email });
 
     if (!user) {
       return null;
@@ -68,7 +68,7 @@ class UserRepository implements Repository {
   }
 
   public async findById(id: number): Promise<UserEntity | null> {
-    const user = await this.userModel.query().findOne({ id }).execute();
+    const user = await this.userModel.query().findOne({ id });
 
     if (!user) {
       return null;
