@@ -4,8 +4,8 @@ type UserColumns = {
     fullName: string;
     passwordHash: string;
     passwordSalt: string;
-    createdAt: string;
-    updatedAt: string
+    createdAt: Date;
+    updatedAt: Date
 };
 
 export { type UserColumns };

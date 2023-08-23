@@ -1,4 +1,4 @@
-import { Model } from 'objection';
+import { Model, type RelationMappings } from 'objection';
 
 import {
   AbstractModel,
@@ -9,7 +9,6 @@ import {
   UserDetailsTableColumns,
 } from '#libs/packages/database/libs/enums/enums.js';
 
-import { type RelationMappingsType } from './libs/types/types.js';
 import { UserDetailsModel } from './user-details.model.js';
 
 class UserModel extends AbstractModel {
@@ -23,7 +22,7 @@ class UserModel extends AbstractModel {
     return DatabaseTableName.USERS;
   }
 
-  public static relationMappings(): RelationMappingsType {
+  public static relationMappings(): RelationMappings {
     return {
       details: {
         relation: Model.HasOneRelation,

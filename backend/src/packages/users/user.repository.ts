@@ -6,7 +6,6 @@ import { CommonTableColumns } from '#libs/packages/database/libs/enums/enums.js'
 
 import { type UserWithUserDetailsJoin, type UserInsertData, type UserColumns } from './libs/types/types.js';
 
-
 class UserRepository implements Repository {
   private userModel: typeof UserModel;
 
@@ -30,11 +29,11 @@ class UserRepository implements Repository {
   }
 
   private flattenUserJoinWithUserDetails(join: UserWithUserDetailsJoin): UserColumns{
-    const newObject = {...join};
+    const newObject = { ...join };
     let fullName = '';
     if(newObject.details){
-      fullName = newObject.details.fullName
-    };
+      fullName = newObject.details.fullName;
+    }
     delete newObject.details;
     return { ...newObject, fullName };
   }
@@ -44,10 +43,8 @@ class UserRepository implements Repository {
     .withGraphJoined('details')
     .where(`${DatabaseTableName.USERS}.${CommonTableColumns.ID}`, '=', userId)
     .first().castTo<UserWithUserDetailsJoin>()
-    return this.flattenUserJoinWithUserDetails(join)
+    return this.flattenUserJoinWithUserDetails(join);
   }
-
- 
 
   public async create(entity: UserEntity): Promise<UserEntity> {
     const { email, passwordSalt, passwordHash, fullName } =
