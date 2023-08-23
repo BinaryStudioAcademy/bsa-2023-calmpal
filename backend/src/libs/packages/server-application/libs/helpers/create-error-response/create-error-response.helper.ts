@@ -6,7 +6,7 @@ import { type ErrorParameter, type ErrorResponse } from './types/types.js';
 
 const createErrorResponse = (error: ErrorParameter): ErrorResponse => {
   const handler =
-    errorHandlers.find((handler) => handler(error)) ??
+    errorHandlers.find((errorHandler) => errorHandler(error)) ??
     handleDefaultErrorResponse;
 
   return handler(error) as ErrorResponse;
