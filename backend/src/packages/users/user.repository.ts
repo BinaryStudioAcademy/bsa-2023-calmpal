@@ -16,13 +16,7 @@ class UserRepository implements Repository {
   public async findAll(): Promise<UserEntity[]> {
     const users = await this.userModel.query().execute();
 
-    return users.map((user) =>
-      UserEntity.initialize({
-        ...user,
-        createdAt: new Date(user.createdAt),
-        updatedAt: new Date(user.updatedAt),
-      }),
-    );
+    return users.map((user) => UserEntity.initialize(user));
   }
 
   public async create(entity: UserEntity): Promise<UserEntity> {
@@ -38,11 +32,7 @@ class UserRepository implements Repository {
       .returning('*')
       .execute();
 
-    return UserEntity.initialize({
-      ...user,
-      createdAt: new Date(user.createdAt),
-      updatedAt: new Date(user.updatedAt),
-    });
+    return UserEntity.initialize(user);
   }
 
   public update(): ReturnType<Repository['update']> {
@@ -60,11 +50,7 @@ class UserRepository implements Repository {
       return null;
     }
 
-    return UserEntity.initialize({
-      ...user,
-      createdAt: new Date(user.createdAt),
-      updatedAt: new Date(user.updatedAt),
-    });
+    return UserEntity.initialize(user);
   }
 
   public async findById(id: number): Promise<UserEntity | null> {
@@ -74,11 +60,7 @@ class UserRepository implements Repository {
       return null;
     }
 
-    return UserEntity.initialize({
-      ...user,
-      createdAt: new Date(user.createdAt),
-      updatedAt: new Date(user.updatedAt),
-    });
+    return UserEntity.initialize(user);
   }
 }
 

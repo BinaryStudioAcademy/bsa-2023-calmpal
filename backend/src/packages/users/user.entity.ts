@@ -22,16 +22,16 @@ class UserEntity implements Entity {
     fullName: string;
     passwordHash: string;
     passwordSalt: string;
-    createdAt: Date | null;
-    updatedAt: Date | null;
+    createdAt: Date | string | null;
+    updatedAt: Date | string | null;
   }) {
     this.id = id;
     this.email = email;
     this.fullName = fullName;
     this.passwordHash = passwordHash;
     this.passwordSalt = passwordSalt;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
+    this.createdAt = createdAt ? new Date(createdAt) : null;
+    this.updatedAt = updatedAt ? new Date(updatedAt) : null;
   }
   public static initialize({
     id,
@@ -47,8 +47,8 @@ class UserEntity implements Entity {
     fullName: string;
     passwordHash: string;
     passwordSalt: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: Date | string;
+    updatedAt: Date | string;
   }): UserEntity {
     return new UserEntity({
       id,
@@ -56,8 +56,8 @@ class UserEntity implements Entity {
       fullName,
       passwordHash,
       passwordSalt,
-      createdAt,
-      updatedAt,
+      createdAt: new Date(createdAt),
+      updatedAt: new Date(updatedAt),
     });
   }
   public static initializeNew({
