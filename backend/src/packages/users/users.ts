@@ -1,5 +1,5 @@
+import { jwtService } from '#libs/packages/jwt/jwt.js';
 import { logger } from '#libs/packages/logger/logger.js';
-import { jwtService } from '#packages/auth/auth.js';
 
 import { UserController } from './user.controller.js';
 import { UserModel } from './user.model.js';
