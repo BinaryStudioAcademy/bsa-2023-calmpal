@@ -1,8 +1,7 @@
 import { type Knex } from 'knex';
 
-import { DatabaseTableName } from '#libs/packages/database/database.js';
-
-const TABLE_NAME = 'user_details';
+const USER_DETAILS_TABLE_NAME = 'user_details';
+const USERS_TABLE_NAME = 'users;';
 
 const ColumnName = {
   ID: 'id',
@@ -15,13 +14,13 @@ const ColumnName = {
 } as const;
 
 function up(knex: Knex): Promise<void> {
-  return knex.schema.createTable(TABLE_NAME, (table) => {
+  return knex.schema.createTable(USER_DETAILS_TABLE_NAME, (table) => {
     table.increments(ColumnName.ID).primary();
     table.integer(ColumnName.USER_ID);
     table
       .foreign(ColumnName.USER_ID)
       .references(ColumnName.ID)
-      .inTable(DatabaseTableName.USERS)
+      .inTable(USERS_TABLE_NAME)
       .onUpdate('CASCADE')
       .onDelete('SET NULL');
     table.string(ColumnName.FULL_NAME).notNullable();
@@ -37,7 +36,7 @@ function up(knex: Knex): Promise<void> {
 }
 
 function down(knex: Knex): Promise<void> {
-  return knex.schema.dropTableIfExists(TABLE_NAME);
+  return knex.schema.dropTableIfExists(USER_DETAILS_TABLE_NAME);
 }
 
 export { down, up };
