@@ -4,6 +4,10 @@ import {
   AbstractModel,
   DatabaseTableName,
 } from '#libs/packages/database/database.js';
+import {
+  CommonTableColumns,
+  UserDetailsTableColumns,
+} from '#libs/packages/database/libs/enums/enums.js';
 
 import { type RelationMappingsType } from './libs/types/types.js';
 import { UserDetailsModel } from './user-details.model.js';
@@ -25,8 +29,8 @@ class UserModel extends AbstractModel {
         relation: Model.HasOneRelation,
         modelClass: UserDetailsModel,
         join: {
-          from: 'users.id',
-          to: 'user_details.user_id',
+          from: `${DatabaseTableName.USERS}.${CommonTableColumns.ID}`,
+          to: `${DatabaseTableName.USER_DETAILS}.${UserDetailsTableColumns.USER_ID}`,
         },
       },
     };
