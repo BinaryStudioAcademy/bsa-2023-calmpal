@@ -7,7 +7,7 @@ import { UserRepository } from './user.repository.js';
 import { UserService } from './user.service.js';
 
 const userRepository = new UserRepository(UserModel);
-const userService = new UserService(userRepository, jwtService);
+const userService = new UserService({ userRepository, jwtService });
 const userController = new UserController(logger, userService);
 
 export { userController, userService };

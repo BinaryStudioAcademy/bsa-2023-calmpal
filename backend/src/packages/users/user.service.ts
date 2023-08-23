@@ -9,11 +9,16 @@ import {
   type UserSignUpResponseDto,
 } from './libs/types/types.js';
 
+type UserServiceDependencies = {
+  userRepository: UserRepository;
+  jwtService: JWTService;
+};
+
 class UserService implements Service {
   private userRepository: UserRepository;
   private jwtService: JWTService;
 
-  public constructor(userRepository: UserRepository, jwtService: JWTService) {
+  public constructor({ userRepository, jwtService }: UserServiceDependencies) {
     this.userRepository = userRepository;
     this.jwtService = jwtService;
   }
