@@ -1,6 +1,10 @@
-type UserSignUpResponseDto = {
+type UserAuthResponseDto = {
   id: number;
   email: string;
+};
+
+type UserSignUpResponseDto = {
+  user: UserAuthResponseDto;
   token: string;
 };
 
