@@ -109,25 +109,6 @@ class UserEntity implements Entity {
       passwordSalt: this.passwordSalt,
     };
   }
-  public getId(): number {
-    return this.id as number;
-  }
-
-  public getEmail(): string {
-    return this.email;
-  }
-
-  public getFullName(): string {
-    return this.fullName;
-  }
-
-  public getCreatedAt(): Date | null {
-    return this.createdAt ?? null;
-  }
-
-  public getUpdatedAt(): Date | null {
-    return this.updatedAt ?? null;
-  }
 }
 
 export { UserEntity };
