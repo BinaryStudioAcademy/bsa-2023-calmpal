@@ -1,5 +1,5 @@
 import { Button, Input, Link } from '#libs/components/components.js';
-import { AppRoute } from '#libs/enums/app-route.enum.js';
+import { AppRoute } from '#libs/enums/enums.js';
 import { useAppForm, useCallback } from '#libs/hooks/hooks.js';
 import {
   type UserSignUpRequestDto,
@@ -13,7 +13,7 @@ type Properties = {
   onSubmit: (payload: UserSignUpRequestDto) => void;
 };
 
-const SignUpForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
+const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
   const { control, errors, handleSubmit } = useAppForm<UserSignUpRequestDto>({
     defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
     validationSchema: userSignUpValidationSchema,
