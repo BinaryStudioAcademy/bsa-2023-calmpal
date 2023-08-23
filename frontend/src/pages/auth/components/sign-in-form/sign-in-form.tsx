@@ -13,7 +13,7 @@ type Properties = {
   onSubmit: (payload: UserSignInRequestDto) => void;
 };
 
-const SignInForm: React.FC<Properties> = ({ onSubmit }: Properties) => {
+const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
   const { control, errors, handleSubmit } = useAppForm<UserSignInRequestDto>({
     defaultValues: DEFAULT_SIGN_IN_PAYLOAD,
     validationSchema: userSignInValidationSchema,
