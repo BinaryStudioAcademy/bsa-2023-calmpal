@@ -17,11 +17,8 @@ type Constructor = {
 };
 
 class AuthApi extends BaseHttpApi {
-  private authStorage: Storage;
-
   public constructor({ baseUrl, http, storage }: Constructor) {
     super({ path: APIPath.AUTH, baseUrl, http, storage });
-    this.authStorage = storage;
   }
 
   public async signUp(
@@ -38,7 +35,7 @@ class AuthApi extends BaseHttpApi {
     );
     const parsedResponse = await response.json<UserSignUpResponseDto>();
 
-    await this.authStorage.set(StorageKey.TOKEN, parsedResponse.token);
+    await this.storage.set(StorageKey.TOKEN, parsedResponse.token);
 
     return parsedResponse;
   }
