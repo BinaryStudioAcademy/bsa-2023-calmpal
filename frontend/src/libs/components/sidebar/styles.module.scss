@@ -22,7 +22,6 @@
   flex-direction: column;
   gap: 262px;
   width: 88px;
-  height: 100%;
   padding: 16px;
   background-color: var(--white);
   box-shadow: var(--shadow);
@@ -58,7 +57,7 @@
   background-color: var(--white);
   border: 0;
   border-radius: 50%;
-  box-shadow: var(--sidebar-shadow);
+  box-shadow: 0 4px 23px 0 #e5e1ff;
   cursor: pointer;
 }
 
