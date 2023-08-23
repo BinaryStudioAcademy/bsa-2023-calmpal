@@ -70,13 +70,13 @@ class UserService implements Service {
   ): Promise<UserSignInResponseDto | null> {
     const userEntity = await this.userRepository.findByEmail(email);
 
-    return userEntity ? userEntity.toObject() : null;
+    return userEntity?.toObject() ?? null;
   }
 
   public async findById(id: number): Promise<UserSignInResponseDto | null> {
     const userEntity = await this.userRepository.findById(id);
 
-    return userEntity ? userEntity.toObject() : null;
+    return userEntity?.toObject() ?? null;
   }
 }
 
