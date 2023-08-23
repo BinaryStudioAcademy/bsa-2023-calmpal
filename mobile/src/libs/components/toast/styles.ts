@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { AppColor } from '#libs/enums/enums';
 
-const toastStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   errorToast: {
     borderColor: AppColor.RED_100,
   },
@@ -14,4 +14,4 @@ const toastStyles = StyleSheet.create({
   },
 });
 
-export { toastStyles };
+export { styles };
