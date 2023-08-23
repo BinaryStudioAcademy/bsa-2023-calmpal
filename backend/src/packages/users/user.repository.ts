@@ -1,5 +1,4 @@
-import { DatabaseTableName } from '#libs/packages/database/database.js';
-import { CommonTableColumns } from '#libs/packages/database/libs/enums/enums.js';
+import { DatabaseTableName, CommonTableColumns } from '#libs/packages/database/database.js';
 import { type Repository } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/user.model.js';

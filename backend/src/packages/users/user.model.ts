@@ -3,11 +3,9 @@ import { Model, type RelationMappings } from 'objection';
 import {
   AbstractModel,
   DatabaseTableName,
-} from '#libs/packages/database/database.js';
-import {
   CommonTableColumns,
-  UserDetailsTableColumns,
-} from '#libs/packages/database/libs/enums/enums.js';
+  UserDetailsTableColumns
+} from '#libs/packages/database/database.js';
 
 import { UserDetailsModel } from './user-details.model.js';
 

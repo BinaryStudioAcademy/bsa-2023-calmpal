@@ -1,4 +1,4 @@
-import { type UserGetAllItemResponseDto } from './user-get-all-item-response-dto.type.js';
+import { type UserGetAllItemResponseDto } from './types.js';
 
 type UserGetAllResponseDto = {
   items: UserGetAllItemResponseDto[];
