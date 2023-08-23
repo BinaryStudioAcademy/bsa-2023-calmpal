@@ -26,9 +26,12 @@ class UserRepository implements Repository {
   public async findAll(): Promise<UserEntity[]> {
     const users = await this.userModel.query().execute();
 
-    const userPromises = users.map(async (user) =>
-      UserEntity.initialize(await this.getUserJoinWithUserDetails(user.id)),
-    );
+    const userPromises = users.map(async (user) => {
+      const userJoinedWithUserDetails = await this.getUserJoinWithUserDetails(
+        user.id,
+      );
+      return UserEntity.initialize(userJoinedWithUserDetails);
+    });
     return await Promise.all(userPromises);
   }
 
@@ -73,9 +76,10 @@ class UserRepository implements Repository {
       .insertGraph(userData)
       .returning('*')
       .execute();
-    return UserEntity.initialize(
-      await this.getUserJoinWithUserDetails(user.id),
+    const userJoinedWithUserDetails = await this.getUserJoinWithUserDetails(
+      user.id,
     );
+    return UserEntity.initialize(userJoinedWithUserDetails);
   }
 
   public update(): ReturnType<Repository['update']> {
