@@ -2,14 +2,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { type AsyncThunkConfig } from '#libs/types/types';
 import {
-  type UserDetailsDto,
+  type UserAuthResponseDto,
   type UserSignUpRequestDto,
 } from '#packages/users/users';
 
 import { name as sliceName } from './auth.slice';
 
 const signUp = createAsyncThunk<
-  UserDetailsDto,
+  UserAuthResponseDto,
   UserSignUpRequestDto,
   AsyncThunkConfig
 >(`${sliceName}/sign-up`, async (signUpPayload, { extra }) => {

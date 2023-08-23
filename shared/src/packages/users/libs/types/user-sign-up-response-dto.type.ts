@@ -1,7 +1,7 @@
-import { type UserDetailsDto } from './user-details-dto.type.js';
+import { type UserAuthResponseDto } from './user-auth-response-dto.types.js';
 
 type UserSignUpResponseDto = {
-  user: UserDetailsDto;
+  user: UserAuthResponseDto;
   token: string;
 };
 
