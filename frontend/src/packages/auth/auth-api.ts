@@ -34,7 +34,6 @@ class AuthApi extends BaseHttpApi {
         hasAuth: false,
       },
     );
-
     return await response.json<UserSignUpResponseDto>();
   }
 
