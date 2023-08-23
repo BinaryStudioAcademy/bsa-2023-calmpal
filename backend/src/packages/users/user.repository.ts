@@ -4,7 +4,7 @@ import { type UserModel } from '#packages/users/user.model.js';
 import { DatabaseTableName } from '#libs/packages/database/database.js';
 import { CommonTableColumns } from '#libs/packages/database/libs/enums/enums.js';
 
-import { UserWithUserDetailsJoin, type UserInsertData, UserColumns } from './libs/types/types.js';
+import { type UserWithUserDetailsJoin, type UserInsertData, type UserColumns } from './libs/types/types.js';
 
 
 class UserRepository implements Repository {
@@ -23,9 +23,10 @@ class UserRepository implements Repository {
   public async findAll(): Promise<UserEntity[]> {
     const users = await this.userModel.query().execute();
 
-    return users.map((user) =>
-      UserEntity.initialize({ ...user, fullName: 'FullName' }),
+    const userPromises = users.map(async (user) => 
+      UserEntity.initialize(await this.getUserJoinWithUserDetails(user.id)),
     );
+    return await Promise.all(userPromises);
   }
 
   private flattenUserJoinWithUserDetails(join: UserWithUserDetailsJoin): UserColumns{
