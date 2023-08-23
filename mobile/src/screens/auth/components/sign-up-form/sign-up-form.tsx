@@ -29,6 +29,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
         errors={errors}
         label="Email"
         name="email"
+        secure={false}
         placeholder="Enter your email"
       />
       <Input
@@ -36,6 +37,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
         errors={errors}
         label="Password"
         name="password"
+        secure={true}
         placeholder="Enter your password"
       />
       <Button label="Sign up" onPress={handleFormSubmit} />
