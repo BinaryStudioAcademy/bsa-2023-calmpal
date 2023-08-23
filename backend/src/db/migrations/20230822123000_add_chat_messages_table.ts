@@ -17,6 +17,10 @@ const ForeignTable = {
   USERS: 'users',
 } as const;
 
+const RelationRule = {
+  CASCADE: 'CASCADE',
+} as const;
+
 function up(knex: Knex): Promise<void> {
   return knex.schema.createTable(TABLE_NAME, (table) => {
     table.increments(ColumnName.ID).primary();
@@ -26,15 +30,15 @@ function up(knex: Knex): Promise<void> {
       .notNullable()
       .references(ColumnName.ID)
       .inTable(ForeignTable.CHATS)
-      .onDelete('CASCADE')
-      .onUpdate('CASCADE');
+      .onUpdate(RelationRule.CASCADE)
+      .onDelete(RelationRule.CASCADE);
     table
       .integer(ColumnName.SENDER_ID)
       .notNullable()
       .references(ColumnName.ID)
       .inTable(ForeignTable.USERS)
-      .onDelete('CASCADE')
-      .onUpdate('CASCADE');
+      .onUpdate(RelationRule.CASCADE)
+      .onDelete(RelationRule.CASCADE);
     table.text(ColumnName.MESSAGE).notNullable();
     table
       .dateTime(ColumnName.CREATED_AT)
