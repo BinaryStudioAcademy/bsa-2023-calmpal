@@ -3,12 +3,12 @@ import '#assets/css/styles.scss';
 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { ToastContainer } from 'react-toastify';
 
 import {
   App,
   RouterProvider,
   StoreProvider,
+  Toaster,
 } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/enums.js';
 import { store } from '#libs/packages/store/store.js';
@@ -39,7 +39,7 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
           },
         ]}
       />
-      <ToastContainer />
+      <Toaster />
     </StoreProvider>
   </StrictMode>,
 );

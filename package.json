@@ -48,8 +48,5 @@
   "simple-git-hooks": {
     "pre-commit": "npm run lint:type && npx lint-staged",
     "commit-msg": "npx commitlint --edit $1"
-  },
-  "dependencies": {
-    "react-toastify": "9.1.3"
   }
 }

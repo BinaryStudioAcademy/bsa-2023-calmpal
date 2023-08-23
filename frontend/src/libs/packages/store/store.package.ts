@@ -7,7 +7,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import { AppEnvironment } from '#libs/enums/enums.js';
 import { type Config } from '#libs/packages/config/config.js';
-import { errorHandlingMiddleware } from '#middlewares/error-handling/error-handling-middleware.js';
+import { handleError } from '#libs/packages/store/middlewares/handle-error.middleware.js';
 import { authApi } from '#packages/auth/auth.js';
 import { userApi } from '#packages/users/users.js';
 import { reducer as authReducer } from '#slices/auth/auth.js';
@@ -45,7 +45,7 @@ class Store {
             extraArgument: this.extraArguments,
           },
         }),
-        errorHandlingMiddleware,
+        handleError,
       ],
     });
   }

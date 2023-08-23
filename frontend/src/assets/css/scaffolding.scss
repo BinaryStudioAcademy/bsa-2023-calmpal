@@ -14,10 +14,6 @@ body {
 }
 
 #root {
-  --toastify-color-error: #d51a52;
-  --toastify-icon-color-error: var(--toastify-color-error);
-  --toastify-color-progress-error: var(--toastify-color-error);
-
   display: flex;
   flex-grow: 1;
   flex-direction: column;
