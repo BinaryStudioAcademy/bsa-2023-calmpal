@@ -7,6 +7,9 @@ const AppColor = {
   GRAY_200: '#CCDDF3',
   GRAY_300: '#ACB4D0',
   GRAY_400: '#302E36',
+  GRAY_500: '#1D1C21FF',
+  TRANSPARENT_GRAY_100: '#FFFFFF7F',
+  TRANSPARENT_GRAY_200: '#312F377F',
 } as const;
 
 export { AppColor };

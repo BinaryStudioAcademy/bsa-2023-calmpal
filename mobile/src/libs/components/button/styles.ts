@@ -18,13 +18,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   btnDisabled: {
-    backgroundColor: '#312F377F',
+    backgroundColor: AppColor.TRANSPARENT_GRAY_200,
   },
   labelDisabled: {
-    color: '#FFFFFF7F',
+    color: AppColor.TRANSPARENT_GRAY_100,
   },
   btnPressed: {
-    backgroundColor: '#1D1C21FF',
+    backgroundColor: AppColor.GRAY_500,
   },
 });
 

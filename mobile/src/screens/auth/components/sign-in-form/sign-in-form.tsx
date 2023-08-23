@@ -3,7 +3,6 @@ import React from 'react';
 import {
   Button,
   Input,
-  Label,
   Link,
   ScrollView,
   Text,
@@ -13,6 +12,7 @@ import { useAppForm, useCallback } from '#libs/hooks/hooks';
 import { type UserSignInRequestDto } from '#packages/users/users';
 import { userSignInValidationSchema } from '#packages/users/users';
 
+import { Label } from '../label/label';
 import { USER_SIGN_IN_DEFAULT_VALUE } from './libs/constants';
 import { styles } from './styles';
 
