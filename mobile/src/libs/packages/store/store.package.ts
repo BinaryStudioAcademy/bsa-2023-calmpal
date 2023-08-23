@@ -11,7 +11,7 @@ import { userApi } from '#packages/users/users';
 import { reducer as authReducer } from '#slices/auth/auth';
 
 import { type Config } from '../config/config';
-import { handleError } from './middlewares/handle-error.middleware';
+import { handleError } from './middlewares/middlewares';
 
 type RootReducer = {
   auth: ReturnType<typeof authReducer>;

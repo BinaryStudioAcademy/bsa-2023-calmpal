@@ -7,11 +7,13 @@ import { isRejected } from '@reduxjs/toolkit';
 
 import { NotificationService } from '#libs/packages/services/notification-service';
 
+const notificationService = new NotificationService();
+
 const handleAction =
   (next: Dispatch): ((action: AnyAction) => AnyAction) =>
   (action: AnyAction): AnyAction => {
     if (isRejected(action) && action.error.message) {
-      NotificationService.error(action.error.message);
+      notificationService.error(action.error.message);
       return next(action);
     }
     return next(action);
