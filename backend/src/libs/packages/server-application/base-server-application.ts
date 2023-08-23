@@ -6,20 +6,14 @@ import swagger, { type StaticDocumentSpec } from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
 import Fastify, { type FastifyError } from 'fastify';
 
-import {
-  AuthError,
-  type ValidationError,
-} from '#libs/exceptions/exceptions.js';
+import { ServerErrorType } from '#libs/enums/enums.js';
+import { type ValidationError } from '#libs/exceptions/exceptions.js';
 import { type Config } from '#libs/packages/config/config.js';
 import { type Database } from '#libs/packages/database/database.js';
-import { HTTPError } from '#libs/packages/http/http.js';
 import { jwtService } from '#libs/packages/jwt/jwt.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 import { authorization as authorizationPlugin } from '#libs/plugins/plugins.js';
-import {
-  type ServerValidationErrorResponse,
-  type ValidationSchema,
-} from '#libs/types/types.js';
+import { type ValidationSchema } from '#libs/types/types.js';
 import { userService } from '#packages/users/users.js';
 
 import { createErrorResponse } from './libs/helpers/helpers.js';
@@ -150,24 +144,16 @@ class BaseServerApplication implements ServerApplication {
   private initErrorHandler(): void {
     this.app.setErrorHandler(
       (error: FastifyError | ValidationError, _request, reply) => {
-        const { status, response } = createErrorResponse(error);
+        const { info, status, response } = createErrorResponse(error);
 
-        if ('isJoi' in error) {
-          this.logger.error(`[Validation Error]: ${response.message}`);
+        this.logger.error(info);
 
-          (response as ServerValidationErrorResponse).details.forEach(
-            (detail) => {
-              this.logger.error(
-                `[${detail.path.toString()}] — ${detail.message}`,
-              );
-            },
-          );
-        } else if (error instanceof AuthError) {
-          this.logger.error(`[Auth Error]: ${status} — ${response.message}`);
-        } else if (error instanceof HTTPError) {
-          this.logger.error(`[HTTP Error]: ${status} — ${response.message}`);
-        } else {
-          this.logger.error(response.message);
+        if (response.errorType === ServerErrorType.VALIDATION) {
+          response.details.forEach((detail) => {
+            this.logger.error(
+              `[${detail.path.toString()}] — ${detail.message}`,
+            );
+          });
         }
 
         return reply.status(status).send(response);
