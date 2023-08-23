@@ -1,7 +1,7 @@
 import { type Knex } from 'knex';
 
 const USER_DETAILS_TABLE_NAME = 'user_details';
-const USERS_TABLE_NAME = 'users;'
+const USERS_TABLE_NAME = 'users';
 
 const ColumnName = {
   ID: 'id',
@@ -13,7 +13,7 @@ const ColumnName = {
 
 const RelationRule = {
   CASCADE: 'CASCADE',
-  SET_NULL: 'SET NULL'
+  SET_NULL: 'SET NULL',
 } as const;
 
 function up(knex: Knex): Promise<void> {
