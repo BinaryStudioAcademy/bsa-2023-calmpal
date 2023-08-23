@@ -8,10 +8,8 @@ import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 import {
   type UserSignInRequestDto,
-  type UserSignUpRequestDto,
-} from '#packages/users/users.js';
-import {
   userSignInValidationSchema,
+  type UserSignUpRequestDto,
   userSignUpValidationSchema,
 } from '#packages/users/users.js';
 
@@ -104,8 +102,8 @@ class AuthController extends BaseController {
 
     if (!user) {
       return {
-        status: HTTPCode.UNAUTHORIZED,
-        payload: { message: 'Unauthorized' },
+        status: HTTPCode.NOT_FOUND,
+        payload: { message: 'User with these credentials was not found' },
       };
     }
 
