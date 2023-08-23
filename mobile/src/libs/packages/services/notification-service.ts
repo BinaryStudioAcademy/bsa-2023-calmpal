@@ -4,7 +4,8 @@ class NotificationService {
   public error(message: string): void {
     Toast.show({
       type: 'error',
-      text1: message,
+      text1: '⛔ An error occurred: ',
+      text2: message,
     });
   }
 }
