@@ -1,7 +1,7 @@
 import { type Knex } from 'knex';
 
 const USER_DETAILS_TABLE_NAME = 'user_details';
-const USERS_TABLE_NAME = 'users;';
+const USERS_TABLE_NAME = 'users;'
 
 const ColumnName = {
   ID: 'id',
@@ -13,6 +13,11 @@ const ColumnName = {
   UPDATED_AT: 'updated_at',
 } as const;
 
+const RelationRule = {
+  CASCADE: 'CASCADE',
+  SET_NULL: 'SET NULL'
+} as const;
+
 function up(knex: Knex): Promise<void> {
   return knex.schema.createTable(USER_DETAILS_TABLE_NAME, (table) => {
     table.increments(ColumnName.ID).primary();
@@ -21,8 +26,8 @@ function up(knex: Knex): Promise<void> {
       .foreign(ColumnName.USER_ID)
       .references(ColumnName.ID)
       .inTable(USERS_TABLE_NAME)
-      .onUpdate('CASCADE')
-      .onDelete('SET NULL');
+      .onUpdate(RelationRule.CASCADE)
+      .onDelete(RelationRule.SET_NULL);
     table.string(ColumnName.FULL_NAME).notNullable();
     table
       .dateTime(ColumnName.CREATED_AT)
