@@ -8,13 +8,7 @@ class EncryptService {
   }
 
   public async generateSalt(saltRounds?: number): Promise<string> {
-    if (saltRounds) {
-      return await bcrypt.genSalt(saltRounds);
-    }
-    if (this.saltRounds) {
-      return await bcrypt.genSalt(this.saltRounds);
-    }
-    return await bcrypt.genSalt();
+    return await bcrypt.genSalt(saltRounds ?? this.saltRounds);
   }
 
   public async generateHash(
