@@ -7,8 +7,6 @@ const ColumnName = {
   ID: 'id',
   USER_ID: 'user_id',
   FULL_NAME: 'full_name',
-  AVATAR_ID: 'avatar_id',
-  SURVEY: 'survey',
   CREATED_AT: 'created_at',
   UPDATED_AT: 'updated_at',
 } as const;
