@@ -22,6 +22,10 @@
   flex-direction: column;
   gap: 262px;
   width: 88px;
+<<<<<<< HEAD
+=======
+  height: 100%;
+>>>>>>> 0843059 (cp-42: + sidebar)
   padding: 16px;
   background-color: var(--white);
   box-shadow: var(--shadow);
@@ -57,7 +61,11 @@
   background-color: var(--white);
   border: 0;
   border-radius: 50%;
+<<<<<<< HEAD
   box-shadow: 0 4px 23px 0 #e5e1ff;
+=======
+  box-shadow: var(--sidebar-shadow);
+>>>>>>> 0843059 (cp-42: + sidebar)
   cursor: pointer;
 }
 
