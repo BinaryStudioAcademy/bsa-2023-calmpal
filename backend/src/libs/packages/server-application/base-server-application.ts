@@ -13,13 +13,13 @@ import {
 import { type Config } from '#libs/packages/config/config.js';
 import { type Database } from '#libs/packages/database/database.js';
 import { HTTPError } from '#libs/packages/http/http.js';
+import { jwtService } from '#libs/packages/jwt/jwt.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 import { authorization as authorizationPlugin } from '#libs/plugins/plugins.js';
 import {
   type ServerValidationErrorResponse,
   type ValidationSchema,
 } from '#libs/types/types.js';
-import { jwtService } from '#packages/auth/auth.js';
 import { userService } from '#packages/users/users.js';
 
 import { createErrorResponse } from './libs/helpers/helpers.js';
