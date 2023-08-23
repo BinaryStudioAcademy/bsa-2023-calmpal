@@ -13,12 +13,7 @@ const config = ({ mode }: ConfigEnv): ReturnType<typeof defineConfig> => {
     build: {
       outDir: 'build',
     },
-    plugins: [
-      reactPlugin(),
-      VitePWAPlugin({
-        registerType: 'autoUpdate',
-      }),
-    ],
+    plugins: [reactPlugin(), vitePWAPlugin({ registerType: 'autoUpdate' })],
     server: {
       port: Number(VITE_APP_DEVELOPMENT_PORT),
       proxy: {
