@@ -5,6 +5,6 @@ type UserInsertData = {
     details: {
       fullName: string;
     };
-  }
+  };
 
-export { type UserInsertData }
+export { type UserInsertData };
