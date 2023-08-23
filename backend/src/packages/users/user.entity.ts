@@ -9,21 +9,26 @@ class UserEntity implements Entity {
 
   private passwordSalt: string;
 
+  private isSurveyCompleted: boolean;
+
   private constructor({
     id,
     email,
     passwordHash,
     passwordSalt,
+    isSurveyCompleted,
   }: {
     id: number | null;
     email: string;
     passwordHash: string;
     passwordSalt: string;
+    isSurveyCompleted: boolean;
   }) {
     this.id = id;
     this.email = email;
     this.passwordHash = passwordHash;
     this.passwordSalt = passwordSalt;
+    this.isSurveyCompleted = isSurveyCompleted;
   }
 
   public static initialize({
@@ -31,17 +36,20 @@ class UserEntity implements Entity {
     email,
     passwordHash,
     passwordSalt,
+    isSurveyCompleted,
   }: {
     id: number;
     email: string;
     passwordHash: string;
     passwordSalt: string;
+    isSurveyCompleted: boolean;
   }): UserEntity {
     return new UserEntity({
       id,
       email,
       passwordHash,
       passwordSalt,
+      isSurveyCompleted,
     });
   }
 
@@ -49,26 +57,31 @@ class UserEntity implements Entity {
     email,
     passwordHash,
     passwordSalt,
+    isSurveyCompleted = false,
   }: {
     email: string;
     passwordHash: string;
     passwordSalt: string;
+    isSurveyCompleted: boolean;
   }): UserEntity {
     return new UserEntity({
       id: null,
       email,
       passwordHash,
       passwordSalt,
+      isSurveyCompleted,
     });
   }
 
   public toObject(): {
     id: number;
     email: string;
+    isSurveyCompleted: boolean;
   } {
     return {
       id: this.id as number,
       email: this.email,
+      isSurveyCompleted: this.isSurveyCompleted,
     };
   }
 
@@ -76,11 +89,13 @@ class UserEntity implements Entity {
     email: string;
     passwordHash: string;
     passwordSalt: string;
+    isSurveyCompleted: boolean;
   } {
     return {
       email: this.email,
       passwordHash: this.passwordHash,
       passwordSalt: this.passwordSalt,
+      isSurveyCompleted: this.isSurveyCompleted,
     };
   }
 }
