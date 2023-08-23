@@ -8,6 +8,7 @@ import { Provider as StoreProvider } from 'react-redux';
 import { store } from '#libs/packages/store/store';
 import { Root as RootNavigation } from '#navigations/navigations';
 
+import { ToastComponent } from '../components';
 import { styles } from './styles';
 
 const App: FC = () => {
@@ -17,6 +18,7 @@ const App: FC = () => {
         <NavigationContainer>
           <RootNavigation />
         </NavigationContainer>
+        <ToastComponent />
       </GestureHandlerRootView>
     </StoreProvider>
   );
