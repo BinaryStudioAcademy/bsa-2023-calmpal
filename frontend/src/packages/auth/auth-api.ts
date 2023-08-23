@@ -39,7 +39,7 @@ class AuthApi extends BaseHttpApi {
 
   public async getAuthenticatedUser(): Promise<UserAuthResponseDto> {
     const response = await this.load(
-      this.getFullEndpoint(AuthApiPath.USER, {}),
+      this.getFullEndpoint(AuthApiPath.AUTHENTICATED_USER, {}),
       {
         method: 'GET',
         hasAuth: true,
