@@ -24,10 +24,8 @@
 }
 
 .input .error {
-  padding: 13px 10px;
-  font-size: 14px;
   border: solid 1px var(--red-300);
-  outline: none;
+  border-radius: 0;
 }
 
 .input .error-message {
