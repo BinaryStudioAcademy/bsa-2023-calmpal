@@ -1,9 +1,8 @@
-import { useLocation } from 'react-router-dom';
-
 import home from '#assets/img/home.svg';
 import logo from '#assets/img/logo.svg';
 import { Link } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/enums.js';
+import { useLocation } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
 
