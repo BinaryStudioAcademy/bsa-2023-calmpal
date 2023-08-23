@@ -11,6 +11,9 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     marginTop: 30,
   },
+  boldText: {
+    fontWeight: 'bold',
+  },
 });
 
 export { styles };

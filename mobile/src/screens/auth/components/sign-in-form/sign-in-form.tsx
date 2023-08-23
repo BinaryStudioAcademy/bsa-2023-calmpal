@@ -54,10 +54,10 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
           label={
             <React.Fragment>
               Don&apos;t have an account? Go to{' '}
-              <Text style={{ fontWeight: 'bold' }}>Sign Up</Text>
+              <Text style={styles.boldText}>Sign Up</Text>
             </React.Fragment>
           }
-          to={`/${RootScreenName.SIGN_UP}`}
+          to={RootScreenName.SIGN_UP}
         />
       </ScrollView>
     </React.Fragment>
