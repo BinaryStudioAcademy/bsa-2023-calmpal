@@ -4,8 +4,8 @@ import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserRepository } from '#packages/users/user.repository.js';
 
 import {
+  type UserAuthResponseDto,
   type UserGetAllResponseDto,
-  type UserSignUpRequestDto,
   type UserSignUpResponseDto,
 } from './libs/types/types.js';
 
@@ -36,7 +36,7 @@ class UserService implements Service {
   }
 
   public async create(
-    payload: UserSignUpRequestDto,
+    payload: UserAuthResponseDto,
   ): Promise<UserSignUpResponseDto> {
     const item = await this.userRepository.create(
       UserEntity.initializeNew({

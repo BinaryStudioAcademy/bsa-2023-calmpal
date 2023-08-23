@@ -6,7 +6,7 @@ import {
 } from '#libs/packages/controller/controller.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
-import { type UserSignUpRequestDto } from '#packages/users/users.js';
+import { type UserAuthResponseDto } from '#packages/users/libs/types/types.js';
 import { userSignUpValidationSchema } from '#packages/users/users.js';
 
 import { type AuthService } from './auth.service.js';
@@ -29,7 +29,7 @@ class AuthController extends BaseController {
       handler: (options) =>
         this.signUp(
           options as APIHandlerOptions<{
-            body: UserSignUpRequestDto;
+            body: UserAuthResponseDto;
           }>,
         ),
     });
@@ -67,7 +67,7 @@ class AuthController extends BaseController {
    */
   private async signUp(
     options: APIHandlerOptions<{
-      body: UserSignUpRequestDto;
+      body: UserAuthResponseDto;
     }>,
   ): Promise<APIHandlerResponse> {
     return {
