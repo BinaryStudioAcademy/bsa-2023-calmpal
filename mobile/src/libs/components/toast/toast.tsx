@@ -1,5 +1,5 @@
 import React from 'react';
-import Toast, { ErrorToast } from 'react-native-toast-message';
+import LibraryToast, { ErrorToast } from 'react-native-toast-message';
 
 import { styles } from './styles';
 
@@ -20,8 +20,8 @@ const toastConfig = {
   ),
 };
 
-const ToastComponent: React.FC = () => {
-  return <Toast config={toastConfig} />;
+const Toast: React.FC = () => {
+  return <LibraryToast config={toastConfig} />;
 };
 
-export { ToastComponent };
+export { Toast };
