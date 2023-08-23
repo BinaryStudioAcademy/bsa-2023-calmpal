@@ -37,7 +37,7 @@ const Input = <T extends FieldValues>({
 
   const isFieldFilled = Boolean(value);
 
-  const onFocusHandler = (): void => {
+  const handleFocus = (): void => {
     setIsFocused(true);
   };
 
@@ -52,7 +52,7 @@ const Input = <T extends FieldValues>({
       <TextInput
         onChangeText={onChange}
         value={value}
-        onFocus={onFocusHandler}
+        onFocus={handleFocus}
         onBlur={handleBlur}
         placeholder={placeholder}
         style={[
