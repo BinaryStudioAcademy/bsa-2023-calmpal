@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { StorageKey } from '#libs/packages/storage/storage';
 import { type AsyncThunkConfig } from '#libs/types/types';
 import {
-  type UserDetailsDto,
+  type UserAuthResponseDto,
   type UserSignInRequestDto,
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
@@ -22,7 +22,7 @@ const signUp = createAsyncThunk<
 });
 
 const signIn = createAsyncThunk<
-  UserDetailsDto,
+  UserAuthResponseDto,
   UserSignInRequestDto,
   AsyncThunkConfig
 >(`${sliceName}/sign-in`, async (signInPayload, { extra }) => {

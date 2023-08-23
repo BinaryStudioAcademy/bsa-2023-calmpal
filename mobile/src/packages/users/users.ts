@@ -12,7 +12,7 @@ const userApi = new UserApi({
 
 export { userApi };
 export {
-  type UserDetailsDto,
+  type UserAuthResponseDto,
   type UserGetAllItemResponseDto,
   type UserGetAllResponseDto,
   type UserSignInRequestDto,
