@@ -1,5 +1,5 @@
 import { config } from '#libs/packages/config/config.js';
-import { JWTService } from '#packages/auth/jwt.service.js';
+import { JWTService } from '#libs/packages/jwt/jwt.service.js';
 
 const jwtService = new JWTService({
   secret: config.ENV.JWT.SECRET_KEY,

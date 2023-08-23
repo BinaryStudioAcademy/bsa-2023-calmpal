@@ -1,5 +1,5 @@
+import { type JWTService } from '#libs/packages/jwt/jwt.service.js';
 import { type Service } from '#libs/types/types.js';
-import { type JWTService } from '#packages/auth/jwt.service.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserRepository } from '#packages/users/user.repository.js';
 
