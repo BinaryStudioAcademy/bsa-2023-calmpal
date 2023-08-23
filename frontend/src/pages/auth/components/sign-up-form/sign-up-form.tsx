@@ -27,53 +27,47 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
   );
 
   return (
-    <>
-      <form onSubmit={handleFormSubmit} className={styles['auth-form']}>
-        <h1 className={styles['greeting']}>
-          Create a free account to save your preferences
-        </h1>
-        <p>
-          <Input
-            type="text"
-            label="Name"
-            placeholder="Please write your name"
-            name="fullName"
-            control={control}
-            errors={errors}
-          />
-        </p>
-        <p>
-          <Input
-            type="text"
-            label="E-mail"
-            placeholder="name@gmail.com"
-            name="email"
-            control={control}
-            errors={errors}
-          />
-        </p>
-        <p>
-          <Input
-            type="password"
-            label="Password"
-            name="password"
-            control={control}
-            errors={errors}
-          />
-        </p>
+    <div className={styles['container']}>
+      <h1 className={styles['title']}>
+        Create a free account to save your preferences
+      </h1>
+      <form onSubmit={handleFormSubmit} className={styles['form']}>
+        <Input
+          type="text"
+          label="Name"
+          placeholder="Please write your name"
+          name="fullName"
+          control={control}
+          errors={errors}
+        />
+        <Input
+          type="text"
+          label="E-mail"
+          placeholder="Enter your email"
+          name="email"
+          control={control}
+          errors={errors}
+        />
+        <Input
+          type="password"
+          label="Password"
+          name="password"
+          control={control}
+          errors={errors}
+        />
         <Button
           type="submit"
           label="Sign up"
-          className={styles['btn'] as string}
+          className={styles['submit'] as string}
         />
-        <span className={styles['auth-form-link']}>
+        <span className={styles['form-link']}>
           Already have an account? Go to
           <Link to={AppRoute.SIGN_IN}>
             <span className={styles['text']}>Sign in</span>
           </Link>
         </span>
       </form>
-    </>
+    </div>
   );
 };
 

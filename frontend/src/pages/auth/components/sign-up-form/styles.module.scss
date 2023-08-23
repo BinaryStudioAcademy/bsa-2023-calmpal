@@ -1,41 +1,36 @@
-.auth-form {
+.container {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 20px;
   width: 280px;
 }
 
-.auth-form .greeting {
+.container .title {
   margin: 0;
   font-weight: var(--semibold);
   font-size: 30px;
 }
 
-.auth-form .btn {
-  display: inline-block;
-  width: 100%;
-  margin-top: 30px;
-  padding: 15px 0;
-  color: white;
-  font-weight: var(--semibold);
-  font-size: 16px;
-  white-space: nowrap;
-  background-color: var(--gray-300);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.auth-form-link {
+.form .submit {
+  margin-top: 15px;
+}
+
+.form-link {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 14px 0;
   font-size: 14px;
 }
 
-.auth-form-link .text {
+.form-link .text {
   margin-left: 5px;
   color: white;
   font-weight: var(--semibold);
