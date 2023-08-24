@@ -1,13 +1,21 @@
-import home from '#assets/img/home.svg';
 import logo from '#assets/img/logo.svg';
 import { Link } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useLocation } from '#libs/hooks/hooks.js';
+import { type ValueOf } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
 
-const Sidebar: React.FC = () => {
+type Properties = {
+  routes: {
+    route: ValueOf<typeof AppRoute>;
+    routeName: string;
+    icon: string;
+  }[];
+};
+
+const Sidebar: React.FC<Properties> = ({ routes }) => {
   const iconSelected = 'icon-selected';
   const iconStyles = 'icon-container';
   const { pathname } = useLocation();
@@ -16,49 +24,37 @@ const Sidebar: React.FC = () => {
     <div className={styles['sidebar']}>
       <nav className={styles['nav']}>
         <Link to={AppRoute.ROOT}>
-          <div className={styles['image']}>
+          <span className={styles['image']}>
             <img src={logo} alt="logo" />
-          </div>
+          </span>
         </Link>
       </nav>
       <nav className={styles['nav']}>
         <div className={styles['icons-container']}>
-          <button
-            className={getValidClassNames(
-              styles[iconStyles],
-              pathname === AppRoute.ROOT && styles[iconSelected],
-            )}
-          >
-            <Link to={AppRoute.ROOT}>
-              <div>
-                <img src={home} alt="home" className={styles['icon']} />
-              </div>
-            </Link>
-          </button>
-          <button
-            className={getValidClassNames(
-              styles[iconStyles],
-              pathname === AppRoute.SIGN_IN && styles[iconSelected],
-            )}
-          >
-            <Link to={AppRoute.SIGN_IN}>
-              <div>
-                <img src={home} alt="home" className={styles['icon']} />
-              </div>
-            </Link>
-          </button>
-          <button
-            className={getValidClassNames(
-              styles[iconStyles],
-              pathname === AppRoute.SIGN_UP && styles[iconSelected],
-            )}
-          >
-            <Link to={AppRoute.SIGN_UP}>
-              <div>
-                <img src={home} alt="home" className={styles['icon']} />
-              </div>
-            </Link>
-          </button>
+          {routes.map((route) => {
+            return (
+              <button
+                key={route.routeName}
+                className={getValidClassNames(
+                  styles[iconStyles],
+                  pathname === route.route && styles[iconSelected],
+                )}
+              >
+                <Link to={route.route}>
+                  <span>
+                    <span className="visually-hidden">
+                      Go to {route.routeName}
+                    </span>
+                    <img
+                      src={route.icon}
+                      alt={route.routeName}
+                      className={styles['icon']}
+                    />
+                  </span>
+                </Link>
+              </button>
+            );
+          })}
         </div>
       </nav>
     </div>

@@ -1,3 +1,4 @@
+import home from '#assets/img/home.svg';
 import reactLogo from '#assets/img/react.svg';
 import { Header, Link, RouterOutlet } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/enums.js';
@@ -21,7 +22,13 @@ const App: React.FC = () => {
 
   return (
     <div className={styles['app-container']}>
-      <Sidebar />
+      <Sidebar
+        routes={[
+          { route: AppRoute.ROOT, routeName: 'home', icon: home },
+          { route: AppRoute.SIGN_IN, routeName: 'sign-in', icon: home },
+          { route: AppRoute.SIGN_UP, routeName: 'sign-up', icon: home },
+        ]}
+      />
       <div className={styles['body-container']}>
         <Header />
         <img src={reactLogo} className="App-logo" width="30" alt="logo" />
