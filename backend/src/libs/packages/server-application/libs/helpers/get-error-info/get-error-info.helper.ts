@@ -1,15 +1,26 @@
-import {
-  errorHandlers,
-  handleDefaultErrorResponse,
-} from './handlers/handlers.js';
-import { type ErrorParameter, type ErrorResponse } from './types/types.js';
+import { AuthError } from '#libs/exceptions/exceptions.js';
+import { HTTPError } from '#libs/packages/http/http.js';
 
-const getErrorInfo = (error: ErrorParameter): ErrorResponse => {
-  const handler =
-    errorHandlers.find((errorHandler) => errorHandler(error)) ??
-    handleDefaultErrorResponse;
+import { getAuthErrorInfo } from './get-auth-error-info.js';
+import { getDefaultErrorInfo } from './get-default-error-info.js';
+import { getHTTPErrorInfo } from './get-http-error-info.js';
+import { getValidationErrorInfo } from './get-validation-error-info.js';
+import { type ErrorInfo, type ErrorParameter } from './types/types.js';
 
-  return handler(error) as ErrorResponse;
+const getErrorInfo = (error: ErrorParameter): ErrorInfo => {
+  if ('isJoi' in error) {
+    return getValidationErrorInfo(error);
+  }
+
+  if (error instanceof AuthError) {
+    return getAuthErrorInfo(error);
+  }
+
+  if (error instanceof HTTPError) {
+    return getHTTPErrorInfo(error);
+  }
+
+  return getDefaultErrorInfo(error);
 };
 
 export { getErrorInfo };
