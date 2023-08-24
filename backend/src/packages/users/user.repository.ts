@@ -53,7 +53,6 @@ class UserRepository implements Repository {
         },
       } as UserInsertData)
       .withGraphJoined(UsersRelation.DETAILS)
-      .returning('*')
       .castTo<UserWithUserDetailsJoin>()
       .execute();
     return UserEntity.initialize({
