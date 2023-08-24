@@ -1,5 +1,5 @@
 export { DataStatus } from './app/app';
-export { RootScreenName } from './navigation/navigation';
+export { MainScreenName, RootScreenName } from './navigation/navigation';
 export { AppColor } from './ui/ui';
 export {
   APIPath,
