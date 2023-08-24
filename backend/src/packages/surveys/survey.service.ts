@@ -1,4 +1,5 @@
 import { type Service } from '#libs/types/types.js';
+import { userService } from '#packages/users/users.js';
 
 import { type SurveyGetAllResponseDto } from './libs/types/types.js';
 import { SurveyEntity } from './survey.entity.js';
@@ -36,6 +37,8 @@ class SurveyService implements Service {
         preferences: payload.preferences,
       }),
     );
+
+    await userService.updateIsSurveyCompleted(payload.userId);
 
     return item.toObject();
   }
