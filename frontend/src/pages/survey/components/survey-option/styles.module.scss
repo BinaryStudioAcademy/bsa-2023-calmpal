@@ -1,0 +1,14 @@
+.option {
+  color: var(--white);
+  font-weight: var(--semibold);
+  font-size: 14px;
+  line-height: 20px;
+  background-color: transparent;
+  border: 1px solid var(--white);
+  border-radius: 25px;
+}
+
+.active {
+  color: var(--gray-300);
+  background-color: var(--blue-alpha-70);
+}
