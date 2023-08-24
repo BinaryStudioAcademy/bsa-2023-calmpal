@@ -1,8 +1,10 @@
 import { StyleSheet } from 'react-native';
 
+import { AppColor } from '#libs/enums/enums';
+
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#507CEB',
+    backgroundColor: AppColor.BLUE_200,
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 55,
