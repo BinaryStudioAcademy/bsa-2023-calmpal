@@ -15,7 +15,7 @@ const config = ({ mode }: ConfigEnv): ReturnType<typeof defineConfig> => {
     },
     plugins: [
       reactPlugin(),
-      VitePWAPlugin({
+      vitePWAPlugin({
         registerType: 'autoUpdate',
       }),
     ],

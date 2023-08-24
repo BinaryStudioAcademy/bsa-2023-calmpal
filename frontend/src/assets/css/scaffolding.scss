@@ -32,7 +32,7 @@ body {
   clip-path: inset(100%);
 }
 
-.Toastify__toast--error {
+#root .Toastify__toast--error {
   color: #222222;
   font-weight: 400;
   font-size: 12px;

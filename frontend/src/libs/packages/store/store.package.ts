@@ -7,15 +7,17 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import { AppEnvironment } from '#libs/enums/enums.js';
 import { type Config } from '#libs/packages/config/config.js';
-import { handleError } from '#libs/packages/store/middlewares/handle-error.middleware.js';
+import { handleError } from '#libs/packages/store/middlewares/middlewares.js';
 import { authApi } from '#packages/auth/auth.js';
 import { userApi } from '#packages/users/users.js';
 import { reducer as authReducer } from '#slices/auth/auth.js';
+import { reducer as notificationsReducer } from '#slices/notifications/notification.js';
 import { reducer as usersReducer } from '#slices/users/users.js';
 
 type RootReducer = {
   auth: ReturnType<typeof authReducer>;
   users: ReturnType<typeof usersReducer>;
+  notifications: ReturnType<typeof notificationsReducer>;
 };
 
 type ExtraArguments = {
@@ -38,6 +40,7 @@ class Store {
       reducer: {
         auth: authReducer,
         users: usersReducer,
+        notifications: notificationsReducer,
       },
       middleware: (getDefaultMiddleware) => [
         ...getDefaultMiddleware({
