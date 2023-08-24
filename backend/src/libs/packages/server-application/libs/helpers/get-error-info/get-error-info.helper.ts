@@ -1,13 +1,13 @@
 import { AuthError } from '#libs/exceptions/exceptions.js';
 import { HTTPError } from '#libs/packages/http/http.js';
 
-import { type ErrorInfo, type ErrorParameter } from '../../types/types.js';
+import { type APIError, type ErrorInfo } from '../../types/types.js';
 import { getAuthErrorInfo } from './get-auth-error-info.helper.js';
 import { getDefaultErrorInfo } from './get-default-error-info.helper.js';
 import { getHttpErrorInfo } from './get-http-error-info.helper.js';
 import { getValidationErrorInfo } from './get-validation-error-info.helper.js';
 
-const getErrorInfo = (error: ErrorParameter): ErrorInfo => {
+const getErrorInfo = (error: APIError): ErrorInfo => {
   if ('isJoi' in error) {
     return getValidationErrorInfo(error);
   }
