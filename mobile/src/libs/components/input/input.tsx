@@ -37,8 +37,6 @@ const Input = <T extends FieldValues>({
   const error = errors[name]?.message;
   const hasError = Boolean(error);
 
-  const isFieldFilled = Boolean(value);
-
   const handleFocus = (): void => {
     setIsFocused(true);
   };
@@ -60,7 +58,7 @@ const Input = <T extends FieldValues>({
         placeholder={placeholder}
         style={[
           styles.input,
-          !hasError && (isFocused || isFieldFilled) && styles.filledInput,
+          !hasError && isFocused && styles.filledInput,
           hasError && styles.errorInput,
         ]}
         placeholderTextColor={styles.placeholder.color}

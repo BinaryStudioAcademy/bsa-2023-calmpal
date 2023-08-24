@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { AppColor } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
-  btn: {
+  button: {
     backgroundColor: AppColor.GRAY_400,
     alignItems: 'center',
     justifyContent: 'center',
@@ -17,14 +17,11 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 16,
   },
-  btnDisabled: {
-    backgroundColor: AppColor.TRANSPARENT_GRAY_200,
+  buttonDisabled: {
+    backgroundColor: AppColor.GRAY_200_ALPHA_50,
   },
   labelDisabled: {
-    color: AppColor.TRANSPARENT_GRAY_100,
-  },
-  btnPressed: {
-    backgroundColor: AppColor.GRAY_500,
+    color: AppColor.GRAY_100_ALPHA_50,
   },
 });
 

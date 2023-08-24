@@ -1,8 +1,10 @@
 import { StyleSheet } from 'react-native';
 
+import { AppColor } from '#libs/enums/enums';
+
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#507CEB',
+    backgroundColor: AppColor.BLUE_200,
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 55,
@@ -15,16 +17,16 @@ const styles = StyleSheet.create({
     left: 0,
     zIndex: -1,
   },
-  backgroundImg: {
+  backgroundImage: {
     width: '100%',
     height: '100%',
   },
-  topBubbleImg: {
+  topBubbleImage: {
     position: 'absolute',
     top: 30,
     right: 0,
   },
-  bottomBubbleImg: {
+  bottomBubbleImage: {
     position: 'absolute',
     bottom: 60,
     left: 0,

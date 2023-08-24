@@ -2,7 +2,6 @@ import React from 'react';
 import { Pressable } from 'react-native';
 
 import { Text } from '#libs/components/components';
-import { useState } from '#libs/hooks/hooks';
 
 import { styles } from './styles';
 
@@ -17,24 +16,15 @@ const Button: React.FC<Properties> = ({
   onPress,
   isDisabled = false,
 }) => {
-  const [isPressed, setIsPressed] = useState<boolean>(false);
-
   const handleOnPress = (): void => {
-    if (isDisabled) {
-      return;
-    }
-    setIsPressed(true);
     onPress();
   };
 
   return (
     <Pressable
-      style={[
-        styles.btn,
-        isDisabled && styles.btnDisabled,
-        isPressed && styles.btnPressed,
-      ]}
+      style={[styles.button, isDisabled && styles.buttonDisabled]}
       onPress={handleOnPress}
+      disabled={isDisabled}
     >
       <Text style={[styles.label, isDisabled && styles.labelDisabled]}>
         {label}
