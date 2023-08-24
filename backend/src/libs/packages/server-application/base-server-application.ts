@@ -16,7 +16,7 @@ import { authorization as authorizationPlugin } from '#libs/plugins/plugins.js';
 import { type ValidationSchema } from '#libs/types/types.js';
 import { userService } from '#packages/users/users.js';
 
-import { createErrorResponse } from './libs/helpers/helpers.js';
+import { getErrorInfo } from './libs/helpers/helpers.js';
 import {
   type ServerApplication,
   type ServerApplicationApi,
@@ -144,7 +144,7 @@ class BaseServerApplication implements ServerApplication {
   private initErrorHandler(): void {
     this.app.setErrorHandler(
       (error: FastifyError | ValidationError, _request, reply) => {
-        const { info, status, response } = createErrorResponse(error);
+        const { info, status, response } = getErrorInfo(error);
 
         this.logger.error(info);
 

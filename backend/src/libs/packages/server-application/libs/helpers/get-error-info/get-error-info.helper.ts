@@ -4,7 +4,7 @@ import {
 } from './handlers/handlers.js';
 import { type ErrorParameter, type ErrorResponse } from './types/types.js';
 
-const createErrorResponse = (error: ErrorParameter): ErrorResponse => {
+const getErrorInfo = (error: ErrorParameter): ErrorResponse => {
   const handler =
     errorHandlers.find((errorHandler) => errorHandler(error)) ??
     handleDefaultErrorResponse;
@@ -12,4 +12,4 @@ const createErrorResponse = (error: ErrorParameter): ErrorResponse => {
   return handler(error) as ErrorResponse;
 };
 
-export { createErrorResponse };
+export { getErrorInfo };
