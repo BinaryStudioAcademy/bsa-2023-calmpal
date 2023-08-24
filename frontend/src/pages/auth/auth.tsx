@@ -1,5 +1,4 @@
 import { AppRoute } from '#libs/enums/enums.js';
-import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useAppDispatch, useCallback, useLocation } from '#libs/hooks/hooks.js';
 import { type UserSignUpRequestDto } from '#packages/users/users.js';
 import { actions as authActions } from '#slices/auth/auth.js';
@@ -44,54 +43,6 @@ const Auth: React.FC = () => {
         <p className={styles['primary']}>Calmpal</p>
       </div>
       <div className={styles['overlay']}>{getScreen(pathname)}</div>
-      <span
-        className={getValidClassNames(
-          styles['shadow'],
-          styles['shadow-top-right'],
-        )}
-      />
-      <span
-        className={getValidClassNames(
-          styles['shadow'],
-          styles['shadow-bottom-right'],
-        )}
-      />
-      <span
-        className={getValidClassNames(
-          styles['shadow'],
-          styles['shadow-bottom-left'],
-        )}
-      />
-      <span
-        className={getValidClassNames(
-          styles['shadow'],
-          styles['shadow-corner-bottom-left'],
-        )}
-      />
-      <span
-        className={getValidClassNames(
-          styles['shadow'],
-          styles['shadow-center'],
-        )}
-      />
-      <span
-        className={getValidClassNames(
-          styles['bubble'],
-          styles['bubble-bottom'],
-        )}
-      />
-      <span
-        className={getValidClassNames(styles['bubble'], styles['bubble-right'])}
-      />
-      <span
-        className={getValidClassNames(
-          styles['bubble'],
-          styles['bubble-center'],
-        )}
-      />
-      <span
-        className={getValidClassNames(styles['bubble'], styles['bubble-top'])}
-      />
     </div>
   );
 };
