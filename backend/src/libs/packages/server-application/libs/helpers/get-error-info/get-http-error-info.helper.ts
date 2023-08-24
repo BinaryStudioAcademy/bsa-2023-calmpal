@@ -4,7 +4,7 @@ import { type ValueOf } from '#libs/types/types.js';
 
 import { type ErrorInfo } from '../../types/types.js';
 
-const getHTTPErrorInfo = (error: HTTPError): ErrorInfo => {
+const getHttpErrorInfo = (error: HTTPError): ErrorInfo => {
   const { message } = error;
   const status = error.status as ValueOf<typeof HTTPCode>;
 
@@ -18,4 +18,4 @@ const getHTTPErrorInfo = (error: HTTPError): ErrorInfo => {
   };
 };
 
-export { getHTTPErrorInfo };
+export { getHttpErrorInfo };
