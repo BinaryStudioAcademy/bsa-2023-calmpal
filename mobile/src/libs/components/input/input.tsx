@@ -26,7 +26,7 @@ const Input = <T extends FieldValues>({
   errors,
   label,
   name,
-  isSecure,
+  isSecure = false,
   placeholder,
 }: Properties<T>): JSX.Element => {
   const [isFocused, setIsFocused] = useState(false);

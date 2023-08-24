@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     marginTop: 30,
   },
+  linkText: {
+    fontWeight: 'bold',
+  },
 });
 
 export { styles };

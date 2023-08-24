@@ -45,7 +45,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
           errors={errors}
           label="Name"
           name="fullName"
-          isSecure={false}
+          isSecure
           placeholder="Enter your full name"
         />
         <Input
@@ -53,7 +53,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
           errors={errors}
           label="Email"
           name="email"
-          isSecure={false}
+          isSecure
           placeholder="Enter your email"
         />
         <Input
@@ -69,7 +69,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
           label={
             <React.Fragment>
               Already have an account? Go to{' '}
-              <Text style={{ fontWeight: 'bold' }}>Sign In</Text>
+              <Text style={styles.linkText}>Sign In</Text>
             </React.Fragment>
           }
           to={`/${RootScreenName.SIGN_IN}`}
