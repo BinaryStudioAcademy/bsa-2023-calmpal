@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 
 import { config } from '#libs/packages/config/config.js';
 
-import { type Encrypt } from './libs/types/encrypt.type.js';
+import { type Encrypt } from './libs/types/types.js';
 
 class BaseEncrypt implements Encrypt {
   public async generateSalt(rounds?: number): Promise<string> {

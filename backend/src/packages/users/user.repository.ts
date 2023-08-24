@@ -2,9 +2,8 @@ import { type Repository } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/user.model.js';
 
-import { UsersRelation } from './libs/enums/users-relation.enum.js';
+import { UsersRelation } from './libs/enums/enums.js';
 import {
-  type UserColumns,
   type UserInsertData,
   type UserWithUserDetailsJoin,
 } from './libs/types/types.js';
@@ -20,46 +19,52 @@ class UserRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  private mapUserWithUserDetailsJoin(
-    join: UserWithUserDetailsJoin,
-  ): UserColumns {
-    const joinCopy = { ...join };
-    const fullName: string = joinCopy.details?.fullName as string;
-    delete joinCopy.details;
-
-    return { ...joinCopy, fullName };
-  }
-
   public async findAll(): Promise<UserEntity[]> {
-    const usersJoins = await this.userModel
+    const users = await this.userModel
       .query()
       .select()
       .withGraphJoined(UsersRelation.DETAILS)
       .castTo<UserWithUserDetailsJoin[]>()
       .execute();
-    return usersJoins.map((usersJoin) => {
-      return UserEntity.initialize(this.mapUserWithUserDetailsJoin(usersJoin));
+    return users.map((user) => {
+      return UserEntity.initialize({
+        id: user.id,
+        email: user.email,
+        passwordHash: user.passwordHash,
+        passwordSalt: user.passwordSalt,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+        fullName: user.details?.fullName ?? '',
+      });
     });
   }
 
   public async create(entity: UserEntity): Promise<UserEntity> {
     const { email, passwordSalt, passwordHash, fullName } =
       entity.toNewObject();
-    const userData: UserInsertData = {
-      email,
-      passwordSalt,
-      passwordHash,
-      details: {
-        fullName,
-      },
-    };
     const user = await this.userModel
       .query()
-      .insertGraph(userData)
+      .insertGraph({
+        email,
+        passwordSalt,
+        passwordHash,
+        [UsersRelation.DETAILS]: {
+          fullName,
+        },
+      } as UserInsertData)
+      .withGraphJoined(UsersRelation.DETAILS)
       .returning('*')
       .castTo<UserWithUserDetailsJoin>()
       .execute();
-    return UserEntity.initialize(this.mapUserWithUserDetailsJoin(user));
+    return UserEntity.initialize({
+      id: user.id,
+      email: user.email,
+      passwordHash: user.passwordHash,
+      passwordSalt: user.passwordSalt,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+      fullName: user.details?.fullName ?? '',
+    });
   }
 
   public update(): ReturnType<Repository['update']> {
