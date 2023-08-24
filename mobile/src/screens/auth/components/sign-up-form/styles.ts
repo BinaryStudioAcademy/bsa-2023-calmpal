@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import { AppColor } from '#libs/enums/enums';
+
 const styles = StyleSheet.create({
   formContainer: {
     height: '100%',
@@ -7,7 +9,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 35,
-    color: 'white',
+    color: AppColor.WHITE,
     marginBottom: 30,
     marginTop: 30,
   },

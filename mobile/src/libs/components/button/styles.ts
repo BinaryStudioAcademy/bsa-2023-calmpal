@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   label: {
-    color: 'white',
+    color: AppColor.WHITE,
     fontWeight: '600',
     fontSize: 16,
   },

@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     paddingBottom: 14,
   },
   labelText: {
-    color: 'white',
+    color: AppColor.WHITE,
     fontSize: 24,
     fontWeight: 'bold',
     letterSpacing: 3,
