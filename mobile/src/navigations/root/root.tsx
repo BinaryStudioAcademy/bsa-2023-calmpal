@@ -9,6 +9,8 @@ import { type RootNavigationParameterList } from '#libs/types/types';
 import { Auth } from '#screens/auth/auth';
 import { Survey } from '#screens/survey/survey';
 
+import { Main } from '../main/main';
+
 const NativeStack = createNativeStackNavigator<RootNavigationParameterList>();
 
 const screenOptions: NativeStackNavigationOptions = {
@@ -20,6 +22,7 @@ const Root: React.FC = () => {
     <NativeStack.Navigator screenOptions={screenOptions}>
       <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
       <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
+      <NativeStack.Screen name={RootScreenName.MAIN} component={Main} />
       <NativeStack.Screen name={RootScreenName.SURVEY} component={Survey} />
     </NativeStack.Navigator>
   );

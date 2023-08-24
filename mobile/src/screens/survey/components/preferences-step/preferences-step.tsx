@@ -29,6 +29,7 @@ const PreferencesStep = (): JSX.Element => {
     if (category === 'Other') {
       setIsOtherSelected(false);
     }
+
     setSelectedCategories((previousSelected) => {
       return previousSelected.includes(category)
         ? previousSelected.filter((item) => item !== category)

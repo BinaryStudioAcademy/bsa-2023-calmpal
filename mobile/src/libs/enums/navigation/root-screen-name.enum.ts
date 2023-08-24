@@ -1,6 +1,7 @@
 const RootScreenName = {
-  SIGN_UP: 'Sign Up',
+  MAIN: 'Main',
   SIGN_IN: 'Sign In',
+  SIGN_UP: 'Sign Up',
   SURVEY: 'Survey',
 } as const;
 
