@@ -32,10 +32,6 @@ class AuthApi extends BaseHttpApi {
         hasAuth: false,
       },
     );
-    if (!response.ok) {
-      const error = await response.json<{ code: number; message: string }>();
-      throw new Error(error.message);
-    }
     return await response.json<UserSignUpResponseDto>();
   }
 }
