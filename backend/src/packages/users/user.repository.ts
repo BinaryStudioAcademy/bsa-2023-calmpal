@@ -48,8 +48,7 @@ class UserRepository implements Repository {
   public async updateIsSurveyCompleted(id: number): Promise<void> {
     await this.userModel
       .query()
-      .updateAndFetchById(id, { isSurveyCompleted: true })
-      .execute();
+      .updateAndFetchById(id, { isSurveyCompleted: true });
   }
 
   public update(): ReturnType<Repository['update']> {

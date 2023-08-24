@@ -6,7 +6,7 @@ import {
 } from '#libs/packages/controller/controller.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
-import { type UserAuthResponseDto } from '#packages/users/libs/types/types.js';
+import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { userSignUpValidationSchema } from '#packages/users/users.js';
 
 import { type AuthService } from './auth.service.js';
