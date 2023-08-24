@@ -19,11 +19,13 @@ const Button: React.FC<Properties> = ({
 }) => {
   const [isPressed, setIsPressed] = useState<boolean>(false);
 
+  const PRESS_DURATION = 100;
+
   const handleOnPress = (): void => {
-    if (isDisabled) {
-      return;
-    }
     setIsPressed(true);
+    setTimeout(() => {
+      setIsPressed(false);
+    }, PRESS_DURATION);
     onPress();
   };
 
@@ -35,6 +37,7 @@ const Button: React.FC<Properties> = ({
         isPressed && styles.buttonPressed,
       ]}
       onPress={handleOnPress}
+      disabled={isDisabled}
     >
       <Text style={[styles.label, isDisabled && styles.labelDisabled]}>
         {label}
