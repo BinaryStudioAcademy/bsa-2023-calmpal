@@ -144,9 +144,9 @@ class BaseServerApplication implements ServerApplication {
   private initErrorHandler(): void {
     this.app.setErrorHandler(
       (error: FastifyError | ValidationError, _request, reply) => {
-        const { info, status, response } = getErrorInfo(error);
+        const { internalMessage, status, response } = getErrorInfo(error);
 
-        this.logger.error(info);
+        this.logger.error(internalMessage);
 
         if (response.errorType === ServerErrorType.VALIDATION) {
           response.details.forEach((detail) => {
