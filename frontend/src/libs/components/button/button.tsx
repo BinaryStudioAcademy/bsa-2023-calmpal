@@ -1,4 +1,4 @@
-import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
+import { getValidClassNames } from '#libs/helpers/helpers.js';
 
 import styles from './styles.module.scss';
 
