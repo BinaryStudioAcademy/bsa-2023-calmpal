@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     gap: 10,
     marginVertical: 10,
-    transform: [{ scale: 1 }],
   },
   label: {
     color: AppColor.WHITE,
@@ -23,10 +22,6 @@ const styles = StyleSheet.create({
   },
   labelDisabled: {
     color: AppColor.GRAY_100_ALPHA_50,
-  },
-  buttonPressed: {
-    backgroundColor: AppColor.GRAY_500,
-    transform: [{ scale: 0.97 }],
   },
 });
 
