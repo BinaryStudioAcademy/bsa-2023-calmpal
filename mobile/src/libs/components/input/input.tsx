@@ -17,7 +17,7 @@ type Properties<T extends FieldValues> = {
   errors: FieldErrors<T>;
   label: string;
   name: FieldPath<T>;
-  isSecure: boolean;
+  isSecure?: boolean;
   placeholder: string;
 };
 
