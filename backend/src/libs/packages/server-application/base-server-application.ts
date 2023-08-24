@@ -10,14 +10,13 @@ import { ServerErrorType } from '#libs/enums/enums.js';
 import { type ValidationError } from '#libs/exceptions/exceptions.js';
 import { type Config } from '#libs/packages/config/config.js';
 import { type Database } from '#libs/packages/database/database.js';
-import { HTTPCode, HTTPError } from '#libs/packages/http/http.js';
+import { jwtService } from '#libs/packages/jwt/jwt.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
-import {
-  type ServerCommonErrorResponse,
-  type ServerValidationErrorResponse,
-  type ValidationSchema,
-} from '#libs/types/types.js';
+import { authorization as authorizationPlugin } from '#libs/plugins/plugins.js';
+import { type ValidationSchema } from '#libs/types/types.js';
+import { userService } from '#packages/users/users.js';
 
+import { getErrorInfo } from './libs/helpers/helpers.js';
 import {
   type ServerApplication,
   type ServerApplicationApi,
@@ -107,6 +106,15 @@ class BaseServerApplication implements ServerApplication {
     );
   }
 
+  private async initPlugins(): Promise<void> {
+    await this.app.register(authorizationPlugin, {
+      services: {
+        jwtService,
+        userService,
+      },
+    });
+  }
+
   private async initServe(): Promise<void> {
     const staticPath = join(
       dirname(fileURLToPath(import.meta.url)),
@@ -136,46 +144,19 @@ class BaseServerApplication implements ServerApplication {
   private initErrorHandler(): void {
     this.app.setErrorHandler(
       (error: FastifyError | ValidationError, _request, reply) => {
-        if ('isJoi' in error) {
-          this.logger.error(`[Validation Error]: ${error.message}`);
+        const { internalMessage, status, response } = getErrorInfo(error);
 
-          error.details.forEach((detail) => {
+        this.logger.error(internalMessage);
+
+        if (response.errorType === ServerErrorType.VALIDATION) {
+          response.details.forEach((detail) => {
             this.logger.error(
               `[${detail.path.toString()}] — ${detail.message}`,
             );
           });
-
-          const response: ServerValidationErrorResponse = {
-            errorType: ServerErrorType.VALIDATION,
-            message: error.message,
-            details: error.details.map((detail) => ({
-              path: detail.path,
-              message: detail.message,
-            })),
-          };
-
-          return reply.status(HTTPCode.UNPROCESSED_ENTITY).send(response);
         }
 
-        if (error instanceof HTTPError) {
-          this.logger.error(`[HTTP Error]: ${error.status} – ${error.message}`);
-
-          const response: ServerCommonErrorResponse = {
-            errorType: ServerErrorType.COMMON,
-            message: error.message,
-          };
-
-          return reply.status(error.status).send(response);
-        }
-
-        this.logger.error(error.message);
-
-        const response: ServerCommonErrorResponse = {
-          errorType: ServerErrorType.COMMON,
-          message: error.message,
-        };
-
-        return reply.status(HTTPCode.INTERNAL_SERVER_ERROR).send(response);
+        return reply.status(status).send(response);
       },
     );
   }
@@ -186,6 +167,8 @@ class BaseServerApplication implements ServerApplication {
     await this.initServe();
 
     await this.initMiddlewares();
+
+    await this.initPlugins();
 
     this.initValidationCompiler();
 
