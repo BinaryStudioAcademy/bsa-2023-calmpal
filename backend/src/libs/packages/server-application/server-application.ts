@@ -24,4 +24,6 @@ const serverApplication = new BaseServerApplication({
 });
 
 export { serverApplication };
+export { WHITE_ROUTES } from './libs/constants/constants.js';
+export { checkIsWhiteRoute } from './libs/helpers/helpers.js';
 export { type ServerApplicationRouteParameters } from './libs/types/types.js';
