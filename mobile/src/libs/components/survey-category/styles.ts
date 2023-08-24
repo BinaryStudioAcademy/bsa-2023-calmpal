@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
-    borderRadius: 8,
+    borderRadius: 22,
     borderWidth: 1,
     marginBottom: 10,
     borderColor: AppColor.WHITE,

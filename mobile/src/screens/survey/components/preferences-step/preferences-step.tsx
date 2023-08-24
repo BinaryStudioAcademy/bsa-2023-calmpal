@@ -9,7 +9,14 @@ import {
 
 import { styles } from './styles';
 
-const categoryNames = ['Category 1', 'Category 2', 'Other'];
+const categoryNames = [
+  'Get emotional support',
+  'Reduce stress or anxiety',
+  'Improve sleep quality',
+  'Get over with depression',
+  'Improve focus',
+  'Other',
+];
 const EMPTY_ARRAY_LENGTH = 0;
 
 const PreferencesStep = (): JSX.Element => {

@@ -8,12 +8,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   otherTextInput: {
-    marginTop: 10,
     backgroundColor: AppColor.BLUE_100_ALPHA_70,
     borderRadius: 8,
     padding: 8,
     borderWidth: 1,
-    marginBottom: 10,
+    marginBottom: 20,
     borderColor: AppColor.WHITE,
   },
 });
