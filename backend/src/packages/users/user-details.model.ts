@@ -2,11 +2,13 @@ import { Model, type RelationMappings } from 'objection';
 
 import {
   AbstractModel,
-  CommonTableColumn,
   DatabaseTableName,
 } from '#libs/packages/database/database.js';
 
-import { UserDetailsTableColumn } from './libs/enums/enums.js';
+import {
+  UserDetailsTableColumn,
+  UsersTableColumn,
+} from './libs/enums/enums.js';
 import { UserModel } from './user.model.js';
 
 class UserDetailsModel extends AbstractModel {
@@ -23,7 +25,7 @@ class UserDetailsModel extends AbstractModel {
         modelClass: UserModel,
         join: {
           from: `${DatabaseTableName.USER_DETAILS}.${UserDetailsTableColumn.USER_ID}`,
-          to: `${DatabaseTableName.USERS}.${CommonTableColumn.ID}`,
+          to: `${DatabaseTableName.USERS}.${UsersTableColumn.ID}`,
         },
       },
     };
