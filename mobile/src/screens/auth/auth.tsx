@@ -45,8 +45,10 @@ const Auth: React.FC = () => {
         return <SignUpForm onSubmit={handleSignUpSubmit} />;
       }
     }
+
     return null;
   };
+
   return (
     <>
       <Text>state: {dataStatus}</Text>

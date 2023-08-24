@@ -17,6 +17,7 @@ const signUp = createAsyncThunk<
   const { authApi, storage } = extra;
   const { user, token } = await authApi.signUp(signUpPayload);
   await storage.set(StorageKey.TOKEN, token);
+
   return user;
 });
 

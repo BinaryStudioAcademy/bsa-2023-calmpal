@@ -11,6 +11,7 @@ import { styles } from './styles';
 type Properties = {
   children: ReactNode;
 };
+
 const SignBackground: FC<Properties> = ({ children }) => {
   return (
     <View style={styles.wrapper}>
