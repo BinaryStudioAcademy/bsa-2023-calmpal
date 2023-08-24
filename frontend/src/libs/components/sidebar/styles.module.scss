@@ -1,0 +1,66 @@
+.image {
+  width: 56px;
+  height: 56px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  filter: invert(43%) sepia(94%) saturate(426%) hue-rotate(185deg)
+    brightness(94%) contrast(97%);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 262px;
+  width: 88px;
+  padding: 16px;
+  background-color: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.icons-container {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 38px;
+}
+
+.icon-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px;
+  background-color: var(--white);
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.icon-selected {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px;
+  background-color: var(--white);
+  border: 0;
+  border-radius: 50%;
+  box-shadow: 0 4px 23px 0 var(--violet-100);
+  cursor: pointer;
+}
+
+.icons-container a {
+  line-height: 0px;
+}
