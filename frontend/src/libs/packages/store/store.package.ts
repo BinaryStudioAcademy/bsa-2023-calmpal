@@ -14,6 +14,8 @@ import { reducer as authReducer } from '#slices/auth/auth.js';
 import { reducer as notificationsReducer } from '#slices/notifications/notification.js';
 import { reducer as usersReducer } from '#slices/users/users.js';
 
+import { storage } from '../storage/storage.js';
+
 type RootReducer = {
   auth: ReturnType<typeof authReducer>;
   users: ReturnType<typeof usersReducer>;
@@ -23,6 +25,7 @@ type RootReducer = {
 type ExtraArguments = {
   authApi: typeof authApi;
   userApi: typeof userApi;
+  storage: typeof storage;
 };
 
 class Store {
@@ -57,6 +60,7 @@ class Store {
     return {
       authApi,
       userApi,
+      storage,
     };
   }
 }
