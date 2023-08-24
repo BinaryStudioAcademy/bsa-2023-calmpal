@@ -13,7 +13,6 @@ const ColumnName = {
 
 const RelationRule = {
   CASCADE: 'CASCADE',
-  SET_NULL: 'SET NULL',
 };
 
 function up(knex: Knex): Promise<void> {
@@ -25,7 +24,7 @@ function up(knex: Knex): Promise<void> {
       .references(ColumnName.ID)
       .inTable(FOREIGN_TABLE_NAME)
       .onUpdate(RelationRule.CASCADE)
-      .onDelete(RelationRule.SET_NULL)
+      .onDelete(RelationRule.CASCADE)
       .notNullable();
     table
       .specificType(ColumnName.PREFERENCES, 'varchar(1000)[]')
