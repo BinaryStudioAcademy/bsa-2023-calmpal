@@ -1,4 +1,4 @@
-import { encryptService } from '#libs/packages/encrypt/encrypt.js';
+import { encrypt as encryptService } from '#libs/packages/encrypt/encrypt.js';
 import { jwtService } from '#libs/packages/jwt/jwt.js';
 import { logger } from '#libs/packages/logger/logger.js';
 

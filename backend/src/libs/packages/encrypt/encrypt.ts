@@ -1,6 +1,6 @@
-import { EncryptService } from './encrypt.service.js';
+import { BaseEncrypt } from './base-encrypt.package.js';
 
-const DEFAULT_ROUNDS = 10;
-const encryptService = new EncryptService(DEFAULT_ROUNDS);
+const encrypt = new BaseEncrypt();
 
-export { encryptService };
+export { encrypt };
+export { type Encrypt } from './libs/types/types.js';
