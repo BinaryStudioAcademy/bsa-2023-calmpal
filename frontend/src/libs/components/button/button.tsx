@@ -13,7 +13,7 @@ const Button: React.FC<Properties> = ({
   label,
   className = '',
 }) => (
-  <button type={type} className={getValidClassNames(className, styles['btn'])}>
+  <button type={type} className={getValidClassNames(styles['btn'], className)}>
     {label}
   </button>
 );
