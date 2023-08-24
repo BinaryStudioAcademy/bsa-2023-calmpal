@@ -1,11 +1,8 @@
-import {
-  CommonTableColumn,
-  DatabaseTableName,
-} from '#libs/packages/database/database.js';
 import { type Repository } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/user.model.js';
 
+import { UsersRelation } from './libs/enums/users-relation.enum.js';
 import {
   type UserColumns,
   type UserInsertData,
@@ -23,40 +20,26 @@ class UserRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public async findAll(): Promise<UserEntity[]> {
-    const users = await this.userModel.query().execute();
-
-    const userPromises = users.map(async (user) => {
-      const userJoinedWithUserDetails = await this.getUserJoinWithUserDetails(
-        user.id,
-      );
-      return UserEntity.initialize(userJoinedWithUserDetails);
-    });
-    return await Promise.all(userPromises);
-  }
-
-  private flattenUserJoinWithUserDetails(
+  private mapUserWithUserDetailsJoin(
     join: UserWithUserDetailsJoin,
   ): UserColumns {
-    const newObject = { ...join };
-    let fullName = '';
-    if (newObject.details) {
-      fullName = newObject.details.fullName;
-    }
-    delete newObject.details;
-    return { ...newObject, fullName };
+    const joinCopy = { ...join };
+    const fullName: string = joinCopy.details?.fullName as string;
+    delete joinCopy.details;
+
+    return { ...joinCopy, fullName };
   }
 
-  private async getUserJoinWithUserDetails(
-    userId: number,
-  ): Promise<UserColumns> {
-    const join = await this.userModel
+  public async findAll(): Promise<UserEntity[]> {
+    const usersJoins = await this.userModel
       .query()
-      .withGraphJoined('details')
-      .where(`${DatabaseTableName.USERS}.${CommonTableColumn.ID}`, '=', userId)
-      .first()
-      .castTo<UserWithUserDetailsJoin>();
-    return this.flattenUserJoinWithUserDetails(join);
+      .select()
+      .withGraphJoined(UsersRelation.DETAILS)
+      .castTo<UserWithUserDetailsJoin[]>()
+      .execute();
+    return usersJoins.map((usersJoin) => {
+      return UserEntity.initialize(this.mapUserWithUserDetailsJoin(usersJoin));
+    });
   }
 
   public async create(entity: UserEntity): Promise<UserEntity> {
@@ -70,16 +53,13 @@ class UserRepository implements Repository {
         fullName,
       },
     };
-
     const user = await this.userModel
       .query()
       .insertGraph(userData)
       .returning('*')
+      .castTo<UserWithUserDetailsJoin>()
       .execute();
-    const userJoinedWithUserDetails = await this.getUserJoinWithUserDetails(
-      user.id,
-    );
-    return UserEntity.initialize(userJoinedWithUserDetails);
+    return UserEntity.initialize(this.mapUserWithUserDetailsJoin(user));
   }
 
   public update(): ReturnType<Repository['update']> {
