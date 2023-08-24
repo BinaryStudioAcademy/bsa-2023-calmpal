@@ -1,12 +1,18 @@
 import Toast from 'react-native-toast-message';
 
+import { NotificationType } from '#libs/enums/notification/notification.enum';
+
 class NotificationService {
-  public error(message: string): void {
+  private show = (type: string, message: string): void => {
     Toast.show({
-      type: 'error',
+      type: type,
       text1: '⛔ An error occurred: ',
       text2: message,
     });
+  };
+
+  public ERROR(message: string): void {
+    this.show(NotificationType.ERROR, message);
   }
 }
 
