@@ -30,9 +30,9 @@ const Button: React.FC<Properties> = ({
   return (
     <Pressable
       style={[
-        styles.btn,
-        isDisabled && styles.btnDisabled,
-        isPressed && styles.btnPressed,
+        styles.button,
+        isDisabled && styles.buttonDisabled,
+        isPressed && styles.buttonPressed,
       ]}
       onPress={handleOnPress}
     >
