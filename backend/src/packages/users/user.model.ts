@@ -22,7 +22,7 @@ class UserModel extends AbstractModel {
   public static get relationMappings(): RelationMappings {
     return {
       surveys: {
-        relation: Model.HasManyRelation,
+        relation: Model.HasOneRelation,
         modelClass: SurveyModel,
         join: {
           from: `${DatabaseTableName.USERS}.id`,
