@@ -14,6 +14,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 20,
     borderColor: AppColor.WHITE,
+    color: AppColor.BLUE_300,
+  },
+  placeholder: {
+    color: AppColor.WHITE,
   },
 });
 

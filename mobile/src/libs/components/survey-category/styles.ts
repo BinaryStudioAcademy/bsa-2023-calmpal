@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderColor: AppColor.WHITE,
     height: 44,
+    justifyContent: 'center',
   },
   selectedCategoryButton: {
     backgroundColor: AppColor.BLUE_100_ALPHA_70,

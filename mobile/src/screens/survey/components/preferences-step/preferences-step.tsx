@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import {
   Button,
+  ScrollView,
   SurveyCategory,
   TextInput,
-  View,
 } from '#libs/components/components';
 
 import { styles } from './styles';
@@ -61,7 +61,10 @@ const PreferencesStep = (): JSX.Element => {
   };
 
   return (
-    <View style={styles.surveyContainer}>
+    <ScrollView
+      style={styles.surveyContainer}
+      showsVerticalScrollIndicator={false}
+    >
       {categoryNames.map((category) => (
         <SurveyCategory
           key={category}
@@ -75,9 +78,12 @@ const PreferencesStep = (): JSX.Element => {
 
       {isOtherSelected && (
         <TextInput
-          placeholder="Enter category details"
+          placeholder="Enter your preferences"
+          placeholderTextColor={styles.placeholder.color}
           maxLength={1000}
           value={otherText}
+          multiline={true}
+          numberOfLines={2}
           onChangeText={(text): void => {
             setOtherText(text);
           }}
@@ -86,7 +92,7 @@ const PreferencesStep = (): JSX.Element => {
       )}
 
       <Button label="Continue" onPress={handleContinue} />
-    </View>
+    </ScrollView>
   );
 };
 
