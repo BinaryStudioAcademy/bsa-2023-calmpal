@@ -34,7 +34,6 @@ erDiagram
       text password_hash
       text password_salt
       int role_id FK
-      boolean is_survey_completed
    }
    user_roles {
       int id PK
@@ -51,6 +50,7 @@ erDiagram
       varchar full_name
       int avatar_id FK "may be null if user has no avatar"
       text survey
+      boolean is_survey_completed
    }
    files {
       int id PK
@@ -138,7 +138,7 @@ erDiagram
    meditation_topics ||--|{ meditation_entries : meditation_topic_id
    journal_topics ||--|o files : journal_topic_image_id
    journal_topics ||--|{ journal_entries : journal_topic_id
-   users |o--o| surveys : user_id
+   user_details |o--o| surveys : user_id
 
 ```
 
