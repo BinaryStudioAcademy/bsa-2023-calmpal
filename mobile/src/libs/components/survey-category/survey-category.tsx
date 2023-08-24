@@ -1,7 +1,5 @@
 import React from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
-
-import { useState } from '#libs/hooks/hooks';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 import { styles } from './styles';
 
@@ -16,8 +14,6 @@ const SurveyCategory: React.FC<SurveyCategoryProperties> = ({
   selected,
   onSelect,
 }) => {
-  const [otherText, setOtherText] = useState('');
-
   const handleSelect = (): void => {
     onSelect(category);
   };
@@ -41,16 +37,6 @@ const SurveyCategory: React.FC<SurveyCategoryProperties> = ({
           </Text>
         </View>
       </TouchableOpacity>
-      {selected && category === 'Other' && (
-        <TextInput
-          style={styles.otherTextInput}
-          placeholder="Enter category details"
-          value={otherText}
-          onChangeText={(text): void => {
-            setOtherText(text);
-          }}
-        />
-      )}
     </View>
   );
 };

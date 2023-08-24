@@ -11,28 +11,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     borderRadius: 8,
-    borderWidth: 2,
+    borderWidth: 1,
     marginBottom: 10,
-    borderColor: 'white',
+    borderColor: AppColor.WHITE,
+    height: 44,
   },
   selectedCategoryButton: {
-    backgroundColor: AppColor.TRANSPARENT_BLUE_100,
+    backgroundColor: AppColor.BLUE_100_ALPHA_70,
   },
   categoryText: {
     fontSize: 16,
-    color: 'white',
+    color: AppColor.WHITE,
   },
   selectedCategoryText: {
     color: AppColor.BLUE_300,
-  },
-  otherTextInput: {
-    marginTop: 10,
-    backgroundColor: AppColor.TRANSPARENT_BLUE_100,
-    borderRadius: 8,
-    padding: 8,
-    borderWidth: 2,
-    marginBottom: 10,
-    borderColor: 'white',
   },
 });
 
