@@ -21,7 +21,7 @@ const tabNavigatorOptions: BottomTabNavigationOptions = {
   tabBarStyle: styles.tabBarStyle,
 };
 
-const MainStack: React.FC = () => {
+const Main: React.FC = () => {
   return (
     <BottomTab.Navigator screenOptions={tabNavigatorOptions}>
       <BottomTab.Screen name={MainScreenName.HOME} component={Home} />
@@ -29,4 +29,4 @@ const MainStack: React.FC = () => {
   );
 };
 
-export { MainStack };
+export { Main };

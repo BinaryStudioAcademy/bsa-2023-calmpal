@@ -8,7 +8,7 @@ import { RootScreenName } from '#libs/enums/enums';
 import { type RootNavigationParameterList } from '#libs/types/types';
 import { Auth } from '#screens/auth/auth';
 
-import { MainStack } from '../main/main';
+import { Main } from '../main/main';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParameterList>();
 
@@ -21,7 +21,7 @@ const Root: React.FC = () => {
     <NativeStack.Navigator screenOptions={screenOptions}>
       <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
       <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
-      <NativeStack.Screen name={RootScreenName.MAIN} component={MainStack} />
+      <NativeStack.Screen name={RootScreenName.MAIN} component={Main} />
     </NativeStack.Navigator>
   );
 };
