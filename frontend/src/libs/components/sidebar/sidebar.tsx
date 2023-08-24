@@ -9,15 +9,13 @@ import styles from './styles.module.scss';
 
 type Properties = {
   routes: {
-    route: ValueOf<typeof AppRoute>;
-    routeName: string;
+    path: ValueOf<typeof AppRoute>;
+    name: string;
     icon: string;
   }[];
 };
 
 const Sidebar: React.FC<Properties> = ({ routes }) => {
-  const iconSelected = 'icon-selected';
-  const iconStyles = 'icon-container';
   const { pathname } = useLocation();
 
   return (
@@ -34,20 +32,18 @@ const Sidebar: React.FC<Properties> = ({ routes }) => {
           {routes.map((route) => {
             return (
               <button
-                key={route.routeName}
+                key={route.name}
                 className={getValidClassNames(
-                  styles[iconStyles],
-                  pathname === route.route && styles[iconSelected],
+                  styles['icon-container'],
+                  pathname === route.path && styles['icon-selected'],
                 )}
               >
-                <Link to={route.route}>
+                <Link to={route.path}>
                   <span>
-                    <span className="visually-hidden">
-                      Go to {route.routeName}
-                    </span>
+                    <span className="visually-hidden">Go to {route.name}</span>
                     <img
                       src={route.icon}
-                      alt={route.routeName}
+                      alt={route.name}
                       className={styles['icon']}
                     />
                   </span>

@@ -24,9 +24,9 @@ const App: React.FC = () => {
     <div className={styles['app-container']}>
       <Sidebar
         routes={[
-          { route: AppRoute.ROOT, routeName: 'home', icon: home },
-          { route: AppRoute.SIGN_IN, routeName: 'sign-in', icon: home },
-          { route: AppRoute.SIGN_UP, routeName: 'sign-up', icon: home },
+          { path: AppRoute.ROOT, name: 'home', icon: home },
+          { path: AppRoute.SIGN_IN, name: 'sign-in', icon: home },
+          { path: AppRoute.SIGN_UP, name: 'sign-up', icon: home },
         ]}
       />
       <div className={styles['body-container']}>
