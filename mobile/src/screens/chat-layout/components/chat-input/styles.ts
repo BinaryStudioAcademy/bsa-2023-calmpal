@@ -9,6 +9,8 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   input: {
+    position: 'absolute',
+    width: '100%',
     backgroundColor: AppColor.WHITE,
     borderRadius: 12,
     paddingVertical: 10,
@@ -24,7 +26,6 @@ const styles = StyleSheet.create({
     top: 12,
     width: 24,
     height: 24,
-    backgroundColor: AppColor.BLUE_200,
   },
 });
 

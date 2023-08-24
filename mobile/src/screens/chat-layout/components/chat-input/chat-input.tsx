@@ -1,6 +1,7 @@
 import { type FC } from 'react';
 import React from 'react';
 
+import SendButton from '#assets/img/icons/send-button.svg';
 import { Pressable, TextInput, View } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
 import { useState } from '#libs/hooks/hooks';
@@ -46,7 +47,11 @@ const ChatInput: FC<Properties> = ({ setMessages, scrollViewToEnd }) => {
           setText(text);
         }}
       />
-      {text && <Pressable style={styles.button} onPress={handlePress} />}
+      {text && (
+        <Pressable onPress={handlePress}>
+          <SendButton style={styles.button} />
+        </Pressable>
+      )}
     </View>
   );
 };

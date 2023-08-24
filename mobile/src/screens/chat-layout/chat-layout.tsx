@@ -8,6 +8,12 @@ import { MessageItem } from './components/message-item/message-item';
 import { PREVIOUS_USER } from './libs/constants';
 import { styles } from './styles';
 
+type Message = {
+  id: number;
+  isUser: boolean;
+  message: string;
+};
+
 const ChatLayout: FC = () => {
   const mockedData = [
     {
@@ -56,12 +62,6 @@ const ChatLayout: FC = () => {
         'I’ve been234234 experiencing persistent sadness, loss of interest in things I used to enjoy. It’s been affecting my work and relationships too!! 💊❌😵',
     },
   ];
-
-  type Message = {
-    id: number;
-    isUser: boolean;
-    message: string;
-  };
 
   const [messages, setMessages] = useState<Message[]>(mockedData);
   const scrollViewReference = useRef<ScrollView | null>(null);

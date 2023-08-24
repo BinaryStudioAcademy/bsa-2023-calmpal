@@ -5,10 +5,9 @@ import { AppColor } from '#libs/enums/enums';
 const styles = StyleSheet.create({
   chatLayoutWrapper: {
     flex: 1,
-    paddingTop: 50,
-    paddingBottom: 90,
     backgroundColor: AppColor.WHITE,
     alignItems: 'center',
+    paddingBottom: 1,
   },
   header: {
     height: 90,
@@ -31,7 +30,8 @@ const styles = StyleSheet.create({
   },
   divider: {
     height: 1,
-    backgroundColor: AppColor.GRAY_100,
+    width: '100%',
+    backgroundColor: AppColor.GRAY_200,
   },
   chatWrapper: {
     paddingHorizontal: 20,
