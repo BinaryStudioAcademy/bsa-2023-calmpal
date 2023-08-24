@@ -27,7 +27,10 @@ function up(knex: Knex): Promise<void> {
       .onUpdate(RelationRule.CASCADE)
       .onDelete(RelationRule.SET_NULL)
       .notNullable();
-    table.specificType(ColumnName.PREFERENCES, 'text[]').notNullable();
+    table
+      .specificType(ColumnName.PREFERENCES, 'varchar(1000)[]')
+      .notNullable()
+      .defaultTo('{}');
     table
       .dateTime(ColumnName.CREATED_AT)
       .notNullable()
