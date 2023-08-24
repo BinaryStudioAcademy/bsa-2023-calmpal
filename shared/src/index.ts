@@ -7,6 +7,7 @@ export {
 } from './libs/enums/enums.js';
 export {
   ApplicationError,
+  AuthError,
   HTTPError,
   ValidationError,
 } from './libs/exceptions/exceptions.js';
