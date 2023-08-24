@@ -5,7 +5,7 @@ import { type SurveyGetAllResponseDto } from './libs/types/types.js';
 import { SurveyEntity } from './survey.entity.js';
 import { type SurveyRepository } from './survey.repository.js';
 import {
-  type SurveyGetAllItemsResponseDto,
+  type SurveyGetAllItemResponseDto,
   type SurveyRequestDto,
 } from './surveys.js';
 
@@ -30,7 +30,7 @@ class SurveyService implements Service {
 
   public async create(
     payload: SurveyRequestDto,
-  ): Promise<SurveyGetAllItemsResponseDto> {
+  ): Promise<SurveyGetAllItemResponseDto> {
     const item = await this.surveyRepository.create(
       SurveyEntity.initializeNew({
         userId: payload.userId,
