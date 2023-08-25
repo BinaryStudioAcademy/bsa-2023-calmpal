@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
-import { FlatList } from 'react-native';
+import { ScrollView } from 'react-native';
 
 import { Input, View } from '#libs/components/components';
 import { useAppForm } from '#libs/hooks/hooks';
 
-import { ChatItem } from './components/chat-item';
+import { ChatItem, ChatLink } from './components/components';
 import data from './data.json';
 import { styles } from './styles';
-
-type chatItem = {
-  id: string;
-  title: string;
-};
 
 const Chat: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -21,25 +16,28 @@ const Chat: React.FC = () => {
   });
 
   return (
-    <View style={styles.container}>
-      <Input
-        control={control}
-        errors={errors}
-        label=""
-        name="search"
-        placeholder="Search topic"
-        setSearchQuery={setSearchQuery}
-        style={styles.input}
-      />
+    <View style={styles.containerWrapper}>
+      <View style={styles.container}>
+        <Input
+          control={control}
+          errors={errors}
+          name="search"
+          placeholder="Search topic"
+          setSearchQuery={setSearchQuery}
+          style={styles.input}
+        />
+        <ScrollView>
+          {data
+            .filter((item) =>
+              item.title.toLowerCase().includes(searchQuery.toLowerCase()),
+            )
+            .map((item) => (
+              <ChatItem chatItem={item} key={item.id} />
+            ))}
+        </ScrollView>
 
-      <FlatList
-        data={data.filter((item) =>
-          item.title.toLowerCase().includes(searchQuery.toLowerCase()),
-        )}
-        renderItem={({ item }: { item: chatItem }): React.ReactElement => {
-          return <ChatItem chatItem={item} />;
-        }}
-      />
+        <ChatLink />
+      </View>
     </View>
   );
 };
