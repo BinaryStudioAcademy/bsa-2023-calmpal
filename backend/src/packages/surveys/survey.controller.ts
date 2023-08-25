@@ -11,6 +11,43 @@ import { AuthApiPath } from '#packages/auth/auth.js';
 import { type SurveyService } from './survey.service.js';
 import { type SurveyRequestDto } from './surveys.js';
 
+/**
+ * @swagger
+ * components:
+ *    schemas:
+ *      SurveyRequest:
+ *        type: object
+ *        properties:
+ *          userId:
+ *            type: number
+ *            format: number
+ *            minimum: 1
+ *          preferences:
+ *            type: array
+ *            items:
+ *              type: string
+ *      SurveyResponse:
+ *        type: object
+ *        properties:
+ *          id:
+ *            type: number
+ *            format: number
+ *            minimum: 1
+ *          userId:
+ *            type: number
+ *            format: number
+ *            minimum: 1
+ *          preferences:
+ *            type: array
+ *            items:
+ *              type: string
+ *          createdAt:
+ *             type: string
+ *             format: date-time
+ *          updatedAt:
+ *             type: string
+ *             format: date-time
+ */
 class SurveyController extends BaseController {
   private surveyService: SurveyService;
 
@@ -30,6 +67,30 @@ class SurveyController extends BaseController {
         ),
     });
   }
+
+  /**
+   * @swagger
+   * /auth/sign-up/survey:
+   *    post:
+   *      description: Create a new survey
+   *      requestBody:
+   *        description: Survey data
+   *        required: true
+   *        content:
+   *          application/json:
+   *            schema:
+   *              $ref: '#/components/schemas/SurveyRequest'
+   *      responses:
+   *        201:
+   *          description: Successful operation
+   *          content:
+   *            application/json:
+   *              schema:
+   *                type: object
+   *                properties:
+   *                  message:
+   *                    $ref: '#/components/schemas/SurveyResponse'
+   */
 
   private async create(
     options: APIHandlerOptions<{
