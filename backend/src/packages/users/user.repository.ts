@@ -66,7 +66,7 @@ class UserRepository implements Repository {
   }
 
   public async create(entity: UserEntity): Promise<UserEntity> {
-    const { email, passwordSalt, passwordHash, fullName } =
+    const { email, passwordSalt, passwordHash, fullName, isSurveyCompleted } =
       entity.toNewObject();
     const user = await this.userModel
       .query()
@@ -76,6 +76,7 @@ class UserRepository implements Repository {
         passwordHash,
         [UsersRelation.DETAILS]: {
           fullName,
+          isSurveyCompleted,
         },
       } as UserCreateQueryPayload)
       .withGraphJoined(UsersRelation.DETAILS)
@@ -92,6 +93,13 @@ class UserRepository implements Repository {
       fullName: user.details?.fullName ?? '',
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
     });
+  }
+
+  public async updateIsSurveyCompleted(id: number): Promise<void> {
+    const user = await this.userModel.query().findById(id);
+    await user
+      ?.$relatedQuery(UsersRelation.DETAILS)
+      .patch({ isSurveyCompleted: true });
   }
 
   public update(): ReturnType<Repository['update']> {

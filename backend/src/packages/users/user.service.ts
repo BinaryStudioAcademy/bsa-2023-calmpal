@@ -89,6 +89,10 @@ class UserService implements Service {
     };
   }
 
+  public async updateIsSurveyCompleted(id: number): Promise<void> {
+    await this.userRepository.updateIsSurveyCompleted(id);
+  }
+
   public update(): ReturnType<Service['update']> {
     return Promise.resolve(null);
   }
