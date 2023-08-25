@@ -22,10 +22,7 @@ import styles from './styles.module.scss';
 const App: React.FC = () => {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
-  const { authenticatedUserDataStatus } = useAppSelector(({ users, auth }) => ({
-    users: users.users,
-    dataStatus: users.dataStatus,
-    authenticatedUser: auth.authenticatedUser,
+  const { authenticatedUserDataStatus } = useAppSelector(({ auth }) => ({
     authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
   }));
 
