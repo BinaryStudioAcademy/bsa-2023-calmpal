@@ -19,6 +19,29 @@ class UserRepository implements Repository {
     return Promise.resolve(null);
   }
 
+  public async findById(id: number): Promise<UserEntity | null> {
+    const user = await this.userModel
+      .query()
+      .withGraphJoined(UsersRelation.DETAILS)
+      .findById(id)
+      .castTo<UserCreateQueryResponse | undefined>()
+      .execute();
+
+    if (!user) {
+      return null;
+    }
+
+    return UserEntity.initialize({
+      id: user.id,
+      email: user.email,
+      passwordHash: user.passwordHash,
+      passwordSalt: user.passwordSalt,
+      createdAt: new Date(user.createdAt),
+      updatedAt: new Date(user.updatedAt),
+      fullName: user.details?.fullName ?? '',
+    });
+  }
+
   public async findAll(): Promise<UserEntity[]> {
     const users = await this.userModel
       .query()
@@ -26,6 +49,7 @@ class UserRepository implements Repository {
       .withGraphJoined(UsersRelation.DETAILS)
       .castTo<UserCreateQueryResponse[]>()
       .execute();
+
     return users.map((user) => {
       return UserEntity.initialize({
         id: user.id,
@@ -55,6 +79,7 @@ class UserRepository implements Repository {
       .withGraphJoined(UsersRelation.DETAILS)
       .castTo<UserCreateQueryResponse>()
       .execute();
+
     return UserEntity.initialize({
       id: user.id,
       email: user.email,
