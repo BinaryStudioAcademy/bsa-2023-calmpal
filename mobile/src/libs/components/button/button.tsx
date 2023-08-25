@@ -26,8 +26,8 @@ const Button: React.FC<Properties> = ({
     <Pressable
       style={[
         styles.button,
-        isDisabled && styles.buttonDisabled,
         isSurvey && styles.buttonSurvey,
+        isDisabled && styles.buttonDisabled,
       ]}
       onPress={handleOnPress}
       disabled={isDisabled}
@@ -35,8 +35,8 @@ const Button: React.FC<Properties> = ({
       <Text
         style={[
           styles.label,
-          isDisabled && styles.labelDisabled,
           isSurvey && styles.labelSurvey,
+          isDisabled && styles.labelDisabled,
         ]}
       >
         {label}

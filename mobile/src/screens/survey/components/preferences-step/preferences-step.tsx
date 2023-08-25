@@ -21,7 +21,7 @@ const EMPTY_ARRAY_LENGTH = 0;
 
 const PreferencesStep = (): JSX.Element => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  // const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [otherText, setOtherText] = useState<string>('');
   const [isOtherSelected, setIsOtherSelected] = useState<boolean>(false);
 
@@ -39,12 +39,12 @@ const PreferencesStep = (): JSX.Element => {
   };
 
   const toggleCategorySelected = (category: string): void => {
-    if (selectedItems.includes(category)) {
-      setSelectedItems(
-        selectedItems.filter((selectedItem) => selectedItem !== category),
+    if (selectedCategories.includes(category)) {
+      setSelectedCategories(
+        selectedCategories.filter((selectedItem) => selectedItem !== category),
       );
     } else {
-      setSelectedItems([...selectedItems, category]);
+      setSelectedCategories([...selectedCategories, category]);
       if (category === 'Other') {
         setIsOtherSelected(true);
       }
@@ -52,7 +52,7 @@ const PreferencesStep = (): JSX.Element => {
   };
 
   const handleContinue = (): void => {
-    if (selectedItems.includes('Other') && otherText.trim() === '') {
+    if (selectedCategories.includes('Other') && otherText.trim() === '') {
       return;
     }
 
@@ -91,8 +91,11 @@ const PreferencesStep = (): JSX.Element => {
           style={styles.otherTextInput}
         />
       )}
-
-      <Button label="Continue" onPress={handleContinue} isSurvey />
+      {selectedCategories.length === EMPTY_ARRAY_LENGTH ? (
+        <Button label="Continue" onPress={handleContinue} isSurvey isDisabled />
+      ) : (
+        <Button label="Continue" onPress={handleContinue} isSurvey />
+      )}
     </ScrollView>
   );
 };
