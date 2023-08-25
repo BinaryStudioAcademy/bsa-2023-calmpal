@@ -4,7 +4,10 @@ import {
   AbstractModel,
   DatabaseTableName,
 } from '#libs/packages/database/database.js';
-import { UserModel } from '#packages/users/user.model.js';
+import { UserDetailsTableColumn } from '#packages/users/libs/enums/enums.js';
+import { UserDetailsModel } from '#packages/users/user-details.model.js';
+
+import { SurveysTableColumn } from './libs/enums/enums.js';
 
 class SurveyModel extends AbstractModel {
   public userId!: number;
@@ -17,12 +20,12 @@ class SurveyModel extends AbstractModel {
 
   public static get relationMappings(): RelationMappings {
     return {
-      users: {
+      details: {
         relation: Model.HasOneRelation,
-        modelClass: UserModel,
+        modelClass: UserDetailsModel,
         join: {
-          from: `${DatabaseTableName.SURVEYS}.user_id`,
-          to: `${DatabaseTableName.USERS}.id`,
+          from: `${DatabaseTableName.SURVEYS}.${SurveysTableColumn.USER_ID}`,
+          to: `${DatabaseTableName.USER_DETAILS}.${UserDetailsTableColumn.USER_ID}`,
         },
       },
     };

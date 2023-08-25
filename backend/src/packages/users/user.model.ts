@@ -4,7 +4,6 @@ import {
   AbstractModel,
   DatabaseTableName,
 } from '#libs/packages/database/database.js';
-import { SurveyModel } from '#packages/surveys/survey.model.js';
 
 import {
   UserDetailsTableColumn,
@@ -31,14 +30,6 @@ class UserModel extends AbstractModel {
         join: {
           from: `${DatabaseTableName.USERS}.${UsersTableColumn.ID}`,
           to: `${DatabaseTableName.USER_DETAILS}.${UserDetailsTableColumn.USER_ID}`,
-        },
-      },
-      surveys: {
-        relation: Model.HasOneRelation,
-        modelClass: SurveyModel,
-        join: {
-          from: `${DatabaseTableName.USERS}.${UsersTableColumn.ID}`,
-          to: `${DatabaseTableName.SURVEYS}.user_id`,
         },
       },
     };

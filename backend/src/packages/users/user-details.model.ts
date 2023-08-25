@@ -4,6 +4,8 @@ import {
   AbstractModel,
   DatabaseTableName,
 } from '#libs/packages/database/database.js';
+import { SurveysTableColumn } from '#packages/surveys/libs/enums/enums.js';
+import { SurveyModel } from '#packages/surveys/survey.model.js';
 
 import {
   UserDetailsTableColumn,
@@ -26,6 +28,14 @@ class UserDetailsModel extends AbstractModel {
         join: {
           from: `${DatabaseTableName.USER_DETAILS}.${UserDetailsTableColumn.USER_ID}`,
           to: `${DatabaseTableName.USERS}.${UsersTableColumn.ID}`,
+        },
+      },
+      surveys: {
+        relation: Model.HasOneRelation,
+        modelClass: SurveyModel,
+        join: {
+          from: `${DatabaseTableName.USERS}.${UserDetailsTableColumn.USER_ID}`,
+          to: `${DatabaseTableName.SURVEYS}.${SurveysTableColumn.USER_ID}`,
         },
       },
     };
