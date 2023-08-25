@@ -49,7 +49,6 @@ erDiagram
       int user_id FK
       varchar full_name
       int avatar_id FK "may be null if user has no avatar"
-      text survey
       boolean is_survey_completed
    }
    files {
