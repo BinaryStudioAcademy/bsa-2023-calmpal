@@ -17,6 +17,9 @@ type EnvironmentSchema = {
     SECRET_KEY: string;
     ALG: string;
   };
+  ENCRYPT: {
+    NUMBER_OF_ROUNDS: number;
+  };
 };
 
 export { type EnvironmentSchema };
