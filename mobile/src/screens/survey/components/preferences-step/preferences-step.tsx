@@ -66,7 +66,7 @@ const PreferencesStep: React.FC = () => {
         <SurveyCategory
           key={category}
           category={category}
-          selected={selectedCategories.includes(category)}
+          isSelected={selectedCategories.includes(category)}
           onSelect={(): void => {
             handleCategorySelect(category);
           }}
