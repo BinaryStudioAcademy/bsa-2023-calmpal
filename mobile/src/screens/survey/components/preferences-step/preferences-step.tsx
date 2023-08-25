@@ -21,7 +21,6 @@ const EMPTY_ARRAY_LENGTH = 0;
 
 const PreferencesStep = (): JSX.Element => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  // const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [otherText, setOtherText] = useState<string>('');
   const [isOtherSelected, setIsOtherSelected] = useState<boolean>(false);
 
@@ -53,10 +52,6 @@ const PreferencesStep = (): JSX.Element => {
 
   const handleContinue = (): void => {
     if (selectedCategories.includes('Other') && otherText.trim() === '') {
-      return;
-    }
-
-    if (selectedCategories.length === EMPTY_ARRAY_LENGTH) {
       return;
     }
   };
