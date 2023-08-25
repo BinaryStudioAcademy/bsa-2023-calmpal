@@ -1,1 +1,1 @@
-export { NotificationType } from './notification.enum';
+export { NotificationType } from './notification-type.enum';

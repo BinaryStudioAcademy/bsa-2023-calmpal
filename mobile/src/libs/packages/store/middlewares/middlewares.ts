@@ -5,7 +5,7 @@ import {
   type Middleware,
 } from '@reduxjs/toolkit';
 
-import { NotificationType } from '#libs/enums/notification/notification.enum';
+import { NotificationType } from '#libs/enums/notification/notification-type.enum';
 import { notify } from '#slices/notifications/actions';
 
 const handleError: Middleware = (store) => {
