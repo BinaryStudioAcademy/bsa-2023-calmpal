@@ -1,3 +1,4 @@
+import { encrypt } from '#libs/packages/encrypt/encrypt.js';
 import {
   type UserSignInRequestDto,
   type UserSignInResponseDto,
@@ -20,9 +21,22 @@ class AuthService {
   }
 
   public async verifyLoginCredentials({
-    email, // password, --> should be used for password comparison
+    email,
+    password, // password, --> should be used for password comparison
   }: UserSignInRequestDto): Promise<UserSignInResponseDto | null> {
-    return await this.userService.findByEmail(email);
+    const user = await this.userService.findByEmail(email);
+
+    if (!user) {
+      return null;
+    }
+
+    const pswrdCompare = await encrypt.compare(password, user.passwordHash);
+
+    if (!pswrdCompare) {
+      return null;
+    }
+
+    return user;
   }
 
   public async signIn(id: number): Promise<UserSignInResponseDto | null> {

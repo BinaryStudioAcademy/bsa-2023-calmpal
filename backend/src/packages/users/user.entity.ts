@@ -97,6 +97,7 @@ class UserEntity implements Entity {
     fullName: string;
     createdAt: Date;
     updatedAt: Date;
+    passwordHash: string;
   } {
     return {
       id: this.id as number,
@@ -104,6 +105,7 @@ class UserEntity implements Entity {
       fullName: this.fullName,
       createdAt: this.createdAt as Date,
       updatedAt: this.updatedAt as Date,
+      passwordHash: this.passwordHash,
     };
   }
 
