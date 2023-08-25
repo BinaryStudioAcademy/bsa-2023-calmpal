@@ -46,7 +46,8 @@ class UserService implements Service {
   public async create(
     payload: UserSignUpRequestDto,
   ): Promise<UserSignUpResponseDto> {
-    const passwordSalt = await this.encryptService.generateSalt();
+    const rounds = 10;
+    const passwordSalt = await this.encryptService.generateSalt(rounds);
     const passwordHash = await this.encryptService.generateHash(
       payload.password,
       passwordSalt,

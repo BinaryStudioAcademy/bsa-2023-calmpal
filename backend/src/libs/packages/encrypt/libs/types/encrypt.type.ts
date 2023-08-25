@@ -1,5 +1,5 @@
 type Encrypt = {
-  generateSalt: (saltRounds?: number) => Promise<string>;
+  generateSalt: (saltRounds: number) => Promise<string>;
   generateHash: (data: string, salt: string) => Promise<string>;
 };
 
