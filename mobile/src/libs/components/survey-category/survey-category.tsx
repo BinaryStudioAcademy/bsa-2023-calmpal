@@ -12,7 +12,7 @@ type SurveyCategoryProperties = {
 
 const SurveyCategory: React.FC<SurveyCategoryProperties> = ({
   category,
-  isSelected: selected,
+  isSelected,
   onSelect,
 }) => {
   const handleSelect = (): void => {
@@ -25,13 +25,13 @@ const SurveyCategory: React.FC<SurveyCategoryProperties> = ({
         <View
           style={[
             styles.categoryButton,
-            selected && styles.selectedCategoryButton,
+            isSelected && styles.selectedCategoryButton,
           ]}
         >
           <Text
             style={[
               styles.categoryText,
-              selected && styles.selectedCategoryText,
+              isSelected && styles.selectedCategoryText,
             ]}
           >
             {category}
