@@ -95,7 +95,7 @@ class AuthController extends BaseController {
   ): Promise<APIHandlerResponse> {
     return {
       status: HTTPCode.OK,
-      payload: await this.authService.getUser(options.user.id),
+      payload: await this.authService.getAuthenticatedUser(options.user.id),
     };
   }
 }

@@ -18,7 +18,7 @@ class AuthService {
     return this.userService.create(userRequestDto);
   }
 
-  public getUser(id: number): Promise<UserAuthResponseDto | null> {
+  public getAuthenticatedUser(id: number): Promise<UserAuthResponseDto | null> {
     return this.userService.findById(id);
   }
 }
