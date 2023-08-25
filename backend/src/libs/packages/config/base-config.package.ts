@@ -89,6 +89,13 @@ class BaseConfig implements Config {
           default: 'HS256',
         },
       },
+      ENCRYPT: {
+        NUMBER_OF_ROUNDS: {
+          doc: 'Default number of rounds for salt generation',
+          format: Number,
+          default: 10,
+        },
+      },
     });
   }
 }
