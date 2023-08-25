@@ -33,7 +33,7 @@ const tabNavigatorOptions = ({
 }: {
   route: RouteProp<TabNavigationParameterList>;
 }): TabNavigatorOptions => ({
-  tabBarActiveTintColor: AppColor.BLUE_200,
+  tabBarActiveTintColor: AppColor.BLUE_300,
   tabBarIcon: ({ color }: { color: string }): React.ReactNode => {
     switch (route.name) {
       case MainScreenName.HOME: {
