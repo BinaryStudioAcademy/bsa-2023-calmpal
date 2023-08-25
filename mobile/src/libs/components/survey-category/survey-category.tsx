@@ -1,17 +1,18 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+
+import { Text, TouchableOpacity, View } from '#libs/components/components';
 
 import { styles } from './styles';
 
 type SurveyCategoryProperties = {
   category: string;
-  selected: boolean;
+  isSelected: boolean;
   onSelect: (category: string) => void;
 };
 
 const SurveyCategory: React.FC<SurveyCategoryProperties> = ({
   category,
-  selected,
+  isSelected: selected,
   onSelect,
 }) => {
   const handleSelect = (): void => {
