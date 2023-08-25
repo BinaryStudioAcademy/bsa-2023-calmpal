@@ -1,3 +1,7 @@
+import {
+  IncorrectPasswordError,
+  UserNotFoundError,
+} from '#libs/exceptions/exceptions.js';
 import { encrypt } from '#libs/packages/encrypt/encrypt.js';
 import {
   type UserSignInRequestDto,
@@ -22,18 +26,22 @@ class AuthService {
 
   public async verifyLoginCredentials({
     email,
-    password, // password, --> should be used for password comparison
+    password,
   }: UserSignInRequestDto): Promise<UserSignInResponseDto | null> {
     const user = await this.userService.findByEmail(email);
 
     if (!user) {
-      return null;
+      throw new UserNotFoundError({
+        message: 'User with these credentials was not found',
+      });
     }
 
     const pswrdCompare = await encrypt.compare(password, user.passwordHash);
 
     if (!pswrdCompare) {
-      return null;
+      throw new IncorrectPasswordError({
+        message: 'Incorrect password',
+      });
     }
 
     return user;

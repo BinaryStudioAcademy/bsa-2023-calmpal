@@ -100,13 +100,6 @@ class AuthController extends BaseController {
   ): Promise<APIHandlerResponse> {
     const user = await this.authService.verifyLoginCredentials(options.body);
 
-    if (!user) {
-      return {
-        status: HTTPCode.NOT_FOUND,
-        payload: { message: 'User with these credentials was not found' },
-      };
-    }
-
     return {
       status: HTTPCode.OK,
       payload: user,
