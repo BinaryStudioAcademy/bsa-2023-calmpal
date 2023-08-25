@@ -1,4 +1,4 @@
-type UserCreateQueryResponse = {
+type UserCommonQueryResponse = {
   id: number;
   createdAt: string;
   updatedAt: string;
@@ -10,4 +10,4 @@ type UserCreateQueryResponse = {
   };
 };
 
-export { type UserCreateQueryResponse };
+export { type UserCommonQueryResponse };

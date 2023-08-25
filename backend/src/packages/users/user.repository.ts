@@ -4,8 +4,8 @@ import { type UserModel } from '#packages/users/user.model.js';
 
 import { UsersRelation } from './libs/enums/enums.js';
 import {
+  type UserCommonQueryResponse,
   type UserCreateQueryPayload,
-  type UserCreateQueryResponse,
 } from './libs/types/types.js';
 
 class UserRepository implements Repository {
@@ -24,7 +24,7 @@ class UserRepository implements Repository {
       .query()
       .withGraphJoined(UsersRelation.DETAILS)
       .findById(id)
-      .castTo<UserCreateQueryResponse | undefined>()
+      .castTo<UserCommonQueryResponse | undefined>()
       .execute();
 
     if (!user) {
@@ -47,7 +47,7 @@ class UserRepository implements Repository {
       .query()
       .select()
       .withGraphJoined(UsersRelation.DETAILS)
-      .castTo<UserCreateQueryResponse[]>()
+      .castTo<UserCommonQueryResponse[]>()
       .execute();
 
     return users.map((user) => {
@@ -77,7 +77,7 @@ class UserRepository implements Repository {
         },
       } as UserCreateQueryPayload)
       .withGraphJoined(UsersRelation.DETAILS)
-      .castTo<UserCreateQueryResponse>()
+      .castTo<UserCommonQueryResponse>()
       .execute();
 
     return UserEntity.initialize({
