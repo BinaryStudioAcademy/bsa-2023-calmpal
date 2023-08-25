@@ -17,11 +17,11 @@ import { styles } from './styles';
 type Properties<T extends FieldValues> = {
   control: Control<T, null>;
   errors: FieldErrors<T>;
-  label: string;
+  label?: string;
   name: FieldPath<T>;
   placeholder: string;
-  style?: StyleProp<ViewStyle>;
   setSearchQuery?: Dispatch<SetStateAction<string>>;
+  style?: StyleProp<ViewStyle>;
 };
 
 const Input = <T extends FieldValues>({
@@ -30,8 +30,8 @@ const Input = <T extends FieldValues>({
   label,
   name,
   placeholder,
-  style,
   setSearchQuery,
+  style,
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
 
@@ -49,13 +49,14 @@ const Input = <T extends FieldValues>({
 
   return (
     <View>
-      <Text>{label}</Text>
+      {label ? <Text>{label}</Text> : null}
       <TextInput
-        onChangeText={handleInputChange}
-        value={value}
         onBlur={onBlur}
+        onChangeText={handleInputChange}
         placeholder={placeholder}
+        placeholderTextColor={styles.placeholder.color}
         style={[styles.input, style]}
+        value={value}
       />
       <Text>{hasError && (error as string)}</Text>
     </View>
