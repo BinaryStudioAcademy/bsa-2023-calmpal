@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import {
   Button,
@@ -6,6 +6,7 @@ import {
   SurveyCategory,
   TextInput,
 } from '#libs/components/components';
+import { useState } from '#libs/hooks/hooks';
 
 import { styles } from './styles';
 
@@ -19,7 +20,7 @@ const categoryNames = [
 ];
 const EMPTY_ARRAY_LENGTH = 0;
 
-const PreferencesStep = (): JSX.Element => {
+const PreferencesStep: React.FC = () => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [otherText, setOtherText] = useState<string>('');
   const [isOtherSelected, setIsOtherSelected] = useState<boolean>(false);
@@ -31,7 +32,7 @@ const PreferencesStep = (): JSX.Element => {
 
     setSelectedCategories((previousSelected) => {
       return previousSelected.includes(category)
-        ? previousSelected.filter((item) => item !== category)
+        ? previousSelected.filter((selectedItem) => selectedItem !== category)
         : [...previousSelected, category];
     });
     toggleCategorySelected(category);
