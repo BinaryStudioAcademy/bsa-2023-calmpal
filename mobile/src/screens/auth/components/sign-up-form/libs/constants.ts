@@ -4,6 +4,7 @@ const USER_SIGN_UP_DEFAULT_VALUES: UserSignUpRequestDto = {
   email: '',
   fullName: '',
   password: '',
+  fullName: '',
 };
 
 export { USER_SIGN_UP_DEFAULT_VALUES };
