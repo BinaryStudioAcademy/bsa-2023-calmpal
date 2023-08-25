@@ -4,7 +4,7 @@ type DefaultApiHandlerOptions = {
   body?: unknown;
   query?: unknown;
   params?: unknown;
-  user?: UserAuthResponseDto | null;
+  user?: UserAuthResponseDto;
 };
 
 type APIHandlerOptions<
