@@ -92,7 +92,7 @@ const PreferencesStep = (): JSX.Element => {
         />
       )}
 
-      <Button label="Continue" onPress={handleContinue} />
+      <Button label="Continue" onPress={handleContinue} isSurvey />
     </ScrollView>
   );
 };
