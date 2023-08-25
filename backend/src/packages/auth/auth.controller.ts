@@ -90,6 +90,23 @@ class AuthController extends BaseController {
     };
   }
 
+  /**
+   * @swagger
+   * /auth/authenticated-user:
+   *    get:
+   *      description: Returns an authenticated user
+   *      responses:
+   *        200:
+   *          description: Successful operation
+   *          content:
+   *            application/json:
+   *              schema:
+   *                type: object
+   *                properties:
+   *                  message:
+   *                    type: object
+   *                    $ref: '#/components/schemas/User'
+   */
   private async getAuthenticatedUser(
     options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
   ): Promise<APIHandlerResponse> {
