@@ -40,7 +40,6 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
           errors={errors}
           label="Email"
           name="email"
-          secure={false}
           placeholder="Enter your email"
         />
         <Input
@@ -48,7 +47,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
           errors={errors}
           label="Password"
           name="password"
-          secure={true}
+          isSecure
           placeholder="Enter your password"
         />
         <Button label="Sign in" onPress={handleFormSubmit} />

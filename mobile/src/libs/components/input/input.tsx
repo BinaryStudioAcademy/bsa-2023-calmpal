@@ -17,7 +17,7 @@ type Properties<T extends FieldValues> = {
   errors: FieldErrors<T>;
   label: string;
   name: FieldPath<T>;
-  secure: boolean;
+  isSecure?: boolean;
   placeholder: string;
 };
 
@@ -26,7 +26,7 @@ const Input = <T extends FieldValues>({
   errors,
   label,
   name,
-  secure,
+  isSecure = false,
   placeholder,
 }: Properties<T>): JSX.Element => {
   const [isFocused, setIsFocused] = useState(false);
@@ -54,7 +54,7 @@ const Input = <T extends FieldValues>({
         value={value}
         onFocus={handleFocus}
         onBlur={handeBlur}
-        secureTextEntry={secure}
+        secureTextEntry={isSecure}
         placeholder={placeholder}
         style={[
           styles.input,
