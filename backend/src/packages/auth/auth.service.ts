@@ -4,6 +4,7 @@ import {
 } from '#libs/exceptions/exceptions.js';
 import { encrypt } from '#libs/packages/encrypt/encrypt.js';
 import {
+  type UserAuthResponseDto,
   type UserSignInRequestDto,
   type UserSignInResponseDto,
   type UserSignUpRequestDto,
@@ -49,6 +50,10 @@ class AuthService {
 
   public async signIn(id: number): Promise<UserSignInResponseDto | null> {
     return await this.userService.findById(id);
+  }
+
+  public getAuthenticatedUser(id: number): Promise<UserAuthResponseDto | null> {
+    return this.userService.findById(id);
   }
 }
 
