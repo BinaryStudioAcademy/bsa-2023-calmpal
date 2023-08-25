@@ -1,12 +1,18 @@
+import { type ValueOf } from 'react-native-gesture-handler/lib/typescript/typeUtils';
 import Toast from 'react-native-toast-message';
 
+import { type NotificationType } from '#libs/enums/enums';
+
 type NotificationPayload = {
-  type: string;
+  type: ValueOf<typeof NotificationType>;
   message: string;
 };
 
 class NotificationService {
-  private show = (type: string, message: string): void => {
+  private show = (
+    type: ValueOf<typeof NotificationType>,
+    message: string,
+  ): void => {
     let titleMessage = '';
 
     switch (type) {
@@ -34,7 +40,7 @@ class NotificationService {
     });
   };
 
-  public notification({ message, type }: NotificationPayload): void {
+  public notification({ type, message }: NotificationPayload): void {
     this.show(type, message);
   }
 }

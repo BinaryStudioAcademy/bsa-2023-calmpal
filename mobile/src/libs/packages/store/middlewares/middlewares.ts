@@ -14,7 +14,7 @@ const handleError: Middleware = ({ dispatch }) => {
       const result = next(action);
 
       if (isRejected(action)) {
-        const message = action.error as string;
+        const message = action.error.message as string;
         dispatch(notify({ type: NotificationType.ERROR, message }));
       }
 
