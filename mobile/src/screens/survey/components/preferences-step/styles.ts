@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderColor: AppColor.WHITE,
     color: AppColor.BLUE_300,
+    fontSize: 16,
   },
   placeholder: {
     color: AppColor.WHITE,
