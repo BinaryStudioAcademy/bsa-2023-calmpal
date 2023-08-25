@@ -1,4 +1,3 @@
-export { type UserColumns } from './user-columns.type.js';
 export { type UserCreateQueryPayload } from './user-create-query-payload.js';
 export { type UserCreateQueryResponse } from './user-create-query-response.js';
 export {
