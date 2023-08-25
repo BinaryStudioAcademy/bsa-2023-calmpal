@@ -6,7 +6,10 @@ import {
 } from '#libs/packages/controller/controller.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
-import { type UserSignUpRequestDto } from '#packages/users/users.js';
+import {
+  type UserAuthResponseDto,
+  type UserSignUpRequestDto,
+} from '#packages/users/users.js';
 import { userSignUpValidationSchema } from '#packages/users/users.js';
 
 import { type AuthService } from './auth.service.js';
@@ -30,6 +33,17 @@ class AuthController extends BaseController {
         this.signUp(
           options as APIHandlerOptions<{
             body: UserSignUpRequestDto;
+          }>,
+        ),
+    });
+
+    this.addRoute({
+      path: AuthApiPath.AUTHENTICATED_USER,
+      method: 'GET',
+      handler: (options) =>
+        this.getUser(
+          options as APIHandlerOptions<{
+            user: UserAuthResponseDto;
           }>,
         ),
     });
@@ -73,6 +87,15 @@ class AuthController extends BaseController {
     return {
       status: HTTPCode.CREATED,
       payload: await this.authService.signUp(options.body),
+    };
+  }
+
+  private async getUser(
+    options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
+  ): Promise<APIHandlerResponse> {
+    return {
+      status: HTTPCode.OK,
+      payload: await this.authService.getUser(options.user.id),
     };
   }
 }
