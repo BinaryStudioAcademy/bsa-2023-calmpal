@@ -1,6 +1,9 @@
 import Toast from 'react-native-toast-message';
 
-import { NotificationType } from '#libs/enums/enums';
+type NotificationPayload = {
+  type: string;
+  message: string;
+};
 
 class NotificationService {
   private show = (type: string, message: string): void => {
@@ -31,8 +34,8 @@ class NotificationService {
     });
   };
 
-  public error(message: string): void {
-    this.show(NotificationType.ERROR, message);
+  public notification({ message, type }: NotificationPayload): void {
+    this.show(type, message);
   }
 }
 

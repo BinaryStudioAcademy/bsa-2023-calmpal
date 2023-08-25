@@ -1,6 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
 
-import { type NotificationType } from '#libs/enums/notification/notification-type.enum';
 import { NotificationService } from '#libs/packages/services/notification-service';
 
 import { name as sliceName } from './notifications.slice';
@@ -8,14 +7,14 @@ import { name as sliceName } from './notifications.slice';
 const notificationsService = new NotificationService();
 
 type NotificationPayload = {
-  type: typeof NotificationType.ERROR;
+  type: string;
   message: string;
 };
 
 const notify = createAction(
   `${sliceName}/notify`,
   (notificationPayload: NotificationPayload) => {
-    notificationsService.error(JSON.stringify(notificationPayload));
+    notificationsService.notification(notificationPayload);
 
     return { payload: notificationPayload };
   },
