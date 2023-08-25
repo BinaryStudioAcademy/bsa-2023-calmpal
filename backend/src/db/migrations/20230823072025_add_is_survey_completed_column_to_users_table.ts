@@ -1,6 +1,6 @@
 import { type Knex } from 'knex';
 
-const TABLE_NAME = 'users';
+const TABLE_NAME = 'user_details';
 
 const ColumnName = {
   IS_SURVEY_COMPLETED: 'is_survey_completed',
