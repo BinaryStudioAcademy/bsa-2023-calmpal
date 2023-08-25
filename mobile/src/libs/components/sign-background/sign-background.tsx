@@ -1,4 +1,4 @@
-import React, { type FC, type ReactNode } from 'react';
+import React, { type ReactNode } from 'react';
 import { Image, type ImageSourcePropType } from 'react-native';
 
 import bottomBubbleImg from '#assets/bottom-bubble.png';
@@ -12,7 +12,7 @@ type Properties = {
   children: ReactNode;
 };
 
-const SignBackground: FC<Properties> = ({ children }) => {
+const SignBackground: React.FC<Properties> = ({ children }) => {
   return (
     <View style={styles.wrapper}>
       <View style={styles.backgroundWrapper}>
