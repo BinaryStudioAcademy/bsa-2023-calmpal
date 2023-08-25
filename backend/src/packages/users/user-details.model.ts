@@ -16,6 +16,8 @@ import { UserModel } from './user.model.js';
 class UserDetailsModel extends AbstractModel {
   public fullName!: string;
 
+  public isSurveyCompleted!: boolean;
+
   public static override get tableName(): string {
     return DatabaseTableName.USER_DETAILS;
   }

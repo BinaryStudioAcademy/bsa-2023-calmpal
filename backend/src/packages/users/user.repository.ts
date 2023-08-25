@@ -39,6 +39,7 @@ class UserRepository implements Repository {
       createdAt: new Date(user.createdAt),
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
+      isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
     });
   }
 
@@ -59,6 +60,7 @@ class UserRepository implements Repository {
         createdAt: new Date(user.createdAt),
         updatedAt: new Date(user.updatedAt),
         fullName: user.details?.fullName ?? '',
+        isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
       });
     });
   }
@@ -88,6 +90,7 @@ class UserRepository implements Repository {
       createdAt: new Date(user.createdAt),
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
+      isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
     });
   }
 
