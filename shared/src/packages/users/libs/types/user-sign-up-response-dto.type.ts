@@ -1,4 +1,4 @@
-import { type UserAuthResponseDto } from './user-auth-response-dto.types.js';
+import { type UserAuthResponseDto } from './types.js';
 
 type UserSignUpResponseDto = {
   user: UserAuthResponseDto;
