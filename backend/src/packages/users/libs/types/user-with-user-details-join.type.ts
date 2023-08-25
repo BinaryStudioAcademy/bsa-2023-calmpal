@@ -1,7 +1,7 @@
 type UserWithUserDetailsJoin = {
   id: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   email: string;
   passwordSalt: string;
   passwordHash: string;

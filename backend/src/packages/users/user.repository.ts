@@ -32,8 +32,8 @@ class UserRepository implements Repository {
         email: user.email,
         passwordHash: user.passwordHash,
         passwordSalt: user.passwordSalt,
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt,
+        createdAt: new Date(user.createdAt),
+        updatedAt: new Date(user.updatedAt),
         fullName: user.details?.fullName ?? '',
       });
     });
@@ -60,8 +60,8 @@ class UserRepository implements Repository {
       email: user.email,
       passwordHash: user.passwordHash,
       passwordSalt: user.passwordSalt,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
+      createdAt: new Date(user.createdAt),
+      updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
     });
   }
