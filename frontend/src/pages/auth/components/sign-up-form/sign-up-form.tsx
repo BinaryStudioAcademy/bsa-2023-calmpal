@@ -20,8 +20,8 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
   });
 
   const handleFormSubmit = useCallback(
-    (event: React.BaseSyntheticEvent): void => {
-      void handleSubmit(onSubmit)(event);
+    (event_: React.BaseSyntheticEvent): void => {
+      void handleSubmit(onSubmit)(event_);
     },
     [handleSubmit, onSubmit],
   );
@@ -35,7 +35,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
         <Input
           type="text"
           label="Name"
-          placeholder="Please write your name"
+          placeholder="Enter your name"
           name="fullName"
           control={control}
           errors={errors}
