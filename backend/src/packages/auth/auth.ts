@@ -8,3 +8,6 @@ const authService = new AuthService(userService);
 const authController = new AuthController(logger, authService);
 
 export { authController, authService };
+export { type AuthService } from './auth.service.js';
+export { AuthApiPath } from './libs/enums/enums.js';
+export { type AuthTokenPayload } from './libs/types/types.js';
