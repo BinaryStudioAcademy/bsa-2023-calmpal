@@ -13,11 +13,18 @@ type ServerCommonErrorResponse = {
   message: string;
 };
 
+type ServerAuthErrorResponse = {
+  errorType: typeof ServerErrorType.AUTHORIZATION;
+  message: string;
+};
+
 type ServerErrorResponse =
   | ServerValidationErrorResponse
-  | ServerCommonErrorResponse;
+  | ServerCommonErrorResponse
+  | ServerAuthErrorResponse;
 
 export {
+  type ServerAuthErrorResponse,
   type ServerCommonErrorResponse,
   type ServerErrorResponse,
   type ServerValidationErrorResponse,

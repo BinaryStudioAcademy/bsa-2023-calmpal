@@ -2,6 +2,7 @@ export { type AsyncThunkConfig } from './app/app';
 export {
   type NavigationScreenProperties,
   type RootNavigationParameterList,
+  type TabNavigationParameterList,
 } from './navigation/navigation';
 export {
   type ServerErrorDetail,
