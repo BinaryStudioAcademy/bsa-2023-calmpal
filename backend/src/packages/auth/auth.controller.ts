@@ -41,7 +41,7 @@ class AuthController extends BaseController {
       path: AuthApiPath.AUTHENTICATED_USER,
       method: 'GET',
       handler: (options) =>
-        this.getUser(
+        this.getAuthenticatedUser(
           options as APIHandlerOptions<{
             user: UserAuthResponseDto;
           }>,
@@ -90,7 +90,7 @@ class AuthController extends BaseController {
     };
   }
 
-  private async getUser(
+  private async getAuthenticatedUser(
     options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
   ): Promise<APIHandlerResponse> {
     return {
