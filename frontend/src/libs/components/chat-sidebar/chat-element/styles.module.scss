@@ -1,0 +1,38 @@
+.chat-element {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 317px;
+  height: 83px;
+  margin-top: 15px;
+  padding: 0;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: Montserrat, sans-serif;
+  background: var(--white-alpha-80);
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 4px 23px 0 var(--violet-100);
+  cursor: pointer;
+}
+
+.chat-element .name {
+  display: flex;
+  align-items: center;
+}
+
+.chat-element .arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  visibility: hidden;
+}
+
+.selected {
+  background: var(--white);
+}
+
+.selected .arrow {
+  visibility: visible;
+}
