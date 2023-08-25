@@ -1,4 +1,3 @@
-import { type FC } from 'react';
 import React from 'react';
 
 import { Text, View } from '#libs/components/components';
@@ -11,7 +10,7 @@ type Properties = {
   showAvatar: boolean;
 };
 
-const MessageItem: FC<Properties> = ({ isUser, text, showAvatar }) => {
+const MessageItem: React.FC<Properties> = ({ isUser, text, showAvatar }) => {
   return (
     <View
       style={[

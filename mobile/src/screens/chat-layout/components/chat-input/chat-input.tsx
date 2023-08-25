@@ -1,4 +1,3 @@
-import { type FC } from 'react';
 import React from 'react';
 
 import SendButton from '#assets/img/icons/send-button.svg';
@@ -19,7 +18,7 @@ type Properties = {
   scrollViewToEnd: () => void;
 };
 
-const ChatInput: FC<Properties> = ({ setMessages, scrollViewToEnd }) => {
+const ChatInput: React.FC<Properties> = ({ setMessages, scrollViewToEnd }) => {
   const [text, setText] = useState('');
 
   const handlePress = (): void => {

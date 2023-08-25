@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import React from 'react';
 
 import { ScrollView, Text, View } from '#libs/components/components';
 import { useEffect, useRef, useState } from '#libs/hooks/hooks';
@@ -14,7 +14,7 @@ type Message = {
   message: string;
 };
 
-const ChatLayout: FC = () => {
+const ChatLayout: React.FC = () => {
   const mockedData = [
     {
       id: 1,
