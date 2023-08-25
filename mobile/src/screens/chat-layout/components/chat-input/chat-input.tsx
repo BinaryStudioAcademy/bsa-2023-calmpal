@@ -1,38 +1,32 @@
 import React from 'react';
+import {
+  type Control,
+  type FieldPath,
+  type FieldValues,
+} from 'react-hook-form';
 
 import SendButton from '#assets/img/icons/send-button.svg';
 import { Pressable, TextInput, View } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
-import { useState } from '#libs/hooks/hooks';
+import { useFormController } from '#libs/hooks/hooks';
 
 import { styles } from './styles';
 
-type Message = {
-  id: number;
-  isUser: boolean;
-  message: string;
-};
-
-type Properties = {
-  setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
+type Properties<T extends FieldValues> = {
+  name: FieldPath<T>;
+  control: Control<T, null>;
   scrollViewToEnd: () => void;
+  onPress: () => void;
 };
 
-const ChatInput: React.FC<Properties> = ({ setMessages, scrollViewToEnd }) => {
-  const [text, setText] = useState('');
-
-  const handlePress = (): void => {
-    setMessages((previous) => [
-      ...previous,
-      {
-        id: Date.now(),
-        isUser: true,
-        message: text,
-      },
-    ]);
-    setText('');
-    scrollViewToEnd();
-  };
+const ChatInput = <T extends FieldValues>({
+  name,
+  control,
+  scrollViewToEnd,
+  onPress,
+}: Properties<T>): JSX.Element => {
+  const { field } = useFormController({ name, control });
+  const { value, onChange } = field;
 
   return (
     <View style={styles.chatInputContainer}>
@@ -40,14 +34,12 @@ const ChatInput: React.FC<Properties> = ({ setMessages, scrollViewToEnd }) => {
         style={styles.input}
         placeholder="Type a message"
         placeholderTextColor={AppColor.GRAY_300}
-        value={text}
+        value={value}
         onFocus={scrollViewToEnd}
-        onChangeText={(text): void => {
-          setText(text);
-        }}
+        onChangeText={onChange}
       />
-      {text && (
-        <Pressable onPress={handlePress}>
+      {value && (
+        <Pressable onPress={onPress}>
           <SendButton style={styles.button} />
         </Pressable>
       )}

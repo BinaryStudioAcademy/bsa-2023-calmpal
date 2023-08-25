@@ -1,10 +1,15 @@
 import React from 'react';
 
 import { ScrollView, Text, View } from '#libs/components/components';
-import { useEffect, useRef, useState } from '#libs/hooks/hooks';
+import {
+  useAppForm,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from '#libs/hooks/hooks';
 
-import { ChatInput } from './components/chat-input/chat-input';
-import { MessageItem } from './components/message-item/message-item';
+import { ChatInput, MessageItem } from './components/components';
 import { PREVIOUS_USER } from './libs/constants';
 import { styles } from './styles';
 
@@ -63,14 +68,36 @@ const ChatLayout: React.FC = () => {
     },
   ];
 
+  const { control, handleSubmit, reset } = useAppForm<{ text: string }>({
+    defaultValues: { text: '' },
+  });
+
   const [messages, setMessages] = useState<Message[]>(mockedData);
   const scrollViewReference = useRef<ScrollView | null>(null);
 
   const scrollViewToEnd = (): void => {
-    if (scrollViewReference.current) {
-      scrollViewReference.current.scrollToEnd();
-    }
+    scrollViewReference.current?.scrollToEnd();
   };
+
+  const onSubmit = useCallback(
+    (payload: { text: string }): void => {
+      setMessages((previous) => [
+        ...previous,
+        {
+          id: Date.now(),
+          isUser: true,
+          message: payload.text,
+        },
+      ]);
+      scrollViewToEnd();
+      reset();
+    },
+    [setMessages, reset],
+  );
+
+  const handlePress = useCallback((): void => {
+    void handleSubmit(onSubmit)();
+  }, [handleSubmit, onSubmit]);
 
   useEffect(() => {
     scrollViewToEnd();
@@ -94,7 +121,12 @@ const ChatLayout: React.FC = () => {
         ))}
       </ScrollView>
 
-      <ChatInput setMessages={setMessages} scrollViewToEnd={scrollViewToEnd} />
+      <ChatInput
+        scrollViewToEnd={scrollViewToEnd}
+        onPress={handlePress}
+        control={control}
+        name="text"
+      />
     </View>
   );
 };
