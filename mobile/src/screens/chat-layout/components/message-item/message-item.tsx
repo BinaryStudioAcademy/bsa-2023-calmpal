@@ -7,23 +7,27 @@ import { styles } from './styles';
 type Properties = {
   isUser: boolean;
   text: string;
-  showAvatar: boolean;
+  isAvatarVisible: boolean;
 };
 
-const MessageItem: React.FC<Properties> = ({ isUser, text, showAvatar }) => {
+const MessageItem: React.FC<Properties> = ({
+  isUser,
+  text,
+  isAvatarVisible,
+}) => {
   return (
     <View
       style={[
         styles.messageWrapper,
         isUser && styles.userWrapper,
-        !showAvatar && styles.sameMessageWrapper,
+        !isAvatarVisible && styles.sameMessageWrapper,
       ]}
     >
       <View
         style={[
           styles.avatar,
           isUser && styles.userAvatar,
-          !showAvatar && styles.transparentAvatar,
+          !isAvatarVisible && styles.transparentAvatar,
         ]}
       />
       <Text style={[styles.messageText, isUser && styles.userMessage]}>

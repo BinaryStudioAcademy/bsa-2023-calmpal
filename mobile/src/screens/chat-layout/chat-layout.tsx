@@ -115,7 +115,9 @@ const ChatLayout: React.FC = () => {
           <MessageItem
             text={item.message}
             isUser={item.isUser}
-            showAvatar={item.isUser !== messages[index - PREVIOUS_USER]?.isUser}
+            isAvatarVisible={
+              item.isUser !== messages[index - PREVIOUS_USER]?.isUser
+            }
             key={item.id}
           />
         ))}
