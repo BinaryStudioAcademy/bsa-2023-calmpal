@@ -13,7 +13,6 @@ const ColumnName = {
 
 const RelationRule = {
   CASCADE: 'CASCADE',
-  SET_NULL: 'SET NULL',
 } as const;
 
 function up(knex: Knex): Promise<void> {
@@ -25,7 +24,7 @@ function up(knex: Knex): Promise<void> {
       .references(ColumnName.ID)
       .inTable(USERS_TABLE_NAME)
       .onUpdate(RelationRule.CASCADE)
-      .onDelete(RelationRule.SET_NULL);
+      .onDelete(RelationRule.CASCADE);
     table.string(ColumnName.FULL_NAME).notNullable();
     table
       .dateTime(ColumnName.CREATED_AT)
