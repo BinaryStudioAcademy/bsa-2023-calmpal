@@ -1,9 +1,8 @@
 import React from 'react';
-import { Image, TouchableOpacity } from 'react-native';
 
 import ArrowIcon from '#assets/img/icons/arrow-left.svg';
 import image from '#assets/img/temp/chat-item.png';
-import { Text } from '#libs/components/components';
+import { Image, Text, TouchableOpacity } from '#libs/components/components';
 
 import { styles } from './styles';
 

@@ -1,7 +1,5 @@
-import { type ReactNode } from 'react';
-import React from 'react';
-import { Text, View } from 'react-native';
-import { type StyleProp, type ViewStyle } from 'react-native';
+import React, { type ReactNode } from 'react';
+import { type StyleProp, Text, View, type ViewStyle } from 'react-native';
 
 import { styles } from './styles';
 

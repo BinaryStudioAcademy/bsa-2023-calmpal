@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
     backgroundColor: AppColor.GRAY_400,
     borderRadius: 24,
     marginLeft: 10,
+    marginTop: 2,
     paddingHorizontal: 8,
     paddingVertical: 2,
-    marginTop: 2,
   },
   badgeText: {
     color: AppColor.BLACK,

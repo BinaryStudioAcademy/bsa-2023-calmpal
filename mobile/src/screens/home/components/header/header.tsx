@@ -1,7 +1,7 @@
-import { type ReactNode } from 'react';
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { type ReactNode } from 'react';
 import { type StyleProp, type ViewStyle } from 'react-native';
+
+import { Text, View } from '#libs/components/components';
 
 const HomeHeader = ({
   title,
