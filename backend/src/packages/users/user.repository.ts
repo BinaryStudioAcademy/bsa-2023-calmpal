@@ -4,8 +4,8 @@ import { type UserModel } from '#packages/users/user.model.js';
 
 import { UsersRelation } from './libs/enums/enums.js';
 import {
-  type UserInsertData,
-  type UserWithUserDetailsJoin,
+  type UserCreateQueryPayload,
+  type UserCreateQueryResponse,
 } from './libs/types/types.js';
 
 class UserRepository implements Repository {
@@ -24,7 +24,7 @@ class UserRepository implements Repository {
       .query()
       .select()
       .withGraphJoined(UsersRelation.DETAILS)
-      .castTo<UserWithUserDetailsJoin[]>()
+      .castTo<UserCreateQueryResponse[]>()
       .execute();
     return users.map((user) => {
       return UserEntity.initialize({
@@ -51,9 +51,9 @@ class UserRepository implements Repository {
         [UsersRelation.DETAILS]: {
           fullName,
         },
-      } as UserInsertData)
+      } as UserCreateQueryPayload)
       .withGraphJoined(UsersRelation.DETAILS)
-      .castTo<UserWithUserDetailsJoin>()
+      .castTo<UserCreateQueryResponse>()
       .execute();
     return UserEntity.initialize({
       id: user.id,

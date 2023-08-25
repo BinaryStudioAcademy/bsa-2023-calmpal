@@ -1,6 +1,6 @@
 export { type UserColumns } from './user-columns.type.js';
-export { type UserInsertData } from './user-insert-data.type.js';
-export { type UserWithUserDetailsJoin } from './user-with-user-details-join.type.js';
+export { type UserCreateQueryPayload } from './user-create-query-payload.js';
+export { type UserCreateQueryResponse } from './user-create-query-response.js';
 export {
   type UserGetAllResponseDto,
   type UserSignUpRequestDto,

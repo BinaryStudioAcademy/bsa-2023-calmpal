@@ -1,4 +1,4 @@
-type UserWithUserDetailsJoin = {
+type UserCreateQueryResponse = {
   id: number;
   createdAt: string;
   updatedAt: string;
@@ -10,4 +10,4 @@ type UserWithUserDetailsJoin = {
   };
 };
 
-export { type UserWithUserDetailsJoin };
+export { type UserCreateQueryResponse };

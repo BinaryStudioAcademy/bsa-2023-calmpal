@@ -1,4 +1,4 @@
-type UserInsertData = {
+type UserCreateQueryPayload = {
   email: string;
   passwordSalt: string;
   passwordHash: string;
@@ -7,4 +7,4 @@ type UserInsertData = {
   };
 };
 
-export { type UserInsertData };
+export { type UserCreateQueryPayload };
