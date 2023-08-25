@@ -9,4 +9,4 @@ const WHITE_ROUTES = [
   { path: `${SERVED_PAGE_PATH}`, methods: ['GET'] },
 ] as const;
 
-export { SERVED_PAGE_PATH, WHITE_ROUTES };
+export { WHITE_ROUTES };
