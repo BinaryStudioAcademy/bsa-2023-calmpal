@@ -41,7 +41,7 @@ const App: React.FC = () => {
     void dispatch(authActions.getAuthenticatedUser());
   }, [dispatch]);
 
-  if (authenticatedUserDataStatus !== DataStatus.FULFILLED) {
+  if (authenticatedUserDataStatus === DataStatus.PENDING) {
     return <Loader />;
   }
 
