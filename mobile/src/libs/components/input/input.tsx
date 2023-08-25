@@ -1,3 +1,4 @@
+import { type Dispatch, type SetStateAction } from 'react';
 import React from 'react';
 import {
   type Control,
@@ -5,6 +6,7 @@ import {
   type FieldPath,
   type FieldValues,
 } from 'react-hook-form';
+import { type StyleProp, type ViewStyle } from 'react-native';
 import { TextInput } from 'react-native';
 
 import { Text, View } from '#libs/components/components';
@@ -18,6 +20,8 @@ type Properties<T extends FieldValues> = {
   label: string;
   name: FieldPath<T>;
   placeholder: string;
+  style?: StyleProp<ViewStyle>;
+  setSearchQuery?: Dispatch<SetStateAction<string>>;
 };
 
 const Input = <T extends FieldValues>({
@@ -26,10 +30,19 @@ const Input = <T extends FieldValues>({
   label,
   name,
   placeholder,
+  style,
+  setSearchQuery,
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
 
   const { value, onChange, onBlur } = field;
+
+  const handleInputChange = (text: string): void => {
+    onChange(text);
+    if (setSearchQuery) {
+      setSearchQuery(text);
+    }
+  };
 
   const error = errors[name]?.message;
   const hasError = Boolean(error);
@@ -38,11 +51,11 @@ const Input = <T extends FieldValues>({
     <View>
       <Text>{label}</Text>
       <TextInput
-        onChangeText={onChange}
+        onChangeText={handleInputChange}
         value={value}
         onBlur={onBlur}
         placeholder={placeholder}
-        style={styles.input}
+        style={[styles.input, style]}
       />
       <Text>{hasError && (error as string)}</Text>
     </View>
