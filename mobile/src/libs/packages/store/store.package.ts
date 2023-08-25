@@ -9,6 +9,7 @@ import { AppEnvironment } from '#libs/enums/enums';
 import { authApi } from '#packages/auth/auth';
 import { userApi } from '#packages/users/users';
 import { reducer as authReducer } from '#slices/auth/auth';
+import { reducer as notificationReducer } from '#slices/notifications/notifications.slice';
 
 import { type Config } from '../config/config';
 import { handleError } from './middlewares/middlewares';
@@ -27,7 +28,12 @@ class Store {
     typeof configureStore<
       RootReducer,
       AnyAction,
-      MiddlewareArray<[ThunkMiddleware<RootReducer, AnyAction, ExtraArguments>]>
+      MiddlewareArray<
+        [
+          ThunkMiddleware<RootReducer, AnyAction, ExtraArguments>,
+          typeof handleError,
+        ]
+      >
     >
   >;
 
@@ -36,6 +42,7 @@ class Store {
       devTools: config.ENV.APP.ENVIRONMENT !== AppEnvironment.PRODUCTION,
       reducer: {
         auth: authReducer,
+        notification: notificationReducer,
       },
       middleware: (getDefaultMiddleware) => [
         ...getDefaultMiddleware({

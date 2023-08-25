@@ -5,18 +5,19 @@ import {
   type Middleware,
 } from '@reduxjs/toolkit';
 
-import { NotificationService } from '#libs/packages/services/notification-service';
+import { NotificationType } from '#libs/enums/notification/notification.enum';
+import { notify } from '#slices/notifications/actions';
 
-const notificationService = new NotificationService();
-
-const handleError: Middleware = () => {
+const handleError: Middleware = (store) => {
   return (next: Dispatch) => {
     return (action: AnyAction) => {
       const result = next(action);
 
       if (isRejected(action)) {
-        const errorMessage = action.error.message as string;
-        notificationService.ERROR(errorMessage);
+        const { message } = action.error;
+        if (message) {
+          store.dispatch(notify({ type: NotificationType.ERROR, message }));
+        }
       }
 
       return result;

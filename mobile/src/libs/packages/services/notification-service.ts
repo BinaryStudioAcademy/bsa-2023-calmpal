@@ -11,7 +11,7 @@ class NotificationService {
     });
   };
 
-  public ERROR(message: string): void {
+  public error(message: string): void {
     this.show(NotificationType.ERROR, message);
   }
 }
