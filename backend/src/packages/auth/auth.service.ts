@@ -1,5 +1,5 @@
 import {
-  type UserAuthResponseDto,
+  type UserSignUpRequestDto,
   type UserSignUpResponseDto,
 } from '#packages/users/libs/types/types.js';
 import { type UserService } from '#packages/users/user.service.js';
@@ -12,7 +12,7 @@ class AuthService {
   }
 
   public signUp(
-    userRequestDto: UserAuthResponseDto,
+    userRequestDto: UserSignUpRequestDto,
   ): Promise<UserSignUpResponseDto> {
     return this.userService.create(userRequestDto);
   }
