@@ -1,6 +1,6 @@
 import Toast from 'react-native-toast-message';
 
-import { NotificationType } from '#libs/enums/notification/notification-type.enum';
+import { NotificationType } from '#libs/enums/enums';
 
 class NotificationService {
   private show = (type: string, message: string): void => {
