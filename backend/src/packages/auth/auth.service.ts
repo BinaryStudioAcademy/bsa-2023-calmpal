@@ -38,9 +38,9 @@ class AuthService {
       });
     }
 
-    const pswrdCompare = await encrypt.compare(password, user.passwordHash);
+    const isSamePassword = await encrypt.compare(password, user.passwordHash);
 
-    if (!pswrdCompare) {
+    if (!isSamePassword) {
       throw new IncorrectPasswordError({
         message: ExceptionMessage.INCORRECT_PASSWORD,
       });
