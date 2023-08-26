@@ -5,4 +5,4 @@ export { useDebounce } from './use-debounce/use-debounce.hook.js';
 export { useSearch } from './use-search/use-search.hook.js';
 export { useCallback, useEffect, useMemo, useState } from 'react';
 export { useController as useFormController } from 'react-hook-form';
-export { useLocation } from 'react-router-dom';
+export { useLocation, useNavigate } from 'react-router-dom';
