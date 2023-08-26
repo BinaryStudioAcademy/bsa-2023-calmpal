@@ -4,7 +4,7 @@ import { DataStatus } from '#libs/enums/enums.js';
 import { type ValueOf } from '#libs/types/types.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 
-import { signIn, signUp } from './actions.js';
+import { getAuthenticatedUser, signIn, signUp } from './actions.js';
 
 type State = {
   user: UserAuthResponseDto | null;
@@ -24,10 +24,12 @@ const { reducer, actions, name } = createSlice({
     builder.addCase(signUp.pending, (state) => {
       state.dataStatus = DataStatus.PENDING;
     });
-    builder.addCase(signUp.fulfilled, (state) => {
+    builder.addCase(signUp.fulfilled, (state, action) => {
+      state.user = action.payload;
       state.dataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(signUp.rejected, (state) => {
+      state.user = null;
       state.dataStatus = DataStatus.REJECTED;
     });
 
@@ -40,6 +42,16 @@ const { reducer, actions, name } = createSlice({
     });
     builder.addCase(signIn.rejected, (state) => {
       state.user = null;
+      state.dataStatus = DataStatus.REJECTED;
+      
+    builder.addCase(getAuthenticatedUser.pending, (state) => {
+      state.dataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(getAuthenticatedUser.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.dataStatus = DataStatus.FULFILLED;
+    });
+    builder.addCase(getAuthenticatedUser.rejected, (state) => {
       state.dataStatus = DataStatus.REJECTED;
     });
   },

@@ -6,7 +6,7 @@ type Properties = {
 };
 
 const Button: React.FC<Properties> = ({ type = 'button', label }) => (
-  <button type={type} className={styles['button']}>
+  <button type={type} className={styles['submit']}>
     {label}
   </button>
 );
