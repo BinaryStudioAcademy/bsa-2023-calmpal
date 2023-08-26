@@ -47,11 +47,10 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
           control={control}
           errors={errors}
         />
-        <Button
-          type="submit"
-          label="Sign in"
-          className={styles['submit'] as string}
-        />
+
+        <div className={styles['submit']}>
+          <Button type="submit" label="Sign in" />
+        </div>
 
         <span className={styles['form-link']}>
           Don&apos;t have an account? Go to
