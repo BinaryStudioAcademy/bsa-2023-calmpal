@@ -1,17 +1,19 @@
 import { type AnyAction, type Middleware } from '@reduxjs/toolkit';
 import { isRejected } from '@reduxjs/toolkit';
 
-import { NotificationService } from '#libs/packages/services/notification-service.js';
-import { type AppDispatch } from '#libs/packages/store/store.js';
-import { showErrorNotification } from '#slices/notifications/actions.js';
+import { NotificationType } from '#libs/packages/services/libs/enums/enums.js';
+import { appActions } from '#slices/notifications/notification.js';
 
-const handleError: Middleware = (api) => {
+const handleError: Middleware = ({ dispatch }) => {
   return (next) => {
     return (action: AnyAction) => {
-      const dispatch: AppDispatch = api.dispatch;
       if (isRejected(action) && action.error.message) {
-        dispatch(showErrorNotification(action.error.message));
-        NotificationService.error(action.error.message);
+        dispatch(
+          appActions.notify({
+            message: action.error.message,
+            type: NotificationType.ERROR,
+          }),
+        );
       }
       return next(action);
     };

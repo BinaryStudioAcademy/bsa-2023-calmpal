@@ -1,10 +1,11 @@
-import { showErrorNotification } from './actions.js';
-import { actions } from './notification.slice.js';
+import { actions } from '#slices/notifications/app.slice.js';
+
+import { notify } from './actions.js';
 
 const allActions = {
   ...actions,
-  showErrorNotification,
+  notify,
 };
 
-export { allActions as actions };
-export { reducer } from './notification.slice.js';
+export { allActions as appActions };
+export { reducer } from '#slices/notifications/app.slice.js';
