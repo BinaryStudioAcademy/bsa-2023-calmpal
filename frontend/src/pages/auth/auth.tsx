@@ -42,10 +42,10 @@ const Auth: React.FC = () => {
 
   return (
     <div className={styles['auth']}>
-      <div className={styles['logo']}>Calmpal</div>
+      <div className={styles['logo']}>CalmPal</div>
       <div className={styles['auth-name']}>
         <p className={styles['secondary']}>Welcome to</p>
-        <p className={styles['primary']}>Calmpal</p>
+        <p className={styles['primary']}>CalmPal</p>
       </div>
       <div className={styles['overlay']}>{getScreen(pathname)}</div>
     </div>
