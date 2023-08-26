@@ -14,6 +14,7 @@ import {
   useEffect,
   useLocation,
 } from '#libs/hooks/hooks.js';
+import { actions as authActions } from '#slices/auth/auth.js';
 import { actions as userActions } from '#slices/users/users.js';
 
 import { Sidebar } from '../sidebar/sidebar.js';
