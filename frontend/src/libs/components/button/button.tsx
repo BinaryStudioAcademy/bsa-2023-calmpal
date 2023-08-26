@@ -1,5 +1,3 @@
-import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
-
 import styles from './styles.module.scss';
 
 type Properties = {
@@ -9,17 +7,8 @@ type Properties = {
   onClick?: (event: React.MouseEvent) => void;
 };
 
-const Button: React.FC<Properties> = ({
-  type = 'button',
-  label,
-  className = '',
-  onClick,
-}) => (
-  <button
-    type={type}
-    className={getValidClassNames(styles['btn'], className)}
-    onClick={onClick}
-  >
+const Button: React.FC<Properties> = ({ type = 'button', label }) => (
+  <button type={type} className={styles['submit']}>
     {label}
   </button>
 );
