@@ -55,11 +55,10 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
           control={control}
           errors={errors}
         />
-        <Button
-          type="submit"
-          label="Sign up"
-          className={styles['submit'] as string}
-        />
+        <div className={styles['submit-button']}>
+          <Button type="submit" label="Sign up" style="submit" />
+        </div>
+
         <span className={styles['form-link']}>
           Already have an account? Go to
           <Link to={AppRoute.SIGN_IN}>
