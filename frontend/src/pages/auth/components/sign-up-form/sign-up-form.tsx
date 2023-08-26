@@ -1,4 +1,5 @@
-import { Button, Input } from '#libs/components/components.js';
+import { Button, Input, Link } from '#libs/components/components.js';
+import { AppRoute } from '#libs/enums/enums.js';
 import { useAppForm, useCallback } from '#libs/hooks/hooks.js';
 import {
   type UserSignUpRequestDto,
@@ -6,6 +7,7 @@ import {
 } from '#packages/users/users.js';
 
 import { DEFAULT_SIGN_UP_PAYLOAD } from './libs/constants.js';
+import styles from './styles.module.scss';
 
 type Properties = {
   onSubmit: (payload: UserSignUpRequestDto) => void;
@@ -25,32 +27,46 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
   );
 
   return (
-    <>
-      <h3>Sign Up</h3>
-      <form onSubmit={handleFormSubmit}>
-        <p>
-          <Input
-            type="text"
-            label="Email"
-            placeholder="Enter your email"
-            name="email"
-            control={control}
-            errors={errors}
-          />
-        </p>
-        <p>
-          <Input
-            type="text"
-            label="Password"
-            placeholder="Enter your password"
-            name="password"
-            control={control}
-            errors={errors}
-          />
-        </p>
-        <Button type="submit" label="Sign up" />
+    <div className={styles['container']}>
+      <h1 className={styles['title']}>
+        Create a free account to save your preferences
+      </h1>
+      <form onSubmit={handleFormSubmit} className={styles['form']}>
+        <Input
+          type="text"
+          label="Name"
+          placeholder="Enter your name"
+          name="fullName"
+          control={control}
+          errors={errors}
+        />
+        <Input
+          type="text"
+          label="E-mail"
+          placeholder="Enter your email"
+          name="email"
+          control={control}
+          errors={errors}
+        />
+        <Input
+          type="password"
+          label="Password"
+          name="password"
+          control={control}
+          errors={errors}
+        />
+        <div className={styles['submit-button']}>
+          <Button type="submit" label="Sign up" />
+        </div>
+
+        <span className={styles['form-link']}>
+          Already have an account? Go to
+          <Link to={AppRoute.SIGN_IN}>
+            <span className={styles['text']}>Sign in</span>
+          </Link>
+        </span>
       </form>
-    </>
+    </div>
   );
 };
 

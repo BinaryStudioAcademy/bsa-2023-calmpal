@@ -5,22 +5,20 @@ import { type AsyncThunkConfig } from '#libs/types/types.js';
 import {
   type UserAuthResponseDto,
   type UserSignUpRequestDto,
-  type UserSignUpResponseDto,
 } from '#packages/users/users.js';
 
 import { name as sliceName } from './auth.slice.js';
 
 const signUp = createAsyncThunk<
-  UserSignUpResponseDto,
+  UserAuthResponseDto,
   UserSignUpRequestDto,
   AsyncThunkConfig
 >(`${sliceName}/sign-up`, async (registerPayload, { extra }) => {
   const { authApi, storage } = extra;
-  const response = await authApi.signUp(registerPayload);
+  const { user, token } = await authApi.signUp(registerPayload);
+  await storage.set(StorageKey.TOKEN, token);
 
-  await storage.set(StorageKey.TOKEN, response.token);
-
-  return response;
+  return user;
 });
 
 const getAuthenticatedUser = createAsyncThunk<
