@@ -1,0 +1,13 @@
+.submit {
+  display: inline-block;
+  width: 100%;
+  padding: 15px 0;
+  color: var(--white);
+  font-weight: 600;
+  font-size: 16px;
+  white-space: nowrap;
+  background-color: var(--gray-300);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
