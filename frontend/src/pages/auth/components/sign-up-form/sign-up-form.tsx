@@ -56,7 +56,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
           errors={errors}
         />
         <div className={styles['submit-button']}>
-          <Button type="submit" label="Sign up" style="submit" />
+          <Button type="submit" label="Sign up" />
         </div>
 
         <span className={styles['form-link']}>
