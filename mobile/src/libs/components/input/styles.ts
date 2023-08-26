@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
   },
   placeholder: {
-    color: AppColor.GRAY_300,
+    color: AppColor.GRAY_400,
   },
 });
 

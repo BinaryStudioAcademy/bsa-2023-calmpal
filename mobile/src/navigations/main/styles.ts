@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     elevation: 4,
     height: 122,
-    shadowColor: AppColor.GRAY_300,
+    shadowColor: AppColor.GRAY_200,
   },
   headerStyle: {
     backgroundColor: AppColor.WHITE,

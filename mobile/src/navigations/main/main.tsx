@@ -39,7 +39,7 @@ const Main: React.FC = () => {
     },
     headerStyle: styles.headerStyle,
     headerTitleStyle: styles.headerTitleStyle,
-    tabBarInactiveTintColor: AppColor.GRAY_300,
+    tabBarInactiveTintColor: AppColor.GRAY_400,
     tabBarShowLabel: false,
     tabBarStyle: styles.tabBarStyle,
   });
