@@ -1,7 +1,7 @@
 import { APIPath } from '#libs/enums/enums.js';
 import { AuthApiPath } from '#packages/auth/auth.js';
 
-const SERVED_PAGE_PATH = '/\\*';
+const SERVED_PAGE_PATH = '^/\\*$';
 
 const WHITE_ROUTES = [
   {
