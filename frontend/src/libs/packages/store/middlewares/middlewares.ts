@@ -15,7 +15,7 @@ const handleError: Middleware = ({ dispatch }) => {
           }),
         );
       }
-      
+
       return next(action);
     };
   };
