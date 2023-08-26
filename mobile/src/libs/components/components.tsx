@@ -3,4 +3,5 @@ export { Button } from './button/button';
 export { Input } from './input/input';
 export { Link } from './link/link';
 export { Loader } from './loader/loader';
-export { Text, View } from 'react-native';
+export { SignBackground } from './sign-background/sign-background';
+export { ScrollView, Text, View } from 'react-native';
