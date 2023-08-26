@@ -28,4 +28,3 @@ function show(
 }
 
 export { Notification };
-export { NotificationType } from './libs/enums/notification-type.enum.js';
