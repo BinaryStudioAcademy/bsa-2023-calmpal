@@ -14,14 +14,6 @@ const styles = StyleSheet.create({
     borderBottomColor: AppColor.GRAY_100,
     borderBottomWidth: 1,
     height: 81,
-    paddingHorizontal: 24,
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  headerTitleStyle: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: AppColor.GRAY_500,
   },
 });
 
