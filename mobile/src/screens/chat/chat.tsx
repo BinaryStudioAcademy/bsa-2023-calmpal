@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { Input, ScrollView, View } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
-import { useAppForm } from '#libs/hooks/hooks';
+import { useAppForm, useState } from '#libs/hooks/hooks';
 
 import { ChatItem, ChatLink } from './components/components';
 import data from './data.json';

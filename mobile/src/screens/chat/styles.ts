@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingBottom: 16,
-    paddingHorizontal: 12, // The Main padding for all screens is 16, but we use 16-4=12 here because we add padding to the Item List to avoid shadow cutting
+    paddingHorizontal: 12,
     paddingTop: 28,
   },
   input: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     fontSize: 14,
     height: 48,
-    marginHorizontal: 4, // To align the input to the borders of the list
+    marginHorizontal: 4,
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   list: {
-    paddingHorizontal: 4, // To avoid problems with cutting a shadow
+    paddingHorizontal: 4,
   },
 });
 

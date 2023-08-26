@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     padding: 3,
     shadowColor: AppColor.PURPLE_100,
-    // shadowColor: 'red',
   },
   image: {
     borderRadius: 20,

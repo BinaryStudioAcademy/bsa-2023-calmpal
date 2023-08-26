@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ArrowIcon from '#assets/img/icons/arrow-left.svg';
+import ArrowIcon from '#assets/img/icons/arrow-right.svg';
 import image from '#assets/img/temp/chat-item.png';
 import { Image, Text, TouchableOpacity } from '#libs/components/components';
 
