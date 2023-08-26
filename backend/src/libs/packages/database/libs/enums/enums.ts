@@ -3,3 +3,4 @@ export { ChatsTableColumn } from './chats-table-column.enum.js';
 export { DatabaseTableName } from './database-table-name.enum.js';
 export { MeditationEntriesTableColumn } from './meditation-entries-table-column.enum.js';
 export { MeditationTopicsTableColumn } from './meditation-topics-table-column.enum.js';
+export { UserRolesTableColumn } from './user-roles-table-column.enum.js';
