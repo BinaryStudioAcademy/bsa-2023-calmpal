@@ -1,12 +1,12 @@
+import { Icon } from '#libs/components/components.js';
+import { IconName } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
+import { useCallback } from '#libs/hooks/hooks.js';
 
-import { useCallback } from '../../../hooks/hooks.js';
 import styles from './styles.module.scss';
 
 type Properties = {
   chat: Chat;
-  isSelected: boolean;
-  onSelectChat: (id: number) => void;
 };
 
 type Chat = {
@@ -14,14 +14,16 @@ type Chat = {
   name: string;
 };
 
-const ChatElement: React.FC<Properties> = ({
-  chat,
-  isSelected,
-  onSelectChat,
-}) => {
+// mocked data
+const selectedChat = {
+  id: 1,
+};
+
+const ChatElement: React.FC<Properties> = ({ chat }) => {
   const handleSelectChat = useCallback(() => {
-    onSelectChat(chat.id);
-  }, [chat.id, onSelectChat]);
+    // TODO: redux logic for chat selection
+  }, []);
+  const isSelected = selectedChat.id === chat.id;
 
   return (
     <button
@@ -36,7 +38,7 @@ const ChatElement: React.FC<Properties> = ({
         {chat.name}
       </div>
       <div className={styles['arrow']}>
-        <img src="arrow.svg" alt="not found" />
+        <Icon name={IconName.ARROW} />
       </div>
     </button>
   );

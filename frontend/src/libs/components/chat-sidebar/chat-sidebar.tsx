@@ -1,5 +1,7 @@
-import { useCallback, useSearch, useState } from '../../hooks/hooks.js';
-import { Search } from '../components.js';
+import { IconName } from '#libs/enums/enums.js';
+import { useCallback, useSearch, useState } from '#libs/hooks/hooks.js';
+
+import { Icon, Search } from '../components.js';
 import { ChatElement } from './chat-element/chat-element.js';
 import styles from './styles.module.scss';
 
@@ -13,7 +15,6 @@ const chats = [
 
 const ChatSidebar: React.FC = () => {
   const [filter, setFilter] = useState('');
-  const [selectedChat, setSelectedChat] = useState({ id: 1 });
   const handleFilterChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>): void => {
       setFilter(event.target.value);
@@ -21,9 +22,6 @@ const ChatSidebar: React.FC = () => {
     [],
   );
   const filteredChats = useSearch(filter, chats, 'name');
-  const handleSelectChat = useCallback((id: number): void => {
-    setSelectedChat({ id });
-  }, []);
 
   return (
     <div className={styles['container']}>
@@ -32,20 +30,17 @@ const ChatSidebar: React.FC = () => {
           <span>Chat</span>
           <span className={styles['chat-number']}>{chats.length}</span>
         </div>
-        <img src="plus.svg" alt="not found" className={styles['plus']} />
+        <div className={styles['plus']}>
+          <Icon name={IconName.PLUS} />
+        </div>
       </div>
       <div className={styles['list']}>
         <div className={styles['search']}>
-          <Search value={filter} handleValueChange={handleFilterChange} />
+          <Search value={filter} onValueChange={handleFilterChange} />
         </div>
         <div className={styles['chat-list']}>
           {filteredChats.map((filteredChat) => (
-            <ChatElement
-              chat={filteredChat}
-              key={filteredChat.id}
-              isSelected={filteredChat.id === selectedChat.id}
-              onSelectChat={handleSelectChat}
-            />
+            <ChatElement chat={filteredChat} key={filteredChat.id} />
           ))}
         </div>
       </div>
