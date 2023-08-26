@@ -1,12 +1,11 @@
 import { ServerErrorType } from '#libs/enums/enums.js';
-import { type UserNotFoundError } from '#libs/exceptions/exceptions.js';
-import { HTTPCode } from '#libs/packages/http/http.js';
+import { type UsersError } from '#libs/exceptions/exceptions.js';
 
 import { type ErrorInfo } from '../../types/types.js';
 
-const getUserNotFoundErrorInfo = (error: UserNotFoundError): ErrorInfo => {
+const getUsersErrorInfo = (error: UsersError): ErrorInfo => {
   const { message } = error;
-  const status = HTTPCode.NOT_FOUND;
+  const status = error.status;
 
   return {
     status,
@@ -18,4 +17,4 @@ const getUserNotFoundErrorInfo = (error: UserNotFoundError): ErrorInfo => {
   };
 };
 
-export { getUserNotFoundErrorInfo };
+export { getUsersErrorInfo };

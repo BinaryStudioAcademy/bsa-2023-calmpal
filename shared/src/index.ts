@@ -9,8 +9,7 @@ export {
   ApplicationError,
   AuthError,
   HTTPError,
-  IncorrectPasswordError,
-  UserNotFoundError,
+  UsersError,
   ValidationError,
 } from './libs/exceptions/exceptions.js';
 export { configureString } from './libs/helpers/helpers.js';

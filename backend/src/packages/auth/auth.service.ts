@@ -1,8 +1,5 @@
 import { ExceptionMessage } from '#libs/enums/enums.js';
-import {
-  IncorrectPasswordError,
-  UserNotFoundError,
-} from '#libs/exceptions/exceptions.js';
+import { UsersError } from '#libs/exceptions/exceptions.js';
 import { encrypt } from '#libs/packages/encrypt/encrypt.js';
 import {
   type UserAuthResponseDto,
@@ -33,7 +30,8 @@ class AuthService {
     const user = await this.userService.findByEmail(email);
 
     if (!user) {
-      throw new UserNotFoundError({
+      throw new UsersError({
+        status: 404,
         message: ExceptionMessage.USER_NOT_FOUND,
       });
     }
@@ -41,7 +39,8 @@ class AuthService {
     const isSamePassword = await encrypt.compare(password, user.passwordHash);
 
     if (!isSamePassword) {
-      throw new IncorrectPasswordError({
+      throw new UsersError({
+        status: 401,
         message: ExceptionMessage.INCORRECT_PASSWORD,
       });
     }
