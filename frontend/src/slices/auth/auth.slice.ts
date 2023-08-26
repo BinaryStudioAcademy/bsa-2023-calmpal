@@ -7,13 +7,13 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { getAuthenticatedUser, signIn, signUp } from './actions.js';
 
 type State = {
-  user: UserAuthResponseDto | null;
-  dataStatus: ValueOf<typeof DataStatus>;
+  authenticatedUser: UserAuthResponseDto | null;
+  authenticatedUserDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
-  user: null,
-  dataStatus: DataStatus.IDLE,
+  authenticatedUser: null,
+  authenticatedUserDataStatus: DataStatus.IDLE,
 };
 
 const { reducer, actions, name } = createSlice({
@@ -22,37 +22,38 @@ const { reducer, actions, name } = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(signUp.pending, (state) => {
-      state.dataStatus = DataStatus.PENDING;
+      state.authenticatedUserDataStatus = DataStatus.PENDING;
     });
     builder.addCase(signUp.fulfilled, (state, action) => {
-      state.user = action.payload;
-      state.dataStatus = DataStatus.FULFILLED;
+      state.authenticatedUser = action.payload;
+      state.authenticatedUserDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(signUp.rejected, (state) => {
-      state.user = null;
-      state.dataStatus = DataStatus.REJECTED;
+      state.authenticatedUser = null;
+      state.authenticatedUserDataStatus = DataStatus.REJECTED;
     });
 
     builder.addCase(signIn.pending, (state) => {
-      state.dataStatus = DataStatus.PENDING;
+      state.authenticatedUserDataStatus = DataStatus.PENDING;
     });
     builder.addCase(signIn.fulfilled, (state, action) => {
-      state.user = action.payload;
-      state.dataStatus = DataStatus.FULFILLED;
+      state.authenticatedUser = action.payload;
+      state.authenticatedUserDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(signIn.rejected, (state) => {
-      state.user = null;
-      state.dataStatus = DataStatus.REJECTED;
-      
+      state.authenticatedUser = null;
+      state.authenticatedUserDataStatus = DataStatus.REJECTED;
+    });
+
     builder.addCase(getAuthenticatedUser.pending, (state) => {
-      state.dataStatus = DataStatus.PENDING;
+      state.authenticatedUserDataStatus = DataStatus.PENDING;
     });
     builder.addCase(getAuthenticatedUser.fulfilled, (state, action) => {
-      state.user = action.payload;
-      state.dataStatus = DataStatus.FULFILLED;
+      state.authenticatedUser = action.payload;
+      state.authenticatedUserDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(getAuthenticatedUser.rejected, (state) => {
-      state.dataStatus = DataStatus.REJECTED;
+      state.authenticatedUserDataStatus = DataStatus.REJECTED;
     });
   },
 });
