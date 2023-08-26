@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Text } from '#libs/components/components';
+import { SignBackground, Text } from '#libs/components/components';
 import { RootScreenName } from '#libs/enums/enums';
 import {
   useAppDispatch,
@@ -21,26 +21,21 @@ const Auth: React.FC = () => {
   const { dataStatus } = useAppSelector(({ auth }) => ({
     dataStatus: auth.dataStatus,
   }));
-
   const isSignUpScreen = name === RootScreenName.SIGN_UP;
-
   useEffect(() => {
     if (isSignUpScreen) {
       void dispatch(userActions.loadAll());
     }
   }, [isSignUpScreen, dispatch]);
-
   const handleSignInSubmit = useCallback(() => {
     // TODO: handle sign in
   }, []);
-
   const handleSignUpSubmit = useCallback(
     (payload: UserSignUpRequestDto): void => {
       void dispatch(authActions.signUp(payload));
     },
     [dispatch],
   );
-
   const getScreen = (screen: string): React.ReactNode => {
     switch (screen) {
       case RootScreenName.SIGN_IN: {
@@ -57,7 +52,7 @@ const Auth: React.FC = () => {
   return (
     <>
       <Text>state: {dataStatus}</Text>
-      {getScreen(name)}
+      <SignBackground>{getScreen(name)}</SignBackground>
     </>
   );
 };
