@@ -1,3 +1,4 @@
+import chat from '#assets/img/chat.svg';
 import home from '#assets/img/home.svg';
 import reactLogo from '#assets/img/react.svg';
 import {
@@ -49,9 +50,13 @@ const App: React.FC = () => {
           { path: AppRoute.ROOT, name: 'home', icon: home },
           { path: AppRoute.SIGN_IN, name: 'sign-in', icon: home },
           { path: AppRoute.SIGN_UP, name: 'sign-up', icon: home },
+          { path: AppRoute.CHAT, name: 'chat', icon: chat },
         ]}
       />
       <div className={styles['body-container']}>
+        <div>
+          <RouterOutlet />
+        </div>
         <Header />
         <img src={reactLogo} className="App-logo" width="30" alt="logo" />
 
@@ -67,10 +72,6 @@ const App: React.FC = () => {
           </li>
         </ul>
         <p>Current path: {pathname}</p>
-
-        <div>
-          <RouterOutlet />
-        </div>
       </div>
     </div>
   );

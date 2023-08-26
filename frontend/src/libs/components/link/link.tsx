@@ -1,3 +1,4 @@
+import { type ClassValue } from 'clsx';
 import { NavLink } from 'react-router-dom';
 
 import { type AppRoute } from '#libs/enums/enums.js';
@@ -9,7 +10,7 @@ import styles from './styles.module.scss';
 type Properties = {
   to: ValueOf<typeof AppRoute>;
   children: React.ReactNode;
-  className?: string;
+  className?: ClassValue;
 };
 
 const Link: React.FC<Properties> = ({ children, to, className = '' }) => {

@@ -1,0 +1,33 @@
+.bot-message-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.message-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 60%;
+}
+
+.message {
+  padding: 8px 16px;
+  background-color: var(--blue-300);
+  border-radius: 12px;
+}
+
+.message-text {
+  color: var(--white);
+  font-weight: 400;
+  font-size: 14px;
+  font-family: Montserrat, sans-serif;
+  line-height: 20px;
+}
+
+.bot-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}

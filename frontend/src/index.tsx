@@ -12,6 +12,7 @@ import {
 import { AppRoute } from '#libs/enums/enums.js';
 import { store } from '#libs/packages/store/store.js';
 import { Auth } from '#pages/auth/auth.js';
+import { ChatPage } from '#pages/chat/chat.js';
 import { Root } from '#pages/root/root.js';
 
 createRoot(document.querySelector('#root') as HTMLElement).render(
@@ -38,6 +39,10 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
               {
                 path: AppRoute.SIGN_UP,
                 element: <Auth />,
+              },
+              {
+                path: AppRoute.CHAT,
+                element: <ChatPage />,
               },
             ],
           },

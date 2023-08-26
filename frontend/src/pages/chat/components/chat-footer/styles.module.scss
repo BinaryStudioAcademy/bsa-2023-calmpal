@@ -1,0 +1,44 @@
+.chat-footer {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  width: calc(80% - 88px);
+}
+
+.form {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 24px 24px 24px 35px;
+  padding: 14px 20px;
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 1px 4px 23px 1px var(--violet-100);
+}
+
+.input {
+  flex: 1;
+  width: 80%;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: Montserrat, sans-serif;
+  line-height: 14px;
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.send-button {
+  align-self: center;
+  background-color: transparent;
+  border: none;
+}
+
+.send-icon {
+  width: 24px;
+  height: 38px;
+  cursor: pointer;
+}
