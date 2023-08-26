@@ -7,7 +7,10 @@ import { type StyleProp, type ViewStyle } from 'react-native';
 import ChatIcon from '#assets/img/icons/chat.svg';
 import HomeIcon from '#assets/img/icons/home.svg';
 import { AppColor, MainScreenName } from '#libs/enums/enums';
-import { type TabNavigationParameterList } from '#libs/types/types';
+import {
+  type TabNavigationParameterList,
+  type TabNavigatorOptions,
+} from '#libs/types/types';
 import { Chat } from '#screens/chat/chat';
 import { ChatHeader } from '#screens/chat/components/components';
 import { HomeHeader } from '#screens/home/components/components';
@@ -17,43 +20,30 @@ import { styles } from './styles';
 
 const BottomTab = createBottomTabNavigator<TabNavigationParameterList>();
 
-type TabBarStyle = {
-  borderTopWidth: number;
-  elevation: number;
-  height: number;
-  shadowColor: string;
-};
-
-type TabNavigatorOptions = {
-  tabBarActiveTintColor: string;
-  tabBarIcon: ({ color }: { color: string }) => React.ReactNode;
-  tabBarInactiveTintColor: string;
-  tabBarShowLabel: boolean;
-  tabBarStyle: TabBarStyle;
-};
-
-const tabNavigatorOptions = ({
-  route,
-}: {
-  route: RouteProp<TabNavigationParameterList>;
-}): TabNavigatorOptions => ({
-  tabBarActiveTintColor: AppColor.BLUE_300,
-  tabBarIcon: ({ color }: { color: string }): React.ReactNode => {
-    switch (route.name) {
-      case MainScreenName.HOME: {
-        return <HomeIcon color={color} />;
-      }
-      case MainScreenName.CHAT: {
-        return <ChatIcon color={color} />;
-      }
-    }
-  },
-  tabBarInactiveTintColor: AppColor.GRAY_300,
-  tabBarShowLabel: false,
-  tabBarStyle: styles.tabBarStyle,
-});
-
 const Main: React.FC = () => {
+  const tabNavigatorOptions = ({
+    route,
+  }: {
+    route: RouteProp<TabNavigationParameterList>;
+  }): TabNavigatorOptions => ({
+    tabBarActiveTintColor: AppColor.BLUE_300,
+    tabBarIcon: ({ color }: { color: string }): React.ReactNode => {
+      switch (route.name) {
+        case MainScreenName.HOME: {
+          return <HomeIcon color={color} />;
+        }
+        case MainScreenName.CHAT: {
+          return <ChatIcon color={color} />;
+        }
+      }
+    },
+    headerStyle: styles.headerStyle,
+    headerTitleStyle: styles.headerTitleStyle,
+    tabBarInactiveTintColor: AppColor.GRAY_300,
+    tabBarShowLabel: false,
+    tabBarStyle: styles.tabBarStyle,
+  });
+
   return (
     <BottomTab.Navigator screenOptions={tabNavigatorOptions}>
       <BottomTab.Screen
@@ -71,8 +61,6 @@ const Main: React.FC = () => {
               />
             );
           },
-          headerStyle: styles.headerStyle,
-          headerTitleStyle: styles.headerTitleStyle,
         }}
       />
       <BottomTab.Screen
@@ -90,8 +78,6 @@ const Main: React.FC = () => {
               />
             );
           },
-          headerStyle: styles.headerStyle,
-          headerTitleStyle: styles.headerTitleStyle,
         }}
       />
     </BottomTab.Navigator>

@@ -3,6 +3,7 @@ export {
   type NavigationScreenProperties,
   type RootNavigationParameterList,
   type TabNavigationParameterList,
+  type TabNavigatorOptions,
 } from './navigation/navigation';
 export {
   type ServerErrorDetail,

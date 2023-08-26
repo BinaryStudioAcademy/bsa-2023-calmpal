@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     lineHeight: 25,
   },
   icon: {
-    paddingRight: 28,
+    marginRight: 28,
   },
 });
 
