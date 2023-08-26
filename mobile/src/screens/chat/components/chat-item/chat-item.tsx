@@ -6,11 +6,11 @@ import { Image, Text, TouchableOpacity } from '#libs/components/components';
 
 import { styles } from './styles';
 
-type ChatItemProperties = {
+type Properties = {
   chatItem: { id: string; title: string };
 };
 
-const ChatItem: React.FC<ChatItemProperties> = ({ chatItem }) => {
+const ChatItem: React.FC<Properties> = ({ chatItem }) => {
   return (
     <TouchableOpacity key={chatItem.id} style={styles.container}>
       <Image source={image} style={styles.image} />

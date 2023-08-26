@@ -5,10 +5,7 @@ import ChatIcon from '#assets/img/icons/chat.svg';
 import HomeIcon from '#assets/img/icons/home.svg';
 import { HeaderTitle } from '#libs/components/components';
 import { AppColor, MainScreenName } from '#libs/enums/enums';
-import {
-  type TabNavigationParameterList,
-  type TabNavigatorOptions,
-} from '#libs/types/types';
+import { type TabNavigationParameterList } from '#libs/types/types';
 import { Chat } from '#screens/chat/chat';
 import { Home } from '#screens/home/home';
 
@@ -16,13 +13,13 @@ import { styles } from './styles';
 
 const BottomTab = createBottomTabNavigator<TabNavigationParameterList>();
 
-const tabNavigatorOptions = (): TabNavigatorOptions => ({
-  tabBarActiveTintColor: AppColor.BLUE_300,
+const tabNavigatorOptions = {
   headerStyle: styles.headerStyle,
+  tabBarActiveTintColor: AppColor.BLUE_300,
   tabBarInactiveTintColor: AppColor.GRAY_400,
   tabBarShowLabel: false,
   tabBarStyle: styles.tabBarStyle,
-});
+};
 
 const Main: React.FC = () => {
   return (
