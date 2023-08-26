@@ -1,3 +1,4 @@
+import { ExceptionMessage } from '#libs/enums/enums.js';
 import {
   IncorrectPasswordError,
   UserNotFoundError,
@@ -33,7 +34,7 @@ class AuthService {
 
     if (!user) {
       throw new UserNotFoundError({
-        message: 'User with these credentials was not found',
+        message: ExceptionMessage.USER_NOT_FOUND,
       });
     }
 
@@ -41,7 +42,7 @@ class AuthService {
 
     if (!pswrdCompare) {
       throw new IncorrectPasswordError({
-        message: 'Incorrect password',
+        message: ExceptionMessage.INCORRECT_PASSWORD,
       });
     }
 
