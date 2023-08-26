@@ -5,7 +5,7 @@ import { type HTTPOptions } from './types';
 
 type HTTPApiOptions = Omit<HTTPOptions, 'headers' | 'payload'> & {
   hasAuth: boolean;
-  contentType: ValueOf<typeof ContentType>;
+  contentType?: ValueOf<typeof ContentType>;
   payload?: HTTPOptions['payload'];
 };
 

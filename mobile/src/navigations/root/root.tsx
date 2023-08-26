@@ -27,3 +27,39 @@ const Root: React.FC = () => {
 };
 
 export { Root };
+
+// import React from 'react';
+// import {
+//   createNativeStackNavigator,
+//   NativeStackNavigationOptions,
+// } from '@react-navigation/native-stack';
+// import { Auth } from '#screens/auth/auth';
+// import { Main } from '../main/main';
+// import { RootScreenName } from '#libs/enums/enums';
+
+// interface RootProps {
+//   userToken: string | null;
+// }
+
+// const NativeStack = createNativeStackNavigator();
+
+// const screenOptions: NativeStackNavigationOptions = {
+//   headerShown: false,
+// };
+
+// const Root: React.FC<RootProps> = ({ userToken }) => {
+//   return (
+//     <NativeStack.Navigator screenOptions={screenOptions}>
+//       {userToken ? (
+//         <NativeStack.Screen name={RootScreenName.MAIN} component={Main} />
+//       ) : (
+//         <>
+//           <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
+//           <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
+//         </>
+//       )}
+//     </NativeStack.Navigator>
+//   );
+// };
+
+// export { Root };
