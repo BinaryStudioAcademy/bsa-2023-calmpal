@@ -5,7 +5,7 @@ import {
   type FieldValues,
 } from 'react-hook-form';
 
-import SendButton from '#assets/img/icons/send-button.svg';
+import SendIcon from '#assets/img/icons/send-button.svg';
 import { Pressable, TextInput, View } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
 import { useFormController } from '#libs/hooks/hooks';
@@ -41,7 +41,7 @@ const ChatInput = <T extends FieldValues>({
       />
       {hasValue && (
         <Pressable onPress={onPress}>
-          <SendButton style={styles.button} />
+          <SendIcon style={styles.button} />
         </Pressable>
       )}
     </View>
