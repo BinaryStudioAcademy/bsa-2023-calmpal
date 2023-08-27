@@ -10,17 +10,15 @@ type Properties = {
   title: string;
   image?: ImageSourcePropType;
   onPress: () => void;
-  key: string; //for moking purpouse
 };
 
 const Card: React.FC<Properties> = ({
   title,
   image = imagePlaceholder,
   onPress,
-  key, //for moking purpouse
 }) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress} key={key}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image source={image} style={styles.image} />
       <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
         {title}
