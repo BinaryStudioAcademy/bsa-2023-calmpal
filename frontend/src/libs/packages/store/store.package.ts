@@ -1,15 +1,16 @@
 import {
   type AnyAction,
+  configureStore,
   type MiddlewareArray,
   type ThunkMiddleware,
 } from '@reduxjs/toolkit';
-import { configureStore } from '@reduxjs/toolkit';
 
 import { AppEnvironment } from '#libs/enums/enums.js';
 import { type Config } from '#libs/packages/config/config.js';
 import { authApi } from '#packages/auth/auth.js';
 import { userApi } from '#packages/users/users.js';
 import { reducer as authReducer } from '#slices/auth/auth.js';
+import { reducer as surveyReducer } from '#slices/survey/survey.js';
 import { reducer as usersReducer } from '#slices/users/users.js';
 
 import { storage } from '../storage/storage.js';
@@ -17,6 +18,7 @@ import { storage } from '../storage/storage.js';
 type RootReducer = {
   auth: ReturnType<typeof authReducer>;
   users: ReturnType<typeof usersReducer>;
+  survey: ReturnType<typeof surveyReducer>;
 };
 
 type ExtraArguments = {
@@ -40,6 +42,7 @@ class Store {
       reducer: {
         auth: authReducer,
         users: usersReducer,
+        survey: surveyReducer,
       },
       middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware({
