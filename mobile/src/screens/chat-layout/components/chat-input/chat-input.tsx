@@ -27,6 +27,7 @@ const ChatInput = <T extends FieldValues>({
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
   const { value, onChange } = field;
+  const hasValue = Boolean(value);
 
   return (
     <View style={styles.chatInputContainer}>
@@ -38,7 +39,7 @@ const ChatInput = <T extends FieldValues>({
         onFocus={scrollViewToEnd}
         onChangeText={onChange}
       />
-      {value && (
+      {hasValue && (
         <Pressable onPress={onPress}>
           <SendButton style={styles.button} />
         </Pressable>
