@@ -21,13 +21,19 @@ type ServerAuthErrorResponse = {
 type ServerUsersErrorResponse = {
   errorType: typeof ServerErrorType.USERS;
   message: string;
+}
+
+type ServerFileErrorResponse = {
+  errorType: typeof ServerErrorType.FILE;
+  message: string;
 };
 
 type ServerErrorResponse =
   | ServerValidationErrorResponse
   | ServerCommonErrorResponse
   | ServerAuthErrorResponse
-  | ServerUsersErrorResponse;
+  | ServerUsersErrorResponse
+  | ServerFileErrorResponse;
 
 export {
   type ServerAuthErrorResponse,
