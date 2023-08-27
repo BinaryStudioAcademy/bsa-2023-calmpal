@@ -21,6 +21,10 @@ const getErrorInfo = (error: APIError): ErrorInfo => {
   if (error instanceof UsersError) {
     return getUsersErrorInfo(error);
   }
+  
+  if (error instanceof FileError) {
+    return getFileErrorInfo(error);
+  }
 
   if (error instanceof FileError) {
     return getFileErrorInfo(error);
