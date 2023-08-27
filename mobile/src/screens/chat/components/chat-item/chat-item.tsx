@@ -1,6 +1,5 @@
 import React from 'react';
 
-import ArrowIcon from '#assets/img/icons/arrow-right.svg';
 import image from '#assets/img/temp/chat-item.png';
 import { Image, Text, TouchableOpacity } from '#libs/components/components';
 
@@ -17,7 +16,6 @@ const ChatItem: React.FC<Properties> = ({ chatItem }) => {
       <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
         {chatItem.title}
       </Text>
-      <ArrowIcon style={styles.icon} />
     </TouchableOpacity>
   );
 };
