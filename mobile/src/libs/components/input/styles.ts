@@ -14,12 +14,14 @@ const styles = StyleSheet.create({
     marginBottom: 2,
     marginTop: 6,
   },
+
   label: {
     fontSize: 14,
     fontWeight: 'bold',
     color: AppColor.GRAY_100,
     marginTop: 4,
   },
+
   placeholder: {
     color: AppColor.GRAY_300,
   },
@@ -36,12 +38,15 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     shadowOpacity: 0.25,
   },
+
   disabledInput: {
     borderColor: AppColor.GRAY_200,
   },
+
   errorInput: {
     borderColor: AppColor.RED_100,
   },
+
   errorText: {
     color: AppColor.RED_100,
     fontSize: 14,

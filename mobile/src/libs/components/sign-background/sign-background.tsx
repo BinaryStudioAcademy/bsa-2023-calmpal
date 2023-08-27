@@ -1,9 +1,9 @@
 import React, { type ReactNode } from 'react';
 import { Image, type ImageSourcePropType } from 'react-native';
 
-import bottomBubbleImg from '#assets/bottom-bubble.png';
-import backgroundImg from '#assets/sign-background.png';
-import topBubbleImg from '#assets/top-bubble.png';
+import bottomBubbleImage from '#assets/bottom-bubble.png';
+import backgroundImage from '#assets/sign-background.png';
+import topBubbleImage from '#assets/top-bubble.png';
 import { View } from '#libs/components/components';
 
 import { styles } from './styles';
@@ -17,19 +17,18 @@ const SignBackground: React.FC<Properties> = ({ children }) => {
     <View style={styles.wrapper}>
       <View style={styles.backgroundWrapper}>
         <Image
-          source={backgroundImg as ImageSourcePropType}
+          source={backgroundImage as ImageSourcePropType}
           style={styles.backgroundImage}
         />
       </View>
       <Image
-        source={topBubbleImg as ImageSourcePropType}
+        source={topBubbleImage as ImageSourcePropType}
         style={styles.topBubbleImage}
       />
       <Image
-        source={bottomBubbleImg as ImageSourcePropType}
+        source={bottomBubbleImage as ImageSourcePropType}
         style={styles.bottomBubbleImage}
       />
-
       {children}
     </View>
   );
