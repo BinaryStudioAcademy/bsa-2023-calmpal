@@ -47,7 +47,7 @@ const Chat: React.FC = () => {
     [setMessages, reset],
   );
 
-  const handlePress = useCallback((): void => {
+  const handleSend = useCallback((): void => {
     void handleSubmit(onSubmit)();
   }, [handleSubmit, onSubmit]);
 
@@ -76,7 +76,7 @@ const Chat: React.FC = () => {
       </ScrollView>
       <ChatInput
         scrollViewToEnd={scrollViewToEnd}
-        onPress={handlePress}
+        onSend={handleSend}
         control={control}
         name="text"
       />

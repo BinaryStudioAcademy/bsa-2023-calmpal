@@ -16,14 +16,14 @@ type Properties<T extends FieldValues> = {
   name: FieldPath<T>;
   control: Control<T, null>;
   scrollViewToEnd: () => void;
-  onPress: () => void;
+  onSend: () => void;
 };
 
 const ChatInput = <T extends FieldValues>({
   name,
   control,
   scrollViewToEnd,
-  onPress,
+  onSend,
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
   const { value, onChange } = field;
@@ -40,7 +40,7 @@ const ChatInput = <T extends FieldValues>({
         onChangeText={onChange}
       />
       {hasValue && (
-        <Pressable onPress={onPress}>
+        <Pressable onPress={onSend}>
           <SendIcon style={styles.button} />
         </Pressable>
       )}
