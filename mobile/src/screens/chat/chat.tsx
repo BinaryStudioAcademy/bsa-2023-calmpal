@@ -1,9 +1,9 @@
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { Input, ScrollView, View } from '#libs/components/components';
+import { InputSearch, ScrollView, View } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
-import { useAppForm, useState } from '#libs/hooks/hooks';
+import { useState } from '#libs/hooks/hooks';
 
 import { ChatItem, ChatLink } from './components/components';
 import data from './data.json';
@@ -12,10 +12,6 @@ import { styles } from './styles';
 const Chat: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const { control, errors } = useAppForm({
-    defaultValues: { search: '' },
-  });
-
   return (
     <LinearGradient
       colors={[AppColor.WHITE, AppColor.BLUE_100]}
@@ -23,13 +19,9 @@ const Chat: React.FC = () => {
     >
       <View style={styles.containerWrapper}>
         <View style={styles.container}>
-          <Input
-            control={control}
-            errors={errors}
-            name="search"
+          <InputSearch
             placeholder="Search topic"
             setSearchQuery={setSearchQuery}
-            style={styles.input}
           />
           <ScrollView contentContainerStyle={styles.list}>
             {data

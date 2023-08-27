@@ -1,4 +1,3 @@
-import { type Dispatch, type SetStateAction } from 'react';
 import React from 'react';
 import {
   type Control,
@@ -6,22 +5,20 @@ import {
   type FieldPath,
   type FieldValues,
 } from 'react-hook-form';
-import { type StyleProp, type ViewStyle } from 'react-native';
 import { TextInput } from 'react-native';
 
 import { Text, View } from '#libs/components/components';
-import { useFormController } from '#libs/hooks/hooks';
+import { useFormController, useState } from '#libs/hooks/hooks';
 
 import { styles } from './styles';
 
 type Properties<T extends FieldValues> = {
   control: Control<T, null>;
   errors: FieldErrors<T>;
-  label?: string;
+  label: string;
   name: FieldPath<T>;
+  isSecure?: boolean;
   placeholder: string;
-  setSearchQuery?: Dispatch<SetStateAction<string>>;
-  style?: StyleProp<ViewStyle>;
 };
 
 const Input = <T extends FieldValues>({
@@ -29,36 +26,44 @@ const Input = <T extends FieldValues>({
   errors,
   label,
   name,
+  isSecure = false,
   placeholder,
-  setSearchQuery,
-  style,
 }: Properties<T>): JSX.Element => {
+  const [isFocused, setIsFocused] = useState(false);
   const { field } = useFormController({ name, control });
 
   const { value, onChange, onBlur } = field;
 
-  const handleInputChange = (text: string): void => {
-    onChange(text);
-    if (setSearchQuery) {
-      setSearchQuery(text);
-    }
-  };
-
   const error = errors[name]?.message;
   const hasError = Boolean(error);
 
+  const handleFocus = (): void => {
+    setIsFocused(true);
+  };
+
+  const handeBlur = (): void => {
+    setIsFocused(false);
+    onBlur();
+  };
+
   return (
     <View>
-      {label ? <Text>{label}</Text> : null}
+      <Text style={styles.label}>{label}</Text>
       <TextInput
-        onBlur={onBlur}
-        onChangeText={handleInputChange}
-        placeholder={placeholder}
-        placeholderTextColor={styles.placeholder.color}
-        style={[styles.input, style]}
+        onChangeText={onChange}
         value={value}
+        onFocus={handleFocus}
+        onBlur={handeBlur}
+        secureTextEntry={isSecure}
+        placeholder={placeholder}
+        style={[
+          styles.input,
+          !hasError && isFocused && styles.filledInput,
+          hasError && styles.errorInput,
+        ]}
+        placeholderTextColor={styles.placeholder.color}
       />
-      <Text>{hasError && (error as string)}</Text>
+      <Text style={styles.errorText}>{hasError && (error as string)}</Text>
     </View>
   );
 };
