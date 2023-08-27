@@ -4,15 +4,15 @@ import { Text, View } from 'react-native';
 import { styles } from './styles';
 
 type Properties = {
-  isBadge?: boolean;
+  hasBadge?: boolean;
   title: string;
 };
 
-const HeaderTitle: React.FC<Properties> = ({ isBadge, title }) => {
+const HeaderTitle: React.FC<Properties> = ({ hasBadge, title }) => {
   return (
     <View style={styles.wrapper}>
       <Text style={styles.title}>{title}</Text>
-      {isBadge ? (
+      {hasBadge ? (
         <View style={styles.badge}>
           {/*12 is moked data*/}
           <Text style={styles.badgeText}>12</Text>

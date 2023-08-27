@@ -37,7 +37,7 @@ const Main: React.FC = () => {
         component={Chat}
         options={{
           headerTitle: () => (
-            <HeaderTitle title={MainScreenName.CHAT} isBadge />
+            <HeaderTitle title={MainScreenName.CHAT} hasBadge />
           ),
           tabBarIcon: ({ color }) => <ChatIcon color={color} />,
         }}
