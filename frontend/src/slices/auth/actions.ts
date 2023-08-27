@@ -28,11 +28,11 @@ const signIn = createAsyncThunk<
   AsyncThunkConfig
 >(`${sliceName}/sign-in`, async (loginPayload, { extra }) => {
   const { authApi, storage } = extra;
-  const response = await authApi.signIn(loginPayload);
+  const { user, token } = await authApi.signIn(loginPayload);
 
-  await storage.set(StorageKey.TOKEN, response.token);
+  await storage.set(StorageKey.TOKEN, token);
 
-  return response.user;
+  return user;
 });
 
 const getAuthenticatedUser = createAsyncThunk<
