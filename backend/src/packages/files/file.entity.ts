@@ -9,24 +9,24 @@ class FileEntity implements Entity {
 
   private url: string;
 
-  private content_type: string;
+  private contentType: string;
 
   private constructor({
     id,
     url,
-    content_type,
+    contentType,
     createdAt,
     updatedAt,
   }: {
     id: number | null;
     url: string;
-    content_type: string;
+    contentType: string;
     createdAt: Date | null;
     updatedAt: Date | null;
   }) {
     this.id = id;
     this.url = url;
-    this.content_type = content_type;
+    this.contentType = contentType;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
@@ -34,20 +34,20 @@ class FileEntity implements Entity {
   public static initialize({
     id,
     url,
-    content_type,
+    contentType,
     createdAt,
     updatedAt,
   }: {
     id: number;
     url: string;
-    content_type: string;
+    contentType: string;
     createdAt: Date;
     updatedAt: Date;
   }): FileEntity {
     return new FileEntity({
       id,
       url,
-      content_type,
+      contentType,
       createdAt,
       updatedAt,
     });
@@ -55,15 +55,15 @@ class FileEntity implements Entity {
 
   public static initializeNew({
     url,
-    content_type,
+    contentType,
   }: {
     url: string;
-    content_type: string;
+    contentType: string;
   }): FileEntity {
     return new FileEntity({
       id: null,
       url,
-      content_type,
+      contentType,
       createdAt: null,
       updatedAt: null,
     });
@@ -72,14 +72,14 @@ class FileEntity implements Entity {
   public toObject(): {
     id: number;
     url: string;
-    content_type: string;
+    contentType: string;
     createdAt: Date;
     updatedAt: Date;
   } {
     return {
       id: this.id as number,
       url: this.url,
-      content_type: this.content_type,
+      contentType: this.contentType,
       createdAt: this.createdAt as Date,
       updatedAt: this.updatedAt as Date,
     };
@@ -87,11 +87,11 @@ class FileEntity implements Entity {
 
   public toNewObject(): {
     url: string;
-    content_type: string;
+    contentType: string;
   } {
     return {
       url: this.url,
-      content_type: this.content_type,
+      contentType: this.contentType,
     };
   }
 }
