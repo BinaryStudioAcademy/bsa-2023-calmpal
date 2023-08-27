@@ -4,9 +4,13 @@ import {
 } from '@react-navigation/native-stack';
 import React from 'react';
 
-import { RootScreenName } from '#libs/enums/enums';
+import { Loader } from '#libs/components/components';
+import { DataStatus, RootScreenName } from '#libs/enums/enums';
+import { useAppDispatch, useAppSelector, useEffect } from '#libs/hooks/hooks';
 import { type RootNavigationParameterList } from '#libs/types/types';
 import { Auth } from '#screens/auth/auth';
+import { actions as authActions } from '#slices/auth/auth';
+import { actions as userActions } from '#slices/users/users';
 
 import { Main } from '../main/main';
 
@@ -16,7 +20,36 @@ const screenOptions: NativeStackNavigationOptions = {
   headerShown: false,
 };
 
-const Root: React.FC = () => {
+type RootProperties = {
+  routeName: string | undefined;
+};
+
+const Root: React.FC<RootProperties> = ({ routeName }) => {
+  const dispatch = useAppDispatch();
+  const { authenticatedUserDataStatus } = useAppSelector(({ auth }) => ({
+    authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
+  }));
+
+  const isRoot = routeName === RootScreenName.SIGN_IN;
+
+  useEffect(() => {
+    if (isRoot) {
+      void dispatch(userActions.loadAll()).catch((error: Error) => {
+        throw new Error(`Error loading all users: ${error.message}`);
+      });
+    }
+  }, [isRoot, dispatch]);
+
+  useEffect(() => {
+    void dispatch(authActions.getAuthenticatedUser()).catch((error: Error) => {
+      throw new Error(`Error getting authenticated user: ${error.message}`);
+    });
+  }, [dispatch]);
+
+  if (authenticatedUserDataStatus === DataStatus.PENDING) {
+    return <Loader />;
+  }
+
   return (
     <NativeStack.Navigator screenOptions={screenOptions}>
       <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
@@ -27,39 +60,3 @@ const Root: React.FC = () => {
 };
 
 export { Root };
-
-// import React from 'react';
-// import {
-//   createNativeStackNavigator,
-//   NativeStackNavigationOptions,
-// } from '@react-navigation/native-stack';
-// import { Auth } from '#screens/auth/auth';
-// import { Main } from '../main/main';
-// import { RootScreenName } from '#libs/enums/enums';
-
-// interface RootProps {
-//   userToken: string | null;
-// }
-
-// const NativeStack = createNativeStackNavigator();
-
-// const screenOptions: NativeStackNavigationOptions = {
-//   headerShown: false,
-// };
-
-// const Root: React.FC<RootProps> = ({ userToken }) => {
-//   return (
-//     <NativeStack.Navigator screenOptions={screenOptions}>
-//       {userToken ? (
-//         <NativeStack.Screen name={RootScreenName.MAIN} component={Main} />
-//       ) : (
-//         <>
-//           <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
-//           <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
-//         </>
-//       )}
-//     </NativeStack.Navigator>
-//   );
-// };
-
-// export { Root };
