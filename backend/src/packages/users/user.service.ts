@@ -78,7 +78,6 @@ class UserService implements Service {
         passwordHash,
       }),
     );
-
     const user = item.toObject();
     const token = await this.jwtService.signJWT({ userId: user.id });
 
