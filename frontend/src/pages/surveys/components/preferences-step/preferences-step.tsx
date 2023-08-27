@@ -15,11 +15,12 @@ import {
   surveyInputValidationSchema,
   SurveyTextareaOptions,
 } from '#packages/survey/survey.js';
-import { DEFAULT_SURVEY_PAYLOAD } from '#pages/surveys/libs/constants.js';
+import {
+  DEFAULT_SURVEY_PAYLOAD,
+  TEXTAREA_MAX_LENGTH,
+} from '#pages/surveys/libs/constants.js';
 
 import styles from './styles.module.scss';
-
-const textareaMaxLength = 1000;
 
 type Properties = {
   onSubmit: (options: string[]) => void;
@@ -94,7 +95,7 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
             errors={errors}
             name="textarea"
             placeholder="Text"
-            maxLength={textareaMaxLength}
+            maxLength={TEXTAREA_MAX_LENGTH}
           />
         )}
       </div>
