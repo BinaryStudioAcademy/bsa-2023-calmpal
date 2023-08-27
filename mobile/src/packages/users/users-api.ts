@@ -23,7 +23,7 @@ class UserApi extends BaseHttpApi {
       {
         method: 'GET',
         contentType: ContentType.JSON,
-        hasAuth: true, //was false
+        hasAuth: false,
       },
     );
 
