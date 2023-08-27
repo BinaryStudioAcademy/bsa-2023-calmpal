@@ -8,7 +8,7 @@ type Properties = {
   title: string;
 };
 
-const HeaderTitle: React.FC<Properties> = ({ hasBadge, title }) => {
+const HeaderTitle: React.FC<Properties> = ({ hasBadge = false, title }) => {
   return (
     <View style={styles.wrapper}>
       <Text style={styles.title}>{title}</Text>

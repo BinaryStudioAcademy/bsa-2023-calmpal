@@ -1,8 +1,8 @@
-import debounce from 'lodash/debounce';
 import React, { type Dispatch, type SetStateAction } from 'react';
 
 import { TextInput, View } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
+import { debouncedFuncion as debouncedSetSearchQuery } from '#libs/helpers/helpers';
 import { useAppForm, useFormController } from '#libs/hooks/hooks';
 
 import { styles } from './styles';
@@ -18,15 +18,10 @@ const InputSearch: React.FC<Properties> = ({ placeholder, setSearchQuery }) => {
   });
   const { field } = useFormController({ name: 'search', control });
   const { value, onChange } = field;
-  const DEBOUNCE_DELAY = 300;
-
-  const debouncedSetSearchQuery = debounce((text: string): void => {
-    setSearchQuery(text);
-  }, DEBOUNCE_DELAY);
 
   const handleInputChange = (text: string): void => {
     onChange(text);
-    debouncedSetSearchQuery(text);
+    debouncedSetSearchQuery(setSearchQuery)(text);
   };
 
   return (
