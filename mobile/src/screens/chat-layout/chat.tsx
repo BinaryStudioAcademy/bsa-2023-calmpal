@@ -56,7 +56,7 @@ const Chat: React.FC = () => {
   }, []);
 
   return (
-    <View style={styles.chatLayoutWrapper}>
+    <View style={styles.wrapper}>
       <View style={styles.header}>
         <View style={styles.avatar} />
         <Text style={styles.title}>Doctor Freud.ai</Text>
@@ -74,7 +74,6 @@ const Chat: React.FC = () => {
           />
         ))}
       </ScrollView>
-
       <ChatInput
         scrollViewToEnd={scrollViewToEnd}
         onPress={handlePress}

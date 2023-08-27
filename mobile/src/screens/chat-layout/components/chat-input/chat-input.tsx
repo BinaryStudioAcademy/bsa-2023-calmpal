@@ -30,7 +30,7 @@ const ChatInput = <T extends FieldValues>({
   const hasValue = Boolean(value);
 
   return (
-    <View style={styles.chatInputContainer}>
+    <View style={styles.container}>
       <TextInput
         style={styles.input}
         placeholder="Type a message"

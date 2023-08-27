@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { AppColor } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
-  chatLayoutWrapper: {
+  wrapper: {
     flex: 1,
     backgroundColor: AppColor.WHITE,
     alignItems: 'center',
