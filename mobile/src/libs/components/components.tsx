@@ -5,6 +5,7 @@ export { Input } from './input/input';
 export { InputSearch } from './input-search/input-search';
 export { Link } from './link/link';
 export { Loader } from './loader/loader';
+export { SignBackground } from './sign-background/sign-background';
 export {
   Image,
   ScrollView,

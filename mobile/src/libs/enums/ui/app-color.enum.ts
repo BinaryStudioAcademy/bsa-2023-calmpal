@@ -1,10 +1,10 @@
 const AppColor = {
   BLACK: '#000000',
-  BLUE_100: '#E5F0FF',
+  BLUE_100: '#4E80FF',
   BLUE_200: '#4E80FF',
   BLUE_300: '#507CEB',
   BLUE_400: '#113182',
-  BLUE_500: '#051e47',
+  BLUE_500: '#051E47',
   GRAY_100: '#EBF3FF',
   GRAY_200: '#EDF2F7',
   GRAY_300: '#CCDDF3',
@@ -15,9 +15,9 @@ const AppColor = {
   PURPLE_100: '#E5E1FF',
   RED_100: '#D51A52',
   WHITE: '#FFFFFF',
-  BLUE_100_ALPHA_70: '#A6D4FFB2',
   GRAY_100_ALPHA_50: '#FFFFFF7F',
   GRAY_200_ALPHA_50: '#312F377F',
+  BLUE_100_ALPHA_70: '#A6D4FFB2',
 } as const;
 
 export { AppColor };
