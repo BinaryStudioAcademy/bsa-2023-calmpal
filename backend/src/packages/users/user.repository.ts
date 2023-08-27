@@ -2,6 +2,12 @@ import { type Repository } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/user.model.js';
 
+import { UsersRelation } from './libs/enums/enums.js';
+import {
+  type UserCommonQueryResponse,
+  type UserCreateQueryPayload,
+} from './libs/types/types.js';
+
 class UserRepository implements Repository {
   private userModel: typeof UserModel;
 
@@ -14,35 +20,75 @@ class UserRepository implements Repository {
   }
 
   public async findById(id: number): Promise<UserEntity | null> {
-    const user = await this.userModel.query().findById(id);
+    const user = await this.userModel
+      .query()
+      .withGraphJoined(UsersRelation.DETAILS)
+      .findById(id)
+      .castTo<UserCommonQueryResponse | undefined>()
+      .execute();
 
     if (!user) {
       return null;
     }
 
-    return UserEntity.initialize(user);
+    return UserEntity.initialize({
+      id: user.id,
+      email: user.email,
+      passwordHash: user.passwordHash,
+      passwordSalt: user.passwordSalt,
+      createdAt: new Date(user.createdAt),
+      updatedAt: new Date(user.updatedAt),
+      fullName: user.details?.fullName ?? '',
+    });
   }
 
   public async findAll(): Promise<UserEntity[]> {
-    const users = await this.userModel.query().execute();
+    const users = await this.userModel
+      .query()
+      .select()
+      .withGraphJoined(UsersRelation.DETAILS)
+      .castTo<UserCommonQueryResponse[]>()
+      .execute();
 
-    return users.map((user) => UserEntity.initialize(user));
+    return users.map((user) => {
+      return UserEntity.initialize({
+        id: user.id,
+        email: user.email,
+        passwordHash: user.passwordHash,
+        passwordSalt: user.passwordSalt,
+        createdAt: new Date(user.createdAt),
+        updatedAt: new Date(user.updatedAt),
+        fullName: user.details?.fullName ?? '',
+      });
+    });
   }
 
   public async create(entity: UserEntity): Promise<UserEntity> {
-    const { email, passwordSalt, passwordHash } = entity.toNewObject();
-
+    const { email, passwordSalt, passwordHash, fullName } =
+      entity.toNewObject();
     const user = await this.userModel
       .query()
-      .insert({
+      .insertGraph({
         email,
         passwordSalt,
         passwordHash,
-      })
-      .returning('*')
+        [UsersRelation.DETAILS]: {
+          fullName,
+        },
+      } as UserCreateQueryPayload)
+      .withGraphJoined(UsersRelation.DETAILS)
+      .castTo<UserCommonQueryResponse>()
       .execute();
 
-    return UserEntity.initialize(user);
+    return UserEntity.initialize({
+      id: user.id,
+      email: user.email,
+      passwordHash: user.passwordHash,
+      passwordSalt: user.passwordSalt,
+      createdAt: new Date(user.createdAt),
+      updatedAt: new Date(user.updatedAt),
+      fullName: user.details?.fullName ?? '',
+    });
   }
 
   public update(): ReturnType<Repository['update']> {
