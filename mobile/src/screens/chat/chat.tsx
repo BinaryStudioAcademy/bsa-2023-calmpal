@@ -20,6 +20,10 @@ type MockChatItem = {
   title: string;
 };
 
+const onPress = (): void => {
+  // This function is intentionally left empty for mocking purposes.
+};
+
 const Chat: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredChats, setFilteredChats] = useState<MockChatItem[]>([]);
@@ -44,7 +48,7 @@ const Chat: React.FC = () => {
   }, [searchQuery]);
 
   const chatList = filteredChats.map((item) => (
-    <Card chatItem={item} key={item.id} />
+    <Card title={item.title} onPress={onPress} key={item.id} />
   ));
 
   return (
