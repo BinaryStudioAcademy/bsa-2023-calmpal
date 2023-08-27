@@ -13,3 +13,17 @@ declare module '*.png' {
 
   export = content;
 }
+
+declare module 'lodash/debounce' {
+  const debounce: (
+    function_: T,
+    wait: number,
+    options?: {
+      leading?: boolean;
+      trailing?: boolean;
+      maxWait?: number;
+    },
+  ) => (...arguments_: Parameters<T>) => void;
+
+  export = debounce;
+}
