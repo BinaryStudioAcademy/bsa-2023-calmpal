@@ -1,31 +1,43 @@
 import {
-  type FieldPath,
+  type ControllerRenderProps,
   type FieldValues,
-  type UseFormRegister,
+  type Path,
 } from 'react-hook-form';
 
 import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
+import { useCallback } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
 
 type Properties<T extends FieldValues> = {
-  register: UseFormRegister<T>;
+  field: ControllerRenderProps<T, Path<T>>;
   label: string;
-  name: FieldPath<T>;
 };
 
 const SurveyCategory = <T extends FieldValues>({
-  register,
+  field,
   label,
-  name,
 }: Properties<T>): JSX.Element => {
+  const { onChange, ...fieldProperties } = field;
+
+  const handleOnChange = useCallback(() => {
+    let options = field.value as string[];
+    if (options.includes(label)) {
+      options = options.filter((option: string) => option !== label);
+    } else {
+      options.push(label);
+    }
+
+    onChange(options);
+  }, [field, label, onChange]);
+
   return (
     <label className={styles['option']}>
       <input
         className={styles['checkbox']}
         type="checkbox"
-        value={label}
-        {...register(name)}
+        onChange={handleOnChange}
+        {...fieldProperties}
       />
       <div className={getValidClassNames(styles['container'])}>
         <span className={styles['label']}>{label}</span>

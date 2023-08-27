@@ -1,9 +1,15 @@
+import { type ControllerRenderProps } from 'react-hook-form';
+
 import {
   Button,
   SurveyCategory,
   Textarea,
 } from '#libs/components/components.js';
-import { useAppForm, useCallback } from '#libs/hooks/hooks.js';
+import {
+  useAppForm,
+  useCallback,
+  useFormController,
+} from '#libs/hooks/hooks.js';
 import {
   type SurveyInputDto,
   surveyInputValidationSchema,
@@ -20,11 +26,15 @@ type Properties = {
 };
 
 const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
-  const { register, watch, control, errors, isValid, handleSubmit } =
+  const { watch, control, errors, isValid, handleSubmit } =
     useAppForm<SurveyInputDto>({
       defaultValues: DEFAULT_SURVEY_PAYLOAD,
       validationSchema: surveyInputValidationSchema,
     });
+  const { field: optionsField } = useFormController({
+    name: 'option',
+    control,
+  });
 
   const activeOptions = watch('option');
   const hasOther = activeOptions.includes('Other');
@@ -58,7 +68,7 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
     (event_: React.BaseSyntheticEvent): void => {
       void handleSubmit(handleOnSubmit)(event_);
     },
-    [handleSubmit, onSubmit],
+    [handleSubmit, handleOnSubmit],
   );
 
   return (
@@ -69,8 +79,12 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
         {options.map((option, index) => (
           <SurveyCategory
             key={index}
-            register={register}
-            name="option"
+            field={
+              optionsField as ControllerRenderProps<
+                SurveyInputDto,
+                'option' | 'textarea' | `option.${number}`
+              >
+            }
             label={option}
           />
         ))}

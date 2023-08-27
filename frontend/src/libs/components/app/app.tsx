@@ -41,7 +41,7 @@ const App: React.FC = () => {
         surveyActions.getUserSurveyPreferences({ userId: authenticatedUserId }),
       );
     }
-  }, [authenticatedUserId]);
+  }, [dispatch, authenticatedUserId]);
 
   if (
     authenticatedUserDataStatus === DataStatus.PENDING ||

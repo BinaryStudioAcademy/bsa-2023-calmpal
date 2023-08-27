@@ -19,14 +19,17 @@ const Survey: React.FC = () => {
     surveyPreferences: survey.isSurveyCompleted,
   }));
 
-  const onSubmit = useCallback((options: string[]) => {
-    void dispatch(
-      surveyActions.createUserSurveyPreferences({
-        userId: userId as number,
-        preferences: options,
-      }),
-    );
-  }, []);
+  const onSubmit = useCallback(
+    (options: string[]) => {
+      void dispatch(
+        surveyActions.createUserSurveyPreferences({
+          userId: userId as number,
+          preferences: options,
+        }),
+      );
+    },
+    [dispatch, userId],
+  );
 
   if (surveyPreferences) {
     return <Navigate to={AppRoute.ROOT} />;
