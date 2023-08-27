@@ -19,7 +19,7 @@ type Message = {
   message: string;
 };
 
-const ChatLayout: React.FC = () => {
+const Chat: React.FC = () => {
   const { control, handleSubmit, reset } = useAppForm<{ text: string }>({
     defaultValues: DEFAULT_VALUES,
   });
@@ -85,4 +85,4 @@ const ChatLayout: React.FC = () => {
   );
 };
 
-export { ChatLayout };
+export { Chat };
