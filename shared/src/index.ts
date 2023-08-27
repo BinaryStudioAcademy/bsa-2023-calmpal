@@ -8,6 +8,7 @@ export {
 export {
   ApplicationError,
   AuthError,
+  FileError,
   HTTPError,
   UsersError,
   ValidationError,
@@ -31,6 +32,13 @@ export {
   type ValueOf,
 } from './libs/types/types.js';
 export { AuthApiPath } from './packages/auth/auth.js';
+export {
+  type FileGetAllItemResponseDto,
+  type FileGetAllResponseDto,
+  type FileUploadRequestDto,
+  type FileUploadResponseDto,
+} from './packages/files/files.js';
+export { FilesApiPath } from './packages/files/files.js';
 export {
   createSurveyValidationSchema,
   type SurveyGetAllItemResponseDto,
