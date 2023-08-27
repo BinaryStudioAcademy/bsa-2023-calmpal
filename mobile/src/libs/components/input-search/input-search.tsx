@@ -5,6 +5,10 @@ import { AppColor } from '#libs/enums/enums';
 import { debounce as debouncedSetSearchQuery } from '#libs/helpers/helpers';
 import { useAppForm, useFormController } from '#libs/hooks/hooks';
 
+import {
+  INPUT_SEARCH_DEFAULT_NAME,
+  INPUT_SEARCH_DEFAULT_VALUE,
+} from './libs/constants/constants';
 import { styles } from './styles';
 
 type Properties = {
@@ -14,9 +18,12 @@ type Properties = {
 
 const InputSearch: React.FC<Properties> = ({ placeholder, setSearchQuery }) => {
   const { control } = useAppForm({
-    defaultValues: { search: '' },
+    defaultValues: { search: INPUT_SEARCH_DEFAULT_VALUE },
   });
-  const { field } = useFormController({ name: 'search', control });
+  const { field } = useFormController({
+    name: INPUT_SEARCH_DEFAULT_NAME,
+    control,
+  });
   const { value, onChange } = field;
 
   const handleInputChange = (text: string): void => {
