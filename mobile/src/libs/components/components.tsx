@@ -1,5 +1,6 @@
 export { App } from './app/app';
 export { Button } from './button/button';
+export { Card } from './card/card';
 export { Input } from './input/input';
 export { InputSearch } from './input-search/input-search';
 export { Link } from './link/link';

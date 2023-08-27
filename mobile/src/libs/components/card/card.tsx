@@ -9,7 +9,7 @@ type Properties = {
   chatItem: { id: string; title: string };
 };
 
-const ChatItem: React.FC<Properties> = ({ chatItem }) => {
+const Card: React.FC<Properties> = ({ chatItem }) => {
   return (
     <TouchableOpacity key={chatItem.id} style={styles.container}>
       <Image source={image} style={styles.image} />
@@ -20,4 +20,4 @@ const ChatItem: React.FC<Properties> = ({ chatItem }) => {
   );
 };
 
-export { ChatItem };
+export { Card };

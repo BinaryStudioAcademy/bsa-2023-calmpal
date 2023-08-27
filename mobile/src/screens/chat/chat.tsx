@@ -2,6 +2,7 @@ import React, { type ReactNode } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
 import {
+  Card,
   InputSearch,
   ScrollView,
   Text,
@@ -10,7 +11,7 @@ import {
 import { AppColor } from '#libs/enums/enums';
 import { useEffect, useNavigation, useState } from '#libs/hooks/hooks';
 
-import { Badge, ChatItem, ChatLink } from './components/components';
+import { Badge, ChatLink } from './components/components';
 import mockedChats from './libs/constants/data.json';
 import { styles } from './styles';
 
@@ -43,7 +44,7 @@ const Chat: React.FC = () => {
   }, [searchQuery]);
 
   const chatList = filteredChats.map((item) => (
-    <ChatItem chatItem={item} key={item.id} />
+    <Card chatItem={item} key={item.id} />
   ));
 
   return (
