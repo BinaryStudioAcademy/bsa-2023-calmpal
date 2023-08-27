@@ -1,4 +1,4 @@
-.submit {
+.primary {
   display: inline-block;
   width: 100%;
   padding: 15px 0;
@@ -10,4 +10,26 @@
   border: none;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.secondary {
+  display: inline-block;
+  width: 100%;
+  padding: 15px 0;
+  color: var(--gray-300);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  background-color: var(--white);
+  border: 1px solid var(--white);
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.secondary:disabled {
+  color: var(--gray-alpha-50);
+  background-color: var(--white-alpha-80);
+  border: 1px solid var(--white-alpha-80);
+  cursor: default;
 }
