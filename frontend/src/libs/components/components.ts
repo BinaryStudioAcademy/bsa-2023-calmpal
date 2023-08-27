@@ -6,5 +6,7 @@ export { Link } from './link/link.js';
 export { Loader } from './loader/loader.js';
 export { ProtectedRoute } from './protected-route/protected-route.js';
 export { RouterProvider } from './router-provider/router-provider.jsx';
+export { SurveyCategory } from './survey-category/survey-category.js';
+export { Textarea } from './textarea/textarea.js';
 export { Provider as StoreProvider } from 'react-redux';
 export { Outlet as RouterOutlet } from 'react-router-dom';
