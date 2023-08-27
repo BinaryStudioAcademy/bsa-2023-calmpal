@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   avatar: {
     height: 40,
     width: 40,
-    backgroundColor: AppColor.BLUE_200,
+    backgroundColor: AppColor.BLUE_300,
     borderRadius: 8,
     marginRight: 0,
     marginLeft: 16,
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   userAvatar: {
-    backgroundColor: AppColor.GRAY_300,
+    backgroundColor: AppColor.GRAY_400,
     marginLeft: 0,
     marginRight: 16,
   },
@@ -37,12 +37,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderRadius: 12,
     maxWidth: '85%',
-    backgroundColor: AppColor.BLUE_200,
+    backgroundColor: AppColor.BLUE_300,
     color: AppColor.WHITE,
   },
   userMessage: {
     backgroundColor: AppColor.GRAY_100,
-    color: AppColor.GRAY_500,
+    color: AppColor.GRAY_600,
   },
 });
 

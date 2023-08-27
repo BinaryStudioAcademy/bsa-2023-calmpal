@@ -19,19 +19,19 @@ const styles = StyleSheet.create({
   avatar: {
     width: 40,
     height: 40,
-    backgroundColor: AppColor.BLUE_200,
+    backgroundColor: AppColor.BLUE_300,
     borderRadius: 10,
   },
   title: {
     fontWeight: '600',
     fontSize: 22,
-    color: AppColor.GRAY_500,
+    color: AppColor.GRAY_600,
     marginLeft: 17,
   },
   divider: {
     height: 1,
     width: '100%',
-    backgroundColor: AppColor.GRAY_200,
+    backgroundColor: AppColor.GRAY_300,
   },
   chatWrapper: {
     paddingHorizontal: 20,
