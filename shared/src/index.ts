@@ -31,6 +31,11 @@ export {
 } from './libs/types/types.js';
 export { AuthApiPath } from './packages/auth/auth.js';
 export {
+  type SurveyInputDto,
+  surveyInputValidationSchema,
+  SurveyTextareaOptions,
+} from './packages/surveys/survey.js';
+export {
   type UserAuthResponseDto,
   type UserGetAllItemResponseDto,
   type UserGetAllResponseDto,
