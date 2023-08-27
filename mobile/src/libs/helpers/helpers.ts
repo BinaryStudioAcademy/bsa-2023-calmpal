@@ -1,1 +1,1 @@
-export { configureString, debouncedFuncion } from 'shared/build/index.js';
+export { configureString, debounce } from 'shared/build/index.js';

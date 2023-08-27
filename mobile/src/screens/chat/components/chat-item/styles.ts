@@ -14,7 +14,9 @@ const styles = StyleSheet.create({
     gap: 20,
     height: 83,
     marginBottom: 8,
-    padding: 3,
+    paddingLeft: 3,
+    paddingRight: 6,
+    paddingVertical: 3,
     shadowColor: AppColor.PURPLE_100,
   },
   image: {

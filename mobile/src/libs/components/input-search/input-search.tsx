@@ -2,7 +2,7 @@ import React, { type Dispatch, type SetStateAction } from 'react';
 
 import { TextInput, View } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
-import { debouncedFuncion as debouncedSetSearchQuery } from '#libs/helpers/helpers';
+import { debounce as debouncedSetSearchQuery } from '#libs/helpers/helpers';
 import { useAppForm, useFormController } from '#libs/hooks/hooks';
 
 import { styles } from './styles';
