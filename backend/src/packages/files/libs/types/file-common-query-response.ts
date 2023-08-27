@@ -3,7 +3,7 @@ type FileCommonQueryResponse = {
   createdAt: string;
   updatedAt: string;
   url: string;
-  content_type: string;
+  contentType: string;
 };
 
 export { type FileCommonQueryResponse };

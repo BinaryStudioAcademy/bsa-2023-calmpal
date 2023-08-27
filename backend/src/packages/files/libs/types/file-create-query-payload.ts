@@ -1,6 +1,6 @@
 type FileCreateQueryPayload = {
   url: string;
-  content_type: string;
+  contentType: string;
 };
 
 export { type FileCreateQueryPayload };
