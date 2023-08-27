@@ -1,6 +1,6 @@
 import React, { type Dispatch, type SetStateAction } from 'react';
 
-import { TextInput, View } from '#libs/components/components';
+import { TextInput } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
 import { debounce as debouncedSetSearchQuery } from '#libs/helpers/helpers';
 import { useAppForm, useFormController } from '#libs/hooks/hooks';
@@ -25,15 +25,13 @@ const InputSearch: React.FC<Properties> = ({ placeholder, setSearchQuery }) => {
   };
 
   return (
-    <View>
-      <TextInput
-        onChangeText={handleInputChange}
-        placeholder={placeholder}
-        placeholderTextColor={AppColor.GRAY_400}
-        style={styles.input}
-        value={value}
-      />
-    </View>
+    <TextInput
+      onChangeText={handleInputChange}
+      placeholder={placeholder}
+      placeholderTextColor={AppColor.GRAY_400}
+      style={styles.input}
+      value={value}
+    />
   );
 };
 

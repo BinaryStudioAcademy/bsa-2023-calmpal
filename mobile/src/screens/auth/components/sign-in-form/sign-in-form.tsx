@@ -18,7 +18,6 @@ const SignInForm: React.FC<Properties> = () => {
         }}
       />
       <Link label="Go to Sign Up" to={`/${RootScreenName.SIGN_UP}`} />
-      <Link label="Go to Sign Up" to={`/${RootScreenName.MAIN}`} />
     </View>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import image from '#assets/img/temp/chat-item.png';
+import image from '#assets/img/card-image-placeholder.png';
 import { Image, Text, TouchableOpacity } from '#libs/components/components';
 
 import { styles } from './styles';
