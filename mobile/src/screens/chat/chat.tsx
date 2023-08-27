@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
 import {
@@ -11,16 +11,22 @@ import { AppColor } from '#libs/enums/enums';
 import { useEffect, useNavigation, useState } from '#libs/hooks/hooks';
 
 import { Badge, ChatItem, ChatLink } from './components/components';
-import data from './data.json';
+import mockedChats from './libs/constants/data.json';
 import { styles } from './styles';
+
+type MockChatItem = {
+  id: string;
+  title: string;
+};
 
 const Chat: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [filteredChats, setFilteredChats] = useState<MockChatItem[]>([]);
   const navigation = useNavigation();
 
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: ({ children }: { children: React.ReactNode }) => (
+      headerTitle: ({ children }: { children: ReactNode }) => (
         <View style={styles.headerTitleWrapper}>
           <Text style={styles.headerTitle}>{children}</Text>
           <Badge />
@@ -28,6 +34,17 @@ const Chat: React.FC = () => {
       ),
     });
   }, [navigation]);
+
+  useEffect(() => {
+    const filteredItems = mockedChats.filter((item) =>
+      item.title.toLowerCase().includes(searchQuery.toLowerCase()),
+    );
+    setFilteredChats(filteredItems);
+  }, [searchQuery]);
+
+  const chatList = filteredChats.map((item) => (
+    <ChatItem chatItem={item} key={item.id} />
+  ));
 
   return (
     <LinearGradient
@@ -39,15 +56,7 @@ const Chat: React.FC = () => {
           placeholder="Search chat"
           setSearchQuery={setSearchQuery}
         />
-        <ScrollView contentContainerStyle={styles.list}>
-          {data
-            .filter((item) =>
-              item.title.toLowerCase().includes(searchQuery.toLowerCase()),
-            )
-            .map((item) => (
-              <ChatItem chatItem={item} key={item.id} />
-            ))}
-        </ScrollView>
+        <ScrollView contentContainerStyle={styles.list}>{chatList}</ScrollView>
         <ChatLink />
       </View>
     </LinearGradient>
