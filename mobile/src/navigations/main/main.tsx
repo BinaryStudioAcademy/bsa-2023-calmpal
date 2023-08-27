@@ -3,7 +3,6 @@ import React from 'react';
 
 import ChatIcon from '#assets/img/icons/chat.svg';
 import HomeIcon from '#assets/img/icons/home.svg';
-import { HeaderTitle } from '#libs/components/components';
 import { AppColor, MainScreenName } from '#libs/enums/enums';
 import { type TabNavigationParameterList } from '#libs/types/types';
 import { Chat } from '#screens/chat/chat';
@@ -14,11 +13,12 @@ import { styles } from './styles';
 const BottomTab = createBottomTabNavigator<TabNavigationParameterList>();
 
 const tabNavigatorOptions = {
-  headerStyle: styles.headerStyle,
+  headerStyle: styles.header,
+  headerTitleStyle: styles.headerTitle,
   tabBarActiveTintColor: AppColor.BLUE_300,
   tabBarInactiveTintColor: AppColor.GRAY_400,
   tabBarShowLabel: false,
-  tabBarStyle: styles.tabBarStyle,
+  tabBarStyle: styles.tabBar,
 };
 
 const Main: React.FC = () => {
@@ -27,20 +27,12 @@ const Main: React.FC = () => {
       <BottomTab.Screen
         name={MainScreenName.HOME}
         component={Home}
-        options={{
-          headerTitle: () => <HeaderTitle title={MainScreenName.HOME} />,
-          tabBarIcon: ({ color }) => <HomeIcon color={color} />,
-        }}
+        options={{ tabBarIcon: HomeIcon }}
       />
       <BottomTab.Screen
         name={MainScreenName.CHAT}
         component={Chat}
-        options={{
-          headerTitle: () => (
-            <HeaderTitle title={MainScreenName.CHAT} hasBadge />
-          ),
-          tabBarIcon: ({ color }) => <ChatIcon color={color} />,
-        }}
+        options={{ tabBarIcon: ChatIcon }}
       />
     </BottomTab.Navigator>
   );

@@ -3,16 +3,6 @@ import { StyleSheet } from 'react-native';
 import { AppColor } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-  },
-  title: {
-    color: AppColor.GRAY_500,
-    fontSize: 20,
-    fontWeight: '600',
-  },
   badge: {
     backgroundColor: AppColor.GRAY_200,
     borderRadius: 24,

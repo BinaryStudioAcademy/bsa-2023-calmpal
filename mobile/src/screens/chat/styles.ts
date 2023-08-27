@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 
+import { AppColor } from '#libs/enums/enums';
+
 const styles = StyleSheet.create({
-  containerWrapper: { flex: 1 },
   container: {
     flex: 1,
     paddingBottom: 16,
@@ -13,6 +14,15 @@ const styles = StyleSheet.create({
   },
   list: {
     paddingHorizontal: 4,
+  },
+  headerTitleWrapper: {
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  headerTitle: {
+    color: AppColor.GRAY_500,
+    fontSize: 20,
+    fontWeight: '600',
   },
 });
 

@@ -12,7 +12,7 @@ const ChatLink: React.FC = () => {
     <Link style={styles.linkWrapper} to={`/${RootScreenName.SIGN_IN}`}>
       <View style={styles.linkContent}>
         <PlusIcon style={styles.icon} />
-        <Text style={styles.link}>Add new topic</Text>
+        <Text style={styles.link}>Add new chat</Text>
       </View>
     </Link>
   );
