@@ -50,6 +50,8 @@ class FileService implements Service {
     return Promise.resolve(null);
   }
 
+  //FUTURE TODO: CREATE CONTROLLER FOR findById
+
   public async findById(
     id: number,
   ): Promise<ReturnType<FileEntity['toObject']> | null> {
@@ -61,6 +63,8 @@ class FileService implements Service {
 
     return file.toObject();
   }
+
+  //FUTURE TODO: CREATE CONTROLLER FOR findAll
 
   public async findAll(): Promise<FileGetAllResponseDto> {
     const files = await this.fileRepository.findAll();
