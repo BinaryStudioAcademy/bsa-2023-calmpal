@@ -2,6 +2,10 @@ import { APIPath, ContentType } from '#libs/enums/enums';
 import { BaseHttpApi } from '#libs/packages/api/api';
 import { type HTTP } from '#libs/packages/http/http';
 import { type Storage } from '#libs/packages/storage/storage';
+import {
+  type SurveyGetAllItemResponseDto,
+  type SurveyRequestDto,
+} from '#packages/survey/survey';
 
 import {
   type UserSignUpRequestDto,
@@ -34,6 +38,22 @@ class AuthApi extends BaseHttpApi {
     );
 
     return await response.json<UserSignUpResponseDto>();
+  }
+
+  public async createUserSurveyPreferences(
+    payload: SurveyRequestDto,
+  ): Promise<SurveyGetAllItemResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(AuthApiPath.SIGN_UP_SURVEY, {}),
+      {
+        method: 'POST',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify(payload),
+        hasAuth: false,
+      },
+    );
+
+    return await response.json<SurveyGetAllItemResponseDto>();
   }
 }
 
