@@ -1,17 +1,19 @@
 import React, { type ReactNode } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
+import PlusIcon from '#assets/img/icons/plus.svg';
 import {
   Card,
   InputSearch,
+  Link,
   ScrollView,
   Text,
   View,
 } from '#libs/components/components';
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, RootScreenName } from '#libs/enums/enums';
 import { useEffect, useNavigation, useState } from '#libs/hooks/hooks';
 
-import { Badge, ChatLink } from './components/components';
+import { Badge } from './components/components';
 import mockedChats from './libs/constants/data.json';
 import { styles } from './styles';
 
@@ -62,7 +64,14 @@ const Chat: React.FC = () => {
           setSearchQuery={setSearchQuery}
         />
         <ScrollView contentContainerStyle={styles.list}>{chatList}</ScrollView>
-        <ChatLink />
+        <View style={styles.linkWrapper}>
+          <Link
+            label="Add new chat"
+            to={`/${RootScreenName.SIGN_IN}`}
+            style={styles.link}
+            icon={<PlusIcon style={styles.icon} color={AppColor.BLUE_300} />}
+          />
+        </View>
       </View>
     </LinearGradient>
   );

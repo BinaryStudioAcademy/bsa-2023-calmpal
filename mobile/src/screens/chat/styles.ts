@@ -24,6 +24,20 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
   },
+  linkWrapper: {
+    alignItems: 'center',
+  },
+  link: {
+    color: AppColor.BLUE_300,
+    fontSize: 16,
+    fontWeight: '600',
+    paddingLeft: 30,
+  },
+  icon: {
+    left: -30,
+    position: 'absolute',
+    top: -20,
+  },
 });
 
 export { styles };
