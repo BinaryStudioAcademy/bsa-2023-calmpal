@@ -1,5 +1,5 @@
 import { ExceptionMessage } from '#libs/enums/enums.js';
-import { AuthError, UsersError } from '#libs/exceptions/exceptions.js';
+import { AuthError } from '#libs/exceptions/exceptions.js';
 import { encrypt } from '#libs/packages/encrypt/encrypt.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import {
@@ -24,7 +24,7 @@ class AuthService {
     const { email } = userRequestDto;
 
     const user = await this.userService.findByEmail(email);
-    if (user) {
+    if (user.id && user.email) {
       throw new AuthError({
         message: ExceptionMessage.USER_ALREADY_EXISTS,
         status: HTTPCode.BAD_REQUEST,
@@ -39,20 +39,18 @@ class AuthService {
     password,
   }: UserSignInRequestDto): Promise<UserSignInResponseDto | null> {
     const user = await this.userService.findByEmail(email);
+    const userWithPassword = await this.userService.getUserInfoWithPassword(
+      email,
+    );
 
-    if (!user) {
-      throw new UsersError({
-        status: 404,
-        message: ExceptionMessage.USER_NOT_FOUND,
-      });
-    }
-
-    const isSamePassword = await encrypt.compare(password, user.passwordHash);
+    const isSamePassword = await encrypt.compare(
+      password,
+      userWithPassword.passwordHash,
+    );
 
     if (!isSamePassword) {
-      throw new UsersError({
-        status: 401,
-        message: ExceptionMessage.INCORRECT_PASSWORD,
+      throw new AuthError({
+        message: ExceptionMessage.INCORRECT_CREDENTIALS,
       });
     }
 

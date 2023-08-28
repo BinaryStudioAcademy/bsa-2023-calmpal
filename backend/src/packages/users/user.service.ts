@@ -1,8 +1,11 @@
+import { ExceptionMessage } from '#libs/enums/enums.js';
+import { UsersError } from '#libs/exceptions/exceptions.js';
 import { type Config } from '#libs/packages/config/config.js';
 import { type Encrypt } from '#libs/packages/encrypt/encrypt.js';
+import { HTTPCode } from '#libs/packages/http/http.js';
 import { type JWTService } from '#libs/packages/jwt/jwt.service.js';
 import { type Service } from '#libs/types/types.js';
-import { UserEntity } from '#packages/users/user.entity.js';
+import { type UserEntity } from '#packages/users/user.entity.js';
 import { type UserRepository } from '#packages/users/user.repository.js';
 
 import {
@@ -10,6 +13,7 @@ import {
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
 } from './libs/types/types.js';
+import { UserWithPasswordEntity } from './user-with-password.entity.js';
 
 type UserServiceDependencies = {
   userRepository: UserRepository;
@@ -67,7 +71,7 @@ class UserService implements Service {
       passwordSalt,
     );
     const item = await this.userRepository.create(
-      UserEntity.initializeNew({
+      UserWithPasswordEntity.initializeNewWithPassword({
         fullName: payload.fullName,
         email: payload.email,
         passwordSalt,
@@ -93,10 +97,32 @@ class UserService implements Service {
 
   public async findByEmail(
     email: string,
-  ): Promise<ReturnType<UserEntity['toObject']> | null> {
+  ): Promise<ReturnType<UserEntity['toObject']>> {
     const userEntity = await this.userRepository.findByEmail(email);
 
-    return userEntity?.toObject() ?? null;
+    if (!userEntity) {
+      throw new UsersError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.USER_NOT_FOUND,
+      });
+    }
+
+    return userEntity.toObject();
+  }
+
+  public async getUserInfoWithPassword(
+    email: string,
+  ): Promise<ReturnType<UserWithPasswordEntity['toObjectWithPassword']>> {
+    const userEntity = await this.userRepository.getUserInfoWithPassword(email);
+
+    if (!userEntity) {
+      throw new UsersError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.USER_NOT_FOUND,
+      });
+    }
+
+    return userEntity.toObjectWithPassword();
   }
 }
 

@@ -1,4 +1,9 @@
-import { Model, type RelationMappings } from 'objection';
+import {
+  Model,
+  type Modifiers,
+  type QueryBuilder,
+  type RelationMappings,
+} from 'objection';
 
 import {
   AbstractModel,
@@ -20,6 +25,20 @@ class UserModel extends AbstractModel {
 
   public static override get tableName(): string {
     return DatabaseTableName.USERS;
+  }
+
+  public static override get modifiers(): Modifiers<QueryBuilder<UserModel>> {
+    return {
+      withoutPassword(builder): QueryBuilder<UserModel> {
+        return builder.select(
+          'id',
+          'email',
+          'fullName',
+          'createdAt',
+          'updatedAt',
+        );
+      },
+    };
   }
 
   public static relationMappings(): RelationMappings {

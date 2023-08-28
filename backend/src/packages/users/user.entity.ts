@@ -11,32 +11,22 @@ class UserEntity implements Entity {
 
   private fullName: string;
 
-  private passwordHash: string;
-
-  private passwordSalt: string;
-
-  private constructor({
+  public constructor({
     id,
     email,
     fullName,
-    passwordHash,
-    passwordSalt,
     createdAt,
     updatedAt,
   }: {
     id: number | null;
     email: string;
     fullName: string;
-    passwordHash: string;
-    passwordSalt: string;
     createdAt: Date | null;
     updatedAt: Date | null;
   }) {
     this.id = id;
     this.email = email;
     this.fullName = fullName;
-    this.passwordHash = passwordHash;
-    this.passwordSalt = passwordSalt;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
@@ -45,16 +35,12 @@ class UserEntity implements Entity {
     id,
     email,
     fullName,
-    passwordHash,
-    passwordSalt,
     createdAt,
     updatedAt,
   }: {
     id: number;
     email: string;
     fullName: string;
-    passwordHash: string;
-    passwordSalt: string;
     createdAt: Date;
     updatedAt: Date;
   }): UserEntity {
@@ -62,8 +48,6 @@ class UserEntity implements Entity {
       id,
       email,
       fullName,
-      passwordHash,
-      passwordSalt,
       createdAt,
       updatedAt,
     });
@@ -72,20 +56,14 @@ class UserEntity implements Entity {
   public static initializeNew({
     email,
     fullName,
-    passwordHash,
-    passwordSalt,
   }: {
     email: string;
     fullName: string;
-    passwordHash: string;
-    passwordSalt: string;
   }): UserEntity {
     return new UserEntity({
       id: null,
       email,
       fullName,
-      passwordHash,
-      passwordSalt,
       createdAt: null,
       updatedAt: null,
     });
@@ -97,7 +75,6 @@ class UserEntity implements Entity {
     fullName: string;
     createdAt: Date;
     updatedAt: Date;
-    passwordHash: string;
   } {
     return {
       id: this.id as number,
@@ -105,21 +82,16 @@ class UserEntity implements Entity {
       fullName: this.fullName,
       createdAt: this.createdAt as Date,
       updatedAt: this.updatedAt as Date,
-      passwordHash: this.passwordHash,
     };
   }
 
   public toNewObject(): {
     email: string;
     fullName: string;
-    passwordHash: string;
-    passwordSalt: string;
   } {
     return {
       email: this.email,
       fullName: this.fullName,
-      passwordHash: this.passwordHash,
-      passwordSalt: this.passwordSalt,
     };
   }
 }
