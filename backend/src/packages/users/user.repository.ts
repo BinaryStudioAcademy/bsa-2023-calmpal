@@ -38,6 +38,7 @@ class UserRepository implements Repository {
       createdAt: new Date(user.createdAt),
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
+      isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
     });
   }
 
@@ -61,6 +62,7 @@ class UserRepository implements Repository {
       createdAt: new Date(user.createdAt),
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
+      isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
     });
   }
 
@@ -81,12 +83,13 @@ class UserRepository implements Repository {
         createdAt: new Date(user.createdAt),
         updatedAt: new Date(user.updatedAt),
         fullName: user.details?.fullName ?? '',
+        isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
       });
     });
   }
 
   public async create(entity: UserEntity): Promise<UserEntity> {
-    const { email, passwordSalt, passwordHash, fullName } =
+    const { email, passwordSalt, passwordHash, fullName, isSurveyCompleted } =
       entity.toNewObject();
     const user = await this.userModel
       .query()
@@ -96,6 +99,7 @@ class UserRepository implements Repository {
         passwordHash,
         [UsersRelation.DETAILS]: {
           fullName,
+          isSurveyCompleted,
         },
       } as UserCreateQueryPayload)
       .withGraphJoined(UsersRelation.DETAILS)
@@ -110,7 +114,15 @@ class UserRepository implements Repository {
       createdAt: new Date(user.createdAt),
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
+      isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
     });
+  }
+
+  public async updateIsSurveyCompleted(id: number): Promise<void> {
+    await this.userModel
+      .relatedQuery(UsersRelation.DETAILS)
+      .for(id)
+      .patch({ isSurveyCompleted: true });
   }
 
   public update(): ReturnType<Repository['update']> {
