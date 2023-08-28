@@ -8,8 +8,8 @@ import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 import { AuthApiPath } from '#packages/auth/auth.js';
 
+import { type SurveyRequestDto } from './libs/types/types.js';
 import { type SurveyService } from './survey.service.js';
-import { type SurveyRequestDto } from './surveys.js';
 
 /**
  * @swagger
