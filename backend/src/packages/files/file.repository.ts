@@ -38,22 +38,8 @@ class FileRepository implements Repository {
     });
   }
 
-  public async findAll(): Promise<FileEntity[]> {
-    const files = await this.fileModel
-      .query()
-      .select()
-      .castTo<FileCommonQueryResponse[]>()
-      .execute();
-
-    return files.map((file) => {
-      return FileEntity.initialize({
-        id: file.id,
-        url: file.url,
-        contentType: file.contentType,
-        createdAt: new Date(file.createdAt),
-        updatedAt: new Date(file.updatedAt),
-      });
-    });
+  public async findAll(): ReturnType<Repository['findAll']> {
+    return await Promise.resolve([]);
   }
 
   public async create(entity: FileEntity): Promise<FileEntity> {
