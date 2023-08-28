@@ -88,8 +88,16 @@ class UserService implements Service {
     };
   }
 
-  public async updateIsSurveyCompleted(id: number): Promise<void> {
-    await this.userRepository.updateIsSurveyCompleted(id);
+  public async completeSurvey(id: number): Promise<void> {
+    const user = await this.userRepository.findById(id);
+
+    if (!user) {
+      return;
+    }
+
+    user.updateSurveyCompleted(true);
+
+    await this.userRepository.updateIsSurveyCompleted(user);
   }
 
   public update(): ReturnType<Service['update']> {
