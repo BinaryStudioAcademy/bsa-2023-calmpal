@@ -10,7 +10,6 @@ import { useEffect } from '#libs/hooks/hooks';
 import { store } from '#libs/packages/store/store';
 import { Root as RootNavigation } from '#navigations/navigations';
 
-import { ProtectedRoute } from '../components';
 import { styles } from './styles';
 
 const App: React.FC = () => {
@@ -22,9 +21,7 @@ const App: React.FC = () => {
     <StoreProvider store={store.instance}>
       <GestureHandlerRootView style={styles.root}>
         <NavigationContainer>
-          <ProtectedRoute>
-            <RootNavigation />
-          </ProtectedRoute>
+          <RootNavigation />
         </NavigationContainer>
       </GestureHandlerRootView>
     </StoreProvider>

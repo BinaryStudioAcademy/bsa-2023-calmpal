@@ -4,6 +4,7 @@ import {
 } from '@react-navigation/native-stack';
 import React from 'react';
 
+import { ProtectedRoute } from '#libs/components/components';
 import { RootScreenName } from '#libs/enums/enums';
 import { type RootNavigationParameterList } from '#libs/types/types';
 import { Auth } from '#screens/auth/auth';
@@ -21,7 +22,14 @@ const Root: React.FC = () => {
     <NativeStack.Navigator screenOptions={screenOptions}>
       <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
       <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
-      <NativeStack.Screen name={RootScreenName.MAIN} component={Main} />
+      <NativeStack.Screen
+        name={RootScreenName.MAIN}
+        component={(): JSX.Element => (
+          <ProtectedRoute>
+            <Main />
+          </ProtectedRoute>
+        )}
+      />
     </NativeStack.Navigator>
   );
 };
