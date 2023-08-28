@@ -95,13 +95,11 @@ class UserRepository implements Repository {
     });
   }
 
-  public async updateIsSurveyCompleted(entity: UserEntity): Promise<void> {
-    const { id, isSurveyCompleted } = entity.toObject();
-
+  public async updateIsSurveyCompleted(id: number): Promise<void> {
     await this.userModel
       .relatedQuery(UsersRelation.DETAILS)
       .for(id)
-      .patch({ isSurveyCompleted });
+      .patch({ isSurveyCompleted: true });
   }
 
   public update(): ReturnType<Repository['update']> {

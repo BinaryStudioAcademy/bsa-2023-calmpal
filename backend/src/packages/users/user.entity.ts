@@ -135,10 +135,6 @@ class UserEntity implements Entity {
       isSurveyCompleted: this.isSurveyCompleted,
     };
   }
-
-  public updateSurveyCompleted(isSurveyCompleted: boolean): void {
-    this.isSurveyCompleted = isSurveyCompleted;
-  }
 }
 
 export { UserEntity };
