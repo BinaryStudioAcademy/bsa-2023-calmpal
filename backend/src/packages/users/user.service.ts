@@ -1,5 +1,8 @@
+import { ExceptionMessage } from '#libs/enums/enums.js';
+import { UsersError } from '#libs/exceptions/exceptions.js';
 import { type Config } from '#libs/packages/config/config.js';
 import { type Encrypt } from '#libs/packages/encrypt/encrypt.js';
+import { HTTPCode } from '#libs/packages/http/http.js';
 import { type JWTService } from '#libs/packages/jwt/jwt.service.js';
 import { type Service } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
@@ -46,10 +49,21 @@ class UserService implements Service {
     const user = await this.userRepository.findById(id);
 
     if (!user) {
-      return null;
+      throw new UsersError({
+        message: ExceptionMessage.USER_ALREADY_EXISTS,
+        status: HTTPCode.BAD_REQUEST,
+      });
     }
 
     return user.toObject();
+  }
+
+  public async findByEmail(
+    email: string,
+  ): Promise<ReturnType<UserEntity['toObject']> | null> {
+    const userEntity = await this.userRepository.findByEmail(email);
+
+    return userEntity?.toObject() ?? null;
   }
 
   public async findAll(): Promise<UserGetAllResponseDto> {
