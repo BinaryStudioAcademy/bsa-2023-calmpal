@@ -21,7 +21,8 @@ const fileService = new FileService({
 });
 const fileController = new FileController(logger, fileService);
 
-export { fileController, fileService };
+export { awsService, fileController, fileService };
+export { type AWSService } from './aws.service.js';
 export { FileModel } from './file.model.js';
 export { type FileService } from './file.service.js';
 export {
