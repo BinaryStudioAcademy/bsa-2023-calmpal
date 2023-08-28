@@ -29,7 +29,7 @@ class FileService implements Service {
     return Promise.resolve(null);
   }
 
-  //FUTURE TODO: CREATE CONTROLLER FOR findById
+  //TODO: create controller for findById
 
   public async findById(
     id: number,
@@ -43,7 +43,7 @@ class FileService implements Service {
     return file.toObject();
   }
 
-  //FUTURE TODO: CREATE CONTROLLER FOR findAll
+  //TODO: create controller for findAll
 
   public async findAll(): Promise<FileGetAllResponseDto> {
     const files = await this.fileRepository.findAll();
@@ -68,8 +68,8 @@ class FileService implements Service {
       contentType: payload.contentType,
     });
 
-    const url = this.awsService.getURL(fileKey);
-    const presignedUrl = await this.awsService.getPreSignedURL(fileKey);
+    const url = this.awsService.getUrl(fileKey);
+    const presignedUrl = await this.awsService.getPreSignedUrl(fileKey);
     await this.fileRepository.create(
       FileEntity.initializeNew({
         url,

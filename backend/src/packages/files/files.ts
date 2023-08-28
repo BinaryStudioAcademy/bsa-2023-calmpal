@@ -21,14 +21,10 @@ const fileService = new FileService({
 });
 const fileController = new FileController(logger, fileService);
 
-export { awsService, fileController, fileService };
-export { type AWSService } from './aws.service.js';
+export { fileController, fileService };
 export { FileModel } from './file.model.js';
 export { type FileService } from './file.service.js';
 export {
-  type AWSUploadRequestDto,
-  type FileCommonQueryResponse,
-  type FileCreateQueryPayload,
   type FileUploadRequestDto,
   type FileUploadResponseDto,
 } from './libs/types/types.js';

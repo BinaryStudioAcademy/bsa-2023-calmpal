@@ -112,17 +112,6 @@ class BaseServerApplication implements ServerApplication {
       }),
     );
   }
-
-  private async initMultipart(): Promise<void> {
-    await this.app.register(fastifyMultipart, {
-      limits: {
-        fileSize: 10_000_000,
-      },
-      attachFieldsToBody: true,
-      throwFileSizeLimit: false,
-    });
-  }
-
   private async initPlugins(): Promise<void> {
     await this.app.register(authorizationPlugin, {
       services: {
@@ -130,6 +119,15 @@ class BaseServerApplication implements ServerApplication {
         userService,
       },
     });
+
+    await this.app.register(fastifyMultipart, {
+      limits: {
+        fileSize: 10_000_000,
+      },
+      attachFieldsToBody: true,
+      throwFileSizeLimit: false,
+    });
+
     await this.app.register(fileUploadingPlugin, {
       extensions: [ContentType.JPEG, ContentType.PNG],
     });
@@ -187,8 +185,6 @@ class BaseServerApplication implements ServerApplication {
     await this.initServe();
 
     await this.initMiddlewares();
-
-    await this.initMultipart();
 
     await this.initPlugins();
 

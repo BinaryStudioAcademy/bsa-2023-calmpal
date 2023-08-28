@@ -44,7 +44,7 @@ class AWSService {
     } as S3ClientConfig);
   }
 
-  public getS3Client(): S3Client {
+  public get S3Client(): S3Client {
     return this.s3Client;
   }
 
@@ -63,20 +63,22 @@ class AWSService {
     await this.s3Client.send(putObjectCommand);
   }
 
-  public async getPreSignedURL(fileKey: string): Promise<string> {
+  public async getPreSignedUrl(fileKey: string): Promise<string> {
     const command = new GetObjectCommand({
       Bucket: this.bucketName,
       Key: fileKey,
     });
 
+    const minuteInSec = 3600;
+
     const signedUrl: string = await getSignedUrl(this.s3Client, command, {
-      expiresIn: 3600,
+      expiresIn: minuteInSec,
     });
 
     return signedUrl;
   }
 
-  public getURL(fileKey: string): string {
+  public getUrl(fileKey: string): string {
     return `https://${this.bucketName}.s3.${this.region}.amazonaws.com/${fileKey}`;
   }
 }
