@@ -1,6 +1,7 @@
 import { ExceptionMessage } from '#libs/enums/enums.js';
-import { UsersError } from '#libs/exceptions/exceptions.js';
+import { AuthError, UsersError } from '#libs/exceptions/exceptions.js';
 import { encrypt } from '#libs/packages/encrypt/encrypt.js';
+import { HTTPCode } from '#libs/packages/http/http.js';
 import {
   type UserAuthResponseDto,
   type UserSignInRequestDto,
@@ -17,10 +18,20 @@ class AuthService {
     this.userService = userService;
   }
 
-  public signUp(
+  public async signUp(
     userRequestDto: UserSignUpRequestDto,
   ): Promise<UserSignUpResponseDto> {
-    return this.userService.create(userRequestDto);
+    const { email } = userRequestDto;
+
+    const user = await this.userService.findByEmail(email);
+    if (user) {
+      throw new AuthError({
+        message: ExceptionMessage.USER_ALREADY_EXISTS,
+        status: HTTPCode.BAD_REQUEST,
+      });
+    }
+
+    return await this.userService.create(userRequestDto);
   }
 
   public async verifyLoginCredentials({
@@ -46,10 +57,6 @@ class AuthService {
     }
 
     return user;
-  }
-
-  public async signIn(id: number): Promise<UserSignInResponseDto | null> {
-    return await this.userService.findById(id);
   }
 
   public getAuthenticatedUser(id: number): Promise<UserAuthResponseDto | null> {
