@@ -16,7 +16,7 @@ import { jwtService } from '#libs/packages/jwt/jwt.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 import {
   authorization as authorizationPlugin,
-  fileUploading as fileUploadingPlugin,
+  fileUpload as fileUploadingPlugin,
 } from '#libs/plugins/plugins.js';
 import { type ValidationSchema } from '#libs/types/types.js';
 import { userService } from '#packages/users/users.js';

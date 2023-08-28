@@ -9,7 +9,7 @@ type Options = {
   extensions: string[];
 };
 
-const fileUploading = fp<Options>((fastify, { extensions }, done) => {
+const fileUpload = fp<Options>((fastify, { extensions }, done) => {
   fastify.decorateRequest('fileBuff', null);
 
   fastify.addHook(ControllerHook.PRE_VALIDATION, async (request) => {
@@ -37,4 +37,4 @@ const fileUploading = fp<Options>((fastify, { extensions }, done) => {
   done();
 });
 
-export { fileUploading };
+export { fileUpload };
