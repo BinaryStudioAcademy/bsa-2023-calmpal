@@ -50,6 +50,10 @@ const Root: React.FC<RootProperties> = ({ routeName }) => {
     return <Loader />;
   }
 
+  if (authenticatedUserDataStatus === DataStatus.FULFILLED) {
+    return <Main />;
+  }
+
   return (
     <NativeStack.Navigator screenOptions={screenOptions}>
       <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
