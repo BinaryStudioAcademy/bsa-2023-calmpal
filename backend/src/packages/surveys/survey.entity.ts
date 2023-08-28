@@ -21,14 +21,14 @@ class SurveyEntity implements Entity {
     id: number | null;
     userId: number;
     preferences: string[];
-    createdAt: string | null;
-    updatedAt: string | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
   }) {
     this.id = id;
     this.userId = userId;
     this.preferences = preferences;
-    this.createdAt = createdAt ? new Date(createdAt) : null;
-    this.updatedAt = updatedAt ? new Date(updatedAt) : null;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
 
   public static initialize({
@@ -41,8 +41,8 @@ class SurveyEntity implements Entity {
     id: number;
     userId: number;
     preferences: string[];
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
   }): SurveyEntity {
     return new SurveyEntity({
       id,

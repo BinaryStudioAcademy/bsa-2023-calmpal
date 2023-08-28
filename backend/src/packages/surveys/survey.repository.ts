@@ -17,7 +17,13 @@ class SurveyRepository implements Repository {
   public async findAll(): Promise<SurveyEntity[]> {
     const surveys: SurveyModel[] = await this.surveyModel.query().execute();
 
-    return surveys.map((survey) => SurveyEntity.initialize(survey));
+    return surveys.map((survey) =>
+      SurveyEntity.initialize({
+        ...survey,
+        createdAt: new Date(survey.createdAt),
+        updatedAt: new Date(survey.updatedAt),
+      }),
+    );
   }
 
   public async create(entity: SurveyEntity): Promise<SurveyEntity> {
@@ -25,14 +31,18 @@ class SurveyRepository implements Repository {
 
     const survey = await this.surveyModel
       .query()
-      .insert({
+      .insertGraph({
         userId,
         preferences,
       })
       .returning('*')
       .execute();
 
-    return SurveyEntity.initialize(survey);
+    return SurveyEntity.initialize({
+      ...survey,
+      createdAt: new Date(survey.createdAt),
+      updatedAt: new Date(survey.updatedAt),
+    });
   }
 
   public update(): ReturnType<Repository['update']> {
