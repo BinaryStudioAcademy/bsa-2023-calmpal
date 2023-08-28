@@ -1,3 +1,6 @@
+import { ExceptionMessage } from '#libs/enums/enums.js';
+import { AuthError } from '#libs/exceptions/exceptions.js';
+import { HTTPCode } from '#libs/packages/http/http.js';
 import {
   type UserAuthResponseDto,
   type UserSignUpRequestDto,
@@ -12,10 +15,20 @@ class AuthService {
     this.userService = userService;
   }
 
-  public signUp(
+  public async signUp(
     userRequestDto: UserSignUpRequestDto,
   ): Promise<UserSignUpResponseDto> {
-    return this.userService.create(userRequestDto);
+    const { email } = userRequestDto;
+
+    const user = await this.userService.findByEmail(email);
+    if (user) {
+      throw new AuthError({
+        message: ExceptionMessage.USER_ALREADY_EXISTS,
+        status: HTTPCode.BAD_REQUEST,
+      });
+    }
+
+    return await this.userService.create(userRequestDto);
   }
 
   public getAuthenticatedUser(id: number): Promise<UserAuthResponseDto | null> {
