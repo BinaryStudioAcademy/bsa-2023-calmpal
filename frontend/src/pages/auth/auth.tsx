@@ -1,20 +1,13 @@
 import { AppRoute } from '#libs/enums/enums.js';
-import {
-  useAppDispatch,
-  useAppSelector,
-  useCallback,
-  useLocation,
-} from '#libs/hooks/hooks.js';
+import { useAppDispatch, useCallback, useLocation } from '#libs/hooks/hooks.js';
 import { type UserSignUpRequestDto } from '#packages/users/users.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
 import { SignInForm, SignUpForm } from './components/components.js';
+import styles from './styles.module.scss';
 
 const Auth: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { dataStatus } = useAppSelector(({ auth }) => ({
-    dataStatus: auth.dataStatus,
-  }));
   const { pathname } = useLocation();
 
   const handleSignInSubmit = useCallback((): void => {
@@ -42,10 +35,15 @@ const Auth: React.FC = () => {
   };
 
   return (
-    <>
-      state: {dataStatus}
-      {getScreen(pathname)}
-    </>
+    <div className={styles['auth']}>
+      <div className={styles['logo']}>CalmPal</div>
+
+      <div className={styles['auth-name']}>
+        <p className={styles['secondary']}>Welcome to</p>
+        <p className={styles['primary']}>CalmPal</p>
+      </div>
+      <div className={styles['overlay']}>{getScreen(pathname)}</div>
+    </div>
   );
 };
 
