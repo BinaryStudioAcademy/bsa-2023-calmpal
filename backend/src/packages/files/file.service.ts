@@ -6,7 +6,6 @@ import { type FileRepository } from '#packages/files/file.repository.js';
 
 import { type AWSService } from './aws.service.js';
 import {
-  type FileGetAllResponseDto,
   type FileUploadRequestDto,
   type FileUploadResponseDto,
 } from './libs/types/types.js';
@@ -43,14 +42,8 @@ class FileService implements Service {
     return file.toObject();
   }
 
-  //TODO: create controller for findAll
-
-  public async findAll(): Promise<FileGetAllResponseDto> {
-    const files = await this.fileRepository.findAll();
-
-    return {
-      items: files.map((file) => file.toObject()),
-    };
+  public async findAll(): ReturnType<Service['findAll']> {
+    return await Promise.resolve({ items: [] });
   }
 
   public async create(

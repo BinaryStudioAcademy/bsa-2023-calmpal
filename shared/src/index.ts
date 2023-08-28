@@ -35,7 +35,6 @@ export { AuthApiPath } from './packages/auth/auth.js';
 export {
   type AWSUploadRequestDto,
   type FileGetAllItemResponseDto,
-  type FileGetAllResponseDto,
   type FileUploadRequestDto,
   type FileUploadResponseDto,
 } from './packages/files/files.js';
