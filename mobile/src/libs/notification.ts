@@ -8,7 +8,7 @@ type NotificationPayload = {
   message: string;
 };
 
-class NotificationService {
+class Notification {
   private show = (
     type: ValueOf<typeof NotificationType>,
     message: string,
@@ -45,4 +45,4 @@ class NotificationService {
   }
 }
 
-export { NotificationService };
+export { Notification };

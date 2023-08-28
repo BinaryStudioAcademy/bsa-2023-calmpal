@@ -2,11 +2,11 @@ import { createAction } from '@reduxjs/toolkit';
 import { type ValueOf } from 'react-native-gesture-handler/lib/typescript/typeUtils';
 
 import { type NotificationType } from '#libs/enums/enums';
-import { NotificationService } from '#libs/packages/services/notification-service';
+import { Notification } from '#libs/notification';
 
 import { name as sliceName } from './notifications.slice';
 
-const notificationsService = new NotificationService();
+const notificationsService = new Notification();
 
 type NotificationPayload = {
   type: ValueOf<typeof NotificationType>;
