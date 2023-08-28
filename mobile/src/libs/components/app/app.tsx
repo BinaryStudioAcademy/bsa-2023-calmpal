@@ -6,6 +6,7 @@ import {
 } from '@react-navigation/native';
 import React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import SplashScreen from 'react-native-splash-screen';
 import { Provider as StoreProvider } from 'react-redux';
 
 import { useEffect, useRef, useState } from '#libs/hooks/hooks';
@@ -37,6 +38,10 @@ const App: React.FC = () => {
       setRouteName(currentRouteName);
     }
   };
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
 
   return (
     <StoreProvider store={store.instance}>
