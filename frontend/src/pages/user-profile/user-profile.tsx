@@ -1,4 +1,4 @@
-import { UserProfileChatSidebar } from '#libs/components/components.js';
+import { UserProfileChatSidebar } from './components/components.js';
 
 const UserProfile: React.FC = () => {
   return (
