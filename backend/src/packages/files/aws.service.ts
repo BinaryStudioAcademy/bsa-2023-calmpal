@@ -81,6 +81,18 @@ class AWSService {
   public getUrl(fileKey: string): string {
     return `https://${this.bucketName}.s3.${this.region}.amazonaws.com/${fileKey}`;
   }
+
+  public getFileKey(url: string): string | undefined {
+    const regex = /https:\/\/[^/]+\/([^/]+)/;
+    const match = url.match(regex);
+    const fileKeyIndex = 1;
+
+    if (!match) {
+      return;
+    }
+
+    return match[fileKeyIndex];
+  }
 }
 
 export { AWSService };
