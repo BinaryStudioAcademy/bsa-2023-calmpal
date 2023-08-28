@@ -7,21 +7,16 @@ import {
   useLocation,
 } from '#libs/hooks/hooks.js';
 import { actions as authActions } from '#slices/auth/auth.js';
-import { actions as surveyActions } from '#slices/survey/survey.js';
 import { actions as userActions } from '#slices/users/users.js';
 
 const App: React.FC = () => {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
-  const {
-    authenticatedUserId,
-    authenticatedUserDataStatus,
-    surveyPreferencesDataStatus,
-  } = useAppSelector(({ auth, survey }) => ({
-    authenticatedUserId: auth.authenticatedUser?.id,
-    authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
-    surveyPreferencesDataStatus: survey.dataStatus,
-  }));
+  const { authenticatedUserDataStatus, surveyPreferencesDataStatus } =
+    useAppSelector(({ auth }) => ({
+      authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
+      surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
+    }));
 
   const isRoot = pathname === AppRoute.ROOT;
 
@@ -34,14 +29,6 @@ const App: React.FC = () => {
   useEffect(() => {
     void dispatch(authActions.getAuthenticatedUser());
   }, [dispatch]);
-
-  useEffect(() => {
-    if (authenticatedUserId) {
-      void dispatch(
-        surveyActions.getUserSurveyPreferences({ userId: authenticatedUserId }),
-      );
-    }
-  }, [dispatch, authenticatedUserId]);
 
   if (
     authenticatedUserDataStatus === DataStatus.PENDING ||
