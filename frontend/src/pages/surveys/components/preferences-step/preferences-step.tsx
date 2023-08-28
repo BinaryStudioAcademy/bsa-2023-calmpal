@@ -29,12 +29,9 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
       validationSchema: surveyInputValidationSchema,
     });
   const { field: optionsField } = useFormController({
-    name: 'option',
+    name: 'options',
     control,
   });
-
-  const activeOptions = watch('option');
-  const hasOther = activeOptions.includes('Other');
 
   const options: string[] = [
     'Get emotional support',
@@ -45,9 +42,12 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
     SurveyTextareaOptions.OTHER,
   ];
 
+  const activeOptions = watch('options');
+  const hasOther = activeOptions.includes('Other');
+
   const handleOnSubmit = useCallback(
     (payload: SurveyInputDto) => {
-      let options = payload.option;
+      let options = payload.options;
       options = [
         ...new Set(
           options.map((option) =>
@@ -79,7 +79,7 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
             field={
               optionsField as ControllerRenderProps<
                 SurveyInputDto,
-                'option' | 'textarea' | `option.${number}`
+                'options' | 'textarea' | `options.${number}`
               >
             }
             label={option}

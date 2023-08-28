@@ -9,7 +9,7 @@ import { type SurveyInputDto } from '../types/types.js';
 const minArrayLength = 1;
 
 const surveyInput = joi.object<SurveyInputDto, true>({
-  option: joi.array().items(joi.string()).min(minArrayLength).messages({
+  options: joi.array().items(joi.string()).min(minArrayLength).messages({
     'array.min': SurveyValidationMessage.OPTION_REQUIRED,
   }),
   textarea: joi.string().when('option', {

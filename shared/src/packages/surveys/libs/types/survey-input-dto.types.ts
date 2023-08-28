@@ -1,5 +1,5 @@
 type SurveyInputDto = {
-  option: string[];
+  options: string[];
   textarea: string;
 };
 
