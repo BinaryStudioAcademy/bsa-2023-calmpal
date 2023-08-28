@@ -11,7 +11,11 @@ const UserProfileChatSidebar: React.FC = () => {
     <div className={styles['container']}>
       <div className={styles['header']}>Profile</div>
       <div className={styles['user-info']}>
-        <img src="images/avatar.png" alt="not found" />
+        <img
+          src="images/avatar.png"
+          alt="avatar"
+          className={styles['avatar']}
+        />
         <span className={styles['user-name']}>
           {authenticatedUser?.fullName}
         </span>
