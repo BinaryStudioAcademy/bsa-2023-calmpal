@@ -1,6 +1,7 @@
 import reactPlugin from '@vitejs/plugin-react';
 import { type ConfigEnv, defineConfig, loadEnv } from 'vite';
 import { VitePWA as vitePWAPlugin } from 'vite-plugin-pwa';
+import svgr from 'vite-plugin-svgr';
 
 const config = ({ mode }: ConfigEnv): ReturnType<typeof defineConfig> => {
   const {
@@ -13,7 +14,11 @@ const config = ({ mode }: ConfigEnv): ReturnType<typeof defineConfig> => {
     build: {
       outDir: 'build',
     },
-    plugins: [reactPlugin(), vitePWAPlugin({ registerType: 'autoUpdate' })],
+    plugins: [
+      reactPlugin(),
+      vitePWAPlugin({ registerType: 'autoUpdate' }),
+      svgr(),
+    ],
     server: {
       port: Number(VITE_APP_DEVELOPMENT_PORT),
       proxy: {
