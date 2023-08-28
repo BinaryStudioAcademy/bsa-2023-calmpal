@@ -1,6 +1,7 @@
 import { type NativeStackNavigationProp } from '@react-navigation/native-stack/lib/typescript/src/types';
 import React, { type ReactNode } from 'react';
 
+import { RootScreenName } from '#libs/enums/enums';
 import { useAppSelector, useEffect, useNavigation } from '#libs/hooks/hooks';
 import { type RootNavigationParameterList } from '#libs/types/types';
 
@@ -16,7 +17,7 @@ const ProtectedRoute: React.FC<Proptertis> = ({ children }) => {
 
   useEffect(() => {
     if (!hasUser) {
-      navigation.navigate('Sign In');
+      navigation.navigate(RootScreenName.SIGN_IN);
     }
   }, [hasUser, navigation]);
 
