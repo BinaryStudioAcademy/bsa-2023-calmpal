@@ -21,7 +21,9 @@ const fileUpload = fp<Options>((fastify, { extensions }, done) => {
     const { file } = request.body as { file: MultipartFile };
 
     if (file.file.truncated) {
-      return;
+      throw new FileError({
+        message: ExceptionMessage.FILE_TOO_BIG,
+      });
     }
 
     if (!extensions.includes(file.mimetype)) {

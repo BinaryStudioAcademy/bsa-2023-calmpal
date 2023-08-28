@@ -119,7 +119,7 @@ class BaseServerApplication implements ServerApplication {
         fileSize: 10_000_000,
       },
       attachFieldsToBody: true,
-      throwFileSizeLimit: true,
+      throwFileSizeLimit: false,
     });
   }
 

@@ -5,6 +5,7 @@ const ExceptionMessage = {
   INCORRECT_CREDENTIALS: 'Incorrect credentials.',
   USER_ALREADY_EXISTS: 'User already exists.',
   INCORRECT_FILE_TYPE: 'Content type of the file is not in png, jpeg.',
+  FILE_TOO_BIG: 'The inputted file is bigger than 10 MB.',
 } as const;
 
 export { ExceptionMessage };
