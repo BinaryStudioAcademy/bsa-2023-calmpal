@@ -1,5 +1,6 @@
 import home from '#assets/img/home.svg';
 import reactLogo from '#assets/img/react.svg';
+import user from '#assets/img/user.svg';
 import {
   Header,
   Link,
@@ -49,6 +50,7 @@ const App: React.FC = () => {
           { path: AppRoute.ROOT, name: 'home', icon: home },
           { path: AppRoute.SIGN_IN, name: 'sign-in', icon: home },
           { path: AppRoute.SIGN_UP, name: 'sign-up', icon: home },
+          { path: AppRoute.USER_PROFILE, name: 'user-profile', icon: user },
         ]}
       />
       <div className={styles['body-container']}>
