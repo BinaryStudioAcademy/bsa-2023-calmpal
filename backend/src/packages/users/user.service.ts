@@ -45,11 +45,15 @@ class UserService implements Service {
   ): Promise<ReturnType<UserEntity['toObject']> | null> {
     const user = await this.userRepository.findById(id);
 
-    if (!user) {
-      return null;
-    }
+    return user?.toObject() ?? null;
+  }
 
-    return user.toObject();
+  public async findByEmail(
+    email: string,
+  ): Promise<ReturnType<UserEntity['toObject']> | null> {
+    const user = await this.userRepository.findByEmail(email);
+
+    return user?.toObject() ?? null;
   }
 
   public async findAll(): Promise<UserGetAllResponseDto> {
