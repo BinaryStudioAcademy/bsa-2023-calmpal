@@ -31,6 +31,7 @@
 
 .selected {
   background: var(--white);
+  box-shadow: 0 4px 20px 0 var(--blue-alpha-30);
 }
 
 .selected .arrow {

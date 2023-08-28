@@ -1,7 +1,7 @@
-import { IconName } from '#libs/enums/enums.js';
+import { IconNameToIcon } from '#libs/enums/enums.js';
 import { useCallback, useSearch, useState } from '#libs/hooks/hooks.js';
 
-import { Icon, Search } from '../components.js';
+import { PlainSvgIcon, Search } from '../components.js';
 import { ChatElement } from './chat-element/chat-element.js';
 import styles from './styles.module.scss';
 
@@ -16,11 +16,12 @@ const chats = [
 const ChatSidebar: React.FC = () => {
   const [filter, setFilter] = useState('');
   const handleFilterChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>): void => {
-      setFilter(event.target.value);
+    (payload: { search: string }): void => {
+      setFilter(payload.search);
     },
     [],
   );
+
   const filteredChats = useSearch(filter, chats, 'name');
 
   return (
@@ -31,12 +32,12 @@ const ChatSidebar: React.FC = () => {
           <span className={styles['chat-number']}>{chats.length}</span>
         </div>
         <div className={styles['plus']}>
-          <Icon name={IconName.PLUS} />
+          <PlainSvgIcon name={IconNameToIcon.PLUS} />
         </div>
       </div>
       <div className={styles['list']}>
         <div className={styles['search']}>
-          <Search value={filter} onValueChange={handleFilterChange} />
+          <Search onValueChange={handleFilterChange} />
         </div>
         <div className={styles['chat-list']}>
           {filteredChats.map((filteredChat) => (

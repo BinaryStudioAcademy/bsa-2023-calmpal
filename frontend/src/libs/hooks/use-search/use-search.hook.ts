@@ -1,19 +1,17 @@
-import { useDebounce, useMemo } from '../hooks.js';
+import { useMemo } from '../hooks.js';
 
 const useSearch = <T>(
   query: string,
   elements: T[],
   propertyName: keyof T,
 ): T[] => {
-  const debounced = useDebounce(query);
-
   return useMemo(() => {
-    const regex = new RegExp(debounced, 'i');
+    const regex = new RegExp(query, 'i');
 
     return elements.filter((element) =>
       regex.test(String(element[propertyName])),
     );
-  }, [elements, propertyName, debounced]);
+  }, [query, elements, propertyName]);
 };
 
 export { useSearch };

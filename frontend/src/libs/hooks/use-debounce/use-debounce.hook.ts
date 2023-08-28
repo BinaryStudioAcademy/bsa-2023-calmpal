@@ -1,20 +1,19 @@
-import { useEffect, useState } from '../hooks.js';
 import { DEFAULT_DEBOUNCE_DELAY } from './libs/constants/constants.js';
 
-const useDebounce = <T>(value: T, delay?: number): T => {
-  const [debouncedValue, setDebounceValue] = useState(value);
+type DebounceFunction<T> = (...arguments_: T[]) => void;
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebounceValue(value);
+const useDebounce = <T>(
+  function_: DebounceFunction<T>,
+  delay?: number,
+): DebounceFunction<T> => {
+  let timeoutId: ReturnType<typeof setTimeout>;
+
+  return function (this: unknown, ...arguments_: T[]): void {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      function_.apply(this, arguments_);
     }, delay ?? DEFAULT_DEBOUNCE_DELAY);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [delay, value]);
-
-  return debouncedValue;
+  };
 };
 
 export { useDebounce };
