@@ -13,6 +13,7 @@ import {
 } from '#packages/survey/survey.js';
 import {
   DEFAULT_SURVEY_PAYLOAD,
+  PREFERENCES_CATEGORIES,
   TEXTAREA_MAX_LENGTH,
 } from '#pages/surveys/libs/constants.js';
 
@@ -34,11 +35,7 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
   });
 
   const options: string[] = [
-    'Get emotional support',
-    'Reduce stress or anxiety',
-    'Improve sleep quality',
-    'Get over with depression',
-    'Improve focus',
+    ...PREFERENCES_CATEGORIES,
     SurveyTextareaOptions.OTHER,
   ];
 
