@@ -7,27 +7,26 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import { AppEnvironment } from '#libs/enums/enums.js';
 import { type Config } from '#libs/packages/config/config.js';
-import { Notification } from '#libs/packages/services/notification.js';
+import { notification } from '#libs/packages/notification/notification.js';
 import { handleError } from '#libs/packages/store/middlewares/middlewares.js';
 import { authApi } from '#packages/auth/auth.js';
 import { userApi } from '#packages/users/users.js';
 import { reducer as authReducer } from '#slices/auth/auth.js';
-import { reducer as notificationsReducer } from '#slices/notifications/notification.js';
 import { reducer as usersReducer } from '#slices/users/users.js';
 
+import { type Notification } from '../notification/notification.package.js';
 import { storage } from '../storage/storage.js';
 
 type RootReducer = {
   auth: ReturnType<typeof authReducer>;
   users: ReturnType<typeof usersReducer>;
-  notifications: ReturnType<typeof notificationsReducer>;
 };
 
 type ExtraArguments = {
   authApi: typeof authApi;
   userApi: typeof userApi;
   storage: typeof storage;
-  notifications: typeof Notification;
+  notification: Notification;
 };
 
 class Store {
@@ -45,7 +44,6 @@ class Store {
       reducer: {
         auth: authReducer,
         users: usersReducer,
-        notifications: notificationsReducer,
       },
       middleware: (getDefaultMiddleware) => [
         ...getDefaultMiddleware({
@@ -63,7 +61,7 @@ class Store {
       authApi,
       userApi,
       storage,
-      notifications: Notification,
+      notification,
     };
   }
 }
