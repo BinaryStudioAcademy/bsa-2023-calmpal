@@ -4,6 +4,7 @@ type UserCreateQueryPayload = {
   passwordHash: string;
   details: {
     fullName: string;
+    isSurveyCompleted: boolean;
   };
 };
 
