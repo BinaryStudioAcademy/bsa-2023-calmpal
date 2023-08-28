@@ -1,10 +1,6 @@
 import { type ControllerRenderProps } from 'react-hook-form';
 
-import {
-  Button,
-  SurveyCategory,
-  Textarea,
-} from '#libs/components/components.js';
+import { Button, Input, SurveyCategory } from '#libs/components/components.js';
 import {
   useAppForm,
   useCallback,
@@ -90,12 +86,13 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
           />
         ))}
         {hasOther && (
-          <Textarea
+          <Input
             control={control}
             errors={errors}
             name="textarea"
             placeholder="Text"
             maxLength={TEXTAREA_MAX_LENGTH}
+            hasRows={true}
           />
         )}
       </div>
