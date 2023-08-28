@@ -1,16 +1,10 @@
 import crypto from 'node:crypto';
 
-import {
-  PutObjectCommand,
-  type PutObjectCommandInput,
-  S3Client,
-  type S3ClientConfig,
-} from '@aws-sdk/client-s3';
-
 import { type Service } from '#libs/types/types.js';
 import { FileEntity } from '#packages/files/file.entity.js';
 import { type FileRepository } from '#packages/files/file.repository.js';
 
+import { type AWSService } from './aws.service.js';
 import {
   type FileGetAllResponseDto,
   type FileUploadRequestDto,
@@ -19,31 +13,16 @@ import {
 
 type FileServiceDependencies = {
   fileRepository: FileRepository;
-  region: string;
-  accessKeyId: string;
-  secretAccessKey: string;
-  bucketName: string;
+  awsService: AWSService;
 };
 
 class FileService implements Service {
   private fileRepository: FileRepository;
-  private region: string;
-  private accessKeyId: string;
-  private secretAccessKey: string;
-  private bucketName: string;
+  private awsService: AWSService;
 
-  public constructor({
-    fileRepository,
-    region,
-    accessKeyId,
-    secretAccessKey,
-    bucketName,
-  }: FileServiceDependencies) {
+  public constructor({ fileRepository, awsService }: FileServiceDependencies) {
     this.fileRepository = fileRepository;
-    this.region = region;
-    this.accessKeyId = accessKeyId;
-    this.secretAccessKey = secretAccessKey;
-    this.bucketName = bucketName;
+    this.awsService = awsService;
   }
 
   public find(): ReturnType<Service['find']> {
@@ -77,30 +56,20 @@ class FileService implements Service {
   public async create(
     payload: FileUploadRequestDto,
   ): Promise<FileUploadResponseDto> {
-    const s3Client = new S3Client({
-      region: this.region,
-      credentials: {
-        accessKeyId: this.accessKeyId,
-        secretAccessKey: this.secretAccessKey,
-      },
-    } as S3ClientConfig);
-
     const fileExtensionIndex = 1;
 
     const fileKey = `${crypto.randomUUID()}.${
       payload.contentType.split('/')[fileExtensionIndex]
     }`;
 
-    const putObjectCommand = new PutObjectCommand({
-      Bucket: this.bucketName,
-      Key: fileKey,
-      Body: payload.buffer,
-      ContentType: payload.contentType,
-    } as PutObjectCommandInput);
+    await this.awsService.sendFile({
+      fileKey,
+      buffer: payload.buffer,
+      contentType: payload.contentType,
+    });
 
-    await s3Client.send(putObjectCommand);
-
-    const url = `https://${this.bucketName}.s3.${this.region}.amazonaws.com/${fileKey}`;
+    const url = this.awsService.getURL(fileKey);
+    const presignedUrl = await this.awsService.getPreSignedURL(fileKey);
     await this.fileRepository.create(
       FileEntity.initializeNew({
         url,
@@ -108,7 +77,7 @@ class FileService implements Service {
       }),
     );
 
-    return { url };
+    return { url: presignedUrl };
   }
 
   public update(): ReturnType<Service['update']> {
