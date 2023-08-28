@@ -37,8 +37,8 @@ const ChatElement: React.FC<Properties> = ({ chat }) => {
         <img src="chat-logo.svg" alt="not found" />
         {chat.name}
       </div>
-      <div className={styles['arrow']}>
-        <PlainSvgIcon name={IconNameToIcon.ARROW} />
+      <div className={styles['trash-box']}>
+        <PlainSvgIcon name={IconNameToIcon.TRASHBOX} />
       </div>
     </button>
   );

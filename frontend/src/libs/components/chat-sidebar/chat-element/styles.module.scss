@@ -21,19 +21,14 @@
   align-items: center;
 }
 
-.chat-element .arrow {
+.chat-element .trash-box {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 15px;
-  visibility: hidden;
 }
 
 .selected {
   background: var(--white);
   box-shadow: 0 4px 20px 0 var(--blue-alpha-30);
-}
-
-.selected .arrow {
-  visibility: visible;
 }
