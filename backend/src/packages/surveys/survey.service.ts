@@ -1,7 +1,6 @@
 import { type Service } from '#libs/types/types.js';
 import { userService } from '#packages/users/users.js';
 
-import { type SurveyGetAllResponseDto } from './libs/types/types.js';
 import { SurveyEntity } from './survey.entity.js';
 import { type SurveyRepository } from './survey.repository.js';
 import {
@@ -20,12 +19,8 @@ class SurveyService implements Service {
     return Promise.resolve(null);
   }
 
-  public async findAll(): Promise<SurveyGetAllResponseDto> {
-    const items = await this.surveyRepository.findAll();
-
-    return {
-      items: items.map((item) => item.toObject()),
-    };
+  public async findAll(): ReturnType<Service['findAll']> {
+    return await Promise.resolve(null);
   }
 
   public async create(
@@ -38,7 +33,7 @@ class SurveyService implements Service {
       }),
     );
 
-    await userService.updateIsSurveyCompleted(payload.userId);
+    await userService.completeSurvey(payload.userId);
 
     return item.toObject();
   }
