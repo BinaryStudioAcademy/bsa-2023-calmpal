@@ -6,19 +6,19 @@ import { NotificationType } from './libs/enums/notification-type.enum.js';
 
 class Notification {
   public [NotificationType.ERROR](message: string): void {
-    this.show(message, 'error');
+    this.show(message, NotificationType.ERROR);
   }
 
   public [NotificationType.SUCCESS](message: string): void {
-    this.show(message, 'success');
+    this.show(message, NotificationType.SUCCESS);
   }
 
   public [NotificationType.WARNING](message: string): void {
-    this.show(message, 'warning');
+    this.show(message, NotificationType.WARNING);
   }
 
   public [NotificationType.INFO](message: string): void {
-    this.show(message, 'info');
+    this.show(message, NotificationType.INFO);
   }
 
   private show(message: string, type: ValueOf<typeof NotificationType>): void {
