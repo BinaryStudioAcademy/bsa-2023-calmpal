@@ -42,25 +42,8 @@ class UserRepository implements Repository {
     });
   }
 
-  public async findAll(): Promise<UserEntity[]> {
-    const users = await this.userModel
-      .query()
-      .select()
-      .withGraphJoined(UsersRelation.DETAILS)
-      .castTo<UserCommonQueryResponse[]>()
-      .execute();
-
-    return users.map((user) => {
-      return UserEntity.initialize({
-        id: user.id,
-        email: user.email,
-        passwordHash: user.passwordHash,
-        passwordSalt: user.passwordSalt,
-        createdAt: new Date(user.createdAt),
-        updatedAt: new Date(user.updatedAt),
-        fullName: user.details?.fullName ?? '',
-      });
-    });
+  public findAll(): ReturnType<Repository['findAll']> {
+    return Promise.resolve([]);
   }
 
   public async create(entity: UserEntity): Promise<UserEntity> {
