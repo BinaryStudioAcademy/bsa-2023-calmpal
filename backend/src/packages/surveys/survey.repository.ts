@@ -14,16 +14,8 @@ class SurveyRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public async findAll(): Promise<SurveyEntity[]> {
-    const surveys: SurveyModel[] = await this.surveyModel.query().execute();
-
-    return surveys.map((survey) =>
-      SurveyEntity.initialize({
-        ...survey,
-        createdAt: new Date(survey.createdAt),
-        updatedAt: new Date(survey.updatedAt),
-      }),
-    );
+  public async findAll(): ReturnType<Repository['findAll']> {
+    return await Promise.resolve([]);
   }
 
   public async create(entity: SurveyEntity): Promise<SurveyEntity> {
