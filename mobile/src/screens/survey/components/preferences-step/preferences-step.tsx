@@ -20,7 +20,12 @@ const categoryNames = [
 ];
 const EMPTY_ARRAY_LENGTH = 0;
 
+// type Properties = {
+//   onSubmit: (options: string[]) => void;
+// };
+
 const PreferencesStep: React.FC = () => {
+  // const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [otherText, setOtherText] = useState<string>('');
   const [isOtherSelected, setIsOtherSelected] = useState<boolean>(false);
