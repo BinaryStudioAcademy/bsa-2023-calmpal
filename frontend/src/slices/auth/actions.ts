@@ -2,12 +2,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { StorageKey } from '#libs/packages/storage/storage.js';
 import { type AsyncThunkConfig } from '#libs/types/types.js';
+import { type SurveyRequestDto } from '#packages/survey/survey.js';
 import {
   type UserAuthResponseDto,
   type UserSignUpRequestDto,
 } from '#packages/users/users.js';
 
 import { name as sliceName } from './auth.slice.js';
+import { EMPTY_ARRAY_LENGTH } from './libs/constants.js';
 
 const signUp = createAsyncThunk<
   UserAuthResponseDto,
@@ -31,4 +33,15 @@ const getAuthenticatedUser = createAsyncThunk<
   return authApi.getAuthenticatedUser();
 });
 
-export { getAuthenticatedUser, signUp };
+const createUserSurveyPreferences = createAsyncThunk<
+  boolean,
+  SurveyRequestDto,
+  AsyncThunkConfig
+>(`${sliceName}/create-user-survey-preferences`, async (payload, { extra }) => {
+  const { authApi } = extra;
+  const { preferences } = await authApi.createUserSurveyPreferences(payload);
+
+  return preferences.length > EMPTY_ARRAY_LENGTH;
+});
+
+export { createUserSurveyPreferences, getAuthenticatedUser, signUp };
