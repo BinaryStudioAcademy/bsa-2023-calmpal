@@ -17,7 +17,7 @@ class AuthService {
 
   public async signUp(
     userRequestDto: UserSignUpRequestDto,
-  ): Promise<UserSignUpResponseDto | undefined> {
+  ): Promise<UserSignUpResponseDto> {
     const { email } = userRequestDto;
 
     const user = await this.userService.findByEmail(email);
