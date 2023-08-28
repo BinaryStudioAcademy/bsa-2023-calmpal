@@ -19,19 +19,20 @@
   max-width: 60%;
 }
 
-.message-box {
-  box-sizing: border-box;
-  padding: 8px 16px;
-  background-color: var(--blue-100);
-  border-radius: 12px;
-}
-
 .message-text {
+  display: inline-block;
+  width: fit-content;
+  padding: 8px 16px;
   color: var(--black);
   font-weight: 400;
   font-size: 14px;
   font-family: Montserrat, sans-serif;
   line-height: 20px;
+  word-wrap: break-word;
+  word-break: break-all;
+  background-color: var(--blue-100);
+  border-radius: 12px;
+  animation: slide-in-right 0.5s forwards;
 }
 
 @keyframes slide-in-right {

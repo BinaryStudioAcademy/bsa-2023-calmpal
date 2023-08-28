@@ -11,9 +11,9 @@ const BotMessage: React.FC<BotMessageProperties> = ({ messages }) => {
     <div className={styles['bot-message-container']}>
       <div className={styles['message-container']}>
         {messages.map((message, index) => (
-          <div key={index} className={styles['message']}>
-            <span className={styles['message-text']}>{message}</span>
-          </div>
+          <span key={index} className={styles['message-text']}>
+            {message}
+          </span>
         ))}
       </div>
       <img src={chatLogo} className={styles['bot-avatar']} alt="bot-avatar" />
