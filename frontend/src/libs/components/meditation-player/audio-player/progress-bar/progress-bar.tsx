@@ -1,4 +1,4 @@
-import { formatTime } from '#libs/helpers/get-format-time.js';
+import { formatTime } from '#libs/helpers/helpers.js';
 import { useCallback } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';

@@ -3,17 +3,11 @@ import reactLogo from '#assets/img/react.svg';
 import {
   Header,
   Link,
-  Loader,
+  MeditationPlayer,
   RouterOutlet,
 } from '#libs/components/components.js';
-import { AppRoute, DataStatus } from '#libs/enums/enums.js';
-import {
-  useAppDispatch,
-  useAppSelector,
-  useEffect,
-  useLocation,
-} from '#libs/hooks/hooks.js';
-import { actions as authActions } from '#slices/auth/auth.js';
+import { AppRoute } from '#libs/enums/enums.js';
+import { useAppDispatch, useEffect, useLocation } from '#libs/hooks/hooks.js';
 import { actions as userActions } from '#slices/users/users.js';
 
 import { Sidebar } from '../sidebar/sidebar.js';
@@ -22,9 +16,6 @@ import styles from './styles.module.scss';
 const App: React.FC = () => {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
-  const { authenticatedUserDataStatus } = useAppSelector(({ auth }) => ({
-    authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
-  }));
 
   const isRoot = pathname === AppRoute.ROOT;
 
@@ -33,14 +24,6 @@ const App: React.FC = () => {
       void dispatch(userActions.loadAll());
     }
   }, [isRoot, dispatch]);
-
-  useEffect(() => {
-    void dispatch(authActions.getAuthenticatedUser());
-  }, [dispatch]);
-
-  if (authenticatedUserDataStatus === DataStatus.PENDING) {
-    return <Loader />;
-  }
 
   return (
     <div className={styles['app-container']}>
@@ -71,6 +54,15 @@ const App: React.FC = () => {
         <div>
           <RouterOutlet />
         </div>
+        <MeditationPlayer
+          meditation={{
+            id: 1,
+            title: 'Meditation for deep sleep',
+            purpose: 'Stress relief',
+            src: 'none',
+            img: '../../../../public/images/meditation-image.svg',
+          }}
+        />
       </div>
     </div>
   );
