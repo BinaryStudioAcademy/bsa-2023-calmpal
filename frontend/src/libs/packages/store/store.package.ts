@@ -14,7 +14,7 @@ import { userApi } from '#packages/users/users.js';
 import { reducer as authReducer } from '#slices/auth/auth.js';
 import { reducer as usersReducer } from '#slices/users/users.js';
 
-import { type Notification } from '../notification/notification.package.js';
+import { type Notification } from '../notification/notification.js';
 import { storage } from '../storage/storage.js';
 
 type RootReducer = {

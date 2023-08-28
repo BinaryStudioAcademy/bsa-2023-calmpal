@@ -33,7 +33,7 @@ body {
 }
 
 #root .Toastify__toast--error {
-  color: var(--black-text);
+  color: var(--black);
   font-weight: 400;
   font-size: 12px;
   font-family: Montserrat, sans-serif;
@@ -42,9 +42,9 @@ body {
 }
 
 #root .Toastify__progress-bar--error {
-  background: var(--red-error);
+  background: var(--red-300);
 }
 
 #root .Toastify__toast-icon svg {
-  fill: var(--red-error);
+  fill: var(--red-300);
 }

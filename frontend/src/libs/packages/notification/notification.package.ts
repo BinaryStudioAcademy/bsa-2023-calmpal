@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 
 import { type ValueOf } from '#libs/types/types.js';
 
-import { NotificationType } from './libs/enums/notification-type.enum.js';
+import { NotificationType } from './libs/enums/enums.js';
 
 class Notification {
   public [NotificationType.ERROR](message: string): void {

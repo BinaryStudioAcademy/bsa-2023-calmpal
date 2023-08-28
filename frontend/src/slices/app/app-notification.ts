@@ -1,7 +1,7 @@
 import { notify } from './actions.js';
 
-const allActions = {
+const appActions = {
   notify,
 };
 
-export { allActions as appActions };
+export { appActions };
