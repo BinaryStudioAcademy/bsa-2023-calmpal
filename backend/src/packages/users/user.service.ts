@@ -6,7 +6,6 @@ import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserRepository } from '#packages/users/user.repository.js';
 
 import {
-  type UserGetAllResponseDto,
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
 } from './libs/types/types.js';
@@ -52,12 +51,8 @@ class UserService implements Service {
     return user.toObject();
   }
 
-  public async findAll(): Promise<UserGetAllResponseDto> {
-    const items = await this.userRepository.findAll();
-
-    return {
-      items: items.map((item) => item.toObject()),
-    };
+  public findAll(): ReturnType<Service['findAll']> {
+    return Promise.resolve({ items: [] });
   }
 
   public async create(
