@@ -3,6 +3,7 @@ const ExceptionMessage = {
   UNAUTHORIZED_USER: 'User is not authorized.',
   USER_NOT_FOUND: 'User with these credentials was not found',
   INCORRECT_PASSWORD: 'Incorrect password',
+  USER_ALREADY_EXISTS: 'User already exists.',
 } as const;
 
 export { ExceptionMessage };
