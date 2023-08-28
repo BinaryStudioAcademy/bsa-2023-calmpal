@@ -11,24 +11,17 @@ import {
   View,
 } from '#libs/components/components';
 import { AppColor, RootScreenName } from '#libs/enums/enums';
-import { useEffect, useNavigation, useState } from '#libs/hooks/hooks';
+import { useEffect, useNavigation, useSearch } from '#libs/hooks/hooks';
 
 import { Badge } from './components/components';
 import mockedChats from './libs/constants/data.json';
 import { styles } from './styles';
-
-type MockChatItem = {
-  id: string;
-  title: string;
-};
 
 const onPress = (): void => {
   // This function is intentionally left empty for mocking purposes.
 };
 
 const Chat: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filteredChats, setFilteredChats] = useState<MockChatItem[]>([]);
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -42,12 +35,8 @@ const Chat: React.FC = () => {
     });
   }, [navigation]);
 
-  useEffect(() => {
-    const filteredItems = mockedChats.filter((item) =>
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()),
-    );
-    setFilteredChats(filteredItems);
-  }, [searchQuery]);
+  const { filteredData: filteredChats, setSearchQuery } =
+    useSearch(mockedChats);
 
   const chatList = filteredChats.map((item) => (
     <Card title={item.title} onPress={onPress} key={item.id} />
