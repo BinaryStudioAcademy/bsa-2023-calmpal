@@ -1,5 +1,5 @@
-import { Icon } from '#libs/components/components.js';
-import { IconName } from '#libs/enums/enums.js';
+import { PlainSvgIcon } from '#libs/components/components.js';
+import { IconNameToIcon } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback } from '#libs/hooks/hooks.js';
 
@@ -38,7 +38,7 @@ const ChatElement: React.FC<Properties> = ({ chat }) => {
         {chat.name}
       </div>
       <div className={styles['arrow']}>
-        <Icon name={IconName.ARROW} />
+        <PlainSvgIcon name={IconNameToIcon.ARROW} />
       </div>
     </button>
   );

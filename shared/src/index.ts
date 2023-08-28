@@ -3,7 +3,7 @@ export {
   AppEnvironment,
   ContentType,
   ExceptionMessage,
-  IconName,
+  IconNameToIcon,
   ServerErrorType,
 } from './libs/enums/enums.js';
 export {

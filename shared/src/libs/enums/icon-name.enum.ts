@@ -1,6 +1,6 @@
-const IconName = {
-  ARROW: 'arrow.svg',
-  PLUS: 'plus.svg',
+const IconNameToIcon = {
+  ARROW: 'arrow',
+  PLUS: 'plus',
 } as const;
 
-export { IconName };
+export { IconNameToIcon };
