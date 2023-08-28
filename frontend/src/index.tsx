@@ -42,7 +42,11 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
               },
               {
                 path: AppRoute.SURVEY,
-                element: <Survey />,
+                element: (
+                  <ProtectedRoute>
+                    <Survey />
+                  </ProtectedRoute>
+                ),
               },
             ],
           },
