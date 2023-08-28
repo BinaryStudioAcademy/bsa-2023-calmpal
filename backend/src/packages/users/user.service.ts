@@ -44,11 +44,15 @@ class UserService implements Service {
   ): Promise<ReturnType<UserEntity['toObject']> | null> {
     const user = await this.userRepository.findById(id);
 
-    if (!user) {
-      return null;
-    }
+    return user?.toObject() ?? null;
+  }
 
-    return user.toObject();
+  public async findByEmail(
+    email: string,
+  ): Promise<ReturnType<UserEntity['toObject']> | null> {
+    const user = await this.userRepository.findByEmail(email);
+
+    return user?.toObject() ?? null;
   }
 
   public findAll(): ReturnType<Service['findAll']> {
@@ -69,6 +73,7 @@ class UserService implements Service {
       UserEntity.initializeNew({
         fullName: payload.fullName,
         email: payload.email,
+        isSurveyCompleted: false,
         passwordSalt,
         passwordHash,
       }),
@@ -80,6 +85,10 @@ class UserService implements Service {
       user,
       token,
     };
+  }
+
+  public async completeSurvey(id: number): Promise<void> {
+    await this.userRepository.updateIsSurveyCompleted(id);
   }
 
   public update(): ReturnType<Service['update']> {

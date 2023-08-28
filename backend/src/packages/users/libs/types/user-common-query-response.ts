@@ -7,6 +7,7 @@ type UserCommonQueryResponse = {
   passwordHash: string;
   details?: {
     fullName: string;
+    isSurveyCompleted: boolean;
   };
 };
 
