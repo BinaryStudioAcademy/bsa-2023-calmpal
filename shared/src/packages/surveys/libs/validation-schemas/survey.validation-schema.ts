@@ -12,7 +12,7 @@ const surveyInput = joi.object<SurveyInputDto, true>({
   options: joi.array().items(joi.string()).min(minArrayLength).messages({
     'array.min': SurveyValidationMessage.OPTION_REQUIRED,
   }),
-  textarea: joi.string().when('option', {
+  textarea: joi.string().when('options', {
     is: joi
       .array()
       .has(joi.string().valid(SurveyTextareaOptions.OTHER))
