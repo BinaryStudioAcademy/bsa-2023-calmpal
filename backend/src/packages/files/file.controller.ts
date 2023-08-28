@@ -25,7 +25,7 @@ class FileController extends BaseController {
       handler: (options) =>
         this.upload(
           options as APIHandlerOptions<{
-            fileBuff: FileUploadRequestDto;
+            fileBuffer: FileUploadRequestDto;
           }>,
         ),
     });
@@ -53,12 +53,12 @@ class FileController extends BaseController {
    */
   private async upload(
     options: APIHandlerOptions<{
-      fileBuff: FileUploadRequestDto;
+      fileBuffer: FileUploadRequestDto;
     }>,
   ): Promise<APIHandlerResponse> {
     return {
       status: HTTPCode.CREATED,
-      payload: await this.fileService.create(options.fileBuff),
+      payload: await this.fileService.create(options.fileBuffer),
     };
   }
 }

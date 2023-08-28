@@ -6,7 +6,7 @@ type DefaultApiHandlerOptions = {
   query?: unknown;
   params?: unknown;
   user?: UserAuthResponseDto;
-  fileBuff?: FileUploadRequestDto;
+  fileBuffer?: FileUploadRequestDto;
 };
 
 type APIHandlerOptions<
@@ -16,7 +16,7 @@ type APIHandlerOptions<
   query: T['query'];
   params: T['params'];
   user: T['user'];
-  fileBuff: T['fileBuff'];
+  fileBuffer: T['fileBuffer'];
 };
 
 export { type APIHandlerOptions };

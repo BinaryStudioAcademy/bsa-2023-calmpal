@@ -10,7 +10,7 @@ type Options = {
 };
 
 const fileUpload = fp<Options>((fastify, { extensions }, done) => {
-  fastify.decorateRequest('fileBuff', null);
+  fastify.decorateRequest('fileBuffer', null);
 
   fastify.addHook(ControllerHook.PRE_VALIDATION, async (request) => {
     if (!request.isMultipart()) {
@@ -31,7 +31,7 @@ const fileUpload = fp<Options>((fastify, { extensions }, done) => {
 
     const buffer = await file.toBuffer();
 
-    request.fileBuff = { buffer, contentType: file.mimetype };
+    request.fileBuffer = { buffer, contentType: file.mimetype };
   });
 
   done();
