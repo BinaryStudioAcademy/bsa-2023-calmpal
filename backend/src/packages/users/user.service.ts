@@ -74,6 +74,7 @@ class UserService implements Service {
       UserWithPasswordEntity.initializeNewWithPassword({
         fullName: payload.fullName,
         email: payload.email,
+        isSurveyCompleted: false,
         passwordSalt,
         passwordHash,
       }),
@@ -85,6 +86,10 @@ class UserService implements Service {
       user,
       token,
     };
+  }
+
+  public async completeSurvey(id: number): Promise<void> {
+    await this.userRepository.updateIsSurveyCompleted(id);
   }
 
   public update(): ReturnType<Service['update']> {

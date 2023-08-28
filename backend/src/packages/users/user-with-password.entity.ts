@@ -13,6 +13,7 @@ class UserWithPasswordEntity extends UserEntity {
     passwordSalt,
     createdAt,
     updatedAt,
+    isSurveyCompleted,
   }: {
     id: number | null;
     email: string;
@@ -21,6 +22,7 @@ class UserWithPasswordEntity extends UserEntity {
     passwordSalt: string;
     createdAt: Date | null;
     updatedAt: Date | null;
+    isSurveyCompleted: boolean;
   }) {
     super({
       id,
@@ -28,6 +30,7 @@ class UserWithPasswordEntity extends UserEntity {
       fullName,
       createdAt,
       updatedAt,
+      isSurveyCompleted,
     });
     this.passwordHash = passwordHash;
     this.passwordSalt = passwordSalt;
@@ -51,6 +54,7 @@ class UserWithPasswordEntity extends UserEntity {
     passwordSalt,
     createdAt,
     updatedAt,
+    isSurveyCompleted,
   }: {
     id: number;
     email: string;
@@ -59,6 +63,7 @@ class UserWithPasswordEntity extends UserEntity {
     passwordSalt: string;
     createdAt: Date;
     updatedAt: Date;
+    isSurveyCompleted: boolean;
   }): UserWithPasswordEntity {
     return new UserWithPasswordEntity({
       id,
@@ -68,6 +73,7 @@ class UserWithPasswordEntity extends UserEntity {
       passwordSalt,
       createdAt,
       updatedAt,
+      isSurveyCompleted,
     });
   }
 
@@ -76,11 +82,13 @@ class UserWithPasswordEntity extends UserEntity {
     fullName,
     passwordHash,
     passwordSalt,
+    isSurveyCompleted,
   }: {
     email: string;
     fullName: string;
     passwordHash: string;
     passwordSalt: string;
+    isSurveyCompleted: boolean;
   }): UserWithPasswordEntity {
     return new UserWithPasswordEntity({
       id: null,
@@ -90,6 +98,7 @@ class UserWithPasswordEntity extends UserEntity {
       passwordSalt,
       createdAt: null,
       updatedAt: null,
+      isSurveyCompleted,
     });
   }
 
@@ -101,6 +110,7 @@ class UserWithPasswordEntity extends UserEntity {
     updatedAt: Date;
     passwordHash: string;
     passwordSalt: string;
+    isSurveyCompleted: boolean;
   } {
     const baseObject = super.toObject();
 
@@ -116,6 +126,7 @@ class UserWithPasswordEntity extends UserEntity {
     fullName: string;
     passwordHash: string;
     passwordSalt: string;
+    isSurveyCompleted: boolean;
   } {
     const baseObject = super.toNewObject();
 
