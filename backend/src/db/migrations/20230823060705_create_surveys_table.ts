@@ -9,11 +9,11 @@ const ColumnName = {
   PREFERENCES: 'preferences',
   CREATED_AT: 'created_at',
   UPDATED_AT: 'updated_at',
-};
+} as const;
 
 const RelationRule = {
   CASCADE: 'CASCADE',
-};
+} as const;
 
 function up(knex: Knex): Promise<void> {
   return knex.schema.createTable(TABLE_NAME, (table) => {

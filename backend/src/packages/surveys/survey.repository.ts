@@ -35,11 +35,12 @@ class SurveyRepository implements Repository {
         userId,
         preferences,
       })
-      .returning('*')
       .execute();
 
     return SurveyEntity.initialize({
-      ...survey,
+      id: survey.id,
+      userId: survey.userId,
+      preferences: survey.preferences,
       createdAt: new Date(survey.createdAt),
       updatedAt: new Date(survey.updatedAt),
     });

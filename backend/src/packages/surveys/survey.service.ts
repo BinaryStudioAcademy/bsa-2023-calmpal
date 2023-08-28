@@ -20,7 +20,7 @@ class SurveyService implements Service {
   }
 
   public async findAll(): ReturnType<Service['findAll']> {
-    return await Promise.resolve(null);
+    return await Promise.resolve([]);
   }
 
   public async create(
