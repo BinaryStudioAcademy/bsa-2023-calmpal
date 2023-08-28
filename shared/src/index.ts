@@ -30,6 +30,7 @@ export {
   type ValueOf,
 } from './libs/types/types.js';
 export { AuthApiPath } from './packages/auth/auth.js';
+export { type ChatMessage, ChatRole } from './packages/chat/chat.js';
 export {
   type UserAuthResponseDto,
   type UserGetAllItemResponseDto,

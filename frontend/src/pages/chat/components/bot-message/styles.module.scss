@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: flex-end;
   gap: 16px;
+  animation: slide-in-left 0.5s forwards;
 }
 
 .message-container {
@@ -30,4 +31,16 @@
   width: 40px;
   height: 40px;
   border-radius: 8px;
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
