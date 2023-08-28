@@ -15,6 +15,8 @@ class UserEntity implements Entity {
 
   private passwordSalt: string;
 
+  private isSurveyCompleted: boolean;
+
   private constructor({
     id,
     email,
@@ -23,6 +25,7 @@ class UserEntity implements Entity {
     passwordSalt,
     createdAt,
     updatedAt,
+    isSurveyCompleted,
   }: {
     id: number | null;
     email: string;
@@ -31,6 +34,7 @@ class UserEntity implements Entity {
     passwordSalt: string;
     createdAt: Date | null;
     updatedAt: Date | null;
+    isSurveyCompleted: boolean;
   }) {
     this.id = id;
     this.email = email;
@@ -39,6 +43,7 @@ class UserEntity implements Entity {
     this.passwordSalt = passwordSalt;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
+    this.isSurveyCompleted = isSurveyCompleted;
   }
 
   public static initialize({
@@ -49,6 +54,7 @@ class UserEntity implements Entity {
     passwordSalt,
     createdAt,
     updatedAt,
+    isSurveyCompleted,
   }: {
     id: number;
     email: string;
@@ -57,6 +63,7 @@ class UserEntity implements Entity {
     passwordSalt: string;
     createdAt: Date;
     updatedAt: Date;
+    isSurveyCompleted: boolean;
   }): UserEntity {
     return new UserEntity({
       id,
@@ -66,6 +73,7 @@ class UserEntity implements Entity {
       passwordSalt,
       createdAt,
       updatedAt,
+      isSurveyCompleted,
     });
   }
 
@@ -74,11 +82,13 @@ class UserEntity implements Entity {
     fullName,
     passwordHash,
     passwordSalt,
+    isSurveyCompleted = false,
   }: {
     email: string;
     fullName: string;
     passwordHash: string;
     passwordSalt: string;
+    isSurveyCompleted: boolean;
   }): UserEntity {
     return new UserEntity({
       id: null,
@@ -88,6 +98,7 @@ class UserEntity implements Entity {
       passwordSalt,
       createdAt: null,
       updatedAt: null,
+      isSurveyCompleted,
     });
   }
 
@@ -97,6 +108,7 @@ class UserEntity implements Entity {
     fullName: string;
     createdAt: Date;
     updatedAt: Date;
+    isSurveyCompleted: boolean;
   } {
     return {
       id: this.id as number,
@@ -104,6 +116,7 @@ class UserEntity implements Entity {
       fullName: this.fullName,
       createdAt: this.createdAt as Date,
       updatedAt: this.updatedAt as Date,
+      isSurveyCompleted: this.isSurveyCompleted,
     };
   }
 
@@ -112,12 +125,14 @@ class UserEntity implements Entity {
     fullName: string;
     passwordHash: string;
     passwordSalt: string;
+    isSurveyCompleted: boolean;
   } {
     return {
       email: this.email,
       fullName: this.fullName,
       passwordHash: this.passwordHash,
       passwordSalt: this.passwordSalt,
+      isSurveyCompleted: this.isSurveyCompleted,
     };
   }
 }
