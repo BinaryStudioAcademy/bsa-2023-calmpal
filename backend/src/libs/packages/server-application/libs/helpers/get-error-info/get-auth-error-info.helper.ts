@@ -1,12 +1,10 @@
 import { ServerErrorType } from '#libs/enums/enums.js';
 import { type AuthError } from '#libs/exceptions/exceptions.js';
-import { HTTPCode } from '#libs/packages/http/http.js';
 
 import { type ErrorInfo } from '../../types/types.js';
 
 const getAuthErrorInfo = (error: AuthError): ErrorInfo => {
-  const { message } = error;
-  const status = HTTPCode.UNAUTHORIZED;
+  const { message, status } = error;
 
   return {
     status,
