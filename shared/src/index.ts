@@ -32,7 +32,6 @@ export {
 export { AuthApiPath } from './packages/auth/auth.js';
 export {
   type SurveyGetAllItemResponseDto,
-  type SurveyGetAllResponseDto,
   type SurveyInputDto,
   surveyInputValidationSchema,
   type SurveyRequestDto,
