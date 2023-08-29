@@ -1,10 +1,10 @@
 export { type AsyncThunkConfig } from './async-thunk-config.type.js';
 export {
-  type Control as FormControl,
-  type FieldErrors as FormFieldErrors,
-  type FieldPath as FormFieldPath,
-  type FieldValues as FormFieldValues,
-} from 'react-hook-form';
+  type FormControl,
+  type FormFieldErrors,
+  type FormFieldPath,
+  type FormFieldValues,
+} from './form/form.type.js';
 export {
   type ServerErrorDetail,
   type ServerErrorResponse,
