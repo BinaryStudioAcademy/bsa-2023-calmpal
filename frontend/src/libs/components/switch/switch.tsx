@@ -22,10 +22,9 @@ const Switch = <T extends FieldValues>({
   const { field } = useFormController({ name, control });
 
   return (
-    <label className={styles['container']} htmlFor={name}>
+    <label className={styles['container']}>
       <span className="visually-hidden">{label}</span>
       <input
-        id={name}
         className={styles['input']}
         type="checkbox"
         checked={field.value}

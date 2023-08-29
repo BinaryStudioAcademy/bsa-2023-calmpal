@@ -15,7 +15,6 @@ const ProfileSettings: React.FC = () => {
       <section className={styles['notifications-section']}>
         <Setting
           label="Allow Notification"
-          name="notification"
           controller={
             <Switch
               name="notification"
