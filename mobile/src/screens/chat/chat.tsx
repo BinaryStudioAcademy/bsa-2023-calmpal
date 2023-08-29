@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react';
+import React, { type ReactNode, useCallback } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
 import PlusIcon from '#assets/img/icons/plus.svg';
@@ -19,10 +19,6 @@ import { styles } from './styles';
 
 const mockedCount = 12;
 
-const onPress = (): void => {
-  // TODO: Implement actual functionality for the onPress event
-};
-
 const Chat: React.FC = () => {
   const navigation = useNavigation();
 
@@ -36,6 +32,10 @@ const Chat: React.FC = () => {
       ),
     });
   }, [navigation]);
+
+  const onPress = useCallback(() => {
+    // TODO: Implement actual functionality for the onPress event
+  }, []);
 
   const { filteredData: filteredChats, setSearchQuery } = useSearch(
     mockedChats,
