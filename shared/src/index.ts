@@ -32,6 +32,10 @@ export {
 export { AuthApiPath } from './packages/auth/auth.js';
 export { type ChatMessage, ChatRole } from './packages/chat/chat.js';
 export {
+  type SurveyGetAllItemResponseDto,
+  type SurveyRequestDto,
+} from './packages/surveys/surveys.js';
+export {
   type UserAuthResponseDto,
   type UserGetAllItemResponseDto,
   type UserGetAllResponseDto,
