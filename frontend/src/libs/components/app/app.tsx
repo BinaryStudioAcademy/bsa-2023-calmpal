@@ -40,7 +40,7 @@ const App: React.FC = () => {
       />
       <div className={styles['body-container']}>
         <Header />
-        <div>
+        <div className={styles['outlet-container']}>
           <RouterOutlet />
         </div>
       </div>

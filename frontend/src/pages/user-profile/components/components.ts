@@ -1,1 +1,1 @@
-export { UserProfileChatSidebar } from './user-profile-sidebar/user-profile-sidebar.js';
+export { UserProfileSidebar } from './user-profile-sidebar/user-profile-sidebar.js';

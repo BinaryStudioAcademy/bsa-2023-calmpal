@@ -2,7 +2,7 @@ import { useAppSelector } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
 
-const UserProfileChatSidebar: React.FC = () => {
+const UserProfileSidebar: React.FC = () => {
   const { authenticatedUser } = useAppSelector(({ auth }) => ({
     authenticatedUser: auth.authenticatedUser,
   }));
@@ -26,4 +26,4 @@ const UserProfileChatSidebar: React.FC = () => {
   );
 };
 
-export { UserProfileChatSidebar };
+export { UserProfileSidebar };
