@@ -9,6 +9,7 @@ export {
   ApplicationError,
   AuthError,
   HTTPError,
+  UsersError,
   ValidationError,
 } from './libs/exceptions/exceptions.js';
 export { configureString } from './libs/helpers/helpers.js';
@@ -30,6 +31,10 @@ export {
   type ValueOf,
 } from './libs/types/types.js';
 export { AuthApiPath } from './packages/auth/auth.js';
+export {
+  type SurveyGetAllItemResponseDto,
+  type SurveyRequestDto,
+} from './packages/surveys/surveys.js';
 export {
   type UserAuthResponseDto,
   type UserGetAllItemResponseDto,

@@ -2,13 +2,14 @@ import { APIPath, ContentType } from '#libs/enums/enums';
 import { BaseHttpApi } from '#libs/packages/api/api';
 import { type HTTP } from '#libs/packages/http/http';
 import { type Storage } from '#libs/packages/storage/storage';
-
 import {
+  type UserAuthResponseDto,
   type UserSignInRequestDto,
   type UserSignInResponseDto,
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
-} from '../users/users';
+} from '#packages/users/users';
+
 import { AuthApiPath } from './libs/enums/enums';
 
 type Constructor = {
@@ -52,6 +53,18 @@ class AuthApi extends BaseHttpApi {
     );
 
     return await response.json<UserSignInResponseDto>();
+  }
+
+  public async getAuthenticatedUser(): Promise<UserAuthResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(AuthApiPath.AUTHENTICATED_USER, {}),
+      {
+        method: 'GET',
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<UserAuthResponseDto>();
   }
 }
 
