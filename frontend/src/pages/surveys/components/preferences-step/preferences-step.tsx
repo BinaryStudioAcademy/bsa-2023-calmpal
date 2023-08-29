@@ -15,6 +15,7 @@ import {
   DEFAULT_SURVEY_PAYLOAD,
   PREFERENCES_CATEGORIES,
   TEXTAREA_MAX_LENGTH,
+  TEXTAREA_ROWS_COUNT,
 } from '#pages/surveys/libs/constants.js';
 
 import styles from './styles.module.scss';
@@ -89,7 +90,7 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
             name="textarea"
             placeholder="Text"
             maxLength={TEXTAREA_MAX_LENGTH}
-            hasRows={true}
+            rowsCount={TEXTAREA_ROWS_COUNT}
           />
         )}
       </div>

@@ -8,6 +8,7 @@ import {
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useFormController } from '#libs/hooks/hooks.js';
 
+import { INPUT_ROWS_COUNT } from './libs/constants.js';
 import styles from './styles.module.scss';
 
 type Properties<T extends FieldValues> = {
@@ -17,7 +18,7 @@ type Properties<T extends FieldValues> = {
   name: FieldPath<T>;
   placeholder?: string;
   type?: 'text' | 'email' | 'password';
-  hasRows?: boolean;
+  rowsCount?: number;
   maxLength?: number;
 };
 
@@ -28,7 +29,7 @@ const Input = <T extends FieldValues>({
   name,
   placeholder = '',
   type = 'text',
-  hasRows = false,
+  rowsCount = INPUT_ROWS_COUNT,
   maxLength,
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
@@ -39,9 +40,10 @@ const Input = <T extends FieldValues>({
   return (
     <label className={styles['container']}>
       <span className={styles['label']}>{label}</span>
-      {hasRows ? (
+      {rowsCount > INPUT_ROWS_COUNT ? (
         <textarea
           {...field}
+          rows={rowsCount}
           placeholder={placeholder}
           maxLength={maxLength}
           className={getValidClassNames(
