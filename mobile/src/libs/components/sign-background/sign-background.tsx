@@ -1,9 +1,9 @@
 import React, { type ReactNode } from 'react';
 import { Image, type ImageSourcePropType } from 'react-native';
 
-import bottomBubbleImage from '#assets/bottom-bubble.png';
-import backgroundImage from '#assets/sign-background.png';
-import topBubbleImage from '#assets/top-bubble.png';
+import bottomBubbleImage from '#assets/img/bottom-bubble.png';
+import backgroundImage from '#assets/img/sign-background.png';
+import topBubbleImage from '#assets/img/top-bubble.png';
 import { View } from '#libs/components/components';
 
 import { styles } from './styles';
