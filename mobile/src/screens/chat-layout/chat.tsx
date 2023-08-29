@@ -31,7 +31,7 @@ const Chat: React.FC = () => {
     scrollViewReference.current?.scrollToEnd();
   };
 
-  const onSubmit = useCallback(
+  const handleFormSubmit = useCallback(
     (payload: { text: string }): void => {
       setMessages((previous) => [
         ...previous,
@@ -48,8 +48,8 @@ const Chat: React.FC = () => {
   );
 
   const handleSend = useCallback((): void => {
-    void handleSubmit(onSubmit)();
-  }, [handleSubmit, onSubmit]);
+    void handleSubmit(handleFormSubmit)();
+  }, [handleSubmit, handleFormSubmit]);
 
   useEffect(() => {
     scrollViewToEnd();
