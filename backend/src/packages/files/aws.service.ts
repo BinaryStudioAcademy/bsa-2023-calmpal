@@ -100,18 +100,6 @@ class AWSService {
 
     throw new FileError({});
   }
-
-  public getFileKey(url: string): string | undefined {
-    const regex = /https:\/\/[^/]+\/([^/]+)/;
-    const match = url.match(regex);
-    const fileKeyIndex = 1;
-
-    if (!match) {
-      return;
-    }
-
-    return match[fileKeyIndex];
-  }
 }
 
 export { AWSService };
