@@ -1,4 +1,9 @@
-import { AuthError, AWSError, FileError, UsersError } from '#libs/exceptions/exceptions.js';
+import {
+  AuthError,
+  AWSError,
+  FileError,
+  UsersError,
+} from '#libs/exceptions/exceptions.js';
 import { HTTPError } from '#libs/packages/http/http.js';
 
 import { type APIError, type ErrorInfo } from '../../types/types.js';
@@ -18,7 +23,7 @@ const getErrorInfo = (error: APIError): ErrorInfo => {
   if (error instanceof UsersError) {
     return getUsersErrorInfo(error);
   }
-  
+
   if (error instanceof FileError) {
     return getFileErrorInfo(error);
   }
