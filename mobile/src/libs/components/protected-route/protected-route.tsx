@@ -10,10 +10,12 @@ type Properties = {
 };
 
 const ProtectedRoute: React.FC<Properties> = ({ children }) => {
-  const { user } = useAppSelector((store) => store.auth);
+  const { authenticatedUser } = useAppSelector(({ auth }) => ({
+    authenticatedUser: auth.authenticatedUser,
+  }));
   const navigation =
     useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
-  const hasUser = Boolean(user);
+  const hasUser = Boolean(authenticatedUser);
 
   useEffect(() => {
     if (!hasUser) {
