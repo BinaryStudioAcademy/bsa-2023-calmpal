@@ -5,7 +5,7 @@ import {
   type FieldValues,
 } from 'react-hook-form';
 
-import SendIcon from '#assets/img/icons/send-button.svg';
+import SendIcon from '#assets/img/icons/send.svg';
 import { Pressable, TextInput, View } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
 import { useFormController } from '#libs/hooks/hooks';
