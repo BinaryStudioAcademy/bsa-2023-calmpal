@@ -24,10 +24,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 35%;
-  min-width: 350px;
-  height: 75%;
-  padding: 45px;
+  padding: 70px 120px;
   text-align: left;
   background-color: var(--white-alpha-20);
   border-radius: 32px;
@@ -49,6 +46,23 @@
   margin: 0.1px;
   font-weight: 600;
   font-size: 83px;
+}
+
+@media (width < 1023px) {
+  .auth {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .auth-name {
+    margin: 0;
+  }
+
+  .auth .overlay {
+    padding: 30px 70px;
+  }
 }
 
 @media (width < 768px) {
