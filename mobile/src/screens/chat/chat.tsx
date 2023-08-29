@@ -37,8 +37,10 @@ const Chat: React.FC = () => {
     });
   }, [navigation]);
 
-  const { filteredData: filteredChats, setSearchQuery } =
-    useSearch(mockedChats);
+  const { filteredData: filteredChats, setSearchQuery } = useSearch(
+    mockedChats,
+    'title',
+  );
 
   return (
     <LinearGradient

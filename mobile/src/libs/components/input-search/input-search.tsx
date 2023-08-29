@@ -1,4 +1,4 @@
-import React, { type Dispatch, type SetStateAction } from 'react';
+import React from 'react';
 
 import { TextInput } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
@@ -8,9 +8,11 @@ import { useAppForm, useFormController } from '#libs/hooks/hooks';
 import { DEFAULT_SEARCH_PAYLOAD } from './libs/constants';
 import { styles } from './styles';
 
+let debounced: ReturnType<typeof debouncedSetSearchQuery> | undefined;
+
 type Properties = {
   placeholder: string;
-  setSearchQuery: Dispatch<SetStateAction<string>>;
+  setSearchQuery: (search: string) => void;
 };
 
 const InputSearch: React.FC<Properties> = ({ placeholder, setSearchQuery }) => {
@@ -25,7 +27,16 @@ const InputSearch: React.FC<Properties> = ({ placeholder, setSearchQuery }) => {
 
   const handleInputChange = (text: string): void => {
     onChange(text);
-    debouncedSetSearchQuery(setSearchQuery)(text);
+
+    if (debounced) {
+      debounced.clear();
+    }
+
+    debounced = debouncedSetSearchQuery((payload: { search: string }) => {
+      setSearchQuery(payload.search);
+    });
+
+    debounced({ search: text });
   };
 
   return (

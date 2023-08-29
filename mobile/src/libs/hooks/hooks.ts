@@ -4,5 +4,5 @@ export { useAppRoute } from './use-app-route/use-app-route.hook';
 export { useAppSelector } from './use-app-selector/use-app-selector.hook';
 export { useSearch } from './use-search/use-search.hook';
 export { useNavigation } from '@react-navigation/native';
-export { useCallback, useEffect, useState } from 'react';
+export { useCallback, useEffect, useMemo, useState } from 'react';
 export { useController as useFormController } from 'react-hook-form';
