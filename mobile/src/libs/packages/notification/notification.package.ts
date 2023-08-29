@@ -17,7 +17,7 @@ class Notification {
   public [NotificationType.ERROR](message: string): void {
     this.show({
       type: NotificationType.ERROR,
-      title: '⛔ An error occurred:',
+      title: '⛔ Error',
       message,
     });
   }
