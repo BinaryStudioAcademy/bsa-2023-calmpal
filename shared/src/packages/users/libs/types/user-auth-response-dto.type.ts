@@ -1,7 +1,7 @@
 type UserAuthResponseDto = {
   id: number;
   email: string;
-  //isSurveyCompleted: boolean;
+  isSurveyCompleted: boolean;
 };
 
 export { type UserAuthResponseDto };
