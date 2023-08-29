@@ -44,11 +44,11 @@ class UserEntity implements Entity {
     updatedAt,
     isSurveyCompleted,
   }: {
-    id: number;
+    id: number | null;
     email: string;
     fullName: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: Date | null;
+    updatedAt: Date | null;
     isSurveyCompleted: boolean;
   }): UserEntity {
     return new UserEntity({

@@ -9,10 +9,10 @@ const getUsersErrorInfo = (error: UsersError): ErrorInfo => {
 
   return {
     status,
-    internalMessage: `[Auth Error]: ${status} — ${message}`,
+    internalMessage: `[Users Error]: ${status} — ${message}`,
     response: {
       message,
-      errorType: ServerErrorType.AUTHORIZATION,
+      errorType: ServerErrorType.USERS,
     },
   };
 };

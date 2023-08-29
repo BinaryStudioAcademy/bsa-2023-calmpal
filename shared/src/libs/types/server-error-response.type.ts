@@ -1,5 +1,4 @@
-import { type ServerErrorType } from '#libs/enums/enums.js';
-
+import { type ServerErrorType } from '../../libs/enums/enums.js';
 import { type ServerErrorDetail } from './server-error-detail.type.js';
 
 type ServerValidationErrorResponse = {
@@ -18,14 +17,21 @@ type ServerAuthErrorResponse = {
   message: string;
 };
 
+type ServerUsersErrorResponse = {
+  errorType: typeof ServerErrorType.USERS;
+  message: string;
+};
+
 type ServerErrorResponse =
   | ServerValidationErrorResponse
   | ServerCommonErrorResponse
-  | ServerAuthErrorResponse;
+  | ServerAuthErrorResponse
+  | ServerUsersErrorResponse;
 
 export {
   type ServerAuthErrorResponse,
   type ServerCommonErrorResponse,
   type ServerErrorResponse,
+  type ServerUsersErrorResponse,
   type ServerValidationErrorResponse,
 };

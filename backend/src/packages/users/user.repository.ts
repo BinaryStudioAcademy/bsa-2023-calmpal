@@ -6,6 +6,7 @@ import { UsersRelation } from './libs/enums/enums.js';
 import {
   type UserCommonQueryResponse,
   type UserCreateQueryPayload,
+  type UserWithPasswordQueryResponse,
 } from './libs/types/types.js';
 import { UserWithPasswordEntity } from './user-with-password.entity.js';
 
@@ -25,14 +26,14 @@ class UserRepository implements Repository {
       .query()
       .withGraphJoined(UsersRelation.DETAILS)
       .findById(id)
-      .castTo<UserCommonQueryResponse | undefined>()
+      .castTo<UserWithPasswordQueryResponse | undefined>()
       .execute();
 
     if (!user) {
       return null;
     }
 
-    return UserWithPasswordEntity.initializeWithPassword({
+    return UserWithPasswordEntity.initialize({
       id: user.id,
       email: user.email,
       passwordHash: user.passwordHash,
@@ -49,11 +50,11 @@ class UserRepository implements Repository {
       .query()
       .select()
       .withGraphJoined(UsersRelation.DETAILS)
-      .castTo<UserCommonQueryResponse[]>()
+      .castTo<UserWithPasswordQueryResponse[]>()
       .execute();
 
     return users.map((user) => {
-      return UserWithPasswordEntity.initializeWithPassword({
+      return UserWithPasswordEntity.initialize({
         id: user.id,
         email: user.email,
         passwordHash: user.passwordHash,
@@ -70,7 +71,7 @@ class UserRepository implements Repository {
     entity: UserWithPasswordEntity,
   ): Promise<UserWithPasswordEntity> {
     const { email, passwordSalt, passwordHash, fullName, isSurveyCompleted } =
-      entity.toNewObjectWithPassword();
+      entity.toNewObject();
 
     const user = await this.userModel
       .query()
@@ -84,10 +85,10 @@ class UserRepository implements Repository {
         },
       } as UserCreateQueryPayload)
       .withGraphJoined(UsersRelation.DETAILS)
-      .castTo<UserCommonQueryResponse>()
+      .castTo<UserWithPasswordQueryResponse>()
       .execute();
 
-    return UserWithPasswordEntity.initializeWithPassword({
+    return UserWithPasswordEntity.initialize({
       id: user.id,
       email: user.email,
       passwordHash: user.passwordHash,
@@ -115,7 +116,12 @@ class UserRepository implements Repository {
   }
 
   public async findByEmail(email: string): Promise<UserEntity | null> {
-    const user = await this.findUserByEmail(email);
+    const user = await this.userModel
+      .query()
+      .modify('withoutPassword')
+      .withGraphJoined(UsersRelation.DETAILS)
+      .findOne({ email })
+      .castTo<UserCommonQueryResponse | undefined>();
 
     if (!user) {
       return null;
@@ -131,16 +137,19 @@ class UserRepository implements Repository {
     });
   }
 
-  public async getUserInfoWithPassword(
+  public async findByEmailWithPassword(
     email: string,
   ): Promise<UserWithPasswordEntity | null> {
-    const user = await this.findUserByEmail(email);
-
+    const user = await this.userModel
+      .query()
+      .withGraphJoined(UsersRelation.DETAILS)
+      .findOne({ email })
+      .castTo<UserWithPasswordQueryResponse | undefined>();
     if (!user) {
       return null;
     }
 
-    return UserWithPasswordEntity.initializeWithPassword({
+    return UserWithPasswordEntity.initialize({
       id: user.id,
       email: user.email,
       passwordHash: user.passwordHash,
@@ -150,16 +159,6 @@ class UserRepository implements Repository {
       fullName: user.details?.fullName ?? '',
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
     });
-  }
-
-  private async findUserByEmail(
-    email: string,
-  ): Promise<UserCommonQueryResponse | undefined> {
-    return await this.userModel
-      .query()
-      .withGraphJoined(UsersRelation.DETAILS)
-      .findOne({ email })
-      .castTo<UserCommonQueryResponse | undefined>();
   }
 }
 

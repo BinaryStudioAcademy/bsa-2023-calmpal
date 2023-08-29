@@ -6,14 +6,9 @@ class UserWithPasswordEntity extends UserEntity {
   private passwordSalt: string;
 
   private constructor({
-    id,
-    email,
-    fullName,
     passwordHash,
     passwordSalt,
-    createdAt,
-    updatedAt,
-    isSurveyCompleted,
+    ...baseData
   }: {
     id: number | null;
     email: string;
@@ -24,65 +19,36 @@ class UserWithPasswordEntity extends UserEntity {
     updatedAt: Date | null;
     isSurveyCompleted: boolean;
   }) {
-    super({
-      id,
-      email,
-      fullName,
-      createdAt,
-      updatedAt,
-      isSurveyCompleted,
-    });
+    super(baseData);
     this.passwordHash = passwordHash;
     this.passwordSalt = passwordSalt;
   }
 
-  public getPasswordInfo(): {
-    passwordHash: string;
-    passwordSalt: string;
-  } {
-    return {
-      passwordHash: this.passwordHash,
-      passwordSalt: this.passwordSalt,
-    };
-  }
-
-  public static initializeWithPassword({
-    id,
-    email,
-    fullName,
+  public static initialize({
     passwordHash,
     passwordSalt,
-    createdAt,
-    updatedAt,
-    isSurveyCompleted,
+    ...baseData
   }: {
-    id: number;
+    id: number | null;
     email: string;
     fullName: string;
     passwordHash: string;
     passwordSalt: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: Date | null;
+    updatedAt: Date | null;
     isSurveyCompleted: boolean;
   }): UserWithPasswordEntity {
     return new UserWithPasswordEntity({
-      id,
-      email,
-      fullName,
+      ...baseData,
       passwordHash,
       passwordSalt,
-      createdAt,
-      updatedAt,
-      isSurveyCompleted,
     });
   }
 
-  public static initializeNewWithPassword({
-    email,
-    fullName,
+  public static initializeNew({
     passwordHash,
     passwordSalt,
-    isSurveyCompleted,
+    ...baseData
   }: {
     email: string;
     fullName: string;
@@ -91,18 +57,16 @@ class UserWithPasswordEntity extends UserEntity {
     isSurveyCompleted: boolean;
   }): UserWithPasswordEntity {
     return new UserWithPasswordEntity({
+      ...baseData,
       id: null,
-      email,
-      fullName,
       passwordHash,
       passwordSalt,
       createdAt: null,
       updatedAt: null,
-      isSurveyCompleted,
     });
   }
 
-  public toObjectWithPassword(): {
+  public toObject(): {
     id: number;
     email: string;
     fullName: string;
@@ -121,7 +85,7 @@ class UserWithPasswordEntity extends UserEntity {
     };
   }
 
-  public toNewObjectWithPassword(): {
+  public toNewObject(): {
     email: string;
     fullName: string;
     passwordHash: string;

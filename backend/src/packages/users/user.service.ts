@@ -71,12 +71,15 @@ class UserService implements Service {
       passwordSalt,
     );
     const item = await this.userRepository.create(
-      UserWithPasswordEntity.initializeNewWithPassword({
+      UserWithPasswordEntity.initialize({
         fullName: payload.fullName,
         email: payload.email,
         isSurveyCompleted: false,
         passwordSalt,
         passwordHash,
+        id: null,
+        createdAt: null,
+        updatedAt: null,
       }),
     );
     const user = item.toObject();
@@ -102,8 +105,20 @@ class UserService implements Service {
 
   public async findByEmail(
     email: string,
-  ): Promise<ReturnType<UserEntity['toObject']>> {
+  ): Promise<ReturnType<UserEntity['toObject']> | null> {
     const userEntity = await this.userRepository.findByEmail(email);
+
+    if (!userEntity) {
+      return null;
+    }
+
+    return userEntity.toObject();
+  }
+
+  public async findByEmailWithPassword(
+    email: string,
+  ): Promise<ReturnType<UserWithPasswordEntity['toObject']>> {
+    const userEntity = await this.userRepository.findByEmailWithPassword(email);
 
     if (!userEntity) {
       throw new UsersError({
@@ -113,21 +128,6 @@ class UserService implements Service {
     }
 
     return userEntity.toObject();
-  }
-
-  public async getUserInfoWithPassword(
-    email: string,
-  ): Promise<ReturnType<UserWithPasswordEntity['toObjectWithPassword']>> {
-    const userEntity = await this.userRepository.getUserInfoWithPassword(email);
-
-    if (!userEntity) {
-      throw new UsersError({
-        status: HTTPCode.NOT_FOUND,
-        message: ExceptionMessage.USER_NOT_FOUND,
-      });
-    }
-
-    return userEntity.toObjectWithPassword();
   }
 }
 

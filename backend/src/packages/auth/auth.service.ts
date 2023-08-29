@@ -5,10 +5,10 @@ import { HTTPCode } from '#libs/packages/http/http.js';
 import {
   type UserAuthResponseDto,
   type UserSignInRequestDto,
-  type UserSignInResponseDto,
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
 } from '#packages/users/libs/types/types.js';
+import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserService } from '#packages/users/user.service.js';
 
 class AuthService {
@@ -24,7 +24,7 @@ class AuthService {
     const { email } = userRequestDto;
 
     const user = await this.userService.findByEmail(email);
-    if (user.id && user.email) {
+    if (user) {
       throw new AuthError({
         message: ExceptionMessage.USER_ALREADY_EXISTS,
         status: HTTPCode.BAD_REQUEST,
@@ -37,16 +37,10 @@ class AuthService {
   public async verifyLoginCredentials({
     email,
     password,
-  }: UserSignInRequestDto): Promise<UserSignInResponseDto | null> {
-    const user = await this.userService.findByEmail(email);
-    const userWithPassword = await this.userService.getUserInfoWithPassword(
-      email,
-    );
+  }: UserSignInRequestDto): Promise<UserEntity | null> {
+    const user = await this.userService.findByEmailWithPassword(email);
 
-    const isSamePassword = await encrypt.compare(
-      password,
-      userWithPassword.passwordHash,
-    );
+    const isSamePassword = await encrypt.compare(password, user.passwordHash);
 
     if (!isSamePassword) {
       throw new AuthError({
@@ -54,7 +48,7 @@ class AuthService {
       });
     }
 
-    return user;
+    return UserEntity.initialize(user);
   }
 
   public getAuthenticatedUser(id: number): Promise<UserAuthResponseDto | null> {
