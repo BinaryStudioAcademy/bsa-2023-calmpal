@@ -62,6 +62,22 @@ class AuthApi extends BaseHttpApi {
         method: 'POST',
         contentType: ContentType.JSON,
         payload: JSON.stringify(payload),
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<SurveyGetAllItemResponseDto>();
+  }
+
+  public async getUserSurveyPreferences(payload: {
+    userId: number;
+  }): Promise<SurveyGetAllItemResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(AuthApiPath.SIGN_UP_SURVEY, {}),
+      {
+        method: 'GET',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify(payload),
         hasAuth: false,
       },
     );
