@@ -19,7 +19,7 @@ const SurveyCategory = <T extends FieldValues>({
 }: Properties<T>): JSX.Element => {
   const { onChange, ...fieldProperties } = field;
 
-  const handleOnChange = useCallback(() => {
+  const handleChange = useCallback(() => {
     let options = field.value as string[];
     if (options.includes(label)) {
       options = options.filter((option: string) => option !== label);
@@ -35,7 +35,7 @@ const SurveyCategory = <T extends FieldValues>({
       <input
         className={styles['checkbox']}
         type="checkbox"
-        onChange={handleOnChange}
+        onChange={handleChange}
         {...fieldProperties}
       />
       <span className={styles['label']}>{label}</span>
