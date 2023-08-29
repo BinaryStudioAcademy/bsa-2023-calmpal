@@ -11,13 +11,11 @@ import { authApi } from '#packages/auth/auth.js';
 import { reducer as authReducer } from '#slices/auth/auth.js';
 import { chatReducer } from '#slices/chat/chat.js';
 
-
 import { storage } from '../storage/storage.js';
 
 type RootReducer = {
   auth: ReturnType<typeof authReducer>;
   chat: ReturnType<typeof chatReducer>;
-
 };
 
 type ExtraArguments = {
