@@ -17,8 +17,10 @@ import { Badge } from './components/components';
 import mockedChats from './libs/constants/data.json';
 import { styles } from './styles';
 
+const mockedCount = 12;
+
 const onPress = (): void => {
-  // This function is intentionally left empty for mocking purposes.
+  // TODO: Implement actual functionality for the onPress event
 };
 
 const Chat: React.FC = () => {
@@ -29,7 +31,7 @@ const Chat: React.FC = () => {
       headerTitle: ({ children }: { children: ReactNode }) => (
         <View style={styles.headerTitleWrapper}>
           <Text style={styles.headerTitle}>{children}</Text>
-          <Badge />
+          <Badge count={mockedCount} />
         </View>
       ),
     });
@@ -37,10 +39,6 @@ const Chat: React.FC = () => {
 
   const { filteredData: filteredChats, setSearchQuery } =
     useSearch(mockedChats);
-
-  const chatList = filteredChats.map((item) => (
-    <Card title={item.title} onPress={onPress} key={item.id} />
-  ));
 
   return (
     <LinearGradient
@@ -52,7 +50,11 @@ const Chat: React.FC = () => {
           placeholder="Search chat"
           setSearchQuery={setSearchQuery}
         />
-        <ScrollView contentContainerStyle={styles.list}>{chatList}</ScrollView>
+        <ScrollView contentContainerStyle={styles.list}>
+          {filteredChats.map((item) => (
+            <Card title={item.title} onPress={onPress} key={item.id} />
+          ))}
+        </ScrollView>
         <View style={styles.linkWrapper}>
           <Link
             label="Add new chat"

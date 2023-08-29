@@ -4,6 +4,7 @@ import { type ImageSourcePropType } from 'react-native';
 import imagePlaceholder from '#assets/img/card-image-placeholder.png';
 import { Image, Text, TouchableOpacity } from '#libs/components/components';
 
+import { DEFAULT_NUMBER_OF_LINES } from './libs/constants/constants';
 import { styles } from './styles';
 
 type Properties = {
@@ -20,7 +21,11 @@ const Card: React.FC<Properties> = ({
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image source={image} style={styles.image} />
-      <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
+      <Text
+        style={styles.title}
+        numberOfLines={DEFAULT_NUMBER_OF_LINES}
+        ellipsizeMode="tail"
+      >
         {title}
       </Text>
     </TouchableOpacity>

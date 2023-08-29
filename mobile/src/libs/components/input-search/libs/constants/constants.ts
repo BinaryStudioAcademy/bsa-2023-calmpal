@@ -1,4 +1,6 @@
-const INPUT_SEARCH_DEFAULT_NAME = 'search';
-const INPUT_SEARCH_DEFAULT_VALUE = '';
+const DEFAULT_SEARCH_PAYLOAD = {
+  search: '',
+  name: 'search' as const,
+};
 
-export { INPUT_SEARCH_DEFAULT_NAME, INPUT_SEARCH_DEFAULT_VALUE };
+export { DEFAULT_SEARCH_PAYLOAD };
