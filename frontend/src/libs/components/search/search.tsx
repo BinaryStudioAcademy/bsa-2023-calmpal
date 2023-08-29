@@ -1,9 +1,9 @@
 import { type SubmitHandler } from 'react-hook-form';
 
+import { debounceFunction } from '#libs/helpers/helpers.js';
 import {
   useAppForm,
   useCallback,
-  useDebounce,
   useFormController,
 } from '#libs/hooks/hooks.js';
 
@@ -20,13 +20,14 @@ const Search = ({ onValueChange }: Properties): JSX.Element => {
     mode: 'onChange',
   });
 
-  const debouncedOnValueChange = useDebounce(onValueChange);
+  const debouncedOnValueChange = debounceFunction(onValueChange);
 
   const handleFormChange = useCallback(
     (event_: React.BaseSyntheticEvent): void => {
       void handleSubmit(
         debouncedOnValueChange as unknown as SubmitHandler<{ search: string }>,
       )(event_);
+      debouncedOnValueChange.clear();
     },
     [debouncedOnValueChange, handleSubmit],
   );

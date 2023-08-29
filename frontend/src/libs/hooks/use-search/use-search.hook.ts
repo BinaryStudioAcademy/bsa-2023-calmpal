@@ -1,17 +1,23 @@
-import { useMemo } from '../hooks.js';
+import { useMemo, useState } from '../hooks.js';
 
 const useSearch = <T>(
-  query: string,
   elements: T[],
   propertyName: keyof T,
-): T[] => {
-  return useMemo(() => {
-    const regex = new RegExp(query, 'i');
+): {
+  filteredElements: T[];
+  setFilter: React.Dispatch<React.SetStateAction<string>>;
+} => {
+  const [filter, setFilter] = useState('');
+
+  const filteredElements = useMemo(() => {
+    const regex = new RegExp(filter, 'i');
 
     return elements.filter((element) =>
       regex.test(String(element[propertyName])),
     );
-  }, [query, elements, propertyName]);
+  }, [filter, elements, propertyName]);
+
+  return { filteredElements, setFilter };
 };
 
 export { useSearch };
