@@ -5,7 +5,7 @@ import { AppColor } from '#libs/enums/enums';
 import { debounce as debouncedSetSearchQuery } from '#libs/helpers/helpers';
 import { useAppForm, useFormController } from '#libs/hooks/hooks';
 
-import { DEFAULT_SEARCH_PAYLOAD } from './libs/constants/constants';
+import { DEFAULT_SEARCH_PAYLOAD } from './libs/constants';
 import { styles } from './styles';
 
 type Properties = {
