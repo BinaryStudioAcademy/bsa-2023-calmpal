@@ -9,6 +9,7 @@ const ProfileSettingsButton: React.FC<ProfileSettingsButtonProperties> = (
   properties,
 ) => {
   const { icon, children } = properties;
+
   return (
     <button className={styles['profile-button']}>
       <div className={styles['profile-button-icon']}>

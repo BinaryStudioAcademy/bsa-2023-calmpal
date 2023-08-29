@@ -1,8 +1,8 @@
 import { type ReactNode } from 'react';
-import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { AppRoute } from '#libs/enums/enums.js';
+import { useAppSelector } from '#libs/hooks/hooks.js';
 import { type ValueOf } from '#libs/types/types.js';
 
 type Properties = {
@@ -14,11 +14,10 @@ const ProtectedRoute: React.FC<Properties> = ({
   children,
   redirectPath = AppRoute.SIGN_IN,
 }) => {
-  //TODO: change this when user data will be stored in redux state
-  const { user } = useSelector(() => ({
-    user: null,
+  const { authenticatedUser } = useAppSelector(({ auth }) => ({
+    authenticatedUser: auth.authenticatedUser,
   }));
-  const hasUser = Boolean(user);
+  const hasUser = Boolean(authenticatedUser);
 
   return hasUser ? <>{children}</> : <Navigate to={redirectPath} />;
 };
