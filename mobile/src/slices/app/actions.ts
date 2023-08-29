@@ -1,14 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { type NotificationType } from '#libs/packages/notification/notification';
-import { type AsyncThunkConfig, type ValueOf } from '#libs/types/types';
+import { type NotificationPayload } from '#libs/types/notification/notification';
+import { type AsyncThunkConfig } from '#libs/types/types';
 
 import { name as sliceName } from './notifications.slice';
-
-type NotificationPayload = {
-  type: ValueOf<typeof NotificationType>;
-  message: string;
-};
 
 const notify = createAsyncThunk<unknown, NotificationPayload, AsyncThunkConfig>(
   `${sliceName}/notify`,
@@ -20,4 +15,5 @@ const notify = createAsyncThunk<unknown, NotificationPayload, AsyncThunkConfig>(
   },
 );
 
-export { type NotificationPayload, notify };
+export { notify };
+export { type NotificationPayload } from '#libs/types/notification/notification';
