@@ -1,4 +1,5 @@
 import home from '#assets/img/home.svg';
+import user from '#assets/img/user.svg';
 import {
   Header,
   Loader,
@@ -31,10 +32,12 @@ const App: React.FC = () => {
 
   return (
     <div className={styles['app-container']}>
-      <Sidebar routes={[
+      <Sidebar
+        routes={[
           { path: AppRoute.ROOT, name: 'home', icon: home },
           { path: AppRoute.USER_PROFILE, name: 'user-profile', icon: user },
-        ]} />
+        ]}
+      />
       <div className={styles['body-container']}>
         <Header />
         <div>
