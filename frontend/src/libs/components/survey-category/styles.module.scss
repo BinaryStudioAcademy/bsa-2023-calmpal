@@ -1,15 +1,9 @@
 .option {
-  position: relative;
-  height: 52px;
-}
-
-.container {
-  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 52px;
+  padding: 15px 0;
   color: var(--white);
   background-color: transparent;
   border: 1px solid var(--white);
@@ -17,7 +11,7 @@
   cursor: pointer;
 }
 
-.container > .label {
+.option > .label {
   display: block;
   color: inherit;
   font-weight: 600;
@@ -26,12 +20,12 @@
   text-align: center;
 }
 
-.checkbox {
+.option .checkbox {
   position: absolute;
   display: none;
 }
 
-.checkbox:checked + .container {
+.option:has(.checkbox:checked) {
   color: var(--gray-300);
   background-color: var(--blue-alpha-70);
 }

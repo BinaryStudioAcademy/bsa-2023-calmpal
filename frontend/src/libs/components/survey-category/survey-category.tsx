@@ -4,7 +4,6 @@ import {
   type Path,
 } from 'react-hook-form';
 
-import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
 import { useCallback } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
@@ -39,9 +38,7 @@ const SurveyCategory = <T extends FieldValues>({
         onChange={handleOnChange}
         {...fieldProperties}
       />
-      <div className={getValidClassNames(styles['container'])}>
-        <span className={styles['label']}>{label}</span>
-      </div>
+      <span className={styles['label']}>{label}</span>
     </label>
   );
 };
