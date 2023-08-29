@@ -48,7 +48,7 @@ const Root: React.FC = () => {
     <NativeStack.Navigator screenOptions={screenOptions}>
       {authenticatedUser ? (
         <>
-          <NativeStack.Screen name={RootScreenName.MAIN} component={Main} />
+          {/* <NativeStack.Screen name={RootScreenName.MAIN} component={Main} /> */}
           <NativeStack.Screen name={RootScreenName.SURVEY} component={Survey} />
         </>
       ) : (

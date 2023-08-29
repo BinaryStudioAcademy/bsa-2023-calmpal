@@ -24,11 +24,18 @@ const styles = StyleSheet.create({
     color: AppColor.GRAY_100_ALPHA_50,
   },
   buttonSurvey: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 44,
+    gap: 10,
+    marginVertical: 10,
     borderRadius: 22,
     backgroundColor: AppColor.WHITE,
   },
   labelSurvey: {
     color: AppColor.BLUE_300,
+    fontWeight: '600',
+    fontSize: 16,
   },
 });
 

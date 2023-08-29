@@ -9,14 +9,14 @@ type Properties = {
   label: string;
   onPress: () => void;
   isDisabled?: boolean;
-  isSurvey?: boolean;
+  style?: 'solid' | 'outlined';
 };
 
 const Button: React.FC<Properties> = ({
   label,
   onPress,
   isDisabled = false,
-  isSurvey = false,
+  style = 'solid',
 }) => {
   const handleOnPress = (): void => {
     onPress();
@@ -25,8 +25,7 @@ const Button: React.FC<Properties> = ({
   return (
     <Pressable
       style={[
-        styles.button,
-        isSurvey && styles.buttonSurvey,
+        style === 'solid' ? styles.button : styles.buttonSurvey,
         isDisabled && styles.buttonDisabled,
       ]}
       onPress={handleOnPress}
@@ -34,8 +33,7 @@ const Button: React.FC<Properties> = ({
     >
       <Text
         style={[
-          styles.label,
-          isSurvey && styles.labelSurvey,
+          style === 'solid' ? styles.label : styles.labelSurvey,
           isDisabled && styles.labelDisabled,
         ]}
       >

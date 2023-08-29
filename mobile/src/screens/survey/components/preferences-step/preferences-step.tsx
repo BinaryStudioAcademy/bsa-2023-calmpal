@@ -96,7 +96,7 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
         label="Continue"
         onPress={handleFormSubmit}
         isDisabled={!isValid}
-        isSurvey
+        style="outlined"
       />
     </ScrollView>
   );
