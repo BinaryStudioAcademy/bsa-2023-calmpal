@@ -35,7 +35,7 @@ const App: React.FC = () => {
       <Sidebar routes={[{ path: AppRoute.ROOT, name: 'home', icon: home }]} />
       <div className={styles['body-container']}>
         <Header />
-          <ChatSidebar />
+        <ChatSidebar />
         <div>
           <RouterOutlet />
         </div>
