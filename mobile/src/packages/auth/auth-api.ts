@@ -6,11 +6,12 @@ import {
   type SurveyGetAllItemResponseDto,
   type SurveyRequestDto,
 } from '#packages/survey/survey';
-
 import {
+  type UserAuthResponseDto,
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
-} from '../users/users';
+} from '#packages/users/users';
+
 import { AuthApiPath } from './libs/enums/enums';
 
 type Constructor = {
@@ -38,6 +39,18 @@ class AuthApi extends BaseHttpApi {
     );
 
     return await response.json<UserSignUpResponseDto>();
+  }
+
+  public async getAuthenticatedUser(): Promise<UserAuthResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(AuthApiPath.AUTHENTICATED_USER, {}),
+      {
+        method: 'GET',
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<UserAuthResponseDto>();
   }
 
   public async createUserSurveyPreferences(

@@ -19,9 +19,20 @@ const signUp = createAsyncThunk<
 >(`${sliceName}/sign-up`, async (signUpPayload, { extra }) => {
   const { authApi, storage } = extra;
   const { user, token } = await authApi.signUp(signUpPayload);
+
   await storage.set(StorageKey.TOKEN, token);
 
   return user;
+});
+
+const getAuthenticatedUser = createAsyncThunk<
+  UserAuthResponseDto,
+  undefined,
+  AsyncThunkConfig
+>(`${sliceName}/get-authenticated-user`, (_, { extra }) => {
+  const { authApi } = extra;
+
+  return authApi.getAuthenticatedUser();
 });
 
 const createUserSurveyPreferences = createAsyncThunk<
@@ -35,4 +46,4 @@ const createUserSurveyPreferences = createAsyncThunk<
   return preferences.length > EMPTY_ARRAY_LENGTH;
 });
 
-export { createUserSurveyPreferences, signUp };
+export { createUserSurveyPreferences, getAuthenticatedUser, signUp };
