@@ -6,10 +6,10 @@ const styles = StyleSheet.create({
   errorToast: {
     borderColor: AppColor.RED_100,
   },
-  text1: {
+  title: {
     fontSize: 15,
   },
-  text2: {
+  message: {
     color: AppColor.GRAY_400,
   },
 });

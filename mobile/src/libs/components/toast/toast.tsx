@@ -1,5 +1,4 @@
 import React from 'react';
-import { type ValueOf } from 'react-native-gesture-handler/lib/typescript/typeUtils';
 import LibraryToast, {
   ErrorToast,
   type ToastConfig,
@@ -7,6 +6,7 @@ import LibraryToast, {
 } from 'react-native-toast-message';
 
 import { type NotificationType } from '#libs/enums/enums';
+import { type ValueOf } from '#libs/types/types';
 
 import { styles } from './styles';
 
@@ -21,8 +21,8 @@ const toastConfig: ToastConfig = {
     <ErrorToast
       {...properties}
       style={styles.errorToast}
-      text1Style={styles.text1}
-      text2Style={styles.text2}
+      text1Style={styles.title}
+      text2Style={styles.message}
     />
   ),
 };
