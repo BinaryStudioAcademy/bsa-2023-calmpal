@@ -1,20 +1,19 @@
 import {
-  type Control,
-  type FieldPath,
-  type FieldValues,
-} from 'react-hook-form';
-
-import { useFormController } from '#libs/hooks/hooks.js';
+  type FormControl,
+  type FormFieldPath,
+  type FormFieldValues,
+  useFormController,
+} from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
 
-type Properties<T extends FieldValues> = {
-  control: Control<T, null>;
+type Properties<T extends FormFieldValues> = {
+  control: FormControl<T, null>;
   label?: string;
-  name: FieldPath<T>;
+  name: FormFieldPath<T>;
 };
 
-const Switch = <T extends FieldValues>({
+const Switch = <T extends FormFieldValues>({
   control,
   name,
   label,

@@ -1,27 +1,28 @@
 import React from 'react';
-import {
-  type Control,
-  type FieldErrors,
-  type FieldPath,
-  type FieldValues,
-} from 'react-hook-form';
 import { TextInput } from 'react-native';
 
 import { Text, View } from '#libs/components/components';
-import { useFormController, useState } from '#libs/hooks/hooks';
+import {
+  type FormControl,
+  type FormFieldErrors,
+  type FormFieldPath,
+  type FormFieldValues,
+  useFormController,
+  useState,
+} from '#libs/hooks/hooks';
 
 import { styles } from './styles';
 
-type Properties<T extends FieldValues> = {
-  control: Control<T, null>;
-  errors: FieldErrors<T>;
+type Properties<T extends FormFieldValues> = {
+  control: FormControl<T, null>;
+  errors: FormFieldErrors<T>;
   label: string;
-  name: FieldPath<T>;
+  name: FormFieldPath<T>;
   isSecure?: boolean;
   placeholder: string;
 };
 
-const Input = <T extends FieldValues>({
+const Input = <T extends FormFieldValues>({
   control,
   errors,
   label,
