@@ -13,7 +13,6 @@ import { reducer as usersReducer } from '#slices/users/users';
 
 import { type Config } from '../config/config';
 import { notification } from '../notification/notification';
-import { type Notification } from '../notification/notification.package';
 import { storage } from '../storage/storage';
 import { handleError } from './middlewares/middlewares';
 
@@ -25,7 +24,7 @@ type RootReducer = {
 type ExtraArguments = {
   authApi: typeof authApi;
   userApi: typeof userApi;
-  notification: Notification;
+  notification: typeof notification;
   storage: typeof storage;
 };
 

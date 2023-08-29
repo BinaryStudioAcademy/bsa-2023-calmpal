@@ -5,11 +5,11 @@ import {
   type Middleware,
 } from '@reduxjs/toolkit';
 
-import { NotificationType } from '#libs/enums/notification/notification-type.enum';
+import { NotificationType } from '#libs/enums/enums';
 import { type AsyncThunkConfig } from '#libs/types/types';
 import { appActions } from '#slices/app/notifications';
 
-import { type AppDispatch } from '../libs/types/app-dispatch';
+import { type AppDispatch } from '../libs/types/types';
 
 const handleError: Middleware<AsyncThunkConfig, unknown, AppDispatch> = ({
   dispatch,
