@@ -13,6 +13,13 @@ type EnvironmentSchema = {
     POOL_MIN: number;
     POOL_MAX: number;
   };
+  JWT: {
+    SECRET_KEY: string;
+    ALG: string;
+  };
+  ENCRYPT: {
+    NUMBER_OF_ROUNDS: number;
+  };
 };
 
 export { type EnvironmentSchema };

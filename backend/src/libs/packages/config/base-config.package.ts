@@ -76,6 +76,26 @@ class BaseConfig implements Config {
           default: null,
         },
       },
+      JWT: {
+        SECRET_KEY: {
+          doc: 'Secret key for JWT token generation',
+          format: String,
+          env: 'JWT_SECRET_KEY',
+          default: null,
+        },
+        ALG: {
+          doc: 'Algorithm for JWT token generation',
+          format: String,
+          default: 'HS256',
+        },
+      },
+      ENCRYPT: {
+        NUMBER_OF_ROUNDS: {
+          doc: 'Default number of rounds for salt generation',
+          format: Number,
+          default: 10,
+        },
+      },
     });
   }
 }

@@ -25,7 +25,7 @@ class BaseHttpApi implements HTTPApi {
 
   private http: HTTP;
 
-  private storage: Storage;
+  protected storage: Storage;
 
   public constructor({ baseUrl, path, http, storage }: Constructor) {
     this.baseUrl = baseUrl;
@@ -40,7 +40,10 @@ class BaseHttpApi implements HTTPApi {
   ): Promise<HTTPApiResponse> {
     const { method, contentType, payload = null, hasAuth } = options;
 
-    const headers = await this.getHeaders(contentType, hasAuth);
+    const headers = await this.getHeaders(
+      contentType as ValueOf<typeof ContentType>,
+      hasAuth,
+    );
 
     const response = await this.http.load(path, {
       method,

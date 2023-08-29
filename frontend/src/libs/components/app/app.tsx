@@ -1,62 +1,44 @@
-import reactLogo from '#assets/img/react.svg';
-import { Link, RouterOutlet } from '#libs/components/components.js';
-import { AppRoute } from '#libs/enums/enums.js';
+import home from '#assets/img/home.svg';
+import {
+  Header,
+  Loader,
+  RouterOutlet,
+  Sidebar,
+} from '#libs/components/components.js';
+import { AppRoute, DataStatus } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
   useEffect,
-  useLocation,
 } from '#libs/hooks/hooks.js';
-import { actions as userActions } from '#slices/users/users.js';
+import { actions as authActions } from '#slices/auth/auth.js';
+
+import styles from './styles.module.scss';
 
 const App: React.FC = () => {
-  const { pathname } = useLocation();
   const dispatch = useAppDispatch();
-  const { users, dataStatus } = useAppSelector(({ users }) => ({
-    users: users.users,
-    dataStatus: users.dataStatus,
+  const { authenticatedUserDataStatus } = useAppSelector(({ auth }) => ({
+    authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
   }));
 
-  const isRoot = pathname === AppRoute.ROOT;
-
   useEffect(() => {
-    if (isRoot) {
-      void dispatch(userActions.loadAll());
-    }
-  }, [isRoot, dispatch]);
+    void dispatch(authActions.getAuthenticatedUser());
+  }, [dispatch]);
+
+  if (authenticatedUserDataStatus === DataStatus.PENDING) {
+    return <Loader />;
+  }
 
   return (
-    <>
-      <img src={reactLogo} className="App-logo" width="30" alt="logo" />
-
-      <ul className="App-navigation-list">
-        <li>
-          <Link to={AppRoute.ROOT}>Root</Link>
-        </li>
-        <li>
-          <Link to={AppRoute.SIGN_IN}>Sign in</Link>
-        </li>
-        <li>
-          <Link to={AppRoute.SIGN_UP}>Sign up</Link>
-        </li>
-      </ul>
-      <p>Current path: {pathname}</p>
-
-      <div>
-        <RouterOutlet />
+    <div className={styles['app-container']}>
+      <Sidebar routes={[{ path: AppRoute.ROOT, name: 'home', icon: home }]} />
+      <div className={styles['body-container']}>
+        <Header />
+        <div>
+          <RouterOutlet />
+        </div>
       </div>
-      {isRoot && (
-        <>
-          <h2>Users:</h2>
-          <h3>Status: {dataStatus}</h3>
-          <ul>
-            {users.map((user) => (
-              <li key={user.id}>{user.email}</li>
-            ))}
-          </ul>
-        </>
-      )}
-    </>
+    </div>
   );
 };
 

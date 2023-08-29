@@ -5,12 +5,15 @@ import { createRoot } from 'react-dom/client';
 
 import {
   App,
+  ProtectedRoute,
   RouterProvider,
   StoreProvider,
+  Toast,
 } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/enums.js';
 import { store } from '#libs/packages/store/store.js';
 import { Auth } from '#pages/auth/auth.js';
+import { Root } from '#pages/root/root.js';
 
 createRoot(document.querySelector('#root') as HTMLElement).render(
   <StrictMode>
@@ -23,7 +26,11 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
             children: [
               {
                 path: AppRoute.ROOT,
-                element: 'Root',
+                element: (
+                  <ProtectedRoute>
+                    <Root />
+                  </ProtectedRoute>
+                ),
               },
               {
                 path: AppRoute.SIGN_IN,
@@ -37,6 +44,7 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
           },
         ]}
       />
+      <Toast />
     </StoreProvider>
   </StrictMode>,
 );
