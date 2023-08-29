@@ -8,22 +8,20 @@ import { configureStore } from '@reduxjs/toolkit';
 import { AppEnvironment } from '#libs/enums/enums.js';
 import { type Config } from '#libs/packages/config/config.js';
 import { authApi } from '#packages/auth/auth.js';
-import { userApi } from '#packages/users/users.js';
 import { reducer as authReducer } from '#slices/auth/auth.js';
 import { chatReducer } from '#slices/chat/chat.js';
-import { reducer as usersReducer } from '#slices/users/users.js';
+
 
 import { storage } from '../storage/storage.js';
 
 type RootReducer = {
   auth: ReturnType<typeof authReducer>;
-  users: ReturnType<typeof usersReducer>;
   chat: ReturnType<typeof chatReducer>;
+
 };
 
 type ExtraArguments = {
   authApi: typeof authApi;
-  userApi: typeof userApi;
   storage: typeof storage;
 };
 
@@ -41,7 +39,6 @@ class Store {
       devTools: config.ENV.APP.ENVIRONMENT !== AppEnvironment.PRODUCTION,
       reducer: {
         auth: authReducer,
-        users: usersReducer,
         chat: chatReducer,
       },
       middleware: (getDefaultMiddleware) => {
@@ -57,7 +54,6 @@ class Store {
   public get extraArguments(): ExtraArguments {
     return {
       authApi,
-      userApi,
       storage,
     };
   }
