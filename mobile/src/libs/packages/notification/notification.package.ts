@@ -1,7 +1,7 @@
-import { type ValueOf } from 'react-native-gesture-handler/lib/typescript/typeUtils';
 import Toast from 'react-native-toast-message';
 
 import { NotificationType } from '#libs/enums/enums';
+import { type ValueOf } from '#libs/types/types';
 
 type NotificationPayload = {
   type: ValueOf<typeof NotificationType>;

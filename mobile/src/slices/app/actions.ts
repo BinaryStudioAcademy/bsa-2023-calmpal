@@ -1,8 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { type ValueOf } from 'react-native-gesture-handler/lib/typescript/typeUtils';
 
 import { type NotificationType } from '#libs/packages/notification/notification';
-import { type AsyncThunkConfig } from '#libs/types/types';
+import { type AsyncThunkConfig, type ValueOf } from '#libs/types/types';
 
 import { name as sliceName } from './notifications.slice';
 
