@@ -15,10 +15,10 @@ type Properties = {
 
 const InputSearch: React.FC<Properties> = ({ placeholder, setSearchQuery }) => {
   const { control } = useAppForm({
-    defaultValues: { search: DEFAULT_SEARCH_PAYLOAD.search },
+    defaultValues: DEFAULT_SEARCH_PAYLOAD,
   });
   const { field } = useFormController({
-    name: DEFAULT_SEARCH_PAYLOAD.name,
+    name: 'search',
     control,
   });
   const { value, onChange } = field;
