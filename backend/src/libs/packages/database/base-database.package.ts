@@ -26,15 +26,24 @@ class BaseDatabase implements Database {
 
   public get environmentsConfig(): Database['environmentsConfig'] {
     return {
+      [AppEnvironment.LOCAL]: this.initialConfig,
       [AppEnvironment.DEVELOPMENT]: this.initialConfig,
       [AppEnvironment.PRODUCTION]: this.initialConfig,
     };
   }
 
   private get initialConfig(): Knex.Config {
+    const sslConfig =
+      this.appConfig.ENV.APP.ENVIRONMENT === AppEnvironment.LOCAL
+        ? {}
+        : { ssl: { rejectUnauthorized: false } };
+
     return {
       client: this.appConfig.ENV.DB.DIALECT,
-      connection: this.appConfig.ENV.DB.CONNECTION_STRING,
+      connection: {
+        connectionString: this.appConfig.ENV.DB.CONNECTION_STRING,
+        ...sslConfig,
+      },
       pool: {
         min: this.appConfig.ENV.DB.POOL_MIN,
         max: this.appConfig.ENV.DB.POOL_MAX,
