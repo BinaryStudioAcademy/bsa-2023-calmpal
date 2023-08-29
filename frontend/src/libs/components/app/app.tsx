@@ -13,6 +13,8 @@ import { actions as userActions } from '#slices/users/users.js';
 import { Sidebar } from '../sidebar/sidebar.js';
 import styles from './styles.module.scss';
 
+const image = '/images/meditation-image.svg';
+
 const App: React.FC = () => {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
@@ -55,13 +57,29 @@ const App: React.FC = () => {
           <RouterOutlet />
         </div>
         <MeditationPlayer
-          meditation={{
-            id: 1,
-            title: 'Meditation for deep sleep',
-            purpose: 'Stress relief',
-            src: 'none',
-            img: '../../../../public/images/meditation-image.svg',
-          }}
+          playlist={[
+            {
+              id: 1,
+              title: 'Meditation for deep sleep',
+              purpose: 'Stress relief',
+              src: 'http://traffic.libsyn.com/mindfulorg/winston-breathing-5mins.mp3',
+              img: image,
+            },
+            {
+              id: 2,
+              title: 'Meditation for relaxing',
+              purpose: 'Relax',
+              src: 'http://traffic.libsyn.com/mindfulorg/SusanKaiserGreenland.mp3',
+              img: image,
+            },
+            {
+              id: 3,
+              title: 'Meditation for breath practice',
+              purpose: 'Breathing',
+              src: 'http://traffic.libsyn.com/mindfulorg/LovingKindness.mp3',
+              img: image,
+            },
+          ]}
         />
       </div>
     </div>

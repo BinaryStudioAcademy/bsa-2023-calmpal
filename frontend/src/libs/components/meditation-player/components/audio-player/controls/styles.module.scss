@@ -1,0 +1,18 @@
+.controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+button:nth-child(1) {
+  margin-right: 40px;
+}
+
+button:nth-child(2),
+button:nth-child(3) {
+  margin-right: 21px;
+}
+
+button:nth-child(4) {
+  margin-right: 40px;
+}

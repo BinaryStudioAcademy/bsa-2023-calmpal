@@ -1,5 +1,3 @@
-/* Input range - chrome and safari */
-
 .wrapper {
   display: flex;
   justify-content: space-between;
@@ -7,70 +5,64 @@
 
 .time {
   color: var(--blue-200);
-  text-align: center;
-  font-family: Montserrat;
-  font-size: 12px;
   font-weight: 400;
+  font-size: 12px;
   line-height: 16.8px;
+  text-align: center;
 }
 
 .progress {
   -webkit-appearance: none;
-  margin-bottom: 46px;
   position: relative;
-  background: var(--blue-100);
   width: 100%;
   height: 3px;
+  margin-bottom: 46px;
+  background-color: var(--blue-100);
   border-radius: 24px;
   cursor: pointer;
 }
 
-/* Input range - firefox */
 .progress::-moz-range-track {
   position: relative;
-  background: var(--blue-100);
   width: 100%;
   height: 3px;
+  background-color: var(--blue-100);
   border-radius: 24px;
   cursor: pointer;
 }
 
-/* played progress length - Chrome & safari*/
 .progress::before {
   content: "";
-  height: 3px;
-  background: var(--blue-200);
-  width: var(--player-progress);
-  border-radius: 24px;
   position: absolute;
   top: 0;
   left: 0;
-}
-
-/* played progress length - firefox */
-.progress::-moz-range-progress {
-  background: var(--blue-200);
-  border-radius: 24px;
+  width: var(--player-progress);
   height: 3px;
+  background-color: var(--blue-200);
+  border-radius: 24px;
 }
 
-/* slider thumb - chrome and safari */
+.progress::-moz-range-progress {
+  height: 3px;
+  background-color: var(--blue-200);
+  border-radius: 24px;
+}
+
 .progress::-webkit-slider-thumb {
   -webkit-appearance: none;
-  height: 8px;
-  width: 8px;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
   position: relative;
+  width: 8px;
+  height: 8px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
-/* slider thumb - firefox */
 .progress::-moz-range-thumb {
-  height: 8px;
-  width: 8px;
-  background: var(--blue-200);
-  cursor: pointer;
-  border: transparent;
   position: relative;
+  width: 8px;
+  height: 8px;
+  background-color: var(--blue-200);
+  border: transparent;
+  cursor: pointer;
 }
