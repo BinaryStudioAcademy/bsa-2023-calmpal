@@ -2,6 +2,8 @@ import { type SurveyInputDto } from '#packages/survey/survey.js';
 
 const TEXTAREA_MAX_LENGTH = 1000;
 
+const TEXTAREA_ROWS_COUNT = 3;
+
 const DEFAULT_SURVEY_PAYLOAD: SurveyInputDto = {
   options: [],
   textarea: '',
@@ -15,4 +17,9 @@ const PREFERENCES_CATEGORIES: string[] = [
   'Improve focus',
 ];
 
-export { DEFAULT_SURVEY_PAYLOAD, PREFERENCES_CATEGORIES, TEXTAREA_MAX_LENGTH };
+export {
+  DEFAULT_SURVEY_PAYLOAD,
+  PREFERENCES_CATEGORIES,
+  TEXTAREA_MAX_LENGTH,
+  TEXTAREA_ROWS_COUNT,
+};
