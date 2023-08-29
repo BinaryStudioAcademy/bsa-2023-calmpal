@@ -185,7 +185,7 @@ class BaseServerApplication implements ServerApplication {
       });
 
       this.logger.info(
-        `Application is listening on PORT – ${this.config.ENV.APP.PORT.toString()}, on ENVIRONMENT – ${
+        `Application is listening on PORT - ${this.config.ENV.APP.PORT.toString()}, on ENVIRONMENT - ${
           this.config.ENV.APP.ENVIRONMENT as string
         }.`,
       );
