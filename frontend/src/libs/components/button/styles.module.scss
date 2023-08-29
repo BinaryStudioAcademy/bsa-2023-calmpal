@@ -1,4 +1,4 @@
-.submit {
+.primary {
   display: inline-block;
   width: 100%;
   padding: 15px 0;
@@ -9,5 +9,32 @@
   background-color: var(--gray-300);
   border: none;
   border-radius: 8px;
+  cursor: pointer;
+}
+
+.rounded {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 52px;
+  padding: 14px;
+  background-color: var(--white-alpha-80);
+  border-color: transparent;
+  border-radius: 50%;
+  box-shadow: 0 4px 23px 0 var(--violet-100);
+  cursor: pointer;
+}
+
+.rounded-transparent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 52px;
+  padding: 14px;
+  background-color: transparent;
+  border-color: transparent;
+  border-radius: 50%;
   cursor: pointer;
 }
