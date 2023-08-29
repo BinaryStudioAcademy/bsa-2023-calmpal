@@ -1,10 +1,10 @@
 import React from 'react';
 import { type ValueOf } from 'react-native-gesture-handler/lib/typescript/typeUtils';
-import {
+import LibraryToast, {
+  ErrorToast,
   type ToastConfig,
   type ToastConfigParams,
 } from 'react-native-toast-message';
-import LibraryToast, { ErrorToast } from 'react-native-toast-message';
 
 import { type NotificationType } from '#libs/enums/enums';
 
