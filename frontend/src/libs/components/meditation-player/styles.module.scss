@@ -1,0 +1,28 @@
+.wrapper {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  background-image: url("/images/meditation-player-background.svg");
+  background-repeat: no-repeat;
+}
+
+.meditation-player {
+  display: flex;
+  flex-direction: column;
+  margin-top: 150px;
+  margin-left: 263px;
+  text-align: center;
+  max-width: 385px;
+}
+
+.title {
+  color: var(--gray-300);
+  font-size: 28px;
+  line-height: 36.4px;
+}
+
+.purpose {
+  margin-bottom: 24px;
+  color: var(--blue-200);
+  font-size: 16px;
+  line-height: 20px;
+}
