@@ -43,7 +43,11 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
               },
               {
                 path: AppRoute.USER_PROFILE,
-                element: <UserProfile />,
+                element: (
+                  <ProtectedRoute>
+                    <UserProfile />
+                  </ProtectedRoute>
+                ),
               },
             ],
           },
