@@ -1,16 +1,10 @@
 import Toast from 'react-native-toast-message';
 
 import { NotificationType } from '#libs/enums/enums';
-import { type ValueOf } from '#libs/types/types';
-
-type NotificationPayload = {
-  type: ValueOf<typeof NotificationType>;
-  title: string;
-  message: string;
-};
+import { type NotificationProperties } from '#libs/types/notification/notification';
 
 class Notification {
-  private show = (payload: NotificationPayload): void => {
+  private show = (payload: NotificationProperties): void => {
     const { type, title, message } = payload;
 
     Toast.show({
@@ -38,7 +32,7 @@ class Notification {
 
   public [NotificationType.INFO](message: string): void {
     this.show({
-      type: NotificationType.ERROR,
+      type: NotificationType.INFO,
       title: '🔷Information:',
       message,
     });
