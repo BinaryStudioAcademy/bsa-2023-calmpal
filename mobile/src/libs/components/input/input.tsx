@@ -8,16 +8,16 @@ import {
   type FormFieldErrors,
   type FormFieldPath,
   type FormFieldValues,
-} from '#libs/types/types.js';
+} from '#libs/types/types';
 
 import { INPUT_ROWS_COUNT } from './libs/constants';
 import { styles } from './styles';
 
-type Properties<T extends FieldValues> = {
-  control: Control<T, null>;
-  errors: FieldErrors<T>;
+type Properties<T extends FormFieldValues> = {
+  control: FormControl<T, null>;
+  errors: FormFieldErrors<T>;
   label?: string;
-  name: FieldPath<T>;
+  name: FormFieldPath<T>;
   isSecure?: boolean;
   placeholder: string;
   type?: 'text' | 'email' | 'password';
