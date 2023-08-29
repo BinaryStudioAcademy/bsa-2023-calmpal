@@ -1,5 +1,6 @@
-import { type NotificationType } from '#libs/enums/enums';
 import { type ValueOf } from '#libs/types/types';
+
+import { type NotificationType } from '../enums/enums';
 
 type NotificationProperties = {
   type: ValueOf<typeof NotificationType>;

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { type NotificationPayload } from '#libs/packages/notification/libs/types/notification';
+import { type NotificationPayload } from '#libs/packages/notification/notification';
 import { type AsyncThunkConfig } from '#libs/types/types';
 
 import { name as sliceName } from './notifications.slice';
