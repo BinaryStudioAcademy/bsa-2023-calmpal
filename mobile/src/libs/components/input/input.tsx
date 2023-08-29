@@ -2,14 +2,13 @@ import React from 'react';
 import { TextInput } from 'react-native';
 
 import { Text, View } from '#libs/components/components';
+import { useFormController, useState } from '#libs/hooks/hooks';
 import {
   type FormControl,
   type FormFieldErrors,
   type FormFieldPath,
   type FormFieldValues,
-  useFormController,
-  useState,
-} from '#libs/hooks/hooks';
+} from '#libs/types/types.js';
 
 import { styles } from './styles';
 

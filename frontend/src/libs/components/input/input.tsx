@@ -1,11 +1,11 @@
 import { getValidClassNames } from '#libs/helpers/helpers.js';
+import { useFormController } from '#libs/hooks/hooks.js';
 import {
   type FormControl,
   type FormFieldErrors,
   type FormFieldPath,
   type FormFieldValues,
-  useFormController,
-} from '#libs/hooks/hooks.js';
+} from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
 
