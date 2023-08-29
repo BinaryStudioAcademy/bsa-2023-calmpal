@@ -1,8 +1,9 @@
-import { AuthError, FileError, UsersError } from '#libs/exceptions/exceptions.js';
+import { AuthError, AWSError, FileError, UsersError } from '#libs/exceptions/exceptions.js';
 import { HTTPError } from '#libs/packages/http/http.js';
 
 import { type APIError, type ErrorInfo } from '../../types/types.js';
 import { getAuthErrorInfo } from './get-auth-error-info.helper.js';
+import { getAwsErrorInfo } from './get-aws-error-info.helper.js';
 import { getDefaultErrorInfo } from './get-default-error-info.helper.js';
 import { getFileErrorInfo } from './get-file-error-info.helper.js';
 import { getHttpErrorInfo } from './get-http-error-info.helper.js';
@@ -20,6 +21,10 @@ const getErrorInfo = (error: APIError): ErrorInfo => {
   
   if (error instanceof FileError) {
     return getFileErrorInfo(error);
+  }
+
+  if (error instanceof AWSError) {
+    return getAwsErrorInfo(error);
   }
 
   if (error instanceof AuthError) {

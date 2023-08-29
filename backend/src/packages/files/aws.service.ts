@@ -7,6 +7,8 @@ import {
 } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
+import { MINUTE_IN_SEC } from './libs/constants/constants.js';
+import { generateUrl } from './libs/helpers/get-url.js';
 import { type AWSUploadRequestDto } from './libs/types/types.js';
 
 type AWSServiceDependencies = {
@@ -18,8 +20,6 @@ type AWSServiceDependencies = {
 
 class AWSService {
   private region: string;
-  private accessKeyId: string;
-  private secretAccessKey: string;
   private bucketName: string;
 
   private s3Client: S3Client;
@@ -31,15 +31,13 @@ class AWSService {
     bucketName,
   }: AWSServiceDependencies) {
     this.region = region;
-    this.accessKeyId = accessKeyId;
-    this.secretAccessKey = secretAccessKey;
     this.bucketName = bucketName;
 
     this.s3Client = new S3Client({
       region: this.region,
       credentials: {
-        accessKeyId: this.accessKeyId,
-        secretAccessKey: this.secretAccessKey,
+        accessKeyId: accessKeyId,
+        secretAccessKey: secretAccessKey,
       },
     } as S3ClientConfig);
   }
@@ -69,29 +67,19 @@ class AWSService {
       Key: fileKey,
     });
 
-    const minuteInSec = 3600;
-
     const signedUrl: string = await getSignedUrl(this.s3Client, command, {
-      expiresIn: minuteInSec,
+      expiresIn: MINUTE_IN_SEC,
     });
 
     return signedUrl;
   }
 
   public getUrl(fileKey: string): string {
-    return `https://${this.bucketName}.s3.${this.region}.amazonaws.com/${fileKey}`;
-  }
-
-  public getFileKey(url: string): string | undefined {
-    const regex = /https:\/\/[^/]+\/([^/]+)/;
-    const match = url.match(regex);
-    const fileKeyIndex = 1;
-
-    if (!match) {
-      return;
-    }
-
-    return match[fileKeyIndex];
+    return generateUrl('https://{bucket}.s3.{region}.amazonaws.com/{fileKey}', {
+      bucket: this.bucketName,
+      region: this.region,
+      fileKey,
+    });
   }
 }
 

@@ -21,10 +21,15 @@ type ServerAuthErrorResponse = {
 type ServerUsersErrorResponse = {
   errorType: typeof ServerErrorType.USERS;
   message: string;
-}
+};
 
 type ServerFileErrorResponse = {
   errorType: typeof ServerErrorType.FILE;
+  message: string;
+};
+
+type ServerAwsErrorResponse = {
+  errorType: typeof ServerErrorType.AWS;
   message: string;
 };
 
@@ -33,10 +38,12 @@ type ServerErrorResponse =
   | ServerCommonErrorResponse
   | ServerAuthErrorResponse
   | ServerUsersErrorResponse
-  | ServerFileErrorResponse;
+  | ServerFileErrorResponse
+  | ServerAwsErrorResponse;
 
 export {
   type ServerAuthErrorResponse,
+  type ServerAwsErrorResponse,
   type ServerCommonErrorResponse,
   type ServerErrorResponse,
   type ServerUsersErrorResponse,
