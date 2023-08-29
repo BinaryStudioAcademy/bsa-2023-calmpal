@@ -2,6 +2,7 @@ import home from '#assets/img/home.svg';
 import {
   Header,
   Loader,
+  ProfileSettingsSidebar,
   RouterOutlet,
   Sidebar,
 } from '#libs/components/components.js';
@@ -32,6 +33,8 @@ const App: React.FC = () => {
   return (
     <div className={styles['app-container']}>
       <Sidebar routes={[{ path: AppRoute.ROOT, name: 'home', icon: home }]} />
+      {/* Adding sidebar here only for visibility */}
+      <ProfileSettingsSidebar />
       <div className={styles['body-container']}>
         <Header />
         <div>

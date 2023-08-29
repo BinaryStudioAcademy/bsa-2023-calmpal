@@ -1,5 +1,5 @@
 import avatar from '#assets/img/avatar.svg';
-import buttonIcon from '#assets/img/buttonIcon.svg';
+import buttonIcon from '#assets/img/button-icon.svg';
 
 import { ProfileSettingsButton } from './profile-settings-button/profile-settings-button.js';
 import styles from './styles.module.scss';
@@ -14,6 +14,7 @@ const ProfileSettingsSidebar: React.FC = () => {
       <div className={styles['divider']} />
       <div className={styles['body']}>
         <div className={styles['user']}>
+          <div className="visually-hidden">User details</div>
           <div className={styles['user-details']}>
             <div className={styles['user-icon']}>
               <img src={avatar} alt="avatar" />
@@ -21,7 +22,11 @@ const ProfileSettingsSidebar: React.FC = () => {
             <div className={styles['user-name']}>John Doe</div>
           </div>
         </div>
-        <ProfileSettingsButton icon={buttonIcon}>Log Out</ProfileSettingsButton>
+        <div className={styles['buttons-container']}>
+          <ProfileSettingsButton icon={buttonIcon}>
+            Sign Out
+          </ProfileSettingsButton>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 .container {
-  width: 349px;
-  height: 1024px;
+  max-width: 349px;
+  min-height: 100vh;
   background: linear-gradient(180deg, rgb(229 240 255 / 0%) 0%, #e5f0ff 100%);
 }
 
@@ -46,9 +46,14 @@
 }
 
 .user-name {
+  // In Figma #1A141F is used for the color, but it's not defined in the variables.scss file.
   color: var(--black);
   font-weight: 600;
   font-size: 16px;
   font-family: Montserrat, sans-serif;
   line-height: 20px;
+}
+
+.buttons-container {
+  padding: 0 16px;
 }
