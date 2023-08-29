@@ -9,7 +9,7 @@ type Parameters = {
 const checkIsWhiteRoute = ({ path, method }: Parameters): boolean =>
   WHITE_ROUTES.some((route) => {
     return (
-      route.path === path &&
+      route.path.test(path) &&
       (route.methods as readonly HTTPMethod[]).includes(method)
     );
   });
