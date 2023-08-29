@@ -1,11 +1,7 @@
 import { UserProfileChatSidebar } from './components/components.js';
 
 const UserProfile: React.FC = () => {
-  return (
-    <>
-      <UserProfileChatSidebar />
-    </>
-  );
+  return <UserProfileChatSidebar />;
 };
 
 export { UserProfile };
