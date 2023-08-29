@@ -1,4 +1,7 @@
+import { Navigate } from 'react-router-dom';
+
 import { Header } from '#libs/components/components.js';
+import { AppRoute } from '#libs/enums/app-route.enum.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -11,9 +14,9 @@ import styles from './styles.module.scss';
 
 const Survey: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { userId /*isSurveyCompleted*/ } = useAppSelector(({ auth }) => ({
+  const { userId, isSurveyCompleted } = useAppSelector(({ auth }) => ({
     userId: auth.authenticatedUser?.id,
-    // isSurveyCompleted: auth.authenticatedUser?.isSurveyCompleted,
+    isSurveyCompleted: auth.authenticatedUser?.isSurveyCompleted,
   }));
 
   const onSubmit = useCallback(
@@ -28,9 +31,9 @@ const Survey: React.FC = () => {
     [dispatch, userId],
   );
 
-  // if (isSurveyCompleted) {
-  //   return <Navigate to={AppRoute.ROOT} />;
-  // }
+  if (isSurveyCompleted) {
+    return <Navigate to={AppRoute.ROOT} />;
+  }
 
   return (
     <div className={styles['container']}>

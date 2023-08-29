@@ -53,10 +53,11 @@ const { reducer, actions, name } = createSlice({
     builder.addCase(createUserSurveyPreferences.pending, (state) => {
       state.surveyPreferencesDataStatus = DataStatus.PENDING;
     });
-    builder.addCase(createUserSurveyPreferences.fulfilled, (state) => {
-      // if(state.authenticatedUser) {
-      //   state.authenticatedUser.isSurveyCompleted = action.payload;
-      // }
+    builder.addCase(createUserSurveyPreferences.fulfilled, (state, action) => {
+      if (state.authenticatedUser) {
+        state.authenticatedUser.isSurveyCompleted = action.payload;
+      }
+
       state.surveyPreferencesDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(createUserSurveyPreferences.rejected, (state) => {
