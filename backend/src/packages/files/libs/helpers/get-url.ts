@@ -5,11 +5,9 @@ function generateUrl(
   let url = template;
 
   Object.keys(placeholders).forEach((key) => {
-    if (Object.hasOwn(placeholders, key)) {
-      const value = placeholders[key];
-      if (value !== undefined) {
-        url = url.replace(`{${key}}`, value);
-      }
+    const value = placeholders[key];
+    if (value !== undefined) {
+      url = url.replace(`{${key}}`, value);
     }
   });
 
