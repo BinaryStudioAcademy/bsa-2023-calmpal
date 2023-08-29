@@ -32,7 +32,6 @@ const App: React.FC = () => {
 
   return (
     <div className={styles['app-container']}>
-
       <Sidebar
         routes={[
           { path: AppRoute.ROOT, name: 'home', icon: home },
