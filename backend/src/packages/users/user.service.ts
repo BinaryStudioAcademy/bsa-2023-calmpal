@@ -1,8 +1,5 @@
-import { ExceptionMessage } from '#libs/enums/enums.js';
-import { UsersError } from '#libs/exceptions/exceptions.js';
 import { type Config } from '#libs/packages/config/config.js';
 import { type Encrypt } from '#libs/packages/encrypt/encrypt.js';
-import { HTTPCode } from '#libs/packages/http/http.js';
 import { type JWTService } from '#libs/packages/jwt/jwt.service.js';
 import { type Service } from '#libs/types/types.js';
 import { type UserEntity } from '#packages/users/user.entity.js';
@@ -117,14 +114,11 @@ class UserService implements Service {
 
   public async findByEmailWithPassword(
     email: string,
-  ): Promise<ReturnType<UserWithPasswordEntity['toObject']>> {
+  ): Promise<ReturnType<UserWithPasswordEntity['toObject']> | null> {
     const userEntity = await this.userRepository.findByEmailWithPassword(email);
 
     if (!userEntity) {
-      throw new UsersError({
-        status: HTTPCode.NOT_FOUND,
-        message: ExceptionMessage.USER_NOT_FOUND,
-      });
+      return null;
     }
 
     return userEntity.toObject();

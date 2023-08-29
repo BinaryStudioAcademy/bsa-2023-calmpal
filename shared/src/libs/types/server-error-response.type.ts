@@ -1,4 +1,5 @@
-import { type ServerErrorType } from '../../libs/enums/enums.js';
+import { type ServerErrorType } from '#libs/enums/enums.js';
+
 import { type ServerErrorDetail } from './server-error-detail.type.js';
 
 type ServerValidationErrorResponse = {
