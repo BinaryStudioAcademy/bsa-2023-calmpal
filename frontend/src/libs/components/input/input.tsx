@@ -1,28 +1,27 @@
-import {
-  type Control,
-  type FieldErrors,
-  type FieldPath,
-  type FieldValues,
-} from 'react-hook-form';
-
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useFormController } from '#libs/hooks/hooks.js';
+import {
+  type FormControl,
+  type FormFieldErrors,
+  type FormFieldPath,
+  type FormFieldValues,
+} from '#libs/types/types.js';
 
 import { INPUT_ROWS_COUNT } from './libs/constants.js';
 import styles from './styles.module.scss';
 
-type Properties<T extends FieldValues> = {
-  control: Control<T, null>;
-  errors: FieldErrors<T>;
+type Properties<T extends FormFieldValues> = {
+  control: FormControl<T, null>;
+  errors: FormFieldErrors<T>;
   label?: string;
-  name: FieldPath<T>;
+  name: FormFieldPath<T>;
   placeholder?: string;
   type?: 'text' | 'email' | 'password';
   rowsCount?: number;
   maxLength?: number;
 };
 
-const Input = <T extends FieldValues>({
+const Input = <T extends FormFieldValues>({
   control,
   errors,
   label,
