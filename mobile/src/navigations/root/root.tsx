@@ -7,17 +7,11 @@ import React from 'react';
 import { Loader } from '#libs/components/components';
 import { DataStatus, RootScreenName } from '#libs/enums/enums';
 import { useAppDispatch, useAppSelector, useEffect } from '#libs/hooks/hooks';
-// import { Loader } from '#libs/components/components';
-// import { DataStatus, RootScreenName } from '#libs/enums/enums';
-// import { useAppDispatch } from '#libs/hooks/hooks';
-// import { useAppDispatch, useAppSelector, useEffect } from '#libs/hooks/hooks';
 import { type RootNavigationParameterList } from '#libs/types/types';
 import { Auth } from '#screens/auth/auth';
 import { Survey } from '#screens/survey/survey';
 import { actions as authActions } from '#slices/auth/auth';
 
-// import { actions as authActions } from '#slices/auth/auth';
-// import { actions as userActions } from '#slices/users/users';
 import { Main } from '../main/main';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParameterList>();
@@ -28,6 +22,9 @@ const screenOptions: NativeStackNavigationOptions = {
 
 const Root: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { isSurveyCompleted } = useAppSelector(({ auth }) => ({
+    isSurveyCompleted: auth.authenticatedUser?.isSurveyCompleted,
+  }));
   const { authenticatedUser, authenticatedUserDataStatus } = useAppSelector(
     ({ auth }) => ({
       authenticatedUser: auth.authenticatedUser,
@@ -41,6 +38,10 @@ const Root: React.FC = () => {
 
   if (authenticatedUserDataStatus === DataStatus.PENDING) {
     return <Loader />;
+  }
+
+  if (isSurveyCompleted) {
+    return <Main />;
   }
 
   return (
