@@ -1,5 +1,8 @@
 name: Continuous Delivery Development
 
+env:
+  DEVELOPMENT_APP_URL: development.calmpal.healthcare
+
 on:
   push:
     branches:
@@ -8,7 +11,7 @@ on:
       - frontend/**/*.*
       - backend/**/*.*
       - shared/**/*.*
-      - .github/workflows/cd.yml
+      - .github/workflows/cd-development.yml
   workflow_dispatch:
 
 jobs:
@@ -48,7 +51,6 @@ jobs:
           image_tag: latest
           context: ./
           dockerfile: ./backend/Dockerfile.development
-          build_extra_args: '--platform=linux/amd64'
       - name: Build, tag, and push frontend image
         id: build-frontend-image
         uses: whoan/docker-build-with-cache-action@v5
@@ -58,15 +60,8 @@ jobs:
           image_tag: latest
           context: ./
           dockerfile: ./frontend/Dockerfile.development
-          build_extra_args: '--platform=linux/amd64 --build-arg VITE_APP_API_ORIGIN_URL=/api/v1 --build-arg VITE_APP_PROXY_SERVER_URL=http://localhost:3001'
+          build_extra_args: '--build-arg VITE_APP_API_ORIGIN_URL=/api/v1 --build-arg VITE_APP_PROXY_SERVER_URL=http://localhost:3001'
 
-      - name: Install AWS CLI v2
-        run: |
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o /tmp/awscliv2.zip
-          unzip -q /tmp/awscliv2.zip -d /tmp
-          rm /tmp/awscliv2.zip
-          sudo /tmp/aws/install --update
-          rm -rf /tmp/aws/
       - name: Download task definition
         run: |
           aws ecs describe-task-definition --task-definition ${{ secrets.ECS_TASK_DEFINITION }} --query taskDefinition > task-definition.json
