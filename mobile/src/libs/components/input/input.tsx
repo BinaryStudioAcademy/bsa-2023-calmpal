@@ -1,14 +1,14 @@
 import React from 'react';
-import {
-  type Control,
-  type FieldErrors,
-  type FieldPath,
-  type FieldValues,
-} from 'react-hook-form';
 import { TextInput } from 'react-native';
 
 import { Text, View } from '#libs/components/components';
 import { useFormController, useState } from '#libs/hooks/hooks';
+import {
+  type FormControl,
+  type FormFieldErrors,
+  type FormFieldPath,
+  type FormFieldValues,
+} from '#libs/types/types.js';
 
 import { INPUT_ROWS_COUNT } from './libs/constants';
 import { styles } from './styles';
@@ -25,7 +25,7 @@ type Properties<T extends FieldValues> = {
   maxLength?: number;
 };
 
-const Input = <T extends FieldValues>({
+const Input = <T extends FormFieldValues>({
   control,
   errors,
   label,
