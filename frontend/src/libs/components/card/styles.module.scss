@@ -18,14 +18,23 @@
 
 .chat-element .name {
   display: flex;
-  align-items: center;
-}
-
-.chat-element .trash-box {
-  display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 15px;
+  overflow: hidden;
+}
+
+.name .image-placeholder {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  overflow: hidden;
+  border-radius: 30%;
+  box-shadow: 0 4px 23px 0 var(--violet-100);
+}
+
+.image-placeholder .image {
+  width: 77px;
+  height: 77px;
 }
 
 .selected {
