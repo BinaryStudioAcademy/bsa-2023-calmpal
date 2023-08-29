@@ -51,6 +51,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
         <Input
           type="password"
           label="Password"
+          placeholder="Enter your password"
           name="password"
           control={control}
           errors={errors}
