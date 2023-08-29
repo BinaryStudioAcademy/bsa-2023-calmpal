@@ -4,7 +4,7 @@ const initialState = {};
 
 const { reducer, actions, name } = createSlice({
   initialState,
-  name: 'notification',
+  name: 'app',
   reducers: {},
 });
 

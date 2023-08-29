@@ -6,19 +6,26 @@ import {
 } from '@reduxjs/toolkit';
 
 import { NotificationType } from '#libs/enums/notification/notification-type.enum';
-import { notify } from '#slices/notifications/actions';
+import { type AsyncThunkConfig } from '#libs/types/types';
+import { appActions } from '#slices/app/notifications';
 
-const handleError: Middleware = ({ dispatch }) => {
+import { type AppDispatch } from '../libs/types/app-dispatch';
+
+const handleError: Middleware<AsyncThunkConfig, unknown, AppDispatch> = ({
+  dispatch,
+}) => {
   return (next: Dispatch) => {
     return (action: AnyAction) => {
-      const result = next(action);
-
       if (isRejected(action)) {
-        const message = action.error.message as string;
-        dispatch(notify({ type: NotificationType.ERROR, message }));
+        void dispatch(
+          appActions.notify({
+            type: NotificationType.ERROR,
+            message: action.error.message ?? 'An error occurred',
+          }),
+        );
       }
 
-      return result;
+      return next(action);
     };
   };
 };

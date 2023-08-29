@@ -9,9 +9,10 @@ import { AppEnvironment } from '#libs/enums/enums';
 import { authApi } from '#packages/auth/auth';
 import { userApi } from '#packages/users/users';
 import { reducer as authReducer } from '#slices/auth/auth';
-import { reducer as notificationReducer } from '#slices/notifications/notifications';
 
 import { type Config } from '../config/config';
+import { notification } from '../notification/notification';
+import { type Notification } from '../notification/notification.package';
 import { handleError } from './middlewares/middlewares';
 
 type RootReducer = {
@@ -21,6 +22,7 @@ type RootReducer = {
 type ExtraArguments = {
   authApi: typeof authApi;
   userApi: typeof userApi;
+  notification: Notification;
 };
 
 class Store {
@@ -28,12 +30,7 @@ class Store {
     typeof configureStore<
       RootReducer,
       AnyAction,
-      MiddlewareArray<
-        [
-          ThunkMiddleware<RootReducer, AnyAction, ExtraArguments>,
-          typeof handleError,
-        ]
-      >
+      MiddlewareArray<[ThunkMiddleware<RootReducer, AnyAction, ExtraArguments>]>
     >
   >;
 
@@ -42,7 +39,6 @@ class Store {
       devTools: config.ENV.APP.ENVIRONMENT !== AppEnvironment.PRODUCTION,
       reducer: {
         auth: authReducer,
-        notification: notificationReducer,
       },
       middleware: (getDefaultMiddleware) => [
         ...getDefaultMiddleware({
@@ -59,6 +55,7 @@ class Store {
     return {
       authApi,
       userApi,
+      notification,
     };
   }
 }

@@ -6,5 +6,5 @@ const allActions = {
   notify,
 };
 
-export { allActions as actions };
+export { allActions as appActions };
 export { reducer } from './notifications.slice';
