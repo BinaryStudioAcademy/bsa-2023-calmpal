@@ -3,24 +3,20 @@ import { type Dispatch, type SetStateAction } from 'react';
 
 const DEBOUNCE_DELAY = 300;
 
-let debouncedFunction: ReturnType<typeof libraryDebounce> | undefined;
+let debounced: ReturnType<typeof libraryDebounce> | undefined;
 
 const debounce = (
   setSearchQuery: Dispatch<SetStateAction<string>>,
-): ((text: string) => void) => {
-  const debounced = libraryDebounce((text: string) => {
+): ReturnType<typeof libraryDebounce> => {
+  if (debounced) {
+    debounced.clear();
+  }
+
+  debounced = libraryDebounce((text: string) => {
     setSearchQuery(text);
   }, DEBOUNCE_DELAY);
 
-  return (text: string): void => {
-    if (debouncedFunction) {
-      debounced.clear();
-      debouncedFunction.clear();
-    }
-
-    debouncedFunction = debounced;
-    debounced(text);
-  };
+  return debounced;
 };
 
 export { debounce };
