@@ -10,7 +10,6 @@ import { useAppDispatch, useAppSelector, useEffect } from '#libs/hooks/hooks';
 import { type RootNavigationParameterList } from '#libs/types/types';
 import { Auth } from '#screens/auth/auth';
 import { actions as authActions } from '#slices/auth/auth';
-import { actions as userActions } from '#slices/users/users';
 
 import { Main } from '../main/main';
 
@@ -20,45 +19,33 @@ const screenOptions: NativeStackNavigationOptions = {
   headerShown: false,
 };
 
-type RootProperties = {
-  routeName: string | undefined;
-};
-
-const Root: React.FC<RootProperties> = ({ routeName }) => {
+const Root: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { authenticatedUserDataStatus } = useAppSelector(({ auth }) => ({
-    authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
-  }));
-
-  const isRoot = routeName === RootScreenName.SIGN_IN;
-
-  useEffect(() => {
-    if (isRoot) {
-      void dispatch(userActions.loadAll()).catch((error: Error) => {
-        throw new Error(`Error loading all users: ${error.message}`);
-      });
-    }
-  }, [isRoot, dispatch]);
+  const { authenticatedUser, authenticatedUserDataStatus } = useAppSelector(
+    ({ auth }) => ({
+      authenticatedUser: auth.authenticatedUser,
+      authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
+    }),
+  );
 
   useEffect(() => {
-    void dispatch(authActions.getAuthenticatedUser()).catch((error: Error) => {
-      throw new Error(`Error getting authenticated user: ${error.message}`);
-    });
+    void dispatch(authActions.getAuthenticatedUser());
   }, [dispatch]);
 
   if (authenticatedUserDataStatus === DataStatus.PENDING) {
     return <Loader />;
   }
 
-  if (authenticatedUserDataStatus === DataStatus.FULFILLED) {
-    return <Main />;
-  }
-
   return (
     <NativeStack.Navigator screenOptions={screenOptions}>
-      <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
-      <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
-      <NativeStack.Screen name={RootScreenName.MAIN} component={Main} />
+      {authenticatedUser ? (
+        <NativeStack.Screen name={RootScreenName.MAIN} component={Main} />
+      ) : (
+        <>
+          <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
+          <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
+        </>
+      )}
     </NativeStack.Navigator>
   );
 };
