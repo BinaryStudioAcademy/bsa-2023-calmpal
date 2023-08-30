@@ -8,7 +8,6 @@ export {
 export {
   ApplicationError,
   AuthError,
-  AWSError,
   FileError,
   HTTPError,
   UsersError,

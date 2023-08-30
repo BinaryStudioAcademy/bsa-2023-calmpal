@@ -4,7 +4,6 @@ const ServerErrorType = {
   USERS: 'USERS',
   VALIDATION: 'VALIDATION',
   FILE: 'FILE',
-  AWS: 'AWS',
 } as const;
 
 export { ServerErrorType };
