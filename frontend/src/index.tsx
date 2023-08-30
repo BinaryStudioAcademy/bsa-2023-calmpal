@@ -7,6 +7,7 @@ import {
   App,
   ProtectedRoute,
   RouterProvider,
+  SidebarWrapper,
   StoreProvider,
   Toast,
 } from '#libs/components/components.js';
@@ -28,7 +29,9 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 path: AppRoute.ROOT,
                 element: (
                   <ProtectedRoute>
-                    <Root />
+                    <SidebarWrapper>
+                      <Root />
+                    </SidebarWrapper>
                   </ProtectedRoute>
                 ),
               },
