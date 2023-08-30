@@ -25,19 +25,31 @@ const Root: React.FC = () => {
   const { isSurveyCompleted } = useAppSelector(({ auth }) => ({
     isSurveyCompleted: auth.authenticatedUser?.isSurveyCompleted,
   }));
-  const { authenticatedUser, authenticatedUserDataStatus } = useAppSelector(
-    ({ auth }) => ({
-      authenticatedUser: auth.authenticatedUser,
-      authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
-    }),
-  );
+  const {
+    authenticatedUser,
+    authenticatedUserDataStatus,
+    surveyPreferencesDataStatus,
+  } = useAppSelector(({ auth }) => ({
+    authenticatedUser: auth.authenticatedUser,
+    authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
+    surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
+  }));
 
   useEffect(() => {
     void dispatch(authActions.getAuthenticatedUser());
   }, [dispatch]);
 
-  if (authenticatedUserDataStatus === DataStatus.PENDING) {
+  if (
+    authenticatedUserDataStatus === DataStatus.IDLE ||
+    authenticatedUserDataStatus === DataStatus.PENDING ||
+    surveyPreferencesDataStatus === DataStatus.PENDING
+  ) {
     return <Loader />;
+  }
+
+  const hasNoSurvey = authenticatedUser && !authenticatedUser.isSurveyCompleted;
+  if (hasNoSurvey) {
+    return <Survey />;
   }
 
   if (isSurveyCompleted) {
