@@ -14,14 +14,19 @@
   cursor: pointer;
 }
 
-.profile-button > img {
-  margin-right: 20px;
-}
-
 .profile-button-text {
+  display: block;
+  width: 145px;
+  margin-right: 25px;
   color: var(--gray-300);
   font-weight: 600;
   font-size: 16px;
   font-family: Montserrat, sans-serif;
   line-height: 20px;
+  text-align: left;
+}
+
+.text-container {
+  display: flex;
+  align-items: center;
 }
