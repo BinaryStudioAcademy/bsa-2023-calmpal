@@ -5,6 +5,7 @@ export {
   type FormFieldPath,
   type FormFieldValues,
 } from './form/form.type.js';
+export { type SidebarRoute } from './sidebar-route.type.js';
 export {
   type ServerErrorDetail,
   type ServerErrorResponse,
