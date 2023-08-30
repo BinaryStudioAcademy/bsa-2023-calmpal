@@ -7,8 +7,8 @@ import {
 } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
-import { MINUTE_IN_SEC } from './libs/constants/constants.js';
-import { generateUrl } from './libs/helpers/get-url.js';
+import { HOUR_IN_SEC } from './libs/constants/constants.js';
+import { getUrl } from './libs/helpers/helpers.js';
 import { type AWSUploadRequestDto } from './libs/types/types.js';
 
 type AWSServiceDependencies = {
@@ -68,14 +68,14 @@ class AWSService {
     });
 
     const signedUrl: string = await getSignedUrl(this.s3Client, command, {
-      expiresIn: MINUTE_IN_SEC,
+      expiresIn: HOUR_IN_SEC,
     });
 
     return signedUrl;
   }
 
   public getUrl(fileKey: string): string {
-    return generateUrl('https://{bucket}.s3.{region}.amazonaws.com/{fileKey}', {
+    return getUrl('https://{bucket}.s3.{region}.amazonaws.com/{fileKey}', {
       bucket: this.bucketName,
       region: this.region,
       fileKey,
