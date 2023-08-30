@@ -10,7 +10,6 @@ import {
   type FormFieldValues,
 } from '#libs/types/types';
 
-import { INPUT_ROWS_COUNT } from './libs/constants';
 import { styles } from './styles';
 
 type Properties<T extends FormFieldValues> = {
@@ -32,7 +31,7 @@ const Input = <T extends FormFieldValues>({
   name,
   isSecure = false,
   placeholder,
-  rowsCount = INPUT_ROWS_COUNT,
+  rowsCount,
   maxLength,
 }: Properties<T>): JSX.Element => {
   const [isFocused, setIsFocused] = useState(false);
@@ -42,6 +41,7 @@ const Input = <T extends FormFieldValues>({
 
   const error = errors[name]?.message;
   const hasError = Boolean(error);
+  const hasRows = Boolean(rowsCount);
 
   const handleFocus = (): void => {
     setIsFocused(true);
@@ -55,7 +55,7 @@ const Input = <T extends FormFieldValues>({
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
-      {rowsCount > INPUT_ROWS_COUNT ? (
+      {hasRows ? (
         <TextInput
           onChangeText={onChange}
           value={value}
