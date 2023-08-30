@@ -34,7 +34,7 @@ const Dropdown: React.FC<Routes> = ({ routes }) => {
               id={item.path}
             >
               <Link to={item.path}>
-                <span className={styles['link']}>
+                <span className={styles['item']}>
                   <span className="visually-hidden">Go to {item.name}</span>
                   <img
                     src={item.icon}
