@@ -4,7 +4,7 @@ import { DataStatus } from '#libs/enums/enums';
 import { type ValueOf } from '#libs/types/types';
 import { type UserAuthResponseDto } from '#packages/users/users';
 
-import { getAuthenticatedUser, signUp } from './actions';
+import { getAuthenticatedUser, signIn, signUp } from './actions';
 
 type State = {
   authenticatedUser: UserAuthResponseDto | null;
@@ -23,6 +23,18 @@ const { reducer, actions, name } = createSlice({
   name: 'auth',
   reducers: {},
   extraReducers(builder) {
+    builder.addCase(signIn.pending, (state) => {
+      state.dataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(signIn.fulfilled, (state, action) => {
+      state.dataStatus = DataStatus.FULFILLED;
+      state.authenticatedUser = action.payload;
+    });
+    builder.addCase(signIn.rejected, (state) => {
+      state.dataStatus = DataStatus.REJECTED;
+      state.authenticatedUser = null;
+    });
+
     builder.addCase(signUp.pending, (state) => {
       state.dataStatus = DataStatus.PENDING;
     });
