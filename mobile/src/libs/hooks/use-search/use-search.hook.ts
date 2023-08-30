@@ -1,39 +1,24 @@
-import { useEffect, useState } from '#libs/hooks/hooks';
+import { type Dispatch, type SetStateAction } from 'react';
 
-type MockChatItem = {
-  id: string;
-  title: string;
+import { useMemo, useState } from '#libs/hooks/hooks';
+
+type UseSearchResult<T> = {
+  filteredData: T[];
+  setSearchQuery: Dispatch<SetStateAction<string>>;
 };
 
-type MockMeditationTopic = {
-  id: number;
-  title: string;
-  uri: string;
-  duration: number;
-};
-
-type MockData = MockChatItem | MockMeditationTopic;
-
-type UseSearchResult = {
-  filteredData: MockData[];
-  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-};
-
-const useSearch = (data: MockData[]): UseSearchResult => {
+const useSearch = <T>(data: T[], propertyName: keyof T): UseSearchResult<T> => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredData, setFilteredData] = useState<MockData[]>([]);
 
-  useEffect(() => {
-    const filteredItems = data.filter((item) =>
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()),
+  const filteredData = useMemo(() => {
+    return data.filter((item) =>
+      (item[propertyName] as string)
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase()),
     );
-    setFilteredData(filteredItems);
-  }, [searchQuery, data]);
+  }, [searchQuery, data, propertyName]);
 
-  return {
-    filteredData,
-    setSearchQuery,
-  };
+  return { filteredData, setSearchQuery };
 };
 
 export { useSearch };

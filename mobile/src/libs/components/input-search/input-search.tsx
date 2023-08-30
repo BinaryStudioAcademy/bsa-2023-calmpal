@@ -11,7 +11,7 @@ import { styles } from './styles';
 
 type Properties = {
   placeholder: string;
-  //   setSearchQuery: Dispatch<SetStateAction<string>>;
+  // setSearchQuery: Dispatch<SetStateAction<string>>;
 };
 
 const InputSearch: React.FC<Properties> = ({ placeholder }) => {

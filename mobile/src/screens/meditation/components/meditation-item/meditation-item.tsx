@@ -13,7 +13,6 @@ import {
 import { styles } from './styles';
 
 type Properties = {
-  //   uri: string;
   title: string;
   duration: number;
 };

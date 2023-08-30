@@ -5,7 +5,7 @@ import HomeIcon from '#assets/img/icons/home.svg';
 import MeditationIcon from '#assets/img/icons/meditations.svg';
 import { AppColor, MainScreenName } from '#libs/enums/enums';
 import { type TabNavigationParameterList } from '#libs/types/types';
-import { Home } from '#screens/main/home';
+import { Home } from '#screens/home/home';
 import { Meditation } from '#screens/meditation/meditation';
 
 import { styles } from './styles';
