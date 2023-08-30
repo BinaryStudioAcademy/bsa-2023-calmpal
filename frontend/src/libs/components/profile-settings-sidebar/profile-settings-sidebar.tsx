@@ -1,6 +1,6 @@
-import avatar from '#assets/img/avatar.svg';
 import { IconNameToIcon } from '#libs/enums/enums.js';
 
+import { Icon } from '../components.js';
 import { ProfileSettingsButton } from './profile-settings-button/profile-settings-button.js';
 import styles from './styles.module.scss';
 
@@ -17,7 +17,7 @@ const ProfileSettingsSidebar: React.FC = () => {
           <div className="visually-hidden">User details</div>
           <div className={styles['user-details']}>
             <div className={styles['user-icon']}>
-              <img src={avatar} alt="avatar" />
+              <Icon name={IconNameToIcon.AVATAR} />
             </div>
             <div className={styles['user-name']}>John Doe</div>
           </div>
