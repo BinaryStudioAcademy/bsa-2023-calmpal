@@ -1,14 +1,21 @@
-import { type Dispatch, type SetStateAction } from 'react';
+import { useAppForm, useMemo } from '#libs/hooks/hooks';
 
-import { useMemo, useState } from '#libs/hooks/hooks';
+import { DEFAULT_SEARCH_PAYLOAD } from './constants';
 
 type UseSearchResult<T> = {
   filteredData: T[];
-  setSearchQuery: Dispatch<SetStateAction<string>>;
+  setSearchQuery: (value: string) => void;
 };
 
 const useSearch = <T>(data: T[], propertyName: keyof T): UseSearchResult<T> => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const { setValue, watch } = useAppForm({
+    defaultValues: DEFAULT_SEARCH_PAYLOAD,
+  });
+
+  const setSearchQuery = (value: string): void => {
+    setValue('search', value);
+  };
+  const searchQuery = watch('search', DEFAULT_SEARCH_PAYLOAD.search);
 
   const filteredData = useMemo(() => {
     return data.filter((item) =>
