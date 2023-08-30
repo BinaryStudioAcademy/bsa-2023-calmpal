@@ -14,6 +14,8 @@ const ProfileSettingsSidebar: React.FC = () => {
     null,
   );
 
+  // Draft logic, still need to figure out how to handle this more gracefully. Initially I wanted to use a single handleClick function but it required me using an arrow function in the onClick prop of the button which is not acceptable by the linter
+
   const handleSignOutClick = useCallback(() => {
     setActiveButton(IconNameToIcon.SIGN_OUT);
   }, []);
