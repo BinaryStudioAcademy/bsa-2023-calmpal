@@ -4,6 +4,7 @@ type UserAuthResponseDto = {
   fullName: string;
   createdAt: Date;
   updatedAt: Date;
+  isSurveyCompleted: boolean;
 };
 
 export { type UserAuthResponseDto };
