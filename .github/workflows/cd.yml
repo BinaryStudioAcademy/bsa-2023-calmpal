@@ -62,6 +62,7 @@ jobs:
           image_tag: latest
           context: ./
           dockerfile: ./backend/Dockerfile.development
+          build_extra_args: '--build-arg NODE_ENV=${{ github.ref_name }} --build-arg HOST=localhost --build-arg PORT=3001'
       - name: Build, tag, and push frontend image
         id: build-frontend-image
         uses: whoan/docker-build-with-cache-action@v5
@@ -71,7 +72,7 @@ jobs:
           image_tag: latest
           context: ./
           dockerfile: ./frontend/Dockerfile.development
-          build_extra_args: '--build-arg VITE_APP_API_ORIGIN_URL=/api/v1 --build-arg VITE_APP_PROXY_SERVER_URL=http://localhost:3001'
+          build_extra_args: '--build-arg VITE_APP_NODE_ENV=${{ github.ref_name }} --build-arg VITE_APP_API_ORIGIN_URL=/api/v1 --build-arg VITE_APP_PROXY_SERVER_URL=http://localhost:3001'
 
       - name: Download task definition
         run: |
