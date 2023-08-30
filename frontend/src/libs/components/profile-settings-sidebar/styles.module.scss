@@ -1,7 +1,13 @@
 .container {
   max-width: 349px;
   min-height: 100vh;
-  background: linear-gradient(180deg, rgb(229 240 255 / 0%) 0%, #e5f0ff 100%);
+
+  // For the second variable in the linear-gradient function the --blue-100 value is used as a replacement for #e5f0ff, if the slight difference is not acceptable, then the --blue-50 could be created with the value #e5f0ff
+  background: linear-gradient(
+    180deg,
+    var(--transparent) 0%,
+    var(--blue-100) 100%
+  );
 }
 
 .header {
@@ -46,7 +52,6 @@
 }
 
 .user-name {
-  // In Figma #1A141F is used for the color, but it's not defined in the variables.scss file.
   color: var(--black);
   font-weight: 600;
   font-size: 16px;

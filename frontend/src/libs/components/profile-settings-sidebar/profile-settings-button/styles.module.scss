@@ -3,14 +3,10 @@
   align-items: center;
   min-width: 317px;
   padding: 3px 26px 3px 3px;
-
-  // Was not present in the variables file, got from figma
-  background-color: rgb(255 255 255 / 50%);
+  background-color: var(--gray-50);
   border: none;
   border-radius: 20px;
-
-  // Was not present in the variables file, got from figma, the closest color is --white-alpha-80
-  box-shadow: 0 4px 23px #e5e1ff;
+  box-shadow: 0 4px 23px var(--violet-100);
   cursor: pointer;
 }
 
