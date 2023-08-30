@@ -20,7 +20,7 @@ const App: React.FC = () => {
   if (authenticatedUserDataStatus === DataStatus.PENDING) {
     return <Loader />;
   }
-  
+
   return <RouterOutlet />;
 };
 
