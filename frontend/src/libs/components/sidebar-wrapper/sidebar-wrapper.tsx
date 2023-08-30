@@ -1,7 +1,6 @@
-import home from '#assets/img/home.svg';
 import { Sidebar } from '#libs/components/components.js';
-import { AppRoute } from '#libs/enums/enums.js';
 
+import { SIDEBAR_ROUTES } from './libs/constants.js';
 import styles from './styles.module.scss';
 
 type Properties = {
@@ -11,7 +10,7 @@ type Properties = {
 const SidebarWrapper: React.FC<Properties> = ({ children }) => {
   return (
     <div className={styles['app']}>
-      <Sidebar routes={[{ path: AppRoute.ROOT, name: 'home', icon: home }]} />
+      <Sidebar routes={SIDEBAR_ROUTES} />
       <div className={styles['body']}>{children}</div>
     </div>
   );
