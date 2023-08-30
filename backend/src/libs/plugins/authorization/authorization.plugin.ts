@@ -50,7 +50,7 @@ const authorization = fp<Options>((fastify, { services }, done) => {
       request.user = authorizedUser;
     } catch {
       throw new AuthError({
-        message: ExceptionMessage.INVALID_TOKEN,
+        message: ExceptionMessage.UNAUTHORIZED_USER,
       });
     }
   });
