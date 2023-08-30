@@ -5,6 +5,7 @@ import fastifyStatic from '@fastify/static';
 import swagger, { type StaticDocumentSpec } from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
 import Fastify, { type FastifyError } from 'fastify';
+import fastifyHealthcheck from 'fastify-healthcheck';
 
 import { APIPath, ServerErrorType } from '#libs/enums/enums.js';
 import { type ValidationError } from '#libs/exceptions/exceptions.js';
@@ -102,6 +103,8 @@ class BaseServerApplication implements ServerApplication {
         await this.app.register(swaggerUi, {
           routePrefix: `/api/${api.version}${APIPath.DOCUMENTATION}`,
         });
+
+        await this.app.register(fastifyHealthcheck);
       }),
     );
   }
