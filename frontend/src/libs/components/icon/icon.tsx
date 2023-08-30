@@ -7,8 +7,8 @@ type Properties = {
   name: ValueOf<typeof IconNameToIcon>;
 };
 
-const PlainSvgIcon: React.FC<Properties> = ({ name }: Properties) => (
+const Icon: React.FC<Properties> = ({ name }: Properties) => (
   <>{iconNameToPlainSvgMap[name]}</>
 );
 
-export { PlainSvgIcon };
+export { Icon };
