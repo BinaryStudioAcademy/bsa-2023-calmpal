@@ -9,7 +9,7 @@ import { type Logger } from '#libs/packages/logger/logger.js';
 import { AuthApiPath } from '#packages/auth/auth.js';
 
 import { type SurveyRequestDto } from './libs/types/types.js';
-import { SurveyValidationSchema } from './libs/validation-schemas/validation-schemas.js';
+import { CreateSurveyValidationSchema } from './libs/validation-schemas/validation-schemas.js';
 import { type SurveyService } from './survey.service.js';
 
 /**
@@ -61,7 +61,7 @@ class SurveyController extends BaseController {
       path: AuthApiPath.SIGN_UP_SURVEY,
       method: 'POST',
       validation: {
-        body: SurveyValidationSchema,
+        body: CreateSurveyValidationSchema,
       },
       handler: (options) =>
         this.create(

@@ -1,1 +1,1 @@
-export { SurveyValidationSchema } from './survey-request.validation-schema.js';
+export { CreateSurveyValidationSchema } from './create-survey.validation-schema.js';
