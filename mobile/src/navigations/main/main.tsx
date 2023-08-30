@@ -14,9 +14,9 @@ import { styles } from './styles';
 const BottomTab = createBottomTabNavigator<TabNavigationParameterList>();
 
 const tabNavigatorOptions: BottomTabNavigationOptions = {
-  tabBarActiveTintColor: AppColor.BLUE_200,
+  tabBarActiveTintColor: AppColor.BLUE_300,
   tabBarIcon: ({ color }) => <HomeIcon color={color} />,
-  tabBarInactiveTintColor: AppColor.GRAY_300,
+  tabBarInactiveTintColor: AppColor.GRAY_400,
   tabBarShowLabel: false,
   tabBarStyle: styles.tabBarStyle,
 };
