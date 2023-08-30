@@ -11,13 +11,24 @@ on:
       - frontend/**/*.*
       - backend/**/*.*
       - shared/**/*.*
-      - .github/workflows/cd-development.yml
+      - .github/workflows/cd.yml
   workflow_dispatch:
 
 jobs:
   cd:
     runs-on: ubuntu-latest
     steps:
+      - name: Set Up Variables
+        uses: kanga333/variable-mapper@master
+        with:
+          key: ${{ github.ref_name }}
+          map: |
+            {
+              "development": {
+                "DEVELOPMENT_APP_URL": "https://development.calmpal.io/"
+              }
+            }
+
       - name: Create Deployment
         uses: chrnorm/deployment-action@v2
         id: deployment
@@ -46,7 +57,7 @@ jobs:
         id: build-backend-image
         uses: whoan/docker-build-with-cache-action@v5
         with:
-          image_name: ${{ secrets.ECR_BACKEND_REPOSITORY }}
+          image_name: ${{ secrets.ECR_BACKEND_REPOSITORY }}-${{ github.ref_name }}
           registry: ${{ steps.login-ecr.outputs.registry }}
           image_tag: latest
           context: ./
@@ -55,7 +66,7 @@ jobs:
         id: build-frontend-image
         uses: whoan/docker-build-with-cache-action@v5
         with:
-          image_name: ${{ secrets.ECR_FRONTEND_REPOSITORY }}
+          image_name: ${{ secrets.ECR_FRONTEND_REPOSITORY }}-${{ github.ref_name }}
           registry: ${{ steps.login-ecr.outputs.registry }}
           image_tag: latest
           context: ./
@@ -64,7 +75,7 @@ jobs:
 
       - name: Download task definition
         run: |
-          aws ecs describe-task-definition --task-definition ${{ secrets.ECS_TASK_DEFINITION }} --query taskDefinition > task-definition.json
+          aws ecs describe-task-definition --task-definition ${{ secrets.ECS_TASK_DEFINITION }}-${{ github.ref_name }} --query taskDefinition > task-definition.json
 
       - name: Fill in the new backend image in the Amazon ECS task definition
         id: render-backend-container
@@ -86,8 +97,8 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.render-frontend-container.outputs.task-definition }}
-          service: ${{ secrets.ECS_SERVICE }}
-          cluster: ${{ secrets.ECS_CLUSTER }}
+          service: ${{ secrets.ECS_SERVICE }}-${{ github.ref_name }}
+          cluster: ${{ secrets.ECS_CLUSTER }}-${{ github.ref_name }}
           wait-for-service-stability: true
 
       - name: Update Deployment Status
