@@ -1,10 +1,9 @@
 import { type ValueOf } from '#/libs/types/types.js';
+import { ReactComponent as Arrow } from '#assets/icons/arrow.svg';
+import { ReactComponent as Avatar } from '#assets/icons/avatar.svg';
+import { ReactComponent as Plus } from '#assets/icons/plus.svg';
+import { ReactComponent as SignOut } from '#assets/icons/sign-out.svg';
 import { IconNameToIcon } from '#libs/enums/enums.js';
-
-import { ReactComponent as Arrow } from './arrow.svg';
-import { ReactComponent as Avatar } from './avatar.svg';
-import { ReactComponent as Plus } from './plus.svg';
-import { ReactComponent as SignOut } from './sign-out.svg';
 
 const iconNameToPlainSvgMap: Record<
   ValueOf<typeof IconNameToIcon>,
