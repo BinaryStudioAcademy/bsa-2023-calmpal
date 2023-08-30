@@ -57,13 +57,13 @@ const Controls: React.FC<Properties> = ({
     playAnimationReference.current = requestAnimationFrame(repeat);
   }, [audioReference, duration, progressBarReference, onTimeProgress]);
 
-  const skipForward = useCallback(() => {
+  const handleSkipForward = useCallback(() => {
     if (audioReference.current) {
       audioReference.current.currentTime += SKIP_STEP;
     }
   }, [audioReference]);
 
-  const skipBackward = useCallback(() => {
+  const handleSkipBackward = useCallback(() => {
     if (audioReference.current) {
       audioReference.current.currentTime -= SKIP_STEP;
     }
@@ -104,7 +104,7 @@ const Controls: React.FC<Properties> = ({
         <Button onClick={handlePrevious} style="rounded-transparent">
           <Icon name={IconNameToIcon.PREVIOUS} />
         </Button>
-        <Button onClick={skipBackward} style="rounded-transparent">
+        <Button onClick={handleSkipBackward} style="rounded-transparent">
           <Icon name={IconNameToIcon.BACKWARD} />
         </Button>
 
@@ -115,7 +115,7 @@ const Controls: React.FC<Properties> = ({
             <Icon name={IconNameToIcon.PLAY} />
           )}
         </Button>
-        <Button onClick={skipForward} style="rounded-transparent">
+        <Button onClick={handleSkipForward} style="rounded-transparent">
           <Icon name={IconNameToIcon.FORWARD} />
         </Button>
         <Button onClick={onNextTrack} style="rounded-transparent">

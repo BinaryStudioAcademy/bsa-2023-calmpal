@@ -4,7 +4,6 @@
   background-image: url("/images/meditation-player-background.svg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-attachment: fixed;
 }
 
 .meditation-player {
@@ -16,6 +15,7 @@
 }
 
 .image {
+  width: 100%;
   margin-bottom: 24px;
   background-color: var(--white);
   border-radius: 24px;
@@ -37,4 +37,20 @@
   color: var(--blue-200);
   font-size: 16px;
   line-height: 20px;
+}
+
+@media (width < 426px) {
+  .meditation-player {
+    max-width: 315px;
+  }
+
+  .title {
+    font-size: 22px;
+    line-height: 34px;
+  }
+
+  .purpose {
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
 }

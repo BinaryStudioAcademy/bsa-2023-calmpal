@@ -26,7 +26,7 @@ const AudioPlayer: React.FC<Properties> = ({
   const audioReference = useRef<HTMLAudioElement | null>(null);
   const progressBarReference = useRef<HTMLInputElement | null>(null);
 
-  const onLoadedMetadata = useCallback((): void => {
+  const handleLoadedMetadata = useCallback((): void => {
     if (audioReference.current) {
       const seconds = audioReference.current.duration;
       setDuration(seconds);
@@ -51,22 +51,25 @@ const AudioPlayer: React.FC<Properties> = ({
     const currentAudio = audioReference.current;
 
     if (currentAudio) {
-      currentAudio.addEventListener('loadedmetadata', onLoadedMetadata);
+      currentAudio.addEventListener('loadedmetadata', handleLoadedMetadata);
     }
 
     return () => {
       if (currentAudio) {
-        currentAudio.removeEventListener('loadedmetadata', onLoadedMetadata);
+        currentAudio.removeEventListener(
+          'loadedmetadata',
+          handleLoadedMetadata,
+        );
       }
     };
-  }, [onLoadedMetadata]);
+  }, [handleLoadedMetadata]);
 
   return (
     <>
       <audio
         src={src}
         ref={audioReference}
-        onLoadedMetadata={onLoadedMetadata}
+        onLoadedMetadata={handleLoadedMetadata}
         onEnded={handleNext}
       >
         <track kind="captions" />
