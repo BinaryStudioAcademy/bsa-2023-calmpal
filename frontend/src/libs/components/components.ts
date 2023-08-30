@@ -11,4 +11,4 @@ export { SurveyCategory } from './survey-category/survey-category.js';
 export { Switch } from './switch/switch.js';
 export { Toast } from './toast/toast.js';
 export { Provider as StoreProvider } from 'react-redux';
-export { Outlet as RouterOutlet } from 'react-router-dom';
+export { Navigate, Outlet as RouterOutlet } from 'react-router-dom';
