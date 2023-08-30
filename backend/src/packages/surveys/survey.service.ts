@@ -1,3 +1,6 @@
+import { ExceptionMessage } from '#libs/enums/enums.js';
+import { UsersError } from '#libs/exceptions/exceptions.js';
+import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Service } from '#libs/types/types.js';
 import { userService } from '#packages/users/users.js';
 
@@ -26,6 +29,23 @@ class SurveyService implements Service {
   public async create(
     payload: SurveyRequestDto,
   ): Promise<SurveyGetAllItemResponseDto> {
+    const user = await userService.findById(payload.userId);
+
+    if (!user) {
+      throw new UsersError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.USER_NOT_FOUND,
+      });
+    }
+
+    if (user.isSurveyCompleted) {
+      const item = (await this.surveyRepository.update(
+        payload,
+      )) as SurveyEntity;
+
+      return item.toObject();
+    }
+
     const item = await this.surveyRepository.create(
       SurveyEntity.initializeNew({
         userId: payload.userId,
