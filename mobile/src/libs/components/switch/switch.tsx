@@ -13,15 +13,15 @@ import {
 
 type Properties<T extends FormFieldValues> = {
   control: FormControl<T, null>;
-  //   label?: string;
   name: FormFieldPath<T>;
 };
 
 const Switch = <T extends FormFieldValues>({
   control,
-  name, //   label,
+  name,
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
+
   //   const [isEnabled, setIsEnabled] = useState(false);
   //   const toggleSwitch = ():void => setIsEnabled((previousState) => !previousState);
 
@@ -29,13 +29,12 @@ const Switch = <T extends FormFieldValues>({
     <View>
       <RNSwitch
         trackColor={{ false: '#767577', true: '#81b0ff' }}
-        // thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+        thumbColor={field.value ? '#f5dd4b' : '#f4f3f4'}
         ios_backgroundColor="#3e3e3e"
         onValueChange={(value): void => {
           field.onChange(value);
         }}
         value={field.value}
-        // value={isEnabled}
       />
     </View>
   );

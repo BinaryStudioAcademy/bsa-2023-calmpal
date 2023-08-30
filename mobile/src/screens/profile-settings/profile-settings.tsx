@@ -17,13 +17,7 @@ const ProfileSettings: React.FC = () => {
       <View style={styles.notificationsSection}>
         <Setting
           label="Allow Notification"
-          controller={
-            <Switch
-              name="notification"
-              // label="Allow notification switch"
-              control={control}
-            />
-          }
+          controller={<Switch name="notification" control={control} />}
         />
       </View>
     </ScrollView>

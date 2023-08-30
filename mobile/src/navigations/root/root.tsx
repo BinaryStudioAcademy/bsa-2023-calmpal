@@ -9,7 +9,7 @@ import { DataStatus, RootScreenName } from '#libs/enums/enums';
 import { useAppDispatch, useAppSelector, useEffect } from '#libs/hooks/hooks';
 import { type RootNavigationParameterList } from '#libs/types/types';
 import { Auth } from '#screens/auth/auth';
-// import { ProfileSettings } from '#screens/profile-settings/profile-settings';
+import { ProfileSettings } from '#screens/profile-settings/profile-settings';
 import { actions as authActions } from '#slices/auth/auth';
 
 import { Main } from '../main/main';
@@ -47,7 +47,10 @@ const Root: React.FC = () => {
           <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
         </>
       )}
-      {/* <NativeStack.Screen name={RootScreenName.SIGN_UP} component={ProfileSettings} /> */}
+      <NativeStack.Screen
+        name={RootScreenName.SIGN_UP}
+        component={ProfileSettings}
+      />
     </NativeStack.Navigator>
   );
 };
