@@ -35,25 +35,11 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
               },
               {
                 path: AppRoute.SIGN_IN,
-                element: (
-                  <ProtectedRoute
-                    shouldBeAuthenticated={false}
-                    redirectPath={AppRoute.ROOT}
-                  >
-                    <Auth />
-                  </ProtectedRoute>
-                ),
+                element: <Auth />,
               },
               {
                 path: AppRoute.SIGN_UP,
-                element: (
-                  <ProtectedRoute
-                    shouldBeAuthenticated={false}
-                    redirectPath={AppRoute.ROOT}
-                  >
-                    <Auth />
-                  </ProtectedRoute>
-                ),
+                element: <Auth />,
               },
               {
                 path: AppRoute.SURVEY,
