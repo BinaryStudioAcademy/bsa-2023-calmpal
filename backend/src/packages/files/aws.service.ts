@@ -7,7 +7,7 @@ import {
 } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
-import { HOUR_IN_SEC } from './libs/constants/constants.js';
+import { SEC_IN_HOUR } from './libs/constants/constants.js';
 import { getUrl } from './libs/helpers/helpers.js';
 import { type AWSUploadRequestDto } from './libs/types/types.js';
 
@@ -68,7 +68,7 @@ class AWSService {
     });
 
     const signedUrl: string = await getSignedUrl(this.s3Client, command, {
-      expiresIn: HOUR_IN_SEC,
+      expiresIn: SEC_IN_HOUR,
     });
 
     return signedUrl;

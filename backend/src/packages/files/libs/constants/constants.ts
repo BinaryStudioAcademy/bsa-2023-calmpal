@@ -1,3 +1,3 @@
-const HOUR_IN_SEC = 3600;
+const SEC_IN_HOUR = 3600;
 
-export { HOUR_IN_SEC };
+export { SEC_IN_HOUR };
