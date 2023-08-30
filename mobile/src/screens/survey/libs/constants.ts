@@ -1,4 +1,4 @@
-import { type SurveyInputDto } from '#packages/survey/survey.js';
+import { type SurveyInputDto } from '#packages/survey/survey';
 
 const TEXTAREA_MAX_LENGTH = 1000;
 
