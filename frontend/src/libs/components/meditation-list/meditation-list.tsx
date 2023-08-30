@@ -1,26 +1,23 @@
-const name = 'Meditation for deep sleep';
-const link = '#link';
+import { MeditationTrack } from './meditation-item/meditation-item.js';
+import styles from './styles.module.scss';
 
-const tracks = [
-  { id: 1, name, duration: '10min', link },
-  { id: 2, name, duration: '9min', link },
-  { id: 3, name, duration: '1min', link },
-  { id: 4, name, duration: '5min', link },
-  { id: 5, name, duration: '4min', link },
-  { id: 6, name, duration: '6min', link },
-  { id: 7, name, duration: '7min', link },
-  { id: 8, name, duration: '13min', link },
-  { id: 9, name, duration: '20min', link },
-];
-
-const firstIndex = 0;
+const track = {
+  id: 1,
+  title: 'Meditation for deep sleep',
+  duration: '10min',
+  link: '',
+};
 
 const MeditationList: React.FC = () => {
   return (
     <>
-      <div className="container">
-        <div className="list">
-          <div className="item">{tracks[firstIndex]?.name}</div>
+      <div className={styles['container']}>
+        <div className={styles['list']}>
+          <MeditationTrack track={track} />
+          <MeditationTrack track={track} />
+          <MeditationTrack track={track} />
+          <MeditationTrack track={track} />
+          <MeditationTrack track={track} />
         </div>
       </div>
     </>

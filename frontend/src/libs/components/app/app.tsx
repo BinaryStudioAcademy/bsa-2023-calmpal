@@ -16,6 +16,7 @@ import {
 import { actions as authActions } from '#slices/auth/auth.js';
 import { actions as userActions } from '#slices/users/users.js';
 
+import { MeditationList } from '../meditation-list/meditation-list.js';
 import { Sidebar } from '../sidebar/sidebar.js';
 import styles from './styles.module.scss';
 
@@ -54,7 +55,7 @@ const App: React.FC = () => {
       <div className={styles['body-container']}>
         <Header />
         <img src={reactLogo} className="App-logo" width="30" alt="logo" />
-
+        <MeditationList />
         <ul className="App-navigation-list">
           <li>
             <Link to={AppRoute.ROOT}>Root</Link>
