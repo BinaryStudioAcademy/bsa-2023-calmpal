@@ -4,7 +4,7 @@ import { AppColor } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: AppColor.GRAY_400,
+    backgroundColor: AppColor.GRAY_500,
     alignItems: 'center',
     justifyContent: 'center',
     height: 44,
