@@ -1,3 +1,6 @@
+import { Link } from '#libs/components/components.js';
+import { Icon } from '#libs/components/icon/icon.js';
+
 import styles from './styles.module.scss';
 
 type Track = {
@@ -19,7 +22,10 @@ const MeditationTrack: React.FC<Properties> = ({ track }) => {
           <h1 className={styles['title']}>{track.title}</h1>
           <p className={styles['p']}>{track.duration}</p>
         </div>
-        <img src="./play-button-60x60.png" alt="" className={styles['img']} />
+
+        <Link to="/" className={'.block'}>
+          <Icon name="play" />
+        </Link>
       </div>
     </div>
   );

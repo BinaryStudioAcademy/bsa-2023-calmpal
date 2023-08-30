@@ -1,17 +1,15 @@
 .container {
   box-sizing: border-box;
   width: 100%;
-  max-width: 1002px;
   padding: 251px 36px 0;
   background-color: white;
   border: 1px solid black;
 }
 
 .list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-gap: 20px;
 }
 
 @media (width <= 613px) {
