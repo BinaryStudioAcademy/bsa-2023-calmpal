@@ -5,9 +5,9 @@ services:
     container_name: calmpal_db
     image: postgres:15.2
     environment:
-      - POSTGRES_DB=$(echo "$DB_CONNECTION_STRING" | awk -F[@/:] '{print $8}')
-      - POSTGRES_USER=$(echo "$DB_CONNECTION_STRING" | awk -F[@/:] '{print $4}')
-      - POSTGRES_PASSWORD=$(echo "$DB_CONNECTION_STRING" | awk -F[@/:] '{print $5}')
+      - POSTGRES_DB=$DB_NAME
+      - POSTGRES_USER=$DB_USERNAME
+      - POSTGRES_PASSWORD=$DB_PASSWORD
     ports:
       - 5434:5432
     networks:

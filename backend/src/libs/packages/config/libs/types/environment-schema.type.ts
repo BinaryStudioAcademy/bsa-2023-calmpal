@@ -8,7 +8,11 @@ type EnvironmentSchema = {
     ENVIRONMENT: ValueOf<typeof AppEnvironment>;
   };
   DB: {
-    CONNECTION_STRING: string;
+    USERNAME: string;
+    PASSWORD: string;
+    HOST: string;
+    PORT: number;
+    NAME: string;
     DIALECT: string;
     POOL_MIN: number;
     POOL_MAX: number;

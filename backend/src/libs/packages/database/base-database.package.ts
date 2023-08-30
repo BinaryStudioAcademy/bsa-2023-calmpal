@@ -41,7 +41,11 @@ class BaseDatabase implements Database {
     return {
       client: this.appConfig.ENV.DB.DIALECT,
       connection: {
-        connectionString: this.appConfig.ENV.DB.CONNECTION_STRING,
+        port: this.appConfig.ENV.DB.PORT,
+        host: this.appConfig.ENV.DB.HOST,
+        database: this.appConfig.ENV.DB.NAME,
+        user: this.appConfig.ENV.DB.USERNAME,
+        password: this.appConfig.ENV.DB.PASSWORD,
         ...sslConfig,
       },
       pool: {
