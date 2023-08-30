@@ -5,6 +5,7 @@ type RootNavigationParameterList = {
   [RootScreenName.SIGN_IN]: undefined;
   [RootScreenName.SIGN_UP]: undefined;
   [RootScreenName.SETTINGS]: undefined;
+  [RootScreenName.PROFILE]: undefined;
 };
 
 export { type RootNavigationParameterList };
