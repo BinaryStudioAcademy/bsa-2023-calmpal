@@ -85,7 +85,7 @@ class AWSService {
       {
         bucket: this.bucketName,
         region: this.region,
-        fileKey,
+        fileKey: fileKey,
       },
     );
   }
@@ -98,7 +98,7 @@ class AWSService {
       });
     }
 
-    throw new FileError({ message: (error as Error).message });
+    throw new FileError({});
   }
 }
 

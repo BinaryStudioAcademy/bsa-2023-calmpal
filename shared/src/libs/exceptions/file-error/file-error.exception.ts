@@ -4,14 +4,14 @@ import { type ValueOf } from '#libs/types/value-of.type.js';
 import { HTTPError } from '../http-error/http-error.exception.js';
 
 type Constructor = {
-  message: string;
+  message?: string;
   status?: ValueOf<typeof HTTPCode>;
   cause?: unknown;
 };
 
 class FileError extends HTTPError {
   public constructor({
-    message,
+    message = 'File error occurred.',
     cause,
     status = HTTPCode.INTERNAL_SERVER_ERROR,
   }: Constructor) {
