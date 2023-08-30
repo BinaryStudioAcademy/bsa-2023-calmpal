@@ -6,7 +6,7 @@ type Properties = {
   label?: string;
   type?: 'button' | 'submit';
   children?: ReactNode;
-  style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent';
+  style?: 'submit' | 'rounded' | 'rounded-transparent';
   onClick?: () => void;
 };
 
@@ -14,7 +14,7 @@ const Button: React.FC<Properties> = ({
   type = 'button',
   label,
   children,
-  style = 'primary',
+  style = 'submit',
   onClick,
 }) => (
   <button type={type} className={styles[style]} onClick={onClick}>
