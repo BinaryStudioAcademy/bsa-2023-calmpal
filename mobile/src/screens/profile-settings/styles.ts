@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native';
 
-// import { AppColor } from '#libs/enums/enums';
-
 const styles = StyleSheet.create({
-  page: {
-    paddingHorizontal: 36,
-    paddingBottom: 20,
+  container: {
+    paddingTop: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   notificationsSection: {
     flexDirection: 'row',

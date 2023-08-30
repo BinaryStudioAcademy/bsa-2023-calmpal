@@ -13,7 +13,7 @@ const ProfileSettings: React.FC = () => {
   });
 
   return (
-    <ScrollView contentContainerStyle={styles.page}>
+    <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.notificationsSection}>
         <Setting
           label="Allow Notification"
