@@ -9,8 +9,7 @@ import {
 } from '#packages/users/users';
 
 import { name as sliceName } from './auth.slice';
-
-const EMPTY_ARRAY_LENGTH = 0;
+import { EMPTY_ARRAY_LENGTH } from './libs/constants';
 
 const signUp = createAsyncThunk<
   UserAuthResponseDto,
