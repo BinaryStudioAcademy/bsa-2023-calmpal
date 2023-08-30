@@ -6,12 +6,13 @@ import {
   useCallback,
   useFormController,
 } from '#libs/hooks/hooks.js';
+import { type SearchInput } from '#libs/types/types.js';
 
 import { DEFAULT_SEARCH_PAYLOAD } from './libs/constants.js';
 import styles from './styles.module.scss';
 
 type Properties = {
-  onValueChange: (payload: { search: string }) => void;
+  onValueChange: (payload: SearchInput) => void;
 };
 
 const Search = ({ onValueChange }: Properties): JSX.Element => {
@@ -25,7 +26,7 @@ const Search = ({ onValueChange }: Properties): JSX.Element => {
   const handleFormChange = useCallback(
     (event_: React.BaseSyntheticEvent): void => {
       void handleSubmit(
-        debouncedOnValueChange as unknown as SubmitHandler<{ search: string }>,
+        debouncedOnValueChange as unknown as SubmitHandler<SearchInput>,
       )(event_);
       debouncedOnValueChange.clear();
     },

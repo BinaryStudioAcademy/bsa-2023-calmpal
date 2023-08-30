@@ -1,5 +1,6 @@
 import { IconNameToIcon } from '#libs/enums/enums.js';
 import { useCallback, useSearch } from '#libs/hooks/hooks.js';
+import { type SearchInput } from '#libs/types/types.js';
 
 import { Icon, Search } from '../components.js';
 import { ChatCardItem } from './chat-card-item/chat-card-item.js';
@@ -15,7 +16,7 @@ const mockedChats = [
 const ChatSidebar: React.FC = () => {
   const { filteredElements, setFilter } = useSearch(mockedChats, 'name');
   const handleFilterChange = useCallback(
-    (payload: { search: string }): void => {
+    (payload: SearchInput): void => {
       setFilter(payload.search);
     },
     [setFilter],

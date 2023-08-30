@@ -26,7 +26,6 @@ const ChatCardItem: React.FC<Properties> = ({ chat }) => {
       imageUrl="images/card-image-placeholder.png"
       onPress={handleSelectChat}
       isActive={mockedSelectedChat.id === chat.id}
-      key={chat.id}
     />
   );
 };

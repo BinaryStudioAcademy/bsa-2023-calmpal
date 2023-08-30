@@ -1,5 +1,5 @@
-import { type ValueOf } from '#/libs/types/types.js';
 import { type IconNameToIcon } from '#libs/enums/enums.js';
+import { type ValueOf } from '#libs/types/types.js';
 
 import { iconNameToPlainSvgMap } from './icons/icon-map.js';
 
