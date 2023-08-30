@@ -12,7 +12,9 @@ import { reducer as authReducer } from '#slices/auth/auth';
 import { reducer as usersReducer } from '#slices/users/users';
 
 import { type Config } from '../config/config';
+import { notification } from '../notification/notification';
 import { storage } from '../storage/storage';
+import { handleError } from './middlewares/middlewares';
 
 type RootReducer = {
   auth: ReturnType<typeof authReducer>;
@@ -22,6 +24,7 @@ type RootReducer = {
 type ExtraArguments = {
   authApi: typeof authApi;
   userApi: typeof userApi;
+  notification: typeof notification;
   storage: typeof storage;
 };
 
@@ -41,13 +44,14 @@ class Store {
         auth: authReducer,
         users: usersReducer,
       },
-      middleware: (getDefaultMiddleware) => {
-        return getDefaultMiddleware({
+      middleware: (getDefaultMiddleware) => [
+        ...getDefaultMiddleware({
           thunk: {
             extraArgument: this.extraArguments,
           },
-        });
-      },
+        }),
+        handleError,
+      ],
     });
   }
 
@@ -55,6 +59,7 @@ class Store {
     return {
       authApi,
       userApi,
+      notification,
       storage,
     };
   }
