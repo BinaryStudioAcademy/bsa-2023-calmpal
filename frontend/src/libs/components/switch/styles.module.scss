@@ -1,0 +1,42 @@
+.container {
+  --controller-color: var(--blue-200);
+  --controller-width: 20px;
+  --dot-offset: 2px;
+  --animation-time: 0.2s;
+
+  position: relative;
+  display: block;
+  width: 40px;
+  height: var(--controller-width);
+  border: 2px solid var(--controller-color);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color var(--animation-time);
+}
+
+.input {
+  display: none;
+}
+
+.container::after {
+  position: absolute;
+  inset: var(--dot-offset);
+  width: 12px;
+  height: 12px;
+  background-color: var(--controller-color);
+  border-radius: 100%;
+  transition:
+    left var(--animation-time),
+    translate var(--animation-time),
+    background-color var(--animation-time);
+  content: "";
+}
+
+.container:has(.input:checked) {
+  --controller-color: var(--blue-300);
+}
+
+.container:has(.input:checked)::after {
+  translate: calc(-100% - var(--dot-offset));
+  left: 100%;
+}

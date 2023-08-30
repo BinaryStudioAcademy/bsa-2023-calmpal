@@ -4,7 +4,7 @@ import { AppColor } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: AppColor.BLUE_200,
+    backgroundColor: AppColor.BLUE_300,
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 55,
