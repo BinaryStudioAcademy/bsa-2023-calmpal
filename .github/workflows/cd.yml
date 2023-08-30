@@ -1,8 +1,5 @@
 name: Continuous Delivery Development
 
-env:
-  DEVELOPMENT_APP_URL: development.calmpal.healthcare
-
 on:
   push:
     branches:
