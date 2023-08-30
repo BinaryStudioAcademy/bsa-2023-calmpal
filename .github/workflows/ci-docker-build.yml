@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: ci-${{ github.ref }}
+  group: ci-build-docker-images-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
