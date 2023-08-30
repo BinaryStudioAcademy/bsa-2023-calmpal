@@ -48,7 +48,7 @@ const Root: React.FC = () => {
         </>
       )}
       <NativeStack.Screen
-        name={RootScreenName.SIGN_UP}
+        name={RootScreenName.SETTINGS}
         component={ProfileSettings}
       />
     </NativeStack.Navigator>
