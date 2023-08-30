@@ -9,13 +9,16 @@ const Dropdown: React.FC<Routes> = ({ routes }) => {
   const { pathname } = useLocation();
   const [isOpen, setOpen] = useState(false);
 
-  const toggleDropdown = useCallback((): void => {
+  const handleDropdownToggle = useCallback((): void => {
     setOpen(!isOpen);
   }, [isOpen]);
 
   return (
     <div className={styles['dropdown']}>
-      <button className={styles['dropdown-header']} onClick={toggleDropdown}>
+      <button
+        className={styles['dropdown-header']}
+        onClick={handleDropdownToggle}
+      >
         <span className={styles['bar']} />
         <span className={styles['bar']} />
         <span className={styles['bar']} />
