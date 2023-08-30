@@ -5,6 +5,7 @@ import { type AsyncThunkConfig } from '#libs/types/types';
 import { type SurveyRequestDto } from '#packages/survey/survey';
 import {
   type UserAuthResponseDto,
+  type UserSignInRequestDto,
   type UserSignUpRequestDto,
 } from '#packages/users/users';
 
@@ -18,6 +19,19 @@ const signUp = createAsyncThunk<
 >(`${sliceName}/sign-up`, async (signUpPayload, { extra }) => {
   const { authApi, storage } = extra;
   const { user, token } = await authApi.signUp(signUpPayload);
+
+  await storage.set(StorageKey.TOKEN, token);
+
+  return user;
+});
+
+const signIn = createAsyncThunk<
+  UserAuthResponseDto,
+  UserSignInRequestDto,
+  AsyncThunkConfig
+>(`${sliceName}/sign-in`, async (signInPayload, { extra }) => {
+  const { authApi, storage } = extra;
+  const { user, token } = await authApi.signIn(signInPayload);
 
   await storage.set(StorageKey.TOKEN, token);
 
@@ -45,4 +59,4 @@ const createUserSurveyPreferences = createAsyncThunk<
   return preferences.length > EMPTY_ARRAY_LENGTH;
 });
 
-export { createUserSurveyPreferences, getAuthenticatedUser, signUp };
+export { createUserSurveyPreferences, getAuthenticatedUser, signIn, signUp };
