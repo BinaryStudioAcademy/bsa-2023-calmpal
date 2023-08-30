@@ -14,7 +14,7 @@ const Survey: React.FC = () => {
     userId: auth.authenticatedUser?.id,
   }));
 
-  const onSubmit = useCallback(
+  const handleSubmit = useCallback(
     (options: string[]) => {
       void dispatch(
         authActions.createUserSurveyPreferences({
@@ -32,7 +32,7 @@ const Survey: React.FC = () => {
         <Text style={styles.labelText}>
           <Link label="Sign In" to={`/${RootScreenName.SIGN_IN}`} />
         </Text>
-        <PreferencesStep onSubmit={onSubmit} />
+        <PreferencesStep onSubmit={handleSubmit} />
       </SignBackground>
     </React.Fragment>
   );
