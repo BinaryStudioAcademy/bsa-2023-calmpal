@@ -3,6 +3,7 @@ import { IconNameToIcon } from '#libs/enums/enums.js';
 
 import { ReactComponent as Arrow } from './arrow.svg';
 import { ReactComponent as Plus } from './plus.svg';
+import { ReactComponent as SignOut } from './sign-out.svg';
 
 const iconNameToPlainSvgMap: Record<
   ValueOf<typeof IconNameToIcon>,
@@ -10,6 +11,7 @@ const iconNameToPlainSvgMap: Record<
 > = {
   [IconNameToIcon.ARROW]: <Arrow />,
   [IconNameToIcon.PLUS]: <Plus />,
+  [IconNameToIcon.SIGN_OUT]: <SignOut />,
 };
 
 export { iconNameToPlainSvgMap };

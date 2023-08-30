@@ -1,5 +1,5 @@
 import avatar from '#assets/img/avatar.svg';
-import buttonIcon from '#assets/img/button-icon.svg';
+import { IconNameToIcon } from '#libs/enums/enums.js';
 
 import { ProfileSettingsButton } from './profile-settings-button/profile-settings-button.js';
 import styles from './styles.module.scss';
@@ -23,7 +23,7 @@ const ProfileSettingsSidebar: React.FC = () => {
           </div>
         </div>
         <div className={styles['buttons-container']}>
-          <ProfileSettingsButton icon={buttonIcon}>
+          <ProfileSettingsButton name={IconNameToIcon.SIGN_OUT}>
             Sign Out
           </ProfileSettingsButton>
         </div>

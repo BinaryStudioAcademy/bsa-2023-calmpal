@@ -1,18 +1,21 @@
+import { Icon } from '#libs/components/components.js';
+import { type IconNameToIcon } from '#libs/enums/enums.js';
+import { type ValueOf } from '#libs/types/types.js';
+
 import styles from './styles.module.scss';
 
 type ProfileSettingsButtonProperties = {
   children: React.ReactNode;
-  icon: string;
+  name: ValueOf<typeof IconNameToIcon>;
 };
 
-const ProfileSettingsButton: React.FC<ProfileSettingsButtonProperties> = (
-  properties,
-) => {
-  const { icon, children } = properties;
-
+const ProfileSettingsButton: React.FC<ProfileSettingsButtonProperties> = ({
+  name,
+  children,
+}) => {
   return (
     <button className={styles['profile-button']}>
-      <img src={icon} alt="button icon" />
+      <Icon name={name} />
       <span className={styles['profile-button-text']}>{children}</span>
     </button>
   );
