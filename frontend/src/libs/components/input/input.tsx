@@ -7,7 +7,6 @@ import {
   type FormFieldValues,
 } from '#libs/types/types.js';
 
-import { INPUT_ROWS_COUNT } from './libs/constants.js';
 import styles from './styles.module.scss';
 
 type Properties<T extends FormFieldValues> = {
@@ -28,18 +27,19 @@ const Input = <T extends FormFieldValues>({
   name,
   placeholder = '',
   type = 'text',
-  rowsCount = INPUT_ROWS_COUNT,
+  rowsCount,
   maxLength,
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
 
   const error = errors[name]?.message;
   const hasError = Boolean(error);
+  const hasRows = Boolean(rowsCount);
 
   return (
     <label className={styles['container']}>
       <span className={styles['label']}>{label}</span>
-      {rowsCount > INPUT_ROWS_COUNT ? (
+      {hasRows ? (
         <textarea
           {...field}
           rows={rowsCount}
