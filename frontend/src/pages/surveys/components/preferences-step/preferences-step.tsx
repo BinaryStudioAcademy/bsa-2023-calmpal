@@ -1,12 +1,12 @@
-import { type ControllerRenderProps } from 'react-hook-form';
-
 import { Button, Input, SurveyCategory } from '#libs/components/components.js';
 import {
   useAppForm,
   useCallback,
   useFormController,
 } from '#libs/hooks/hooks.js';
+import { type FormControllerRenderProps } from '#libs/types/types.js';
 import {
+  getSurveyCategories,
   type SurveyInputDto,
   surveyInputValidationSchema,
   SurveyTextareaOptions,
@@ -25,11 +25,16 @@ type Properties = {
 };
 
 const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
-  const { watch, control, errors, isValid, handleSubmit } =
-    useAppForm<SurveyInputDto>({
-      defaultValues: DEFAULT_SURVEY_PAYLOAD,
-      validationSchema: surveyInputValidationSchema,
-    });
+  const {
+    watch,
+    control,
+    errors,
+    isValid,
+    handleSubmit: handleValidationSubmit,
+  } = useAppForm<SurveyInputDto>({
+    defaultValues: DEFAULT_SURVEY_PAYLOAD,
+    validationSchema: surveyInputValidationSchema,
+  });
   const { field: optionsField } = useFormController({
     name: 'options',
     control,
@@ -43,27 +48,18 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
   const activeOptions = watch('options');
   const hasOther = activeOptions.includes('Other');
 
-  const handleOnSubmit = useCallback(
+  const handleSubmit = useCallback(
     (payload: SurveyInputDto) => {
-      let options = payload.options;
-      options = [
-        ...new Set(
-          options.map((option) =>
-            option === SurveyTextareaOptions.OTHER ? payload.textarea : option,
-          ),
-        ),
-      ];
-
-      onSubmit(options);
+      onSubmit(getSurveyCategories(payload));
     },
     [onSubmit],
   );
 
   const handleFormSubmit = useCallback(
     (event_: React.BaseSyntheticEvent): void => {
-      void handleSubmit(handleOnSubmit)(event_);
+      void handleValidationSubmit(handleSubmit)(event_);
     },
-    [handleSubmit, handleOnSubmit],
+    [handleValidationSubmit, handleSubmit],
   );
 
   return (
@@ -71,11 +67,11 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
       <div className={styles['title']}>What can we help you with?</div>
 
       <div className={styles['select']}>
-        {options.map((option, index) => (
+        {options.map((option) => (
           <SurveyCategory
-            key={index}
+            key={option}
             field={
-              optionsField as ControllerRenderProps<
+              optionsField as FormControllerRenderProps<
                 SurveyInputDto,
                 'options' | 'textarea' | `options.${number}`
               >
@@ -96,9 +92,9 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
       </div>
 
       <Button
-        type={'submit'}
-        label={'Continue'}
-        style={'secondary'}
+        type="submit"
+        label="Continue"
+        style="secondary"
         disabled={!isValid}
       />
     </form>

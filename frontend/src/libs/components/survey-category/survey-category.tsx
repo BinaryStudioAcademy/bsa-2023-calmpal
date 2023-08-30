@@ -1,19 +1,19 @@
-import {
-  type ControllerRenderProps,
-  type FieldValues,
-  type Path,
-} from 'react-hook-form';
-
 import { useCallback } from '#libs/hooks/hooks.js';
+import {} from '#libs/types/form/form.type.js';
+import {
+  type FormControllerRenderProps,
+  type FormFieldValues,
+  type FormPath,
+} from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
 
-type Properties<T extends FieldValues> = {
-  field: ControllerRenderProps<T, Path<T>>;
+type Properties<T extends FormFieldValues> = {
+  field: FormControllerRenderProps<T, FormPath<T>>;
   label: string;
 };
 
-const SurveyCategory = <T extends FieldValues>({
+const SurveyCategory = <T extends FormFieldValues>({
   field,
   label,
 }: Properties<T>): JSX.Element => {

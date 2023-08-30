@@ -1,12 +1,11 @@
-import { Navigate } from 'react-router-dom';
-
-import { Header } from '#libs/components/components.js';
-import { AppRoute } from '#libs/enums/app-route.enum.js';
+import { Header, Navigate } from '#libs/components/components.js';
+import { AppRoute } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
   useCallback,
 } from '#libs/hooks/hooks.js';
+import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
 import { PreferencesStep } from './components/components.js';
@@ -15,15 +14,15 @@ import styles from './styles.module.scss';
 const Survey: React.FC = () => {
   const dispatch = useAppDispatch();
   const { userId, isSurveyCompleted } = useAppSelector(({ auth }) => ({
-    userId: auth.authenticatedUser?.id,
+    userId: (auth.authenticatedUser as UserAuthResponseDto).id,
     isSurveyCompleted: auth.authenticatedUser?.isSurveyCompleted,
   }));
 
-  const onSubmit = useCallback(
+  const handleSubmit = useCallback(
     (options: string[]) => {
       void dispatch(
         authActions.createUserSurveyPreferences({
-          userId: userId as number,
+          userId: userId,
           preferences: options,
         }),
       );
@@ -44,7 +43,7 @@ const Survey: React.FC = () => {
           Serenity is your trusted companion on the journey to mental well-being
         </div>
 
-        <PreferencesStep onSubmit={onSubmit} />
+        <PreferencesStep onSubmit={handleSubmit} />
       </div>
     </div>
   );
