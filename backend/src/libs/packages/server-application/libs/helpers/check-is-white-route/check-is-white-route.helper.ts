@@ -6,12 +6,13 @@ type Parameters = {
   method: HTTPMethod;
 };
 
-const checkIsWhiteRoute = ({ path, method }: Parameters): boolean =>
-  WHITE_ROUTES.some((route) => {
+const checkIsWhiteRoute = ({ path, method }: Parameters): boolean => {
+  return WHITE_ROUTES.some((route) => {
     return (
       route.path.test(path) &&
       (route.methods as readonly HTTPMethod[]).includes(method)
     );
   });
+};
 
 export { checkIsWhiteRoute };
