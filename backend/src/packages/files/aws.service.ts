@@ -4,11 +4,16 @@ import {
   type PutObjectCommandInput,
   S3Client,
   type S3ClientConfig,
+  S3ServiceException,
 } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
+import { FileError } from '#libs/exceptions/exceptions.js';
+import { replaceTemplateWithValue } from '#libs/helpers/helpers.js';
+import { type HTTPCode } from '#libs/packages/http/http.js';
+import { type ValueOf } from '#libs/types/types.js';
+
 import { SEC_IN_HOUR } from './libs/constants/constants.js';
-import { getUrl } from './libs/helpers/helpers.js';
 import { type AWSUploadRequestDto } from './libs/types/types.js';
 
 type AWSServiceDependencies = {
@@ -75,11 +80,25 @@ class AWSService {
   }
 
   public getUrl(fileKey: string): string {
-    return getUrl('https://{bucket}.s3.{region}.amazonaws.com/{fileKey}', {
-      bucket: this.bucketName,
-      region: this.region,
-      fileKey,
-    });
+    return replaceTemplateWithValue(
+      'https://{bucket}.s3.{region}.amazonaws.com/{fileKey}',
+      {
+        bucket: this.bucketName,
+        region: this.region,
+        fileKey,
+      },
+    );
+  }
+
+  private throwError(error: unknown): never {
+    if (error instanceof S3ServiceException) {
+      throw new FileError({
+        message: error.message,
+        status: error.$response?.statusCode as ValueOf<typeof HTTPCode>,
+      });
+    }
+
+    throw new FileError({ message: (error as Error).message });
   }
 }
 

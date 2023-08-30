@@ -28,22 +28,15 @@ type ServerFileErrorResponse = {
   message: string;
 };
 
-type ServerAwsErrorResponse = {
-  errorType: typeof ServerErrorType.AWS;
-  message: string;
-};
-
 type ServerErrorResponse =
   | ServerValidationErrorResponse
   | ServerCommonErrorResponse
   | ServerAuthErrorResponse
   | ServerUsersErrorResponse
-  | ServerFileErrorResponse
-  | ServerAwsErrorResponse;
+  | ServerFileErrorResponse;
 
 export {
   type ServerAuthErrorResponse,
-  type ServerAwsErrorResponse,
   type ServerCommonErrorResponse,
   type ServerErrorResponse,
   type ServerUsersErrorResponse,

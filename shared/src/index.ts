@@ -8,13 +8,15 @@ export {
 export {
   ApplicationError,
   AuthError,
-  AWSError,
   FileError,
   HTTPError,
   UsersError,
   ValidationError,
 } from './libs/exceptions/exceptions.js';
-export { configureString } from './libs/helpers/helpers.js';
+export {
+  configureString,
+  replaceTemplateWithValue,
+} from './libs/helpers/helpers.js';
 export { type Config } from './libs/packages/config/config.js';
 export {
   type HTTP,
