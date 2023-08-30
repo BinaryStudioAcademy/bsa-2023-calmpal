@@ -58,9 +58,7 @@ class SurveyRepository implements Repository {
     });
   }
 
-  public async update(
-    payload: SurveyRequestDto,
-  ): ReturnType<Repository['update']> {
+  public async update(payload: SurveyRequestDto): Promise<SurveyEntity | null> {
     const survey = await this.findByUserId(payload.userId);
 
     if (survey) {
@@ -78,6 +76,8 @@ class SurveyRepository implements Repository {
         updatedAt: new Date(),
       });
     }
+
+    return null;
   }
 
   public delete(): ReturnType<Repository['delete']> {

@@ -28,7 +28,7 @@ class SurveyService implements Service {
 
   public async create(
     payload: SurveyRequestDto,
-  ): Promise<SurveyGetAllItemResponseDto> {
+  ): Promise<SurveyGetAllItemResponseDto | null> {
     const user = await userService.findById(payload.userId);
 
     if (!user) {
@@ -39,11 +39,9 @@ class SurveyService implements Service {
     }
 
     if (user.isSurveyCompleted) {
-      const item = (await this.surveyRepository.update(
-        payload,
-      )) as SurveyEntity;
+      const item = await this.surveyRepository.update(payload);
 
-      return item.toObject();
+      return item ? item.toObject() : null;
     }
 
     const item = await this.surveyRepository.create(
