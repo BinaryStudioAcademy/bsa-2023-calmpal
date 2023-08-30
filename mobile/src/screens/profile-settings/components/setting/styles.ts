@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-// import { AppColor } from '#libs/enums/enums';
+import { AppColor } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   container: {
@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 30,
     paddingVertical: 32,
-    backgroundColor: '#BEE3F8',
+    backgroundColor: AppColor.GRAY_100,
     borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {

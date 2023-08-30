@@ -7,9 +7,8 @@ import {
   type FormFieldPath,
   type FormFieldValues,
 } from '#libs/types/types';
-// import { useState, useFormController } from '#libs/hooks/hooks';
 
-// import { styles } from './styles';
+import { styles } from './styles';
 
 type Properties<T extends FormFieldValues> = {
   control: FormControl<T, null>;
@@ -28,8 +27,13 @@ const Switch = <T extends FormFieldValues>({
   return (
     <View>
       <RNSwitch
-        trackColor={{ false: '#767577', true: '#81b0ff' }}
-        thumbColor={field.value ? '#f5dd4b' : '#f4f3f4'}
+        trackColor={{
+          false: styles.switchFalse.backgroundColor,
+          true: styles.switchTrue.backgroundColor,
+        }}
+        thumbColor={
+          field.value ? styles.switchTrue.color : styles.switchFalse.color
+        }
         ios_backgroundColor="#3e3e3e"
         onValueChange={(value): void => {
           field.onChange(value);
