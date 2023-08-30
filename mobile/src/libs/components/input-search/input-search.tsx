@@ -31,9 +31,7 @@ const InputSearch: React.FC<Properties> = ({ placeholder, setSearchQuery }) => {
   const debouncedReference = useRef<ReturnType<typeof debounce>>();
 
   useEffect(() => {
-    if (debouncedReference.current) {
-      debouncedReference.current.clear();
-    }
+    debouncedReference.current?.clear();
 
     debouncedReference.current = debounce(() => {
       setSearchQuery(value);
