@@ -1,12 +1,5 @@
-import home from '#assets/img/home.svg';
-import {
-  Header,
-  Loader,
-  Navigate,
-  RouterOutlet,
-  Sidebar,
-} from '#libs/components/components.js';
-import { AppRoute, DataStatus } from '#libs/enums/enums.js';
+import { Loader, RouterOutlet } from '#libs/components/components.js';
+import { DataStatus } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -14,8 +7,6 @@ import {
   useLocation,
 } from '#libs/hooks/hooks.js';
 import { actions as authActions } from '#slices/auth/auth.js';
-
-import styles from './styles.module.scss';
 
 const App: React.FC = () => {
   const { pathname } = useLocation();
@@ -42,25 +33,7 @@ const App: React.FC = () => {
     return <Loader />;
   }
 
-  const hasNoSurvey =
-    authenticatedUser &&
-    !authenticatedUser.isSurveyCompleted &&
-    pathname !== AppRoute.SURVEY;
-  if (hasNoSurvey) {
-    return <Navigate to={AppRoute.SURVEY} />;
-  }
-
-  return (
-    <div className={styles['app-container']}>
-      <Sidebar routes={[{ path: AppRoute.ROOT, name: 'home', icon: home }]} />
-      <div className={styles['body-container']}>
-        <Header />
-        <div>
-          <RouterOutlet />
-        </div>
-      </div>
-    </div>
-  );
+  return <RouterOutlet />;
 };
 
 export { App };

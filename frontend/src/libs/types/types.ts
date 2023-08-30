@@ -7,9 +7,10 @@ export {
   type FormFieldValues,
   type FormPath,
 } from './form/form.type.js';
+export { type SidebarRoute } from './sidebar-route.type.js';
+export { type ValueOf } from './values-of.type.js';
 export {
   type ServerErrorDetail,
   type ServerErrorResponse,
   type ValidationSchema,
-  type ValueOf,
 } from 'shared/build/index.js';
