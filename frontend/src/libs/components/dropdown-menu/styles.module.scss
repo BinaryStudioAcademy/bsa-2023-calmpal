@@ -1,5 +1,5 @@
 .dropdown {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: end;
   width: 50px;
@@ -99,8 +99,8 @@ hr:last-child {
   align-self: last baseline;
 }
 
-@media (width > 480px) {
+@media (width < 480px) {
   .dropdown {
-    display: none;
+    display: flex;
   }
 }

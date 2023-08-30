@@ -1,5 +1,5 @@
 import logo from '#assets/img/logo.svg';
-import { Dropdown, Link } from '#libs/components/components.js';
+import { DropdownMenu, Link } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/enums.js';
 import { type Routes } from '#libs/types/types.js';
 
@@ -17,7 +17,7 @@ const Header: React.FC<Routes> = ({ routes }) => {
       </nav>
       <nav className={styles['nav']}>
         <Link to={AppRoute.SIGN_IN}>Sign In</Link>
-        <Dropdown routes={routes} />
+        <DropdownMenu routes={routes} />
       </nav>
     </header>
   );

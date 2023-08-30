@@ -19,7 +19,7 @@
   align-items: center;
 }
 
-@media (width <= 480px) {
+@media (width < 480px) {
   .header {
     padding: 15px;
   }

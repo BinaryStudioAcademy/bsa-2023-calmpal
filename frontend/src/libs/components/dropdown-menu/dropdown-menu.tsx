@@ -5,7 +5,7 @@ import { type Routes } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
 
-const Dropdown: React.FC<Routes> = ({ routes }) => {
+const DropdownMenu: React.FC<Routes> = ({ routes }) => {
   const { pathname } = useLocation();
   const [isOpen, setOpen] = useState(false);
 
@@ -30,12 +30,8 @@ const Dropdown: React.FC<Routes> = ({ routes }) => {
         )}
       >
         {routes.map((item) => (
-          <>
-            <button
-              key={item.path}
-              className={styles['dropdown-item']}
-              id={item.path}
-            >
+          <div key={item.path}>
+            <button className={styles['dropdown-item']} id={item.path}>
               <Link to={item.path}>
                 <span className={styles['item']}>
                   <span className="visually-hidden">Go to {item.name}</span>
@@ -52,11 +48,11 @@ const Dropdown: React.FC<Routes> = ({ routes }) => {
               </Link>
             </button>
             <hr />
-          </>
+          </div>
         ))}
       </div>
     </div>
   );
 };
 
-export { Dropdown };
+export { DropdownMenu };
