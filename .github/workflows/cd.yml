@@ -11,6 +11,12 @@ on:
       - .github/workflows/cd.yml
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+  deployments: write
+  statuses: write
+
 jobs:
   cd:
     runs-on: ubuntu-latest
