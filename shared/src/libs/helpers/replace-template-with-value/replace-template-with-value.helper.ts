@@ -2,9 +2,12 @@ const replaceTemplateWithValue = (
   template: string,
   replacements: Record<string, string | number>,
 ): string => {
-  return template.replaceAll(/{([^}]+)}/, (_, placeholder) =>
-    String(replacements[placeholder as string]),
-  );
+  let result = template;
+  for (const [placeholder, value] of Object.entries(replacements)) {
+    result = result.replaceAll(`{${placeholder}}`, String(value));
+  }
+
+  return result;
 };
 
 export { replaceTemplateWithValue };
