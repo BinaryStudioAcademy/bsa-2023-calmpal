@@ -3,7 +3,6 @@ import { database } from '#libs/packages/database/database.js';
 import { logger } from '#libs/packages/logger/logger.js';
 import { authController } from '#packages/auth/auth.js';
 import { surveyController } from '#packages/surveys/surveys.js';
-import { userController } from '#packages/users/users.js';
 
 import { BaseServerApplication } from './base-server-application.js';
 import { BaseServerApplicationApi } from './base-server-application-api.js';
@@ -13,7 +12,6 @@ const apiV1 = new BaseServerApplicationApi(
   config,
   ...authController.routes,
   ...surveyController.routes,
-  ...userController.routes,
 );
 const serverApplication = new BaseServerApplication({
   title: 'CalmPal',
