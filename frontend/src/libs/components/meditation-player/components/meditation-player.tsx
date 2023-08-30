@@ -1,25 +1,41 @@
 import { useCallback, useState } from '#libs/hooks/hooks.js';
+import { FIRST_INDEX, MOCKED_IMAGE } from '#libs/types/types.js';
 
-import { FIRST_INDEX } from '../libs/constants.js';
-import { type Meditation } from '../libs/types.js';
 import { AudioPlayer } from './audio-player/audio-player.js';
 import styles from './styles.module.scss';
 
-type Properties = {
-  playlist: Meditation[];
-};
+const mockedPlaylist = [
+  {
+    id: 1,
+    title: 'Meditation for deep sleep',
+    purpose: 'Stress relief',
+    src: 'http://traffic.libsyn.com/mindfulorg/winston-breathing-5mins.mp3',
+    img: MOCKED_IMAGE,
+  },
+  {
+    id: 2,
+    title: 'Meditation for relaxing',
+    purpose: 'Relax',
+    src: 'http://traffic.libsyn.com/mindfulorg/SusanKaiserGreenland.mp3',
+    img: MOCKED_IMAGE,
+  },
+  {
+    id: 3,
+    title: 'Meditation for breath practice',
+    purpose: 'Breathing',
+    src: 'http://traffic.libsyn.com/mindfulorg/LovingKindness.mp3',
+    img: MOCKED_IMAGE,
+  },
+];
 
-const MeditationPlayer: React.FC<Properties> = ({ playlist }) => {
+const MeditationPlayer: React.FC = () => {
   const [trackIndex, setTrackIndex] = useState<number>(FIRST_INDEX);
-  const [currentTrack, setCurrentTrack] = useState(playlist[trackIndex]);
+  const [currentTrack, setCurrentTrack] = useState(mockedPlaylist[trackIndex]);
 
-  const handleTrackIndex = useCallback(
-    (index: number): void => {
-      setTrackIndex(index);
-      setCurrentTrack(playlist[index]);
-    },
-    [playlist],
-  );
+  const handleTrackIndex = useCallback((index: number): void => {
+    setTrackIndex(index);
+    setCurrentTrack(mockedPlaylist[index]);
+  }, []);
 
   return (
     <div className={styles['wrapper']}>
@@ -38,7 +54,7 @@ const MeditationPlayer: React.FC<Properties> = ({ playlist }) => {
           trackIndex={trackIndex}
           onSetTrackIndex={handleTrackIndex}
           onSetCurrentTrack={setCurrentTrack}
-          tracks={playlist}
+          tracks={mockedPlaylist}
         />
       </div>
     </div>

@@ -30,8 +30,6 @@ const App: React.FC = () => {
     return <Loader />;
   }
 
-  const image = '../../../../public/images/meditation-image.svg';
-
   return (
     <div className={styles['app-container']}>
       <Sidebar routes={[{ path: AppRoute.ROOT, name: 'home', icon: home }]} />
@@ -40,31 +38,7 @@ const App: React.FC = () => {
         <div>
           <RouterOutlet />
         </div>
-        <MeditationPlayer
-          playlist={[
-            {
-              id: 1,
-              title: 'Meditation for deep sleep',
-              purpose: 'Stress relief',
-              src: 'http://traffic.libsyn.com/mindfulorg/winston-breathing-5mins.mp3',
-              img: image,
-            },
-            {
-              id: 2,
-              title: 'Meditation for relaxing',
-              purpose: 'Relax',
-              src: 'http://traffic.libsyn.com/mindfulorg/SusanKaiserGreenland.mp3',
-              img: image,
-            },
-            {
-              id: 3,
-              title: 'Meditation for breath practice',
-              purpose: 'Breathing',
-              src: 'http://traffic.libsyn.com/mindfulorg/LovingKindness.mp3',
-              img: image,
-            },
-          ]}
-        />
+        <MeditationPlayer />
       </div>
     </div>
   );

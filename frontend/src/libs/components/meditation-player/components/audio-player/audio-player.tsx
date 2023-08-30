@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from '#libs/hooks/hooks.js';
+import { type Meditation, START_TIME, STEP } from '#libs/types/types.js';
 
-import { START_TIME, STEP } from '../../libs/constants.js';
-import { type Meditation } from '../../libs/types.js';
 import { Controls } from './controls/controls.js';
 import { ProgressBar } from './progress-bar/progress-bar.js';
 

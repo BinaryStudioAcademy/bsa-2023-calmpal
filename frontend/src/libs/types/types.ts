@@ -6,6 +6,16 @@ export {
   type FormFieldValues,
 } from './form/form.type.js';
 export {
+  FIRST_INDEX,
+  FULL_PERCENTAGE,
+  type Meditation,
+  MOCKED_IMAGE,
+  PROGRESS_BAR,
+  SKIP_STEP,
+  START_TIME,
+  STEP,
+} from './meditation-player/meditation-player.type.js';
+export {
   type ServerErrorDetail,
   type ServerErrorResponse,
   type ValidationSchema,

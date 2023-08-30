@@ -1,13 +1,13 @@
 import { Button, Icon } from '#libs/components/components.js';
+import { IconNameToIcon } from '#libs/enums/enums.js';
+import { useCallback, useEffect, useRef, useState } from '#libs/hooks/hooks.js';
 import {
   FULL_PERCENTAGE,
+  type Meditation,
   PROGRESS_BAR,
   SKIP_STEP,
   STEP,
-} from '#libs/components/meditation-player/libs/constants.js';
-import { type Meditation } from '#libs/components/meditation-player/libs/types.js';
-import { IconNameToIcon } from '#libs/enums/enums.js';
-import { useCallback, useEffect, useRef, useState } from '#libs/hooks/hooks.js';
+} from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
 
