@@ -2,6 +2,7 @@ import home from '#assets/img/home.svg';
 import {
   Header,
   Loader,
+  Navigate,
   RouterOutlet,
   Sidebar,
 } from '#libs/components/components.js';
@@ -10,28 +11,43 @@ import {
   useAppDispatch,
   useAppSelector,
   useEffect,
+  useLocation,
 } from '#libs/hooks/hooks.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
 import styles from './styles.module.scss';
 
 const App: React.FC = () => {
+  const { pathname } = useLocation();
   const dispatch = useAppDispatch();
-  const { authenticatedUserDataStatus, surveyPreferencesDataStatus } =
-    useAppSelector(({ auth }) => ({
-      authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
-      surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
-    }));
+  const {
+    authenticatedUser,
+    authenticatedUserDataStatus,
+    surveyPreferencesDataStatus,
+  } = useAppSelector(({ auth }) => ({
+    authenticatedUser: auth.authenticatedUser,
+    authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
+    surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
+  }));
 
   useEffect(() => {
     void dispatch(authActions.getAuthenticatedUser());
   }, [dispatch]);
 
   if (
+    authenticatedUserDataStatus === DataStatus.IDLE ||
     authenticatedUserDataStatus === DataStatus.PENDING ||
     surveyPreferencesDataStatus === DataStatus.PENDING
   ) {
     return <Loader />;
+  }
+
+  const hasNoSurvey =
+    authenticatedUser &&
+    !authenticatedUser.isSurveyCompleted &&
+    pathname !== AppRoute.SURVEY;
+  if (hasNoSurvey) {
+    return <Navigate to={AppRoute.SURVEY} />;
   }
 
   return (
