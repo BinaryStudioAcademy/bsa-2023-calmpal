@@ -26,6 +26,12 @@ const ProfileSettingsSidebar: React.FC = () => {
           <ProfileSettingsButton name={IconNameToIcon.SIGN_OUT}>
             Sign Out
           </ProfileSettingsButton>
+          <ProfileSettingsButton name={IconNameToIcon.SIGN_OUT}>
+            Test
+          </ProfileSettingsButton>
+          <ProfileSettingsButton name={IconNameToIcon.SIGN_OUT}>
+            Very long text to see if it will break
+          </ProfileSettingsButton>
         </div>
       </div>
     </div>
