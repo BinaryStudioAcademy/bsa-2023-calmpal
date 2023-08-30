@@ -1,11 +1,15 @@
 import { Link } from '#libs/components/components.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useLocation, useState } from '#libs/hooks/hooks.js';
-import { type Routes } from '#libs/types/types.js';
+import { type Route } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
 
-const DropdownMenu: React.FC<Routes> = ({ routes }) => {
+type Properties = {
+  routes: Route[];
+};
+
+const DropdownMenu: React.FC<Properties> = ({ routes }) => {
   const { pathname } = useLocation();
   const [isOpen, setOpen] = useState(false);
 

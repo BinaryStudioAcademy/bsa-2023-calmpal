@@ -1,11 +1,15 @@
 import logo from '#assets/img/logo.svg';
 import { DropdownMenu, Link } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/enums.js';
-import { type Routes } from '#libs/types/types.js';
+import { type Route } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
 
-const Header: React.FC<Routes> = ({ routes }) => {
+type Properties = {
+  routes: Route[];
+};
+
+const Header: React.FC<Properties> = ({ routes }) => {
   return (
     <header className={styles['header']}>
       <nav className={styles['nav']}>

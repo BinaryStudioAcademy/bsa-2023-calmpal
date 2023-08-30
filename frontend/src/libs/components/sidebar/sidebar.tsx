@@ -3,12 +3,12 @@ import { Link } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useLocation } from '#libs/hooks/hooks.js';
-import { type SidebarRoute } from '#libs/types/types.js';
+import { type Route } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
 
 type Properties = {
-  routes: SidebarRoute[];
+  routes: Route[];
 };
 
 const Sidebar: React.FC<Properties> = ({ routes }) => {
