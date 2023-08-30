@@ -1,4 +1,4 @@
-import { useAppForm, useMemo } from '#libs/hooks/hooks';
+import { useAppForm, useCallback, useMemo } from '#libs/hooks/hooks';
 
 import { DEFAULT_SEARCH_PAYLOAD } from './constants';
 
@@ -12,9 +12,13 @@ const useSearch = <T>(data: T[], propertyName: keyof T): UseSearchResult<T> => {
     defaultValues: DEFAULT_SEARCH_PAYLOAD,
   });
 
-  const setSearchQuery = (value: string): void => {
-    setValue('search', value);
-  };
+  const setSearchQuery = useCallback(
+    (searchValue: string) => {
+      setValue('search', searchValue);
+    },
+    [setValue],
+  );
+
   const searchQuery = watch('search', DEFAULT_SEARCH_PAYLOAD.search);
 
   const filteredData = useMemo(() => {

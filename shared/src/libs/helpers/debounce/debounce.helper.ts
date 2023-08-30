@@ -1,11 +1,12 @@
 import libraryDebounce from 'debounce';
 
-const DEBOUNCE_DELAY = 300;
+import { TIMEOUT } from './libs/constants.js';
 
 const debounce = (
-  function_: (payload: { search: string }) => void,
+  function_: () => void,
+  timeout: number = TIMEOUT,
 ): ReturnType<typeof libraryDebounce> => {
-  return libraryDebounce(function_, DEBOUNCE_DELAY);
+  return libraryDebounce(function_, timeout);
 };
 
 export { debounce };

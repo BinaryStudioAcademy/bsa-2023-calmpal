@@ -2,13 +2,16 @@ import React from 'react';
 
 import { TextInput } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
-import { debounce as debouncedSetSearchQuery } from '#libs/helpers/helpers';
-import { useAppForm, useFormController } from '#libs/hooks/hooks';
+import { debounce } from '#libs/helpers/helpers';
+import {
+  useAppForm,
+  useEffect,
+  useFormController,
+  useRef,
+} from '#libs/hooks/hooks';
 
-import { DEFAULT_SEARCH_PAYLOAD } from './libs/constants';
+import { DEFAULT_SEARCH_PAYLOAD, TIMEOUT } from './libs/constants';
 import { styles } from './styles';
-
-let debounced: ReturnType<typeof debouncedSetSearchQuery> | undefined;
 
 type Properties = {
   placeholder: string;
@@ -25,18 +28,22 @@ const InputSearch: React.FC<Properties> = ({ placeholder, setSearchQuery }) => {
   });
   const { value, onChange } = field;
 
-  const handleInputChange = (text: string): void => {
-    onChange(text);
+  const debouncedReference = useRef<ReturnType<typeof debounce>>();
 
-    if (debounced) {
-      debounced.clear();
+  useEffect(() => {
+    if (debouncedReference.current) {
+      debouncedReference.current.clear();
     }
 
-    debounced = debouncedSetSearchQuery((payload: { search: string }) => {
-      setSearchQuery(payload.search);
-    });
+    debouncedReference.current = debounce(() => {
+      setSearchQuery(value);
+    }, TIMEOUT);
 
-    debounced({ search: text });
+    debouncedReference.current();
+  }, [value, setSearchQuery]);
+
+  const handleInputChange = (text: string): void => {
+    onChange(text);
   };
 
   return (
