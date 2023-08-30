@@ -25,7 +25,7 @@ jobs:
           map: |
             {
               "development": {
-                "DEVELOPMENT_APP_URL": "https://development.calmpal.io/"
+                "DEVELOPMENT_APP_URL": "http://calmpal-alb-development-453467742.eu-west-1.elb.amazonaws.com/"
               }
             }
 
