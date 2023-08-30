@@ -21,9 +21,6 @@ const Switch = <T extends FormFieldValues>({
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
 
-  //   const [isEnabled, setIsEnabled] = useState(false);
-  //   const toggleSwitch = ():void => setIsEnabled((previousState) => !previousState);
-
   return (
     <View>
       <RNSwitch
@@ -34,7 +31,7 @@ const Switch = <T extends FormFieldValues>({
         thumbColor={
           field.value ? styles.switchTrue.color : styles.switchFalse.color
         }
-        ios_backgroundColor="#3e3e3e"
+        ios_backgroundColor={styles.switchTrue.backgroundColor}
         onValueChange={(value): void => {
           field.onChange(value);
         }}

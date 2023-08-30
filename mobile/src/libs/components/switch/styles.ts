@@ -5,7 +5,7 @@ import { AppColor } from '#libs/enums/enums';
 const styles = StyleSheet.create({
   switchFalse: {
     color: AppColor.GRAY_400,
-    backgroundColor: AppColor.WHITE,
+    backgroundColor: AppColor.GRAY_300,
   },
   switchTrue: {
     color: AppColor.BLUE_300,
