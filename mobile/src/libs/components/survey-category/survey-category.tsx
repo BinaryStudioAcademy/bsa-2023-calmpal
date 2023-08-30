@@ -1,21 +1,21 @@
 import React from 'react';
-import {
-  type ControllerRenderProps,
-  type FieldValues,
-  type Path,
-} from 'react-hook-form';
 
 import { Text, TouchableOpacity, View } from '#libs/components/components';
 import { useCallback, useState } from '#libs/hooks/hooks';
+import {
+  type FormControllerRenderProps,
+  type FormFieldValues,
+  type FormPath,
+} from '#libs/types/types';
 
 import { styles } from './styles';
 
-type Properties<T extends FieldValues> = {
-  field: ControllerRenderProps<T, Path<T>>;
+type Properties<T extends FormFieldValues> = {
+  field: FormControllerRenderProps<T, FormPath<T>>;
   label: string;
 };
 
-const SurveyCategory = <T extends FieldValues>({
+const SurveyCategory = <T extends FormFieldValues>({
   field,
   label,
 }: Properties<T>): JSX.Element => {
