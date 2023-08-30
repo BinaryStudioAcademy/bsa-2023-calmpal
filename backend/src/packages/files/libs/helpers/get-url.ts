@@ -1,7 +1,7 @@
-function generateUrl(
+const getUrl = (
   template: string,
   placeholders: Record<string, string>,
-): string {
+): string => {
   let url = template;
 
   Object.keys(placeholders).forEach((key) => {
@@ -12,6 +12,6 @@ function generateUrl(
   });
 
   return url;
-}
+};
 
-export { generateUrl };
+export { getUrl };
