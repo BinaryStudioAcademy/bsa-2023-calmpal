@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "17.7.1",
+    "@esbuild/win32-x64": "0.19.2",
     "@ls-lint/ls-lint": "2.0.1",
     "@typescript-eslint/eslint-plugin": "6.3.0",
     "@typescript-eslint/parser": "6.4.0",

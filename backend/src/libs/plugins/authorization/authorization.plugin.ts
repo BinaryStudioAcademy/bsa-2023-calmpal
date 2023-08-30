@@ -38,16 +38,21 @@ const authorization = fp<Options>((fastify, { services }, done) => {
     }
 
     const { jwtService, userService } = services;
-    const { userId } = await jwtService.decode<AuthTokenPayload>(token);
-    const authorizedUser = await userService.findById(userId);
+    try {
+      const { userId } = await jwtService.decode<AuthTokenPayload>(token);
+      const authorizedUser = await userService.findById(userId);
+      if (!authorizedUser) {
+        throw new AuthError({
+          message: ExceptionMessage.INVALID_TOKEN,
+        });
+      }
 
-    if (!authorizedUser) {
+      request.user = authorizedUser;
+    } catch {
       throw new AuthError({
         message: ExceptionMessage.INVALID_TOKEN,
       });
     }
-
-    request.user = authorizedUser;
   });
 
   done();
