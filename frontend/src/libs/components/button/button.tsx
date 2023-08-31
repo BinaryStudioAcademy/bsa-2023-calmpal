@@ -4,14 +4,14 @@ type Properties = {
   label: string;
   type?: 'button' | 'submit';
   style?: 'primary' | 'secondary';
-  disabled?: boolean;
+  isDisabled?: boolean;
 };
 
 const Button: React.FC<Properties> = ({
   type = 'button',
   label,
   style = 'primary',
-  disabled = false,
+  isDisabled: disabled = false,
 }) => (
   <button type={type} className={styles[style]} disabled={disabled}>
     {label}
