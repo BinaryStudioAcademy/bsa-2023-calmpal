@@ -25,8 +25,10 @@ const { reducer, actions, name } = createSlice({
       state.dataStatus = DataStatus.PENDING;
     });
     builder.addCase(loadAll.fulfilled, (state, action) => {
-      state.users = action.payload.items;
-      state.dataStatus = DataStatus.FULFILLED;
+      if (action.payload) {
+        state.users = action.payload.items;
+        state.dataStatus = DataStatus.FULFILLED;
+      }
     });
     builder.addCase(loadAll.rejected, (state) => {
       state.dataStatus = DataStatus.REJECTED;
