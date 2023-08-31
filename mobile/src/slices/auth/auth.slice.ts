@@ -4,15 +4,17 @@ import { DataStatus } from '#libs/enums/enums';
 import { type ValueOf } from '#libs/types/types';
 import { type UserAuthResponseDto } from '#packages/users/users';
 
-import { signUp } from './actions';
+import { getAuthenticatedUser, signIn, signUp } from './actions';
 
 type State = {
-  user: UserAuthResponseDto | null;
+  authenticatedUser: UserAuthResponseDto | null;
+  authenticatedUserDataStatus: ValueOf<typeof DataStatus>;
   dataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
-  user: null,
+  authenticatedUser: null,
+  authenticatedUserDataStatus: DataStatus.IDLE,
   dataStatus: DataStatus.IDLE,
 };
 
@@ -21,16 +23,39 @@ const { reducer, actions, name } = createSlice({
   name: 'auth',
   reducers: {},
   extraReducers(builder) {
+    builder.addCase(signIn.pending, (state) => {
+      state.dataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(signIn.fulfilled, (state, action) => {
+      state.dataStatus = DataStatus.FULFILLED;
+      state.authenticatedUser = action.payload;
+    });
+    builder.addCase(signIn.rejected, (state) => {
+      state.dataStatus = DataStatus.REJECTED;
+      state.authenticatedUser = null;
+    });
+
     builder.addCase(signUp.pending, (state) => {
       state.dataStatus = DataStatus.PENDING;
     });
     builder.addCase(signUp.fulfilled, (state, action) => {
-      state.user = action.payload;
+      state.authenticatedUser = action.payload;
       state.dataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(signUp.rejected, (state) => {
-      state.user = null;
+      state.authenticatedUser = null;
       state.dataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(getAuthenticatedUser.pending, (state) => {
+      state.authenticatedUserDataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(getAuthenticatedUser.fulfilled, (state, action) => {
+      state.authenticatedUser = action.payload;
+      state.authenticatedUserDataStatus = DataStatus.FULFILLED;
+    });
+    builder.addCase(getAuthenticatedUser.rejected, (state) => {
+      state.authenticatedUserDataStatus = DataStatus.REJECTED;
     });
   },
 });

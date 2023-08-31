@@ -49,7 +49,7 @@ erDiagram
       int user_id FK
       varchar full_name
       int avatar_id FK "may be null if user has no avatar"
-      text survey
+      boolean is_survey_completed
    }
    files {
       int id PK
@@ -118,6 +118,13 @@ erDiagram
       int topic_id FK
       text content
    }
+   surveys {
+      int id PK
+      int user_id FK
+      dateTime created_at
+      dateTime updated_at
+      array preferences
+   }
    user_roles ||--|{ users : user_role_id
    user_details ||--|| users : user_id
    user_preferences ||--|| users : user_id
@@ -130,6 +137,7 @@ erDiagram
    meditation_topics ||--|{ meditation_entries : meditation_topic_id
    journal_topics ||--|o files : journal_topic_image_id
    journal_topics ||--|{ journal_entries : journal_topic_id
+   user_details |o--o| surveys : user_id
 
 ```
 
@@ -254,7 +262,7 @@ You should use .env.example folder as a reference.
 
 2. Install pre-commit hooks: `npx simple-git-hooks`. This hook is used to verify code style on commit.
 
-3. Run database. You can either run it in docker using command `docker-compose -f docker-compose.yml up --build` or by installing postgres on your computer. Docker variant is preferred.
+3. Run database. You can either run it in docker using command `docker-compose --env-file ./backend/.env -f docker-compose.services.yml up --build` or by installing postgres on your computer. Docker variant is preferred.
 
 4. Apply migrations: `npm run migrate:dev -w backend`
 
