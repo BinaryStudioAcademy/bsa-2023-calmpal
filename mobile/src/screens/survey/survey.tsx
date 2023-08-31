@@ -1,7 +1,12 @@
 import React from 'react';
 
-import { Link, SignBackground, Text } from '#libs/components/components';
-import { RootScreenName } from '#libs/enums/enums';
+import {
+  Link,
+  Loader,
+  SignBackground,
+  Text,
+} from '#libs/components/components';
+import { DataStatus, RootScreenName } from '#libs/enums/enums';
 import { useAppDispatch, useAppSelector, useCallback } from '#libs/hooks/hooks';
 import { type UserAuthResponseDto } from '#packages/users/users';
 import { actions as authActions } from '#slices/auth/auth';
@@ -11,9 +16,12 @@ import { styles } from './styles';
 
 const Survey: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { userId } = useAppSelector(({ auth }) => ({
-    userId: (auth.authenticatedUser as UserAuthResponseDto).id,
-  }));
+  const { userId, authenticatedUserDataStatus } = useAppSelector(
+    ({ auth }) => ({
+      userId: (auth.authenticatedUser as UserAuthResponseDto).id,
+      authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
+    }),
+  );
 
   const handleSubmit = useCallback(
     (options: string[]) => {
@@ -26,6 +34,10 @@ const Survey: React.FC = () => {
     },
     [dispatch, userId],
   );
+
+  if (authenticatedUserDataStatus === DataStatus.PENDING) {
+    return <Loader />;
+  }
 
   return (
     <React.Fragment>
