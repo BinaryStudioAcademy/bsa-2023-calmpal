@@ -16,10 +16,10 @@ import { styles } from './styles';
 
 const Survey: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { userId, authenticatedUserDataStatus } = useAppSelector(
+  const { userId, surveyPreferencesDataStatus } = useAppSelector(
     ({ auth }) => ({
       userId: (auth.authenticatedUser as UserAuthResponseDto).id,
-      authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
+      surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
     }),
   );
 
@@ -35,7 +35,7 @@ const Survey: React.FC = () => {
     [dispatch, userId],
   );
 
-  if (authenticatedUserDataStatus === DataStatus.PENDING) {
+  if (surveyPreferencesDataStatus === DataStatus.PENDING) {
     return <Loader />;
   }
 
