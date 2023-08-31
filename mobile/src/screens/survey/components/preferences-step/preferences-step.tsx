@@ -2,12 +2,10 @@ import React from 'react';
 
 import { Button, Input, ScrollView } from '#libs/components/components';
 import { useAppForm, useCallback, useFormController } from '#libs/hooks/hooks';
-// import { type FormControllerRenderProps } from '#libs/types/types';
 import {
   getSurveyCategories,
   type SurveyInputDto,
   surveyInputValidationSchema,
-  // SurveyTextareaOptions,
 } from '#packages/survey/survey';
 import {
   DEFAULT_SURVEY_PAYLOAD,
@@ -27,7 +25,6 @@ type Properties = {
 
 const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
   const {
-    // watch,
     control,
     errors,
     isValid,
@@ -42,14 +39,6 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
     name: 'preferences',
     control,
   });
-
-  // const options: string[] = [
-  //   ...PREFERENCES_CATEGORIES,
-  //   SurveyTextareaOptions.OTHER,
-  // ];
-
-  // const activeOptions = watch('options');
-  // const hasOther = activeOptions.includes('Other');
   const hasOther = categoriesValue.includes('Other');
 
   const handleFieldChange = useCallback(
@@ -84,19 +73,6 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
       style={styles.surveyContainer}
       showsVerticalScrollIndicator={false}
     >
-      {/* {options.map((option) => (
-        <SurveyCategory
-          key={option}
-          field={
-            optionsField as FormControllerRenderProps<
-              SurveyInputDto,
-              'options' | 'textarea' | `options.${number}`
-            >
-          }
-          label={option}
-        />
-      ))} */}
-
       {PREFERENCES_CATEGORIES.map((category) => (
         <SurveyCategory
           key={category}
