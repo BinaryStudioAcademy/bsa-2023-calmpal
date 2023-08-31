@@ -14,6 +14,7 @@ import {
   INVALID_ARRAY_INDEX,
   PREFERENCES_CATEGORIES,
   SPLICE_COUNT,
+  START_ARRAY_INDEX,
   TEXTAREA_MAX_LENGTH,
   TEXTAREA_ROWS_COUNT,
 } from '#pages/surveys/libs/constants.js';
@@ -51,8 +52,10 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
         return;
       }
 
-      categoriesValue.splice(index, SPLICE_COUNT);
-      onCategoryChange(categoriesValue);
+      onCategoryChange([
+        ...categoriesValue.slice(START_ARRAY_INDEX, index),
+        ...categoriesValue.slice(index + SPLICE_COUNT),
+      ]);
     },
     [categoriesValue, onCategoryChange],
   );
