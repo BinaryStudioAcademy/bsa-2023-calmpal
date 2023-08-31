@@ -6,4 +6,7 @@ export {
   type SurveyInputDto,
   type SurveyRequestDto,
 } from './libs/types/types.js';
-export { createSurveyValidationSchema, surveyInput as surveyInputValidationSchema } from './libs/validation-schemas/validation-schemas.js';
+export {
+  createSurveyValidationSchema,
+  surveyInput as surveyInputValidationSchema,
+} from './libs/validation-schemas/validation-schemas.js';
