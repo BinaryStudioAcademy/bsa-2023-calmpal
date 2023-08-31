@@ -1,9 +1,5 @@
 import { Button, Checkbox, Input } from '#libs/components/components.js';
 import {
-  INVALID_ARRAY_INDEX,
-  START_ARRAY_INDEX,
-} from '#libs/constants/constants.js';
-import {
   useAppForm,
   useCallback,
   useFormController,
@@ -16,7 +12,6 @@ import {
 import {
   DEFAULT_SURVEY_PAYLOAD,
   PREFERENCES_CATEGORIES,
-  SPLICE_CATEGORIES_COUNT,
   TEXTAREA_MAX_LENGTH,
   TEXTAREA_ROWS_COUNT,
 } from '#pages/surveys/libs/constants.js';
@@ -46,18 +41,15 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
   const handleFieldChange = useCallback(
     (category: string) => {
       return () => {
-        const index = categoriesValue.indexOf(category);
-
-        if (index === INVALID_ARRAY_INDEX) {
+        if (categoriesValue.includes(category)) {
           onCategoryChange([...categoriesValue, category]);
 
           return;
         }
 
-        onCategoryChange([
-          ...categoriesValue.slice(START_ARRAY_INDEX, index),
-          ...categoriesValue.slice(index + SPLICE_CATEGORIES_COUNT),
-        ]);
+        onCategoryChange(
+          categoriesValue.filter((option) => option !== category),
+        );
       };
     },
     [categoriesValue, onCategoryChange],
