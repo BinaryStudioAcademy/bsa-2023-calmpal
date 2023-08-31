@@ -31,12 +31,10 @@ const { reducer, actions, name } = createSlice({
     builder.addCase(signUp.pending, (state) => {
       state.authenticatedUserDataStatus = DataStatus.PENDING;
     });
-
     builder.addCase(signUp.fulfilled, (state, action) => {
       state.authenticatedUser = action.payload;
       state.authenticatedUserDataStatus = DataStatus.FULFILLED;
     });
-
     builder.addCase(signUp.rejected, (state) => {
       state.authenticatedUser = null;
       state.authenticatedUserDataStatus = DataStatus.REJECTED;
@@ -57,12 +55,10 @@ const { reducer, actions, name } = createSlice({
     builder.addCase(getAuthenticatedUser.pending, (state) => {
       state.authenticatedUserDataStatus = DataStatus.PENDING;
     });
-
     builder.addCase(getAuthenticatedUser.fulfilled, (state, action) => {
       state.authenticatedUser = action.payload;
       state.authenticatedUserDataStatus = DataStatus.FULFILLED;
     });
-
     builder.addCase(getAuthenticatedUser.rejected, (state) => {
       state.authenticatedUserDataStatus = DataStatus.REJECTED;
     });
@@ -70,7 +66,6 @@ const { reducer, actions, name } = createSlice({
     builder.addCase(createUserSurvey.pending, (state) => {
       state.surveyPreferencesDataStatus = DataStatus.PENDING;
     });
-
     builder.addCase(createUserSurvey.fulfilled, (state, action) => {
       if (state.authenticatedUser) {
         state.authenticatedUser.isSurveyCompleted = action.payload;
@@ -78,7 +73,6 @@ const { reducer, actions, name } = createSlice({
 
       state.surveyPreferencesDataStatus = DataStatus.FULFILLED;
     });
-
     builder.addCase(createUserSurvey.rejected, (state) => {
       state.surveyPreferencesDataStatus = DataStatus.REJECTED;
     });
