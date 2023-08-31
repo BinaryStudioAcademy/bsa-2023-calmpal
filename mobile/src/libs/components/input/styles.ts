@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 20,
     borderColor: AppColor.WHITE,
-    color: AppColor.BLUE_300,
+    color: AppColor.BLUE_400,
     fontSize: 16,
   },
   otherPlaceholder: {

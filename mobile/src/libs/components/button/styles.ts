@@ -4,18 +4,22 @@ import { AppColor } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: AppColor.GRAY_500,
     alignItems: 'center',
     justifyContent: 'center',
     height: 44,
-    borderRadius: 8,
     gap: 10,
     marginVertical: 10,
   },
   label: {
-    color: AppColor.WHITE,
     fontWeight: '600',
     fontSize: 16,
+  },
+  buttonSolid: {
+    backgroundColor: AppColor.GRAY_500,
+    borderRadius: 8,
+  },
+  labelSolid: {
+    color: AppColor.WHITE,
   },
   buttonDisabled: {
     backgroundColor: AppColor.GRAY_200_ALPHA_50,
@@ -23,19 +27,12 @@ const styles = StyleSheet.create({
   labelDisabled: {
     color: AppColor.GRAY_100_ALPHA_50,
   },
-  buttonSurvey: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 44,
-    gap: 10,
-    marginVertical: 10,
+  buttonOutlined: {
     borderRadius: 22,
     backgroundColor: AppColor.WHITE,
   },
-  labelSurvey: {
-    color: AppColor.BLUE_300,
-    fontWeight: '600',
-    fontSize: 16,
+  labelOutlined: {
+    color: AppColor.BLUE_400,
   },
 });
 

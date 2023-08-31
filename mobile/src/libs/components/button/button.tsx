@@ -25,7 +25,9 @@ const Button: React.FC<Properties> = ({
   return (
     <Pressable
       style={[
-        style === 'solid' ? styles.button : styles.buttonSurvey,
+        styles.button,
+        style === 'solid' && styles.buttonSolid,
+        style === 'outlined' && styles.buttonOutlined,
         isDisabled && styles.buttonDisabled,
       ]}
       onPress={handleOnPress}
@@ -33,7 +35,9 @@ const Button: React.FC<Properties> = ({
     >
       <Text
         style={[
-          style === 'solid' ? styles.label : styles.labelSurvey,
+          styles.label,
+          style === 'solid' && styles.labelSolid,
+          style === 'outlined' && styles.labelOutlined,
           isDisabled && styles.labelDisabled,
         ]}
       >

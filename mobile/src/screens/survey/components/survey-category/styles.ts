@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     color: AppColor.WHITE,
   },
   selectedCategoryText: {
-    color: AppColor.BLUE_300,
+    color: AppColor.BLUE_400,
   },
 });
 
