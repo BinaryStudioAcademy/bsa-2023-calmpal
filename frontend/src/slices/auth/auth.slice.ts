@@ -24,32 +24,26 @@ const { reducer, actions, name } = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(signUp.pending, (state) => {
-      state.authenticatedUserDataStatus = DataStatus.PENDING;
       state.authDataStatus = DataStatus.PENDING;
     });
     builder.addCase(signUp.fulfilled, (state, action) => {
       state.authenticatedUser = action.payload;
-      state.authenticatedUserDataStatus = DataStatus.FULFILLED;
       state.authDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(signUp.rejected, (state) => {
       state.authenticatedUser = null;
-      state.authenticatedUserDataStatus = DataStatus.REJECTED;
       state.authDataStatus = DataStatus.REJECTED;
     });
 
     builder.addCase(signIn.pending, (state) => {
-      state.authenticatedUserDataStatus = DataStatus.PENDING;
       state.authDataStatus = DataStatus.PENDING;
     });
     builder.addCase(signIn.fulfilled, (state, action) => {
       state.authenticatedUser = action.payload;
-      state.authenticatedUserDataStatus = DataStatus.FULFILLED;
       state.authDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(signIn.rejected, (state) => {
       state.authenticatedUser = null;
-      state.authenticatedUserDataStatus = DataStatus.REJECTED;
       state.authDataStatus = DataStatus.REJECTED;
     });
 
