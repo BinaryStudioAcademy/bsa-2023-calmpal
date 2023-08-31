@@ -1,5 +1,4 @@
-import { Icon } from '#libs/components/components.js';
-import { Link } from '#libs/components/components.js';
+import { Icon, Link } from '#libs/components/components.js';
 import { IconNameToIcon } from '#libs/enums/enums.js';
 
 import styles from './styles.module.scss';
@@ -20,8 +19,8 @@ const MeditationTrack: React.FC<Properties> = ({ track }) => {
   return (
     <div className={styles['track']}>
       <img
-        src="./images/background-image.jpg"
-        alt="background"
+        src={track.imageLink}
+        alt="Meditation track background"
         className={styles['background-image']}
       />
       <div className={styles['content']}>
