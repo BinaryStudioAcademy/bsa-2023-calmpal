@@ -20,7 +20,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
   });
 
   const { isLoading } = useAppSelector(({ auth }) => ({
-    isLoading: auth.authenticatedUserDataStatus === DataStatus.PENDING,
+    isLoading: auth.authDataStatus === DataStatus.PENDING,
   }));
 
   const handleFormSubmit = useCallback(
