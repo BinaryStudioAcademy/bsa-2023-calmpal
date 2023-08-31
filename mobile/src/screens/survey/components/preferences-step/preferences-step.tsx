@@ -29,25 +29,27 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
     },
   );
   const {
-    field: { onChange: onCategoryChange, value: categories },
+    field: { onChange: onCategoryChange, value: categoriesValue },
   } = useFormController({
     name: 'preferences',
     control,
   });
-  const hasOther = categories.includes('Other');
+  const hasOther = categoriesValue.includes('Other');
 
   const handleFieldChange = useCallback(
     (option: string) => {
-      if (categories.includes(option)) {
-        onCategoryChange(categories.filter((category) => category !== option));
+      if (categoriesValue.includes(option)) {
+        onCategoryChange(
+          categoriesValue.filter((category) => category !== option),
+        );
 
         return;
       }
 
-      onCategoryChange([...categories, option]);
+      onCategoryChange([...categoriesValue, option]);
     },
 
-    [categories, onCategoryChange],
+    [categoriesValue, onCategoryChange],
   );
 
   const handleSurveySubmit = useCallback(
