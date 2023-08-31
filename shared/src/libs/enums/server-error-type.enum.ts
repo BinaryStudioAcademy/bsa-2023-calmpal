@@ -1,7 +1,8 @@
 const ServerErrorType = {
-  COMMON: 'COMMON',
-  VALIDATION: 'VALIDATION',
   AUTHORIZATION: 'AUTHORIZATION',
+  COMMON: 'COMMON',
+  USERS: 'USERS',
+  VALIDATION: 'VALIDATION',
 } as const;
 
 export { ServerErrorType };

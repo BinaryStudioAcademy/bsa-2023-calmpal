@@ -1,12 +1,14 @@
 import { type Repository } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
-import { type UserModel } from '#packages/users/user.model.js';
+import { type UserModel } from '#packages/users/users.js';
 
 import { UsersRelation } from './libs/enums/enums.js';
 import {
   type UserCommonQueryResponse,
   type UserCreateQueryPayload,
+  type UserWithPasswordQueryResponse,
 } from './libs/types/types.js';
+import { UserWithPasswordEntity } from './user-with-password.entity.js';
 
 class UserRepository implements Repository {
   private userModel: typeof UserModel;
@@ -19,19 +21,19 @@ class UserRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public async findById(id: number): Promise<UserEntity | null> {
+  public async findById(id: number): Promise<UserWithPasswordEntity | null> {
     const user = await this.userModel
       .query()
       .withGraphJoined(UsersRelation.DETAILS)
       .findById(id)
-      .castTo<UserCommonQueryResponse | undefined>()
+      .castTo<UserWithPasswordQueryResponse | undefined>()
       .execute();
 
     if (!user) {
       return null;
     }
 
-    return UserEntity.initialize({
+    return UserWithPasswordEntity.initialize({
       id: user.id,
       email: user.email,
       passwordHash: user.passwordHash,
@@ -39,19 +41,20 @@ class UserRepository implements Repository {
       createdAt: new Date(user.createdAt),
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
+      isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
     });
   }
 
-  public async findAll(): Promise<UserEntity[]> {
+  public async findAll(): Promise<UserWithPasswordEntity[]> {
     const users = await this.userModel
       .query()
       .select()
       .withGraphJoined(UsersRelation.DETAILS)
-      .castTo<UserCommonQueryResponse[]>()
+      .castTo<UserWithPasswordQueryResponse[]>()
       .execute();
 
     return users.map((user) => {
-      return UserEntity.initialize({
+      return UserWithPasswordEntity.initialize({
         id: user.id,
         email: user.email,
         passwordHash: user.passwordHash,
@@ -59,13 +62,15 @@ class UserRepository implements Repository {
         createdAt: new Date(user.createdAt),
         updatedAt: new Date(user.updatedAt),
         fullName: user.details?.fullName ?? '',
+        isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
       });
     });
   }
 
-  public async create(entity: UserEntity): Promise<UserEntity> {
-    const { email, passwordSalt, passwordHash, fullName } =
+  public async create(entity: UserWithPasswordEntity): Promise<UserEntity> {
+    const { email, passwordSalt, passwordHash, fullName, isSurveyCompleted } =
       entity.toNewObject();
+
     const user = await this.userModel
       .query()
       .insertGraph({
@@ -74,21 +79,28 @@ class UserRepository implements Repository {
         passwordHash,
         [UsersRelation.DETAILS]: {
           fullName,
+          isSurveyCompleted,
         },
       } as UserCreateQueryPayload)
       .withGraphJoined(UsersRelation.DETAILS)
-      .castTo<UserCommonQueryResponse>()
+      .castTo<UserWithPasswordQueryResponse>()
       .execute();
 
     return UserEntity.initialize({
       id: user.id,
       email: user.email,
-      passwordHash: user.passwordHash,
-      passwordSalt: user.passwordSalt,
       createdAt: new Date(user.createdAt),
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
+      isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
     });
+  }
+
+  public async updateIsSurveyCompleted(id: number): Promise<void> {
+    await this.userModel
+      .relatedQuery(UsersRelation.DETAILS)
+      .for(id)
+      .patch({ isSurveyCompleted: true });
   }
 
   public update(): ReturnType<Repository['update']> {
@@ -97,6 +109,52 @@ class UserRepository implements Repository {
 
   public delete(): ReturnType<Repository['delete']> {
     return Promise.resolve(true);
+  }
+
+  public async findByEmail(email: string): Promise<UserEntity | null> {
+    const user = await this.userModel
+      .query()
+      .modify('withoutPassword')
+      .withGraphJoined(UsersRelation.DETAILS)
+      .findOne({ email })
+      .castTo<UserCommonQueryResponse | undefined>();
+
+    if (!user) {
+      return null;
+    }
+
+    return UserEntity.initialize({
+      id: user.id,
+      email: user.email,
+      createdAt: new Date(user.createdAt),
+      updatedAt: new Date(user.updatedAt),
+      fullName: user.details?.fullName ?? '',
+      isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+    });
+  }
+
+  public async findByEmailWithPassword(
+    email: string,
+  ): Promise<UserWithPasswordEntity | null> {
+    const user = await this.userModel
+      .query()
+      .withGraphJoined(UsersRelation.DETAILS)
+      .findOne({ email })
+      .castTo<UserWithPasswordQueryResponse | undefined>();
+    if (!user) {
+      return null;
+    }
+
+    return UserWithPasswordEntity.initialize({
+      id: user.id,
+      email: user.email,
+      passwordHash: user.passwordHash,
+      passwordSalt: user.passwordSalt,
+      createdAt: new Date(user.createdAt),
+      updatedAt: new Date(user.updatedAt),
+      fullName: user.details?.fullName ?? '',
+      isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+    });
   }
 }
 

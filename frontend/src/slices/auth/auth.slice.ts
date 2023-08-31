@@ -2,15 +2,18 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { DataStatus } from '#libs/enums/enums.js';
 import { type ValueOf } from '#libs/types/types.js';
+import { type UserAuthResponseDto } from '#packages/users/users.js';
 
-import { signUp } from './actions.js';
+import { getAuthenticatedUser, signIn, signUp } from './actions.js';
 
 type State = {
-  dataStatus: ValueOf<typeof DataStatus>;
+  authenticatedUser: UserAuthResponseDto | null;
+  authenticatedUserDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
-  dataStatus: DataStatus.IDLE,
+  authenticatedUser: null,
+  authenticatedUserDataStatus: DataStatus.IDLE,
 };
 
 const { reducer, actions, name } = createSlice({
@@ -19,13 +22,38 @@ const { reducer, actions, name } = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(signUp.pending, (state) => {
-      state.dataStatus = DataStatus.PENDING;
+      state.authenticatedUserDataStatus = DataStatus.PENDING;
     });
-    builder.addCase(signUp.fulfilled, (state) => {
-      state.dataStatus = DataStatus.FULFILLED;
+    builder.addCase(signUp.fulfilled, (state, action) => {
+      state.authenticatedUser = action.payload;
+      state.authenticatedUserDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(signUp.rejected, (state) => {
-      state.dataStatus = DataStatus.REJECTED;
+      state.authenticatedUser = null;
+      state.authenticatedUserDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(signIn.pending, (state) => {
+      state.authenticatedUserDataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(signIn.fulfilled, (state, action) => {
+      state.authenticatedUser = action.payload;
+      state.authenticatedUserDataStatus = DataStatus.FULFILLED;
+    });
+    builder.addCase(signIn.rejected, (state) => {
+      state.authenticatedUser = null;
+      state.authenticatedUserDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(getAuthenticatedUser.pending, (state) => {
+      state.authenticatedUserDataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(getAuthenticatedUser.fulfilled, (state, action) => {
+      state.authenticatedUser = action.payload;
+      state.authenticatedUserDataStatus = DataStatus.FULFILLED;
+    });
+    builder.addCase(getAuthenticatedUser.rejected, (state) => {
+      state.authenticatedUserDataStatus = DataStatus.REJECTED;
     });
   },
 });

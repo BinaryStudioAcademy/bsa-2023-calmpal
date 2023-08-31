@@ -1,32 +1,35 @@
 import React from 'react';
-import {
-  type Control,
-  type FieldErrors,
-  type FieldPath,
-  type FieldValues,
-} from 'react-hook-form';
 import { TextInput } from 'react-native';
 
 import { Text, View } from '#libs/components/components';
-import { useFormController } from '#libs/hooks/hooks';
+import { useFormController, useState } from '#libs/hooks/hooks';
+import {
+  type FormControl,
+  type FormFieldErrors,
+  type FormFieldPath,
+  type FormFieldValues,
+} from '#libs/types/types.js';
 
 import { styles } from './styles';
 
-type Properties<T extends FieldValues> = {
-  control: Control<T, null>;
-  errors: FieldErrors<T>;
+type Properties<T extends FormFieldValues> = {
+  control: FormControl<T, null>;
+  errors: FormFieldErrors<T>;
   label: string;
-  name: FieldPath<T>;
+  name: FormFieldPath<T>;
+  isSecure?: boolean;
   placeholder: string;
 };
 
-const Input = <T extends FieldValues>({
+const Input = <T extends FormFieldValues>({
   control,
   errors,
   label,
   name,
+  isSecure = false,
   placeholder,
 }: Properties<T>): JSX.Element => {
+  const [isFocused, setIsFocused] = useState(false);
   const { field } = useFormController({ name, control });
 
   const { value, onChange, onBlur } = field;
@@ -34,17 +37,33 @@ const Input = <T extends FieldValues>({
   const error = errors[name]?.message;
   const hasError = Boolean(error);
 
+  const handleFocus = (): void => {
+    setIsFocused(true);
+  };
+
+  const handeBlur = (): void => {
+    setIsFocused(false);
+    onBlur();
+  };
+
   return (
     <View>
-      <Text>{label}</Text>
+      <Text style={styles.label}>{label}</Text>
       <TextInput
         onChangeText={onChange}
         value={value}
-        onBlur={onBlur}
+        onFocus={handleFocus}
+        onBlur={handeBlur}
+        secureTextEntry={isSecure}
         placeholder={placeholder}
-        style={styles.input}
+        style={[
+          styles.input,
+          !hasError && isFocused && styles.filledInput,
+          hasError && styles.errorInput,
+        ]}
+        placeholderTextColor={styles.placeholder.color}
       />
-      <Text>{hasError && (error as string)}</Text>
+      <Text style={styles.errorText}>{hasError && (error as string)}</Text>
     </View>
   );
 };

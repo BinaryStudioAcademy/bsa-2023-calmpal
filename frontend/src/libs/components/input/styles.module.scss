@@ -1,0 +1,36 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-size: 14px;
+}
+
+.input .label {
+  font-weight: 600;
+}
+
+.input .default {
+  padding: 13px 10px;
+  font-size: 14px;
+  font-family: Montserrat, Arial, sans-serif;
+  line-height: 1.5;
+  border: solid var(--blue-200) 1px;
+  border-radius: 8px;
+  outline: none;
+}
+
+.input .default:focus {
+  border: solid var(--blue-300) 1px;
+  box-shadow: 0.1px 3px 3px var(--blue-alpha-30);
+}
+
+.input .error {
+  border: solid 1px var(--red-300);
+  border-radius: 8px;
+}
+
+.input .error-message {
+  color: var(--red-300);
+  font-size: 12px;
+  text-align: left;
+}

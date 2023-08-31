@@ -5,8 +5,9 @@ import fastifyStatic from '@fastify/static';
 import swagger, { type StaticDocumentSpec } from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
 import Fastify, { type FastifyError } from 'fastify';
+import fastifyHealthcheck from 'fastify-healthcheck';
 
-import { ServerErrorType } from '#libs/enums/enums.js';
+import { APIPath, ServerErrorType } from '#libs/enums/enums.js';
 import { type ValidationError } from '#libs/exceptions/exceptions.js';
 import { type Config } from '#libs/packages/config/config.js';
 import { type Database } from '#libs/packages/database/database.js';
@@ -100,8 +101,10 @@ class BaseServerApplication implements ServerApplication {
         });
 
         await this.app.register(swaggerUi, {
-          routePrefix: `${api.version}/documentation`,
+          routePrefix: `/api/${api.version}${APIPath.DOCUMENTATION}`,
         });
+
+        await this.app.register(fastifyHealthcheck);
       }),
     );
   }
@@ -185,7 +188,7 @@ class BaseServerApplication implements ServerApplication {
       });
 
       this.logger.info(
-        `Application is listening on PORT – ${this.config.ENV.APP.PORT.toString()}, on ENVIRONMENT – ${
+        `Application is listening on PORT - ${this.config.ENV.APP.PORT.toString()}, on ENVIRONMENT - ${
           this.config.ENV.APP.ENVIRONMENT as string
         }.`,
       );
