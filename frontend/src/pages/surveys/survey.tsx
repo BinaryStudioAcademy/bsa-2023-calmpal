@@ -40,7 +40,6 @@ const Survey: React.FC = () => {
   return (
     <div className={styles['container']}>
       <Header />
-
       {surveyPreferencesDataStatus === DataStatus.PENDING ? (
         <Loader />
       ) : (
@@ -49,7 +48,6 @@ const Survey: React.FC = () => {
             Serenity is your trusted companion on the journey to mental
             well-being
           </div>
-
           <PreferencesStep onSubmit={handleSubmit} />
         </div>
       )}
