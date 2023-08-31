@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { AppRoute } from '#libs/enums/app-route.enum.js';
-import { StorageKey } from '#libs/packages/storage/storage.js';
+import { storage, StorageKey } from '#libs/packages/storage/storage.js';
 import { type AsyncThunkConfig } from '#libs/types/types.js';
 import {
   type UserAuthResponseDto,
@@ -39,14 +39,19 @@ const signIn = createAsyncThunk<
 });
 
 const getAuthenticatedUser = createAsyncThunk<
-  UserAuthResponseDto,
+  UserAuthResponseDto | null,
   undefined,
   AsyncThunkConfig
->(`${sliceName}/get-authenticated-user`, (_, { extra, dispatch }) => {
+>(`${sliceName}/get-authenticated-user`, async (_, { extra, dispatch }) => {
   const { authApi } = extra;
-  dispatch(appActions.navigate(AppRoute.ROOT));
+  const hasToken = await storage.has(StorageKey.TOKEN);
+  if (hasToken) {
+    dispatch(appActions.navigate(AppRoute.ROOT));
 
-  return authApi.getAuthenticatedUser();
+    return await authApi.getAuthenticatedUser();
+  }
+
+  return null;
 });
 
 export { getAuthenticatedUser, signIn, signUp };
