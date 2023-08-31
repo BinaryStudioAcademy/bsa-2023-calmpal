@@ -67,9 +67,7 @@ class UserRepository implements Repository {
     });
   }
 
-  public async create(
-    entity: UserWithPasswordEntity,
-  ): Promise<UserWithPasswordEntity> {
+  public async create(entity: UserWithPasswordEntity): Promise<UserEntity> {
     const { email, passwordSalt, passwordHash, fullName, isSurveyCompleted } =
       entity.toNewObject();
 
@@ -88,11 +86,9 @@ class UserRepository implements Repository {
       .castTo<UserWithPasswordQueryResponse>()
       .execute();
 
-    return UserWithPasswordEntity.initialize({
+    return UserEntity.initialize({
       id: user.id,
       email: user.email,
-      passwordHash: user.passwordHash,
-      passwordSalt: user.passwordSalt,
       createdAt: new Date(user.createdAt),
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
