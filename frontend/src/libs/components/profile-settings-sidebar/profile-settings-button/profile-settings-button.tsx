@@ -22,8 +22,12 @@ const ProfileSettingsButton: React.FC<ProfileSettingsButtonProperties> = ({
     onClick(name);
   }, [name, onClick]);
 
+  const buttonStyle = isActive
+    ? `${styles['profile-button']} ${styles['focused']}`
+    : styles['profile-button'];
+
   return (
-    <button className={styles['profile-button']} onClick={handleOnClick}>
+    <button className={buttonStyle} onClick={handleOnClick}>
       <Icon name={name} className={'profile-button-background'} />
       <div className={styles['text-container']}>
         <span className={styles['profile-button-text']}>{children}</span>

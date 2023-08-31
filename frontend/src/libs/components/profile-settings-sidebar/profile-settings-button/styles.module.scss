@@ -11,6 +11,10 @@
   cursor: pointer;
 }
 
+.focused {
+  box-shadow: 0 4px 49px 0 var(--blue-400);
+}
+
 .profile-button-text {
   display: block;
   width: 145px;
