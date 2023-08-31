@@ -1,4 +1,4 @@
-import logo from '#assets/img/logo.svg';
+import logo from '#assets/icons/logo.svg';
 import { Link } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
