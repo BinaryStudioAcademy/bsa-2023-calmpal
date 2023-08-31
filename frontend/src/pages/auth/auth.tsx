@@ -1,30 +1,17 @@
 import { AppRoute } from '#libs/enums/enums.js';
-import {
-  useAppDispatch,
-  useAppSelector,
-  useCallback,
-  useEffect,
-  useLocation,
-  useNavigate,
-} from '#libs/hooks/hooks.js';
+import { useAppDispatch, useCallback, useLocation } from '#libs/hooks/hooks.js';
 import {
   type UserSignInRequestDto,
   type UserSignUpRequestDto,
 } from '#packages/users/users.js';
-import { actions as appActions } from '#slices/app/app.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
 import { SignInForm, SignUpForm } from './components/components.js';
 import styles from './styles.module.scss';
 
 const Auth: React.FC = () => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
-
-  const { redirectTo } = useAppSelector(({ app }) => ({
-    redirectTo: app.redirectTo,
-  }));
 
   const handleSignInSubmit = useCallback(
     (payload: UserSignInRequestDto): void => {
@@ -39,13 +26,6 @@ const Auth: React.FC = () => {
     },
     [dispatch],
   );
-
-  useEffect(() => {
-    if (redirectTo) {
-      navigate(redirectTo);
-      dispatch(appActions.navigate(null));
-    }
-  }, [dispatch, navigate, redirectTo]);
 
   const getScreen = (screen: string): React.ReactNode => {
     switch (screen) {
