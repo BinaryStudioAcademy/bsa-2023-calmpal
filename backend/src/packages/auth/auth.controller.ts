@@ -116,9 +116,11 @@ class AuthController extends BaseController {
    *              schema:
    *                type: object
    *                properties:
-   *                  message:
+   *                  user:
    *                    type: object
    *                    $ref: '#/components/schemas/User'
+   *                  token:
+   *                    type: string
    */
   private async signUp(
     options: APIHandlerOptions<{
