@@ -1,5 +1,4 @@
 import { Button, Icon } from '#libs/components/components.js';
-import { IconNameToIcon } from '#libs/enums/enums.js';
 import { useCallback, useEffect, useRef, useState } from '#libs/hooks/hooks.js';
 import {
   FULL_PERCENTAGE,
@@ -102,24 +101,22 @@ const Controls: React.FC<Properties> = ({
     <div className={styles['wrapper']}>
       <div className={styles['controls']}>
         <Button onClick={handlePrevious} style="rounded-transparent">
-          <Icon name={IconNameToIcon.PREVIOUS} />
+          <Icon name="previous" />
         </Button>
         <div className={styles['button-wrapper']}>
           <Button onClick={handleSkipBackward} style="rounded-transparent">
-            <Icon name={IconNameToIcon.BACKWARD} />
+            <Icon name="backward" />
           </Button>
 
           <Button onClick={handlePlayToggle} style="rounded">
-            <Icon
-              name={isPlaying ? IconNameToIcon.PAUSE : IconNameToIcon.PLAY}
-            />
+            <Icon name={isPlaying ? 'pause' : 'play'} />
           </Button>
           <Button onClick={handleSkipForward} style="rounded-transparent">
-            <Icon name={IconNameToIcon.FORWARD} />
+            <Icon name="forward" />
           </Button>
         </div>
         <Button onClick={onNextTrack} style="rounded-transparent">
-          <Icon name={IconNameToIcon.NEXT} />
+          <Icon name="next" />
         </Button>
       </div>
     </div>
