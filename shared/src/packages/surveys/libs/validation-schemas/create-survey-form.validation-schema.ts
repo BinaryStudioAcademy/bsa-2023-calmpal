@@ -19,12 +19,16 @@ const createSurveyForm = joi.object<SurveyInputDto, true>({
     is: joi
       .array()
       .has(joi.string().valid(PREFERENCES_OTHER_CATEGORY))
-      .min(SurveyValidationRule.MINIMUM_PREFERENCE_LENGTH)
-      .max(SurveyValidationRule.MAXIMUM_PREFERENCE_ITEM_LENGTH),
-    then: joi.string().trim().required().messages({
-      'any.required': SurveyValidationMessage.TEXT_REQUIRED,
-      'string.empty': SurveyValidationMessage.TEXT_REQUIRED,
-    }),
+      .min(SurveyValidationRule.MINIMUM_PREFERENCE_LENGTH),
+    then: joi
+      .string()
+      .trim()
+      .max(SurveyValidationRule.MAXIMUM_PREFERENCE_ITEM_LENGTH)
+      .required()
+      .messages({
+        'any.required': SurveyValidationMessage.TEXT_REQUIRED,
+        'string.empty': SurveyValidationMessage.TEXT_REQUIRED,
+      }),
     otherwise: joi.allow(''),
   }),
 });
