@@ -1,4 +1,3 @@
-
 import { Loader, RouterOutlet } from '#libs/components/components.js';
 import { DataStatus } from '#libs/enums/enums.js';
 import {
