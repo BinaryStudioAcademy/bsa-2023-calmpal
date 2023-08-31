@@ -4,16 +4,16 @@ import {
   useCallback,
   useFormController,
 } from '#libs/hooks/hooks.js';
-import { type FormControllerRenderProps } from '#libs/types/types.js';
 import {
   getSurveyCategories,
   type SurveyInputDto,
   surveyInputValidationSchema,
-  SurveyTextareaOptions,
 } from '#packages/survey/survey.js';
 import {
   DEFAULT_SURVEY_PAYLOAD,
+  INVALID_ARRAY_INDEX,
   PREFERENCES_CATEGORIES,
+  SPLICE_COUNT,
   TEXTAREA_MAX_LENGTH,
   TEXTAREA_ROWS_COUNT,
 } from '#pages/surveys/libs/constants.js';
@@ -26,7 +26,6 @@ type Properties = {
 
 const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
   const {
-    watch,
     control,
     errors,
     isValid,
@@ -35,18 +34,30 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
     defaultValues: DEFAULT_SURVEY_PAYLOAD,
     validationSchema: surveyInputValidationSchema,
   });
-  const { field: optionsField } = useFormController({
-    name: 'options',
+  const {
+    field: { onChange: onCategoryChange, value: categoriesValue },
+  } = useFormController({
+    name: 'preferences',
     control,
   });
 
-  const options: string[] = [
-    ...PREFERENCES_CATEGORIES,
-    SurveyTextareaOptions.OTHER,
-  ];
+  const hasOther = categoriesValue.includes('Other');
 
-  const activeOptions = watch('options');
-  const hasOther = activeOptions.includes('Other');
+  const handleFieldChange = useCallback(
+    (option: string) => {
+      const index = categoriesValue.indexOf(option);
+
+      if (index === INVALID_ARRAY_INDEX) {
+        onCategoryChange([...categoriesValue, option]);
+
+        return;
+      }
+
+      categoriesValue.splice(index, SPLICE_COUNT);
+      onCategoryChange(categoriesValue);
+    },
+    [categoriesValue, onCategoryChange],
+  );
 
   const handleSubmit = useCallback(
     (payload: SurveyInputDto) => {
@@ -67,23 +78,18 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
       <div className={styles['title']}>What can we help you with?</div>
 
       <div className={styles['select']}>
-        {options.map((option) => (
+        {PREFERENCES_CATEGORIES.map((category) => (
           <SurveyCategory
-            key={option}
-            field={
-              optionsField as FormControllerRenderProps<
-                SurveyInputDto,
-                'options' | 'textarea' | `options.${number}`
-              >
-            }
-            label={option}
+            key={category}
+            onChange={handleFieldChange}
+            label={category}
           />
         ))}
         {hasOther && (
           <Input
             control={control}
             errors={errors}
-            name="textarea"
+            name="other"
             placeholder="Text"
             maxLength={TEXTAREA_MAX_LENGTH}
             rowsCount={TEXTAREA_ROWS_COUNT}

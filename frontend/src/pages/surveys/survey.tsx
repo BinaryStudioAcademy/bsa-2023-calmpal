@@ -21,7 +21,7 @@ const Survey: React.FC = () => {
   const handleSubmit = useCallback(
     (options: string[]) => {
       void dispatch(
-        authActions.createUserSurveyPreferences({
+        authActions.createUserSurvey({
           userId: userId,
           preferences: options,
         }),
