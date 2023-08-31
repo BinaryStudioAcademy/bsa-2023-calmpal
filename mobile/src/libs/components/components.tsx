@@ -6,4 +6,10 @@ export { Loader } from './loader/loader';
 export { ProtectedRoute } from './protected-route/protected-route';
 export { SignBackground } from './sign-background/sign-background';
 export { Toast } from './toast/toast';
-export { ScrollView, Text, View } from 'react-native';
+export {
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
