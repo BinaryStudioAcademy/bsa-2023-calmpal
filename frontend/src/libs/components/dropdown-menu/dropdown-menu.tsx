@@ -14,8 +14,8 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
   const [isOpen, setOpen] = useState(false);
 
   const handleDropdownToggle = useCallback((): void => {
-    setOpen(!isOpen);
-  }, [isOpen]);
+    setOpen((previous) => !previous);
+  }, []);
 
   return (
     <div className={styles['dropdown']}>
@@ -23,9 +23,7 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
         className={styles['dropdown-header']}
         onClick={handleDropdownToggle}
       >
-        <span className={styles['bar']} />
-        <span className={styles['bar']} />
-        <span className={styles['bar']} />
+        <span className={styles['container']} />
       </button>
       <div
         className={getValidClassNames(
@@ -51,7 +49,7 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
                 </span>
               </Link>
             </button>
-            <hr />
+            <hr className={styles['divider']} />
           </div>
         ))}
       </div>
