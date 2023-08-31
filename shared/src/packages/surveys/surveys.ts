@@ -1,7 +1,5 @@
-export {
-  SurveyTextareaOptions,
-  SurveyValidationMessage,
-} from './libs/enums/enums.js';
+export { PREFERENCES_OTHER_CATEGORY } from './libs/constants/constants.js';
+export { SurveyValidationMessage } from './libs/enums/enums.js';
 export { getSurveyCategories } from './libs/helpers/helpers.js';
 export {
   type SurveyGetAllItemResponseDto,

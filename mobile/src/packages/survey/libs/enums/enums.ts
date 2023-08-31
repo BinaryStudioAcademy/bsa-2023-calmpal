@@ -1,1 +1,1 @@
-export { SurveyTextareaOptions } from 'shared/build/index.js';
+export { PREFERENCES_OTHER_CATEGORY } from 'shared/build/index.js';

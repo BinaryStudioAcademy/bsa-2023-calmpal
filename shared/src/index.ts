@@ -33,11 +33,11 @@ export {
 export { AuthApiPath } from './packages/auth/auth.js';
 export {
   getSurveyCategories,
+  PREFERENCES_OTHER_CATEGORY,
   type SurveyGetAllItemResponseDto,
   type SurveyInputDto,
   surveyInputValidationSchema,
   type SurveyRequestDto,
-  SurveyTextareaOptions,
 } from './packages/surveys/surveys.js';
 export {
   type UserAuthResponseDto,

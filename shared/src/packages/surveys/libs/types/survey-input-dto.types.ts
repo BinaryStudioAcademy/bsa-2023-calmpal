@@ -1,6 +1,6 @@
 type SurveyInputDto = {
-  options: string[];
-  textarea: string;
+  preferences: string[];
+  other: string;
 };
 
 export { type SurveyInputDto };

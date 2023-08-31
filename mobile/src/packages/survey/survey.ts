@@ -1,4 +1,4 @@
-export { SurveyTextareaOptions } from './libs/enums/enums';
+export { PREFERENCES_OTHER_CATEGORY } from './libs/enums/enums';
 export { getSurveyCategories } from './libs/helpers/helpers';
 export {
   type SurveyGetAllItemResponseDto,

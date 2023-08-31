@@ -2,16 +2,18 @@ import React from 'react';
 
 import { Button, Input, ScrollView } from '#libs/components/components';
 import { useAppForm, useCallback, useFormController } from '#libs/hooks/hooks';
-import { type FormControllerRenderProps } from '#libs/types/types';
+// import { type FormControllerRenderProps } from '#libs/types/types';
 import {
   getSurveyCategories,
   type SurveyInputDto,
   surveyInputValidationSchema,
-  SurveyTextareaOptions,
+  // SurveyTextareaOptions,
 } from '#packages/survey/survey';
 import {
   DEFAULT_SURVEY_PAYLOAD,
+  INVALID_ARRAY_INDEX,
   PREFERENCES_CATEGORIES,
+  SPLICE_COUNT,
   TEXTAREA_MAX_LENGTH,
   TEXTAREA_ROWS_COUNT,
 } from '#screens/survey/libs/constants';
@@ -25,7 +27,7 @@ type Properties = {
 
 const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
   const {
-    watch,
+    // watch,
     control,
     errors,
     isValid,
@@ -34,18 +36,37 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
     defaultValues: DEFAULT_SURVEY_PAYLOAD,
     validationSchema: surveyInputValidationSchema,
   });
-  const { field: optionsField } = useFormController({
-    name: 'options',
+  const {
+    field: { onChange: onCategoryChange, value: categoriesValue },
+  } = useFormController({
+    name: 'preferences',
     control,
   });
 
-  const options: string[] = [
-    ...PREFERENCES_CATEGORIES,
-    SurveyTextareaOptions.OTHER,
-  ];
+  // const options: string[] = [
+  //   ...PREFERENCES_CATEGORIES,
+  //   SurveyTextareaOptions.OTHER,
+  // ];
 
-  const activeOptions = watch('options');
-  const hasOther = activeOptions.includes('Other');
+  // const activeOptions = watch('options');
+  // const hasOther = activeOptions.includes('Other');
+  const hasOther = categoriesValue.includes('Other');
+
+  const handleFieldChange = useCallback(
+    (option: string) => {
+      const index = categoriesValue.indexOf(option);
+
+      if (index === INVALID_ARRAY_INDEX) {
+        onCategoryChange([...categoriesValue, option]);
+
+        return;
+      }
+
+      categoriesValue.splice(index, SPLICE_COUNT);
+      onCategoryChange(categoriesValue);
+    },
+    [categoriesValue, onCategoryChange],
+  );
 
   const handleSubmit = useCallback(
     (payload: SurveyInputDto) => {
@@ -63,7 +84,7 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
       style={styles.surveyContainer}
       showsVerticalScrollIndicator={false}
     >
-      {options.map((option) => (
+      {/* {options.map((option) => (
         <SurveyCategory
           key={option}
           field={
@@ -74,12 +95,21 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
           }
           label={option}
         />
+      ))} */}
+
+      {PREFERENCES_CATEGORIES.map((category) => (
+        <SurveyCategory
+          key={category}
+          onChange={handleFieldChange}
+          label={category}
+        />
       ))}
+
       {hasOther && (
         <Input
           control={control}
           errors={errors}
-          name="textarea"
+          name="other"
           placeholder="Enter your preferences"
           maxLength={TEXTAREA_MAX_LENGTH}
           rowsCount={TEXTAREA_ROWS_COUNT}
