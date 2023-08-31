@@ -24,15 +24,12 @@ type Properties = {
 };
 
 const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
-  const {
-    control,
-    errors,
-    isValid,
-    handleSubmit: handleValidationSubmit,
-  } = useAppForm<SurveyInputDto>({
-    defaultValues: DEFAULT_SURVEY_PAYLOAD,
-    validationSchema: surveyInputValidationSchema,
-  });
+  const { control, errors, isValid, handleSubmit } = useAppForm<SurveyInputDto>(
+    {
+      defaultValues: DEFAULT_SURVEY_PAYLOAD,
+      validationSchema: surveyInputValidationSchema,
+    },
+  );
   const {
     field: { onChange: onCategoryChange, value: categoriesValue },
   } = useFormController({
@@ -57,7 +54,7 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
     [categoriesValue, onCategoryChange],
   );
 
-  const handleSubmit = useCallback(
+  const handleSurveySubmit = useCallback(
     (payload: SurveyInputDto) => {
       onSubmit(getSurveyCategories(payload));
     },
@@ -65,8 +62,8 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
   );
 
   const handleFormSubmit = useCallback((): void => {
-    void handleValidationSubmit(handleSubmit)();
-  }, [handleValidationSubmit, handleSubmit]);
+    void handleSubmit(handleSurveySubmit)();
+  }, [handleSubmit, handleSurveySubmit]);
 
   return (
     <ScrollView
