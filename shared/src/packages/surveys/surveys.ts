@@ -1,5 +1,8 @@
 export { PREFERENCES_OTHER_CATEGORY } from './libs/constants/constants.js';
-export { SurveyValidationMessage } from './libs/enums/enums.js';
+export {
+  SurveyValidationMessage,
+  SurveyValidationRule,
+} from './libs/enums/enums.js';
 export { getSurveyCategories } from './libs/helpers/helpers.js';
 export {
   type SurveyGetAllItemResponseDto,
