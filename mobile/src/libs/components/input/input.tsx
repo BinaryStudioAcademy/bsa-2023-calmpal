@@ -19,7 +19,6 @@ type Properties<T extends FormFieldValues> = {
   name: FormFieldPath<T>;
   isSecure?: boolean;
   placeholder: string;
-  type?: 'text' | 'email' | 'password';
   rowsCount?: number;
   maxLength?: number;
 };
