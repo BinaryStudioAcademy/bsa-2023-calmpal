@@ -1,8 +1,8 @@
 .auth {
   display: flex;
+  flex: 1;
   justify-content: space-around;
   align-items: center;
-  height: 100vh;
   padding: 0 5%;
   overflow: hidden;
   color: var(--white);
@@ -33,7 +33,7 @@
 .auth-name {
   position: relative;
   z-index: 2;
-  margin-bottom: 20vh;
+  margin-bottom: 150px;
   text-align: center;
 }
 
