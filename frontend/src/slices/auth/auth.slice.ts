@@ -7,6 +7,7 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 import {
   createUserSurveyPreferences,
   getAuthenticatedUser,
+  signIn,
   signUp,
 } from './actions.js';
 
@@ -14,6 +15,7 @@ type State = {
   authenticatedUser: UserAuthResponseDto | null;
   authenticatedUserDataStatus: ValueOf<typeof DataStatus>;
   surveyPreferencesDataStatus: ValueOf<typeof DataStatus>;
+=======
 };
 
 const initialState: State = {
@@ -37,6 +39,18 @@ const { reducer, actions, name } = createSlice({
     });
 
     builder.addCase(signUp.rejected, (state) => {
+      state.authenticatedUser = null;
+      state.authenticatedUserDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(signIn.pending, (state) => {
+      state.authenticatedUserDataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(signIn.fulfilled, (state, action) => {
+      state.authenticatedUser = action.payload;
+      state.authenticatedUserDataStatus = DataStatus.FULFILLED;
+    });
+    builder.addCase(signIn.rejected, (state) => {
       state.authenticatedUser = null;
       state.authenticatedUserDataStatus = DataStatus.REJECTED;
     });
