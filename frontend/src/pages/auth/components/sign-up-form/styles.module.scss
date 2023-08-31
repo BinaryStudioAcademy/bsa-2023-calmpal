@@ -10,6 +10,7 @@
   margin: 0;
   font-weight: 600;
   font-size: 30px;
+  line-height: 1.25;
 }
 
 .form {
@@ -35,4 +36,8 @@
   color: var(--white);
   font-weight: 600;
   text-decoration: none;
+}
+
+.form-link .text:hover {
+  color: var(--gray-100);
 }
