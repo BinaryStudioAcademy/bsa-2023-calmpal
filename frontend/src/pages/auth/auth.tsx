@@ -1,5 +1,10 @@
 import { AppRoute } from '#libs/enums/enums.js';
-import { useAppDispatch, useCallback, useLocation } from '#libs/hooks/hooks.js';
+import {
+  useAppDispatch,
+  useCallback,
+  useLocation,
+  useNavigate,
+} from '#libs/hooks/hooks.js';
 import {
   type UserSignInRequestDto,
   type UserSignUpRequestDto,
@@ -10,21 +15,24 @@ import { SignInForm, SignUpForm } from './components/components.js';
 import styles from './styles.module.scss';
 
 const Auth: React.FC = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
 
   const handleSignInSubmit = useCallback(
     (payload: UserSignInRequestDto): void => {
       void dispatch(authActions.signIn(payload));
+      navigate(AppRoute.ROOT);
     },
-    [dispatch],
+    [dispatch, navigate],
   );
 
   const handleSignUpSubmit = useCallback(
     (payload: UserSignUpRequestDto): void => {
       void dispatch(authActions.signUp(payload));
+      navigate(AppRoute.ROOT);
     },
-    [dispatch],
+    [dispatch, navigate],
   );
 
   const getScreen = (screen: string): React.ReactNode => {

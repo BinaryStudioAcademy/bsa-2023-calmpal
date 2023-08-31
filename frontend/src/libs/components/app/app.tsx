@@ -1,13 +1,15 @@
 import { Loader, RouterOutlet } from '#libs/components/components.js';
-import { DataStatus } from '#libs/enums/enums.js';
+import { AppRoute, DataStatus } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
   useEffect,
+  useNavigate,
 } from '#libs/hooks/hooks.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
 const App: React.FC = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { authenticatedUserDataStatus } = useAppSelector(({ auth }) => ({
     authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
@@ -15,7 +17,8 @@ const App: React.FC = () => {
 
   useEffect(() => {
     void dispatch(authActions.getAuthenticatedUser());
-  }, [dispatch]);
+    navigate(AppRoute.ROOT);
+  }, [dispatch, navigate]);
 
   if (authenticatedUserDataStatus === DataStatus.PENDING) {
     return <Loader />;
