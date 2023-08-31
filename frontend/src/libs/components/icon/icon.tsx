@@ -1,7 +1,6 @@
 import { type IconNameToIcon } from '#libs/enums/enums.js';
+import { iconNameToPlainSvgMap } from '#libs/maps/icon-name-to-plain-svg.js';
 import { type ValueOf } from '#libs/types/types.js';
-
-import { iconNameToPlainSvgMap } from './icon-map.js';
 
 type Properties = {
   name: ValueOf<typeof IconNameToIcon>;
