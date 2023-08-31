@@ -121,6 +121,20 @@ class AuthController extends BaseController {
    *                    $ref: '#/components/schemas/User'
    *                  token:
    *                    type: string
+   *        400:
+   *          description: Bad request. User already exists.
+   *          content:
+   *            application/json:
+   *              schema:
+   *                type: object
+   *                properties:
+   *                  message:
+   *                    type: string
+   *                  errorType:
+   *                    type: string
+   *                example:
+   *                  message: "User already exists."
+   *                  errorType: "AUTHORIZATION"
    */
   private async signUp(
     options: APIHandlerOptions<{
