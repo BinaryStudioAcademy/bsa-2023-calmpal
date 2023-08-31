@@ -9,6 +9,7 @@ export {
   ApplicationError,
   AuthError,
   HTTPError,
+  UsersError,
   ValidationError,
 } from './libs/exceptions/exceptions.js';
 export { configureString } from './libs/helpers/helpers.js';
@@ -32,7 +33,12 @@ export {
 export { AuthApiPath } from './packages/auth/auth.js';
 export { type ChatMessage, ChatRole } from './packages/chat/chat.js';
 export {
+  createSurveyValidationSchema,
+  getSurveyCategories,
+  PREFERENCES_OTHER_CATEGORY,
   type SurveyGetAllItemResponseDto,
+  type SurveyInputDto,
+  surveyInputValidationSchema,
   type SurveyRequestDto,
 } from './packages/surveys/surveys.js';
 export {
@@ -40,6 +46,9 @@ export {
   type UserGetAllItemResponseDto,
   type UserGetAllResponseDto,
   UsersApiPath,
+  type UserSignInRequestDto,
+  type UserSignInResponseDto,
+  userSignInValidationSchema,
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
   userSignUpValidationSchema,

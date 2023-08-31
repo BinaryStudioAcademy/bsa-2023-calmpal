@@ -7,6 +7,8 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import { AppEnvironment } from '#libs/enums/enums.js';
 import { type Config } from '#libs/packages/config/config.js';
+import { notification } from '#libs/packages/notification/notification.js';
+import { handleError } from '#libs/packages/store/middlewares/middlewares.js';
 import { authApi } from '#packages/auth/auth.js';
 import { reducer as authReducer } from '#slices/auth/auth.js';
 import { chatReducer } from '#slices/chat/chat.js';
@@ -21,6 +23,7 @@ type RootReducer = {
 type ExtraArguments = {
   authApi: typeof authApi;
   storage: typeof storage;
+  notification: typeof notification;
 };
 
 class Store {
@@ -39,13 +42,14 @@ class Store {
         auth: authReducer,
         chat: chatReducer,
       },
-      middleware: (getDefaultMiddleware) => {
-        return getDefaultMiddleware({
+      middleware: (getDefaultMiddleware) => [
+        ...getDefaultMiddleware({
           thunk: {
             extraArgument: this.extraArguments,
           },
-        });
-      },
+        }),
+        handleError,
+      ],
     });
   }
 
@@ -53,6 +57,7 @@ class Store {
     return {
       authApi,
       storage,
+      notification,
     };
   }
 }
