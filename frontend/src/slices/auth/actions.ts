@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { AppRoute } from '#libs/enums/app-route.enum.js';
+import { AppRoute } from '#libs/enums/enum.js';
 import { storage, StorageKey } from '#libs/packages/storage/storage.js';
 import { type AsyncThunkConfig } from '#libs/types/types.js';
 import {
