@@ -29,17 +29,17 @@ const InputSearch: React.FC<Properties> = ({ placeholder, setSearchQuery }) => {
   });
   const { value, onChange } = field;
 
-  const debounceHandleSearch = debounce(() => {
-    setSearchQuery(value);
-  }, SEARCH_TIMEOUT);
-
   useEffect(() => {
+    const debounceHandleSearch = debounce(() => {
+      setSearchQuery(value);
+    }, SEARCH_TIMEOUT);
+
     debounceHandleSearch();
 
     return () => {
       debounceHandleSearch.clear();
     };
-  }, [value, debounceHandleSearch]);
+  }, [value, setSearchQuery]);
 
   const handleInputChange = (text: string): void => {
     onChange(text);
