@@ -74,7 +74,7 @@ const AudioPlayer: React.FC<Properties> = ({
         <track kind="captions" />
       </audio>
       <ProgressBar
-        progressBarReference={progressBarReference}
+        ref={progressBarReference}
         audioReference={audioReference}
         timeProgress={timeProgress}
         duration={duration}

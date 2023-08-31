@@ -1,21 +1,21 @@
 import { getFormatTime } from '#libs/helpers/helpers.js';
-import { useCallback } from '#libs/hooks/hooks.js';
+import { forwardRef, useCallback } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
 
 type Properties = {
-  progressBarReference: React.RefObject<HTMLInputElement | null>;
   audioReference: React.RefObject<HTMLAudioElement | null>;
   duration: number;
   timeProgress: number;
 };
 
-const ProgressBar: React.FC<Properties> = ({
-  progressBarReference,
-  audioReference,
-  duration,
-  timeProgress,
-}) => {
+const ProgressBar: React.ForwardRefRenderFunction<
+  HTMLInputElement | null,
+  Properties
+> = ({ audioReference, duration, timeProgress }, reference) => {
+  const progressBarReference =
+    reference as React.RefObject<HTMLInputElement | null>;
+
   const handleProgressChange: React.ChangeEventHandler<HTMLInputElement> =
     useCallback(
       (event) => {
@@ -38,7 +38,7 @@ const ProgressBar: React.FC<Properties> = ({
       <input
         className={styles['progress']}
         type="range"
-        ref={progressBarReference as React.RefObject<HTMLInputElement>}
+        ref={reference}
         defaultValue="0"
         onChange={handleProgressChange}
       />
@@ -46,4 +46,5 @@ const ProgressBar: React.FC<Properties> = ({
   );
 };
 
-export { ProgressBar };
+const ForwardedProgressBar = forwardRef(ProgressBar);
+export { ForwardedProgressBar as ProgressBar };
