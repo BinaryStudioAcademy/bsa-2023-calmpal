@@ -1,5 +1,5 @@
-import home from '#assets/img/home.svg';
-import meditation from '#assets/img/meditation.svg';
+import home from '#assets/icons/home.svg';
+import meditation from '#assets/icons/meditation.svg';
 import { AppRoute } from '#libs/enums/enums.js';
 import { type SidebarRoute } from '#libs/types/types.js';
 

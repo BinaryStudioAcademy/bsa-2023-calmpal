@@ -1,14 +1,23 @@
-import { type ValueOf } from '#/libs/types/types.js';
-import { type IconNameToIcon } from '#libs/enums/enums.js';
+import { type IconName } from '#libs/enums/enums.js';
+import { iconNameToPlainSvgMap } from '#libs/maps/icon-name-to-plain-svg.js';
 
-import { iconNameToPlainSvgMap } from './icons/icon-map.js';
+import styles from './styles.module.scss';
 
 type Properties = {
-  name: ValueOf<typeof IconNameToIcon>;
+  name: IconName;
+  className?: string;
 };
 
-const Icon: React.FC<Properties> = ({ name }) => (
-  <>{iconNameToPlainSvgMap[name]}</>
-);
+const Icon: React.FC<Properties> = ({ name, className = '' }) => {
+  const SelectedIcon = iconNameToPlainSvgMap[name];
+
+  const cssClass = className && styles[className] ? styles[className] : '';
+
+  return (
+    <div className={cssClass}>
+      <SelectedIcon />
+    </div>
+  );
+};
 
 export { Icon };
