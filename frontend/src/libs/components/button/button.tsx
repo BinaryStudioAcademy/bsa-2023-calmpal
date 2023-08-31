@@ -7,9 +7,9 @@ type Properties = {
 };
 
 const Button: React.FC<Properties> = ({
-  type = 'button',
   label,
-  isLoading,
+  type = 'button',
+  isLoading = false,
 }) => (
   <button type={type} className={styles['submit']} disabled={isLoading}>
     {isLoading && <span className={styles['loader']} />}
