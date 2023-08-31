@@ -9,14 +9,14 @@ type Properties = {
   label: string;
   onPress: () => void;
   isDisabled?: boolean;
-  style?: 'solid' | 'outlined';
+  type?: 'solid' | 'outlined';
 };
 
 const Button: React.FC<Properties> = ({
   label,
   onPress,
   isDisabled = false,
-  style = 'solid',
+  type: style = 'solid',
 }) => {
   const handleOnPress = (): void => {
     onPress();
