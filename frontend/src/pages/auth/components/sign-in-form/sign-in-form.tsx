@@ -1,6 +1,6 @@
 import { Button, Input, Link } from '#libs/components/components.js';
-import { AppRoute } from '#libs/enums/enums.js';
-import { useAppForm, useCallback } from '#libs/hooks/hooks.js';
+import { AppRoute, DataStatus } from '#libs/enums/enums.js';
+import { useAppForm, useAppSelector, useCallback } from '#libs/hooks/hooks.js';
 import {
   type UserSignInRequestDto,
   userSignInValidationSchema,
@@ -18,6 +18,10 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
     defaultValues: DEFAULT_SIGN_IN_PAYLOAD,
     validationSchema: userSignInValidationSchema,
   });
+
+  const { isLoading } = useAppSelector(({ auth }) => ({
+    isLoading: auth.authenticatedUserDataStatus === DataStatus.PENDING,
+  }));
 
   const handleFormSubmit = useCallback(
     (event_: React.BaseSyntheticEvent): void => {
@@ -49,7 +53,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
         />
 
         <div className={styles['submit']}>
-          <Button type="submit" label="Sign in" />
+          <Button type="submit" label="Sign in" isLoading={isLoading} />
         </div>
 
         <span className={styles['form-link']}>
