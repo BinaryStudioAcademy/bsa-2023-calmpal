@@ -1,4 +1,4 @@
-import { Button, Input } from '#libs/components/components.js';
+import { Button, Checkbox, Input } from '#libs/components/components.js';
 import {
   useAppForm,
   useCallback,
@@ -19,7 +19,6 @@ import {
   TEXTAREA_ROWS_COUNT,
 } from '#pages/surveys/libs/constants.js';
 
-import { SurveyCategory } from '../survey-category/survey-category.js';
 import styles from './styles.module.scss';
 
 type Properties = {
@@ -43,19 +42,21 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
   const hasOther = categoriesValue.includes('Other');
 
   const handleFieldChange = useCallback(
-    (option: string) => {
-      const index = categoriesValue.indexOf(option);
+    (category: string) => {
+      return () => {
+        const index = categoriesValue.indexOf(category);
 
-      if (index === INVALID_ARRAY_INDEX) {
-        onCategoryChange([...categoriesValue, option]);
+        if (index === INVALID_ARRAY_INDEX) {
+          onCategoryChange([...categoriesValue, category]);
 
-        return;
-      }
+          return;
+        }
 
-      onCategoryChange([
-        ...categoriesValue.slice(START_ARRAY_INDEX, index),
-        ...categoriesValue.slice(index + SPLICE_COUNT),
-      ]);
+        onCategoryChange([
+          ...categoriesValue.slice(START_ARRAY_INDEX, index),
+          ...categoriesValue.slice(index + SPLICE_COUNT),
+        ]);
+      };
     },
     [categoriesValue, onCategoryChange],
   );
@@ -80,10 +81,10 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
 
       <div className={styles['select']}>
         {PREFERENCES_CATEGORIES.map((category) => (
-          <SurveyCategory
+          <Checkbox
             key={category}
-            onChange={handleFieldChange}
             label={category}
+            onChange={handleFieldChange(category)}
           />
         ))}
         {hasOther && (
