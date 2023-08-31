@@ -1,15 +1,21 @@
-.item {
+.track {
   position: relative;
+  width: 100%;
   max-width: 451px;
   height: 177px;
-  background-image: url("./images/track-bg.png");
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-  border: 1px solid gray;
+  margin: 0 auto;
   border-radius: 30px;
-  box-shadow:
-    0 0 30px 0 rgb(243 241 255 / 100%),
-    0 0 15px 15px white;
+  box-shadow: 0 4px 23px 0 var(--violet-100);
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 37%;
+  height: 100%;
+  border-radius: 30px 0 0 30px;
 }
 
 .content {
@@ -18,11 +24,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 70%;
   max-width: 85%;
   height: 100%;
   padding-right: 23px;
   padding-left: 29px;
-  background-color: white;
+  background-color: var(--white);
   border-radius: 30px;
 }
 
@@ -34,58 +41,41 @@
 
 .title {
   margin: 0;
-  padding: 0;
   font-weight: 600;
   font-size: 16px;
 }
 
-.p {
+.duration {
   display: inline-block;
   margin-top: 8px;
   padding: 6px 12px;
-  color: #5244f3;
+  color: var(--blue-400);
   font-weight: 400;
   font-size: 14px;
+  line-height: 16.8px;
   text-align: center;
-  background-color: #3b46ef26;
+  background-color: var(--blue-alpha-30);
   border-radius: 14px;
 }
 
-@media (width <= 1187px) {
-  .info {
-    width: 70%;
-  }
-}
-
-@media (width <= 800px) {
-  .item {
-    height: 144px;
-  }
-}
-
-@media (width <= 1348px) {
-  .item {
-    width: 100%;
-  }
-}
-
-@media (width <= 613px) {
-  .item {
-    flex: 1 1 100%;
-  }
-}
-
-.img {
-  display: block;
-}
-
-a svg {
+.play-button {
   display: block;
   width: 48px;
   height: 48px;
+  fill: var(--blue-300);
 }
 
-a svg:hover {
+.play-button:hover {
   transform: scale(1.1);
-  fill: #5244f3;
+  fill: var(--blue-400);
+}
+
+@media (width <= 800px) {
+  .content {
+    width: 85%;
+  }
+
+  .track {
+    height: 140px;
+  }
 }
