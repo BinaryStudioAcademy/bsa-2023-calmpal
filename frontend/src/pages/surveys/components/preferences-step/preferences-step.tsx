@@ -12,7 +12,6 @@ import {
 import {
   DEFAULT_SURVEY_PAYLOAD,
   PREFERENCES_CATEGORIES,
-  TEXTAREA_MAX_LENGTH,
   TEXTAREA_ROWS_COUNT,
 } from '#pages/surveys/libs/constants.js';
 
@@ -42,14 +41,14 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
     (category: string) => {
       return () => {
         if (categoriesValue.includes(category)) {
-          onCategoryChange([...categoriesValue, category]);
+          onCategoryChange(
+            categoriesValue.filter((option) => option !== category),
+          );
 
           return;
         }
 
-        onCategoryChange(
-          categoriesValue.filter((option) => option !== category),
-        );
+        onCategoryChange([...categoriesValue, category]);
       };
     },
     [categoriesValue, onCategoryChange],
@@ -87,7 +86,6 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
             errors={errors}
             name="other"
             placeholder="Text"
-            maxLength={TEXTAREA_MAX_LENGTH}
             rowsCount={TEXTAREA_ROWS_COUNT}
           />
         )}
