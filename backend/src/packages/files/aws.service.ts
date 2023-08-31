@@ -14,7 +14,7 @@ import { type HTTPCode } from '#libs/packages/http/http.js';
 import { type ValueOf } from '#libs/types/types.js';
 
 import { SEC_IN_HOUR } from './libs/constants/constants.js';
-import { type AWSUploadRequestDto } from './libs/types/types.js';
+import { type AWSFileUploadRequestDto } from './libs/types/types.js';
 
 type AWSServiceDependencies = {
   region: string;
@@ -55,7 +55,7 @@ class AWSService {
     fileKey,
     buffer,
     contentType,
-  }: AWSUploadRequestDto): Promise<void> {
+  }: AWSFileUploadRequestDto): Promise<void> {
     const putObjectCommand = new PutObjectCommand({
       Bucket: this.bucketName,
       Key: fileKey,
@@ -85,7 +85,7 @@ class AWSService {
       {
         bucket: this.bucketName,
         region: this.region,
-        fileKey: fileKey,
+        fileKey,
       },
     );
   }

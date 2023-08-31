@@ -1,9 +1,9 @@
 import { type ContentType, type ValueOf } from '#index.js';
 
-type AWSUploadRequestDto = {
+type AWSFileUploadRequestDto = {
   fileKey: string;
   buffer: Buffer;
   contentType: ValueOf<typeof ContentType>;
 };
 
-export { type AWSUploadRequestDto };
+export { type AWSFileUploadRequestDto };

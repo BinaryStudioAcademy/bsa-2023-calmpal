@@ -1,6 +1,6 @@
 export { FilesApiPath } from './libs/enums/enums.js';
 export {
-  type AWSUploadRequestDto,
+  type AWSFileUploadRequestDto,
   type FileGetAllItemResponseDto,
   type FileUploadRequestDto,
   type FileUploadResponseDto,
