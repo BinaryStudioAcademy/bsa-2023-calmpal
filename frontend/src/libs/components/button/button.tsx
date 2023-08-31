@@ -11,9 +11,9 @@ const Button: React.FC<Properties> = ({
   type = 'button',
   label,
   style = 'primary',
-  isDisabled: disabled = false,
+  isDisabled = false,
 }) => (
-  <button type={type} className={styles[style]} disabled={disabled}>
+  <button type={type} className={styles[style]} disabled={isDisabled}>
     {label}
   </button>
 );
