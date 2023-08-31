@@ -1,4 +1,4 @@
-export { SurveyTextareaOptions } from './libs/enums/enums.js';
+export { PREFERENCES_OTHER_CATEGORY } from './libs/constants/constants.js';
 export { getSurveyCategories } from './libs/helpers/helpers.js';
 export {
   type SurveyGetAllItemResponseDto,
