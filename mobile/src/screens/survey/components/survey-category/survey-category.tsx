@@ -10,10 +10,7 @@ type Properties = {
   onChange: (label: string) => void;
 };
 
-const SurveyCategory: React.FC<Properties> = ({
-  label,
-  onChange,
-}): JSX.Element => {
+const SurveyCategory: React.FC<Properties> = ({ label, onChange }) => {
   const [isSelected, setIsSelected] = useState(false);
   const handleChange = useCallback(() => {
     onChange(label);
