@@ -6,7 +6,7 @@ import { type SurveyInputDto } from '../types/types.js';
 
 const MINIMUM_ARRAY_LENGTH = 1;
 
-const surveyInput = joi.object<SurveyInputDto, true>({
+const createSurveyForm = joi.object<SurveyInputDto, true>({
   preferences: joi
     .array()
     .items(joi.string())
@@ -27,4 +27,4 @@ const surveyInput = joi.object<SurveyInputDto, true>({
   }),
 });
 
-export { surveyInput };
+export { createSurveyForm };
