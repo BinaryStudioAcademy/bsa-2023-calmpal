@@ -26,15 +26,12 @@ type Properties = {
 };
 
 const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
-  const {
-    control,
-    errors,
-    isValid,
-    handleSubmit: handleValidationSubmit,
-  } = useAppForm<SurveyInputDto>({
-    defaultValues: DEFAULT_SURVEY_PAYLOAD,
-    validationSchema: surveyInputValidationSchema,
-  });
+  const { control, errors, isValid, handleSubmit } = useAppForm<SurveyInputDto>(
+    {
+      defaultValues: DEFAULT_SURVEY_PAYLOAD,
+      validationSchema: surveyInputValidationSchema,
+    },
+  );
   const {
     field: { onChange: onCategoryChange, value: categoriesValue },
   } = useFormController({
@@ -60,7 +57,7 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
     [categoriesValue, onCategoryChange],
   );
 
-  const handleSubmit = useCallback(
+  const handlePreferencesSubmit = useCallback(
     (payload: SurveyInputDto) => {
       onSubmit(getSurveyCategories(payload));
     },
@@ -69,9 +66,9 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
 
   const handleFormSubmit = useCallback(
     (event_: React.BaseSyntheticEvent): void => {
-      void handleValidationSubmit(handleSubmit)(event_);
+      void handleSubmit(handlePreferencesSubmit)(event_);
     },
-    [handleValidationSubmit, handleSubmit],
+    [handleSubmit, handlePreferencesSubmit],
   );
 
   return (
