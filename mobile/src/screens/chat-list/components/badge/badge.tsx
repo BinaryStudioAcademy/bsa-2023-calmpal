@@ -11,7 +11,6 @@ type Properties = {
 const Badge: React.FC<Properties> = ({ count }) => {
   return (
     <View style={styles.badge}>
-      {/*12 is moked data*/}
       <Text style={styles.badgeText}>{count}</Text>
     </View>
   );

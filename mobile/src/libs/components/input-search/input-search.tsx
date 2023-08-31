@@ -10,7 +10,7 @@ import {
   useRef,
 } from '#libs/hooks/hooks';
 
-import { DEFAULT_SEARCH_PAYLOAD, TIMEOUT } from './libs/constants';
+import { DEFAULT_SEARCH_PAYLOAD, SEARCH_TIMEOUT } from './libs/constants';
 import { styles } from './styles';
 
 type Properties = {
@@ -35,7 +35,7 @@ const InputSearch: React.FC<Properties> = ({ placeholder, setSearchQuery }) => {
 
     debouncedReference.current = debounce(() => {
       setSearchQuery(value);
-    }, TIMEOUT);
+    }, SEARCH_TIMEOUT);
 
     debouncedReference.current();
   }, [value, setSearchQuery]);

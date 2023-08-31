@@ -5,7 +5,7 @@ import ChatIcon from '#assets/img/icons/chat.svg';
 import HomeIcon from '#assets/img/icons/home.svg';
 import { AppColor, MainScreenName } from '#libs/enums/enums';
 import { type TabNavigationParameterList } from '#libs/types/types';
-import { Chat } from '#screens/chat/chat';
+import { ChatList } from '#screens/chat-list/chat-list';
 import { Home } from '#screens/home/home';
 
 import { styles } from './styles';
@@ -30,8 +30,8 @@ const Main: React.FC = () => {
         options={{ tabBarIcon: HomeIcon }}
       />
       <BottomTab.Screen
-        name={MainScreenName.CHAT}
-        component={Chat}
+        name={MainScreenName.CHAT_LIST}
+        component={ChatList}
         options={{ tabBarIcon: ChatIcon }}
       />
     </BottomTab.Navigator>

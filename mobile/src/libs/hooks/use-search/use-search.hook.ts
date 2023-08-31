@@ -1,6 +1,6 @@
 import { useAppForm, useCallback, useMemo } from '#libs/hooks/hooks';
 
-import { DEFAULT_SEARCH_PAYLOAD } from './constants';
+import { DEFAULT_SEARCH_PAYLOAD } from './libs/constants';
 
 type UseSearchResult<T> = {
   filteredData: T[];

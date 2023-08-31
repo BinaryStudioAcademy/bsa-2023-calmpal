@@ -14,12 +14,12 @@ import { AppColor, RootScreenName } from '#libs/enums/enums';
 import { useEffect, useNavigation, useSearch } from '#libs/hooks/hooks';
 
 import { Badge } from './components/components';
-import mockedChats from './libs/constants/data.json';
+import mockedChats from './libs/data.json';
 import { styles } from './styles';
 
 const mockedCount = 12;
 
-const Chat: React.FC = () => {
+const ChatList: React.FC = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -70,4 +70,4 @@ const Chat: React.FC = () => {
   );
 };
 
-export { Chat };
+export { ChatList };

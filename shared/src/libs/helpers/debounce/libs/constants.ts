@@ -1,3 +1,3 @@
-const TIMEOUT = 300;
+const DEBOUNCE_TIMEOUT = 300;
 
-export { TIMEOUT };
+export { DEBOUNCE_TIMEOUT };
