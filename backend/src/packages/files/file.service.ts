@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
 
-import { type S3Package } from '#libs/packages/s3/s3.js';
+import { type S3 } from '#libs/packages/s3/s3.js';
 import { type Service } from '#libs/types/types.js';
 import { FileEntity } from '#packages/files/file.entity.js';
 import { type FileRepository } from '#packages/files/file.repository.js';
@@ -12,16 +12,16 @@ import {
 
 type FileServiceDependencies = {
   fileRepository: FileRepository;
-  s3Package: S3Package;
+  s3: S3;
 };
 
 class FileService implements Service {
   private fileRepository: FileRepository;
-  private s3Package: S3Package;
+  private s3: S3;
 
-  public constructor({ fileRepository, s3Package }: FileServiceDependencies) {
+  public constructor({ fileRepository, s3 }: FileServiceDependencies) {
     this.fileRepository = fileRepository;
-    this.s3Package = s3Package;
+    this.s3 = s3;
   }
 
   public find(): ReturnType<Service['find']> {
@@ -55,14 +55,14 @@ class FileService implements Service {
       payload.contentType.split('/')[fileExtensionIndex]
     }`;
 
-    await this.s3Package.sendFile({
+    await this.s3.sendFile({
       fileKey,
       buffer: payload.buffer,
       contentType: payload.contentType,
     });
 
-    const url = this.s3Package.getUrl(fileKey);
-    const presignedUrl = await this.s3Package.getPreSignedUrl(fileKey);
+    const url = this.s3.getUrl(fileKey);
+    const presignedUrl = await this.s3.getPreSignedUrl(fileKey);
     await this.fileRepository.create(
       FileEntity.initializeNew({
         url,

@@ -36,10 +36,10 @@ export {
 } from './libs/types/types.js';
 export { AuthApiPath } from './packages/auth/auth.js';
 export {
-  type AWSFileUploadRequestDto,
   type FileGetAllItemResponseDto,
   type FileUploadRequestDto,
   type FileUploadResponseDto,
+  type S3FileUploadRequestDto,
 } from './packages/files/files.js';
 export { FilesApiPath } from './packages/files/files.js';
 export {

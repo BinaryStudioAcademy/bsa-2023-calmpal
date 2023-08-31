@@ -1,1 +1,1 @@
-export { type AWSFileUploadRequestDto } from 'shared/build/index.js';
+export { type S3FileUploadRequestDto } from 'shared/build/index.js';

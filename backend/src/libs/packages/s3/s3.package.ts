@@ -14,16 +14,16 @@ import { type HTTPCode } from '#libs/packages/http/http.js';
 import { type ValueOf } from '#libs/types/types.js';
 
 import { SEC_IN_HOUR } from './libs/constants/constants.js';
-import { type AWSFileUploadRequestDto } from './libs/types/types.js';
+import { type S3FileUploadRequestDto } from './libs/types/types.js';
 
-type S3PackageDependencies = {
+type S3Dependencies = {
   region: string;
   accessKeyId: string;
   secretAccessKey: string;
   bucketName: string;
 };
 
-class S3Package {
+class S3 {
   private region: string;
   private bucketName: string;
 
@@ -34,7 +34,7 @@ class S3Package {
     accessKeyId,
     secretAccessKey,
     bucketName,
-  }: S3PackageDependencies) {
+  }: S3Dependencies) {
     this.region = region;
     this.bucketName = bucketName;
 
@@ -55,7 +55,7 @@ class S3Package {
     fileKey,
     buffer,
     contentType,
-  }: AWSFileUploadRequestDto): Promise<void> {
+  }: S3FileUploadRequestDto): Promise<void> {
     const putObjectCommand = new PutObjectCommand({
       Bucket: this.bucketName,
       Key: fileKey,
@@ -102,4 +102,4 @@ class S3Package {
   }
 }
 
-export { S3Package };
+export { S3 };
