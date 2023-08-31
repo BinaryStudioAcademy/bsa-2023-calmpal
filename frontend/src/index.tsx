@@ -5,6 +5,7 @@ import { createRoot } from 'react-dom/client';
 
 import {
   App,
+  MeditationList,
   ProtectedRoute,
   RouterProvider,
   SidebarWrapper,
@@ -31,6 +32,16 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                   <ProtectedRoute>
                     <SidebarWrapper>
                       <Root />
+                    </SidebarWrapper>
+                  </ProtectedRoute>
+                ),
+              },
+              {
+                path: AppRoute.MEDITATION_LIST,
+                element: (
+                  <ProtectedRoute>
+                    <SidebarWrapper>
+                      <MeditationList />
                     </SidebarWrapper>
                   </ProtectedRoute>
                 ),

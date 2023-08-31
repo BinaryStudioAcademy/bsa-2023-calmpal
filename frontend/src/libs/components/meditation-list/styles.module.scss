@@ -7,12 +7,12 @@
 
 .list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   grid-gap: 20px;
   margin-top: 0 auto;
 }
 
-@media (width <= 900px) {
+@media (width <= 550px) {
   .list {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
