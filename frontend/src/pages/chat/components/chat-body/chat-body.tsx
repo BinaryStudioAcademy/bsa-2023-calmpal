@@ -7,27 +7,33 @@ import { UserMessage } from '../user-message/user-message.js';
 import styles from './styles.module.scss';
 
 const ChatBody: React.FC = () => {
-  const { messages, addMessage } = useAppChat();
+  const { messages, newMessage } = useAppChat();
 
-  const useHandleSend = useCallback(
+  const handleSend = useCallback(
     ({ text }: { text: string }): void => {
-      addMessage(text);
+      newMessage({
+        sender: ChatRole.USER,
+        message: [text],
+        id: crypto.randomUUID(),
+      });
     },
-    [addMessage],
+    [newMessage],
   );
 
   return (
     <>
       <section className={styles['chat-body']}>
         {messages.map(({ sender, message }, index) => {
-          return sender === ChatRole.USER ? (
+          const isUser = sender === ChatRole.USER;
+
+          return isUser ? (
             <UserMessage key={index} messages={message} />
           ) : (
             <BotMessage key={index} messages={message} />
           );
         })}
       </section>
-      <ChatFooter onSend={useHandleSend} />
+      <ChatFooter onSend={handleSend} />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import chat from '#assets/img/chat.svg';
+import chat from '#assets/icons/chat-icon.svg';
 import home from '#assets/img/home.svg';
 import {
   Header,

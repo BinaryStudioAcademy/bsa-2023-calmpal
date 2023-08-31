@@ -1,4 +1,4 @@
-import chatLogo from '#/assets/img/chat-logo.svg';
+import { Icon } from '#libs/components/components.js';
 
 import styles from './styles.module.scss';
 
@@ -16,7 +16,7 @@ const BotMessage: React.FC<BotMessageProperties> = ({ messages }) => {
           </span>
         ))}
       </div>
-      <img src={chatLogo} className={styles['bot-avatar']} alt="bot-avatar" />
+      <Icon name="chat-logo" className={styles['bot-avatar']} />
     </div>
   );
 };

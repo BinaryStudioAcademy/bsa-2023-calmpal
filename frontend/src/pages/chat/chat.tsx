@@ -1,4 +1,5 @@
-import { ChatLayout } from './components/chat-layout/chat-layout.js';
+import { ChatLayout } from '#libs/components/components.js';
+
 import styles from './styles.module.scss';
 
 const ChatPage: React.FC = () => {

@@ -1,9 +1,8 @@
-import { type ClassValue } from 'clsx';
 import { NavLink } from 'react-router-dom';
 
 import { type AppRoute } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { type ValueOf } from '#libs/types/types.js';
+import { type ClassValue, type ValueOf } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
 

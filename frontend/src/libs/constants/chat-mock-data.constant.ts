@@ -5,6 +5,7 @@ const DOCTOR_FREUD_GREETING =
   'Hello, I am Doctor Freud 👨‍⚕️. How can I help you?';
 
 const MOCK_MESSAGE: ChatMessage = {
+  id: crypto.randomUUID(),
   sender: ChatRole.BOT,
   message: [DOCTOR_FREUD_GREETING],
 };

@@ -29,3 +29,16 @@
   height: 38px;
   cursor: pointer;
 }
+
+.input {
+  flex: 1;
+  width: 80%;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: Montserrat, sans-serif;
+  line-height: 14px;
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}

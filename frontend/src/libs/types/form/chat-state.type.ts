@@ -1,4 +1,4 @@
-import { type ChatMessage } from './types.js';
+import { type ChatMessage } from 'shared/build/index.js';
 
 type ChatState = {
   messages: ChatMessage[];

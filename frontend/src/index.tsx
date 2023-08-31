@@ -42,7 +42,11 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
               },
               {
                 path: AppRoute.CHAT,
-                element: <ChatPage />,
+                element: (
+                  //<ProtectedRoute>
+                  <ChatPage />
+                  //</ProtectedRoute>
+                ),
               },
             ],
           },
