@@ -1,9 +1,8 @@
-import { type IconNameToIcon } from '#libs/enums/enums.js';
+import { type IconNames } from '#libs/enums/enums.js';
 import { iconNameToPlainSvgMap } from '#libs/maps/icon-name-to-plain-svg.js';
-import { type ValueOf } from '#libs/types/types.js';
 
 type Properties = {
-  name: ValueOf<typeof IconNameToIcon>;
+  name: IconNames;
 };
 
 const Icon: React.FC<Properties> = ({ name }) => {

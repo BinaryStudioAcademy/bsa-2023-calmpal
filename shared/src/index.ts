@@ -3,9 +3,9 @@ export {
   AppEnvironment,
   ContentType,
   ExceptionMessage,
-  IconNameToIcon,
   ServerErrorType,
 } from './libs/enums/enums.js';
+export { type IconNames } from './libs/enums/icon-name.enum.js';
 export {
   ApplicationError,
   AuthError,

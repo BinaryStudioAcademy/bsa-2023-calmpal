@@ -1,12 +1,11 @@
 import { Icon } from '#libs/components/components.js';
-import { IconNameToIcon } from '#libs/enums/enums.js';
-import { type ValueOf } from '#libs/types/types.js';
+import { type IconNames } from '#libs/enums/enums.js';
 
 import styles from './styles.module.scss';
 
 type ProfileSettingsButtonProperties = {
   children: React.ReactNode;
-  name: ValueOf<typeof IconNameToIcon>;
+  name: IconNames;
   onClick: () => void;
   isActive?: boolean;
 };
@@ -22,7 +21,7 @@ const ProfileSettingsButton: React.FC<ProfileSettingsButtonProperties> = ({
       <Icon name={name} />
       <div className={styles['text-container']}>
         <span className={styles['profile-button-text']}>{children}</span>
-        {isActive && <Icon name={IconNameToIcon.ARROW} />}
+        {isActive && <Icon name={'arrow'} />}
       </div>
     </button>
   );
