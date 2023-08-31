@@ -58,9 +58,8 @@ const Input = <T extends FormFieldValues>({
         placeholder={placeholder}
         style={[
           styles.input,
-          !hasError && isFocused && styles.filledInput,
           hasError && styles.errorInput,
-          hasError && isFocused && styles.filledInput,
+          isFocused && styles.focusedInput,
         ]}
         placeholderTextColor={styles.placeholder.color}
       />

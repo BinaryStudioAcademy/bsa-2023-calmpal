@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   placeholder: {
     color: AppColor.GRAY_400,
   },
-  filledInput: {
+  focusedInput: {
     borderWidth: 1,
     borderColor: AppColor.BLUE_300,
     borderRadius: 8,
