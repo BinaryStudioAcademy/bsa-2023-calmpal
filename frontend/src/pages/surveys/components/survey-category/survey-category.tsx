@@ -1,6 +1,5 @@
+import { Checkbox } from '#libs/components/components.js';
 import { useCallback } from '#libs/hooks/hooks.js';
-
-import styles from './styles.module.scss';
 
 type Properties = {
   label: string;
@@ -15,16 +14,7 @@ const SurveyCategory: React.FC<Properties> = ({
     onChange(label);
   }, [label, onChange]);
 
-  return (
-    <label className={styles['option']}>
-      <input
-        className={styles['checkbox']}
-        type="checkbox"
-        onChange={handleChange}
-      />
-      <span className={styles['label']}>{label}</span>
-    </label>
-  );
+  return <Checkbox label={label} onChange={handleChange} />;
 };
 
 export { SurveyCategory };
