@@ -5,6 +5,7 @@ import { createRoot } from 'react-dom/client';
 
 import {
   App,
+  MeditationPlayer,
   ProtectedRoute,
   RouterProvider,
   SidebarWrapper,
@@ -37,7 +38,12 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
               },
               {
                 path: AppRoute.SIGN_IN,
-                element: <Auth />,
+                element: (
+                  <>
+                    <Auth />
+                    <MeditationPlayer />
+                  </>
+                ),
               },
               {
                 path: AppRoute.SIGN_UP,

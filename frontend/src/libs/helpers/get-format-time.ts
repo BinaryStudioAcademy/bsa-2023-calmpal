@@ -1,17 +1,22 @@
-const SECONDS_NUMBER = 60;
-const SECONDS = 10;
+const SECONDS_IN_MINUTE = 60;
+const TARGET_STRING_LENGTH = 2;
 
-const formatTime = (time: number): string => {
+const getFormatTime = (time: number): string => {
   if (time && !Number.isNaN(time)) {
-    const minutes = Math.floor(time / SECONDS_NUMBER);
-    const formatMinutes = minutes < SECONDS ? `0${minutes}` : `${minutes}`;
-    const seconds = Math.floor(time % SECONDS_NUMBER);
-    const formatSeconds = seconds < SECONDS ? `0${seconds}` : `${seconds}`;
+    const minutes = Math.floor(time / SECONDS_IN_MINUTE);
+    const formattedMinutes = minutes
+      .toString()
+      .padStart(TARGET_STRING_LENGTH, '0');
 
-    return `${formatMinutes}:${formatSeconds}`;
+    const seconds = Math.floor(time % SECONDS_IN_MINUTE);
+    const formattedSeconds = seconds
+      .toString()
+      .padStart(TARGET_STRING_LENGTH, '0');
+
+    return `${formattedMinutes}:${formattedSeconds}`;
   }
 
   return '00:00';
 };
 
-export { formatTime };
+export { getFormatTime };

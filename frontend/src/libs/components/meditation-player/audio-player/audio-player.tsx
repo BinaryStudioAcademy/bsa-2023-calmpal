@@ -19,8 +19,8 @@ const AudioPlayer: React.FC<Properties> = ({
   onSetCurrentTrack,
   onSetTrackIndex,
 }) => {
-  const [timeProgress, setTimeProgress] = useState<number>(START_TIME);
-  const [duration, setDuration] = useState<number>(START_TIME);
+  const [timeProgress, setTimeProgress] = useState(START_TIME);
+  const [duration, setDuration] = useState(START_TIME);
 
   const audioReference = useRef<HTMLAudioElement | null>(null);
   const progressBarReference = useRef<HTMLInputElement | null>(null);

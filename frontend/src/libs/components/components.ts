@@ -5,7 +5,7 @@ export { Icon } from './icon/icon.js';
 export { Input } from './input/input.js';
 export { Link } from './link/link.js';
 export { Loader } from './loader/loader.js';
-export { MeditationPlayer } from './meditation-player/components/meditation-player.js';
+export { MeditationPlayer } from './meditation-player/meditation-player.js';
 export { ProtectedRoute } from './protected-route/protected-route.js';
 export { RouterProvider } from './router-provider/router-provider.jsx';
 export { Sidebar } from './sidebar/sidebar.js';

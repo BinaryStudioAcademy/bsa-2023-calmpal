@@ -29,7 +29,7 @@ const mockedPlaylist = [
 ];
 
 const MeditationPlayer: React.FC = () => {
-  const [trackIndex, setTrackIndex] = useState<number>(FIRST_INDEX);
+  const [trackIndex, setTrackIndex] = useState(FIRST_INDEX);
   const [currentTrack, setCurrentTrack] = useState(mockedPlaylist[trackIndex]);
 
   const handleTrackIndex = useCallback((index: number): void => {

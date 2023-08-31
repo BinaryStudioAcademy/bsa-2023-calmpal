@@ -1,4 +1,4 @@
-import { formatTime } from '#libs/helpers/helpers.js';
+import { getFormatTime } from '#libs/helpers/helpers.js';
 import { useCallback } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
@@ -32,8 +32,8 @@ const ProgressBar: React.FC<Properties> = ({
   return (
     <div>
       <div className={styles['wrapper']}>
-        <span className={styles['time']}>{formatTime(timeProgress)}</span>
-        <span className={styles['time']}>{formatTime(duration)}</span>
+        <span className={styles['time']}>{getFormatTime(timeProgress)}</span>
+        <span className={styles['time']}>{getFormatTime(duration)}</span>
       </div>
       <input
         className={styles['progress']}

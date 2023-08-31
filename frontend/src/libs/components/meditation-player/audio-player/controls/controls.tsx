@@ -34,9 +34,9 @@ const Controls: React.FC<Properties> = ({
   onSetTrackIndex,
   onNextTrack,
 }) => {
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  const playAnimationReference = useRef<number | undefined>();
+  const playAnimationReference = useRef<number | null>(null);
 
   const repeat = useCallback((): void => {
     if (!audioReference.current || !progressBarReference.current) {
@@ -109,11 +109,7 @@ const Controls: React.FC<Properties> = ({
         </Button>
 
         <Button onClick={togglePlayPause} style="rounded">
-          {isPlaying ? (
-            <Icon name={IconNameToIcon.PAUSE} />
-          ) : (
-            <Icon name={IconNameToIcon.PLAY} />
-          )}
+          <Icon name={isPlaying ? IconNameToIcon.PAUSE : IconNameToIcon.PLAY} />
         </Button>
         <Button onClick={handleSkipForward} style="rounded-transparent">
           <Icon name={IconNameToIcon.FORWARD} />
