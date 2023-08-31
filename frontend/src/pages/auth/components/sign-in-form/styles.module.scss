@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  width: 280px;
+}
+
+.container .title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form .submit {
+  margin-top: 15px;
+}
+
+.form-link {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+.form-link .text {
+  margin-left: 5px;
+  color: var(--white);
+  font-weight: 600;
+  text-decoration: none;
+}
