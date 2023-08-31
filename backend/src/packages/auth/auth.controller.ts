@@ -189,6 +189,15 @@ class AuthController extends BaseController {
    *              example:
    *                message: "Incorrect credentials."
    *                errorType: "AUTHORIZATION"
+   *        404:
+   *          description: User was not found
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "User with these credentials was not found."
+   *                errorType: "USERS"
    */
   private async signIn(
     options: APIHandlerOptions<{
