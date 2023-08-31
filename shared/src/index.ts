@@ -32,6 +32,7 @@ export {
 } from './libs/types/types.js';
 export { AuthApiPath } from './packages/auth/auth.js';
 export {
+  createSurveyValidationSchema,
   getSurveyCategories,
   PREFERENCES_OTHER_CATEGORY,
   type SurveyGetAllItemResponseDto,
