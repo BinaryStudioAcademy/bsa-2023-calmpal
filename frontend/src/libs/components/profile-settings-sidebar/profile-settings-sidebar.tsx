@@ -1,12 +1,20 @@
+import { useState } from 'react';
+
+import { type IconNames } from '#libs/enums/enums.js';
+
 import { Icon } from '../components.js';
 import { ProfileSettingsButton } from './profile-settings-button/profile-settings-button.js';
 import styles from './styles.module.scss';
 
-function handleClick(): void {
-  // Placeholder
-}
-
 const ProfileSettingsSidebar: React.FC = () => {
+  const [activeButton, setActiveButton] = useState<string>('');
+
+  function handleOnClick(name: IconNames) {
+    return () => {
+      setActiveButton(name);
+    };
+  }
+
   return (
     <div className={styles['container']}>
       <div className={styles['header']}>
@@ -25,15 +33,26 @@ const ProfileSettingsSidebar: React.FC = () => {
           </div>
         </div>
         <div className={styles['buttons-container']}>
-          <ProfileSettingsButton name={'notification'} onClick={handleClick}>
+          <ProfileSettingsButton
+            name={'notification'}
+            onClick={handleOnClick('notification')}
+            isActive={activeButton === 'notification'}
+          >
             Very long text to see if it will break
           </ProfileSettingsButton>
 
-          <ProfileSettingsButton name={'subscription'} onClick={handleClick}>
+          <ProfileSettingsButton
+            name={'subscription'}
+            onClick={handleOnClick('subscription')}
+            isActive={activeButton === 'subscription'}
+          >
             Test
           </ProfileSettingsButton>
 
-          <ProfileSettingsButton name={'sign-out'} onClick={handleClick}>
+          <ProfileSettingsButton
+            name={'sign-out'}
+            onClick={handleOnClick('sign-out')}
+          >
             Sign Out
           </ProfileSettingsButton>
         </div>
