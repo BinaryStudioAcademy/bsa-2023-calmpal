@@ -1,16 +1,17 @@
 import joi from 'joi';
 
 import { PREFERENCES_OTHER_CATEGORY } from '../constants/constants.js';
-import { SurveyValidationMessage } from '../enums/enums.js';
+import {
+  SurveyValidationMessage,
+  SurveyValidationRule,
+} from '../enums/enums.js';
 import { type SurveyInputDto } from '../types/types.js';
 
-const MINIMUM_ARRAY_LENGTH = 1;
-
-const surveyInput = joi.object<SurveyInputDto, true>({
+const createSurveyForm = joi.object<SurveyInputDto, true>({
   preferences: joi
     .array()
     .items(joi.string())
-    .min(MINIMUM_ARRAY_LENGTH)
+    .min(SurveyValidationRule.MINIMUM_PREFERENCE_LENGTH)
     .messages({
       'array.min': SurveyValidationMessage.OPTION_REQUIRED,
     }),
@@ -18,7 +19,8 @@ const surveyInput = joi.object<SurveyInputDto, true>({
     is: joi
       .array()
       .has(joi.string().valid(PREFERENCES_OTHER_CATEGORY))
-      .min(MINIMUM_ARRAY_LENGTH),
+      .min(SurveyValidationRule.MINIMUM_PREFERENCE_LENGTH)
+      .max(SurveyValidationRule.MAXIMUM_PREFERENCE_ITEM_LENGTH),
     then: joi.string().trim().required().messages({
       'any.required': SurveyValidationMessage.TEXT_REQUIRED,
       'string.empty': SurveyValidationMessage.TEXT_REQUIRED,
@@ -27,4 +29,4 @@ const surveyInput = joi.object<SurveyInputDto, true>({
   }),
 });
 
-export { surveyInput };
+export { createSurveyForm };

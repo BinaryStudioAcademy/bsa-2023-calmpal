@@ -8,5 +8,5 @@ export {
 } from './libs/types/types.js';
 export {
   createSurveyValidationSchema,
-  surveyInput as surveyInputValidationSchema,
+  createSurveyForm as surveyInputValidationSchema,
 } from './libs/validation-schemas/validation-schemas.js';

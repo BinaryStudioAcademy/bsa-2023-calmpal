@@ -1,4 +1,5 @@
 import { Header, Loader, Navigate } from '#libs/components/components.js';
+import { SIDEBAR_ROUTES } from '#libs/components/sidebar-wrapper/libs/constants.js';
 import { AppRoute, DataStatus } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
@@ -39,7 +40,7 @@ const Survey: React.FC = () => {
 
   return (
     <div className={styles['container']}>
-      <Header />
+      <Header routes={SIDEBAR_ROUTES} />
       {surveyPreferencesDataStatus === DataStatus.PENDING ? (
         <Loader />
       ) : (

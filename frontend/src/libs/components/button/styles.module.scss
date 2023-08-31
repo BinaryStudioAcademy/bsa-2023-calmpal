@@ -18,6 +18,11 @@
   background-color: var(--gray-300);
 }
 
+.primary:disabled {
+  background-color: var(--gray-400);
+  opacity: 0.9;
+}
+
 .secondary {
   display: inline-block;
   width: 100%;
@@ -38,4 +43,32 @@
   background-color: var(--white-alpha-80);
   border: 1px solid var(--white-alpha-80);
   cursor: default;
+}
+
+.primary:has(.loader),
+.secondary:has(.loader) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.loader {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--white);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }

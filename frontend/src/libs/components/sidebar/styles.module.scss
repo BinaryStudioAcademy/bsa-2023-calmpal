@@ -61,6 +61,12 @@
   cursor: pointer;
 }
 
-.icons-container a {
+.link {
   line-height: 0px;
+}
+
+@media (width <= 480px) {
+  .sidebar {
+    display: none;
+  }
 }
