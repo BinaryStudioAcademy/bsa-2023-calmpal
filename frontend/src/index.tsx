@@ -45,7 +45,7 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 element: <Auth />,
               },
               {
-                path: AppRoute.SURVEY,
+                path: AppRoute.SIGN_UP_SURVEY,
                 element: (
                   <ProtectedRoute>
                     <Survey />

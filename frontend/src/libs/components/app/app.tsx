@@ -25,10 +25,10 @@ const App: React.FC = () => {
   const hasNoSurvey =
     authenticatedUser &&
     !authenticatedUser.isSurveyCompleted &&
-    pathname !== AppRoute.SURVEY;
+    pathname !== AppRoute.SIGN_UP_SURVEY;
 
   if (hasNoSurvey) {
-    return <Navigate to={AppRoute.SURVEY} />;
+    return <Navigate to={AppRoute.SIGN_UP_SURVEY} />;
   }
 
   if (
