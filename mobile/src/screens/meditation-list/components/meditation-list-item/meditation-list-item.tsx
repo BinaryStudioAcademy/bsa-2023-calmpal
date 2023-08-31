@@ -17,7 +17,7 @@ type Properties = {
   duration: number;
 };
 
-const MeditationItem: React.FC<Properties> = ({ title, duration }) => {
+const MeditationListItem: React.FC<Properties> = ({ title, duration }) => {
   return (
     <View style={styles.container}>
       <Image
@@ -39,4 +39,4 @@ const MeditationItem: React.FC<Properties> = ({ title, duration }) => {
   );
 };
 
-export { MeditationItem };
+export { MeditationListItem };

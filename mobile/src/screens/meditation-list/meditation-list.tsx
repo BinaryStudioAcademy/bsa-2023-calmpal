@@ -3,7 +3,7 @@ import React from 'react';
 import { InputSearch, ScrollView, View } from '#libs/components/components';
 import { useSearch } from '#libs/hooks/hooks';
 
-import { MeditationItem } from './components/components';
+import { MeditationListItem } from './components/components';
 import { styles } from './styles';
 
 // type Topic = {
@@ -13,7 +13,7 @@ import { styles } from './styles';
 //   uri: string;
 // };
 
-const Meditation: React.FC = () => {
+const MeditationList: React.FC = () => {
   const mockedData = [
     { id: 0, title: '1Meditation for deep sleep', duration: 10 },
     { id: 1, title: 'Breathing meditation', duration: 100 },
@@ -32,7 +32,7 @@ const Meditation: React.FC = () => {
       <InputSearch placeholder="Search topic" />
       <ScrollView style={styles.contentContainer}>
         {filteredMeditationTopics.map((item) => (
-          <MeditationItem
+          <MeditationListItem
             title={item.title}
             duration={item.duration}
             key={item.id}
@@ -43,4 +43,4 @@ const Meditation: React.FC = () => {
   );
 };
 
-export { Meditation };
+export { MeditationList };
