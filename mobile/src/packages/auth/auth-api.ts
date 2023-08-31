@@ -3,6 +3,10 @@ import { BaseHttpApi } from '#libs/packages/api/api';
 import { type HTTP } from '#libs/packages/http/http';
 import { type Storage } from '#libs/packages/storage/storage';
 import {
+  type SurveyGetAllItemResponseDto,
+  type SurveyRequestDto,
+} from '#packages/survey/survey';
+import {
   type UserAuthResponseDto,
   type UserSignInRequestDto,
   type UserSignInResponseDto,
@@ -65,6 +69,22 @@ class AuthApi extends BaseHttpApi {
     );
 
     return await response.json<UserAuthResponseDto>();
+  }
+
+  public async createUserSurvey(
+    payload: SurveyRequestDto,
+  ): Promise<SurveyGetAllItemResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(AuthApiPath.SIGN_UP_SURVEY, {}),
+      {
+        method: 'POST',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify(payload),
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<SurveyGetAllItemResponseDto>();
   }
 }
 

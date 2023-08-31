@@ -22,10 +22,11 @@ type Parameters<T extends FieldValues = FieldValues> = {
 };
 
 type ReturnValue<T extends FieldValues = FieldValues> = {
+  watch: UseFormWatch<T>;
   control: Control<T, null>;
   errors: FieldErrors<T>;
+  isValid: boolean;
   handleSubmit: UseFormHandleSubmit<T>;
-  watch: UseFormWatch<T>;
   setValue: UseFormSetValue<T>;
   reset: UseFormReset<T>;
 };
@@ -48,19 +49,20 @@ const useAppForm = <T extends FieldValues = FieldValues>({
   }
 
   const {
+    watch,
     control,
     handleSubmit,
-    formState: { errors },
-    watch,
     setValue,
     reset,
+    formState: { errors, isValid },
   } = useForm<T>(parameters);
 
   return {
+    watch,
     control,
     errors,
+    isValid,
     handleSubmit,
-    watch,
     setValue,
     reset,
   };
