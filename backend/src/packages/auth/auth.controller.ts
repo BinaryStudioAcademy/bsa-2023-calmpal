@@ -180,6 +180,15 @@ class AuthController extends BaseController {
    *                    $ref: '#/components/schemas/User'
    *                  token:
    *                    type: string
+   *        401:
+   *          description: Unauthorized
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "Incorrect credentials."
+   *                errorType: "AUTHORIZATION"
    */
   private async signIn(
     options: APIHandlerOptions<{
