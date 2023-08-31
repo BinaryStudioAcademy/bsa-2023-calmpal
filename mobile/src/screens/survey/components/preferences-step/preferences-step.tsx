@@ -9,9 +9,7 @@ import {
 } from '#packages/survey/survey';
 import {
   DEFAULT_SURVEY_PAYLOAD,
-  INVALID_ARRAY_INDEX,
   PREFERENCES_CATEGORIES,
-  SPLICE_COUNT,
   TEXTAREA_MAX_LENGTH,
   TEXTAREA_ROWS_COUNT,
 } from '#screens/survey/libs/constants';
@@ -40,17 +38,17 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
 
   const handleFieldChange = useCallback(
     (option: string) => {
-      const index = categoriesValue.indexOf(option);
-
-      if (index === INVALID_ARRAY_INDEX) {
-        onCategoryChange([...categoriesValue, option]);
+      if (categoriesValue.includes(option)) {
+        onCategoryChange(
+          categoriesValue.filter((category) => category !== option),
+        );
 
         return;
       }
 
-      categoriesValue.splice(index, SPLICE_COUNT);
-      onCategoryChange(categoriesValue);
+      onCategoryChange([...categoriesValue, option]);
     },
+
     [categoriesValue, onCategoryChange],
   );
 
