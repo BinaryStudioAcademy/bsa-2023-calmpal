@@ -1,11 +1,6 @@
 import React from 'react';
 
-import {
-  Button,
-  Input,
-  ScrollView,
-  SurveyCategory,
-} from '#libs/components/components';
+import { Button, Input, ScrollView } from '#libs/components/components';
 import { useAppForm, useCallback, useFormController } from '#libs/hooks/hooks';
 import { type FormControllerRenderProps } from '#libs/types/types';
 import {
@@ -21,6 +16,7 @@ import {
   TEXTAREA_ROWS_COUNT,
 } from '#screens/survey/libs/constants';
 
+import { SurveyCategory } from '../components';
 import { styles } from './styles';
 
 type Properties = {

@@ -5,7 +5,6 @@ export { Link } from './link/link';
 export { Loader } from './loader/loader';
 export { ProtectedRoute } from './protected-route/protected-route';
 export { SignBackground } from './sign-background/sign-background';
-export { SurveyCategory } from './survey-category/survey-category';
 export { Toast } from './toast/toast';
 export {
   ScrollView,
