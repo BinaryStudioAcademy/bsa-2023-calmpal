@@ -5,9 +5,10 @@ import { AppColor } from '#libs/enums/enums';
 import { debounce } from '#libs/helpers/helpers';
 import {
   useAppForm,
+  useCallback,
   useEffect,
+  useFocusEffect,
   useFormController,
-  useRef,
 } from '#libs/hooks/hooks';
 
 import { DEFAULT_SEARCH_PAYLOAD, SEARCH_TIMEOUT } from './libs/constants';
@@ -19,7 +20,7 @@ type Properties = {
 };
 
 const InputSearch: React.FC<Properties> = ({ placeholder, setSearchQuery }) => {
-  const { control } = useAppForm({
+  const { control, reset } = useAppForm({
     defaultValues: DEFAULT_SEARCH_PAYLOAD,
   });
   const { field } = useFormController({
@@ -28,21 +29,29 @@ const InputSearch: React.FC<Properties> = ({ placeholder, setSearchQuery }) => {
   });
   const { value, onChange } = field;
 
-  const debouncedReference = useRef<ReturnType<typeof debounce>>();
+  const debounceHandleSearch = debounce(() => {
+    setSearchQuery(value);
+  }, SEARCH_TIMEOUT);
 
   useEffect(() => {
-    debouncedReference.current?.clear();
+    debounceHandleSearch();
 
-    debouncedReference.current = debounce(() => {
-      setSearchQuery(value);
-    }, SEARCH_TIMEOUT);
-
-    debouncedReference.current();
-  }, [value, setSearchQuery]);
+    return () => {
+      debounceHandleSearch.clear();
+    };
+  }, [value, debounceHandleSearch]);
 
   const handleInputChange = (text: string): void => {
     onChange(text);
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        reset(DEFAULT_SEARCH_PAYLOAD);
+      };
+    }, [reset]),
+  );
 
   return (
     <TextInput
