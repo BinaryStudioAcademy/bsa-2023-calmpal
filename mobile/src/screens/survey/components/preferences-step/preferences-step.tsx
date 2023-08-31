@@ -10,7 +10,6 @@ import {
 import {
   DEFAULT_SURVEY_PAYLOAD,
   PREFERENCES_CATEGORIES,
-  TEXTAREA_MAX_LENGTH,
   TEXTAREA_ROWS_COUNT,
 } from '#screens/survey/libs/constants';
 
@@ -82,7 +81,6 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
           errors={errors}
           name="other"
           placeholder="Enter your preferences"
-          maxLength={TEXTAREA_MAX_LENGTH}
           rowsCount={TEXTAREA_ROWS_COUNT}
         />
       )}

@@ -20,7 +20,6 @@ type Properties<T extends FormFieldValues> = {
   isSecure?: boolean;
   placeholder: string;
   rowsCount?: number;
-  maxLength?: number;
 };
 
 const Input = <T extends FormFieldValues>({
@@ -31,7 +30,6 @@ const Input = <T extends FormFieldValues>({
   isSecure = false,
   placeholder,
   rowsCount,
-  maxLength,
 }: Properties<T>): JSX.Element => {
   const [isFocused, setIsFocused] = useState(false);
   const { field } = useFormController({ name, control });
@@ -62,7 +60,6 @@ const Input = <T extends FormFieldValues>({
           onBlur={handeBlur}
           multiline={true}
           numberOfLines={rowsCount}
-          maxLength={maxLength}
           style={styles.otherTextInput}
           placeholder={placeholder}
           placeholderTextColor={styles.otherPlaceholder.color}

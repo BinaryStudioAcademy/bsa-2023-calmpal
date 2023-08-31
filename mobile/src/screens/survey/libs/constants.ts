@@ -3,7 +3,6 @@ import {
   type SurveyInputDto,
 } from '#packages/survey/survey';
 
-const TEXTAREA_MAX_LENGTH = 1000;
 const TEXTAREA_ROWS_COUNT = 3;
 
 const SPLICE_COUNT = 1;
@@ -26,6 +25,5 @@ export {
   DEFAULT_SURVEY_PAYLOAD,
   PREFERENCES_CATEGORIES,
   SPLICE_COUNT,
-  TEXTAREA_MAX_LENGTH,
   TEXTAREA_ROWS_COUNT,
 };
