@@ -16,7 +16,7 @@ const Button: React.FC<Properties> = ({
   label,
   onPress,
   isDisabled = false,
-  type: style = 'solid',
+  type = 'solid',
 }) => {
   const handleOnPress = (): void => {
     onPress();
@@ -26,8 +26,8 @@ const Button: React.FC<Properties> = ({
     <Pressable
       style={[
         styles.button,
-        style === 'solid' && styles.buttonSolid,
-        style === 'outlined' && styles.buttonOutlined,
+        type === 'solid' && styles.buttonSolid,
+        type === 'outlined' && styles.buttonOutlined,
         isDisabled && styles.buttonDisabled,
       ]}
       onPress={handleOnPress}
@@ -36,8 +36,8 @@ const Button: React.FC<Properties> = ({
       <Text
         style={[
           styles.label,
-          style === 'solid' && styles.labelSolid,
-          style === 'outlined' && styles.labelOutlined,
+          type === 'solid' && styles.labelSolid,
+          type === 'outlined' && styles.labelOutlined,
           isDisabled && styles.labelDisabled,
         ]}
       >
