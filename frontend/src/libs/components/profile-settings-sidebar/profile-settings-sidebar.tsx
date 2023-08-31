@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { type IconNames } from '#libs/enums/enums.js';
 
@@ -9,11 +9,9 @@ import styles from './styles.module.scss';
 const ProfileSettingsSidebar: React.FC = () => {
   const [activeButton, setActiveButton] = useState<string>('');
 
-  function handleOnClick(name: IconNames) {
-    return () => {
-      setActiveButton(name);
-    };
-  }
+  const handleOnClick = useCallback((name: IconNames) => {
+    setActiveButton(name);
+  }, []);
 
   return (
     <div className={styles['container']}>
@@ -35,7 +33,7 @@ const ProfileSettingsSidebar: React.FC = () => {
         <div className={styles['buttons-container']}>
           <ProfileSettingsButton
             name={'notification'}
-            onClick={handleOnClick('notification')}
+            onClick={handleOnClick}
             isActive={activeButton === 'notification'}
           >
             Very long text to see if it will break
@@ -43,16 +41,13 @@ const ProfileSettingsSidebar: React.FC = () => {
 
           <ProfileSettingsButton
             name={'subscription'}
-            onClick={handleOnClick('subscription')}
+            onClick={handleOnClick}
             isActive={activeButton === 'subscription'}
           >
             Test
           </ProfileSettingsButton>
 
-          <ProfileSettingsButton
-            name={'sign-out'}
-            onClick={handleOnClick('sign-out')}
-          >
+          <ProfileSettingsButton name={'sign-out'} onClick={handleOnClick}>
             Sign Out
           </ProfileSettingsButton>
         </div>
