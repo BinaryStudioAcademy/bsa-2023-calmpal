@@ -1,23 +1,15 @@
-import { config } from '#libs/packages/config/config.js';
 import { logger } from '#libs/packages/logger/logger.js';
+import { s3Package } from '#libs/packages/s3/s3.js';
 
-import { AWSService } from './aws.service.js';
 import { FileController } from './file.controller.js';
 import { FileModel } from './file.model.js';
 import { FileRepository } from './file.repository.js';
 import { FileService } from './file.service.js';
 
-const awsService = new AWSService({
-  region: config.ENV.AWS.REGION,
-  accessKeyId: config.ENV.AWS.ACCESS_KEY_ID,
-  secretAccessKey: config.ENV.AWS.SECRET_ACCESS_KEY,
-  bucketName: config.ENV.AWS.BUCKET_NAME,
-});
-
 const fileRepository = new FileRepository(FileModel);
 const fileService = new FileService({
   fileRepository,
-  awsService: awsService,
+  s3Package,
 });
 const fileController = new FileController(logger, fileService);
 

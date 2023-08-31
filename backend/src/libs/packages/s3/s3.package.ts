@@ -16,14 +16,14 @@ import { type ValueOf } from '#libs/types/types.js';
 import { SEC_IN_HOUR } from './libs/constants/constants.js';
 import { type AWSFileUploadRequestDto } from './libs/types/types.js';
 
-type AWSServiceDependencies = {
+type S3PackageDependencies = {
   region: string;
   accessKeyId: string;
   secretAccessKey: string;
   bucketName: string;
 };
 
-class AWSService {
+class S3Package {
   private region: string;
   private bucketName: string;
 
@@ -34,7 +34,7 @@ class AWSService {
     accessKeyId,
     secretAccessKey,
     bucketName,
-  }: AWSServiceDependencies) {
+  }: S3PackageDependencies) {
     this.region = region;
     this.bucketName = bucketName;
 
@@ -102,4 +102,4 @@ class AWSService {
   }
 }
 
-export { AWSService };
+export { S3Package };
