@@ -1,5 +1,5 @@
-import { Header, Navigate } from '#libs/components/components.js';
-import { AppRoute } from '#libs/enums/enums.js';
+import { Header, Loader, Navigate } from '#libs/components/components.js';
+import { AppRoute, DataStatus } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -13,9 +13,12 @@ import styles from './styles.module.scss';
 
 const Survey: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { userId, isSurveyCompleted } = useAppSelector(({ auth }) => ({
-    userId: (auth.authenticatedUser as UserAuthResponseDto).id,
-    isSurveyCompleted: auth.authenticatedUser?.isSurveyCompleted,
+  const {
+    user: { id: userId, isSurveyCompleted },
+    surveyPreferencesDataStatus,
+  } = useAppSelector(({ auth }) => ({
+    user: auth.authenticatedUser as UserAuthResponseDto,
+    surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
   }));
 
   const handleSubmit = useCallback(
@@ -38,13 +41,18 @@ const Survey: React.FC = () => {
     <div className={styles['container']}>
       <Header />
 
-      <div className={styles['survey']}>
-        <div className={styles['name']}>
-          Serenity is your trusted companion on the journey to mental well-being
-        </div>
+      {surveyPreferencesDataStatus === DataStatus.PENDING ? (
+        <Loader />
+      ) : (
+        <div className={styles['survey']}>
+          <div className={styles['name']}>
+            Serenity is your trusted companion on the journey to mental
+            well-being
+          </div>
 
-        <PreferencesStep onSubmit={handleSubmit} />
-      </div>
+          <PreferencesStep onSubmit={handleSubmit} />
+        </div>
+      )}
     </div>
   );
 };

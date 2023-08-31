@@ -11,15 +11,12 @@ import { actions as authActions } from '#slices/auth/auth.js';
 const App: React.FC = () => {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
-  const {
-    authenticatedUser,
-    authenticatedUserDataStatus,
-    surveyPreferencesDataStatus,
-  } = useAppSelector(({ auth }) => ({
-    authenticatedUser: auth.authenticatedUser,
-    authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
-    surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
-  }));
+  const { authenticatedUser, authenticatedUserDataStatus } = useAppSelector(
+    ({ auth }) => ({
+      authenticatedUser: auth.authenticatedUser,
+      authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
+    }),
+  );
 
   useEffect(() => {
     void dispatch(authActions.getAuthenticatedUser());
@@ -29,14 +26,14 @@ const App: React.FC = () => {
     authenticatedUser &&
     !authenticatedUser.isSurveyCompleted &&
     pathname !== AppRoute.SURVEY;
+
   if (hasNoSurvey) {
     return <Navigate to={AppRoute.SURVEY} />;
   }
 
   if (
     authenticatedUserDataStatus === DataStatus.IDLE ||
-    authenticatedUserDataStatus === DataStatus.PENDING ||
-    surveyPreferencesDataStatus === DataStatus.PENDING
+    authenticatedUserDataStatus === DataStatus.PENDING
   ) {
     return <Loader />;
   }
