@@ -8,7 +8,6 @@ export { ProtectedRoute } from './protected-route/protected-route.js';
 export { RouterProvider } from './router-provider/router-provider.jsx';
 export { Sidebar } from './sidebar/sidebar.js';
 export { SidebarWrapper } from './sidebar-wrapper/sidebar-wrapper.js';
-export { SurveyCategory } from './survey-category/survey-category.js';
 export { Switch } from './switch/switch.js';
 export { Toast } from './toast/toast.js';
 export { Provider as StoreProvider } from 'react-redux';

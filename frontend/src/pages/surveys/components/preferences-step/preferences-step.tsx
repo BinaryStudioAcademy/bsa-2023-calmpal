@@ -1,4 +1,4 @@
-import { Button, Input, SurveyCategory } from '#libs/components/components.js';
+import { Button, Input } from '#libs/components/components.js';
 import {
   useAppForm,
   useCallback,
@@ -18,6 +18,7 @@ import {
   TEXTAREA_ROWS_COUNT,
 } from '#pages/surveys/libs/constants.js';
 
+import { SurveyCategory } from '../survey-category/survey-category.js';
 import styles from './styles.module.scss';
 
 type Properties = {
