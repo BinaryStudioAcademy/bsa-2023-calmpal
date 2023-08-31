@@ -13,13 +13,13 @@ import styles from './styles.module.scss';
 
 const Survey: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { userId, isSurveyCompleted, surveyPreferencesDataStatus } =
-    useAppSelector(({ auth }) => ({
-      userId: (auth.authenticatedUser as UserAuthResponseDto).id,
-      isSurveyCompleted: (auth.authenticatedUser as UserAuthResponseDto)
-        .isSurveyCompleted,
-      surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
-    }));
+  const {
+    user: { id: userId, isSurveyCompleted },
+    surveyPreferencesDataStatus,
+  } = useAppSelector(({ auth }) => ({
+    user: auth.authenticatedUser as UserAuthResponseDto,
+    surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
+  }));
 
   const handleSubmit = useCallback(
     (options: string[]) => {
