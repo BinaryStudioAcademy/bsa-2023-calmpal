@@ -37,11 +37,7 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
               },
               {
                 path: AppRoute.SIGN_IN,
-                element: (
-                  <>
-                    <Auth />
-                  </>
-                ),
+                element: <Auth />,
               },
               {
                 path: AppRoute.SIGN_UP,
