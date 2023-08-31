@@ -17,6 +17,7 @@ type Properties<T extends FormFieldValues> = {
   placeholder?: string;
   type?: 'text' | 'email' | 'password';
   rowsCount?: number;
+  maxLength?: number;
 };
 
 const Input = <T extends FormFieldValues>({
@@ -27,6 +28,7 @@ const Input = <T extends FormFieldValues>({
   placeholder = '',
   type = 'text',
   rowsCount,
+  maxLength,
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
 
@@ -42,6 +44,7 @@ const Input = <T extends FormFieldValues>({
           {...field}
           rows={rowsCount}
           placeholder={placeholder}
+          maxLength={maxLength}
           className={getValidClassNames(
             styles['textarea'],
             hasError && styles['error'],
@@ -52,6 +55,7 @@ const Input = <T extends FormFieldValues>({
           {...field}
           type={type}
           placeholder={placeholder}
+          maxLength={maxLength}
           className={getValidClassNames(
             styles['input'],
             hasError && styles['error'],

@@ -8,6 +8,7 @@ import {
   getSurveyCategories,
   type SurveyInputDto,
   surveyInputValidationSchema,
+  SurveyValidationRule,
 } from '#packages/survey/survey.js';
 import {
   DEFAULT_SURVEY_PAYLOAD,
@@ -86,6 +87,7 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
             errors={errors}
             name="other"
             placeholder="Text"
+            maxLength={SurveyValidationRule.MAXIMUM_PREFERENCE_ITEM_LENGTH}
             rowsCount={TEXTAREA_ROWS_COUNT}
           />
         )}
