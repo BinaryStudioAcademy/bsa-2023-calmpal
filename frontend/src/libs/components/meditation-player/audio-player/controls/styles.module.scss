@@ -2,24 +2,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 45px;
   margin-bottom: 40px;
 }
 
-button:nth-child(1) {
-  margin-right: 40px;
-}
-
-button:nth-child(2),
-button:nth-child(3) {
-  margin-right: 21px;
-}
-
-button:nth-child(4) {
-  margin-right: 40px;
+.button-wrapper {
+  display: flex;
+  gap: 21px;
 }
 
 @media (width < 426px) {
-  .controls button:not(:last-child) {
-    margin-right: 15px;
+  .controls {
+    gap: 20px;
+  }
+
+  .button-wrapper {
+    gap: 27px;
   }
 }

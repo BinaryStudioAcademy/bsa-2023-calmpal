@@ -94,7 +94,7 @@ const Controls: React.FC<Properties> = ({
     };
   }, [isPlaying, audioReference, repeat]);
 
-  const togglePlayPause = useCallback((): void => {
+  const handlePlayToggle = useCallback((): void => {
     setIsPlaying((previous) => !previous);
   }, []);
 
@@ -104,16 +104,20 @@ const Controls: React.FC<Properties> = ({
         <Button onClick={handlePrevious} style="rounded-transparent">
           <Icon name={IconNameToIcon.PREVIOUS} />
         </Button>
-        <Button onClick={handleSkipBackward} style="rounded-transparent">
-          <Icon name={IconNameToIcon.BACKWARD} />
-        </Button>
+        <div className={styles['button-wrapper']}>
+          <Button onClick={handleSkipBackward} style="rounded-transparent">
+            <Icon name={IconNameToIcon.BACKWARD} />
+          </Button>
 
-        <Button onClick={togglePlayPause} style="rounded">
-          <Icon name={isPlaying ? IconNameToIcon.PAUSE : IconNameToIcon.PLAY} />
-        </Button>
-        <Button onClick={handleSkipForward} style="rounded-transparent">
-          <Icon name={IconNameToIcon.FORWARD} />
-        </Button>
+          <Button onClick={handlePlayToggle} style="rounded">
+            <Icon
+              name={isPlaying ? IconNameToIcon.PAUSE : IconNameToIcon.PLAY}
+            />
+          </Button>
+          <Button onClick={handleSkipForward} style="rounded-transparent">
+            <Icon name={IconNameToIcon.FORWARD} />
+          </Button>
+        </div>
         <Button onClick={onNextTrack} style="rounded-transparent">
           <Icon name={IconNameToIcon.NEXT} />
         </Button>
