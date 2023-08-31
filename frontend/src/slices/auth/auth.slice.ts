@@ -5,7 +5,7 @@ import { type ValueOf } from '#libs/types/types.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import {
-  createUserSurveyPreferences,
+  createUserSurvey,
   getAuthenticatedUser,
   signIn,
   signUp,
@@ -67,11 +67,11 @@ const { reducer, actions, name } = createSlice({
       state.authenticatedUserDataStatus = DataStatus.REJECTED;
     });
 
-    builder.addCase(createUserSurveyPreferences.pending, (state) => {
+    builder.addCase(createUserSurvey.pending, (state) => {
       state.surveyPreferencesDataStatus = DataStatus.PENDING;
     });
 
-    builder.addCase(createUserSurveyPreferences.fulfilled, (state, action) => {
+    builder.addCase(createUserSurvey.fulfilled, (state, action) => {
       if (state.authenticatedUser) {
         state.authenticatedUser.isSurveyCompleted = action.payload;
       }
@@ -79,7 +79,7 @@ const { reducer, actions, name } = createSlice({
       state.surveyPreferencesDataStatus = DataStatus.FULFILLED;
     });
 
-    builder.addCase(createUserSurveyPreferences.rejected, (state) => {
+    builder.addCase(createUserSurvey.rejected, (state) => {
       state.surveyPreferencesDataStatus = DataStatus.REJECTED;
     });
   },

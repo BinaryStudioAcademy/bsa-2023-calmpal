@@ -47,15 +47,15 @@ const getAuthenticatedUser = createAsyncThunk<
   return authApi.getAuthenticatedUser();
 });
 
-const createUserSurveyPreferences = createAsyncThunk<
+const createUserSurvey = createAsyncThunk<
   boolean,
   SurveyRequestDto,
   AsyncThunkConfig
 >(`${sliceName}/create-user-survey-preferences`, async (payload, { extra }) => {
   const { authApi } = extra;
-  const { preferences } = await authApi.createUserSurveyPreferences(payload);
+  const { preferences } = await authApi.createUserSurvey(payload);
 
   return preferences.length > EMPTY_ARRAY_LENGTH;
 });
 
-export { createUserSurveyPreferences, getAuthenticatedUser, signIn, signUp };
+export { createUserSurvey, getAuthenticatedUser, signIn, signUp };
