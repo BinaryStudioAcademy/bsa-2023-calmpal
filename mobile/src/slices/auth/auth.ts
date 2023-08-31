@@ -1,5 +1,5 @@
 import {
-  createUserSurveyPreferences,
+  createUserSurvey,
   getAuthenticatedUser,
   signIn,
   signUp,
@@ -11,7 +11,7 @@ const allActions = {
   signUp,
   signIn,
   getAuthenticatedUser,
-  createUserSurveyPreferences,
+  createUserSurvey,
 };
 
 export { allActions as actions };

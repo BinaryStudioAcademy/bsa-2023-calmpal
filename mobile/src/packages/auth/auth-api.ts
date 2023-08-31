@@ -71,7 +71,7 @@ class AuthApi extends BaseHttpApi {
     return await response.json<UserAuthResponseDto>();
   }
 
-  public async createUserSurveyPreferences(
+  public async createUserSurvey(
     payload: SurveyRequestDto,
   ): Promise<SurveyGetAllItemResponseDto> {
     const response = await this.load(
