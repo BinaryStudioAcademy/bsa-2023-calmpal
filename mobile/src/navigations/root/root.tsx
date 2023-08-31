@@ -47,22 +47,14 @@ const Root: React.FC = () => {
     return <Loader />;
   }
 
-  const hasNoSurvey = authenticatedUser && !authenticatedUser.isSurveyCompleted;
-  if (hasNoSurvey) {
-    return <Survey />;
-  }
-
-  if (isSurveyCompleted) {
-    return <Main />;
-  }
-
   return (
     <NativeStack.Navigator screenOptions={screenOptions}>
       {authenticatedUser ? (
-        <>
+        isSurveyCompleted ? (
           <NativeStack.Screen name={RootScreenName.MAIN} component={Main} />
+        ) : (
           <NativeStack.Screen name={RootScreenName.SURVEY} component={Survey} />
-        </>
+        )
       ) : (
         <>
           <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
