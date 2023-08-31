@@ -1,7 +1,6 @@
 export { type AsyncThunkConfig } from './async-thunk-config.type.js';
 export {
   type FormControl,
-  type FormControllerRenderProps,
   type FormFieldErrors,
   type FormFieldPath,
   type FormFieldValues,
