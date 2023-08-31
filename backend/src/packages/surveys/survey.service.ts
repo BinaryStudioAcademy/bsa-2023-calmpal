@@ -41,7 +41,7 @@ class SurveyService implements Service {
     if (user.isSurveyCompleted) {
       const item = await this.surveyRepository.update(payload);
 
-      return item ? item.toObject() : null;
+      return item?.toObject() ?? null;
     }
 
     const item = await this.surveyRepository.create(
