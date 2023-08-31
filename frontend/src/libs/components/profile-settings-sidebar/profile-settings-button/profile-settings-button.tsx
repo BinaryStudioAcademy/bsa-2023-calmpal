@@ -18,7 +18,7 @@ const ProfileSettingsButton: React.FC<ProfileSettingsButtonProperties> = ({
 }) => {
   return (
     <button className={styles['profile-button']} onClick={onClick}>
-      <Icon name={name} />
+      <Icon name={name} className={'profile-button-background'} />
       <div className={styles['text-container']}>
         <span className={styles['profile-button-text']}>{children}</span>
         {isActive && <Icon name={'arrow'} />}
