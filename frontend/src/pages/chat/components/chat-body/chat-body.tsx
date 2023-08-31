@@ -23,13 +23,13 @@ const ChatBody: React.FC = () => {
   return (
     <>
       <section className={styles['chat-body']}>
-        {messages.map(({ sender, message }, index) => {
+        {messages.map(({ sender, message, id }) => {
           const isUser = sender === ChatRole.USER;
 
           return isUser ? (
-            <UserMessage key={index} messages={message} />
+            <UserMessage key={id} messages={message} />
           ) : (
-            <BotMessage key={index} messages={message} />
+            <BotMessage key={id} messages={message} />
           );
         })}
       </section>
