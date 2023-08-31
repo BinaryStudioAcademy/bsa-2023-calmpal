@@ -41,6 +41,13 @@ import { AuthApiPath } from './libs/enums/enums.js';
  *            format: date-time
  *          isSurveyCompleted:
  *            type: boolean
+ *      Error:
+ *        type: object
+ *        properties:
+ *          message:
+ *            type: string
+ *          errorType:
+ *            type: string
  */
 class AuthController extends BaseController {
   private authService: AuthService;
@@ -122,19 +129,14 @@ class AuthController extends BaseController {
    *                  token:
    *                    type: string
    *        400:
-   *          description: Bad request. User already exists.
+   *          description: Bad request. User already exists
    *          content:
    *            application/json:
    *              schema:
-   *                type: object
-   *                properties:
-   *                  message:
-   *                    type: string
-   *                  errorType:
-   *                    type: string
-   *                example:
-   *                  message: "User already exists."
-   *                  errorType: "AUTHORIZATION"
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "User already exists."
+   *                errorType: "AUTHORIZATION"
    */
   private async signUp(
     options: APIHandlerOptions<{
