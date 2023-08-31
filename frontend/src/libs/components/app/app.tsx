@@ -21,7 +21,6 @@ const App: React.FC = () => {
     return <Loader />;
   }
 
-  // return <MeditationList />
   return <RouterOutlet />;
 };
 
