@@ -84,7 +84,7 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
           control={control}
           errors={errors}
           name="textarea"
-          placeholder="Text"
+          placeholder="Enter your preferences"
           maxLength={TEXTAREA_MAX_LENGTH}
           rowsCount={TEXTAREA_ROWS_COUNT}
         />

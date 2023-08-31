@@ -65,7 +65,7 @@ const Input = <T extends FormFieldValues>({
           numberOfLines={rowsCount}
           maxLength={maxLength}
           style={styles.otherTextInput}
-          placeholder="Enter your preferences"
+          placeholder={placeholder}
           placeholderTextColor={styles.otherPlaceholder.color}
         />
       ) : (
