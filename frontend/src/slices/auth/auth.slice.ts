@@ -67,10 +67,8 @@ const { reducer, actions, name } = createSlice({
       state.surveyPreferencesDataStatus = DataStatus.PENDING;
     });
     builder.addCase(createUserSurvey.fulfilled, (state, action) => {
-      if (state.authenticatedUser) {
-        state.authenticatedUser.isSurveyCompleted = action.payload;
-      }
-
+      (state.authenticatedUser as UserAuthResponseDto).isSurveyCompleted =
+        action.payload;
       state.surveyPreferencesDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(createUserSurvey.rejected, (state) => {
