@@ -15,7 +15,6 @@ type State = {
   authenticatedUser: UserAuthResponseDto | null;
   authenticatedUserDataStatus: ValueOf<typeof DataStatus>;
   surveyPreferencesDataStatus: ValueOf<typeof DataStatus>;
-=======
 };
 
 const initialState: State = {
