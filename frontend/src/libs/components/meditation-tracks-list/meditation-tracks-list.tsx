@@ -1,4 +1,4 @@
-import { MeditationTrack } from './meditation-item/meditation-item.js';
+import { MeditationTrack } from './meditation-track/meditation-track.js';
 import styles from './styles.module.scss';
 
 const mockedImageLink = './images/track-background-336x480.jpg';
@@ -34,7 +34,7 @@ const mockedTracks = [
   },
 ];
 
-const MeditationList: React.FC = () => {
+const MeditationTracksList: React.FC = () => {
   return (
     <>
       <div className={styles['container']}>
@@ -48,4 +48,4 @@ const MeditationList: React.FC = () => {
   );
 };
 
-export { MeditationList };
+export { MeditationTracksList };

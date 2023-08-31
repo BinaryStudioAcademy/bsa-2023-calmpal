@@ -5,7 +5,6 @@ import { createRoot } from 'react-dom/client';
 
 import {
   App,
-  MeditationList,
   ProtectedRoute,
   RouterProvider,
   SidebarWrapper,
@@ -15,6 +14,7 @@ import {
 import { AppRoute } from '#libs/enums/enums.js';
 import { store } from '#libs/packages/store/store.js';
 import { Auth } from '#pages/auth/auth.js';
+import { MeditationPlayList } from '#pages/meditation-play-list/meditation-play-list.js';
 import { Root } from '#pages/root/root.js';
 
 createRoot(document.querySelector('#root') as HTMLElement).render(
@@ -41,7 +41,7 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 element: (
                   <ProtectedRoute>
                     <SidebarWrapper>
-                      <MeditationList />
+                      <MeditationPlayList />
                     </SidebarWrapper>
                   </ProtectedRoute>
                 ),
