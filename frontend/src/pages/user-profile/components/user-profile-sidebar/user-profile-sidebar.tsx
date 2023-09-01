@@ -1,4 +1,5 @@
 import { useAppSelector } from '#libs/hooks/hooks.js';
+import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import styles from './styles.module.scss';
 
@@ -19,7 +20,7 @@ const UserProfileSidebar: React.FC = () => {
           />
         </div>
         <span className={styles['user-name']}>
-          {authenticatedUser?.fullName}
+          {(authenticatedUser as UserAuthResponseDto).fullName}
         </span>
       </div>
     </div>
