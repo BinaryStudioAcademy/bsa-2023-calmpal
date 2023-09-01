@@ -1,10 +1,3 @@
-type IconName =
-  | 'arrow'
-  | 'plus'
-  | 'sign-out'
-  | 'avatar'
-  | 'notification'
-  | 'subscription'
-  | 'play';
+type IconName = 'home' | 'logo' | 'meditation' | 'play';
 
 export { type IconName };
