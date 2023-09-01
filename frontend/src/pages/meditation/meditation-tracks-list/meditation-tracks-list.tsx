@@ -1,4 +1,4 @@
-import { mockedTracks } from '../constants/constants.js';
+import { mockedTracks } from '../libs/constants/constants.js';
 import { MeditationTrack } from './meditation-track/meditation-track.js';
 import styles from './styles.module.scss';
 

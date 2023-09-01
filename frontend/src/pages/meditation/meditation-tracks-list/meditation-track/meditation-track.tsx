@@ -1,13 +1,7 @@
 import { Icon, Link } from '#libs/components/components.js';
 
+import { type Track } from '../../libs/types/types.js';
 import styles from './styles.module.scss';
-
-type Track = {
-  id: number;
-  title: string;
-  duration: string;
-  image: string;
-};
 
 type Properties = {
   track: Track;
