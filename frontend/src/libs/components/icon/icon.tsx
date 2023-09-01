@@ -1,4 +1,4 @@
-import { iconNameToPlainSvgMap } from '#libs/maps/icon-name-to-plain-svg.js';
+import { iconNameToIcon } from '#libs/maps/icon-name-to-plain-svg.js';
 import { type IconName } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
@@ -9,7 +9,7 @@ type Properties = {
 };
 
 const Icon: React.FC<Properties> = ({ name, className = '' }) => {
-  const SelectedIcon = iconNameToPlainSvgMap[name];
+  const SelectedIcon = iconNameToIcon[name];
 
   const cssClass = styles[className] ?? '';
 

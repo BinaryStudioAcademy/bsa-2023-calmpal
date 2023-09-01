@@ -1,5 +1,5 @@
+import { mockedTracks } from '../constants/constants.js';
 import { MeditationTrack } from './meditation-track/meditation-track.js';
-import { mockedTracks } from './mock/mocked-tracks.js';
 import styles from './styles.module.scss';
 
 const MeditationTracksList: React.FC = () => {

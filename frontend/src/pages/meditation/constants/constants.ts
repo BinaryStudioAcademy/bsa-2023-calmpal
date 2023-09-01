@@ -25,6 +25,6 @@ const mockedTracks = [
     duration: '45 min',
     image: meditationListPlaceholder,
   },
-];
+] as const;
 
 export { mockedTracks };
