@@ -5,7 +5,7 @@ export {
   ExceptionMessage,
   ServerErrorType,
 } from './libs/enums/enums.js';
-export { type IconNames } from './libs/enums/icon-name.enum.js';
+export { type IconNames } from './libs/enums/enums.js';
 export {
   ApplicationError,
   AuthError,

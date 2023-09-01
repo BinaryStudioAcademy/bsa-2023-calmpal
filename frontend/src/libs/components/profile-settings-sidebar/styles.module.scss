@@ -1,8 +1,6 @@
 .container {
   max-width: 349px;
   min-height: 100vh;
-
-  // For the second variable in the linear-gradient function the --blue-100 value is used as a replacement for #e5f0ff, if the slight difference is not acceptable, then the --blue-50 could be created with the value #e5f0ff
   background: linear-gradient(
     180deg,
     var(--transparent) 0%,
