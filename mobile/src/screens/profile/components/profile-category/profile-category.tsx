@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Text, TouchableOpacity, View } from '#libs/components/components';
+import { Pressable, Text, View } from '#libs/components/components';
 import { useState } from '#libs/hooks/hooks';
 
 import { styles } from './styles';
@@ -21,7 +21,7 @@ const ProfileCategory: React.FC<ProfileCategoryProperties> = ({
   };
 
   return (
-    <TouchableOpacity onPress={handlePress}>
+    <Pressable onPress={handlePress}>
       <View
         style={[styles.container, isPressed ? styles.pressed : styles.default]}
       >
@@ -30,7 +30,7 @@ const ProfileCategory: React.FC<ProfileCategoryProperties> = ({
           <Text style={styles.title}>{title}</Text>
         </View>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

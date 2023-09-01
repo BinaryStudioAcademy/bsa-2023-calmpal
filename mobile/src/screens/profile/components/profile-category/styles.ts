@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   },
 
   default: {
+    backgroundColor: AppColor.WHITE,
     shadowColor: AppColor.PURPLE_100,
     shadowOffset: {
       width: 0,
@@ -20,10 +21,11 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 1,
     shadowRadius: 10,
-    elevation: 6,
+    elevation: 12,
   },
 
   pressed: {
+    backgroundColor: AppColor.WHITE,
     shadowColor: AppColor.BLUE_300,
     shadowOffset: {
       width: 0,
@@ -31,7 +33,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 10,
-    elevation: 6,
+    elevation: 12,
   },
 
   iconContainer: {
