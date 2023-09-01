@@ -1,5 +1,4 @@
 import { Icon, Link } from '#libs/components/components.js';
-import { IconNameToIcon } from '#libs/enums/enums.js';
 
 import styles from './styles.module.scss';
 
@@ -28,7 +27,7 @@ const MeditationTrack: React.FC<Properties> = ({ track }) => {
           <p className={styles['duration']}>{track.duration}</p>
         </div>
         <Link to="/" className={styles['play-button'] ?? ''}>
-          <Icon name={IconNameToIcon.PLAY} />
+          <Icon name="meditation" />
         </Link>
       </div>
     </div>
