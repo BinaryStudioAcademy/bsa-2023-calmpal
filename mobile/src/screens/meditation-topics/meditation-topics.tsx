@@ -1,13 +1,24 @@
+// import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
 import { Card } from '#libs/components/card/card';
-import { InputSearch, ScrollView, View } from '#libs/components/components';
+import {
+  InputSearch,
+  ScrollView,
+  // Text,
+  View,
+} from '#libs/components/components';
+import { MeditationScreenName } from '#libs/enums/enums';
+// import { useEffect } from '#libs/hooks/hooks';
+import { type NavigationScreenProperties } from '#libs/types/types';
 
 // import { useSearch } from '#libs/hooks/hooks';
 import { mockedData } from './libs/constants';
 import { styles } from './styles';
 
-const MeditationTopics: React.FC = () => {
+const MeditationTopics = ({
+  navigation,
+}: NavigationScreenProperties): JSX.Element => {
   // const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
   //   mockedData,
   //   'title',
@@ -21,7 +32,7 @@ const MeditationTopics: React.FC = () => {
           <Card
             title={item.title}
             onPress={(): void => {
-              return;
+              navigation.navigate(MeditationScreenName.MEDITATION_LIST);
             }}
             key={item.id}
           />

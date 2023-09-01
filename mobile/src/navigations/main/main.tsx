@@ -5,8 +5,8 @@ import HomeIcon from '#assets/img/icons/home.svg';
 import MeditationIcon from '#assets/img/icons/meditations.svg';
 import { AppColor, MainScreenName } from '#libs/enums/enums';
 import { type TabNavigationParameterList } from '#libs/types/types';
+import { Meditation } from '#navigations/navigations';
 import { Home } from '#screens/home/home';
-import { MeditationTopics } from '#screens/meditation-topics/meditation-topics';
 
 import { styles } from './styles';
 
@@ -31,11 +31,8 @@ const Main: React.FC = () => {
       />
       <BottomTab.Screen
         name={MainScreenName.MEDITATION}
-        component={MeditationTopics}
-        options={{
-          tabBarIcon: MeditationIcon,
-          headerTitle: 'Meditation &  Breathing',
-        }}
+        component={Meditation}
+        options={{ tabBarIcon: MeditationIcon, headerShown: false }}
       />
     </BottomTab.Navigator>
   );
