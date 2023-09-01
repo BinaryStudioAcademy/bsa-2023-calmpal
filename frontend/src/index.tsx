@@ -37,7 +37,7 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 ),
               },
               {
-                path: AppRoute.MEDITATION_LIST,
+                path: AppRoute.MEDITATION,
                 element: (
                   <ProtectedRoute>
                     <SidebarWrapper>
