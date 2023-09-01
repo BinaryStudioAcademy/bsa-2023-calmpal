@@ -1,6 +1,6 @@
 import { Button, Input, Link } from '#libs/components/components.js';
-import { AppRoute } from '#libs/enums/enums.js';
-import { useAppForm, useCallback } from '#libs/hooks/hooks.js';
+import { AppRoute, DataStatus } from '#libs/enums/enums.js';
+import { useAppForm, useAppSelector, useCallback } from '#libs/hooks/hooks.js';
 import {
   type UserSignUpRequestDto,
   userSignUpValidationSchema,
@@ -18,6 +18,10 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
     defaultValues: DEFAULT_SIGN_UP_PAYLOAD,
     validationSchema: userSignUpValidationSchema,
   });
+
+  const { isLoading } = useAppSelector(({ auth }) => ({
+    isLoading: auth.authDataStatus === DataStatus.PENDING,
+  }));
 
   const handleFormSubmit = useCallback(
     (event_: React.BaseSyntheticEvent): void => {
@@ -57,7 +61,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
           errors={errors}
         />
         <div className={styles['submit-button']}>
-          <Button type="submit" label="Sign up" />
+          <Button type="submit" label="Sign up" isLoading={isLoading} />
         </div>
 
         <span className={styles['form-link']}>
