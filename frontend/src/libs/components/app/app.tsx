@@ -21,7 +21,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     void dispatch(authActions.getAuthenticatedUser());
-  }, [dispatch, navigate]);
+  }, [dispatch]);
 
   useEffect(() => {
     if (redirectTo) {
