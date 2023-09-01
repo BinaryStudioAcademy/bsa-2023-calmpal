@@ -11,7 +11,7 @@ type Properties = {
 const Icon: React.FC<Properties> = ({ name, className = '' }) => {
   const SelectedIcon = iconNameToPlainSvgMap[name];
 
-  const cssClass = className && styles[className] ? styles[className] : '';
+  const cssClass = styles[className] ?? '';
 
   return (
     <div className={cssClass}>
