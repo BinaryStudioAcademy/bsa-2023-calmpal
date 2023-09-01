@@ -1,4 +1,5 @@
 import { ChatRole } from '#libs/enums/enums.js';
+import { generateUUID } from '#libs/helpers/generate-uuid.js';
 import { useAppChat, useCallback } from '#libs/hooks/hooks.js';
 
 import { BotMessage } from '../bot-message/bot-message.js';
@@ -14,7 +15,7 @@ const ChatBody: React.FC = () => {
       newMessage({
         sender: ChatRole.USER,
         message: [text],
-        id: crypto.randomUUID(),
+        id: generateUUID(),
       });
     },
     [newMessage],
