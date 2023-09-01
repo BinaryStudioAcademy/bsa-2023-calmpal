@@ -46,7 +46,7 @@ const Survey: React.FC = () => {
       ) : (
         <div className={styles['survey']}>
           <div className={styles['name']}>
-            Serenity is your trusted companion on the journey to mental
+            CalmPal is your trusted companion on the journey to mental
             well-being
           </div>
           <PreferencesStep onSubmit={handleSubmit} />
