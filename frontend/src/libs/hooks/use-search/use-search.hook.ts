@@ -1,19 +1,18 @@
+import { type UseSearchReturn } from '#libs/types/types.js';
+
 import { useMemo, useState } from '../hooks.js';
 
 const useSearch = <T>(
   elements: T[],
   propertyName: keyof T,
-): {
-  filteredElements: T[];
-  setFilter: React.Dispatch<React.SetStateAction<string>>;
-} => {
+): UseSearchReturn<T> => {
   const [filter, setFilter] = useState('');
 
   const filteredElements = useMemo(() => {
-    const regex = new RegExp(filter, 'i');
-
     return elements.filter((element) =>
-      regex.test(String(element[propertyName])),
+      (element[propertyName] as string)
+        .toLowerCase()
+        .includes(filter.toLowerCase()),
     );
   }, [filter, elements, propertyName]);
 
