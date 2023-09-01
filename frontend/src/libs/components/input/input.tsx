@@ -16,6 +16,8 @@ type Properties<T extends FormFieldValues> = {
   name: FormFieldPath<T>;
   placeholder?: string;
   type?: 'text' | 'email' | 'password';
+  rowsCount?: number;
+  maxLength?: number;
 };
 
 const Input = <T extends FormFieldValues>({
@@ -25,24 +27,41 @@ const Input = <T extends FormFieldValues>({
   name,
   placeholder = '',
   type = 'text',
+  rowsCount,
+  maxLength,
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
 
   const error = errors[name]?.message;
   const hasError = Boolean(error);
+  const hasRows = Boolean(rowsCount);
 
   return (
-    <label className={styles['input']}>
+    <label className={styles['container']}>
       <span className={styles['label']}>{label}</span>
-      <input
-        {...field}
-        className={getValidClassNames(
-          styles['default'],
-          hasError && styles['error'],
-        )}
-        type={type}
-        placeholder={placeholder}
-      />
+      {hasRows ? (
+        <textarea
+          {...field}
+          rows={rowsCount}
+          placeholder={placeholder}
+          maxLength={maxLength}
+          className={getValidClassNames(
+            styles['textarea'],
+            hasError && styles['error'],
+          )}
+        />
+      ) : (
+        <input
+          {...field}
+          type={type}
+          placeholder={placeholder}
+          maxLength={maxLength}
+          className={getValidClassNames(
+            styles['input'],
+            hasError && styles['error'],
+          )}
+        />
+      )}
       {hasError && (
         <span className={styles['error-message']}>{error as string}</span>
       )}
