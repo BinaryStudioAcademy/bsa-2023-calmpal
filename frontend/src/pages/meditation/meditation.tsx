@@ -1,6 +1,6 @@
 import { MeditationTracksList } from '#libs/components/components.js';
 
-const MeditationPlayList: React.FC = () => {
+const Meditation: React.FC = () => {
   return <MeditationTracksList />;
 };
-export { MeditationPlayList };
+export { Meditation };

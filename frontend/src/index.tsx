@@ -14,7 +14,7 @@ import {
 import { AppRoute } from '#libs/enums/enums.js';
 import { store } from '#libs/packages/store/store.js';
 import { Auth } from '#pages/auth/auth.js';
-import { MeditationPlayList } from '#pages/meditation-play-list/meditation-play-list.js';
+import { Meditation } from '#pages/meditation/meditation.js';
 import { Root } from '#pages/root/root.js';
 
 createRoot(document.querySelector('#root') as HTMLElement).render(
@@ -41,7 +41,7 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 element: (
                   <ProtectedRoute>
                     <SidebarWrapper>
-                      <MeditationPlayList />
+                      <Meditation />
                     </SidebarWrapper>
                   </ProtectedRoute>
                 ),
