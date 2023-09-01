@@ -31,7 +31,7 @@ const ProfileSettingsSidebar: React.FC = () => {
         </div>
         <div className={styles['buttons-container']}>
           <ProfileSettingsButton
-            name={'notification'}
+            name="notification"
             onClick={handleOnClick}
             isActive={activeButton === 'notification'}
           >
@@ -39,14 +39,14 @@ const ProfileSettingsSidebar: React.FC = () => {
           </ProfileSettingsButton>
 
           <ProfileSettingsButton
-            name={'subscription'}
+            name="subscription"
             onClick={handleOnClick}
             isActive={activeButton === 'subscription'}
           >
             Test
           </ProfileSettingsButton>
 
-          <ProfileSettingsButton name={'sign-out'} onClick={handleOnClick}>
+          <ProfileSettingsButton name="sign-out" onClick={handleOnClick}>
             Sign Out
           </ProfileSettingsButton>
         </div>
