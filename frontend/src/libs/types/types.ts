@@ -7,9 +7,9 @@ export {
   type FormPath,
 } from './form/form.type.js';
 export { type Route } from './route/route.type.js';
+export { type UseSearchReturn } from './use-search/use-search-return.type.js';
 export { type ValueOf } from './value-of.type.js';
 export {
-  type SearchInput,
   type ServerErrorDetail,
   type ServerErrorResponse,
   type ValidationSchema,

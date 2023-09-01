@@ -3,7 +3,7 @@ export {
   AppEnvironment,
   ContentType,
   ExceptionMessage,
-  IconNameToIcon,
+  type IconName,
   ServerErrorType,
 } from './libs/enums/enums.js';
 export {
@@ -29,7 +29,6 @@ export {
 } from './libs/packages/http/http.js';
 export { type Storage } from './libs/packages/storage/storage.js';
 export {
-  type SearchInput,
   type ServerCommonErrorResponse,
   type ServerErrorDetail,
   type ServerErrorResponse,
