@@ -50,8 +50,8 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 element: (
                   <ProtectedRoute>
                     <ChatPage />
-                   </ProtectedRoute>
-                  ),
+                  </ProtectedRoute>
+                ),
               },
               {
                 path: AppRoute.SIGN_UP_SURVEY,
