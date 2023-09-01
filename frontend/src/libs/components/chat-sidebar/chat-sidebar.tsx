@@ -1,9 +1,6 @@
-import { IconNameToIcon } from '#libs/enums/enums.js';
 import { useCallback, useSearch } from '#libs/hooks/hooks.js';
-import { type SearchInput } from '#libs/types/types.js';
 
-import { Icon, Search } from '../components.js';
-import { ChatCardItem } from './chat-card-item/chat-card-item.js';
+import { Card, Icon, Search } from '../components.js';
 import styles from './styles.module.scss';
 
 const mockedChats = [
@@ -13,14 +10,25 @@ const mockedChats = [
   { id: 4, name: 'Work' },
 ];
 
+const mockedSelectedChat = {
+  id: 1,
+};
+
 const ChatSidebar: React.FC = () => {
   const { filteredElements, setFilter } = useSearch(mockedChats, 'name');
   const handleFilterChange = useCallback(
-    (payload: SearchInput): void => {
-      setFilter(payload.search);
+    (search: string): void => {
+      setFilter(search);
     },
     [setFilter],
   );
+
+  const handleSelectChat = useCallback((id: number) => {
+    return () => {
+      mockedSelectedChat.id = id;
+      // TODO redux logic
+    };
+  }, []);
 
   return (
     <div className={styles['container']}>
@@ -32,7 +40,7 @@ const ChatSidebar: React.FC = () => {
           </span>
         </div>
         <div className={styles['plus']}>
-          <Icon name={IconNameToIcon.PLUS} />
+          <Icon name={'plus'} />
         </div>
       </div>
       <div className={styles['list']}>
@@ -41,7 +49,13 @@ const ChatSidebar: React.FC = () => {
         </div>
         <div className={styles['chat-list']}>
           {filteredElements.map((filteredChat) => (
-            <ChatCardItem chat={filteredChat} key={filteredChat.id} />
+            <Card
+              title={filteredChat.name}
+              imageUrl="images/card-image-placeholder.png"
+              onPress={handleSelectChat(filteredChat.id)}
+              isActive={mockedSelectedChat.id === filteredChat.id}
+              key={filteredChat.id}
+            />
           ))}
         </div>
       </div>
