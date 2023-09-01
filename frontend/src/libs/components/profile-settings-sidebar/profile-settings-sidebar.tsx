@@ -24,7 +24,7 @@ const ProfileSettingsSidebar: React.FC = () => {
           <div className="visually-hidden">User details</div>
           <div className={styles['user-details']}>
             <div className={styles['user-icon']}>
-              <Icon name={'avatar'} />
+              <Icon name="avatar" />
             </div>
             <div className={styles['user-name']}>John Doe</div>
           </div>

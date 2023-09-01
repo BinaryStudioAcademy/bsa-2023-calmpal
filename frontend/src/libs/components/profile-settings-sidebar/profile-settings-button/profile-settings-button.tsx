@@ -30,7 +30,7 @@ const ProfileSettingsButton: React.FC<ProfileSettingsButtonProperties> = ({
       <Icon name={name} className={'profile-button-background'} />
       <div className={styles['text-container']}>
         <span className={styles['profile-button-text']}>{children}</span>
-        {isActive && <Icon name={'arrow'} />}
+        {isActive && <Icon name="arrow" />}
       </div>
     </button>
   );
