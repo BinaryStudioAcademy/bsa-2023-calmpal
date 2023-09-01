@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: AppColor.WHITE,
     alignItems: 'center',
+    paddingBottom: 1,
   },
   header: {
     height: 90,
