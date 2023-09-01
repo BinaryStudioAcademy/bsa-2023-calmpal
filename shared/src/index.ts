@@ -27,7 +27,6 @@ export {
 } from './libs/packages/http/http.js';
 export { type Storage } from './libs/packages/storage/storage.js';
 export {
-  type IconNames,
   type ServerCommonErrorResponse,
   type ServerErrorDetail,
   type ServerErrorResponse,

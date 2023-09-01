@@ -5,6 +5,7 @@ export {
   type FormFieldPath,
   type FormFieldValues,
 } from './form/form.type.js';
+export { type IconNames } from './icon-name.type.js';
 export {
   FIRST_INDEX,
   FULL_PERCENTAGE,
@@ -18,7 +19,6 @@ export {
 export { type Route } from './route/route.type.js';
 export { type ValueOf } from './value-of.type.js';
 export {
-  type IconNames,
   type ServerErrorDetail,
   type ServerErrorResponse,
   type ValidationSchema,

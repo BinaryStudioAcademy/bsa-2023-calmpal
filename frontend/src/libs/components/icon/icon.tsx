@@ -1,4 +1,4 @@
-import { iconNameToSvgMap } from '#libs/maps/icon-name-to-svg.map.js';
+import { iconNameToIcon } from '#libs/maps/maps.js';
 import { type IconNames } from '#libs/types/types.js';
 
 type Properties = {
@@ -6,7 +6,7 @@ type Properties = {
 };
 
 const Icon: React.FC<Properties> = ({ name }) => {
-  const SelectedIcon = iconNameToSvgMap[name];
+  const SelectedIcon = iconNameToIcon[name];
 
   return <SelectedIcon />;
 };
