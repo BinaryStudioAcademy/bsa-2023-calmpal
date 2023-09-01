@@ -4,8 +4,8 @@ import {
   useAppDispatch,
   useAppSelector,
   useEffect,
-  useNavigate,
   useLocation,
+  useNavigate,
 } from '#libs/hooks/hooks.js';
 import { actions as appActions } from '#slices/app/app.js';
 import { actions as authActions } from '#slices/auth/auth.js';
@@ -14,13 +14,12 @@ const App: React.FC = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { authenticatedUser, authenticatedUserDataStatus, redirectTo } = useAppSelector(
-    ({ auth, app }) => ({
+  const { authenticatedUser, authenticatedUserDataStatus, redirectTo } =
+    useAppSelector(({ auth, app }) => ({
       authenticatedUser: auth.authenticatedUser,
       authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
       redirectTo: app.redirectTo,
-    }),
-  );
+    }));
 
   useEffect(() => {
     void dispatch(authActions.getAuthenticatedUser());
@@ -41,7 +40,7 @@ const App: React.FC = () => {
   if (hasNoSurvey) {
     return <Navigate to={AppRoute.SIGN_UP_SURVEY} />;
   }
-    
+
   if (
     authenticatedUserDataStatus === DataStatus.PENDING ||
     authenticatedUserDataStatus === DataStatus.IDLE
