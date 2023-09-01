@@ -16,6 +16,7 @@ import { store } from '#libs/packages/store/store.js';
 import { Auth } from '#pages/auth/auth.js';
 import { Root } from '#pages/root/root.js';
 import { UserProfile } from '#pages/user-profile/user-profile.js';
+import { Survey } from '#pages/surveys/survey.js';
 
 createRoot(document.querySelector('#root') as HTMLElement).render(
   <StrictMode>
@@ -49,6 +50,14 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 element: (
                   <ProtectedRoute>
                     <UserProfile />
+                  </ProtectedRoute>
+                ),
+              },
+              {
+                path: AppRoute.SIGN_UP_SURVEY,
+                element: (
+                  <ProtectedRoute>
+                    <Survey />
                   </ProtectedRoute>
                 ),
               },
