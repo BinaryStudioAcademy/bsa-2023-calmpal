@@ -1,6 +1,5 @@
-import { useCallback, useState } from 'react';
-
 import { type IconNames } from '#libs/enums/enums.js';
+import { useCallback, useState } from '#libs/hooks/hooks.js';
 
 import { Icon } from '../components.js';
 import { ProfileSettingsButton } from './profile-settings-button/profile-settings-button.js';

@@ -1,7 +1,6 @@
-import { useCallback } from 'react';
-
 import { Icon } from '#libs/components/components.js';
 import { type IconNames } from '#libs/enums/enums.js';
+import { useCallback } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
 
