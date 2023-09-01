@@ -41,6 +41,13 @@ import { AuthApiPath } from './libs/enums/enums.js';
  *            format: date-time
  *          isSurveyCompleted:
  *            type: boolean
+ *      Error:
+ *        type: object
+ *        properties:
+ *          message:
+ *            type: string
+ *          errorType:
+ *            type: string
  */
 class AuthController extends BaseController {
   private authService: AuthService;
@@ -104,6 +111,8 @@ class AuthController extends BaseController {
    *                email:
    *                  type: string
    *                  format: email
+   *                fullName:
+   *                  type: string
    *                password:
    *                  type: string
    *      responses:
@@ -114,9 +123,20 @@ class AuthController extends BaseController {
    *              schema:
    *                type: object
    *                properties:
-   *                  message:
+   *                  user:
    *                    type: object
    *                    $ref: '#/components/schemas/User'
+   *                  token:
+   *                    type: string
+   *        400:
+   *          description: Bad request. User already exists
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "User already exists."
+   *                errorType: "AUTHORIZATION"
    */
   private async signUp(
     options: APIHandlerOptions<{
@@ -160,6 +180,24 @@ class AuthController extends BaseController {
    *                    $ref: '#/components/schemas/User'
    *                  token:
    *                    type: string
+   *        401:
+   *          description: Unauthorized
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "Incorrect credentials."
+   *                errorType: "AUTHORIZATION"
+   *        404:
+   *          description: User was not found
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "User with these credentials was not found."
+   *                errorType: "USERS"
    */
   private async signIn(
     options: APIHandlerOptions<{
