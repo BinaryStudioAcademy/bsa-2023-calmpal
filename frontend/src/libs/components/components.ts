@@ -1,5 +1,6 @@
 export { App } from './app/app.js';
 export { Button } from './button/button.js';
+export { Checkbox } from './checkbox/checkbox.js';
 export { DropdownMenu } from './dropdown-menu/dropdown-menu.js';
 export { Header } from './header/header.js';
 export { Icon } from './icon/icon.js';
@@ -14,4 +15,4 @@ export { SidebarWrapper } from './sidebar-wrapper/sidebar-wrapper.js';
 export { Switch } from './switch/switch.js';
 export { Toast } from './toast/toast.js';
 export { Provider as StoreProvider } from 'react-redux';
-export { Outlet as RouterOutlet } from 'react-router-dom';
+export { Navigate, Outlet as RouterOutlet } from 'react-router-dom';
