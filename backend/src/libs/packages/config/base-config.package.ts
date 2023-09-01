@@ -113,6 +113,32 @@ class BaseConfig implements Config {
           default: 'HS256',
         },
       },
+      AWS: {
+        REGION: {
+          doc: 'Region of the AWS account',
+          format: String,
+          env: 'AWS_REGION',
+          default: null,
+        },
+        ACCESS_KEY_ID: {
+          doc: 'Access key ID for the AWS account',
+          format: String,
+          env: 'AWS_ACCESS_KEY_ID',
+          default: null,
+        },
+        SECRET_ACCESS_KEY: {
+          doc: 'Secret access key for the AWS account',
+          format: String,
+          env: 'AWS_SECRET_ACCESS_KEY',
+          default: null,
+        },
+        BUCKET_NAME: {
+          doc: 'Name of the S3 Bucket in the the AWS account',
+          format: String,
+          env: 'AWS_BUCKET_NAME',
+          default: null,
+        },
+      },
       ENCRYPT: {
         NUMBER_OF_ROUNDS: {
           doc: 'Default number of rounds for salt generation',
