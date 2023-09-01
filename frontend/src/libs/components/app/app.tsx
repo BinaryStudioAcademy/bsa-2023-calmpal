@@ -5,22 +5,32 @@ import {
   useAppSelector,
   useEffect,
   useLocation,
+  useNavigate,
 } from '#libs/hooks/hooks.js';
+import { actions as appActions } from '#slices/app/app.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
 const App: React.FC = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { authenticatedUser, authenticatedUserDataStatus } = useAppSelector(
-    ({ auth }) => ({
+  const { authenticatedUser, authenticatedUserDataStatus, redirectTo } =
+    useAppSelector(({ auth, app }) => ({
       authenticatedUser: auth.authenticatedUser,
       authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
-    }),
-  );
+      redirectTo: app.redirectTo,
+    }));
 
   useEffect(() => {
     void dispatch(authActions.getAuthenticatedUser());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (redirectTo) {
+      navigate(redirectTo);
+      dispatch(appActions.navigate(null));
+    }
+  }, [dispatch, navigate, redirectTo]);
 
   const hasNoSurvey =
     authenticatedUser &&
@@ -32,8 +42,8 @@ const App: React.FC = () => {
   }
 
   if (
-    authenticatedUserDataStatus === DataStatus.IDLE ||
-    authenticatedUserDataStatus === DataStatus.PENDING
+    authenticatedUserDataStatus === DataStatus.PENDING ||
+    authenticatedUserDataStatus === DataStatus.IDLE
   ) {
     return <Loader />;
   }
