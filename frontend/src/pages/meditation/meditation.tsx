@@ -1,4 +1,4 @@
-import { MeditationTracksList } from '#libs/components/components.js';
+import { MeditationTracksList } from './meditation-tracks-list/meditation-tracks-list.js';
 
 const Meditation: React.FC = () => {
   return <MeditationTracksList />;
