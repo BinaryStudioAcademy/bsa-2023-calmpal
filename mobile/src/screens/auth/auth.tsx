@@ -1,13 +1,8 @@
 import React from 'react';
 
-import { SignBackground, Text } from '#libs/components/components';
+import { SignBackground } from '#libs/components/components';
 import { RootScreenName } from '#libs/enums/enums';
-import {
-  useAppDispatch,
-  useAppRoute,
-  useAppSelector,
-  useCallback,
-} from '#libs/hooks/hooks';
+import { useAppDispatch, useAppRoute, useCallback } from '#libs/hooks/hooks';
 import {
   type UserSignInRequestDto,
   type UserSignUpRequestDto,
@@ -19,9 +14,6 @@ import { SignInForm, SignUpForm } from './components/components';
 const Auth: React.FC = () => {
   const { name } = useAppRoute();
   const dispatch = useAppDispatch();
-  const { dataStatus } = useAppSelector(({ auth }) => ({
-    dataStatus: auth.dataStatus,
-  }));
 
   const handleSignInSubmit = useCallback(
     (payload: UserSignInRequestDto): void => {
@@ -52,7 +44,6 @@ const Auth: React.FC = () => {
 
   return (
     <>
-      <Text>state: {dataStatus}</Text>
       <SignBackground>{getScreen(name)}</SignBackground>
     </>
   );
