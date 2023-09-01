@@ -8,6 +8,7 @@ export { SignBackground } from './sign-background/sign-background';
 export { Switch } from './switch/switch';
 export { Toast } from './toast/toast';
 export {
+  Image,
   Switch as RNSwitch,
   ScrollView,
   Text,
