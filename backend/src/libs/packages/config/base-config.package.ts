@@ -51,10 +51,34 @@ class BaseConfig implements Config {
         },
       },
       DB: {
-        CONNECTION_STRING: {
-          doc: 'Database connection string',
+        USERNAME: {
+          doc: 'Database connection username',
           format: String,
-          env: 'DB_CONNECTION_STRING',
+          env: 'DB_USERNAME',
+          default: null,
+        },
+        PASSWORD: {
+          doc: 'Database connection password',
+          format: String,
+          env: 'DB_PASSWORD',
+          default: null,
+        },
+        HOST: {
+          doc: 'Database connection host',
+          format: String,
+          env: 'DB_HOST',
+          default: null,
+        },
+        PORT: {
+          doc: 'Database connection port',
+          format: Number,
+          env: 'DB_PORT',
+          default: null,
+        },
+        NAME: {
+          doc: 'Database name to connect',
+          format: String,
+          env: 'DB_NAME',
           default: null,
         },
         DIALECT: {
@@ -87,6 +111,32 @@ class BaseConfig implements Config {
           doc: 'Algorithm for JWT token generation',
           format: String,
           default: 'HS256',
+        },
+      },
+      AWS: {
+        REGION: {
+          doc: 'Region of the AWS account',
+          format: String,
+          env: 'AWS_REGION',
+          default: null,
+        },
+        ACCESS_KEY_ID: {
+          doc: 'Access key ID for the AWS account',
+          format: String,
+          env: 'AWS_ACCESS_KEY_ID',
+          default: null,
+        },
+        SECRET_ACCESS_KEY: {
+          doc: 'Secret access key for the AWS account',
+          format: String,
+          env: 'AWS_SECRET_ACCESS_KEY',
+          default: null,
+        },
+        BUCKET_NAME: {
+          doc: 'Name of the S3 Bucket in the the AWS account',
+          format: String,
+          env: 'AWS_BUCKET_NAME',
+          default: null,
         },
       },
       ENCRYPT: {

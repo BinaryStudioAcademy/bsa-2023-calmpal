@@ -3,16 +3,12 @@ import { Link } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useLocation } from '#libs/hooks/hooks.js';
-import { type ValueOf } from '#libs/types/types.js';
+import { type Route } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
 
 type Properties = {
-  routes: {
-    path: ValueOf<typeof AppRoute>;
-    name: string;
-    icon: string;
-  }[];
+  routes: Route[];
 };
 
 const Sidebar: React.FC<Properties> = ({ routes }) => {
@@ -38,7 +34,7 @@ const Sidebar: React.FC<Properties> = ({ routes }) => {
                   pathname === route.path && styles['icon-selected'],
                 )}
               >
-                <Link to={route.path}>
+                <Link className={styles['link'] as string} to={route.path}>
                   <span>
                     <span className="visually-hidden">Go to {route.name}</span>
                     <img
