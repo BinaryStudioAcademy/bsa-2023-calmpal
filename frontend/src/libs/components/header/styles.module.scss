@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 100%;
   margin: 15px 17px;
   padding: 15px 54px 15px 18px;
   background-color: var(--white);
@@ -17,4 +18,10 @@
 .nav {
   display: flex;
   align-items: center;
+}
+
+@media (width < 480px) {
+  .header {
+    padding: 15px;
+  }
 }
