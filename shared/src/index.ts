@@ -8,11 +8,15 @@ export {
 export {
   ApplicationError,
   AuthError,
+  FileError,
   HTTPError,
   UsersError,
   ValidationError,
 } from './libs/exceptions/exceptions.js';
-export { configureString } from './libs/helpers/helpers.js';
+export {
+  configureString,
+  replaceTemplateWithValue,
+} from './libs/helpers/helpers.js';
 export { type Config } from './libs/packages/config/config.js';
 export {
   type HTTP,
@@ -33,6 +37,13 @@ export {
 export { AuthApiPath } from './packages/auth/auth.js';
 export { type ChatMessage, ChatRole } from './packages/chat/chat.js';
 export {
+  type FileGetAllItemResponseDto,
+  type FileUploadRequestDto,
+  type FileUploadResponseDto,
+  type S3FileUploadRequestDto,
+} from './packages/files/files.js';
+export { FilesApiPath } from './packages/files/files.js';
+export {
   createSurveyValidationSchema,
   getSurveyCategories,
   PREFERENCES_OTHER_CATEGORY,
@@ -40,6 +51,7 @@ export {
   type SurveyInputDto,
   surveyInputValidationSchema,
   type SurveyRequestDto,
+  SurveyValidationRule,
 } from './packages/surveys/surveys.js';
 export {
   type UserAuthResponseDto,
