@@ -70,7 +70,7 @@
   fill: var(--blue-400);
 }
 
-@media (width <= 600px) {
+@media (width < 600px) {
   .content {
     width: 85%;
   }
