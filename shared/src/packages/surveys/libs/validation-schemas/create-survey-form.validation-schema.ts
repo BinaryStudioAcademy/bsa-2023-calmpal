@@ -16,13 +16,11 @@ const createSurveyForm = joi.object<SurveyInputDto, true>({
       'array.min': SurveyValidationMessage.OPTION_REQUIRED,
     }),
   other: joi.string().when('preferences', {
-    is: joi
-      .array()
-      .has(joi.string().valid(PREFERENCES_OTHER_CATEGORY))
-      .min(SurveyValidationRule.MINIMUM_PREFERENCE_LENGTH),
+    is: joi.array().has(joi.string().valid(PREFERENCES_OTHER_CATEGORY)),
     then: joi
       .string()
       .trim()
+      .min(SurveyValidationRule.MINIMUM_PREFERENCE_LENGTH)
       .max(SurveyValidationRule.MAXIMUM_PREFERENCE_ITEM_LENGTH)
       .required()
       .messages({
