@@ -12,7 +12,7 @@ import { handleError } from '#libs/packages/store/middlewares/middlewares.js';
 import { authApi } from '#packages/auth/auth.js';
 import { reducer as appReducer } from '#slices/app/app.js';
 import { reducer as authReducer } from '#slices/auth/auth.js';
-import { chatReducer } from '#slices/chat/chat.js';
+import { reducer as chatReducer } from '#slices/chat/chat.js';
 
 import { storage } from '../storage/storage.js';
 

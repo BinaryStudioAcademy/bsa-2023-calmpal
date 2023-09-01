@@ -1,2 +1,2 @@
 export { newMessage } from './actions.js';
-export { reducer as chatReducer, name } from './chat.slice.js';
+export { name, reducer } from './chat.slice.js';

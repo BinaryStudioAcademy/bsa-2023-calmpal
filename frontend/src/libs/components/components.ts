@@ -1,6 +1,5 @@
 export { App } from './app/app.js';
 export { Button } from './button/button.js';
-export { ChatLayout } from './chat-layout/chat-layout.js';
 export { Checkbox } from './checkbox/checkbox.js';
 export { DropdownMenu } from './dropdown-menu/dropdown-menu.js';
 export { Header } from './header/header.js';
