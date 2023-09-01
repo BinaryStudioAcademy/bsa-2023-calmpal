@@ -13,9 +13,11 @@ type Properties = {
 };
 
 const Link: React.FC<Properties> = ({ label, to, style, icon }) => {
+  const hasIcon = Boolean(icon);
+
   return (
     <UILink style={[styles.link, style]} to={to}>
-      {icon && <View>{icon}</View>}
+      {hasIcon && <View>{icon}</View>}
 
       {label}
     </UILink>
