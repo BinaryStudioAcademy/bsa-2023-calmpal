@@ -36,15 +36,13 @@ const mockedTracks = [
 
 const MeditationTracksList: React.FC = () => {
   return (
-    <>
-      <div className={styles['container']}>
-        <div className={styles['list']}>
-          {mockedTracks.map((track) => {
-            return <MeditationTrack track={track} key={track.id} />;
-          })}
-        </div>
+    <div className={styles['container']}>
+      <div className={styles['list']}>
+        {mockedTracks.map((track) => {
+          return <MeditationTrack track={track} key={track.id} />;
+        })}
       </div>
-    </>
+    </div>
   );
 };
 
