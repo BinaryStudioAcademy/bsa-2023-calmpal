@@ -8,11 +8,15 @@ export {
 export {
   ApplicationError,
   AuthError,
+  FileError,
   HTTPError,
   UsersError,
   ValidationError,
 } from './libs/exceptions/exceptions.js';
-export { configureString } from './libs/helpers/helpers.js';
+export {
+  configureString,
+  replaceTemplateWithValue,
+} from './libs/helpers/helpers.js';
 export { type Config } from './libs/packages/config/config.js';
 export {
   type HTTP,
@@ -31,6 +35,13 @@ export {
   type ValueOf,
 } from './libs/types/types.js';
 export { AuthApiPath } from './packages/auth/auth.js';
+export {
+  type FileGetAllItemResponseDto,
+  type FileUploadRequestDto,
+  type FileUploadResponseDto,
+  type S3FileUploadRequestDto,
+} from './packages/files/files.js';
+export { FilesApiPath } from './packages/files/files.js';
 export {
   createSurveyValidationSchema,
   getSurveyCategories,

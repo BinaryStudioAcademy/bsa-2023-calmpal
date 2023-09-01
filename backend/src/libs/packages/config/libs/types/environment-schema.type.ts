@@ -21,6 +21,12 @@ type EnvironmentSchema = {
     SECRET_KEY: string;
     ALG: string;
   };
+  AWS: {
+    REGION: string;
+    ACCESS_KEY_ID: string;
+    SECRET_ACCESS_KEY: string;
+    BUCKET_NAME: string;
+  };
   ENCRYPT: {
     NUMBER_OF_ROUNDS: number;
   };
