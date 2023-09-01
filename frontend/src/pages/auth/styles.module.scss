@@ -1,12 +1,12 @@
 .auth {
   display: flex;
+  flex: 1;
   justify-content: space-around;
   align-items: center;
-  height: 100vh;
   padding: 0 5%;
   overflow: hidden;
   color: var(--white);
-  background-image: url("images/auth-720x512.png");
+  background-image: url("../../assets/img/auth-background.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -24,10 +24,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 35%;
-  min-width: 350px;
-  height: 75%;
-  padding: 45px;
+  padding: 70px 120px;
   text-align: left;
   background-color: var(--white-alpha-20);
   border-radius: 32px;
@@ -36,7 +33,7 @@
 .auth-name {
   position: relative;
   z-index: 2;
-  margin-bottom: 20vh;
+  margin-bottom: 150px;
   text-align: center;
 }
 
@@ -49,6 +46,23 @@
   margin: 0.1px;
   font-weight: 600;
   font-size: 83px;
+}
+
+@media (width < 1023px) {
+  .auth {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .auth-name {
+    margin: 0;
+  }
+
+  .auth .overlay {
+    padding: 30px 70px;
+  }
 }
 
 @media (width < 768px) {

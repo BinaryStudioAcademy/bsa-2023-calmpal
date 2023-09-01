@@ -5,7 +5,7 @@ import { AppColor } from '#libs/enums/enums';
 const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
-    borderColor: AppColor.GRAY_300,
+    borderColor: AppColor.GRAY_400,
     height: 44,
     padding: 12,
     borderRadius: 8,
@@ -23,24 +23,24 @@ const styles = StyleSheet.create({
   },
 
   placeholder: {
-    color: AppColor.GRAY_300,
+    color: AppColor.GRAY_400,
   },
-  filledInput: {
+  focusedInput: {
     borderWidth: 1,
-    borderColor: AppColor.BLUE_200,
+    borderColor: AppColor.BLUE_300,
     borderRadius: 8,
     fontSize: 16,
     padding: 12,
     backgroundColor: AppColor.WHITE,
     elevation: 10,
-    shadowColor: AppColor.BLUE_200,
+    shadowColor: AppColor.BLUE_300,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
     shadowOpacity: 0.25,
   },
 
   disabledInput: {
-    borderColor: AppColor.GRAY_200,
+    borderColor: AppColor.GRAY_300,
   },
 
   errorInput: {
@@ -51,6 +51,19 @@ const styles = StyleSheet.create({
     color: AppColor.RED_100,
     fontSize: 14,
     marginBottom: 4,
+  },
+  otherTextInput: {
+    backgroundColor: AppColor.BLUE_100_ALPHA_70,
+    borderRadius: 8,
+    padding: 8,
+    borderWidth: 1,
+    marginBottom: 20,
+    borderColor: AppColor.WHITE,
+    color: AppColor.BLUE_400,
+    fontSize: 16,
+  },
+  otherPlaceholder: {
+    color: AppColor.WHITE,
   },
 });
 
