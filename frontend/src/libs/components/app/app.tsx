@@ -1,23 +1,40 @@
-import { Loader, RouterOutlet } from '#libs/components/components.js';
-import { DataStatus } from '#libs/enums/enums.js';
+import { Loader, Navigate, RouterOutlet } from '#libs/components/components.js';
+import { AppRoute, DataStatus } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
   useEffect,
+  useLocation,
 } from '#libs/hooks/hooks.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
 const App: React.FC = () => {
+  const { pathname } = useLocation();
   const dispatch = useAppDispatch();
-  const { authenticatedUserDataStatus } = useAppSelector(({ auth }) => ({
-    authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
-  }));
+  const { authenticatedUser, authenticatedUserDataStatus } = useAppSelector(
+    ({ auth }) => ({
+      authenticatedUser: auth.authenticatedUser,
+      authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
+    }),
+  );
 
   useEffect(() => {
     void dispatch(authActions.getAuthenticatedUser());
   }, [dispatch]);
 
-  if (authenticatedUserDataStatus === DataStatus.PENDING) {
+  const hasNoSurvey =
+    authenticatedUser &&
+    !authenticatedUser.isSurveyCompleted &&
+    pathname !== AppRoute.SIGN_UP_SURVEY;
+
+  if (hasNoSurvey) {
+    return <Navigate to={AppRoute.SIGN_UP_SURVEY} />;
+  }
+
+  if (
+    authenticatedUserDataStatus === DataStatus.IDLE ||
+    authenticatedUserDataStatus === DataStatus.PENDING
+  ) {
     return <Loader />;
   }
 

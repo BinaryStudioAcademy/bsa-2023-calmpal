@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  height: 100vh;
+  background-image: url("../../assets/img/auth-background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.survey {
+  display: flex;
+  gap: max(12%, 50px);
+  padding: 0% max(12%, 50px);
+}
+
+.survey .name {
+  flex: 1;
+  color: var(--white);
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 125%;
+}
+
+@media (width < 768px) {
+  .survey .name {
+    display: none;
+  }
+}
