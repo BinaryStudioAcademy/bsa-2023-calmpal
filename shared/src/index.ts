@@ -50,6 +50,7 @@ export {
   type SurveyInputDto,
   surveyInputValidationSchema,
   type SurveyRequestDto,
+  SurveyValidationRule,
 } from './packages/surveys/surveys.js';
 export {
   type UserAuthResponseDto,

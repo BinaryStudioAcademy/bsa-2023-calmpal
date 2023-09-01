@@ -6,7 +6,7 @@ type Properties = {
   label?: string;
   type?: 'button' | 'submit';
   children?: ReactNode;
-  style?: 'submit' | 'rounded' | 'rounded-transparent';
+  style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent';
   isLoading?: boolean;
   onClick?: () => void;
 };
@@ -15,7 +15,7 @@ const Button: React.FC<Properties> = ({
   type = 'button',
   label,
   children,
-  style = 'submit',
+  style = 'primary',
   isLoading = false,
   onClick,
 }) => (

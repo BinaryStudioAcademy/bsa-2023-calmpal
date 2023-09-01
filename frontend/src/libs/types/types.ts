@@ -4,6 +4,7 @@ export {
   type FormFieldErrors,
   type FormFieldPath,
   type FormFieldValues,
+  type FormPath,
 } from './form/form.type.js';
 export { type IconNames } from './icon-name.type.js';
 export {
