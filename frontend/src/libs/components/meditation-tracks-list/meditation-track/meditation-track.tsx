@@ -7,8 +7,7 @@ type Track = {
   id: number;
   title: string;
   duration: string;
-  link: string;
-  imageLink: string;
+  image: string;
 };
 
 type Properties = {
@@ -19,7 +18,7 @@ const MeditationTrack: React.FC<Properties> = ({ track }) => {
   return (
     <div className={styles['track']}>
       <img
-        src={track.imageLink}
+        src={track.image}
         alt="Meditation track background"
         className={styles['background-image']}
       />
