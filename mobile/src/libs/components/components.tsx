@@ -7,6 +7,7 @@ export { ProtectedRoute } from './protected-route/protected-route';
 export { SignBackground } from './sign-background/sign-background';
 export { Toast } from './toast/toast';
 export {
+  Image,
   ScrollView,
   Text,
   TextInput,
