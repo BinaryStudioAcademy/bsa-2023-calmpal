@@ -5,7 +5,7 @@ type Properties = {
   onChange: () => void;
 };
 
-const Checkbox: React.FC<Properties> = ({ label, onChange }): JSX.Element => {
+const Checkbox: React.FC<Properties> = ({ label, onChange }) => {
   return (
     <label className={styles['container']}>
       <input
