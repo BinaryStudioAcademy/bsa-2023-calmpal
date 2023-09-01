@@ -30,7 +30,10 @@ const App: React.FC = () => {
     }
   }, [dispatch, navigate, redirectTo]);
 
-  if (authenticatedUserDataStatus === DataStatus.PENDING) {
+  if (
+    authenticatedUserDataStatus === DataStatus.PENDING ||
+    authenticatedUserDataStatus === DataStatus.IDLE
+  ) {
     return <Loader />;
   }
 
