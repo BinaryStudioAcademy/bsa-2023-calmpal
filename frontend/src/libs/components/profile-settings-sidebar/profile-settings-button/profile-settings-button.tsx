@@ -1,5 +1,6 @@
 import { Icon } from '#libs/components/components.js';
 import { type IconNames } from '#libs/enums/enums.js';
+import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
 import { useCallback } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
@@ -21,9 +22,10 @@ const ProfileSettingsButton: React.FC<ProfileSettingsButtonProperties> = ({
     onClick(name);
   }, [name, onClick]);
 
-  const buttonStyle = isActive
-    ? `${styles['profile-button']} ${styles['focused']}`
-    : styles['profile-button'];
+  const buttonStyle = getValidClassNames(
+    styles['profile-button'],
+    isActive && styles['focused'],
+  );
 
   return (
     <button className={buttonStyle} onClick={handleOnClick}>
