@@ -4,13 +4,13 @@ import { useAppForm, useCallback } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
 
-type ChatFooterProperties = {
+type Properties = {
   onSend: ({ text }: { text: string }) => void;
 };
 
 type HandleForm = () => void;
 
-const ChatFooter: React.FC<ChatFooterProperties> = ({ onSend }) => {
+const ChatFooter: React.FC<Properties> = ({ onSend }) => {
   const { register, handleSubmit, reset } = useAppForm<{ text: string }>({
     defaultValues: {
       text: BLANK,
