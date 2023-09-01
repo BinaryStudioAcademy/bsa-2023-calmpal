@@ -27,7 +27,7 @@ const MeditationTrack: React.FC<Properties> = ({ track }) => {
           <p className={styles['duration']}>{track.duration}</p>
         </div>
         <Link to="/" className={styles['play-button'] ?? ''}>
-          <Icon name="meditation" />
+          <Icon name="play" />
         </Link>
       </div>
     </div>

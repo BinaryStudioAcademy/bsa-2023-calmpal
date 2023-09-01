@@ -1,5 +1,5 @@
 import logo from '#assets/icons/logo.svg';
-import { Link } from '#libs/components/components.js';
+import { Icon, Link } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useLocation } from '#libs/hooks/hooks.js';
@@ -37,11 +37,7 @@ const Sidebar: React.FC<Properties> = ({ routes }) => {
                 <Link className={styles['link'] as string} to={route.path}>
                   <span>
                     <span className="visually-hidden">Go to {route.name}</span>
-                    <img
-                      src={route.icon}
-                      alt={route.name}
-                      className={styles['icon']}
-                    />
+                    <Icon name={route.icon} />
                   </span>
                 </Link>
               </button>
