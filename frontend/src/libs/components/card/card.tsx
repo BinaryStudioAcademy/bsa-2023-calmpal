@@ -13,7 +13,7 @@ const Card: React.FC<Properties> = ({ title, imageUrl, onPress, isActive }) => {
   return (
     <button
       className={getValidClassNames(
-        styles['chat-element'],
+        styles['item'],
         isActive && styles['selected'],
       )}
       onClick={onPress}

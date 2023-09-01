@@ -1,4 +1,4 @@
-.chat-element {
+.item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,7 +16,7 @@
   cursor: pointer;
 }
 
-.chat-element .name {
+.item .name {
   display: flex;
   justify-content: center;
   align-items: center;
