@@ -1,5 +1,5 @@
-import { type IconName } from '#libs/enums/enums.js';
 import { iconNameToPlainSvgMap } from '#libs/maps/icon-name-to-plain-svg.js';
+import { type IconName } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
 

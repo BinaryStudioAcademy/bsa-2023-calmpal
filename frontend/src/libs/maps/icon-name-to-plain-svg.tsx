@@ -5,7 +5,7 @@ import { ReactComponent as NotificationIcon } from '#assets/icons/notification.s
 import { ReactComponent as PlusIcon } from '#assets/icons/plus.svg';
 import { ReactComponent as SignOutIcon } from '#assets/icons/sign-out.svg';
 import { ReactComponent as SubscriptionIcon } from '#assets/icons/subscription.svg';
-import { type IconName } from '#libs/enums/enums.js';
+import { type IconName } from '#libs/types/types.js';
 
 const iconNameToPlainSvgMap: Record<
   IconName,

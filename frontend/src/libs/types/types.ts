@@ -8,6 +8,7 @@ export {
 export { type SidebarRoute } from './sidebar-route.type.js';
 export { type ValueOf } from './values-of.type.js';
 export {
+  type IconName,
   type ServerErrorDetail,
   type ServerErrorResponse,
   type ValidationSchema,
