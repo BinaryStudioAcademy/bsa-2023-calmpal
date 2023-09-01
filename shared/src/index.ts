@@ -15,6 +15,7 @@ export {
 } from './libs/exceptions/exceptions.js';
 export {
   configureString,
+  debounce,
   replaceTemplateWithValue,
 } from './libs/helpers/helpers.js';
 export { type Config } from './libs/packages/config/config.js';
