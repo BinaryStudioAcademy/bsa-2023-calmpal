@@ -32,6 +32,9 @@
     "ts-paths-esm-loader": "1.4.3"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "3.400.0",
+    "@aws-sdk/s3-request-presigner": "3.400.0",
+    "@fastify/multipart": "7.7.3",
     "@fastify/static": "6.10.2",
     "@fastify/swagger": "8.8.0",
     "@fastify/swagger-ui": "1.9.3",
