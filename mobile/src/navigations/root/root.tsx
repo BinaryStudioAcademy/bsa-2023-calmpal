@@ -9,6 +9,7 @@ import { DataStatus, RootScreenName } from '#libs/enums/enums';
 import { useAppDispatch, useAppSelector, useEffect } from '#libs/hooks/hooks';
 import { type RootNavigationParameterList } from '#libs/types/types';
 import { Auth } from '#screens/auth/auth';
+import { Survey } from '#screens/survey/survey';
 import { actions as authActions } from '#slices/auth/auth';
 
 import { Main } from '../main/main';
@@ -21,25 +22,32 @@ const screenOptions: NativeStackNavigationOptions = {
 
 const Root: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { authenticatedUser, authenticatedUserDataStatus } = useAppSelector(
-    ({ auth }) => ({
+  const { isSurveyCompleted, authenticatedUser, authenticatedUserDataStatus } =
+    useAppSelector(({ auth }) => ({
+      isSurveyCompleted: auth.authenticatedUser?.isSurveyCompleted,
       authenticatedUser: auth.authenticatedUser,
       authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
-    }),
-  );
+    }));
 
   useEffect(() => {
     void dispatch(authActions.getAuthenticatedUser());
   }, [dispatch]);
 
-  if (authenticatedUserDataStatus === DataStatus.PENDING) {
+  if (
+    authenticatedUserDataStatus === DataStatus.IDLE ||
+    authenticatedUserDataStatus === DataStatus.PENDING
+  ) {
     return <Loader />;
   }
 
   return (
     <NativeStack.Navigator screenOptions={screenOptions}>
       {authenticatedUser ? (
-        <NativeStack.Screen name={RootScreenName.MAIN} component={Main} />
+        isSurveyCompleted ? (
+          <NativeStack.Screen name={RootScreenName.MAIN} component={Main} />
+        ) : (
+          <NativeStack.Screen name={RootScreenName.SURVEY} component={Survey} />
+        )
       ) : (
         <>
           <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />

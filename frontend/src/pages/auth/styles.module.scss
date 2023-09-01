@@ -1,12 +1,12 @@
 .auth {
   display: flex;
+  flex: 1;
   justify-content: space-around;
   align-items: center;
-  height: 100vh;
   padding: 0 5%;
   overflow: hidden;
   color: var(--white);
-  background-image: url("images/auth-720x512.png");
+  background-image: url("../../assets/img/auth-background.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -33,7 +33,7 @@
 .auth-name {
   position: relative;
   z-index: 2;
-  margin-bottom: 20vh;
+  margin-bottom: 150px;
   text-align: center;
 }
 
