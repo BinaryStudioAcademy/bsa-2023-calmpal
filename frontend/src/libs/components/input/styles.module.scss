@@ -1,15 +1,15 @@
-.input {
+.container {
   display: flex;
   flex-direction: column;
   width: 100%;
   font-size: 14px;
 }
 
-.input .label {
+.container .label {
   font-weight: 600;
 }
 
-.input .default {
+.input {
   padding: 13px 10px;
   font-size: 14px;
   font-family: Montserrat, Arial, sans-serif;
@@ -19,17 +19,43 @@
   outline: none;
 }
 
-.input .default:focus {
+.textarea {
+  padding: 12px 0 12px 12px;
+  overflow-y: scroll;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: inherit;
+  line-height: 20px;
+  background-color: var(--blue-alpha-70);
+  border: 1px solid var(--white);
+  border-radius: 8px;
+  outline: none;
+  resize: none;
+}
+
+.textarea::-webkit-scrollbar {
+  width: 12px;
+}
+
+.textarea::-webkit-scrollbar-thumb {
+  background-color: var(--white);
+  background-clip: padding-box;
+  border: 4px solid var(--transparent);
+  border-radius: 6px;
+}
+
+.input:focus,
+.textarea:focus {
   border: solid var(--blue-300) 1px;
   box-shadow: 0.1px 3px 3px var(--blue-alpha-30);
 }
 
-.input .error {
+.error {
   border: solid 1px var(--red-300);
   border-radius: 8px;
 }
 
-.input .error-message {
+.error-message {
   color: var(--red-300);
   font-size: 12px;
   text-align: left;
