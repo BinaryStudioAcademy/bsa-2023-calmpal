@@ -7,14 +7,12 @@ import {
   useAppRoute,
   useAppSelector,
   useCallback,
-  useEffect,
 } from '#libs/hooks/hooks';
 import {
   type UserSignInRequestDto,
   type UserSignUpRequestDto,
 } from '#packages/users/users';
 import { actions as authActions } from '#slices/auth/auth';
-import { actions as userActions } from '#slices/users/users';
 
 import { SignInForm, SignUpForm } from './components/components';
 
@@ -24,13 +22,6 @@ const Auth: React.FC = () => {
   const { dataStatus } = useAppSelector(({ auth }) => ({
     dataStatus: auth.dataStatus,
   }));
-  const isSignUpScreen = name === RootScreenName.SIGN_UP;
-
-  useEffect(() => {
-    if (isSignUpScreen) {
-      void dispatch(userActions.loadAll());
-    }
-  }, [isSignUpScreen, dispatch]);
 
   const handleSignInSubmit = useCallback(
     (payload: UserSignInRequestDto): void => {
