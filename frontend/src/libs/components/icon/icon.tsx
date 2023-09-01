@@ -13,11 +13,7 @@ const Icon: React.FC<Properties> = ({ name, className = '' }) => {
 
   const cssClass = className && styles[className] ? styles[className] : '';
 
-  return (
-    <div className={cssClass}>
-      <SelectedIcon />
-    </div>
-  );
+  return <SelectedIcon className={cssClass} />;
 };
 
 export { Icon };
