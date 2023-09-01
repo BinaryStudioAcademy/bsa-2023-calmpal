@@ -1,13 +1,12 @@
 import libraryDebounce from 'debounce';
 
-import { type SearchInput } from '#index.js';
-
-const DEBOUNCE_DELAY = 300;
+import { DEBOUNCE_TIMEOUT } from './libs/constants.js';
 
 const debounce = (
-  function_: (payload: SearchInput) => void,
+  function_: () => void,
+  timeout: number = DEBOUNCE_TIMEOUT,
 ): ReturnType<typeof libraryDebounce> => {
-  return libraryDebounce(function_, DEBOUNCE_DELAY);
+  return libraryDebounce(function_, timeout);
 };
 
 export { debounce };
