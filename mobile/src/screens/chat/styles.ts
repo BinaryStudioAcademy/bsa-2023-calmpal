@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: AppColor.WHITE,
     alignItems: 'center',
-    paddingBottom: 1,
   },
   header: {
     height: 90,
@@ -27,11 +26,6 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: AppColor.GRAY_600,
     marginLeft: 17,
-  },
-  divider: {
-    height: 1,
-    width: '100%',
-    backgroundColor: AppColor.GRAY_300,
   },
   chatWrapper: {
     paddingHorizontal: 20,

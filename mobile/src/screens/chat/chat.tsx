@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { ScrollView, Text, View } from '#libs/components/components';
+import { Header, ScrollView, Text, View } from '#libs/components/components';
+import { type ChatScreenName } from '#libs/enums/navigation/chat-screen-name.enum';
 import {
   useAppForm,
   useCallback,
@@ -8,6 +9,8 @@ import {
   useRef,
   useState,
 } from '#libs/hooks/hooks';
+import { type ChatNavigationParameterList } from '#libs/types/navigation/chat-navigation-parameter-list.type';
+import { type NavigationScreenProperties } from '#libs/types/types';
 
 import { ChatInput, MessageItem } from './components/components';
 import { DEFAULT_VALUES, MOCKED_DATA, PREVIOUS_USER } from './libs/constants';
@@ -19,7 +22,12 @@ type Message = {
   message: string;
 };
 
-const Chat: React.FC = () => {
+const Chat = ({
+  navigation,
+  route,
+}: NavigationScreenProperties): JSX.Element => {
+  const { title } =
+    route.params as ChatNavigationParameterList[typeof ChatScreenName.CHAT];
   const { control, handleSubmit, reset } = useAppForm<{ text: string }>({
     defaultValues: DEFAULT_VALUES,
   });
@@ -55,13 +63,18 @@ const Chat: React.FC = () => {
     scrollViewToEnd();
   }, []);
 
+  useEffect(() => {
+    navigation.setOptions({
+      header: () => <Header title={title} isArrowVisible />,
+    });
+  }, [navigation, title]);
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
         <View style={styles.avatar} />
         <Text style={styles.title}>Doctor Freud.ai</Text>
       </View>
-      <View style={styles.divider} />
       <ScrollView style={styles.chatWrapper} ref={scrollViewReference}>
         {messages.map((item, index) => (
           <MessageItem
