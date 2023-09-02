@@ -6,16 +6,19 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SplashScreen from 'react-native-splash-screen';
 import { Provider as StoreProvider } from 'react-redux';
 
-import { Toast } from '#libs/components/components';
+import { Loader, Toast } from '#libs/components/components';
 import { useEffect } from '#libs/hooks/hooks';
 import { store } from '#libs/packages/store/store';
 import { Root as RootNavigation } from '#navigations/navigations';
 
+import { DELAY } from './libs/constants';
 import { styles } from './styles';
 
 const App: React.FC = () => {
   useEffect(() => {
-    SplashScreen.hide();
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, DELAY);
   }, []);
 
   return (
@@ -23,6 +26,7 @@ const App: React.FC = () => {
       <GestureHandlerRootView style={styles.root}>
         <NavigationContainer>
           <RootNavigation />
+          <Loader />
         </NavigationContainer>
         <Toast />
       </GestureHandlerRootView>
