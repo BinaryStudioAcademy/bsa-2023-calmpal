@@ -1,6 +1,6 @@
 import React from 'react';
 
-import BackArrawImage from '#assets/img/icons/back-arrow.svg';
+import BackArrowImage from '#assets/img/icons/back-arrow.svg';
 import { Text, TouchableOpacity, View } from '#libs/components/components';
 import { useNavigation } from '#libs/hooks/hooks';
 
@@ -29,7 +29,7 @@ const Header: React.FC<Properties> = ({
     <View style={[styles.header, isArrowVisible && styles.headerCenter]}>
       {isArrowVisible && (
         <TouchableOpacity style={styles.arrow} onPress={handleOnPress}>
-          <BackArrawImage />
+          <BackArrowImage />
         </TouchableOpacity>
       )}
       <Text style={styles.title}>{title}</Text>
