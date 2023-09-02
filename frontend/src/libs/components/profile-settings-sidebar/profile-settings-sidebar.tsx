@@ -30,6 +30,7 @@ const ProfileSettingsSidebar: React.FC = () => {
           </div>
         </div>
         <div className={styles['buttons-container']}>
+          <div className="visually-hidden">Profile settings options</div>
           <ProfileSettingsButton
             name="notification"
             onClick={handleOnClick}
