@@ -24,7 +24,6 @@ const ProfileSettings = ({
       style={styles.linearGradient}
     >
       <Header navigation={navigation} title={route.name} isArrowVisible />
-
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.notificationsSection}>
           <Setting
