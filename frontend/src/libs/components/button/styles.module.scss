@@ -63,6 +63,12 @@
   animation: rotation 1s linear infinite;
 }
 
+.send-button {
+  align-self: center;
+  background-color: transparent;
+  border: none;
+}
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);

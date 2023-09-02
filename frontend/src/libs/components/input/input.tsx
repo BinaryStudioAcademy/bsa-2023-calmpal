@@ -1,7 +1,6 @@
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useFormController } from '#libs/hooks/hooks.js';
 import {
-  type ClassValue,
   type FormControl,
   type FormFieldErrors,
   type FormFieldPath,
@@ -19,39 +18,30 @@ type Properties<T extends FormFieldValues> = {
   type?: 'text' | 'email' | 'password';
   rowsCount?: number;
   maxLength?: number;
-  className?: ClassValue;
   autoComplete?: 'off' | 'on';
   required?: boolean;
-  customStyles?: ClassValue;
+  style?: 'primary' | 'chat-input';
 };
 
 const Input = <T extends FormFieldValues>({
   control,
-  errors,
+  errors = {},
   label,
   name,
   placeholder = '',
   type = 'text',
   rowsCount,
   maxLength,
-  className = '',
   autoComplete,
   required = false,
-  customStyles = '',
+  style = 'primary',
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
 
-  const error = errors ? errors[name]?.message : null;
+  const error = errors[name]?.message;
   const hasError = Boolean(error);
   const hasRows = Boolean(rowsCount);
-
-  const style =
-    customStyles ??
-    getValidClassNames(
-      className,
-      styles['textarea'],
-      hasError && styles['error'],
-    );
+  const isPrimaryStyle = style === 'primary';
 
   return (
     <label className={styles['container']}>
@@ -64,7 +54,10 @@ const Input = <T extends FormFieldValues>({
           maxLength={maxLength}
           autoComplete={autoComplete}
           required={required}
-          className={style as string}
+          className={getValidClassNames(
+            styles[isPrimaryStyle ? 'textarea' : style],
+            hasError && styles['error'],
+          )}
         />
       ) : (
         <input
@@ -74,7 +67,10 @@ const Input = <T extends FormFieldValues>({
           maxLength={maxLength}
           autoComplete={autoComplete}
           required={required}
-          className={style as string}
+          className={getValidClassNames(
+            styles[isPrimaryStyle ? 'input' : style],
+            hasError && styles['error'],
+          )}
         />
       )}
       {hasError && (

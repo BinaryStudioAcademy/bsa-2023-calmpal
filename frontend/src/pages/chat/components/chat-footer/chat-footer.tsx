@@ -1,4 +1,4 @@
-import { Input } from '#libs/components/components.js';
+import { Button, Input } from '#libs/components/components.js';
 import { Icon } from '#libs/components/icon/icon.js';
 import { DEFAULT_INPUT } from '#libs/constants/constants.js';
 import { typer } from '#libs/helpers/helpers.js';
@@ -36,7 +36,7 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
       >
         <Input
           placeholder="Type a message"
-          customStyles={styles['input']}
+          style="chat-input"
           autoComplete="off"
           required
           name="text"
@@ -45,9 +45,9 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
             FormControl<FormFieldValues, null>
           >(control)}
         />
-        <button type="submit" className={styles['send-button']}>
+        <Button type="submit" style="send-button">
           <Icon name={'send-icon'} />
-        </button>
+        </Button>
       </form>
     </footer>
   );

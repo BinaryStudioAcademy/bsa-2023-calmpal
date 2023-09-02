@@ -1,10 +1,11 @@
 import styles from './styles.module.scss';
 
 type Properties = {
-  label: string;
+  label?: string;
   type?: 'button' | 'submit';
-  style?: 'primary' | 'secondary';
+  style?: 'primary' | 'secondary' | 'send-button';
   isLoading?: boolean;
+  children?: React.ReactNode;
 };
 
 const Button: React.FC<Properties> = ({
@@ -12,10 +13,12 @@ const Button: React.FC<Properties> = ({
   label,
   style = 'primary',
   isLoading = false,
+  children,
 }) => (
   <button type={type} className={styles[style]} disabled={isLoading}>
     {isLoading && <span className={styles['loader']} />}
     {label}
+    {children}
   </button>
 );
 
