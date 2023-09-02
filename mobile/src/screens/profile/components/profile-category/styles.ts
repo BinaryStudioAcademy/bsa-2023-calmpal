@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     width: 300,
     backgroundColor: AppColor.WHITE,
     borderRadius: 20,
-    shadowColor: AppColor.PURPLE_100,
+    shadowColor: AppColor.BLUE_300,
     shadowOffset: {
       width: 0,
       height: 2,
