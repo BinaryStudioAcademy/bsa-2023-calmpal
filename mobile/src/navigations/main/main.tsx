@@ -1,11 +1,13 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 
+import ChatIcon from '#assets/img/icons/chat.svg';
 import HomeIcon from '#assets/img/icons/home.svg';
 import MeditationIcon from '#assets/img/icons/meditations.svg';
 import { AppColor, MainScreenName } from '#libs/enums/enums';
 import { type TabNavigationParameterList } from '#libs/types/types';
 import { Meditation } from '#navigations/navigations';
+import { ChatList } from '#screens/chat-list/chat-list';
 import { Home } from '#screens/home/home';
 
 import { styles } from './styles';
@@ -28,6 +30,11 @@ const Main: React.FC = () => {
         name={MainScreenName.HOME}
         component={Home}
         options={{ tabBarIcon: HomeIcon }}
+      />
+      <BottomTab.Screen
+        name={MainScreenName.CHAT_LIST}
+        component={ChatList}
+        options={{ tabBarIcon: ChatIcon }}
       />
       <BottomTab.Screen
         name={MainScreenName.MEDITATION}

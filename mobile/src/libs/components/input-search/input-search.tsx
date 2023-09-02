@@ -1,33 +1,57 @@
-// import React, { type Dispatch, type SetStateAction } from 'react';
 import React from 'react';
 
 import { TextInput } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
-// import { debounce as debouncedSetSearchQuery } from '#libs/helpers/helpers';
-import { useAppForm, useFormController } from '#libs/hooks/hooks';
+import { debounce } from '#libs/helpers/helpers';
+import {
+  useAppForm,
+  useCallback,
+  useEffect,
+  useFocusEffect,
+  useFormController,
+} from '#libs/hooks/hooks';
 
-import { DEFAULT_SEARCH_PAYLOAD } from './libs/constants';
+import { DEFAULT_SEARCH_PAYLOAD, SEARCH_TIMEOUT } from './libs/constants';
 import { styles } from './styles';
 
 type Properties = {
   placeholder: string;
-  // setSearchQuery: Dispatch<SetStateAction<string>>;
+  setSearchQuery: (search: string) => void;
 };
 
-const InputSearch: React.FC<Properties> = ({ placeholder }) => {
-  const { control } = useAppForm({
+const InputSearch: React.FC<Properties> = ({ placeholder, setSearchQuery }) => {
+  const { control, reset } = useAppForm({
     defaultValues: DEFAULT_SEARCH_PAYLOAD,
   });
-
   const { field } = useFormController({
     name: 'search',
     control,
   });
   const { value, onChange } = field;
+
+  useEffect(() => {
+    const debounceHandleSearch = debounce(() => {
+      setSearchQuery(value);
+    }, SEARCH_TIMEOUT);
+
+    debounceHandleSearch();
+
+    return () => {
+      debounceHandleSearch.clear();
+    };
+  }, [value, setSearchQuery]);
+
   const handleInputChange = (text: string): void => {
     onChange(text);
-    // debouncedSetSearchQuery(setSearchQuery)(text);
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        reset(DEFAULT_SEARCH_PAYLOAD);
+      };
+    }, [reset]),
+  );
 
   return (
     <TextInput

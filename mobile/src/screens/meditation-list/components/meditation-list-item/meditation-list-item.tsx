@@ -1,5 +1,4 @@
 import React from 'react';
-import { type ImageSourcePropType } from 'react-native';
 
 import ImagePlaceholder from '#assets/img/card-image-placeholder.png';
 import Play from '#assets/img/icons/play.svg';
@@ -20,10 +19,7 @@ type Properties = {
 const MeditationListItem: React.FC<Properties> = ({ title, duration }) => {
   return (
     <View style={styles.container}>
-      <Image
-        source={ImagePlaceholder as ImageSourcePropType}
-        style={styles.image}
-      />
+      <Image source={ImagePlaceholder} style={styles.image} />
       <View style={styles.innerContainer}>
         <View>
           <Text style={styles.title}>{title}</Text>

@@ -15,7 +15,7 @@ type Properties = {
 
 const Card: React.FC<Properties> = ({
   title,
-  image = imagePlaceholder as ImageSourcePropType,
+  image = imagePlaceholder,
   onPress,
 }) => {
   return (

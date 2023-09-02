@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { InputSearch, ScrollView, View } from '#libs/components/components';
+import { ScrollView, View } from '#libs/components/components';
 import { useSearch } from '#libs/hooks/hooks';
 
 import { MeditationListItem } from './components/components';
@@ -22,7 +22,7 @@ const MeditationList: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <InputSearch placeholder="Search topic" />
+      {/* <InputSearch placeholder="Search topic" /> */}
       <ScrollView>
         {filteredMeditationTopics.map((item) => (
           <MeditationListItem

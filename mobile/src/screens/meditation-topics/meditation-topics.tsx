@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Card } from '#libs/components/card/card';
 import {
-  InputSearch,
+  // InputSearch,
   ScrollView,
   // Text,
   View,
@@ -26,7 +26,7 @@ const MeditationTopics = ({
 
   return (
     <View style={styles.container}>
-      <InputSearch placeholder="Search topic" />
+      {/* <InputSearch placeholder="Search topic" /> */}
       <ScrollView contentContainerStyle={styles.list}>
         {mockedData.map((item) => (
           <Card

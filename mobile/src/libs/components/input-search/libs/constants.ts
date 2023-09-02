@@ -2,4 +2,6 @@ const DEFAULT_SEARCH_PAYLOAD = {
   search: '',
 };
 
-export { DEFAULT_SEARCH_PAYLOAD };
+const SEARCH_TIMEOUT = 300;
+
+export { DEFAULT_SEARCH_PAYLOAD, SEARCH_TIMEOUT };

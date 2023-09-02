@@ -1,6 +1,8 @@
 import { type Dispatch, type SetStateAction } from 'react';
 
-import { useMemo, useState } from '#libs/hooks/hooks';
+import { useEffect, useState } from '#libs/hooks/hooks';
+
+import { DEFAULT_SEARCH_PAYLOAD } from './libs/constants';
 
 type UseSearchResult<T> = {
   filteredData: T[];
@@ -8,15 +10,17 @@ type UseSearchResult<T> = {
 };
 
 const useSearch = <T>(data: T[], propertyName: keyof T): UseSearchResult<T> => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(DEFAULT_SEARCH_PAYLOAD.search);
+  const [filteredData, setFilteredData] = useState<T[]>([]);
 
-  const filteredData = useMemo(() => {
-    return data.filter((item) =>
+  useEffect(() => {
+    const filtered = data.filter((item) =>
       (item[propertyName] as string)
         .toLowerCase()
         .includes(searchQuery.toLowerCase()),
     );
-  }, [searchQuery, data, propertyName]);
+    setFilteredData(filtered);
+  }, [data, propertyName, searchQuery]);
 
   return { filteredData, setSearchQuery };
 };
