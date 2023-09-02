@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 
-import { ChatScreenName } from '#libs/enums/navigation/navigation';
+import { ChatScreenName } from '#libs/enums/enums';
 import { type ChatNavigationParameterList } from '#libs/types/types';
 import { Chat } from '#screens/chat/chat';
 import { ChatList } from '#screens/chat-list/chat-list';

@@ -10,8 +10,7 @@ import {
   ScrollView,
   View,
 } from '#libs/components/components';
-import { AppColor, RootScreenName } from '#libs/enums/enums';
-import { ChatScreenName } from '#libs/enums/navigation/navigation';
+import { AppColor, ChatScreenName, RootScreenName } from '#libs/enums/enums';
 import { useCallback, useEffect, useSearch } from '#libs/hooks/hooks';
 import { type NavigationScreenProperties } from '#libs/types/types';
 

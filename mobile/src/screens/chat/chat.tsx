@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Header, ScrollView, Text, View } from '#libs/components/components';
-import { type ChatScreenName } from '#libs/enums/navigation/navigation';
+import { type ChatScreenName } from '#libs/enums/enums';
 import {
   useAppForm,
   useCallback,
