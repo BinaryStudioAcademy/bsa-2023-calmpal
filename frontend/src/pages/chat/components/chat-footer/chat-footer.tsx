@@ -1,6 +1,10 @@
+import { type Control } from 'react-hook-form';
+
+import { Input } from '#libs/components/components.js';
 import { Icon } from '#libs/components/icon/icon.js';
-import { BLANK } from '#libs/constants/blank.constant.js';
+import { DEFAULT_INPUT } from '#libs/constants/constants.js';
 import { useAppForm, useCallback } from '#libs/hooks/hooks.js';
+import { type FormFieldValues } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
 
@@ -10,16 +14,21 @@ type Properties = {
 
 type HandleForm = () => void;
 
+type FormValue = {
+  text: string;
+} & FormFieldValues;
+
+const handleControl = (
+  control: Control<FormValue, null>,
+): Control<FormFieldValues, null> => {
+  return control as unknown as Control<FormFieldValues, null>;
+};
+
 const ChatFooter: React.FC<Properties> = ({ onSend }) => {
-  const { register, handleSubmit, reset } = useAppForm<{ text: string }>({
-    defaultValues: {
-      text: BLANK,
-    },
-    mode: 'onSubmit',
-  });
+  const { control, handleSubmit, reset } = useAppForm<FormValue>(DEFAULT_INPUT);
 
   const onSubmit = useCallback(
-    ({ text }: { text: string }): void => {
+    ({ text }: FormValue): void => {
       onSend({ text });
       reset();
     },
@@ -32,12 +41,13 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
         className={styles['form']}
         onSubmit={handleSubmit(onSubmit) as HandleForm}
       >
-        <input
+        <Input
           placeholder="Type a message"
-          className={styles['input']}
+          customStyles={styles['input']}
           autoComplete="off"
           required
-          {...register('text')}
+          name="text"
+          control={handleControl(control)}
         />
         <button type="submit" className={styles['send-button']}>
           <Icon name={'send-icon'} />

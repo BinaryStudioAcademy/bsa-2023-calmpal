@@ -1,14 +1,11 @@
 .bot-message-container {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
   gap: 16px;
-  animation: slide-in-left 0.5s forwards;
+  animation: slide-in-right 0.5s forwards;
 }
 
 .message-container {
   display: flex;
-  flex-direction: column;
   gap: 10px;
   max-width: 60%;
 }
@@ -23,10 +20,9 @@
   font-family: Montserrat, sans-serif;
   line-height: 20px;
   word-wrap: break-word;
-  word-break: break-all;
   background-color: var(--blue-300);
   border-radius: 12px;
-  animation: slide-in-left 0.5s forwards;
+  animation: slide-in-right 0.5s forwards;
 }
 
 .bot-avatar {
@@ -35,9 +31,9 @@
   border-radius: 8px;
 }
 
-@keyframes slide-in-left {
+@keyframes slide-in-right {
   0% {
-    transform: translateX(100%);
+    transform: translateX(-5%);
     opacity: 0;
   }
 

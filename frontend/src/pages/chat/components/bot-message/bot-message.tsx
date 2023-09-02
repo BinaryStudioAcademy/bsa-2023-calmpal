@@ -9,6 +9,7 @@ type Properties = {
 const BotMessage: React.FC<Properties> = ({ messages }) => {
   return (
     <div className={styles['bot-message-container']}>
+      <Icon name="chat-logo" className={styles['bot-avatar']} />
       <div className={styles['message-container']}>
         {messages.map((message, index) => (
           <span key={index} className={styles['message-text']}>
@@ -16,7 +17,6 @@ const BotMessage: React.FC<Properties> = ({ messages }) => {
           </span>
         ))}
       </div>
-      <Icon name="chat-logo" className={styles['bot-avatar']} />
     </div>
   );
 };

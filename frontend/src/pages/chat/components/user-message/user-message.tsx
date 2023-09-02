@@ -7,14 +7,14 @@ type Properties = {
 const UserMessage: React.FC<Properties> = ({ messages }) => {
   return (
     <div className={styles['user-message-container']}>
-      <span className={styles['user-avatar']} />
       <div className={styles['user-message-content']}>
         {messages.map((message, index) => (
-          <span key={index} className={styles['message-text']}>
-            {message}
+          <span key={index} className={styles['message-item']}>
+            <p className={styles['message-text']}> {message} </p>
           </span>
         ))}
       </div>
+      <span className={styles['user-avatar']} />
     </div>
   );
 };

@@ -1,8 +1,9 @@
 .user-message-container {
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
   gap: 16px;
-  animation: slide-in-right 0.5s forwards;
+  animation: slide-in-left 0.5s forwards;
 }
 
 .user-avatar {
@@ -19,25 +20,30 @@
   max-width: 60%;
 }
 
-.message-text {
-  display: inline-block;
-  width: fit-content;
-  padding: 8px 16px;
+.message-item {
   color: var(--black);
   font-weight: 400;
   font-size: 14px;
   font-family: Montserrat, sans-serif;
   line-height: 20px;
+  text-align: right;
   word-wrap: break-word;
   word-break: break-all;
-  background-color: var(--blue-100);
-  border-radius: 12px;
-  animation: slide-in-right 0.5s forwards;
 }
 
-@keyframes slide-in-right {
+.message-text {
+  display: inline-block;
+  width: fit-content;
+  margin: 0;
+  padding: 8px 16px;
+  background-color: var(--blue-100);
+  border-radius: 12px;
+  animation: slide-in-left 0.5s forwards;
+}
+
+@keyframes slide-in-left {
   0% {
-    transform: translateX(-5%);
+    transform: translateX(100%);
     opacity: 0;
   }
 

@@ -1,6 +1,7 @@
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useFormController } from '#libs/hooks/hooks.js';
 import {
+  type ClassValue,
   type FormControl,
   type FormFieldErrors,
   type FormFieldPath,
@@ -11,13 +12,17 @@ import styles from './styles.module.scss';
 
 type Properties<T extends FormFieldValues> = {
   control: FormControl<T, null>;
-  errors: FormFieldErrors<T>;
+  errors?: FormFieldErrors<T>;
   label?: string;
   name: FormFieldPath<T>;
   placeholder?: string;
   type?: 'text' | 'email' | 'password';
   rowsCount?: number;
   maxLength?: number;
+  className?: ClassValue;
+  autoComplete?: 'off' | 'on';
+  required?: boolean;
+  customStyles?: ClassValue;
 };
 
 const Input = <T extends FormFieldValues>({
@@ -29,12 +34,24 @@ const Input = <T extends FormFieldValues>({
   type = 'text',
   rowsCount,
   maxLength,
+  className = '',
+  autoComplete,
+  required = false,
+  customStyles = '',
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
 
-  const error = errors[name]?.message;
+  const error = errors ? errors[name]?.message : null;
   const hasError = Boolean(error);
   const hasRows = Boolean(rowsCount);
+
+  const style =
+    customStyles ??
+    getValidClassNames(
+      className,
+      styles['textarea'],
+      hasError && styles['error'],
+    );
 
   return (
     <label className={styles['container']}>
@@ -45,10 +62,9 @@ const Input = <T extends FormFieldValues>({
           rows={rowsCount}
           placeholder={placeholder}
           maxLength={maxLength}
-          className={getValidClassNames(
-            styles['textarea'],
-            hasError && styles['error'],
-          )}
+          autoComplete={autoComplete}
+          required={required}
+          className={style as string}
         />
       ) : (
         <input
@@ -56,10 +72,9 @@ const Input = <T extends FormFieldValues>({
           type={type}
           placeholder={placeholder}
           maxLength={maxLength}
-          className={getValidClassNames(
-            styles['input'],
-            hasError && styles['error'],
-          )}
+          autoComplete={autoComplete}
+          required={required}
+          className={style as string}
         />
       )}
       {hasError && (
