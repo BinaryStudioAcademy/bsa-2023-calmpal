@@ -1,7 +1,13 @@
 import React from 'react';
+import LinearGradient from 'react-native-linear-gradient';
 
-import { Header, ScrollView, View } from '#libs/components/components';
-import { type MeditationScreenName } from '#libs/enums/enums';
+import {
+  Header,
+  InputSearch,
+  ScrollView,
+  View,
+} from '#libs/components/components';
+import { AppColor, type MeditationScreenName } from '#libs/enums/enums';
 import { useEffect, useSearch } from '#libs/hooks/hooks';
 import {
   type MeditationNavigationParameterList,
@@ -12,13 +18,6 @@ import { MeditationListItem } from './components/components';
 import { mockedData } from './libs/constants';
 import { styles } from './styles';
 
-// type Topic = {
-//   id: number;
-//   title: string;
-//   duration: number;
-//   uri: string;
-// };
-
 const MeditationList = ({
   navigation,
   route,
@@ -26,7 +25,7 @@ const MeditationList = ({
   const { title } =
     route.params as MeditationNavigationParameterList[typeof MeditationScreenName.MEDITATION_LIST];
 
-  const { filteredData: filteredMeditationTopics } = useSearch(
+  const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
     mockedData,
     'title',
   );
@@ -38,18 +37,26 @@ const MeditationList = ({
   }, [navigation, route.name, title]);
 
   return (
-    <View style={styles.container}>
-      {/* <InputSearch placeholder="Search topic" /> */}
-      <ScrollView>
-        {filteredMeditationTopics.map((item) => (
-          <MeditationListItem
-            title={item.title}
-            duration={item.duration}
-            key={item.id}
-          />
-        ))}
-      </ScrollView>
-    </View>
+    <LinearGradient
+      colors={[AppColor.WHITE, AppColor.BLUE_100]}
+      style={styles.linearGradient}
+    >
+      <View style={styles.container}>
+        <InputSearch
+          placeholder="Search topic"
+          setSearchQuery={setSearchQuery}
+        />
+        <ScrollView>
+          {filteredMeditationTopics.map((item) => (
+            <MeditationListItem
+              title={item.title}
+              duration={item.duration}
+              key={item.id}
+            />
+          ))}
+        </ScrollView>
+      </View>
+    </LinearGradient>
   );
 };
 

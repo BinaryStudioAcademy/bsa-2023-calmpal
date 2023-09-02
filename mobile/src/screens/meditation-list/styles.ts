@@ -5,6 +5,9 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     flex: 1,
   },
+  linearGradient: {
+    flex: 1,
+  },
 });
 
 export { styles };
