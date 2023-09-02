@@ -1,9 +1,11 @@
 import React from 'react';
 
 import BackArrowImage from '#assets/img/icons/back-arrow.svg';
+// import UserIcon from '#assets/img/icons/user.svg';
 import { Text, TouchableOpacity, View } from '#libs/components/components';
 import { useNavigation } from '#libs/hooks/hooks';
 
+// import { IconButton } from '../icon-button/icon-button';
 import { Badge } from './components/components';
 import { DEFAULT_BADGE_COUNT } from './libs/constants';
 import { styles } from './styles';
@@ -12,12 +14,14 @@ type Properties = {
   title: string;
   isArrowVisible?: boolean;
   badgeCount?: number;
+  isSettingsVisible?: boolean;
 };
 
 const Header: React.FC<Properties> = ({
   title,
   isArrowVisible = false,
   badgeCount = DEFAULT_BADGE_COUNT,
+  isSettingsVisible = false,
 }) => {
   const navigation = useNavigation();
   const handleOnPress = (): void => {
@@ -25,15 +29,30 @@ const Header: React.FC<Properties> = ({
   };
   const hasValue = Boolean(badgeCount);
 
+  // const handleIconPress = (): void => {};
+
   return (
-    <View style={[styles.header, isArrowVisible && styles.headerCenter]}>
+    <View
+      style={[
+        styles.header,
+        isArrowVisible && styles.headerCenter,
+        isSettingsVisible && styles.settings,
+      ]}
+    >
       {isArrowVisible && (
         <TouchableOpacity style={styles.arrow} onPress={handleOnPress}>
           <BackArrowImage />
         </TouchableOpacity>
       )}
-      <Text style={styles.title}>{title}</Text>
-      {hasValue && <Badge count={badgeCount} />}
+      <View style={styles.titleBadgeContainer}>
+        <Text style={styles.title}>{title}</Text>
+        {hasValue && <Badge count={badgeCount} />}
+      </View>
+      {isSettingsVisible && (
+        <View style={styles.settingsContainer}>
+          {/* <IconButton onPress={handleIconPress} iconSourceSvg={<UserIcon />} /> */}
+        </View>
+      )}
     </View>
   );
 };

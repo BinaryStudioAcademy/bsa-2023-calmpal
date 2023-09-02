@@ -15,6 +15,15 @@ const styles = StyleSheet.create({
   headerCenter: {
     justifyContent: 'center',
   },
+  titleBadgeContainer: {
+    flexDirection: 'row',
+  },
+  settingsContainer: {
+    flexDirection: 'row',
+  },
+  settings: {
+    justifyContent: 'space-between',
+  },
   title: {
     color: AppColor.GRAY_500,
     fontSize: 20,

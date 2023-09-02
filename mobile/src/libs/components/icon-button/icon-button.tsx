@@ -5,13 +5,16 @@ import { styles } from './styles';
 
 type IconButtonProperties = {
   onPress: () => void;
-  icon: React.ReactNode;
+  iconSourceSvg: JSX.Element;
 };
 
-const IconButton: React.FC<IconButtonProperties> = ({ onPress, icon }) => {
+const IconButton: React.FC<IconButtonProperties> = ({
+  onPress,
+  iconSourceSvg,
+}) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.buttonContainer}>
-      {icon}
+      {iconSourceSvg}
     </TouchableOpacity>
   );
 };

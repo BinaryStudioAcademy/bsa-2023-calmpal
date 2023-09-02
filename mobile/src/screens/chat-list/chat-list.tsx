@@ -100,7 +100,9 @@ const ChatList = ({
 }: NavigationScreenProperties): JSX.Element => {
   useEffect(() => {
     navigation.setOptions({
-      header: () => <Header title={route.name} badgeCount={mockedCount} />,
+      header: () => (
+        <Header title={route.name} badgeCount={mockedCount} isSettingsVisible />
+      ),
     });
   }, [navigation, route.name]);
 
