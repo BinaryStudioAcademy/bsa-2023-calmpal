@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Header } from '#libs/components/components';
 import { MeditationScreenName } from '#libs/enums/enums';
-import { type MeditationNavigationParameterList } from '#libs/types/navigation/meditation-navigation-parameter-list.type';
+import { type MeditationNavigationParameterList } from '#libs/types/types';
 import { MeditationList } from '#screens/meditation-list/meditation-list';
 import { MeditationTopics } from '#screens/meditation-topics/meditation-topics';
 
