@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
 import PlusIcon from '#assets/img/icons/plus.svg';
@@ -11,8 +11,8 @@ import {
   View,
 } from '#libs/components/components';
 import { AppColor, RootScreenName } from '#libs/enums/enums';
-import { ChatScreenName } from '#libs/enums/navigation/chat-screen-name.enum';
-import { useEffect, useSearch } from '#libs/hooks/hooks';
+import { ChatScreenName } from '#libs/enums/navigation/navigation';
+import { useCallback, useEffect, useSearch } from '#libs/hooks/hooks';
 import { type NavigationScreenProperties } from '#libs/types/types';
 
 import mockedChats from './libs/data.json';

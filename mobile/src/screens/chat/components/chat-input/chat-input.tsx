@@ -25,8 +25,9 @@ const ChatInput = <T extends FieldValues>({
   scrollViewToEnd,
   onSend,
 }: Properties<T>): JSX.Element => {
-  const { field } = useFormController({ name, control });
-  const { value, onChange } = field;
+  const {
+    field: { value, onChange },
+  } = useFormController({ name, control });
   const hasValue = Boolean(value);
 
   return (
