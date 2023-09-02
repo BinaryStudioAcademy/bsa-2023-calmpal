@@ -101,7 +101,12 @@ const ChatList = ({
   useEffect(() => {
     navigation.setOptions({
       header: () => (
-        <Header title={route.name} badgeCount={mockedCount} isSettingsVisible />
+        <Header
+          navigation={navigation}
+          title={route.name}
+          badgeCount={mockedCount}
+          isSettingsVisible
+        />
       ),
     });
   }, [navigation, route.name]);

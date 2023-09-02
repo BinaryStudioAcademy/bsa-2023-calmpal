@@ -1,16 +1,21 @@
+import {
+  type NavigationProp,
+  type ParamListBase,
+} from '@react-navigation/native';
 import React from 'react';
 
 import BackArrowImage from '#assets/img/icons/back-arrow.svg';
-// import UserIcon from '#assets/img/icons/user.svg';
+import UserIcon from '#assets/img/icons/user.svg';
 import { Text, TouchableOpacity, View } from '#libs/components/components';
-import { useNavigation } from '#libs/hooks/hooks';
+import { RootScreenName } from '#libs/enums/enums';
 
-// import { IconButton } from '../icon-button/icon-button';
+import { IconButton } from '../icon-button/icon-button';
 import { Badge } from './components/components';
 import { DEFAULT_BADGE_COUNT } from './libs/constants';
 import { styles } from './styles';
 
 type Properties = {
+  navigation: NavigationProp<ParamListBase>;
   title: string;
   isArrowVisible?: boolean;
   badgeCount?: number;
@@ -18,18 +23,20 @@ type Properties = {
 };
 
 const Header: React.FC<Properties> = ({
+  navigation,
   title,
   isArrowVisible = false,
   badgeCount = DEFAULT_BADGE_COUNT,
   isSettingsVisible = false,
 }) => {
-  const navigation = useNavigation();
   const handleOnPress = (): void => {
     navigation.goBack();
   };
   const hasValue = Boolean(badgeCount);
 
-  // const handleIconPress = (): void => {};
+  const handleIconPress = (): void => {
+    navigation.navigate(RootScreenName.PROFILE);
+  };
 
   return (
     <View
@@ -50,7 +57,7 @@ const Header: React.FC<Properties> = ({
       </View>
       {isSettingsVisible && (
         <View style={styles.settingsContainer}>
-          {/* <IconButton onPress={handleIconPress} iconSourceSvg={<UserIcon />} /> */}
+          <IconButton onPress={handleIconPress} iconSourceSvg={<UserIcon />} />
         </View>
       )}
     </View>
