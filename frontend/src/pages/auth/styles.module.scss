@@ -13,10 +13,6 @@
   background-attachment: fixed;
 }
 
-.auth .logo {
-  display: none;
-}
-
 .auth .overlay {
   position: relative;
   z-index: 3;
@@ -45,12 +41,6 @@
   line-height: 2.344;
 }
 
-.auth-name .primary {
-  margin: 0.1px;
-  font-weight: 600;
-  font-size: 83px;
-}
-
 @media (width < 1023px) {
   .auth {
     flex-direction: column;
@@ -68,8 +58,8 @@
     margin-bottom: 13px;
   }
 
-  .auth-name .logo-xl img {
-    width: 298px;
+  .auth-name .logo img {
+    width: 290px;
   }
 
   .auth .overlay {
@@ -92,8 +82,9 @@
     display: none;
   }
 
-  .auth-name .logo-xl img {
+  .auth-name .logo img {
     width: 175px;
+    margin-bottom: 25px;
   }
 
   .auth .overlay {

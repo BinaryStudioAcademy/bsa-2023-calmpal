@@ -43,11 +43,9 @@ const Auth: React.FC = () => {
 
   return (
     <div className={styles['auth']}>
-      <div className={styles['logo']}>CalmPal</div>
-
       <div className={styles['auth-name']}>
         <p className={styles['secondary']}>Welcome to</p>
-        <picture className={styles['logo-xl']}>
+        <picture className={styles['logo']}>
           <source
             media="(width < 1023px)"
             srcSet={logoM}
