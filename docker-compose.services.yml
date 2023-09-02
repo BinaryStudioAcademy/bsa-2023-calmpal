@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  calmpal_db:
+    container_name: calmpal_db
+    image: postgres:15.2
+    environment:
+      - POSTGRES_DB=$DB_NAME
+      - POSTGRES_USER=$DB_USERNAME
+      - POSTGRES_PASSWORD=$DB_PASSWORD
+    ports:
+      - 5434:5432
+    networks:
+      - calmpal_network
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: on-failure
+
+networks:
+  calmpal_network:
+    driver: bridge
+
+volumes:
+  pgdata:
+    driver: local

@@ -4,18 +4,25 @@ import { DataStatus } from '#libs/enums/enums';
 import { type ValueOf } from '#libs/types/types';
 import { type UserAuthResponseDto } from '#packages/users/users';
 
-import { getAuthenticatedUser, signUp } from './actions';
+import {
+  createUserSurvey,
+  getAuthenticatedUser,
+  signIn,
+  signUp,
+} from './actions';
 
 type State = {
   authenticatedUser: UserAuthResponseDto | null;
   authenticatedUserDataStatus: ValueOf<typeof DataStatus>;
   dataStatus: ValueOf<typeof DataStatus>;
+  surveyPreferencesDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
   authenticatedUser: null,
   authenticatedUserDataStatus: DataStatus.IDLE,
   dataStatus: DataStatus.IDLE,
+  surveyPreferencesDataStatus: DataStatus.IDLE,
 };
 
 const { reducer, actions, name } = createSlice({
@@ -23,6 +30,18 @@ const { reducer, actions, name } = createSlice({
   name: 'auth',
   reducers: {},
   extraReducers(builder) {
+    builder.addCase(signIn.pending, (state) => {
+      state.dataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(signIn.fulfilled, (state, action) => {
+      state.dataStatus = DataStatus.FULFILLED;
+      state.authenticatedUser = action.payload;
+    });
+    builder.addCase(signIn.rejected, (state) => {
+      state.dataStatus = DataStatus.REJECTED;
+      state.authenticatedUser = null;
+    });
+
     builder.addCase(signUp.pending, (state) => {
       state.dataStatus = DataStatus.PENDING;
     });
@@ -44,6 +63,19 @@ const { reducer, actions, name } = createSlice({
     });
     builder.addCase(getAuthenticatedUser.rejected, (state) => {
       state.authenticatedUserDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(createUserSurvey.pending, (state) => {
+      state.surveyPreferencesDataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(createUserSurvey.fulfilled, (state, action) => {
+      (state.authenticatedUser as UserAuthResponseDto).isSurveyCompleted =
+        action.payload;
+
+      state.surveyPreferencesDataStatus = DataStatus.FULFILLED;
+    });
+    builder.addCase(createUserSurvey.rejected, (state) => {
+      state.surveyPreferencesDataStatus = DataStatus.REJECTED;
     });
   },
 });

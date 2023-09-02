@@ -7,6 +7,7 @@ import {
   App,
   ProtectedRoute,
   RouterProvider,
+  SidebarWrapper,
   StoreProvider,
   Toast,
 } from '#libs/components/components.js';
@@ -14,6 +15,7 @@ import { AppRoute } from '#libs/enums/enums.js';
 import { store } from '#libs/packages/store/store.js';
 import { Auth } from '#pages/auth/auth.js';
 import { Root } from '#pages/root/root.js';
+import { Survey } from '#pages/surveys/survey.js';
 
 createRoot(document.querySelector('#root') as HTMLElement).render(
   <StrictMode>
@@ -28,7 +30,9 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 path: AppRoute.ROOT,
                 element: (
                   <ProtectedRoute>
-                    <Root />
+                    <SidebarWrapper>
+                      <Root />
+                    </SidebarWrapper>
                   </ProtectedRoute>
                 ),
               },
@@ -39,6 +43,14 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
               {
                 path: AppRoute.SIGN_UP,
                 element: <Auth />,
+              },
+              {
+                path: AppRoute.SIGN_UP_SURVEY,
+                element: (
+                  <ProtectedRoute>
+                    <Survey />
+                  </ProtectedRoute>
+                ),
               },
             ],
           },

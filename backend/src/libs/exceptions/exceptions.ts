@@ -1,1 +1,6 @@
-export { AuthError, ValidationError } from 'shared/build/index.js';
+export {
+  AuthError,
+  FileError,
+  UsersError,
+  ValidationError,
+} from 'shared/build/index.js';

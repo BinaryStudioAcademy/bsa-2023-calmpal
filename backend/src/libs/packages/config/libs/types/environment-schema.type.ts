@@ -8,7 +8,11 @@ type EnvironmentSchema = {
     ENVIRONMENT: ValueOf<typeof AppEnvironment>;
   };
   DB: {
-    CONNECTION_STRING: string;
+    USERNAME: string;
+    PASSWORD: string;
+    HOST: string;
+    PORT: number;
+    NAME: string;
     DIALECT: string;
     POOL_MIN: number;
     POOL_MAX: number;
@@ -16,6 +20,12 @@ type EnvironmentSchema = {
   JWT: {
     SECRET_KEY: string;
     ALG: string;
+  };
+  AWS: {
+    REGION: string;
+    ACCESS_KEY_ID: string;
+    SECRET_ACCESS_KEY: string;
+    BUCKET_NAME: string;
   };
   ENCRYPT: {
     NUMBER_OF_ROUNDS: number;

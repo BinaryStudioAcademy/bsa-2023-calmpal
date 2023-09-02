@@ -1,45 +1,54 @@
-import home from '#assets/img/home.svg';
-import {
-  Header,
-  Loader,
-  RouterOutlet,
-  Sidebar,
-} from '#libs/components/components.js';
+import { Loader, Navigate, RouterOutlet } from '#libs/components/components.js';
 import { AppRoute, DataStatus } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
   useEffect,
+  useLocation,
+  useNavigate,
 } from '#libs/hooks/hooks.js';
+import { actions as appActions } from '#slices/app/app.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
-import styles from './styles.module.scss';
-
 const App: React.FC = () => {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { authenticatedUserDataStatus } = useAppSelector(({ auth }) => ({
-    authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
-  }));
+  const { authenticatedUser, authenticatedUserDataStatus, redirectTo } =
+    useAppSelector(({ auth, app }) => ({
+      authenticatedUser: auth.authenticatedUser,
+      authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
+      redirectTo: app.redirectTo,
+    }));
 
   useEffect(() => {
     void dispatch(authActions.getAuthenticatedUser());
   }, [dispatch]);
 
-  if (authenticatedUserDataStatus === DataStatus.PENDING) {
+  useEffect(() => {
+    if (redirectTo) {
+      navigate(redirectTo);
+      dispatch(appActions.navigate(null));
+    }
+  }, [dispatch, navigate, redirectTo]);
+
+  const hasNoSurvey =
+    authenticatedUser &&
+    !authenticatedUser.isSurveyCompleted &&
+    pathname !== AppRoute.SIGN_UP_SURVEY;
+
+  if (hasNoSurvey) {
+    return <Navigate to={AppRoute.SIGN_UP_SURVEY} />;
+  }
+
+  if (
+    authenticatedUserDataStatus === DataStatus.PENDING ||
+    authenticatedUserDataStatus === DataStatus.IDLE
+  ) {
     return <Loader />;
   }
 
-  return (
-    <div className={styles['app-container']}>
-      <Sidebar routes={[{ path: AppRoute.ROOT, name: 'home', icon: home }]} />
-      <div className={styles['body-container']}>
-        <Header />
-        <div>
-          <RouterOutlet />
-        </div>
-      </div>
-    </div>
-  );
+  return <RouterOutlet />;
 };
 
 export { App };

@@ -1,0 +1,115 @@
+name: Continuous Delivery Development
+
+on:
+  push:
+    branches:
+      - development
+    paths:
+      - frontend/**/*.*
+      - backend/**/*.*
+      - shared/**/*.*
+      - .github/workflows/cd.yml
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+  deployments: write
+  statuses: write
+
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Up Variables
+        uses: kanga333/variable-mapper@master
+        with:
+          key: ${{ github.ref_name }}
+          map: |
+            {
+              "development": {
+                "DEVELOPMENT_APP_URL": "http://calmpal-alb-development-453467742.eu-west-1.elb.amazonaws.com/"
+              }
+            }
+
+      - name: Create Deployment
+        uses: chrnorm/deployment-action@v2
+        id: deployment
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment-url: ${{ env.DEVELOPMENT_APP_URL }}
+          environment: ${{ github.ref_name }}
+
+      - name: Checkout Source Code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+        with:
+          mask-password: true
+
+      - name: Build, tag, and push backend image
+        id: build-backend-image
+        uses: whoan/docker-build-with-cache-action@v5
+        with:
+          image_name: ${{ secrets.ECR_BACKEND_REPOSITORY }}-${{ github.ref_name }}
+          registry: ${{ steps.login-ecr.outputs.registry }}
+          image_tag: latest
+          context: ./
+          dockerfile: ./backend/Dockerfile.development
+          build_extra_args: '--build-arg NODE_ENV=${{ github.ref_name }} --build-arg HOST=localhost --build-arg PORT=3001'
+      - name: Build, tag, and push frontend image
+        id: build-frontend-image
+        uses: whoan/docker-build-with-cache-action@v5
+        with:
+          image_name: ${{ secrets.ECR_FRONTEND_REPOSITORY }}-${{ github.ref_name }}
+          registry: ${{ steps.login-ecr.outputs.registry }}
+          image_tag: latest
+          context: ./
+          dockerfile: ./frontend/Dockerfile.development
+          build_extra_args: '--build-arg VITE_APP_NODE_ENV=${{ github.ref_name }} --build-arg VITE_APP_API_ORIGIN_URL=/api/v1 --build-arg VITE_APP_PROXY_SERVER_URL=http://localhost:3001'
+
+      - name: Download task definition
+        run: |
+          aws ecs describe-task-definition --task-definition ${{ secrets.ECS_TASK_DEFINITION }}-${{ github.ref_name }} --query taskDefinition > task-definition.json
+
+      - name: Fill in the new backend image in the Amazon ECS task definition
+        id: render-backend-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: ${{ secrets.BACKEND_CONTAINER_NAME }}
+          image: ${{ steps.build-backend-image.outputs.FULL_IMAGE_NAME }}
+
+      - name: Fill in the new frontend image in the Amazon ECS task definition
+        id: render-frontend-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-backend-container.outputs.task-definition }}
+          container-name: ${{ secrets.FRONTEND_CONTAINER_NAME }}
+          image: ${{ steps.build-frontend-image.outputs.FULL_IMAGE_NAME }}
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-frontend-container.outputs.task-definition }}
+          service: ${{ secrets.ECS_SERVICE }}-${{ github.ref_name }}
+          cluster: ${{ secrets.ECS_CLUSTER }}-${{ github.ref_name }}
+          wait-for-service-stability: true
+
+      - name: Update Deployment Status
+        if: ${{ always() }}
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: '${{ secrets.GITHUB_TOKEN }}'
+          environment-url: ${{ steps.deployment.outputs.environment_url }}
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+          state: ${{ job.status }}

@@ -8,6 +8,8 @@ import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 import {
   type UserAuthResponseDto,
+  type UserSignInRequestDto,
+  userSignInValidationSchema,
   type UserSignUpRequestDto,
   userSignUpValidationSchema,
 } from '#packages/users/users.js';
@@ -15,6 +17,38 @@ import {
 import { type AuthService } from './auth.service.js';
 import { AuthApiPath } from './libs/enums/enums.js';
 
+/**
+ * @swagger
+ * components:
+ *    schemas:
+ *      User:
+ *        type: object
+ *        properties:
+ *          id:
+ *            type: number
+ *            format: number
+ *            minimum: 1
+ *          email:
+ *            type: string
+ *            format: email
+ *          fullName:
+ *            type: string
+ *          createdAt:
+ *            type: string
+ *            format: date-time
+ *          updatedAt:
+ *            type: string
+ *            format: date-time
+ *          isSurveyCompleted:
+ *            type: boolean
+ *      Error:
+ *        type: object
+ *        properties:
+ *          message:
+ *            type: string
+ *          errorType:
+ *            type: string
+ */
 class AuthController extends BaseController {
   private authService: AuthService;
 
@@ -36,7 +70,19 @@ class AuthController extends BaseController {
           }>,
         ),
     });
-
+    this.addRoute({
+      path: AuthApiPath.SIGN_IN,
+      method: 'POST',
+      validation: {
+        body: userSignInValidationSchema,
+      },
+      handler: (options) =>
+        this.signIn(
+          options as APIHandlerOptions<{
+            body: UserSignInRequestDto;
+          }>,
+        ),
+    });
     this.addRoute({
       path: AuthApiPath.AUTHENTICATED_USER,
       method: 'GET',
@@ -65,6 +111,8 @@ class AuthController extends BaseController {
    *                email:
    *                  type: string
    *                  format: email
+   *                fullName:
+   *                  type: string
    *                password:
    *                  type: string
    *      responses:
@@ -75,9 +123,20 @@ class AuthController extends BaseController {
    *              schema:
    *                type: object
    *                properties:
-   *                  message:
+   *                  user:
    *                    type: object
    *                    $ref: '#/components/schemas/User'
+   *                  token:
+   *                    type: string
+   *        400:
+   *          description: Bad request. User already exists
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "User already exists."
+   *                errorType: "AUTHORIZATION"
    */
   private async signUp(
     options: APIHandlerOptions<{
@@ -87,6 +146,69 @@ class AuthController extends BaseController {
     return {
       status: HTTPCode.CREATED,
       payload: await this.authService.signUp(options.body),
+    };
+  }
+
+  /**
+   * @swagger
+   * /auth/sign-in:
+   *    post:
+   *      description: Sign in user with credentials
+   *      requestBody:
+   *        description: User login credentials
+   *        required: true
+   *        content:
+   *          application/json:
+   *            schema:
+   *              type: object
+   *              properties:
+   *                email:
+   *                  type: string
+   *                  format: email
+   *                password:
+   *                  type: string
+   *      responses:
+   *        200:
+   *          description: Successful operation
+   *          content:
+   *            application/json:
+   *              schema:
+   *                type: object
+   *                properties:
+   *                  user:
+   *                    type: object
+   *                    $ref: '#/components/schemas/User'
+   *                  token:
+   *                    type: string
+   *        401:
+   *          description: Unauthorized
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "Incorrect credentials."
+   *                errorType: "AUTHORIZATION"
+   *        404:
+   *          description: User was not found
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "User with these credentials was not found."
+   *                errorType: "USERS"
+   */
+  private async signIn(
+    options: APIHandlerOptions<{
+      body: UserSignInRequestDto;
+    }>,
+  ): Promise<APIHandlerResponse> {
+    const user = await this.authService.verifyLoginCredentials(options.body);
+
+    return {
+      status: HTTPCode.OK,
+      payload: await this.authService.signIn(user),
     };
   }
 
