@@ -33,13 +33,16 @@
 .auth-name {
   position: relative;
   z-index: 2;
-  margin-bottom: 150px;
+  margin-bottom: 80px;
   text-align: center;
 }
 
 .auth-name .secondary {
   margin: 0.1px;
+  margin-bottom: 45px;
+  font-weight: 600;
   font-size: 30px;
+  line-height: 2.344;
 }
 
 .auth-name .primary {
@@ -57,7 +60,16 @@
   }
 
   .auth-name {
+    width: 420px;
     margin: 0;
+  }
+
+  .auth-name .secondary {
+    margin-bottom: 13px;
+  }
+
+  .auth-name .logo-xl img {
+    width: 298px;
   }
 
   .auth .overlay {
@@ -71,26 +83,22 @@
     justify-content: center;
   }
 
-  .auth .logo {
-    z-index: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 149px;
-    height: 56px;
-    margin: 0.1px 130px 32px 0.1px;
-    font-size: 21px;
-    background: var(--blue-300);
-    border-radius: 14px;
+  .auth-name {
+    width: 280px;
+    text-align: start;
+  }
+
+  .auth-name .secondary {
+    display: none;
+  }
+
+  .auth-name .logo-xl img {
+    width: 175px;
   }
 
   .auth .overlay {
     height: auto;
     padding: 0.1px;
     background-color: transparent;
-  }
-
-  .auth-name {
-    display: none;
   }
 }

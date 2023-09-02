@@ -1,3 +1,4 @@
+import { logoM, logoXl } from '#assets/img/logos/logos.js';
 import { AppRoute } from '#libs/enums/enums.js';
 import { useAppDispatch, useCallback, useLocation } from '#libs/hooks/hooks.js';
 import {
@@ -46,7 +47,14 @@ const Auth: React.FC = () => {
 
       <div className={styles['auth-name']}>
         <p className={styles['secondary']}>Welcome to</p>
-        <p className={styles['primary']}>CalmPal</p>
+        <picture className={styles['logo-xl']}>
+          <source
+            media="(width < 1023px)"
+            srcSet={logoM}
+            type="image/svg+xml"
+          />
+          <img src={logoXl} alt="white logo of CalmPal size XL" />
+        </picture>
       </div>
       <div className={styles['overlay']}>{getScreen(pathname)}</div>
     </div>
