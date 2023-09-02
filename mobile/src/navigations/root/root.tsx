@@ -56,11 +56,12 @@ const Root: React.FC = () => {
           <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
         </>
       )}
+
+      <NativeStack.Screen name={RootScreenName.PROFILE} component={Profile} />
       <NativeStack.Screen
         name={RootScreenName.SETTINGS}
         component={ProfileSettings}
       />
-      <NativeStack.Screen name={RootScreenName.PROFILE} component={Profile} />
     </NativeStack.Navigator>
   );
 };

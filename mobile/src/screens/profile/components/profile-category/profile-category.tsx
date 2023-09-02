@@ -1,30 +1,23 @@
 import React from 'react';
 
 import { Pressable, Text, View } from '#libs/components/components';
-import { useState } from '#libs/hooks/hooks';
 
 import { styles } from './styles';
 
 type ProfileCategoryProperties = {
   iconSourceSvg: JSX.Element;
   title: string;
+  onPress: () => void;
 };
 
 const ProfileCategory: React.FC<ProfileCategoryProperties> = ({
   iconSourceSvg,
   title,
+  onPress,
 }) => {
-  const [isPressed, setIsPressed] = useState(false);
-
-  const handlePress = (): void => {
-    setIsPressed(!isPressed);
-  };
-
   return (
-    <Pressable onPress={handlePress}>
-      <View
-        style={[styles.container, isPressed ? styles.pressed : styles.default]}
-      >
+    <Pressable onPress={onPress}>
+      <View style={styles.container}>
         <View style={styles.iconContainer}>{iconSourceSvg}</View>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{title}</Text>
