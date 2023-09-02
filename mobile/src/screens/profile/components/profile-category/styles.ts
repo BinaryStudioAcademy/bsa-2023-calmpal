@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 
   iconContainer: {
     margin: 6,
-    padding: 30,
+    padding: 26,
     backgroundColor: AppColor.BLUE_300,
     borderRadius: 20,
   },
