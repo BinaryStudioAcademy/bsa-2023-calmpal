@@ -20,7 +20,7 @@ const Header: React.FC<Properties> = ({
   badgeCount = DEFAULT_BADGE_COUNT,
 }) => {
   const navigation = useNavigation();
-  const handleOnPress = (): void => {
+  const handleGoBack = (): void => {
     navigation.goBack();
   };
   const hasValue = Boolean(badgeCount);
@@ -28,7 +28,7 @@ const Header: React.FC<Properties> = ({
   return (
     <View style={[styles.header, isArrowVisible && styles.headerCenter]}>
       {isArrowVisible && (
-        <TouchableOpacity style={styles.arrow} onPress={handleOnPress}>
+        <TouchableOpacity style={styles.arrow} onPress={handleGoBack}>
           <BackArrowImage />
         </TouchableOpacity>
       )}

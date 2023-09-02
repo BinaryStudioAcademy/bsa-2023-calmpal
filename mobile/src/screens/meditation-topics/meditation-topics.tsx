@@ -1,8 +1,12 @@
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { Card } from '#libs/components/card/card';
-import { InputSearch, ScrollView, View } from '#libs/components/components';
+import {
+  Card,
+  InputSearch,
+  ScrollView,
+  View,
+} from '#libs/components/components';
 import { AppColor, MeditationScreenName } from '#libs/enums/enums';
 import { useSearch } from '#libs/hooks/hooks';
 import { type NavigationScreenProperties } from '#libs/types/types';
@@ -17,7 +21,7 @@ const MeditationTopics = ({
     mockedData,
     'title',
   );
-  const handleOnPress = (title: string): void => {
+  const handleSelectMeditation = (title: string): void => {
     navigation.navigate(MeditationScreenName.MEDITATION_LIST, {
       title,
     });
@@ -37,9 +41,7 @@ const MeditationTopics = ({
           {filteredMeditationTopics.map((item) => (
             <Card
               title={item.title}
-              onPress={(): void => {
-                handleOnPress(item.title);
-              }}
+              onPress={handleSelectMeditation}
               key={item.id}
             />
           ))}
