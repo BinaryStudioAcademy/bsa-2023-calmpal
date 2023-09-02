@@ -8,6 +8,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  linearGradient: {
+    flex: 1,
+  },
 });
 
 export { styles };
