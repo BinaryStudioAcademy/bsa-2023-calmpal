@@ -1,11 +1,15 @@
 import { type IconName } from '#libs/enums/enums.js';
-import { useCallback, useState } from '#libs/hooks/hooks.js';
+import { useAppSelector, useCallback, useState } from '#libs/hooks/hooks.js';
 
 import { Icon } from '../components.js';
 import { ProfileSettingsButton } from './profile-settings-button/profile-settings-button.js';
 import styles from './styles.module.scss';
 
 const ProfileSettingsSidebar: React.FC = () => {
+  const userName = useAppSelector(
+    (state) => state.auth.authenticatedUser?.fullName,
+  );
+
   const [activeButton, setActiveButton] = useState<string>('');
 
   const handleOnClick = useCallback((name: IconName) => {
@@ -26,7 +30,7 @@ const ProfileSettingsSidebar: React.FC = () => {
             <div className={styles['user-icon']}>
               <Icon name="avatar" />
             </div>
-            <div className={styles['user-name']}>John Doe</div>
+            <div className={styles['user-name']}>{userName}</div>
           </div>
         </div>
         <div className={styles['buttons-container']}>
