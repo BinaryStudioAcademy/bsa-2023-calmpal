@@ -1,11 +1,11 @@
-import { type IconNames } from '#libs/enums/enums.js';
+import { type IconName } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
 import { iconNameToPlainSvgMap } from '#libs/maps/icon-name-to-plain-svg.js';
 
 import styles from './styles.module.scss';
 
 type Properties = {
-  name: IconNames;
+  name: IconName;
   className?: string;
 };
 

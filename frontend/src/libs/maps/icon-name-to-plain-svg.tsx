@@ -4,10 +4,10 @@ import { ReactComponent as NotificationIcon } from '#assets/icons/notification.s
 import { ReactComponent as PlusIcon } from '#assets/icons/plus.svg';
 import { ReactComponent as SignOutIcon } from '#assets/icons/sign-out.svg';
 import { ReactComponent as SubscriptionIcon } from '#assets/icons/subscription.svg';
-import { type IconNames } from '#libs/enums/enums.js';
+import { type IconName } from '#libs/enums/enums.js';
 
 const iconNameToPlainSvgMap: Record<
-  IconNames,
+  IconName,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 > = {
   'arrow': ArrowIcon,

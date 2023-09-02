@@ -1,4 +1,4 @@
-type IconNames =
+type IconName =
   | 'arrow'
   | 'plus'
   | 'sign-out'
@@ -6,4 +6,4 @@ type IconNames =
   | 'notification'
   | 'subscription';
 
-export { type IconNames };
+export { type IconName };

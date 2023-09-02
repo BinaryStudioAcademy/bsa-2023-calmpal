@@ -6,4 +6,4 @@ export {
   ContentType,
   ServerErrorType,
 } from 'shared/build/index.js';
-export { type IconNames } from 'shared/build/index.js';
+export { type IconName } from 'shared/build/index.js';

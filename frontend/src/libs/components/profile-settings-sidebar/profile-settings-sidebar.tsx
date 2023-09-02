@@ -1,4 +1,4 @@
-import { type IconNames } from '#libs/enums/enums.js';
+import { type IconName } from '#libs/enums/enums.js';
 import { useCallback, useState } from '#libs/hooks/hooks.js';
 
 import { Icon } from '../components.js';
@@ -8,7 +8,7 @@ import styles from './styles.module.scss';
 const ProfileSettingsSidebar: React.FC = () => {
   const [activeButton, setActiveButton] = useState<string>('');
 
-  const handleOnClick = useCallback((name: IconNames) => {
+  const handleOnClick = useCallback((name: IconName) => {
     setActiveButton(name);
   }, []);
 

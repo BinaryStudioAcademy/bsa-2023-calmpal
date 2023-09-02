@@ -1,5 +1,5 @@
 import { Icon } from '#libs/components/components.js';
-import { type IconNames } from '#libs/enums/enums.js';
+import { type IconName } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
 import { useCallback } from '#libs/hooks/hooks.js';
 
@@ -7,8 +7,8 @@ import styles from './styles.module.scss';
 
 type ProfileSettingsButtonProperties = {
   children: React.ReactNode;
-  name: IconNames;
-  onClick: (name: IconNames) => void;
+  name: IconName;
+  onClick: (name: IconName) => void;
   isActive?: boolean;
 };
 
