@@ -1,6 +1,8 @@
 .container {
+  flex: 1;
   max-width: 349px;
-  min-height: 100vh;
+  height: 100%;
+  overflow-y: auto;
   background: linear-gradient(
     180deg,
     var(--transparent) 0%,
@@ -30,9 +32,9 @@
 
 .user {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 28px 8px 91px 28px;
+  align-items: flex-start;
+  min-height: 155px;
+  padding: 28px;
 }
 
 .user-details {
