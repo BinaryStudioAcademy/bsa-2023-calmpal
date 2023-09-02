@@ -9,8 +9,10 @@ import {
   useRef,
   useState,
 } from '#libs/hooks/hooks';
-import { type ChatNavigationParameterList } from '#libs/types/navigation/chat-navigation-parameter-list.type';
-import { type NavigationScreenProperties } from '#libs/types/types';
+import {
+  type ChatNavigationParameterList,
+  type NavigationScreenProperties,
+} from '#libs/types/types';
 
 import { ChatInput, MessageItem } from './components/components';
 import { DEFAULT_VALUES, MOCKED_DATA, PREVIOUS_USER } from './libs/constants';
