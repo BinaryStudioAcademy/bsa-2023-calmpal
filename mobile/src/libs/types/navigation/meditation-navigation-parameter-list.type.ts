@@ -1,8 +1,8 @@
 import { type MeditationScreenName } from '#libs/enums/enums';
 
-type MedationNavigationParameterList = {
+type MeditationNavigationParameterList = {
   [MeditationScreenName.MEDITATION_TOPICS]: undefined;
-  [MeditationScreenName.MEDITATION_LIST]: undefined;
+  [MeditationScreenName.MEDITATION_LIST]: { title: string };
 };
 
-export { type MedationNavigationParameterList };
+export { type MeditationNavigationParameterList };

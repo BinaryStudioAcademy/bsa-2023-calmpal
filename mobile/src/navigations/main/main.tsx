@@ -4,6 +4,7 @@ import React from 'react';
 import ChatIcon from '#assets/img/icons/chat.svg';
 import HomeIcon from '#assets/img/icons/home.svg';
 import MeditationIcon from '#assets/img/icons/meditations.svg';
+import { Header } from '#libs/components/components';
 import { AppColor, MainScreenName } from '#libs/enums/enums';
 import { type TabNavigationParameterList } from '#libs/types/types';
 import { Meditation } from '#navigations/navigations';
@@ -15,8 +16,6 @@ import { styles } from './styles';
 const BottomTab = createBottomTabNavigator<TabNavigationParameterList>();
 
 const tabNavigatorOptions = {
-  headerStyle: styles.header,
-  headerTitleStyle: styles.headerTitle,
   tabBarActiveTintColor: AppColor.BLUE_300,
   tabBarInactiveTintColor: AppColor.GRAY_400,
   tabBarShowLabel: false,
@@ -29,7 +28,10 @@ const Main: React.FC = () => {
       <BottomTab.Screen
         name={MainScreenName.HOME}
         component={Home}
-        options={{ tabBarIcon: HomeIcon }}
+        options={{
+          tabBarIcon: HomeIcon,
+          header: ({ route }) => <Header title={route.name} />,
+        }}
       />
       <BottomTab.Screen
         name={MainScreenName.CHAT_LIST}

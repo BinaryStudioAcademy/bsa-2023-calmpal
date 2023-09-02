@@ -23,6 +23,11 @@ const MeditationTopics = ({
   //   mockedData,
   //   'title',
   // );
+  const handleOnPress = (title: string): void => {
+    navigation.navigate(MeditationScreenName.MEDITATION_LIST, {
+      title,
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -32,7 +37,7 @@ const MeditationTopics = ({
           <Card
             title={item.title}
             onPress={(): void => {
-              navigation.navigate(MeditationScreenName.MEDITATION_LIST);
+              handleOnPress(item.title);
             }}
             key={item.id}
           />

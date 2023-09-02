@@ -1,37 +1,33 @@
-import React, { type ReactNode, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
 import PlusIcon from '#assets/img/icons/plus.svg';
 import {
   Card,
+  Header,
   InputSearch,
   Link,
   ScrollView,
-  Text,
   View,
 } from '#libs/components/components';
 import { AppColor, RootScreenName } from '#libs/enums/enums';
-import { useEffect, useNavigation, useSearch } from '#libs/hooks/hooks';
+import { useEffect, useSearch } from '#libs/hooks/hooks';
+import { type NavigationScreenProperties } from '#libs/types/types';
 
-import { Badge } from './components/components';
 import mockedChats from './libs/data.json';
 import { styles } from './styles';
 
 const mockedCount = 12;
 
-const ChatList: React.FC = () => {
-  const navigation = useNavigation();
-
+const ChatList = ({
+  navigation,
+  route,
+}: NavigationScreenProperties): JSX.Element => {
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: ({ children }: { children: ReactNode }) => (
-        <View style={styles.headerTitleWrapper}>
-          <Text style={styles.headerTitle}>{children}</Text>
-          <Badge count={mockedCount} />
-        </View>
-      ),
+      header: () => <Header title={route.name} badgeCount={mockedCount} />,
     });
-  }, [navigation]);
+  }, [navigation, route.name]);
 
   const onPress = useCallback(() => {
     // TODO: Implement actual functionality for the onPress event
