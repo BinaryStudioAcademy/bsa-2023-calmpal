@@ -11,7 +11,7 @@ import styles from './styles.module.scss';
 
 type Properties<T extends FormFieldValues> = {
   control: FormControl<T, null>;
-  errors?: FormFieldErrors<T>;
+  errors: FormFieldErrors<T>;
   label?: string;
   name: FormFieldPath<T>;
   placeholder?: string;

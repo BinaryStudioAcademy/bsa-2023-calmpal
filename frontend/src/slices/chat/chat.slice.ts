@@ -12,10 +12,12 @@ type StateInfo = ChatMessage & {
   state: ChatState;
 };
 
+type Message = { message: string; id: string };
+
 const isSameUserLastMessage = (state: ChatState, sender: string): boolean =>
   state.messages.at(LAST_INDEX)?.sender === sender;
 
-const appendLastMessage = (state: ChatState, message: string): void => {
+const appendLastMessage = (state: ChatState, message: Message): void => {
   const updatedLastMessage = {
     ...state.messages.at(LAST_INDEX),
   } as ChatMessage;
@@ -32,7 +34,7 @@ const addMessageToState = ({ state, id, sender, message }: StateInfo): void => {
 
 const handleMessages = ({ state, id, sender, message }: StateInfo): void => {
   if (isSameUserLastMessage(state, sender)) {
-    appendLastMessage(state, message[FIRST_INDEX] as string);
+    appendLastMessage(state, message[FIRST_INDEX] as Message);
   } else {
     addMessageToState({ state, id, sender, message });
   }

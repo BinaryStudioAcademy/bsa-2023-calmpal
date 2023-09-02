@@ -1,4 +1,4 @@
-import { ReactComponent as ChatIcon } from '#assets/icons/chat-icon.svg';
+import { ReactComponent as ChatIcon } from '#assets/icons/chat.svg';
 import { ReactComponent as ChatLogo } from '#assets/icons/chat-logo.svg';
 import { ReactComponent as SendIcon } from '#assets/icons/send-icon.svg';
 import { type IconNames } from '#libs/enums/enums.js';

@@ -1,9 +1,8 @@
-import { Button, Input } from '#libs/components/components.js';
-import { Icon } from '#libs/components/icon/icon.js';
+import { IconButton } from '#libs/components/icon-button/icon-button.js';
+import { Input } from '#libs/components/input/input.js';
 import { DEFAULT_INPUT } from '#libs/constants/constants.js';
-import { typer } from '#libs/helpers/helpers.js';
 import { useAppForm, useCallback } from '#libs/hooks/hooks.js';
-import { type FormControl, type FormFieldValues } from '#libs/types/types.js';
+import { type ChatInputValue } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
 
@@ -13,15 +12,12 @@ type Properties = {
 
 type HandleForm = () => void;
 
-type FormValue = {
-  text: string;
-} & FormFieldValues;
-
 const ChatFooter: React.FC<Properties> = ({ onSend }) => {
-  const { control, handleSubmit, reset } = useAppForm<FormValue>(DEFAULT_INPUT);
+  const { control, handleSubmit, errors, reset } =
+    useAppForm<ChatInputValue>(DEFAULT_INPUT);
 
   const onSubmit = useCallback(
-    ({ text }: FormValue): void => {
+    ({ text }: ChatInputValue): void => {
       onSend({ text });
       reset();
     },
@@ -36,18 +32,14 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
       >
         <Input
           placeholder="Type a message"
+          errors={errors}
           style="chat-input"
           autoComplete="off"
           required
           name="text"
-          control={typer<
-            FormControl<FormValue, null>,
-            FormControl<FormFieldValues, null>
-          >(control)}
+          control={control}
         />
-        <Button type="submit" style="send-button">
-          <Icon name={'send-icon'} />
-        </Button>
+        <IconButton type="submit" style="primary" icon="send-icon" />
       </form>
     </footer>
   );

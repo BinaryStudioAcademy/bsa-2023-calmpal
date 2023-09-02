@@ -14,7 +14,7 @@ const ChatBody: React.FC = () => {
     ({ text }: { text: string }): void => {
       newMessage({
         sender: ChatRole.USER,
-        message: [text],
+        message: [{ id: generateUUID(), message: text }],
         id: generateUUID(),
       });
     },
