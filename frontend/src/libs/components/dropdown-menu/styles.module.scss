@@ -1,0 +1,125 @@
+.dropdown {
+  display: none;
+  flex-direction: column;
+  align-items: end;
+  width: 50px;
+  background-color: var(--white);
+  border-radius: 10px;
+}
+
+.dropdown-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  background-color: var(--white);
+  border: 0;
+  cursor: pointer;
+}
+
+.dropdown-body {
+  position: absolute;
+  top: 85px;
+  right: 20px;
+  z-index: 3;
+  display: none;
+  width: 200px;
+  min-width: 160px;
+  margin-top: -3px;
+  overflow: hidden;
+  background-color: var(--white);
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+}
+
+.open {
+  display: block;
+}
+
+.dropdown-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+  background-color: var(--white);
+  border: 0;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-self: baseline;
+  gap: 5px;
+}
+
+.divider {
+  width: 100%;
+  margin: 0;
+  border: 0.5px solid var(--gray-100);
+}
+
+.divider:not(:last-child) {
+  border: 0.5px solid var(--gray-100);
+}
+
+.dropdown-item:hover {
+  background-color: var(--gray-100);
+  cursor: pointer;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  filter: invert(45%) sepia(7%) saturate(555%) hue-rotate(185deg)
+    brightness(93%) contrast(86%);
+}
+
+.icon-selected {
+  filter: invert(43%) sepia(94%) saturate(426%) hue-rotate(185deg)
+    brightness(94%) contrast(97%);
+}
+
+.title {
+  display: flex;
+  justify-content: baseline;
+  align-self: last baseline;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: 33px;
+  height: 2px;
+  background-color: var(--gray-200);
+  border-radius: 3px;
+  transform-origin: 4px 0;
+}
+
+.container::before,
+.container::after {
+  content: "";
+  position: absolute;
+  width: 33px;
+  height: 2px;
+  background-color: var(--gray-200);
+  border-radius: 3px;
+  transform-origin: 4px 0;
+}
+
+.container::before {
+  top: -8px;
+  left: 0;
+}
+
+.container::after {
+  top: 8px;
+  left: 0;
+}
+
+@media (width < 480px) {
+  .dropdown {
+    display: flex;
+  }
+}

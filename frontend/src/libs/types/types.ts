@@ -4,9 +4,10 @@ export {
   type FormFieldErrors,
   type FormFieldPath,
   type FormFieldValues,
+  type FormPath,
 } from './form/form.type.js';
-export { type SidebarRoute } from './sidebar-route.type.js';
-export { type ValueOf } from './values-of.type.js';
+export { type Route } from './route/route.type.js';
+export { type ValueOf } from './value-of.type.js';
 export {
   type ServerErrorDetail,
   type ServerErrorResponse,

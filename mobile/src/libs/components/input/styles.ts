@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   placeholder: {
     color: AppColor.GRAY_400,
   },
-  filledInput: {
+  focusedInput: {
     borderWidth: 1,
     borderColor: AppColor.BLUE_300,
     borderRadius: 8,
@@ -51,6 +51,19 @@ const styles = StyleSheet.create({
     color: AppColor.RED_100,
     fontSize: 14,
     marginBottom: 4,
+  },
+  otherTextInput: {
+    backgroundColor: AppColor.BLUE_100_ALPHA_70,
+    borderRadius: 8,
+    padding: 8,
+    borderWidth: 1,
+    marginBottom: 20,
+    borderColor: AppColor.WHITE,
+    color: AppColor.BLUE_400,
+    fontSize: 16,
+  },
+  otherPlaceholder: {
+    color: AppColor.WHITE,
   },
 });
 
