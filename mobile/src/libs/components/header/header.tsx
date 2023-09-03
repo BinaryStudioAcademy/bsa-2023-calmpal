@@ -68,7 +68,7 @@ import React from 'react';
 import BackArrowImage from '#assets/img/icons/back-arrow.svg';
 import UserIcon from '#assets/img/icons/user.svg';
 import { Text, TouchableOpacity, View } from '#libs/components/components';
-import { RootScreenName } from '#libs/enums/enums';
+import { AppColor, RootScreenName } from '#libs/enums/enums';
 import { useAppRoute, useNavigation } from '#libs/hooks/hooks';
 import { type RootNavigationParameterList } from '#libs/types/types';
 
@@ -114,7 +114,7 @@ const Header: React.FC<Properties> = ({
     >
       {isArrowVisible && (
         <TouchableOpacity style={styles.arrow} onPress={handleGoBack}>
-          <BackArrowImage />
+          <BackArrowImage color={AppColor.BLUE_200} />
         </TouchableOpacity>
       )}
       <View style={styles.titleBadgeContainer}>
