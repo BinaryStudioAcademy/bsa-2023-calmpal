@@ -1,5 +1,5 @@
 import { type IconName } from '#libs/enums/enums.js';
-import { iconNameToPlainSvgMap } from '#libs/maps/icon-name-to-plain-svg.js';
+import { iconNameToIcon } from '#libs/maps/icon-name-to-plain-svg.js';
 
 type Properties = {
   name: IconName;
@@ -7,7 +7,7 @@ type Properties = {
 };
 
 const Icon: React.FC<Properties> = ({ name, color }) => {
-  const SelectedIcon = iconNameToPlainSvgMap[name];
+  const SelectedIcon = iconNameToIcon[name];
 
   return <SelectedIcon style={{ color }} />;
 };

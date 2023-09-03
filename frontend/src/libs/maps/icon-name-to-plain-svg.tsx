@@ -2,7 +2,7 @@ import { ReactComponent as ArrowIcon } from '#assets/icons/arrow.svg';
 import { ReactComponent as PlusIcon } from '#assets/icons/plus.svg';
 import { type IconName } from '#libs/enums/enums.js';
 
-const iconNameToPlainSvgMap: Record<
+const iconNameToIcon: Record<
   IconName,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 > = {
@@ -10,4 +10,4 @@ const iconNameToPlainSvgMap: Record<
   'plus': PlusIcon,
 };
 
-export { iconNameToPlainSvgMap };
+export { iconNameToIcon };
