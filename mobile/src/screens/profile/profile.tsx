@@ -12,7 +12,7 @@ const Profile = ({
   navigation,
   route,
 }: NavigationScreenProperties): JSX.Element => {
-  const onPress = (): void => {
+  const handleCategoryPress = (): void => {
     navigation.navigate(RootScreenName.SETTINGS);
   };
 
@@ -23,7 +23,7 @@ const Profile = ({
         <ProfileCategory
           iconSourceSvg={<NotificationBellIcon color={AppColor.WHITE} />}
           title="Notifications and Reminders"
-          onPress={onPress}
+          onPress={handleCategoryPress}
         />
       </View>
     </LinearGradient>
