@@ -12,7 +12,8 @@
 }
 
 .container:hover {
-  border: 1px solid var(--blue-700);
+  // border: 1px solid var(--blue-700)
+  background-color: var(--blue-alpha-70);
 }
 
 .container > .label {
