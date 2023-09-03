@@ -38,6 +38,11 @@
   cursor: pointer;
 }
 
+.secondary:hover {
+  border: 1px solid var(--blue-700);
+  box-shadow: var(--secondary-button-shadow);
+}
+
 .secondary:disabled {
   color: var(--gray-alpha-50);
   background-color: var(--white-alpha-80);
