@@ -4,6 +4,7 @@ export { Card } from './card/card';
 export { Header } from './header/header';
 export { Input } from './input/input';
 export { InputSearch } from './input-search/input-search';
+export { LinearGradient } from './linear-gradient/linear-gradient';
 export { Link } from './link/link';
 export { Loader } from './loader/loader';
 export { ProtectedRoute } from './protected-route/protected-route';
