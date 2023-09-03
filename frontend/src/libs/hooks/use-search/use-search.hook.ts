@@ -1,6 +1,9 @@
-import { type UseSearchReturn } from '#libs/types/types.js';
-
 import { useMemo, useState } from '../hooks.js';
+
+type UseSearchReturn<T> = {
+  filteredElements: T[];
+  setFilter: React.Dispatch<React.SetStateAction<string>>;
+};
 
 const useSearch = <T>(
   elements: T[],
