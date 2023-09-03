@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from '#libs/components/components';
+import { AppColor } from '#libs/enums/enums';
 
 import { styles } from './styles';
 
@@ -27,7 +28,7 @@ const MeditationListItem: React.FC<Properties> = ({ title, duration }) => {
         </View>
         <TouchableOpacity>
           <View style={styles.playButton}>
-            <Play />
+            <Play color={AppColor.WHITE} />
           </View>
         </TouchableOpacity>
       </View>
