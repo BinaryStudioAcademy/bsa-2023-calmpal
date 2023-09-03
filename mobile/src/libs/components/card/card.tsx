@@ -18,12 +18,12 @@ const Card: React.FC<Properties> = ({
   image = imagePlaceholder,
   onPress,
 }) => {
-  const handleOnPress = (): void => {
+  const handlePress = (): void => {
     onPress(title);
   };
 
   return (
-    <TouchableOpacity style={styles.container} onPress={handleOnPress}>
+    <TouchableOpacity style={styles.container} onPress={handlePress}>
       <Image source={image} style={styles.image} />
       <Text
         style={styles.title}
