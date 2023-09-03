@@ -21,13 +21,17 @@ import { MeditationItem } from './components/components';
 import { mockedData } from './libs/constants';
 import { styles } from './styles';
 
+type RouteParameters = {
+  title: string;
+};
+
 const MeditationList: React.FC = () => {
   const navigation =
     useNavigation<
       NativeStackNavigationProp<MeditationNavigationParameterList>
     >();
   const route = useAppRoute();
-  const { title } = route.params as { title: string };
+  const { title } = route.params as RouteParameters;
 
   const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
     mockedData,
