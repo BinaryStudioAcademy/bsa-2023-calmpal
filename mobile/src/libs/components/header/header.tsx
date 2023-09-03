@@ -2,6 +2,7 @@ import React from 'react';
 
 import BackArrowImage from '#assets/img/icons/back-arrow.svg';
 import { Text, TouchableOpacity, View } from '#libs/components/components';
+import { AppColor } from '#libs/enums/enums';
 import { useNavigation } from '#libs/hooks/hooks';
 
 import { Badge } from './components/components';
@@ -29,7 +30,7 @@ const Header: React.FC<Properties> = ({
     <View style={[styles.header, isArrowVisible && styles.headerCenter]}>
       {isArrowVisible && (
         <TouchableOpacity style={styles.arrow} onPress={handleOnPress}>
-          <BackArrowImage />
+          <BackArrowImage color={AppColor.BLUE_200} />
         </TouchableOpacity>
       )}
       <Text style={styles.title}>{title}</Text>
