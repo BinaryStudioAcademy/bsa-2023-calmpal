@@ -123,7 +123,10 @@ const Header: React.FC<Properties> = ({
       </View>
       {isSettingsVisible && (
         <View style={styles.settingsContainer}>
-          <IconButton onPress={handleIconPress} iconSourceSvg={<UserIcon />} />
+          <IconButton
+            onPress={handleIconPress}
+            iconSourceSvg={<UserIcon color={AppColor.BLUE_300} />}
+          />
         </View>
       )}
     </View>
