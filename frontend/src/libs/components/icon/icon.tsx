@@ -1,20 +1,15 @@
 import { type IconName } from '#libs/enums/enums.js';
-import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
 import { iconNameToPlainSvgMap } from '#libs/maps/icon-name-to-plain-svg.js';
-
-import styles from './styles.module.scss';
 
 type Properties = {
   name: IconName;
-  className?: string;
+  color?: string;
 };
 
-const Icon: React.FC<Properties> = ({ name, className = '' }) => {
+const Icon: React.FC<Properties> = ({ name, color }) => {
   const SelectedIcon = iconNameToPlainSvgMap[name];
 
-  const cssClass = getValidClassNames(styles[className]);
-
-  return <SelectedIcon className={cssClass} />;
+  return <SelectedIcon style={{ fill: color }} />;
 };
 
 export { Icon };
