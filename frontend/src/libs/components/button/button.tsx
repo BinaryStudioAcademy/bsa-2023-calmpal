@@ -7,6 +7,7 @@ type Properties = {
   isLoading?: boolean;
   children?: React.ReactNode;
   onClick?: () => void;
+  isDisabled?: boolean;
 };
 
 const Button: React.FC<Properties> = ({
@@ -16,12 +17,13 @@ const Button: React.FC<Properties> = ({
   isLoading = false,
   children,
   onClick,
+  isDisabled = false,
 }) => (
   <button
     type={type}
     className={styles[style]}
-    disabled={isLoading}
     onClick={onClick}
+    disabled={isDisabled || isLoading}
   >
     {isLoading && <span className={styles['loader']} />}
     {label}
