@@ -1,14 +1,14 @@
 import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
-import LinearGradient from 'react-native-linear-gradient';
 
 import {
   Card,
   InputSearch,
+  LinearGradient,
   ScrollView,
   View,
 } from '#libs/components/components';
-import { AppColor, MeditationScreenName } from '#libs/enums/enums';
+import { MeditationScreenName } from '#libs/enums/enums';
 import { useNavigation, useSearch } from '#libs/hooks/hooks';
 import { type MeditationNavigationParameterList } from '#libs/types/types';
 
@@ -31,10 +31,7 @@ const MeditationHome: React.FC = () => {
   };
 
   return (
-    <LinearGradient
-      colors={[AppColor.WHITE, AppColor.BLUE_100]}
-      style={styles.linearGradient}
-    >
+    <LinearGradient>
       <View style={styles.container}>
         <InputSearch
           placeholder="Search topic"

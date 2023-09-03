@@ -12,9 +12,6 @@ const styles = StyleSheet.create({
   list: {
     paddingHorizontal: 4,
   },
-  linearGradient: {
-    flex: 1,
-  },
 });
 
 export { styles };
