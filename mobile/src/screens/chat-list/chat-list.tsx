@@ -1,3 +1,4 @@
+import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
 import PlusIcon from '#assets/img/icons/plus.svg';
@@ -11,25 +12,30 @@ import {
   View,
 } from '#libs/components/components';
 import { AppColor, RootScreenName } from '#libs/enums/enums';
-import { useCallback, useEffect, useSearch } from '#libs/hooks/hooks';
-import { type NavigationScreenProperties } from '#libs/types/types';
+import {
+  useAppRoute,
+  useCallback,
+  useEffect,
+  useNavigation,
+  useSearch,
+} from '#libs/hooks/hooks';
+import { type ChatNavigationParameterList } from '#libs/types/types';
 
 import mockedChats from './libs/data.json';
 import { styles } from './styles';
 
 const mockedCount = 12;
-
-const ChatList = ({
-  navigation,
-  route,
-}: NavigationScreenProperties): JSX.Element => {
+const ChatList: React.FC = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<ChatNavigationParameterList>>();
+  const { name: routeName } = useAppRoute();
   useEffect(() => {
     navigation.setOptions({
       header: () => (
-        <Header title={route.name} badgeCount={mockedCount} isSettingsVisible />
+        <Header title={routeName} badgeCount={mockedCount} isSettingsVisible />
       ),
     });
-  }, [navigation, route.name]);
+  }, [navigation, routeName]);
 
   const handleSelectChat = useCallback(() => {
     // TODO: Implement actual functionality for the onPress event
