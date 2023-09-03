@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from '#libs/hooks/hooks.js';
+import { useCallback, useRef, useState } from '#libs/hooks/hooks.js';
 import { type Meditation, START_TIME, STEP } from '#libs/types/types.js';
 
 import { Controls } from './controls/controls.js';
@@ -45,23 +45,6 @@ const AudioPlayer: React.FC<Properties> = ({
     onSetTrackIndex(nextTrackIndex);
     onSetCurrentTrack(tracks[nextTrackIndex] as Meditation);
   }, [onSetCurrentTrack, onSetTrackIndex, trackIndex, tracks]);
-
-  useEffect(() => {
-    const currentAudio = audioReference.current;
-
-    if (currentAudio) {
-      currentAudio.addEventListener('loadedmetadata', handleLoadedMetadata);
-    }
-
-    return () => {
-      if (currentAudio) {
-        currentAudio.removeEventListener(
-          'loadedmetadata',
-          handleLoadedMetadata,
-        );
-      }
-    };
-  }, [handleLoadedMetadata]);
 
   return (
     <>

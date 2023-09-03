@@ -107,7 +107,7 @@ const Controls: React.FC<Properties> = ({
         <div className={styles['button-wrapper']}>
           <Button onClick={handleSkipBackward} style="rounded-transparent">
             <Icon name="backward" color="var(--blue-200)" />
-            <span className="visually-hidden">Back to 30 seconds</span>
+            <span className="visually-hidden">Back 30 seconds</span>
           </Button>
 
           <Button onClick={handlePlayToggle} style="rounded">
@@ -116,7 +116,7 @@ const Controls: React.FC<Properties> = ({
           </Button>
           <Button onClick={handleSkipForward} style="rounded-transparent">
             <Icon name="forward" color="var(--blue-200)" />
-            <span className="visually-hidden">Go ahead to 30 seconds</span>
+            <span className="visually-hidden">Forward 30 seconds</span>
           </Button>
         </div>
         <Button onClick={onNextTrack} style="rounded-transparent">
