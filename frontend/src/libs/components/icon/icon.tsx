@@ -3,13 +3,13 @@ import { iconNameToPlainSvgMap } from '#libs/maps/icon-name-to-plain-svg.js';
 
 type Properties = {
   name: IconName;
-  color?: string;
+  color: string;
 };
 
 const Icon: React.FC<Properties> = ({ name, color }) => {
   const SelectedIcon = iconNameToPlainSvgMap[name];
 
-  return <SelectedIcon style={{ fill: color }} />;
+  return <SelectedIcon style={{ color }} />;
 };
 
 export { Icon };

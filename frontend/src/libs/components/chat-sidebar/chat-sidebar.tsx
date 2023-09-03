@@ -40,7 +40,7 @@ const ChatSidebar: React.FC = () => {
           </span>
         </div>
         <div className={styles['plus']}>
-          <Icon name={'plus'} color="red" />
+          <Icon name={'plus'} color="#507CEB" />
         </div>
       </div>
       <div className={styles['list']}>
