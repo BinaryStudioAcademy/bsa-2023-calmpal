@@ -1,3 +1,3 @@
-type IconNames = 'chat-icon' | 'send-icon' | 'chat-logo';
+type IconName = 'chat-icon' | 'send-icon' | 'chat-logo';
 
-export { type IconNames };
+export { type IconName };

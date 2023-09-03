@@ -1,10 +1,10 @@
 import { Icon } from '#libs/components/icon/icon.js';
-import { type IconNames } from '#libs/enums/icon-name.enum.js';
+import { type IconName } from '#libs/enums/enums.js';
 
 import styles from './styles.module.scss';
 
 type Properties = {
-  icon: IconNames;
+  icon: IconName;
   onClick?: () => void;
   style: 'primary';
   type?: 'button' | 'submit';

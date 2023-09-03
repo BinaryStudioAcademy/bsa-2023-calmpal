@@ -1,10 +1,10 @@
 import { ReactComponent as ChatIcon } from '#assets/icons/chat.svg';
 import { ReactComponent as ChatLogo } from '#assets/icons/chat-logo.svg';
 import { ReactComponent as SendIcon } from '#assets/icons/send-icon.svg';
-import { type IconNames } from '#libs/enums/enums.js';
+import { type IconName } from '#libs/enums/enums.js';
 
 const iconNameToPlainSvgMap: Record<
-  IconNames,
+  IconName,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 > = {
   'chat-icon': ChatIcon,
