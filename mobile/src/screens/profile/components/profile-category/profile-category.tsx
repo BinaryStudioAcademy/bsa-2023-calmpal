@@ -4,13 +4,13 @@ import { Pressable, Text, View } from '#libs/components/components';
 
 import { styles } from './styles';
 
-type ProfileCategoryProperties = {
+type Properties = {
   iconSourceSvg: JSX.Element;
   title: string;
   onPress: () => void;
 };
 
-const ProfileCategory: React.FC<ProfileCategoryProperties> = ({
+const ProfileCategory: React.FC<Properties> = ({
   iconSourceSvg,
   title,
   onPress,
