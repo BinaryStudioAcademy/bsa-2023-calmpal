@@ -43,7 +43,9 @@
   color: var(--blue-700);
   background-color: var(--blue-alpha-70);
   outline: none;
-  box-shadow: var(--secondary-button-shadow);
+  box-shadow:
+    0 2px 4px -2px #002c840f,
+    0 4px 8px -2px #0055ff29;
 }
 
 .secondary:disabled {
