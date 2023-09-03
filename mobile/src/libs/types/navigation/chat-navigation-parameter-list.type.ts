@@ -1,4 +1,4 @@
-import { type ChatScreenName } from '#libs/enums/navigation/navigation';
+import { type ChatScreenName } from '#libs/enums/enums';
 
 type ChatNavigationParameterList = {
   [ChatScreenName.CHAT_LIST]: undefined;
