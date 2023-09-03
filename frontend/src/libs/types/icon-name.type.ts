@@ -1,9 +1,3 @@
-type IconNames =
-  | 'backward'
-  | 'forward'
-  | 'next'
-  | 'previous'
-  | 'play'
-  | 'pause';
+type IconName = 'backward' | 'forward' | 'next' | 'previous' | 'play' | 'pause';
 
-export { type IconNames };
+export { type IconName };

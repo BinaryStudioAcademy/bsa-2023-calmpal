@@ -101,22 +101,22 @@ const Controls: React.FC<Properties> = ({
     <div className={styles['wrapper']}>
       <div className={styles['controls']}>
         <Button onClick={handlePrevious} style="rounded-transparent">
-          <Icon name="previous" />
+          <Icon name="previous" color="var(--blue-200)" />
         </Button>
         <div className={styles['button-wrapper']}>
           <Button onClick={handleSkipBackward} style="rounded-transparent">
-            <Icon name="backward" />
+            <Icon name="backward" color="var(--blue-200)" />
           </Button>
 
           <Button onClick={handlePlayToggle} style="rounded">
-            <Icon name={isPlaying ? 'pause' : 'play'} />
+            <Icon name={isPlaying ? 'pause' : 'play'} color="var(--blue-300)" />
           </Button>
           <Button onClick={handleSkipForward} style="rounded-transparent">
-            <Icon name="forward" />
+            <Icon name="forward" color="var(--blue-200)" />
           </Button>
         </div>
         <Button onClick={onNextTrack} style="rounded-transparent">
-          <Icon name="next" />
+          <Icon name="next" color="var(--blue-200)" />
         </Button>
       </div>
     </div>

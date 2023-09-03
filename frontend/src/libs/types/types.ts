@@ -6,7 +6,7 @@ export {
   type FormFieldValues,
   type FormPath,
 } from './form/form.type.js';
-export { type IconNames } from './icon-name.type.js';
+export { type IconName } from './icon-name.type.js';
 export {
   FIRST_INDEX,
   FULL_PERCENTAGE,
