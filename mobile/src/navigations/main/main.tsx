@@ -30,7 +30,7 @@ const Main: React.FC = () => {
         options={{ tabBarIcon: HomeIcon }}
       />
       <BottomTab.Screen
-        name={MainScreenName.CHAT_LIST}
+        name={MainScreenName.CHAT}
         component={ChatList}
         options={{ tabBarIcon: ChatIcon }}
       />
