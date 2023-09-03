@@ -11,6 +11,10 @@
   cursor: pointer;
 }
 
+.container:hover {
+  border: 1px solid var(--blue-700);
+}
+
 .container > .label {
   display: block;
   color: inherit;
@@ -25,6 +29,6 @@
 }
 
 .container:has(.checkbox:checked) {
-  color: var(--gray-300);
+  color: var(--blue-700);
   background-color: var(--blue-alpha-70);
 }
