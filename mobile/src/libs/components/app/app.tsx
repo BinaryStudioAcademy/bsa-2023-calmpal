@@ -16,6 +16,7 @@ import { styles } from './styles';
 
 const App: React.FC = () => {
   useEffect(() => {
+    // To prevent white screen after splash screen disappears
     setTimeout(() => {
       SplashScreen.hide();
     }, DELAY);
