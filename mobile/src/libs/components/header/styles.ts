@@ -21,10 +21,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     maxWidth: 300,
   },
-  arrow: {
-    position: 'absolute',
-    left: 31,
-  },
 });
 
 export { styles };
