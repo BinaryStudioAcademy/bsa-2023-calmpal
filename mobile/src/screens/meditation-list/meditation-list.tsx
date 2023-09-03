@@ -1,4 +1,4 @@
-import { type NativeStackNavigationProp } from '@react-navigation/native-stack/lib/typescript/src/types';
+import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
