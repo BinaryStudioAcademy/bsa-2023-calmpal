@@ -8,17 +8,22 @@
   display: block;
   width: 40px;
   height: var(--controller-width);
-  border: 2px solid var(--controller-color);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: border-color var(--animation-time);
 }
 
 .input {
   display: none;
 }
 
-.container::after {
+.slider {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--controller-color);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color var(--animation-time);
+}
+
+.slider::after {
   position: absolute;
   inset: var(--dot-offset);
   width: 12px;
@@ -32,11 +37,11 @@
   content: "";
 }
 
-.container:has(.input:checked) {
+.input:checked + .slider {
   --controller-color: var(--blue-300);
 }
 
-.container:has(.input:checked)::after {
+.input:checked + .slider::after {
   translate: calc(-100% - var(--dot-offset));
   left: 100%;
 }
