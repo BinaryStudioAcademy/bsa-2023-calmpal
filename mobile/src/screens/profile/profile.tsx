@@ -1,9 +1,8 @@
 import React from 'react';
-import LinearGradient from 'react-native-linear-gradient';
 
 import NotificationBellIcon from '#assets/img/icons/bell.svg';
-import { Header, View } from '#libs/components/components';
-import { AppColor, RootScreenName } from '#libs/enums/enums';
+import { Header, LinearGradient, View } from '#libs/components/components';
+import { RootScreenName } from '#libs/enums/enums';
 import { type NavigationScreenProperties } from '#libs/types/types';
 
 import { ProfileCategory } from './components/components';
@@ -18,10 +17,7 @@ const Profile = ({
   };
 
   return (
-    <LinearGradient
-      colors={[AppColor.WHITE, AppColor.BLUE_100]}
-      style={styles.linearGradient}
-    >
+    <LinearGradient>
       <Header navigation={navigation} title={route.name} isArrowVisible />
       <View style={styles.container}>
         <ProfileCategory
