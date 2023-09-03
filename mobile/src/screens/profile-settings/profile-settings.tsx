@@ -7,7 +7,7 @@ import { useAppForm } from '#libs/hooks/hooks';
 import { type NavigationScreenProperties } from '#libs/types/types';
 
 import { Setting } from './components/components';
-import { DEFAULT_NOTIFICATION_SETTINGS_VALUES } from './libs/constants';
+import { NOTIFICATION_SETTINGS_DEFAULT_VALUE } from './libs/constants';
 import { styles } from './styles';
 
 const ProfileSettings = ({
@@ -15,7 +15,7 @@ const ProfileSettings = ({
   route,
 }: NavigationScreenProperties): JSX.Element => {
   const { control } = useAppForm({
-    defaultValues: DEFAULT_NOTIFICATION_SETTINGS_VALUES,
+    defaultValues: NOTIFICATION_SETTINGS_DEFAULT_VALUE,
   });
 
   return (
