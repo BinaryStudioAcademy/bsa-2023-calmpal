@@ -4,8 +4,8 @@ import React from 'react';
 import { Header } from '#libs/components/components';
 import { MeditationScreenName } from '#libs/enums/enums';
 import { type MeditationNavigationParameterList } from '#libs/types/types';
+import { MeditationHome } from '#screens/meditation-home/meditation-home';
 import { MeditationList } from '#screens/meditation-list/meditation-list';
-import { MeditationTopics } from '#screens/meditation-topics/meditation-topics';
 
 const NativeStack =
   createNativeStackNavigator<MeditationNavigationParameterList>();
@@ -14,8 +14,8 @@ const Meditation: React.FC = () => {
   return (
     <NativeStack.Navigator>
       <NativeStack.Screen
-        name={MeditationScreenName.MEDITATION_TOPICS}
-        component={MeditationTopics}
+        name={MeditationScreenName.MEDITATION_MENU}
+        component={MeditationHome}
         options={{
           header: () => <Header title={'Meditation \n& Breathing'} />,
         }}

@@ -17,7 +17,7 @@ import {
 } from '#libs/hooks/hooks';
 import { type MeditationNavigationParameterList } from '#libs/types/types';
 
-import { MeditationListItem } from './components/components';
+import { MeditationItem } from './components/components';
 import { mockedData } from './libs/constants';
 import { styles } from './styles';
 
@@ -52,7 +52,7 @@ const MeditationList: React.FC = () => {
         />
         <ScrollView>
           {filteredMeditationTopics.map((item) => (
-            <MeditationListItem
+            <MeditationItem
               title={item.title}
               duration={item.duration}
               key={item.id}

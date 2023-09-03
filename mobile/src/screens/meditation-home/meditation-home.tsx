@@ -15,7 +15,7 @@ import { type MeditationNavigationParameterList } from '#libs/types/types';
 import { mockedData } from './libs/constants';
 import { styles } from './styles';
 
-const MeditationTopics: React.FC = () => {
+const MeditationHome: React.FC = () => {
   const navigation =
     useNavigation<
       NativeStackNavigationProp<MeditationNavigationParameterList>
@@ -54,4 +54,4 @@ const MeditationTopics: React.FC = () => {
   );
 };
 
-export { MeditationTopics };
+export { MeditationHome };

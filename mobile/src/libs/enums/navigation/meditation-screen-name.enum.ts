@@ -1,5 +1,5 @@
 const MeditationScreenName = {
-  MEDITATION_TOPICS: 'Meditation topics',
+  MEDITATION_MENU: 'Meditation home',
   MEDITATION_LIST: 'Meditation list',
 } as const;
 

@@ -1,1 +1,1 @@
-export { MeditationListItem } from './meditation-list-item/meditation-list-item';
+export { MeditationItem } from './meditation-item/meditation-item';
