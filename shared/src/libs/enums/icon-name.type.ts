@@ -1,3 +1,3 @@
-type IconName = 'arrow' | 'plus' | 'trash-box';
+type IconName = 'arrow' | 'plus';
 
 export { type IconName };
