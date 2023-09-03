@@ -40,7 +40,7 @@ const ChatSidebar: React.FC = () => {
           </span>
         </div>
         <div className={styles['plus']}>
-          <Icon name={'plus'} />
+          <Icon name={'plus'} color="red" />
         </div>
       </div>
       <div className={styles['list']}>
@@ -51,8 +51,8 @@ const ChatSidebar: React.FC = () => {
           {filteredElements.map((filteredChat) => (
             <Card
               title={filteredChat.name}
-              imageUrl="images/card-image-placeholder.png"
-              onPress={handleSelectChat(filteredChat.id)}
+              imageUrl="src/assets/img/card-image-placeholder.png"
+              onClick={handleSelectChat(filteredChat.id)}
               isActive={mockedSelectedChat.id === filteredChat.id}
               key={filteredChat.id}
             />

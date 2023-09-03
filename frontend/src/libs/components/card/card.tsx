@@ -5,18 +5,18 @@ import styles from './styles.module.scss';
 type Properties = {
   title: string;
   imageUrl: string;
-  onPress: () => void;
+  onClick: () => void;
   isActive: boolean;
 };
 
-const Card: React.FC<Properties> = ({ title, imageUrl, onPress, isActive }) => {
+const Card: React.FC<Properties> = ({ title, imageUrl, onClick, isActive }) => {
   return (
     <button
       className={getValidClassNames(
         styles['item'],
         isActive && styles['selected'],
       )}
-      onClick={onPress}
+      onClick={onClick}
     >
       <div className={styles['name']}>
         <div className={styles['image-placeholder']}>
