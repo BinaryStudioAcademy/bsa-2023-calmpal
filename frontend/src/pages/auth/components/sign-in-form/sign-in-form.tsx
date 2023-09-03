@@ -53,7 +53,12 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
         />
 
         <div className={styles['submit']}>
-          <Button type="submit" label="Sign in" isLoading={isLoading} />
+          <Button
+            type="submit"
+            label="Sign in"
+            isLoading={isLoading}
+            isDisabled={isLoading}
+          />
         </div>
 
         <span className={styles['form-link']}>

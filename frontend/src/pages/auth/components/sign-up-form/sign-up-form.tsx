@@ -61,7 +61,12 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
           errors={errors}
         />
         <div className={styles['submit-button']}>
-          <Button type="submit" label="Sign up" isLoading={isLoading} />
+          <Button
+            type="submit"
+            label="Sign up"
+            isLoading={isLoading}
+            isDisabled={isLoading}
+          />
         </div>
 
         <span className={styles['form-link']}>
