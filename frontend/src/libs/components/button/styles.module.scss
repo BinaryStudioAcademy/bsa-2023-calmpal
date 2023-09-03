@@ -55,8 +55,7 @@
   cursor: default;
 }
 
-.primary:has(.loader),
-.secondary:has(.loader) {
+.primary:has(.loader) {
   display: flex;
   justify-content: center;
   align-items: center;
