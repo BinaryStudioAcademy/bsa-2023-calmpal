@@ -21,10 +21,12 @@ const Header: React.FC<Properties> = ({
   badgeCount = DEFAULT_BADGE_COUNT,
 }) => {
   const navigation = useNavigation();
+
+  const hasValue = Boolean(badgeCount);
+
   const handleOnPress = (): void => {
     navigation.goBack();
   };
-  const hasValue = Boolean(badgeCount);
 
   return (
     <View style={[styles.header, isArrowVisible && styles.headerCenter]}>
