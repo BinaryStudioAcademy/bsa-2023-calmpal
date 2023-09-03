@@ -38,6 +38,16 @@
   cursor: pointer;
 }
 
+.secondary:hover,
+.secondary:focus {
+  color: var(--blue-700);
+  background-color: var(--blue-alpha-70);
+  outline: none;
+  box-shadow:
+    0 2px 4px -2px #002c840f,
+    0 4px 8px -2px #0055ff29;
+}
+
 .secondary:disabled {
   color: var(--gray-alpha-50);
   background-color: var(--white-alpha-80);
@@ -45,8 +55,7 @@
   cursor: default;
 }
 
-.primary:has(.loader),
-.secondary:has(.loader) {
+.primary:has(.loader) {
   display: flex;
   justify-content: center;
   align-items: center;
