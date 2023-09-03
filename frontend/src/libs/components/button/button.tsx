@@ -14,7 +14,6 @@ const Button: React.FC<Properties> = ({
   isLoading = false,
 }) => (
   <button type={type} className={styles[style]} disabled={isLoading}>
-    {isLoading && <span className={styles['loader']} />}
     {label}
   </button>
 );
