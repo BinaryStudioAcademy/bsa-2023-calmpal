@@ -1,7 +1,7 @@
 const SECONDS_IN_MINUTE = 60;
 const TARGET_STRING_LENGTH = 2;
 
-const getFormatTime = (time: number): string => {
+const getFormattedTime = (time: number): string => {
   if (time && !Number.isNaN(time)) {
     const minutes = Math.floor(time / SECONDS_IN_MINUTE);
     const formattedMinutes = minutes
@@ -19,4 +19,4 @@ const getFormatTime = (time: number): string => {
   return '00:00';
 };
 
-export { getFormatTime };
+export { getFormattedTime };

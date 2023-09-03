@@ -1,4 +1,4 @@
-import { getFormatTime } from '#libs/helpers/helpers.js';
+import { getFormattedTime } from '#libs/helpers/helpers.js';
 import { forwardRef, useCallback } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
@@ -32,8 +32,8 @@ const ProgressBar: React.ForwardRefRenderFunction<
   return (
     <div>
       <div className={styles['wrapper']}>
-        <span className={styles['time']}>{getFormatTime(timeProgress)}</span>
-        <span className={styles['time']}>{getFormatTime(duration)}</span>
+        <span className={styles['time']}>{getFormattedTime(timeProgress)}</span>
+        <span className={styles['time']}>{getFormattedTime(duration)}</span>
       </div>
       <label>
         <span className="visually-hidden">A Meditation duration</span>
