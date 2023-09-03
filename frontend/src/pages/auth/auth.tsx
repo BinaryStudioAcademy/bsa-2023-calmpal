@@ -51,7 +51,11 @@ const Auth: React.FC = () => {
             srcSet={logoM}
             type="image/svg+xml"
           />
-          <img src={logoXl} alt="white logo of CalmPal size XL" />
+          <img
+            src={logoXl}
+            className={styles['logo-img']}
+            alt="white logo of CalmPal size XL"
+          />
         </picture>
       </div>
       <div className={styles['overlay']}>{getScreen(pathname)}</div>
