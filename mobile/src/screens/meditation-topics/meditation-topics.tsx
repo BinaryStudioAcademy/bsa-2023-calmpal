@@ -1,3 +1,4 @@
+import { type NativeStackNavigationProp } from '@react-navigation/native-stack/lib/typescript/src/types';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -8,15 +9,17 @@ import {
   View,
 } from '#libs/components/components';
 import { AppColor, MeditationScreenName } from '#libs/enums/enums';
-import { useSearch } from '#libs/hooks/hooks';
-import { type NavigationScreenProperties } from '#libs/types/types';
+import { useNavigation, useSearch } from '#libs/hooks/hooks';
+import { type MeditationNavigationParameterList } from '#libs/types/types';
 
 import { mockedData } from './libs/constants';
 import { styles } from './styles';
 
-const MeditationTopics = ({
-  navigation,
-}: NavigationScreenProperties): JSX.Element => {
+const MeditationTopics: React.FC = () => {
+  const navigation =
+    useNavigation<
+      NativeStackNavigationProp<MeditationNavigationParameterList>
+    >();
   const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
     mockedData,
     'title',
