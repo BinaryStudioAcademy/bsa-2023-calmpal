@@ -6,7 +6,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SplashScreen from 'react-native-splash-screen';
 import { Provider as StoreProvider } from 'react-redux';
 
-import { Loader, Toast } from '#libs/components/components';
+import { LoaderContainer, Toast } from '#libs/components/components';
 import { useEffect } from '#libs/hooks/hooks';
 import { store } from '#libs/packages/store/store';
 import { Root as RootNavigation } from '#navigations/navigations';
@@ -27,7 +27,7 @@ const App: React.FC = () => {
       <GestureHandlerRootView style={styles.root}>
         <NavigationContainer>
           <RootNavigation />
-          <Loader />
+          <LoaderContainer />
         </NavigationContainer>
         <Toast />
       </GestureHandlerRootView>

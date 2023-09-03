@@ -1,20 +1,16 @@
 import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
-import { AppColor, DataStatus } from '#libs/enums/enums';
-import { useAppSelector } from '#libs/hooks/hooks';
+import { AppColor } from '#libs/enums/enums';
 
 import { styles } from './styles';
 
-const Loader: React.FC = () => {
-  const { authenticatedUserDataStatus } = useAppSelector(({ auth }) => ({
-    authenticatedUser: auth.authenticatedUser,
-    authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
-  }));
-  if (
-    authenticatedUserDataStatus !== DataStatus.IDLE &&
-    authenticatedUserDataStatus !== DataStatus.PENDING
-  ) {
+type Properties = {
+  isVisible: boolean;
+};
+
+const Loader: React.FC<Properties> = ({ isVisible }) => {
+  if (!isVisible) {
     return null;
   }
 
