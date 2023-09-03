@@ -15,7 +15,11 @@ const Button: React.FC<Properties> = ({
   isLoading = false,
   isDisabled = false,
 }) => (
-  <button type={type} className={styles[style]} disabled={isDisabled}>
+  <button
+    type={type}
+    className={styles[style]}
+    disabled={isDisabled || isLoading}
+  >
     {isLoading && <span className={styles['loader']} />}
     {label}
   </button>
