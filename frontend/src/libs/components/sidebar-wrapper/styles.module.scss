@@ -8,4 +8,11 @@
 
 .body {
   width: 100%;
+  margin-left: 88px;
+}
+
+@media (width <= 480px) {
+  .body {
+    margin-left: 0;
+  }
 }
