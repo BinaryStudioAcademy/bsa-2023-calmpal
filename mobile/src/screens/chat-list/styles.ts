@@ -9,9 +9,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingTop: 28,
   },
-  linearGradient: {
-    flex: 1,
-  },
   list: {
     paddingHorizontal: 4,
   },
