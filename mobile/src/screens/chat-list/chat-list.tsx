@@ -37,7 +37,7 @@ const ChatList: React.FC = () => {
     });
   }, [navigation, routeName]);
 
-  const onPress = useCallback(() => {
+  const handleSelectChat = useCallback(() => {
     // TODO: Implement actual functionality for the onPress event
   }, []);
 
@@ -58,7 +58,7 @@ const ChatList: React.FC = () => {
         />
         <ScrollView contentContainerStyle={styles.list}>
           {filteredChats.map((item) => (
-            <Card title={item.title} onPress={onPress} key={item.id} />
+            <Card title={item.title} onPress={handleSelectChat} key={item.id} />
           ))}
         </ScrollView>
         <View style={styles.linkWrapper}>
