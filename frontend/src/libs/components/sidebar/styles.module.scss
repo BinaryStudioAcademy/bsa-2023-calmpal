@@ -18,10 +18,12 @@
 }
 
 .sidebar {
+  position: fixed;
   display: flex;
   flex-direction: column;
   gap: 262px;
   width: 88px;
+  height: 100%;
   padding: 16px;
   background-color: var(--white);
   box-shadow: var(--shadow);
