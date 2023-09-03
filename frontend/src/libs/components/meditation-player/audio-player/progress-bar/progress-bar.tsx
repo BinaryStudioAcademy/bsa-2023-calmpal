@@ -1,5 +1,7 @@
+import { forwardRef } from 'react';
+
 import { getFormattedTime } from '#libs/helpers/helpers.js';
-import { forwardRef, useCallback } from '#libs/hooks/hooks.js';
+import { useCallback } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
 
