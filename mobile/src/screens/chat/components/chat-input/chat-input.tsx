@@ -1,25 +1,25 @@
 import React from 'react';
-import {
-  type Control,
-  type FieldPath,
-  type FieldValues,
-} from 'react-hook-form';
 
 import SendIcon from '#assets/img/icons/send.svg';
 import { Pressable, TextInput, View } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
 import { useFormController } from '#libs/hooks/hooks';
+import {
+  type FormControl,
+  type FormFieldPath,
+  type FormFieldValues,
+} from '#libs/types/types';
 
 import { styles } from './styles';
 
-type Properties<T extends FieldValues> = {
-  name: FieldPath<T>;
-  control: Control<T, null>;
+type Properties<T extends FormFieldValues> = {
+  name: FormFieldPath<T>;
+  control: FormControl<T, null>;
   scrollViewToEnd: () => void;
   onSend: () => void;
 };
 
-const ChatInput = <T extends FieldValues>({
+const ChatInput = <T extends FormFieldValues>({
   name,
   control,
   scrollViewToEnd,

@@ -1,4 +1,4 @@
-import { type NativeStackNavigationProp } from '@react-navigation/native-stack/lib/typescript/src/types';
+import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { type ReactNode } from 'react';
 
 import { RootScreenName } from '#libs/enums/enums';
