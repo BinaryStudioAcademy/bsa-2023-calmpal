@@ -10,8 +10,6 @@ type Properties = {
   onSend: ({ text }: { text: string }) => void;
 };
 
-type HandleForm = () => void;
-
 const ChatFooter: React.FC<Properties> = ({ onSend }) => {
   const { control, handleSubmit, errors, reset } =
     useAppForm<ChatInputValue>(DEFAULT_INPUT);
@@ -23,13 +21,16 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
     },
     [onSend, reset],
   );
+  const handleFormSubmit = useCallback(
+    (event_: React.BaseSyntheticEvent): void => {
+      void handleSubmit(onSubmit)(event_);
+    },
+    [handleSubmit, onSubmit],
+  );
 
   return (
     <footer className={styles['chat-footer']}>
-      <form
-        className={styles['form']}
-        onSubmit={handleSubmit(onSubmit) as HandleForm}
-      >
+      <form className={styles['form']} onSubmit={handleFormSubmit}>
         <Input
           placeholder="Type a message"
           errors={errors}
@@ -39,7 +40,7 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
           name="text"
           control={control}
         />
-        <IconButton type="submit" style="primary" icon="send-icon" />
+        <IconButton type="submit" icon="send-icon" />
       </form>
     </footer>
   );
