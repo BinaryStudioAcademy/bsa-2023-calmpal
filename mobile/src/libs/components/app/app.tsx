@@ -11,7 +11,7 @@ import { useEffect } from '#libs/hooks/hooks';
 import { store } from '#libs/packages/store/store';
 import { Root as RootNavigation } from '#navigations/navigations';
 
-import { DELAY } from './libs/constants';
+import { SPLASH_SCREEN_HIDE_TIMEOUT } from './libs/constants';
 import { styles } from './styles';
 
 const App: React.FC = () => {
@@ -19,7 +19,7 @@ const App: React.FC = () => {
     // To prevent white screen after splash screen disappears
     setTimeout(() => {
       SplashScreen.hide();
-    }, DELAY);
+    }, SPLASH_SCREEN_HIDE_TIMEOUT);
   }, []);
 
   return (

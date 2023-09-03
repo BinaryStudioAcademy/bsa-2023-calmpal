@@ -1,3 +1,3 @@
-const DELAY = 0;
+const SPLASH_SCREEN_HIDE_TIMEOUT = 0;
 
-export { DELAY };
+export { SPLASH_SCREEN_HIDE_TIMEOUT };
