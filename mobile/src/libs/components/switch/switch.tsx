@@ -1,6 +1,7 @@
 import React from 'react';
+import { Switch as RNSwitch } from 'react-native';
 
-import { RNSwitch, View } from '#libs/components/components';
+import { View } from '#libs/components/components';
 import { useFormController } from '#libs/hooks/hooks';
 import {
   type FormControl,

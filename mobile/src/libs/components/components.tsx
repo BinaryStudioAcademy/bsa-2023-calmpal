@@ -13,7 +13,6 @@ export { Toast } from './toast/toast';
 export {
   Image,
   Pressable,
-  Switch as RNSwitch,
   ScrollView,
   Text,
   TextInput,
