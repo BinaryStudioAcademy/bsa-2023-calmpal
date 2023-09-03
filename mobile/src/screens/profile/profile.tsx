@@ -18,7 +18,7 @@ const Profile = ({
 
   return (
     <LinearGradient>
-      <Header navigation={navigation} title={route.name} isArrowVisible />
+      <Header title={route.name} isArrowVisible />
       <View style={styles.container}>
         <ProfileCategory
           iconSourceSvg={<NotificationBellIcon />}

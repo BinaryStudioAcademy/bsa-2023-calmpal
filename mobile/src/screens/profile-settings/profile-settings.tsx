@@ -15,7 +15,6 @@ import { NOTIFICATION_SETTINGS_DEFAULT_VALUE } from './libs/constants';
 import { styles } from './styles';
 
 const ProfileSettings = ({
-  navigation,
   route,
 }: NavigationScreenProperties): JSX.Element => {
   const { control } = useAppForm({
@@ -24,7 +23,7 @@ const ProfileSettings = ({
 
   return (
     <LinearGradient>
-      <Header navigation={navigation} title={route.name} isArrowVisible />
+      <Header title={route.name} isArrowVisible />
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.notificationsSection}>
           <Setting
