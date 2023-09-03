@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { Text } from '#libs/components/components';
+import Logo from '#assets/img/logo.png';
+import { Image } from '#libs/components/components';
 
 import { styles } from './styles';
 
 const Label: React.FC = () => {
-  return <Text style={styles.labelText}>CalmPal</Text>;
+  return <Image source={Logo} style={styles.label} />;
 };
 
 export { Label };
