@@ -102,21 +102,26 @@ const Controls: React.FC<Properties> = ({
       <div className={styles['controls']}>
         <Button onClick={handlePrevious} style="rounded-transparent">
           <Icon name="previous" color="var(--blue-200)" />
+          <span className="visually-hidden">Play previous meditation</span>
         </Button>
         <div className={styles['button-wrapper']}>
           <Button onClick={handleSkipBackward} style="rounded-transparent">
             <Icon name="backward" color="var(--blue-200)" />
+            <span className="visually-hidden">Back to 30 seconds</span>
           </Button>
 
           <Button onClick={handlePlayToggle} style="rounded">
             <Icon name={isPlaying ? 'pause' : 'play'} color="var(--blue-300)" />
+            <span className="visually-hidden">Play or pause a meditation</span>
           </Button>
           <Button onClick={handleSkipForward} style="rounded-transparent">
             <Icon name="forward" color="var(--blue-200)" />
+            <span className="visually-hidden">Go ahead to 30 seconds</span>
           </Button>
         </div>
         <Button onClick={onNextTrack} style="rounded-transparent">
           <Icon name="next" color="var(--blue-200)" />
+          <span className="visually-hidden">Play next meditation</span>
         </Button>
       </div>
     </div>

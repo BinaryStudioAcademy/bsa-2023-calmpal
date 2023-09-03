@@ -35,13 +35,16 @@ const ProgressBar: React.ForwardRefRenderFunction<
         <span className={styles['time']}>{getFormatTime(timeProgress)}</span>
         <span className={styles['time']}>{getFormatTime(duration)}</span>
       </div>
-      <input
-        className={styles['progress']}
-        type="range"
-        ref={reference}
-        defaultValue="0"
-        onChange={handleProgressChange}
-      />
+      <label>
+        <span className="visually-hidden">A Meditation duration</span>
+        <input
+          className={styles['progress']}
+          type="range"
+          ref={reference}
+          defaultValue="0"
+          onChange={handleProgressChange}
+        />
+      </label>
     </div>
   );
 };
