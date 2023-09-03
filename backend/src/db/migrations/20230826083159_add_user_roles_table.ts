@@ -10,8 +10,17 @@ const ColumnName = {
   UPDATED_AT: 'updated_at',
 } as const;
 
-function up(knex: Knex): Promise<void> {
-  return knex.schema.createTable(TABLE_NAME, (table) => {
+const ROLES = [
+  {
+    id: 1,
+    name: 'Chatbot',
+    key: 'chatbot',
+  },
+  { id: 2, name: 'User', key: 'user' },
+];
+
+async function up(knex: Knex): Promise<void> {
+  await knex.schema.createTable(TABLE_NAME, (table) => {
     table.increments(ColumnName.ID).primary();
     table.string(ColumnName.NAME).notNullable();
     table.string(ColumnName.KEY).checkIn(['chatbot', 'user']).notNullable();
@@ -24,6 +33,8 @@ function up(knex: Knex): Promise<void> {
       .notNullable()
       .defaultTo(knex.fn.now());
   });
+
+  await knex(TABLE_NAME).insert(ROLES);
 }
 
 function down(knex: Knex): Promise<void> {
