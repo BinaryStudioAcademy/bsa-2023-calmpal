@@ -42,7 +42,7 @@ const ChatInput = <T extends FieldValues>({
       />
       {hasValue && (
         <Pressable onPress={onSend}>
-          <SendIcon style={styles.button} />
+          <SendIcon style={styles.button} color={AppColor.BLUE_300} />
         </Pressable>
       )}
     </View>
