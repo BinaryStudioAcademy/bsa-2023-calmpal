@@ -1,18 +1,17 @@
+import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
 import { Header, ScrollView, Text, View } from '#libs/components/components';
-import { type ChatScreenName } from '#libs/enums/enums';
 import {
   useAppForm,
+  useAppRoute,
   useCallback,
   useEffect,
+  useNavigation,
   useRef,
   useState,
 } from '#libs/hooks/hooks';
-import {
-  type ChatNavigationParameterList,
-  type NavigationScreenProperties,
-} from '#libs/types/types';
+import { type ChatNavigationParameterList } from '#libs/types/types';
 
 import { ChatInput, MessageItem } from './components/components';
 import { DEFAULT_VALUES, MOCKED_DATA, PREVIOUS_USER } from './libs/constants';
@@ -24,12 +23,14 @@ type Message = {
   message: string;
 };
 
-const Chat = ({
-  navigation,
-  route,
-}: NavigationScreenProperties): JSX.Element => {
-  const { title } =
-    route.params as ChatNavigationParameterList[typeof ChatScreenName.CHAT];
+type RouteParameters = {
+  title: string;
+};
+
+const Chat: React.FC = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<ChatNavigationParameterList>>();
+  const { title } = useAppRoute().params as RouteParameters;
   const { control, handleSubmit, reset } = useAppForm<{ text: string }>({
     defaultValues: DEFAULT_VALUES,
   });
