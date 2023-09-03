@@ -3,21 +3,21 @@ import React from 'react';
 
 import { ChatScreenName } from '#libs/enums/enums';
 import { type ChatNavigationParameterList } from '#libs/types/types';
-import { Chat } from '#screens/chat/chat';
+import { Chat as ChatPanel } from '#screens/chat/chat';
 import { ChatList } from '#screens/chat-list/chat-list';
 
 const NativeStack = createNativeStackNavigator<ChatNavigationParameterList>();
 
-const ChatNavigation: React.FC = () => {
+const Chat: React.FC = () => {
   return (
     <NativeStack.Navigator>
       <NativeStack.Screen
         name={ChatScreenName.CHAT_LIST}
         component={ChatList}
       />
-      <NativeStack.Screen name={ChatScreenName.CHAT} component={Chat} />
+      <NativeStack.Screen name={ChatScreenName.CHAT} component={ChatPanel} />
     </NativeStack.Navigator>
   );
 };
 
-export { ChatNavigation };
+export { Chat };
