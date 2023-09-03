@@ -30,7 +30,7 @@ const Main: React.FC = () => {
         component={Home}
         options={{
           tabBarIcon: HomeIcon,
-          header: ({ route }) => <Header title={route.name} />,
+          header: () => <Header />,
         }}
       />
       <BottomTab.Screen
