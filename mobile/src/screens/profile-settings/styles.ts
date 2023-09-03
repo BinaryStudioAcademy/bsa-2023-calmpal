@@ -5,9 +5,6 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     alignItems: 'center',
   },
-  linearGradient: {
-    flex: 1,
-  },
   notificationsSection: {
     flexDirection: 'row',
     flexWrap: 'wrap',

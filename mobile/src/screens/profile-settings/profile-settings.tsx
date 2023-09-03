@@ -1,8 +1,12 @@
 import React from 'react';
-import LinearGradient from 'react-native-linear-gradient';
 
-import { Header, ScrollView, Switch, View } from '#libs/components/components';
-import { AppColor } from '#libs/enums/enums';
+import {
+  Header,
+  LinearGradient,
+  ScrollView,
+  Switch,
+  View,
+} from '#libs/components/components';
 import { useAppForm } from '#libs/hooks/hooks';
 import { type NavigationScreenProperties } from '#libs/types/types';
 
@@ -19,10 +23,7 @@ const ProfileSettings = ({
   });
 
   return (
-    <LinearGradient
-      colors={[AppColor.WHITE, AppColor.BLUE_100]}
-      style={styles.linearGradient}
-    >
+    <LinearGradient>
       <Header navigation={navigation} title={route.name} isArrowVisible />
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.notificationsSection}>
