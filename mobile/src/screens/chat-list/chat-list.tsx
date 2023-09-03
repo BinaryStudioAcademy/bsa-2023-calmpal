@@ -37,7 +37,7 @@ const ChatList: React.FC = () => {
     });
   }, [navigation, routeName]);
 
-  const onPress = useCallback(
+  const handleSelectChat = useCallback(
     (title: string) => {
       navigation.navigate(ChatScreenName.CHAT, { title });
     },
@@ -61,13 +61,7 @@ const ChatList: React.FC = () => {
         />
         <ScrollView contentContainerStyle={styles.list}>
           {filteredChats.map((item) => (
-            <Card
-              title={item.title}
-              onPress={(): void => {
-                onPress(item.title);
-              }}
-              key={item.id}
-            />
+            <Card title={item.title} onPress={handleSelectChat} key={item.id} />
           ))}
         </ScrollView>
         <View style={styles.linkWrapper}>

@@ -31,7 +31,7 @@ const Chat: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<ChatNavigationParameterList>>();
   const { title } = useAppRoute().params as RouteParameters;
-  const { control, handleSubmit, reset } = useAppForm<{ text: string }>({
+  const { control, handleSubmit, reset } = useAppForm({
     defaultValues: DEFAULT_VALUES,
   });
 
