@@ -1,11 +1,11 @@
 import React from 'react';
-import LinearGradient from 'react-native-linear-gradient';
 
 import PlusIcon from '#assets/img/icons/plus.svg';
 import {
   Card,
   Header,
   InputSearch,
+  LinearGradient,
   Link,
   ScrollView,
   View,
@@ -46,10 +46,7 @@ const ChatList = ({
   );
 
   return (
-    <LinearGradient
-      colors={[AppColor.WHITE, AppColor.BLUE_100]}
-      style={styles.linearGradient}
-    >
+    <LinearGradient>
       <View style={styles.container}>
         <InputSearch
           placeholder="Search chat"
