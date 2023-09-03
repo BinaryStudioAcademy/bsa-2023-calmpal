@@ -1,4 +1,4 @@
-import { logoS } from '#assets/img/logos/logos.js';
+import logoS from '#assets/img/logo-s.svg';
 import { Link } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
@@ -18,13 +18,7 @@ const Sidebar: React.FC<Properties> = ({ routes }) => {
     <div className={styles['sidebar']}>
       <nav className={styles['nav']}>
         <Link to={AppRoute.ROOT}>
-          <span className={styles['logo']}>
-            <img
-              src={logoS}
-              className={styles['logo-img']}
-              alt="CalmPal Logo blue"
-            />
-          </span>
+          <img src={logoS} className={styles['logo']} alt="CalmPal logo" />
         </Link>
       </nav>
       <nav className={styles['nav']}>
