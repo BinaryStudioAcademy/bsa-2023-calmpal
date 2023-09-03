@@ -10,7 +10,7 @@ import {
   ScrollView,
   View,
 } from '#libs/components/components';
-import { AppColor, ChatScreenName, RootScreenName } from '#libs/enums/enums';
+import { AppColor, RootScreenName } from '#libs/enums/enums';
 import { useCallback, useEffect, useSearch } from '#libs/hooks/hooks';
 import { type NavigationScreenProperties } from '#libs/types/types';
 
@@ -36,12 +36,9 @@ const ChatList = ({
     });
   }, [navigation, route.name]);
 
-  const onPress = useCallback(
-    (title: string) => {
-      navigation.navigate(ChatScreenName.CHAT, { title });
-    },
-    [navigation],
-  );
+  const handleSelectChat = useCallback(() => {
+    // TODO: Implement actual functionality for the onPress event
+  }, []);
 
   const { filteredData: filteredChats, setSearchQuery } = useSearch(
     mockedChats,
@@ -60,13 +57,7 @@ const ChatList = ({
         />
         <ScrollView contentContainerStyle={styles.list}>
           {filteredChats.map((item) => (
-            <Card
-              title={item.title}
-              onPress={(): void => {
-                onPress(item.title);
-              }}
-              key={item.id}
-            />
+            <Card title={item.title} onPress={handleSelectChat} key={item.id} />
           ))}
         </ScrollView>
         <View style={styles.linkWrapper}>

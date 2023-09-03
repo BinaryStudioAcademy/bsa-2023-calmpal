@@ -21,6 +21,7 @@ const Switch = <T extends FormFieldValues>({
   name,
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
+  const { onChange, value } = field;
 
   return (
     <View>
@@ -29,14 +30,10 @@ const Switch = <T extends FormFieldValues>({
           false: styles.switchFalse.backgroundColor,
           true: styles.switchTrue.backgroundColor,
         }}
-        thumbColor={
-          field.value ? styles.switchTrue.color : styles.switchFalse.color
-        }
+        thumbColor={value ? styles.switchTrue.color : styles.switchFalse.color}
         ios_backgroundColor={styles.switchTrue.backgroundColor}
-        onValueChange={(value): void => {
-          field.onChange(value);
-        }}
-        value={field.value}
+        onValueChange={onChange}
+        value={value}
       />
     </View>
   );
