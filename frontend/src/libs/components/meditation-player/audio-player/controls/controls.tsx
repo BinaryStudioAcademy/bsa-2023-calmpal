@@ -1,13 +1,13 @@
 import { Button } from '#libs/components/components.js';
 import { useCallback, useEffect, useRef, useState } from '#libs/hooks/hooks.js';
+import { type Meditation } from '#libs/types/types.js';
+
 import {
   FULL_PERCENTAGE,
-  type Meditation,
   PROGRESS_BAR,
   SKIP_STEP,
   STEP,
-} from '#libs/types/types.js';
-
+} from '../../constants/constants.js';
 import styles from './styles.module.scss';
 
 type Properties = {
