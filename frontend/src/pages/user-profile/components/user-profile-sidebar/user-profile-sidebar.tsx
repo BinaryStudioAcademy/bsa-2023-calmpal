@@ -5,9 +5,11 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 import styles from './styles.module.scss';
 
 const UserProfileSidebar: React.FC = () => {
-  const { authenticatedUser } = useAppSelector(({ auth }) => ({
-    authenticatedUser: auth.authenticatedUser,
-  }));
+  const { authenticatedUser } = useAppSelector(({ auth }) => {
+    return {
+      authenticatedUser: auth.authenticatedUser,
+    };
+  });
 
   return (
     <div className={styles['container']}>
