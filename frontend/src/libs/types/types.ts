@@ -11,7 +11,6 @@ export {
   FIRST_INDEX,
   FULL_PERCENTAGE,
   type Meditation,
-  MOCKED_IMAGE,
   PROGRESS_BAR,
   SKIP_STEP,
   START_TIME,
