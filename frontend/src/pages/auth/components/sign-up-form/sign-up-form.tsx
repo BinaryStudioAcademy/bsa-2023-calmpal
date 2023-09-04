@@ -19,9 +19,11 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
     validationSchema: userSignUpValidationSchema,
   });
 
-  const { isLoading } = useAppSelector(({ auth }) => ({
-    isLoading: auth.authDataStatus === DataStatus.PENDING,
-  }));
+  const { isLoading } = useAppSelector(({ auth }) => {
+    return {
+      isLoading: auth.authDataStatus === DataStatus.PENDING,
+    };
+  });
 
   const handleFormSubmit = useCallback(
     (event_: React.BaseSyntheticEvent): void => {

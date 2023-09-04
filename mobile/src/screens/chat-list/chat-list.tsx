@@ -29,11 +29,18 @@ const ChatList: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<ChatNavigationParameterList>>();
   const { name: routeName } = useAppRoute();
+
   useEffect(() => {
     navigation.setOptions({
-      header: () => (
-        <Header title={routeName} badgeCount={mockedCount} isSettingsVisible />
-      ),
+      header: () => {
+        return (
+          <Header
+            title={routeName}
+            badgeCount={mockedCount}
+            isSettingsVisible
+          />
+        );
+      },
     });
   }, [navigation, routeName]);
 
@@ -54,9 +61,15 @@ const ChatList: React.FC = () => {
           setSearchQuery={setSearchQuery}
         />
         <ScrollView contentContainerStyle={styles.list}>
-          {filteredChats.map((item) => (
-            <Card title={item.title} onPress={handleSelectChat} key={item.id} />
-          ))}
+          {filteredChats.map((item) => {
+            return (
+              <Card
+                title={item.title}
+                onPress={handleSelectChat}
+                key={item.id}
+              />
+            );
+          })}
         </ScrollView>
         <View style={styles.linkWrapper}>
           <Link
