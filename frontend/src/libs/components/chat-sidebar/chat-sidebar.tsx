@@ -1,4 +1,5 @@
 import cardPlaceholder from '#assets/img/card-image-placeholder.png';
+import { IconColor } from '#libs/enums/enums.js';
 import { useCallback, useSearch } from '#libs/hooks/hooks.js';
 
 import { Card, Icon, Search } from '../components.js';
@@ -35,7 +36,7 @@ const ChatSidebar: React.FC = () => {
           </span>
         </div>
         <div className={styles['plus']}>
-          <Icon name={'plus'} color="#507CEB" />
+          <Icon name={'plus'} color={IconColor.BLUE} />
         </div>
       </div>
       <div className={styles['list']}>
