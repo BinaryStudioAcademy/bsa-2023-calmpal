@@ -29,7 +29,9 @@ const ProfileSettingsButton: React.FC<Properties> = ({
 
   return (
     <button className={buttonStyle} onClick={handleClick}>
-      <Icon name={name} className={'profile-button-background'} />
+      <div className={styles['icon-background']}>
+        <Icon name={name} />
+      </div>
       <div className={styles['text-container']}>
         <span className={styles['profile-button-text']}>{children}</span>
         {isActive && <Icon name="arrow" />}

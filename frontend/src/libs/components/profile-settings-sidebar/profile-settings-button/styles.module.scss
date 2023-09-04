@@ -12,7 +12,7 @@
 }
 
 .focused {
-  box-shadow: 0 4px 49px 0 var(--blue-400);
+  box-shadow: 0 4px 49px 0 var(--blue-alpha-90);
 }
 
 .profile-button-text {
@@ -30,4 +30,16 @@
 .text-container {
   display: flex;
   align-items: center;
+}
+
+.icon-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 83px;
+  height: 83px;
+  margin-right: 25px;
+  padding: 3px;
+  background-color: var(--blue-300);
+  border-radius: 20px;
 }
