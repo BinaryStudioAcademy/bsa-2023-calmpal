@@ -1,12 +1,12 @@
 import React from 'react';
 
-import Logo from '#assets/img/logo.png';
-import { Image } from '#libs/components/components';
+import Logo from '#assets/img/logo.svg';
+import { AppColor } from '#libs/enums/enums';
 
 import { styles } from './styles';
 
 const Label: React.FC = () => {
-  return <Image source={Logo} style={styles.label} />;
+  return <Logo width={175} style={styles.label} color={AppColor.WHITE} />;
 };
 
 export { Label };

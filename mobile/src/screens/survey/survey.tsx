@@ -16,12 +16,12 @@ import { styles } from './styles';
 
 const Survey: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { userId, surveyPreferencesDataStatus } = useAppSelector(
-    ({ auth }) => ({
+  const { userId, surveyPreferencesDataStatus } = useAppSelector(({ auth }) => {
+    return {
       userId: (auth.authenticatedUser as UserAuthResponseDto).id,
       surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
-    }),
-  );
+    };
+  });
 
   const handleSubmit = useCallback(
     (options: string[]) => {

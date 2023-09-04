@@ -1,4 +1,4 @@
-import { type NativeStackNavigationProp } from '@react-navigation/native-stack/lib/typescript/src/types';
+import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { type ReactNode } from 'react';
 
 import { RootScreenName } from '#libs/enums/enums';
@@ -10,9 +10,11 @@ type Properties = {
 };
 
 const ProtectedRoute: React.FC<Properties> = ({ children }) => {
-  const { authenticatedUser } = useAppSelector(({ auth }) => ({
-    authenticatedUser: auth.authenticatedUser,
-  }));
+  const { authenticatedUser } = useAppSelector(({ auth }) => {
+    return {
+      authenticatedUser: auth.authenticatedUser,
+    };
+  });
   const navigation =
     useNavigation<NativeStackNavigationProp<RootNavigationParameterList>>();
   const hasUser = Boolean(authenticatedUser);
