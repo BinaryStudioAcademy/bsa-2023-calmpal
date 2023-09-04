@@ -76,10 +76,16 @@ class AuthService {
   }
 
   public async getAuthenticatedUser(id: number): Promise<UserAuthResponseDto> {
-    const user = (await this.userService.findById(id)) as UserAuthResponseDto;
-    const userEntity = UserEntity.initialize(user);
+    const user = await this.userService.findById(id);
 
-    return userEntity.toObject();
+    if (!user) {
+      throw new UsersError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.USER_NOT_FOUND,
+      });
+    }
+
+    return user;
   }
 }
 
