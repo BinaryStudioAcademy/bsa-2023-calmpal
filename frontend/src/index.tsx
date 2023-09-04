@@ -49,7 +49,9 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 path: AppRoute.PROFILE,
                 element: (
                   <ProtectedRoute>
-                    <UserProfile />
+                    <SidebarWrapper>
+                      <UserProfile />
+                    </SidebarWrapper>
                   </ProtectedRoute>
                 ),
               },
