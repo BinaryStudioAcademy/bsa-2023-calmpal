@@ -1,3 +1,4 @@
+import meditationListPlaceholder from '#assets/img/meditation-list-placeholder.jpg';
 import { Icon, Link } from '#libs/components/components.js';
 
 import { type Track } from '../../libs/types/types.js';
@@ -11,7 +12,7 @@ const MeditationEntry: React.FC<Properties> = ({ track }) => {
   return (
     <div className={styles['track']}>
       <img
-        src={track.image}
+        src={meditationListPlaceholder}
         alt="Meditation track background"
         className={styles['background-image']}
       />
