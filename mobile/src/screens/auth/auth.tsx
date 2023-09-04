@@ -15,19 +15,6 @@ const Auth: React.FC = () => {
   const { name } = useAppRoute();
   const dispatch = useAppDispatch();
 
-  const { dataStatus } = useAppSelector(({ auth }) => {
-    return {
-      dataStatus: auth.dataStatus,
-    };
-  });
-  const isSignUpScreen = name === RootScreenName.SIGN_UP;
-
-  useEffect(() => {
-    if (isSignUpScreen) {
-      void dispatch(userActions.loadAll());
-    }
-  }, [isSignUpScreen, dispatch]);
-
   const handleSignInSubmit = useCallback(
     (payload: UserSignInRequestDto): void => {
       void dispatch(authActions.signIn(payload));
