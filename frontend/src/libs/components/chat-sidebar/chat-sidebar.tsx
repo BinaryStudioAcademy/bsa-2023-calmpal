@@ -1,3 +1,4 @@
+import cardPlaceholder from '#assets/img/card-image-placeholder.png';
 import { useCallback, useSearch } from '#libs/hooks/hooks.js';
 
 import { Card, Icon, Search } from '../components.js';
@@ -16,12 +17,6 @@ const mockedSelectedChat = {
 
 const ChatSidebar: React.FC = () => {
   const { filteredElements, setFilter } = useSearch(mockedChats, 'name');
-  const handleFilterChange = useCallback(
-    (search: string): void => {
-      setFilter(search);
-    },
-    [setFilter],
-  );
 
   const handleSelectChat = useCallback((id: number) => {
     return () => {
@@ -45,13 +40,13 @@ const ChatSidebar: React.FC = () => {
       </div>
       <div className={styles['list']}>
         <div className={styles['search']}>
-          <Search onValueChange={handleFilterChange} />
+          <Search onValueChange={setFilter} />
         </div>
         <div className={styles['chat-list']}>
           {filteredElements.map((filteredChat) => (
             <Card
               title={filteredChat.name}
-              imageUrl="src/assets/img/card-image-placeholder.png"
+              imageUrl={cardPlaceholder}
               onClick={handleSelectChat(filteredChat.id)}
               isActive={mockedSelectedChat.id === filteredChat.id}
               key={filteredChat.id}
