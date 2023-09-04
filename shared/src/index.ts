@@ -5,7 +5,6 @@ export {
   ExceptionMessage,
   ServerErrorType,
 } from './libs/enums/enums.js';
-export { type IconName } from './libs/enums/enums.js';
 export {
   ApplicationError,
   AuthError,
@@ -29,6 +28,7 @@ export {
 } from './libs/packages/http/http.js';
 export { type Storage } from './libs/packages/storage/storage.js';
 export {
+  type IconName,
   type ServerCommonErrorResponse,
   type ServerErrorDetail,
   type ServerErrorResponse,
