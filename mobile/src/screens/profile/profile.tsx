@@ -1,11 +1,15 @@
 import React from 'react';
 
 import NotificationBellIcon from '#assets/img/icons/bell.svg';
-import { Header, LinearGradient, View } from '#libs/components/components';
+import {
+  Card,
+  Header,
+  LinearGradient,
+  View,
+} from '#libs/components/components';
 import { AppColor, RootScreenName } from '#libs/enums/enums';
 import { type NavigationScreenProperties } from '#libs/types/types';
 
-import { ProfileCategory } from './components/components';
 import { styles } from './styles';
 
 const Profile = ({
@@ -20,7 +24,7 @@ const Profile = ({
     <LinearGradient>
       <Header title={route.name} isArrowVisible />
       <View style={styles.container}>
-        <ProfileCategory
+        <Card
           iconSourceSvg={<NotificationBellIcon color={AppColor.WHITE} />}
           title="Notifications and Reminders"
           onPress={handleCategoryPress}

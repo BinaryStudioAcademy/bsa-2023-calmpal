@@ -5,7 +5,6 @@ import {
   LinearGradient,
   ScrollView,
   Switch,
-  View,
 } from '#libs/components/components';
 import { useAppForm } from '#libs/hooks/hooks';
 import { type NavigationScreenProperties } from '#libs/types/types';
@@ -25,12 +24,10 @@ const ProfileSettings = ({
     <LinearGradient>
       <Header title={route.name} isArrowVisible />
       <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.notificationsSection}>
-          <Setting
-            label="Allow Notification"
-            controller={<Switch name="notification" control={control} />}
-          />
-        </View>
+        <Setting
+          label="Allow Notification"
+          controller={<Switch name="notification" control={control} />}
+        />
       </ScrollView>
     </LinearGradient>
   );
