@@ -39,7 +39,9 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
     (option: string) => {
       if (categoriesValue.includes(option)) {
         onCategoryChange(
-          categoriesValue.filter((category) => category !== option),
+          categoriesValue.filter((category) => {
+            return category !== option;
+          }),
         );
 
         return;
@@ -67,13 +69,15 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
       style={styles.surveyContainer}
       showsVerticalScrollIndicator={false}
     >
-      {PREFERENCES_CATEGORIES.map((category) => (
-        <SurveyCategory
-          key={category}
-          onChange={handleFieldChange}
-          label={category}
-        />
-      ))}
+      {PREFERENCES_CATEGORIES.map((category) => {
+        return (
+          <SurveyCategory
+            key={category}
+            onChange={handleFieldChange}
+            label={category}
+          />
+        );
+      })}
 
       {hasOther && (
         <Input
