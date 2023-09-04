@@ -10,7 +10,7 @@ import { styles } from './styles';
 type Properties = {
   title: string;
   image?: ImageSourcePropType;
-  onPress: () => void;
+  onPress: (title: string) => void;
 };
 
 const Card: React.FC<Properties> = ({
@@ -18,8 +18,12 @@ const Card: React.FC<Properties> = ({
   image = imagePlaceholder,
   onPress,
 }) => {
+  const handlePress = (): void => {
+    onPress(title);
+  };
+
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity style={styles.container} onPress={handlePress}>
       <Image source={image} style={styles.image} />
       <Text
         style={styles.title}
