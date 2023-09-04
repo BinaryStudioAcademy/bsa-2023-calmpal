@@ -8,6 +8,7 @@ type Properties = {
   children?: ReactNode;
   style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent';
   isLoading?: boolean;
+  isDisabled?: boolean;
   onClick?: () => void;
 };
 
@@ -17,13 +18,14 @@ const Button: React.FC<Properties> = ({
   children,
   style = 'primary',
   isLoading = false,
+  isDisabled = false,
   onClick,
 }) => (
   <button
     type={type}
     className={styles[style]}
     onClick={onClick}
-    disabled={isLoading}
+    disabled={isDisabled || isLoading}
   >
     {isLoading && <span className={styles['loader']} />}
     {label ?? children}

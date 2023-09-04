@@ -97,7 +97,7 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
         type="submit"
         label="Continue"
         style="secondary"
-        isLoading={!isValid}
+        isDisabled={!isValid}
       />
     </form>
   );
