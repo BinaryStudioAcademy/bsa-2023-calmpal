@@ -1,6 +1,6 @@
+import { iconNameToPlainSvgMap } from '#libs/components/icon/icon-name-to-plain-svg.js';
 import { type IconName } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { iconNameToPlainSvgMap } from '#libs/maps/icon-name-to-plain-svg.js';
 
 import styles from './styles.module.scss';
 
