@@ -33,7 +33,7 @@ const ChatElement: React.FC<Properties> = ({ chat }) => {
       onClick={handleSelectChat}
     >
       <div className={styles['name']}>
-        <img src="chat-logo.svg" alt="not found" />
+        <Icon name={'chat-logo'} />
         {chat.name}
       </div>
       <div className={styles['arrow']}>
