@@ -16,7 +16,7 @@ const Meditation: React.FC = () => {
           <Image source={ImagePlaceholder} style={styles.image} />
         </View>
         <Text style={styles.title} numberOfLines={1}>
-          Meditation for deep sleep
+          Meditation for deep sleepa
         </Text>
         <Text style={styles.purpose}>Stress relief</Text>
         <AudioPlayer />
