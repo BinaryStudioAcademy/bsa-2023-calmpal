@@ -79,16 +79,19 @@ const Chat: React.FC = () => {
         <Text style={styles.title}>Doctor Freud.ai</Text>
       </View>
       <ScrollView style={styles.chatWrapper} ref={scrollViewReference}>
-        {messages.map((item, index) => (
-          <MessageItem
-            text={item.message}
-            isUser={item.isUser}
-            isAvatarVisible={
-              item.isUser !== messages[index - PREVIOUS_USER]?.isUser
-            }
-            key={item.id}
-          />
-        ))}
+        {messages.map((item, index) => {
+          const isDifferentUser =
+            item.isUser !== messages[index - PREVIOUS_USER]?.isUser;
+
+          return (
+            <MessageItem
+              text={item.message}
+              isUser={item.isUser}
+              isAvatarVisible={isDifferentUser}
+              key={item.id}
+            />
+          );
+        })}
       </ScrollView>
       <ChatInput
         scrollViewToEnd={scrollViewToEnd}
