@@ -1,3 +1,4 @@
+import { type NavigationProp } from '@react-navigation/native';
 import React from 'react';
 
 import NotificationBellIcon from '#assets/img/icons/bell.svg';
@@ -8,21 +9,22 @@ import {
   View,
 } from '#libs/components/components';
 import { AppColor, RootScreenName } from '#libs/enums/enums';
-import { type NavigationScreenProperties } from '#libs/types/types';
+import { useNavigation } from '#libs/hooks/hooks';
+import { type RootNavigationParameterList } from '#libs/types/types';
 
 import { styles } from './styles';
 
-const Profile = ({
-  navigation,
-  route,
-}: NavigationScreenProperties): JSX.Element => {
+const Profile: React.FC = () => {
+  const navigation =
+    useNavigation<NavigationProp<RootNavigationParameterList>>();
+
   const handleCategoryPress = (): void => {
     navigation.navigate(RootScreenName.SETTINGS);
   };
 
   return (
     <LinearGradient>
-      <Header title={route.name} isArrowVisible />
+      <Header isArrowVisible />
       <View style={styles.container}>
         <Card
           iconSourceSvg={<NotificationBellIcon color={AppColor.WHITE} />}
