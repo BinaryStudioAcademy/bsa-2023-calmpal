@@ -3,9 +3,8 @@ import styles from './styles.module.scss';
 type Properties = {
   label?: string;
   type?: 'button' | 'submit';
-  style?: 'primary' | 'secondary' | 'send-button';
+  style?: 'primary' | 'secondary';
   isLoading?: boolean;
-  onClick?: () => void;
   isDisabled?: boolean;
 };
 
@@ -14,13 +13,11 @@ const Button: React.FC<Properties> = ({
   label,
   style = 'primary',
   isLoading = false,
-  onClick,
   isDisabled = false,
 }) => (
   <button
     type={type}
     className={styles[style]}
-    onClick={onClick}
     disabled={isDisabled || isLoading}
   >
     {isLoading && <span className={styles['loader']} />}
