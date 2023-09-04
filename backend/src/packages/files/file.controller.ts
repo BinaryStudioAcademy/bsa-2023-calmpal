@@ -22,12 +22,13 @@ class FileController extends BaseController {
     this.addRoute({
       path: FilesApiPath.UPLOAD,
       method: 'POST',
-      handler: (options) =>
-        this.upload(
+      handler: (options) => {
+        return this.upload(
           options as APIHandlerOptions<{
             fileBuffer: FileUploadRequestDto;
           }>,
-        ),
+        );
+      },
     });
   }
 
