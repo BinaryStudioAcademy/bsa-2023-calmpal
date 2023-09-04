@@ -11,7 +11,7 @@ import {
   ScrollView,
   View,
 } from '#libs/components/components';
-import { AppColor, RootScreenName } from '#libs/enums/enums';
+import { AppColor, ChatScreenName, RootScreenName } from '#libs/enums/enums';
 import {
   useAppRoute,
   useCallback,
@@ -44,9 +44,12 @@ const ChatList: React.FC = () => {
     });
   }, [navigation, routeName]);
 
-  const handleSelectChat = useCallback(() => {
-    // TODO: Implement actual functionality for the onPress event
-  }, []);
+  const handleSelectChat = useCallback(
+    (title: string) => {
+      navigation.navigate(ChatScreenName.CHAT, { title });
+    },
+    [navigation],
+  );
 
   const { filteredData: filteredChats, setSearchQuery } = useSearch(
     mockedChats,

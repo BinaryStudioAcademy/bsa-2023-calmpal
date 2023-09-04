@@ -17,7 +17,7 @@ type Properties = {
   title: string;
   image?: ImageSourcePropType;
   iconSourceSvg?: JSX.Element;
-  onPress: () => void;
+  onPress: (title: string) => void;
 };
 
 const Card: React.FC<Properties> = ({
@@ -26,15 +26,19 @@ const Card: React.FC<Properties> = ({
   iconSourceSvg,
   onPress,
 }) => {
+  const handlePress = (): void => {
+    onPress(title);
+  };
+
   return iconSourceSvg ? (
-    <Pressable onPress={onPress}>
+    <Pressable onPress={handlePress}>
       <View style={styles.container}>
         <View style={styles.iconContainer}>{iconSourceSvg}</View>
         <Text style={styles.title}>{title}</Text>
       </View>
     </Pressable>
   ) : (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity style={styles.container} onPress={handlePress}>
       <Image source={image} style={styles.image} />
       <Text
         style={styles.title}
