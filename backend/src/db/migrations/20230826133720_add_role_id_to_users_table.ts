@@ -1,8 +1,14 @@
 import { type Knex } from 'knex';
 
-const TABLE_NAME = 'users';
+const TABLE_NAME = {
+  USERS: 'users',
+  USER_ROLES: 'user_roles',
+};
 
-const REFERENCE_COLUMN = 'role_id';
+const COLUMN_NAME = {
+  ROLE_ID: 'role_id',
+  ID: 'id',
+};
 
 const ROLE_MAPPING = {
   CHATBOT: 1,
@@ -10,19 +16,22 @@ const ROLE_MAPPING = {
 };
 
 function up(knex: Knex): Promise<void> {
-  return knex.schema.alterTable(TABLE_NAME, (table) => {
+  return knex.schema.alterTable(TABLE_NAME.USERS, (table) => {
     table
-      .integer(REFERENCE_COLUMN)
+      .integer(COLUMN_NAME.ROLE_ID)
       .unsigned()
       .notNullable()
       .defaultTo(ROLE_MAPPING.USER);
-    table.foreign(REFERENCE_COLUMN).references('id').inTable('user_roles');
+    table
+      .foreign(COLUMN_NAME.ROLE_ID)
+      .references(COLUMN_NAME.ID)
+      .inTable(TABLE_NAME.USER_ROLES);
   });
 }
 
 function down(knex: Knex): Promise<void> {
-  return knex.schema.alterTable(TABLE_NAME, (table) => {
-    table.dropColumn(REFERENCE_COLUMN);
+  return knex.schema.alterTable(TABLE_NAME.USERS, (table) => {
+    table.dropColumn(COLUMN_NAME.ROLE_ID);
   });
 }
 
