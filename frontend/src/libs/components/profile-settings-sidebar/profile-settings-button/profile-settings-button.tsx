@@ -5,14 +5,14 @@ import { type IconName } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
 
-type ProfileSettingsButtonProperties = {
+type Properties = {
   children: React.ReactNode;
   name: IconName;
   onClick: (name: IconName) => void;
   isActive?: boolean;
 };
 
-const ProfileSettingsButton: React.FC<ProfileSettingsButtonProperties> = ({
+const ProfileSettingsButton: React.FC<Properties> = ({
   name,
   children,
   onClick,
