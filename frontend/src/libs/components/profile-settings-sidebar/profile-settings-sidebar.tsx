@@ -6,9 +6,9 @@ import { ProfileSettingsButton } from './profile-settings-button/profile-setting
 import styles from './styles.module.scss';
 
 const ProfileSettingsSidebar: React.FC = () => {
-  const userName = useAppSelector(
-    (state) => state.auth.authenticatedUser?.fullName,
-  );
+  const userName = useAppSelector((state) => {
+    return state.auth.authenticatedUser?.fullName;
+  });
 
   const [activeButton, setActiveButton] = useState<string>('');
 
