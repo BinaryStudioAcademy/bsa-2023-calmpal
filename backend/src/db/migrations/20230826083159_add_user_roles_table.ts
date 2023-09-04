@@ -2,7 +2,7 @@ import { type Knex } from 'knex';
 
 const TABLE_NAME = 'user_roles';
 
-const ColumnName = {
+const COLUMN_NAME = {
   ID: 'id',
   NAME: 'name',
   KEY: 'key',
@@ -10,26 +10,35 @@ const ColumnName = {
   UPDATED_AT: 'updated_at',
 } as const;
 
+const USER_NAMES = {
+  CHATBOT: 'Chatbot',
+  USER: 'User',
+} as const;
+
+const USER_ROLES = {
+  CHATBOT: 'chatbot',
+  USER: 'user',
+} as const;
+
 const ROLES = [
   {
-    id: 1,
     name: 'Chatbot',
     key: 'chatbot',
   },
-  { id: 2, name: 'User', key: 'user' },
+  { name: 'User', key: 'user' },
 ];
 
 async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable(TABLE_NAME, (table) => {
-    table.increments(ColumnName.ID).primary();
-    table.string(ColumnName.NAME).notNullable();
-    table.string(ColumnName.KEY).checkIn(['chatbot', 'user']).notNullable();
+    table.increments(COLUMN_NAME.ID).primary();
+    table.enum(COLUMN_NAME.NAME, Object.values(USER_NAMES));
+    table.enum(COLUMN_NAME.KEY, Object.values(USER_ROLES));
     table
-      .dateTime(ColumnName.CREATED_AT)
+      .dateTime(COLUMN_NAME.CREATED_AT)
       .notNullable()
       .defaultTo(knex.fn.now());
     table
-      .dateTime(ColumnName.UPDATED_AT)
+      .dateTime(COLUMN_NAME.UPDATED_AT)
       .notNullable()
       .defaultTo(knex.fn.now());
   });
