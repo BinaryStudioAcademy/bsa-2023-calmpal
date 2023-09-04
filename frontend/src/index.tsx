@@ -49,7 +49,9 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 path: AppRoute.CHAT,
                 element: (
                   <ProtectedRoute>
-                    <Chat />
+                    <SidebarWrapper>
+                      <Chat />
+                    </SidebarWrapper>
                   </ProtectedRoute>
                 ),
               },

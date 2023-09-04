@@ -1,5 +1,5 @@
 import { Icon } from '#libs/components/icon/icon.js';
-import { type IconName } from '#libs/enums/enums.js';
+import { type IconName } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
 

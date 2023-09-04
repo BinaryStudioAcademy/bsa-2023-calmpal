@@ -1,6 +1,6 @@
-const ChatRole = {
+const UserRole = {
   USER: 'user',
   BOT: 'bot',
 } as const;
 
-export { ChatRole };
+export { UserRole };

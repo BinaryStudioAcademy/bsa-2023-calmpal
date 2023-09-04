@@ -28,6 +28,7 @@ export {
 } from './libs/packages/http/http.js';
 export { type Storage } from './libs/packages/storage/storage.js';
 export {
+  type IconName,
   type ServerCommonErrorResponse,
   type ServerErrorDetail,
   type ServerErrorResponse,
@@ -36,7 +37,7 @@ export {
   type ValueOf,
 } from './libs/types/types.js';
 export { AuthApiPath } from './packages/auth/auth.js';
-export { type ChatMessage, ChatRole } from './packages/chat/chat.js';
+export { type ChatMessage, UserRole } from './packages/chat/chat.js';
 export {
   type FileGetAllItemResponseDto,
   type FileUploadRequestDto,

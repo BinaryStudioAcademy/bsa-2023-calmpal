@@ -1,1 +1,1 @@
-export { ChatRole } from './chat-role.enum.js';
+export { UserRole } from './user-role.enum.js';

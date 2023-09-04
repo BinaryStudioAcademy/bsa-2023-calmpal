@@ -1,5 +1,5 @@
 import { Icon } from '#libs/components/components.js';
-import { ChatRole } from '#libs/enums/enums.js';
+import { UserRole } from '#libs/enums/enums.js';
 import { type ChatMessage } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
@@ -16,7 +16,7 @@ type Message = {
 const ChatMessage: React.FC<Properties> = ({ messages }) => (
   <>
     {messages.map(({ message, id, sender }) => {
-      const isUser = sender === ChatRole.USER;
+      const isUser = sender === UserRole.USER;
 
       return isUser ? (
         <div className={styles['user-message-container']} key={id}>
@@ -31,7 +31,7 @@ const ChatMessage: React.FC<Properties> = ({ messages }) => (
         </div>
       ) : (
         <div className={styles['bot-message-container']} key={id}>
-          <Icon name="chat-logo" className={styles['bot-avatar']} />
+          <Icon name="chat-page-logo" className={styles['bot-avatar']} />
           <div className={styles['bot-message-child-container']}>
             {message.map(({ message, id }: Message) => (
               <span key={id} className={styles['bot-message-text']}>

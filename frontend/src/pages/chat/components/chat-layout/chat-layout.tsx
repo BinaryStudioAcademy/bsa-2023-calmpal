@@ -1,4 +1,4 @@
-import { ChatRole } from '#libs/enums/enums.js';
+import { UserRole } from '#libs/enums/enums.js';
 import { generateUUID } from '#libs/helpers/helpers.js';
 import { useAppChat, useCallback } from '#libs/hooks/hooks.js';
 import { ChatHeader } from '#pages/chat/components/chat-header/chat-header.js';
@@ -13,7 +13,7 @@ const ChatLayout: React.FC = () => {
   const handleSend = useCallback(
     ({ text }: { text: string }): void => {
       newMessage({
-        sender: ChatRole.USER,
+        sender: UserRole.USER,
         message: [{ id: generateUUID(), message: text }],
         id: generateUUID(),
       });

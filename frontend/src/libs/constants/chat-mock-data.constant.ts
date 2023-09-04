@@ -1,4 +1,4 @@
-import { ChatRole } from '#libs/enums/enums.js';
+import { UserRole } from '#libs/enums/enums.js';
 import { generateUUID } from '#libs/helpers/helpers.js';
 import { type ChatMessage } from '#libs/types/types.js';
 
@@ -7,7 +7,7 @@ const DOCTOR_FREUD_GREETING =
 
 const MOCK_MESSAGE: ChatMessage = {
   id: generateUUID(),
-  sender: ChatRole.BOT,
+  sender: UserRole.BOT,
   message: [{ message: DOCTOR_FREUD_GREETING, id: generateUUID() }],
 };
 

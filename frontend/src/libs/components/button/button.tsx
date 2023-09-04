@@ -5,7 +5,6 @@ type Properties = {
   type?: 'button' | 'submit';
   style?: 'primary' | 'secondary' | 'send-button';
   isLoading?: boolean;
-  children?: React.ReactNode;
   onClick?: () => void;
   isDisabled?: boolean;
 };
@@ -15,7 +14,6 @@ const Button: React.FC<Properties> = ({
   label,
   style = 'primary',
   isLoading = false,
-  children,
   onClick,
   isDisabled = false,
 }) => (
@@ -27,7 +25,6 @@ const Button: React.FC<Properties> = ({
   >
     {isLoading && <span className={styles['loader']} />}
     {label}
-    {children}
   </button>
 );
 

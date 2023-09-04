@@ -1,6 +1,6 @@
-import { type IconName } from '#libs/enums/enums.js';
-import { iconNameToPlainSvgMap } from '#libs/maps/icon-name-to-plain-svg.map.js';
-import { type ClassValue } from '#libs/types/types.js';
+import { type ClassValue, type IconName } from '#libs/types/types.js';
+
+import { iconNameToPlainSvgMap } from './icon-name-to-plain-svg.js';
 
 type Properties = {
   name: IconName;
