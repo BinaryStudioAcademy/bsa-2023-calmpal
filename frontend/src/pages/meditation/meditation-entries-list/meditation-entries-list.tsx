@@ -1,17 +1,17 @@
 import { mockedTracks } from '../libs/constants/constants.js';
-import { MeditationTrack } from './meditation-track/meditation-track.js';
+import { MeditationEntry } from './meditation-entry/meditation-entry.js';
 import styles from './styles.module.scss';
 
-const MeditationTracksList: React.FC = () => {
+const MeditationEntriesList: React.FC = () => {
   return (
     <div className={styles['container']}>
       <div className={styles['list']}>
         {mockedTracks.map((track) => {
-          return <MeditationTrack track={track} key={track.id} />;
+          return <MeditationEntry track={track} key={track.id} />;
         })}
       </div>
     </div>
   );
 };
 
-export { MeditationTracksList };
+export { MeditationEntriesList };

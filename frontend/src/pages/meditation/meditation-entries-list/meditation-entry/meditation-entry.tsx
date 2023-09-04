@@ -7,7 +7,7 @@ type Properties = {
   track: Track;
 };
 
-const MeditationTrack: React.FC<Properties> = ({ track }) => {
+const MeditationEntry: React.FC<Properties> = ({ track }) => {
   return (
     <div className={styles['track']}>
       <img
@@ -28,4 +28,4 @@ const MeditationTrack: React.FC<Properties> = ({ track }) => {
   );
 };
 
-export { MeditationTrack };
+export { MeditationEntry };
