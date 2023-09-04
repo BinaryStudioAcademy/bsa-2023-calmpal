@@ -75,8 +75,11 @@ class AuthService {
     };
   }
 
-  public getAuthenticatedUser(id: number): Promise<UserAuthResponseDto | null> {
-    return this.userService.findById(id);
+  public async getAuthenticatedUser(id: number): Promise<UserAuthResponseDto> {
+    const user = (await this.userService.findById(id)) as UserAuthResponseDto;
+    const userEntity = UserEntity.initialize(user);
+
+    return userEntity.toObject();
   }
 }
 
