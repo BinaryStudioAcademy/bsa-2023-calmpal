@@ -1,24 +1,27 @@
-import { type ReactNode } from 'react';
+import { type IconName } from '#libs/types/icon-name.type.js';
 
+import { Icon } from '../components.js';
 import styles from './styles.module.scss';
 
 type Properties = {
   label?: string;
   type?: 'button' | 'submit';
-  children?: ReactNode;
+  iconName?: IconName;
   style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent';
   isLoading?: boolean;
   isDisabled?: boolean;
+  accessabilityMessage?: string;
   onClick?: () => void;
 };
 
 const Button: React.FC<Properties> = ({
   type = 'button',
   label,
-  children,
+  iconName,
   style = 'primary',
   isLoading = false,
   isDisabled = false,
+  accessabilityMessage = '',
   onClick,
 }) => (
   <button
@@ -28,7 +31,11 @@ const Button: React.FC<Properties> = ({
     disabled={isDisabled || isLoading}
   >
     {isLoading && <span className={styles['loader']} />}
-    {label ?? children}
+    {label}
+    {iconName && <Icon name={iconName} />}
+    {accessabilityMessage && (
+      <span className="visually-hidden">{accessabilityMessage}</span>
+    )}
   </button>
 );
 

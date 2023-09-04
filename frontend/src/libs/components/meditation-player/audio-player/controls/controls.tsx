@@ -1,4 +1,4 @@
-import { Button, Icon } from '#libs/components/components.js';
+import { Button } from '#libs/components/components.js';
 import { useCallback, useEffect, useRef, useState } from '#libs/hooks/hooks.js';
 import {
   FULL_PERCENTAGE,
@@ -100,29 +100,39 @@ const Controls: React.FC<Properties> = ({
   return (
     <div className={styles['wrapper']}>
       <div className={styles['controls']}>
-        <Button onClick={handlePrevious} style="rounded-transparent">
-          <Icon name="previous" color="var(--blue-200)" />
-          <span className="visually-hidden">Play previous meditation</span>
-        </Button>
+        <Button
+          onClick={handlePrevious}
+          style="rounded-transparent"
+          iconName="previous"
+          accessabilityMessage="Play previous meditation"
+        />
         <div className={styles['button-wrapper']}>
-          <Button onClick={handleSkipBackward} style="rounded-transparent">
-            <Icon name="backward" color="var(--blue-200)" />
-            <span className="visually-hidden">Back 30 seconds</span>
-          </Button>
+          <Button
+            onClick={handleSkipBackward}
+            style="rounded-transparent"
+            iconName="backward"
+            accessabilityMessage="Back 30 seconds"
+          />
 
-          <Button onClick={handlePlayToggle} style="rounded">
-            <Icon name={isPlaying ? 'pause' : 'play'} color="var(--blue-300)" />
-            <span className="visually-hidden">Play or pause a meditation</span>
-          </Button>
-          <Button onClick={handleSkipForward} style="rounded-transparent">
-            <Icon name="forward" color="var(--blue-200)" />
-            <span className="visually-hidden">Forward 30 seconds</span>
-          </Button>
+          <Button
+            onClick={handlePlayToggle}
+            style="rounded"
+            iconName={isPlaying ? 'pause' : 'play'}
+            accessabilityMessage="Play or pause a meditation"
+          />
+          <Button
+            onClick={handleSkipForward}
+            style="rounded-transparent"
+            iconName="forward"
+            accessabilityMessage="Forward 30 seconds"
+          />
         </div>
-        <Button onClick={onNextTrack} style="rounded-transparent">
-          <Icon name="next" color="var(--blue-200)" />
-          <span className="visually-hidden">Play next meditation</span>
-        </Button>
+        <Button
+          onClick={onNextTrack}
+          style="rounded-transparent"
+          iconName="next"
+          accessabilityMessage="Play next meditation"
+        />
       </div>
     </div>
   );
