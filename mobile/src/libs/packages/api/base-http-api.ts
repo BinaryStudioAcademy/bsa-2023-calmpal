@@ -95,12 +95,14 @@ class BaseHttpApi implements HTTPApi {
   }
 
   private async handleError(response: Response): Promise<never> {
-    const parsedException = (await response.json().catch(
-      (): ServerErrorResponse => ({
-        errorType: ServerErrorType.COMMON,
-        message: response.statusText,
-      }),
-    )) as ServerErrorResponse;
+    const parsedException = (await response
+      .json()
+      .catch((): ServerErrorResponse => {
+        return {
+          errorType: ServerErrorType.COMMON,
+          message: response.statusText,
+        };
+      })) as ServerErrorResponse;
 
     const isCustomException = Boolean(parsedException.errorType);
 

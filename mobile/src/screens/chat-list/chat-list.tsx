@@ -24,12 +24,14 @@ const ChatList: React.FC = () => {
 
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: ({ children }: { children: ReactNode }) => (
-        <View style={styles.headerTitleWrapper}>
-          <Text style={styles.headerTitle}>{children}</Text>
-          <Badge count={mockedCount} />
-        </View>
-      ),
+      headerTitle: ({ children }: { children: ReactNode }) => {
+        return (
+          <View style={styles.headerTitleWrapper}>
+            <Text style={styles.headerTitle}>{children}</Text>
+            <Badge count={mockedCount} />
+          </View>
+        );
+      },
     });
   }, [navigation]);
 
@@ -53,9 +55,9 @@ const ChatList: React.FC = () => {
           setSearchQuery={setSearchQuery}
         />
         <ScrollView contentContainerStyle={styles.list}>
-          {filteredChats.map((item) => (
-            <Card title={item.title} onPress={onPress} key={item.id} />
-          ))}
+          {filteredChats.map((item) => {
+            return <Card title={item.title} onPress={onPress} key={item.id} />;
+          })}
         </ScrollView>
         <View style={styles.linkWrapper}>
           <Link
