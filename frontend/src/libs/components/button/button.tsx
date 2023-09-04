@@ -23,20 +23,22 @@ const Button: React.FC<Properties> = ({
   isDisabled = false,
   accessabilityMessage = '',
   onClick,
-}) => (
-  <button
-    type={type}
-    className={styles[style]}
-    onClick={onClick}
-    disabled={isDisabled || isLoading}
-  >
-    {isLoading && <span className={styles['loader']} />}
-    {label}
-    {iconName && <Icon name={iconName} />}
-    {accessabilityMessage && (
-      <span className="visually-hidden">{accessabilityMessage}</span>
-    )}
-  </button>
-);
+}) => {
+  return (
+    <button
+      type={type}
+      className={styles[style]}
+      onClick={onClick}
+      disabled={isDisabled || isLoading}
+    >
+      {isLoading && <span className={styles['loader']} />}
+      {label}
+      {iconName && <Icon name={iconName} />}
+      {accessabilityMessage && (
+        <span className="visually-hidden">{accessabilityMessage}</span>
+      )}
+    </button>
+  );
+};
 
 export { Button };

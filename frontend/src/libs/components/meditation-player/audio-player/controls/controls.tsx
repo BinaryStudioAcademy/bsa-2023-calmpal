@@ -94,7 +94,9 @@ const Controls: React.FC<Properties> = ({
   }, [isPlaying, audioReference, repeat]);
 
   const handlePlayToggle = useCallback((): void => {
-    setIsPlaying((previous) => !previous);
+    setIsPlaying((previous) => {
+      return !previous;
+    });
   }, []);
 
   return (

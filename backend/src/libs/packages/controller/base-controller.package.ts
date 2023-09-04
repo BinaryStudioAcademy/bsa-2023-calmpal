@@ -28,7 +28,9 @@ class BaseController implements Controller {
     this.routes.push({
       ...options,
       path: fullPath,
-      handler: (request, reply) => this.mapHandler(handler, request, reply),
+      handler: (request, reply) => {
+        return this.mapHandler(handler, request, reply);
+      },
     });
   }
 
