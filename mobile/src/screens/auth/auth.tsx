@@ -21,9 +21,11 @@ import { SignInForm, SignUpForm } from './components/components';
 const Auth: React.FC = () => {
   const { name } = useAppRoute();
   const dispatch = useAppDispatch();
-  const { dataStatus } = useAppSelector(({ auth }) => ({
-    dataStatus: auth.dataStatus,
-  }));
+  const { dataStatus } = useAppSelector(({ auth }) => {
+    return {
+      dataStatus: auth.dataStatus,
+    };
+  });
   const isSignUpScreen = name === RootScreenName.SIGN_UP;
 
   useEffect(() => {

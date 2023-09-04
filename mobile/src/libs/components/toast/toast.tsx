@@ -17,14 +17,16 @@ type Properties = {
 };
 
 const toastConfig: ToastConfig = {
-  error: (properties: ToastConfigParams<Properties>): React.ReactNode => (
-    <ErrorToast
-      {...properties}
-      style={styles.errorToast}
-      text1Style={styles.title}
-      text2Style={styles.message}
-    />
-  ),
+  error: (properties: ToastConfigParams<Properties>): React.ReactNode => {
+    return (
+      <ErrorToast
+        {...properties}
+        style={styles.errorToast}
+        text1Style={styles.title}
+        text2Style={styles.message}
+      />
+    );
+  },
 };
 
 const Toast: React.FC = () => {

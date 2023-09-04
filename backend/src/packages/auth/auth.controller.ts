@@ -63,12 +63,13 @@ class AuthController extends BaseController {
       validation: {
         body: userSignUpValidationSchema,
       },
-      handler: (options) =>
-        this.signUp(
+      handler: (options) => {
+        return this.signUp(
           options as APIHandlerOptions<{
             body: UserSignUpRequestDto;
           }>,
-        ),
+        );
+      },
     });
     this.addRoute({
       path: AuthApiPath.SIGN_IN,
@@ -76,22 +77,24 @@ class AuthController extends BaseController {
       validation: {
         body: userSignInValidationSchema,
       },
-      handler: (options) =>
-        this.signIn(
+      handler: (options) => {
+        return this.signIn(
           options as APIHandlerOptions<{
             body: UserSignInRequestDto;
           }>,
-        ),
+        );
+      },
     });
     this.addRoute({
       path: AuthApiPath.AUTHENTICATED_USER,
       method: 'GET',
-      handler: (options) =>
-        this.getAuthenticatedUser(
+      handler: (options) => {
+        return this.getAuthenticatedUser(
           options as APIHandlerOptions<{
             user: UserAuthResponseDto;
           }>,
-        ),
+        );
+      },
     });
   }
 
