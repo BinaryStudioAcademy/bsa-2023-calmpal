@@ -22,10 +22,12 @@ class BaseServerApplicationApi implements ServerApplicationApi {
   ) {
     this.version = version;
     this.config = config;
-    this.routes = handlers.map((handler) => ({
-      ...handler,
-      path: `/api/${this.version}${handler.path}`,
-    }));
+    this.routes = handlers.map((handler) => {
+      return {
+        ...handler,
+        path: `/api/${this.version}${handler.path}`,
+      };
+    });
   }
 
   public generateDoc(title: string): ReturnType<typeof swaggerJsdoc> {
