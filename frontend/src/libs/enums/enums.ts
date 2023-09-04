@@ -4,6 +4,6 @@ export {
   APIPath,
   AppEnvironment,
   ContentType,
+  type IconName,
   ServerErrorType,
 } from 'shared/build/index.js';
-export { type IconName } from 'shared/build/index.js';

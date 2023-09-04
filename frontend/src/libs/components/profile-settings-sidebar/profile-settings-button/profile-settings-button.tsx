@@ -1,6 +1,6 @@
 import { Icon } from '#libs/components/components.js';
 import { type IconName } from '#libs/enums/enums.js';
-import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
+import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
@@ -18,7 +18,7 @@ const ProfileSettingsButton: React.FC<ProfileSettingsButtonProperties> = ({
   onClick,
   isActive = false,
 }) => {
-  const handleOnClick = useCallback(() => {
+  const handleClick = useCallback(() => {
     onClick(name);
   }, [name, onClick]);
 
@@ -28,7 +28,7 @@ const ProfileSettingsButton: React.FC<ProfileSettingsButtonProperties> = ({
   );
 
   return (
-    <button className={buttonStyle} onClick={handleOnClick}>
+    <button className={buttonStyle} onClick={handleClick}>
       <Icon name={name} className={'profile-button-background'} />
       <div className={styles['text-container']}>
         <span className={styles['profile-button-text']}>{children}</span>
