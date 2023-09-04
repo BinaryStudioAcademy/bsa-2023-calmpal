@@ -3,6 +3,7 @@
   justify-content: space-between;
   width: 100%;
   max-width: 451px;
+  max-height: 177px;
   margin: 0 auto;
   padding: 0 15px 0 0;
   border-radius: 30px;
@@ -50,9 +51,9 @@
 }
 
 .play-button {
-  display: block;
-  width: 48px;
-  height: 48px;
+  display: inline-block;
+  min-width: 48px;
+  min-height: 48px;
   color: var(--blue-300);
 }
 
