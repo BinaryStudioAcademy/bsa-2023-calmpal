@@ -3,29 +3,33 @@ import { type Knex } from 'knex';
 const TABLE_NAME = {
   USERS: 'users',
   USER_ROLES: 'user_roles',
-};
+} as const;
 
 const COLUMN_NAME = {
   ROLE_ID: 'role_id',
   ID: 'id',
+} as const;
+
+const USER_ROLE_KEY = 'user';
+
+type UserRow = {
+  id: number;
 };
 
-const ROLE_MAPPING = {
-  CHATBOT: 1,
-  USER: 2,
-};
+async function up(knex: Knex): Promise<void> {
+  const userRole: UserRow = (await knex(TABLE_NAME.USER_ROLES)
+    .where({ key: USER_ROLE_KEY })
+    .select(COLUMN_NAME.ID)
+    .first()) as UserRow;
 
-function up(knex: Knex): Promise<void> {
-  return knex.schema.alterTable(TABLE_NAME.USERS, (table) => {
+  await knex.schema.alterTable(TABLE_NAME.USERS, (table) => {
     table
       .integer(COLUMN_NAME.ROLE_ID)
       .unsigned()
       .notNullable()
-      .defaultTo(ROLE_MAPPING.USER);
-    table
-      .foreign(COLUMN_NAME.ROLE_ID)
       .references(COLUMN_NAME.ID)
-      .inTable(TABLE_NAME.USER_ROLES);
+      .inTable(TABLE_NAME.USER_ROLES)
+      .defaultTo(userRole.id);
   });
 }
 
