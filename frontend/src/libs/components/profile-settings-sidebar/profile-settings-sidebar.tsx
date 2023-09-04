@@ -1,5 +1,5 @@
-import { type IconName } from '#libs/enums/enums.js';
 import { useAppSelector, useCallback, useState } from '#libs/hooks/hooks.js';
+import { type IconName } from '#libs/types/types.js';
 
 import { Icon } from '../components.js';
 import { ProfileSettingsButton } from './profile-settings-button/profile-settings-button.js';
