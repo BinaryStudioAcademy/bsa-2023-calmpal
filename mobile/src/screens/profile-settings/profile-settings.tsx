@@ -7,22 +7,19 @@ import {
   Switch,
 } from '#libs/components/components';
 import { useAppForm } from '#libs/hooks/hooks';
-import { type NavigationScreenProperties } from '#libs/types/types';
 
 import { Setting } from './components/components';
 import { NOTIFICATION_SETTINGS_DEFAULT_VALUE } from './libs/constants';
 import { styles } from './styles';
 
-const ProfileSettings = ({
-  route,
-}: NavigationScreenProperties): JSX.Element => {
+const ProfileSettings: React.FC = () => {
   const { control } = useAppForm({
     defaultValues: NOTIFICATION_SETTINGS_DEFAULT_VALUE,
   });
 
   return (
     <LinearGradient>
-      <Header title={route.name} isArrowVisible />
+      <Header isArrowVisible />
       <ScrollView contentContainerStyle={styles.container}>
         <Setting
           label="Allow Notification"
