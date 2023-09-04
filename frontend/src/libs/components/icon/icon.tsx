@@ -6,10 +6,10 @@ type Properties = {
   color?: string;
 };
 
-const Icon: React.FC<Properties> = ({ name, color }) => {
+const Icon: React.FC<Properties> = ({ name, color = 'currentColor' }) => {
   const SelectedIcon = iconNameToIcon[name];
 
-  return <SelectedIcon color={color} />;
+  return <SelectedIcon style={{ color }} />;
 };
 
 export { Icon };

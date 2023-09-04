@@ -5,7 +5,6 @@ import { createRoot } from 'react-dom/client';
 
 import {
   App,
-  MeditationPlayer,
   ProtectedRoute,
   RouterProvider,
   SidebarWrapper,
@@ -50,7 +49,6 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 element: (
                   <ProtectedRoute>
                     <Survey />
-                    <MeditationPlayer />
                   </ProtectedRoute>
                 ),
               },
