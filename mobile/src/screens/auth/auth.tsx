@@ -42,11 +42,7 @@ const Auth: React.FC = () => {
     return null;
   };
 
-  return (
-    <>
-      <SignBackground>{getScreen(name)}</SignBackground>
-    </>
-  );
+  return <SignBackground>{getScreen(name)}</SignBackground>;
 };
 
 export { Auth };
