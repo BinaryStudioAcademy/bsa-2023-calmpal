@@ -1,8 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 
-import ChatIcon from '#assets/img/icons/chat.svg';
-import HomeIcon from '#assets/img/icons/home.svg';
+import { Icon } from '#libs/components/components';
 import { AppColor, MainScreenName } from '#libs/enums/enums';
 import { type TabNavigationParameterList } from '#libs/types/types';
 import { ChatList } from '#screens/chat-list/chat-list';
@@ -27,12 +26,20 @@ const Main: React.FC = () => {
       <BottomTab.Screen
         name={MainScreenName.HOME}
         component={Home}
-        options={{ tabBarIcon: HomeIcon }}
+        options={{
+          tabBarIcon: ({ color }): JSX.Element => {
+            return <Icon name={'home'} color={color} />;
+          },
+        }}
       />
       <BottomTab.Screen
         name={MainScreenName.CHAT}
         component={ChatList}
-        options={{ tabBarIcon: ChatIcon }}
+        options={{
+          tabBarIcon: ({ color }): JSX.Element => {
+            return <Icon name={'chat'} color={color} />;
+          },
+        }}
       />
     </BottomTab.Navigator>
   );

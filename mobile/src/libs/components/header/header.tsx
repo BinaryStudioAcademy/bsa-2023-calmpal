@@ -1,9 +1,12 @@
 import { type NavigationProp } from '@react-navigation/native';
 import React from 'react';
 
-import BackArrowImage from '#assets/img/icons/back-arrow.svg';
-import UserIcon from '#assets/img/icons/user.svg';
-import { Text, TouchableOpacity, View } from '#libs/components/components';
+import {
+  Icon,
+  Text,
+  TouchableOpacity,
+  View,
+} from '#libs/components/components';
 import { AppColor, RootScreenName } from '#libs/enums/enums';
 import { useAppRoute, useNavigation } from '#libs/hooks/hooks';
 import { type RootNavigationParameterList } from '#libs/types/types';
@@ -50,7 +53,7 @@ const Header: React.FC<Properties> = ({
     >
       {isArrowVisible && (
         <TouchableOpacity style={styles.arrow} onPress={handleGoBack}>
-          <BackArrowImage color={AppColor.BLUE_200} />
+          <Icon name={'back-arrow'} color={AppColor.BLUE_200} />
         </TouchableOpacity>
       )}
       <View style={styles.titleBadgeContainer}>
@@ -61,7 +64,7 @@ const Header: React.FC<Properties> = ({
         <View style={styles.settingsContainer}>
           <IconButton
             onPress={handleIconPress}
-            iconSourceSvg={<UserIcon color={AppColor.BLUE_300} />}
+            iconSourceSvg={<Icon name={'user'} color={AppColor.BLUE_300} />}
           />
         </View>
       )}

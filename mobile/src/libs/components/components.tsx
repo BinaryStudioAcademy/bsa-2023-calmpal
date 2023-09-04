@@ -2,6 +2,7 @@ export { App } from './app/app';
 export { Button } from './button/button';
 export { Card } from './card/card';
 export { Header } from './header/header';
+export { Icon } from './icon/icon';
 export { Input } from './input/input';
 export { InputSearch } from './input-search/input-search';
 export { LinearGradient } from './linear-gradient/linear-gradient';

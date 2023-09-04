@@ -1,10 +1,10 @@
 import { type NavigationProp } from '@react-navigation/native';
 import React from 'react';
 
-import NotificationBellIcon from '#assets/img/icons/bell.svg';
 import {
   Card,
   Header,
+  Icon,
   LinearGradient,
   View,
 } from '#libs/components/components';
@@ -27,7 +27,7 @@ const Profile: React.FC = () => {
       <Header isArrowVisible />
       <View style={styles.container}>
         <Card
-          iconSourceSvg={<NotificationBellIcon color={AppColor.WHITE} />}
+          iconSourceSvg={<Icon name={'bell'} color={AppColor.WHITE} />}
           title="Notifications and Reminders"
           onPress={handleCategoryPress}
         />
