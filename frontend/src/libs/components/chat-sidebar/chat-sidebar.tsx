@@ -43,15 +43,17 @@ const ChatSidebar: React.FC = () => {
           <Search onValueChange={setFilter} />
         </div>
         <div className={styles['chat-list']}>
-          {filteredElements.map((filteredChat) => (
-            <Card
-              title={filteredChat.name}
-              imageUrl={cardPlaceholder}
-              onClick={handleSelectChat(filteredChat.id)}
-              isActive={mockedSelectedChat.id === filteredChat.id}
-              key={filteredChat.id}
-            />
-          ))}
+          {filteredElements.map((filteredChat) => {
+            return (
+              <Card
+                title={filteredChat.name}
+                imageUrl={cardPlaceholder}
+                onClick={handleSelectChat(filteredChat.id)}
+                isActive={mockedSelectedChat.id === filteredChat.id}
+                key={filteredChat.id}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

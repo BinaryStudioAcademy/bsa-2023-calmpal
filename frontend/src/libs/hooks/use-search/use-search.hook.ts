@@ -12,11 +12,11 @@ const useSearch = <T>(
   const [filter, setFilter] = useState('');
 
   const filteredElements = useMemo(() => {
-    return elements.filter((element) =>
-      (element[propertyName] as string)
+    return elements.filter((element) => {
+      return (element[propertyName] as string)
         .toLowerCase()
-        .includes(filter.toLowerCase()),
-    );
+        .includes(filter.toLowerCase());
+    });
   }, [filter, elements, propertyName]);
 
   return { filteredElements, setFilter };
