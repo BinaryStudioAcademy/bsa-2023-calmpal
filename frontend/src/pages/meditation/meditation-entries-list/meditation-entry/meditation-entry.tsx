@@ -1,11 +1,11 @@
 import meditationListPlaceholder from '#assets/img/meditation-list-placeholder.jpg';
 import { Icon, Link } from '#libs/components/components.js';
 
-import { type Track } from '../../libs/types/types.js';
+import { type Entry } from '../../libs/types/types.js';
 import styles from './styles.module.scss';
 
 type Properties = {
-  track: Track;
+  track: Entry;
 };
 
 const MeditationEntry: React.FC<Properties> = ({ track }) => {

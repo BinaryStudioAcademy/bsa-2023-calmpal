@@ -1,1 +1,1 @@
-export { type Track } from './track.type.js';
+export { type Entry } from './entry.type.js';

@@ -1,7 +1,7 @@
-type Track = {
+type Entry = {
   id: number;
   title: string;
   duration: string;
 };
 
-export { type Track };
+export { type Entry };
