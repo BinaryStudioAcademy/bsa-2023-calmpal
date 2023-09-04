@@ -21,7 +21,7 @@ const MeditationEntry: React.FC<Properties> = ({ track }) => {
           <h1 className={styles['title']}>{track.title}</h1>
           <p className={styles['duration']}>{track.duration}</p>
         </div>
-        <Link to="/" className={styles['play-button'] ?? ''}>
+        <Link to="/" className={styles['play-button'] as string}>
           <Icon name="play" />
         </Link>
       </div>
