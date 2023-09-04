@@ -33,7 +33,9 @@ const ChatList: React.FC = () => {
 
   useEffect(() => {
     navigation.setOptions({
-      header: () => <Header title={routeName} badgeCount={mockedCount} />,
+      header: () => {
+        return <Header title={routeName} badgeCount={mockedCount} />;
+      },
     });
   }, [navigation, routeName]);
 
@@ -57,9 +59,15 @@ const ChatList: React.FC = () => {
           setSearchQuery={setSearchQuery}
         />
         <ScrollView contentContainerStyle={styles.list}>
-          {filteredChats.map((item) => (
-            <Card title={item.title} onPress={handleSelectChat} key={item.id} />
-          ))}
+          {filteredChats.map((item) => {
+            return (
+              <Card
+                title={item.title}
+                onPress={handleSelectChat}
+                key={item.id}
+              />
+            );
+          })}
         </ScrollView>
         <View style={styles.linkWrapper}>
           <Link

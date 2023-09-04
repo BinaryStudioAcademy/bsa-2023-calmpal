@@ -44,14 +44,16 @@ const Chat: React.FC = () => {
 
   const handleFormSubmit = useCallback(
     (payload: { text: string }): void => {
-      setMessages((previous) => [
-        ...previous,
-        {
-          id: Date.now(),
-          isUser: true,
-          message: payload.text,
-        },
-      ]);
+      setMessages((previous) => {
+        return [
+          ...previous,
+          {
+            id: Date.now(),
+            isUser: true,
+            message: payload.text,
+          },
+        ];
+      });
       scrollViewToEnd();
       reset();
     },
@@ -68,7 +70,9 @@ const Chat: React.FC = () => {
 
   useEffect(() => {
     navigation.setOptions({
-      header: () => <Header title={title} isArrowVisible />,
+      header: () => {
+        return <Header title={title} isArrowVisible />;
+      },
     });
   }, [navigation, title]);
 

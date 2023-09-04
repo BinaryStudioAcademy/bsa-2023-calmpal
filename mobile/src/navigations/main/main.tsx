@@ -28,7 +28,9 @@ const Main: React.FC = () => {
         component={Home}
         options={{
           tabBarIcon: HomeIcon,
-          header: () => <Header />,
+          header: (): React.ReactNode => {
+            return <Header />;
+          },
         }}
       />
       <BottomTab.Screen
