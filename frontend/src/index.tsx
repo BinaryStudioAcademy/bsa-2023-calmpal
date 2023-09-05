@@ -14,9 +14,8 @@ import {
 import { AppRoute } from '#libs/enums/enums.js';
 import { store } from '#libs/packages/store/store.js';
 import { Auth } from '#pages/auth/auth.js';
-import { Root } from '#pages/root/root.js';
+import { Dashboard } from '#pages/dashboard/dashboard.js';
 import { Survey } from '#pages/surveys/survey.js';
-import { UserProfile } from '#pages/user-profile/user-profile.js';
 
 createRoot(document.querySelector('#root') as HTMLElement).render(
   <StrictMode>
@@ -28,16 +27,6 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
             element: <App />,
             children: [
               {
-                path: AppRoute.ROOT,
-                element: (
-                  <ProtectedRoute>
-                    <SidebarWrapper>
-                      <Root />
-                    </SidebarWrapper>
-                  </ProtectedRoute>
-                ),
-              },
-              {
                 path: AppRoute.SIGN_IN,
                 element: <Auth />,
               },
@@ -46,11 +35,11 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 element: <Auth />,
               },
               {
-                path: AppRoute.PROFILE,
+                path: AppRoute.ROOT,
                 element: (
                   <ProtectedRoute>
                     <SidebarWrapper>
-                      <UserProfile />
+                      <Dashboard />
                     </SidebarWrapper>
                   </ProtectedRoute>
                 ),
