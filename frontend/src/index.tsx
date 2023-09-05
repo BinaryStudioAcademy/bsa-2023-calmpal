@@ -15,6 +15,7 @@ import { AppRoute } from '#libs/enums/enums.js';
 import { store } from '#libs/packages/store/store.js';
 import { Auth } from '#pages/auth/auth.js';
 import { Dashboard } from '#pages/dashboard/dashboard.js';
+import { Chats } from '#pages/chat/chat.js';
 import { Survey } from '#pages/surveys/survey.js';
 
 createRoot(document.querySelector('#root') as HTMLElement).render(
@@ -49,6 +50,16 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 element: (
                   <ProtectedRoute>
                     <Survey />
+                  </ProtectedRoute>
+                ),
+              },
+              {
+                path: AppRoute.CHATS,
+                element: (
+                  <ProtectedRoute>
+                    <SidebarWrapper>
+                      <Chats />
+                    </SidebarWrapper>
                   </ProtectedRoute>
                 ),
               },
