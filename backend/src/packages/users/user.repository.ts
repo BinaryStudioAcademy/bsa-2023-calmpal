@@ -21,23 +21,22 @@ class UserRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public async findById(id: number): Promise<UserWithPasswordEntity | null> {
+  public async findById(id: number): Promise<UserEntity | null> {
     const user = await this.userModel
       .query()
+      .modify('withoutPassword')
       .withGraphJoined(UsersRelation.DETAILS)
       .findById(id)
-      .castTo<UserWithPasswordQueryResponse | undefined>()
+      .castTo<UserCommonQueryResponse | undefined>()
       .execute();
 
     if (!user) {
       return null;
     }
 
-    return UserWithPasswordEntity.initialize({
+    return UserEntity.initialize({
       id: user.id,
       email: user.email,
-      passwordHash: user.passwordHash,
-      passwordSalt: user.passwordSalt,
       createdAt: new Date(user.createdAt),
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
