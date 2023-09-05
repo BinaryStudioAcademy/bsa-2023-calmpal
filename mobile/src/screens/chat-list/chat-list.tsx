@@ -11,7 +11,7 @@ import {
   ScrollView,
   View,
 } from '#libs/components/components';
-import { AppColor, RootScreenName } from '#libs/enums/enums';
+import { AppColor, ChatScreenName, RootScreenName } from '#libs/enums/enums';
 import {
   useAppRoute,
   useCallback,
@@ -33,13 +33,18 @@ const ChatList: React.FC = () => {
 
   useEffect(() => {
     navigation.setOptions({
-      header: () => <Header title={routeName} badgeCount={mockedCount} />,
+      header: () => {
+        return <Header title={routeName} badgeCount={mockedCount} />;
+      },
     });
   }, [navigation, routeName]);
 
-  const handleSelectChat = useCallback(() => {
-    // TODO: Implement actual functionality for the onPress event
-  }, []);
+  const handleSelectChat = useCallback(
+    (title: string) => {
+      navigation.navigate(ChatScreenName.CHAT, { title });
+    },
+    [navigation],
+  );
 
   const { filteredData: filteredChats, setSearchQuery } = useSearch(
     mockedChats,
@@ -54,9 +59,15 @@ const ChatList: React.FC = () => {
           setSearchQuery={setSearchQuery}
         />
         <ScrollView contentContainerStyle={styles.list}>
-          {filteredChats.map((item) => (
-            <Card title={item.title} onPress={handleSelectChat} key={item.id} />
-          ))}
+          {filteredChats.map((item) => {
+            return (
+              <Card
+                title={item.title}
+                onPress={handleSelectChat}
+                key={item.id}
+              />
+            );
+          })}
         </ScrollView>
         <View style={styles.linkWrapper}>
           <Link

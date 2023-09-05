@@ -17,10 +17,12 @@ const Survey: React.FC = () => {
   const {
     user: { id: userId, isSurveyCompleted },
     surveyPreferencesDataStatus,
-  } = useAppSelector(({ auth }) => ({
-    user: auth.authenticatedUser as UserAuthResponseDto,
-    surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
-  }));
+  } = useAppSelector(({ auth }) => {
+    return {
+      user: auth.authenticatedUser as UserAuthResponseDto,
+      surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
+    };
+  });
 
   const handleSubmit = useCallback(
     (options: string[]) => {

@@ -39,7 +39,9 @@ const MeditationList: React.FC = () => {
 
   useEffect(() => {
     navigation.setOptions({
-      header: () => <Header title={title} isArrowVisible />,
+      header: () => {
+        return <Header title={title} isArrowVisible />;
+      },
     });
   }, [navigation, title]);
 
@@ -51,13 +53,15 @@ const MeditationList: React.FC = () => {
           setSearchQuery={setSearchQuery}
         />
         <ScrollView>
-          {filteredMeditationTopics.map((item) => (
-            <MeditationItem
-              title={item.title}
-              duration={item.duration}
-              key={item.id}
-            />
-          ))}
+          {filteredMeditationTopics.map((item) => {
+            return (
+              <MeditationItem
+                title={item.title}
+                duration={item.duration}
+                key={item.id}
+              />
+            );
+          })}
         </ScrollView>
       </View>
     </LinearGradient>

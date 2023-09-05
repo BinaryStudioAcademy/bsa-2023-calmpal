@@ -38,13 +38,15 @@ const MeditationHome: React.FC = () => {
           setSearchQuery={setSearchQuery}
         />
         <ScrollView contentContainerStyle={styles.list}>
-          {filteredMeditationTopics.map((item) => (
-            <Card
-              title={item.title}
-              onPress={handleSelectMeditation}
-              key={item.id}
-            />
-          ))}
+          {filteredMeditationTopics.map((item) => {
+            return (
+              <Card
+                title={item.title}
+                onPress={handleSelectMeditation}
+                key={item.id}
+              />
+            );
+          })}
         </ScrollView>
       </View>
     </LinearGradient>

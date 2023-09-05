@@ -7,8 +7,7 @@ import MeditationIcon from '#assets/img/icons/meditations.svg';
 import { Header } from '#libs/components/components';
 import { AppColor, MainScreenName } from '#libs/enums/enums';
 import { type TabNavigationParameterList } from '#libs/types/types';
-import { Meditation } from '#navigations/navigations';
-import { ChatList } from '#screens/chat-list/chat-list';
+import { Chat, Meditation } from '#navigations/navigations';
 import { Home } from '#screens/home/home';
 
 import { styles } from './styles';
@@ -30,13 +29,15 @@ const Main: React.FC = () => {
         component={Home}
         options={{
           tabBarIcon: HomeIcon,
-          header: () => <Header />,
+          header: (): React.ReactNode => {
+            return <Header />;
+          },
         }}
       />
       <BottomTab.Screen
         name={MainScreenName.CHAT_LIST}
-        component={ChatList}
-        options={{ tabBarIcon: ChatIcon }}
+        component={Chat}
+        options={{ tabBarIcon: ChatIcon, headerShown: false }}
       />
       <BottomTab.Screen
         name={MainScreenName.MEDITATION}

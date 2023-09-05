@@ -43,7 +43,9 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
       return () => {
         if (categoriesValue.includes(category)) {
           onCategoryChange(
-            categoriesValue.filter((option) => option !== category),
+            categoriesValue.filter((option) => {
+              return option !== category;
+            }),
           );
 
           return;
@@ -74,13 +76,15 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
       <div className={styles['title']}>What can we help you with?</div>
 
       <div className={styles['select']}>
-        {PREFERENCES_CATEGORIES.map((category) => (
-          <Checkbox
-            key={category}
-            label={category}
-            onChange={handleFieldChange(category)}
-          />
-        ))}
+        {PREFERENCES_CATEGORIES.map((category) => {
+          return (
+            <Checkbox
+              key={category}
+              label={category}
+              onChange={handleFieldChange(category)}
+            />
+          );
+        })}
         {hasOther && (
           <Input
             control={control}
@@ -97,7 +101,7 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
         type="submit"
         label="Continue"
         style="secondary"
-        isLoading={!isValid}
+        isDisabled={!isValid}
       />
     </form>
   );

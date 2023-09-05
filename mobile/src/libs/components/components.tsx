@@ -12,6 +12,7 @@ export { SignBackground } from './sign-background/sign-background';
 export { Toast } from './toast/toast';
 export {
   Image,
+  Pressable,
   ScrollView,
   Text,
   TextInput,

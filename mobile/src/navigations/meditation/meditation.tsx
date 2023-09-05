@@ -17,7 +17,9 @@ const Meditation: React.FC = () => {
         name={MeditationScreenName.MEDITATION_MENU}
         component={MeditationHome}
         options={{
-          header: () => <Header title={'Meditation \n& Breathing'} />,
+          header: (): React.ReactNode => {
+            return <Header title={'Meditation \n& Breathing'} />;
+          },
         }}
       />
       <NativeStack.Screen
