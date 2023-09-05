@@ -1,6 +1,6 @@
 .wrapper {
   font-weight: 600;
-  background-image: url("../../../assets/img/meditation-player-background.svg");
+  background-image: url("../../../assets/img/meditation-player-background.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -46,7 +46,11 @@
   line-height: 1.25;
 }
 
-@media (width < 426px) {
+@media (width < 767px) {
+  .wrapper {
+    background-image: url("../../../assets/img/meditation-player-background-mobile.png");
+  }
+
   .meditation-player {
     max-width: 315px;
   }
