@@ -1,1 +1,1 @@
-export { type Entry } from './entry.type.js';
+export { type MeditationEntry } from './meditation-entry.type.js';

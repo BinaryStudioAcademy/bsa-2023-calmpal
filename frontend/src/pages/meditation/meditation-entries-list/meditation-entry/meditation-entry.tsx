@@ -2,14 +2,14 @@ import meditationListPlaceholder from '#assets/img/meditation-list-placeholder.j
 import { Icon, Link } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
 
-import { type Entry } from '../../libs/types/types.js';
+import { type MeditationEntry } from '../../libs/types/types.js';
 import styles from './styles.module.scss';
 
 type Properties = {
-  track: Entry;
+  meditationEntry: MeditationEntry;
 };
 
-const MeditationEntry: React.FC<Properties> = ({ track }) => {
+const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
   return (
     <div className={styles['track']}>
       <img
@@ -19,8 +19,8 @@ const MeditationEntry: React.FC<Properties> = ({ track }) => {
       />
       <div className={styles['content']}>
         <div className={styles['info']}>
-          <h1 className={styles['title']}>{track.title}</h1>
-          <p className={styles['duration']}>{track.duration}</p>
+          <h1 className={styles['title']}>{meditationEntry.title}</h1>
+          <p className={styles['duration']}>{meditationEntry.duration}</p>
         </div>
         <Link to="/" className={styles['play-button'] as string}>
           <Icon name="play" color={IconColor.BLUE} />

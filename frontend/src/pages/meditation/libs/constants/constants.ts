@@ -1,4 +1,4 @@
-const mockedTracks = [
+const mockedEntries = [
   {
     id: 1,
     title: 'Meditation for deep sleep',
@@ -21,4 +21,4 @@ const mockedTracks = [
   },
 ] as const;
 
-export { mockedTracks };
+export { mockedEntries };
