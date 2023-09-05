@@ -53,7 +53,7 @@ const Header: React.FC<Properties> = ({
     >
       {isArrowVisible && (
         <TouchableOpacity style={styles.arrow} onPress={handleGoBack}>
-          <Icon name={'back-arrow'} color={AppColor.BLUE_200} />
+          <Icon name="back-arrow" color={AppColor.BLUE_200} />
         </TouchableOpacity>
       )}
       <View style={styles.titleBadgeContainer}>
@@ -64,7 +64,7 @@ const Header: React.FC<Properties> = ({
         <View style={styles.settingsContainer}>
           <IconButton
             onPress={handleIconPress}
-            iconSourceSvg={<Icon name={'user'} color={AppColor.BLUE_300} />}
+            iconSourceSvg={<Icon name="user" color={AppColor.BLUE_300} />}
           />
         </View>
       )}

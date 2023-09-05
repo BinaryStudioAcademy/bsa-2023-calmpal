@@ -26,7 +26,7 @@ const Main: React.FC = () => {
         component={Home}
         options={{
           tabBarIcon: ({ color }): JSX.Element => {
-            return <Icon name={'home'} color={color} />;
+            return <Icon name="home" color={color} />;
           },
           header: (): React.ReactNode => {
             return <Header />;
@@ -38,7 +38,7 @@ const Main: React.FC = () => {
         component={Chat}
         options={{
           tabBarIcon: ({ color }): JSX.Element => {
-            return <Icon name={'chat'} color={color} />;
+            return <Icon name="chat" color={color} />;
           },
           headerShown: false,
         }}

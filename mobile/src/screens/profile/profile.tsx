@@ -27,7 +27,7 @@ const Profile: React.FC = () => {
       <Header isArrowVisible />
       <View style={styles.container}>
         <Card
-          iconSourceSvg={<Icon name={'bell'} color={AppColor.WHITE} />}
+          iconSourceSvg={<Icon name="bell" color={AppColor.WHITE} />}
           title="Notifications and Reminders"
           onPress={handleCategoryPress}
         />
