@@ -2,7 +2,7 @@ import cardPlaceholder from '#assets/img/card-image-placeholder.png';
 import { IconColor } from '#libs/enums/enums.js';
 import { useCallback, useSearch } from '#libs/hooks/hooks.js';
 
-import { Card, Icon, Search } from '../components.js';
+import { Card, Icon, Search } from '../../../../libs/components/components.js';
 import styles from './styles.module.scss';
 
 const mockedChats = [
