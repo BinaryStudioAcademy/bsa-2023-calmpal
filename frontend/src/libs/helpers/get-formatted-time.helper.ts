@@ -1,13 +1,20 @@
 import { format } from 'date-fns';
 
-const EPOCH_MILLISECONDS = 0;
-const TIME_FORMAT = 'mm:ss';
+const START_POINT = 0;
 
-const getFormattedTime = (time: number): string => {
-  const timeDate = new Date(EPOCH_MILLISECONDS);
-  timeDate.setSeconds(time);
+const TIME_FORMATS = {
+  MM_SS: 'mm:ss',
+  HH_MM_SS: 'hh:mm:ss',
+};
 
-  return format(timeDate, TIME_FORMAT);
+const getFormattedTime = (timeInSeconds: number): string => {
+  const date = new Date(START_POINT);
+  date.setHours(START_POINT);
+
+  date.setSeconds(timeInSeconds);
+  const hasHours = date.getHours();
+
+  return format(date, hasHours ? TIME_FORMATS.HH_MM_SS : TIME_FORMATS.MM_SS);
 };
 
 export { getFormattedTime };
