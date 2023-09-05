@@ -3,6 +3,7 @@ const APIPath = {
   AUTH: '/auth',
   DOCUMENTATION: '/documentation',
   FILES: '/files',
+  MEDITATION: '/meditation',
 } as const;
 
 export { APIPath };
