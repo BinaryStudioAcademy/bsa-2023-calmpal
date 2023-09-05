@@ -18,7 +18,7 @@ const Sidebar: React.FC<Properties> = ({ routes }) => {
     <div className={styles['sidebar']}>
       <nav className={styles['nav']}>
         <Link to={AppRoute.ROOT}>
-          <img src={logoS} className={styles['logo']} alt="CalmPal logo" />
+          <img src={logoS} alt="CalmPal logo" />
         </Link>
       </nav>
       <nav className={styles['nav']}>
