@@ -27,12 +27,14 @@ const Root: React.FC = () => {
     authenticatedUser,
     authenticatedUserDataStatus,
     surveyPreferencesDataStatus,
-  } = useAppSelector(({ auth }) => ({
-    isSurveyCompleted: auth.authenticatedUser?.isSurveyCompleted,
-    authenticatedUser: auth.authenticatedUser,
-    authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
-    surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
-  }));
+  } = useAppSelector(({ auth }) => {
+    return {
+      isSurveyCompleted: auth.authenticatedUser?.isSurveyCompleted,
+      authenticatedUser: auth.authenticatedUser,
+      authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
+      surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
+    };
+  });
 
   const isLoaderVisible =
     authenticatedUserDataStatus === DataStatus.IDLE ||

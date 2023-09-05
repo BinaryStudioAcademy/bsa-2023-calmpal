@@ -11,9 +11,11 @@ import { styles } from './styles';
 
 const Survey: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { userId } = useAppSelector(({ auth }) => ({
-    userId: (auth.authenticatedUser as UserAuthResponseDto).id,
-  }));
+  const { userId } = useAppSelector(({ auth }) => {
+    return {
+      userId: (auth.authenticatedUser as UserAuthResponseDto).id,
+    };
+  });
 
   const handleSubmit = useCallback(
     (options: string[]) => {
