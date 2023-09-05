@@ -1,6 +1,6 @@
-import { MeditationEntriesList } from './meditation-entries-list/meditation-entries-list.js';
+import { MeditationList } from './meditation-entries-list/meditation-list.js';
 
 const Meditation: React.FC = () => {
-  return <MeditationEntriesList />;
+  return <MeditationList />;
 };
 export { Meditation };

@@ -2,7 +2,7 @@ import { mockedEntries } from '../libs/constants/constants.js';
 import { MeditationEntry } from './meditation-entry/meditation-entry.js';
 import styles from './styles.module.scss';
 
-const MeditationEntriesList: React.FC = () => {
+const MeditationList: React.FC = () => {
   return (
     <div className={styles['container']}>
       <div className={styles['list']}>
@@ -14,4 +14,4 @@ const MeditationEntriesList: React.FC = () => {
   );
 };
 
-export { MeditationEntriesList };
+export { MeditationList };
