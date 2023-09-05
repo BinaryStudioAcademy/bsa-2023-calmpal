@@ -1,6 +1,6 @@
 .wrapper {
   font-weight: 600;
-  background-image: url("../../../assets/img/meditation-player-background.png");
+  background-image: url("../../../../assets/img/meditation-player-background.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -48,7 +48,7 @@
 
 @media (width < 767px) {
   .wrapper {
-    background-image: url("../../../assets/img/meditation-player-background-mobile.png");
+    background-image: url("../../../../assets/img/meditation-player-background-mobile.png");
   }
 
   .meditation-player {

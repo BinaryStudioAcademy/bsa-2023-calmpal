@@ -1,7 +1,10 @@
+import { AudioPlayer } from '#libs/components/components.js';
 import { useCallback, useState } from '#libs/hooks/hooks.js';
+import {
+  FIRST_INDEX,
+  mockedPlaylist,
+} from '#pages/meditation/constants/constants.js';
 
-import { AudioPlayer } from './audio-player/audio-player.js';
-import { FIRST_INDEX, mockedPlaylist } from './constants/constants.js';
 import styles from './styles.module.scss';
 
 const MeditationPlayer: React.FC = () => {

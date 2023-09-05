@@ -1,13 +1,13 @@
 import { Button } from '#libs/components/components.js';
 import { useCallback, useEffect, useRef, useState } from '#libs/hooks/hooks.js';
 import { type Meditation } from '#libs/types/types.js';
-
 import {
   FULL_PERCENTAGE,
   PROGRESS_BAR,
   SKIP_STEP,
   STEP,
-} from '../../constants/constants.js';
+} from '#pages/meditation/constants/constants.js';
+
 import styles from './styles.module.scss';
 
 type Properties = {
@@ -22,7 +22,7 @@ type Properties = {
   onNextTrack: () => void;
 };
 
-const Controls: React.FC<Properties> = ({
+const AudioControls: React.FC<Properties> = ({
   audioReference,
   progressBarReference,
   duration,
@@ -145,4 +145,4 @@ const Controls: React.FC<Properties> = ({
   );
 };
 
-export { Controls };
+export { AudioControls };

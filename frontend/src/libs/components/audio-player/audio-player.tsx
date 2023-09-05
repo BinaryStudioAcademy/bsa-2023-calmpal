@@ -1,9 +1,9 @@
 import { useCallback, useRef, useState } from '#libs/hooks/hooks.js';
 import { type Meditation } from '#libs/types/types.js';
+import { START_TIME, STEP } from '#pages/meditation/constants/constants.js';
 
-import { START_TIME, STEP } from '../constants/constants.js';
-import { Controls } from './controls/controls.js';
-import { ProgressBar } from './progress-bar/progress-bar.js';
+import { AudioControls } from './components/audio-controls/audio-controls.js';
+import { ProgressBar } from './components/progress-bar/progress-bar.js';
 
 type Properties = {
   src: string;
@@ -63,7 +63,7 @@ const AudioPlayer: React.FC<Properties> = ({
         timeProgress={timeProgress}
         duration={duration}
       />
-      <Controls
+      <AudioControls
         audioReference={audioReference}
         progressBarReference={progressBarReference}
         duration={duration}
