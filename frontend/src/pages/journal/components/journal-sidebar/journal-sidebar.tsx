@@ -12,10 +12,12 @@ import styles from './styles.module.scss';
 const JournalSidebar: React.FC = () => {
   const dispatch = useAppDispatch();
   const { allJournalEntries, selectedJournalEntry } = useAppSelector(
-    ({ journal }) => ({
-      allJournalEntries: journal.allJournalEntries,
-      selectedJournalEntry: journal.selectedJournalEntry,
-    }),
+    ({ journal }) => {
+      return {
+        allJournalEntries: journal.allJournalEntries,
+        selectedJournalEntry: journal.selectedJournalEntry,
+      };
+    },
   );
 
   useEffect(() => {

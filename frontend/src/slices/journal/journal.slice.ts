@@ -26,8 +26,9 @@ const { reducer, actions, name } = createSlice({
   reducers: {
     setSelectedJournalEntry: (state, action) => {
       state.selectedJournalEntry =
-        state.allJournalEntries.find((entry) => entry.id === action.payload) ??
-        null;
+        state.allJournalEntries.find((entry) => {
+          return entry.id === action.payload;
+        }) ?? null;
     },
   },
   extraReducers(builder) {

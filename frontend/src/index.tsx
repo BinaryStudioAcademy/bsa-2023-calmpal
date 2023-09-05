@@ -82,7 +82,7 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                   <ProtectedRoute>
                     <SidebarWrapper>
                       <Chats />
-                      </SidebarWrapper>
+                    </SidebarWrapper>
                   </ProtectedRoute>
                 ),
               },
