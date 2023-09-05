@@ -45,14 +45,16 @@ class Store {
         chat: chatReducer,
         app: appReducer,
       },
-      middleware: (getDefaultMiddleware) => [
-        ...getDefaultMiddleware({
-          thunk: {
-            extraArgument: this.extraArguments,
-          },
-        }),
-        handleError,
-      ],
+      middleware: (getDefaultMiddleware) => {
+        return [
+          ...getDefaultMiddleware({
+            thunk: {
+              extraArgument: this.extraArguments,
+            },
+          }),
+          handleError,
+        ];
+      },
     });
   }
 

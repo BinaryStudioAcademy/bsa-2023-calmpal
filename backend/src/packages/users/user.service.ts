@@ -53,7 +53,9 @@ class UserService implements Service {
     const items = await this.userRepository.findAll();
 
     return {
-      items: items.map((item) => item.toObject()),
+      items: items.map((item) => {
+        return item.toObject();
+      }),
     };
   }
 

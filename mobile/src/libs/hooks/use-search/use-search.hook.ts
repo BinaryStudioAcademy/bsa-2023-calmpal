@@ -14,11 +14,11 @@ const useSearch = <T>(data: T[], propertyName: keyof T): UseSearchResult<T> => {
   const [filteredData, setFilteredData] = useState<T[]>([]);
 
   useEffect(() => {
-    const filtered = data.filter((item) =>
-      (item[propertyName] as string)
+    const filtered = data.filter((item) => {
+      return (item[propertyName] as string)
         .toLowerCase()
-        .includes(searchQuery.toLowerCase()),
-    );
+        .includes(searchQuery.toLowerCase());
+    });
     setFilteredData(filtered);
   }, [data, propertyName, searchQuery]);
 

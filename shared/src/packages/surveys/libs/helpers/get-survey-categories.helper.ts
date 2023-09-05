@@ -8,9 +8,9 @@ const getSurveyCategories: (payload: SurveyInputDto) => string[] = (
 
   return [
     ...new Set(
-      preferences.map((category) =>
-        category === PREFERENCES_OTHER_CATEGORY ? other : category,
-      ),
+      preferences.map((category) => {
+        return category === PREFERENCES_OTHER_CATEGORY ? other : category;
+      }),
     ),
   ];
 };

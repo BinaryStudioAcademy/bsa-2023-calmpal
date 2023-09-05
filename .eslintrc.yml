@@ -132,6 +132,9 @@ rules:
     - error
   simple-import-sort/exports:
     - error
+  arrow-body-style:
+    - error
+    - always
 
 overrides:
   - files:

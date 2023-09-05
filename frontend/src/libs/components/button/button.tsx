@@ -14,15 +14,17 @@ const Button: React.FC<Properties> = ({
   style = 'primary',
   isLoading = false,
   isDisabled = false,
-}) => (
-  <button
-    type={type}
-    className={styles[style]}
-    disabled={isDisabled || isLoading}
-  >
-    {isLoading && <span className={styles['loader']} />}
-    {label}
-  </button>
-);
+}) => {
+  return (
+    <button
+      type={type}
+      className={styles[style]}
+      disabled={isDisabled || isLoading}
+    >
+      {isLoading && <span className={styles['loader']} />}
+      {label}
+    </button>
+  );
+};
 
 export { Button };
