@@ -13,10 +13,12 @@ const getValidationErrorInfo = (error: ValidationError): ErrorInfo => {
     response: {
       message,
       errorType: ServerErrorType.VALIDATION,
-      details: details.map((detail) => ({
-        path: detail.path,
-        message: detail.message,
-      })),
+      details: details.map((detail) => {
+        return {
+          path: detail.path,
+          message: detail.message,
+        };
+      }),
     },
   };
 };
