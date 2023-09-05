@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { AppColor } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
-  tabBarStyle: {
+  tabBar: {
     borderTopWidth: 0,
     elevation: 4,
     height: 122,

@@ -28,7 +28,9 @@ class BaseController implements Controller {
     this.routes.push({
       ...options,
       path: fullPath,
-      handler: (request, reply) => this.mapHandler(handler, request, reply),
+      handler: (request, reply) => {
+        return this.mapHandler(handler, request, reply);
+      },
     });
   }
 
@@ -48,13 +50,14 @@ class BaseController implements Controller {
   private mapRequest(
     request: Parameters<ServerApplicationRouteParameters['handler']>[0],
   ): APIHandlerOptions {
-    const { body, query, params, user } = request;
+    const { body, query, params, user, fileBuffer } = request;
 
     return {
       body,
       query,
       params,
       user,
+      fileBuffer,
     };
   }
 }

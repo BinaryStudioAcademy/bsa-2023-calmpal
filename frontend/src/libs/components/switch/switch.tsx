@@ -29,6 +29,7 @@ const Switch = <T extends FormFieldValues>({
         checked={field.value}
         {...field}
       />
+      <span className={styles['slider']} />
     </label>
   );
 };

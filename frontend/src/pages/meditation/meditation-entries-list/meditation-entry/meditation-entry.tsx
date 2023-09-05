@@ -1,5 +1,6 @@
 import meditationListPlaceholder from '#assets/img/meditation-list-placeholder.jpg';
 import { Icon, Link } from '#libs/components/components.js';
+import { IconColor } from '#libs/enums/enums.js';
 
 import { type Entry } from '../../libs/types/types.js';
 import styles from './styles.module.scss';
@@ -22,7 +23,7 @@ const MeditationEntry: React.FC<Properties> = ({ track }) => {
           <p className={styles['duration']}>{track.duration}</p>
         </div>
         <Link to="/" className={styles['play-button'] as string}>
-          <Icon name="play" />
+          <Icon name="play" color={IconColor.BLUE} />
         </Link>
       </div>
     </div>

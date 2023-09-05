@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 15px 0;
+  color: var(--white);
+  background-color: transparent;
+  border: 1px solid var(--white);
+  border-radius: 26px;
+  cursor: pointer;
+}
+
+.container:hover {
+  background-color: var(--blue-alpha-70);
+}
+
+.container > .label {
+  display: block;
+  color: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.container .checkbox {
+  display: none;
+}
+
+.container:has(.checkbox:checked) {
+  color: var(--blue-700);
+  background-color: var(--blue-alpha-70);
+}

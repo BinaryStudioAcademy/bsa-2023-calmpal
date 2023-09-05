@@ -14,7 +14,9 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
   const [isOpen, setOpen] = useState(false);
 
   const handleDropdownToggle = useCallback((): void => {
-    setOpen((previous) => !previous);
+    setOpen((previous) => {
+      return !previous;
+    });
   }, []);
 
   return (
@@ -31,27 +33,29 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
           isOpen && styles['open'],
         )}
       >
-        {routes.map((item) => (
-          <div key={item.path}>
-            <button className={styles['dropdown-item']} id={item.path}>
-              <Link to={item.path}>
-                <span className={styles['item']}>
-                  <span className="visually-hidden">Go to {item.name}</span>
-                  <img
-                    src={item.icon}
-                    alt={item.name}
-                    className={getValidClassNames(
-                      styles['icon'],
-                      pathname === item.path && styles['icon-selected'],
-                    )}
-                  />
-                  <span className={styles['title']}>{item.name}</span>
-                </span>
-              </Link>
-            </button>
-            <hr className={styles['divider']} />
-          </div>
-        ))}
+        {routes.map((item) => {
+          return (
+            <div key={item.path}>
+              <button className={styles['dropdown-item']} id={item.path}>
+                <Link to={item.path}>
+                  <span className={styles['item']}>
+                    <span className="visually-hidden">Go to {item.name}</span>
+                    <img
+                      src={item.icon}
+                      alt={item.name}
+                      className={getValidClassNames(
+                        styles['icon'],
+                        pathname === item.path && styles['icon-selected'],
+                      )}
+                    />
+                    <span className={styles['title']}>{item.name}</span>
+                  </span>
+                </Link>
+              </button>
+              <hr className={styles['divider']} />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
