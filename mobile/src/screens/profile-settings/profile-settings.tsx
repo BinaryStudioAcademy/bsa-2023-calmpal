@@ -22,7 +22,7 @@ const ProfileSettings: React.FC = () => {
       <Header isArrowVisible />
       <ScrollView contentContainerStyle={styles.container}>
         <Setting
-          label="Allow Notification"
+          label="Allow Notifications"
           controller={<Switch name="notification" control={control} />}
         />
       </ScrollView>
