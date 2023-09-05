@@ -2,7 +2,6 @@ export { App } from './app/app.js';
 export { AudioPlayer } from './audio-player/audio-player.js';
 export { Button } from './button/button.js';
 export { Card } from './card/card.js';
-export { ChatSidebar } from './chat-sidebar/chat-sidebar.js';
 export { Checkbox } from './checkbox/checkbox.js';
 export { DropdownMenu } from './dropdown-menu/dropdown-menu.js';
 export { Header } from './header/header.js';
