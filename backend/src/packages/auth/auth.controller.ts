@@ -226,11 +226,7 @@ class AuthController extends BaseController {
    *          content:
    *            application/json:
    *              schema:
-   *                type: object
-   *                properties:
-   *                  message:
-   *                    type: object
-   *                    $ref: '#/components/schemas/User'
+   *                $ref: '#/components/schemas/User'
    */
   private async getAuthenticatedUser(
     options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
