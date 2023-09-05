@@ -1,4 +1,6 @@
 .wrapper {
+  height: 100%;
+  padding-top: 150px;
   font-weight: 600;
   background-image: url("../../../../assets/img/meditation-player-background.png");
   background-repeat: no-repeat;
@@ -9,7 +11,7 @@
   display: flex;
   flex-direction: column;
   max-width: 385px;
-  margin: 150px auto;
+  margin: auto;
   text-align: center;
 }
 
