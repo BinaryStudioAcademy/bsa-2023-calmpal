@@ -1,22 +1,13 @@
-const SECONDS_IN_MINUTE = 60;
-const TARGET_STRING_LENGTH = 2;
+import { format } from 'date-fns';
+
+const EPOCH_MILLISECONDS = 0;
+const TIME_FORMAT = 'mm:ss';
 
 const getFormattedTime = (time: number): string => {
-  if (time && !Number.isNaN(time)) {
-    const minutes = Math.floor(time / SECONDS_IN_MINUTE);
-    const formattedMinutes = minutes
-      .toString()
-      .padStart(TARGET_STRING_LENGTH, '0');
+  const timeDate = new Date(EPOCH_MILLISECONDS);
+  timeDate.setSeconds(time);
 
-    const seconds = Math.floor(time % SECONDS_IN_MINUTE);
-    const formattedSeconds = seconds
-      .toString()
-      .padStart(TARGET_STRING_LENGTH, '0');
-
-    return `${formattedMinutes}:${formattedSeconds}`;
-  }
-
-  return '00:00';
+  return format(timeDate, TIME_FORMAT);
 };
 
 export { getFormattedTime };
