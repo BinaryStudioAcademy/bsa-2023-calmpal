@@ -23,7 +23,9 @@ class JournalEntryService implements Service {
     const items = await this.journalEntryRepository.findAll();
 
     return {
-      items: items.map((item) => item.toObject()),
+      items: items.map((item) => {
+        return item.toObject();
+      }),
     };
   }
 

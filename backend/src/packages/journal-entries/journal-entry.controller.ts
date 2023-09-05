@@ -45,18 +45,21 @@ class JournalEntryController extends BaseController {
     this.addRoute({
       path: JournalApiPath.ROOT,
       method: 'POST',
-      handler: (options) =>
-        this.create(
+      handler: (options) => {
+        return this.create(
           options as APIHandlerOptions<{
             body: JournalEntryCreateRequestDto;
           }>,
-        ),
+        );
+      },
     });
 
     this.addRoute({
       path: JournalApiPath.ROOT,
       method: 'GET',
-      handler: () => this.getAll(),
+      handler: () => {
+        return this.getAll();
+      },
     });
   }
 
