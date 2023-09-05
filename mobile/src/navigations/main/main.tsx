@@ -35,8 +35,8 @@ const Main: React.FC = () => {
       />
       <BottomTab.Screen
         name={MainScreenName.CHAT}
-        component={ChatList}
-        options={{ tabBarIcon: ChatIcon, headerShown: false  }}
+        component={Chat}
+        options={{ tabBarIcon: ChatIcon, headerShown: false }}
       />
     </BottomTab.Navigator>
   );
