@@ -58,12 +58,12 @@
   transform: scale(1.1);
 }
 
-@media (width < 600px) {
+@media (width < 768px) {
   .track {
     max-height: 140px;
   }
 
   .content {
-    flex-basis: 341px;
+    flex-basis: 400px;
   }
 }
