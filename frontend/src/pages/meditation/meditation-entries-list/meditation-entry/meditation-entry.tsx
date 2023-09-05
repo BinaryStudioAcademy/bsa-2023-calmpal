@@ -20,7 +20,7 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
       <div className={styles['content']}>
         <div className={styles['info']}>
           <h1 className={styles['title']}>{meditationEntry.title}</h1>
-          <p className={styles['duration']}>{meditationEntry.duration}</p>
+          <span className={styles['duration']}>{meditationEntry.duration}</span>
         </div>
         <Link to="/" className={styles['play-button'] as string}>
           <Icon name="play" color={IconColor.BLUE} />
