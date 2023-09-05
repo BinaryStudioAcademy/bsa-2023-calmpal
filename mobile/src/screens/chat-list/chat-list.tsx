@@ -1,43 +1,50 @@
-import React, { type ReactNode, useCallback } from 'react';
-import LinearGradient from 'react-native-linear-gradient';
+import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React from 'react';
 
 import PlusIcon from '#assets/img/icons/plus.svg';
 import {
   Card,
+  Header,
   InputSearch,
+  LinearGradient,
   Link,
   ScrollView,
-  Text,
   View,
 } from '#libs/components/components';
-import { AppColor, RootScreenName } from '#libs/enums/enums';
-import { useEffect, useNavigation, useSearch } from '#libs/hooks/hooks';
+import { AppColor, ChatScreenName, RootScreenName } from '#libs/enums/enums';
+import {
+  useAppRoute,
+  useCallback,
+  useEffect,
+  useNavigation,
+  useSearch,
+} from '#libs/hooks/hooks';
+import { type ChatNavigationParameterList } from '#libs/types/types';
 
-import { Badge } from './components/components';
 import mockedChats from './libs/data.json';
 import { styles } from './styles';
 
 const mockedCount = 12;
 
 const ChatList: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<ChatNavigationParameterList>>();
+  const { name: routeName } = useAppRoute();
 
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: ({ children }: { children: ReactNode }) => {
-        return (
-          <View style={styles.headerTitleWrapper}>
-            <Text style={styles.headerTitle}>{children}</Text>
-            <Badge count={mockedCount} />
-          </View>
-        );
+      header: () => {
+        return <Header title={routeName} badgeCount={mockedCount} />;
       },
     });
-  }, [navigation]);
+  }, [navigation, routeName]);
 
-  const onPress = useCallback(() => {
-    // TODO: Implement actual functionality for the onPress event
-  }, []);
+  const handleSelectChat = useCallback(
+    (title: string) => {
+      navigation.navigate(ChatScreenName.CHAT, { title });
+    },
+    [navigation],
+  );
 
   const { filteredData: filteredChats, setSearchQuery } = useSearch(
     mockedChats,
@@ -45,10 +52,7 @@ const ChatList: React.FC = () => {
   );
 
   return (
-    <LinearGradient
-      colors={[AppColor.WHITE, AppColor.BLUE_100]}
-      style={styles.linearGradient}
-    >
+    <LinearGradient>
       <View style={styles.container}>
         <InputSearch
           placeholder="Search chat"
@@ -56,7 +60,13 @@ const ChatList: React.FC = () => {
         />
         <ScrollView contentContainerStyle={styles.list}>
           {filteredChats.map((item) => {
-            return <Card title={item.title} onPress={onPress} key={item.id} />;
+            return (
+              <Card
+                title={item.title}
+                onPress={handleSelectChat}
+                key={item.id}
+              />
+            );
           })}
         </ScrollView>
         <View style={styles.linkWrapper}>
