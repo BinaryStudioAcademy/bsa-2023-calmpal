@@ -3,9 +3,10 @@ import React from 'react';
 
 import ChatIcon from '#assets/img/icons/chat.svg';
 import HomeIcon from '#assets/img/icons/home.svg';
+import { Header } from '#libs/components/components';
 import { AppColor, MainScreenName } from '#libs/enums/enums';
 import { type TabNavigationParameterList } from '#libs/types/types';
-import { ChatList } from '#screens/chat-list/chat-list';
+import { Chat } from '#navigations/navigations';
 import { Home } from '#screens/home/home';
 
 import { styles } from './styles';
@@ -13,8 +14,6 @@ import { styles } from './styles';
 const BottomTab = createBottomTabNavigator<TabNavigationParameterList>();
 
 const tabNavigatorOptions = {
-  headerStyle: styles.header,
-  headerTitleStyle: styles.headerTitle,
   tabBarActiveTintColor: AppColor.BLUE_300,
   tabBarInactiveTintColor: AppColor.GRAY_400,
   tabBarShowLabel: false,
@@ -27,12 +26,17 @@ const Main: React.FC = () => {
       <BottomTab.Screen
         name={MainScreenName.HOME}
         component={Home}
-        options={{ tabBarIcon: HomeIcon }}
+        options={{
+          tabBarIcon: HomeIcon,
+          header: (): React.ReactNode => {
+            return <Header />;
+          },
+        }}
       />
       <BottomTab.Screen
         name={MainScreenName.CHAT_LIST}
-        component={ChatList}
-        options={{ tabBarIcon: ChatIcon }}
+        component={Chat}
+        options={{ tabBarIcon: ChatIcon, headerShown: false }}
       />
     </BottomTab.Navigator>
   );
