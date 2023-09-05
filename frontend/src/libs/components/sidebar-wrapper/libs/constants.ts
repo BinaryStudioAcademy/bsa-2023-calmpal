@@ -1,4 +1,4 @@
-import chats from '#assets/img/chat-link.svg';
+import chats from '#assets/icons/chat-link.svg';
 import home from '#assets/img/home.svg';
 import { AppRoute } from '#libs/enums/enums.js';
 import { type Route } from '#libs/types/types.js';
