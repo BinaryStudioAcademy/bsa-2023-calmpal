@@ -4,7 +4,8 @@ import {
 } from '@react-navigation/native-stack';
 import React from 'react';
 
-import { RootScreenName } from '#libs/enums/enums';
+import { Loader } from '#libs/components/components';
+import { DataStatus, RootScreenName } from '#libs/enums/enums';
 import { useAppDispatch, useAppSelector, useEffect } from '#libs/hooks/hooks';
 import { type RootNavigationParameterList } from '#libs/types/types';
 import { Auth } from '#screens/auth/auth';
@@ -21,32 +22,54 @@ const screenOptions: NativeStackNavigationOptions = {
 
 const Root: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { isSurveyCompleted, authenticatedUser } = useAppSelector(
-    ({ auth }) => ({
-      isSurveyCompleted: auth.authenticatedUser?.isSurveyCompleted,
-      authenticatedUser: auth.authenticatedUser,
-    }),
-  );
+  const {
+    isSurveyCompleted,
+    authenticatedUser,
+    authenticatedUserDataStatus,
+    surveyPreferencesDataStatus,
+  } = useAppSelector(({ auth }) => ({
+    isSurveyCompleted: auth.authenticatedUser?.isSurveyCompleted,
+    authenticatedUser: auth.authenticatedUser,
+    authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
+    surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
+  }));
+
+  const isLoaderVisible =
+    authenticatedUserDataStatus === DataStatus.IDLE ||
+    authenticatedUserDataStatus === DataStatus.PENDING ||
+    surveyPreferencesDataStatus === DataStatus.PENDING;
 
   useEffect(() => {
     void dispatch(authActions.getAuthenticatedUser());
   }, [dispatch]);
 
   return (
-    <NativeStack.Navigator screenOptions={screenOptions}>
-      {authenticatedUser ? (
-        isSurveyCompleted ? (
-          <NativeStack.Screen name={RootScreenName.MAIN} component={Main} />
+    <>
+      <NativeStack.Navigator screenOptions={screenOptions}>
+        {authenticatedUser ? (
+          isSurveyCompleted ? (
+            <NativeStack.Screen name={RootScreenName.MAIN} component={Main} />
+          ) : (
+            <NativeStack.Screen
+              name={RootScreenName.SURVEY}
+              component={Survey}
+            />
+          )
         ) : (
-          <NativeStack.Screen name={RootScreenName.SURVEY} component={Survey} />
-        )
-      ) : (
-        <>
-          <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
-          <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
-        </>
-      )}
-    </NativeStack.Navigator>
+          <>
+            <NativeStack.Screen
+              name={RootScreenName.SIGN_IN}
+              component={Auth}
+            />
+            <NativeStack.Screen
+              name={RootScreenName.SIGN_UP}
+              component={Auth}
+            />
+          </>
+        )}
+      </NativeStack.Navigator>
+      <Loader isVisible={isLoaderVisible} />
+    </>
   );
 };
 

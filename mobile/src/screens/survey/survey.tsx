@@ -13,7 +13,6 @@ const Survey: React.FC = () => {
   const dispatch = useAppDispatch();
   const { userId } = useAppSelector(({ auth }) => ({
     userId: (auth.authenticatedUser as UserAuthResponseDto).id,
-    surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
   }));
 
   const handleSubmit = useCallback(
