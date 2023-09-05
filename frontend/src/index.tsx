@@ -15,6 +15,7 @@ import { AppRoute } from '#libs/enums/enums.js';
 import { store } from '#libs/packages/store/store.js';
 import { Auth } from '#pages/auth/auth.js';
 import { Chats } from '#pages/chat/chat.js';
+import { Dashboard } from '#pages/dashboard/dashboard.js';
 import { Meditation } from '#pages/meditation/meditation.js';
 import { Root } from '#pages/root/root.js';
 import { Survey } from '#pages/surveys/survey.js';
@@ -55,6 +56,16 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
               {
                 path: AppRoute.SIGN_UP,
                 element: <Auth />,
+              },
+              {
+                path: AppRoute.ROOT,
+                element: (
+                  <ProtectedRoute>
+                    <SidebarWrapper>
+                      <Dashboard />
+                    </SidebarWrapper>
+                  </ProtectedRoute>
+                ),
               },
               {
                 path: AppRoute.SIGN_UP_SURVEY,
