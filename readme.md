@@ -96,13 +96,14 @@ erDiagram
       dateTime created_at
       dateTime updated_at
       varchar name
-      int image_id FK
+      varchar audio_url
    }
    meditation_entries {
       int id PK
       dateTime created_at
       dateTime updated_at
       int topic_id FK
+      int file_id FK
    }
    journal_topics {
       int id PK
