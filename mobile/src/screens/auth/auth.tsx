@@ -1,36 +1,19 @@
 import React from 'react';
 
-import { SignBackground, Text } from '#libs/components/components';
+import { SignBackground } from '#libs/components/components';
 import { RootScreenName } from '#libs/enums/enums';
-import {
-  useAppDispatch,
-  useAppRoute,
-  useAppSelector,
-  useCallback,
-  useEffect,
-} from '#libs/hooks/hooks';
+import { useAppDispatch, useAppRoute, useCallback } from '#libs/hooks/hooks';
 import {
   type UserSignInRequestDto,
   type UserSignUpRequestDto,
 } from '#packages/users/users';
 import { actions as authActions } from '#slices/auth/auth';
-import { actions as userActions } from '#slices/users/users';
 
 import { SignInForm, SignUpForm } from './components/components';
 
 const Auth: React.FC = () => {
   const { name } = useAppRoute();
   const dispatch = useAppDispatch();
-  const { dataStatus } = useAppSelector(({ auth }) => ({
-    dataStatus: auth.dataStatus,
-  }));
-  const isSignUpScreen = name === RootScreenName.SIGN_UP;
-
-  useEffect(() => {
-    if (isSignUpScreen) {
-      void dispatch(userActions.loadAll());
-    }
-  }, [isSignUpScreen, dispatch]);
 
   const handleSignInSubmit = useCallback(
     (payload: UserSignInRequestDto): void => {
@@ -59,12 +42,7 @@ const Auth: React.FC = () => {
     return null;
   };
 
-  return (
-    <>
-      <Text>state: {dataStatus}</Text>
-      <SignBackground>{getScreen(name)}</SignBackground>
-    </>
-  );
+  return <SignBackground>{getScreen(name)}</SignBackground>;
 };
 
 export { Auth };

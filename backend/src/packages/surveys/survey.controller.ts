@@ -63,12 +63,13 @@ class SurveyController extends BaseController {
       validation: {
         body: createSurveyValidationSchema,
       },
-      handler: (options) =>
-        this.create(
+      handler: (options) => {
+        return this.create(
           options as APIHandlerOptions<{
             body: SurveyRequestDto;
           }>,
-        ),
+        );
+      },
     });
   }
 

@@ -15,9 +15,11 @@ const ProtectedRoute: React.FC<Properties> = ({
   children,
   redirectPath = AppRoute.SIGN_IN,
 }) => {
-  const { authenticatedUser } = useAppSelector(({ auth }) => ({
-    authenticatedUser: auth.authenticatedUser,
-  }));
+  const { authenticatedUser } = useAppSelector(({ auth }) => {
+    return {
+      authenticatedUser: auth.authenticatedUser,
+    };
+  });
   const hasUser = Boolean(authenticatedUser);
 
   return hasUser ? <>{children}</> : <Navigate to={redirectPath} />;

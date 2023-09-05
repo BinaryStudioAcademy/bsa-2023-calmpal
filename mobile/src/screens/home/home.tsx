@@ -1,3 +1,5 @@
-const Home = (): null => null;
+const Home = (): null => {
+  return null;
+};
 
 export { Home };
