@@ -5,24 +5,19 @@ import { type ChatMessage } from '#libs/types/types.js';
 import styles from './styles.module.scss';
 
 type Properties = {
-  messages: ChatMessage[];
+  chatRecord: ChatMessage[];
 };
 
-type Message = {
-  message: string;
-  id: string;
-};
-
-const ChatMessage: React.FC<Properties> = ({ messages }) => {
+const ChatMessage: React.FC<Properties> = ({ chatRecord }) => {
   return (
     <>
-      {messages.map(({ message, id, sender }) => {
+      {chatRecord.map(({ messages, id: chatId, sender }) => {
         const isUser = sender === UserRole.USER;
 
         return isUser ? (
-          <div className={styles['user-message-container']} key={id}>
+          <div className={styles['user-message-container']} key={chatId}>
             <div className={styles['user-message-content']}>
-              {message.map(({ message, id }: Message) => {
+              {messages.map(({ message, id }) => {
                 return (
                   <span key={id} className={styles['user-message-item']}>
                     <p className={styles['user-message-text']}>{message}</p>
@@ -33,10 +28,10 @@ const ChatMessage: React.FC<Properties> = ({ messages }) => {
             <span className={styles['user-avatar']} />
           </div>
         ) : (
-          <div className={styles['bot-message-container']} key={id}>
+          <div className={styles['bot-message-container']} key={chatId}>
             <Icon name="chat-page" className={styles['bot-avatar']} />
             <div className={styles['bot-message-child-container']}>
-              {message.map(({ message, id }: Message) => {
+              {messages.map(({ message, id }) => {
                 return (
                   <span key={id} className={styles['bot-message-text']}>
                     {message}

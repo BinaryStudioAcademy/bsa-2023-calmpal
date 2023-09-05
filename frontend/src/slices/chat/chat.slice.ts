@@ -2,7 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { MOCK_MESSAGE } from '#libs/constants/chat-mock-data.constant.js';
 import { FIRST_INDEX, LAST_INDEX } from '#libs/constants/index.constant.js';
-import { type ChatMessage, type ChatState } from '#libs/types/types.js';
+import {
+  type ChatMessage,
+  type ChatState,
+  type Message,
+} from '#libs/types/types.js';
 
 import { newMessage } from './actions.js';
 
@@ -12,8 +16,6 @@ type StateInfo = ChatMessage & {
   state: ChatState;
 };
 
-type Message = { message: string; id: string };
-
 const isSameUserLastMessage = (state: ChatState, sender: string): boolean => {
   return state.messages.at(LAST_INDEX)?.sender === sender;
 };
@@ -22,22 +24,27 @@ const appendLastMessage = (state: ChatState, message: Message): void => {
   const updatedLastMessage = {
     ...state.messages.at(LAST_INDEX),
   } as ChatMessage;
-  updatedLastMessage.message.push(message);
+  updatedLastMessage.messages.push(message);
   state.messages = [
     ...state.messages.slice(FIRST_INDEX, LAST_INDEX),
     updatedLastMessage,
   ];
 };
 
-const addMessageToState = ({ state, id, sender, message }: StateInfo): void => {
-  state.messages = [...state.messages, { id, sender, message: message }];
+const addMessageToState = ({
+  state,
+  id,
+  sender,
+  messages,
+}: StateInfo): void => {
+  state.messages = [...state.messages, { id, sender, messages }];
 };
 
-const handleMessages = ({ state, id, sender, message }: StateInfo): void => {
+const handleMessages = ({ state, id, sender, messages }: StateInfo): void => {
   if (isSameUserLastMessage(state, sender)) {
-    appendLastMessage(state, message[FIRST_INDEX] as Message);
+    messages[FIRST_INDEX] && appendLastMessage(state, messages[FIRST_INDEX]);
   } else {
-    addMessageToState({ state, id, sender, message });
+    addMessageToState({ state, id, sender, messages });
   }
 };
 const { reducer, actions, name } = createSlice({
@@ -50,7 +57,7 @@ const { reducer, actions, name } = createSlice({
         state,
         id: action.payload.id,
         sender: action.payload.sender,
-        message: action.payload.message,
+        messages: action.payload.messages,
       });
     });
   },

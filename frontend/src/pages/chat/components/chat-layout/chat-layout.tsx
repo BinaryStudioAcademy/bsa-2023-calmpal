@@ -14,7 +14,7 @@ const ChatLayout: React.FC = () => {
     ({ text }: { text: string }): void => {
       newMessage({
         sender: UserRole.USER,
-        message: [{ id: generateUUID(), message: text }],
+        messages: [{ id: generateUUID(), message: text }],
         id: generateUUID(),
       });
     },
@@ -25,7 +25,7 @@ const ChatLayout: React.FC = () => {
     <>
       <ChatHeader />
       <section className={styles['chat-body']}>
-        <ChatMessage messages={messages} />
+        <ChatMessage chatRecord={messages} />
       </section>
       <ChatFooter onSend={handleSend} />
     </>

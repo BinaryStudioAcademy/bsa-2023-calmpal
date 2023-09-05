@@ -8,7 +8,7 @@ const DOCTOR_FREUD_GREETING =
 const MOCK_MESSAGE: ChatMessage = {
   id: generateUUID(),
   sender: UserRole.BOT,
-  message: [{ message: DOCTOR_FREUD_GREETING, id: generateUUID() }],
+  messages: [{ message: DOCTOR_FREUD_GREETING, id: generateUUID() }],
 };
 
 export { MOCK_MESSAGE };

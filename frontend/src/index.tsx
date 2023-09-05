@@ -15,7 +15,6 @@ import { AppRoute } from '#libs/enums/enums.js';
 import { store } from '#libs/packages/store/store.js';
 import { Auth } from '#pages/auth/auth.js';
 import { Chat } from '#pages/chat/chat.js';
-import { Root } from '#pages/root/root.js';
 import { Dashboard } from '#pages/dashboard/dashboard.js';
 import { Survey } from '#pages/surveys/survey.js';
 

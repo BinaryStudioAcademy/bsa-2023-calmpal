@@ -1,4 +1,4 @@
-import { IconButton } from '#libs/components/icon-button/icon-button.js';
+import { Button } from '#libs/components/button/button.js';
 import { Input } from '#libs/components/input/input.js';
 import { DEFAULT_INPUT } from '#libs/constants/constants.js';
 import { useAppForm, useCallback } from '#libs/hooks/hooks.js';
@@ -40,7 +40,7 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
           name="text"
           control={control}
         />
-        <IconButton type="submit" icon="send" />
+        <Button type="submit" icon="send" />
       </form>
     </footer>
   );
