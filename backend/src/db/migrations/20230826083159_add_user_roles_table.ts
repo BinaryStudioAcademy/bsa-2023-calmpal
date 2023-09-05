@@ -10,16 +10,6 @@ const COLUMN_NAME = {
   UPDATED_AT: 'updated_at',
 } as const;
 
-const USER_NAMES = {
-  CHATBOT: 'Chatbot',
-  USER: 'User',
-} as const;
-
-const USER_ROLES = {
-  CHATBOT: 'chatbot',
-  USER: 'user',
-} as const;
-
 const ROLES = [
   {
     name: 'Chatbot',
@@ -31,8 +21,8 @@ const ROLES = [
 async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable(TABLE_NAME, (table) => {
     table.increments(COLUMN_NAME.ID).primary();
-    table.enum(COLUMN_NAME.NAME, Object.values(USER_NAMES));
-    table.enum(COLUMN_NAME.KEY, Object.values(USER_ROLES));
+    table.string(COLUMN_NAME.NAME).notNullable();
+    table.string(COLUMN_NAME.KEY).notNullable();
     table
       .dateTime(COLUMN_NAME.CREATED_AT)
       .notNullable()
