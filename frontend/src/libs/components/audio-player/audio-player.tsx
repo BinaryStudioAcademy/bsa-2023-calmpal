@@ -1,6 +1,9 @@
 import { useCallback, useRef, useState } from '#libs/hooks/hooks.js';
 import { type Meditation } from '#libs/types/types.js';
-import { START_TIME, STEP } from '#pages/meditation/constants/constants.js';
+import {
+  TRACK_INCREMENT_INDEX,
+  TRACK_START_TIME,
+} from '#pages/meditation/constants/constants.js';
 
 import { AudioControls } from './components/audio-controls/audio-controls.js';
 import { ProgressBar } from './components/progress-bar/progress-bar.js';
@@ -20,8 +23,8 @@ const AudioPlayer: React.FC<Properties> = ({
   onSetCurrentTrack,
   onSetTrackIndex,
 }) => {
-  const [timeProgress, setTimeProgress] = useState(START_TIME);
-  const [duration, setDuration] = useState(START_TIME);
+  const [timeProgress, setTimeProgress] = useState(TRACK_START_TIME);
+  const [duration, setDuration] = useState(TRACK_START_TIME);
 
   const audioReference = useRef<HTMLAudioElement | null>(null);
   const progressBarReference = useRef<HTMLInputElement | null>(null);
@@ -42,7 +45,7 @@ const AudioPlayer: React.FC<Properties> = ({
   }, []);
 
   const handleNext = useCallback(() => {
-    const nextTrackIndex = (trackIndex + STEP) % tracks.length;
+    const nextTrackIndex = (trackIndex + TRACK_INCREMENT_INDEX) % tracks.length;
     onSetTrackIndex(nextTrackIndex);
     onSetCurrentTrack(tracks[nextTrackIndex] as Meditation);
   }, [onSetCurrentTrack, onSetTrackIndex, trackIndex, tracks]);

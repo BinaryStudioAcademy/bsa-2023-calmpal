@@ -1,8 +1,8 @@
-const FIRST_INDEX = 0;
-const START_TIME = 0;
+const TRACK_FIRST_INDEX = 0;
+const TRACK_START_TIME = 0;
 const FULL_PERCENTAGE = 100;
-const STEP = 1;
-const SKIP_STEP = 30;
+const TRACK_INCREMENT_INDEX = 1;
+const TRACK_SKIP_SECONDS = 30;
 const PROGRESS_BAR = '--player-progress';
 
 const MOCKED_IMAGE = '../../src/assets/img/meditation-image-placeholder.jpg';
@@ -32,11 +32,11 @@ const mockedPlaylist = [
 ];
 
 export {
-  FIRST_INDEX,
   FULL_PERCENTAGE,
   mockedPlaylist,
   PROGRESS_BAR,
-  SKIP_STEP,
-  START_TIME,
-  STEP,
+  TRACK_FIRST_INDEX,
+  TRACK_INCREMENT_INDEX,
+  TRACK_SKIP_SECONDS,
+  TRACK_START_TIME,
 };

@@ -1,14 +1,14 @@
 import { AudioPlayer } from '#libs/components/components.js';
 import { useCallback, useState } from '#libs/hooks/hooks.js';
 import {
-  FIRST_INDEX,
   mockedPlaylist,
+  TRACK_FIRST_INDEX,
 } from '#pages/meditation/constants/constants.js';
 
 import styles from './styles.module.scss';
 
 const MeditationPlayer: React.FC = () => {
-  const [trackIndex, setTrackIndex] = useState(FIRST_INDEX);
+  const [trackIndex, setTrackIndex] = useState(TRACK_FIRST_INDEX);
   const [currentTrack, setCurrentTrack] = useState(mockedPlaylist[trackIndex]);
 
   const handleTrackIndex = useCallback((index: number): void => {

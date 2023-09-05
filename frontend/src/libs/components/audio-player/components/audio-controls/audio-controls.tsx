@@ -4,8 +4,8 @@ import { type Meditation } from '#libs/types/types.js';
 import {
   FULL_PERCENTAGE,
   PROGRESS_BAR,
-  SKIP_STEP,
-  STEP,
+  TRACK_INCREMENT_INDEX,
+  TRACK_SKIP_SECONDS,
 } from '#pages/meditation/constants/constants.js';
 
 import styles from './styles.module.scss';
@@ -58,19 +58,19 @@ const AudioControls: React.FC<Properties> = ({
 
   const handleSkipForward = useCallback(() => {
     if (audioReference.current) {
-      audioReference.current.currentTime += SKIP_STEP;
+      audioReference.current.currentTime += TRACK_SKIP_SECONDS;
     }
   }, [audioReference]);
 
   const handleSkipBackward = useCallback(() => {
     if (audioReference.current) {
-      audioReference.current.currentTime -= SKIP_STEP;
+      audioReference.current.currentTime -= TRACK_SKIP_SECONDS;
     }
   }, [audioReference]);
 
   const handlePrevious = useCallback(() => {
     const previousTrackIndex =
-      (trackIndex - STEP + tracks.length) % tracks.length;
+      (trackIndex - TRACK_INCREMENT_INDEX + tracks.length) % tracks.length;
     onSetTrackIndex(previousTrackIndex);
     onSetCurrentTrack(tracks[previousTrackIndex] as Meditation);
   }, [onSetCurrentTrack, onSetTrackIndex, trackIndex, tracks]);
