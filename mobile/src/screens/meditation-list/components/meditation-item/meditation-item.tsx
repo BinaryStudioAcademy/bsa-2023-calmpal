@@ -1,7 +1,7 @@
 import React from 'react';
 import { type ImageSourcePropType } from 'react-native';
 
-import ImagePlaceholder from '#assets/img/card-image-placeholder.png';
+import cardImagePlaceholder from '#assets/img/card-image-placeholder.png';
 import Play from '#assets/img/icons/play.svg';
 import {
   Image,
@@ -22,7 +22,7 @@ type Properties = {
 const MeditationItem: React.FC<Properties> = ({
   title,
   duration,
-  img = ImagePlaceholder,
+  img = cardImagePlaceholder,
 }) => {
   return (
     <View style={styles.container}>

@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   innerContainer: {
     position: 'absolute',
     right: 20,
-    width: 286,
+    width: '77%',
     height: '100%',
     backgroundColor: AppColor.WHITE,
     borderRadius: 25,
