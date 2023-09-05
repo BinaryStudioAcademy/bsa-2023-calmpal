@@ -1,5 +1,6 @@
-import { DropdownMenu, Icon, Link } from '#libs/components/components.js';
-import { AppRoute, IconColor } from '#libs/enums/enums.js';
+import logo from '#assets/img/logo.svg';
+import { DropdownMenu, Link } from '#libs/components/components.js';
+import { AppRoute } from '#libs/enums/enums.js';
 import { type Route } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
@@ -14,7 +15,7 @@ const Header: React.FC<Properties> = ({ routes }) => {
       <nav className={styles['nav']}>
         <Link to={AppRoute.ROOT}>
           <div className={styles['image']}>
-            <Icon name="logo" color={IconColor.BLUE} />
+            <img src={logo} alt="logo" />
           </div>
         </Link>
       </nav>
