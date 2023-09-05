@@ -31,7 +31,7 @@ const ProfileSettingsButton: React.FC<Properties> = ({
   return (
     <button className={buttonStyle} onClick={handleClick}>
       <div className={styles['icon-background']}>
-        <Icon name={name} color={IconColor.BLUE} />
+        <Icon name={name} color={IconColor.WHITE} />
       </div>
       <div className={styles['text-container']}>
         <span className={styles['profile-button-text']}>{children}</span>
