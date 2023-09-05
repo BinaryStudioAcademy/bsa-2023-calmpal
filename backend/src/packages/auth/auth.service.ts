@@ -75,8 +75,17 @@ class AuthService {
     };
   }
 
-  public getAuthenticatedUser(id: number): Promise<UserAuthResponseDto | null> {
-    return this.userService.findById(id);
+  public async getAuthenticatedUser(id: number): Promise<UserAuthResponseDto> {
+    const user = await this.userService.findById(id);
+
+    if (!user) {
+      throw new UsersError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.USER_NOT_FOUND,
+      });
+    }
+
+    return user;
   }
 }
 
