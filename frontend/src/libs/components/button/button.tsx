@@ -1,3 +1,4 @@
+import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { type IconName } from '#libs/types/icon-name.type.js';
 
 import { Icon } from '../components.js';
@@ -33,7 +34,12 @@ const Button: React.FC<Properties> = ({
     >
       {isLoading && <span className={styles['loader']} />}
       {iconName && <Icon name={iconName} />}
-      <span className={isLabelVisuallyHidden ? 'visually-hidden' : ''}>
+      <span
+        className={getValidClassNames(
+          '',
+          isLabelVisuallyHidden && 'visually-hidden',
+        )}
+      >
         {label}
       </span>
     </button>
