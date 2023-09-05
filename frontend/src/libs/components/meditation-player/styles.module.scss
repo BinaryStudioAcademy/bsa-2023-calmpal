@@ -13,14 +13,22 @@
   text-align: center;
 }
 
-.image {
-  width: 100%;
+.image-wrapper {
+  width: 385px;
   margin-bottom: 24px;
+  padding: 15px;
   background-color: var(--white);
   border-radius: 24px;
   box-shadow:
     0 4px 23px 0 var(--violet-100),
     0 4px 49px 0 var(--blue-shadow);
+}
+
+.image {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 24px;
 }
 
 .title {
@@ -51,5 +59,10 @@
   .purpose {
     margin-bottom: 20px;
     font-size: 14px;
+  }
+
+  .image-wrapper {
+    width: 315px;
+    height: 315px;
   }
 }

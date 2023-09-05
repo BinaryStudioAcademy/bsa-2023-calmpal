@@ -5,7 +5,7 @@ const STEP = 1;
 const SKIP_STEP = 30;
 const PROGRESS_BAR = '--player-progress';
 
-const MOCKED_IMAGE = '../../src/assets/img/meditation-image.svg';
+const MOCKED_IMAGE = '../../src/assets/img/meditation-image-placeholder.jpg';
 
 const mockedPlaylist = [
   {

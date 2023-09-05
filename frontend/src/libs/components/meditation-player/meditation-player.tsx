@@ -16,13 +16,15 @@ const MeditationPlayer: React.FC = () => {
   return (
     <div className={styles['wrapper']}>
       <div className={styles['meditation-player']}>
-        <img
-          className={styles['image']}
-          src={currentTrack?.img}
-          alt="Meditation"
-          width={355}
-          height={355}
-        />
+        <div className={styles['image-wrapper']}>
+          <img
+            className={styles['image']}
+            src={currentTrack?.img}
+            alt="Meditation"
+            width={355}
+            height={355}
+          />
+        </div>
         <p className={styles['title']}>{currentTrack?.title}</p>
         <p className={styles['purpose']}>{currentTrack?.purpose}</p>
         <AudioPlayer
