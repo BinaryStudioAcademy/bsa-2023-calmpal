@@ -14,7 +14,7 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
     <div className={styles['track']}>
       <img
         src={meditationListPlaceholder}
-        alt="Meditation track background"
+        alt="Meditation entry"
         className={styles['background-image']}
       />
       <div className={styles['content']}>
