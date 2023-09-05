@@ -4,13 +4,13 @@ import { Icon } from '../components.js';
 import styles from './styles.module.scss';
 
 type Properties = {
-  label?: string;
+  label: string;
   type?: 'button' | 'submit';
   iconName?: IconName;
   style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent';
   isLoading?: boolean;
   isDisabled?: boolean;
-  accessabilityMessage?: string;
+  isLabelVisuallyHidden?: boolean;
   onClick?: () => void;
 };
 
@@ -21,7 +21,7 @@ const Button: React.FC<Properties> = ({
   style = 'primary',
   isLoading = false,
   isDisabled = false,
-  accessabilityMessage = '',
+  isLabelVisuallyHidden = false,
   onClick,
 }) => {
   return (
@@ -32,11 +32,10 @@ const Button: React.FC<Properties> = ({
       disabled={isDisabled || isLoading}
     >
       {isLoading && <span className={styles['loader']} />}
-      {label}
       {iconName && <Icon name={iconName} />}
-      {accessabilityMessage && (
-        <span className="visually-hidden">{accessabilityMessage}</span>
-      )}
+      <span className={isLabelVisuallyHidden ? 'visually-hidden' : ''}>
+        {label}
+      </span>
     </button>
   );
 };

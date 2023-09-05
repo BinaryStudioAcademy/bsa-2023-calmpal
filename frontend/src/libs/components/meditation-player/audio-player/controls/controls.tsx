@@ -106,34 +106,39 @@ const Controls: React.FC<Properties> = ({
           onClick={handlePrevious}
           style="rounded-transparent"
           iconName="previous"
-          accessabilityMessage="Play previous meditation"
+          label="Play previous meditation"
+          isLabelVisuallyHidden
         />
         <div className={styles['button-wrapper']}>
           <Button
             onClick={handleSkipBackward}
             style="rounded-transparent"
             iconName="backward"
-            accessabilityMessage="Back 30 seconds"
+            label="Back 30 seconds"
+            isLabelVisuallyHidden
           />
 
           <Button
             onClick={handlePlayToggle}
             style="rounded"
             iconName={isPlaying ? 'pause' : 'play'}
-            accessabilityMessage="Play or pause a meditation"
+            label="Play or pause a meditation"
+            isLabelVisuallyHidden
           />
           <Button
             onClick={handleSkipForward}
             style="rounded-transparent"
             iconName="forward"
-            accessabilityMessage="Forward 30 seconds"
+            label="Forward 30 seconds"
+            isLabelVisuallyHidden
           />
         </div>
         <Button
           onClick={onNextTrack}
           style="rounded-transparent"
           iconName="next"
-          accessabilityMessage="Play next meditation"
+          label="Play next meditation"
+          isLabelVisuallyHidden
         />
       </div>
     </div>
