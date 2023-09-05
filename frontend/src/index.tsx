@@ -5,6 +5,7 @@ import { createRoot } from 'react-dom/client';
 
 import {
   App,
+  ProfileSettingsSidebar,
   ProtectedRoute,
   RouterProvider,
   SidebarWrapper,
@@ -32,6 +33,7 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 element: (
                   <ProtectedRoute>
                     <SidebarWrapper>
+                      <ProfileSettingsSidebar />
                       <Root />
                     </SidebarWrapper>
                   </ProtectedRoute>

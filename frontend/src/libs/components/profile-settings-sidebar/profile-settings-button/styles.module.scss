@@ -43,3 +43,15 @@
   background-color: var(--blue-300);
   border-radius: 20px;
 }
+
+@media (width <= 480px) {
+  .profile-button {
+    display: flex;
+    width: 100%;
+  }
+
+  .text-container {
+    flex: 1;
+    justify-content: space-between;
+  }
+}
