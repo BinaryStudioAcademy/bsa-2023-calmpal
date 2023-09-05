@@ -1,10 +1,10 @@
-import avatar from '#assets/img/avatar.png';
+import avatar from '#assets/img/avatar-placeholder.png';
 import { useAppSelector } from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import styles from './styles.module.scss';
 
-const UserProfileSidebar: React.FC = () => {
+const UserProfileInfo: React.FC = () => {
   const { authenticatedUser } = useAppSelector(({ auth }) => {
     return {
       authenticatedUser: auth.authenticatedUser,
@@ -26,4 +26,4 @@ const UserProfileSidebar: React.FC = () => {
   );
 };
 
-export { UserProfileSidebar };
+export { UserProfileInfo };
