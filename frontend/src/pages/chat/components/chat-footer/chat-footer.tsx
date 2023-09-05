@@ -40,7 +40,7 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
           name="text"
           control={control}
         />
-        <IconButton type="submit" icon="send-icon" />
+        <IconButton type="submit" icon="send" />
       </form>
     </footer>
   );

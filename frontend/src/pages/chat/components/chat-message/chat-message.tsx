@@ -13,36 +13,42 @@ type Message = {
   id: string;
 };
 
-const ChatMessage: React.FC<Properties> = ({ messages }) => (
-  <>
-    {messages.map(({ message, id, sender }) => {
-      const isUser = sender === UserRole.USER;
+const ChatMessage: React.FC<Properties> = ({ messages }) => {
+  return (
+    <>
+      {messages.map(({ message, id, sender }) => {
+        const isUser = sender === UserRole.USER;
 
-      return isUser ? (
-        <div className={styles['user-message-container']} key={id}>
-          <div className={styles['user-message-content']}>
-            {message.map(({ message, id }: Message) => (
-              <span key={id} className={styles['user-message-item']}>
-                <p className={styles['user-message-text']}>{message}</p>
-              </span>
-            ))}
+        return isUser ? (
+          <div className={styles['user-message-container']} key={id}>
+            <div className={styles['user-message-content']}>
+              {message.map(({ message, id }: Message) => {
+                return (
+                  <span key={id} className={styles['user-message-item']}>
+                    <p className={styles['user-message-text']}>{message}</p>
+                  </span>
+                );
+              })}
+            </div>
+            <span className={styles['user-avatar']} />
           </div>
-          <span className={styles['user-avatar']} />
-        </div>
-      ) : (
-        <div className={styles['bot-message-container']} key={id}>
-          <Icon name="chat-page-logo" className={styles['bot-avatar']} />
-          <div className={styles['bot-message-child-container']}>
-            {message.map(({ message, id }: Message) => (
-              <span key={id} className={styles['bot-message-text']}>
-                {message}
-              </span>
-            ))}
+        ) : (
+          <div className={styles['bot-message-container']} key={id}>
+            <Icon name="chat-page" className={styles['bot-avatar']} />
+            <div className={styles['bot-message-child-container']}>
+              {message.map(({ message, id }: Message) => {
+                return (
+                  <span key={id} className={styles['bot-message-text']}>
+                    {message}
+                  </span>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      );
-    })}
-  </>
-);
+        );
+      })}
+    </>
+  );
+};
 
 export { ChatMessage };

@@ -1,20 +1,16 @@
+import { iconNameToIcon } from '#libs/maps/icon-name-to-plain-svg.js';
 import { type ClassValue, type IconName } from '#libs/types/types.js';
-
-import { iconNameToPlainSvgMap } from './icon-name-to-plain-svg.js';
 
 type Properties = {
   name: IconName;
+  color?: string;
   className?: ClassValue;
 };
 
-const Icon: React.FC<Properties> = ({ name, className = '' }) => {
-  const SelectedIcon = iconNameToPlainSvgMap[name];
+const Icon: React.FC<Properties> = ({ name, color, className }) => {
+  const SelectedIcon = iconNameToIcon[name];
 
-  return (
-    <div className={className as string}>
-      <SelectedIcon />
-    </div>
-  );
+  return <SelectedIcon style={{ color }} className={className as string} />;
 };
 
 export { Icon };

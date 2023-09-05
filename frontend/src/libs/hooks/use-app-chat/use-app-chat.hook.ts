@@ -18,9 +18,9 @@ type State = {
 };
 
 const useAppChat = (): AppChat => {
-  const messages: ChatMessage[] = useAppSelector(
-    (state: State) => state.chat.messages,
-  );
+  const messages: ChatMessage[] = useAppSelector((state: State) => {
+    return state.chat.messages;
+  });
   const dispatch = useAppDispatch();
 
   return {
