@@ -129,7 +129,7 @@ class BaseServerApplication implements ServerApplication {
     });
 
     await this.app.register(fileUploadPlugin, {
-      extensions: [ContentType.JPEG, ContentType.PNG],
+      extensions: [ContentType.JPEG, ContentType.PNG, ContentType.MP3],
     });
   }
 
