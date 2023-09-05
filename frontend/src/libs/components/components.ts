@@ -6,7 +6,6 @@ export { Checkbox } from './checkbox/checkbox.js';
 export { DropdownMenu } from './dropdown-menu/dropdown-menu.js';
 export { Header } from './header/header.js';
 export { Icon } from './icon/icon.js';
-export { iconNameToIcon } from './icon/icon-name-to-plain-svg.js';
 export { Input } from './input/input.js';
 export { Link } from './link/link.js';
 export { Loader } from './loader/loader.js';
