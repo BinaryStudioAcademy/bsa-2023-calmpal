@@ -7,7 +7,7 @@ import { Controls, ProgressBar } from './components/components';
 const AudioPlayer: React.FC = () => {
   return (
     <View>
-      <ProgressBar timeProgress={3} duration={3} />
+      <ProgressBar timeProgress={25} duration={65} />
       <Controls />
     </View>
   );

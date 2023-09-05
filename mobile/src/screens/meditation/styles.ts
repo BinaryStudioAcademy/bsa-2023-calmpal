@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   contentWrapper: {
-    paddingHorizontal: 55,
+    paddingHorizontal: 60,
     alignItems: 'center',
   },
   imageWrapper: {
