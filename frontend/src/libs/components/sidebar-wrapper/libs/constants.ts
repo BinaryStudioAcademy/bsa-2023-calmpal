@@ -1,5 +1,5 @@
 import chat from '#assets/icons/chat-sidebar-logo.svg';
-import home from '#assets/img/home.svg';
+import home from '#assets/icons/home.svg';
 import { AppRoute } from '#libs/enums/enums.js';
 import { type Route } from '#libs/types/types.js';
 
