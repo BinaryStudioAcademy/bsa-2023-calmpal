@@ -83,7 +83,9 @@ class BaseServerApplication implements ServerApplication {
   }
 
   public initRoutes(): void {
-    const routers = this.apis.flatMap((api) => api.routes);
+    const routers = this.apis.flatMap((api) => {
+      return api.routes;
+    });
 
     this.addRoutes(routers);
   }

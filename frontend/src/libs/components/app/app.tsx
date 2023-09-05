@@ -15,11 +15,13 @@ const App: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { authenticatedUser, authenticatedUserDataStatus, redirectTo } =
-    useAppSelector(({ auth, app }) => ({
-      authenticatedUser: auth.authenticatedUser,
-      authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
-      redirectTo: app.redirectTo,
-    }));
+    useAppSelector(({ auth, app }) => {
+      return {
+        authenticatedUser: auth.authenticatedUser,
+        authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
+        redirectTo: app.redirectTo,
+      };
+    });
 
   useEffect(() => {
     void dispatch(authActions.getAuthenticatedUser());
