@@ -1,4 +1,5 @@
 import { Icon } from '#libs/components/components.js';
+import { IconColor } from '#libs/enums/icon-color.enum.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback } from '#libs/hooks/hooks.js';
 import { type IconName } from '#libs/types/types.js';
@@ -30,11 +31,11 @@ const ProfileSettingsButton: React.FC<Properties> = ({
   return (
     <button className={buttonStyle} onClick={handleClick}>
       <div className={styles['icon-background']}>
-        <Icon name={name} />
+        <Icon name={name} color={IconColor.BLUE} />
       </div>
       <div className={styles['text-container']}>
         <span className={styles['profile-button-text']}>{children}</span>
-        {isActive && <Icon name="arrow" />}
+        {isActive && <Icon name="arrow" color={IconColor.BLUE} />}
       </div>
     </button>
   );

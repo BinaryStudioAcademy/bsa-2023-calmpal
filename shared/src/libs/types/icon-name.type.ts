@@ -4,7 +4,6 @@ type IconName =
   | 'sign-out'
   | 'avatar'
   | 'notification'
-  | 'subscription'
-  | 'chat-logo';
+  | 'subscription';
 
 export { type IconName };

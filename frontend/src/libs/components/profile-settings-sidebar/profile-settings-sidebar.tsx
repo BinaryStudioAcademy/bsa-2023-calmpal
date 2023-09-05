@@ -1,3 +1,4 @@
+import { IconColor } from '#libs/enums/icon-color.enum.js';
 import { useAppSelector, useCallback, useState } from '#libs/hooks/hooks.js';
 import { type IconName } from '#libs/types/types.js';
 
@@ -28,7 +29,7 @@ const ProfileSettingsSidebar: React.FC = () => {
           <div className="visually-hidden">User details</div>
           <div className={styles['user-details']}>
             <div className={styles['user-icon']}>
-              <Icon name="avatar" />
+              <Icon name="avatar" color={IconColor.BLUE} />
             </div>
             <div className={styles['user-name']}>{userName}</div>
           </div>
