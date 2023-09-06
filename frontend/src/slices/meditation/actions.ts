@@ -14,11 +14,7 @@ const createMeditationEntry = createAsyncThunk<
   AsyncThunkConfig
 >(`${sliceName}/create-meditation-entry`, async (payload, { extra }) => {
   const { meditationApi, filesApi } = extra;
-
-  const file = await filesApi.uploadFile({
-    file: payload.file,
-    contentType: payload.contentType,
-  });
+  const file = await filesApi.uploadFile(payload.file);
 
   return await meditationApi.createMeditationEntry({
     topicName: payload.topicName,

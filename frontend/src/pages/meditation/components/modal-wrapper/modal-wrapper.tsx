@@ -1,4 +1,4 @@
-import { ContentType, DataStatus } from '#libs/enums/enums.js';
+import { DataStatus } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -39,7 +39,6 @@ const ModalWrapper: React.FC = () => {
         meditationActions.createMeditationEntry({
           topicName: title,
           file: file,
-          contentType: ContentType.MPEG,
         }),
       );
     },
