@@ -17,10 +17,10 @@ type UserRow = {
 };
 
 async function up(knex: Knex): Promise<void> {
-  const userRole: UserRow = (await knex(TABLE_NAME.USER_ROLES)
-    .where({ key: USER_ROLE_KEY })
-    .select(COLUMN_NAME.ID)
-    .first()) as UserRow;
+  const userRole = await knex(TABLE_NAME.USER_ROLES)
+    .select<UserRow>(COLUMN_NAME.ID)
+    .where('key', USER_ROLE_KEY)
+    .first();
 
   await knex.schema.alterTable(TABLE_NAME.USERS, (table) => {
     table
@@ -29,7 +29,7 @@ async function up(knex: Knex): Promise<void> {
       .notNullable()
       .references(COLUMN_NAME.ID)
       .inTable(TABLE_NAME.USER_ROLES)
-      .defaultTo(userRole.id);
+      .defaultTo((userRole as UserRow).id);
   });
 }
 
