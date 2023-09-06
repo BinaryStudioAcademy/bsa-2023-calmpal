@@ -89,7 +89,6 @@ class JournalEntryController extends BaseController {
    *                type: object
    *                properties:
    *                  journalEntry:
-   *                    type: object
    *                    $ref: '#/components/schemas/Journal Entry'
    */
 
