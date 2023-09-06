@@ -10,18 +10,24 @@ import { type Config } from '#libs/packages/config/config.js';
 import { notification } from '#libs/packages/notification/notification.js';
 import { handleError } from '#libs/packages/store/middlewares/middlewares.js';
 import { authApi } from '#packages/auth/auth.js';
+import { filesApi } from '#packages/files/files.js';
+import { meditationApi } from '#packages/meditation/meditation.js';
 import { reducer as appReducer } from '#slices/app/app.js';
 import { reducer as authReducer } from '#slices/auth/auth.js';
+import { reducer as meditationReducer } from '#slices/meditation/meditation.js';
 
 import { storage } from '../storage/storage.js';
 
 type RootReducer = {
   auth: ReturnType<typeof authReducer>;
   app: ReturnType<typeof appReducer>;
+  meditation: ReturnType<typeof meditationReducer>;
 };
 
 type ExtraArguments = {
   authApi: typeof authApi;
+  meditationApi: typeof meditationApi;
+  filesApi: typeof filesApi;
   storage: typeof storage;
   notification: typeof notification;
 };
@@ -41,6 +47,7 @@ class Store {
       reducer: {
         auth: authReducer,
         app: appReducer,
+        meditation: meditationReducer,
       },
       middleware: (getDefaultMiddleware) => {
         return [
@@ -58,6 +65,8 @@ class Store {
   public get extraArguments(): ExtraArguments {
     return {
       authApi,
+      meditationApi,
+      filesApi,
       storage,
       notification,
     };
