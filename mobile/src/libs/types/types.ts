@@ -1,4 +1,5 @@
 export { type AsyncThunkConfig } from './app/app';
+export { type IconName } from './icon-name.type';
 export {
   type ChatNavigationParameterList,
   type NavigationScreenProperties,
