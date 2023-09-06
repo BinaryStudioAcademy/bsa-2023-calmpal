@@ -58,9 +58,11 @@ const InputFile = <T extends FormFieldValues>({
 
         return property.message;
       });
-    } else {
-      setErrorMessage(null);
+
+      return;
     }
+
+    setErrorMessage(null);
   }, [inputError]);
 
   const handleFileChange = useCallback(
