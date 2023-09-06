@@ -23,7 +23,7 @@ const MeditationModal: React.FC<Properties> = ({
   onSubmit,
   onClose,
 }) => {
-  const [file, setFile] = useState<File>();
+  const [file, setFile] = useState<File | null>(null);
   const { control, errors, handleSubmit, reset } =
     useAppForm<MeditationCreateValidation>({
       defaultValues: DEFAULT_MEDITATION_PAYLOAD,
@@ -43,6 +43,7 @@ const MeditationModal: React.FC<Properties> = ({
     (event_: React.FormEvent<HTMLFormElement>) => {
       void handleSubmit(({ title }) => {
         reset();
+        setFile(null);
         onSubmit(title, file as File);
       })(event_);
     },
