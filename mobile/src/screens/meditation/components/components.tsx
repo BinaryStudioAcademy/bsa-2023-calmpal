@@ -1,1 +1,2 @@
-export { AudioPlayer } from './audio-player/audio-player';
+export { Controls } from './controls/controls';
+export { ProgressBar } from './progress-bar/progress-bar';

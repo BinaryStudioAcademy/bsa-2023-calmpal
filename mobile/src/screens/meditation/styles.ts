@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: AppColor.WHITE,
     flex: 1,
-    alignItems: 'center',
   },
   background: {
     position: 'absolute',
@@ -14,7 +13,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   contentWrapper: {
-    paddingHorizontal: 60,
+    paddingHorizontal: 45,
     alignItems: 'center',
   },
   imageWrapper: {
