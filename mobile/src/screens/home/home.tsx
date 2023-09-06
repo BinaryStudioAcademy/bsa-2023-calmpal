@@ -9,7 +9,7 @@ const Home: React.FC = () => {
   return (
     <React.Fragment>
       <LinearGradient>
-        <View>
+        <View style={styles.profileContainer}>
           <Image source={userImagePlaceholder} style={styles.userImage} />
         </View>
       </LinearGradient>
