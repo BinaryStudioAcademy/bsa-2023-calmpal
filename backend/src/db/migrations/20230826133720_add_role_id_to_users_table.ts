@@ -12,13 +12,13 @@ const COLUMN_NAME = {
 
 const USER_ROLE_KEY = 'user';
 
-type UserRow = {
+type UserRole = {
   id: number;
 };
 
 async function up(knex: Knex): Promise<void> {
   const userRole = await knex(TABLE_NAME.USER_ROLES)
-    .select<UserRow>(COLUMN_NAME.ID)
+    .select<UserRole>(COLUMN_NAME.ID)
     .where('key', USER_ROLE_KEY)
     .first();
 
@@ -29,7 +29,7 @@ async function up(knex: Knex): Promise<void> {
       .notNullable()
       .references(COLUMN_NAME.ID)
       .inTable(TABLE_NAME.USER_ROLES)
-      .defaultTo((userRole as UserRow).id);
+      .defaultTo((userRole as UserRole).id);
   });
 }
 
