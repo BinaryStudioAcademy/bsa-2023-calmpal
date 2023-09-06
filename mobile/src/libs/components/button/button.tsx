@@ -10,6 +10,7 @@ type Properties = {
   onPress: () => void;
   isDisabled?: boolean;
   type?: 'solid' | 'outlined';
+  color?: string;
 };
 
 const Button: React.FC<Properties> = ({
@@ -17,10 +18,20 @@ const Button: React.FC<Properties> = ({
   onPress,
   isDisabled = false,
   type = 'solid',
+  color = '',
 }) => {
   const handleOnPress = (): void => {
     onPress();
   };
+
+  let dynamicStyles = {};
+
+  if (color) {
+    dynamicStyles = {
+      backgroundColor: type === 'solid' ? color : 'transparent',
+      borderColor: type === 'outlined' ? color : 'transparent',
+    };
+  }
 
   return (
     <Pressable
@@ -29,6 +40,7 @@ const Button: React.FC<Properties> = ({
         type === 'solid' && styles.buttonSolid,
         type === 'outlined' && styles.buttonOutlined,
         isDisabled && styles.buttonDisabled,
+        dynamicStyles,
       ]}
       onPress={handleOnPress}
       disabled={isDisabled}

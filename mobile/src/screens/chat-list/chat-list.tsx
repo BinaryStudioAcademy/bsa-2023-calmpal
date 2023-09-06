@@ -8,6 +8,7 @@ import {
   InputSearch,
   LinearGradient,
   Link,
+  Modal,
   ScrollView,
   View,
 } from '#libs/components/components';
@@ -54,6 +55,7 @@ const ChatList: React.FC = () => {
   return (
     <LinearGradient>
       <View style={styles.container}>
+        <Modal />
         <InputSearch
           placeholder="Search chat"
           setSearchQuery={setSearchQuery}
