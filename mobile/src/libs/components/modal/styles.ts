@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   duration: {
-    color: '#747474',
+    color: AppColor.GRAY_200_ALPHA_50,
     fontSize: 20,
   },
   durationItem: {
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     height: 80,
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: '#747474',
+    borderColor: AppColor.GRAY_200_ALPHA_50,
     borderWidth: 1,
     backgroundColor: AppColor.WHITE,
   },
