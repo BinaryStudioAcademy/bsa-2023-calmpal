@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     marginLeft: 16,
   },
   messageText: {
-    fontSize: 14,
+    fontSize: 16,
     lineHeight: 20,
     paddingVertical: 8,
     paddingHorizontal: 16,
