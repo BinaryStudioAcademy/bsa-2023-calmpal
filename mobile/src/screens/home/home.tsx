@@ -7,7 +7,7 @@ import { type UserAuthResponseDto } from '#packages/users/users';
 
 import { styles } from './styles';
 
-const Home: React.FC = () => {
+const Dashboard: React.FC = () => {
   const { userName } = useAppSelector(({ auth }) => {
     return {
       userName: (auth.authenticatedUser as UserAuthResponseDto).fullName,
@@ -26,4 +26,4 @@ const Home: React.FC = () => {
   );
 };
 
-export { Home };
+export { Dashboard };
