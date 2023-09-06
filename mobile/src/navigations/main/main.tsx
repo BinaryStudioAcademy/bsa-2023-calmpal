@@ -7,7 +7,7 @@ import { Header } from '#libs/components/components';
 import { AppColor, MainScreenName } from '#libs/enums/enums';
 import { type TabNavigationParameterList } from '#libs/types/types';
 import { Chat } from '#navigations/navigations';
-import { Dashboard } from '#screens/home/home';
+import { Dashboard } from '#screens/dashboard/dashboard';
 
 import { styles } from './styles';
 
