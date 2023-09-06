@@ -2,6 +2,7 @@ import { type NavigationProp } from '@react-navigation/native';
 import React from 'react';
 
 import {
+  Button,
   Icon,
   Text,
   TouchableOpacity,
@@ -11,7 +12,6 @@ import { AppColor, RootScreenName } from '#libs/enums/enums';
 import { useAppRoute, useNavigation } from '#libs/hooks/hooks';
 import { type RootNavigationParameterList } from '#libs/types/types';
 
-import { IconButton } from '../icon-button/icon-button';
 import { Badge } from './components/components';
 import { DEFAULT_BADGE_COUNT } from './libs/constants';
 import { styles } from './styles';
@@ -62,7 +62,7 @@ const Header: React.FC<Properties> = ({
       </View>
       {isSettingsVisible && (
         <View style={styles.settingsContainer}>
-          <IconButton
+          <Button
             onPress={handleIconPress}
             iconSourceSvg={<Icon name="user" color={AppColor.BLUE_300} />}
           />
