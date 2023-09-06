@@ -4,7 +4,7 @@ import ChatIcon from '#assets/img/icons/chat.svg';
 import HomeIcon from '#assets/img/icons/home.svg';
 import PlusIcon from '#assets/img/icons/plus.svg';
 import UserIcon from '#assets/img/icons/user.svg';
-import { type IconName } from '#libs/types/icon-name.type';
+import { type IconName } from '#libs/types/types';
 
 type SVGIcon = React.FC<React.SVGProps<SVGSVGElement>>;
 
