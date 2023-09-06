@@ -1,5 +1,6 @@
 .profile-button {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   min-width: 317px;
   margin-bottom: 8px;
@@ -15,10 +16,20 @@
   box-shadow: 0 4px 49px 0 var(--blue-alpha-90);
 }
 
+.icon-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 83px;
+  min-height: 83px;
+  margin-right: 25px;
+  padding: 3px;
+  background-color: var(--blue-300);
+  border-radius: 20px;
+}
+
 .profile-button-text {
   display: block;
-  width: 145px;
-  margin-right: 25px;
   color: var(--gray-300);
   font-weight: 600;
   font-size: 16px;
@@ -29,19 +40,16 @@
 
 .text-container {
   display: flex;
+  flex: 1;
   align-items: center;
 }
 
-.icon-background {
+.arrow-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 83px;
-  height: 83px;
-  margin-right: 25px;
-  padding: 3px;
-  background-color: var(--blue-300);
-  border-radius: 20px;
+  margin-left: 26px;
 }
 
 @media (width <= 480px) {

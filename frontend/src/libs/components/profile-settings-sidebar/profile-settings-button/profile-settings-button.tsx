@@ -35,6 +35,8 @@ const ProfileSettingsButton: React.FC<Properties> = ({
       </div>
       <div className={styles['text-container']}>
         <span className={styles['profile-button-text']}>{children}</span>
+      </div>
+      <div className={styles['arrow-container']}>
         {isActive && <Icon name="arrow" color={IconColor.BLUE} />}
       </div>
     </button>
