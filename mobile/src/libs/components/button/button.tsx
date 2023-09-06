@@ -25,7 +25,7 @@ const Button: React.FC<Properties> = ({
   };
 
   return iconSourceSvg ? (
-    <Pressable onPress={onPress} style={styles.iconButtonContainer}>
+    <Pressable onPress={handleOnPress} style={styles.iconButtonContainer}>
       {iconSourceSvg}
     </Pressable>
   ) : (
