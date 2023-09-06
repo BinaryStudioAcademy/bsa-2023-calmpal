@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-// import { AppColor } from '#libs/enums/enums';
+import { AppColor } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   profileContainer: {
@@ -12,6 +12,12 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
+  },
+  userName: {
+    marginTop: 6,
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: AppColor.GRAY_500,
   },
 });
 

@@ -19,7 +19,7 @@ const Home: React.FC = () => {
       <LinearGradient>
         <View style={styles.profileContainer}>
           <Image source={userImagePlaceholder} style={styles.userImage} />
-          <Text>{userName}</Text>
+          <Text style={styles.userName}>{userName}</Text>
         </View>
       </LinearGradient>
     </React.Fragment>
