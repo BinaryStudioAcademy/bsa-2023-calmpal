@@ -1,5 +1,6 @@
-import { iconNameToIcon } from '#libs/maps/icon-name-to-plain-svg.js';
 import { type IconName } from '#libs/types/types.js';
+
+import { iconNameToIcon } from './libs/maps/icon-name-to-icon.js';
 
 type Properties = {
   name: IconName;
