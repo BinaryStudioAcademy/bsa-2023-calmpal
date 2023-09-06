@@ -1,3 +1,12 @@
-type IconName = 'arrow' | 'plus' | 'cross' | 'upload' | 'download';
+type IconName =
+  | 'home'
+  | 'meditation'
+  | 'play'
+  | 'arrow'
+  | 'plus'
+  | 'chats'
+  | 'cross'
+  | 'upload'
+  | 'download';
 
 export { type IconName };
