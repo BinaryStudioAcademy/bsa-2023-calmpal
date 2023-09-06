@@ -6,7 +6,7 @@ import { ReactComponent as SignOutIcon } from '#assets/icons/sign-out.svg';
 import { ReactComponent as SubscriptionIcon } from '#assets/icons/subscription.svg';
 import { type IconName } from '#libs/types/types.js';
 
-const iconNameToPlainSvg: Record<
+const iconNameToIcon: Record<
   IconName,
   React.FunctionComponent<React.SVGProps<SVGSVGElement>>
 > = {
@@ -18,4 +18,4 @@ const iconNameToPlainSvg: Record<
   'subscription': SubscriptionIcon,
 };
 
-export { iconNameToPlainSvg };
+export { iconNameToIcon };
