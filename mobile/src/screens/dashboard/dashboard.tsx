@@ -15,14 +15,12 @@ const Dashboard: React.FC = () => {
   });
 
   return (
-    <React.Fragment>
-      <LinearGradient>
-        <View style={styles.profileContainer}>
-          <Image source={userImagePlaceholder} style={styles.userImage} />
-          <Text style={styles.userName}>{userName}</Text>
-        </View>
-      </LinearGradient>
-    </React.Fragment>
+    <LinearGradient>
+      <View style={styles.profileContainer}>
+        <Image source={userImagePlaceholder} style={styles.userImage} />
+        <Text style={styles.userName}>{userName}</Text>
+      </View>
+    </LinearGradient>
   );
 };
 
