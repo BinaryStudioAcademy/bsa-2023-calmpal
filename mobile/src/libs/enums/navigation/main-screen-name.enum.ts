@@ -1,5 +1,5 @@
 const MainScreenName = {
-  HOME: 'Home',
+  DASHBOARD: 'Home',
   CHAT_LIST: 'Chat list',
 } as const;
 
