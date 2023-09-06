@@ -1,6 +1,7 @@
-import { IconColor } from '#libs/enums/icon-color.enum.js';
+import { IconColor } from '#libs/enums/enums.js';
 import { useAppSelector, useCallback, useState } from '#libs/hooks/hooks.js';
 import { type IconName } from '#libs/types/types.js';
+import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { Icon } from '../components.js';
 import { ProfileSettingsButton } from './profile-settings-button/profile-settings-button.js';
@@ -8,7 +9,9 @@ import styles from './styles.module.scss';
 
 const ProfileSettingsSidebar: React.FC = () => {
   const userName = useAppSelector((state) => {
-    return state.auth.authenticatedUser?.fullName;
+    const user = state.auth.authenticatedUser as UserAuthResponseDto;
+
+    return user.fullName;
   });
 
   const [activeButton, setActiveButton] = useState<string>('');
