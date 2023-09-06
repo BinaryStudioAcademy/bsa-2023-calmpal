@@ -45,30 +45,27 @@ const Root: React.FC = () => {
     void dispatch(authActions.getAuthenticatedUser());
   }, [dispatch]);
 
+  const getScreen = (): JSX.Element => {
+    if (authenticatedUser) {
+      return isSurveyCompleted ? (
+        <NativeStack.Screen name={RootScreenName.MAIN} component={Main} />
+      ) : (
+        <NativeStack.Screen name={RootScreenName.SURVEY} component={Survey} />
+      );
+    } else {
+      return (
+        <>
+          <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
+          <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
+        </>
+      );
+    }
+  };
+
   return (
     <>
       <NativeStack.Navigator screenOptions={screenOptions}>
-        {authenticatedUser ? (
-          isSurveyCompleted ? (
-            <NativeStack.Screen name={RootScreenName.MAIN} component={Main} />
-          ) : (
-            <NativeStack.Screen
-              name={RootScreenName.SURVEY}
-              component={Survey}
-            />
-          )
-        ) : (
-          <>
-            <NativeStack.Screen
-              name={RootScreenName.SIGN_IN}
-              component={Auth}
-            />
-            <NativeStack.Screen
-              name={RootScreenName.SIGN_UP}
-              component={Auth}
-            />
-          </>
-        )}
+        {getScreen()}
       </NativeStack.Navigator>
       <Loader isVisible={isLoaderVisible} />
     </>
