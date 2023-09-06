@@ -1,20 +1,28 @@
 import { format } from 'date-fns';
 
-const START_POINT = 0;
+import { TIME_FORMAT } from '#libs/enums/enums.js';
 
-const TIME_FORMATS = {
-  MM_SS: 'mm:ss',
-  HH_MM_SS: 'hh:mm:ss',
+const MILLISECONDS_IN_SECOND = 1000;
+const SECONDS_IN_MINUTE = 60;
+
+const getFormattedDate = (date: Date, formatType: string): string => {
+  return format(date, formatType);
 };
 
-const getFormattedTime = (timeInSeconds: number): string => {
-  const date = new Date(START_POINT);
-  date.setHours(START_POINT);
+const getFormattedTime = (seconds: number): string => {
+  const timeZoneOffsetInMinutes = new Date().getTimezoneOffset();
 
-  date.setSeconds(timeInSeconds);
-  const hasHours = date.getHours();
+  const timeZoneOffsetInMilliseconds =
+    timeZoneOffsetInMinutes * SECONDS_IN_MINUTE * MILLISECONDS_IN_SECOND;
+  const offset = new Date(
+    seconds * MILLISECONDS_IN_SECOND + timeZoneOffsetInMilliseconds,
+  );
+  const hours = offset.getHours();
 
-  return format(date, hasHours ? TIME_FORMATS.HH_MM_SS : TIME_FORMATS.MM_SS);
+  return getFormattedDate(
+    offset,
+    hours ? TIME_FORMAT.HH_MM_SS : TIME_FORMAT.MM_SS,
+  );
 };
 
 export { getFormattedTime };
