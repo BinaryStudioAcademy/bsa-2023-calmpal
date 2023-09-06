@@ -43,7 +43,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 14px;
+  padding: 0;
   background-color: var(--white);
   border: 0;
   border-radius: 50%;
@@ -55,7 +55,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 14px;
   background-color: var(--white);
   border: 0;
   border-radius: 50%;
@@ -64,6 +63,7 @@
 }
 
 .link {
+  padding: 14px;
   line-height: 0px;
 }
 
