@@ -1,3 +1,3 @@
-type IconName = 'arrow' | 'plus';
+type IconName = 'arrow' | 'plus' | 'cross' | 'upload' | 'download';
 
 export { type IconName };
