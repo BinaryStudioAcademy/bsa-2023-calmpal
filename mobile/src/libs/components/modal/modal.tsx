@@ -28,7 +28,7 @@ const Modal: React.FC = () => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modal}>
-            <Text style={styles.title}>Choose your duration</Text>
+            <Text style={styles.title}>Choose Your Duration</Text>
             <View style={styles.durations}>
               {Object.keys(MEDITATION_DURATION).map((duration) => {
                 return (
@@ -70,6 +70,8 @@ const Modal: React.FC = () => {
                 setIsModalVisible(!isModalVisible);
               }}
               color={AppColor.BLUE_300}
+              type="solid"
+              styles={styles.button}
             />
           </View>
         </View>

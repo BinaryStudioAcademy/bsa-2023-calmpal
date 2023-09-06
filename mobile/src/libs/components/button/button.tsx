@@ -2,6 +2,7 @@ import React from 'react';
 import { Pressable } from 'react-native';
 
 import { Text } from '#libs/components/components';
+import { AppColor } from '#libs/enums/enums';
 
 import { styles } from './styles';
 
@@ -11,6 +12,7 @@ type Properties = {
   isDisabled?: boolean;
   type?: 'solid' | 'outlined';
   color?: string;
+  styles?: { height?: number; borderRadius?: number };
 };
 
 const Button: React.FC<Properties> = ({
@@ -18,20 +20,14 @@ const Button: React.FC<Properties> = ({
   onPress,
   isDisabled = false,
   type = 'solid',
-  color = '',
+  color = AppColor.GRAY_500,
+  styles: buttonStyles,
 }) => {
   const handleOnPress = (): void => {
     onPress();
   };
 
-  let dynamicStyles = {};
-
-  if (color) {
-    dynamicStyles = {
-      backgroundColor: type === 'solid' ? color : 'transparent',
-      borderColor: type === 'outlined' ? color : 'transparent',
-    };
-  }
+  const isCustomColor = Boolean(color);
 
   return (
     <Pressable
@@ -39,8 +35,9 @@ const Button: React.FC<Properties> = ({
         styles.button,
         type === 'solid' && styles.buttonSolid,
         type === 'outlined' && styles.buttonOutlined,
+        isCustomColor && { backgroundColor: color },
+        buttonStyles,
         isDisabled && styles.buttonDisabled,
-        dynamicStyles,
       ]}
       onPress={handleOnPress}
       disabled={isDisabled}
