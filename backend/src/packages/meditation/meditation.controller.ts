@@ -49,12 +49,13 @@ class MeditationController extends BaseController {
     this.addRoute({
       path: MeditationApiPath.ROOT,
       method: 'POST',
-      handler: (options) =>
-        this.create(
+      handler: (options) => {
+        return this.create(
           options as APIHandlerOptions<{
             body: MeditationEntryRequestDto;
           }>,
-        ),
+        );
+      },
     });
   }
 
