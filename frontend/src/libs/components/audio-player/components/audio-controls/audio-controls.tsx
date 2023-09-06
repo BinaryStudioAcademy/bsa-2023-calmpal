@@ -121,7 +121,7 @@ const AudioControls: React.FC<Properties> = ({
           <Button
             onClick={handlePlayToggle}
             style="rounded"
-            iconName={isPlaying ? 'pause' : 'play'}
+            iconName={isPlaying ? 'pause' : 'audio-play-icon'}
             label="Play or pause a meditation"
             isLabelVisuallyHidden
           />

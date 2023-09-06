@@ -5,7 +5,11 @@ type IconName =
   | 'forward'
   | 'next'
   | 'previous'
+  | 'audio-play-icon'
   | 'play'
-  | 'pause';
+  | 'pause'
+  | 'home'
+  | 'meditation'
+  | 'chats';
 
 export { type IconName };
