@@ -44,7 +44,10 @@ export {
   type S3FileUploadRequestDto,
 } from './packages/files/files.js';
 export {
+  createMeditationValidationSchema,
   MeditationApiPath,
+  type MeditationCreatePayload,
+  type MeditationCreateValidation,
   type MeditationEntryRequestDto,
   type MeditationEntryResponseDto,
 } from './packages/meditation/meditation.js';
