@@ -1,0 +1,5 @@
+const NOTIFICATION_SETTINGS_DEFAULT_VALUE = {
+  notification: true,
+};
+
+export { NOTIFICATION_SETTINGS_DEFAULT_VALUE };
