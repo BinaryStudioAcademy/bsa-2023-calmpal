@@ -36,7 +36,7 @@ const InputFile = <T extends FormFieldValues>({
   description,
   onChange,
 }: Properties<T>): JSX.Element => {
-  const [errorMessage, setErrorMessage] = useState<string>();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { field } = useFormController({ name, control });
 
   const hasFile = Boolean(fileName);
@@ -58,6 +58,8 @@ const InputFile = <T extends FormFieldValues>({
 
         return property.message;
       });
+    } else {
+      setErrorMessage(null);
     }
   }, [inputError]);
 
