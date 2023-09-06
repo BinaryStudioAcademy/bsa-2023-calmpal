@@ -5,15 +5,7 @@ import { AppColor } from '#libs/enums/enums';
 
 import { styles } from './styles';
 
-type Properties = {
-  isVisible: boolean;
-};
-
-const Loader: React.FC<Properties> = ({ isVisible }) => {
-  if (!isVisible) {
-    return null;
-  }
-
+const Loader: React.FC = () => {
   return (
     <View style={styles.container}>
       <ActivityIndicator size="large" color={AppColor.BLUE_200} />

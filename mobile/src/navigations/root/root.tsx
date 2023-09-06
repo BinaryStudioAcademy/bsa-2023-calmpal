@@ -67,7 +67,7 @@ const Root: React.FC = () => {
       <NativeStack.Navigator screenOptions={screenOptions}>
         {getScreen()}
       </NativeStack.Navigator>
-      <Loader isVisible={isLoaderVisible} />
+      {isLoaderVisible && <Loader />}
     </>
   );
 };
