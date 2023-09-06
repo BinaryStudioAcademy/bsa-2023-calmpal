@@ -3,6 +3,7 @@ export {
   ChatScreenName,
   MainScreenName,
   RootScreenName,
+  SurveyScreenName,
 } from './navigation/navigation';
 export { AppColor } from './ui/ui';
 export {

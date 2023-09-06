@@ -3,6 +3,7 @@ export {
   type ChatNavigationParameterList,
   type NavigationScreenProperties,
   type RootNavigationParameterList,
+  type SurveyNavigationParameterList,
   type TabNavigationParameterList,
 } from './navigation/navigation';
 export {
