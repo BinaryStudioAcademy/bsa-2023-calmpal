@@ -1,9 +1,9 @@
+import { Icon } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { useAppSelector, useCallback, useState } from '#libs/hooks/hooks.js';
 import { type IconName } from '#libs/types/types.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 
-import { Icon } from '../components.js';
 import { ProfileSettingsButton } from './profile-settings-button/profile-settings-button.js';
 import styles from './styles.module.scss';
 
