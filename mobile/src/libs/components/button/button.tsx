@@ -6,8 +6,9 @@ import { Text } from '#libs/components/components';
 import { styles } from './styles';
 
 type Properties = {
-  label: string;
+  label?: string;
   onPress: () => void;
+  iconSourceSvg?: JSX.Element;
   isDisabled?: boolean;
   type?: 'solid' | 'outlined';
 };
@@ -17,12 +18,17 @@ const Button: React.FC<Properties> = ({
   onPress,
   isDisabled = false,
   type = 'solid',
+  iconSourceSvg,
 }) => {
   const handleOnPress = (): void => {
     onPress();
   };
 
-  return (
+  return iconSourceSvg ? (
+    <Pressable onPress={onPress} style={styles.iconButtonContainer}>
+      {iconSourceSvg}
+    </Pressable>
+  ) : (
     <Pressable
       style={[
         styles.button,
