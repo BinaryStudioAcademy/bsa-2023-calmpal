@@ -16,6 +16,7 @@ export {
 export {
   configureString,
   debounce,
+  getFormattedTime,
   replaceTemplateWithValue,
 } from './libs/helpers/helpers.js';
 export { type Config } from './libs/packages/config/config.js';
