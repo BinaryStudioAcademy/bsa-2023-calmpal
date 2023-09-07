@@ -37,13 +37,13 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
         showsVerticalScrollIndicator={false}
       >
         <Label />
-        <Text style={styles.titleText}>Sign In to your account</Text>
+        <Text style={styles.titleText}>Sign in to your account</Text>
         <Input
           control={control}
           errors={errors}
-          label="Email"
+          label="E-mail"
           name="email"
-          placeholder="Enter your email"
+          placeholder="Enter your e-mail"
         />
         <Input
           control={control}
@@ -58,7 +58,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
           label={
             <React.Fragment>
               Don&apos;t have an account? Go to{' '}
-              <Text style={styles.boldText}>Sign Up</Text>
+              <Text style={styles.boldText}>Sign up</Text>
             </React.Fragment>
           }
           to={`/${RootScreenName.SIGN_UP}`}

@@ -26,7 +26,8 @@
   },
   "dependencies": {
     "debounce": "1.2.1",
-    "joi": "17.9.2"
+    "joi": "17.9.2",
+    "date-fns": "2.30.0"
   },
   "devDependencies": {
     "@types/debounce": "1.2.1",
