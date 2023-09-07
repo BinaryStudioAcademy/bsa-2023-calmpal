@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-  Header,
   LinearGradient,
   ScrollView,
   Switch,
@@ -19,7 +18,6 @@ const ProfileSettings: React.FC = () => {
 
   return (
     <LinearGradient>
-      <Header isArrowVisible />
       <ScrollView contentContainerStyle={styles.container}>
         <Setting
           label="Allow Notifications"

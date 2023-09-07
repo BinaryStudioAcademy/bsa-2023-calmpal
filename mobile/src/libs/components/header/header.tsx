@@ -8,9 +8,9 @@ import {
   TouchableOpacity,
   View,
 } from '#libs/components/components';
-import { AppColor, RootScreenName } from '#libs/enums/enums';
+import { AppColor, ProfileScreenName } from '#libs/enums/enums';
 import { useAppRoute, useNavigation } from '#libs/hooks/hooks';
-import { type RootNavigationParameterList } from '#libs/types/types';
+import { type ProfileNavigationParameterList } from '#libs/types/types';
 
 import { Badge } from './components/components';
 import { DEFAULT_BADGE_COUNT } from './libs/constants';
@@ -30,7 +30,7 @@ const Header: React.FC<Properties> = ({
   isProfileVisible = false,
 }) => {
   const navigation =
-    useNavigation<NavigationProp<RootNavigationParameterList>>();
+    useNavigation<NavigationProp<ProfileNavigationParameterList>>();
   const { name } = useAppRoute();
 
   const hasValue = Boolean(badgeCount);
@@ -40,7 +40,7 @@ const Header: React.FC<Properties> = ({
   };
 
   const handleIconPress = (): void => {
-    navigation.navigate(RootScreenName.PROFILE);
+    navigation.navigate(ProfileScreenName.PROFILE);
   };
 
   return (

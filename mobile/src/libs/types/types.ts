@@ -4,6 +4,7 @@ export {
   type ChatNavigationParameterList,
   type MeditationNavigationParameterList,
   type NavigationScreenProperties,
+  type ProfileNavigationParameterList,
   type RootNavigationParameterList,
   type TabNavigationParameterList,
 } from './navigation/navigation';

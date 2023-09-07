@@ -8,9 +8,8 @@ import { Loader } from '#libs/components/components';
 import { DataStatus, RootScreenName } from '#libs/enums/enums';
 import { useAppDispatch, useAppSelector, useEffect } from '#libs/hooks/hooks';
 import { type RootNavigationParameterList } from '#libs/types/types';
+import { UserProfile } from '#navigations/navigations';
 import { Auth } from '#screens/auth/auth';
-import { Profile } from '#screens/profile/profile';
-import { ProfileSettings } from '#screens/profile-settings/profile-settings';
 import { Survey } from '#screens/survey/survey';
 import { actions as authActions } from '#slices/auth/auth';
 
@@ -59,10 +58,9 @@ const Root: React.FC = () => {
         </>
       )}
 
-      <NativeStack.Screen name={RootScreenName.PROFILE} component={Profile} />
       <NativeStack.Screen
-        name={RootScreenName.SETTINGS}
-        component={ProfileSettings}
+        name={RootScreenName.PROFILE}
+        component={UserProfile}
       />
     </NativeStack.Navigator>
   );
