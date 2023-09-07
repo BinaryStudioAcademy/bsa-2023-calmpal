@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  linearGradient: {
+  container: {
+    paddingTop: 12,
     flex: 1,
   },
 });
