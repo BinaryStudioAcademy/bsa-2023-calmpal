@@ -7,6 +7,7 @@ export {
   type FormPath,
 } from './form/form.type.js';
 export { type IconName } from './icon-name.type.js';
+export { type Meditation } from './meditation-player/meditation-player.type.js';
 export { type Route } from './route/route.type.js';
 export { type ValueOf } from './value-of.type.js';
 export {

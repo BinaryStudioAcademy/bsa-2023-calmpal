@@ -1,0 +1,22 @@
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 45px;
+  margin-bottom: 40px;
+}
+
+.button-wrapper {
+  display: flex;
+  gap: 21px;
+}
+
+@media (width < 767px) {
+  .controls {
+    gap: 20px;
+  }
+
+  .button-wrapper {
+    gap: 27px;
+  }
+}
