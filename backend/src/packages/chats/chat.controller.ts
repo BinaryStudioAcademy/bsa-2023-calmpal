@@ -53,6 +53,16 @@ class ChatController extends BaseController {
         );
       },
     });
+
+    this.addRoute({
+      path: ChatsApiPath.ROOT,
+      method: 'POST',
+      handler: (options) => {
+        return this.create(
+          options as APIHandlerOptions<{ user: UserAuthResponseDto }>,
+        );
+      },
+    });
   }
 
   /**
@@ -79,6 +89,31 @@ class ChatController extends BaseController {
     return {
       status: HTTPCode.OK,
       payload: await this.chatService.findAllByUserId(options.user.id),
+    };
+  }
+
+  /**
+   * @swagger
+   * /chats:
+   *   post:
+   *     description: Create a new chat
+   *     responses:
+   *       201:
+   *         description: Successful operation
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Chat'
+   */
+  private async create(
+    options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
+  ): Promise<APIHandlerResponse> {
+    return {
+      status: HTTPCode.CREATED,
+      payload: await this.chatService.create({
+        name: 'Mocked name',
+        members: [options.user.id],
+      }),
     };
   }
 }
