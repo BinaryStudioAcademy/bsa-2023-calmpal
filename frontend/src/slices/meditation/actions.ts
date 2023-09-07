@@ -13,13 +13,17 @@ const createMeditationEntry = createAsyncThunk<
   MeditationCreatePayload,
   AsyncThunkConfig
 >(`${sliceName}/create-meditation-entry`, async (payload, { extra }) => {
-  const { meditationApi, filesApi } = extra;
-  const file = await filesApi.uploadFile(payload.file);
+  const { meditationApi, filesApi, notification } = extra;
 
-  return await meditationApi.createMeditationEntry({
+  const file = await filesApi.uploadFile(payload.file);
+  const item = await meditationApi.createMeditationEntry({
     topicName: payload.topicName,
     audioUrl: file.url,
   });
+
+  notification.success(`Meditation ${item.topicName} was added.`);
+
+  return item;
 });
 
 export { createMeditationEntry };
