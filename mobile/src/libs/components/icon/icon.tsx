@@ -2,7 +2,7 @@ import React from 'react';
 
 import { type IconName } from '#libs/types/types';
 
-import { iconNameToIcon } from './maps/maps';
+import { iconNameToIcon } from './libs/maps/maps';
 
 type Properties = {
   name: IconName;
