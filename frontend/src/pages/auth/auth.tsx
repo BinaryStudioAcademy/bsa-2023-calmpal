@@ -1,3 +1,6 @@
+import logoM from '#assets/img/logo-m.svg';
+import logoXl from '#assets/img/logo-xl.svg';
+import logoXs from '#assets/img/logo-xs.svg';
 import { AppRoute } from '#libs/enums/enums.js';
 import { useAppDispatch, useCallback, useLocation } from '#libs/hooks/hooks.js';
 import {
@@ -42,11 +45,21 @@ const Auth: React.FC = () => {
 
   return (
     <div className={styles['auth']}>
-      <div className={styles['logo']}>CalmPal</div>
-
       <div className={styles['auth-name']}>
         <p className={styles['secondary']}>Welcome to</p>
-        <p className={styles['primary']}>CalmPal</p>
+        <picture>
+          <source
+            media="(max-width: 768px)"
+            srcSet={logoXs}
+            type="image/svg+xml"
+          />
+          <source
+            media="(max-width: 1023px)"
+            srcSet={logoM}
+            type="image/svg+xml"
+          />
+          <img src={logoXl} alt="CalmPal logo" />
+        </picture>
       </div>
       <div className={styles['overlay']}>{getScreen(pathname)}</div>
     </div>

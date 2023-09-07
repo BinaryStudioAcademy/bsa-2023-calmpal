@@ -2,6 +2,7 @@ export { type AsyncThunkConfig } from './app/app';
 export { type Track } from './meditation/meditation';
 export {
   type ChatNavigationParameterList,
+  type MeditationNavigationParameterList,
   type NavigationScreenProperties,
   type RootNavigationParameterList,
   type TabNavigationParameterList,
