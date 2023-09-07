@@ -5,14 +5,12 @@ import {
 import React from 'react';
 
 import { Loader } from '#libs/components/components';
-import { DataStatus, RootScreenName } from '#libs/enums/enums';
+import { DataStatus } from '#libs/enums/enums';
 import { useAppDispatch, useAppSelector, useEffect } from '#libs/hooks/hooks';
 import { type RootNavigationParameterList } from '#libs/types/types';
-import { Auth } from '#screens/auth/auth';
-import { Survey } from '#screens/survey/survey';
 import { actions as authActions } from '#slices/auth/auth';
 
-import { Main } from '../main/main';
+import { NO_MATCHING_SCREENS, screensConfig } from './libs/constants';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParameterList>();
 
@@ -23,13 +21,11 @@ const screenOptions: NativeStackNavigationOptions = {
 const Root: React.FC = () => {
   const dispatch = useAppDispatch();
   const {
-    isSurveyCompleted,
     authenticatedUser,
     authenticatedUserDataStatus,
     surveyPreferencesDataStatus,
   } = useAppSelector(({ auth }) => {
     return {
-      isSurveyCompleted: auth.authenticatedUser?.isSurveyCompleted,
       authenticatedUser: auth.authenticatedUser,
       authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
       surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
@@ -45,27 +41,36 @@ const Root: React.FC = () => {
     void dispatch(authActions.getAuthenticatedUser());
   }, [dispatch]);
 
-  const getScreen = (): JSX.Element => {
-    if (authenticatedUser) {
-      return isSurveyCompleted ? (
-        <NativeStack.Screen name={RootScreenName.MAIN} component={Main} />
-      ) : (
-        <NativeStack.Screen name={RootScreenName.SURVEY} component={Survey} />
-      );
-    } else {
-      return (
-        <>
-          <NativeStack.Screen name={RootScreenName.SIGN_IN} component={Auth} />
-          <NativeStack.Screen name={RootScreenName.SIGN_UP} component={Auth} />
-        </>
-      );
+  const getScreenToRender = (
+    authenticatedUser: boolean,
+    isSurveyCompleted: boolean,
+  ): JSX.Element[] | null => {
+    const matchingScreens = screensConfig.filter((screen) => {
+      return screen.conditionToRender(authenticatedUser, isSurveyCompleted);
+    });
+
+    if (matchingScreens.length > NO_MATCHING_SCREENS) {
+      return matchingScreens.map((screen) => {
+        return (
+          <NativeStack.Screen
+            name={screen.name}
+            component={screen.component}
+            key={screen.name}
+          />
+        );
+      });
     }
+
+    return null;
   };
 
   return (
     <>
       <NativeStack.Navigator screenOptions={screenOptions}>
-        {getScreen()}
+        {getScreenToRender(
+          Boolean(authenticatedUser),
+          Boolean(authenticatedUser?.isSurveyCompleted),
+        )}
       </NativeStack.Navigator>
       {isLoaderVisible && <Loader />}
     </>
