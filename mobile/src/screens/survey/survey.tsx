@@ -7,6 +7,7 @@ import { type UserAuthResponseDto } from '#packages/users/users';
 import { actions as authActions } from '#slices/auth/auth';
 
 import { PreferencesStep } from './components/components';
+import { styles } from './styles';
 
 const Survey: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -36,7 +37,7 @@ const Survey: React.FC = () => {
   return (
     <React.Fragment>
       <SignBackground>
-        <Text>What can we help you with?</Text>
+        <Text style={styles.titleText}>What can we help you with?</Text>
         <PreferencesStep onSubmit={handleSubmit} />
       </SignBackground>
     </React.Fragment>
