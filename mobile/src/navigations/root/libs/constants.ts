@@ -3,9 +3,7 @@ import { Main } from '#navigations/navigations';
 import { Auth } from '#screens/auth/auth';
 import { Survey } from '#screens/survey/survey';
 
-const NO_MATCHING_SCREENS = 0;
-
-const screensConfig = [
+const NAVIGATION_ITEMS = [
   {
     name: RootScreenName.MAIN,
     component: Main,
@@ -42,4 +40,4 @@ const screensConfig = [
   },
 ];
 
-export { NO_MATCHING_SCREENS, screensConfig };
+export { NAVIGATION_ITEMS };

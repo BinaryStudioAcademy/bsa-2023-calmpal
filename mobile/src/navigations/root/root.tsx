@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector, useEffect } from '#libs/hooks/hooks';
 import { type RootNavigationParameterList } from '#libs/types/types';
 import { actions as authActions } from '#slices/auth/auth';
 
-import { NO_MATCHING_SCREENS, screensConfig } from './libs/constants';
+import { NAVIGATION_ITEMS } from './libs/constants';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParameterList>();
 
@@ -41,36 +41,23 @@ const Root: React.FC = () => {
     void dispatch(authActions.getAuthenticatedUser());
   }, [dispatch]);
 
-  const getScreenToRender = (
-    authenticatedUser: boolean,
-    isSurveyCompleted: boolean,
-  ): JSX.Element[] | null => {
-    const matchingScreens = screensConfig.filter((screen) => {
-      return screen.conditionToRender(authenticatedUser, isSurveyCompleted);
-    });
-
-    if (matchingScreens.length > NO_MATCHING_SCREENS) {
-      return matchingScreens.map((screen) => {
-        return (
-          <NativeStack.Screen
-            name={screen.name}
-            component={screen.component}
-            key={screen.name}
-          />
-        );
-      });
-    }
-
-    return null;
-  };
-
   return (
     <>
       <NativeStack.Navigator screenOptions={screenOptions}>
-        {getScreenToRender(
-          Boolean(authenticatedUser),
-          Boolean(authenticatedUser?.isSurveyCompleted),
-        )}
+        {NAVIGATION_ITEMS.filter((screen) => {
+          return screen.conditionToRender(
+            Boolean(authenticatedUser),
+            Boolean(authenticatedUser?.isSurveyCompleted),
+          );
+        }).map((screen) => {
+          return (
+            <NativeStack.Screen
+              name={screen.name}
+              component={screen.component}
+              key={screen.name}
+            />
+          );
+        })}
       </NativeStack.Navigator>
       {isLoaderVisible && <Loader />}
     </>
