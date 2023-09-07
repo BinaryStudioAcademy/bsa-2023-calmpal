@@ -1,3 +1,10 @@
+import { type MeditationCreateValidation } from '#packages/meditation/libs/types/types.js';
+
+const DEFAULT_MEDITATION_PAYLOAD: MeditationCreateValidation = {
+  title: '',
+  file: null,
+};
+
 const mockedEntries = [
   {
     id: 1,
@@ -21,4 +28,4 @@ const mockedEntries = [
   },
 ] as const;
 
-export { mockedEntries };
+export { DEFAULT_MEDITATION_PAYLOAD, mockedEntries };
