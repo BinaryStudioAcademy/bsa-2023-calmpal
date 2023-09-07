@@ -11,6 +11,31 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { type ChatService } from './chat.service.js';
 import { ChatsApiPath } from './libs/enums/enums.js';
 
+/**
+ * @swagger
+ * components:
+ *    schemas:
+ *      Chat:
+ *        type: object
+ *        properties:
+ *          id:
+ *            type: number
+ *            format: number
+ *            minimum: 1
+ *          name:
+ *            type: string
+ *          members:
+ *            type: array
+ *            items:
+ *              type: number
+ *              minimum: 1
+ *          createdAt:
+ *             type: string
+ *             format: date-time
+ *          updatedAt:
+ *             type: string
+ *             format: date-time
+ */
 class ChatController extends BaseController {
   private chatService: ChatService;
 
@@ -30,7 +55,24 @@ class ChatController extends BaseController {
     });
   }
 
-  // TODO: add swagger doc
+  /**
+   * @swagger
+   * /chats:
+   *   get:
+   *     description: Returns all chats with authenticated user
+   *     responses:
+   *       200:
+   *         description: Successful operation
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 items:
+   *                   type: array
+   *                   items:
+   *                     $ref: '#/components/schemas/Chat'
+   */
   private async findAll(
     options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
   ): Promise<APIHandlerResponse> {
