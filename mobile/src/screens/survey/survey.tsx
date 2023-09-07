@@ -1,13 +1,11 @@
 import React from 'react';
 
-import { Link, SignBackground, Text } from '#libs/components/components';
-import { RootScreenName } from '#libs/enums/enums';
+import { SignBackground } from '#libs/components/components';
 import { useAppDispatch, useAppSelector, useCallback } from '#libs/hooks/hooks';
 import { type UserAuthResponseDto } from '#packages/users/users';
 import { actions as authActions } from '#slices/auth/auth';
 
 import { PreferencesStep } from './components/components';
-import { styles } from './styles';
 
 const Survey: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -32,9 +30,6 @@ const Survey: React.FC = () => {
   return (
     <React.Fragment>
       <SignBackground>
-        <Text style={styles.labelText}>
-          <Link label="Sign In" to={`/${RootScreenName.SIGN_IN}`} />
-        </Text>
         <PreferencesStep onSubmit={handleSubmit} />
       </SignBackground>
     </React.Fragment>
