@@ -1,6 +1,6 @@
 import 'fast-text-encoding';
 
-import { NavigationContainer } from '@react-navigation/native';
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SplashScreen from 'react-native-splash-screen';
@@ -13,6 +13,14 @@ import { Root as RootNavigation } from '#navigations/navigations';
 
 import { styles } from './styles';
 
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: 'transparent',
+  },
+};
+
 const App: React.FC = () => {
   useEffect(() => {
     SplashScreen.hide();
@@ -21,7 +29,7 @@ const App: React.FC = () => {
   return (
     <StoreProvider store={store.instance}>
       <GestureHandlerRootView style={styles.root}>
-        <NavigationContainer>
+        <NavigationContainer theme={theme}>
           <RootNavigation />
         </NavigationContainer>
         <Toast />
