@@ -3,7 +3,7 @@ import { useCallback, useState } from '#libs/hooks/hooks.js';
 import {
   mockedPlaylist,
   TRACK_FIRST_INDEX,
-} from '#pages/meditation/constants/constants.js';
+} from '#pages/meditation/libs/constants/constants.js';
 
 import styles from './styles.module.scss';
 

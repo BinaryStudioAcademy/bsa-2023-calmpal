@@ -3,7 +3,7 @@ import { type Meditation } from '#libs/types/types.js';
 import {
   TRACK_INCREMENT_INDEX,
   TRACK_START_TIME,
-} from '#pages/meditation/constants/constants.js';
+} from '#pages/meditation/libs/constants/constants.js';
 
 import { AudioControls } from './components/audio-controls/audio-controls.js';
 import { ProgressBar } from './components/progress-bar/progress-bar.js';

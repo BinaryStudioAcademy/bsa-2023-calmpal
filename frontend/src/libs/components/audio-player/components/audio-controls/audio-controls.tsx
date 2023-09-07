@@ -6,7 +6,7 @@ import {
   PROGRESS_BAR,
   TRACK_INCREMENT_INDEX,
   TRACK_SKIP_SECONDS,
-} from '#pages/meditation/constants/constants.js';
+} from '#pages/meditation/libs/constants/constants.js';
 
 import styles from './styles.module.scss';
 
