@@ -12,3 +12,10 @@
 .input-search:focus {
   outline: none;
 }
+
+@media (width <= 480px) {
+  .input-search {
+    width: 100%;
+    min-width: 0;
+  }
+}

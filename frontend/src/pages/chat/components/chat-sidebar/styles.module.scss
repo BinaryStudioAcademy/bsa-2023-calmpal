@@ -75,3 +75,18 @@
 .plus {
   width: 34px;
 }
+
+@media (width <= 480px) {
+  .container {
+    width: 100%;
+  }
+
+  .chat-list {
+    padding: 0 15px;
+  }
+
+  .list .search {
+    width: 100%;
+    padding: 0 15px;
+  }
+}
