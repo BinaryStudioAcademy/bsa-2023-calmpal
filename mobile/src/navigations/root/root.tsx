@@ -6,7 +6,12 @@ import React from 'react';
 
 import { Loader } from '#libs/components/components';
 import { DataStatus } from '#libs/enums/enums';
-import { useAppDispatch, useAppSelector, useEffect } from '#libs/hooks/hooks';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useEffect,
+  useMemo,
+} from '#libs/hooks/hooks';
 import { type RootNavigationParameterList } from '#libs/types/types';
 import { actions as authActions } from '#slices/auth/auth';
 
@@ -37,6 +42,15 @@ const Root: React.FC = () => {
     authenticatedUserDataStatus === DataStatus.PENDING ||
     surveyPreferencesDataStatus === DataStatus.PENDING;
 
+  const filteredNavigationItems = useMemo(() => {
+    return NAVIGATION_ITEMS.filter((screen) => {
+      return screen.conditionToRender(
+        Boolean(authenticatedUser),
+        Boolean(authenticatedUser?.isSurveyCompleted),
+      );
+    });
+  }, [authenticatedUser]);
+
   useEffect(() => {
     void dispatch(authActions.getAuthenticatedUser());
   }, [dispatch]);
@@ -44,12 +58,7 @@ const Root: React.FC = () => {
   return (
     <>
       <NativeStack.Navigator screenOptions={screenOptions}>
-        {NAVIGATION_ITEMS.filter((screen) => {
-          return screen.conditionToRender(
-            Boolean(authenticatedUser),
-            Boolean(authenticatedUser?.isSurveyCompleted),
-          );
-        }).map((screen) => {
+        {filteredNavigationItems.map((screen) => {
           return (
             <NativeStack.Screen
               name={screen.name}
