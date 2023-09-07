@@ -9,9 +9,9 @@ const MAXIMUM_FILE_SIZE = 10_485_760;
 
 const createMeditation = joi.object<MeditationCreateValidation, true>({
   title: joi.string().trim().required().messages({
-    'any.required': MeditationValidationMessage.TITLE_REQUIRED,
-    'string.required': MeditationValidationMessage.TITLE_REQUIRED,
-    'string.empty': MeditationValidationMessage.TITLE_REQUIRED,
+    'any.required': MeditationValidationMessage.TOPIC_REQUIRED,
+    'string.required': MeditationValidationMessage.TOPIC_REQUIRED,
+    'string.empty': MeditationValidationMessage.TOPIC_REQUIRED,
   }),
   file: joi
     .object()
