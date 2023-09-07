@@ -2,8 +2,8 @@ import { type NavigationProp } from '@react-navigation/native';
 import React from 'react';
 
 import {
-  Button,
   Icon,
+  IconButton,
   Text,
   TouchableOpacity,
   View,
@@ -62,9 +62,10 @@ const Header: React.FC<Properties> = ({
       </View>
       {isProfileVisible && (
         <View style={styles.settingsContainer}>
-          <Button
+          <IconButton
             onPress={handleIconPress}
-            iconSourceSvg={<Icon name="user" color={AppColor.BLUE_300} />}
+            color={AppColor.BLUE_300}
+            iconName="user"
           />
         </View>
       )}
