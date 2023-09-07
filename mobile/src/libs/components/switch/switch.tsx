@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch as RNSwitch } from 'react-native';
 
-import { View } from '#libs/components/components';
 import { useFormController } from '#libs/hooks/hooks';
 import {
   type FormControl,
@@ -25,18 +24,16 @@ const Switch = <T extends FormFieldValues>({
   } = useFormController({ name, control });
 
   return (
-    <View>
-      <RNSwitch
-        trackColor={{
-          false: styles.switchFalse.backgroundColor,
-          true: styles.switchTrue.backgroundColor,
-        }}
-        thumbColor={value ? styles.switchTrue.color : styles.switchFalse.color}
-        ios_backgroundColor={styles.switchTrue.backgroundColor}
-        onValueChange={onChange}
-        value={value}
-      />
-    </View>
+    <RNSwitch
+      trackColor={{
+        false: styles.switchFalse.backgroundColor,
+        true: styles.switchTrue.backgroundColor,
+      }}
+      thumbColor={value ? styles.switchTrue.color : styles.switchFalse.color}
+      ios_backgroundColor={styles.switchTrue.backgroundColor}
+      onValueChange={onChange}
+      value={value}
+    />
   );
 };
 export { Switch };
