@@ -8,28 +8,28 @@ const NAVIGATION_ITEMS: NavigationItem[] = [
   {
     name: RootScreenName.MAIN,
     component: Main,
-    conditionToRender: (authenticatedUser, isSurveyCompleted): boolean => {
+    checkShouldBeRendered: (authenticatedUser, isSurveyCompleted): boolean => {
       return authenticatedUser && isSurveyCompleted;
     },
   },
   {
     name: RootScreenName.SURVEY,
     component: Survey,
-    conditionToRender: (authenticatedUser, isSurveyCompleted): boolean => {
+    checkShouldBeRendered: (authenticatedUser, isSurveyCompleted): boolean => {
       return authenticatedUser && !isSurveyCompleted;
     },
   },
   {
     name: RootScreenName.SIGN_IN,
     component: Auth,
-    conditionToRender: (authenticatedUser): boolean => {
+    checkShouldBeRendered: (authenticatedUser): boolean => {
       return !authenticatedUser;
     },
   },
   {
     name: RootScreenName.SIGN_UP,
     component: Auth,
-    conditionToRender: (authenticatedUser): boolean => {
+    checkShouldBeRendered: (authenticatedUser): boolean => {
       return !authenticatedUser;
     },
   },

@@ -3,7 +3,7 @@ import { type RootNavigationParameterList } from './root-navigation-parameter-li
 type NavigationItem = {
   name: keyof RootNavigationParameterList;
   component: React.ComponentType;
-  conditionToRender: (...argument: boolean[]) => boolean;
+  checkShouldBeRendered: (...argument: boolean[]) => boolean;
 };
 
 export { type NavigationItem };

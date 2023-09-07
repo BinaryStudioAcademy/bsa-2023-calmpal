@@ -44,7 +44,7 @@ const Root: React.FC = () => {
 
   const filteredNavigationItems = useMemo(() => {
     return NAVIGATION_ITEMS.filter((screen) => {
-      return screen.conditionToRender(
+      return screen.checkShouldBeRendered(
         Boolean(authenticatedUser),
         Boolean(authenticatedUser?.isSurveyCompleted),
       );
