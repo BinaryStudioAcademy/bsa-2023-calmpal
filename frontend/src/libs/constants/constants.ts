@@ -1,5 +1,1 @@
-const EMPTY_ARRAY_LENGTH = 0;
-
-const FIRST_ARRAY_INDEX = 0;
-
-export { EMPTY_ARRAY_LENGTH, FIRST_ARRAY_INDEX };
+export { EMPTY_ARRAY_LENGTH, FIRST_ARRAY_INDEX } from 'shared/build/index.js';
