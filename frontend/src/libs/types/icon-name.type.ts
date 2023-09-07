@@ -14,5 +14,6 @@ type IconName =
   | 'close'
   | 'upload'
   | 'download';
+  | 'journal';
 
 export { type IconName };

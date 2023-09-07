@@ -105,19 +105,12 @@ erDiagram
       int topic_id FK
       int file_id FK
    }
-   journal_topics {
-      int id PK
-      dateTime created_at
-      dateTime updated_at
-      varchar name
-      int image_id FK
-   }
    journal_entries {
       int id PK
       dateTime created_at
       dateTime updated_at
-      int topic_id FK
-      text content
+      varchar title
+      text text
    }
    surveys {
       int id PK
@@ -136,8 +129,6 @@ erDiagram
    users ||--|{ chat_messages : user_id
    meditation_topics ||..|o files : meditation_topic_image_id
    meditation_topics ||--|{ meditation_entries : meditation_topic_id
-   journal_topics ||--|o files : journal_topic_image_id
-   journal_topics ||--|{ journal_entries : journal_topic_id
    user_details |o--o| surveys : user_id
 
 ```

@@ -3,6 +3,7 @@ const APIPath = {
   AUTH: '/auth',
   DOCUMENTATION: '/documentation',
   FILES: '/files',
+  JOURNAL: '/journal',
   MEDITATION: '/meditation',
 } as const;
 
