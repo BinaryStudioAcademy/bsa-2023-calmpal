@@ -5,21 +5,28 @@ import {
   Modal,
 } from '#libs/components/components.js';
 import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants.js';
-import { useAppForm, useCallback, useState } from '#libs/hooks/hooks.js';
+import {
+  useAppForm,
+  useCallback,
+  useEffect,
+  useState,
+} from '#libs/hooks/hooks.js';
 import { type MeditationCreateValidation } from '#packages/meditation/libs/types/types.js';
 import { createMeditationValidationSchema } from '#packages/meditation/libs/validation-schemas/validation-schemas.js';
-import { DEFAULT_MEDITATION_PAYLOAD } from '#pages/meditation/libs/constants.js';
+import { DEFAULT_MEDITATION_PAYLOAD } from '#pages/meditation/libs/constants/constants.js';
 
 import styles from './styles.module.scss';
 
 type Properties = {
   isDisplayed: boolean;
+  isReseted: boolean;
   onSubmit: (title: string, file: File) => void;
   onClose: () => void;
 };
 
 const MeditationModal: React.FC<Properties> = ({
   isDisplayed,
+  isReseted,
   onSubmit,
   onClose,
 }) => {
@@ -32,6 +39,13 @@ const MeditationModal: React.FC<Properties> = ({
 
   const hasError = Boolean(Object.keys(errors).length > EMPTY_ARRAY_LENGTH);
 
+  useEffect(() => {
+    if (isReseted) {
+      reset();
+      setFile(null);
+    }
+  }, [isReseted, reset, setFile]);
+
   const handleFileChange = useCallback(
     (currentFile: File) => {
       setFile(currentFile);
@@ -42,12 +56,10 @@ const MeditationModal: React.FC<Properties> = ({
   const handleFormSubmit = useCallback(
     (event_: React.FormEvent<HTMLFormElement>) => {
       void handleSubmit(({ title }) => {
-        reset();
-        setFile(null);
         onSubmit(title, file as File);
       })(event_);
     },
-    [file, onSubmit, handleSubmit, reset],
+    [file, onSubmit, handleSubmit],
   );
 
   return (

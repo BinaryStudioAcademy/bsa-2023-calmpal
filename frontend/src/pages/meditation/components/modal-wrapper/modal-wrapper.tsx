@@ -3,6 +3,7 @@ import {
   useAppDispatch,
   useAppSelector,
   useCallback,
+  useEffect,
   useState,
 } from '#libs/hooks/hooks.js';
 import { actions as meditationActions } from '#slices/meditation/meditation.js';
@@ -10,28 +11,33 @@ import { actions as meditationActions } from '#slices/meditation/meditation.js';
 import { MeditationModal } from '../meditation-modal/meditation-modal.js';
 import styles from './styles.module.scss';
 
-// Temporary coponent, that will be removed with implementation of the sidebar
+// Temporary component, that will be removed with implementation of the sidebar
 
 const ModalWrapper: React.FC = () => {
   const dispatch = useAppDispatch();
   const [isDisplayed, setIsDisplayed] = useState<boolean>(false);
+  const [isReseted, setIsReseted] = useState<boolean>(false);
   const { meditationDataStatus } = useAppSelector(({ meditation }) => {
     return {
       meditationDataStatus: meditation.dataStatus,
     };
   });
 
-  if (meditationDataStatus === DataStatus.FULFILLED) {
-    setIsDisplayed(false);
-  }
+  useEffect(() => {
+    if (meditationDataStatus === DataStatus.FULFILLED) {
+      setIsDisplayed(false);
+      setIsReseted(true);
+    }
+  }, [meditationDataStatus]);
 
-  const handleOpenModal = useCallback(() => {
+  const handleOpen = useCallback(() => {
     setIsDisplayed(true);
-  }, []);
+    setIsReseted(false);
+  }, [setIsDisplayed]);
 
-  const handleCloseModal = useCallback(() => {
+  const handleClose = useCallback(() => {
     setIsDisplayed(false);
-  }, []);
+  }, [setIsDisplayed]);
 
   const handleSubmit = useCallback(
     (title: string, file: File) => {
@@ -48,12 +54,13 @@ const ModalWrapper: React.FC = () => {
   return (
     <>
       <div className={styles['container']}>
-        <button onClick={handleOpenModal}>Open modal</button>
+        <button onClick={handleOpen}>Open modal</button>
       </div>
 
       <MeditationModal
         isDisplayed={isDisplayed}
-        onClose={handleCloseModal}
+        isReseted={isReseted}
+        onClose={handleClose}
         onSubmit={handleSubmit}
       />
     </>
