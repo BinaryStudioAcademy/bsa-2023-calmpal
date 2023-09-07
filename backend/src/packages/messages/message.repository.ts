@@ -19,14 +19,14 @@ class MessageRepository implements Repository {
   }
 
   public async create(entity: MessageEntity): Promise<MessageEntity> {
-    const { name, message, sender_id } = entity.toNewObject();
+    const { name, message, chat_id } = entity.toNewObject();
 
     const chatMessage = await this.messageModel
       .query()
       .insertGraph({
         name,
         message,
-        sender_id,
+        chat_id,
       })
       .execute();
 
@@ -34,7 +34,7 @@ class MessageRepository implements Repository {
       id: chatMessage.id,
       name: chatMessage.name,
       message: chatMessage.message,
-      sender_id: chatMessage.sender_id,
+      chat_id: chatMessage.chat_id,
       createdAt: new Date(chatMessage.createdAt),
       updatedAt: new Date(chatMessage.updatedAt),
     });

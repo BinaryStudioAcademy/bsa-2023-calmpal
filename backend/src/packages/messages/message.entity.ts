@@ -11,7 +11,7 @@ class MessageEntity implements Entity {
 
   private message: string;
 
-  private sender_id: string;
+  private chat_id: string;
 
   public constructor({
     id,
@@ -19,21 +19,21 @@ class MessageEntity implements Entity {
     updatedAt,
     name,
     message,
-    sender_id,
+    chat_id,
   }: {
     id: number | null;
     createdAt: Date | null;
     updatedAt: Date | null;
     name: string;
     message: string;
-    sender_id: string;
+    chat_id: string;
   }) {
     this.id = id;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.name = name;
     this.message = message;
-    this.sender_id = sender_id;
+    this.chat_id = chat_id;
   }
 
   public static initialize({
@@ -42,14 +42,14 @@ class MessageEntity implements Entity {
     updatedAt,
     name,
     message,
-    sender_id,
+    chat_id,
   }: {
     id: number | null;
     createdAt: Date | null;
     updatedAt: Date | null;
     name: string;
     message: string;
-    sender_id: string;
+    chat_id: string;
   }): MessageEntity {
     return new MessageEntity({
       id,
@@ -57,7 +57,7 @@ class MessageEntity implements Entity {
       updatedAt,
       name,
       message,
-      sender_id,
+      chat_id,
     });
   }
 
@@ -67,7 +67,7 @@ class MessageEntity implements Entity {
     updatedAt: Date;
     name: string;
     message: string;
-    sender_id: string;
+    chat_id: string;
   } {
     return {
       id: this.id as number,
@@ -75,19 +75,19 @@ class MessageEntity implements Entity {
       updatedAt: this.updatedAt as Date,
       name: this.name,
       message: this.message,
-      sender_id: this.sender_id,
+      chat_id: this.chat_id,
     };
   }
 
   public toNewObject(): {
     name: string;
     message: string;
-    sender_id: string;
+    chat_id: string;
   } {
     return {
       name: this.name,
       message: this.message,
-      sender_id: this.sender_id,
+      chat_id: this.chat_id,
     };
   }
 }

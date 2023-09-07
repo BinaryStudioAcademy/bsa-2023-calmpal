@@ -4,6 +4,7 @@ const ChatMessagesTableColumn = {
   UPDATED_AT: 'updated_at',
   NAME: 'name',
   SENDER_ID: 'sender_id',
+  CHAT_ID: 'chat_id',
   MESSAGE: 'message',
 } as const;
 
