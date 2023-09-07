@@ -13,7 +13,7 @@ type IconName =
   | 'chats'
   | 'close'
   | 'upload'
-  | 'download';
+  | 'download'
   | 'journal';
 
 export { type IconName };
