@@ -45,3 +45,13 @@
   font-size: 30px;
   line-height: 40px;
 }
+
+@media (width < 480px) {
+  .overlay {
+    background-color: var(--white-alpha-30);
+  }
+
+  .modal {
+    background-color: var(--transparent);
+  }
+}
