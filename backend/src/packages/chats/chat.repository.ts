@@ -32,8 +32,21 @@ class ChatRepository implements Repository {
     });
   }
 
-  public create(): Promise<unknown> {
-    return Promise.resolve(null);
+  public async create(entity: ChatEntity): Promise<ChatEntity> {
+    const { members, name } = entity.toNewObject();
+
+    const survey = await this.chatModel.query().insertGraph({
+      name,
+      members,
+    });
+
+    return ChatEntity.initialize({
+      id: survey.id,
+      name: survey.name,
+      members: survey.members,
+      createdAt: new Date(survey.createdAt),
+      updatedAt: new Date(survey.updatedAt),
+    });
   }
 
   public update(): Promise<unknown> {

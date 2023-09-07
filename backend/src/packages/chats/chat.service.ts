@@ -1,7 +1,12 @@
 import { type Service } from '#libs/types/types.js';
 
+import { ChatEntity } from './chat.entity.js';
 import { type ChatRepository } from './chat.repository.js';
-import { type ChatGetAllResponseDto } from './libs/types/types.js';
+import {
+  type ChatGetAllItemResponseDto,
+  type ChatGetAllResponseDto,
+  type ChatRequestDto,
+} from './libs/types/types.js';
 
 class ChatService implements Service {
   private chatRepository: ChatRepository;
@@ -28,8 +33,17 @@ class ChatService implements Service {
     };
   }
 
-  public create(): ReturnType<Service['create']> {
-    return Promise.resolve(null);
+  public async create(
+    payload: ChatRequestDto,
+  ): Promise<ChatGetAllItemResponseDto> {
+    const item = await this.chatRepository.create(
+      ChatEntity.initializeNew({
+        name: payload.name,
+        members: payload.members,
+      }),
+    );
+
+    return item.toObject();
   }
 
   public update(): ReturnType<Service['update']> {
