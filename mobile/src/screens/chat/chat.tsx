@@ -1,6 +1,7 @@
 import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
+import ChatAvatar from '#assets/img/icons/chat-avatar.svg';
 import { Header, ScrollView, Text, View } from '#libs/components/components';
 import {
   useAppForm,
@@ -79,7 +80,7 @@ const Chat: React.FC = () => {
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
-        <View style={styles.avatar} />
+        <ChatAvatar />
         <Text style={styles.title}>Doctor Freud.ai</Text>
       </View>
       <ScrollView style={styles.chatWrapper} ref={scrollViewReference}>
