@@ -3,6 +3,7 @@ export { type IconName } from './icon-name.type';
 export {
   type ChatNavigationParameterList,
   type MeditationNavigationParameterList,
+  type NavigationItem,
   type NavigationScreenProperties,
   type ProfileNavigationParameterList,
   type RootNavigationParameterList,
