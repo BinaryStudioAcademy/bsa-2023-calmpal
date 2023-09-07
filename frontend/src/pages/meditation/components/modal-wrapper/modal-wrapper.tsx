@@ -8,7 +8,7 @@ import {
 } from '#libs/hooks/hooks.js';
 import { actions as meditationActions } from '#slices/meditation/meditation.js';
 
-import { MeditationModal } from '../meditation-modal/meditation-modal.js';
+import { MeditationModal } from '../components.js';
 import styles from './styles.module.scss';
 
 // Temporary component, that will be removed with implementation of the sidebar
