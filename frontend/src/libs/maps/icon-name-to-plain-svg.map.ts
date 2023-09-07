@@ -19,7 +19,7 @@ const iconNameToIcon: Record<
   'arrow': ArrowIcon,
   'plus': PlusIcon,
   'chats': ChatsIcon,
-  'cross': CrossIcon,
+  'close': CrossIcon,
   'upload': UploadIcon,
   'download': DownloadIcon,
 };

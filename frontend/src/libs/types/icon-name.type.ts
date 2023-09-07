@@ -5,7 +5,7 @@ type IconName =
   | 'arrow'
   | 'plus'
   | 'chats'
-  | 'cross'
+  | 'close'
   | 'upload'
   | 'download';
 
