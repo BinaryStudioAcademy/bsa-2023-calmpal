@@ -4,7 +4,7 @@ import { type AsyncThunkConfig } from '#libs/types/types.js';
 import {
   type MeditationCreatePayload,
   type MeditationEntryResponseDto,
-} from '#packages/meditation/libs/types/types.js';
+} from '#packages/meditation/meditation.js';
 
 import { name as sliceName } from './meditation.slice.js';
 

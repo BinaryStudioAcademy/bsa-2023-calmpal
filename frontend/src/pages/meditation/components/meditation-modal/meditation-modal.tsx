@@ -11,8 +11,10 @@ import {
   useEffect,
   useState,
 } from '#libs/hooks/hooks.js';
-import { type MeditationCreateValidation } from '#packages/meditation/libs/types/types.js';
-import { createMeditationValidationSchema } from '#packages/meditation/libs/validation-schemas/validation-schemas.js';
+import {
+  createMeditationValidationSchema,
+  type MeditationCreateValidation,
+} from '#packages/meditation/meditation.js';
 import { DEFAULT_MEDITATION_PAYLOAD } from '#pages/meditation/libs/constants/constants.js';
 
 import styles from './styles.module.scss';

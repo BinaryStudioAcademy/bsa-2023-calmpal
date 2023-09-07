@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { DataStatus } from '#libs/enums/enums.js';
 import { type ValueOf } from '#libs/types/types.js';
-import { type MeditationEntryResponseDto } from '#packages/meditation/libs/types/types.js';
+import { type MeditationEntryResponseDto } from '#packages/meditation/meditation.js';
 
 import { createMeditationEntry } from './actions.js';
 
