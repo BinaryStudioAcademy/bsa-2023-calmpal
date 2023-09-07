@@ -12,6 +12,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 31,
   },
+  transparentHeader: {
+    position: 'absolute',
+    marginTop: 40,
+  },
   headerCenter: {
     justifyContent: 'center',
   },

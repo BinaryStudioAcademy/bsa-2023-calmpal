@@ -1,3 +1,4 @@
+import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 import { type ImageSourcePropType } from 'react-native';
 
@@ -10,7 +11,10 @@ import {
   View,
 } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
+import { useNavigation } from '#libs/hooks/hooks';
+import { type MeditationNavigationParameterList } from '#libs/types/types';
 
+import { MOCKED_PLAYLIST } from './libs/constants';
 import { styles } from './styles';
 
 type Properties = {
@@ -24,6 +28,15 @@ const MeditationItem: React.FC<Properties> = ({
   duration,
   img = cardImagePlaceholder,
 }) => {
+  const navigation =
+    useNavigation<
+      NativeStackNavigationProp<MeditationNavigationParameterList>
+    >();
+
+  const handleSetPlaylist = (): void => {
+    navigation.navigate('Meditation', { playlist: MOCKED_PLAYLIST });
+  };
+
   return (
     <View style={styles.container}>
       <Image source={img} style={styles.image} />
@@ -32,9 +45,9 @@ const MeditationItem: React.FC<Properties> = ({
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.duration}>{duration} min</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleSetPlaylist}>
           <View style={styles.playButton}>
-            <Play color={AppColor.WHITE} />
+            <Play color={AppColor.WHITE} width={12} />
           </View>
         </TouchableOpacity>
       </View>

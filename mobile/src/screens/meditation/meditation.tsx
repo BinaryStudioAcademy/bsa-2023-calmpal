@@ -1,40 +1,38 @@
 import React from 'react';
 import TrackPlayer, {
   Event,
-  RepeatMode,
   State,
   useTrackPlayerEvents,
 } from 'react-native-track-player';
 
 import imagePlaceholder from '#assets/img/card-image-placeholder.png';
-import MeditationBackground from '#assets/img/meditation-background.png';
+import meditationBackground from '#assets/img/meditation-background.png';
 import { Image, Text, View } from '#libs/components/components';
-import { useEffect, useState } from '#libs/hooks/hooks';
+import { useAppRoute, useEffect, useState } from '#libs/hooks/hooks';
 import { type Track } from '#libs/types/types';
 
 import { Controls, ProgressBar } from './components/components';
-import {
-  mockedPlaylist,
-  TITLE_LINE_COUNT,
-  TRACK_START_INDEX,
-} from './libs/constants';
+import { TITLE_LINE_COUNT, TRACK_START_INDEX } from './libs/constants';
 import { styles } from './styles';
 
 const Meditation: React.FC = () => {
+  const { playlist } = useAppRoute().params as {
+    playlist: Track[];
+  };
+
   const [playbackState, setPlaybackState] = useState<State | null>(null);
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const isPlaying = playbackState === State.Playing;
 
   useEffect(() => {
-    const startPlayer = async (): Promise<void> => {
-      await TrackPlayer.setupPlayer();
-      await TrackPlayer.add(mockedPlaylist);
-      await TrackPlayer.setRepeatMode(RepeatMode.Queue);
-      setCurrentTrack(mockedPlaylist[TRACK_START_INDEX] as Track);
+    const setPlaylist = async (): Promise<void> => {
+      await TrackPlayer.reset();
+      await TrackPlayer.add(playlist);
+      setCurrentTrack(playlist[TRACK_START_INDEX] as Track);
     };
 
-    void startPlayer();
-  }, []);
+    void setPlaylist();
+  }, [playlist]);
 
   useTrackPlayerEvents(
     [Event.PlaybackState, Event.PlaybackTrackChanged],
@@ -55,7 +53,7 @@ const Meditation: React.FC = () => {
 
   return (
     <View style={styles.wrapper}>
-      <Image source={MeditationBackground} style={styles.background} />
+      <Image source={meditationBackground} style={styles.background} />
       <View style={styles.contentWrapper}>
         <View style={styles.imageWrapper}>
           <Image

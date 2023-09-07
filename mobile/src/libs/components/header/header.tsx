@@ -11,23 +11,35 @@ type Properties = {
   title?: string;
   isArrowVisible?: boolean;
   badgeCount?: number;
+  isVisible?: boolean;
 };
 
 const Header: React.FC<Properties> = ({
   title,
   isArrowVisible = false,
   badgeCount = DEFAULT_BADGE_COUNT,
+  isVisible = true,
 }) => {
   const { name } = useAppRoute();
 
   const hasValue = Boolean(badgeCount);
 
   return (
-    <View style={[styles.header, isArrowVisible && styles.headerCenter]}>
-      {isArrowVisible && <BackButton />}
-      <Text style={styles.title}>{title ?? name}</Text>
-      {hasValue && <Badge count={badgeCount} />}
-    </View>
+    <>
+      {isVisible ? (
+        <View style={[styles.header, isArrowVisible && styles.headerCenter]}>
+          {isArrowVisible && <BackButton />}
+          <Text style={styles.title}>{title ?? name}</Text>
+          {hasValue && <Badge count={badgeCount} />}
+        </View>
+      ) : (
+        <>
+          <View style={styles.transparentHeader}>
+            {isArrowVisible && <BackButton />}
+          </View>
+        </>
+      )}
+    </>
   );
 };
 
