@@ -1,4 +1,4 @@
 export {
-  type ChatsGetAllItemResponseDto,
-  type ChatsGetAllResponseDto,
+  type ChatGetAllItemResponseDto,
+  type ChatGetAllResponseDto,
 } from 'shared/build/index.js';
