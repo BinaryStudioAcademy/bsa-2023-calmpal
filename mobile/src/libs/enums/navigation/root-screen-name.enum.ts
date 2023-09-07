@@ -4,7 +4,7 @@ const RootScreenName = {
   SIGN_UP: 'Sign Up',
   SURVEY: 'Survey',
   SETTINGS: 'Settings',
-  MY_PROFILE: 'My Profile',
+  PROFILE: 'Profile',
 } as const;
 
 export { RootScreenName };
