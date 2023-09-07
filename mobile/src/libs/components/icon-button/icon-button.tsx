@@ -1,9 +1,9 @@
 import React from 'react';
-import { Pressable } from 'react-native';
 
+import { Pressable } from '#libs/components/components';
 import { type IconName } from '#libs/types/types';
 
-// import { styles } from './styles';
+import { styles } from './styles';
 
 type Properties = {
   onPress: () => void;
@@ -15,7 +15,11 @@ const IconButton: React.FC<Properties> = ({
 
   IconName,
 }) => {
-  return <Pressable onPress={onPress}>{IconName}</Pressable>;
+  return (
+    <Pressable onPress={onPress} style={styles.iconButtonContainer}>
+      {IconName}
+    </Pressable>
+  );
 };
 
 export { IconButton };

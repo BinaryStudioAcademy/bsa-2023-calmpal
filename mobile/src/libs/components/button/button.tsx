@@ -1,7 +1,6 @@
 import React, { type ReactNode } from 'react';
-import { Pressable } from 'react-native';
 
-import { Text } from '#libs/components/components';
+import { Pressable, Text } from '#libs/components/components';
 
 import { styles } from './styles';
 
