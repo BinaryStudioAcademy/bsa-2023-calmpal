@@ -2,7 +2,14 @@ import React from 'react';
 import { type ImageSourcePropType } from 'react-native';
 
 import imagePlaceholder from '#assets/img/card-image-placeholder.png';
-import { Image, Pressable, Text, View } from '#libs/components/components';
+import {
+  Icon,
+  Image,
+  Pressable,
+  Text,
+  View,
+} from '#libs/components/components';
+import { type IconName } from '#libs/types/types';
 
 import { DEFAULT_NUMBER_OF_LINES } from './libs/constants';
 import { styles } from './styles';
@@ -10,14 +17,16 @@ import { styles } from './styles';
 type Properties = {
   title: string;
   image?: ImageSourcePropType;
-  iconSourceSvg?: JSX.Element;
+  iconName?: IconName;
+  iconColor?: string;
   onPress: (title: string) => void;
 };
 
 const Card: React.FC<Properties> = ({
   title,
   image = imagePlaceholder,
-  iconSourceSvg,
+  iconName,
+  iconColor,
   onPress,
 }) => {
   const handlePress = (): void => {
@@ -26,8 +35,10 @@ const Card: React.FC<Properties> = ({
 
   return (
     <Pressable onPress={handlePress} style={styles.container}>
-      {iconSourceSvg ? (
-        <View style={styles.iconContainer}>{iconSourceSvg}</View>
+      {iconName && iconColor ? (
+        <View style={styles.iconContainer}>
+          <Icon name={iconName} color={iconColor} />
+        </View>
       ) : (
         <Image source={image} style={styles.image} />
       )}

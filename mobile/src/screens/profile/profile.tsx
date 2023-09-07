@@ -1,7 +1,7 @@
 import { type NavigationProp } from '@react-navigation/native';
 import React from 'react';
 
-import { Card, Icon, LinearGradient, View } from '#libs/components/components';
+import { Card, LinearGradient, View } from '#libs/components/components';
 import { AppColor, ProfileScreenName } from '#libs/enums/enums';
 import { useNavigation } from '#libs/hooks/hooks';
 import { type ProfileNavigationParameterList } from '#libs/types/types';
@@ -20,9 +20,10 @@ const Profile: React.FC = () => {
     <LinearGradient>
       <View style={styles.container}>
         <Card
-          iconSourceSvg={<Icon name="bell" color={AppColor.WHITE} />}
           title="Notifications and Reminders"
           onPress={handleCategoryPress}
+          iconColor={AppColor.WHITE}
+          iconName="bell"
         />
       </View>
     </LinearGradient>
