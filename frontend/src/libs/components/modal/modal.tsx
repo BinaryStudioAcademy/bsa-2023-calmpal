@@ -24,16 +24,14 @@ const Modal: React.FC<Properties> = ({
         !isDisplayed && 'visually-hidden',
       )}
     >
-      <div className={styles['container']}>
-        <div className={styles['modal']}>
-          <div className={styles['header']}>
-            <span className={styles['title']}>{title}</span>
-            <button className={styles['icon-container']} onClick={onClose}>
-              <Icon name="close" color={IconColor.BLACK} />
-            </button>
-          </div>
-          {children}
+      <div className={styles['modal']}>
+        <div className={styles['header']}>
+          <span className={styles['title']}>{title}</span>
+          <button className={styles['icon-container']} onClick={onClose}>
+            <Icon name="close" color={IconColor.BLACK} />
+          </button>
         </div>
+        {children}
       </div>
     </div>
   );
