@@ -9,6 +9,7 @@ import {
   useEffect,
   useFocusEffect,
   useFormController,
+  useState,
 } from '#libs/hooks/hooks';
 
 import { DEFAULT_SEARCH_PAYLOAD, SEARCH_TIMEOUT } from './libs/constants';
@@ -20,6 +21,8 @@ type Properties = {
 };
 
 const InputSearch: React.FC<Properties> = ({ placeholder, setSearchQuery }) => {
+  const [isFocused, setIsFocused] = useState(false);
+
   const { control, reset } = useAppForm({
     defaultValues: DEFAULT_SEARCH_PAYLOAD,
   });
@@ -45,6 +48,14 @@ const InputSearch: React.FC<Properties> = ({ placeholder, setSearchQuery }) => {
     onChange(text);
   };
 
+  const handleFocus = (): void => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = (): void => {
+    setIsFocused(false);
+  };
+
   useFocusEffect(
     useCallback(() => {
       return () => {
@@ -56,9 +67,11 @@ const InputSearch: React.FC<Properties> = ({ placeholder, setSearchQuery }) => {
   return (
     <TextInput
       onChangeText={handleInputChange}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
       placeholder={placeholder}
       placeholderTextColor={AppColor.GRAY_400}
-      style={styles.input}
+      style={[styles.input, isFocused && styles.focusedInput]}
       value={value}
     />
   );
