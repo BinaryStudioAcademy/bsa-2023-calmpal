@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     position: 'absolute',
-    right: 20,
+    right: 0,
     width: '77%',
     height: '100%',
     backgroundColor: AppColor.WHITE,
