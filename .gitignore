@@ -12,6 +12,6 @@ build
 .DS_Store
 .env
 
-#gitconfig
+# gitconfig
 .gitconfig
 .gitattributes
