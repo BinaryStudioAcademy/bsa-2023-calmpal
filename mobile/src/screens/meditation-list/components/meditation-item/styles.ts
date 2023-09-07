@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     maxWidth: 151,
   },
   duration: {
-    color: AppColor.BLUE_300,
+    color: AppColor.PURPLE_200,
     paddingVertical: 5,
     backgroundColor: AppColor.PURPLE_100,
     maxWidth: 72,
