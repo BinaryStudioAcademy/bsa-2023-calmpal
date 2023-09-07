@@ -3,10 +3,11 @@ import React from 'react';
 
 import ChatIcon from '#assets/img/icons/chat.svg';
 import HomeIcon from '#assets/img/icons/home.svg';
+import MeditationIcon from '#assets/img/icons/meditations.svg';
 import { Header } from '#libs/components/components';
 import { AppColor, MainScreenName } from '#libs/enums/enums';
 import { type TabNavigationParameterList } from '#libs/types/types';
-import { Chat } from '#navigations/navigations';
+import { Chat, Meditation } from '#navigations/navigations';
 import { Home } from '#screens/home/home';
 
 import { styles } from './styles';
@@ -37,6 +38,11 @@ const Main: React.FC = () => {
         name={MainScreenName.CHAT}
         component={Chat}
         options={{ tabBarIcon: ChatIcon, headerShown: false }}
+      />
+      <BottomTab.Screen
+        name={MainScreenName.MEDITATION}
+        component={Meditation}
+        options={{ tabBarIcon: MeditationIcon, headerShown: false }}
       />
     </BottomTab.Navigator>
   );
