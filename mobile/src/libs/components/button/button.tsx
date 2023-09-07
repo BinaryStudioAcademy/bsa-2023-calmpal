@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Pressable } from 'react-native';
 
 import { Text } from '#libs/components/components';
@@ -8,7 +8,7 @@ import { styles } from './styles';
 type Properties = {
   label?: string;
   onPress: () => void;
-  iconSourceSvg?: JSX.Element;
+  iconSourceSvg?: ReactNode;
   isDisabled?: boolean;
   type?: 'solid' | 'outlined';
 };
