@@ -47,7 +47,7 @@
   box-shadow: 0 4px 20px 0 var(--blue-alpha-30);
 }
 
-@media (width <= 480px) {
+@media (width < 480px) {
   .item {
     width: 100%;
     min-width: 0;

@@ -43,7 +43,7 @@
   font-size: 20px;
 }
 
-@media (width <= 480px) {
+@media (width < 480px) {
   .container {
     width: 100%;
     max-width: none;
