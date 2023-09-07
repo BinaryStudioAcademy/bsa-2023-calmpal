@@ -24,7 +24,7 @@ const Main: React.FC = () => {
   return (
     <BottomTab.Navigator screenOptions={tabNavigatorOptions}>
       <BottomTab.Screen
-        name={MainScreenName.DASHBOARD}
+        name={MainScreenName.HOME}
         component={Dashboard}
         options={{
           tabBarIcon: HomeIcon,
