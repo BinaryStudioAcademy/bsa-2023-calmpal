@@ -2,6 +2,8 @@ import { ReactComponent as ArrowIcon } from '#assets/icons/arrow.svg';
 import { ReactComponent as AudioPlayIcon } from '#assets/icons/audio-player-play.svg';
 import { ReactComponent as BackwardIcon } from '#assets/icons/backward.svg';
 import { ReactComponent as ChatsIcon } from '#assets/icons/chats.svg';
+import { ReactComponent as CrossIcon } from '#assets/icons/cross.svg';
+import { ReactComponent as DownloadIcon } from '#assets/icons/download.svg';
 import { ReactComponent as ForwardIcon } from '#assets/icons/forward.svg';
 import { ReactComponent as HomeIcon } from '#assets/icons/home.svg';
 import { ReactComponent as MeditationIcon } from '#assets/icons/meditation.svg';
@@ -10,6 +12,7 @@ import { ReactComponent as PauseIcon } from '#assets/icons/pause.svg';
 import { ReactComponent as PlayIcon } from '#assets/icons/play.svg';
 import { ReactComponent as PlusIcon } from '#assets/icons/plus.svg';
 import { ReactComponent as PreviousIcon } from '#assets/icons/previous.svg';
+import { ReactComponent as UploadIcon } from '#assets/icons/upload.svg';
 import { type IconName } from '#libs/types/types.js';
 
 const iconNameToIcon: Record<
@@ -28,6 +31,9 @@ const iconNameToIcon: Record<
   'play': PlayIcon,
   'home': HomeIcon,
   'chats': ChatsIcon,
+  'close': CrossIcon,
+  'upload': UploadIcon,
+  'download': DownloadIcon,
 };
 
 export { iconNameToIcon };

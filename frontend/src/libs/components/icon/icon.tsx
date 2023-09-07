@@ -1,5 +1,6 @@
-import { iconNameToIcon } from '#libs/maps/maps.js';
 import { type IconName } from '#libs/types/types.js';
+
+import { iconNameToIcon } from './libs/maps/icon-name-to-icon.map.js';
 
 type Properties = {
   name: IconName;
