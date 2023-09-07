@@ -10,18 +10,22 @@ import { type Config } from '#libs/packages/config/config.js';
 import { notification } from '#libs/packages/notification/notification.js';
 import { handleError } from '#libs/packages/store/middlewares/middlewares.js';
 import { authApi } from '#packages/auth/auth.js';
+import { journalApi } from '#packages/journal/journal.js';
 import { reducer as appReducer } from '#slices/app/app.js';
 import { reducer as authReducer } from '#slices/auth/auth.js';
+import { reducer as journalReducer } from '#slices/journal/journal.js';
 
 import { storage } from '../storage/storage.js';
 
 type RootReducer = {
   auth: ReturnType<typeof authReducer>;
   app: ReturnType<typeof appReducer>;
+  journal: ReturnType<typeof journalReducer>;
 };
 
 type ExtraArguments = {
   authApi: typeof authApi;
+  journalApi: typeof journalApi;
   storage: typeof storage;
   notification: typeof notification;
 };
@@ -41,6 +45,7 @@ class Store {
       reducer: {
         auth: authReducer,
         app: appReducer,
+        journal: journalReducer,
       },
       middleware: (getDefaultMiddleware) => {
         return [
@@ -58,6 +63,7 @@ class Store {
   public get extraArguments(): ExtraArguments {
     return {
       authApi,
+      journalApi,
       storage,
       notification,
     };
