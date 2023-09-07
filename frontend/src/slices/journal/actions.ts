@@ -15,9 +15,8 @@ const createJournalEntry = createAsyncThunk<
   AsyncThunkConfig
 >(`${sliceName}/create-journal-entry`, async (payload, { extra }) => {
   const { journalApi } = extra;
-  const { journalEntry } = await journalApi.createJournalEntry(payload);
 
-  return journalEntry;
+  return await journalApi.createJournalEntry(payload);
 });
 
 const getAllJournalEntries = createAsyncThunk<

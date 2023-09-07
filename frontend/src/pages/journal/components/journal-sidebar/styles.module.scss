@@ -49,3 +49,13 @@
 .journal-entry-list::-webkit-scrollbar {
   display: none;
 }
+
+@media (width < 480px) {
+  .container {
+    width: 100%;
+  }
+
+  .journal-entry-list {
+    padding: 0 20px;
+  }
+}

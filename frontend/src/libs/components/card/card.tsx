@@ -4,12 +4,12 @@ import styles from './styles.module.scss';
 
 type Properties = {
   title: string;
-  imageUrl: string;
   onClick: () => void;
   isActive: boolean;
+  imageUrl?: string;
 };
 
-const Card: React.FC<Properties> = ({ title, imageUrl, onClick, isActive }) => {
+const Card: React.FC<Properties> = ({ title, onClick, isActive, imageUrl }) => {
   return (
     <button
       className={getValidClassNames(
@@ -18,10 +18,17 @@ const Card: React.FC<Properties> = ({ title, imageUrl, onClick, isActive }) => {
       )}
       onClick={onClick}
     >
-      <div className={styles['name']}>
-        <div className={styles['image-placeholder']}>
-          <img src={imageUrl} alt="not found" className={styles['image']} />
-        </div>
+      <div
+        className={getValidClassNames(
+          styles['name'],
+          !imageUrl && styles['no-image'],
+        )}
+      >
+        {imageUrl && (
+          <div className={styles['image-placeholder']}>
+            <img src={imageUrl} alt="not found" className={styles['image']} />
+          </div>
+        )}
         {title}
       </div>
     </button>

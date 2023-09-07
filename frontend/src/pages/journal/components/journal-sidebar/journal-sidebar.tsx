@@ -1,3 +1,4 @@
+import { Card } from '#libs/components/components.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -6,7 +7,6 @@ import {
 } from '#libs/hooks/hooks.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
-import { JournalCard } from '../journal-card/journal-card.js';
 import styles from './styles.module.scss';
 
 const JournalSidebar: React.FC = () => {
@@ -44,7 +44,7 @@ const JournalSidebar: React.FC = () => {
         <div className={styles['journal-entry-list']}>
           {allJournalEntries.map((journalEntry) => {
             return (
-              <JournalCard
+              <Card
                 title={journalEntry.title}
                 onClick={handleSelectJournalEntry(journalEntry.id)}
                 isActive={selectedJournalEntry?.id === journalEntry.id}

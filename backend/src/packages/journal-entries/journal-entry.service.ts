@@ -4,7 +4,7 @@ import { JournalEntryEntity } from './journal-entry.entity.js';
 import { type JournalEntryRepository } from './journal-entry.repository.js';
 import {
   type JournalEntryCreateRequestDto,
-  type JournalEntryCreateResponseDto,
+  type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
 } from './libs/types/types.js';
 
@@ -31,7 +31,7 @@ class JournalEntryService implements Service {
 
   public async create(
     payload: JournalEntryCreateRequestDto,
-  ): Promise<JournalEntryCreateResponseDto> {
+  ): Promise<JournalEntryGetAllItemResponseDto> {
     const item = await this.journalEntryRepository.create(
       JournalEntryEntity.initialize({
         id: null,
@@ -41,11 +41,8 @@ class JournalEntryService implements Service {
         text: payload.text,
       }),
     );
-    const journalEntry = item.toObject();
 
-    return {
-      journalEntry,
-    };
+    return item.toObject();
   }
 
   public update(): ReturnType<Service['update']> {

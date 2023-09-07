@@ -12,7 +12,6 @@ const journalApi = new JournalApi({
 
 export {
   type JournalEntryCreateRequestDto,
-  type JournalEntryCreateResponseDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
 } from './libs/types/types.js';
