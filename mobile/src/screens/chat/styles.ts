@@ -16,12 +16,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 28,
     alignSelf: 'flex-start',
   },
-  avatar: {
-    width: 40,
-    height: 40,
-    backgroundColor: AppColor.BLUE_300,
-    borderRadius: 10,
-  },
   title: {
     fontWeight: '600',
     fontSize: 22,

@@ -34,13 +34,13 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
 
   return (
     <div className={styles['container']}>
-      <h1 className={styles['title']}>Sign In to your account</h1>
+      <h1 className={styles['title']}>Sign in to your account</h1>
 
       <form className={styles['form']} onSubmit={handleFormSubmit}>
         <Input
           type="text"
-          label="Email"
-          placeholder="Enter your email"
+          label="E-mail"
+          placeholder="Enter your e-mail"
           name="email"
           control={control}
           errors={errors}

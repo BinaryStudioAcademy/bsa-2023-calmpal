@@ -35,20 +35,8 @@ const MOCKED_DATA = [
   },
   {
     id: 6,
-    isUser: false,
-    message: 'I’ll be there in 2 mins ⏰',
-  },
-  {
-    id: 7,
-    isUser: false,
-    message:
-      'I’ve been5435345 experiencing persistent sadness, loss of interest in things I used to enjoy. It’s been affecting my work and relationships too!! 💊❌😵',
-  },
-  {
-    id: 8,
     isUser: true,
-    message:
-      'I’ve been234234 experiencing persistent sadness, loss of interest in things I used to enjoy. It’s been affecting my work and relationships too!! 💊❌😵',
+    message: '😵',
   },
 ];
 
