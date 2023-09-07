@@ -69,6 +69,28 @@ class MessageEntity implements Entity {
     });
   }
 
+  public static initializeNew({
+    name,
+    message,
+    chatId,
+    senderId,
+  }: {
+    name: string;
+    message: string;
+    chatId: string;
+    senderId: string;
+  }): MessageEntity {
+    return new MessageEntity({
+      id: null,
+      createdAt: null,
+      updatedAt: null,
+      name,
+      message,
+      chatId,
+      senderId,
+    });
+  }
+
   public toObject(): {
     id: number;
     createdAt: Date;

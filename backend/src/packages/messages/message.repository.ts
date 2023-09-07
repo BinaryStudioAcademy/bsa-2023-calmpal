@@ -19,7 +19,9 @@ class MessageRepository implements Repository {
     return await Promise.resolve([]);
   }
 
-  public async findByChatId(chatId: string): Promise<MessageEntity[] | null> {
+  public async findAllByChatId(
+    chatId: string,
+  ): Promise<MessageEntity[] | null> {
     const messages = await this.messageModel.query().where('chatId', chatId);
 
     if (messages.length === EMPTY_ARRAY_LENGTH) {
