@@ -20,12 +20,8 @@ const Button: React.FC<Properties> = ({
   type = 'solid',
   iconSourceSvg,
 }) => {
-  const handleOnPress = (): void => {
-    onPress();
-  };
-
   return iconSourceSvg ? (
-    <Pressable onPress={handleOnPress} style={styles.iconButtonContainer}>
+    <Pressable onPress={onPress} style={styles.iconButtonContainer}>
       {iconSourceSvg}
     </Pressable>
   ) : (
@@ -36,7 +32,7 @@ const Button: React.FC<Properties> = ({
         type === 'outlined' && styles.buttonOutlined,
         isDisabled && styles.buttonDisabled,
       ]}
-      onPress={handleOnPress}
+      onPress={onPress}
       disabled={isDisabled}
     >
       <Text
