@@ -146,6 +146,14 @@ class BaseConfig implements Config {
           default: 10,
         },
       },
+      OPEN_AI: {
+        API_KEY: {
+          doc: 'Api key for the Open AI account',
+          format: String,
+          env: 'OPEN_AI_API_KEY',
+          default: null,
+        },
+      },
     });
   }
 }
