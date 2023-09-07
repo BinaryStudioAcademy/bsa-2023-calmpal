@@ -20,14 +20,14 @@ type Properties = {
   title?: string;
   isArrowVisible?: boolean;
   badgeCount?: number;
-  isSettingsVisible?: boolean;
+  isProfileVisible?: boolean;
 };
 
 const Header: React.FC<Properties> = ({
   title,
   isArrowVisible = false,
   badgeCount = DEFAULT_BADGE_COUNT,
-  isSettingsVisible = false,
+  isProfileVisible = false,
 }) => {
   const navigation =
     useNavigation<NavigationProp<RootNavigationParameterList>>();
@@ -48,7 +48,7 @@ const Header: React.FC<Properties> = ({
       style={[
         styles.header,
         isArrowVisible && styles.headerCenter,
-        isSettingsVisible && styles.settings,
+        isProfileVisible && styles.settings,
       ]}
     >
       {isArrowVisible && (
@@ -60,7 +60,7 @@ const Header: React.FC<Properties> = ({
         <Text style={styles.title}>{title ?? name}</Text>
         {hasValue && <Badge count={badgeCount} />}
       </View>
-      {isSettingsVisible && (
+      {isProfileVisible && (
         <View style={styles.settingsContainer}>
           <Button
             onPress={handleIconPress}

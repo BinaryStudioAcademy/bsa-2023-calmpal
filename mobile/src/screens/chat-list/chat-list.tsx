@@ -34,11 +34,7 @@ const ChatList: React.FC = () => {
     navigation.setOptions({
       header: () => {
         return (
-          <Header
-            title={routeName}
-            badgeCount={mockedCount}
-            isSettingsVisible
-          />
+          <Header title={routeName} badgeCount={mockedCount} isProfileVisible />
         );
       },
     });
