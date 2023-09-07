@@ -20,8 +20,9 @@ const Switch = <T extends FormFieldValues>({
   control,
   name,
 }: Properties<T>): JSX.Element => {
-  const { field } = useFormController({ name, control });
-  const { onChange, value } = field;
+  const {
+    field: { onChange, value },
+  } = useFormController({ name, control });
 
   return (
     <View>
