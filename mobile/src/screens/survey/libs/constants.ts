@@ -19,4 +19,51 @@ const PREFERENCES_CATEGORIES: string[] = [
   PREFERENCES_OTHER_CATEGORY,
 ];
 
-export { DEFAULT_SURVEY_PAYLOAD, PREFERENCES_CATEGORIES, TEXTAREA_ROWS_COUNT };
+const FEELING_CATEGORIES: string[] = [
+  'Good',
+  'Streesed',
+  'Sad',
+  'Depressed',
+  'Indifferent',
+  PREFERENCES_OTHER_CATEGORY,
+];
+
+const GOALS_CATEGORIES: string[] = [
+  'Manage stress and anxiety',
+  'Improve sleep quality',
+  'Cultivate a positive mindset',
+  'Enhance emotional well-being',
+  PREFERENCES_OTHER_CATEGORY,
+];
+
+const WORRIES_CATEGORIES: string[] = [
+  'Work or school',
+  'Money',
+  'Relationships',
+  'Health',
+  'Family responsibilities',
+  PREFERENCES_OTHER_CATEGORY,
+];
+
+const MEDITATION_EXPERIENCE_CATEGORIES: string[] = [
+  'None',
+  'I have tried a few times',
+  'I have meditated a lot',
+];
+
+const JOURNALING_EXPERIENCE_CATEGORIES: string[] = [
+  'None',
+  'I have tried a few times',
+  'I am doing this frequently',
+];
+
+export {
+  DEFAULT_SURVEY_PAYLOAD,
+  FEELING_CATEGORIES,
+  GOALS_CATEGORIES,
+  JOURNALING_EXPERIENCE_CATEGORIES,
+  MEDITATION_EXPERIENCE_CATEGORIES,
+  PREFERENCES_CATEGORIES,
+  TEXTAREA_ROWS_COUNT,
+  WORRIES_CATEGORIES,
+};

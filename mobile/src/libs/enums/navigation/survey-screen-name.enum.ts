@@ -1,8 +1,8 @@
 const SurveyScreenName = {
-  HELP_WITH: 'help with',
+  PREFERENCE: 'preference',
   FEELING: 'feeling',
-  ACHIVE: 'achive',
-  WORRY: 'worry',
+  GOAL: 'goal',
+  WORRIES: 'worries',
   MEDITATION_EXPERIENCE: 'meditation experience',
   JOURNALING_EXPERIENCE: 'journaling experience',
 } as const;

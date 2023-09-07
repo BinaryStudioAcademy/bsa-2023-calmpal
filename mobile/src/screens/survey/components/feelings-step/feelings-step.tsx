@@ -16,14 +16,14 @@ import {
 } from '#packages/survey/survey';
 import {
   DEFAULT_SURVEY_PAYLOAD,
-  PREFERENCES_CATEGORIES,
+  FEELING_CATEGORIES,
   TEXTAREA_ROWS_COUNT,
 } from '#screens/survey/libs/constants';
 
 import { SurveyCategory } from '../components';
 import { styles } from './styles';
 
-const PreferencesStep: React.FC = () => {
+const FeelingsStep: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<SurveyNavigationParameterList>>();
 
@@ -58,7 +58,11 @@ const PreferencesStep: React.FC = () => {
   );
 
   const handleContinue = (): void => {
-    navigation.navigate(SurveyScreenName.FEELING);
+    navigation.navigate(SurveyScreenName.GOAL);
+  };
+
+  const handleBack = (): void => {
+    navigation.navigate(SurveyScreenName.PREFERENCE);
   };
 
   return (
@@ -66,8 +70,8 @@ const PreferencesStep: React.FC = () => {
       style={styles.surveyContainer}
       showsVerticalScrollIndicator={false}
     >
-      <Text style={styles.titleText}>What can we help you with?</Text>
-      {PREFERENCES_CATEGORIES.map((category) => {
+      <Text style={styles.titleText}>How have you been feeling lately?</Text>
+      {FEELING_CATEGORIES.map((category) => {
         return (
           <SurveyCategory
             key={category}
@@ -92,8 +96,9 @@ const PreferencesStep: React.FC = () => {
         isDisabled={!isValid}
         type="outlined"
       />
+      <Button label="Go back" onPress={handleBack} type="solid" />
     </ScrollView>
   );
 };
 
-export { PreferencesStep };
+export { FeelingsStep };
