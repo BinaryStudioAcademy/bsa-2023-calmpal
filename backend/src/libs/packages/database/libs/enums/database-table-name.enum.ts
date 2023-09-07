@@ -7,6 +7,7 @@ const DatabaseTableName = {
   SURVEYS: 'surveys',
   MEDITATION_TOPICS: 'meditation_topics',
   MEDITATION_ENTRIES: 'meditation_entries',
+  USER_ROLES: 'user_roles',
   FILES: 'files',
 } as const;
 export { DatabaseTableName };
