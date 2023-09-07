@@ -1,5 +1,5 @@
 import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { type IconName } from '#libs/types/icon-name.type.js';
+import { type IconName } from '#libs/types/types.js';
 
 import { Icon } from '../components.js';
 import styles from './styles.module.scss';
@@ -32,7 +32,7 @@ const Card: React.FC<Properties> = ({
           {imageUrl && (
             <img src={imageUrl} alt="not found" className={styles['image']} />
           )}
-          {iconName && <Icon name={`${iconName}`} />}
+          {iconName && <Icon name={iconName} />}
         </div>
         {title}
       </div>
