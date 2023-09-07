@@ -70,8 +70,7 @@
   cursor: pointer;
 }
 
-.rounded:hover,
-.rounded:focus {
+.rounded:hover {
   box-shadow: none;
   box-shadow: 0 4px 23px 0 var(--blue-200);
 }
@@ -89,8 +88,7 @@
   cursor: pointer;
 }
 
-.rounded-transparent:hover,
-.rounded-transparent:focus {
+.rounded-transparent:hover {
   background-color: var(--white-alpha-80);
   box-shadow: 0 4px 23px 0 var(--violet-100);
 }

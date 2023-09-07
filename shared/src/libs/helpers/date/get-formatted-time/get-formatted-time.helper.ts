@@ -1,14 +1,9 @@
-import { format } from 'date-fns';
-
+import { getFormattedDate } from '../get-formatted-date/get-formatted-date.helper.js';
 import {
   MILLISECONDS_IN_SECOND,
   SECONDS_IN_MINUTE,
-} from './libs/constants/constants.js';
-import { TIME_FORMAT } from './libs/enums/time-format.enum.js';
-
-const getFormattedDate = (date: Date, formatType: string): string => {
-  return format(date, formatType);
-};
+} from '../libs/constants/constants.js';
+import { TIME_FORMAT } from '../libs/enums/time-format.enum.js';
 
 const getFormattedTime = (seconds: number): string => {
   const timeZoneOffsetInMinutes = new Date().getTimezoneOffset();

@@ -16,6 +16,7 @@ export {
 export {
   configureString,
   debounce,
+  getFormattedDate,
   getFormattedTime,
   replaceTemplateWithValue,
 } from './libs/helpers/helpers.js';
