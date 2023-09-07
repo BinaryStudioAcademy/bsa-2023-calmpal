@@ -32,7 +32,10 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
 
   return (
     <React.Fragment>
-      <ScrollView style={styles.formContainer}>
+      <ScrollView
+        style={styles.formContainer}
+        showsVerticalScrollIndicator={false}
+      >
         <Label />
         <Text style={styles.titleText}>Sign In to your account</Text>
         <Input
