@@ -1,5 +1,6 @@
 import { type Repository } from '#libs/types/types.js';
 
+import { ChatEntity } from './chat.entity.js';
 import { type ChatModel } from './chat.model.js';
 
 class ChatRepository implements Repository {
@@ -15,6 +16,20 @@ class ChatRepository implements Repository {
 
   public findAll(): ReturnType<Repository['findAll']> {
     return Promise.resolve([]);
+  }
+
+  public async findAllByUserId(userId: number): Promise<ChatEntity[]> {
+    const chats = await this.chatModel.query().where('members', '@>', [userId]);
+
+    return chats.map((chat) => {
+      return ChatEntity.initialize({
+        id: chat.id,
+        name: chat.name,
+        members: chat.members,
+        createdAt: new Date(chat.createdAt),
+        updatedAt: new Date(chat.updatedAt),
+      });
+    });
   }
 
   public create(): Promise<unknown> {
