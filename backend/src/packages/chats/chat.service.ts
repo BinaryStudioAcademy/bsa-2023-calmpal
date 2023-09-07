@@ -1,7 +1,7 @@
 import { type Service } from '#libs/types/types.js';
 
 import { type ChatRepository } from './chat.repository.js';
-import { type ChatsGetAllResponseDto } from './libs/types/types.js';
+import { type ChatGetAllResponseDto } from './libs/types/types.js';
 
 class ChatService implements Service {
   private chatRepository: ChatRepository;
@@ -18,9 +18,7 @@ class ChatService implements Service {
     return await Promise.resolve({ items: [] });
   }
 
-  public async findAllByUserId(
-    userId: number,
-  ): Promise<ChatsGetAllResponseDto> {
+  public async findAllByUserId(userId: number): Promise<ChatGetAllResponseDto> {
     const items = await this.chatRepository.findAllByUserId(userId);
 
     return {

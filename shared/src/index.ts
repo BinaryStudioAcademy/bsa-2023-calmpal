@@ -39,9 +39,9 @@ export {
 } from './libs/types/types.js';
 export { AuthApiPath } from './packages/auth/auth.js';
 export {
+  type ChatGetAllItemResponseDto,
+  type ChatGetAllResponseDto,
   ChatsApiPath,
-  type ChatsGetAllItemResponseDto,
-  type ChatsGetAllResponseDto,
 } from './packages/chats/chats.js';
 export {
   type FileGetAllItemResponseDto,
