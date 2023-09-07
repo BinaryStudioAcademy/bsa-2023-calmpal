@@ -28,10 +28,7 @@ const Modal: React.FC<Properties> = ({
         <div className={styles['modal']}>
           <div className={styles['header']}>
             <span className={styles['title']}>{title}</span>
-            <button
-              className={getValidClassNames(styles['icon-container'])}
-              onClick={onClose}
-            >
+            <button className={styles['icon-container']} onClick={onClose}>
               <Icon name="close" color={IconColor.BLACK} />
             </button>
           </div>
