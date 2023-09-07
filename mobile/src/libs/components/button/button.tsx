@@ -20,9 +20,7 @@ const Button: React.FC<Properties> = ({
   iconSourceSvg,
 }) => {
   return iconSourceSvg ? (
-    <Pressable onPress={onPress} style={styles.iconButtonContainer}>
-      {iconSourceSvg}
-    </Pressable>
+    <Pressable onPress={onPress}>{iconSourceSvg}</Pressable>
   ) : (
     <Pressable
       style={[
