@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
   container: {
     height: 177,
     position: 'relative',
-    paddingHorizontal: 20,
     marginBottom: 10,
   },
   image: {
