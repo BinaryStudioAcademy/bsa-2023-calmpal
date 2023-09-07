@@ -2,13 +2,7 @@ import React from 'react';
 import { type ImageSourcePropType } from 'react-native';
 
 import imagePlaceholder from '#assets/img/card-image-placeholder.png';
-import {
-  Image,
-  Pressable,
-  Text,
-  TouchableOpacity,
-  View,
-} from '#libs/components/components';
+import { Image, Pressable, Text, View } from '#libs/components/components';
 
 import { DEFAULT_NUMBER_OF_LINES } from './libs/constants';
 import { styles } from './styles';
@@ -30,16 +24,13 @@ const Card: React.FC<Properties> = ({
     onPress(title);
   };
 
-  return iconSourceSvg ? (
-    <Pressable onPress={handlePress}>
-      <View style={styles.container}>
+  return (
+    <Pressable onPress={handlePress} style={styles.container}>
+      {iconSourceSvg ? (
         <View style={styles.iconContainer}>{iconSourceSvg}</View>
-        <Text style={styles.title}>{title}</Text>
-      </View>
-    </Pressable>
-  ) : (
-    <TouchableOpacity style={styles.container} onPress={handlePress}>
-      <Image source={image} style={styles.image} />
+      ) : (
+        <Image source={image} style={styles.image} />
+      )}
       <Text
         style={styles.title}
         numberOfLines={DEFAULT_NUMBER_OF_LINES}
@@ -47,7 +38,7 @@ const Card: React.FC<Properties> = ({
       >
         {title}
       </Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
