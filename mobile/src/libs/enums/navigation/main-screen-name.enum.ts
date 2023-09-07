@@ -1,6 +1,6 @@
 const MainScreenName = {
   HOME: 'Home',
-  CHAT_LIST: 'Chat list',
+  CHAT: 'Chat',
   MEDITATION: 'Meditation',
 } as const;
 

@@ -1,7 +1,7 @@
 .auth {
   display: flex;
   flex: 1;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   padding: 0 5%;
   overflow: hidden;
@@ -13,11 +13,7 @@
   background-attachment: fixed;
 }
 
-.auth .logo {
-  display: none;
-}
-
-.auth .overlay {
+.overlay {
   position: relative;
   z-index: 3;
   display: flex;
@@ -33,19 +29,19 @@
 .auth-name {
   position: relative;
   z-index: 2;
-  margin-bottom: 150px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  margin-bottom: 64px;
 }
 
-.auth-name .secondary {
-  margin: 0.1px;
-  font-size: 30px;
-}
-
-.auth-name .primary {
+.secondary {
   margin: 0.1px;
   font-weight: 600;
-  font-size: 83px;
+  font-size: 30px;
+  line-height: 2.344;
 }
 
 @media (width < 1023px) {
@@ -57,10 +53,11 @@
   }
 
   .auth-name {
-    margin: 0;
+    gap: 16px;
+    margin-bottom: 0;
   }
 
-  .auth .overlay {
+  .overlay {
     padding: 30px 70px;
   }
 }
@@ -71,26 +68,18 @@
     justify-content: center;
   }
 
-  .auth .logo {
-    z-index: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 149px;
-    height: 56px;
-    margin: 0.1px 130px 32px 0.1px;
-    font-size: 21px;
-    background: var(--blue-300);
-    border-radius: 14px;
+  .auth-name {
+    right: 55px;
+    margin-bottom: 18px;
   }
 
-  .auth .overlay {
+  .secondary {
+    display: none;
+  }
+
+  .overlay {
     height: auto;
     padding: 0.1px;
     background-color: transparent;
-  }
-
-  .auth-name {
-    display: none;
   }
 }
