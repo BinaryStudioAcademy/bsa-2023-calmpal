@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react';
+import React from 'react';
 
 import { Pressable, Text } from '#libs/components/components';
 
@@ -7,7 +7,6 @@ import { styles } from './styles';
 type Properties = {
   label?: string;
   onPress: () => void;
-  iconSourceSvg?: ReactNode;
   isDisabled?: boolean;
   type?: 'solid' | 'outlined';
 };
@@ -17,11 +16,8 @@ const Button: React.FC<Properties> = ({
   onPress,
   isDisabled = false,
   type = 'solid',
-  iconSourceSvg,
 }) => {
-  return iconSourceSvg ? (
-    <Pressable onPress={onPress}>{iconSourceSvg}</Pressable>
-  ) : (
+  return (
     <Pressable
       style={[
         styles.button,
