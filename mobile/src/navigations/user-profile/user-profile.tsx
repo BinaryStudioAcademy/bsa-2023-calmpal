@@ -4,8 +4,8 @@ import React from 'react';
 import { Header } from '#libs/components/components';
 import { ProfileScreenName } from '#libs/enums/enums';
 import { type ProfileNavigationParameterList } from '#libs/types/types';
+import { NotificationSettings } from '#screens/notification-settings/notification-settings';
 import { Profile } from '#screens/profile/profile';
-import { ProfileSettings } from '#screens/profile-settings/profile-settings';
 
 const NativeStack =
   createNativeStackNavigator<ProfileNavigationParameterList>();
@@ -24,7 +24,7 @@ const UserProfile: React.FC = () => {
       />
       <NativeStack.Screen
         name={ProfileScreenName.SETTINGS}
-        component={ProfileSettings}
+        component={NotificationSettings}
         options={{
           header: (): React.ReactNode => {
             return <Header isArrowVisible />;

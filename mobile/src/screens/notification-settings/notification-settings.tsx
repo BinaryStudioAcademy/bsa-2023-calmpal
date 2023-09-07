@@ -11,7 +11,7 @@ import { Setting } from './components/components';
 import { NOTIFICATION_SETTINGS_DEFAULT_VALUE } from './libs/constants';
 import { styles } from './styles';
 
-const ProfileSettings: React.FC = () => {
+const NotificationSettings: React.FC = () => {
   const { control } = useAppForm({
     defaultValues: NOTIFICATION_SETTINGS_DEFAULT_VALUE,
   });
@@ -27,4 +27,4 @@ const ProfileSettings: React.FC = () => {
     </LinearGradient>
   );
 };
-export { ProfileSettings };
+export { NotificationSettings };
