@@ -59,7 +59,10 @@ const Root: React.FC = () => {
         </>
       )}
 
-      <NativeStack.Screen name={RootScreenName.PROFILE} component={Profile} />
+      <NativeStack.Screen
+        name={RootScreenName.MY_PROFILE}
+        component={Profile}
+      />
       <NativeStack.Screen
         name={RootScreenName.SETTINGS}
         component={ProfileSettings}

@@ -40,7 +40,7 @@ const Header: React.FC<Properties> = ({
   };
 
   const handleIconPress = (): void => {
-    navigation.navigate(RootScreenName.PROFILE);
+    navigation.navigate(RootScreenName.MY_PROFILE);
   };
 
   return (
