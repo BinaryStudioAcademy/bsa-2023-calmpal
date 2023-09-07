@@ -50,6 +50,12 @@ export {
   type S3FileUploadRequestDto,
 } from './packages/files/files.js';
 export {
+  JournalApiPath,
+  type JournalEntryCreateRequestDto,
+  type JournalEntryGetAllItemResponseDto,
+  type JournalEntryGetAllResponseDto,
+} from './packages/journal/journal.js';
+export {
   createMeditationValidationSchema,
   MeditationApiPath,
   type MeditationCreatePayload,
@@ -57,12 +63,6 @@ export {
   type MeditationEntryRequestDto,
   type MeditationEntryResponseDto,
 } from './packages/meditation/meditation.js';
-export {
-  JournalApiPath,
-  type JournalEntryCreateRequestDto,
-  type JournalEntryGetAllItemResponseDto,
-  type JournalEntryGetAllResponseDto,
-} from './packages/journal/journal.js';
 export {
   createSurveyValidationSchema,
   getSurveyCategories,
