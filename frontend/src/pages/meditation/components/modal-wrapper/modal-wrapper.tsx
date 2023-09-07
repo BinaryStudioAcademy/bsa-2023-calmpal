@@ -1,3 +1,4 @@
+import { Button } from '#libs/components/components.js';
 import { DataStatus } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
@@ -54,7 +55,9 @@ const ModalWrapper: React.FC = () => {
   return (
     <>
       <div className={styles['container']}>
-        <button onClick={handleOpen}>Open modal</button>
+        <div className={styles['button']}>
+          <Button label="Open modal" onClick={handleOpen} style="secondary" />
+        </div>
       </div>
 
       <MeditationModal
