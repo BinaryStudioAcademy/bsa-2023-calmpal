@@ -19,4 +19,5 @@ const LinearGradient: React.FC<Properties> = ({ children }) => {
     </Gradient>
   );
 };
+
 export { LinearGradient };
