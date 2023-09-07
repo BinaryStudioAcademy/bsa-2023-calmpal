@@ -31,7 +31,7 @@ type ExtraArguments = {
   authApi: typeof authApi;
   journalApi: typeof journalApi;
   meditationApi: typeof meditationApi;
-  filesApi: typeof filesApi;t
+  filesApi: typeof filesApi;
   storage: typeof storage;
   notification: typeof notification;
 };
