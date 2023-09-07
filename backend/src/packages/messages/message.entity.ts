@@ -11,7 +11,9 @@ class MessageEntity implements Entity {
 
   private message: string;
 
-  private chat_id: string;
+  private chatId: string;
+
+  private senderId: string;
 
   public constructor({
     id,
@@ -19,21 +21,24 @@ class MessageEntity implements Entity {
     updatedAt,
     name,
     message,
-    chat_id,
+    chatId,
+    senderId,
   }: {
     id: number | null;
     createdAt: Date | null;
     updatedAt: Date | null;
     name: string;
     message: string;
-    chat_id: string;
+    chatId: string;
+    senderId: string;
   }) {
     this.id = id;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.name = name;
     this.message = message;
-    this.chat_id = chat_id;
+    this.chatId = chatId;
+    this.senderId = senderId;
   }
 
   public static initialize({
@@ -42,14 +47,16 @@ class MessageEntity implements Entity {
     updatedAt,
     name,
     message,
-    chat_id,
+    chatId,
+    senderId,
   }: {
     id: number | null;
     createdAt: Date | null;
     updatedAt: Date | null;
     name: string;
     message: string;
-    chat_id: string;
+    chatId: string;
+    senderId: string;
   }): MessageEntity {
     return new MessageEntity({
       id,
@@ -57,7 +64,8 @@ class MessageEntity implements Entity {
       updatedAt,
       name,
       message,
-      chat_id,
+      chatId,
+      senderId,
     });
   }
 
@@ -67,7 +75,8 @@ class MessageEntity implements Entity {
     updatedAt: Date;
     name: string;
     message: string;
-    chat_id: string;
+    chatId: string;
+    senderId: string;
   } {
     return {
       id: this.id as number,
@@ -75,19 +84,22 @@ class MessageEntity implements Entity {
       updatedAt: this.updatedAt as Date,
       name: this.name,
       message: this.message,
-      chat_id: this.chat_id,
+      chatId: this.chatId,
+      senderId: this.senderId,
     };
   }
 
   public toNewObject(): {
     name: string;
     message: string;
-    chat_id: string;
+    chatId: string;
+    senderId: string;
   } {
     return {
       name: this.name,
       message: this.message,
-      chat_id: this.chat_id,
+      chatId: this.chatId,
+      senderId: this.senderId,
     };
   }
 }
