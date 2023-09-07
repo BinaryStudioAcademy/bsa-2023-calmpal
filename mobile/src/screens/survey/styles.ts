@@ -3,14 +3,15 @@ import { StyleSheet } from 'react-native';
 import { AppColor } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    alignItems: 'center',
-    flexDirection: 'row',
+  titleText: {
+    fontSize: 22,
+    paddingHorizontal: 10,
     justifyContent: 'center',
-    backgroundColor: AppColor.GRAY_100_ALPHA_50,
-    height: '100%',
-    width: '100%',
+    marginTop: 40,
+    paddingTop: 4,
+    paddingBottom: 4,
+    alignSelf: 'center',
+    color: AppColor.WHITE,
   },
 });
 

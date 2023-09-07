@@ -1,19 +1,18 @@
 import React from 'react';
 
-import { Loader, SignBackground } from '#libs/components/components';
-import { DataStatus } from '#libs/enums/enums';
+import { SignBackground, Text } from '#libs/components/components';
 import { useAppDispatch, useAppSelector, useCallback } from '#libs/hooks/hooks';
 import { type UserAuthResponseDto } from '#packages/users/users';
 import { actions as authActions } from '#slices/auth/auth';
 
 import { PreferencesStep } from './components/components';
+import { styles } from './styles';
 
 const Survey: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { userId, surveyPreferencesDataStatus } = useAppSelector(({ auth }) => {
+  const { userId } = useAppSelector(({ auth }) => {
     return {
       userId: (auth.authenticatedUser as UserAuthResponseDto).id,
-      surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
     };
   });
 
@@ -29,13 +28,10 @@ const Survey: React.FC = () => {
     [dispatch, userId],
   );
 
-  if (surveyPreferencesDataStatus === DataStatus.PENDING) {
-    return <Loader />;
-  }
-
   return (
     <React.Fragment>
       <SignBackground>
+        <Text style={styles.titleText}>What can we help you with?</Text>
         <PreferencesStep onSubmit={handleSubmit} />
       </SignBackground>
     </React.Fragment>

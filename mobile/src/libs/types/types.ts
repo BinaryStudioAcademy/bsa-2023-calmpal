@@ -3,6 +3,7 @@ export { type Track } from './meditation/meditation';
 export {
   type ChatNavigationParameterList,
   type MeditationNavigationParameterList,
+  type NavigationItem,
   type NavigationScreenProperties,
   type RootNavigationParameterList,
   type TabNavigationParameterList,

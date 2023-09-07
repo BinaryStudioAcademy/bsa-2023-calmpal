@@ -12,17 +12,26 @@ import { useEffect } from '#libs/hooks/hooks';
 import { store } from '#libs/packages/store/store';
 import { Root as RootNavigation } from '#navigations/navigations';
 
+import { SPLASH_SCREEN_HIDE_TIMEOUT } from './libs/constants';
 import { styles } from './styles';
 
 const App: React.FC = () => {
   useEffect(() => {
-    SplashScreen.hide();
+    // To prevent white screen after splash screen disappears
+    const splashScreenTimer = setTimeout(() => {
+      SplashScreen.hide();
+    }, SPLASH_SCREEN_HIDE_TIMEOUT);
+
     const startPlayer = async (): Promise<void> => {
       await TrackPlayer.setupPlayer();
       await TrackPlayer.setRepeatMode(RepeatMode.Queue);
     };
 
     void startPlayer();
+
+    return () => {
+      clearTimeout(splashScreenTimer);
+    };
   }, []);
 
   return (
