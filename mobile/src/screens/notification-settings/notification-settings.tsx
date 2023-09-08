@@ -21,7 +21,7 @@ const NotificationSettings: React.FC = () => {
       <ScrollView contentContainerStyle={styles.container}>
         <Setting
           label="Allow Notifications"
-          controller={<Switch name="notification" control={control} />}
+          controller={<Switch name="hasNotification" control={control} />}
         />
       </ScrollView>
     </LinearGradient>

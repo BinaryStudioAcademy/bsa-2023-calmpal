@@ -1,5 +1,5 @@
 const NOTIFICATION_SETTINGS_DEFAULT_VALUE = {
-  notification: true,
+  hasNotification: true,
 } as const;
 
 export { NOTIFICATION_SETTINGS_DEFAULT_VALUE };
