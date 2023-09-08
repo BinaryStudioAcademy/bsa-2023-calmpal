@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingLeft: 20,
     paddingRight: 40,
-    fontSize: 14,
+    fontSize: 16,
     elevation: 2,
     color: AppColor.BLACK,
   },

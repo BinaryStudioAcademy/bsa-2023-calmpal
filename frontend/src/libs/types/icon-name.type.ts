@@ -10,6 +10,7 @@ type IconName =
   | 'pause'
   | 'home'
   | 'meditation'
-  | 'chats';
+  | 'chats'
+  | 'journal';
 
 export { type IconName };

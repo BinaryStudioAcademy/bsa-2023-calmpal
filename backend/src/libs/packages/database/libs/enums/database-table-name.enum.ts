@@ -9,5 +9,6 @@ const DatabaseTableName = {
   MEDITATION_ENTRIES: 'meditation_entries',
   USER_ROLES: 'user_roles',
   FILES: 'files',
+  JOURNAL_ENTRIES: 'journal_entries',
 } as const;
 export { DatabaseTableName };
