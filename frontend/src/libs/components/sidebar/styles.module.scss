@@ -62,7 +62,7 @@
   line-height: 0px;
 }
 
-@media (width <= 480px) {
+@media (width < 768px) {
   .sidebar {
     display: none;
   }
