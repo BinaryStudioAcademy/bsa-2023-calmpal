@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
   surveyContainer: {
     flex: 1,
     marginTop: 40,
+    paddingHorizontal: 55,
   },
   otherTextInput: {
     backgroundColor: AppColor.BLUE_100_ALPHA_70,
