@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
     backgroundColor: AppColor.BLUE_300,
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 55,
   },
   backgroundWrapper: {
     position: 'absolute',
