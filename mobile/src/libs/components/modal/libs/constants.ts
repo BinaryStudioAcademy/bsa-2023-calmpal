@@ -4,4 +4,8 @@ const MEDITATION_DURATION = {
   LONG: '20',
 };
 
-export { MEDITATION_DURATION };
+const DURATION_UNIT = {
+  MINUTES: 'min',
+};
+
+export { DURATION_UNIT, MEDITATION_DURATION };

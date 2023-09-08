@@ -17,13 +17,21 @@ type Properties = {
   title: string;
   duration: number;
   img?: ImageSourcePropType;
+  id: number;
+  onClick: (id: number) => void;
 };
 
 const MeditationItem: React.FC<Properties> = ({
   title,
   duration,
   img = cardImagePlaceholder,
+  id,
+  onClick,
 }) => {
+  const handleClick = (): void => {
+    onClick(id);
+  };
+
   return (
     <View style={styles.container}>
       <Image source={img} style={styles.image} />
@@ -32,7 +40,7 @@ const MeditationItem: React.FC<Properties> = ({
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.duration}>{duration} min</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleClick}>
           <View style={styles.playButton}>
             <Play color={AppColor.WHITE} />
           </View>

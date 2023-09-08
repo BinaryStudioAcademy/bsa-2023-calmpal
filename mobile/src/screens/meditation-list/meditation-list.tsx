@@ -5,6 +5,7 @@ import {
   Header,
   InputSearch,
   LinearGradient,
+  Modal,
   ScrollView,
   View,
 } from '#libs/components/components';
@@ -13,6 +14,7 @@ import {
   useEffect,
   useNavigation,
   useSearch,
+  useState,
 } from '#libs/hooks/hooks';
 import { type MeditationNavigationParameterList } from '#libs/types/types';
 
@@ -37,6 +39,16 @@ const MeditationList: React.FC = () => {
     'title',
   );
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const handleClick = (): void => {
+    setIsModalVisible(!isModalVisible);
+  };
+
+  const handleClose = (): void => {
+    setIsModalVisible(!isModalVisible);
+  };
+
   useEffect(() => {
     navigation.setOptions({
       header: () => {
@@ -48,6 +60,7 @@ const MeditationList: React.FC = () => {
   return (
     <LinearGradient>
       <View style={styles.container}>
+        {isModalVisible && <Modal onClose={handleClose} />}
         <InputSearch
           placeholder="Search topic"
           setSearchQuery={setSearchQuery}
@@ -59,6 +72,8 @@ const MeditationList: React.FC = () => {
                 title={item.title}
                 duration={item.duration}
                 key={item.id}
+                id={item.id}
+                onClick={handleClick}
               />
             );
           })}

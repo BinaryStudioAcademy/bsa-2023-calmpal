@@ -4,33 +4,25 @@ import { AppColor } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   container: {
-    bottom: 0,
-    justifyContent: 'flex-end',
-    left: 0,
-    position: 'absolute',
-    right: 0,
-    top: 0,
-  },
-  modalContainer: {
     flex: 1,
     justifyContent: 'flex-end',
   },
   modal: {
     backgroundColor: AppColor.WHITE,
     borderColor: AppColor.GRAY_100,
-    paddingHorizontal: 30,
-    paddingTop: 30,
-    paddingBottom: 20,
-    shadowColor: 'red',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+    paddingBottom: 20,
+    paddingHorizontal: 30,
+    paddingTop: 30,
+    shadowColor: 'red',
   },
   title: {
     alignSelf: 'center',
-    marginBottom: 20,
-    fontWeight: '600',
     color: AppColor.BLACK,
     fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 20,
   },
   durations: {
     flexDirection: 'row',
@@ -43,20 +35,20 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   durationItem: {
+    alignItems: 'center',
+    backgroundColor: AppColor.WHITE,
+    borderColor: AppColor.GRAY_200_ALPHA_50,
     borderRadius: 80,
-    width: 80,
+    borderWidth: 1,
     height: 80,
     justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: AppColor.GRAY_200_ALPHA_50,
-    borderWidth: 1,
-    backgroundColor: AppColor.WHITE,
+    width: 80,
   },
   durationUnit: {
-    fontSize: 12,
     color: AppColor.GRAY_200_ALPHA_50,
+    fontSize: 12,
   },
-  active: {
+  activeDuration: {
     backgroundColor: AppColor.BLUE_300,
     borderWidth: 0,
   },
@@ -64,8 +56,8 @@ const styles = StyleSheet.create({
     color: AppColor.WHITE,
   },
   button: {
-    height: 52,
     borderRadius: 40,
+    height: 52,
   },
 });
 
