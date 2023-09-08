@@ -1,8 +1,3 @@
-.image {
-  width: 56px;
-  height: 56px;
-}
-
 .icon {
   width: 24px;
   height: 24px;
@@ -67,7 +62,7 @@
   line-height: 0px;
 }
 
-@media (width <= 480px) {
+@media (width < 768px) {
   .sidebar {
     display: none;
   }

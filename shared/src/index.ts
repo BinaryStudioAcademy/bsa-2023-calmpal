@@ -17,6 +17,8 @@ export {
 export {
   configureString,
   debounce,
+  getFormattedDate,
+  getFormattedTime,
   replaceTemplateWithValue,
 } from './libs/helpers/helpers.js';
 export { type Config } from './libs/packages/config/config.js';
@@ -44,6 +46,12 @@ export {
   type S3FileUploadRequestDto,
 } from './packages/files/files.js';
 export { FilesApiPath } from './packages/files/files.js';
+export {
+  JournalApiPath,
+  type JournalEntryCreateRequestDto,
+  type JournalEntryGetAllItemResponseDto,
+  type JournalEntryGetAllResponseDto,
+} from './packages/journal/journal.js';
 export {
   createSurveyValidationSchema,
   getSurveyCategories,

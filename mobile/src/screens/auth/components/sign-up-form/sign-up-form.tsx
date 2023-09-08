@@ -32,10 +32,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 
   return (
     <React.Fragment>
-      <ScrollView
-        style={styles.formContainer}
-        showsVerticalScrollIndicator={false}
-      >
+      <ScrollView style={styles.formContainer}>
         <Label />
         <Text style={styles.titleText}>
           Create a free account to save your preferences
@@ -45,14 +42,14 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
           errors={errors}
           label="Name"
           name="fullName"
-          placeholder="Enter your full name"
+          placeholder="Enter your name"
         />
         <Input
           control={control}
           errors={errors}
-          label="Email"
+          label="E-mail"
           name="email"
-          placeholder="Enter your email"
+          placeholder="Enter your e-mail"
         />
         <Input
           control={control}
@@ -67,7 +64,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
           label={
             <React.Fragment>
               Already have an account? Go to{' '}
-              <Text style={styles.linkText}>Sign In</Text>
+              <Text style={styles.linkText}>Sign in</Text>
             </React.Fragment>
           }
           to={`/${RootScreenName.SIGN_IN}`}
