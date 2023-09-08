@@ -32,8 +32,7 @@ class UserModel extends AbstractModel {
       withoutPassword(builder): QueryBuilder<UserModel> {
         return builder.select(
           'users.id',
-          'email',
-          'details.fullName',
+          'users.email',
           'users.created_at',
           'users.updated_at',
         );
