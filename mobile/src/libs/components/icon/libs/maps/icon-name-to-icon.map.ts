@@ -3,6 +3,7 @@ import BellIcon from '#assets/img/icons/bell.svg';
 import ChatIcon from '#assets/img/icons/chat.svg';
 import HomeIcon from '#assets/img/icons/home.svg';
 import PlusIcon from '#assets/img/icons/plus.svg';
+import SignOutIcon from '#assets/img/icons/sign-out.svg';
 import UserIcon from '#assets/img/icons/user.svg';
 import { type IconName } from '#libs/types/types';
 
@@ -15,6 +16,7 @@ const iconNameToIcon: Record<IconName, SVGIcon> = {
   'home': HomeIcon as SVGIcon,
   'back-arrow': BackArrowIcon as SVGIcon,
   'user': UserIcon as SVGIcon,
+  'sign-out': SignOutIcon as SVGIcon,
 };
 
 export { iconNameToIcon };
