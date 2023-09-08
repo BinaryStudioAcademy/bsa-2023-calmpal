@@ -12,7 +12,7 @@ const Profile: React.FC = () => {
   const navigation =
     useNavigation<NavigationProp<ProfileNavigationParameterList>>();
 
-  const handleCategoryPress = (): void => {
+  const handleNotificationsPress = (): void => {
     navigation.navigate(ProfileScreenName.SETTINGS);
   };
 
@@ -21,13 +21,13 @@ const Profile: React.FC = () => {
       <View style={styles.container}>
         <Card
           title="Notifications and Reminders"
-          onPress={handleCategoryPress}
+          onPress={handleNotificationsPress}
           iconColor={AppColor.WHITE}
           iconName="bell"
         />
         <Card
           title="Sign Out"
-          onPress={handleCategoryPress}
+          onPress={handleNotificationsPress}
           iconColor={AppColor.WHITE}
           iconName="sign-out"
         />
