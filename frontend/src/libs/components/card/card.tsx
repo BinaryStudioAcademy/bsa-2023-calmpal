@@ -1,7 +1,7 @@
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { type IconName } from '#libs/types/types.js';
 
-import { Icon } from '../components.js';
+// import { Icon } from '../components.js';
 import styles from './styles.module.scss';
 
 type Properties = {
@@ -17,7 +17,7 @@ const Card: React.FC<Properties> = ({
   imageUrl,
   onClick,
   isActive,
-  iconName,
+  // iconName,
 }) => {
   return (
     <button
@@ -27,13 +27,17 @@ const Card: React.FC<Properties> = ({
       )}
       onClick={onClick}
     >
-      <div className={styles['name']}>
-        <div className={styles['image-placeholder']}>
-          {imageUrl && (
+      <div
+        className={getValidClassNames(
+          styles['name'],
+          !imageUrl && styles['no-image'],
+        )}
+      >
+        {imageUrl && (
+          <div className={styles['image-placeholder']}>
             <img src={imageUrl} alt="not found" className={styles['image']} />
-          )}
-          {iconName && <Icon name={iconName} />}
-        </div>
+          </div>
+        )}
         {title}
       </div>
     </button>

@@ -4,6 +4,7 @@ import { ReactComponent as BackwardIcon } from '#assets/icons/backward.svg';
 import { ReactComponent as ChatsIcon } from '#assets/icons/chats.svg';
 import { ReactComponent as ForwardIcon } from '#assets/icons/forward.svg';
 import { ReactComponent as HomeIcon } from '#assets/icons/home.svg';
+import { ReactComponent as JournalIcon } from '#assets/icons/journal.svg';
 import { ReactComponent as MeditationIcon } from '#assets/icons/meditation.svg';
 import { ReactComponent as NextIcon } from '#assets/icons/next.svg';
 import { ReactComponent as PauseIcon } from '#assets/icons/pause.svg';
@@ -28,6 +29,7 @@ const iconNameToIcon: Record<
   'play': PlayIcon,
   'home': HomeIcon,
   'chats': ChatsIcon,
+  'journal': JournalIcon,
 };
 
 export { iconNameToIcon };
