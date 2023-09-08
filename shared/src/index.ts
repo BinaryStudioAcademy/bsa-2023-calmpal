@@ -46,6 +46,12 @@ export {
 } from './packages/files/files.js';
 export { FilesApiPath } from './packages/files/files.js';
 export {
+  JournalApiPath,
+  type JournalEntryCreateRequestDto,
+  type JournalEntryGetAllItemResponseDto,
+  type JournalEntryGetAllResponseDto,
+} from './packages/journal/journal.js';
+export {
   createSurveyValidationSchema,
   getSurveyCategories,
   PREFERENCES_OTHER_CATEGORY,
