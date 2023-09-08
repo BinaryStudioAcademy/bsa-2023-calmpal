@@ -1,4 +1,6 @@
-import { type ChangeEvent, type FC, useCallback, useState } from 'react';
+import { type ChangeEvent, type FC } from 'react';
+
+import { useCallback, useState } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
 

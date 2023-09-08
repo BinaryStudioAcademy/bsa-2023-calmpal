@@ -1,7 +1,8 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 
 import { IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
+import { useCallback, useState } from '#libs/hooks/hooks.js';
 
 import { Icon } from '../components.js';
 import styles from './styles.module.scss';
