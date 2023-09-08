@@ -11,6 +11,7 @@ const AppColor = {
   GRAY_400: '#ACB4D0',
   GRAY_500: '#302E36',
   GRAY_600: '#1D1C21FF',
+  GREEN_100: '#84b750',
   PINK_100: '#E1A7D5',
   PURPLE_100: '#E5E1FF',
   RED_100: '#D51A52',
