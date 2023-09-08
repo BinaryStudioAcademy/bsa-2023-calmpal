@@ -17,14 +17,14 @@ class Notification {
   public [NotificationType.ERROR](message: string): void {
     this.show({
       type: NotificationType.ERROR,
-      title: '⛔ Error',
+      title: '⛔ Error:',
       message,
     });
   }
 
   public [NotificationType.SUCCESS](message: string): void {
     this.show({
-      type: NotificationType.ERROR,
+      type: NotificationType.SUCCESS,
       title: '✅ Success:',
       message,
     });

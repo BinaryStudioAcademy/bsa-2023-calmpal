@@ -15,10 +15,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row-reverse',
   },
   avatar: {
-    height: 40,
-    width: 40,
-    backgroundColor: AppColor.BLUE_300,
-    borderRadius: 8,
     marginRight: 16,
     marginLeft: 0,
   },
@@ -27,11 +23,14 @@ const styles = StyleSheet.create({
   },
   userAvatar: {
     backgroundColor: AppColor.GRAY_400,
+    height: 40,
+    width: 40,
+    borderRadius: 8,
     marginRight: 0,
     marginLeft: 16,
   },
   messageText: {
-    fontSize: 14,
+    fontSize: 16,
     lineHeight: 20,
     paddingVertical: 8,
     paddingHorizontal: 16,

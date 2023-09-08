@@ -4,6 +4,17 @@ type IconName =
   | 'sign-out'
   | 'avatar'
   | 'notification'
-  | 'subscription';
+  | 'subscription'
+  | 'backward'
+  | 'forward'
+  | 'next'
+  | 'previous'
+  | 'audio-play-icon'
+  | 'play'
+  | 'pause'
+  | 'home'
+  | 'meditation'
+  | 'chats'
+  | 'journal';
 
 export { type IconName };

@@ -16,6 +16,11 @@
   cursor: pointer;
 }
 
+.item:hover {
+  background: var(--white);
+  box-shadow: 0 4px 20px 0 var(--blue-alpha-30);
+}
+
 .item .name {
   display: flex;
   justify-content: center;
@@ -40,4 +45,11 @@
 .selected {
   background: var(--white);
   box-shadow: 0 4px 20px 0 var(--blue-alpha-30);
+}
+
+@media (width < 900px) {
+  .item {
+    width: 100%;
+    min-width: 0;
+  }
 }

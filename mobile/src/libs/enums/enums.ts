@@ -2,6 +2,8 @@ export { DataStatus } from './app/app';
 export {
   ChatScreenName,
   MainScreenName,
+  MeditationScreenName,
+  ProfileScreenName,
   RootScreenName,
 } from './navigation/navigation';
 export { AppColor } from './ui/ui';
