@@ -10,10 +10,10 @@ function useTrackPlayerProgress(): [number, number] {
 
   useEffect(() => {
     const getPlayerDetails = async (): Promise<void> => {
-      const pos = await TrackPlayer.getPosition();
-      const dur = await TrackPlayer.getDuration();
-      setPosition(pos);
-      setDuration(dur);
+      const currentPosition = await TrackPlayer.getPosition();
+      const currentDuration = await TrackPlayer.getDuration();
+      setPosition(currentPosition);
+      setDuration(currentDuration);
     };
 
     const interval = setInterval(() => {
