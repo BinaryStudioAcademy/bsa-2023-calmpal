@@ -76,12 +76,32 @@
   width: 34px;
 }
 
-@media (width < 480px) {
+@media (width < 900px) {
+  .container {
+    width: 250px;
+  }
+
+  .chat-list {
+    padding: 0 15px;
+  }
+
+  .list .search {
+    width: 100%;
+    padding: 0 15px;
+  }
+}
+
+@media (width < 768px) {
   .container {
     width: 100%;
   }
 
   .chat-list {
     padding: 0 20px;
+  }
+
+  .list .search {
+    width: 100%;
+    padding: 0 15px;
   }
 }
