@@ -5,6 +5,7 @@ const AppRoute = {
   MEDITATION: '/meditation',
   SIGN_UP_SURVEY: '/sign-up/survey',
   CHATS: '/chats',
+  JOURNAL: '/journal',
 } as const;
 
 export { AppRoute };
