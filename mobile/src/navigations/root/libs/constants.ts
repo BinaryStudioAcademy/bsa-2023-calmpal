@@ -1,6 +1,6 @@
 import { RootScreenName } from '#libs/enums/enums';
 import { type NavigationItem } from '#libs/types/types';
-import { Main } from '#navigations/navigations';
+import { Main, UserProfile } from '#navigations/navigations';
 import { Auth } from '#screens/auth/auth';
 import { Survey } from '#screens/survey/survey';
 
@@ -31,6 +31,13 @@ const NAVIGATION_ITEMS: NavigationItem[] = [
     component: Auth,
     checkShouldBeRendered: (authenticatedUser): boolean => {
       return !authenticatedUser;
+    },
+  },
+  {
+    name: RootScreenName.PROFILE,
+    component: UserProfile,
+    checkShouldBeRendered: (authenticatedUser, isSurveyCompleted): boolean => {
+      return authenticatedUser && isSurveyCompleted;
     },
   },
 ];
