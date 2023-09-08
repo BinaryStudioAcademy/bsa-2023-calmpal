@@ -5,7 +5,7 @@ import { type ChatRepository } from './chat.repository.js';
 import {
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
-  type ChatRequestDto,
+  type CreateChatPayload,
 } from './libs/types/types.js';
 
 class ChatService implements Service {
@@ -34,7 +34,7 @@ class ChatService implements Service {
   }
 
   public async create(
-    payload: ChatRequestDto,
+    payload: CreateChatPayload,
   ): Promise<ChatGetAllItemResponseDto> {
     const item = await this.chatRepository.create(
       ChatEntity.initializeNew({
