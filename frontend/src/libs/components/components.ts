@@ -9,7 +9,6 @@ export { Icon } from './icon/icon.js';
 export { Input } from './input/input.js';
 export { Link } from './link/link.js';
 export { Loader } from './loader/loader.js';
-export { MeditationSidebar } from './meditation-sidebar/meditation-sidebar.js';
 export { ProtectedRoute } from './protected-route/protected-route.js';
 export { RouterProvider } from './router-provider/router-provider.jsx';
 export { Search } from './search/search.js';
