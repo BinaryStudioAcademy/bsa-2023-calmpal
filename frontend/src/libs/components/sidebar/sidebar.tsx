@@ -1,8 +1,13 @@
 import logoS from '#assets/img/logo-s.svg';
-import { Icon, Link } from '#libs/components/components.js';
+import { Icon, Link, Modal } from '#libs/components/components.js';
+import {
+  DeleteAccount,
+  DeleteAccountForm,
+  DeleteAccountMessage,
+} from '#libs/components/modal/steps/delete-account/delete-account.js';
 import { AppRoute, IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { useLocation } from '#libs/hooks/hooks.js';
+import { useCallback, useLocation, useState } from '#libs/hooks/hooks.js';
 import { type Route } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
@@ -13,6 +18,27 @@ type Properties = {
 
 const Sidebar: React.FC<Properties> = ({ routes }) => {
   const { pathname } = useLocation();
+
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const toggleModal = useCallback((): void => {
+    setModalOpen(!isModalOpen);
+  }, [isModalOpen]);
+
+  const steps = [
+    {
+      component: <DeleteAccountMessage />,
+      title: 'We are Sad that you are Leaving',
+    },
+    {
+      component: <DeleteAccountForm />,
+      title: 'Please tell us why',
+    },
+    {
+      component: <DeleteAccount />,
+      title: 'Your account is deleted',
+    },
+  ];
 
   return (
     <div className={styles['sidebar']}>
@@ -41,6 +67,15 @@ const Sidebar: React.FC<Properties> = ({ routes }) => {
               </button>
             );
           })}
+        </div>
+        <div>
+          <button onClick={toggleModal}>modal</button>
+
+          <Modal
+            isDisplayed={isModalOpen}
+            steps={steps}
+            onClose={toggleModal}
+          />
         </div>
       </nav>
     </div>

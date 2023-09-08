@@ -1,5 +1,6 @@
 import { ReactComponent as ArrowIcon } from '#assets/icons/arrow.svg';
 import { ReactComponent as ChatsIcon } from '#assets/icons/chats.svg';
+import { ReactComponent as CrossIcon } from '#assets/icons/cross.svg';
 import { ReactComponent as HomeIcon } from '#assets/icons/home.svg';
 import { ReactComponent as MeditationIcon } from '#assets/icons/meditation.svg';
 import { ReactComponent as PlayIcon } from '#assets/icons/play.svg';
@@ -16,6 +17,7 @@ const iconNameToIcon: Record<
   'arrow': ArrowIcon,
   'plus': PlusIcon,
   'chats': ChatsIcon,
+  'cross': CrossIcon,
 };
 
 export { iconNameToIcon };
