@@ -5,7 +5,6 @@ import { AppColor } from '#libs/enums/enums';
 const styles = StyleSheet.create({
   titleText: {
     fontSize: 22,
-    paddingHorizontal: 10,
     justifyContent: 'center',
     marginTop: 40,
     paddingTop: 4,
