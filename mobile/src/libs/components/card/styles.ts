@@ -6,13 +6,11 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: AppColor.WHITE,
+    justifyContent: 'space-around',
     borderRadius: 20,
-    display: 'flex',
     elevation: 20,
-    flex: 1,
     flexDirection: 'row',
     gap: 20,
-    height: 83,
     marginBottom: 8,
     paddingLeft: 3,
     paddingRight: 6,
@@ -33,6 +31,15 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 28,
+  },
+  iconContainer: {
+    padding: 26,
+    backgroundColor: AppColor.BLUE_300,
+    borderRadius: 20,
+  },
+  titleContainer: {
+    flex: 1,
+    margin: 16,
   },
 });
 
