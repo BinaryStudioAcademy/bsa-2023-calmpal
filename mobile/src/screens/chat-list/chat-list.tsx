@@ -24,7 +24,6 @@ import mockedChats from './libs/data.json';
 import { styles } from './styles';
 
 const mockedCount = 12;
-
 const ChatList: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<ChatNavigationParameterList>>();
@@ -32,7 +31,9 @@ const ChatList: React.FC = () => {
   useEffect(() => {
     navigation.setOptions({
       header: () => {
-        return <Header title={'Chat'} badgeCount={mockedCount} />;
+        return (
+          <Header title="Chat" badgeCount={mockedCount} isProfileVisible />
+        );
       },
     });
   }, [navigation]);
