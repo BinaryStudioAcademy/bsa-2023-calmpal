@@ -1,10 +1,12 @@
 export { type AsyncThunkConfig } from './app/app';
+export { type IconName } from './icon-name.type';
 export { type Track } from './meditation/meditation';
 export {
   type ChatNavigationParameterList,
   type MeditationNavigationParameterList,
   type NavigationItem,
   type NavigationScreenProperties,
+  type ProfileNavigationParameterList,
   type RootNavigationParameterList,
   type TabNavigationParameterList,
 } from './navigation/navigation';

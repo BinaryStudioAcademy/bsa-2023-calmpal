@@ -1,7 +1,10 @@
+import { type NavigationProp } from '@react-navigation/native';
 import React from 'react';
 
-import { Text, View } from '#libs/components/components';
-import { useAppRoute } from '#libs/hooks/hooks';
+import { IconButton, Text, View } from '#libs/components/components';
+import { AppColor, ProfileScreenName } from '#libs/enums/enums';
+import { useAppRoute, useNavigation } from '#libs/hooks/hooks';
+import { type ProfileNavigationParameterList } from '#libs/types/types';
 
 import { BackButton, Badge } from './components/components';
 import { DEFAULT_BADGE_COUNT } from './libs/constants';
@@ -12,6 +15,7 @@ type Properties = {
   isArrowVisible?: boolean;
   badgeCount?: number;
   isVisible?: boolean;
+  isProfileVisible?: boolean;
 };
 
 const Header: React.FC<Properties> = ({
@@ -19,18 +23,43 @@ const Header: React.FC<Properties> = ({
   isArrowVisible = false,
   badgeCount = DEFAULT_BADGE_COUNT,
   isVisible = true,
+  isProfileVisible = false,
 }) => {
+  const navigation =
+    useNavigation<NavigationProp<ProfileNavigationParameterList>>();
   const { name } = useAppRoute();
 
   const hasValue = Boolean(badgeCount);
 
+  const handleIconPress = (): void => {
+    navigation.navigate(ProfileScreenName.PROFILE);
+  };
+
   return (
     <>
       {isVisible ? (
-        <View style={[styles.header, isArrowVisible && styles.headerCenter]}>
+        <View
+          style={[
+            styles.header,
+            isArrowVisible && styles.headerCenter,
+            isProfileVisible && styles.settings,
+          ]}
+        >
           {isArrowVisible && <BackButton />}
-          <Text style={styles.title}>{title ?? name}</Text>
-          {hasValue && <Badge count={badgeCount} />}
+
+          <View style={styles.titleBadgeContainer}>
+            <Text style={styles.title}>{title ?? name}</Text>
+            {hasValue && <Badge count={badgeCount} />}
+          </View>
+          {isProfileVisible && (
+            <View style={styles.settingsContainer}>
+              <IconButton
+                onPress={handleIconPress}
+                color={AppColor.BLUE_300}
+                iconName="user"
+              />
+            </View>
+          )}
         </View>
       ) : (
         <>
