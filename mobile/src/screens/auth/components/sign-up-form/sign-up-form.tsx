@@ -32,10 +32,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
 
   return (
     <React.Fragment>
-      <ScrollView
-        style={styles.formContainer}
-        showsVerticalScrollIndicator={false}
-      >
+      <ScrollView style={styles.formContainer}>
         <Label />
         <Text style={styles.titleText}>
           Create a free account to save your preferences
