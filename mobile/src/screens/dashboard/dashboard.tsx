@@ -8,9 +8,9 @@ import { type UserAuthResponseDto } from '#packages/users/users';
 import { styles } from './styles';
 
 const Dashboard: React.FC = () => {
-  const { fullName } = useAppSelector(({ auth }) => {
+  const { authenticatedUser } = useAppSelector(({ auth }) => {
     return {
-      fullName: (auth.authenticatedUser as UserAuthResponseDto).fullName,
+      authenticatedUser: auth.authenticatedUser as UserAuthResponseDto,
     };
   });
 
@@ -18,7 +18,7 @@ const Dashboard: React.FC = () => {
     <LinearGradient>
       <View style={styles.profileContainer}>
         <Image source={userImagePlaceholder} style={styles.userImage} />
-        <Text style={styles.userName}>{fullName}</Text>
+        <Text style={styles.userName}>{authenticatedUser.fullName}</Text>
       </View>
     </LinearGradient>
   );
