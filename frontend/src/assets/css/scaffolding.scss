@@ -33,7 +33,7 @@ body {
   clip-path: inset(100%);
 }
 
-#root .Toastify__toast--error {
+#root .Toastify__toast {
   color: var(--black);
   font-weight: 400;
   font-size: 12px;
@@ -46,6 +46,6 @@ body {
   background: var(--red-300);
 }
 
-#root .Toastify__toast-icon svg {
+#root .Toastify__toast--error .Toastify__toast-icon svg {
   fill: var(--red-300);
 }

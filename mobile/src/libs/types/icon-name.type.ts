@@ -10,6 +10,7 @@ type IconName =
   | 'next'
   | 'pause'
   | 'play'
-  | 'previous';
+  | 'previous'
+  | 'sign-out';
 
 export { type IconName };

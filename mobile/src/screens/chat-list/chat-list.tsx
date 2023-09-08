@@ -13,7 +13,6 @@ import {
 } from '#libs/components/components';
 import { AppColor, ChatScreenName, RootScreenName } from '#libs/enums/enums';
 import {
-  useAppRoute,
   useCallback,
   useEffect,
   useNavigation,
@@ -28,17 +27,16 @@ const mockedCount = 12;
 const ChatList: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<ChatNavigationParameterList>>();
-  const { name: routeName } = useAppRoute();
 
   useEffect(() => {
     navigation.setOptions({
       header: () => {
         return (
-          <Header title={routeName} badgeCount={mockedCount} isProfileVisible />
+          <Header title="Chat" badgeCount={mockedCount} isProfileVisible />
         );
       },
     });
-  }, [navigation, routeName]);
+  }, [navigation]);
 
   const handleSelectChat = useCallback(
     (title: string) => {

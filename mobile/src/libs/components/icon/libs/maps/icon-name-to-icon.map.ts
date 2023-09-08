@@ -9,6 +9,7 @@ import Pause from '#assets/img/icons/pause.svg';
 import Play from '#assets/img/icons/play.svg';
 import PlusIcon from '#assets/img/icons/plus.svg';
 import Previous from '#assets/img/icons/previous.svg';
+import SignOutIcon from '#assets/img/icons/sign-out.svg';
 import UserIcon from '#assets/img/icons/user.svg';
 import { type IconName } from '#libs/types/types';
 
@@ -27,6 +28,7 @@ const iconNameToIcon: Record<IconName, SVGIcon> = {
   'pause': Pause as SVGIcon,
   'play': Play as SVGIcon,
   'previous': Previous as SVGIcon,
+  'sign-out': SignOutIcon as SVGIcon,
 };
 
 export { iconNameToIcon };
