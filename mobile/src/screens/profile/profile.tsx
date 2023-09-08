@@ -25,6 +25,12 @@ const Profile: React.FC = () => {
           iconColor={AppColor.WHITE}
           iconName="bell"
         />
+        <Card
+          title="Sign Out"
+          onPress={handleCategoryPress}
+          iconColor={AppColor.WHITE}
+          iconName="sign-out"
+        />
       </View>
     </LinearGradient>
   );
