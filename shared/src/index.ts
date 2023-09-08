@@ -43,6 +43,7 @@ export {
   type ChatGetAllResponseDto,
   type ChatRequestDto,
   ChatsApiPath,
+  createChatValidationSchema,
 } from './packages/chats/chats.js';
 export {
   type FileGetAllItemResponseDto,

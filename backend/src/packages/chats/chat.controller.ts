@@ -10,6 +10,8 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { type ChatService } from './chat.service.js';
 import { ChatsApiPath } from './libs/enums/enums.js';
+import { type ChatRequestDto } from './libs/types/types.js';
+import { createChatValidationSchema } from './libs/validation-schemas/validation-schemas.js';
 
 /**
  * @swagger
@@ -57,9 +59,13 @@ class ChatController extends BaseController {
     this.addRoute({
       path: ChatsApiPath.ROOT,
       method: 'POST',
+      validation: { body: createChatValidationSchema },
       handler: (options) => {
         return this.create(
-          options as APIHandlerOptions<{ user: UserAuthResponseDto }>,
+          options as APIHandlerOptions<{
+            body: ChatRequestDto;
+            user: UserAuthResponseDto;
+          }>,
         );
       },
     });
@@ -106,12 +112,15 @@ class ChatController extends BaseController {
    *               $ref: '#/components/schemas/Chat'
    */
   private async create(
-    options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
+    options: APIHandlerOptions<{
+      body: ChatRequestDto;
+      user: UserAuthResponseDto;
+    }>,
   ): Promise<APIHandlerResponse> {
     return {
       status: HTTPCode.CREATED,
       payload: await this.chatService.create({
-        name: 'Mocked name',
+        name: options.body.name,
         members: [options.user.id],
       }),
     };
