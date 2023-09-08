@@ -16,6 +16,9 @@ import { store } from '#libs/packages/store/store.js';
 import { Auth } from '#pages/auth/auth.js';
 import { Chats } from '#pages/chat/chat.js';
 import { Dashboard } from '#pages/dashboard/dashboard.js';
+import { Journal } from '#pages/journal/journal.js';
+import { Meditation } from '#pages/meditation/meditation.js';
+import { Root } from '#pages/root/root.js';
 import { Survey } from '#pages/surveys/survey.js';
 
 createRoot(document.querySelector('#root') as HTMLElement).render(
@@ -27,6 +30,26 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
             path: AppRoute.ROOT,
             element: <App />,
             children: [
+              {
+                path: AppRoute.ROOT,
+                element: (
+                  <ProtectedRoute>
+                    <SidebarWrapper>
+                      <Root />
+                    </SidebarWrapper>
+                  </ProtectedRoute>
+                ),
+              },
+              {
+                path: AppRoute.MEDITATION,
+                element: (
+                  <ProtectedRoute>
+                    <SidebarWrapper>
+                      <Meditation />
+                    </SidebarWrapper>
+                  </ProtectedRoute>
+                ),
+              },
               {
                 path: AppRoute.SIGN_IN,
                 element: <Auth />,
@@ -59,6 +82,16 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                   <ProtectedRoute>
                     <SidebarWrapper>
                       <Chats />
+                    </SidebarWrapper>
+                  </ProtectedRoute>
+                ),
+              },
+              {
+                path: AppRoute.JOURNAL,
+                element: (
+                  <ProtectedRoute>
+                    <SidebarWrapper>
+                      <Journal />
                     </SidebarWrapper>
                   </ProtectedRoute>
                 ),
