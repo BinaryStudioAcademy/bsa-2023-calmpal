@@ -47,6 +47,18 @@
   box-shadow: 0 4px 20px 0 var(--blue-alpha-30);
 }
 
+.icon-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 83px;
+  min-height: 83px;
+  margin-right: 25px;
+  padding: 3px;
+  background-color: var(--blue-300);
+  border-radius: 20px;
+}
+
 @media (width < 900px) {
   .item {
     width: 100%;

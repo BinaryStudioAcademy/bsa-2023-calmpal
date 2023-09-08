@@ -1,10 +1,9 @@
-import { Icon } from '#libs/components/components.js';
+import { Card, Icon } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { useAppSelector, useCallback, useState } from '#libs/hooks/hooks.js';
 import { type IconName } from '#libs/types/types.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 
-import { ProfileSettingsButton } from './profile-settings-button/profile-settings-button.js';
 import styles from './styles.module.scss';
 
 const ProfileSettingsSidebar: React.FC = () => {
@@ -14,10 +13,18 @@ const ProfileSettingsSidebar: React.FC = () => {
     return user.fullName;
   });
 
-  const [activeButton, setActiveButton] = useState<string>('');
+  const [activeButton, setActiveButton] = useState<IconName | ''>('');
+
+  const settingsOptions: { name: IconName; title: string }[] = [
+    { name: 'notification', title: 'Very long text to see if it will break' },
+    { name: 'subscription', title: 'Test' },
+    { name: 'sign-out', title: 'Sign Out' },
+  ];
 
   const handleOnClick = useCallback((name: IconName) => {
-    setActiveButton(name);
+    return () => {
+      setActiveButton(name);
+    };
   }, []);
 
   return (
@@ -41,25 +48,18 @@ const ProfileSettingsSidebar: React.FC = () => {
       <div className={styles['body']}>
         <div className={styles['buttons-container']}>
           <div className="visually-hidden">Profile settings options</div>
-          <ProfileSettingsButton
-            name="notification"
-            onClick={handleOnClick}
-            isActive={activeButton === 'notification'}
-          >
-            Very long text to see if it will break
-          </ProfileSettingsButton>
-
-          <ProfileSettingsButton
-            name="subscription"
-            onClick={handleOnClick}
-            isActive={activeButton === 'subscription'}
-          >
-            Test
-          </ProfileSettingsButton>
-
-          <ProfileSettingsButton name="sign-out" onClick={handleOnClick}>
-            Sign Out
-          </ProfileSettingsButton>
+          {settingsOptions.map((option) => {
+            return (
+              <Card
+                key={option.name}
+                title={option.title}
+                onClick={handleOnClick(option.name)}
+                isActive={activeButton === option.name}
+                iconName={option.name}
+                iconColor={IconColor.WHITE}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

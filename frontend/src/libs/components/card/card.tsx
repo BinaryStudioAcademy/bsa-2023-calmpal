@@ -10,6 +10,7 @@ type Properties = {
   onClick: () => void;
   isActive: boolean;
   iconName?: IconName;
+  iconColor?: string;
 };
 
 const Card: React.FC<Properties> = ({
@@ -18,6 +19,7 @@ const Card: React.FC<Properties> = ({
   onClick,
   isActive,
   iconName,
+  iconColor = 'currentColor',
 }) => {
   return (
     <button
@@ -39,8 +41,8 @@ const Card: React.FC<Properties> = ({
           </div>
         )}
         {iconName && (
-          <div className={styles['image-placeholder']}>
-            <Icon name={iconName} />
+          <div className={styles['icon-background']}>
+            <Icon name={iconName} color={iconColor} />
           </div>
         )}
         {title}
