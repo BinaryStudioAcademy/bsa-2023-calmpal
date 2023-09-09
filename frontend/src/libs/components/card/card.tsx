@@ -25,28 +25,31 @@ const Card: React.FC<Properties> = ({
   statusIcon,
 }) => {
   const shouldShowStatusIcon = isActive && statusIcon;
+  const hasNoImageOrIcon = !imageUrl && !iconName;
 
   return (
     <button
       className={getValidClassNames(
         styles['item'],
         isActive && styles['selected'],
-        !imageUrl && !iconName && styles['no-image'],
+        hasNoImageOrIcon && styles['no-image'],
       )}
       onClick={onClick}
     >
-      <div className={getValidClassNames(styles['image-container'])}>
-        {imageUrl && (
-          <div className={styles['image-placeholder']}>
-            <img src={imageUrl} alt="not found" className={styles['image']} />
-          </div>
-        )}
-        {iconName && (
-          <div className={styles['icon-background']}>
-            <Icon name={iconName} color={iconColor} />
-          </div>
-        )}
-      </div>
+      {!hasNoImageOrIcon && (
+        <div className={getValidClassNames(styles['image-container'])}>
+          {imageUrl && (
+            <div className={styles['image-placeholder']}>
+              <img src={imageUrl} alt="not found" className={styles['image']} />
+            </div>
+          )}
+          {iconName && (
+            <div className={styles['icon-background']}>
+              <Icon name={iconName} color={iconColor} />
+            </div>
+          )}
+        </div>
+      )}
       <div className={styles['title']}>{title}</div>
       {shouldShowStatusIcon && (
         <div className={styles['status-icon']}>
