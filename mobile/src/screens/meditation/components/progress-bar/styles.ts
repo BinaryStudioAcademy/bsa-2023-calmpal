@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '100%',
     marginTop: 40,
-    marginBottom: 20,
   },
   progress: {
     position: 'absolute',
