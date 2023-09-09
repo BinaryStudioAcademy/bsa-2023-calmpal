@@ -1,4 +1,4 @@
-import { type IconColor } from '#libs/enums/enums.js';
+import { IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { type IconName, type ValueOf } from '#libs/types/types.js';
 
@@ -12,6 +12,7 @@ type Properties = {
   isActive: boolean;
   iconName?: IconName;
   iconColor?: ValueOf<typeof IconColor>;
+  statusIcon?: IconName;
 };
 
 const Card: React.FC<Properties> = ({
@@ -21,6 +22,7 @@ const Card: React.FC<Properties> = ({
   isActive,
   iconName,
   iconColor = 'currentColor',
+  statusIcon,
 }) => {
   return (
     <button
@@ -30,7 +32,7 @@ const Card: React.FC<Properties> = ({
       )}
       onClick={onClick}
     >
-      <div className={getValidClassNames(styles['name'])}>
+      <div className={getValidClassNames(styles['image-container'])}>
         {imageUrl && (
           <div className={styles['image-placeholder']}>
             <img src={imageUrl} alt="not found" className={styles['image']} />
@@ -41,8 +43,13 @@ const Card: React.FC<Properties> = ({
             <Icon name={iconName} color={iconColor} />
           </div>
         )}
-        {title}
       </div>
+      <div className={styles['title']}>{title}</div>
+      {statusIcon && isActive && (
+        <div className={styles['status-icon']}>
+          <Icon name={statusIcon} color={IconColor.BLUE} />
+        </div>
+      )}
     </button>
   );
 };

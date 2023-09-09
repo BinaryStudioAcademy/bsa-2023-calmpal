@@ -6,6 +6,20 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import styles from './styles.module.scss';
 
+const settingsOptions: {
+  name: IconName;
+  title: string;
+  statusIcon: IconName;
+}[] = [
+  {
+    name: 'notification',
+    title: 'Very long text to see if it will break',
+    statusIcon: 'arrow',
+  },
+  { name: 'subscription', title: 'Test', statusIcon: 'arrow' },
+  { name: 'sign-out', title: 'Sign Out', statusIcon: 'arrow' },
+];
+
 const ProfileSettingsSidebar: React.FC = () => {
   const { fullName } = useAppSelector(({ auth }) => {
     return {
@@ -14,12 +28,6 @@ const ProfileSettingsSidebar: React.FC = () => {
   });
 
   const [activeButton, setActiveButton] = useState<IconName | null>(null);
-
-  const settingsOptions: { name: IconName; title: string }[] = [
-    { name: 'notification', title: 'Very long text to see if it will break' },
-    { name: 'subscription', title: 'Test' },
-    { name: 'sign-out', title: 'Sign Out' },
-  ];
 
   const handleOnClick = useCallback((name: IconName) => {
     return () => {
@@ -57,6 +65,7 @@ const ProfileSettingsSidebar: React.FC = () => {
                 isActive={activeButton === option.name}
                 iconName={option.name}
                 iconColor={IconColor.WHITE}
+                statusIcon={option.statusIcon}
               />
             );
           })}
