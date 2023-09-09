@@ -14,6 +14,8 @@ class JournalEntryModel extends AbstractModel {
 
   public text!: string;
 
+  public userId!: number;
+
   public static override get tableName(): string {
     return DatabaseTableName.JOURNAL_ENTRIES;
   }
