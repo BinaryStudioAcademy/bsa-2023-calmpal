@@ -33,7 +33,7 @@ import { type MeditationService } from './meditation.service.js';
  *            format: url
  *          createdAt:
  *            type: string
- *            format: date-tie
+ *            format: date-time
  *          updatedAt:
  *            type: string
  *            format: date-time
