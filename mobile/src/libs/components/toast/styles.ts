@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
   errorToast: {
     borderColor: AppColor.RED_100,
   },
+  successToast: {
+    borderColor: AppColor.GREEN_100,
+  },
   title: {
     fontSize: 15,
   },
