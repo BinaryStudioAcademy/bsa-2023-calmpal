@@ -2,7 +2,7 @@ import { ReactComponent as ArrowIcon } from '#assets/icons/arrow.svg';
 import { ReactComponent as AudioPlayIcon } from '#assets/icons/audio-player-play.svg';
 import { ReactComponent as BackwardIcon } from '#assets/icons/backward.svg';
 import { ReactComponent as ChatsIcon } from '#assets/icons/chats.svg';
-import { ReactComponent as CloseIcon } from '#assets/icons/cross.svg';
+import { ReactComponent as CloseIcon } from '#assets/icons/close.svg';
 import { ReactComponent as DownloadIcon } from '#assets/icons/download.svg';
 import { ReactComponent as ForwardIcon } from '#assets/icons/forward.svg';
 import { ReactComponent as HomeIcon } from '#assets/icons/home.svg';
