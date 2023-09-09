@@ -47,15 +47,14 @@ class MeditationRepository implements Repository {
     topicId?: number,
   ): Promise<MeditationEntity> {
     const { audioUrl, topicName: name } = entity.toObject();
+    const topic = topicId ? { name, id: topicId } : { name };
 
     const meditation = await this.meditationEntryModel
       .query()
       .insertGraph(
         {
           audioUrl,
-          [MeditationRelation.TOPIC]: topicId
-            ? { name, id: topicId }
-            : { name },
+          [MeditationRelation.TOPIC]: topic,
         } as MeditationCreateQueryPayload,
         { relate: true },
       )
