@@ -1,4 +1,8 @@
+import { ExceptionMessage } from '#libs/enums/enums.js';
+import { UsersError } from '#libs/exceptions/exceptions.js';
+import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Service } from '#libs/types/types.js';
+import { userService } from '#packages/users/users.js';
 
 import { JournalEntryEntity } from './journal-entry.entity.js';
 import { type JournalEntryRepository } from './journal-entry.repository.js';
@@ -19,8 +23,14 @@ class JournalEntryService implements Service {
     return Promise.resolve(null);
   }
 
-  public async findAll(): Promise<JournalEntryGetAllResponseDto> {
-    const items = await this.journalEntryRepository.findAll();
+  public async findAll(): ReturnType<Service['findAll']> {
+    return await Promise.resolve({ items: [] });
+  }
+
+  public async findAllByUserId(
+    userId: number,
+  ): Promise<JournalEntryGetAllResponseDto> {
+    const items = await this.journalEntryRepository.findAllByUserId(userId);
 
     return {
       items: items.map((item) => {
@@ -32,9 +42,19 @@ class JournalEntryService implements Service {
   public async create(
     payload: JournalEntryCreateRequestDto,
   ): Promise<JournalEntryGetAllItemResponseDto> {
+    const user = await userService.findById(payload.userId);
+
+    if (!user) {
+      throw new UsersError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.USER_NOT_FOUND,
+      });
+    }
+
     const item = await this.journalEntryRepository.create(
       JournalEntryEntity.initialize({
         id: null,
+        userId: payload.userId,
         createdAt: null,
         updatedAt: null,
         title: payload.title,

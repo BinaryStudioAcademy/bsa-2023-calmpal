@@ -6,6 +6,7 @@ import {
 } from '#libs/packages/controller/controller.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
+import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { type JournalEntryService } from './journal-entry.service.js';
 import { JournalApiPath } from './libs/enums/enums.js';
@@ -57,8 +58,12 @@ class JournalEntryController extends BaseController {
     this.addRoute({
       path: JournalApiPath.ROOT,
       method: 'GET',
-      handler: () => {
-        return this.getAll();
+      handler: (options) => {
+        return this.getAll(
+          options as APIHandlerOptions<{
+            user: UserAuthResponseDto;
+          }>,
+        );
       },
     });
   }
@@ -122,10 +127,12 @@ class JournalEntryController extends BaseController {
    *                      $ref: '#/components/schemas/Journal Entry'
    */
 
-  private async getAll(): Promise<APIHandlerResponse> {
+  private async getAll(
+    options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
+  ): Promise<APIHandlerResponse> {
     return {
       status: HTTPCode.OK,
-      payload: await this.journalEntryService.findAll(),
+      payload: await this.journalEntryService.findAllByUserId(options.user.id),
     };
   }
 }
