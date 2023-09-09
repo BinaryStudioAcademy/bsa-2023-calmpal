@@ -1,6 +1,9 @@
 import { FIRST_ARRAY_INDEX } from '#libs/constants/constants.js';
 import { IconColor } from '#libs/enums/enums.js';
-import { getValidClassNames } from '#libs/helpers/helpers.js';
+import {
+  getDeepErrorMessage,
+  getValidClassNames,
+} from '#libs/helpers/helpers.js';
 import {
   useCallback,
   useEffect,
@@ -39,30 +42,13 @@ const InputFile = <T extends FormFieldValues>({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { field } = useFormController({ name, control });
 
-  const hasFile = Boolean(fileName);
   const inputError = errors[name];
   const hasError = Boolean(errorMessage);
+  const displayFile = Boolean(fileName) && !hasError;
 
   useEffect(() => {
-    if (inputError) {
-      if (inputError.message) {
-        setErrorMessage(inputError.message as string);
-
-        return;
-      }
-
-      Object.values(inputError).find((property: { message?: string }) => {
-        if (property.message) {
-          setErrorMessage(property.message);
-        }
-
-        return property.message;
-      });
-
-      return;
-    }
-
-    setErrorMessage(null);
+    const message = getDeepErrorMessage(inputError);
+    setErrorMessage(message);
   }, [inputError]);
 
   const handleFileChange = useCallback(
@@ -101,15 +87,12 @@ const InputFile = <T extends FormFieldValues>({
           onChange={handleFileChange}
         />
       </div>
-      {hasError ? (
-        <span className={styles['error-text']}>{errorMessage}</span>
-      ) : (
-        hasFile && (
-          <div className={styles['file']}>
-            <Icon name="download" color={IconColor.BLACK} />
-            <span className={styles['name']}>{fileName}</span>
-          </div>
-        )
+      {hasError && <span className={styles['error-text']}>{errorMessage}</span>}
+      {displayFile && (
+        <div className={styles['file']}>
+          <Icon name="download" color={IconColor.BLACK} />
+          <span className={styles['name']}>{fileName}</span>
+        </div>
       )}
     </label>
   );
