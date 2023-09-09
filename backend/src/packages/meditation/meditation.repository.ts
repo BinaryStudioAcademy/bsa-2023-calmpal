@@ -59,8 +59,7 @@ class MeditationRepository implements Repository {
         { relate: true },
       )
       .withGraphJoined(MeditationRelation.TOPIC)
-      .castTo<MeditationCommonQueryResponse>()
-      .execute();
+      .castTo<MeditationCommonQueryResponse>();
 
     return MeditationEntity.initialize({
       id: meditation.id,
