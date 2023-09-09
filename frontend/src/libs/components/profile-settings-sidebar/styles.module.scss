@@ -13,8 +13,13 @@
 .header {
   display: flex;
   justify-content: space-between;
+  height: 10%;
   padding: 26px 28px;
   border-bottom: 1px solid var(--blue-100);
+}
+
+.body {
+  height: 90%;
 }
 
 .header-text {
@@ -57,39 +62,18 @@
   padding: 0 16px;
 }
 
-@media (width < 480px) {
+@media (width < 900px) {
+  .container {
+    max-width: 250px;
+  }
+}
+
+@media (width < 768px) {
   .container {
     max-width: 100%;
   }
 
-  .header {
-    padding: 22px;
-    border-bottom: none;
-  }
-
-  .header-text {
-    line-height: 1.25;
-  }
-
-  .user {
-    padding: 22px;
-  }
-
-  .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--blue-100);
-  }
-
   .buttons-container {
-    width: 100%;
-    margin-top: 46px;
-  }
-}
-
-@media (width < 340px) {
-  .buttons-container {
-    padding: 4px;
+    padding: 0 20px;
   }
 }
