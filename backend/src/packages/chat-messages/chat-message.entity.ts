@@ -1,6 +1,6 @@
 import { type Entity } from '#libs/types/types.js';
 
-class MessageEntity implements Entity {
+class ChatMessageEntity implements Entity {
   private id: number | null;
 
   private createdAt: Date | null;
@@ -57,8 +57,8 @@ class MessageEntity implements Entity {
     message: string;
     chatId: string;
     senderId: string;
-  }): MessageEntity {
-    return new MessageEntity({
+  }): ChatMessageEntity {
+    return new ChatMessageEntity({
       id,
       createdAt,
       updatedAt,
@@ -79,8 +79,8 @@ class MessageEntity implements Entity {
     message: string;
     chatId: string;
     senderId: string;
-  }): MessageEntity {
-    return new MessageEntity({
+  }): ChatMessageEntity {
+    return new ChatMessageEntity({
       id: null,
       createdAt: null,
       updatedAt: null,
@@ -126,4 +126,4 @@ class MessageEntity implements Entity {
   }
 }
 
-export { MessageEntity };
+export { ChatMessageEntity };

@@ -9,7 +9,7 @@ import { UserDetailsModel } from '#packages/users/user-details.model.js';
 
 import { ChatMessagesTableColumn } from './libs/enums/chat-messages-table-column.enum.js';
 
-class MessageModel extends AbstractModel {
+class ChatMessageModel extends AbstractModel {
   public name!: string;
   public message!: string;
   public chatId!: string;
@@ -34,4 +34,4 @@ class MessageModel extends AbstractModel {
   }
 }
 
-export { MessageModel };
+export { ChatMessageModel };

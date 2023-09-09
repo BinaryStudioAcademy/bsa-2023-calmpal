@@ -1,7 +1,7 @@
 import { type Service } from '#libs/types/types.js';
 
-import { MessageEntity } from './message.entity.js';
-import { type MessageRepository } from './message.repository.js';
+import { ChatMessageEntity } from './chat-message.entity.js';
+import { type ChatMessageRepository } from './chat-message.repository.js';
 
 type CreateMessageRequestDto = {
   name: string;
@@ -18,11 +18,11 @@ type CreateMessageResponseDto = {
   chatId: string;
 };
 
-class MessageService implements Service {
-  private messageRepository: MessageRepository;
+class ChatMessageService implements Service {
+  private chatMessageRepository: ChatMessageRepository;
 
-  public constructor(messageRepository: MessageRepository) {
-    this.messageRepository = messageRepository;
+  public constructor(chatMessageRepository: ChatMessageRepository) {
+    this.chatMessageRepository = chatMessageRepository;
   }
 
   public find(): ReturnType<Service['find']> {
@@ -36,8 +36,8 @@ class MessageService implements Service {
   public async create(
     payload: CreateMessageRequestDto,
   ): Promise<CreateMessageResponseDto> {
-    const newMessage = await this.messageRepository.create(
-      MessageEntity.initializeNew({
+    const chatMessage = await this.chatMessageRepository.create(
+      ChatMessageEntity.initializeNew({
         name: payload.name,
         message: payload.message,
         chatId: payload.chatId,
@@ -45,19 +45,21 @@ class MessageService implements Service {
       }),
     );
 
-    return newMessage.toObject();
+    return chatMessage.toObject();
   }
 
   public async findAllByChatId(
     chatId: string,
-  ): Promise<ReturnType<MessageEntity['toObject']>[] | null> {
-    const messages = await this.messageRepository.findAllByChatId(chatId);
-    if (!messages) {
+  ): Promise<ReturnType<ChatMessageEntity['toObject']>[] | null> {
+    const chatMessages = await this.chatMessageRepository.findAllByChatId(
+      chatId,
+    );
+    if (!chatMessages) {
       return null;
     }
 
-    return messages.map((message) => {
-      return message.toObject();
+    return chatMessages.map((chatMessage) => {
+      return chatMessage.toObject();
     });
   }
 
@@ -70,4 +72,4 @@ class MessageService implements Service {
   }
 }
 
-export { MessageService };
+export { ChatMessageService };
