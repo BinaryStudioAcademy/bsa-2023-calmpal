@@ -1,29 +1,33 @@
 import cardPlaceholder from '#assets/img/card-image-placeholder.png';
 import { Card, Icon, Search } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
-import { useCallback, useSearch } from '#libs/hooks/hooks.js';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useCallback,
+  useEffect,
+  useSearch,
+} from '#libs/hooks/hooks.js';
+import { actions as chatsActions } from '#slices/chats/chats.js';
 
 import styles from './styles.module.scss';
 
-const mockedChats = [
-  { id: 1, name: 'Relationship' },
-  { id: 2, name: 'Friends' },
-  { id: 3, name: 'Family' },
-  { id: 4, name: 'Work' },
-];
-
-const mockedSelectedChat = {
-  id: 1,
-};
-
 const ChatSidebar: React.FC = () => {
-  const { filteredElements, setFilter } = useSearch(mockedChats, 'name');
-
-  const handleSelectChat = useCallback((id: number) => {
-    return () => {
-      mockedSelectedChat.id = id;
-      // TODO redux logic
+  const dispatch = useAppDispatch();
+  const { chats } = useAppSelector(({ chats }) => {
+    return {
+      chats: chats.chats,
     };
+  });
+
+  useEffect(() => {
+    void dispatch(chatsActions.getAllChats());
+  }, [dispatch]);
+
+  const { filteredElements, setFilter } = useSearch(chats, 'name');
+
+  const handleSelectChat = useCallback(() => {
+    // TODO redux logic
   }, []);
 
   return (
@@ -49,8 +53,8 @@ const ChatSidebar: React.FC = () => {
               <Card
                 title={filteredChat.name}
                 imageUrl={cardPlaceholder}
-                onClick={handleSelectChat(filteredChat.id)}
-                isActive={mockedSelectedChat.id === filteredChat.id}
+                onClick={handleSelectChat}
+                isActive={false}
                 key={filteredChat.id}
               />
             );
