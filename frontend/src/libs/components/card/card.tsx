@@ -24,6 +24,8 @@ const Card: React.FC<Properties> = ({
   iconColor = 'currentColor',
   statusIcon,
 }) => {
+  const shouldShowStatusIcon = isActive && statusIcon;
+
   return (
     <button
       className={getValidClassNames(
@@ -45,7 +47,7 @@ const Card: React.FC<Properties> = ({
         )}
       </div>
       <div className={styles['title']}>{title}</div>
-      {statusIcon && isActive && (
+      {shouldShowStatusIcon && (
         <div className={styles['status-icon']}>
           <Icon name={statusIcon} color={IconColor.BLUE} />
         </div>
