@@ -4,3 +4,4 @@ export {
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
 } from './libs/types/types.js';
+export { createJournalEntryValidationSchema } from './libs/validation-schemas/validation-schemas.js';

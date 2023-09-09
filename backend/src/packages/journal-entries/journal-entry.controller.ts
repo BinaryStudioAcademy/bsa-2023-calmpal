@@ -11,6 +11,7 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { type JournalEntryService } from './journal-entry.service.js';
 import { JournalApiPath } from './libs/enums/enums.js';
 import { type JournalEntryCreateRequestDto } from './libs/types/types.js';
+import { createJournalEntryValidationSchema } from './libs/validation-schemas/validation-schemas.js';
 
 /**
  * @swagger
@@ -46,6 +47,9 @@ class JournalEntryController extends BaseController {
     this.addRoute({
       path: JournalApiPath.ROOT,
       method: 'POST',
+      validation: {
+        body: createJournalEntryValidationSchema,
+      },
       handler: (options) => {
         return this.create(
           options as APIHandlerOptions<{

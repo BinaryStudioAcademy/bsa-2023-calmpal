@@ -46,6 +46,7 @@ export {
 } from './packages/files/files.js';
 export { FilesApiPath } from './packages/files/files.js';
 export {
+  createJournalEntryValidationSchema,
   JournalApiPath,
   type JournalEntryCreateRequestDto,
   type JournalEntryGetAllItemResponseDto,
