@@ -2,11 +2,14 @@ import meditationListPlaceholder from '#assets/img/meditation-list-placeholder.j
 import { Icon, Link } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
 
-import { type MeditationEntry } from '../../libs/types/types.js';
 import styles from './styles.module.scss';
 
 type Properties = {
-  meditationEntry: MeditationEntry;
+  meditationEntry: {
+    id: number;
+    title: string;
+    duration: string;
+  };
 };
 
 const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {

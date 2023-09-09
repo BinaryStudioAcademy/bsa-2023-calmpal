@@ -1,4 +1,5 @@
-import { mockedEntries } from '../libs/constants/constants.js';
+import { mockedEntries } from '#pages/meditation/libs/constants/constants.js';
+
 import { MeditationEntry } from './meditation-entry/meditation-entry.js';
 import styles from './styles.module.scss';
 
