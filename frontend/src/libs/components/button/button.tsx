@@ -8,7 +8,7 @@ type Properties = {
   label: string;
   type?: 'button' | 'submit';
   iconName?: IconName;
-  style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent';
+  style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent' | 'add';
   isLoading?: boolean;
   isDisabled?: boolean;
   isLabelVisuallyHidden?: boolean;

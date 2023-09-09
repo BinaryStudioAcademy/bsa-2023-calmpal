@@ -1,0 +1,9 @@
+.wrapper {
+  display: flex;
+  height: 100%;
+}
+
+.note-wrapper {
+  flex-grow: 1;
+  padding: 0 20px;
+}

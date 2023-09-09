@@ -11,7 +11,6 @@ import {
   StoreProvider,
   Toast,
 } from '#libs/components/components.js';
-import { Note } from '#libs/components/note/note.js';
 import { AppRoute } from '#libs/enums/enums.js';
 import { store } from '#libs/packages/store/store.js';
 import { Auth } from '#pages/auth/auth.js';
@@ -82,7 +81,6 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                   <ProtectedRoute>
                     <SidebarWrapper>
                       <Journal />
-                      <Note />
                     </SidebarWrapper>
                   </ProtectedRoute>
                 ),

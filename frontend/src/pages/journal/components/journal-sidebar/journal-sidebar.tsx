@@ -1,4 +1,4 @@
-import { Card } from '#libs/components/components.js';
+import { Button, Card } from '#libs/components/components.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -9,7 +9,11 @@ import { actions as journalActions } from '#slices/journal/journal.js';
 
 import styles from './styles.module.scss';
 
-const JournalSidebar: React.FC = () => {
+type Properties = {
+  onPlusButtonClick: () => void;
+};
+
+const JournalSidebar: React.FC<Properties> = ({ onPlusButtonClick }) => {
   const dispatch = useAppDispatch();
   const { allJournalEntries, selectedJournalEntry } = useAppSelector(
     ({ journal }) => {
@@ -39,6 +43,13 @@ const JournalSidebar: React.FC = () => {
         <div className={styles['info']}>
           <span>Journal</span>
         </div>
+        <Button
+          label="Add note"
+          isLabelVisuallyHidden
+          iconName="plus"
+          style="add"
+          onClick={onPlusButtonClick}
+        />
       </div>
       <div className={styles['list']}>
         <div className={styles['journal-entry-list']}>

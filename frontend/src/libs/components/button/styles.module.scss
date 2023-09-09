@@ -93,6 +93,23 @@
   box-shadow: 0 4px 23px 0 var(--violet-100);
 }
 
+.add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 52px;
+  color: var(--blue-300);
+  background-color: transparent;
+  border-color: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.add:hover {
+  transform: scale(1.1);
+}
+
 .primary:has(.loader),
 .secondary:has(.loader) {
   display: flex;

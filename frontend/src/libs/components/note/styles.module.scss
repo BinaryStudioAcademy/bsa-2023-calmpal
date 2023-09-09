@@ -1,18 +1,25 @@
 .wrapper {
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   margin: 150px auto;
+  color: var(--blue-700);
+  font-weight: 500;
 }
 
 .title {
   margin-bottom: 20px;
   padding: 10px;
   background-color: var(--blue-100);
+  border: 1px solid var(--blue-700);
+  border-radius: 5px;
 }
 
 .text {
   height: 300px;
   padding: 10px;
   background-color: var(--blue-100);
+  border: 1px solid var(--blue-700);
+  border-radius: 5px;
 }
 
 .title:focus,

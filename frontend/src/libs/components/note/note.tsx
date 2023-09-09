@@ -1,5 +1,6 @@
 import sanitizeHtml from 'sanitize-html';
 
+import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
 import { useCallback, useEffect, useRef, useState } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
@@ -9,7 +10,11 @@ const sanitizeConfig = {
   allowedAttributes: { a: ['href'] },
 };
 
-const Note: React.FC = () => {
+type Properties = {
+  className: string;
+};
+
+const Note: React.FC<Properties> = ({ className }) => {
   const [title, setTitle] = useState('Type your title here');
   const [text, setText] = useState('Type your text here');
 
@@ -50,7 +55,7 @@ const Note: React.FC = () => {
   }, [handleCursorPosition, text]);
 
   return (
-    <div className={styles['wrapper']}>
+    <div className={getValidClassNames(styles['wrapper'], className)}>
       <div
         contentEditable
         onInput={handleTitleChange}
