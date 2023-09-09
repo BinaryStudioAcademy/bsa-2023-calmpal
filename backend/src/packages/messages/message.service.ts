@@ -48,6 +48,19 @@ class MessageService implements Service {
     return newMessage.toObject();
   }
 
+  public async findAllByChatId(
+    chatId: string,
+  ): Promise<ReturnType<MessageEntity['toObject']>[] | null> {
+    const messages = await this.messageRepository.findAllByChatId(chatId);
+    if (!messages) {
+      return null;
+    }
+
+    return messages.map((message) => {
+      return message.toObject();
+    });
+  }
+
   public update(): ReturnType<Service['update']> {
     return Promise.resolve(null);
   }
