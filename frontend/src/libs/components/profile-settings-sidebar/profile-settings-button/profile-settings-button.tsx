@@ -1,5 +1,5 @@
 import { Icon } from '#libs/components/components.js';
-import { IconColor } from '#libs/enums/icon-color.enum.js';
+import { IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback } from '#libs/hooks/hooks.js';
 import { type IconName } from '#libs/types/types.js';
