@@ -58,7 +58,7 @@
   padding: 0 16px;
 }
 
-@media (width <= 480px) {
+@media (width < 480px) {
   .container {
     max-width: 100%;
   }
@@ -89,7 +89,7 @@
   }
 }
 
-@media (width <= 340px) {
+@media (width < 340px) {
   .buttons-container {
     padding: 4px;
   }

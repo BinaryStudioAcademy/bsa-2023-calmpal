@@ -33,7 +33,6 @@
   color: var(--gray-300);
   font-weight: 600;
   font-size: 16px;
-  font-family: Montserrat, sans-serif;
   line-height: 1.25;
   text-align: left;
 }
@@ -52,7 +51,7 @@
   margin-left: 26px;
 }
 
-@media (width <= 480px) {
+@media (width < 480px) {
   .profile-button {
     display: flex;
     width: 100%;

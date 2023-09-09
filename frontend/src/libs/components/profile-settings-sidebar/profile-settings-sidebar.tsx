@@ -13,7 +13,7 @@ const ProfileSettingsSidebar: React.FC = () => {
     return user.fullName;
   });
 
-  const [activeButton, setActiveButton] = useState<IconName | ''>('');
+  const [activeButton, setActiveButton] = useState<IconName | null>(null);
 
   const settingsOptions: { name: IconName; title: string }[] = [
     { name: 'notification', title: 'Very long text to see if it will break' },
