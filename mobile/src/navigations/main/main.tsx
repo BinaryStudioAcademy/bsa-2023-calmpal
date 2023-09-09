@@ -52,7 +52,7 @@ const Main: React.FC = () => {
         options={{
           tabBarIcon: JournalIcon,
           header: (): React.ReactNode => {
-            return <Header />;
+            return <Header badgeCount={10} />;
           },
         }}
       />
