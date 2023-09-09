@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
   container: {
     height: 177,
     position: 'relative',
-    paddingHorizontal: 20,
     marginBottom: 10,
   },
   image: {
@@ -17,7 +16,7 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     position: 'absolute',
-    right: 20,
+    right: 0,
     width: '77%',
     height: '100%',
     backgroundColor: AppColor.WHITE,
@@ -34,7 +33,7 @@ const styles = StyleSheet.create({
     maxWidth: 151,
   },
   duration: {
-    color: AppColor.BLUE_300,
+    color: AppColor.PURPLE_200,
     paddingVertical: 5,
     backgroundColor: AppColor.PURPLE_100,
     maxWidth: 72,
@@ -50,6 +49,7 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingLeft: 4,
   },
 });
 
