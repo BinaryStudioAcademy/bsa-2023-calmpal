@@ -8,7 +8,7 @@ import { Header } from '#libs/components/components';
 import { AppColor, MainScreenName } from '#libs/enums/enums';
 import { type TabNavigationParameterList } from '#libs/types/types';
 import { Chat, Meditation } from '#navigations/navigations';
-import { Home } from '#screens/home/home';
+import { Dashboard } from '#screens/dashboard/dashboard';
 
 import { styles } from './styles';
 
@@ -26,11 +26,11 @@ const Main: React.FC = () => {
     <BottomTab.Navigator screenOptions={tabNavigatorOptions}>
       <BottomTab.Screen
         name={MainScreenName.HOME}
-        component={Home}
+        component={Dashboard}
         options={{
           tabBarIcon: HomeIcon,
           header: (): React.ReactNode => {
-            return <Header />;
+            return <Header isProfileVisible />;
           },
         }}
       />
