@@ -7,7 +7,7 @@ type Properties = {
   isPlaying: boolean;
 };
 
-type ReturnType = {
+type TrackPlayerControls = {
   handlePlayPause: () => void;
   handleSkipToNext: () => void;
   handleSkipToPrevious: () => void;
@@ -16,7 +16,9 @@ type ReturnType = {
   handleSeek: (value: number) => void;
 };
 
-const useTrackPlayerControls = ({ isPlaying }: Properties): ReturnType => {
+const useTrackPlayerControls = ({
+  isPlaying,
+}: Properties): TrackPlayerControls => {
   const [timeProgress] = useTrackPlayerProgress();
 
   const handlePlayPause = useCallback(async (): Promise<void> => {

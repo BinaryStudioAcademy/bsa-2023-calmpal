@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from '#libs/components/components';
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, MeditationScreenName } from '#libs/enums/enums';
 import { useNavigation } from '#libs/hooks/hooks';
 import { type MeditationNavigationParameterList } from '#libs/types/types';
 
@@ -34,7 +34,9 @@ const MeditationItem: React.FC<Properties> = ({
     >();
 
   const handleSetPlaylist = (): void => {
-    navigation.navigate('Meditation', { playlist: MOCKED_PLAYLIST });
+    navigation.navigate(MeditationScreenName.MEDITATION, {
+      playlist: MOCKED_PLAYLIST,
+    });
   };
 
   return (
