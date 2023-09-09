@@ -1,0 +1,21 @@
+.wrapper {
+  width: 500px;
+  margin: 150px auto;
+}
+
+.title {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: var(--blue-100);
+}
+
+.text {
+  height: 300px;
+  padding: 10px;
+  background-color: var(--blue-100);
+}
+
+.title:focus,
+.text:focus {
+  outline: none;
+}
