@@ -9,8 +9,8 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: var(--gray-alpha-35);
-  backdrop-filter: blur(30px);
+  background-color: var(--gray-alpha-30);
+  backdrop-filter: blur(15px);
 }
 
 .modal {
@@ -26,6 +26,7 @@
   display: flex;
   justify-content: space-between;
   gap: 50px;
+  font-size: 30px;
 }
 
 .icon-container {
@@ -33,7 +34,6 @@
   flex-direction: column;
   justify-content: center;
   padding: 0;
-  font-size: 28px;
   background-color: var(--transparent);
   border: none;
   cursor: pointer;
@@ -41,13 +41,16 @@
 
 .title {
   font-weight: 600;
-  font-size: 30px;
   line-height: 40px;
 }
 
 @media (width < 480px) {
+  .overlay {
+    background-color: var(--gray-alpha-5);
+    backdrop-filter: blur(25px);
+  }
+
   .modal {
-    color: var(--white);
     background-color: var(--transparent);
   }
 }

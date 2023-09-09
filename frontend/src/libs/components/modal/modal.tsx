@@ -1,14 +1,14 @@
 import { IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 
-import { Icon } from '../components.js';
+import { Button } from '../components.js';
 import styles from './styles.module.scss';
 
 type Properties = {
   children: React.ReactNode;
   isDisplayed: boolean;
   title: string;
-  onClose?: () => void;
+  onClose: () => void;
 };
 
 const Modal: React.FC<Properties> = ({
@@ -27,9 +27,15 @@ const Modal: React.FC<Properties> = ({
       <div className={styles['modal']}>
         <div className={styles['header']}>
           <span className={styles['title']}>{title}</span>
-          <button className={styles['icon-container']} onClick={onClose}>
-            <Icon name="close" color={IconColor.BLACK} />
-          </button>
+          <div className={styles['icon-container']}>
+            <Button
+              icon={{ name: 'close', color: IconColor.BLACK }}
+              label="Close modal"
+              isLabelVisuallyHidden={true}
+              style="rounded-transparent"
+              onClick={onClose}
+            />
+          </div>
         </div>
         {children}
       </div>
