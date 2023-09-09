@@ -14,7 +14,7 @@
   display: flex;
   justify-content: space-between;
   height: 10%;
-  padding: 26px 28px;
+  padding: 26px 20px;
   border-bottom: 1px solid var(--blue-100);
 }
 
@@ -24,7 +24,6 @@
 
 .header-text {
   color: var(--black);
-  font-weight: 600;
   font-size: 20px;
   line-height: 1.5;
 }
@@ -51,9 +50,8 @@
 
 .user-name {
   color: var(--black);
-  font-weight: 600;
+  font-weight: 500;
   font-size: 16px;
-  font-family: Montserrat, sans-serif;
   line-height: 1.5;
 }
 
