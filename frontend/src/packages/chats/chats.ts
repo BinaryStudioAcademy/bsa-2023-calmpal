@@ -13,5 +13,6 @@ const chatApi = new ChatApi({
 export {
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
+  type ChatRequestDto,
 } from './libs/types/types.js';
 export { chatApi };
