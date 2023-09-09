@@ -7,7 +7,9 @@ import {
 
 import { AppEnvironment } from '#libs/enums/enums';
 import { authApi } from '#packages/auth/auth';
+import { journalApi } from '#packages/journal/journal';
 import { reducer as authReducer } from '#slices/auth/auth';
+import { reducer as journalReducer } from '#slices/journal/journal';
 
 import { type Config } from '../config/config';
 import { notification } from '../notification/notification';
@@ -16,10 +18,12 @@ import { handleError } from './middlewares/middlewares';
 
 type RootReducer = {
   auth: ReturnType<typeof authReducer>;
+  journal: ReturnType<typeof journalReducer>;
 };
 
 type ExtraArguments = {
   authApi: typeof authApi;
+  journalApi: typeof journalApi;
   notification: typeof notification;
   storage: typeof storage;
 };
@@ -38,6 +42,7 @@ class Store {
       devTools: config.ENV.APP.ENVIRONMENT !== AppEnvironment.PRODUCTION,
       reducer: {
         auth: authReducer,
+        journal: journalReducer,
       },
       middleware: (getDefaultMiddleware) => {
         return [
@@ -55,6 +60,7 @@ class Store {
   public get extraArguments(): ExtraArguments {
     return {
       authApi,
+      journalApi,
       notification,
       storage,
     };
