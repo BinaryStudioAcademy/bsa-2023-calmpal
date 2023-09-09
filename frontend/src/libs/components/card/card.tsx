@@ -31,6 +31,7 @@ const Card: React.FC<Properties> = ({
       className={getValidClassNames(
         styles['item'],
         isActive && styles['selected'],
+        !imageUrl && !iconName && styles['no-image'],
       )}
       onClick={onClick}
     >
