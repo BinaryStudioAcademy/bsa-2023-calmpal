@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { type ChatGetAllItemResponseDto } from '#packages/chat/chat.js';
+import { type ChatGetAllItemResponseDto } from '#packages/chats/chats.js';
 
 type State = {
   chats: ChatGetAllItemResponseDto[];
