@@ -17,7 +17,6 @@ const settingsOptions: {
     statusIcon: 'arrow',
   },
   { name: 'subscription', title: 'Test', statusIcon: 'arrow' },
-  { name: 'sign-out', title: 'Sign Out', statusIcon: 'arrow' },
 ];
 
 const ProfileSettingsSidebar: React.FC = () => {
@@ -69,6 +68,14 @@ const ProfileSettingsSidebar: React.FC = () => {
               />
             );
           })}
+          <Card
+            title="Sign Out"
+            onClick={handleOnClick('sign-out')}
+            isActive={false}
+            iconName="sign-out"
+            iconColor={IconColor.WHITE}
+            statusIcon="arrow"
+          />
         </div>
       </div>
     </div>
