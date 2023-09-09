@@ -14,7 +14,6 @@ import { AppColor, MeditationScreenName } from '#libs/enums/enums';
 import { useNavigation } from '#libs/hooks/hooks';
 import { type MeditationNavigationParameterList } from '#libs/types/types';
 
-import { MOCKED_PLAYLIST } from './libs/constants';
 import { styles } from './styles';
 
 type Properties = {
@@ -34,9 +33,7 @@ const MeditationItem: React.FC<Properties> = ({
     >();
 
   const handleSetPlaylist = (): void => {
-    navigation.navigate(MeditationScreenName.MEDITATION, {
-      playlist: MOCKED_PLAYLIST,
-    });
+    navigation.navigate(MeditationScreenName.MEDITATION);
   };
 
   return (

@@ -8,18 +8,18 @@ import TrackPlayer, {
 import imagePlaceholder from '#assets/img/card-image-placeholder.png';
 import meditationBackground from '#assets/img/meditation-background.png';
 import { Image, Text, View } from '#libs/components/components';
-import { useAppRoute, useEffect, useState } from '#libs/hooks/hooks';
+import { useEffect, useState } from '#libs/hooks/hooks';
 import { type Track } from '#libs/types/types';
 
 import { Controls, ProgressBar } from './components/components';
-import { TITLE_LINE_COUNT, TRACK_START_INDEX } from './libs/constants';
+import {
+  MOCKED_PLAYLIST,
+  TITLE_LINE_COUNT,
+  TRACK_START_INDEX,
+} from './libs/constants';
 import { styles } from './styles';
 
 const Meditation: React.FC = () => {
-  const { playlist } = useAppRoute().params as {
-    playlist: Track[];
-  };
-
   const [playbackState, setPlaybackState] = useState<State | null>(null);
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const isPlaying = playbackState === State.Playing;
@@ -27,12 +27,12 @@ const Meditation: React.FC = () => {
   useEffect(() => {
     const setPlaylist = async (): Promise<void> => {
       await TrackPlayer.reset();
-      await TrackPlayer.add(playlist);
-      setCurrentTrack(playlist[TRACK_START_INDEX] as Track);
+      await TrackPlayer.add(MOCKED_PLAYLIST);
+      setCurrentTrack(MOCKED_PLAYLIST[TRACK_START_INDEX] as Track);
     };
 
     void setPlaylist();
-  }, [playlist]);
+  }, []);
 
   useTrackPlayerEvents(
     [Event.PlaybackState, Event.PlaybackTrackChanged],
