@@ -1,16 +1,12 @@
 import { Card, Icon } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { useAppSelector, useCallback, useState } from '#libs/hooks/hooks.js';
-import { type IconName } from '#libs/types/types.js';
+import { type IconName, type SettingsOption } from '#libs/types/types.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import styles from './styles.module.scss';
 
-const settingsOptions: {
-  name: IconName;
-  title: string;
-  statusIcon: IconName;
-}[] = [
+const settingsOptions: SettingsOption[] = [
   {
     name: 'notification',
     title: 'Very long text to see if it will break',
