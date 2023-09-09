@@ -1,5 +1,6 @@
+import { type IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { type IconName } from '#libs/types/types.js';
+import { type IconName, type ValueOf } from '#libs/types/types.js';
 
 import { Icon } from '../components.js';
 import styles from './styles.module.scss';
@@ -10,7 +11,7 @@ type Properties = {
   onClick: () => void;
   isActive: boolean;
   iconName?: IconName;
-  iconColor?: string;
+  iconColor?: ValueOf<typeof IconColor>;
 };
 
 const Card: React.FC<Properties> = ({
