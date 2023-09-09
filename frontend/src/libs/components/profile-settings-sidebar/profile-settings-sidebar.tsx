@@ -7,10 +7,10 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 import styles from './styles.module.scss';
 
 const ProfileSettingsSidebar: React.FC = () => {
-  const userName = useAppSelector((state) => {
-    const user = state.auth.authenticatedUser as UserAuthResponseDto;
-
-    return user.fullName;
+  const { fullName } = useAppSelector(({ auth }) => {
+    return {
+      fullName: (auth.authenticatedUser as UserAuthResponseDto).fullName,
+    };
   });
 
   const [activeButton, setActiveButton] = useState<IconName | null>(null);
@@ -40,7 +40,7 @@ const ProfileSettingsSidebar: React.FC = () => {
             <div className={styles['user-icon']}>
               <Icon name="avatar" color={IconColor.WHITE} />
             </div>
-            <div className={styles['user-name']}>{userName}</div>
+            <div className={styles['user-name']}>{fullName}</div>
           </div>
         </div>
       </div>
