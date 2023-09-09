@@ -18,9 +18,14 @@ class JournalEntryRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public async findAll(): Promise<JournalEntryEntity[]> {
+  public async findAll(): ReturnType<Repository['findAll']> {
+    return await Promise.resolve([]);
+  }
+
+  public async findAllByUserId(userId: number): Promise<JournalEntryEntity[]> {
     const journalEntries = await this.journalEntryModel
       .query()
+      .where('userId', userId)
       .select()
       .castTo<JournalEntryCommonQueryResponse[]>()
       .execute();
@@ -28,6 +33,7 @@ class JournalEntryRepository implements Repository {
     return journalEntries.map((journalEntry) => {
       return JournalEntryEntity.initialize({
         id: journalEntry.id,
+        userId: journalEntry.userId,
         title: journalEntry.title,
         createdAt: new Date(journalEntry.createdAt),
         updatedAt: new Date(journalEntry.updatedAt),
@@ -36,12 +42,37 @@ class JournalEntryRepository implements Repository {
     });
   }
 
+  public async findByTitle(
+    userId: number,
+    title: string,
+  ): Promise<JournalEntryEntity | null> {
+    const entity = await this.journalEntryModel
+      .query()
+      .where('userId', userId)
+      .andWhere('title', title)
+      .first();
+
+    if (!entity) {
+      return null;
+    }
+
+    return JournalEntryEntity.initialize({
+      id: entity.id,
+      userId: entity.userId,
+      title: entity.title,
+      text: entity.text,
+      createdAt: new Date(entity.createdAt),
+      updatedAt: new Date(entity.updatedAt),
+    });
+  }
+
   public async create(entity: JournalEntryEntity): Promise<JournalEntryEntity> {
-    const { title, text } = entity.toNewObject();
+    const { title, text, userId } = entity.toNewObject();
 
     const journalEntry = await this.journalEntryModel
       .query()
       .insertGraph({
+        userId,
         title,
         text,
       } as JournalEntryCreateQueryPayload)
@@ -50,6 +81,7 @@ class JournalEntryRepository implements Repository {
 
     return JournalEntryEntity.initialize({
       id: journalEntry.id,
+      userId: journalEntry.userId,
       title: journalEntry.title,
       createdAt: new Date(journalEntry.createdAt),
       updatedAt: new Date(journalEntry.updatedAt),
