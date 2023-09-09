@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { View } from '#libs/components/components';
+import { Button, View } from '#libs/components/components';
 import { useTrackPlayerControls } from '#libs/hooks/hooks';
 
-import { Button } from './components/components';
 import { styles } from './styles';
 
 type Properties = {
@@ -21,15 +20,27 @@ const Controls: React.FC<Properties> = ({ isPlaying }) => {
 
   return (
     <View style={styles.container}>
-      <Button iconName="previous" onPress={handleSkipToPrevious} />
-      <Button iconName="backward" onPress={handleSkipBackward} />
+      <Button
+        iconName="previous"
+        onPress={handleSkipToPrevious}
+        type="transparent"
+      />
+      <Button
+        iconName="backward"
+        onPress={handleSkipBackward}
+        type="transparent"
+      />
       <Button
         iconName={isPlaying ? 'pause' : 'play'}
         onPress={handlePlayPause}
-        isRounded
+        type="rounded"
       />
-      <Button iconName="forward" onPress={handleSkipForward} />
-      <Button iconName="next" onPress={handleSkipToNext} />
+      <Button
+        iconName="forward"
+        onPress={handleSkipForward}
+        type="transparent"
+      />
+      <Button iconName="next" onPress={handleSkipToNext} type="transparent" />
     </View>
   );
 };
