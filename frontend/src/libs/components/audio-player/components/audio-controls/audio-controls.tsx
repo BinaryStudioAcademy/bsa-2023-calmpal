@@ -105,7 +105,7 @@ const AudioControls: React.FC<Properties> = ({
         <Button
           onClick={handlePrevious}
           style="rounded-transparent"
-          iconName="previous"
+          icon={{ name: 'previous' }}
           label="Play previous meditation"
           isLabelVisuallyHidden
         />
@@ -113,7 +113,7 @@ const AudioControls: React.FC<Properties> = ({
           <Button
             onClick={handleSkipBackward}
             style="rounded-transparent"
-            iconName="backward"
+            icon={{ name: 'backward' }}
             label="Back 30 seconds"
             isLabelVisuallyHidden
           />
@@ -121,14 +121,14 @@ const AudioControls: React.FC<Properties> = ({
           <Button
             onClick={handlePlayToggle}
             style="rounded"
-            iconName={isPlaying ? 'pause' : 'audio-play-icon'}
+            icon={{ name: isPlaying ? 'pause' : 'audio-play-icon' }}
             label="Play or pause a meditation"
             isLabelVisuallyHidden
           />
           <Button
             onClick={handleSkipForward}
             style="rounded-transparent"
-            iconName="forward"
+            icon={{ name: 'forward' }}
             label="Forward 30 seconds"
             isLabelVisuallyHidden
           />
@@ -136,7 +136,7 @@ const AudioControls: React.FC<Properties> = ({
         <Button
           onClick={onNextTrack}
           style="rounded-transparent"
-          iconName="next"
+          icon={{ name: 'next' }}
           label="Play next meditation"
           isLabelVisuallyHidden
         />
