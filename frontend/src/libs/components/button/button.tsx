@@ -1,5 +1,6 @@
+import { type IconColor } from '#libs/enums/icon-color.enum.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { type IconName } from '#libs/types/types.js';
+import { type IconName, type ValueOf } from '#libs/types/types.js';
 
 import { Icon } from '../components.js';
 import styles from './styles.module.scss';
@@ -7,7 +8,10 @@ import styles from './styles.module.scss';
 type Properties = {
   label: string;
   type?: 'button' | 'submit';
-  iconName?: IconName;
+  icon?: {
+    name: IconName;
+    color?: ValueOf<typeof IconColor>;
+  };
   style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent';
   isLoading?: boolean;
   isDisabled?: boolean;
@@ -18,7 +22,7 @@ type Properties = {
 const Button: React.FC<Properties> = ({
   type = 'button',
   label,
-  iconName,
+  icon,
   style = 'primary',
   isLoading = false,
   isDisabled = false,
@@ -33,7 +37,7 @@ const Button: React.FC<Properties> = ({
       disabled={isDisabled || isLoading}
     >
       {isLoading && <span className={styles['loader']} />}
-      {iconName && <Icon name={iconName} />}
+      {icon && <Icon name={icon.name} color={icon.color} />}
       <span
         className={getValidClassNames(
           isLabelVisuallyHidden && 'visually-hidden',
