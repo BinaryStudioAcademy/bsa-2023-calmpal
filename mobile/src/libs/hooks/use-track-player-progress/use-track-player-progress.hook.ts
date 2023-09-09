@@ -4,7 +4,7 @@ import { useEffect, useState } from '#libs/hooks/hooks';
 
 import { INTERVAL_DURATION, TRACK_START_TIME } from './libs/constants';
 
-function useTrackPlayerProgress(): [number, number] {
+const useTrackPlayerProgress = (): [number, number] => {
   const [position, setPosition] = useState(TRACK_START_TIME);
   const [duration, setDuration] = useState(TRACK_START_TIME);
 
@@ -26,6 +26,6 @@ function useTrackPlayerProgress(): [number, number] {
   }, []);
 
   return [position, duration];
-}
+};
 
 export { useTrackPlayerProgress };
