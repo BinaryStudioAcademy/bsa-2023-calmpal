@@ -24,6 +24,10 @@ import { createJournalEntryValidationSchema } from './libs/validation-schemas/va
  *            type: number
  *            format: number
  *            minimum: 1
+ *          userId:
+ *            type: number
+ *            format: number
+ *            minimum: 1
  *          title:
  *            type: string
  *          text:
@@ -34,6 +38,13 @@ import { createJournalEntryValidationSchema } from './libs/validation-schemas/va
  *          updatedAt:
  *            type: string
  *            format: date-time
+ *      Error:
+ *        type: object
+ *        properties:
+ *          message:
+ *            type: string
+ *          errorType:
+ *            type: string
  */
 
 class JournalEntryController extends BaseController {
@@ -85,6 +96,10 @@ class JournalEntryController extends BaseController {
    *            schema:
    *              type: object
    *              properties:
+   *                userId:
+   *                  type: number
+   *                  format: number
+   *                  minimum: 1
    *                title:
    *                  type: string
    *                text:
@@ -99,6 +114,24 @@ class JournalEntryController extends BaseController {
    *                properties:
    *                  journalEntry:
    *                    $ref: '#/components/schemas/Journal Entry'
+   *        401:
+   *          description: Unauthorized
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "Incorrect credentials."
+   *                errorType: "AUTHORIZATION"
+   *        404:
+   *          description: User was not found
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "User with these credentials was not found."
+   *                errorType: "USERS"
    */
 
   private async create(
@@ -118,17 +151,24 @@ class JournalEntryController extends BaseController {
    *    get:
    *      description: Get all a journal entries
    *      responses:
-   *        200:
+   *        201:
    *          description: Successful operation
    *          content:
    *            application/json:
    *              schema:
    *                type: object
    *                properties:
-   *                  items:
-   *                    type: array
-   *                    items:
-   *                      $ref: '#/components/schemas/Journal Entry'
+   *                  journalEntry:
+   *                    $ref: '#/components/schemas/Journal Entry'
+   *        401:
+   *          description: Unauthorized
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "Incorrect credentials."
+   *                errorType: "AUTHORIZATION"
    */
 
   private async getAll(
