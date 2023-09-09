@@ -1,10 +1,17 @@
 type IconName =
-  | 'home'
-  | 'meditation'
-  | 'play'
   | 'arrow'
   | 'plus'
+  | 'backward'
+  | 'forward'
+  | 'next'
+  | 'previous'
+  | 'audio-play-icon'
+  | 'play'
+  | 'pause'
+  | 'home'
+  | 'meditation'
   | 'chats'
-  | 'cross';
+  | 'journal'
+  | 'close';
 
 export { type IconName };

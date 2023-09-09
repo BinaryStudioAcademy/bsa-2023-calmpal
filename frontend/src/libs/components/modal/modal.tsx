@@ -77,7 +77,7 @@ const Modal: React.FC<Properties> = ({
               className={getValidClassNames(styles['icon-container'])}
               onClick={handleClose}
             >
-              <Icon name="cross" color={IconColor.BLACK} />
+              <Icon name="close" color={IconColor.BLACK} />
             </button>
           </div>
           {renderedComponent}

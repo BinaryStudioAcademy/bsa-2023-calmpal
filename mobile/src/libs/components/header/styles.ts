@@ -15,11 +15,24 @@ const styles = StyleSheet.create({
   headerCenter: {
     justifyContent: 'center',
   },
+  titleBadgeContainer: {
+    flexDirection: 'row',
+  },
+  settingsContainer: {
+    flexDirection: 'row',
+  },
+  settings: {
+    justifyContent: 'space-between',
+  },
   title: {
     color: AppColor.GRAY_500,
     fontSize: 20,
     fontWeight: '600',
     maxWidth: 300,
+  },
+  arrow: {
+    position: 'absolute',
+    left: 31,
   },
 });
 
