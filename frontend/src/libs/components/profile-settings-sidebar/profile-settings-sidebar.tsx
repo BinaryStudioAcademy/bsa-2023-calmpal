@@ -24,7 +24,7 @@ const ProfileSettingsSidebar: React.FC = () => {
 
   const [activeButton, setActiveButton] = useState<IconName | null>(null);
 
-  const handleOnClick = useCallback((name: IconName) => {
+  const handleClick = useCallback((name: IconName) => {
     return () => {
       setActiveButton(name);
     };
@@ -54,7 +54,7 @@ const ProfileSettingsSidebar: React.FC = () => {
               <Card
                 key={option.name}
                 title={option.title}
-                onClick={handleOnClick(option.name)}
+                onClick={handleClick(option.name)}
                 isActive={activeButton === option.name}
                 iconName={option.name}
                 iconColor={IconColor.WHITE}
@@ -64,7 +64,7 @@ const ProfileSettingsSidebar: React.FC = () => {
           })}
           <Card
             title="Sign Out"
-            onClick={handleOnClick('sign-out')}
+            onClick={handleClick('sign-out')}
             isActive={false}
             iconName="sign-out"
             iconColor={IconColor.WHITE}
