@@ -15,6 +15,7 @@ import {
   useAppDispatch,
   useAppRoute,
   useAppSelector,
+  useCallback,
   useEffect,
   useNavigation,
   useSearch,
@@ -38,6 +39,10 @@ const Journal: React.FC = () => {
     allJournalEntries,
     'title',
   );
+
+  const handleSelectJournal = useCallback(() => {
+    // TODO: Implement actual functionality for the onPress event
+  }, []);
 
   useEffect(() => {
     navigation.setOptions({
@@ -63,9 +68,7 @@ const Journal: React.FC = () => {
             return (
               <Card
                 title={item.title}
-                onPress={(): void => {
-                  return;
-                }}
+                onPress={handleSelectJournal}
                 key={item.id}
               />
             );
