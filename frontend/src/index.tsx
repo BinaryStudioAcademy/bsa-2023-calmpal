@@ -5,9 +5,9 @@ import { createRoot } from 'react-dom/client';
 
 import {
   App,
+  NavigationMenuWrapper,
   ProtectedRoute,
   RouterProvider,
-  SidebarWrapper,
   StoreProvider,
   Toast,
 } from '#libs/components/components.js';
@@ -33,9 +33,9 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 path: AppRoute.MEDITATION,
                 element: (
                   <ProtectedRoute>
-                    <SidebarWrapper>
+                    <NavigationMenuWrapper>
                       <Meditation />
-                    </SidebarWrapper>
+                    </NavigationMenuWrapper>
                   </ProtectedRoute>
                 ),
               },
@@ -51,9 +51,9 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 path: AppRoute.ROOT,
                 element: (
                   <ProtectedRoute>
-                    <SidebarWrapper>
+                    <NavigationMenuWrapper>
                       <Dashboard />
-                    </SidebarWrapper>
+                    </NavigationMenuWrapper>
                   </ProtectedRoute>
                 ),
               },
@@ -69,9 +69,9 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 path: AppRoute.CHATS,
                 element: (
                   <ProtectedRoute>
-                    <SidebarWrapper>
+                    <NavigationMenuWrapper>
                       <Chats />
-                    </SidebarWrapper>
+                    </NavigationMenuWrapper>
                   </ProtectedRoute>
                 ),
               },
@@ -79,9 +79,9 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 path: AppRoute.JOURNAL,
                 element: (
                   <ProtectedRoute>
-                    <SidebarWrapper>
+                    <NavigationMenuWrapper>
                       <Journal />
-                    </SidebarWrapper>
+                    </NavigationMenuWrapper>
                   </ProtectedRoute>
                 ),
               },

@@ -1,5 +1,6 @@
 import meditationPlaceholder from '#assets/img/meditation-image-placeholder.png';
-import { Card, Search } from '#libs/components/components.js';
+import { Card, DropdownMenu, Search } from '#libs/components/components.js';
+import { SIDEBAR_ROUTES as routes } from '#libs/components/navigation-menu-wrapper/libs/constants.js';
 import { useCallback, useSearch } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
@@ -25,6 +26,7 @@ const MeditationSidebar: React.FC = () => {
       <div className={styles['header']}>
         <div className={styles['info']}>
           <span>Meditation & Breathing</span>
+          <DropdownMenu routes={routes} />
         </div>
       </div>
       <div className={styles['list']}>
