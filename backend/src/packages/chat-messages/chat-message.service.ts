@@ -1,4 +1,7 @@
+import { ExceptionMessage, HTTPCode, UsersError } from 'shared/build/index.js';
+
 import { type Service } from '#libs/types/types.js';
+import { userService } from '#packages/users/users.js';
 
 import { ChatMessageEntity } from './chat-message.entity.js';
 import { type ChatMessageRepository } from './chat-message.repository.js';
@@ -36,6 +39,14 @@ class ChatMessageService implements Service {
   public async create(
     payload: CreateMessageRequestDto,
   ): Promise<CreateMessageResponseDto> {
+    const sender = await userService.findById(payload.senderId);
+    if (!sender) {
+      throw new UsersError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.USER_NOT_FOUND,
+      });
+    }
+
     const chatMessage = await this.chatMessageRepository.create(
       ChatMessageEntity.initializeNew({
         name: payload.name,
