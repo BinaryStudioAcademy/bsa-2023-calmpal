@@ -1,11 +1,9 @@
 import meditationPlaceholder from '#assets/img/meditation-image-placeholder.png';
 import { Button, Card, Search } from '#libs/components/components.js';
-import { DataStatus, IconColor } from '#libs/enums/enums.js';
+import { IconColor } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
-  useAppSelector,
   useCallback,
-  useEffect,
   useSearch,
   useState,
 } from '#libs/hooks/hooks.js';
@@ -24,23 +22,9 @@ const MeditationSidebar: React.FC = () => {
   const dispatch = useAppDispatch();
   const { filteredElements, setFilter } = useSearch(mockedMeditations, 'name');
   const [isDisplayed, setIsDisplayed] = useState<boolean>(false);
-  const [isReseted, setIsReseted] = useState<boolean>(false);
-  const { meditationDataStatus } = useAppSelector(({ meditation }) => {
-    return {
-      meditationDataStatus: meditation.dataStatus,
-    };
-  });
-
-  useEffect(() => {
-    if (meditationDataStatus === DataStatus.FULFILLED) {
-      setIsDisplayed(false);
-      setIsReseted(true);
-    }
-  }, [meditationDataStatus]);
 
   const handleOpen = useCallback(() => {
     setIsDisplayed(true);
-    setIsReseted(false);
   }, [setIsDisplayed]);
 
   const handleClose = useCallback(() => {
@@ -103,7 +87,7 @@ const MeditationSidebar: React.FC = () => {
 
       <MeditationModal
         isDisplayed={isDisplayed}
-        isReseted={isReseted}
+        setIsDisplayed={setIsDisplayed}
         onClose={handleClose}
         onSubmit={handleSubmit}
       />

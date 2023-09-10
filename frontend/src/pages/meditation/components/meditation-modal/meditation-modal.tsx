@@ -5,8 +5,10 @@ import {
   Modal,
 } from '#libs/components/components.js';
 import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants.js';
+import { DataStatus } from '#libs/enums/enums.js';
 import {
   useAppForm,
+  useAppSelector,
   useCallback,
   useEffect,
   useState,
@@ -21,18 +23,23 @@ import styles from './styles.module.scss';
 
 type Properties = {
   isDisplayed: boolean;
-  isReseted: boolean;
+  setIsDisplayed: React.Dispatch<React.SetStateAction<boolean>>;
   onSubmit: (title: string, file: File) => void;
   onClose: () => void;
 };
 
 const MeditationModal: React.FC<Properties> = ({
   isDisplayed,
-  isReseted,
+  setIsDisplayed,
   onSubmit,
   onClose,
 }) => {
   const [file, setFile] = useState<File | null>(null);
+  const { meditationDataStatus } = useAppSelector(({ meditation }) => {
+    return {
+      meditationDataStatus: meditation.dataStatus,
+    };
+  });
   const { control, errors, handleSubmit, reset } =
     useAppForm<MeditationCreateValidation>({
       defaultValues: DEFAULT_MEDITATION_PAYLOAD,
@@ -40,13 +47,15 @@ const MeditationModal: React.FC<Properties> = ({
     });
 
   const hasError = Boolean(Object.keys(errors).length > EMPTY_ARRAY_LENGTH);
+  const isLoading = meditationDataStatus === DataStatus.PENDING || hasError;
 
   useEffect(() => {
-    if (isReseted) {
+    if (meditationDataStatus === DataStatus.FULFILLED) {
+      setIsDisplayed(false);
       reset();
       setFile(null);
     }
-  }, [isReseted, reset, setFile]);
+  }, [meditationDataStatus]);
 
   const handleFileChange = useCallback(
     (currentFile: File) => {
@@ -83,7 +92,7 @@ const MeditationModal: React.FC<Properties> = ({
           description="Only MP3 extension is allowed"
           onChange={handleFileChange}
         />
-        <Button type="submit" label="Submit" isLoading={hasError} />
+        <Button type="submit" label="Submit" isLoading={isLoading} />
       </form>
     </Modal>
   );
