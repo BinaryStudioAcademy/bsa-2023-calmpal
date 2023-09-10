@@ -1,4 +1,8 @@
-import { Card } from '#libs/components/components.js';
+import { Card, Sidebar } from '#libs/components/components.js';
+import {
+  Body,
+  Header,
+} from '#libs/components/sidebar/components/components.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -34,13 +38,13 @@ const JournalSidebar: React.FC = () => {
   );
 
   return (
-    <div className={styles['container']}>
-      <div className={styles['header']}>
+    <Sidebar>
+      <Header>
         <div className={styles['info']}>
           <span>Journal</span>
         </div>
-      </div>
-      <div className={styles['list']}>
+      </Header>
+      <Body>
         <div className={styles['journal-entry-list']}>
           {allJournalEntries.map((journalEntry) => {
             return (
@@ -53,8 +57,8 @@ const JournalSidebar: React.FC = () => {
             );
           })}
         </div>
-      </div>
-    </div>
+      </Body>
+    </Sidebar>
   );
 };
 

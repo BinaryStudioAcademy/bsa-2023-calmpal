@@ -1,4 +1,9 @@
 import avatar from '#assets/img/avatar-placeholder.png';
+import { Sidebar } from '#libs/components/components.js';
+import {
+  Body,
+  Header,
+} from '#libs/components/sidebar/components/components.js';
 import { useAppSelector } from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 
@@ -12,17 +17,23 @@ const UserProfileInfo: React.FC = () => {
   });
 
   return (
-    <div className={styles['container']}>
-      <div className={styles['header']}>Profile</div>
-      <div className={styles['user-info']}>
-        <div className={styles['avatar-container']}>
-          <img src={avatar} alt="avatar" className={styles['avatar']} />
+    <Sidebar>
+      <Header>
+        <div className={styles['info']}>
+          <span>Profile</span>
         </div>
-        <span className={styles['user-name']}>
-          {(authenticatedUser as UserAuthResponseDto).fullName}
-        </span>
-      </div>
-    </div>
+      </Header>
+      <Body>
+        <div className={styles['user-info']}>
+          <div className={styles['avatar-container']}>
+            <img src={avatar} alt="avatar" className={styles['avatar']} />
+          </div>
+          <span className={styles['user-name']}>
+            {(authenticatedUser as UserAuthResponseDto).fullName}
+          </span>
+        </div>
+      </Body>
+    </Sidebar>
   );
 };
 
