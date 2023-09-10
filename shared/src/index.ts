@@ -9,6 +9,7 @@ export {
 export {
   ApplicationError,
   AuthError,
+  ChatError,
   FileError,
   HTTPError,
   UsersError,
