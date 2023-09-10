@@ -1,14 +1,10 @@
-import { APIPath, ContentType } from '#libs/enums/enums';
+import { APIPath } from '#libs/enums/enums';
 import { BaseHttpApi } from '#libs/packages/api/api';
 import { type HTTP } from '#libs/packages/http/http';
 import { type Storage } from '#libs/packages/storage/storage';
 
 import { JournalApiPath } from './libs/enums/enums';
-import {
-  type JournalEntryCreateRequestDto,
-  type JournalEntryGetAllItemResponseDto,
-  type JournalEntryGetAllResponseDto,
-} from './libs/types/types.js';
+import { type JournalEntryGetAllResponseDto } from './libs/types/types.js';
 
 type Constructor = {
   baseUrl: string;
@@ -31,22 +27,6 @@ class JournalApi extends BaseHttpApi {
     );
 
     return await response.json<JournalEntryGetAllResponseDto>();
-  }
-
-  public async createJournalEntry(
-    payload: JournalEntryCreateRequestDto,
-  ): Promise<JournalEntryGetAllItemResponseDto> {
-    const response = await this.load(
-      this.getFullEndpoint(JournalApiPath.ROOT, {}),
-      {
-        method: 'POST',
-        contentType: ContentType.JSON,
-        payload: JSON.stringify(payload),
-        hasAuth: true,
-      },
-    );
-
-    return await response.json<JournalEntryGetAllItemResponseDto>();
   }
 }
 

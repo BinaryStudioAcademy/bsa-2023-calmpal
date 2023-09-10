@@ -1,9 +1,8 @@
-import { createJournalEntry, getAllJournalEntriers } from './actions';
+import { getAllJournalEntriers } from './actions';
 import { actions } from './journal.slice';
 
 const allActions = {
   ...actions,
-  createJournalEntry,
   getAllJournalEntriers,
 };
 
