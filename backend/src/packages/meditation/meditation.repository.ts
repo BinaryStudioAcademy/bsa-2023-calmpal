@@ -46,14 +46,15 @@ class MeditationRepository implements Repository {
     entity: MeditationEntity,
     topicId?: number,
   ): Promise<MeditationEntity> {
-    const { audioUrl, topicName: name } = entity.toObject();
+    const { topicName: name, mediaUrl, contentType } = entity.toObject();
     const topic = topicId ? { name, id: topicId } : { name };
 
     const meditation = await this.meditationEntryModel
       .query()
       .insertGraph(
         {
-          audioUrl,
+          mediaUrl,
+          contentType,
           [MeditationRelation.TOPIC]: topic,
         } as MeditationCreateQueryPayload,
         { relate: true },
@@ -64,7 +65,8 @@ class MeditationRepository implements Repository {
     return MeditationEntity.initialize({
       id: meditation.id,
       topicName: meditation.topic.name,
-      audioUrl: meditation.audioUrl,
+      mediaUrl: meditation.mediaUrl,
+      contentType: meditation.contentType,
       createdAt: new Date(meditation.createdAt),
       updatedAt: new Date(meditation.updatedAt),
     });
