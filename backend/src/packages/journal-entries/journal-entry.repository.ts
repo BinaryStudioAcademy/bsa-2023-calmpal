@@ -14,8 +14,24 @@ class JournalEntryRepository implements Repository {
     this.journalEntryModel = journalEntryModel;
   }
 
-  public find(): ReturnType<Repository['find']> {
-    return Promise.resolve(null);
+  public async find(id: number): Promise<JournalEntryEntity | null> {
+    const journalEntry = await this.journalEntryModel
+      .query()
+      .findById(id)
+      .execute();
+
+    if (!journalEntry) {
+      return null;
+    }
+
+    return JournalEntryEntity.initialize({
+      id: journalEntry.id,
+      userId: journalEntry.userId,
+      title: journalEntry.title,
+      text: journalEntry.text,
+      createdAt: new Date(journalEntry.createdAt),
+      updatedAt: new Date(journalEntry.updatedAt),
+    });
   }
 
   public async findAll(): ReturnType<Repository['findAll']> {

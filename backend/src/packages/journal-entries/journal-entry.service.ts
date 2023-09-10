@@ -19,8 +19,16 @@ class JournalEntryService implements Service {
     this.journalEntryRepository = journalEntryRepository;
   }
 
-  public find(): ReturnType<Service['find']> {
-    return Promise.resolve(null);
+  public async find(
+    id: number,
+  ): Promise<JournalEntryGetAllItemResponseDto | null> {
+    const journalEntry = await this.journalEntryRepository.find(id);
+
+    if (!journalEntry) {
+      return null;
+    }
+
+    return journalEntry.toObject();
   }
 
   public async findAll(): ReturnType<Service['findAll']> {

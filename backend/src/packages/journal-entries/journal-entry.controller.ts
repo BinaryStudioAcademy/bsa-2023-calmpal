@@ -81,6 +81,18 @@ class JournalEntryController extends BaseController {
 
     this.addRoute({
       path: JournalApiPath.$ID,
+      method: 'GET',
+      handler: (options) => {
+        return this.getById(
+          options as APIHandlerOptions<{
+            params: { id: number };
+          }>,
+        );
+      },
+    });
+
+    this.addRoute({
+      path: JournalApiPath.$ID,
       method: 'PUT',
       validation: {
         body: createJournalEntryValidationSchema,
@@ -187,15 +199,54 @@ class JournalEntryController extends BaseController {
   private async getAll(
     options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
   ): Promise<APIHandlerResponse> {
+    const { id } = options.user;
+
     return {
       status: HTTPCode.OK,
-      payload: await this.journalEntryService.findAllByUserId(options.user.id),
+      payload: await this.journalEntryService.findAllByUserId(id),
     };
   }
 
   /**
    * @swagger
-   * /journal-entries:
+   * /journal-entries/:id:
+   *    get:
+   *      description: Get journal entry by id
+   *      responses:
+   *        201:
+   *          description: Successful operation
+   *          content:
+   *            application/json:
+   *              schema:
+   *                type: object
+   *                properties:
+   *                  journalEntry:
+   *                    $ref: '#/components/schemas/Journal Entry'
+   *        401:
+   *          description: Unauthorized
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "Incorrect credentials."
+   *                errorType: "AUTHORIZATION"
+   */
+
+  private async getById(
+    options: APIHandlerOptions<{ params: { id: number } }>,
+  ): Promise<APIHandlerResponse> {
+    const { id } = options.params;
+
+    return {
+      status: HTTPCode.OK,
+      payload: await this.journalEntryService.find(id),
+    };
+  }
+
+  /**
+   * @swagger
+   * /journal-entries/:id:
    *    put:
    *      description: Update a journal entry
    *      requestBody:
@@ -250,12 +301,11 @@ class JournalEntryController extends BaseController {
       body: JournalEntryCreateRequestDto;
     }>,
   ): Promise<APIHandlerResponse> {
+    const { id } = options.params;
+
     return {
       status: HTTPCode.OK,
-      payload: await this.journalEntryService.update(
-        options.params.id,
-        options.body,
-      ),
+      payload: await this.journalEntryService.update(id, options.body),
     };
   }
 }
