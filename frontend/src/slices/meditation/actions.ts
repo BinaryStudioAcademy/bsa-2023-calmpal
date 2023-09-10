@@ -18,7 +18,8 @@ const createMeditationEntry = createAsyncThunk<
   const file = await filesApi.uploadFile(payload.file);
   const item = await meditationApi.createMeditationEntry({
     topicName: payload.topicName,
-    audioUrl: file.url,
+    mediaUrl: file.url,
+    contentType: file.contentType,
   });
 
   notification.success(`Meditation ${item.topicName} was added.`);
