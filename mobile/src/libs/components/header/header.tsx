@@ -35,40 +35,38 @@ const Header: React.FC<Properties> = ({
     navigation.navigate(ProfileScreenName.PROFILE);
   };
 
-  return (
-    <>
-      {isVisible ? (
-        <View
-          style={[
-            styles.header,
-            isArrowVisible && styles.headerCenter,
-            isProfileVisible && styles.settings,
-          ]}
-        >
-          {isArrowVisible && <BackButton />}
+  if (!isVisible) {
+    return (
+      <View style={styles.transparentHeader}>
+        {isArrowVisible && <BackButton />}
+      </View>
+    );
+  }
 
-          <View style={styles.titleBadgeContainer}>
-            <Text style={styles.title}>{title ?? name}</Text>
-            {hasValue && <Badge count={badgeCount} />}
-          </View>
-          {isProfileVisible && (
-            <View style={styles.settingsContainer}>
-              <IconButton
-                onPress={handleIconPress}
-                color={AppColor.BLUE_300}
-                iconName="user"
-              />
-            </View>
-          )}
+  return (
+    <View
+      style={[
+        styles.header,
+        isArrowVisible && styles.headerCenter,
+        isProfileVisible && styles.settings,
+      ]}
+    >
+      {isArrowVisible && <BackButton />}
+
+      <View style={styles.titleBadgeContainer}>
+        <Text style={styles.title}>{title ?? name}</Text>
+        {hasValue && <Badge count={badgeCount} />}
+      </View>
+      {isProfileVisible && (
+        <View style={styles.settingsContainer}>
+          <IconButton
+            onPress={handleIconPress}
+            color={AppColor.BLUE_300}
+            iconName="user"
+          />
         </View>
-      ) : (
-        <>
-          <View style={styles.transparentHeader}>
-            {isArrowVisible && <BackButton />}
-          </View>
-        </>
       )}
-    </>
+    </View>
   );
 };
 
