@@ -8,11 +8,10 @@ import styles from './styles.module.scss';
 
 const settingsOptions: SettingsOption[] = [
   {
-    name: 'notification',
-    title: 'Very long text to see if it will break',
+    key: 'notification',
+    title: 'Notifications and Reminders',
     statusIcon: 'arrow',
   },
-  { name: 'subscription', title: 'Test', statusIcon: 'arrow' },
 ];
 
 const ProfileSettingsSidebar: React.FC = () => {
@@ -54,11 +53,11 @@ const ProfileSettingsSidebar: React.FC = () => {
           {settingsOptions.map((option) => {
             return (
               <Card
-                key={option.name}
+                key={option.key}
                 title={option.title}
-                onClick={handleClick(option.name)}
-                isActive={activeButton === option.name}
-                iconName={option.name}
+                onClick={handleClick(option.key)}
+                isActive={activeButton === option.key}
+                iconName={option.key}
                 iconColor={IconColor.WHITE}
                 statusIcon={option.statusIcon}
               />
