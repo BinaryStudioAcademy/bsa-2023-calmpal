@@ -20,28 +20,25 @@ const Modal: React.FC<Properties> = ({
   onClose,
 }) => {
   return createPortal(
-    <div
-      className={getValidClassNames(
-        styles['overlay'],
-        !isDisplayed && 'visually-hidden',
-      )}
-    >
-      <div className={styles['modal']}>
-        <div className={styles['header']}>
-          <span className={styles['title']}>{title}</span>
-          <div className={styles['icon-container']}>
-            <Button
-              icon={{ name: 'close', color: IconColor.BLACK }}
-              label="Close modal"
-              isLabelVisuallyHidden={true}
-              style="rounded-transparent"
-              onClick={onClose}
-            />
+    isDisplayed && (
+      <div className={getValidClassNames(styles['overlay'])}>
+        <div className={styles['modal']}>
+          <div className={styles['header']}>
+            <span className={styles['title']}>{title}</span>
+            <div className={styles['icon-container']}>
+              <Button
+                icon={{ name: 'close', color: IconColor.BLACK }}
+                label="Close modal"
+                isLabelVisuallyHidden={true}
+                style="rounded-transparent"
+                onClick={onClose}
+              />
+            </div>
           </div>
+          {children}
         </div>
-        {children}
       </div>
-    </div>,
+    ),
     document.body,
   );
 };
