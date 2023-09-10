@@ -1,9 +1,11 @@
 import { Model, type RelationMappings } from 'objection';
 
+import { type ContentType } from '#libs/enums/enums.js';
 import {
   AbstractModel,
   DatabaseTableName,
 } from '#libs/packages/database/database.js';
+import { type ValueOf } from '#libs/types/types.js';
 
 import {
   MeditationEntriesTableColumn,
@@ -13,7 +15,9 @@ import {
 import { MeditationTopicModel } from './meditation-topics.model.js';
 
 class MeditationEntriesModel extends AbstractModel {
-  public audioUrl!: string;
+  public mediaUrl!: string;
+
+  public contentType!: ValueOf<typeof ContentType>;
 
   public static override get tableName(): string {
     return DatabaseTableName.MEDITATION_ENTRIES;
