@@ -8,7 +8,8 @@ const TableName = {
 const ColumnName = {
   ID: 'id',
   TOPIC_ID: 'topic_id',
-  AUDIO_URL: 'audio_url',
+  MEDIA_URL: 'media_url',
+  CONTENT_TYPE: 'content_type',
 } as const;
 
 type MeditationTopic = {
@@ -18,7 +19,8 @@ type MeditationTopic = {
 function up(knex: Knex): Promise<void> {
   return knex.schema.alterTable(TableName.MEDITATION_ENTRIES, (table) => {
     table.integer(ColumnName.TOPIC_ID).nullable().alter();
-    table.text(ColumnName.AUDIO_URL).notNullable().defaultTo('');
+    table.text(ColumnName.MEDIA_URL).notNullable().defaultTo('');
+    table.string(ColumnName.CONTENT_TYPE).notNullable().defaultTo('');
   });
 }
 
@@ -33,7 +35,8 @@ async function down(knex: Knex): Promise<void> {
       .notNullable()
       .defaultTo((topic as MeditationTopic).id)
       .alter();
-    table.dropColumn(ColumnName.AUDIO_URL);
+    table.dropColumn(ColumnName.MEDIA_URL);
+    table.dropColumn(ColumnName.CONTENT_TYPE);
   });
 }
 
