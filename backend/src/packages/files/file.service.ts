@@ -70,7 +70,7 @@ class FileService implements Service {
       }),
     );
 
-    return { url: presignedUrl };
+    return { url: presignedUrl, contentType: payload.contentType };
   }
 
   public update(): ReturnType<Service['update']> {
