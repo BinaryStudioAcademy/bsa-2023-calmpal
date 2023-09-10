@@ -65,8 +65,31 @@ class JournalEntryService implements Service {
     return item.toObject();
   }
 
-  public update(): ReturnType<Service['update']> {
-    return Promise.resolve(null);
+  public async update(
+    id: number,
+    payload: JournalEntryCreateRequestDto,
+  ): Promise<JournalEntryGetAllItemResponseDto> {
+    const user = await userService.findById(payload.userId);
+
+    if (!user) {
+      throw new UsersError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.USER_NOT_FOUND,
+      });
+    }
+
+    const newJournalEntry = await this.journalEntryRepository.update(
+      JournalEntryEntity.initialize({
+        id,
+        userId: payload.userId,
+        createdAt: null,
+        updatedAt: null,
+        title: payload.title,
+        text: payload.text,
+      }),
+    );
+
+    return newJournalEntry.toObject();
   }
 
   public delete(): ReturnType<Service['delete']> {

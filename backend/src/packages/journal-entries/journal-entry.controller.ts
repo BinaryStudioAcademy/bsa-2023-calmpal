@@ -58,9 +58,6 @@ class JournalEntryController extends BaseController {
     this.addRoute({
       path: JournalApiPath.ROOT,
       method: 'POST',
-      validation: {
-        body: createJournalEntryValidationSchema,
-      },
       handler: (options) => {
         return this.create(
           options as APIHandlerOptions<{
@@ -77,6 +74,22 @@ class JournalEntryController extends BaseController {
         return this.getAll(
           options as APIHandlerOptions<{
             user: UserAuthResponseDto;
+          }>,
+        );
+      },
+    });
+
+    this.addRoute({
+      path: JournalApiPath.$ID,
+      method: 'PUT',
+      validation: {
+        body: createJournalEntryValidationSchema,
+      },
+      handler: (options) => {
+        return this.update(
+          options as APIHandlerOptions<{
+            params: { id: number };
+            body: JournalEntryCreateRequestDto;
           }>,
         );
       },
@@ -177,6 +190,72 @@ class JournalEntryController extends BaseController {
     return {
       status: HTTPCode.OK,
       payload: await this.journalEntryService.findAllByUserId(options.user.id),
+    };
+  }
+
+  /**
+   * @swagger
+   * /journal-entries:
+   *    put:
+   *      description: Update a journal entry
+   *      requestBody:
+   *        description: Journal Entry data
+   *        required: true
+   *        content:
+   *          application/json:
+   *            schema:
+   *              type: object
+   *              properties:
+   *                userId:
+   *                  type: number
+   *                  format: number
+   *                  minimum: 1
+   *                title:
+   *                  type: string
+   *                text:
+   *                  type: string
+   *      responses:
+   *        200:
+   *          description: Successful operation
+   *          content:
+   *            application/json:
+   *              schema:
+   *                type: object
+   *                properties:
+   *                  journalEntry:
+   *                    $ref: '#/components/schemas/Journal Entry'
+   *        401:
+   *          description: Unauthorized
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "Incorrect credentials."
+   *                errorType: "AUTHORIZATION"
+   *        404:
+   *          description: User was not found
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "User with these credentials was not found."
+   *                errorType: "USERS"
+   */
+
+  private async update(
+    options: APIHandlerOptions<{
+      params: { id: number };
+      body: JournalEntryCreateRequestDto;
+    }>,
+  ): Promise<APIHandlerResponse> {
+    return {
+      status: HTTPCode.OK,
+      payload: await this.journalEntryService.update(
+        options.params.id,
+        options.body,
+      ),
     };
   }
 }

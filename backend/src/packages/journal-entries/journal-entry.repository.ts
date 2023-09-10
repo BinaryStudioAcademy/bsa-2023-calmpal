@@ -89,8 +89,21 @@ class JournalEntryRepository implements Repository {
     });
   }
 
-  public update(): ReturnType<Repository['update']> {
-    return Promise.resolve(null);
+  public async update(entity: JournalEntryEntity): Promise<JournalEntryEntity> {
+    const { title, text, id } = entity.toObject();
+
+    const updatedJournalEntry = await this.journalEntryModel
+      .query()
+      .patchAndFetchById(id, { title, text });
+
+    return JournalEntryEntity.initialize({
+      id: updatedJournalEntry.id,
+      userId: updatedJournalEntry.userId,
+      text: updatedJournalEntry.text,
+      title: updatedJournalEntry.title,
+      createdAt: new Date(updatedJournalEntry.createdAt),
+      updatedAt: new Date(),
+    });
   }
 
   public delete(): ReturnType<Repository['delete']> {
