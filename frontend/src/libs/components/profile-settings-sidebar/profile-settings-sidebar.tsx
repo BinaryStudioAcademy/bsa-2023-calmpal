@@ -1,7 +1,7 @@
 import { Card, Icon } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { useAppSelector, useCallback, useState } from '#libs/hooks/hooks.js';
-import { type IconName, type SettingsOption } from '#libs/types/types.js';
+import { type SettingsOption } from '#libs/types/types.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import styles from './styles.module.scss';
@@ -20,11 +20,11 @@ const ProfileSettingsSidebar: React.FC = () => {
     };
   });
 
-  const [activeButton, setActiveButton] = useState<IconName | null>(null);
+  const [activeItem, setActiveItem] = useState<string | null>(null);
 
-  const handleClick = useCallback((name: IconName) => {
+  const handleClick = useCallback((key: string) => {
     return () => {
-      setActiveButton(name);
+      setActiveItem(key);
     };
   }, []);
 
@@ -55,10 +55,10 @@ const ProfileSettingsSidebar: React.FC = () => {
                 key={option.key}
                 title={option.title}
                 onClick={handleClick(option.key)}
-                isActive={activeButton === option.key}
+                isActive={activeItem === option.key}
                 iconName={option.key}
                 iconColor={IconColor.WHITE}
-                statusIcon={'arrow'}
+                statusIcon="arrow"
               />
             );
           })}
