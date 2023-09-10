@@ -26,6 +26,8 @@ const Card: React.FC<Properties> = ({
 }) => {
   const shouldShowStatusIcon = isActive && statusIcon;
   const hasNoImageOrIcon = !imageUrl && !iconName;
+  const hasImage = Boolean(imageUrl);
+  const hasIcon = Boolean(iconName);
 
   return (
     <button
@@ -38,14 +40,14 @@ const Card: React.FC<Properties> = ({
     >
       {!hasNoImageOrIcon && (
         <div className={styles['image-container']}>
-          {imageUrl && (
+          {hasImage && (
             <div className={styles['image-placeholder']}>
               <img src={imageUrl} alt="not found" className={styles['image']} />
             </div>
           )}
-          {iconName && (
+          {hasIcon && (
             <div className={styles['icon-background']}>
-              <Icon name={iconName} color={iconColor} />
+              <Icon name={iconName as IconName} color={iconColor} />
             </div>
           )}
         </div>
