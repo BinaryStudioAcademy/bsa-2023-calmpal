@@ -51,9 +51,6 @@ const Main: React.FC = () => {
         component={Journal}
         options={{
           tabBarIcon: JournalIcon,
-          header: (): React.ReactNode => {
-            return <Header badgeCount={10} />;
-          },
         }}
       />
     </BottomTab.Navigator>

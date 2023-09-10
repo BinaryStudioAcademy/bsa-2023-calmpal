@@ -3,6 +3,7 @@ import React from 'react';
 import PlusIcon from '#assets/img/icons/plus.svg';
 import {
   Card,
+  Header,
   InputSearch,
   LinearGradient,
   Link,
@@ -12,16 +13,22 @@ import {
 import { AppColor } from '#libs/enums/enums';
 import {
   useAppDispatch,
+  useAppRoute,
   useAppSelector,
   useEffect,
+  useNavigation,
   useSearch,
 } from '#libs/hooks/hooks';
 import { actions as journalActions } from '#slices/journal/journal';
 
 import { styles } from './styles';
 
+const mockedCount = 12;
 const Journal: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigation = useNavigation();
+  const route = useAppRoute();
+
   const { allJournalEntries } = useAppSelector(({ journal }) => {
     return {
       allJournalEntries: journal.allJournalEntries,
@@ -31,6 +38,14 @@ const Journal: React.FC = () => {
     allJournalEntries,
     'title',
   );
+
+  useEffect(() => {
+    navigation.setOptions({
+      header: () => {
+        return <Header title={route.name} badgeCount={mockedCount} />;
+      },
+    });
+  }, [navigation, route.name]);
 
   useEffect(() => {
     void dispatch(journalActions.getAllJournalEntriers());
