@@ -1,4 +1,5 @@
-import { Link } from '#libs/components/components.js';
+import { Icon, Link } from '#libs/components/components.js';
+import { IconColor } from '#libs/enums/icon-color.enum.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useLocation, useState } from '#libs/hooks/hooks.js';
 import { type Route } from '#libs/types/types.js';
@@ -36,22 +37,21 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
         {routes.map((item) => {
           return (
             <div key={item.path}>
-              <button className={styles['dropdown-item']} id={item.path}>
+              <div
+                className={getValidClassNames(
+                  styles['dropdown-item'],
+                  pathname === item.path && styles['selected'],
+                )}
+                id={item.path}
+              >
                 <Link to={item.path}>
                   <span className={styles['item']}>
                     <span className="visually-hidden">Go to {item.name}</span>
-                    <img
-                      src={item.icon}
-                      alt={item.name}
-                      className={getValidClassNames(
-                        styles['icon'],
-                        pathname === item.path && styles['icon-selected'],
-                      )}
-                    />
+                    <Icon name={item.icon} color={IconColor.BLUE} />
                     <span className={styles['title']}>{item.name}</span>
                   </span>
                 </Link>
-              </button>
+              </div>
               <hr className={styles['divider']} />
             </div>
           );
