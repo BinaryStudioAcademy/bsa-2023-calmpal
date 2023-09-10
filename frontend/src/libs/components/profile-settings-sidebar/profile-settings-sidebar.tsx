@@ -10,7 +10,6 @@ const settingsOptions: SettingsOption[] = [
   {
     key: 'notification',
     title: 'Notifications and Reminders',
-    statusIcon: 'arrow',
   },
 ];
 
@@ -59,7 +58,7 @@ const ProfileSettingsSidebar: React.FC = () => {
                 isActive={activeButton === option.key}
                 iconName={option.key}
                 iconColor={IconColor.WHITE}
-                statusIcon={option.statusIcon}
+                statusIcon={'arrow'}
               />
             );
           })}
