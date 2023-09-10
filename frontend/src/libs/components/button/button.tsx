@@ -1,5 +1,6 @@
+import { type IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { type IconName } from '#libs/types/types.js';
+import { type IconName, type ValueOf } from '#libs/types/types.js';
 
 import { Icon } from '../components.js';
 import styles from './styles.module.scss';
@@ -8,6 +9,7 @@ type Properties = {
   label: string;
   type?: 'button' | 'submit';
   iconName?: IconName;
+  iconColor?: ValueOf<typeof IconColor>;
   style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent';
   isLoading?: boolean;
   isDisabled?: boolean;

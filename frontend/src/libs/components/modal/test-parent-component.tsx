@@ -15,7 +15,11 @@ const TestParentComponent: React.FC = () => {
       <button type="button" onClick={handleClick(true)}>
         Open modal
       </button>
-      <Modal isOpen={isOpen} onClose={handleClick(false)}>
+      <Modal
+        isDisplayed={isOpen}
+        title="Modal title"
+        onClose={handleClick(false)}
+      >
         <div>Modal content</div>
       </Modal>
     </div>

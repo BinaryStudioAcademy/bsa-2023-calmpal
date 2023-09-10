@@ -11,6 +11,7 @@ type IconName =
   | 'home'
   | 'meditation'
   | 'chats'
-  | 'journal';
+  | 'journal'
+  | 'close';
 
 export { type IconName };

@@ -1,29 +1,46 @@
+import { createPortal } from 'react-dom';
+
+import { IconColor } from '#libs/enums/enums.js';
+import { getValidClassNames } from '#libs/helpers/helpers.js';
+
+import { Button } from '../components.js';
 import styles from './styles.module.scss';
 
 type Properties = {
   children: React.ReactNode;
-  isOpen: boolean;
+  isDisplayed: boolean;
+  title: string;
   onClose: () => void;
 };
 
-const Modal: React.FC<Properties> = ({ children, isOpen, onClose }) => {
-  if (!isOpen) {
-    return null;
-  }
-
-  return (
-    <div className={styles['modal-backdrop']}>
-      <div className={styles['modal-content']}>
-        <button
-          type="button"
-          className={styles['modal-close']}
-          onClick={onClose}
-        >
-          X
-        </button>
-        {children}
+const Modal: React.FC<Properties> = ({
+  children,
+  isDisplayed,
+  title,
+  onClose,
+}) => {
+  return createPortal(
+    isDisplayed && (
+      <div className={getValidClassNames(styles['overlay'])}>
+        <div className={styles['modal']}>
+          <div className={styles['header']}>
+            <span className={styles['title']}>{title}</span>
+            <div className={styles['icon-container']}>
+              <Button
+                iconName="close"
+                iconColor={IconColor.BLACK}
+                label="Close modal"
+                isLabelVisuallyHidden={true}
+                style="rounded-transparent"
+                onClick={onClose}
+              />
+            </div>
+          </div>
+          {children}
+        </div>
       </div>
-    </div>
+    ),
+    document.body,
   );
 };
 
