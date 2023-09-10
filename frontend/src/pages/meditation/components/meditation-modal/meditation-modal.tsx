@@ -55,7 +55,7 @@ const MeditationModal: React.FC<Properties> = ({
       reset();
       setFile(null);
     }
-  }, [meditationDataStatus]);
+  }, [meditationDataStatus, reset, setIsDisplayed, setFile]);
 
   const handleFileChange = useCallback(
     (currentFile: File) => {
