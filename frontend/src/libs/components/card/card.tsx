@@ -37,7 +37,7 @@ const Card: React.FC<Properties> = ({
       onClick={onClick}
     >
       {!hasNoImageOrIcon && (
-        <div className={getValidClassNames(styles['image-container'])}>
+        <div className={styles['image-container']}>
           {imageUrl && (
             <div className={styles['image-placeholder']}>
               <img src={imageUrl} alt="not found" className={styles['image']} />
