@@ -6,16 +6,16 @@ import { type ChatMessageRepository } from './chat-message.repository.js';
 type CreateMessageRequestDto = {
   name: string;
   message: string;
-  senderId: string;
-  chatId: string;
+  senderId: number;
+  chatId: number;
 };
 
 type CreateMessageResponseDto = {
   id: number;
   name: string;
   message: string;
-  senderId: string;
-  chatId: string;
+  senderId: number;
+  chatId: number;
 };
 
 class ChatMessageService implements Service {

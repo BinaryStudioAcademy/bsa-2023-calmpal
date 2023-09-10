@@ -11,9 +11,9 @@ class ChatMessageEntity implements Entity {
 
   private message: string;
 
-  private chatId: string;
+  private chatId: number;
 
-  private senderId: string;
+  private senderId: number;
 
   public constructor({
     id,
@@ -29,8 +29,8 @@ class ChatMessageEntity implements Entity {
     updatedAt: Date | null;
     name: string;
     message: string;
-    chatId: string;
-    senderId: string;
+    chatId: number;
+    senderId: number;
   }) {
     this.id = id;
     this.createdAt = createdAt;
@@ -55,8 +55,8 @@ class ChatMessageEntity implements Entity {
     updatedAt: Date | null;
     name: string;
     message: string;
-    chatId: string;
-    senderId: string;
+    chatId: number;
+    senderId: number;
   }): ChatMessageEntity {
     return new ChatMessageEntity({
       id,
@@ -77,8 +77,8 @@ class ChatMessageEntity implements Entity {
   }: {
     name: string;
     message: string;
-    chatId: string;
-    senderId: string;
+    chatId: number;
+    senderId: number;
   }): ChatMessageEntity {
     return new ChatMessageEntity({
       id: null,
@@ -97,8 +97,8 @@ class ChatMessageEntity implements Entity {
     updatedAt: Date;
     name: string;
     message: string;
-    chatId: string;
-    senderId: string;
+    chatId: number;
+    senderId: number;
   } {
     return {
       id: this.id as number,
@@ -114,8 +114,8 @@ class ChatMessageEntity implements Entity {
   public toNewObject(): {
     name: string;
     message: string;
-    chatId: string;
-    senderId: string;
+    chatId: number;
+    senderId: number;
   } {
     return {
       name: this.name,

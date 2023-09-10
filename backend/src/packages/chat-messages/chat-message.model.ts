@@ -12,8 +12,8 @@ import { ChatMessagesTableColumn } from './libs/enums/chat-messages-table-column
 class ChatMessageModel extends AbstractModel {
   public name!: string;
   public message!: string;
-  public chatId!: string;
-  public senderId!: string;
+  public chatId!: number;
+  public senderId!: number;
 
   public static override get tableName(): string {
     return DatabaseTableName.CHAT_MESSAGES;
