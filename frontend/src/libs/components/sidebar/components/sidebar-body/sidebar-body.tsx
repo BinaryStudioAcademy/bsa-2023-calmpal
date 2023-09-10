@@ -4,8 +4,8 @@ type Properties = {
   children: React.ReactNode;
 };
 
-const Body: React.FC<Properties> = ({ children }) => {
+const SidebarBody: React.FC<Properties> = ({ children }) => {
   return <div className={styles['body']}>{children}</div>;
 };
 
-export { Body };
+export { SidebarBody };

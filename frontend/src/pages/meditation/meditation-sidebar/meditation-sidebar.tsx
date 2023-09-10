@@ -1,8 +1,8 @@
 import meditationPlaceholder from '#assets/img/meditation-image-placeholder.png';
 import { Card, Search, Sidebar } from '#libs/components/components.js';
 import {
-  Body,
-  Header,
+  SidebarBody,
+  SidebarHeader,
 } from '#libs/components/sidebar/components/components.js';
 import { useCallback, useSearch } from '#libs/hooks/hooks.js';
 
@@ -26,12 +26,12 @@ const MeditationSidebar: React.FC = () => {
 
   return (
     <Sidebar>
-      <Header>
+      <SidebarHeader>
         <div className={styles['info']}>
           <span>Meditation & Breathing</span>
         </div>
-      </Header>
-      <Body>
+      </SidebarHeader>
+      <SidebarBody>
         <div className={styles['search']}>
           <Search onValueChange={setFilter} />
         </div>
@@ -48,7 +48,7 @@ const MeditationSidebar: React.FC = () => {
             );
           })}
         </div>
-      </Body>
+      </SidebarBody>
     </Sidebar>
   );
 };

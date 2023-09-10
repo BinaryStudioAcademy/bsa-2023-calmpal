@@ -1,7 +1,7 @@
 import { Card, Sidebar } from '#libs/components/components.js';
 import {
-  Body,
-  Header,
+  SidebarBody,
+  SidebarHeader,
 } from '#libs/components/sidebar/components/components.js';
 import {
   useAppDispatch,
@@ -39,12 +39,12 @@ const JournalSidebar: React.FC = () => {
 
   return (
     <Sidebar>
-      <Header>
+      <SidebarHeader>
         <div className={styles['info']}>
           <span>Journal</span>
         </div>
-      </Header>
-      <Body>
+      </SidebarHeader>
+      <SidebarBody>
         <div className={styles['journal-entry-list']}>
           {allJournalEntries.map((journalEntry) => {
             return (
@@ -57,7 +57,7 @@ const JournalSidebar: React.FC = () => {
             );
           })}
         </div>
-      </Body>
+      </SidebarBody>
     </Sidebar>
   );
 };

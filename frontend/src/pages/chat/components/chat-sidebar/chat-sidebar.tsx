@@ -1,8 +1,8 @@
 import cardPlaceholder from '#assets/img/card-image-placeholder.png';
 import { Card, Icon, Search, Sidebar } from '#libs/components/components.js';
 import {
-  Body,
-  Header,
+  SidebarBody,
+  SidebarHeader,
 } from '#libs/components/sidebar/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { useCallback, useSearch } from '#libs/hooks/hooks.js';
@@ -32,7 +32,7 @@ const ChatSidebar: React.FC = () => {
 
   return (
     <Sidebar>
-      <Header>
+      <SidebarHeader>
         <div className={styles['info']}>
           <span>Chat</span>
           <span className={styles['chat-number']}>
@@ -42,8 +42,8 @@ const ChatSidebar: React.FC = () => {
         <div className={styles['plus']}>
           <Icon name={'plus'} color={IconColor.BLUE} />
         </div>
-      </Header>
-      <Body>
+      </SidebarHeader>
+      <SidebarBody>
         <div className={styles['search']}>
           <Search onValueChange={setFilter} />
         </div>
@@ -60,7 +60,7 @@ const ChatSidebar: React.FC = () => {
             );
           })}
         </div>
-      </Body>
+      </SidebarBody>
     </Sidebar>
   );
 };

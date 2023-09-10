@@ -1,8 +1,8 @@
 import avatar from '#assets/img/avatar-placeholder.png';
 import { Sidebar } from '#libs/components/components.js';
 import {
-  Body,
-  Header,
+  SidebarBody,
+  SidebarHeader,
 } from '#libs/components/sidebar/components/components.js';
 import { useAppSelector } from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
@@ -18,12 +18,12 @@ const UserProfileInfo: React.FC = () => {
 
   return (
     <Sidebar>
-      <Header>
+      <SidebarHeader>
         <div className={styles['info']}>
           <span>Profile</span>
         </div>
-      </Header>
-      <Body>
+      </SidebarHeader>
+      <SidebarBody>
         <div className={styles['user-info']}>
           <div className={styles['avatar-container']}>
             <img src={avatar} alt="avatar" className={styles['avatar']} />
@@ -32,7 +32,7 @@ const UserProfileInfo: React.FC = () => {
             {(authenticatedUser as UserAuthResponseDto).fullName}
           </span>
         </div>
-      </Body>
+      </SidebarBody>
     </Sidebar>
   );
 };
