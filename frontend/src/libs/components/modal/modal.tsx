@@ -1,3 +1,5 @@
+import { createPortal } from 'react-dom';
+
 import { IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 
@@ -17,7 +19,7 @@ const Modal: React.FC<Properties> = ({
   title,
   onClose,
 }) => {
-  return (
+  return createPortal(
     <div
       className={getValidClassNames(
         styles['overlay'],
@@ -39,7 +41,8 @@ const Modal: React.FC<Properties> = ({
         </div>
         {children}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 };
 
