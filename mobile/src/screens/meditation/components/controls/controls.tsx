@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Button, View } from '#libs/components/components';
-import { useTrackPlayerControls } from '#libs/hooks/hooks';
+import { usePlayerControls } from '#libs/hooks/hooks';
 
 import { styles } from './styles';
 
@@ -16,7 +16,7 @@ const Controls: React.FC<Properties> = ({ isPlaying }) => {
     handlePlayPause,
     handleSkipForward,
     handleSkipToNext,
-  } = useTrackPlayerControls({ isPlaying });
+  } = usePlayerControls({ isPlaying });
 
   return (
     <View style={styles.container}>

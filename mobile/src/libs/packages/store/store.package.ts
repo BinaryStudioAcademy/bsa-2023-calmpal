@@ -11,6 +11,7 @@ import { reducer as authReducer } from '#slices/auth/auth';
 
 import { type Config } from '../config/config';
 import { notification } from '../notification/notification';
+import { player } from '../player/player';
 import { storage } from '../storage/storage';
 import { handleError } from './middlewares/middlewares';
 
@@ -21,6 +22,7 @@ type RootReducer = {
 type ExtraArguments = {
   authApi: typeof authApi;
   notification: typeof notification;
+  player: typeof player;
   storage: typeof storage;
 };
 
@@ -56,6 +58,7 @@ class Store {
     return {
       authApi,
       notification,
+      player,
       storage,
     };
   }

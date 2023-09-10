@@ -4,10 +4,7 @@ import React from 'react';
 import { Text, View } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
 import { getFormattedTime } from '#libs/helpers/helpers';
-import {
-  useTrackPlayerControls,
-  useTrackPlayerProgress,
-} from '#libs/hooks/hooks';
+import { usePlayerControls, usePlayerProgress } from '#libs/hooks/hooks';
 
 import { TRACK_START_TIME } from './libs/constants';
 import { styles } from './styles';
@@ -17,9 +14,9 @@ type Properties = {
 };
 
 const ProgressBar: React.FC<Properties> = ({ isPlaying }) => {
-  const [timeProgress, duration] = useTrackPlayerProgress();
+  const [timeProgress, duration] = usePlayerProgress();
 
-  const { handleSeek } = useTrackPlayerControls({ isPlaying });
+  const { handleSeek } = usePlayerControls({ isPlaying });
 
   return (
     <View style={styles.wrapper}>
