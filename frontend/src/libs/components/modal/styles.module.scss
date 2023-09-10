@@ -17,9 +17,9 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 25px 20px;
+  padding: 30px 25px;
   background-color: var(--white);
-  border-radius: 32px;
+  border-radius: 28px;
   box-shadow:
     0 0 var(--black),
     0 0 var(--black),
@@ -55,6 +55,7 @@
   }
 
   .modal {
+    padding: 20px;
     background-color: var(--transparent);
     box-shadow: none;
   }
