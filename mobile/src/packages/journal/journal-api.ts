@@ -4,7 +4,7 @@ import { type HTTP } from '#libs/packages/http/http';
 import { type Storage } from '#libs/packages/storage/storage';
 
 import { JournalApiPath } from './libs/enums/enums';
-import { type JournalEntryGetAllResponseDto } from './libs/types/types.js';
+import { type JournalEntryGetAllResponseDto } from './libs/types/types';
 
 type Constructor = {
   baseUrl: string;
@@ -17,7 +17,7 @@ class JournalApi extends BaseHttpApi {
     super({ path: APIPath.JOURNAL, baseUrl, http, storage });
   }
 
-  public async getAllJournalEntriers(): Promise<JournalEntryGetAllResponseDto> {
+  public async getAllJournalEntries(): Promise<JournalEntryGetAllResponseDto> {
     const response = await this.load(
       this.getFullEndpoint(JournalApiPath.ROOT, {}),
       {

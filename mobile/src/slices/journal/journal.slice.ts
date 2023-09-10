@@ -4,7 +4,7 @@ import { DataStatus } from '#libs/enums/enums';
 import { type ValueOf } from '#libs/types/types';
 import { type JournalEntryGetAllItemResponseDto } from '#packages/journal/journal';
 
-import { getAllJournalEntriers } from './actions';
+import { getAllJournalEntries } from './actions';
 
 type State = {
   allJournalEntries: JournalEntryGetAllItemResponseDto[];
@@ -21,14 +21,14 @@ const { reducer, actions, name } = createSlice({
   name: 'journal',
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(getAllJournalEntriers.pending, (state) => {
+    builder.addCase(getAllJournalEntries.pending, (state) => {
       state.journalEntriesDataStatus = DataStatus.PENDING;
     });
-    builder.addCase(getAllJournalEntriers.fulfilled, (state, action) => {
+    builder.addCase(getAllJournalEntries.fulfilled, (state, action) => {
       state.allJournalEntries = action.payload.items;
       state.journalEntriesDataStatus = DataStatus.FULFILLED;
     });
-    builder.addCase(getAllJournalEntriers.rejected, (state) => {
+    builder.addCase(getAllJournalEntries.rejected, (state) => {
       state.journalEntriesDataStatus = DataStatus.REJECTED;
     });
   },

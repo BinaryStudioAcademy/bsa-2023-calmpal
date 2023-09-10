@@ -5,14 +5,14 @@ import { type JournalEntryGetAllResponseDto } from '#packages/journal/journal';
 
 import { name as sliceName } from './journal.slice';
 
-const getAllJournalEntriers = createAsyncThunk<
+const getAllJournalEntries = createAsyncThunk<
   JournalEntryGetAllResponseDto,
   undefined,
   AsyncThunkConfig
 >(`${sliceName}/get-all-journal-entries`, async (_, { extra }) => {
   const { journalApi } = extra;
 
-  return await journalApi.getAllJournalEntriers();
+  return await journalApi.getAllJournalEntries();
 });
 
-export { getAllJournalEntriers };
+export { getAllJournalEntries };

@@ -1,9 +1,9 @@
-import { getAllJournalEntriers } from './actions';
+import { getAllJournalEntries } from './actions';
 import { actions } from './journal.slice';
 
 const allActions = {
   ...actions,
-  getAllJournalEntriers,
+  getAllJournalEntries,
 };
 
 export { allActions as actions };
