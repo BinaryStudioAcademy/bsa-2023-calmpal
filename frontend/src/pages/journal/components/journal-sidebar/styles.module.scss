@@ -13,8 +13,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 10%;
-  padding: 0 20px;
+  padding: 30px 20px;
+  font-weight: 600;
   font-size: 20px;
   border-bottom: 1px solid var(--blue-100);
 }
@@ -50,12 +50,22 @@
   display: none;
 }
 
-@media (width < 480px) {
+@media (width < 900px) {
+  .container {
+    width: 250px;
+  }
+
+  .journal-entry-list {
+    padding: 0 15px;
+  }
+}
+
+@media (width < 768px) {
   .container {
     width: 100%;
   }
 
   .journal-entry-list {
-    padding: 0 20px;
+    padding: 0 15px;
   }
 }
