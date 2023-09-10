@@ -16,9 +16,9 @@ const settingsOptions: SettingsOption[] = [
 ];
 
 const ProfileSettingsSidebar: React.FC = () => {
-  const { fullName } = useAppSelector(({ auth }) => {
+  const { authenticatedUser } = useAppSelector(({ auth }) => {
     return {
-      fullName: (auth.authenticatedUser as UserAuthResponseDto).fullName,
+      authenticatedUser: auth.authenticatedUser as UserAuthResponseDto,
     };
   });
 
@@ -43,7 +43,9 @@ const ProfileSettingsSidebar: React.FC = () => {
             <div className={styles['user-icon']}>
               <Icon name="avatar" color={IconColor.WHITE} />
             </div>
-            <div className={styles['user-name']}>{fullName}</div>
+            <div className={styles['user-name']}>
+              {authenticatedUser.fullName}
+            </div>
           </div>
         </div>
 
