@@ -25,17 +25,12 @@ const Journal: React.FC = () => {
   const { allJournalEntries } = useAppSelector(({ journal }) => {
     return {
       allJournalEntries: journal.allJournalEntries,
-      // selectedJournalEntry: journal.selectedJournalEntry,
     };
   });
   const { filteredData: filteredJournals, setSearchQuery } = useSearch(
     allJournalEntries,
     'title',
   );
-
-  //   const handleSelectJournal = (): void => {
-  //     return;
-  //   };
 
   useEffect(() => {
     void dispatch(journalActions.getAllJournalEntriers());
