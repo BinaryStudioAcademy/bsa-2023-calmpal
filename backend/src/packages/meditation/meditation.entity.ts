@@ -1,11 +1,14 @@
-import { type Entity } from '#libs/types/types.js';
+import { type ContentType } from '#libs/enums/enums.js';
+import { type Entity, type ValueOf } from '#libs/types/types.js';
 
 class MeditationEntity implements Entity {
   private id: number | null;
 
   private topicName: string;
 
-  private audioUrl: string;
+  private mediaUrl: string;
+
+  private contentType: ValueOf<typeof ContentType>;
 
   private createdAt: Date | null;
 
@@ -14,19 +17,22 @@ class MeditationEntity implements Entity {
   public constructor({
     id,
     topicName,
-    audioUrl,
+    mediaUrl,
+    contentType,
     createdAt,
     updatedAt,
   }: {
     id: number | null;
     topicName: string;
-    audioUrl: string;
+    mediaUrl: string;
+    contentType: ValueOf<typeof ContentType>;
     createdAt: Date | null;
     updatedAt: Date | null;
   }) {
     this.id = id;
     this.topicName = topicName;
-    this.audioUrl = audioUrl;
+    this.mediaUrl = mediaUrl;
+    this.contentType = contentType;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
@@ -34,20 +40,23 @@ class MeditationEntity implements Entity {
   public static initialize({
     id,
     topicName,
-    audioUrl,
+    mediaUrl,
+    contentType,
     createdAt,
     updatedAt,
   }: {
     id: number | null;
     topicName: string;
-    audioUrl: string;
+    mediaUrl: string;
+    contentType: ValueOf<typeof ContentType>;
     createdAt: Date | null;
     updatedAt: Date | null;
   }): MeditationEntity {
     return new MeditationEntity({
       id,
       topicName,
-      audioUrl,
+      mediaUrl,
+      contentType,
       createdAt,
       updatedAt,
     });
@@ -55,15 +64,18 @@ class MeditationEntity implements Entity {
 
   public static initializeNew({
     topicName,
-    audioUrl,
+    mediaUrl,
+    contentType,
   }: {
     topicName: string;
-    audioUrl: string;
+    mediaUrl: string;
+    contentType: ValueOf<typeof ContentType>;
   }): MeditationEntity {
     return new MeditationEntity({
       id: null,
       topicName,
-      audioUrl,
+      mediaUrl,
+      contentType,
       createdAt: null,
       updatedAt: null,
     });
@@ -72,14 +84,16 @@ class MeditationEntity implements Entity {
   public toObject(): {
     id: number;
     topicName: string;
-    audioUrl: string;
+    mediaUrl: string;
+    contentType: ValueOf<typeof ContentType>;
     createdAt: Date;
     updatedAt: Date;
   } {
     return {
       id: this.id as number,
       topicName: this.topicName,
-      audioUrl: this.audioUrl,
+      mediaUrl: this.mediaUrl,
+      contentType: this.contentType,
       createdAt: this.createdAt as Date,
       updatedAt: this.updatedAt as Date,
     };
@@ -87,11 +101,13 @@ class MeditationEntity implements Entity {
 
   public toNewObject(): {
     topicName: string;
-    audioUrl: string;
+    mediaUrl: string;
+    contentType: ValueOf<typeof ContentType>;
   } {
     return {
       topicName: this.topicName,
-      audioUrl: this.audioUrl,
+      mediaUrl: this.mediaUrl,
+      contentType: this.contentType,
     };
   }
 }
