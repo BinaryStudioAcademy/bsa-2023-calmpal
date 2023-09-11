@@ -1,6 +1,7 @@
-import { Button } from '#libs/components/button/button.js';
+import { Icon } from '#libs/components/components.js';
 import { Input } from '#libs/components/input/input.js';
 import { DEFAULT_INPUT } from '#libs/constants/constants.js';
+import { IconColor } from '#libs/enums/enums.js';
 import { useAppForm, useCallback } from '#libs/hooks/hooks.js';
 import { type ChatInputValue } from '#libs/types/types.js';
 
@@ -40,12 +41,10 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
           name="text"
           control={control}
         />
-        <Button
-          label="Send message"
-          type="submit"
-          iconName="send"
-          isLabelVisuallyHidden
-        />
+        <button type="submit" className={styles['send-button']}>
+          <span className="visually-hidden">Send message</span>
+          <Icon name="send" color={IconColor.BLUE} />
+        </button>
       </form>
     </footer>
   );
