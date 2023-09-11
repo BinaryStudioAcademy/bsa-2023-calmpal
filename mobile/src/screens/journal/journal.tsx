@@ -51,7 +51,7 @@ const Journal: React.FC = () => {
         );
       },
     });
-  }, [navigation, route.name]);
+  }, [navigation, route.name, allJournalEntries]);
 
   useEffect(() => {
     void dispatch(journalActions.getAllJournalEntries());

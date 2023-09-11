@@ -6,11 +6,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingBottom: 16,
-    paddingHorizontal: 12,
     paddingTop: 28,
   },
   list: {
-    paddingHorizontal: 4,
+    paddingHorizontal: 8,
   },
   linkWrapper: {
     alignItems: 'center',
