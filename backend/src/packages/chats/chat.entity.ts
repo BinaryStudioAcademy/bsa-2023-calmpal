@@ -1,11 +1,13 @@
 import { type Entity } from '#libs/types/types.js';
 
+import { type UserToChatQueryResponse } from './libs/types/types.js';
+
 class ChatEntity implements Entity {
   private id: number | null;
 
   private name: string;
 
-  private members: number[];
+  private members: UserToChatQueryResponse[];
 
   private createdAt: Date | null;
 
@@ -20,7 +22,7 @@ class ChatEntity implements Entity {
   }: {
     id: number | null;
     name: string;
-    members: number[];
+    members: UserToChatQueryResponse[];
     createdAt: Date | null;
     updatedAt: Date | null;
   }) {
@@ -40,7 +42,7 @@ class ChatEntity implements Entity {
   }: {
     id: number;
     name: string;
-    members: number[];
+    members: UserToChatQueryResponse[];
     createdAt: Date;
     updatedAt: Date;
   }): ChatEntity {
@@ -55,15 +57,14 @@ class ChatEntity implements Entity {
 
   public static initializeNew({
     name,
-    members,
   }: {
     name: string;
-    members: number[];
+    members: UserToChatQueryResponse[];
   }): ChatEntity {
     return new ChatEntity({
       id: null,
       name,
-      members,
+      members: [],
       createdAt: null,
       updatedAt: null,
     });
@@ -72,7 +73,7 @@ class ChatEntity implements Entity {
   public toObject(): {
     id: number;
     name: string;
-    members: number[];
+    members: UserToChatQueryResponse[];
     createdAt: Date;
     updatedAt: Date;
   } {
@@ -87,11 +88,9 @@ class ChatEntity implements Entity {
 
   public toNewObject(): {
     name: string;
-    members: number[];
   } {
     return {
       name: this.name,
-      members: this.members,
     };
   }
 }
