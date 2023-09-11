@@ -61,6 +61,7 @@ class JournalEntryController extends BaseController {
       handler: (options) => {
         return this.create(
           options as APIHandlerOptions<{
+            user: UserAuthResponseDto;
             body: JournalEntryCreateRequestDto;
           }>,
         );
@@ -100,6 +101,7 @@ class JournalEntryController extends BaseController {
       handler: (options) => {
         return this.update(
           options as APIHandlerOptions<{
+            user: UserAuthResponseDto;
             params: { id: number };
             body: JournalEntryCreateRequestDto;
           }>,
@@ -121,10 +123,6 @@ class JournalEntryController extends BaseController {
    *            schema:
    *              type: object
    *              properties:
-   *                userId:
-   *                  type: number
-   *                  format: number
-   *                  minimum: 1
    *                title:
    *                  type: string
    *                text:
@@ -161,12 +159,16 @@ class JournalEntryController extends BaseController {
 
   private async create(
     options: APIHandlerOptions<{
+      user: UserAuthResponseDto;
       body: JournalEntryCreateRequestDto;
     }>,
   ): Promise<APIHandlerResponse> {
     return {
       status: HTTPCode.CREATED,
-      payload: await this.journalEntryService.create(options.body),
+      payload: await this.journalEntryService.create(
+        options.body,
+        options.user.id,
+      ),
     };
   }
 
@@ -257,10 +259,6 @@ class JournalEntryController extends BaseController {
    *            schema:
    *              type: object
    *              properties:
-   *                userId:
-   *                  type: number
-   *                  format: number
-   *                  minimum: 1
    *                title:
    *                  type: string
    *                text:
@@ -298,14 +296,17 @@ class JournalEntryController extends BaseController {
   private async update(
     options: APIHandlerOptions<{
       params: { id: number };
+      user: UserAuthResponseDto;
       body: JournalEntryCreateRequestDto;
     }>,
   ): Promise<APIHandlerResponse> {
     const { id } = options.params;
+    const { id: userId } = options.user;
+    const { body } = options;
 
     return {
       status: HTTPCode.OK,
-      payload: await this.journalEntryService.update(id, options.body),
+      payload: await this.journalEntryService.update(id, userId, body),
     };
   }
 }

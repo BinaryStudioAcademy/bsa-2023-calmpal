@@ -1,5 +1,4 @@
 type JournalEntryCreateRequestDto = {
-  userId: number;
   title: string;
   text: string;
 };

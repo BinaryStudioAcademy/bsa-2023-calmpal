@@ -3,8 +3,8 @@ type Service<T = unknown> = {
   findAll(): Promise<{
     items: T[];
   }>;
-  create(payload: unknown): Promise<T>;
-  update(id: number, payload: unknown): Promise<T>;
+  create(payload: unknown, id?: number): Promise<T>;
+  update(id: number, userId: number, payload: unknown): Promise<T>;
   delete(): Promise<boolean>;
 };
 

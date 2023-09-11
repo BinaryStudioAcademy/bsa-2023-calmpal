@@ -66,7 +66,6 @@ const Note: React.FC<Properties> = ({ className }) => {
           journalActions.updateJournalEntry({
             id,
             body: {
-              userId,
               title: newNote.title,
               text: newNote.text,
             },
@@ -80,14 +79,14 @@ const Note: React.FC<Properties> = ({ className }) => {
   const handleTitleChange: React.FormEventHandler<HTMLDivElement> = debounce(
     (event_: React.SyntheticEvent<HTMLDivElement>) => {
       if (titleReference.current) {
-        const newTitle = sanitizeInput(
-          (event_.target as HTMLElement).textContent as string,
-        );
-        if (newTitle.trim()) {
+        const newTitle = (event_.target as HTMLElement).textContent as string;
+        const sanitizedTitle = sanitizeInput(newTitle);
+
+        if (sanitizedTitle.trim() && sanitizedTitle !== note.title) {
           setNote((previous) => {
-            return { ...previous, title: newTitle };
+            return { ...previous, title: sanitizedTitle };
           });
-          handleSaveNote({ title: newTitle, text: note.text });
+          handleSaveNote({ title: sanitizedTitle, text: note.text });
         }
       }
     },
@@ -97,14 +96,14 @@ const Note: React.FC<Properties> = ({ className }) => {
   const handleTextChange: React.FormEventHandler<HTMLDivElement> = debounce(
     (event_: React.SyntheticEvent<HTMLDivElement>) => {
       if (textReference.current) {
-        const newText = sanitizeInput(
-          (event_.target as HTMLElement).textContent as string,
-        );
-        if (newText.trim()) {
+        const newText = (event_.target as HTMLElement).textContent as string;
+        const sanitizedText = sanitizeInput(newText);
+
+        if (sanitizedText.trim() && sanitizedText !== note.text) {
           setNote((previous) => {
-            return { ...previous, text: newText };
+            return { ...previous, text: sanitizedText };
           });
-          handleSaveNote({ title: note.title, text: newText });
+          handleSaveNote({ title: note.title, text: sanitizedText });
         }
       }
     },
@@ -137,14 +136,14 @@ const Note: React.FC<Properties> = ({ className }) => {
       <div
         contentEditable
         onInput={handleTitleChange}
-        dangerouslySetInnerHTML={{ __html: note.title }}
+        dangerouslySetInnerHTML={{ __html: sanitizeInput(note.title) }}
         className={styles['title']}
         ref={titleReference}
       />
       <div
         contentEditable
         onInput={handleTextChange}
-        dangerouslySetInnerHTML={{ __html: note.text }}
+        dangerouslySetInnerHTML={{ __html: sanitizeInput(note.text) }}
         className={styles['text']}
         ref={textReference}
       />

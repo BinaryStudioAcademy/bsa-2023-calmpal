@@ -29,7 +29,6 @@ const JournalSidebar: React.FC = () => {
     if (userId) {
       void dispatch(
         journalActions.createJournalEntry({
-          userId,
           title: DEFAULT_NOTE_PAYLOAD.title,
           text: DEFAULT_NOTE_PAYLOAD.text,
         }),

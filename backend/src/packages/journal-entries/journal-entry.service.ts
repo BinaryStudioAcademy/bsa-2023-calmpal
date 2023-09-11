@@ -49,8 +49,9 @@ class JournalEntryService implements Service {
 
   public async create(
     payload: JournalEntryCreateRequestDto,
+    userId: number,
   ): Promise<JournalEntryGetAllItemResponseDto> {
-    const user = await userService.findById(payload.userId);
+    const user = await userService.findById(userId);
 
     if (!user) {
       throw new UsersError({
@@ -62,7 +63,7 @@ class JournalEntryService implements Service {
     const item = await this.journalEntryRepository.create(
       JournalEntryEntity.initialize({
         id: null,
-        userId: payload.userId,
+        userId,
         createdAt: null,
         updatedAt: null,
         title: payload.title,
@@ -75,9 +76,10 @@ class JournalEntryService implements Service {
 
   public async update(
     id: number,
+    userId: number,
     payload: JournalEntryCreateRequestDto,
   ): Promise<JournalEntryGetAllItemResponseDto> {
-    const user = await userService.findById(payload.userId);
+    const user = await userService.findById(userId);
 
     if (!user) {
       throw new UsersError({
@@ -89,7 +91,7 @@ class JournalEntryService implements Service {
     const newJournalEntry = await this.journalEntryRepository.update(
       JournalEntryEntity.initialize({
         id,
-        userId: payload.userId,
+        userId,
         createdAt: null,
         updatedAt: null,
         title: payload.title,
