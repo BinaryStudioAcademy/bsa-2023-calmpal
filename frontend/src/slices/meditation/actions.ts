@@ -22,7 +22,7 @@ const createMeditationEntry = createAsyncThunk<
     contentType: file.contentType,
   });
 
-  notification.success(`Meditation ${item.topicName} was added.`);
+  notification.success(`Meditation ${payload.topicName} was added.`);
 
   return item;
 });
