@@ -1,8 +1,6 @@
-import { BLANK } from './blank.constant.js';
-
 const DEFAULT_INPUT = {
   defaultValues: {
-    text: BLANK,
+    text: '',
   },
   mode: 'onSubmit',
 } as const;

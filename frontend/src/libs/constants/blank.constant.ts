@@ -1,3 +1,0 @@
-const BLANK = '';
-
-export { BLANK };
