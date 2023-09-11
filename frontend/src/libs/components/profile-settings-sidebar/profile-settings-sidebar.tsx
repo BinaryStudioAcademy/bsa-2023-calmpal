@@ -1,12 +1,20 @@
 import { Card, Icon } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
-import { useAppSelector, useCallback, useState } from '#libs/hooks/hooks.js';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useCallback,
+  useState,
+} from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
+import { actions as authActions } from '#slices/auth/auth.js';
 
 import { settingsOptions } from './libs/constants.js';
 import styles from './styles.module.scss';
 
 const ProfileSettingsSidebar: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const { authenticatedUser } = useAppSelector(({ auth }) => {
     return {
       authenticatedUser: auth.authenticatedUser as UserAuthResponseDto,
@@ -20,6 +28,10 @@ const ProfileSettingsSidebar: React.FC = () => {
       setActiveItem(key);
     };
   }, []);
+
+  const handleSignOut = useCallback((): void => {
+    void dispatch(authActions.signOut());
+  }, [dispatch]);
 
   return (
     <div className={styles['container']}>
@@ -57,7 +69,7 @@ const ProfileSettingsSidebar: React.FC = () => {
           })}
           <Card
             title="Sign Out"
-            onClick={handleClick('sign-out')}
+            onClick={handleSignOut}
             isActive={false}
             iconName="sign-out"
             iconColor={IconColor.WHITE}
