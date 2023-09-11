@@ -1,5 +1,5 @@
 import { Icon } from '#libs/components/components.js';
-import { UserRole } from '#libs/enums/enums.js';
+import { IconColor, UserRole } from '#libs/enums/enums.js';
 import { type ChatMessage } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
@@ -30,7 +30,7 @@ const ChatMessage: React.FC<Properties> = ({ chatRecord }) => {
         ) : (
           <div className={styles['bot-message-container']} key={chatId}>
             <div className={styles['bot-avatar']}>
-              <Icon name="chat-page" />
+              <Icon name="chat-page" color={IconColor.BLUE} />
             </div>
             <div className={styles['bot-message-child-container']}>
               {messages.map(({ message, id }) => {
