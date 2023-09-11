@@ -1,6 +1,6 @@
 import joi from 'joi';
 
-import { ContentType } from '#index.js';
+import { ContentType } from '#libs/enums/enums.js';
 
 import { MeditationValidationMessage } from '../enums/enums.js';
 import { type MeditationCreateValidation } from '../types/types.js';
