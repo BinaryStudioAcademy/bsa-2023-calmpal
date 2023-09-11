@@ -1,3 +1,4 @@
+import { MeditationTimer } from '#libs/components/components.js';
 import { useCallback, useState } from '#libs/hooks/hooks.js';
 
 import { Modal } from './modal.js';
@@ -20,7 +21,7 @@ const TestParentComponent: React.FC = () => {
         title="Test modal"
         onClose={handleClick(false)}
       >
-        <div>Modal content</div>
+        <MeditationTimer onClose={handleClick(false)} />
       </Modal>
     </div>
   );

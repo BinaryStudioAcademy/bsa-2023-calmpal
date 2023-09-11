@@ -1,0 +1,51 @@
+.title {
+  margin-bottom: 20px;
+  color: black;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+}
+
+.duration-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.start-button {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  color: white;
+  text-align: center;
+  background-color: blue;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+}
+
+.duration-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 80px;
+}
+
+.duration-button.active {
+  background-color: blue;
+  border: none;
+}
+
+.duration,
+.duration-unit {
+  color: gray;
+}
+
+.active-text {
+  color: white;
+}

@@ -1,12 +1,14 @@
+import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useState } from '#libs/hooks/hooks.js';
 
 import { DURATION_UNIT, MEDITATION_DURATION } from './libs/constants.js';
+import styles from './styles.module.scss';
 
 type TimerProperties = {
   onClose: () => void;
 };
 
-const Timer: React.FC<TimerProperties> = ({ onClose }) => {
+const MeditationTimer: React.FC<TimerProperties> = ({ onClose }) => {
   const [selectedDuration, setSelectedDuration] = useState('');
 
   const handleClick = useCallback((duration: string) => {
@@ -16,22 +18,24 @@ const Timer: React.FC<TimerProperties> = ({ onClose }) => {
   }, []);
 
   return (
-    <div className="timer">
-      <p className="title">Choose Your Duration</p>
-      <div className="durations">
+    <div className={styles['timer']}>
+      <p className={styles['title']}>Choose Your Duration</p>
+      <div className={styles['duration-container']}>
         {Object.keys(MEDITATION_DURATION).map((duration) => {
           return (
             <button
               key={duration}
-              className={`duration-item ${
-                selectedDuration === duration ? 'active' : ''
-              }`}
+              className={getValidClassNames(
+                styles['duration-button'],
+                selectedDuration === duration ? styles['active'] : '',
+              )}
               onClick={handleClick(duration)}
             >
               <span
-                className={`duration ${
-                  selectedDuration === duration ? 'active-text' : ''
-                }`}
+                className={getValidClassNames(
+                  styles['duration-value'],
+                  selectedDuration === duration ? styles['active-text'] : '',
+                )}
               >
                 {
                   MEDITATION_DURATION[
@@ -40,9 +44,10 @@ const Timer: React.FC<TimerProperties> = ({ onClose }) => {
                 }
               </span>
               <span
-                className={`duration-unit ${
-                  selectedDuration === duration ? 'active-text' : ''
-                }`}
+                className={getValidClassNames(
+                  styles['duration-unit'],
+                  selectedDuration === duration ? styles['active-text'] : '',
+                )}
               >
                 {DURATION_UNIT.MINUTES}
               </span>
@@ -50,11 +55,11 @@ const Timer: React.FC<TimerProperties> = ({ onClose }) => {
           );
         })}
       </div>
-      <button className="start-button" onClick={onClose}>
+      <button className={styles['start-button']} onClick={onClose}>
         Start Session
       </button>
     </div>
   );
 };
 
-export { Timer };
+export { MeditationTimer };
