@@ -1,5 +1,3 @@
-import { createPortal } from 'react-dom';
-
 import { IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 
@@ -19,28 +17,28 @@ const Modal: React.FC<Properties> = ({
   title,
   onClose,
 }) => {
-  return createPortal(
-    isDisplayed && (
-      <div className={getValidClassNames(styles['overlay'])}>
-        <div className={styles['modal']}>
-          <div className={styles['header']}>
-            <span className={styles['title']}>{title}</span>
-            <div className={styles['icon-container']}>
-              <Button
-                label="Close modal"
-                iconName="close"
-                iconColor={IconColor.BLACK}
-                isLabelVisuallyHidden={true}
-                style="rounded-transparent"
-                onClick={onClose}
-              />
-            </div>
+  return (
+    <dialog
+      open={isDisplayed}
+      className={getValidClassNames(isDisplayed && styles['overlay'])}
+    >
+      <div className={styles['modal']}>
+        <div className={styles['header']}>
+          <span className={styles['title']}>{title}</span>
+          <div className={styles['icon-container']}>
+            <Button
+              label="Close modal"
+              iconName="close"
+              iconColor={IconColor.BLACK}
+              isLabelVisuallyHidden={true}
+              style="rounded-transparent"
+              onClick={onClose}
+            />
           </div>
-          {children}
         </div>
+        {children}
       </div>
-    ),
-    document.body,
+    </dialog>
   );
 };
 
