@@ -7,6 +7,7 @@ import {
   useEffect,
 } from '#libs/hooks/hooks.js';
 import { type ValueOf } from '#libs/types/value-of.type.js';
+import { DEFAULT_NOTE_PAYLOAD } from '#pages/journal/libs/constants/constants.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
 import styles from './styles.module.scss';
@@ -29,8 +30,8 @@ const JournalSidebar: React.FC = () => {
       void dispatch(
         journalActions.createJournalEntry({
           userId,
-          title: '',
-          text: '',
+          title: DEFAULT_NOTE_PAYLOAD.title,
+          text: DEFAULT_NOTE_PAYLOAD.text,
         }),
       );
     }
