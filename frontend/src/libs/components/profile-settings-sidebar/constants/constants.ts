@@ -1,4 +1,4 @@
-import { type SettingsOption } from '#libs/types/settings-options.type.js';
+import { type SettingsOption } from '#libs/types/types.js';
 
 const SETTINGS_OPTIONS: SettingsOption[] = [
   {

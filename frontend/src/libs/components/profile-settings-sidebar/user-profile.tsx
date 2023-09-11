@@ -69,7 +69,6 @@ const UserProfile: React.FC = () => {
           <Card
             title="Sign Out"
             onClick={handleSignOut}
-            isActive={false}
             iconName="sign-out"
             iconColor={IconColor.WHITE}
           />

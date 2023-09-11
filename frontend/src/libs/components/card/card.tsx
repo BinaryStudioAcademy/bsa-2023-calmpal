@@ -9,7 +9,7 @@ type Properties = {
   title: string;
   imageUrl?: string;
   onClick: () => void;
-  isActive: boolean;
+  isActive?: boolean;
   iconName?: IconName;
   iconColor?: ValueOf<typeof IconColor>;
   statusIcon?: IconName;
@@ -19,7 +19,7 @@ const Card: React.FC<Properties> = ({
   title,
   imageUrl,
   onClick,
-  isActive,
+  isActive = false,
   iconName,
   iconColor = 'currentColor',
 }) => {
