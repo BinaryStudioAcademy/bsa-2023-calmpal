@@ -1,3 +1,5 @@
+import { type SetURLSearchParams } from 'react-router-dom';
+
 import cardPlaceholder from '#assets/img/card-image-placeholder.png';
 import { Card, Icon, Search, Sidebar } from '#libs/components/components.js';
 import {
@@ -22,7 +24,7 @@ const mockedSelectedChat = {
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsSidebarShown: SetURLSearchParams;
 };
 
 const ChatSidebar: React.FC<Properties> = ({
@@ -35,7 +37,7 @@ const ChatSidebar: React.FC<Properties> = ({
     (id: number) => {
       return () => {
         mockedSelectedChat.id = id;
-        setIsSidebarShown(false);
+        setIsSidebarShown({ isSidebarShownParam: 'false' });
         // TODO redux logic
       };
     },

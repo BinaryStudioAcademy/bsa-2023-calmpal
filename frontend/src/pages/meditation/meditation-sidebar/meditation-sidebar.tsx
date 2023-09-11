@@ -1,3 +1,5 @@
+import { type SetURLSearchParams } from 'react-router-dom';
+
 import meditationPlaceholder from '#assets/img/meditation-image-placeholder.png';
 import { Card, Search, Sidebar } from '#libs/components/components.js';
 import {
@@ -10,7 +12,7 @@ import styles from './styles.module.scss';
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsSidebarShown: SetURLSearchParams;
 };
 
 const mockedMeditations = [{ id: 1, name: 'Meditation' }];
@@ -29,7 +31,7 @@ const MeditationSidebar: React.FC<Properties> = ({
     (id: number) => {
       return () => {
         mockedSelectedMeditation.id = id;
-        setIsSidebarShown(false);
+        setIsSidebarShown({ isSidebarShownParam: 'false' });
         // TODO redux logic
       };
     },

@@ -1,3 +1,5 @@
+import { type SetURLSearchParams } from 'react-router-dom';
+
 import { BackwardButton } from '#libs/components/components.js';
 import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
 import { useCallback } from '#libs/hooks/hooks.js';
@@ -8,7 +10,7 @@ import styles from './styles.module.scss';
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsSidebarShown: SetURLSearchParams;
 };
 
 const MeditationList: React.FC<Properties> = ({
@@ -16,7 +18,7 @@ const MeditationList: React.FC<Properties> = ({
   setIsSidebarShown,
 }) => {
   const handleButtonBackward = useCallback(() => {
-    setIsSidebarShown(true);
+    setIsSidebarShown({ isSidebarShownParam: 'true' });
   }, [setIsSidebarShown]);
 
   return (

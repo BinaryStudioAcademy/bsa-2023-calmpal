@@ -1,30 +1,21 @@
 import { useSearchParams } from 'react-router-dom';
 
-import { useEffect, useState } from '#libs/hooks/hooks.js';
-
 import { MeditationList } from './meditation-list/meditation-list.js';
 import { MeditationSidebar } from './meditation-sidebar/meditation-sidebar.js';
 
 const Meditation: React.FC = () => {
-  const [isSidebarShown, setIsSidebarShown] = useState(true);
-  const [searchParameters, setSearchParameters] = useSearchParams();
-  useEffect(() => {
-    searchParameters.get('isSidebarShownParam') !== null &&
-      setIsSidebarShown(searchParameters.get('isSidebarShownParam') === 'true');
-  }, []);
-
-  useEffect(() => {
-    setSearchParameters({ isSidebarShownParam: String(isSidebarShown) });
-  }, [isSidebarShown, setSearchParameters]);
+  const [isSidebarShown, setIsSidebarShown] = useSearchParams({
+    isSidebarShownParam: 'true',
+  });
 
   return (
     <>
       <MeditationSidebar
-        isSidebarShown={isSidebarShown}
+        isSidebarShown={isSidebarShown.get('isSidebarShownParam') === 'true'}
         setIsSidebarShown={setIsSidebarShown}
       />
       <MeditationList
-        isSidebarShown={isSidebarShown}
+        isSidebarShown={isSidebarShown.get('isSidebarShownParam') === 'true'}
         setIsSidebarShown={setIsSidebarShown}
       />
     </>

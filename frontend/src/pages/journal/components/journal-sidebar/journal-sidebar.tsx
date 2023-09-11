@@ -1,3 +1,5 @@
+import { type SetURLSearchParams } from 'react-router-dom';
+
 import { Card, Sidebar } from '#libs/components/components.js';
 import {
   SidebarBody,
@@ -15,7 +17,7 @@ import styles from './styles.module.scss';
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsSidebarShown: SetURLSearchParams;
 };
 
 const JournalSidebar: React.FC<Properties> = ({
@@ -39,7 +41,7 @@ const JournalSidebar: React.FC<Properties> = ({
   const handleSelectJournalEntry = useCallback(
     (id: number) => {
       return () => {
-        setIsSidebarShown(false);
+        setIsSidebarShown({ isSidebarShownParam: 'false' });
         dispatch(journalActions.setSelectedJournalEntry(id));
       };
     },
