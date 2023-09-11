@@ -17,6 +17,27 @@ import { createChatValidationSchema } from './libs/validation-schemas/validation
  * @swagger
  * components:
  *    schemas:
+ *      ChatMember:
+ *        type: object
+ *        properties:
+ *         id:
+ *           type: number
+ *           format: number
+ *           minimum: 1
+ *         userId:
+ *           type: number
+ *           format: number
+ *           minimum: 1
+ *         chatId:
+ *           type: number
+ *           format: number
+ *           minimum: 1
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
  *      Chat:
  *        type: object
  *        properties:
@@ -29,8 +50,7 @@ import { createChatValidationSchema } from './libs/validation-schemas/validation
  *          members:
  *            type: array
  *            items:
- *              type: number
- *              minimum: 1
+ *              $ref: '#/components/schemas/ChatMember'
  *          createdAt:
  *             type: string
  *             format: date-time
