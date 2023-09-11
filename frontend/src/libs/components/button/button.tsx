@@ -5,7 +5,7 @@ import { Icon } from '../components.js';
 import styles from './styles.module.scss';
 
 type Properties = {
-  label?: string;
+  label: string;
   type?: 'button' | 'submit';
   iconName?: IconName;
   style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent';
