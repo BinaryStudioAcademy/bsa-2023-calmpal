@@ -83,13 +83,13 @@ erDiagram
       int topic_id FK
       array members
    }
-	users_to_chats {
-		int id PK
-		dateTime created_at
-		dateTime updated_at
-		int user_id FK
-		int chat_id FK
-	}
+   users_to_chats {
+     int id PK
+     dateTime created_at
+     dateTime updated_at
+     int user_id FK
+     int chat_id FK
+   }
    chat_messages {
       int id PK
       varchar name
@@ -133,8 +133,8 @@ erDiagram
    chat_topics ||--|{ chats : chat_topic_id
    chat_topics ||..|o files : chat_topic_image_id
    chats ||--|{ chat_messages : chat_id
-	 chats ||--|| users_to_chats : chat_id
-	 users ||--|| users_to_chats : user_id
+   chats ||--|| users_to_chats : chat_id
+   users ||--|| users_to_chats : user_id
    users ||--|{ chat_messages : user_id
    meditation_topics ||..|o files : meditation_topic_image_id
    meditation_topics ||--|{ meditation_entries : meditation_topic_id
