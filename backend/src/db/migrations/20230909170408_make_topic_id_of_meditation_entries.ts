@@ -3,7 +3,6 @@ import { type Knex } from 'knex';
 const TABLE_NAME = 'meditation_entries';
 
 const ColumnName = {
-  ID: 'id',
   TOPIC_ID: 'topic_id',
 } as const;
 
