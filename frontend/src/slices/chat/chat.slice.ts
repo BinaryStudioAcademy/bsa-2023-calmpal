@@ -1,10 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import {
-  FIRST_INDEX,
-  LAST_INDEX,
-  MOCK_MESSAGE,
-} from '#libs/constants/constants.js';
+import { FIRST_INDEX, LAST_INDEX } from '#libs/constants/constants.js';
 import {
   type ChatMessage,
   type ChatState,
@@ -13,7 +9,7 @@ import {
 
 import { newMessage } from './actions.js';
 
-const initialState: ChatState = { messages: [MOCK_MESSAGE] };
+const initialState: ChatState = { messages: [] };
 
 type StateInfo = ChatMessage & {
   state: ChatState;
