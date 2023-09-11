@@ -3,15 +3,16 @@ import { type Knex } from 'knex';
 const TABLE_NAME = 'meditation_entries';
 
 const ColumnName = {
-  ID: 'id',
   MEDIA_URL: 'media_url',
   CONTENT_TYPE: 'content_type',
 } as const;
 
-function up(knex: Knex): Promise<void> {
-  return knex.schema.alterTable(TABLE_NAME, (table) => {
-    table.text(ColumnName.MEDIA_URL).notNullable().defaultTo('');
-    table.string(ColumnName.CONTENT_TYPE).notNullable().defaultTo('');
+async function up(knex: Knex): Promise<void> {
+  await knex(TABLE_NAME).del();
+
+  await knex.schema.alterTable(TABLE_NAME, (table) => {
+    table.text(ColumnName.MEDIA_URL).notNullable();
+    table.string(ColumnName.CONTENT_TYPE).notNullable();
   });
 }
 
