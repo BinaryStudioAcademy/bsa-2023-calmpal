@@ -4,12 +4,7 @@ import {
   getDeepErrorMessage,
   getValidClassNames,
 } from '#libs/helpers/helpers.js';
-import {
-  useCallback,
-  useEffect,
-  useFormController,
-  useState,
-} from '#libs/hooks/hooks.js';
+import { useCallback, useFormController } from '#libs/hooks/hooks.js';
 import {
   type FormControl,
   type FormFieldErrors,
@@ -39,17 +34,11 @@ const InputFile = <T extends FormFieldValues>({
   description,
   onChange,
 }: Properties<T>): JSX.Element => {
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { field } = useFormController({ name, control });
 
-  const inputError = errors[name];
+  const errorMessage = getDeepErrorMessage(errors[name]);
   const hasError = Boolean(errorMessage);
   const displayFile = Boolean(fileName) && !hasError;
-
-  useEffect(() => {
-    const message = getDeepErrorMessage(inputError);
-    setErrorMessage(message);
-  }, [inputError]);
 
   const handleFileChange = useCallback(
     (event_: React.ChangeEvent<HTMLInputElement>) => {
