@@ -1,7 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 
-import { Icon } from '#libs/components/components.js';
-import { IconColor } from '#libs/enums/icon-color.enum.js';
+import { BackwardButton } from '#libs/components/components.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useEffect, useState } from '#libs/hooks/hooks.js';
 
@@ -36,9 +35,7 @@ const Chats: React.FC = () => {
           isSidebarShown && styles['hide'],
         )}
       >
-        <button className={styles['backward']} onClick={handleButtonBackward}>
-          <Icon name="back" color={IconColor.BLUE} />
-        </button>
+        <BackwardButton handleButtonBackward={handleButtonBackward} />
         hi there
       </div>
     </>

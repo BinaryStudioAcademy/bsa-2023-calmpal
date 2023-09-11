@@ -1,5 +1,4 @@
-import { Icon } from '#libs/components/components.js';
-import { IconColor } from '#libs/enums/icon-color.enum.js';
+import { BackwardButton } from '#libs/components/components.js';
 import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
 import { useCallback } from '#libs/hooks/hooks.js';
 
@@ -27,9 +26,7 @@ const MeditationList: React.FC<Properties> = ({
         isSidebarShown && styles['hide'],
       )}
     >
-      <button className={styles['backward']} onClick={handleButtonBackward}>
-        <Icon name="back" color={IconColor.BLUE} />
-      </button>
+      <BackwardButton handleButtonBackward={handleButtonBackward} />
       <div className={styles['list']}>
         {mockedEntries.map((entry) => {
           return <MeditationEntry meditationEntry={entry} key={entry.id} />;
