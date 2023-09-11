@@ -19,13 +19,17 @@ const Chats: React.FC = () => {
   return (
     <>
       <ChatSidebar
-        isSidebarShown={isSidebarShown.get('isSidebarShownParam') === 'true'}
+        isSidebarShown={
+          isSidebarShown.get('isSidebarShownParam') === 'true' ||
+          isSidebarShown.get('isSidebarShownParam') === null
+        }
         setIsSidebarShown={setIsSidebarShown}
       />
       <div
         className={getValidClassNames(
           styles['container'],
-          isSidebarShown.get('isSidebarShownParam') === 'true' &&
+          (isSidebarShown.get('isSidebarShownParam') === 'true' ||
+            isSidebarShown.get('isSidebarShownParam') === null) &&
             styles['hide'],
         )}
       >

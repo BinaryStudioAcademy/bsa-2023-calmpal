@@ -11,11 +11,17 @@ const Meditation: React.FC = () => {
   return (
     <>
       <MeditationSidebar
-        isSidebarShown={isSidebarShown.get('isSidebarShownParam') === 'true'}
+        isSidebarShown={
+          isSidebarShown.get('isSidebarShownParam') === 'true' ||
+          isSidebarShown.get('isSidebarShownParam') === null
+        }
         setIsSidebarShown={setIsSidebarShown}
       />
       <MeditationList
-        isSidebarShown={isSidebarShown.get('isSidebarShownParam') === 'true'}
+        isSidebarShown={
+          isSidebarShown.get('isSidebarShownParam') === 'true' ||
+          isSidebarShown.get('isSidebarShownParam') === null
+        }
         setIsSidebarShown={setIsSidebarShown}
       />
     </>
