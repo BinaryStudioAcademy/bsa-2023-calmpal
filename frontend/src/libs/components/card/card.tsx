@@ -12,7 +12,6 @@ type Properties = {
   isActive?: boolean;
   iconName?: IconName;
   iconColor?: ValueOf<typeof IconColor>;
-  statusIcon?: IconName;
 };
 
 const Card: React.FC<Properties> = ({
