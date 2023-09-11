@@ -9,7 +9,7 @@ import {
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
-import { settingsOptions } from './constants/constants.js';
+import { SETTINGS_OPTIONS } from './constants/constants.js';
 import styles from './styles.module.scss';
 
 const UserProfile: React.FC = () => {
@@ -54,7 +54,7 @@ const UserProfile: React.FC = () => {
 
         <div className={styles['buttons-container']}>
           <div className="visually-hidden">Profile settings options</div>
-          {settingsOptions.map((option) => {
+          {SETTINGS_OPTIONS.map((option) => {
             return (
               <Card
                 key={option.key}

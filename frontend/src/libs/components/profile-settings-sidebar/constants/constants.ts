@@ -1,10 +1,10 @@
 import { type SettingsOption } from '#libs/types/settings-options.type.js';
 
-const settingsOptions: SettingsOption[] = [
+const SETTINGS_OPTIONS: SettingsOption[] = [
   {
     key: 'notification',
     title: 'Notifications and Reminders',
   },
 ];
 
-export { settingsOptions };
+export { SETTINGS_OPTIONS };
