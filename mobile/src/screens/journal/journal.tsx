@@ -77,7 +77,7 @@ const Journal: React.FC = () => {
         </ScrollView>
         <View style={styles.linkWrapper}>
           <Link
-            label="Add new journal"
+            label="Add new note"
             to={''}
             style={styles.link}
             icon={<PlusIcon style={styles.icon} color={AppColor.BLUE_300} />}
