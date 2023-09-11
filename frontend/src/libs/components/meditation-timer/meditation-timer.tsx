@@ -1,7 +1,7 @@
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useState } from '#libs/hooks/hooks.js';
 
-import { DURATION_UNIT, MEDITATION_DURATION } from './libs/constants.js';
+import { DURATION_UNIT, MEDITATION_DURATION } from './constants/constants.js';
 import styles from './styles.module.scss';
 
 type TimerProperties = {
