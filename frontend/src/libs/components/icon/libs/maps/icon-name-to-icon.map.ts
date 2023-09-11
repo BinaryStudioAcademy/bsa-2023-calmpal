@@ -13,7 +13,6 @@ import { ReactComponent as PlayIcon } from '#assets/icons/play.svg';
 import { ReactComponent as PlusIcon } from '#assets/icons/plus.svg';
 import { ReactComponent as PreviousIcon } from '#assets/icons/previous.svg';
 import { ReactComponent as SignOutIcon } from '#assets/icons/sign-out.svg';
-import { ReactComponent as SubscriptionIcon } from '#assets/icons/subscription.svg';
 import { ReactComponent as UserIcon } from '#assets/icons/user.svg';
 import { type IconName } from '#libs/types/types.js';
 
@@ -37,7 +36,6 @@ const iconNameToIcon: Record<
   'sign-out': SignOutIcon,
   'user': UserIcon,
   'notification': NotificationIcon,
-  'subscription': SubscriptionIcon,
 };
 
 export { iconNameToIcon };

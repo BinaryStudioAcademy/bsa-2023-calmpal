@@ -4,7 +4,6 @@ type IconName =
   | 'sign-out'
   | 'user'
   | 'notification'
-  | 'subscription'
   | 'backward'
   | 'forward'
   | 'next'
