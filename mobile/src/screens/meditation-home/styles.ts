@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     marginBottom: 60,
   },
   list: {
-    paddingHorizontal: 8,
+    paddingHorizontal: 16,
   },
 });
 

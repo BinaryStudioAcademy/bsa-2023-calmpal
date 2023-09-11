@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     paddingTop: 28,
   },
   list: {
-    paddingHorizontal: 8,
+    paddingHorizontal: 16,
   },
   linkWrapper: {
     alignItems: 'center',

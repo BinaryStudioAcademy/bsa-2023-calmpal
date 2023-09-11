@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     paddingRight: 6,
     paddingVertical: 3,
     shadowColor: AppColor.PURPLE_100,
-    marginHorizontal: 12,
   },
   image: {
     borderRadius: 20,
