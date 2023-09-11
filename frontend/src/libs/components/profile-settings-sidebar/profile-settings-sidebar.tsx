@@ -1,17 +1,10 @@
 import { Card, Icon } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { useAppSelector, useCallback, useState } from '#libs/hooks/hooks.js';
-import { type SettingsOption } from '#libs/types/types.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 
+import { settingsOptions } from './libs/constants.js';
 import styles from './styles.module.scss';
-
-const settingsOptions: SettingsOption[] = [
-  {
-    key: 'notification',
-    title: 'Notifications and Reminders',
-  },
-];
 
 const ProfileSettingsSidebar: React.FC = () => {
   const { authenticatedUser } = useAppSelector(({ auth }) => {
