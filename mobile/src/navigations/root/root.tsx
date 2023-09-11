@@ -25,6 +25,7 @@ const screenOptions: NativeStackNavigationOptions = {
 
 const Root: React.FC = () => {
   const dispatch = useAppDispatch();
+
   const {
     authenticatedUser,
     authenticatedUserDataStatus,
