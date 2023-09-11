@@ -37,7 +37,6 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
           errors={errors}
           style="chat-input"
           autoComplete="off"
-          isRequired
           name="text"
           control={control}
         />

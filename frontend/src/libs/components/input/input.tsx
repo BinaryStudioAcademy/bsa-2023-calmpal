@@ -19,7 +19,6 @@ type Properties<T extends FormFieldValues> = {
   rowsCount?: number;
   maxLength?: number;
   autoComplete?: 'off' | 'on';
-  isRequired?: boolean;
   style?: 'primary' | 'chat-input';
 };
 
@@ -33,7 +32,6 @@ const Input = <T extends FormFieldValues>({
   rowsCount,
   maxLength,
   autoComplete,
-  isRequired = false,
   style = 'primary',
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
@@ -53,7 +51,6 @@ const Input = <T extends FormFieldValues>({
           placeholder={placeholder}
           maxLength={maxLength}
           autoComplete={autoComplete}
-          required={isRequired}
           className={getValidClassNames(
             styles[isPrimaryStyle ? 'textarea' : style],
             hasError && styles['error'],
@@ -66,7 +63,6 @@ const Input = <T extends FormFieldValues>({
           placeholder={placeholder}
           maxLength={maxLength}
           autoComplete={autoComplete}
-          required={isRequired}
           className={getValidClassNames(
             styles[isPrimaryStyle ? 'input' : style],
             hasError && styles['error'],
