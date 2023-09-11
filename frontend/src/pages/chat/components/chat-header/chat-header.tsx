@@ -6,7 +6,9 @@ const ChatHeader: React.FC = () => {
   return (
     <header className={styles['chat-header']}>
       <div className={styles['header-content']}>
-        <Icon name="chat-page" className={styles['logo']} />
+        <div className={styles['logo']}>
+          <Icon name="chat-page" />
+        </div>
         <span className={styles['title']}>Doctor Freud.ai</span>
       </div>
       <hr className={styles['separator']} />

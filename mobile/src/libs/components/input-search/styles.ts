@@ -14,6 +14,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
+  focusedInput: {
+    borderWidth: 1,
+    borderColor: AppColor.BLUE_300,
+    elevation: 10,
+    shadowColor: AppColor.BLUE_300,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 6,
+    shadowOpacity: 0.25,
+  },
 });
 
 export { styles };

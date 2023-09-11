@@ -1,40 +1,46 @@
-import { type IconName } from '#libs/types/icon-name.type.js';
+import { getValidClassNames } from '#libs/helpers/helpers.js';
+import { type IconName } from '#libs/types/types.js';
 
-import { Icon } from '../icon/icon.js';
+import { Icon } from '../components.js';
 import styles from './styles.module.scss';
 
 type Properties = {
   label?: string;
   type?: 'button' | 'submit';
-  style?: 'primary' | 'secondary';
+  iconName?: IconName;
+  style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent';
   isLoading?: boolean;
   isDisabled?: boolean;
-  icon?: IconName | '';
+  isLabelVisuallyHidden?: boolean;
   onClick?: () => void;
 };
 
 const Button: React.FC<Properties> = ({
   type = 'button',
   label,
+  iconName,
   style = 'primary',
-  icon = '',
   isLoading = false,
   isDisabled = false,
+  isLabelVisuallyHidden = false,
   onClick,
 }) => {
-  return icon ? (
-    <button type={type} className={styles['icon-primary']}>
-      <Icon name={icon} />
-    </button>
-  ) : (
+  return (
     <button
       type={type}
       className={styles[style]}
-      disabled={isDisabled || isLoading}
       onClick={onClick}
+      disabled={isDisabled || isLoading}
     >
       {isLoading && <span className={styles['loader']} />}
-      {label}
+      {iconName && <Icon name={iconName} />}
+      <span
+        className={getValidClassNames(
+          isLabelVisuallyHidden && 'visually-hidden',
+        )}
+      >
+        {label}
+      </span>
     </button>
   );
 };

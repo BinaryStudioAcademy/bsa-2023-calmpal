@@ -29,7 +29,9 @@ const ChatMessage: React.FC<Properties> = ({ chatRecord }) => {
           </div>
         ) : (
           <div className={styles['bot-message-container']} key={chatId}>
-            <Icon name="chat-page" className={styles['bot-avatar']} />
+            <div className={styles['bot-avatar']}>
+              <Icon name="chat-page" />
+            </div>
             <div className={styles['bot-message-child-container']}>
               {messages.map(({ message, id }) => {
                 return (

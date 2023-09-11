@@ -1,6 +1,6 @@
-import logo from '#assets/img/logo.svg';
-import { Link } from '#libs/components/components.js';
-import { AppRoute } from '#libs/enums/enums.js';
+import logoS from '#assets/img/logo-s.svg';
+import { Icon, Link } from '#libs/components/components.js';
+import { AppRoute, IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useLocation } from '#libs/hooks/hooks.js';
 import { type Route } from '#libs/types/types.js';
@@ -18,9 +18,7 @@ const Sidebar: React.FC<Properties> = ({ routes }) => {
     <div className={styles['sidebar']}>
       <nav className={styles['nav']}>
         <Link to={AppRoute.ROOT}>
-          <span className={styles['image']}>
-            <img src={logo} alt="logo" />
-          </span>
+          <img src={logoS} alt="CalmPal logo" />
         </Link>
       </nav>
       <nav className={styles['nav']}>
@@ -37,11 +35,7 @@ const Sidebar: React.FC<Properties> = ({ routes }) => {
                 <Link className={styles['link'] as string} to={route.path}>
                   <span>
                     <span className="visually-hidden">Go to {route.name}</span>
-                    <img
-                      src={route.icon}
-                      alt={route.name}
-                      className={styles['icon']}
-                    />
+                    <Icon name={route.icon} color={IconColor.BLUE} />
                   </span>
                 </Link>
               </button>
