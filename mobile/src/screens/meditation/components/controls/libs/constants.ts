@@ -1,3 +1,0 @@
-const TRACK_SKIP_SECONDS = 30;
-
-export { TRACK_SKIP_SECONDS };
