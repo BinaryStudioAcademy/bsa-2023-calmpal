@@ -5,10 +5,7 @@ type MeditationCreateQueryPayload = {
   id: number;
   mediaUrl: string;
   contentType: ValueOf<typeof ContentType>;
-  topic: {
-    id?: number;
-    name: string;
-  };
+  topicId: number | null;
 };
 
 export { type MeditationCreateQueryPayload };

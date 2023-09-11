@@ -46,25 +46,21 @@ class MeditationRepository implements Repository {
     entity: MeditationEntity,
     topicId?: number,
   ): Promise<MeditationEntity> {
-    const { topicName: name, mediaUrl, contentType } = entity.toObject();
-    const topic = topicId ? { name, id: topicId } : { name };
+    const { topicName, mediaUrl, contentType } = entity.toObject();
 
     const meditation = await this.meditationEntryModel
       .query()
-      .insertGraph(
-        {
-          mediaUrl,
-          contentType,
-          [MeditationRelation.TOPIC]: topic,
-        } as MeditationCreateQueryPayload,
-        { relate: true },
-      )
+      .insertGraph({
+        mediaUrl,
+        contentType,
+        topicId: topicId ?? null,
+      } as MeditationCreateQueryPayload)
       .withGraphJoined(MeditationRelation.TOPIC)
       .castTo<MeditationCommonQueryResponse>();
 
     return MeditationEntity.initialize({
       id: meditation.id,
-      topicName: meditation.topic.name,
+      topicName: meditation.topic?.name ?? topicName,
       mediaUrl: meditation.mediaUrl,
       contentType: meditation.contentType,
       createdAt: new Date(meditation.createdAt),
