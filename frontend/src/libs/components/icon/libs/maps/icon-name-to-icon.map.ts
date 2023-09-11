@@ -1,6 +1,5 @@
 import { ReactComponent as ArrowIcon } from '#assets/icons/arrow.svg';
 import { ReactComponent as AudioPlayIcon } from '#assets/icons/audio-player-play.svg';
-import { ReactComponent as AvatarIcon } from '#assets/icons/avatar.svg';
 import { ReactComponent as BackwardIcon } from '#assets/icons/backward.svg';
 import { ReactComponent as ChatsIcon } from '#assets/icons/chats.svg';
 import { ReactComponent as ForwardIcon } from '#assets/icons/forward.svg';
@@ -15,6 +14,7 @@ import { ReactComponent as PlusIcon } from '#assets/icons/plus.svg';
 import { ReactComponent as PreviousIcon } from '#assets/icons/previous.svg';
 import { ReactComponent as SignOutIcon } from '#assets/icons/sign-out.svg';
 import { ReactComponent as SubscriptionIcon } from '#assets/icons/subscription.svg';
+import { ReactComponent as UserIcon } from '#assets/icons/user.svg';
 import { type IconName } from '#libs/types/types.js';
 
 const iconNameToIcon: Record<
@@ -35,7 +35,7 @@ const iconNameToIcon: Record<
   'chats': ChatsIcon,
   'journal': JournalIcon,
   'sign-out': SignOutIcon,
-  'avatar': AvatarIcon,
+  'user': UserIcon,
   'notification': NotificationIcon,
   'subscription': SubscriptionIcon,
 };

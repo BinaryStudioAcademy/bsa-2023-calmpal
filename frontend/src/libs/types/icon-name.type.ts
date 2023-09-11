@@ -2,7 +2,7 @@ type IconName =
   | 'arrow'
   | 'plus'
   | 'sign-out'
-  | 'avatar'
+  | 'user'
   | 'notification'
   | 'subscription'
   | 'backward'
