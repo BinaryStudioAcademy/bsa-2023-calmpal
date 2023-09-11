@@ -10,7 +10,8 @@ type Properties = {
   label?: string;
   onPress: () => void;
   isDisabled?: boolean;
-  type?: 'solid' | 'outlined' | 'rounded' | 'transparent';
+  type?: 'solid' | 'outlined' | 'transparent';
+  isRounded?: boolean;
   iconName?: IconName;
 };
 
@@ -19,6 +20,7 @@ const Button: React.FC<Properties> = ({
   onPress,
   isDisabled = false,
   type = 'solid',
+  isRounded,
   iconName,
 }) => {
   return (
@@ -27,8 +29,8 @@ const Button: React.FC<Properties> = ({
         styles.button,
         type === 'solid' && styles.buttonSolid,
         type === 'outlined' && styles.buttonOutlined,
-        type === 'rounded' && styles.buttonRounded,
         type === 'transparent' && styles.buttonTransparent,
+        isRounded && styles.buttonRounded,
         isDisabled && styles.buttonDisabled,
       ]}
       onPress={onPress}
@@ -37,7 +39,7 @@ const Button: React.FC<Properties> = ({
       {iconName ? (
         <Icon
           name={iconName}
-          color={type === 'rounded' ? AppColor.BLUE_200 : AppColor.GRAY_400}
+          color={isRounded ? AppColor.BLUE_200 : AppColor.GRAY_400}
         />
       ) : (
         <Text
