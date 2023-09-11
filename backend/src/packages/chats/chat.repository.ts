@@ -2,6 +2,12 @@ import { type Repository } from '#libs/types/types.js';
 
 import { ChatEntity } from './chat.entity.js';
 import { type ChatModel } from './chat.model.js';
+import { ChatsRelation } from './libs/enums/enums.js';
+import {
+  type ChatCommonQueryResponse,
+  type CreateChatPayload,
+} from './libs/types/types.js';
+import { UserToChatModel } from './user-to-chat.model.js';
 
 class ChatRepository implements Repository {
   private chatModel: typeof ChatModel;
@@ -21,8 +27,9 @@ class ChatRepository implements Repository {
   public async findAllByUserId(userId: number): Promise<ChatEntity[]> {
     const chats = await this.chatModel
       .query()
-      .where('members', '@>', [userId])
-      .orderBy('createdAt', 'DESC');
+      .whereExists(UserToChatModel.query().where('userId', userId))
+      .orderBy('createdAt', 'DESC')
+      .castTo<ChatCommonQueryResponse[]>();
 
     return chats.map((chat) => {
       return ChatEntity.initialize({
@@ -35,20 +42,27 @@ class ChatRepository implements Repository {
     });
   }
 
-  public async create(entity: ChatEntity): Promise<ChatEntity> {
-    const { members, name } = entity.toNewObject();
+  public async create(payload: CreateChatPayload): Promise<ChatEntity> {
+    const { name, members } = payload;
 
-    const survey = await this.chatModel.query().insertGraph({
-      name,
-      members,
-    });
+    const chat = await this.chatModel
+      .query()
+      .insertGraph({
+        name,
+        [ChatsRelation.MEMBERS]: members.map((member) => {
+          return {
+            userId: member,
+          };
+        }),
+      })
+      .castTo<ChatCommonQueryResponse>();
 
     return ChatEntity.initialize({
-      id: survey.id,
-      name: survey.name,
-      members: survey.members,
-      createdAt: new Date(survey.createdAt),
-      updatedAt: new Date(survey.updatedAt),
+      id: chat.id,
+      name: chat.name,
+      members: chat.members,
+      createdAt: new Date(chat.createdAt),
+      updatedAt: new Date(chat.updatedAt),
     });
   }
 
