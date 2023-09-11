@@ -1,8 +1,8 @@
 import { ReactComponent as ArrowIcon } from '#assets/icons/arrow.svg';
 import { ReactComponent as AudioPlayIcon } from '#assets/icons/audio-player-play.svg';
 import { ReactComponent as BackwardIcon } from '#assets/icons/backward.svg';
-import { ReactComponent as ChatPageIcon } from '#assets/icons/chat-page-logo.svg';
-import { ReactComponent as ChatSideBarIcon } from '#assets/icons/chat-sidebar-logo.svg';
+import { ReactComponent as ChatSideBarIcon } from '#assets/icons/chat.svg';
+import { ReactComponent as ChatPageIcon } from '#assets/icons/chat-page.svg';
 import { ReactComponent as ChatsIcon } from '#assets/icons/chats.svg';
 import { ReactComponent as ForwardIcon } from '#assets/icons/forward.svg';
 import { ReactComponent as HomeIcon } from '#assets/icons/home.svg';
