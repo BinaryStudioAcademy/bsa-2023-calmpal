@@ -1,9 +1,9 @@
 import React from 'react';
 
-import PlusIcon from '#assets/img/icons/plus.svg';
 import {
   Card,
   Header,
+  Icon,
   InputSearch,
   LinearGradient,
   Link,
@@ -78,7 +78,13 @@ const Journal: React.FC = () => {
             label="Add new note"
             to={''}
             style={styles.link}
-            icon={<PlusIcon style={styles.icon} color={AppColor.BLUE_300} />}
+            icon={
+              <Icon
+                name="plus"
+                styles={styles.icon}
+                color={AppColor.BLUE_300}
+              />
+            }
           />
         </View>
       </View>
