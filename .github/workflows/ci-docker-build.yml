@@ -5,6 +5,10 @@ on:
     branches:
       - development
       - production
+    paths:
+      - frontend/**/*.*
+      - backend/**/*.*
+      - shared/**/*.*
 
   workflow_dispatch:
 
@@ -26,6 +30,7 @@ jobs:
           push_image_and_stages: false
           context: ./
           dockerfile: ./backend/Dockerfile.development
+          build_extra_args: '--build-arg NODE_ENV=development --build-arg HOST=localhost --build-arg PORT=3001'
       - name: Build frontend image
         uses: whoan/docker-build-with-cache-action@v5
         with:
@@ -33,4 +38,4 @@ jobs:
           push_image_and_stages: false
           context: ./
           dockerfile: ./frontend/Dockerfile.development
-          build_extra_args: "--build-arg VITE_APP_API_ORIGIN_URL=/api/v1 --build-arg VITE_APP_PROXY_SERVER_URL=http://localhost:3001"
+          build_extra_args: '--build-arg NODE_ENV=development --build-arg VITE_APP_API_ORIGIN_URL=/api/v1 --build-arg VITE_APP_PROXY_SERVER_URL=http://localhost:3001'
