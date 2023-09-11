@@ -8,10 +8,8 @@ import styles from './styles.module.scss';
 type Properties = {
   label: string;
   type?: 'button' | 'submit';
-  icon?: {
-    name: IconName;
-    color?: ValueOf<typeof IconColor>;
-  };
+  iconName?: IconName;
+  iconColor?: ValueOf<typeof IconColor>;
   style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent';
   isLoading?: boolean;
   isDisabled?: boolean;
@@ -22,7 +20,8 @@ type Properties = {
 const Button: React.FC<Properties> = ({
   type = 'button',
   label,
-  icon,
+  iconName,
+  iconColor,
   style = 'primary',
   isLoading = false,
   isDisabled = false,
@@ -37,7 +36,7 @@ const Button: React.FC<Properties> = ({
       disabled={isDisabled || isLoading}
     >
       {isLoading && <span className={styles['loader']} />}
-      {icon && <Icon name={icon.name} color={icon.color} />}
+      {iconName && <Icon name={iconName} color={iconColor} />}
       <span
         className={getValidClassNames(
           isLabelVisuallyHidden && 'visually-hidden',
