@@ -14,6 +14,6 @@ type IconName =
   | 'journal'
   | 'chat-sidebar'
   | 'send'
-  | 'chat-page';
+  | 'chatbot-avatar';
 
 export { type IconName };

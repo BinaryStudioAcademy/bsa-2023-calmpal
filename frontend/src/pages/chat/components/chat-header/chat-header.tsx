@@ -8,7 +8,7 @@ const ChatHeader: React.FC = () => {
     <header className={styles['chat-header']}>
       <div className={styles['header-content']}>
         <div className={styles['logo']}>
-          <Icon name="chat-page" color={IconColor.BLUE} />
+          <Icon name="chatbot-avatar" color={IconColor.BLUE} />
         </div>
         <span className={styles['title']}>Doctor Freud.ai</span>
       </div>

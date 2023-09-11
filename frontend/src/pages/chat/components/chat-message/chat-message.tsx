@@ -30,7 +30,7 @@ const ChatMessage: React.FC<Properties> = ({ chatRecord }) => {
         ) : (
           <div className={styles['bot-message-container']} key={chatId}>
             <div className={styles['bot-avatar']}>
-              <Icon name="chat-page" color={IconColor.BLUE} />
+              <Icon name="chatbot-avatar" color={IconColor.BLUE} />
             </div>
             <div className={styles['bot-message-child-container']}>
               {messages.map(({ message, id }) => {
