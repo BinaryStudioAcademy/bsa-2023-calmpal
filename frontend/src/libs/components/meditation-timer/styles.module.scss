@@ -1,6 +1,6 @@
 .title {
   margin-bottom: 20px;
-  color: black;
+  color: var(--black);
   font-weight: 600;
   font-size: 16px;
   text-align: center;
@@ -19,33 +19,38 @@
   padding: 15px;
   color: white;
   text-align: center;
-  background-color: blue;
+  background-color: var(--blue-300);
   border: none;
   border-radius: 40px;
   cursor: pointer;
 }
 
+.start-button:hover {
+  box-shadow: 0 4px 20px 0 var(--blue-alpha-30);
+}
+
 .duration-button {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 80px;
   height: 80px;
-  background-color: white;
-  border: 1px solid gray;
+  background-color: var(--white);
+  border: 1px solid var(--gray-200);
   border-radius: 80px;
 }
 
+.duration-button:hover {
+  background-color: var(--white);
+  box-shadow: 0 4px 20px 0 var(--blue-alpha-30);
+}
+
 .duration-button.active {
-  background-color: blue;
+  background-color: var(--blue-300);
   border: none;
 }
 
-.duration,
-.duration-unit {
-  color: gray;
-}
-
 .active-text {
-  color: white;
+  color: var(--white);
 }
