@@ -44,10 +44,9 @@ const signIn = createAsyncThunk<
 
 const signOut = createAsyncThunk<null, undefined, AsyncThunkConfig>(
   `${sliceName}/sign-out`,
-  async (_, { extra, dispatch }) => {
+  async (_, { extra }) => {
     const { storage } = extra;
     await storage.drop(StorageKey.TOKEN);
-    dispatch(appActions.navigate(AppRoute.SIGN_IN));
 
     return null;
   },
