@@ -62,15 +62,14 @@ class FileService implements Service {
     });
 
     const url = this.s3.getUrl(fileKey);
-    const presignedUrl = await this.s3.getPreSignedUrl(fileKey);
-    await this.fileRepository.create(
+    const file = await this.fileRepository.create(
       FileEntity.initializeNew({
         url,
         contentType: payload.contentType,
       }),
     );
 
-    return { url: presignedUrl, contentType: payload.contentType };
+    return file.toObject();
   }
 
   public update(): ReturnType<Service['update']> {
