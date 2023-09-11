@@ -24,7 +24,6 @@ import { actions as journalActions } from '#slices/journal/journal';
 
 import { styles } from './styles';
 
-const mockedCount = 12;
 const Journal: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigation = useNavigation();
@@ -47,7 +46,9 @@ const Journal: React.FC = () => {
   useEffect(() => {
     navigation.setOptions({
       header: () => {
-        return <Header title={route.name} badgeCount={mockedCount} />;
+        return (
+          <Header title={route.name} badgeCount={allJournalEntries.length} />
+        );
       },
     });
   }, [navigation, route.name]);
