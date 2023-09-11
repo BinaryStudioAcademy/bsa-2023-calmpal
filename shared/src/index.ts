@@ -15,6 +15,7 @@ export {
 } from './libs/exceptions/exceptions.js';
 export {
   configureString,
+  customDebounce,
   debounce,
   getFormattedDate,
   getFormattedTime,
@@ -51,6 +52,7 @@ export {
   type JournalEntryCreateRequestDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
+  type JournalEntryUpdateRequestDto,
 } from './packages/journal/journal.js';
 export {
   createSurveyValidationSchema,
