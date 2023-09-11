@@ -23,15 +23,11 @@ class MeditationService implements Service {
   }
 
   public async create({
-    topicName,
     mediaUrl,
     contentType,
   }: MeditationEntryRequestDto): Promise<MeditationEntryResponseDto> {
-    const topic = await this.meditationRepository.findTopicByName(topicName);
-
     const item = await this.meditationRepository.create(
       MeditationEntity.initializeNew({ mediaUrl, contentType }),
-      topic?.id,
     );
 
     return item.toObject();

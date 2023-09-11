@@ -4,47 +4,26 @@ import { MeditationRelation } from './libs/enums/enums.js';
 import {
   type MeditationCommonQueryResponse,
   type MeditationCreateQueryPayload,
-  type TopicCommonQueryResponse,
 } from './libs/types/types.js';
 import { MeditationEntity } from './meditation.entity.js';
 import { type MeditationEntriesModel } from './meditation-entries.model.js';
-import { type MeditationTopicModel } from './meditation-topics.model.js';
 
 class MeditationRepository implements Repository {
   private meditationEntryModel: typeof MeditationEntriesModel;
-  private meditationTopicModel: typeof MeditationTopicModel;
 
-  public constructor(
-    meditationEntryModel: typeof MeditationEntriesModel,
-    meditationTopicModel: typeof MeditationTopicModel,
-  ) {
+  public constructor(meditationEntryModel: typeof MeditationEntriesModel) {
     this.meditationEntryModel = meditationEntryModel;
-    this.meditationTopicModel = meditationTopicModel;
   }
 
   public find(): ReturnType<Repository['find']> {
     return Promise.resolve(null);
   }
 
-  public async findTopicByName(
-    name: string,
-  ): Promise<TopicCommonQueryResponse | undefined> {
-    return await this.meditationTopicModel
-      .query()
-      .findOne({
-        name,
-      })
-      .castTo<TopicCommonQueryResponse | undefined>();
-  }
-
   public async findAll(): ReturnType<Repository['findAll']> {
     return await Promise.resolve([]);
   }
 
-  public async create(
-    entity: MeditationEntity,
-    topicId?: number,
-  ): Promise<MeditationEntity> {
+  public async create(entity: MeditationEntity): Promise<MeditationEntity> {
     const { mediaUrl, contentType } = entity.toObject();
 
     const meditation = await this.meditationEntryModel
@@ -52,7 +31,7 @@ class MeditationRepository implements Repository {
       .insertGraph({
         mediaUrl,
         contentType,
-        topicId: topicId ?? null,
+        topicId: null,
       } as MeditationCreateQueryPayload)
       .withGraphJoined(MeditationRelation.TOPIC)
       .castTo<MeditationCommonQueryResponse>();
