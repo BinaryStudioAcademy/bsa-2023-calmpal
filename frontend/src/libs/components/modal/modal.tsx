@@ -27,8 +27,9 @@ const Modal: React.FC<Properties> = ({
             <span className={styles['title']}>{title}</span>
             <div className={styles['icon-container']}>
               <Button
-                icon={{ name: 'close', color: IconColor.BLACK }}
                 label="Close modal"
+                iconName="close"
+                iconColor={IconColor.BLACK}
                 isLabelVisuallyHidden={true}
                 style="rounded-transparent"
                 onClick={onClose}

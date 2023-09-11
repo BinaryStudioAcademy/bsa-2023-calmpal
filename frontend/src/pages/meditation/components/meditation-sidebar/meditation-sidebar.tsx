@@ -60,7 +60,8 @@ const MeditationSidebar: React.FC = () => {
           <Button
             label="Open modal"
             isLabelVisuallyHidden={true}
-            icon={{ name: 'plus', color: IconColor.BLUE }}
+            iconName="plus"
+            iconColor={IconColor.BLUE}
             style="rounded-transparent"
             onClick={handleOpen}
           />
