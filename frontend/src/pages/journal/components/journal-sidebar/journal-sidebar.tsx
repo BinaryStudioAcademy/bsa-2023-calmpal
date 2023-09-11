@@ -1,28 +1,40 @@
 import { Button, Card } from '#libs/components/components.js';
+import { AppRoute } from '#libs/enums/app-route.enum.js';
 import {
   useAppDispatch,
   useAppSelector,
   useCallback,
   useEffect,
 } from '#libs/hooks/hooks.js';
+import { type ValueOf } from '#libs/types/value-of.type.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
 import styles from './styles.module.scss';
 
-type Properties = {
-  onPlusButtonClick: () => void;
-};
-
-const JournalSidebar: React.FC<Properties> = ({ onPlusButtonClick }) => {
+const JournalSidebar: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { allJournalEntries, selectedJournalEntry } = useAppSelector(
-    ({ journal }) => {
+
+  const { allJournalEntries, selectedJournalEntry, userId } = useAppSelector(
+    ({ journal, auth }) => {
       return {
+        userId: auth.authenticatedUser?.id,
         allJournalEntries: journal.allJournalEntries,
         selectedJournalEntry: journal.selectedJournalEntry,
       };
     },
   );
+
+  const handlePlusButtonClick = useCallback(() => {
+    if (userId) {
+      void dispatch(
+        journalActions.createJournalEntry({
+          userId,
+          title: '',
+          text: '',
+        }),
+      );
+    }
+  }, [dispatch, userId]);
 
   useEffect(() => {
     void dispatch(journalActions.getAllJournalEntries());
@@ -48,7 +60,7 @@ const JournalSidebar: React.FC<Properties> = ({ onPlusButtonClick }) => {
           isLabelVisuallyHidden
           iconName="plus"
           style="add"
-          onClick={onPlusButtonClick}
+          onClick={handlePlusButtonClick}
         />
       </div>
       <div className={styles['list']}>
@@ -60,6 +72,11 @@ const JournalSidebar: React.FC<Properties> = ({ onPlusButtonClick }) => {
                 onClick={handleSelectJournalEntry(journalEntry.id)}
                 isActive={selectedJournalEntry?.id === journalEntry.id}
                 key={journalEntry.id}
+                linkTo={
+                  `${AppRoute.JOURNAL}/${journalEntry.id}` as ValueOf<
+                    typeof AppRoute
+                  >
+                }
               />
             );
           })}

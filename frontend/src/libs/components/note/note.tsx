@@ -1,22 +1,46 @@
-import sanitizeHtml from 'sanitize-html';
-
 import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
-import { useCallback, useEffect, useRef, useState } from '#libs/hooks/hooks.js';
+import { customDebounce } from '#libs/helpers/helpers.js';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useCallback,
+  useEffect,
+  useParams,
+  useRef,
+  useState,
+} from '#libs/hooks/hooks.js';
+import { actions as journalActions } from '#slices/journal/journal.js';
 
+import { DEFAULT_NOTE_PAYLOAD, NOTE_TIMEOUT } from './libs/constants.js';
+import { type NoteContent } from './libs/types.js';
 import styles from './styles.module.scss';
-
-const sanitizeConfig = {
-  allowedTags: ['b', 'i', 'a', 'p'],
-  allowedAttributes: { a: ['href'] },
-};
 
 type Properties = {
   className: string;
 };
 
 const Note: React.FC<Properties> = ({ className }) => {
-  const [title, setTitle] = useState('Type your title here');
-  const [text, setText] = useState('Type your text here');
+  const { userId, selectedJournalEntry } = useAppSelector(
+    ({ auth, journal }) => {
+      return {
+        userId: auth.authenticatedUser?.id,
+        authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
+        selectedJournalEntry: journal.selectedJournalEntry,
+      };
+    },
+  );
+
+  const [note, setNote] = useState<NoteContent>(
+    selectedJournalEntry
+      ? {
+          title: selectedJournalEntry.title || DEFAULT_NOTE_PAYLOAD.title,
+          text: selectedJournalEntry.text || DEFAULT_NOTE_PAYLOAD.text,
+        }
+      : DEFAULT_NOTE_PAYLOAD,
+  );
+
+  const dispatch = useAppDispatch();
+  const { id } = useParams();
 
   const titleReference = useRef<HTMLDivElement | null>(null);
   const textReference = useRef<HTMLDivElement | null>(null);
@@ -32,41 +56,82 @@ const Note: React.FC<Properties> = ({ className }) => {
     }
   }, []);
 
-  const handleTitleChange = useCallback(
-    (event_: React.ChangeEvent<HTMLDivElement>): void => {
-      setTitle(sanitizeHtml(event_.currentTarget.innerHTML, sanitizeConfig));
+  const handleSaveNote = useCallback(
+    (newNote: NoteContent) => {
+      if (userId && id) {
+        void dispatch(
+          journalActions.updateJournalEntry({
+            id,
+            body: {
+              userId,
+              title: newNote.title,
+              text: newNote.text,
+            },
+          }),
+        );
+      }
     },
-    [],
+    [dispatch, userId, id],
   );
 
-  const handleTextChange = useCallback(
-    (event_: React.ChangeEvent<HTMLDivElement>): void => {
-      setText(sanitizeHtml(event_.currentTarget.innerHTML, sanitizeConfig));
-    },
-    [],
-  );
+  const handleTitleChange: React.FormEventHandler<HTMLDivElement> =
+    customDebounce((event_: React.SyntheticEvent<HTMLDivElement>) => {
+      if (titleReference.current) {
+        const newTitle = (event_.target as HTMLElement).textContent as string;
+
+        setNote((previous) => {
+          return { ...previous, title: newTitle };
+        });
+        handleSaveNote({ title: newTitle, text: note.text });
+      }
+    }, NOTE_TIMEOUT);
+
+  const handleTextChange: React.FormEventHandler<HTMLDivElement> =
+    customDebounce((event_: React.SyntheticEvent<HTMLDivElement>) => {
+      if (textReference.current) {
+        const newText = (event_.target as HTMLElement).textContent as string;
+
+        setNote((previous) => {
+          return { ...previous, text: newText };
+        });
+        handleSaveNote({ title: note.title, text: newText });
+      }
+    }, NOTE_TIMEOUT);
 
   useEffect(() => {
-    handleCursorPosition(titleReference.current);
-  }, [handleCursorPosition, title]);
+    if (selectedJournalEntry) {
+      setNote({
+        title: selectedJournalEntry.title,
+        text: selectedJournalEntry.text,
+      });
+    }
+  }, [selectedJournalEntry]);
 
   useEffect(() => {
-    handleCursorPosition(textReference.current);
-  }, [handleCursorPosition, text]);
+    if (titleReference.current) {
+      handleCursorPosition(titleReference.current);
+    }
+  }, [handleCursorPosition, note.title]);
+
+  useEffect(() => {
+    if (textReference.current) {
+      handleCursorPosition(textReference.current);
+    }
+  }, [handleCursorPosition, note.text]);
 
   return (
     <div className={getValidClassNames(styles['wrapper'], className)}>
       <div
         contentEditable
         onInput={handleTitleChange}
-        dangerouslySetInnerHTML={{ __html: title }}
+        dangerouslySetInnerHTML={{ __html: note.title }}
         className={styles['title']}
         ref={titleReference}
       />
       <div
         contentEditable
         onInput={handleTextChange}
-        dangerouslySetInnerHTML={{ __html: text }}
+        dangerouslySetInnerHTML={{ __html: note.text }}
         className={styles['text']}
         ref={textReference}
       />
