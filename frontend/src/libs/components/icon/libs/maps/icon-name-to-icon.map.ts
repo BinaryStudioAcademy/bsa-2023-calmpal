@@ -1,6 +1,7 @@
 import { ReactComponent as ArrowIcon } from '#assets/icons/arrow.svg';
 import { ReactComponent as AudioPlayIcon } from '#assets/icons/audio-player-play.svg';
 import { ReactComponent as BackwardIcon } from '#assets/icons/backward.svg';
+import { ReactComponent as Back } from '#assets/icons/button-back.svg';
 import { ReactComponent as ChatsIcon } from '#assets/icons/chats.svg';
 import { ReactComponent as ForwardIcon } from '#assets/icons/forward.svg';
 import { ReactComponent as HomeIcon } from '#assets/icons/home.svg';
@@ -30,6 +31,7 @@ const iconNameToIcon: Record<
   'home': HomeIcon,
   'chats': ChatsIcon,
   'journal': JournalIcon,
+  'back': Back,
 };
 
 export { iconNameToIcon };

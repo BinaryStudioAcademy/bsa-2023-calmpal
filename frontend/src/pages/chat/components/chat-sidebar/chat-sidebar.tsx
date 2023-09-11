@@ -20,18 +20,30 @@ const mockedSelectedChat = {
   id: 1,
 };
 
-const ChatSidebar: React.FC = () => {
+type Properties = {
+  isSidebarShown: boolean;
+  setIsSidebarShown: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const ChatSidebar: React.FC<Properties> = ({
+  isSidebarShown,
+  setIsSidebarShown,
+}) => {
   const { filteredElements, setFilter } = useSearch(mockedChats, 'name');
 
-  const handleSelectChat = useCallback((id: number) => {
-    return () => {
-      mockedSelectedChat.id = id;
-      // TODO redux logic
-    };
-  }, []);
+  const handleSelectChat = useCallback(
+    (id: number) => {
+      return () => {
+        mockedSelectedChat.id = id;
+        setIsSidebarShown(false);
+        // TODO redux logic
+      };
+    },
+    [setIsSidebarShown],
+  );
 
   return (
-    <Sidebar>
+    <Sidebar isSidebarShown={isSidebarShown}>
       <SidebarHeader>
         <div className={styles['info']}>
           <span>Chat</span>

@@ -13,7 +13,15 @@ import { actions as journalActions } from '#slices/journal/journal.js';
 
 import styles from './styles.module.scss';
 
-const JournalSidebar: React.FC = () => {
+type Properties = {
+  isSidebarShown: boolean;
+  setIsSidebarShown: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const JournalSidebar: React.FC<Properties> = ({
+  isSidebarShown,
+  setIsSidebarShown,
+}) => {
   const dispatch = useAppDispatch();
   const { allJournalEntries, selectedJournalEntry } = useAppSelector(
     ({ journal }) => {
@@ -31,14 +39,15 @@ const JournalSidebar: React.FC = () => {
   const handleSelectJournalEntry = useCallback(
     (id: number) => {
       return () => {
+        setIsSidebarShown(false);
         dispatch(journalActions.setSelectedJournalEntry(id));
       };
     },
-    [dispatch],
+    [dispatch, setIsSidebarShown],
   );
 
   return (
-    <Sidebar>
+    <Sidebar isSidebarShown={isSidebarShown}>
       <SidebarHeader>
         <div className={styles['info']}>
           <span>Journal</span>

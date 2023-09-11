@@ -8,24 +8,36 @@ import { useCallback, useSearch } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
 
+type Properties = {
+  isSidebarShown: boolean;
+  setIsSidebarShown: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 const mockedMeditations = [{ id: 1, name: 'Meditation' }];
 
 const mockedSelectedMeditation = {
   id: 1,
 };
 
-const MeditationSidebar: React.FC = () => {
+const MeditationSidebar: React.FC<Properties> = ({
+  isSidebarShown,
+  setIsSidebarShown,
+}) => {
   const { filteredElements, setFilter } = useSearch(mockedMeditations, 'name');
 
-  const handleSelectChat = useCallback((id: number) => {
-    return () => {
-      mockedSelectedMeditation.id = id;
-      // TODO redux logic
-    };
-  }, []);
+  const handleSelectChat = useCallback(
+    (id: number) => {
+      return () => {
+        mockedSelectedMeditation.id = id;
+        setIsSidebarShown(false);
+        // TODO redux logic
+      };
+    },
+    [setIsSidebarShown],
+  );
 
   return (
-    <Sidebar>
+    <Sidebar isSidebarShown={isSidebarShown}>
       <SidebarHeader>
         <div className={styles['info']}>
           <span>Meditation & Breathing</span>
