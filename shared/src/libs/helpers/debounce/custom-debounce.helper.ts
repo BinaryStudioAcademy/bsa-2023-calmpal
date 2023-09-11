@@ -1,16 +1,20 @@
 // without this I have too much typeScript errors in Note, so i decided to make this custom debounce function
 
-import { debounce } from 'debounce';
+import libraryDebounce from 'debounce';
 
-const customDebounce = <T extends React.SyntheticEvent<HTMLDivElement>>(
-  function_: (event: T) => void,
-  delay: number,
-): ((event: T) => void) => {
-  const debouncedFunction = debounce((event: T) => {
-    function_(event);
-  }, delay);
+import { DEBOUNCE_TIMEOUT } from './libs/constants.js';
 
-  return (event: T) => {
+type FormEventHandlerWithSyntheticEvent<T> = (
+  event: React.SyntheticEvent<T>,
+) => void;
+
+const customDebounce = <T extends HTMLDivElement>(
+  function_: FormEventHandlerWithSyntheticEvent<T>,
+  timeout: number = DEBOUNCE_TIMEOUT,
+): FormEventHandlerWithSyntheticEvent<T> => {
+  const debouncedFunction = libraryDebounce(function_, timeout);
+
+  return (event: React.SyntheticEvent<T>) => {
     debouncedFunction(event);
   };
 };
