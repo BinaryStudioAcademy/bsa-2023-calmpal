@@ -2,8 +2,8 @@ import { Icon } from '#libs/components/components.js';
 import { Input } from '#libs/components/input/input.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { useAppForm, useCallback } from '#libs/hooks/hooks.js';
-import { type ChatInputValue } from '#libs/types/types.js';
 import { DEFAULT_INPUT } from '#pages/chat/libs/constants/constants.js';
+import { type ChatInputValue } from '#pages/chat/libs/types/types.js';
 
 import styles from './styles.module.scss';
 

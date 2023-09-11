@@ -1,6 +1,4 @@
 export { type AsyncThunkConfig } from './async-thunk-config.type.js';
-export { type ChatInputValue } from './form/chat-input-value.type.js';
-export { type ChatState } from './form/chat-state.type.js';
 export {
   type FormControl,
   type FormFieldErrors,

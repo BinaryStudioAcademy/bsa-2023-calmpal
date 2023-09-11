@@ -1,25 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { FIRST_INDEX, LAST_INDEX } from '#libs/constants/constants.js';
-import {
-  type ChatMessage,
-  type ChatState,
-  type Message,
-} from '#libs/types/types.js';
+import { type ChatMessage, type Message } from '#libs/types/types.js';
 
 import { newMessage } from './actions.js';
 
-const initialState: ChatState = { messages: [] };
-
-type StateInfo = ChatMessage & {
-  state: ChatState;
+type State = {
+  messages: ChatMessage[];
 };
 
-const isSameUserLastMessage = (state: ChatState, sender: string): boolean => {
+const initialState: State = { messages: [] };
+
+type StateInfo = ChatMessage & {
+  state: State;
+};
+
+const isSameUserLastMessage = (state: State, sender: string): boolean => {
   return state.messages.at(LAST_INDEX)?.sender === sender;
 };
 
-const appendLastMessage = (state: ChatState, message: Message): void => {
+const appendLastMessage = (state: State, message: Message): void => {
   const updatedLastMessage = {
     ...state.messages.at(LAST_INDEX),
   } as ChatMessage;
