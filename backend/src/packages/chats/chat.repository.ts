@@ -27,6 +27,7 @@ class ChatRepository implements Repository {
   public async findAllByUserId(userId: number): Promise<ChatEntity[]> {
     const chats = await this.chatModel
       .query()
+      .withGraphJoined(ChatsRelation.MEMBERS)
       .whereExists(UserToChatModel.query().where('userId', userId))
       .orderBy('createdAt', 'DESC')
       .castTo<ChatCommonQueryResponse[]>();
