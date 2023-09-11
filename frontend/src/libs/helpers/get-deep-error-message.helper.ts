@@ -21,11 +21,7 @@ const getDeepErrorMessage = <T extends FormFieldValues>(
     })
     .find(Boolean);
 
-  if (message) {
-    return message;
-  }
-
-  return null;
+  return message ?? null;
 };
 
 export { getDeepErrorMessage };
