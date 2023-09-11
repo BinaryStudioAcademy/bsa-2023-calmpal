@@ -81,7 +81,6 @@ erDiagram
       dateTime updated_at
       varchar name
       int topic_id FK
-      array members
    }
    users_to_chats {
      int id PK
