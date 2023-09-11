@@ -136,7 +136,7 @@ erDiagram
 
 ## 5. Architecture
 
-TODO: add application schema
+![Application schema](./docs/application-architecture/application-schema.drawio.svg)
 
 ### 5.1 Global
 
