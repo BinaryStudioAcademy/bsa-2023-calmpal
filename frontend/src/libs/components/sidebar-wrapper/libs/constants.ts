@@ -6,6 +6,7 @@ const SIDEBAR_ROUTES: Route[] = [
   { path: AppRoute.MEDITATION, name: 'meditation', icon: 'meditation' },
   { path: AppRoute.CHATS, name: 'chats', icon: 'chats' },
   { path: AppRoute.JOURNAL, name: 'journal', icon: 'journal' },
+  { path: AppRoute.PROFILE, name: 'profile', icon: 'avatar' },
 ];
 
 export { SIDEBAR_ROUTES };
