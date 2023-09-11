@@ -1,0 +1,11 @@
+const MEDITATION_DURATION = {
+  SHORT: '5',
+  MEDIUM: '10',
+  LONG: '20',
+};
+
+const DURATION_UNIT = {
+  MINUTES: 'min',
+};
+
+export { DURATION_UNIT, MEDITATION_DURATION };
