@@ -66,16 +66,6 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 element: <Auth />,
               },
               {
-                path: AppRoute.CHAT,
-                element: (
-                  <ProtectedRoute>
-                    <SidebarWrapper>
-                      <Chat />
-                    </SidebarWrapper>
-                  </ProtectedRoute>
-                ),
-              },
-              {
                 path: AppRoute.SIGN_UP_SURVEY,
                 element: (
                   <ProtectedRoute>
@@ -84,7 +74,7 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 ),
               },
               {
-                path: AppRoute.CHAT,
+                path: AppRoute.CHATS,
                 element: (
                   <ProtectedRoute>
                     <SidebarWrapper>
