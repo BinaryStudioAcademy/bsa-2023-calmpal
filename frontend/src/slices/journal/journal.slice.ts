@@ -54,6 +54,7 @@ const { reducer, actions, name } = createSlice({
     });
     builder.addCase(createJournalEntry.fulfilled, (state, action) => {
       state.allJournalEntries.push(action.payload);
+      state.selectedJournalEntry = action.payload;
       state.createJournalEntryDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(createJournalEntry.rejected, (state) => {

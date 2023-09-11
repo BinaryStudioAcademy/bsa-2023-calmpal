@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+import { AppRoute } from '#libs/enums/enums.js';
 import { type AsyncThunkConfig } from '#libs/types/types.js';
 import {
   type JournalEntryCreateRequestDto,
@@ -7,6 +8,7 @@ import {
   type JournalEntryGetAllResponseDto,
   type JournalEntryUpdateRequestDto,
 } from '#packages/journal/journal.js';
+import { actions as appActions } from '#slices/app/app.js';
 
 import { name as sliceName } from './journal.slice.js';
 
@@ -14,10 +16,12 @@ const createJournalEntry = createAsyncThunk<
   JournalEntryGetAllItemResponseDto,
   JournalEntryCreateRequestDto,
   AsyncThunkConfig
->(`${sliceName}/create-journal-entry`, async (payload, { extra }) => {
+>(`${sliceName}/create-journal-entry`, async (payload, { extra, dispatch }) => {
   const { journalApi } = extra;
+  const journalEntry = await journalApi.createJournalEntry(payload);
+  dispatch(appActions.navigate(`${AppRoute.JOURNAL}/${journalEntry.id}`));
 
-  return await journalApi.createJournalEntry(payload);
+  return journalEntry;
 });
 
 const getAllJournalEntries = createAsyncThunk<
