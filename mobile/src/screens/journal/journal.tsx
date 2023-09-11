@@ -13,7 +13,6 @@ import {
 import { AppColor } from '#libs/enums/enums';
 import {
   useAppDispatch,
-  useAppRoute,
   useAppSelector,
   useCallback,
   useEffect,
@@ -27,7 +26,6 @@ import { styles } from './styles';
 const Journal: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigation = useNavigation();
-  const route = useAppRoute();
 
   const { allJournalEntries } = useAppSelector(({ journal }) => {
     return {
@@ -48,10 +46,10 @@ const Journal: React.FC = () => {
   useEffect(() => {
     navigation.setOptions({
       header: () => {
-        return <Header title={route.name} badgeCount={badgeCount} />;
+        return <Header badgeCount={badgeCount} />;
       },
     });
-  }, [navigation, route.name, badgeCount]);
+  }, [navigation, badgeCount]);
 
   useEffect(() => {
     void dispatch(journalActions.getAllJournalEntries());
