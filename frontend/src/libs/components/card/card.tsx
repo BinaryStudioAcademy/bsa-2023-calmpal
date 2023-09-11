@@ -1,5 +1,5 @@
 import { Icon } from '#libs/components/components.js';
-import { IconColor } from '#libs/enums/enums.js';
+import { type IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { type IconName, type ValueOf } from '#libs/types/types.js';
 
@@ -22,9 +22,7 @@ const Card: React.FC<Properties> = ({
   isActive,
   iconName,
   iconColor = 'currentColor',
-  statusIcon,
 }) => {
-  const shouldShowStatusIcon = isActive && statusIcon;
   const hasNoImageOrIcon = !imageUrl && !iconName;
   const hasImage = Boolean(imageUrl);
   const hasIcon = Boolean(iconName);
@@ -53,11 +51,6 @@ const Card: React.FC<Properties> = ({
         </div>
       )}
       <div className={styles['title']}>{title}</div>
-      {shouldShowStatusIcon && (
-        <div className={styles['status-icon']}>
-          <Icon name={statusIcon} color={IconColor.BLUE} />
-        </div>
-      )}
     </button>
   );
 };

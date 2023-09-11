@@ -63,7 +63,6 @@ const ProfileSettingsSidebar: React.FC = () => {
                 isActive={activeItem === option.key}
                 iconName={option.key}
                 iconColor={IconColor.WHITE}
-                statusIcon="arrow"
               />
             );
           })}
@@ -73,7 +72,6 @@ const ProfileSettingsSidebar: React.FC = () => {
             isActive={false}
             iconName="sign-out"
             iconColor={IconColor.WHITE}
-            statusIcon="arrow"
           />
         </div>
       </div>

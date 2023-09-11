@@ -1,5 +1,4 @@
 .item {
-  position: relative;
   display: flex;
   align-items: center;
   min-width: 317px;
@@ -68,13 +67,6 @@
   text-align: left;
 }
 
-.status-icon {
-  position: absolute;
-  top: 50%;
-  right: 26px;
-  transform: translateY(-50%);
-}
-
 @media (width < 900px) {
   .item {
     width: 100%;
@@ -82,8 +74,8 @@
     padding: 3px 24px 3px 3px;
   }
 
-  .status-icon {
-    right: 13px;
+  .no-image {
+    padding-left: 20px;
   }
 }
 
@@ -92,7 +84,7 @@
     padding: 3px 30px 3px 3px;
   }
 
-  .status-icon {
-    right: 18px;
+  .no-image {
+    padding-left: 20px;
   }
 }
