@@ -14,5 +14,6 @@ export {
   type JournalEntryCreateRequestDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
+  type JournalEntryUpdateRequestDto,
 } from './libs/types/types.js';
 export { journalApi };

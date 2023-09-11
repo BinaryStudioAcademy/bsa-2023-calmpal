@@ -4,13 +4,18 @@ import { DataStatus } from '#libs/enums/enums.js';
 import { type ValueOf } from '#libs/types/types.js';
 import { type JournalEntryGetAllItemResponseDto } from '#packages/journal/journal.js';
 
-import { createJournalEntry, getAllJournalEntries } from './actions.js';
+import {
+  createJournalEntry,
+  getAllJournalEntries,
+  updateJournalEntry,
+} from './actions.js';
 
 type State = {
   allJournalEntries: JournalEntryGetAllItemResponseDto[];
   selectedJournalEntry: JournalEntryGetAllItemResponseDto | null;
   journalEntriesDataStatus: ValueOf<typeof DataStatus>;
   createJournalEntryDataStatus: ValueOf<typeof DataStatus>;
+  updateJournalEntryDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
@@ -18,6 +23,7 @@ const initialState: State = {
   selectedJournalEntry: null,
   journalEntriesDataStatus: DataStatus.IDLE,
   createJournalEntryDataStatus: DataStatus.IDLE,
+  updateJournalEntryDataStatus: DataStatus.IDLE,
 };
 
 const { reducer, actions, name } = createSlice({
@@ -52,6 +58,25 @@ const { reducer, actions, name } = createSlice({
     });
     builder.addCase(createJournalEntry.rejected, (state) => {
       state.createJournalEntryDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(updateJournalEntry.pending, (state) => {
+      state.updateJournalEntryDataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(updateJournalEntry.fulfilled, (state, action) => {
+      state.allJournalEntries = state.allJournalEntries.map((journalEntry) => {
+        if (journalEntry.id === action.payload.id) {
+          return action.payload;
+        }
+
+        return journalEntry;
+      });
+
+      state.updateJournalEntryDataStatus = DataStatus.FULFILLED;
+      state.selectedJournalEntry = action.payload;
+    });
+    builder.addCase(updateJournalEntry.rejected, (state) => {
+      state.updateJournalEntryDataStatus = DataStatus.REJECTED;
     });
   },
 });

@@ -85,6 +85,16 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                   </ProtectedRoute>
                 ),
               },
+              {
+                path: AppRoute.JOURNAL_ENTRY_$ID,
+                element: (
+                  <ProtectedRoute>
+                    <SidebarWrapper>
+                      <Journal />
+                    </SidebarWrapper>
+                  </ProtectedRoute>
+                ),
+              },
             ],
           },
         ]}
