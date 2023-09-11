@@ -7,7 +7,7 @@ import {
 
 import {
   MeditationEntriesTableColumn,
-  MeditationRelation,
+  MeditationTopicsRelation,
   MeditationTopicsTableColumn,
 } from './libs/enums/enums.js';
 import { MeditationEntriesModel } from './meditation-entries.model.js';
@@ -21,7 +21,7 @@ class MeditationTopicModel extends AbstractModel {
 
   public static relationMappings(): RelationMappings {
     return {
-      [MeditationRelation.ENTRY]: {
+      [MeditationTopicsRelation.ENTRY]: {
         relation: Model.HasManyRelation,
         modelClass: MeditationEntriesModel,
         join: {

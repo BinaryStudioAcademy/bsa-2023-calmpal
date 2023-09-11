@@ -1,6 +1,6 @@
 import { type Repository } from '#libs/types/types.js';
 
-import { MeditationRelation } from './libs/enums/enums.js';
+import { MeditationEntriesRelation } from './libs/enums/enums.js';
 import {
   type MeditationCommonQueryResponse,
   type MeditationCreateQueryPayload,
@@ -33,7 +33,7 @@ class MeditationRepository implements Repository {
         contentType,
         topicId: null,
       } as MeditationCreateQueryPayload)
-      .withGraphJoined(MeditationRelation.TOPIC)
+      .withGraphJoined(MeditationEntriesRelation.TOPIC)
       .castTo<MeditationCommonQueryResponse>();
 
     return MeditationEntity.initialize({

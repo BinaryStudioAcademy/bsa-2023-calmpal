@@ -8,8 +8,8 @@ import {
 import { type ValueOf } from '#libs/types/types.js';
 
 import {
+  MeditationEntriesRelation,
   MeditationEntriesTableColumn,
-  MeditationRelation,
   MeditationTopicsTableColumn,
 } from './libs/enums/enums.js';
 import { MeditationTopicModel } from './meditation-topics.model.js';
@@ -25,7 +25,7 @@ class MeditationEntriesModel extends AbstractModel {
 
   public static relationMappings(): RelationMappings {
     return {
-      [MeditationRelation.TOPIC]: {
+      [MeditationEntriesRelation.TOPIC]: {
         relation: Model.BelongsToOneRelation,
         modelClass: MeditationTopicModel,
         join: {
