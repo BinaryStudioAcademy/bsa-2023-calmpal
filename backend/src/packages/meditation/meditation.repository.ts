@@ -34,8 +34,7 @@ class MeditationRepository implements Repository {
       .findOne({
         name,
       })
-      .castTo<TopicCommonQueryResponse | undefined>()
-      .execute();
+      .castTo<TopicCommonQueryResponse | undefined>();
   }
 
   public async findAll(): ReturnType<Repository['findAll']> {
@@ -46,7 +45,7 @@ class MeditationRepository implements Repository {
     entity: MeditationEntity,
     topicId?: number,
   ): Promise<MeditationEntity> {
-    const { topicName, mediaUrl, contentType } = entity.toObject();
+    const { mediaUrl, contentType } = entity.toObject();
 
     const meditation = await this.meditationEntryModel
       .query()
@@ -60,7 +59,6 @@ class MeditationRepository implements Repository {
 
     return MeditationEntity.initialize({
       id: meditation.id,
-      topicName: meditation.topic?.name ?? topicName,
       mediaUrl: meditation.mediaUrl,
       contentType: meditation.contentType,
       createdAt: new Date(meditation.createdAt),
