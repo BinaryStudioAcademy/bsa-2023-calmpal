@@ -5,12 +5,12 @@ import { createRoot } from 'react-dom/client';
 
 import {
   App,
-  ProfileSettingsSidebar,
   ProtectedRoute,
   RouterProvider,
   SidebarWrapper,
   StoreProvider,
   Toast,
+  UserProfile,
 } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/enums.js';
 import { store } from '#libs/packages/store/store.js';
@@ -91,7 +91,7 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 element: (
                   <ProtectedRoute>
                     <SidebarWrapper>
-                      <ProfileSettingsSidebar />
+                      <UserProfile />
                     </SidebarWrapper>
                   </ProtectedRoute>
                 ),

@@ -9,7 +9,7 @@ export { Icon } from './icon/icon.js';
 export { Input } from './input/input.js';
 export { Link } from './link/link.js';
 export { Loader } from './loader/loader.js';
-export { ProfileSettingsSidebar } from './profile-settings-sidebar/profile-settings-sidebar.js';
+export { UserProfile } from './profile-settings-sidebar/profile-settings-sidebar.js';
 export { ProtectedRoute } from './protected-route/protected-route.js';
 export { RouterProvider } from './router-provider/router-provider.jsx';
 export { Search } from './search/search.js';

@@ -12,7 +12,7 @@ import { actions as authActions } from '#slices/auth/auth.js';
 import { settingsOptions } from './libs/constants.js';
 import styles from './styles.module.scss';
 
-const ProfileSettingsSidebar: React.FC = () => {
+const UserProfile: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const { authenticatedUser } = useAppSelector(({ auth }) => {
@@ -79,4 +79,4 @@ const ProfileSettingsSidebar: React.FC = () => {
   );
 };
 
-export { ProfileSettingsSidebar };
+export { UserProfile };
