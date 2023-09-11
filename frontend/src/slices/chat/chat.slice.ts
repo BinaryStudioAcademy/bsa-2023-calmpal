@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { MOCK_MESSAGE } from '#libs/constants/chat-mock-data.constant.js';
-import { FIRST_INDEX, LAST_INDEX } from '#libs/constants/index.constant.js';
+import {
+  FIRST_INDEX,
+  LAST_INDEX,
+  MOCK_MESSAGE,
+} from '#libs/constants/constants.js';
 import {
   type ChatMessage,
   type ChatState,
