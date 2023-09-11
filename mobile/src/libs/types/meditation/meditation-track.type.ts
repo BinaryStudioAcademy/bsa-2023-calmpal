@@ -1,4 +1,4 @@
-//NOTE: This type is required for "react-native-track-player" library, so don't change it
+//TODO: delete this type when backend part is ready
 type Track = {
   id: string;
   url: string;
