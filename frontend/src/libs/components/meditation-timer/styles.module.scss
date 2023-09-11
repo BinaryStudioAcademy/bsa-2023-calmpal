@@ -21,7 +21,7 @@
   text-align: center;
   background-color: var(--blue-300);
   border: none;
-  border-radius: 40px;
+  border-radius: 80px;
   cursor: pointer;
 }
 
@@ -38,17 +38,17 @@
   height: 80px;
   background-color: var(--white);
   border: 1px solid var(--gray-200);
-  border-radius: 80px;
+  border-radius: 50%;
 }
 
 .duration-button:hover {
-  background-color: var(--white);
   box-shadow: 0 4px 20px 0 var(--blue-alpha-30);
 }
 
-.duration-button.active {
+.active {
   background-color: var(--blue-300);
   border: none;
+  box-shadow: 0 4px 20px 0 var(--blue-alpha-30);
 }
 
 .active-text {
