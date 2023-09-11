@@ -30,7 +30,7 @@ class MeditationService implements Service {
     const topic = await this.meditationRepository.findTopicByName(topicName);
 
     const item = await this.meditationRepository.create(
-      MeditationEntity.initializeNew({ topicName, mediaUrl, contentType }),
+      MeditationEntity.initializeNew({ mediaUrl, contentType }),
       topic?.id,
     );
 
