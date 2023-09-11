@@ -1,4 +1,5 @@
 export { App } from './app/app';
+export { BackButton } from './back-button/back-button';
 export { Button } from './button/button';
 export { Card } from './card/card';
 export { Header } from './header/header';
