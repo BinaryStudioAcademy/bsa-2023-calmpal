@@ -34,6 +34,8 @@ const Journal: React.FC = () => {
       allJournalEntries: journal.allJournalEntries,
     };
   });
+  const badgeCount = allJournalEntries.length;
+
   const { filteredData: filteredJournals, setSearchQuery } = useSearch(
     allJournalEntries,
     'title',
@@ -46,12 +48,10 @@ const Journal: React.FC = () => {
   useEffect(() => {
     navigation.setOptions({
       header: () => {
-        return (
-          <Header title={route.name} badgeCount={allJournalEntries.length} />
-        );
+        return <Header title={route.name} badgeCount={badgeCount} />;
       },
     });
-  }, [navigation, route.name, allJournalEntries]);
+  }, [navigation, route.name, badgeCount]);
 
   useEffect(() => {
     void dispatch(journalActions.getAllJournalEntries());
