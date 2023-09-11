@@ -19,7 +19,7 @@ type Properties<T extends FormFieldValues> = {
   rowsCount?: number;
   maxLength?: number;
   autoComplete?: 'off' | 'on';
-  style?: 'primary' | 'chat-input';
+  isChatInput?: boolean;
 };
 
 const Input = <T extends FormFieldValues>({
@@ -32,14 +32,13 @@ const Input = <T extends FormFieldValues>({
   rowsCount,
   maxLength,
   autoComplete,
-  style = 'primary',
+  isChatInput,
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
 
   const error = errors[name]?.message;
   const hasError = Boolean(error);
   const hasRows = Boolean(rowsCount);
-  const isPrimaryStyle = style === 'primary';
 
   return (
     <label className={styles['container']}>
@@ -52,7 +51,8 @@ const Input = <T extends FormFieldValues>({
           maxLength={maxLength}
           autoComplete={autoComplete}
           className={getValidClassNames(
-            styles[isPrimaryStyle ? 'textarea' : style],
+            styles['textarea'],
+            isChatInput && styles['chat-input'],
             hasError && styles['error'],
           )}
         />
@@ -64,7 +64,8 @@ const Input = <T extends FormFieldValues>({
           maxLength={maxLength}
           autoComplete={autoComplete}
           className={getValidClassNames(
-            styles[isPrimaryStyle ? 'input' : style],
+            styles['input'],
+            isChatInput && styles['chat-input'],
             hasError && styles['error'],
           )}
         />

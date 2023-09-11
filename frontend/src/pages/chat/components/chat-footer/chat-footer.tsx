@@ -35,10 +35,10 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
         <Input
           placeholder="Type a message"
           errors={errors}
-          style="chat-input"
           autoComplete="off"
           name="text"
           control={control}
+          isChatInput
         />
         <button type="submit" className={styles['send-button']}>
           <span className="visually-hidden">Send message</span>
