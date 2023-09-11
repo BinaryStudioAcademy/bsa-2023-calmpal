@@ -15,7 +15,7 @@ const ChatLayout: React.FC = () => {
     <>
       <ChatHeader />
       <div className={styles['chat-body']}>
-        <ChatMessage chatRecord={[MOCK_MESSAGE]} />
+        <ChatMessage item={[MOCK_MESSAGE]} />
       </div>
       <ChatFooter onSend={handleSend} />
     </>

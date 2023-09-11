@@ -5,13 +5,13 @@ import { type ChatMessage } from '#libs/types/types.js';
 import styles from './styles.module.scss';
 
 type Properties = {
-  chatRecord: ChatMessage[];
+  item: ChatMessage[];
 };
 
-const ChatMessage: React.FC<Properties> = ({ chatRecord }) => {
+const ChatMessage: React.FC<Properties> = ({ item }) => {
   return (
     <>
-      {chatRecord.map(({ messages, id: chatId, sender }) => {
+      {item.map(({ messages, id: chatId, sender }) => {
         const isUser = sender === UserRole.USER;
 
         return isUser ? (
