@@ -1,5 +1,8 @@
-import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
-import { customDebounce } from '#libs/helpers/helpers.js';
+import {
+  customDebounce as debounce,
+  getValidClassNames,
+  sanitizeInput,
+} from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -74,29 +77,39 @@ const Note: React.FC<Properties> = ({ className }) => {
     [dispatch, userId, id],
   );
 
-  const handleTitleChange: React.FormEventHandler<HTMLDivElement> =
-    customDebounce((event_: React.SyntheticEvent<HTMLDivElement>) => {
+  const handleTitleChange: React.FormEventHandler<HTMLDivElement> = debounce(
+    (event_: React.SyntheticEvent<HTMLDivElement>) => {
       if (titleReference.current) {
-        const newTitle = (event_.target as HTMLElement).textContent as string;
-
-        setNote((previous) => {
-          return { ...previous, title: newTitle };
-        });
-        handleSaveNote({ title: newTitle, text: note.text });
+        const newTitle = sanitizeInput(
+          (event_.target as HTMLElement).textContent as string,
+        );
+        if (newTitle.trim()) {
+          setNote((previous) => {
+            return { ...previous, title: newTitle };
+          });
+          handleSaveNote({ title: newTitle, text: note.text });
+        }
       }
-    }, NOTE_TIMEOUT);
+    },
+    NOTE_TIMEOUT,
+  );
 
-  const handleTextChange: React.FormEventHandler<HTMLDivElement> =
-    customDebounce((event_: React.SyntheticEvent<HTMLDivElement>) => {
+  const handleTextChange: React.FormEventHandler<HTMLDivElement> = debounce(
+    (event_: React.SyntheticEvent<HTMLDivElement>) => {
       if (textReference.current) {
-        const newText = (event_.target as HTMLElement).textContent as string;
-
-        setNote((previous) => {
-          return { ...previous, text: newText };
-        });
-        handleSaveNote({ title: note.title, text: newText });
+        const newText = sanitizeInput(
+          (event_.target as HTMLElement).textContent as string,
+        );
+        if (newText.trim()) {
+          setNote((previous) => {
+            return { ...previous, text: newText };
+          });
+          handleSaveNote({ title: note.title, text: newText });
+        }
       }
-    }, NOTE_TIMEOUT);
+    },
+    NOTE_TIMEOUT,
+  );
 
   useEffect(() => {
     if (selectedJournalEntry) {
