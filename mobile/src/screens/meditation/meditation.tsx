@@ -2,7 +2,7 @@ import React from 'react';
 
 import imagePlaceholder from '#assets/img/card-image-placeholder.png';
 import meditationBackground from '#assets/img/meditation-background.png';
-import { Image, PLayer, Text, View } from '#libs/components/components';
+import { Image, Player, Text, View } from '#libs/components/components';
 import { useState } from '#libs/hooks/hooks';
 import { type Track } from '#libs/types/types';
 
@@ -31,7 +31,7 @@ const Meditation: React.FC = () => {
         </Text>
         <Text style={styles.purpose}>{currentTrack?.artist}</Text>
 
-        <PLayer setCurrentTrack={setCurrentTrack} />
+        <Player setCurrentTrack={setCurrentTrack} />
       </View>
     </View>
   );

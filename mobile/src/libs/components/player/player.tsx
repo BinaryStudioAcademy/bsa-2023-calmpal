@@ -20,7 +20,7 @@ type Properties = {
   setCurrentTrack: React.Dispatch<React.SetStateAction<Track | null>>;
 };
 
-const PLayer: React.FC<Properties> = ({ setCurrentTrack }) => {
+const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
   const [playbackState, setPlaybackState] = useState<State | null>(null);
   const isPlaying = playbackState === State.Playing;
 
@@ -63,4 +63,4 @@ const PLayer: React.FC<Properties> = ({ setCurrentTrack }) => {
   );
 };
 
-export { PLayer };
+export { Player };
