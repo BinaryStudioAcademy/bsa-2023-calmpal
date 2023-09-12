@@ -9,7 +9,7 @@ import {
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
-import { SETTINGS_OPTIONS } from './constants/constants.js';
+import { SETTINGS_OPTIONS } from './libs/constants.js';
 import styles from './styles.module.scss';
 
 const UserProfile: React.FC = () => {
