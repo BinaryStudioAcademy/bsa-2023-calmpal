@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     height: 48,
     marginBottom: 23,
-    marginHorizontal: 12,
+    marginHorizontal: 24,
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
