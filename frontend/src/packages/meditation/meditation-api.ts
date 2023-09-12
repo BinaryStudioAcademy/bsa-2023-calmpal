@@ -5,8 +5,8 @@ import { type Storage } from '#libs/packages/storage/storage.js';
 
 import { MeditationApiPath } from './libs/enums/enums.js';
 import {
-  type MeditationEntryRequestDto,
-  type MeditationEntryResponseDto,
+  type MeditationEntryCreateRequestDto,
+  type MeditationEntryCreateResponseDto,
 } from './libs/types/types.js';
 
 type Constructor = {
@@ -21,8 +21,8 @@ class MeditationApi extends BaseHttpApi {
   }
 
   public async createMeditationEntry(
-    payload: MeditationEntryRequestDto,
-  ): Promise<MeditationEntryResponseDto> {
+    payload: MeditationEntryCreateRequestDto,
+  ): Promise<MeditationEntryCreateResponseDto> {
     const response = await this.load(
       this.getFullEndpoint(MeditationApiPath.ROOT, {}),
       {
@@ -33,7 +33,7 @@ class MeditationApi extends BaseHttpApi {
       },
     );
 
-    return await response.json<MeditationEntryResponseDto>();
+    return await response.json<MeditationEntryCreateResponseDto>();
   }
 }
 
