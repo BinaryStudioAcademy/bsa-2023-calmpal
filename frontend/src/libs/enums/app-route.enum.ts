@@ -6,6 +6,7 @@ const AppRoute = {
   SIGN_UP_SURVEY: '/sign-up/survey',
   CHATS: '/chats',
   JOURNAL: '/journal',
+  PROFILE: '/profile',
 } as const;
 
 export { AppRoute };
