@@ -5,6 +5,8 @@ import { HTTPCode } from '#libs/packages/http/http.js';
 import { type JWTService } from '#libs/packages/jwt/jwt.js';
 import {
   type UserAuthResponseDto,
+  type UserDeleteRequestDto,
+  type UserDeleteResponseDto,
   type UserSignInRequestDto,
   type UserSignInResponseDto,
   type UserSignUpRequestDto,
@@ -77,7 +79,6 @@ class AuthService {
 
   public async getAuthenticatedUser(id: number): Promise<UserAuthResponseDto> {
     const user = await this.userService.findById(id);
-
     if (!user) {
       throw new UsersError({
         status: HTTPCode.NOT_FOUND,
@@ -86,6 +87,31 @@ class AuthService {
     }
 
     return user;
+  }
+
+  public async delete(id: number): Promise<UserDeleteResponseDto> {
+    const user = await this.userService.findById(id);
+    if (!user) {
+      throw new UsersError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.USER_NOT_FOUND,
+      });
+    }
+
+    const deleteResult = await this.userService.delete(id);
+
+    if (!deleteResult) {
+      throw new UsersError({
+        status: HTTPCode.INTERNAL_SERVER_ERROR,
+        message: 'Failed to delete user',
+      });
+    }
+
+    const userResponse: UserDeleteRequestDto = {
+      id: user.id,
+    };
+
+    return { user: userResponse };
   }
 }
 

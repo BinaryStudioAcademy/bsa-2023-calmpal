@@ -63,6 +63,8 @@ export {
 } from './packages/surveys/surveys.js';
 export {
   type UserAuthResponseDto,
+  type UserDeleteRequestDto,
+  type UserDeleteResponseDto,
   type UserGetAllItemResponseDto,
   type UserGetAllResponseDto,
   UsersApiPath,

@@ -96,6 +96,17 @@ class AuthController extends BaseController {
         );
       },
     });
+    this.addRoute({
+      path: AuthApiPath.DELETE_USER,
+      method: 'DELETE',
+      handler: (options) => {
+        return this.deleteUser(
+          options as APIHandlerOptions<{
+            user: UserAuthResponseDto;
+          }>,
+        );
+      },
+    });
   }
 
   /**
@@ -234,6 +245,15 @@ class AuthController extends BaseController {
     return {
       status: HTTPCode.OK,
       payload: await this.authService.getAuthenticatedUser(options.user.id),
+    };
+  }
+
+  private async deleteUser(
+    options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
+  ): Promise<APIHandlerResponse> {
+    return {
+      status: HTTPCode.OK,
+      payload: await this.authService.delete(options.user.id),
     };
   }
 }

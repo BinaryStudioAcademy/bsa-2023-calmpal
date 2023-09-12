@@ -1,5 +1,6 @@
 import {
   createUserSurvey,
+  deleteUser,
   getAuthenticatedUser,
   signIn,
   signUp,
@@ -10,6 +11,7 @@ const allActions = {
   ...actions,
   signUp,
   signIn,
+  deleteUser,
   getAuthenticatedUser,
   createUserSurvey,
 };

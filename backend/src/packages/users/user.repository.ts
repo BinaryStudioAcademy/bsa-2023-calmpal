@@ -2,6 +2,7 @@ import { type Repository } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/users.js';
 
+import { ROWS_DELETED_SUCCESSFULLY } from './libs/constants.ts/constants.js';
 import { UsersRelation } from './libs/enums/enums.js';
 import {
   type UserCommonQueryResponse,
@@ -106,8 +107,10 @@ class UserRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public delete(): ReturnType<Repository['delete']> {
-    return Promise.resolve(true);
+  public async delete(id: number): Promise<boolean> {
+    const rowsDeleted = await this.userModel.query().deleteById(id);
+
+    return rowsDeleted > ROWS_DELETED_SUCCESSFULLY;
   }
 
   public async findByEmail(email: string): Promise<UserEntity | null> {

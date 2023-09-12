@@ -6,6 +6,7 @@ import { type AsyncThunkConfig } from '#libs/types/types.js';
 import { type SurveyRequestDto } from '#packages/survey/survey.js';
 import {
   type UserAuthResponseDto,
+  type UserDeleteRequestDto,
   type UserSignInRequestDto,
   type UserSignUpRequestDto,
 } from '#packages/users/users.js';
@@ -67,4 +68,19 @@ const createUserSurvey = createAsyncThunk<
   return preferences.length > EMPTY_ARRAY_LENGTH;
 });
 
-export { createUserSurvey, getAuthenticatedUser, signIn, signUp };
+const deleteUser = createAsyncThunk<
+  unknown,
+  UserDeleteRequestDto,
+  AsyncThunkConfig
+>(`${sliceName}/delete-user`, async (deletePayload, { extra, dispatch }) => {
+  const { authApi, storage } = extra;
+  const { user } = await authApi.deleteUser(deletePayload);
+
+  await storage.drop(StorageKey.TOKEN);
+
+  dispatch(appActions.navigate(AppRoute.SIGN_IN));
+
+  return user;
+});
+
+export { createUserSurvey, deleteUser, getAuthenticatedUser, signIn, signUp };

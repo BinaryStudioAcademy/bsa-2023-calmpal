@@ -36,7 +36,7 @@ const Sidebar: React.FC<Properties> = ({ routes }) => {
     },
     {
       component: <DeleteAccount />,
-      title: 'Your account is deleted',
+      title: 'Your account will be deleted',
     },
   ];
 

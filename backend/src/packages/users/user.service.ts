@@ -98,8 +98,8 @@ class UserService implements Service {
     return Promise.resolve(null);
   }
 
-  public delete(): ReturnType<Service['delete']> {
-    return Promise.resolve(true);
+  public delete(id: number): Promise<boolean> {
+    return this.userRepository.delete(id);
   }
 
   public async findByEmail(
