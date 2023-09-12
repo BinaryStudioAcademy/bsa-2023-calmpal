@@ -7,7 +7,6 @@ import { ChatMessageEntity } from './chat-message.entity.js';
 import { type ChatMessageRepository } from './chat-message.repository.js';
 
 type CreateMessageRequestDto = {
-  name: string;
   message: string;
   senderId: number;
   chatId: number;
@@ -15,7 +14,6 @@ type CreateMessageRequestDto = {
 
 type CreateMessageResponseDto = {
   id: number;
-  name: string;
   message: string;
   senderId: number;
   chatId: number;
@@ -49,7 +47,6 @@ class ChatMessageService implements Service {
 
     const chatMessage = await this.chatMessageRepository.create(
       ChatMessageEntity.initializeNew({
-        name: payload.name,
         message: payload.message,
         chatId: payload.chatId,
         senderId: payload.senderId,

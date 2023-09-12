@@ -7,8 +7,6 @@ class ChatMessageEntity implements Entity {
 
   private updatedAt: Date | null;
 
-  private name: string;
-
   private message: string;
 
   private chatId: number;
@@ -19,7 +17,6 @@ class ChatMessageEntity implements Entity {
     id,
     createdAt,
     updatedAt,
-    name,
     message,
     chatId,
     senderId,
@@ -27,7 +24,6 @@ class ChatMessageEntity implements Entity {
     id: number | null;
     createdAt: Date | null;
     updatedAt: Date | null;
-    name: string;
     message: string;
     chatId: number;
     senderId: number;
@@ -35,7 +31,6 @@ class ChatMessageEntity implements Entity {
     this.id = id;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
-    this.name = name;
     this.message = message;
     this.chatId = chatId;
     this.senderId = senderId;
@@ -45,7 +40,6 @@ class ChatMessageEntity implements Entity {
     id,
     createdAt,
     updatedAt,
-    name,
     message,
     chatId,
     senderId,
@@ -53,7 +47,6 @@ class ChatMessageEntity implements Entity {
     id: number | null;
     createdAt: Date | null;
     updatedAt: Date | null;
-    name: string;
     message: string;
     chatId: number;
     senderId: number;
@@ -62,7 +55,6 @@ class ChatMessageEntity implements Entity {
       id,
       createdAt,
       updatedAt,
-      name,
       message,
       chatId,
       senderId,
@@ -70,12 +62,10 @@ class ChatMessageEntity implements Entity {
   }
 
   public static initializeNew({
-    name,
     message,
     chatId,
     senderId,
   }: {
-    name: string;
     message: string;
     chatId: number;
     senderId: number;
@@ -84,7 +74,6 @@ class ChatMessageEntity implements Entity {
       id: null,
       createdAt: null,
       updatedAt: null,
-      name,
       message,
       chatId,
       senderId,
@@ -95,7 +84,6 @@ class ChatMessageEntity implements Entity {
     id: number;
     createdAt: Date;
     updatedAt: Date;
-    name: string;
     message: string;
     chatId: number;
     senderId: number;
@@ -104,7 +92,6 @@ class ChatMessageEntity implements Entity {
       id: this.id as number,
       createdAt: this.createdAt as Date,
       updatedAt: this.updatedAt as Date,
-      name: this.name,
       message: this.message,
       chatId: this.chatId,
       senderId: this.senderId,
@@ -112,13 +99,11 @@ class ChatMessageEntity implements Entity {
   }
 
   public toNewObject(): {
-    name: string;
     message: string;
     chatId: number;
     senderId: number;
   } {
     return {
-      name: this.name,
       message: this.message,
       chatId: this.chatId,
       senderId: this.senderId,
