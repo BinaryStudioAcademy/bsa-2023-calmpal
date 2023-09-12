@@ -14,8 +14,8 @@ import {
   useState,
 } from '#libs/hooks/hooks.js';
 import {
-  createMeditationValidationSchema,
-  type MeditationCreateValidation,
+  createMeditationEntryValidationSchema,
+  type MeditationEntryCreateForm,
 } from '#packages/meditation/meditation.js';
 import { DEFAULT_MEDITATION_PAYLOAD } from '#pages/meditation/libs/constants/constants.js';
 
@@ -41,9 +41,9 @@ const MeditationModal: React.FC<Properties> = ({
     };
   });
   const { control, errors, handleSubmit, reset } =
-    useAppForm<MeditationCreateValidation>({
+    useAppForm<MeditationEntryCreateForm>({
       defaultValues: DEFAULT_MEDITATION_PAYLOAD,
-      validationSchema: createMeditationValidationSchema,
+      validationSchema: createMeditationEntryValidationSchema,
     });
 
   const hasError = Boolean(Object.keys(errors).length > EMPTY_ARRAY_LENGTH);

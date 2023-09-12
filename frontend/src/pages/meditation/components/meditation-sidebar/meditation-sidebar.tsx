@@ -35,7 +35,6 @@ const MeditationSidebar: React.FC = () => {
     (title: string, file: File) => {
       void dispatch(
         meditationActions.createMeditationEntry({
-          topicName: title,
           file: file,
         }),
       );
