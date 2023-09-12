@@ -46,11 +46,12 @@
 }
 
 .active {
+  color: var(--white);
   background-color: var(--blue-300);
   border: none;
   box-shadow: 0 4px 20px 0 var(--blue-alpha-30);
 }
 
 .active-text {
-  color: var(--white);
+  color: inherit;
 }
