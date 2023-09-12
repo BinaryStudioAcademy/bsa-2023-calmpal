@@ -42,13 +42,11 @@ const signIn = createAsyncThunk<
   return user;
 });
 
-const signOut = createAsyncThunk<null, undefined, AsyncThunkConfig>(
+const signOut = createAsyncThunk<unknown, undefined, AsyncThunkConfig>(
   `${sliceName}/sign-out`,
   async (_, { extra }) => {
     const { storage } = extra;
     await storage.drop(StorageKey.TOKEN);
-
-    return null;
   },
 );
 
