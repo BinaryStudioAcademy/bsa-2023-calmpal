@@ -1,4 +1,4 @@
-const MeditationValidationMessage = {
+const MeditationEntryValidationMessage = {
   TOPIC_REQUIRED: 'Topic name is required.',
   FILE_REQUIRED: 'File is required.',
   FILE_NAME_REQUIRED: 'File name is required.',
@@ -6,4 +6,4 @@ const MeditationValidationMessage = {
   MPEG_REQUIRED: 'Only files with MP3 extension are allowed.',
 } as const;
 
-export { MeditationValidationMessage };
+export { MeditationEntryValidationMessage };
