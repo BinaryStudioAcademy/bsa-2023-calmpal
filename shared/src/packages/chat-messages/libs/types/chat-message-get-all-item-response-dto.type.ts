@@ -1,6 +1,6 @@
 type ChatMessageGetAllItemResponseDto = {
   id: number;
-  role: string;
+  senderId: number;
   message: string;
 };
 
