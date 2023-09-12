@@ -34,13 +34,10 @@
 }
 
 .icon-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 0;
+  overflow: hidden;
   background-color: var(--white);
-  border: 0;
+  border: none;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -52,7 +49,11 @@
 }
 
 .link {
-  padding: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 52px;
   line-height: 0px;
 }
 
