@@ -2,12 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { DataStatus } from '#libs/enums/enums.js';
 import { type ValueOf } from '#libs/types/types.js';
-import { type MeditationEntryResponseDto } from '#packages/meditation/meditation.js';
+import { type MeditationEntryCreateResponseDto } from '#packages/meditation/meditation.js';
 
 import { createMeditationEntry } from './actions.js';
 
 type State = {
-  meditationEntries: MeditationEntryResponseDto[];
+  meditationEntries: MeditationEntryCreateResponseDto[];
   dataStatus: ValueOf<typeof DataStatus>;
 };
 

@@ -2,27 +2,26 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { type AsyncThunkConfig } from '#libs/types/types.js';
 import {
-  type MeditationCreatePayload,
-  type MeditationEntryResponseDto,
+  type MeditationEntryCreatePayload,
+  type MeditationEntryCreateResponseDto,
 } from '#packages/meditation/meditation.js';
 
 import { name as sliceName } from './meditation.slice.js';
 
 const createMeditationEntry = createAsyncThunk<
-  MeditationEntryResponseDto,
-  MeditationCreatePayload,
+  MeditationEntryCreateResponseDto,
+  MeditationEntryCreatePayload,
   AsyncThunkConfig
 >(`${sliceName}/create-meditation-entry`, async (payload, { extra }) => {
   const { meditationApi, filesApi, notification } = extra;
 
   const file = await filesApi.uploadFile(payload.file);
   const item = await meditationApi.createMeditationEntry({
-    topicName: payload.topicName,
     mediaUrl: file.url,
     contentType: file.contentType,
   });
 
-  notification.success(`Meditation ${payload.topicName} was added.`);
+  notification.success('Meditation was added.');
 
   return item;
 });
