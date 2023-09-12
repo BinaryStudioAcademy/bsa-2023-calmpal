@@ -21,7 +21,7 @@ const UserProfile: React.FC = () => {
     };
   });
 
-  const [activeItem, setActiveItem] = useState<string | null>(null);
+  const [activeItem, setActiveItem] = useState<string | null>('notification');
 
   const handleClick = useCallback((key: string) => {
     return () => {
