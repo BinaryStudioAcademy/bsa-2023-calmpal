@@ -46,7 +46,7 @@
 }
 
 .icon-selected,
-.icon-container:hover {
+.icon-container:hover .icon-container:focus {
   box-shadow: 0 4px 23px 0 var(--violet-100);
 }
 
