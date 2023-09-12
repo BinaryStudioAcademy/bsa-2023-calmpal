@@ -32,16 +32,12 @@ const Sidebar: React.FC<Properties> = ({ routes }) => {
                   pathname === route.path && styles['icon-selected'],
                 )}
               >
-                <div className={styles['link']}>
-                  <Link to={route.path}>
-                    <span>
-                      <span className="visually-hidden">
-                        Go to {route.name}
-                      </span>
-                      <Icon name={route.icon} color={IconColor.BLUE} />
-                    </span>
-                  </Link>
-                </div>
+                <Link to={route.path}>
+                  <span className={styles['link']}>
+                    <span className="visually-hidden">Go to {route.name}</span>
+                    <Icon name={route.icon} color={IconColor.BLUE} />
+                  </span>
+                </Link>
               </button>
             );
           })}
