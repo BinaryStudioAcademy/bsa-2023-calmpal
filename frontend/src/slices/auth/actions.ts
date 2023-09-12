@@ -42,6 +42,14 @@ const signIn = createAsyncThunk<
   return user;
 });
 
+const signOut = createAsyncThunk<unknown, undefined, AsyncThunkConfig>(
+  `${sliceName}/sign-out`,
+  async (_, { extra }) => {
+    const { storage } = extra;
+    await storage.drop(StorageKey.TOKEN);
+  },
+);
+
 const getAuthenticatedUser = createAsyncThunk<
   UserAuthResponseDto | null,
   undefined,
@@ -67,4 +75,4 @@ const createUserSurvey = createAsyncThunk<
   return preferences.length > EMPTY_ARRAY_LENGTH;
 });
 
-export { createUserSurvey, getAuthenticatedUser, signIn, signUp };
+export { createUserSurvey, getAuthenticatedUser, signIn, signOut, signUp };
