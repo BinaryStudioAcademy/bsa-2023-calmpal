@@ -1,5 +1,3 @@
-import { type SetURLSearchParams } from 'react-router-dom';
-
 import {
   Card,
   Icon,
@@ -14,6 +12,7 @@ import {
   useCallback,
   useState,
 } from '#libs/hooks/hooks.js';
+import { type SetURLSearchParams } from '#libs/types/types.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 

@@ -1,5 +1,3 @@
-import { type SetURLSearchParams } from 'react-router-dom';
-
 import {
   Card,
   Sidebar,
@@ -12,6 +10,7 @@ import {
   useCallback,
   useEffect,
 } from '#libs/hooks/hooks.js';
+import { type SetURLSearchParams } from '#libs/types/types.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
 import styles from './styles.module.scss';
