@@ -1,4 +1,4 @@
-type MeditationCreateValidation = {
+type MeditationEntryCreateForm = {
   title: string;
   file: {
     name: string;
@@ -7,4 +7,4 @@ type MeditationCreateValidation = {
   } | null;
 };
 
-export { type MeditationCreateValidation };
+export { type MeditationEntryCreateForm };
