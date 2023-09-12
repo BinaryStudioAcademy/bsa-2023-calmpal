@@ -1,5 +1,6 @@
 import { ExceptionMessage } from '#libs/enums/enums.js';
 import { UsersError } from '#libs/exceptions/exceptions.js';
+import { sanitizeInput } from '#libs/helpers/helpers.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Service } from '#libs/types/types.js';
 import { userService } from '#packages/users/users.js';
@@ -66,8 +67,8 @@ class JournalEntryService implements Service {
         userId,
         createdAt: null,
         updatedAt: null,
-        title: payload.title,
-        text: payload.text,
+        title: sanitizeInput(payload.title),
+        text: sanitizeInput(payload.text),
       }),
     );
 
@@ -94,8 +95,8 @@ class JournalEntryService implements Service {
         userId,
         createdAt: null,
         updatedAt: null,
-        title: payload.title,
-        text: payload.text,
+        title: sanitizeInput(payload.title),
+        text: sanitizeInput(payload.text),
       }),
     );
 
