@@ -6,11 +6,16 @@ import { Icon } from '../components.js';
 import styles from './styles.module.scss';
 
 type Properties = {
-  label: string;
+  label?: string;
   type?: 'button' | 'submit';
   iconName?: IconName;
   iconColor?: ValueOf<typeof IconColor>;
-  style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent';
+  style?:
+    | 'primary'
+    | 'secondary'
+    | 'rounded'
+    | 'rounded-transparent'
+    | 'play-button';
   isLoading?: boolean;
   isDisabled?: boolean;
   isLabelVisuallyHidden?: boolean;

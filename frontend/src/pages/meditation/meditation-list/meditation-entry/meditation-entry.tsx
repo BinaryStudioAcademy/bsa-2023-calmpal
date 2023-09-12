@@ -1,5 +1,5 @@
 import meditationListPlaceholder from '#assets/img/meditation-list-placeholder.jpg';
-import { Icon, MeditationTimer, Modal } from '#libs/components/components.js';
+import { Button, MeditationTimer, Modal } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { useCallback, useState } from '#libs/hooks/hooks.js';
 
@@ -33,12 +33,12 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
           <h1 className={styles['title']}>{meditationEntry.title}</h1>
           <span className={styles['duration']}>{meditationEntry.duration}</span>
         </div>
-        <button
-          className={styles['play-button'] as string}
+        <Button
+          style="play-button"
           onClick={handlePlayClick}
-        >
-          <Icon name="play" color={IconColor.BLUE} />
-        </button>
+          iconName="play"
+          iconColor={IconColor.BLUE}
+        />
       </div>
       <Modal
         isDisplayed={isModalDisplayed}

@@ -111,6 +111,20 @@
   animation: rotation 1s linear infinite;
 }
 
+.play-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 48px;
+  min-height: 48px;
+  background-color: var(--white);
+  border: none;
+}
+
+.play-button:hover {
+  transform: scale(1.1);
+}
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
