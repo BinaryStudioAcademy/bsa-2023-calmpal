@@ -1,6 +1,7 @@
+import { UserRole } from '#libs/enums/enums.js';
 import { useCallback } from '#libs/hooks/hooks.js';
 import { ChatHeader } from '#pages/chat/components/chat-header/chat-header.js';
-import { MOCK_MESSAGE } from '#pages/chat/libs/constants/constants.js';
+import { MOCK_MESSAGES } from '#pages/chat/libs/constants/constants.js';
 
 import { ChatFooter } from '../chat-footer/chat-footer.js';
 import { ChatMessage } from '../chat-message/chat-message.js';
@@ -15,7 +16,15 @@ const ChatLayout: React.FC = () => {
     <>
       <ChatHeader />
       <div className={styles['chat-body']}>
-        <ChatMessage item={[MOCK_MESSAGE]} />
+        {MOCK_MESSAGES.map((item) => {
+          return (
+            <ChatMessage
+              key={item.id}
+              item={item}
+              isSender={item.sender === UserRole.USER}
+            />
+          );
+        })}
       </div>
       <ChatFooter onSend={handleSend} />
     </>

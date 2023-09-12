@@ -1,50 +1,58 @@
 import { Icon } from '#libs/components/components.js';
-import { IconColor, UserRole } from '#libs/enums/enums.js';
+import { IconColor } from '#libs/enums/enums.js';
+import { getValidClassNames } from '#libs/helpers/get-valid-class-names.helper.js';
 import { type ChatMessage } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
 
 type Properties = {
-  item: ChatMessage[];
+  item: ChatMessage;
+  isSender: boolean;
 };
 
-const ChatMessage: React.FC<Properties> = ({ item }) => {
+const ChatMessage: React.FC<Properties> = ({ item, isSender }) => {
   return (
-    <>
-      {item.map(({ messages, id: chatId, sender }) => {
-        const isUser = sender === UserRole.USER;
-
-        return isUser ? (
-          <div className={styles['user-message-container']} key={chatId}>
-            <div className={styles['user-message-content']}>
-              {messages.map(({ message, id }) => {
-                return (
-                  <span key={id} className={styles['user-message-item']}>
-                    <p className={styles['user-message-text']}>{message}</p>
-                  </span>
-                );
-              })}
-            </div>
-            <span className={styles['user-avatar']} />
-          </div>
-        ) : (
-          <div className={styles['bot-message-container']} key={chatId}>
-            <div className={styles['bot-avatar']}>
-              <Icon name="chatbot-avatar" color={IconColor.BLUE} />
-            </div>
-            <div className={styles['bot-message-child-container']}>
-              {messages.map(({ message, id }) => {
-                return (
-                  <span key={id} className={styles['bot-message-text']}>
-                    {message}
-                  </span>
-                );
-              })}
-            </div>
-          </div>
-        );
-      })}
-    </>
+    <div
+      className={getValidClassNames(
+        styles['message-container'],
+        isSender && styles['user-message-container'],
+      )}
+    >
+      {!isSender && (
+        <div className={styles['avatar']}>
+          <Icon name="chatbot-avatar" color={IconColor.BLUE} />
+        </div>
+      )}
+      <div
+        className={getValidClassNames(
+          styles['message-content'],
+          isSender && styles['user-message-content'],
+        )}
+      >
+        {item.messages.map(({ message, id }) => {
+          return (
+            <p
+              key={id}
+              className={getValidClassNames(
+                styles['message-item'],
+                isSender && styles['user-message-item'],
+                !isSender && styles['bot-message-item'],
+              )}
+            >
+              {message}
+            </p>
+          );
+        })}
+      </div>
+      {isSender && (
+        <div
+          className={getValidClassNames(
+            styles['avatar'],
+            styles['user-avatar'],
+          )}
+        />
+      )}
+    </div>
   );
 };
 
