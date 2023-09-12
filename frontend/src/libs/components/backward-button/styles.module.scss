@@ -7,10 +7,19 @@
     position: sticky;
     top: 70px;
     left: 50px;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 30px;
     padding: 0;
     background-color: transparent;
     border: none;
+    border-radius: 20px;
     cursor: pointer;
+  }
+
+  .backward:hover {
+    background-color: var(--gray-100);
   }
 }
