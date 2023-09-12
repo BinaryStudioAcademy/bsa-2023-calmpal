@@ -42,7 +42,7 @@ const UserProfileSidebar: React.FC<Properties> = ({
   const handleClick = useCallback(
     (key: string) => {
       return () => {
-        setIsSidebarShown({ isSidebarShownParam: 'false' });
+        setIsSidebarShown({ sidebarMode: 'hide' });
         setActiveItem(key);
       };
     },

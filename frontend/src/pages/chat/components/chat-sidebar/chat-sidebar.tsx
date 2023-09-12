@@ -38,7 +38,7 @@ const ChatSidebar: React.FC<Properties> = ({
     (id: number) => {
       return () => {
         mockedSelectedChat.id = id;
-        setIsSidebarShown({ isSidebarShownParam: 'false' });
+        setIsSidebarShown({ sidebarMode: 'hide' });
         // TODO redux logic
       };
     },

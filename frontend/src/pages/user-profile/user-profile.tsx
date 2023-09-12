@@ -6,17 +6,15 @@ import { UserProfileSidebar } from './components/components.js';
 import styles from './styles.module.scss';
 
 const UserProfile: React.FC = () => {
-  const [isSidebarShown, setIsSidebarShown] = useSearchParams({
-    isSidebarShownParam: 'true',
-  });
+  const [isSidebarShown, setIsSidebarShown] = useSearchParams();
 
   const handleButtonBackward = useCallback(() => {
-    setIsSidebarShown({ isSidebarShownParam: 'true' });
+    setIsSidebarShown({ sidebarMode: 'show' });
   }, [setIsSidebarShown]);
 
   const isSidebarShownParameter =
-    isSidebarShown.get('isSidebarShownParam') === 'true' ||
-    isSidebarShown.get('isSidebarShownParam') === null;
+    isSidebarShown.get('sidebarMode') === 'show' ||
+    isSidebarShown.get('sidebarMode') === null;
 
   return (
     <>

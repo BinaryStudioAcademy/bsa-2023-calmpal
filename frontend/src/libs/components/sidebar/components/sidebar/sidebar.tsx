@@ -7,7 +7,7 @@ type Properties = {
   isSidebarShown?: boolean;
 };
 
-const Sidebar: React.FC<Properties> = ({ children, isSidebarShown }) => {
+const Sidebar: React.FC<Properties> = ({ children, isSidebarShown = true }) => {
   return (
     <div
       className={getValidClassNames(

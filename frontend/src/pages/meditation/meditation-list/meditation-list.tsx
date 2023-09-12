@@ -18,7 +18,7 @@ const MeditationList: React.FC<Properties> = ({
   setIsSidebarShown,
 }) => {
   const handleButtonBackward = useCallback(() => {
-    setIsSidebarShown({ isSidebarShownParam: 'true' });
+    setIsSidebarShown({ sidebarMode: 'show' });
   }, [setIsSidebarShown]);
 
   return (

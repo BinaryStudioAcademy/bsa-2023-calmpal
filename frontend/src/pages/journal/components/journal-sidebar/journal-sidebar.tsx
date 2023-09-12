@@ -42,7 +42,7 @@ const JournalSidebar: React.FC<Properties> = ({
   const handleSelectJournalEntry = useCallback(
     (id: number) => {
       return () => {
-        setIsSidebarShown({ isSidebarShownParam: 'false' });
+        setIsSidebarShown({ sidebarMode: 'hide' });
         dispatch(journalActions.setSelectedJournalEntry(id));
       };
     },

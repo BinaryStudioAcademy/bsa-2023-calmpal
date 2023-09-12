@@ -6,16 +6,14 @@ import { JournalSidebar } from './components/journal-sidebar/journal-sidebar.js'
 import styles from './styles.module.scss';
 
 const Journal: React.FC = () => {
-  const [isSidebarShown, setIsSidebarShown] = useSearchParams({
-    isSidebarShownParam: 'true',
-  });
+  const [isSidebarShown, setIsSidebarShown] = useSearchParams();
 
   const isSidebarShownParameter =
-    isSidebarShown.get('isSidebarShownParam') === 'true' ||
-    isSidebarShown.get('isSidebarShownParam') === null;
+    isSidebarShown.get('sidebarMode') === 'show' ||
+    isSidebarShown.get('sidebarMode') === null;
 
   const handleButtonBackward = useCallback(() => {
-    setIsSidebarShown({ isSidebarShownParam: 'true' });
+    setIsSidebarShown({ sidebarMode: 'show' });
   }, [setIsSidebarShown]);
 
   return (

@@ -4,13 +4,11 @@ import { MeditationList } from './meditation-list/meditation-list.js';
 import { MeditationSidebar } from './meditation-sidebar/meditation-sidebar.js';
 
 const Meditation: React.FC = () => {
-  const [isSidebarShown, setIsSidebarShown] = useSearchParams({
-    isSidebarShownParam: 'true',
-  });
+  const [isSidebarShown, setIsSidebarShown] = useSearchParams();
 
   const isSidebarShownParameter =
-    isSidebarShown.get('isSidebarShownParam') === 'true' ||
-    isSidebarShown.get('isSidebarShownParam') === null;
+    isSidebarShown.get('sidebarMode') === 'show' ||
+    isSidebarShown.get('sidebarMode') === null;
 
   return (
     <>

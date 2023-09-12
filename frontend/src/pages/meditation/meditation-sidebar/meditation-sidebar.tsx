@@ -33,7 +33,7 @@ const MeditationSidebar: React.FC<Properties> = ({
     (id: number) => {
       return () => {
         mockedSelectedMeditation.id = id;
-        setIsSidebarShown({ isSidebarShownParam: 'false' });
+        setIsSidebarShown({ sidebarMode: 'hide' });
         // TODO redux logic
       };
     },
