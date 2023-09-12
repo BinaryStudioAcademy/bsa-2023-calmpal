@@ -16,21 +16,20 @@ const Chats: React.FC = () => {
     setIsSidebarShown({ isSidebarShownParam: 'true' });
   }, [setIsSidebarShown]);
 
+  const isSidebarShownParameter =
+    isSidebarShown.get('isSidebarShownParam') === 'true' ||
+    isSidebarShown.get('isSidebarShownParam') === null;
+
   return (
     <>
       <ChatSidebar
-        isSidebarShown={
-          isSidebarShown.get('isSidebarShownParam') === 'true' ||
-          isSidebarShown.get('isSidebarShownParam') === null
-        }
+        isSidebarShown={isSidebarShownParameter}
         setIsSidebarShown={setIsSidebarShown}
       />
       <div
         className={getValidClassNames(
           styles['container'],
-          (isSidebarShown.get('isSidebarShownParam') === 'true' ||
-            isSidebarShown.get('isSidebarShownParam') === null) &&
-            styles['hide'],
+          isSidebarShownParameter && styles['hide'],
         )}
       >
         <BackwardButton handleButtonBackward={handleButtonBackward} />

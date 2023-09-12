@@ -8,20 +8,18 @@ const Meditation: React.FC = () => {
     isSidebarShownParam: 'true',
   });
 
+  const isSidebarShownParameter =
+    isSidebarShown.get('isSidebarShownParam') === 'true' ||
+    isSidebarShown.get('isSidebarShownParam') === null;
+
   return (
     <>
       <MeditationSidebar
-        isSidebarShown={
-          isSidebarShown.get('isSidebarShownParam') === 'true' ||
-          isSidebarShown.get('isSidebarShownParam') === null
-        }
+        isSidebarShown={isSidebarShownParameter}
         setIsSidebarShown={setIsSidebarShown}
       />
       <MeditationList
-        isSidebarShown={
-          isSidebarShown.get('isSidebarShownParam') === 'true' ||
-          isSidebarShown.get('isSidebarShownParam') === null
-        }
+        isSidebarShown={isSidebarShownParameter}
         setIsSidebarShown={setIsSidebarShown}
       />
     </>

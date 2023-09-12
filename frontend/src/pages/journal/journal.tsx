@@ -12,6 +12,10 @@ const Journal: React.FC = () => {
     isSidebarShownParam: 'true',
   });
 
+  const isSidebarShownParameter =
+    isSidebarShown.get('isSidebarShownParam') === 'true' ||
+    isSidebarShown.get('isSidebarShownParam') === null;
+
   const handleButtonBackward = useCallback(() => {
     setIsSidebarShown({ isSidebarShownParam: 'true' });
   }, [setIsSidebarShown]);
@@ -19,18 +23,13 @@ const Journal: React.FC = () => {
   return (
     <>
       <JournalSidebar
-        isSidebarShown={
-          isSidebarShown.get('isSidebarShownParam') === 'true' ||
-          isSidebarShown.get('isSidebarShownParam') === null
-        }
+        isSidebarShown={isSidebarShownParameter}
         setIsSidebarShown={setIsSidebarShown}
       />
       <div
         className={getValidClassNames(
           styles['container'],
-          (isSidebarShown.get('isSidebarShownParam') === 'true' ||
-            isSidebarShown.get('isSidebarShownParam') === null) &&
-            styles['hide'],
+          isSidebarShownParameter && styles['hide'],
         )}
       >
         <BackwardButton handleButtonBackward={handleButtonBackward} />
