@@ -5,10 +5,11 @@
 }
 
 .chat-panel {
-  width: 30%;
+  width: 100%;
+  max-width: 349px;
   background-color: var(--blue-100);
 }
 
 .chat-container {
-  width: 70%;
+  width: 100%;
 }
