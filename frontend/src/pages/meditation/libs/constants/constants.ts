@@ -1,4 +1,4 @@
-import { type MeditationCreateValidation } from '#packages/meditation/libs/types/types.js';
+import { type MeditationEntryCreateForm } from '#packages/meditation/libs/types/types.js';
 
 const TRACK_FIRST_INDEX = 0;
 const TRACK_START_TIME = 0;
@@ -7,7 +7,7 @@ const TRACK_INCREMENT_INDEX = 1;
 const TRACK_SKIP_SECONDS = 30;
 const PROGRESS_BAR = '--player-progress';
 
-const DEFAULT_MEDITATION_PAYLOAD: MeditationCreateValidation = {
+const DEFAULT_MEDITATION_PAYLOAD: MeditationEntryCreateForm = {
   title: '',
   file: null,
 };
