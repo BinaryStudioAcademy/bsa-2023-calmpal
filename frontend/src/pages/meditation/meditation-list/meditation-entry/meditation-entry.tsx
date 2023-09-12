@@ -1,6 +1,7 @@
 import meditationListPlaceholder from '#assets/img/meditation-list-placeholder.jpg';
-import { Icon, Link } from '#libs/components/components.js';
+import { Icon, MeditationTimer, Modal } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
+import { useCallback, useState } from '#libs/hooks/hooks.js';
 
 import { type MeditationEntry } from '../../libs/types/types.js';
 import styles from './styles.module.scss';
@@ -10,6 +11,16 @@ type Properties = {
 };
 
 const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
+  const [isModalDisplayed, setIsModalDisplayed] = useState(false);
+
+  const handlePlayClick = useCallback(() => {
+    setIsModalDisplayed(true);
+  }, []);
+
+  const handleModalClose = useCallback(() => {
+    setIsModalDisplayed(false);
+  }, []);
+
   return (
     <div className={styles['track']}>
       <img
@@ -22,10 +33,23 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
           <h1 className={styles['title']}>{meditationEntry.title}</h1>
           <span className={styles['duration']}>{meditationEntry.duration}</span>
         </div>
-        <Link to="/" className={styles['play-button'] as string}>
+        <button
+          className={styles['play-button'] as string}
+          onClick={handlePlayClick}
+        >
           <Icon name="play" color={IconColor.BLUE} />
-        </Link>
+        </button>
       </div>
+      <Modal
+        isDisplayed={isModalDisplayed}
+        title={meditationEntry.title}
+        onClose={handleModalClose}
+      >
+        <MeditationTimer
+          onClose={handleModalClose}
+          defaultDuration={meditationEntry.duration}
+        />
+      </Modal>
     </div>
   );
 };
