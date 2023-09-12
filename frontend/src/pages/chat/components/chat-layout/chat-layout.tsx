@@ -1,10 +1,12 @@
 import { UserRole } from '#libs/enums/enums.js';
 import { useCallback } from '#libs/hooks/hooks.js';
-import { ChatHeader } from '#pages/chat/components/chat-header/chat-header.js';
+import {
+  ChatFooter,
+  ChatHeader,
+  ChatMessage,
+} from '#pages/chat/components/components.js';
 import { MOCK_MESSAGES } from '#pages/chat/libs/constants/constants.js';
 
-import { ChatFooter } from '../chat-footer/chat-footer.js';
-import { ChatMessage } from '../chat-message/chat-message.js';
 import styles from './styles.module.scss';
 
 const ChatLayout: React.FC = () => {
