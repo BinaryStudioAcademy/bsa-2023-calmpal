@@ -1,5 +1,4 @@
-export { ChatValidationMessage } from './libs/enums/enums.js';
-export { ChatsApiPath } from './libs/enums/enums.js';
+export { ChatsApiPath, ChatValidationMessage } from './libs/enums/enums.js';
 export {
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
