@@ -105,7 +105,7 @@ const JournalingStep: React.FC = () => {
       showsVerticalScrollIndicator={false}
     >
       <Text style={styles.titleText}>
-        What&aposs your experience with journaling?
+        What&apos;s your experience with journaling?
       </Text>
       {JOURNALING_EXPERIENCE_CATEGORIES.map((category) => {
         return (

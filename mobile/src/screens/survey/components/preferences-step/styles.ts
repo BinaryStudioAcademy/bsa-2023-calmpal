@@ -5,7 +5,8 @@ import { AppColor } from '#libs/enums/enums';
 const styles = StyleSheet.create({
   surveyContainer: {
     flex: 1,
-    marginTop: 20,
+    marginTop: 40,
+    paddingHorizontal: 55,
   },
   otherTextInput: {
     backgroundColor: AppColor.BLUE_100_ALPHA_70,
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   titleText: {
-    fontSize: 35,
+    fontSize: 22,
     color: AppColor.WHITE,
     marginBottom: 30,
     marginTop: 30,

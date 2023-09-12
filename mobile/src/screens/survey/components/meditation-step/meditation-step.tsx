@@ -71,7 +71,7 @@ const MeditationStep: React.FC = () => {
       showsVerticalScrollIndicator={false}
     >
       <Text style={styles.titleText}>
-        What&aposs your experience with meditation?
+        What&apos;s your experience with meditation?
       </Text>
       {MEDITATION_EXPERIENCE_CATEGORIES.map((category) => {
         return (
