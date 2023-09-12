@@ -1,6 +1,6 @@
 import { type SetURLSearchParams } from 'react-router-dom';
 
-import { BackwardButton } from '#libs/components/components.js';
+import { BackButton } from '#libs/components/components.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback } from '#libs/hooks/hooks.js';
 
@@ -17,7 +17,7 @@ const MeditationList: React.FC<Properties> = ({
   isSidebarShown,
   setIsSidebarShown,
 }) => {
-  const handleButtonBackward = useCallback(() => {
+  const handleBackButtonPress = useCallback(() => {
     setIsSidebarShown({ sidebarMode: 'show' });
   }, [setIsSidebarShown]);
 
@@ -28,7 +28,7 @@ const MeditationList: React.FC<Properties> = ({
         isSidebarShown && styles['hidden'],
       )}
     >
-      <BackwardButton onGoBack={handleButtonBackward} />
+      <BackButton onGoBack={handleBackButtonPress} />
       <div className={styles['list']}>
         {mockedEntries.map((entry) => {
           return <MeditationEntry meditationEntry={entry} key={entry.id} />;

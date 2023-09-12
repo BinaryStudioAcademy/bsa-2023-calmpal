@@ -7,7 +7,7 @@ type Properties = {
   onGoBack: () => void;
 };
 
-const BackwardButton: React.FC<Properties> = ({ onGoBack }) => {
+const BackButton: React.FC<Properties> = ({ onGoBack }) => {
   return (
     <button className={styles['backward']} onClick={onGoBack}>
       <Icon name="back" color={IconColor.BLUE} />
@@ -15,4 +15,4 @@ const BackwardButton: React.FC<Properties> = ({ onGoBack }) => {
   );
 };
 
-export { BackwardButton };
+export { BackButton };

@@ -1,6 +1,6 @@
 export { App } from './app/app.js';
 export { AudioPlayer } from './audio-player/audio-player.js';
-export { BackwardButton } from './backward-button/backward-button.js';
+export { BackButton } from './backward-button/backward-button.js';
 export { Button } from './button/button.js';
 export { Card } from './card/card.js';
 export { Checkbox } from './checkbox/checkbox.js';
