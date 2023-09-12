@@ -3,6 +3,7 @@ import {
   deleteUser,
   getAuthenticatedUser,
   signIn,
+  signOut,
   signUp,
 } from './actions.js';
 import { actions } from './auth.slice.js';
@@ -10,6 +11,7 @@ import { actions } from './auth.slice.js';
 const allActions = {
   ...actions,
   signUp,
+  signOut,
   signIn,
   deleteUser,
   getAuthenticatedUser,

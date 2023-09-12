@@ -1,7 +1,7 @@
 import cardPlaceholder from '#assets/img/card-image-placeholder.png';
 import { Card, Icon, Search } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
-import { useCallback, useSearch } from '#libs/hooks/hooks.js';
+import { useCallback, useSearch, useState } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
 
@@ -17,10 +17,14 @@ const mockedSelectedChat = {
 };
 
 const ChatSidebar: React.FC = () => {
+  const [selectedChatId, setSelectedChatId] = useState<number>(
+    mockedSelectedChat.id,
+  );
   const { filteredElements, setFilter } = useSearch(mockedChats, 'name');
 
   const handleSelectChat = useCallback((id: number) => {
     return () => {
+      setSelectedChatId(id);
       mockedSelectedChat.id = id;
       // TODO redux logic
     };
@@ -50,7 +54,7 @@ const ChatSidebar: React.FC = () => {
                 title={filteredChat.name}
                 imageUrl={cardPlaceholder}
                 onClick={handleSelectChat(filteredChat.id)}
-                isActive={mockedSelectedChat.id === filteredChat.id}
+                isActive={selectedChatId === filteredChat.id}
                 key={filteredChat.id}
               />
             );
