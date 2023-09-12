@@ -44,6 +44,9 @@ export {
   type ChatMessageCreateRequestDto,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
+  ChatMessageValidationMessage,
+  ChatMessageValidationRule,
+  ChatsApiPath,
 } from './packages/chat-messages/chat-messages.js';
 export {
   type FileGetAllItemResponseDto,
