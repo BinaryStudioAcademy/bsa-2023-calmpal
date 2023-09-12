@@ -28,7 +28,7 @@ jobs:
           map: |
             {
               "development": {
-                "DEVELOPMENT_APP_URL": "http://calmpal-alb-development-453467742.eu-west-1.elb.amazonaws.com/"
+                "APP_URL": "https://development.app.calmpal.com/"
               }
             }
 
@@ -37,7 +37,7 @@ jobs:
         id: deployment
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          environment-url: ${{ env.DEVELOPMENT_APP_URL }}
+          environment-url: ${{ env.APP_URL }}
           environment: ${{ github.ref_name }}
 
       - name: Checkout Source Code
