@@ -59,7 +59,7 @@ const Journal: React.FC = () => {
     <LinearGradient>
       <View style={styles.container}>
         <InputSearch
-          placeholder="Search journal"
+          placeholder="Search note"
           setSearchQuery={setSearchQuery}
         />
         <ScrollView contentContainerStyle={styles.list}>
