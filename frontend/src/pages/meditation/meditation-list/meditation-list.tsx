@@ -1,7 +1,7 @@
 import { type SetURLSearchParams } from 'react-router-dom';
 
 import { BackwardButton } from '#libs/components/components.js';
-import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
+import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback } from '#libs/hooks/hooks.js';
 
 import { mockedEntries } from '../libs/constants/constants.js';
@@ -25,10 +25,10 @@ const MeditationList: React.FC<Properties> = ({
     <div
       className={getValidClassNames(
         styles['container'],
-        isSidebarShown && styles['hide'],
+        isSidebarShown && styles['hidden'],
       )}
     >
-      <BackwardButton handleButtonBackward={handleButtonBackward} />
+      <BackwardButton onGoBack={handleButtonBackward} />
       <div className={styles['list']}>
         {mockedEntries.map((entry) => {
           return <MeditationEntry meditationEntry={entry} key={entry.id} />;

@@ -1,8 +1,6 @@
-import { useSearchParams } from 'react-router-dom';
-
 import { BackwardButton } from '#libs/components/components.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { useCallback } from '#libs/hooks/hooks.js';
+import { useCallback, useSearchParams } from '#libs/hooks/hooks.js';
 
 import { ChatSidebar } from './components/components.js';
 import styles from './styles.module.scss';
@@ -32,7 +30,7 @@ const Chats: React.FC = () => {
           isSidebarShownParameter && styles['hide'],
         )}
       >
-        <BackwardButton handleButtonBackward={handleButtonBackward} />
+        <BackwardButton onGoBack={handleButtonBackward} />
         hi there
       </div>
     </>

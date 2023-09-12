@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from '#libs/hooks/hooks.js';
 
 import { MeditationList } from './meditation-list/meditation-list.js';
 import { MeditationSidebar } from './meditation-sidebar/meditation-sidebar.js';
