@@ -7,7 +7,7 @@ import {
   SidebarHeader,
 } from '#libs/components/sidebar/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
-import { useCallback, useSearch, useState } from '#libs/hooks/hooks.js';
+import { useCallback, useSearch } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
 
@@ -31,15 +31,11 @@ const ChatSidebar: React.FC<Properties> = ({
   setIsSidebarShown,
 }) => {
   const { filteredElements, setFilter } = useSearch(mockedChats, 'name');
-  const [selectedChatId, setSelectedChatId] = useState<number>(
-    mockedSelectedChat.id,
-  );
   const handleSelectChat = useCallback(
     (id: number) => {
       return () => {
         mockedSelectedChat.id = id;
         setIsSidebarShown({ isSidebarShownParam: 'false' });
-        setSelectedChatId(id);
         // TODO redux logic
       };
     },
@@ -70,7 +66,7 @@ const ChatSidebar: React.FC<Properties> = ({
                 title={filteredChat.name}
                 imageUrl={cardPlaceholder}
                 onClick={handleSelectChat(filteredChat.id)}
-                isActive={selectedChatId === filteredChat.id}
+                isActive={mockedSelectedChat.id === filteredChat.id}
                 key={filteredChat.id}
               />
             );

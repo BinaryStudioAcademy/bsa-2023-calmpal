@@ -10,7 +10,6 @@ import {
   RouterProvider,
   StoreProvider,
   Toast,
-  UserProfile,
 } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/enums.js';
 import { store } from '#libs/packages/store/store.js';
@@ -20,6 +19,7 @@ import { Dashboard } from '#pages/dashboard/dashboard.js';
 import { Journal } from '#pages/journal/journal.js';
 import { Meditation } from '#pages/meditation/meditation.js';
 import { Survey } from '#pages/surveys/survey.js';
+import { UserProfile } from '#pages/user-profile/user-profile.js';
 
 createRoot(document.querySelector('#root') as HTMLElement).render(
   <StrictMode>
