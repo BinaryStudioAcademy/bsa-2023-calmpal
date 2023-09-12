@@ -56,12 +56,12 @@ export {
   type JournalEntryGetAllResponseDto,
 } from './packages/journal/journal.js';
 export {
-  createMeditationValidationSchema,
+  createMeditationEntryValidationSchema,
   MeditationApiPath,
-  type MeditationCreatePayload,
-  type MeditationCreateValidation,
-  type MeditationEntryRequestDto,
-  type MeditationEntryResponseDto,
+  type MeditationEntryCreateForm,
+  type MeditationEntryCreatePayload,
+  type MeditationEntryCreateRequestDto,
+  type MeditationEntryCreateResponseDto,
 } from './packages/meditation/meditation.js';
 export {
   createSurveyValidationSchema,

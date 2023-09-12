@@ -1,8 +1,8 @@
 export { MeditationApiPath } from './libs/enums/enums.js';
 export {
-  type MeditationCreatePayload,
-  type MeditationCreateValidation,
-  type MeditationEntryRequestDto,
-  type MeditationEntryResponseDto,
+  type MeditationEntryCreateForm,
+  type MeditationEntryCreatePayload,
+  type MeditationEntryCreateRequestDto,
+  type MeditationEntryCreateResponseDto,
 } from './libs/types/types.js';
-export { createMeditation as createMeditationValidationSchema } from './libs/validation-schemas/validation-schemas.js';
+export { createMeditationEntry as createMeditationEntryValidationSchema } from './libs/validation-schemas/validation-schemas.js';
