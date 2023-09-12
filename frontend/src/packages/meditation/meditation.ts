@@ -13,9 +13,9 @@ const meditationApi = new MeditationApi({
 export { meditationApi };
 export { MeditationApiPath } from './libs/enums/enums.js';
 export {
-  type MeditationCreatePayload,
-  type MeditationCreateValidation,
-  type MeditationEntryRequestDto,
-  type MeditationEntryResponseDto,
+  type MeditationEntryCreateForm,
+  type MeditationEntryCreatePayload,
+  type MeditationEntryCreateRequestDto,
+  type MeditationEntryCreateResponseDto,
 } from './libs/types/types.js';
-export { createMeditationValidationSchema } from './libs/validation-schemas/validation-schemas.js';
+export { createMeditationEntryValidationSchema } from './libs/validation-schemas/validation-schemas.js';

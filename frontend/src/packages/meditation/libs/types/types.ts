@@ -1,6 +1,6 @@
 export {
-  type MeditationCreatePayload,
-  type MeditationCreateValidation,
-  type MeditationEntryRequestDto,
-  type MeditationEntryResponseDto,
+  type MeditationEntryCreateForm,
+  type MeditationEntryCreatePayload,
+  type MeditationEntryCreateRequestDto,
+  type MeditationEntryCreateResponseDto,
 } from 'shared/build/index.js';
