@@ -46,6 +46,8 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
         <Button
           style="play-button"
           onClick={handlePlayClick}
+          label="Play meditation"
+          isLabelVisuallyHidden={true}
           iconName="play"
           iconColor={IconColor.BLUE}
         />
