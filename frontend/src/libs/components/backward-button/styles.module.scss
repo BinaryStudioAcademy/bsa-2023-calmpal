@@ -4,8 +4,8 @@
 
 @media (width < 768px) {
   .backward {
-    position: sticky;
-    top: 70px;
+    position: absolute;
+    top: 30px;
     left: 50px;
     display: flex;
     justify-content: center;
