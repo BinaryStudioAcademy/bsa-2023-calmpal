@@ -1,6 +1,7 @@
 .chat-header {
   position: sticky;
-  top: calc(0%);
+  top: 0;
+  z-index: 1;
   width: 100%;
   background-color: var(--white);
   box-shadow: 1px 15px 15px -15px var(--white);
