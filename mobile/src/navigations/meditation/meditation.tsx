@@ -21,7 +21,9 @@ const Meditation: React.FC = () => {
         component={MeditationHome}
         options={{
           header: (): React.ReactNode => {
-            return <Header title={'Meditation \n& Breathing'} />;
+            return (
+              <Header title={'Meditation \n& Breathing'} isProfileVisible />
+            );
           },
         }}
       />

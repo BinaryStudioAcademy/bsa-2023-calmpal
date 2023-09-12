@@ -59,7 +59,7 @@ const MeditationList: React.FC = () => {
           placeholder="Search topic"
           setSearchQuery={setSearchQuery}
         />
-        <ScrollView>
+        <ScrollView contentContainerStyle={styles.list}>
           {filteredMeditationTopics.map((item) => {
             return (
               <MeditationItem
