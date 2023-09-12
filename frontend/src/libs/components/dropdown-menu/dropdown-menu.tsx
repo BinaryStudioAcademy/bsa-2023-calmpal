@@ -37,21 +37,19 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
         {routes.map((item) => {
           return (
             <div key={item.path}>
-              <div
+              <Link
+                to={item.path}
                 className={getValidClassNames(
                   styles['dropdown-item'],
                   pathname === item.path && styles['selected'],
                 )}
-                id={item.path}
               >
-                <Link to={item.path}>
-                  <span className={styles['item']}>
-                    <span className="visually-hidden">Go to {item.name}</span>
-                    <Icon name={item.icon} color={IconColor.BLUE} />
-                    <span className={styles['title']}>{item.name}</span>
-                  </span>
-                </Link>
-              </div>
+                <span className={styles['item']}>
+                  <span className="visually-hidden">Go to {item.name}</span>
+                  <Icon name={item.icon} color={IconColor.BLUE} />
+                  <span className={styles['title']}>{item.name}</span>
+                </span>
+              </Link>
               <hr className={styles['divider']} />
             </div>
           );
