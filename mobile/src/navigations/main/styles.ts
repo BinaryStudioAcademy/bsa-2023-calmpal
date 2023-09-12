@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   tabBar: {
     borderTopWidth: 0,
     elevation: 4,
-    height: 122,
+    height: 80,
     shadowColor: AppColor.GRAY_400,
   },
 });
