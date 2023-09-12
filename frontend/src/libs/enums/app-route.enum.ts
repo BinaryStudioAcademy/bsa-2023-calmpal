@@ -7,6 +7,7 @@ const AppRoute = {
   CHATS: '/chats',
   JOURNAL: '/journal',
   JOURNAL_ENTRY_$ID: '/journal/:id',
+  PROFILE: '/profile',
 } as const;
 
 export { AppRoute };
