@@ -11,6 +11,7 @@ import { styles } from './styles';
 
 const Meditation: React.FC = () => {
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
+  const trackArtwork = currentTrack?.artwork;
 
   return (
     <View style={styles.wrapper}>
@@ -18,11 +19,7 @@ const Meditation: React.FC = () => {
       <View style={styles.contentWrapper}>
         <View style={styles.imageWrapper}>
           <Image
-            source={
-              currentTrack?.artwork
-                ? { uri: currentTrack.artwork }
-                : imagePlaceholder
-            }
+            source={trackArtwork ? { uri: trackArtwork } : imagePlaceholder}
             style={styles.image}
           />
         </View>
