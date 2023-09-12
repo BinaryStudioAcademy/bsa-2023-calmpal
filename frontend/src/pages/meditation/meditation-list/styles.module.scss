@@ -1,7 +1,6 @@
 .container {
   box-sizing: border-box;
-  margin-left: 350px;
-  padding: 251px 36px 0;
+  padding: 251px 36px 0 386px;
   background-color: var(--white);
   border-radius: 30px 0 0 30px;
 }
@@ -15,16 +14,14 @@
 
 @media (width < 900px) {
   .container {
-    margin-left: 250px;
-    padding-inline: 0;
+    padding: 251px 36px 0 286px;
   }
 }
 
 @media (width < 768px) {
   .container {
     width: 100%;
-    margin-left: 0;
-    padding-top: 70px;
+    padding: 70px 0 0;
   }
 
   .hidden {
