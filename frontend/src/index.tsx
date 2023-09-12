@@ -10,6 +10,7 @@ import {
   RouterProvider,
   StoreProvider,
   Toast,
+  UserProfile,
 } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/enums.js';
 import { store } from '#libs/packages/store/store.js';
@@ -81,6 +82,16 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                   <ProtectedRoute>
                     <NavigationMenuWrapper>
                       <Journal />
+                    </NavigationMenuWrapper>
+                  </ProtectedRoute>
+                ),
+              },
+              {
+                path: AppRoute.PROFILE,
+                element: (
+                  <ProtectedRoute>
+                    <NavigationMenuWrapper>
+                      <UserProfile />
                     </NavigationMenuWrapper>
                   </ProtectedRoute>
                 ),

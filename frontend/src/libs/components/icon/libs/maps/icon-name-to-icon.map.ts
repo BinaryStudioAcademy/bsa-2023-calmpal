@@ -8,10 +8,13 @@ import { ReactComponent as HomeIcon } from '#assets/icons/home.svg';
 import { ReactComponent as JournalIcon } from '#assets/icons/journal.svg';
 import { ReactComponent as MeditationIcon } from '#assets/icons/meditation.svg';
 import { ReactComponent as NextIcon } from '#assets/icons/next.svg';
+import { ReactComponent as NotificationIcon } from '#assets/icons/notification.svg';
 import { ReactComponent as PauseIcon } from '#assets/icons/pause.svg';
 import { ReactComponent as PlayIcon } from '#assets/icons/play.svg';
 import { ReactComponent as PlusIcon } from '#assets/icons/plus.svg';
 import { ReactComponent as PreviousIcon } from '#assets/icons/previous.svg';
+import { ReactComponent as SignOutIcon } from '#assets/icons/sign-out.svg';
+import { ReactComponent as UserIcon } from '#assets/icons/user.svg';
 import { type IconName } from '#libs/types/types.js';
 
 const iconNameToIcon: Record<
@@ -32,6 +35,9 @@ const iconNameToIcon: Record<
   'chats': ChatsIcon,
   'journal': JournalIcon,
   'back': Back,
+  'sign-out': SignOutIcon,
+  'user': UserIcon,
+  'notification': NotificationIcon,
 };
 
 export { iconNameToIcon };

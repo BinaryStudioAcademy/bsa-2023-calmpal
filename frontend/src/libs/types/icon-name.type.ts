@@ -1,6 +1,9 @@
 type IconName =
   | 'arrow'
   | 'plus'
+  | 'sign-out'
+  | 'user'
+  | 'notification'
   | 'backward'
   | 'forward'
   | 'next'
