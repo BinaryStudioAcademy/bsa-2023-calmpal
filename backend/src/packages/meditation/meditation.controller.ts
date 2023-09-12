@@ -8,7 +8,7 @@ import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 
 import { MeditationApiPath } from './libs/enums/enums.js';
-import { type MeditationEntryRequestDto } from './libs/types/types.js';
+import { type MeditationEntryCreateRequestDto } from './libs/types/types.js';
 import { type MeditationService } from './meditation.service.js';
 
 /**
@@ -52,7 +52,7 @@ class MeditationController extends BaseController {
       handler: (options) => {
         return this.create(
           options as APIHandlerOptions<{
-            body: MeditationEntryRequestDto;
+            body: MeditationEntryCreateRequestDto;
           }>,
         );
       },
@@ -85,7 +85,7 @@ class MeditationController extends BaseController {
 
   private async create(
     options: APIHandlerOptions<{
-      body: MeditationEntryRequestDto;
+      body: MeditationEntryCreateRequestDto;
     }>,
   ): Promise<APIHandlerResponse> {
     return {

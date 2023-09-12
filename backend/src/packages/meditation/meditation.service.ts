@@ -1,8 +1,8 @@
 import { type Service } from '#libs/types/types.js';
 
 import {
-  type MeditationEntryRequestDto,
-  type MeditationEntryResponseDto,
+  type MeditationEntryCreateRequestDto,
+  type MeditationEntryCreateResponseDto,
 } from './libs/types/types.js';
 import { MeditationEntity } from './meditation.entity.js';
 import { type MeditationRepository } from './meditation.repository.js';
@@ -25,7 +25,7 @@ class MeditationService implements Service {
   public async create({
     mediaUrl,
     contentType,
-  }: MeditationEntryRequestDto): Promise<MeditationEntryResponseDto> {
+  }: MeditationEntryCreateRequestDto): Promise<MeditationEntryCreateResponseDto> {
     const item = await this.meditationRepository.create(
       MeditationEntity.initializeNew({ mediaUrl, contentType }),
     );
