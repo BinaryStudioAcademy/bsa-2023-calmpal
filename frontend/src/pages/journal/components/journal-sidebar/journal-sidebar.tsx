@@ -6,6 +6,7 @@ import {
   useCallback,
   useEffect,
 } from '#libs/hooks/hooks.js';
+import { notification } from '#libs/packages/notification/notification.js';
 import { type ValueOf } from '#libs/types/value-of.type.js';
 import { DEFAULT_NOTE_PAYLOAD } from '#pages/journal/libs/constants/constants.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
@@ -34,6 +35,8 @@ const JournalSidebar: React.FC = () => {
         }),
       );
     }
+
+    notification.success('New note has been created');
   }, [dispatch, userId]);
 
   useEffect(() => {
