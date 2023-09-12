@@ -48,16 +48,6 @@
   border-radius: 14px;
 }
 
-.play-button {
-  display: inline-block;
-  min-width: 48px;
-  min-height: 48px;
-}
-
-.play-button:hover {
-  transform: scale(1.1);
-}
-
 @media (width < 900px) {
   .track {
     max-width: 350px;
