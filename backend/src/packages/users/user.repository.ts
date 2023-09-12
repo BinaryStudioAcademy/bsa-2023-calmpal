@@ -2,7 +2,7 @@ import { type Repository } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/users.js';
 
-import { ROWS_DELETED_SUCCESSFULLY } from './libs/constants.ts/constants.js';
+import { ROWS_DELETED_SUCCESSFULLY } from './libs/constants/constants.js';
 import { UsersRelation } from './libs/enums/enums.js';
 import {
   type UserCommonQueryResponse,

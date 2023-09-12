@@ -3,6 +3,7 @@ import { ReactComponent as AudioPlayIcon } from '#assets/icons/audio-player-play
 import { ReactComponent as BackwardIcon } from '#assets/icons/backward.svg';
 import { ReactComponent as ChatsIcon } from '#assets/icons/chats.svg';
 import { ReactComponent as CloseIcon } from '#assets/icons/close.svg';
+import { ReactComponent as DeleteIcon } from '#assets/icons/delete.svg';
 import { ReactComponent as ForwardIcon } from '#assets/icons/forward.svg';
 import { ReactComponent as HomeIcon } from '#assets/icons/home.svg';
 import { ReactComponent as JournalIcon } from '#assets/icons/journal.svg';
@@ -38,6 +39,7 @@ const iconNameToIcon: Record<
   'user': UserIcon,
   'notification': NotificationIcon,
   'close': CloseIcon,
+  'delete': DeleteIcon,
 };
 
 export { iconNameToIcon };

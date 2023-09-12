@@ -10,11 +10,11 @@ import { actions as authActions } from '#slices/auth/auth.js';
 
 import styles from './styles.module.scss';
 
-type DeleteAccountProperties = {
+type Properties = {
   onClose?: () => void;
 };
 
-const DeleteAccount: FC<DeleteAccountProperties> = ({ onClose }) => {
+const DeleteAccountConfirmation: FC<Properties> = ({ onClose }) => {
   const { authenticatedUser } = useAppSelector(({ auth }) => {
     return {
       authenticatedUser: auth.authenticatedUser,
@@ -42,8 +42,12 @@ const DeleteAccount: FC<DeleteAccountProperties> = ({ onClose }) => {
 
   return (
     <div className={styles['modal-body']}>
-      <p>Thank you for your feedback and for being with us</p>
-      <p>are you sure you want to delete your account?</p>
+      <p className={styles['text']}>
+        Thank you for your feedback and for being with us
+      </p>
+      <p className={styles['text']}>
+        are you sure you want to delete your account?
+      </p>
       <div className={styles['footer']}>
         <button onClick={handleclick} className={styles['button']}>
           Confirm
@@ -53,4 +57,4 @@ const DeleteAccount: FC<DeleteAccountProperties> = ({ onClose }) => {
   );
 };
 
-export { DeleteAccount };
+export { DeleteAccountConfirmation };

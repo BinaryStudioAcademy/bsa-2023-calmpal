@@ -56,3 +56,14 @@
   background-color: var(--gray-300);
   cursor: not-allowed;
 }
+
+@media (width < 480px) {
+  .modal-body {
+    padding: 5px;
+    white-space: wrap;
+  }
+
+  .text {
+    width: 290px;
+  }
+}

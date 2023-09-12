@@ -4,15 +4,12 @@ import { useCallback, useState } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
 
-type DeleteAccountFormProperties = {
+type Properties = {
   onNext?: () => void;
   onClose?: () => void;
 };
 
-const DeleteAccountForm: FC<DeleteAccountFormProperties> = ({
-  onNext,
-  onClose,
-}) => {
+const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
   const [isChecked, setIsChecked] = useState({
     checkbox1: false,
     checkbox2: false,

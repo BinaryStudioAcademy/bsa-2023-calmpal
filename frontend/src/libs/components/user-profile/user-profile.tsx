@@ -1,4 +1,9 @@
-import { Card, Icon } from '#libs/components/components.js';
+import { Card, Icon, Modal } from '#libs/components/components.js';
+import {
+  DeleteAccountConfirmation,
+  DeleteAccountForm,
+  DeleteAccountMessage,
+} from '#libs/components/modal/steps/delete-account/delete-account.js';
 import { IconColor } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
@@ -22,6 +27,7 @@ const UserProfile: React.FC = () => {
   });
 
   const [activeItem, setActiveItem] = useState<string | null>(null);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const handleClick = useCallback((key: string) => {
     return () => {
@@ -32,6 +38,25 @@ const UserProfile: React.FC = () => {
   const handleSignOut = useCallback((): void => {
     void dispatch(authActions.signOut());
   }, [dispatch]);
+
+  const toggleModal = useCallback((): void => {
+    setModalOpen(!isModalOpen);
+  }, [isModalOpen]);
+
+  const steps = [
+    {
+      component: <DeleteAccountMessage />,
+      title: 'We are Sad that you are Leaving',
+    },
+    {
+      component: <DeleteAccountForm />,
+      title: 'Please tell us why',
+    },
+    {
+      component: <DeleteAccountConfirmation />,
+      title: 'Your account will be deleted',
+    },
+  ];
 
   return (
     <div className={styles['container']}>
@@ -71,6 +96,17 @@ const UserProfile: React.FC = () => {
             onClick={handleSignOut}
             iconName="sign-out"
             iconColor={IconColor.WHITE}
+          />
+          <Card
+            title="Delete account"
+            onClick={toggleModal}
+            iconName="delete"
+            iconColor={IconColor.WHITE}
+          />
+          <Modal
+            isDisplayed={isModalOpen}
+            steps={steps}
+            onClose={toggleModal}
           />
         </div>
       </div>
