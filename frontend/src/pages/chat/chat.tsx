@@ -1,6 +1,10 @@
-import { BackwardButton } from '#libs/components/components.js';
+import { BackButton } from '#libs/components/components.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { useCallback, useSearchParams } from '#libs/hooks/hooks.js';
+import {
+  useCallback,
+  useSearchParams,
+  useSidebarShow,
+} from '#libs/hooks/hooks.js';
 
 import { ChatSidebar } from './components/components.js';
 import styles from './styles.module.scss';
@@ -8,13 +12,13 @@ import styles from './styles.module.scss';
 const Chats: React.FC = () => {
   const [isSidebarShown, setIsSidebarShown] = useSearchParams();
 
-  const handleButtonBackward = useCallback(() => {
+  const handleBackButtonPress = useCallback(() => {
     setIsSidebarShown({ sidebarMode: 'show' });
   }, [setIsSidebarShown]);
 
-  const isSidebarShownParameter =
-    isSidebarShown.get('sidebarMode') === 'show' ||
-    isSidebarShown.get('sidebarMode') === null;
+  const isSidebarShownParameter = useSidebarShow(
+    isSidebarShown.get('sidebarMode'),
+  );
 
   return (
     <>
@@ -28,7 +32,7 @@ const Chats: React.FC = () => {
           isSidebarShownParameter && styles['hide'],
         )}
       >
-        <BackwardButton onGoBack={handleButtonBackward} />
+        <BackButton onGoBack={handleBackButtonPress} />
         hi there
       </div>
     </>

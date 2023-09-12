@@ -1,4 +1,4 @@
-import { useSearchParams } from '#libs/hooks/hooks.js';
+import { useSearchParams, useSidebarShow } from '#libs/hooks/hooks.js';
 
 import { MeditationList } from './meditation-list/meditation-list.js';
 import { MeditationSidebar } from './meditation-sidebar/meditation-sidebar.js';
@@ -6,9 +6,9 @@ import { MeditationSidebar } from './meditation-sidebar/meditation-sidebar.js';
 const Meditation: React.FC = () => {
   const [isSidebarShown, setIsSidebarShown] = useSearchParams();
 
-  const isSidebarShownParameter =
-    isSidebarShown.get('sidebarMode') === 'show' ||
-    isSidebarShown.get('sidebarMode') === null;
+  const isSidebarShownParameter = useSidebarShow(
+    isSidebarShown.get('sidebarMode'),
+  );
 
   return (
     <>
