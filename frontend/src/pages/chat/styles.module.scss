@@ -11,5 +11,10 @@
 }
 
 .chat-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  max-height: 100vh;
+  overflow: auto;
 }
