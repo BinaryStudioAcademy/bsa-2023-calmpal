@@ -37,7 +37,6 @@ const MeditationTimer: React.FC<TimerProperties> = ({
             >
               <span
                 className={getValidClassNames(
-                  styles['duration-value'],
                   selectedDuration === duration ? styles['active-text'] : '',
                 )}
               >
@@ -49,7 +48,6 @@ const MeditationTimer: React.FC<TimerProperties> = ({
               </span>
               <span
                 className={getValidClassNames(
-                  styles['duration-unit'],
                   selectedDuration === duration ? styles['active-text'] : '',
                 )}
               >
