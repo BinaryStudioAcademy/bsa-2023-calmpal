@@ -2,6 +2,10 @@ import meditationListPlaceholder from '#assets/img/meditation-list-placeholder.j
 import { Button, MeditationTimer, Modal } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { useCallback, useState } from '#libs/hooks/hooks.js';
+import {
+  DURATION_UNIT,
+  MEDITATION_DURATION,
+} from '#pages/meditation/libs/constants/constants.js';
 
 import { type MeditationEntry } from '../../libs/types/types.js';
 import styles from './styles.module.scss';
@@ -12,6 +16,12 @@ type Properties = {
 
 const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
   const [isModalDisplayed, setIsModalDisplayed] = useState(false);
+
+  const displayedDuration = `${
+    MEDITATION_DURATION[
+      meditationEntry.durationKey as keyof typeof MEDITATION_DURATION
+    ]
+  } ${DURATION_UNIT.MINUTES}`;
 
   const handlePlayClick = useCallback(() => {
     setIsModalDisplayed(true);
@@ -31,7 +41,7 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
       <div className={styles['content']}>
         <div className={styles['info']}>
           <h1 className={styles['title']}>{meditationEntry.title}</h1>
-          <span className={styles['duration']}>{meditationEntry.duration}</span>
+          <span className={styles['duration']}>{displayedDuration}</span>
         </div>
         <Button
           style="play-button"
@@ -47,7 +57,7 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
       >
         <MeditationTimer
           onClose={handleModalClose}
-          defaultDuration={meditationEntry.duration}
+          defaultDuration={meditationEntry.durationKey}
         />
       </Modal>
     </div>

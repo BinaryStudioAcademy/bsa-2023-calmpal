@@ -1,7 +1,7 @@
 type MeditationEntry = {
   id: number;
   title: string;
-  duration: string;
+  durationKey: string;
 };
 
 export { type MeditationEntry };

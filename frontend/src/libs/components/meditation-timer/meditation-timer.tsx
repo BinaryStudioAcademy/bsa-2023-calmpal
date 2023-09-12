@@ -6,16 +6,14 @@ import styles from './styles.module.scss';
 
 type TimerProperties = {
   onClose: () => void;
-  defaultDuration?: string;
+  defaultDuration: string;
 };
 
 const MeditationTimer: React.FC<TimerProperties> = ({
   onClose,
   defaultDuration,
 }) => {
-  const [selectedDuration, setSelectedDuration] = useState(
-    defaultDuration ?? '',
-  );
+  const [selectedDuration, setSelectedDuration] = useState(defaultDuration);
 
   const handleClick = useCallback((duration: string) => {
     return () => {
