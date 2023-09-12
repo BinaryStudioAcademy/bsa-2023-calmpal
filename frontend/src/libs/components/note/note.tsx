@@ -87,6 +87,7 @@ const Note: React.FC<Properties> = ({ className }) => {
           setNote((previous) => {
             return { ...previous, title: sanitizedTitle };
           });
+
           handleSaveNote({ title: sanitizedTitle, text: note.text });
         }
       }

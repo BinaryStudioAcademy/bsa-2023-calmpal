@@ -1,5 +1,4 @@
 import { Note } from '#libs/components/components.js';
-import { AppRoute } from '#libs/enums/app-route.enum.js';
 import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
 import {
   useAppDispatch,
@@ -8,7 +7,6 @@ import {
   useParams,
   useState,
 } from '#libs/hooks/hooks.js';
-import { actions as appActions } from '#slices/app/app.js';
 
 import { JournalSidebar } from './components/journal-sidebar/journal-sidebar.js';
 import styles from './styles.module.scss';
@@ -26,11 +24,7 @@ const Journal: React.FC = () => {
 
   useEffect(() => {
     if (id) {
-      if (selectedJournalEntry) {
-        setIsNoteVisible(true);
-      } else {
-        dispatch(appActions.navigate(AppRoute.JOURNAL));
-      }
+      setIsNoteVisible(true);
     }
   }, [dispatch, id, selectedJournalEntry]);
 
@@ -39,7 +33,11 @@ const Journal: React.FC = () => {
       <JournalSidebar />
       <div className={styles['note-wrapper']}>
         {isNoteVisible && (
-          <Note className={getValidClassNames(!id && 'visually-hidden')} />
+          <Note
+            className={getValidClassNames(
+              !selectedJournalEntry && 'visually-hidden',
+            )}
+          />
         )}
       </div>
     </div>

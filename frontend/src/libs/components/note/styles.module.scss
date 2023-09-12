@@ -1,7 +1,7 @@
 .wrapper {
   width: 100%;
-  max-width: 500px;
-  margin: 150px auto;
+  max-width: 800px;
+  margin: auto;
   color: var(--blue-700);
   font-weight: 500;
 }
@@ -12,14 +12,16 @@
   background-color: var(--blue-100);
   border: 1px solid var(--blue-700);
   border-radius: 5px;
+  box-shadow: 0 4px 23px 0 var(--violet-100);
 }
 
 .text {
-  height: 300px;
+  min-height: 400px;
   padding: 10px;
   background-color: var(--blue-100);
   border: 1px solid var(--blue-700);
   border-radius: 5px;
+  box-shadow: 0 4px 23px 0 var(--violet-100);
 }
 
 .title:focus,
