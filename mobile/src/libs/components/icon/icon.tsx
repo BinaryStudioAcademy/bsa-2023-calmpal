@@ -7,13 +7,12 @@ import { iconNameToIcon } from './libs/maps/maps';
 type Properties = {
   name: IconName;
   color?: string;
-  styles?: React.CSSProperties;
 };
 
-const Icon: React.FC<Properties> = ({ name, color, styles }) => {
+const Icon: React.FC<Properties> = ({ name, color }) => {
   const SelectedIcon = iconNameToIcon[name];
 
-  return <SelectedIcon color={color} style={styles} />;
+  return <SelectedIcon color={color} />;
 };
 
 export { Icon };

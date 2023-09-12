@@ -20,11 +20,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     paddingLeft: 30,
   },
-  icon: {
-    left: -30,
-    position: 'absolute',
-    top: -20,
-  },
 });
 
 export { styles };
