@@ -24,6 +24,29 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
   const [playbackState, setPlaybackState] = useState<State | null>(null);
   const isPlaying = playbackState === State.Playing;
 
+  const handlePlaybackStateChange = async (): Promise<void> => {
+    const state = await player.getState();
+    setPlaybackState(state);
+  };
+
+  const handleNextTrack = async (nextTrack: number): Promise<void> => {
+    const track = await player.getTrack(nextTrack);
+    if (track) {
+      setCurrentTrack(track);
+    }
+  };
+
+  usePlayerEvents(
+    [Event.PlaybackState, Event.PlaybackTrackChanged],
+    (event): void => {
+      if (event.type === Event.PlaybackState) {
+        void handlePlaybackStateChange();
+      } else if (typeof event.nextTrack === 'string') {
+        void handleNextTrack(event.nextTrack);
+      }
+    },
+  );
+
   useEffect(() => {
     const addPlaylist = async (): Promise<void> => {
       const trackQueue = await player.getQueue();
@@ -37,23 +60,6 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
     void addPlaylist();
     setCurrentTrack(MOCKED_PLAYLIST[TRACK_START_INDEX] as Track);
   }, [setCurrentTrack]);
-
-  usePlayerEvents(
-    [Event.PlaybackState, Event.PlaybackTrackChanged],
-    (event): void => {
-      void (async (): Promise<void> => {
-        if (event.type === Event.PlaybackState) {
-          const state = await player.getState();
-          setPlaybackState(state);
-        } else if (typeof event.nextTrack === 'string') {
-          const track = await player.getTrack(event.nextTrack);
-          if (track) {
-            setCurrentTrack(track);
-          }
-        }
-      })();
-    },
-  );
 
   return (
     <>
