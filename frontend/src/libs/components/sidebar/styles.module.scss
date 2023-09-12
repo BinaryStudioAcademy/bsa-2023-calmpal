@@ -45,16 +45,9 @@
   cursor: pointer;
 }
 
-.icon-selected {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--white);
-  border: 0;
-  border-radius: 50%;
+.icon-selected,
+.icon-container:hover {
   box-shadow: 0 4px 23px 0 var(--violet-100);
-  cursor: pointer;
 }
 
 .link {
