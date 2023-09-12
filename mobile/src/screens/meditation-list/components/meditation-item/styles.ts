@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     height: 177,
     position: 'relative',
     marginBottom: 10,
+    marginHorizontal: 12,
   },
   image: {
     width: 187,

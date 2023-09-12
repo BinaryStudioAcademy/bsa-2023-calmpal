@@ -73,7 +73,7 @@ const ChatList: React.FC = () => {
             label="Add new chat"
             to={`/${RootScreenName.SIGN_IN}`}
             style={styles.link}
-            icon={<PlusIcon style={styles.icon} color={AppColor.BLUE_300} />}
+            icon={<PlusIcon color={AppColor.BLUE_300} />}
           />
         </View>
       </View>
