@@ -4,7 +4,8 @@
 
 @media (width < 768px) {
   .backward {
-    position: relative;
+    position: sticky;
+    top: 70px;
     left: 50px;
     display: block;
     padding: 0;
