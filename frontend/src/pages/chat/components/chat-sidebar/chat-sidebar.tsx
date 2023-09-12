@@ -1,11 +1,14 @@
 import { type SetURLSearchParams } from 'react-router-dom';
 
 import cardPlaceholder from '#assets/img/card-image-placeholder.png';
-import { Card, Icon, Search, Sidebar } from '#libs/components/components.js';
 import {
+  Card,
+  Icon,
+  Search,
+  Sidebar,
   SidebarBody,
   SidebarHeader,
-} from '#libs/components/sidebar/components/components.js';
+} from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { useCallback, useSearch } from '#libs/hooks/hooks.js';
 

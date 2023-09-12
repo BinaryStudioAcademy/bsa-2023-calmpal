@@ -1,10 +1,12 @@
 import { type SetURLSearchParams } from 'react-router-dom';
 
-import { Card, Icon, Sidebar } from '#libs/components/components.js';
 import {
+  Card,
+  Icon,
+  Sidebar,
   SidebarBody,
   SidebarHeader,
-} from '#libs/components/sidebar/components/components.js';
+} from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
 import {
   useAppDispatch,

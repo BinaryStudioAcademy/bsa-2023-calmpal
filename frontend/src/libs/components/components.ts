@@ -15,7 +15,7 @@ export { NavigationMenuWrapper } from './navigation-menu-wrapper/navigation-menu
 export { ProtectedRoute } from './protected-route/protected-route.js';
 export { RouterProvider } from './router-provider/router-provider.jsx';
 export { Search } from './search/search.js';
-export { Sidebar } from './sidebar/sidebar.js';
+export { Sidebar, SidebarBody, SidebarHeader } from './sidebar/components.js';
 export { Switch } from './switch/switch.js';
 export { Toast } from './toast/toast.js';
 export { Provider as StoreProvider } from 'react-redux';

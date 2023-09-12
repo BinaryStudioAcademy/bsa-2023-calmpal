@@ -4,12 +4,12 @@ import { Icon } from '../components.js';
 import styles from './styles.module.scss';
 
 type Properties = {
-  handleButtonBackward: () => void;
+  onGoBack: () => void;
 };
 
-const BackwardButton: React.FC<Properties> = ({ handleButtonBackward }) => {
+const BackwardButton: React.FC<Properties> = ({ onGoBack }) => {
   return (
-    <button className={styles['backward']} onClick={handleButtonBackward}>
+    <button className={styles['backward']} onClick={onGoBack}>
       <Icon name="back" color={IconColor.BLUE} />
     </button>
   );

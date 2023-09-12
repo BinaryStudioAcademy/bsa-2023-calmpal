@@ -1,6 +1,6 @@
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 
-import styles from './style.module.scss';
+import styles from './styles.module.scss';
 
 type Properties = {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ const Sidebar: React.FC<Properties> = ({ children, isSidebarShown }) => {
     <div
       className={getValidClassNames(
         styles['container'],
-        isSidebarShown === false && styles['hide'],
+        !isSidebarShown && styles['hide'],
       )}
     >
       {children}

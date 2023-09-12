@@ -1,11 +1,13 @@
 import { type SetURLSearchParams } from 'react-router-dom';
 
 import meditationPlaceholder from '#assets/img/meditation-image-placeholder.png';
-import { Card, Search, Sidebar } from '#libs/components/components.js';
 import {
+  Card,
+  Search,
+  Sidebar,
   SidebarBody,
   SidebarHeader,
-} from '#libs/components/sidebar/components/components.js';
+} from '#libs/components/components.js';
 import { useCallback, useSearch } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';

@@ -1,10 +1,11 @@
 import { type SetURLSearchParams } from 'react-router-dom';
 
-import { Card, Sidebar } from '#libs/components/components.js';
 import {
+  Card,
+  Sidebar,
   SidebarBody,
   SidebarHeader,
-} from '#libs/components/sidebar/components/components.js';
+} from '#libs/components/components.js';
 import {
   useAppDispatch,
   useAppSelector,
