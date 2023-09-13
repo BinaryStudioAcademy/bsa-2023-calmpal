@@ -1,4 +1,4 @@
-import { type IconColor } from '#libs/enums/icon-color.enum.js';
+import { type IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { type IconName, type ValueOf } from '#libs/types/types.js';
 
