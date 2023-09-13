@@ -46,7 +46,7 @@ const UserProfile: React.FC = () => {
   const steps = [
     {
       component: <DeleteAccountMessage />,
-      title: 'We are Sad that you are Leaving',
+      title: 'We are sad that you are leaving',
     },
     {
       component: <DeleteAccountForm />,
