@@ -97,7 +97,7 @@ class AuthService {
     if (!deleteResult) {
       throw new UsersError({
         status: HTTPCode.INTERNAL_SERVER_ERROR,
-        message: 'Failed to delete user',
+        message: ExceptionMessage.DELETE_FAIL,
       });
     }
 
