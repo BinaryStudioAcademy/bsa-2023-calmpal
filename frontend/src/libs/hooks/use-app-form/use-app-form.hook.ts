@@ -8,6 +8,7 @@ import {
   type UseFormHandleSubmit,
   type UseFormProps,
   type ValidationMode,
+  type WatchInternal,
 } from 'react-hook-form';
 
 import { type ValidationSchema } from '#libs/types/types.js';
@@ -23,6 +24,7 @@ type ReturnValue<T extends FieldValues = FieldValues> = {
   errors: FieldErrors<T>;
   isValid: boolean;
   handleSubmit: UseFormHandleSubmit<T>;
+  watch: WatchInternal<T>;
 };
 
 const useAppForm = <T extends FieldValues = FieldValues>({
@@ -46,9 +48,11 @@ const useAppForm = <T extends FieldValues = FieldValues>({
     control,
     handleSubmit,
     formState: { errors, isValid },
+    watch,
   } = useForm<T>(parameters);
 
   return {
+    watch,
     control,
     errors,
     isValid,

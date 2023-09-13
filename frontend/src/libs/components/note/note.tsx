@@ -1,11 +1,12 @@
 import { DataStatus } from '#libs/enums/enums.js';
 import {
-  customDebounce as debounce,
+  debounce,
   getValidClassNames,
   sanitizeInput,
 } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
+  useAppForm,
   useAppSelector,
   useCallback,
   useEffect,
@@ -16,7 +17,7 @@ import {
 import { actions as journalActions } from '#slices/journal/journal.js';
 
 import { Loader } from '../components.js';
-import { DEFAULT_NOTE_PAYLOAD, NOTE_TIMEOUT } from './libs/constants.js';
+import { NOTE_TIMEOUT } from './libs/constants.js';
 import { type NoteContent } from './libs/types.js';
 import styles from './styles.module.scss';
 
@@ -34,14 +35,20 @@ const Note: React.FC<Properties> = ({ className }) => {
       };
     });
 
-  const [note, setNote] = useState<NoteContent>(
-    selectedJournalEntry
-      ? {
-          title: selectedJournalEntry.title || DEFAULT_NOTE_PAYLOAD.title,
-          text: selectedJournalEntry.text || DEFAULT_NOTE_PAYLOAD.text,
-        }
-      : DEFAULT_NOTE_PAYLOAD,
-  );
+  const { watch } = useAppForm({
+    defaultValues: {
+      title: selectedJournalEntry?.title,
+      text: selectedJournalEntry?.text,
+    },
+    mode: 'onSubmit',
+  });
+
+  const [note, setNote] = useState<NoteContent>({
+    title: watch('title') as string,
+    text: watch('text') as string,
+  });
+
+  const [isChanged, setIsChanged] = useState(false);
 
   const dispatch = useAppDispatch();
   const { id } = useParams();
@@ -74,13 +81,29 @@ const Note: React.FC<Properties> = ({ className }) => {
         );
       }
     },
-    [dispatch, userId, id],
+    [dispatch, id, userId],
   );
 
-  const handleTitleChange: React.FormEventHandler<HTMLDivElement> = debounce(
-    (event_: React.SyntheticEvent<HTMLDivElement>) => {
+  const handleSaveNoteWithDebounce = debounce((newNote: NoteContent) => {
+    if (userId && id && isChanged) {
+      void dispatch(
+        journalActions.updateJournalEntry({
+          id,
+          body: {
+            title: newNote.title,
+            text: newNote.text,
+          },
+        }),
+      ).then(() => {
+        setIsChanged(false);
+      });
+    }
+  }, NOTE_TIMEOUT);
+
+  const handleTitleChange: React.FormEventHandler<HTMLDivElement> =
+    useCallback(() => {
       if (titleReference.current) {
-        const newTitle = (event_.target as HTMLElement).textContent as string;
+        const newTitle = titleReference.current.textContent ?? '';
         const sanitizedTitle = sanitizeInput(newTitle);
 
         if (sanitizedTitle.trim() && sanitizedTitle !== note.title) {
@@ -88,29 +111,44 @@ const Note: React.FC<Properties> = ({ className }) => {
             return { ...previous, title: sanitizedTitle };
           });
 
-          handleSaveNote({ title: sanitizedTitle, text: note.text });
+          setIsChanged(true);
         }
       }
-    },
-    NOTE_TIMEOUT,
-  );
+    }, [note.title]);
 
-  const handleTextChange: React.FormEventHandler<HTMLDivElement> = debounce(
-    (event_: React.SyntheticEvent<HTMLDivElement>) => {
+  const handleTextChange: React.FormEventHandler<HTMLDivElement> =
+    useCallback(() => {
       if (textReference.current) {
-        const newText = (event_.target as HTMLElement).textContent as string;
+        const newText = textReference.current.textContent ?? '';
         const sanitizedText = sanitizeInput(newText);
 
         if (sanitizedText.trim() && sanitizedText !== note.text) {
           setNote((previous) => {
             return { ...previous, text: sanitizedText };
           });
-          handleSaveNote({ title: note.title, text: sanitizedText });
+          setIsChanged(true);
         }
       }
-    },
-    NOTE_TIMEOUT,
-  );
+    }, [note.text]);
+
+  useEffect(() => {
+    handleSaveNoteWithDebounce(note);
+  }, [handleSaveNoteWithDebounce, note]);
+
+  useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent): void => {
+      if (isChanged) {
+        event.preventDefault();
+        handleSaveNote(note);
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [isChanged, note, handleSaveNote]);
 
   useEffect(() => {
     void dispatch(journalActions.getAllJournalEntries()).then(() => {
@@ -153,14 +191,16 @@ const Note: React.FC<Properties> = ({ className }) => {
       <div
         contentEditable
         onInput={handleTitleChange}
-        dangerouslySetInnerHTML={{ __html: sanitizeInput(note.title) }}
+        dangerouslySetInnerHTML={{ __html: sanitizeInput(note.title || '') }}
         className={styles['title']}
         ref={titleReference}
       />
       <div
         contentEditable
         onInput={handleTextChange}
-        dangerouslySetInnerHTML={{ __html: sanitizeInput(note.text) }}
+        dangerouslySetInnerHTML={{
+          __html: sanitizeInput(note.text || ''),
+        }}
         className={styles['text']}
         ref={textReference}
       />
