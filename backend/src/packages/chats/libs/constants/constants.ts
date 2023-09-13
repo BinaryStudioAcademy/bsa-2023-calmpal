@@ -1,3 +1,5 @@
 const MOCKED_CHAT_NAME = 'Chat';
 
-export { MOCKED_CHAT_NAME };
+const NO_RESPONSE = 'I am unable to give a response.';
+
+export { MOCKED_CHAT_NAME, NO_RESPONSE };
