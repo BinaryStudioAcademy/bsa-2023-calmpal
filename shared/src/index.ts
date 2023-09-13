@@ -44,6 +44,13 @@ export {
   UserRole,
 } from './packages/chat/chat.js';
 export {
+  type ChatGetAllItemResponseDto,
+  type ChatGetAllResponseDto,
+  type ChatRequestDto,
+  ChatsApiPath,
+  createChatValidationSchema,
+} from './packages/chats/chats.js';
+export {
   type FileGetAllItemResponseDto,
   type FileUploadRequestDto,
   type FileUploadResponseDto,
