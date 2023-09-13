@@ -41,19 +41,10 @@ class JournalEntryService implements Service {
   ): Promise<JournalEntryGetAllResponseDto> {
     const items = await this.journalEntryRepository.findAllByUserId(userId);
 
-    const sortedItems = items
-      .map((item) => {
-        return item.toObject();
-      })
-      .sort((previous, next) => {
-        const datePrevious = previous.updatedAt.getTime();
-        const dateNext = next.updatedAt.getTime();
-
-        return dateNext - datePrevious;
-      });
-
     return {
-      items: sortedItems,
+      items: items.map((item) => {
+        return item.toObject();
+      }),
     };
   }
 

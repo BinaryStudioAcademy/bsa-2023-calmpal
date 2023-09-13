@@ -42,9 +42,8 @@ class JournalEntryRepository implements Repository {
     const journalEntries = await this.journalEntryModel
       .query()
       .where('userId', userId)
-      .select()
-      .castTo<JournalEntryCommonQueryResponse[]>()
-      .execute();
+      .orderBy('updatedAt', 'DESC')
+      .castTo<JournalEntryCommonQueryResponse[]>();
 
     return journalEntries.map((journalEntry) => {
       return JournalEntryEntity.initialize({
@@ -58,30 +57,6 @@ class JournalEntryRepository implements Repository {
     });
   }
 
-  public async findByTitle(
-    userId: number,
-    title: string,
-  ): Promise<JournalEntryEntity | null> {
-    const entity = await this.journalEntryModel
-      .query()
-      .where('userId', userId)
-      .andWhere('title', title)
-      .first();
-
-    if (!entity) {
-      return null;
-    }
-
-    return JournalEntryEntity.initialize({
-      id: entity.id,
-      userId: entity.userId,
-      title: entity.title,
-      text: entity.text,
-      createdAt: new Date(entity.createdAt),
-      updatedAt: new Date(entity.updatedAt),
-    });
-  }
-
   public async create(entity: JournalEntryEntity): Promise<JournalEntryEntity> {
     const { title, text, userId } = entity.toNewObject();
 
@@ -92,8 +67,7 @@ class JournalEntryRepository implements Repository {
         title,
         text,
       } as JournalEntryCreateQueryPayload)
-      .castTo<JournalEntryCommonQueryResponse>()
-      .execute();
+      .castTo<JournalEntryCommonQueryResponse>();
 
     return JournalEntryEntity.initialize({
       id: journalEntry.id,
@@ -110,7 +84,8 @@ class JournalEntryRepository implements Repository {
 
     const updatedJournalEntry = await this.journalEntryModel
       .query()
-      .patchAndFetchById(id, { title, text });
+      .patchAndFetchById(id, { title, text })
+      .castTo<JournalEntryCommonQueryResponse>();
 
     return JournalEntryEntity.initialize({
       id: updatedJournalEntry.id,
