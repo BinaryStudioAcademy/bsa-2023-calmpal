@@ -15,20 +15,19 @@
   background-color: var(--blue-alpha-70);
 }
 
-.container > .label {
+.label {
   display: block;
   color: inherit;
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
-  text-align: center;
 }
 
-.container .checkbox {
+.checkbox {
   display: none;
 }
 
-.container:has(.checkbox:checked) {
+.checkbox:checked + .container {
   color: var(--blue-700);
   background-color: var(--blue-alpha-70);
 }

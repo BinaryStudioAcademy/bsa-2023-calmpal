@@ -17,6 +17,9 @@ type IconName =
   | 'close'
   | 'upload'
   | 'download'
-  | 'journal';
+  | 'journal'
+  | 'chat-sidebar'
+  | 'send'
+  | 'chatbot-avatar';
 
 export { type IconName };

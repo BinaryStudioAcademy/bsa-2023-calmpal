@@ -4,7 +4,7 @@ import { type HTTP } from '#libs/packages/http/http.js';
 import { type Storage } from '#libs/packages/storage/storage.js';
 
 import { FilesApiPath } from './libs/enums/enums.js';
-import { type FileUploadResponseDto } from './libs/types/types.js';
+import { type FileGetAllItemResponseDto } from './libs/types/types.js';
 
 type Constructor = {
   baseUrl: string;
@@ -17,7 +17,7 @@ class FilesApi extends BaseHttpApi {
     super({ path: APIPath.FILES, baseUrl, http, storage });
   }
 
-  public async uploadFile(file: File): Promise<FileUploadResponseDto> {
+  public async uploadFile(file: File): Promise<FileGetAllItemResponseDto> {
     const formData = new FormData();
     formData.append('file', file);
 
@@ -30,7 +30,7 @@ class FilesApi extends BaseHttpApi {
       },
     );
 
-    return await response.json<FileUploadResponseDto>();
+    return await response.json<FileGetAllItemResponseDto>();
   }
 }
 

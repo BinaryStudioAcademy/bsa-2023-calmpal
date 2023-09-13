@@ -109,6 +109,13 @@
   animation: rotation 1s linear infinite;
 }
 
+.icon-primary {
+  align-self: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
