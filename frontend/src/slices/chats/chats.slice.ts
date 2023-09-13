@@ -2,18 +2,21 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { DataStatus } from '#libs/enums/enums.js';
 import { type ValueOf } from '#libs/types/types.js';
+import { type ChatMessageGetAllItemResponseDto } from '#packages/chat-messages/chat-messages.js';
 import { type ChatGetAllItemResponseDto } from '#packages/chats/chats.js';
 
 import { createChat, getAllChats } from './actions.js';
 
 type State = {
   chats: ChatGetAllItemResponseDto[];
+  currentChatMessages: ChatMessageGetAllItemResponseDto[];
   chatsDataStatus: ValueOf<typeof DataStatus>;
   createChatDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
   chats: [],
+  currentChatMessages: [],
   chatsDataStatus: DataStatus.IDLE,
   createChatDataStatus: DataStatus.IDLE,
 };
