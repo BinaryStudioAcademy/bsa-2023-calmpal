@@ -26,7 +26,7 @@ import { type FileUploadRequestDto } from './libs/types/types.js';
  *            type: string
  *          contentType:
  *            type: string
- *           createdAt:
+ *          createdAt:
  *            type: string
  *            format: date-time
  *          updatedAt:
