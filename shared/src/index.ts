@@ -39,6 +39,11 @@ export {
 } from './libs/types/types.js';
 export { AuthApiPath } from './packages/auth/auth.js';
 export {
+  type ChatMessage,
+  type Message,
+  UserRole,
+} from './packages/chat/chat.js';
+export {
   type FileGetAllItemResponseDto,
   type FileUploadRequestDto,
   type FileUploadResponseDto,

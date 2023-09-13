@@ -20,7 +20,7 @@ const UserProfileInfo: React.FC = () => {
     <Sidebar>
       <SidebarHeader>
         <div className={styles['info']}>
-          <span>Profile</span>
+          <span>Home</span>
         </div>
       </SidebarHeader>
       <SidebarBody>

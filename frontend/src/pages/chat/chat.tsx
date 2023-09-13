@@ -6,10 +6,13 @@ import {
   useSidebarShow,
 } from '#libs/hooks/hooks.js';
 
-import { ChatSidebar } from './components/components.js';
+import {
+  // ChatLayout,
+  ChatSidebar,
+} from './components/components.js';
 import styles from './styles.module.scss';
 
-const Chats: React.FC = () => {
+const Chat: React.FC = () => {
   const [isSidebarShown, setIsSidebarShown] = useSearchParams();
 
   const handleBackButtonPress = useCallback(() => {
@@ -35,8 +38,16 @@ const Chats: React.FC = () => {
         <BackButton onGoBack={handleBackButtonPress} />
         hi there
       </div>
+      {/* <main className={styles['view-port']}>
+      <aside className={styles['chat-panel']}>
+        <ChatSidebar />
+      </aside>
+      <section className={styles['chat-container']}>
+        <ChatLayout />
+      </section>
+    </main> */}
     </>
   );
 };
 
-export { Chats };
+export { Chat };

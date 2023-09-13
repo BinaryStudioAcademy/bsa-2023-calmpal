@@ -16,7 +16,9 @@
   position: fixed;
   display: flex;
   flex-direction: column;
-  gap: 262px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 190px;
   width: 88px;
   height: 100%;
   padding: 16px;
@@ -42,7 +44,9 @@
   cursor: pointer;
 }
 
-.icon-selected {
+.icon-selected,
+.icon-container:hover,
+.icon-container:focus {
   box-shadow: 0 4px 23px 0 var(--violet-100);
 }
 
