@@ -2,7 +2,7 @@ import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useState } from '#libs/hooks/hooks.js';
 
 import { Button } from '../components.js';
-import { TimerButton } from './components/duration-button.js';
+import { TimerButton } from './components/duration-button/duration-button.js';
 import { DURATION_UNIT, MEDITATION_DURATION } from './libs/constants.js';
 import styles from './styles.module.scss';
 
