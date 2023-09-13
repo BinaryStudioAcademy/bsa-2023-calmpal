@@ -36,7 +36,7 @@ const UserProfileSidebar: React.FC<Properties> = ({
     };
   });
 
-  const [activeItem, setActiveItem] = useState<string | null>(null);
+  const [activeItem, setActiveItem] = useState<string>('notification');
 
   const handleClick = useCallback(
     (key: string) => {

@@ -34,31 +34,24 @@
 }
 
 .icon-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 0;
+  overflow: hidden;
   background-color: var(--white);
-  border: 0;
+  border: none;
   border-radius: 50%;
   cursor: pointer;
 }
 
 .icon-selected {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--white);
-  border: 0;
-  border-radius: 50%;
   box-shadow: 0 4px 23px 0 var(--violet-100);
-  cursor: pointer;
 }
 
 .link {
-  padding: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 52px;
   line-height: 0px;
 }
 

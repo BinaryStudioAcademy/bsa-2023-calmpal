@@ -22,9 +22,11 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
           <h1 className={styles['title']}>{meditationEntry.title}</h1>
           <span className={styles['duration']}>{meditationEntry.duration}</span>
         </div>
-        <Link to="/" className={styles['play-button'] as string}>
-          <Icon name="play" color={IconColor.BLUE} />
-        </Link>
+        <div className={styles['play-button']}>
+          <Link to="/">
+            <Icon name="play" color={IconColor.BLUE} />
+          </Link>
+        </div>
       </div>
     </div>
   );
