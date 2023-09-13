@@ -1,15 +1,12 @@
-import { UserRole } from '#libs/enums/enums.js';
-import { useCallback } from '#libs/hooks/hooks.js';
-import {
-  ChatFooter,
-  ChatHeader,
-  ChatMessage,
-} from '#pages/chat/components/components.js';
-import { MOCK_MESSAGES } from '#pages/chat/libs/constants/constants.js';
+import { RouterOutlet } from '#libs/components/components.js';
+import { useCallback, useParams } from '#libs/hooks/hooks.js';
+import { ChatFooter, ChatHeader } from '#pages/chat/components/components.js';
 
 import styles from './styles.module.scss';
 
 const ChatLayout: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+
   const handleSend = useCallback((): void => {
     // TODO: dispatch redux action to send message
   }, []);
@@ -18,17 +15,9 @@ const ChatLayout: React.FC = () => {
     <>
       <ChatHeader />
       <div className={styles['chat-body']}>
-        {MOCK_MESSAGES.map((item) => {
-          return (
-            <ChatMessage
-              key={item.id}
-              item={item}
-              isSender={item.sender === UserRole.USER}
-            />
-          );
-        })}
+        <RouterOutlet />
       </div>
-      <ChatFooter onSend={handleSend} />
+      <ChatFooter key={id} onSend={handleSend} />
     </>
   );
 };
