@@ -92,14 +92,6 @@ class AuthService {
   public async deleteAuthenticatedUser(
     id: number,
   ): Promise<UserDeleteResponseDto> {
-    const user = await this.userService.findById(id);
-    if (!user) {
-      throw new UsersError({
-        status: HTTPCode.NOT_FOUND,
-        message: ExceptionMessage.USER_NOT_FOUND,
-      });
-    }
-
     const deleteResult = await this.userService.delete(id);
 
     if (!deleteResult) {
@@ -110,7 +102,7 @@ class AuthService {
     }
 
     const userResponse: UserDeleteRequestDto = {
-      id: user.id,
+      id: id,
     };
 
     return { user: userResponse };

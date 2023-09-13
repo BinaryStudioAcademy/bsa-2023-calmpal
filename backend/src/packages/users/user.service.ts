@@ -98,8 +98,13 @@ class UserService implements Service {
     return Promise.resolve(null);
   }
 
-  public delete(id: number): Promise<boolean> {
-    return this.userRepository.delete(id);
+  public async delete(id: number): Promise<boolean> {
+    const user = await this.findById(id);
+    if (!user) {
+      return false;
+    }
+
+    return await this.userRepository.delete(id);
   }
 
   public async findByEmail(
