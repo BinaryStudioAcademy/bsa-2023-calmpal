@@ -111,6 +111,13 @@
   animation: rotation 1s linear infinite;
 }
 
+.icon-primary {
+  align-self: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
 .play-button {
   display: flex;
   justify-content: center;

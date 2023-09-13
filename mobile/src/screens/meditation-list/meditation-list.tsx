@@ -9,12 +9,14 @@ import {
   View,
 } from '#libs/components/components';
 import {
+  useAppDispatch,
   useAppRoute,
   useEffect,
   useNavigation,
   useSearch,
 } from '#libs/hooks/hooks';
 import { type MeditationNavigationParameterList } from '#libs/types/types';
+import { actions as meditationActions } from '#slices/meditation/meditation';
 
 import { MeditationItem } from './components/components';
 import { mockedData } from './libs/constants';
@@ -25,6 +27,7 @@ type RouteParameters = {
 };
 
 const MeditationList: React.FC = () => {
+  const dispatch = useAppDispatch();
   const navigation =
     useNavigation<
       NativeStackNavigationProp<MeditationNavigationParameterList>
@@ -44,6 +47,10 @@ const MeditationList: React.FC = () => {
       },
     });
   }, [navigation, title]);
+
+  useEffect(() => {
+    void dispatch(meditationActions.initPlayer());
+  }, [dispatch]);
 
   return (
     <LinearGradient>
