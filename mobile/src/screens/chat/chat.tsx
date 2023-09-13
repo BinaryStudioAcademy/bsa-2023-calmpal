@@ -4,6 +4,7 @@ import React from 'react';
 import ChatAvatar from '#assets/img/icons/chat-avatar.svg';
 import { Header, ScrollView, Text, View } from '#libs/components/components';
 import {
+  useAppDispatch,
   useAppForm,
   useAppRoute,
   useCallback,
@@ -13,9 +14,14 @@ import {
   useState,
 } from '#libs/hooks/hooks';
 import { type ChatNavigationParameterList } from '#libs/types/types';
+import { actions as chatsActions } from '#slices/chats/chats';
 
 import { ChatInput, MessageItem } from './components/components';
-import { DEFAULT_VALUES, MOCKED_DATA, PREVIOUS_USER } from './libs/constants';
+import {
+  DEFAULT_VALUES,
+  EMPTY_ARRAY_LENGTH,
+  PREVIOUS_USER,
+} from './libs/constants';
 import { styles } from './styles';
 
 type Message = {
@@ -29,6 +35,7 @@ type RouteParameters = {
 };
 
 const Chat: React.FC = () => {
+  const dispatch = useAppDispatch();
   const navigation =
     useNavigation<NativeStackNavigationProp<ChatNavigationParameterList>>();
   const { title } = useAppRoute().params as RouteParameters;
@@ -36,15 +43,19 @@ const Chat: React.FC = () => {
     defaultValues: DEFAULT_VALUES,
   });
 
-  const [messages, setMessages] = useState<Message[]>(MOCKED_DATA);
+  const [messages, setMessages] = useState<Message[]>([]);
   const scrollViewReference = useRef<ScrollView | null>(null);
-
+  const messagesLength = messages.length;
   const scrollViewToEnd = (): void => {
     scrollViewReference.current?.scrollToEnd();
   };
 
   const handleFormSubmit = useCallback(
     (payload: { text: string }): void => {
+      if (messagesLength === EMPTY_ARRAY_LENGTH) {
+        void dispatch(chatsActions.createChat({ name: 'New Chat' }));
+      }
+
       setMessages((previous) => {
         return [
           ...previous,
@@ -58,7 +69,7 @@ const Chat: React.FC = () => {
       scrollViewToEnd();
       reset();
     },
-    [setMessages, reset],
+    [setMessages, reset, dispatch, messagesLength],
   );
 
   const handleSend = useCallback((): void => {

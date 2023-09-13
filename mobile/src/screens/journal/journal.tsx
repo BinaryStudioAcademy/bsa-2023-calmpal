@@ -42,7 +42,7 @@ const Journal: React.FC = () => {
   }, []);
 
   const handleAddNote = useCallback(() => {
-    //
+    // TODO: Implement actual functionality for the onPress event
   }, []);
 
   useEffect(() => {

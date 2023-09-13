@@ -24,7 +24,6 @@ import { actions as chatsActions } from '#slices/chats/chats';
 
 import { styles } from './styles';
 
-const mockedCount = 12;
 const ChatList: React.FC = () => {
   const { chats } = useAppSelector(({ chats }) => {
     return {
@@ -40,6 +39,8 @@ const ChatList: React.FC = () => {
     'name',
   );
 
+  const badgeCount = chats.length;
+
   const handleSelectChat = useCallback(
     (title: string) => {
       navigation.navigate(ChatScreenName.CHAT, { title });
@@ -48,18 +49,16 @@ const ChatList: React.FC = () => {
   );
 
   const handleAddChat = useCallback(() => {
-    //
-  }, []);
+    navigation.navigate(ChatScreenName.CHAT, { title: 'New Chat' });
+  }, [navigation]);
 
   useEffect(() => {
     navigation.setOptions({
       header: () => {
-        return (
-          <Header title="Chat" badgeCount={mockedCount} isProfileVisible />
-        );
+        return <Header title="Chat" badgeCount={badgeCount} isProfileVisible />;
       },
     });
-  }, [navigation]);
+  }, [navigation, badgeCount]);
 
   useEffect(() => {
     void dispatch(chatsActions.getAllChats());
@@ -86,7 +85,7 @@ const ChatList: React.FC = () => {
         <Button
           onPress={handleAddChat}
           iconName="plus"
-          label="Add new note"
+          label="Add new chat"
           type="transparent"
           isAddButton
         />
