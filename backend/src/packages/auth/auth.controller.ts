@@ -100,7 +100,7 @@ class AuthController extends BaseController {
       path: AuthApiPath.DELETE_USER,
       method: 'DELETE',
       handler: (options) => {
-        return this.deleteUser(
+        return this.deleteAuthenticatedUser(
           options as APIHandlerOptions<{
             user: UserAuthResponseDto;
           }>,
@@ -248,7 +248,7 @@ class AuthController extends BaseController {
     };
   }
 
-  private async deleteUser(
+  private async deleteAuthenticatedUser(
     options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
   ): Promise<APIHandlerResponse> {
     return {
