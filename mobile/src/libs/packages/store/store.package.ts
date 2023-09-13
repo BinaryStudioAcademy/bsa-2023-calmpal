@@ -13,6 +13,7 @@ import { reducer as journalReducer } from '#slices/journal/journal';
 
 import { type Config } from '../config/config';
 import { notification } from '../notification/notification';
+import { player } from '../player/player';
 import { storage } from '../storage/storage';
 import { handleError } from './middlewares/middlewares';
 
@@ -25,6 +26,7 @@ type ExtraArguments = {
   authApi: typeof authApi;
   journalApi: typeof journalApi;
   notification: typeof notification;
+  player: typeof player;
   storage: typeof storage;
 };
 
@@ -62,6 +64,7 @@ class Store {
       authApi,
       journalApi,
       notification,
+      player,
       storage,
     };
   }

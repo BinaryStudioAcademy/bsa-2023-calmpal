@@ -78,7 +78,11 @@ const Journal: React.FC = () => {
             label="Add new note"
             to={''}
             style={styles.link}
-            icon={<Icon name="plus" color={AppColor.BLUE_300} />}
+            icon={
+              <View style={styles.icon}>
+                <Icon name="plus" color={AppColor.BLUE_300} />
+              </View>
+            }
           />
         </View>
       </View>
