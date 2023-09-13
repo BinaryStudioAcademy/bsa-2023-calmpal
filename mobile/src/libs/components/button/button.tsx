@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Icon, Pressable, Text } from '#libs/components/components';
+import { Icon, Pressable, Text, View } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
 import { type IconName } from '#libs/types/types';
 
@@ -13,6 +13,7 @@ type Properties = {
   type?: 'solid' | 'outlined' | 'transparent';
   isRounded?: boolean;
   iconName?: IconName;
+  isAddButton?: boolean;
 };
 
 const Button: React.FC<Properties> = ({
@@ -22,6 +23,7 @@ const Button: React.FC<Properties> = ({
   type = 'solid',
   isRounded,
   iconName,
+  isAddButton,
 }) => {
   return (
     <Pressable
@@ -30,29 +32,33 @@ const Button: React.FC<Properties> = ({
         type === 'solid' && styles.buttonSolid,
         type === 'outlined' && styles.buttonOutlined,
         type === 'transparent' && styles.buttonTransparent,
-        isRounded && styles.buttonRounded,
         isDisabled && styles.buttonDisabled,
       ]}
       onPress={onPress}
       disabled={isDisabled}
     >
-      {iconName ? (
-        <Icon
-          name={iconName}
-          color={isRounded ? AppColor.BLUE_200 : AppColor.GRAY_400}
-        />
-      ) : (
-        <Text
-          style={[
-            styles.label,
-            type === 'solid' && styles.labelSolid,
-            type === 'outlined' && styles.labelOutlined,
-            isDisabled && styles.labelDisabled,
-          ]}
-        >
-          {label}
-        </Text>
-      )}
+      {iconName &&
+        (isRounded ? (
+          <View style={styles.buttonRounded}>
+            <Icon name={iconName} color={AppColor.BLUE_200} />
+          </View>
+        ) : (
+          <Icon
+            name={iconName}
+            color={isAddButton ? AppColor.BLUE_300 : AppColor.GRAY_400}
+          />
+        ))}
+      <Text
+        style={[
+          styles.label,
+          type === 'solid' && styles.labelSolid,
+          type === 'outlined' && styles.labelOutlined,
+          isAddButton && styles.addButtonLabel,
+          isDisabled && styles.labelDisabled,
+        ]}
+      >
+        {label}
+      </Text>
     </Pressable>
   );
 };

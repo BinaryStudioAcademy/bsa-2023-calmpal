@@ -1,7 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -10,15 +8,6 @@ const styles = StyleSheet.create({
   },
   list: {
     paddingHorizontal: 16,
-  },
-  linkWrapper: {
-    alignItems: 'center',
-  },
-  link: {
-    color: AppColor.BLUE_300,
-    fontSize: 16,
-    fontWeight: '600',
-    paddingLeft: 30,
   },
 });
 

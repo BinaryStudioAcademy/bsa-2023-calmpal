@@ -34,6 +34,7 @@ const Controls: React.FC<Properties> = ({ isPlaying }) => {
         iconName={isPlaying ? 'pause' : 'play'}
         onPress={handlePlayPause}
         isRounded
+        type="transparent"
       />
       <Button
         iconName="forward"
