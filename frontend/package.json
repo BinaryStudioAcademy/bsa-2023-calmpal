@@ -31,7 +31,6 @@
     "vite-plugin-svgr": "3.2.0"
   },
   "devDependencies": {
-    "@esbuild/win32-x64": "0.18.20",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
     "@vitejs/plugin-react": "4.0.4",
