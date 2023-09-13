@@ -46,7 +46,6 @@ export {
 export {
   type FileGetAllItemResponseDto,
   type FileUploadRequestDto,
-  type FileUploadResponseDto,
   type S3FileUploadRequestDto,
 } from './packages/files/files.js';
 export { FilesApiPath } from './packages/files/files.js';
