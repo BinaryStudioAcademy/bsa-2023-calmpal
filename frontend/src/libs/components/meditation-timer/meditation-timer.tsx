@@ -53,33 +53,3 @@ const MeditationTimer: React.FC<TimerProperties> = ({
 };
 
 export { MeditationTimer };
-
-{
-  /* <button
-key={duration}
-className={getValidClassNames(
-  styles['duration-button'],
-  selectedDuration === duration ? styles['active'] : '',
-)}
-onClick={handleClick(duration)}
->
-<span
-  className={getValidClassNames(
-    selectedDuration === duration ? styles['active-text'] : '',
-  )}
->
-  {
-    MEDITATION_DURATION[
-      duration as keyof typeof MEDITATION_DURATION
-    ]
-  }
-</span>
-<span
-  className={getValidClassNames(
-    selectedDuration === duration ? styles['active-text'] : '',
-  )}
->
-  {DURATION_UNIT.MINUTES}
-</span>
-</button> */
-}
