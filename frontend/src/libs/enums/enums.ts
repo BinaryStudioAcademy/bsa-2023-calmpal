@@ -6,4 +6,5 @@ export {
   AppEnvironment,
   ContentType,
   ServerErrorType,
+  UserRole,
 } from 'shared/build/index.js';
