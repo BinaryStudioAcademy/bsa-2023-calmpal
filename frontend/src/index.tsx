@@ -16,6 +16,7 @@ import { AppRoute } from '#libs/enums/enums.js';
 import { store } from '#libs/packages/store/store.js';
 import { Auth } from '#pages/auth/auth.js';
 import { Chat } from '#pages/chat/chat.js';
+import { ChatMessages } from '#pages/chat/chat-messages.js';
 import { Dashboard } from '#pages/dashboard/dashboard.js';
 import { Journal } from '#pages/journal/journal.js';
 import { Meditation } from '#pages/meditation/meditation.js';
@@ -83,6 +84,16 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                     </SidebarWrapper>
                   </ProtectedRoute>
                 ),
+                children: [
+                  {
+                    path: AppRoute.CHATS_$ID,
+                    element: (
+                      <ProtectedRoute>
+                        <ChatMessages />
+                      </ProtectedRoute>
+                    ),
+                  },
+                ],
               },
               {
                 path: AppRoute.JOURNAL,
