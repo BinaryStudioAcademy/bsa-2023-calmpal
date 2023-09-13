@@ -14,7 +14,7 @@ type Properties = {
   type?: 'button' | 'submit';
   iconName?: IconName;
   iconColor?: ValueOf<typeof IconColor>;
-  style?: ButtonStyle;
+  style?: ButtonStyle[];
   isLoading?: boolean;
   isDisabled?: boolean;
   isLabelVisuallyHidden?: boolean;
@@ -26,7 +26,7 @@ const Button: React.FC<Properties> = ({
   label,
   iconName,
   iconColor,
-  style = 'primary',
+  style = ['primary'],
   isLoading = false,
   isDisabled = false,
   isLabelVisuallyHidden = false,
@@ -35,7 +35,11 @@ const Button: React.FC<Properties> = ({
   return (
     <button
       type={type}
-      className={styles[style]}
+      className={getValidClassNames(
+        ...style.map((s) => {
+          return styles[s];
+        }),
+      )}
       onClick={onClick}
       disabled={isDisabled || isLoading}
     >

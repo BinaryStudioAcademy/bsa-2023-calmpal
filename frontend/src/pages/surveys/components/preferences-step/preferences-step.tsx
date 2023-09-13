@@ -100,7 +100,7 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
       <Button
         type="submit"
         label="Continue"
-        style="secondary"
+        style={['secondary']}
         isDisabled={!isValid}
       />
     </form>
