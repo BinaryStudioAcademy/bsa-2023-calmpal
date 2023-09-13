@@ -1,17 +1,23 @@
-import { UserRole } from '#libs/enums/enums.js';
+import { useAppSelector } from '#libs/hooks/hooks.js';
 
 import { ChatMessage } from './components/components.js';
 import { MOCK_MESSAGES } from './libs/constants/constants.js';
 
 const ChatMessages: React.FC = () => {
+  const { authenticatedUser } = useAppSelector(({ auth }) => {
+    return {
+      authenticatedUser: auth.authenticatedUser,
+    };
+  });
+
   return (
     <>
       {MOCK_MESSAGES.map((item) => {
         return (
           <ChatMessage
             key={item.id}
-            item={item}
-            isSender={item.sender === UserRole.USER}
+            message={item.message}
+            isSender={item.senderId === authenticatedUser?.id}
           />
         );
       })}
