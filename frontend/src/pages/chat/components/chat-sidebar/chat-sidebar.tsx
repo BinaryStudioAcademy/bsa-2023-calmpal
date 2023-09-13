@@ -1,6 +1,6 @@
 import cardPlaceholder from '#assets/img/card-image-placeholder.png';
 import { Card, Icon, Link, Search } from '#libs/components/components.js';
-import { IconColor } from '#libs/enums/enums.js';
+import { AppRoute, IconColor } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -51,14 +51,20 @@ const ChatSidebar: React.FC = () => {
         </div>
         <div className={styles['chat-list']}>
           {filteredElements.map((filteredChat) => {
+            const chatLink = AppRoute.CHATS_$ID.replace(
+              ':id',
+              String(filteredChat.id),
+            ) as typeof AppRoute.CHATS_$ID;
+
             return (
-              <Card
-                title={filteredChat.name}
-                imageUrl={cardPlaceholder}
-                onClick={handleSelectChat}
-                isActive={false}
-                key={filteredChat.id}
-              />
+              <Link key={filteredChat.id} to={chatLink}>
+                <Card
+                  title={filteredChat.name}
+                  imageUrl={cardPlaceholder}
+                  onClick={handleSelectChat}
+                  isActive={false}
+                />
+              </Link>
             );
           })}
         </div>
