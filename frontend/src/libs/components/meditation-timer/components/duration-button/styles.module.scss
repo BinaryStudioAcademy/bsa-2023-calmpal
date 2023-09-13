@@ -6,8 +6,9 @@
   width: 80px;
   height: 80px;
   background-color: var(--white);
-  border: 1px solid var(--gray-200);
+  border: none;
   border-radius: 50%;
+  box-shadow: 0 4px 23px 0 var(--violet-100);
 }
 
 .duration-button:hover {
