@@ -104,7 +104,8 @@ const AudioControls: React.FC<Properties> = ({
       <div className={styles['controls']}>
         <Button
           onClick={handlePrevious}
-          style="rounded-transparent"
+          // eslint-disable-next-line sonarjs/no-duplicate-string
+          style={['rounded-transparent']}
           iconName="previous"
           label="Play previous meditation"
           isLabelVisuallyHidden
@@ -112,7 +113,7 @@ const AudioControls: React.FC<Properties> = ({
         <div className={styles['button-wrapper']}>
           <Button
             onClick={handleSkipBackward}
-            style="rounded-transparent"
+            style={['rounded-transparent']}
             iconName="backward"
             label="Back 30 seconds"
             isLabelVisuallyHidden
@@ -120,14 +121,14 @@ const AudioControls: React.FC<Properties> = ({
 
           <Button
             onClick={handlePlayToggle}
-            style="rounded"
+            style={['rounded']}
             iconName={isPlaying ? 'pause' : 'audio-play-icon'}
             label="Play or pause a meditation"
             isLabelVisuallyHidden
           />
           <Button
             onClick={handleSkipForward}
-            style="rounded-transparent"
+            style={['rounded-transparent']}
             iconName="forward"
             label="Forward 30 seconds"
             isLabelVisuallyHidden
@@ -135,7 +136,7 @@ const AudioControls: React.FC<Properties> = ({
         </div>
         <Button
           onClick={onNextTrack}
-          style="rounded-transparent"
+          style={['rounded-transparent']}
           iconName="next"
           label="Play next meditation"
           isLabelVisuallyHidden

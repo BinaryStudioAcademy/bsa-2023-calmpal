@@ -1,5 +1,6 @@
-import { getValidClassNames } from '#libs/helpers/helpers.js';
+import { Button } from '#libs/components/components.js';
 import { useCallback, useState } from '#libs/hooks/hooks.js';
+import { type ButtonStyle } from '#libs/types/types.js';
 
 import { DURATION_UNIT, MEDITATION_DURATION } from './libs/constants.js';
 import styles from './styles.module.scss';
@@ -27,33 +28,20 @@ const MeditationTimer: React.FC<TimerProperties> = ({
       <div className={styles['duration-container']}>
         {Object.keys(MEDITATION_DURATION).map((duration) => {
           return (
-            <button
+            <Button
               key={duration}
-              className={getValidClassNames(
-                styles['duration-button'],
-                selectedDuration === duration ? styles['active'] : '',
-              )}
+              label={`${
+                MEDITATION_DURATION[
+                  duration as keyof typeof MEDITATION_DURATION
+                ]
+              }
+              ${DURATION_UNIT.MINUTES}`}
+              style={[
+                'duration-button',
+                selectedDuration === duration ? 'active' : ('' as ButtonStyle),
+              ]}
               onClick={handleClick(duration)}
-            >
-              <span
-                className={getValidClassNames(
-                  selectedDuration === duration ? styles['active-text'] : '',
-                )}
-              >
-                {
-                  MEDITATION_DURATION[
-                    duration as keyof typeof MEDITATION_DURATION
-                  ]
-                }
-              </span>
-              <span
-                className={getValidClassNames(
-                  selectedDuration === duration ? styles['active-text'] : '',
-                )}
-              >
-                {DURATION_UNIT.MINUTES}
-              </span>
-            </button>
+            />
           );
         })}
       </div>

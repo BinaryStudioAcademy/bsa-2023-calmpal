@@ -44,7 +44,7 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
           <span className={styles['duration']}>{displayedDuration}</span>
         </div>
         <Button
-          style="play-button"
+          style={['play-button']}
           onClick={handlePlayClick}
           label="Play meditation"
           isLabelVisuallyHidden={true}
