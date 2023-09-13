@@ -89,7 +89,9 @@ class AuthService {
     return user;
   }
 
-  public async delete(id: number): Promise<UserDeleteResponseDto> {
+  public async deleteAuthenticatedUser(
+    id: number,
+  ): Promise<UserDeleteResponseDto> {
     const user = await this.userService.findById(id);
     if (!user) {
       throw new UsersError({

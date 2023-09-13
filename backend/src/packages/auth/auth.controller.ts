@@ -253,7 +253,7 @@ class AuthController extends BaseController {
   ): Promise<APIHandlerResponse> {
     return {
       status: HTTPCode.OK,
-      payload: await this.authService.delete(options.user.id),
+      payload: await this.authService.deleteAuthenticatedUser(options.user.id),
     };
   }
 }
