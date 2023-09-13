@@ -4,7 +4,7 @@ type ButtonStyle =
   | 'rounded'
   | 'rounded-transparent'
   | 'play-button'
-  | 'duration-button'
-  | 'active';
+  | 'active'
+  | 'start-button';
 
 export { type ButtonStyle };
