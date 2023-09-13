@@ -1,0 +1,9 @@
+.chat-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 32px;
+  padding: 30px 36px 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}

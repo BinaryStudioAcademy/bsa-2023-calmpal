@@ -16,7 +16,9 @@
   position: fixed;
   display: flex;
   flex-direction: column;
-  gap: 262px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 190px;
   width: 88px;
   height: 100%;
   padding: 16px;
