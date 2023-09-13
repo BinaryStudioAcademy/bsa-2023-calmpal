@@ -1,7 +1,6 @@
 import React from 'react';
 
-import BackArrowImage from '#assets/img/icons/back-arrow.svg';
-import { TouchableOpacity } from '#libs/components/components';
+import { Icon, TouchableOpacity } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
 import { useNavigation } from '#libs/hooks/hooks';
 
@@ -16,7 +15,7 @@ const BackButton: React.FC = () => {
 
   return (
     <TouchableOpacity style={styles.arrow} onPress={handleGoBack}>
-      <BackArrowImage color={AppColor.BLUE_200} />
+      <Icon color={AppColor.BLUE_200} name="back-arrow" />
     </TouchableOpacity>
   );
 };

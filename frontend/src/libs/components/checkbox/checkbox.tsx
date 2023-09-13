@@ -7,13 +7,15 @@ type Properties = {
 
 const Checkbox: React.FC<Properties> = ({ label, onChange }) => {
   return (
-    <label className={styles['container']}>
+    <label>
       <input
         className={styles['checkbox']}
         type="checkbox"
         onChange={onChange}
       />
-      <span className={styles['label']}>{label}</span>
+      <div className={styles['container']}>
+        <span className={styles['label']}>{label}</span>
+      </div>
     </label>
   );
 };
