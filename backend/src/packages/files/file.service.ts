@@ -69,7 +69,7 @@ class FileService implements Service {
       }),
     );
 
-    return { id: file.toObject().id, url, contentType: payload.contentType };
+    return file.toObject();
   }
 
   public update(): ReturnType<Service['update']> {

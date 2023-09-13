@@ -26,6 +26,12 @@ import { type FileUploadRequestDto } from './libs/types/types.js';
  *            type: string
  *          contentType:
  *            type: string
+ *           createdAt:
+ *            type: string
+ *            format: date-time
+ *          updatedAt:
+ *            type: string
+ *            format: date-time
  *      Error:
  *        type: object
  *        properties:
