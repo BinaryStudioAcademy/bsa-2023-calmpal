@@ -15,7 +15,9 @@ const fileUpload = fp<Options>((fastify, { extensions }, done) => {
 
   fastify.addHook(ControllerHook.PRE_VALIDATION, async (request) => {
     if (!request.isMultipart()) {
-      return;
+      throw new FileError({
+        message: ExceptionMessage.NOT_MULTIPART,
+      });
     }
 
     const { file } = request.body as { file: MultipartFile };

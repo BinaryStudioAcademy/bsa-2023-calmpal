@@ -6,8 +6,8 @@ import { FileEntity } from '#packages/files/file.entity.js';
 import { type FileRepository } from '#packages/files/file.repository.js';
 
 import {
+  type FileGetAllItemResponseDto,
   type FileUploadRequestDto,
-  type FileUploadResponseDto,
 } from './libs/types/types.js';
 
 type FileServiceDependencies = {
@@ -48,7 +48,7 @@ class FileService implements Service {
 
   public async create(
     payload: FileUploadRequestDto,
-  ): Promise<FileUploadResponseDto> {
+  ): Promise<FileGetAllItemResponseDto> {
     const fileExtensionIndex = 1;
 
     const fileKey = `${crypto.randomUUID()}.${
@@ -62,15 +62,14 @@ class FileService implements Service {
     });
 
     const url = this.s3.getUrl(fileKey);
-    const presignedUrl = await this.s3.getPreSignedUrl(fileKey);
-    await this.fileRepository.create(
+    const file = await this.fileRepository.create(
       FileEntity.initializeNew({
         url,
         contentType: payload.contentType,
       }),
     );
 
-    return { url: presignedUrl };
+    return { id: file.toObject().id, url, contentType: payload.contentType };
   }
 
   public update(): ReturnType<Service['update']> {

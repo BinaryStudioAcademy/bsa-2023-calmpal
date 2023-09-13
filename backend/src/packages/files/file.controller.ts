@@ -18,7 +18,13 @@ import { type FileUploadRequestDto } from './libs/types/types.js';
  *      File:
  *        type: object
  *        properties:
+ *          id:
+ *            type: number
+ *            format: number
+ *            minimum: 1
  *          url:
+ *            type: string
+ *          contentType:
  *            type: string
  *      Error:
  *        type: object
@@ -72,9 +78,7 @@ class FileController extends BaseController {
    *            application/json:
    *              schema:
    *                type: object
-   *                properties:
-   *                  message:
-   *                    $ref: '#/components/schemas/File'
+   *                $ref: '#/components/schemas/File'
    *        401:
    *          description: Unauthorized
    *          content:
