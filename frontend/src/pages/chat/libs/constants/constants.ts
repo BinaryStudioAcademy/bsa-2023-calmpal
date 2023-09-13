@@ -2,6 +2,8 @@ import { UserRole } from '#libs/enums/enums.js';
 import { generateUUID } from '#libs/helpers/helpers.js';
 import { type ChatMessage } from '#libs/types/types.js';
 
+const EMPTY_ARRAY_LENGTH = 0;
+
 const CHAT_INPUT_DEFAULT_VALUES = {
   text: '',
 } as const;
@@ -41,4 +43,4 @@ const MOCK_MESSAGES: ChatMessage[] = [
   },
 ];
 
-export { CHAT_INPUT_DEFAULT_VALUES, MOCK_MESSAGES };
+export { CHAT_INPUT_DEFAULT_VALUES, EMPTY_ARRAY_LENGTH, MOCK_MESSAGES };
