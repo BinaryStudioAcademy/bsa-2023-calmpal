@@ -84,3 +84,7 @@ export {
   type UserSignUpResponseDto,
   userSignUpValidationSchema,
 } from './packages/users/users.js';
+export {
+  type ChatMessageGetAllItemResponseDto,
+  type ChatMessageGetAllResponseDto,
+} from '#packages/chat-messages/chat-messages.js';
