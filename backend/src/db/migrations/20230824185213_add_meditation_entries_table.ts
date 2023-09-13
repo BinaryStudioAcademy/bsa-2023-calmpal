@@ -1,6 +1,6 @@
 import { type Knex } from 'knex';
 
-import { DatabaseTableName } from '#libs/packages/database/database.js';
+const TABLE_NAME = 'meditation_entries';
 
 const ColumnName = {
   ID: 'id',
@@ -18,31 +18,28 @@ const RelationRule = {
 } as const;
 
 function up(knex: Knex): Promise<void> {
-  return knex.schema.createTable(
-    DatabaseTableName.MEDITATION_ENTRIES,
-    (table) => {
-      table.increments(ColumnName.ID).primary();
-      table
-        .integer(ColumnName.TOPIC_ID)
-        .notNullable()
-        .references(ColumnName.ID)
-        .inTable(ForeignTable.MEDITATION_TOPICS)
-        .onUpdate(RelationRule.CASCADE)
-        .onDelete(RelationRule.CASCADE);
-      table
-        .dateTime(ColumnName.CREATED_AT)
-        .notNullable()
-        .defaultTo(knex.fn.now());
-      table
-        .dateTime(ColumnName.UPDATED_AT)
-        .notNullable()
-        .defaultTo(knex.fn.now());
-    },
-  );
+  return knex.schema.createTable(TABLE_NAME, (table) => {
+    table.increments(ColumnName.ID).primary();
+    table
+      .integer(ColumnName.TOPIC_ID)
+      .notNullable()
+      .references(ColumnName.ID)
+      .inTable(ForeignTable.MEDITATION_TOPICS)
+      .onUpdate(RelationRule.CASCADE)
+      .onDelete(RelationRule.CASCADE);
+    table
+      .dateTime(ColumnName.CREATED_AT)
+      .notNullable()
+      .defaultTo(knex.fn.now());
+    table
+      .dateTime(ColumnName.UPDATED_AT)
+      .notNullable()
+      .defaultTo(knex.fn.now());
+  });
 }
 
 function down(knex: Knex): Promise<void> {
-  return knex.schema.dropTableIfExists(DatabaseTableName.MEDITATION_ENTRIES);
+  return knex.schema.dropTableIfExists(TABLE_NAME);
 }
 
 export { down, up };
