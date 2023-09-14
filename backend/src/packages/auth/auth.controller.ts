@@ -231,6 +231,8 @@ class AuthController extends BaseController {
    * /auth/authenticated-user:
    *    get:
    *      description: Returns an authenticated user
+   *      security:
+   *       - bearerAuth: []
    *      responses:
    *        200:
    *          description: Successful operation
