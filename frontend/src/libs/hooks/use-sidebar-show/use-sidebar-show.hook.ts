@@ -10,7 +10,7 @@ const useSidebarState = (): UseSidebarStateReturn => {
 
   const isSidebarShown =
     sidebarMode.get('sidebarMode') === 'show' ||
-    sidebarMode.get('sidebarMode') === null;
+    !sidebarMode.get('sidebarMode');
 
   const setIsSidebarShown = (value: boolean): void => {
     setSidebarMode((previous) => {
