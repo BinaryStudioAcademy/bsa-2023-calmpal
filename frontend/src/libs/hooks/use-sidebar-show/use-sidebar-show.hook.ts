@@ -1,5 +1,20 @@
-const useSidebarShow = (searchParameter: string | null): boolean => {
-  return searchParameter === 'show' || searchParameter === null;
+import { type SetURLSearchParams } from '#libs/types/types.js';
+
+import { useSearchParams as useSearchParameters } from '../hooks.js';
+
+type UseSidebarStateReturn = {
+  isSidebarShownParameter: boolean;
+  setIsSidebarShown: SetURLSearchParams;
 };
 
-export { useSidebarShow };
+const useSidebarState = (): UseSidebarStateReturn => {
+  const [isSidebarShown, setIsSidebarShown] = useSearchParameters();
+
+  const isSidebarShownParameter =
+    isSidebarShown.get('sidebarMode') === 'show' ||
+    isSidebarShown.get('sidebarMode') === null;
+
+  return { isSidebarShownParameter, setIsSidebarShown };
+};
+
+export { useSidebarState };
