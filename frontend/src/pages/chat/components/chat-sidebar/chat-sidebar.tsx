@@ -6,6 +6,7 @@ import {
   useAppSelector,
   useCallback,
   useEffect,
+  useParams,
   useSearch,
 } from '#libs/hooks/hooks.js';
 import { actions as chatsActions } from '#slices/chats/chats.js';
@@ -13,6 +14,7 @@ import { actions as chatsActions } from '#slices/chats/chats.js';
 import styles from './styles.module.scss';
 
 const ChatSidebar: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
   const { chats } = useAppSelector(({ chats }) => {
     return {
@@ -62,6 +64,7 @@ const ChatSidebar: React.FC = () => {
                   title={filteredChat.name}
                   imageUrl={cardPlaceholder}
                   onClick={handleSelectChat}
+                  isActive={String(filteredChat.id) === id}
                 />
               </Link>
             );
