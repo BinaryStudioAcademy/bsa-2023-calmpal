@@ -10,10 +10,8 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 import styles from './styles.module.scss';
 
 const UserProfileInfo: React.FC = () => {
-  const { authenticatedUser } = useAppSelector(({ auth }) => {
-    return {
-      authenticatedUser: auth.authenticatedUser,
-    };
+  const fullName = useAppSelector(({ auth }) => {
+    return (auth.authenticatedUser as UserAuthResponseDto).fullName;
   });
 
   return (
@@ -28,9 +26,7 @@ const UserProfileInfo: React.FC = () => {
           <div className={styles['avatar-container']}>
             <img src={avatar} alt="avatar" className={styles['avatar']} />
           </div>
-          <span className={styles['user-name']}>
-            {(authenticatedUser as UserAuthResponseDto).fullName}
-          </span>
+          <span className={styles['user-name']}>{fullName}</span>
         </div>
       </SidebarBody>
     </Sidebar>
