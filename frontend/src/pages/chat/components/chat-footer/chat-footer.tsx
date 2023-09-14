@@ -19,10 +19,6 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
 
   const onSubmit = useCallback(
     ({ text }: ChatInputValue): void => {
-      if (!text.trim()) {
-        return;
-      }
-
       onSend({ text });
       reset();
     },
