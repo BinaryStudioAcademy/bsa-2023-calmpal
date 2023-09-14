@@ -1,10 +1,6 @@
-import {
-  AppRoute,
-  type ContentType,
-  ServerErrorType,
-} from '#libs/enums/enums.js';
+import { type ContentType, ServerErrorType } from '#libs/enums/enums.js';
 import { configureString } from '#libs/helpers/helpers.js';
-import { type HTTP, HTTPCode } from '#libs/packages/http/http.js';
+import { type HTTP, type HTTPCode } from '#libs/packages/http/http.js';
 import { HTTPError, HTTPHeader } from '#libs/packages/http/http.js';
 import { type Storage, StorageKey } from '#libs/packages/storage/storage.js';
 import { type ServerErrorResponse, type ValueOf } from '#libs/types/types.js';
@@ -108,11 +104,6 @@ class BaseHttpApi implements HTTPApi {
         errorType: ServerErrorType.COMMON,
         message: response.statusText,
       };
-    }
-
-    if (response.status === HTTPCode.UNAUTHORIZED) {
-      await this.storage.drop(StorageKey.TOKEN);
-      window.location.assign(AppRoute.SIGN_IN);
     }
 
     const isCustomException = Boolean(parsedException.errorType);
