@@ -1,4 +1,5 @@
 import React from 'react';
+import KeepAwake from 'react-native-keep-awake';
 
 import { useEffect, useState } from '#libs/hooks/hooks';
 import {
@@ -46,10 +47,17 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
       }
     },
   );
-
+  useEffect(() => {
+    if (isPlaying) {
+      KeepAwake.activate();
+    } else {
+      KeepAwake.deactivate();
+    }
+  }, [isPlaying]);
   useEffect(() => {
     return () => {
       void player.stopPlaying();
+      KeepAwake.deactivate();
     };
   }, []);
 
