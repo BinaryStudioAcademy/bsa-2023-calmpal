@@ -70,15 +70,12 @@ class UserService implements Service {
       passwordSalt,
     );
     const item = await this.userRepository.create(
-      UserWithPasswordEntity.initialize({
+      UserWithPasswordEntity.initializeNew({
         fullName: payload.fullName,
         email: payload.email,
         isSurveyCompleted: false,
         passwordSalt,
         passwordHash,
-        id: null,
-        createdAt: null,
-        updatedAt: null,
       }),
     );
     const user = item.toObject();
