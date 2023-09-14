@@ -22,8 +22,9 @@
 
 .info {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 .icon-container {
@@ -40,11 +41,11 @@
   height: 90%;
 }
 
-.list .search {
+.search {
   margin-top: 23px;
 }
 
-.list .meditation-list {
+.meditation-list {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -59,30 +60,22 @@
 }
 
 @media (width < 900px) {
-  .container {
-    width: 250px;
-  }
-
   .meditation-list {
     padding: 0 15px;
   }
 
-  .list .search {
+  .search {
     width: 100%;
     padding: 0 15px;
   }
 }
 
 @media (width < 768px) {
-  .container {
-    width: 100%;
-  }
-
   .meditation-list {
     padding: 0 15px;
   }
 
-  .list .search {
+  .search {
     width: 100%;
     padding: 0 15px;
   }

@@ -1,6 +1,7 @@
 import { ReactComponent as ArrowIcon } from '#assets/icons/arrow.svg';
 import { ReactComponent as AudioPlayIcon } from '#assets/icons/audio-player-play.svg';
 import { ReactComponent as BackwardIcon } from '#assets/icons/backward.svg';
+import { ReactComponent as Back } from '#assets/icons/button-back.svg';
 import { ReactComponent as ChatSideBarIcon } from '#assets/icons/chat.svg';
 import { ReactComponent as ChatBotAvatarIcon } from '#assets/icons/chatbot-avatar.svg';
 import { ReactComponent as ChatsIcon } from '#assets/icons/chats.svg';
@@ -45,6 +46,7 @@ const iconNameToIcon: Record<
   'chatbot-avatar': ChatBotAvatarIcon,
   'chat-sidebar': ChatSideBarIcon,
   'send': SendIcon,
+  'back': Back,
   'sign-out': SignOutIcon,
   'user': UserIcon,
   'notification': NotificationIcon,
