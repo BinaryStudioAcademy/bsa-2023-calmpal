@@ -1,10 +1,10 @@
 import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
-import PlusIcon from '#assets/img/icons/plus.svg';
 import {
   Card,
   Header,
+  Icon,
   InputSearch,
   LinearGradient,
   Link,
@@ -73,7 +73,11 @@ const ChatList: React.FC = () => {
             label="Add new chat"
             to={`/${RootScreenName.SIGN_IN}`}
             style={styles.link}
-            icon={<PlusIcon color={AppColor.BLUE_300} />}
+            icon={
+              <View style={styles.icon}>
+                <Icon name="plus" color={AppColor.BLUE_300} />
+              </View>
+            }
           />
         </View>
       </View>

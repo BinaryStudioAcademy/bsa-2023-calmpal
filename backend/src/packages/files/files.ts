@@ -17,6 +17,6 @@ export { fileController, fileService };
 export { FileModel } from './file.model.js';
 export { type FileService } from './file.service.js';
 export {
+  type FileGetAllItemResponseDto,
   type FileUploadRequestDto,
-  type FileUploadResponseDto,
 } from './libs/types/types.js';
