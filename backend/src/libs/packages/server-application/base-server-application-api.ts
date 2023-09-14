@@ -55,6 +55,7 @@ class BaseServerApplicationApi implements ServerApplicationApi {
         },
       },
       apis: [`src/packages/**/*.controller.${controllerExtension}`],
+      security: [{ bearerAuth: [] }],
     });
   }
 }

@@ -105,6 +105,8 @@ class SurveyController extends BaseController {
    *          application/json:
    *            schema:
    *              $ref: '#/components/schemas/SurveyRequest'
+   *      security:
+   *       - bearerAuth: []
    *      responses:
    *        201:
    *          description: Successful operation
