@@ -5,7 +5,7 @@ type Chat = {
   name: string;
 };
 
-const NAME_INDEX_ADDITION = 1;
+const NAME_INDEX_INCREMENT_NUMBER = 1;
 
 const TABLE_NAME = 'chats';
 
@@ -36,7 +36,7 @@ async function down(knex: Knex): Promise<void> {
       .table(TABLE_NAME)
       .where(ColumnName.ID, item.id)
       .update({
-        name: `${item.name} #${index + NAME_INDEX_ADDITION}`,
+        name: `${item.name} #${index + NAME_INDEX_INCREMENT_NUMBER}`,
       });
   });
 
