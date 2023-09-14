@@ -9,7 +9,10 @@ import { type Logger } from '#libs/packages/logger/logger.js';
 
 import { type ChatMessageService } from './chat-message.service.js';
 import { ChatsApiPath } from './libs/enums/enums.js';
-import { type ChatMessageCreateRequestDto } from './libs/types/types.js';
+import {
+  type ChatMessageCreateRequestDto,
+  type ChatMessagesUrlParameters,
+} from './libs/types/types.js';
 
 class ChatMessageController extends BaseController {
   private chatMessageService: ChatMessageService;
@@ -26,6 +29,7 @@ class ChatMessageController extends BaseController {
         return this.create(
           options as APIHandlerOptions<{
             body: ChatMessageCreateRequestDto;
+            params: ChatMessagesUrlParameters;
           }>,
         );
       },
@@ -35,6 +39,7 @@ class ChatMessageController extends BaseController {
   private async create(
     options: APIHandlerOptions<{
       body: ChatMessageCreateRequestDto;
+      params: ChatMessagesUrlParameters;
     }>,
   ): Promise<APIHandlerResponse> {
     return {
