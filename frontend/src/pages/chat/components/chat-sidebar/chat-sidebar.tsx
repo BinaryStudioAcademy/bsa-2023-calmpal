@@ -41,7 +41,7 @@ const ChatSidebar: React.FC = () => {
         </div>
         <div className={styles['plus']}>
           <Link to="/chats">
-            <Icon name={'plus'} color={IconColor.BLUE} />
+            <Icon name="plus" color={IconColor.BLUE} />
           </Link>
         </div>
       </div>
@@ -62,7 +62,6 @@ const ChatSidebar: React.FC = () => {
                   title={filteredChat.name}
                   imageUrl={cardPlaceholder}
                   onClick={handleSelectChat}
-                  isActive={false}
                 />
               </Link>
             );
