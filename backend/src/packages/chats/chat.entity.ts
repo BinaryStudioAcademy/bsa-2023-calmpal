@@ -55,12 +55,7 @@ class ChatEntity implements Entity {
     });
   }
 
-  public static initializeNew({
-    name,
-  }: {
-    name: string;
-    members: UserToChatQueryResponse[];
-  }): ChatEntity {
+  public static initializeNew({ name }: { name: string }): ChatEntity {
     return new ChatEntity({
       id: null,
       name,
