@@ -79,6 +79,7 @@ export {
   type UserSignUpResponseDto,
   userSignUpValidationSchema,
 } from './packages/users/users.js';
+export { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants.js';
 export {
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,

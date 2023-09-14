@@ -1,7 +1,5 @@
 import { type ChatMessageGetAllItemResponseDto } from '#packages/chat-messages/chat-messages.js';
 
-const EMPTY_ARRAY_LENGTH = 0;
-
 const CHAT_INPUT_DEFAULT_VALUES = {
   message: '',
 } as const;
@@ -37,4 +35,5 @@ const MOCK_MESSAGES: ChatMessageGetAllItemResponseDto[] = [
   },
 ];
 
-export { CHAT_INPUT_DEFAULT_VALUES, EMPTY_ARRAY_LENGTH, MOCK_MESSAGES };
+export { CHAT_INPUT_DEFAULT_VALUES, MOCK_MESSAGES };
+export { EMPTY_ARRAY_LENGTH } from 'shared/build/index.js';
