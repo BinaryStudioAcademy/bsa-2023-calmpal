@@ -24,10 +24,6 @@ const createMessageValidationSchema = joi.object<
     'any.required': ChatMessageValidationMessage.USER_ID_IS_REQUIRED,
     'number.base': ChatMessageValidationMessage.USER_ID_MUST_BE_NUMBER,
   }),
-  chatId: joi.number().integer().strict().required().messages({
-    'any.required': ChatMessageValidationMessage.CHAT_ID_IS_REQUIRED,
-    'number.base': ChatMessageValidationMessage.CHAT_ID_MUST_BE_NUMBER,
-  }),
 });
 
 export { createMessageValidationSchema };
