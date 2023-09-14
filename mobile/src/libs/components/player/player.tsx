@@ -48,6 +48,12 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
   );
 
   useEffect(() => {
+    return () => {
+      void player.stopPlaying();
+    };
+  }, []);
+
+  useEffect(() => {
     const addPlaylist = async (): Promise<void> => {
       const trackQueue = await player.getQueue();
       if (trackQueue.length === EMPTY_ARRAY_LENGTH) {
