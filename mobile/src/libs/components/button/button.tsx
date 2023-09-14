@@ -36,7 +36,7 @@ const Button: React.FC<Properties> = ({
     color = isRounded ? AppColor.BLUE_200 : AppColor.GRAY_400;
   }
 
-  const handleOnPress = (): void => {
+  const handlePress = (): void => {
     setIsPressed(true);
     onPress();
   };
@@ -59,7 +59,7 @@ const Button: React.FC<Properties> = ({
         isRounded && styles.buttonRounded,
         isDisabled && styles.buttonDisabled,
       ]}
-      onPress={handleOnPress}
+      onPress={handlePress}
       disabled={isDisabled}
     >
       {iconName ? (
