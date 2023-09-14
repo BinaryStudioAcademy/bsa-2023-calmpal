@@ -1,6 +1,4 @@
 .icon {
-  width: 24px;
-  height: 24px;
   filter: invert(43%) sepia(94%) saturate(426%) hue-rotate(185deg)
     brightness(94%) contrast(97%);
 }
@@ -36,6 +34,11 @@
 }
 
 .icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 52px;
   padding: 0;
   overflow: hidden;
   background-color: var(--white);
@@ -57,6 +60,8 @@
   width: 52px;
   height: 52px;
   line-height: 0px;
+  border: none;
+  border-radius: 50%;
 }
 
 @media (width < 768px) {

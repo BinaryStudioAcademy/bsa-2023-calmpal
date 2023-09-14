@@ -35,7 +35,12 @@ const Sidebar: React.FC<Properties> = ({ routes }) => {
                 <Link to={route.path}>
                   <span className={styles['link']}>
                     <span className="visually-hidden">Go to {route.name}</span>
-                    <Icon name={route.icon} color={IconColor.BLUE} />
+                    <Icon
+                      name={route.icon}
+                      color={IconColor.BLUE}
+                      width="24px"
+                      height="24px"
+                    />
                   </span>
                 </Link>
               </button>
