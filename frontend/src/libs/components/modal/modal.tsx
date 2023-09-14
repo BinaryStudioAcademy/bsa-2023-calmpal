@@ -1,5 +1,6 @@
 import { IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
+import { useHandleClickOutside, useRef } from '#libs/hooks/hooks.js';
 
 import { Button } from '../components.js';
 import styles from './styles.module.scss';
@@ -17,6 +18,9 @@ const Modal: React.FC<Properties> = ({
   title,
   onClose,
 }) => {
+  const reference = useRef<HTMLDivElement>(null);
+  useHandleClickOutside({ reference, onClose });
+
   return (
     <dialog
       open={isDisplayed}
