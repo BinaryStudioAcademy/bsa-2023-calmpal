@@ -13,7 +13,7 @@ const UserProfileInfo: React.FC = () => {
 
   return (
     <div className={styles['container']}>
-      <div className={styles['header']}>Profile</div>
+      <div className={styles['header']}>Home</div>
       <div className={styles['user-info']}>
         <div className={styles['avatar-container']}>
           <img src={avatar} alt="avatar" className={styles['avatar']} />

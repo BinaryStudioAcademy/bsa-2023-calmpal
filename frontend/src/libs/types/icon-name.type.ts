@@ -1,6 +1,9 @@
 type IconName =
   | 'arrow'
   | 'plus'
+  | 'sign-out'
+  | 'user'
+  | 'notification'
   | 'backward'
   | 'forward'
   | 'next'
@@ -11,6 +14,9 @@ type IconName =
   | 'home'
   | 'meditation'
   | 'chats'
-  | 'journal';
+  | 'journal'
+  | 'chat-sidebar'
+  | 'send'
+  | 'chatbot-avatar';
 
 export { type IconName };

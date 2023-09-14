@@ -33,10 +33,7 @@ class JournalEntryService implements Service {
     payload: JournalEntryCreateRequestDto,
   ): Promise<JournalEntryGetAllItemResponseDto> {
     const item = await this.journalEntryRepository.create(
-      JournalEntryEntity.initialize({
-        id: null,
-        createdAt: null,
-        updatedAt: null,
+      JournalEntryEntity.initializeNew({
         title: payload.title,
         text: payload.text,
       }),
