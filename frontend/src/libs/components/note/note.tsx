@@ -15,7 +15,6 @@ import {
   useFormController,
   useParams,
   useRef,
-  useState,
 } from '#libs/hooks/hooks.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
@@ -56,9 +55,6 @@ const Note: React.FC<Properties> = ({ className }) => {
 
   const titleReference = useRef<HTMLDivElement | null>(null);
   const textReference = useRef<HTMLDivElement | null>(null);
-
-  const [isFirstRender, setIsFirstRender] = useState(true);
-
   const cursorPosition = useRef<number | null>(null);
 
   const handleSaveNote = useCallback(
@@ -76,15 +72,6 @@ const Note: React.FC<Properties> = ({ className }) => {
       }
     },
     [dispatch, id],
-  );
-
-  const handleSaveNoteWithDebounce = useCallback(
-    debounce((data: NoteContent) => {
-      if (userId && id && isDirty) {
-        handleSaveNote(data);
-      }
-    }, NOTE_TIMEOUT),
-    [handleSaveNote, isDirty, userId, id],
   );
 
   const handleTitleChange: React.FormEventHandler<HTMLDivElement> =
@@ -114,18 +101,18 @@ const Note: React.FC<Properties> = ({ className }) => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (isFirstRender) {
-      setIsFirstRender(false);
-    } else {
-      handleSaveNoteWithDebounce({ title: titleValue, text: textValue });
-    }
-  }, [
-    handleSaveNoteWithDebounce,
-    titleValue,
-    textValue,
-    isDirty,
-    isFirstRender,
-  ]);
+    const handleSaveNoteWithDebounce = debounce((data: NoteContent) => {
+      if (id && isDirty) {
+        handleSaveNote(data);
+      }
+    }, NOTE_TIMEOUT);
+
+    handleSaveNoteWithDebounce({ title: titleValue, text: textValue });
+
+    return () => {
+      handleSaveNoteWithDebounce.clear();
+    };
+  }, [titleValue, textValue, isDirty, userId, id, handleSaveNote]);
 
   useEffect(() => {
     if (selectedJournalEntry) {
@@ -159,9 +146,8 @@ const Note: React.FC<Properties> = ({ className }) => {
 
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
-      handleSaveNoteWithDebounce.clear();
     };
-  }, [handleSaveNote, handleSaveNoteWithDebounce, textValue, titleValue]);
+  }, [handleSaveNote, textValue, titleValue]);
 
   if (
     journalEntriesDataStatus === DataStatus.IDLE ||
