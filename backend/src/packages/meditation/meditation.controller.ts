@@ -9,6 +9,7 @@ import { type Logger } from '#libs/packages/logger/logger.js';
 
 import { MeditationApiPath } from './libs/enums/enums.js';
 import { type MeditationEntryCreateRequestDto } from './libs/types/types.js';
+import { createMeditationEntryRequestValidationSchema } from './libs/validation-schemas/validation-schemas.js';
 import { type MeditationService } from './meditation.service.js';
 
 /**
@@ -49,6 +50,9 @@ class MeditationController extends BaseController {
     this.addRoute({
       path: MeditationApiPath.ROOT,
       method: 'POST',
+      validation: {
+        body: createMeditationEntryRequestValidationSchema,
+      },
       handler: (options) => {
         return this.create(
           options as APIHandlerOptions<{
