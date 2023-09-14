@@ -8,6 +8,7 @@ import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 
+import { ChatEntity } from './chat.entity.js';
 import { type ChatService } from './chat.service.js';
 import { MOCKED_CHAT_NAME } from './libs/constants/constants.js';
 import { ChatsApiPath } from './libs/enums/enums.js';
@@ -133,11 +134,15 @@ class ChatController extends BaseController {
       user: UserAuthResponseDto;
     }>,
   ): Promise<APIHandlerResponse> {
+    const chatEntity = ChatEntity.initializeNew({
+      name: MOCKED_CHAT_NAME,
+    });
+
     return {
       status: HTTPCode.CREATED,
       payload: await this.chatService.create({
-        name: MOCKED_CHAT_NAME,
         members: [options.user.id],
+        chatEntity,
       }),
     };
   }

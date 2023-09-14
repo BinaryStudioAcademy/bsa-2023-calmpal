@@ -43,8 +43,11 @@ class ChatRepository implements Repository {
     });
   }
 
-  public async create(payload: CreateChatPayload): Promise<ChatEntity> {
-    const { name, members } = payload;
+  public async create({
+    chatEntity,
+    members,
+  }: CreateChatPayload): Promise<ChatEntity> {
+    const { name } = chatEntity.toNewObject();
 
     const chat = await this.chatModel
       .query()
