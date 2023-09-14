@@ -13,6 +13,7 @@ import { type ChatService } from './chat.service.js';
 import { MOCKED_CHAT_NAME } from './libs/constants/constants.js';
 import { ChatsApiPath } from './libs/enums/enums.js';
 import { type ChatCreateRequestDto } from './libs/types/types.js';
+import { createChatValidationSchema } from './libs/validation-schemas/validation-schemas.js';
 
 /**
  * @swagger
@@ -80,6 +81,9 @@ class ChatController extends BaseController {
     this.addRoute({
       path: ChatsApiPath.ROOT,
       method: 'POST',
+      validation: {
+        body: createChatValidationSchema,
+      },
       handler: (options) => {
         return this.create(
           options as APIHandlerOptions<{
