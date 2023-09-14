@@ -24,7 +24,7 @@ const mockedSelectedChat = {
 };
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: (isSidebarShown: boolean) => void;
+  setIsSidebarShown: (value: boolean) => void;
 };
 
 const ChatSidebar: React.FC<Properties> = ({

@@ -6,7 +6,7 @@ import { UserProfileSidebar } from './components/components.js';
 import styles from './styles.module.scss';
 
 const UserProfile: React.FC = () => {
-  const { isSidebarShownParameter, setIsSidebarShown } = useSidebarState();
+  const { isSidebarShown, setIsSidebarShown } = useSidebarState();
 
   const handleBackButtonPress = useCallback(() => {
     setIsSidebarShown(true);
@@ -15,13 +15,13 @@ const UserProfile: React.FC = () => {
   return (
     <>
       <UserProfileSidebar
-        isSidebarShown={isSidebarShownParameter}
+        isSidebarShown={isSidebarShown}
         setIsSidebarShown={setIsSidebarShown}
       />
       <div
         className={getValidClassNames(
           styles['container'],
-          isSidebarShownParameter && styles['hide'],
+          isSidebarShown && styles['hide'],
         )}
       >
         <BackButton onGoBack={handleBackButtonPress} />

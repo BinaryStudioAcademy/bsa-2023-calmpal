@@ -4,16 +4,16 @@ import { MeditationList } from './meditation-list/meditation-list.js';
 import { MeditationSidebar } from './meditation-sidebar/meditation-sidebar.js';
 
 const Meditation: React.FC = () => {
-  const { isSidebarShownParameter, setIsSidebarShown } = useSidebarState();
+  const { isSidebarShown, setIsSidebarShown } = useSidebarState();
 
   return (
     <>
       <MeditationSidebar
-        isSidebarShown={isSidebarShownParameter}
+        isSidebarShown={isSidebarShown}
         setIsSidebarShown={setIsSidebarShown}
       />
       <MeditationList
-        isSidebarShown={isSidebarShownParameter}
+        isSidebarShown={isSidebarShown}
         setIsSidebarShown={setIsSidebarShown}
       />
     </>

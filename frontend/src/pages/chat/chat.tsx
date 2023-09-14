@@ -6,7 +6,7 @@ import { ChatLayout, ChatSidebar } from './components/components.js';
 import styles from './styles.module.scss';
 
 const Chat: React.FC = () => {
-  const { isSidebarShownParameter, setIsSidebarShown } = useSidebarState();
+  const { isSidebarShown, setIsSidebarShown } = useSidebarState();
 
   const handleBackButtonPress = useCallback(() => {
     setIsSidebarShown(true);
@@ -15,13 +15,13 @@ const Chat: React.FC = () => {
   return (
     <>
       <ChatSidebar
-        isSidebarShown={isSidebarShownParameter}
+        isSidebarShown={isSidebarShown}
         setIsSidebarShown={setIsSidebarShown}
       />
       <div
         className={getValidClassNames(
           styles['container'],
-          isSidebarShownParameter && styles['hide'],
+          isSidebarShown && styles['hide'],
         )}
       >
         <BackButton onGoBack={handleBackButtonPress} />

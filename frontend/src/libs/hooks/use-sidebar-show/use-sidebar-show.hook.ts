@@ -1,24 +1,24 @@
 import { useSearchParams as useSearchParameters } from '../hooks.js';
 
 type UseSidebarStateReturn = {
-  isSidebarShownParameter: boolean;
-  setIsSidebarShown: (isSidebarShown: boolean) => void;
+  isSidebarShown: boolean;
+  setIsSidebarShown: (value: boolean) => void;
 };
 
 const useSidebarState = (): UseSidebarStateReturn => {
   const [sidebarMode, setSidebarMode] = useSearchParameters();
 
-  const isSidebarShownParameter =
+  const isSidebarShown =
     sidebarMode.get('sidebarMode') === 'show' ||
     sidebarMode.get('sidebarMode') === null;
 
-  const setIsSidebarShown = (isSidebarShown: boolean): void => {
+  const setIsSidebarShown = (value: boolean): void => {
     setSidebarMode((previous) => {
-      return { ...previous, sidebarMode: isSidebarShown ? 'show' : 'hide' };
+      return { ...previous, sidebarMode: value ? 'show' : 'hide' };
     });
   };
 
-  return { isSidebarShownParameter, setIsSidebarShown };
+  return { isSidebarShown, setIsSidebarShown };
 };
 
 export { useSidebarState };

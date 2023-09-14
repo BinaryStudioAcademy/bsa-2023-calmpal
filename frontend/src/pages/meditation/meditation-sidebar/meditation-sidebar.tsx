@@ -12,7 +12,7 @@ import styles from './styles.module.scss';
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: (isSidebarShown: boolean) => void;
+  setIsSidebarShown: (value: boolean) => void;
 };
 
 const mockedMeditations = [{ id: 1, name: 'Meditation' }];

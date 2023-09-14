@@ -6,7 +6,7 @@ import { JournalSidebar } from './components/journal-sidebar/journal-sidebar.js'
 import styles from './styles.module.scss';
 
 const Journal: React.FC = () => {
-  const { isSidebarShownParameter, setIsSidebarShown } = useSidebarState();
+  const { isSidebarShown, setIsSidebarShown } = useSidebarState();
 
   const handleBackButtonPress = useCallback(() => {
     setIsSidebarShown(true);
@@ -15,13 +15,13 @@ const Journal: React.FC = () => {
   return (
     <>
       <JournalSidebar
-        isSidebarShown={isSidebarShownParameter}
+        isSidebarShown={isSidebarShown}
         setIsSidebarShown={setIsSidebarShown}
       />
       <div
         className={getValidClassNames(
           styles['container'],
-          isSidebarShownParameter && styles['hide'],
+          isSidebarShown && styles['hide'],
         )}
       >
         <BackButton onGoBack={handleBackButtonPress} />
