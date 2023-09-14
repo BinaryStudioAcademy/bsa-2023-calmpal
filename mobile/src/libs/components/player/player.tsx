@@ -11,11 +11,7 @@ import {
 import { type Track } from '#libs/types/types';
 
 import { Controls, ProgressBar } from './components/components';
-import {
-  EMPTY_ARRAY_LENGTH,
-  MOCKED_PLAYLIST,
-  TRACK_START_INDEX,
-} from './libs/constants';
+import { MOCKED_PLAYLIST, TRACK_START_INDEX } from './libs/constants';
 
 type Properties = {
   setCurrentTrack: React.Dispatch<React.SetStateAction<Track | null>>;
@@ -47,6 +43,7 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
       }
     },
   );
+
   useEffect(() => {
     if (isPlaying) {
       KeepAwake.activate();
@@ -54,6 +51,7 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
       KeepAwake.deactivate();
     }
   }, [isPlaying]);
+
   useEffect(() => {
     return () => {
       void player.stopPlaying();
@@ -63,14 +61,9 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
 
   useEffect(() => {
     const addPlaylist = async (): Promise<void> => {
-      const trackQueue = await player.getQueue();
-      if (trackQueue.length === EMPTY_ARRAY_LENGTH) {
-        void player.setPlaylist(MOCKED_PLAYLIST);
-      }
-
+      void player.setPlaylist(MOCKED_PLAYLIST);
       setPlaybackState(await player.getState());
     };
-
     void addPlaylist();
     setCurrentTrack(MOCKED_PLAYLIST[TRACK_START_INDEX] as Track);
   }, [setCurrentTrack]);
