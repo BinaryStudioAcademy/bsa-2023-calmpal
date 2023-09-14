@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { type AsyncThunkConfig } from '#libs/types/types.js';
 import {
+  type ChatCreateRequestDto,
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
 } from '#packages/chats/chats.js';
@@ -20,12 +21,12 @@ const getAllChats = createAsyncThunk<
 
 const createChat = createAsyncThunk<
   ChatGetAllItemResponseDto,
-  undefined,
+  ChatCreateRequestDto,
   AsyncThunkConfig
->(`${sliceName}/create-chat`, async (_, { extra }) => {
+>(`${sliceName}/create-chat`, async (payload, { extra }) => {
   const { chatApi } = extra;
 
-  return await chatApi.createChat();
+  return await chatApi.createChat(payload);
 });
 
 export { createChat, getAllChats };

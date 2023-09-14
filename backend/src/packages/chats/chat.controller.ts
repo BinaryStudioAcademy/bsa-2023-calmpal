@@ -12,6 +12,7 @@ import { ChatEntity } from './chat.entity.js';
 import { type ChatService } from './chat.service.js';
 import { MOCKED_CHAT_NAME } from './libs/constants/constants.js';
 import { ChatsApiPath } from './libs/enums/enums.js';
+import { type ChatCreateRequestDto } from './libs/types/types.js';
 
 /**
  * @swagger
@@ -82,6 +83,7 @@ class ChatController extends BaseController {
       handler: (options) => {
         return this.create(
           options as APIHandlerOptions<{
+            body: ChatCreateRequestDto;
             user: UserAuthResponseDto;
           }>,
         );
@@ -131,6 +133,7 @@ class ChatController extends BaseController {
    */
   private async create(
     options: APIHandlerOptions<{
+      body: ChatCreateRequestDto;
       user: UserAuthResponseDto;
     }>,
   ): Promise<APIHandlerResponse> {

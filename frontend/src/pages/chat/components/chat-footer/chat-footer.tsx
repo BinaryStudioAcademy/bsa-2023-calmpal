@@ -8,7 +8,7 @@ import { type ChatInputValue } from '#pages/chat/libs/types/types.js';
 import styles from './styles.module.scss';
 
 type Properties = {
-  onSend: ({ text }: { text: string }) => void;
+  onSend: ({ message }: { message: string }) => void;
 };
 
 const ChatFooter: React.FC<Properties> = ({ onSend }) => {
@@ -18,8 +18,8 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
   });
 
   const onSubmit = useCallback(
-    ({ text }: ChatInputValue): void => {
-      onSend({ text });
+    ({ message }: ChatInputValue): void => {
+      onSend({ message });
       reset();
     },
     [onSend, reset],
@@ -38,7 +38,7 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
           placeholder="Type a message"
           errors={errors}
           autoComplete="off"
-          name="text"
+          name="message"
           control={control}
           isChatInput
         />

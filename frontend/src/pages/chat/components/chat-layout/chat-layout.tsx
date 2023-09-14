@@ -20,12 +20,15 @@ const ChatLayout: React.FC = () => {
     };
   });
 
-  const handleSend = useCallback((): void => {
-    if (currentChatMessages.length === EMPTY_ARRAY_LENGTH) {
-      void dispatch(chatActions.createChat());
-    }
-    // TODO: dispatch redux action to send message
-  }, [dispatch, currentChatMessages.length]);
+  const handleSend = useCallback(
+    ({ message }: { message: string }): void => {
+      if (currentChatMessages.length === EMPTY_ARRAY_LENGTH) {
+        void dispatch(chatActions.createChat({ message }));
+      }
+      // TODO: dispatch redux action to send message
+    },
+    [dispatch, currentChatMessages.length],
+  );
 
   return (
     <>

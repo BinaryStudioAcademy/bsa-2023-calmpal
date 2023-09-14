@@ -3,7 +3,7 @@ import { type ChatMessageGetAllItemResponseDto } from '#packages/chat-messages/c
 const EMPTY_ARRAY_LENGTH = 0;
 
 const CHAT_INPUT_DEFAULT_VALUES = {
-  text: '',
+  message: '',
 } as const;
 
 const MOCK_MESSAGES: ChatMessageGetAllItemResponseDto[] = [

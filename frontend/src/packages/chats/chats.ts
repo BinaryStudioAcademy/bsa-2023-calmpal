@@ -11,6 +11,7 @@ const chatApi = new ChatApi({
 });
 
 export {
+  type ChatCreateRequestDto,
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
 } from './libs/types/types.js';
