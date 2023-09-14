@@ -34,6 +34,16 @@ const styles = StyleSheet.create({
   labelOutlined: {
     color: AppColor.BLUE_400,
   },
+  buttonRounded: {
+    backgroundColor: AppColor.WHITE,
+    borderRadius: 30,
+    elevation: 2,
+    padding: 15,
+    height: 55,
+  },
+  buttonTransparent: {
+    backgroundColor: 'transparent',
+  },
 });
 
 export { styles };

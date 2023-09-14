@@ -1,5 +1,5 @@
 import { Note } from '#libs/components/components.js';
-import { getValidClassNames } from '#libs/helpers/get-valid-class-names.js';
+import { getValidClassNames } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useAppSelector,
