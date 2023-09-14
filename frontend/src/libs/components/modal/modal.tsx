@@ -19,6 +19,7 @@ const Modal: React.FC<Properties> = ({
   onClose,
 }) => {
   const reference = useRef<HTMLDivElement>(null);
+
   useHandleClickOutside({ reference, onClose });
 
   return (
@@ -26,7 +27,7 @@ const Modal: React.FC<Properties> = ({
       open={isDisplayed}
       className={getValidClassNames(isDisplayed && styles['overlay'])}
     >
-      <div className={styles['modal']}>
+      <div className={styles['modal']} ref={reference}>
         <div className={styles['header']}>
           <span className={styles['title']}>{title}</span>
           <div className={styles['icon-container']}>
@@ -34,9 +35,9 @@ const Modal: React.FC<Properties> = ({
               label="Close modal"
               iconName="close"
               iconColor={IconColor.BLACK}
-              isLabelVisuallyHidden={true}
               style="rounded-transparent"
               onClick={onClose}
+              isLabelVisuallyHidden
             />
           </div>
         </div>
