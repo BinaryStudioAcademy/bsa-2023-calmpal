@@ -30,7 +30,7 @@ const createMeditationEntry = joi.object<MeditationEntryCreateForm, true>({
         .max(MeditationEntryValidationRule.MAXIMUM_FILE_SIZE)
         .required()
         .messages({
-          'number.max': MeditationEntryValidationMessage.FILE_REQUIRED,
+          'number.max': MeditationEntryValidationMessage.SIZE_TOO_BIG,
         }),
     })
     .required()
