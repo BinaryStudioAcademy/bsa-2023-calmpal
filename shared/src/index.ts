@@ -60,6 +60,7 @@ export {
   type JournalEntryGetAllResponseDto,
 } from './packages/journal/journal.js';
 export {
+  createMeditationEntryRequestValidationSchema,
   createMeditationEntryValidationSchema,
   MeditationApiPath,
   type MeditationEntryCreateForm,
