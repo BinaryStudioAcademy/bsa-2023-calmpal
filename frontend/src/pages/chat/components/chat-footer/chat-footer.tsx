@@ -8,7 +8,7 @@ import { type ChatInputValue } from '#pages/chat/libs/types/types.js';
 import styles from './styles.module.scss';
 
 type Properties = {
-  onSend: ({ message }: { message: string }) => void;
+  onSend: ({ message }: ChatInputValue) => void;
 };
 
 const ChatFooter: React.FC<Properties> = ({ onSend }) => {
