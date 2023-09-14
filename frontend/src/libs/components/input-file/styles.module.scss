@@ -78,7 +78,12 @@
 }
 
 .error-text {
+  display: none;
   color: var(--red-300);
   font-size: 12px;
   text-align: left;
+}
+
+.error-text:first-child {
+  display: initial;
 }

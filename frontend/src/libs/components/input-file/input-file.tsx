@@ -1,13 +1,19 @@
-import { FIRST_ARRAY_INDEX } from '#libs/constants/constants.js';
-import { IconColor } from '#libs/enums/enums.js';
 import {
-  getDeepErrorMessage,
-  getValidClassNames,
-} from '#libs/helpers/helpers.js';
+  ErrorMessage,
+  type FieldValuesFromFieldErrors,
+} from '@hookform/error-message';
+
+import {
+  EMPTY_ARRAY_LENGTH,
+  FIRST_ARRAY_INDEX,
+} from '#libs/constants/constants.js';
+import { IconColor } from '#libs/enums/enums.js';
+import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useFormController } from '#libs/hooks/hooks.js';
 import {
   type FormControl,
   type FormFieldErrors,
+  type FormFieldName,
   type FormFieldPath,
   type FormFieldValues,
 } from '#libs/types/types.js';
@@ -36,8 +42,9 @@ const InputFile = <T extends FormFieldValues>({
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
 
-  const errorMessage = getDeepErrorMessage(errors[name]);
-  const hasError = Boolean(errorMessage);
+  const inputErrors = errors[name];
+  const hasError =
+    inputErrors && Object.keys(inputErrors).length > EMPTY_ARRAY_LENGTH;
   const displayFile = Boolean(fileName) && !hasError;
 
   const handleFileChange = useCallback(
@@ -55,6 +62,10 @@ const InputFile = <T extends FormFieldValues>({
     },
     [field, onChange],
   );
+
+  const displayError = useCallback(({ message }: { message: string }) => {
+    return message && <span className={styles['error-text']}>{message}</span>;
+  }, []);
 
   return (
     <label className={styles['container']}>
@@ -76,7 +87,37 @@ const InputFile = <T extends FormFieldValues>({
           onChange={handleFileChange}
         />
       </div>
-      {hasError && <span className={styles['error-text']}>{errorMessage}</span>}
+
+      <div>
+        <ErrorMessage
+          errors={errors}
+          name={
+            name.toString() as FormFieldName<
+              FieldValuesFromFieldErrors<FormFieldErrors<T>>
+            >
+          }
+          render={displayError}
+        />
+        <ErrorMessage
+          errors={errors}
+          name={
+            `${name}.type` as FormFieldName<
+              FieldValuesFromFieldErrors<FormFieldErrors<T>>
+            >
+          }
+          render={displayError}
+        />
+        <ErrorMessage
+          errors={errors}
+          name={
+            `${name}.size` as FormFieldName<
+              FieldValuesFromFieldErrors<FormFieldErrors<T>>
+            >
+          }
+          render={displayError}
+        />
+      </div>
+
       {displayFile && (
         <div className={styles['file']}>
           <Icon name="download" color={IconColor.BLACK} />
