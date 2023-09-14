@@ -1,5 +1,13 @@
 import cardPlaceholder from '#assets/img/card-image-placeholder.png';
-import { Card, Icon, Link, Search } from '#libs/components/components.js';
+import {
+  Card,
+  Icon,
+  Link,
+  Search,
+  Sidebar,
+  SidebarBody,
+  SidebarHeader,
+} from '#libs/components/components.js';
 import { AppRoute, IconColor } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
@@ -13,7 +21,15 @@ import { actions as chatsActions } from '#slices/chats/chats.js';
 
 import styles from './styles.module.scss';
 
-const ChatSidebar: React.FC = () => {
+type Properties = {
+  isSidebarShown: boolean;
+  setIsSidebarShown: (value: boolean) => void;
+};
+
+const ChatSidebar: React.FC<Properties> = ({
+  isSidebarShown,
+  setIsSidebarShown,
+}) => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
   const { chats } = useAppSelector(({ chats }) => {
@@ -29,12 +45,13 @@ const ChatSidebar: React.FC = () => {
   const { filteredElements, setFilter } = useSearch(chats, 'name');
 
   const handleSelectChat = useCallback(() => {
+    setIsSidebarShown(false);
     // TODO redux logic
-  }, []);
+  }, [setIsSidebarShown]);
 
   return (
-    <div className={styles['container']}>
-      <div className={styles['header']}>
+    <Sidebar isSidebarShown={isSidebarShown}>
+      <SidebarHeader>
         <div className={styles['info']}>
           <span>Chat</span>
           <span className={styles['chat-number']}>
@@ -46,8 +63,8 @@ const ChatSidebar: React.FC = () => {
             <Icon name="plus" color={IconColor.BLUE} />
           </Link>
         </div>
-      </div>
-      <div className={styles['list']}>
+      </SidebarHeader>
+      <SidebarBody>
         <div className={styles['search']}>
           <Search onValueChange={setFilter} />
         </div>
@@ -70,8 +87,8 @@ const ChatSidebar: React.FC = () => {
             );
           })}
         </div>
-      </div>
-    </div>
+      </SidebarBody>
+    </Sidebar>
   );
 };
 
