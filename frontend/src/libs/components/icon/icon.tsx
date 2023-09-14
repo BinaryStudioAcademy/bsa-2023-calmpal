@@ -5,8 +5,8 @@ import { iconNameToIcon } from './libs/maps/icon-name-to-icon.map.js';
 type Properties = {
   name: IconName;
   color?: string;
-  width?: string | number;
-  height?: string | number;
+  width?: number;
+  height?: number;
 };
 
 const Icon: React.FC<Properties> = ({
@@ -17,7 +17,13 @@ const Icon: React.FC<Properties> = ({
 }) => {
   const SelectedIcon = iconNameToIcon[name];
 
-  return <SelectedIcon style={{ color, width, height }} />;
+  const svgProperties = {
+    color,
+    width: width ? `${width}px` : undefined,
+    height: height ? `${height}px` : undefined,
+  };
+
+  return <SelectedIcon style={{ ...svgProperties }} />;
 };
 
 export { Icon };

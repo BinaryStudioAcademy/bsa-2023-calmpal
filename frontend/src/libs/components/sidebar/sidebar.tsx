@@ -38,8 +38,8 @@ const Sidebar: React.FC<Properties> = ({ routes }) => {
                     <Icon
                       name={route.icon}
                       color={IconColor.BLUE}
-                      width="24px"
-                      height="24px"
+                      width={24}
+                      height={24}
                     />
                   </span>
                 </Link>
