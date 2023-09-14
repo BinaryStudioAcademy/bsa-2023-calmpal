@@ -30,7 +30,7 @@ const Modal: React.FC<Properties> = ({
               label="Close modal"
               iconName="close"
               iconColor={IconColor.BLACK}
-              isLabelVisuallyHidden={true}
+              isLabelVisuallyHidden
               style="rounded-transparent"
               onClick={onClose}
             />
