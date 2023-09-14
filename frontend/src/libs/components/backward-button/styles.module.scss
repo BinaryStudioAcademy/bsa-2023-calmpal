@@ -6,7 +6,8 @@
   .backward {
     position: absolute;
     top: 30px;
-    left: 50px;
+    left: 25px;
+    z-index: 5;
     display: flex;
     justify-content: center;
     align-items: center;
