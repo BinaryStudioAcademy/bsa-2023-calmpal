@@ -12,7 +12,6 @@ import {
   useCallback,
   useState,
 } from '#libs/hooks/hooks.js';
-import { type SetURLSearchParams } from '#libs/types/types.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
@@ -21,7 +20,7 @@ import styles from './styles.module.scss';
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: SetURLSearchParams;
+  setIsSidebarShown: (isSidebarShown: boolean) => void;
 };
 
 const UserProfileSidebar: React.FC<Properties> = ({
@@ -41,7 +40,7 @@ const UserProfileSidebar: React.FC<Properties> = ({
   const handleClick = useCallback(
     (key: string) => {
       return () => {
-        setIsSidebarShown({ sidebarMode: 'hide' });
+        setIsSidebarShown(false);
         setActiveItem(key);
       };
     },

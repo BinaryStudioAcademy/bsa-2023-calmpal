@@ -9,7 +9,6 @@ import {
 } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { useCallback, useSearch } from '#libs/hooks/hooks.js';
-import { type SetURLSearchParams } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
 
@@ -25,7 +24,7 @@ const mockedSelectedChat = {
 };
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: SetURLSearchParams;
+  setIsSidebarShown: (isSidebarShown: boolean) => void;
 };
 
 const ChatSidebar: React.FC<Properties> = ({
@@ -37,7 +36,7 @@ const ChatSidebar: React.FC<Properties> = ({
     (id: number) => {
       return () => {
         mockedSelectedChat.id = id;
-        setIsSidebarShown({ sidebarMode: 'hide' });
+        setIsSidebarShown(false);
         // TODO redux logic
       };
     },

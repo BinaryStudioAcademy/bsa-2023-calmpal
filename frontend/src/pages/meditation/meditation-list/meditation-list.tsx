@@ -1,7 +1,6 @@
 import { BackButton } from '#libs/components/components.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback } from '#libs/hooks/hooks.js';
-import { type SetURLSearchParams } from '#libs/types/types.js';
 
 import { mockedEntries } from '../libs/constants/constants.js';
 import { MeditationEntry } from './meditation-entry/meditation-entry.js';
@@ -9,7 +8,7 @@ import styles from './styles.module.scss';
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: SetURLSearchParams;
+  setIsSidebarShown: (isSidebarShown: boolean) => void;
 };
 
 const MeditationList: React.FC<Properties> = ({
@@ -17,7 +16,7 @@ const MeditationList: React.FC<Properties> = ({
   setIsSidebarShown,
 }) => {
   const handleBackButtonPress = useCallback(() => {
-    setIsSidebarShown({ sidebarMode: 'show' });
+    setIsSidebarShown(true);
   }, [setIsSidebarShown]);
 
   return (

@@ -9,7 +9,7 @@ const UserProfile: React.FC = () => {
   const { isSidebarShownParameter, setIsSidebarShown } = useSidebarState();
 
   const handleBackButtonPress = useCallback(() => {
-    setIsSidebarShown({ sidebarMode: 'show' });
+    setIsSidebarShown(true);
   }, [setIsSidebarShown]);
 
   return (

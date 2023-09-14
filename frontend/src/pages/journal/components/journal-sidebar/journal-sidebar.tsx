@@ -10,14 +10,13 @@ import {
   useCallback,
   useEffect,
 } from '#libs/hooks/hooks.js';
-import { type SetURLSearchParams } from '#libs/types/types.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
 import styles from './styles.module.scss';
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: SetURLSearchParams;
+  setIsSidebarShown: (isSidebarShown: boolean) => void;
 };
 
 const JournalSidebar: React.FC<Properties> = ({
@@ -41,7 +40,7 @@ const JournalSidebar: React.FC<Properties> = ({
   const handleSelectJournalEntry = useCallback(
     (id: number) => {
       return () => {
-        setIsSidebarShown({ sidebarMode: 'hide' });
+        setIsSidebarShown(false);
         dispatch(journalActions.setSelectedJournalEntry(id));
       };
     },

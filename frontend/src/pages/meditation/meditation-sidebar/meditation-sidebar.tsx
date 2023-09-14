@@ -7,13 +7,12 @@ import {
   SidebarHeader,
 } from '#libs/components/components.js';
 import { useCallback, useSearch } from '#libs/hooks/hooks.js';
-import { type SetURLSearchParams } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: SetURLSearchParams;
+  setIsSidebarShown: (isSidebarShown: boolean) => void;
 };
 
 const mockedMeditations = [{ id: 1, name: 'Meditation' }];
@@ -32,7 +31,7 @@ const MeditationSidebar: React.FC<Properties> = ({
     (id: number) => {
       return () => {
         mockedSelectedMeditation.id = id;
-        setIsSidebarShown({ sidebarMode: 'hide' });
+        setIsSidebarShown(false);
         // TODO redux logic
       };
     },
