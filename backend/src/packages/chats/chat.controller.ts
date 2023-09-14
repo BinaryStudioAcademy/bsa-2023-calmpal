@@ -9,9 +9,8 @@ import { type Logger } from '#libs/packages/logger/logger.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { type ChatService } from './chat.service.js';
+import { MOCKED_CHAT_NAME } from './libs/constants/constants.js';
 import { ChatsApiPath } from './libs/enums/enums.js';
-import { type ChatRequestDto } from './libs/types/types.js';
-import { createChatValidationSchema } from './libs/validation-schemas/validation-schemas.js';
 
 /**
  * @swagger
@@ -79,11 +78,9 @@ class ChatController extends BaseController {
     this.addRoute({
       path: ChatsApiPath.ROOT,
       method: 'POST',
-      validation: { body: createChatValidationSchema },
       handler: (options) => {
         return this.create(
           options as APIHandlerOptions<{
-            body: ChatRequestDto;
             user: UserAuthResponseDto;
           }>,
         );
@@ -133,14 +130,13 @@ class ChatController extends BaseController {
    */
   private async create(
     options: APIHandlerOptions<{
-      body: ChatRequestDto;
       user: UserAuthResponseDto;
     }>,
   ): Promise<APIHandlerResponse> {
     return {
       status: HTTPCode.CREATED,
       payload: await this.chatService.create({
-        name: options.body.name,
+        name: MOCKED_CHAT_NAME,
         members: [options.user.id],
       }),
     };

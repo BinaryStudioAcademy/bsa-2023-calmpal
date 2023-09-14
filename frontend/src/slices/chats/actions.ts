@@ -4,7 +4,6 @@ import { type AsyncThunkConfig } from '#libs/types/types.js';
 import {
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
-  type ChatRequestDto,
 } from '#packages/chats/chats.js';
 
 import { name as sliceName } from './chats.slice.js';
@@ -21,12 +20,12 @@ const getAllChats = createAsyncThunk<
 
 const createChat = createAsyncThunk<
   ChatGetAllItemResponseDto,
-  ChatRequestDto,
+  undefined,
   AsyncThunkConfig
->(`${sliceName}/create-chat`, async (payload, { extra }) => {
+>(`${sliceName}/create-chat`, async (_, { extra }) => {
   const { chatApi } = extra;
 
-  return await chatApi.createChat(payload);
+  return await chatApi.createChat();
 });
 
 export { createChat, getAllChats };

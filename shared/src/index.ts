@@ -41,9 +41,7 @@ export { AuthApiPath } from './packages/auth/auth.js';
 export {
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
-  type ChatRequestDto,
   ChatsApiPath,
-  createChatValidationSchema,
 } from './packages/chats/chats.js';
 export {
   type FileGetAllItemResponseDto,

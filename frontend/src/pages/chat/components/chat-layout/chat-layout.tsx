@@ -22,9 +22,7 @@ const ChatLayout: React.FC = () => {
 
   const handleSend = useCallback((): void => {
     if (currentChatMessages.length === EMPTY_ARRAY_LENGTH) {
-      void dispatch(
-        chatActions.createChat({ name: `Chat ${new Date().getSeconds()}` }),
-      );
+      void dispatch(chatActions.createChat());
     }
     // TODO: dispatch redux action to send message
   }, [dispatch, currentChatMessages.length]);

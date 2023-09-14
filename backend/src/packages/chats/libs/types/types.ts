@@ -4,5 +4,4 @@ export { type UserToChatQueryResponse } from './user-to-chat-query-response.type
 export {
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
-  type ChatRequestDto,
 } from 'shared/build/index.js';
