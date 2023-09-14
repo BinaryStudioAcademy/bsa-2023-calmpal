@@ -82,13 +82,13 @@ const deleteUser = createAsyncThunk<
   AsyncThunkConfig
 >(`${sliceName}/delete-user`, async (deletePayload, { extra, dispatch }) => {
   const { authApi, storage } = extra;
-  const { user } = await authApi.deleteUser(deletePayload);
+  const { id } = await authApi.deleteUser(deletePayload);
 
   await storage.drop(StorageKey.TOKEN);
 
   dispatch(appActions.navigate(AppRoute.SIGN_IN));
 
-  return user;
+  return id;
 });
 
 export {

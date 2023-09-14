@@ -5,7 +5,6 @@ import { HTTPCode } from '#libs/packages/http/http.js';
 import { type JWTService } from '#libs/packages/jwt/jwt.js';
 import {
   type UserAuthResponseDto,
-  type UserDeleteRequestDto,
   type UserDeleteResponseDto,
   type UserSignInRequestDto,
   type UserSignInResponseDto,
@@ -101,11 +100,7 @@ class AuthService {
       });
     }
 
-    const userResponse: UserDeleteRequestDto = {
-      id: id,
-    };
-
-    return { user: userResponse };
+    return { id: id };
   }
 }
 
