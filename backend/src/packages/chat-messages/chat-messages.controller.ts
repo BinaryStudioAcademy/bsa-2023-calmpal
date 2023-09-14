@@ -10,6 +10,7 @@ import { type Logger } from '#libs/packages/logger/logger.js';
 import { type ChatMessageService } from './chat-message.service.js';
 import { ChatsApiPath } from './libs/enums/enums.js';
 import {
+  type ChatMessageCreateData,
   type ChatMessageCreateRequestDto,
   type ChatMessagesUrlParameters,
 } from './libs/types/types.js';
@@ -34,6 +35,19 @@ class ChatMessageController extends BaseController {
         );
       },
     });
+    this.addRoute({
+      path: ChatsApiPath.CREATE_MESSAGE,
+      method: 'GET',
+      handler: (options) => {
+        return this.findAllByChatId(
+          (
+            options as {
+              params: ChatMessagesUrlParameters;
+            }
+          ).params.chat_id,
+        );
+      },
+    });
   }
 
   private async create(
@@ -42,9 +56,22 @@ class ChatMessageController extends BaseController {
       params: ChatMessagesUrlParameters;
     }>,
   ): Promise<APIHandlerResponse> {
+    const chatId = options.params.chat_id;
+    const chatMessageToCreateData: ChatMessageCreateData = {
+      ...options.body,
+      chatId,
+    };
+
     return {
       status: HTTPCode.CREATED,
-      payload: await this.chatMessageService.create(options.body),
+      payload: await this.chatMessageService.create(chatMessageToCreateData),
+    };
+  }
+
+  public async findAllByChatId(chatId: number): Promise<APIHandlerResponse> {
+    return {
+      status: HTTPCode.OK,
+      payload: await this.chatMessageService.findAllByChatId(chatId),
     };
   }
 }

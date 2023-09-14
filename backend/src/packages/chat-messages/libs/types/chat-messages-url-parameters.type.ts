@@ -1,5 +1,5 @@
 type ChatMessagesUrlParameters = {
-  chat_id: string;
+  chat_id: number;
 };
 
 export { type ChatMessagesUrlParameters };

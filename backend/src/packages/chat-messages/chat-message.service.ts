@@ -5,19 +5,10 @@ import { userService } from '#packages/users/users.js';
 
 import { ChatMessageEntity } from './chat-message.entity.js';
 import { type ChatMessageRepository } from './chat-message.repository.js';
-
-type CreateMessageRequestDto = {
-  message: string;
-  senderId: number;
-  chatId: number;
-};
-
-type CreateMessageResponseDto = {
-  id: number;
-  message: string;
-  senderId: number;
-  chatId: number;
-};
+import {
+  type ChatMessageCreateData,
+  type ChatMessageGetAllItemResponseDto,
+} from './libs/types/types.js';
 
 class ChatMessageService implements Service {
   private chatMessageRepository: ChatMessageRepository;
@@ -35,8 +26,8 @@ class ChatMessageService implements Service {
   }
 
   public async create(
-    payload: CreateMessageRequestDto,
-  ): Promise<CreateMessageResponseDto> {
+    payload: ChatMessageCreateData,
+  ): Promise<ChatMessageGetAllItemResponseDto> {
     const sender = await userService.findById(payload.senderId);
     if (!sender) {
       throw new UsersError({
@@ -57,7 +48,7 @@ class ChatMessageService implements Service {
   }
 
   public async findAllByChatId(
-    chatId: string,
+    chatId: number,
   ): Promise<ReturnType<ChatMessageEntity['toObject']>[] | null> {
     const chatMessages = await this.chatMessageRepository.findAllByChatId(
       chatId,

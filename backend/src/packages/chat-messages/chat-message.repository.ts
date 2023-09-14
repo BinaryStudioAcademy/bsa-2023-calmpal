@@ -20,11 +20,9 @@ class ChatMessageRepository implements Repository {
   }
 
   public async findAllByChatId(
-    chatId: string,
+    chatId: number,
   ): Promise<ChatMessageEntity[] | null> {
-    const chatMessages = await this.chatMessageModel
-      .query()
-      .where('chatId', chatId);
+    const chatMessages = await this.chatMessageModel.query().where({ chatId });
 
     if (chatMessages.length === EMPTY_ARRAY_LENGTH) {
       return null;
