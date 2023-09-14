@@ -43,7 +43,7 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
     (event): void => {
       if (event.type === Event.PlaybackState) {
         void handlePlaybackStateChange();
-      } else if (typeof event.nextTrack === 'string') {
+      } else {
         void handleNextTrack(event.nextTrack);
       }
     },
