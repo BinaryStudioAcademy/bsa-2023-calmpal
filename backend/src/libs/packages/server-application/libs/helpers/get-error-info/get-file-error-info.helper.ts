@@ -6,7 +6,7 @@ import { type ErrorInfo } from '../../types/types.js';
 
 const getFileErrorInfo = (error: FileError): ErrorInfo => {
   const { message } = error;
-  const status = HTTPCode.INTERNAL_SERVER_ERROR;
+  const status = HTTPCode.BAD_REQUEST;
 
   return {
     status,

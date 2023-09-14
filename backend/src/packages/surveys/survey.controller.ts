@@ -48,6 +48,26 @@ import { type SurveyService } from './survey.service.js';
  *          updatedAt:
  *             type: string
  *             format: date-time
+ *      UnprocessableEntity:
+ *        type: object
+ *        properties:
+ *          message:
+ *            type: string
+ *          errorType:
+ *            type: string
+ *          preferences:
+ *            type: array
+ *            items:
+ *              type: object
+ *              properties:
+ *                path:
+ *                  type: array
+ *                  items:
+ *                    oneOf:
+ *                      - type: string
+ *                      - type: number
+ *                message:
+ *                  type: string
  */
 class SurveyController extends BaseController {
   private surveyService: SurveyService;
@@ -91,10 +111,13 @@ class SurveyController extends BaseController {
    *          content:
    *            application/json:
    *              schema:
-   *                type: object
-   *                properties:
-   *                  message:
-   *                    $ref: '#/components/schemas/SurveyResponse'
+   *                $ref: '#/components/schemas/SurveyResponse'
+   *        422:
+   *          description: Validation failed
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/UnprocessableEntity'
    */
 
   private async create(
