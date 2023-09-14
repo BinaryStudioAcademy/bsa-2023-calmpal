@@ -2,7 +2,7 @@ import { getValidClassNames } from '#libs/helpers/helpers.js';
 
 import styles from './styles.module.scss';
 
-type TimerButtonProperties = {
+type Properties = {
   isActive: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
@@ -10,7 +10,7 @@ type TimerButtonProperties = {
   children: React.ReactNode;
 };
 
-const TimerButton: React.FC<TimerButtonProperties> = ({
+const TimerButton: React.FC<Properties> = ({
   isActive,
   onChange,
   value,
