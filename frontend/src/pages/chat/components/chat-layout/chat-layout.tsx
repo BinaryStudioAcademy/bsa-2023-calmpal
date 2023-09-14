@@ -26,7 +26,7 @@ const ChatLayout: React.FC = () => {
     ({ chats, auth }) => {
       return {
         currentChatMessages: chats.currentChatMessages,
-        authenticatedUser: auth.authenticatedUser,
+        authenticatedUser: auth.authenticatedUser as UserAuthResponseDto,
       };
     },
   );
@@ -51,10 +51,7 @@ const ChatLayout: React.FC = () => {
               <ChatMessage
                 key={item.id}
                 message={item.message}
-                isSender={
-                  item.senderId ===
-                  (authenticatedUser as UserAuthResponseDto).id
-                }
+                isSender={item.senderId === authenticatedUser.id}
               />
             );
           })}
