@@ -1,10 +1,8 @@
-import {
-  EMPTY_ARRAY_LENGTH,
-  FIRST_ARRAY_INDEX,
-} from '#libs/constants/constants.js';
 import { DataStatus } from '#libs/enums/enums.js';
 import {
+  changeCursorPosition,
   debounce,
+  getCursorPosition,
   getValidClassNames,
   sanitizeInput,
 } from '#libs/helpers/helpers.js';
@@ -63,36 +61,6 @@ const Note: React.FC<Properties> = ({ className }) => {
 
   const cursorPosition = useRef<number | null>(null);
 
-  const handleCursorPosition = useCallback((element: HTMLDivElement | null) => {
-    if (element) {
-      const range = document.createRange();
-      const selection = window.getSelection() as Selection;
-
-      if (cursorPosition.current) {
-        if (element.firstChild) {
-          range.setStart(element.firstChild, cursorPosition.current);
-        }
-
-        range.collapse(true);
-        cursorPosition.current = null;
-      } else {
-        range.selectNodeContents(element);
-        range.collapse(false);
-      }
-
-      selection.removeAllRanges();
-      selection.addRange(range);
-    }
-  }, []);
-
-  const handleChangeCursorPosition = (): void => {
-    const selection = window.getSelection() as Selection;
-    if (selection.rangeCount > EMPTY_ARRAY_LENGTH) {
-      const range = selection.getRangeAt(FIRST_ARRAY_INDEX);
-      cursorPosition.current = range.startOffset;
-    }
-  };
-
   const handleSaveNote = useCallback(
     (data: NoteContent) => {
       if (userId && id) {
@@ -124,7 +92,7 @@ const Note: React.FC<Properties> = ({ className }) => {
       if (titleReference.current) {
         const newTitle = titleReference.current.textContent ?? '';
         onTitleChange(newTitle);
-        handleChangeCursorPosition();
+        changeCursorPosition(cursorPosition);
       }
     }, [onTitleChange]);
 
@@ -133,7 +101,7 @@ const Note: React.FC<Properties> = ({ className }) => {
       if (textReference.current) {
         const newText = textReference.current.textContent ?? '';
         onTextChange(newText);
-        handleChangeCursorPosition();
+        changeCursorPosition(cursorPosition);
       }
     }, [onTextChange]);
 
@@ -168,15 +136,15 @@ const Note: React.FC<Properties> = ({ className }) => {
 
   useEffect(() => {
     if (titleReference.current && cursorPosition.current) {
-      handleCursorPosition(titleReference.current);
+      getCursorPosition(titleReference.current, cursorPosition);
     }
-  }, [handleCursorPosition, titleValue]);
+  }, [cursorPosition, titleValue]);
 
   useEffect(() => {
     if (textReference.current && cursorPosition.current) {
-      handleCursorPosition(textReference.current);
+      getCursorPosition(textReference.current, cursorPosition);
     }
-  }, [handleCursorPosition, textValue]);
+  }, [cursorPosition, textValue]);
 
   useEffect(() => {
     const handleBeforeUnload = (event: BeforeUnloadEvent): void => {
