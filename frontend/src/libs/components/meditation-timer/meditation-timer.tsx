@@ -2,7 +2,7 @@ import { Button } from '#libs/components/components.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useState } from '#libs/hooks/hooks.js';
 
-import { TimerButton } from './components/duration-button/timer-button.js';
+import { TimerButton } from './components/timer-button/timer-button.js';
 import { DURATION_UNIT, MEDITATION_DURATION } from './libs/constants.js';
 import styles from './styles.module.scss';
 
@@ -17,11 +17,12 @@ const MeditationTimer: React.FC<TimerProperties> = ({
 }) => {
   const [selectedDuration, setSelectedDuration] = useState(defaultDuration);
 
-  const handleClick = useCallback((duration: string) => {
-    return () => {
-      setSelectedDuration(duration);
-    };
-  }, []);
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setSelectedDuration(event.target.value);
+    },
+    [],
+  );
 
   return (
     <div className={styles['timer']}>
@@ -32,7 +33,9 @@ const MeditationTimer: React.FC<TimerProperties> = ({
             <TimerButton
               key={duration}
               isActive={selectedDuration === duration}
-              onClick={handleClick(duration)}
+              onChange={handleChange}
+              value={duration}
+              name="meditationDuration"
             >
               <div
                 className={getValidClassNames(
