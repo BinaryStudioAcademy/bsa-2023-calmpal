@@ -63,7 +63,7 @@ const Note: React.FC<Properties> = ({ className }) => {
 
   const handleSaveNote = useCallback(
     (data: NoteContent) => {
-      if (userId && id) {
+      if (data.title && data.text && id) {
         void dispatch(
           journalActions.updateJournalEntry({
             id,
@@ -75,7 +75,7 @@ const Note: React.FC<Properties> = ({ className }) => {
         );
       }
     },
-    [dispatch, id, userId],
+    [dispatch, id],
   );
 
   const handleSaveNoteWithDebounce = useCallback(

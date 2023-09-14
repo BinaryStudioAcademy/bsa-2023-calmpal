@@ -11,9 +11,18 @@ const getCursorPosition = (
     const range = document.createRange();
     const selection = window.getSelection() as Selection;
 
-    if (cursorPosition.current) {
+    let adjustedCursorPosition = cursorPosition.current;
+
+    if (
+      adjustedCursorPosition &&
+      adjustedCursorPosition > (element.textContent as string).length
+    ) {
+      adjustedCursorPosition = (element.textContent as string).length;
+    }
+
+    if (adjustedCursorPosition) {
       if (element.firstChild) {
-        range.setStart(element.firstChild, cursorPosition.current);
+        range.setStart(element.firstChild, adjustedCursorPosition);
       }
 
       range.collapse(true);
