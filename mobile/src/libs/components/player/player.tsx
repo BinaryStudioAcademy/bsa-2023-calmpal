@@ -24,6 +24,11 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
   const handlePlaybackStateChange = async (): Promise<void> => {
     const state = await player.getState();
     setPlaybackState(state);
+    if (isPlaying) {
+      KeepAwake.activate();
+    } else {
+      KeepAwake.deactivate();
+    }
   };
 
   const handleNextTrack = async (nextTrack: number): Promise<void> => {
@@ -45,14 +50,6 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
   );
 
   useEffect(() => {
-    if (isPlaying) {
-      KeepAwake.activate();
-    } else {
-      KeepAwake.deactivate();
-    }
-  }, [isPlaying]);
-
-  useEffect(() => {
     return () => {
       void player.stopPlaying();
       KeepAwake.deactivate();
@@ -60,11 +57,7 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
   }, []);
 
   useEffect(() => {
-    const addPlaylist = async (): Promise<void> => {
-      void player.setPlaylist(MOCKED_PLAYLIST);
-      setPlaybackState(await player.getState());
-    };
-    void addPlaylist();
+    void player.setPlaylist(MOCKED_PLAYLIST);
     setCurrentTrack(MOCKED_PLAYLIST[TRACK_START_INDEX] as Track);
   }, [setCurrentTrack]);
 
