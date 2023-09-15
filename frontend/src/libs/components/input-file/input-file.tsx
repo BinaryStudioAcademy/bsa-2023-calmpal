@@ -21,7 +21,6 @@ type Properties<T extends FormFieldValues> = {
   control: FormControl<T, null>;
   errors: FormFieldErrors<T>;
   name: FormFieldPath<T>;
-  fileName: string | undefined;
   label: string;
   description: string;
   onChange?: (file: File) => void;
@@ -31,12 +30,12 @@ const InputFile = <T extends FormFieldValues>({
   control,
   errors,
   name,
-  fileName,
   label,
   description,
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController<T>({ name, control });
 
+  const fileName = (field.value as { data: File } | null)?.data.name;
   const errorNames = [name.toString(), `${name}.type`, `${name}.size`];
   const inputErrors = errors[name];
   const hasError =

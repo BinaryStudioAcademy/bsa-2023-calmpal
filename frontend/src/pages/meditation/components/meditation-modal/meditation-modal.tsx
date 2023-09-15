@@ -38,14 +38,12 @@ const MeditationModal: React.FC<Properties> = ({
       meditationDataStatus: meditation.meditationEntriesDataStatus,
     };
   });
-  const { control, errors, handleSubmit, reset, watch } =
+  const { control, errors, handleSubmit, reset } =
     useAppForm<MeditationEntryCreateForm>({
       defaultValues: DEFAULT_MEDITATION_PAYLOAD,
       validationSchema: createMeditationEntryValidationSchema,
     });
 
-  const currentFile = watch('file');
-  const fileName = currentFile?.data.name;
   const hasError = Boolean(Object.keys(errors).length > EMPTY_ARRAY_LENGTH);
   const isLoading = meditationDataStatus === DataStatus.PENDING || hasError;
 
@@ -79,7 +77,6 @@ const MeditationModal: React.FC<Properties> = ({
           control={control}
           errors={errors}
           name="file"
-          fileName={fileName}
           label="Meditation audio file"
           description="Only MP3 extension is allowed"
         />
