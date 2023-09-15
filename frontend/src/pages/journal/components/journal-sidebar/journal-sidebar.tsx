@@ -1,4 +1,4 @@
-import { Button, Card } from '#libs/components/components.js';
+import { Button, Card, Link } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/app-route.enum.js';
 import {
   useAppDispatch,
@@ -6,7 +6,6 @@ import {
   useCallback,
   useEffect,
 } from '#libs/hooks/hooks.js';
-import { type ValueOf } from '#libs/types/value-of.type.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { DEFAULT_NOTE_PAYLOAD } from '#pages/journal/libs/constants/constants.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
@@ -67,18 +66,19 @@ const JournalSidebar: React.FC = () => {
       <div className={styles['list']}>
         <div className={styles['journal-entry-list']}>
           {allJournalEntries.map((journalEntry) => {
+            const noteLink = AppRoute.JOURNAL_ENTRY_$ID.replace(
+              ':id',
+              String(journalEntry.id),
+            ) as typeof AppRoute.JOURNAL_ENTRY_$ID;
+
             return (
-              <Card
-                title={journalEntry.title}
-                onClick={handleSelectJournalEntry(journalEntry.id)}
-                isActive={selectedJournalEntry?.id === journalEntry.id}
-                key={journalEntry.id}
-                linkTo={
-                  `${AppRoute.JOURNAL}/${journalEntry.id}` as ValueOf<
-                    typeof AppRoute
-                  >
-                }
-              />
+              <Link key={journalEntry.id} to={noteLink}>
+                <Card
+                  title={journalEntry.title}
+                  onClick={handleSelectJournalEntry(journalEntry.id)}
+                  isActive={selectedJournalEntry?.id === journalEntry.id}
+                />
+              </Link>
             );
           })}
         </div>
