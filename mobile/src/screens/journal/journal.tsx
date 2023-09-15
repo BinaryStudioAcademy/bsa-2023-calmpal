@@ -7,6 +7,7 @@ import {
   InputSearch,
   LinearGradient,
   Link,
+  Modal,
   ScrollView,
   View,
 } from '#libs/components/components';
@@ -18,6 +19,7 @@ import {
   useEffect,
   useNavigation,
   useSearch,
+  useState,
 } from '#libs/hooks/hooks';
 import { actions as journalActions } from '#slices/journal/journal';
 
@@ -26,6 +28,8 @@ import { styles } from './styles';
 const Journal: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigation = useNavigation();
+
+  const [isModalVisible, setisModalVisible] = useState(false);
 
   const { allJournalEntries } = useAppSelector(({ journal }) => {
     return {
@@ -43,6 +47,18 @@ const Journal: React.FC = () => {
     // TODO: Implement actual functionality for the onPress event
   }, []);
 
+  const handleShowModal = (): void => {
+    setisModalVisible(false);
+  };
+
+  const hanleCloseModal = (): void => {
+    setisModalVisible(false);
+  };
+
+  const handleDeleteNote = (): void => {
+    setisModalVisible(false);
+  };
+
   useEffect(() => {
     navigation.setOptions({
       header: () => {
@@ -57,6 +73,11 @@ const Journal: React.FC = () => {
 
   return (
     <LinearGradient>
+      <Modal
+        isVisible={isModalVisible}
+        onClose={hanleCloseModal}
+        onDelete={handleDeleteNote}
+      />
       <View style={styles.container}>
         <InputSearch
           placeholder="Search note"
@@ -69,6 +90,7 @@ const Journal: React.FC = () => {
                 title={item.title}
                 onPress={handleSelectJournal}
                 key={item.id}
+                onDelete={handleShowModal}
               />
             );
           })}
