@@ -15,10 +15,6 @@ const createMeditationEntry = joi.object<MeditationEntryCreateForm, true>({
   }),
   file: joi
     .object({
-      name: joi.string().trim().required().messages({
-        'any.required': MeditationEntryValidationMessage.FILE_NAME_REQUIRED,
-        'string.empty': MeditationEntryValidationMessage.FILE_NAME_REQUIRED,
-      }),
       type: joi.string().valid(ContentType.MPEG).required().messages({
         'any.only': MeditationEntryValidationMessage.MPEG_REQUIRED,
       }),
@@ -30,8 +26,8 @@ const createMeditationEntry = joi.object<MeditationEntryCreateForm, true>({
           'number.max': MeditationEntryValidationMessage.SIZE_TOO_BIG,
         }),
     })
-    .options({ stripUnknown: true })
     .required()
+    .unknown(true)
     .messages({
       'object.base': MeditationEntryValidationMessage.FILE_REQUIRED,
     }),
