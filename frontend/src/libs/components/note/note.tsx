@@ -1,4 +1,3 @@
-import { DataStatus } from '#libs/enums/enums.js';
 import {
   changeCursorPosition,
   debounce,
@@ -18,7 +17,6 @@ import {
 } from '#libs/hooks/hooks.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
-import { Loader } from '../components.js';
 import { NOTE_TIMEOUT } from './libs/constants.js';
 import { type NoteContent } from './libs/types.js';
 import styles from './styles.module.scss';
@@ -28,14 +26,14 @@ type Properties = {
 };
 
 const Note: React.FC<Properties> = ({ className }) => {
-  const { userId, selectedJournalEntry, journalEntriesDataStatus } =
-    useAppSelector(({ auth, journal }) => {
+  const { userId, selectedJournalEntry } = useAppSelector(
+    ({ auth, journal }) => {
       return {
         userId: auth.authenticatedUser?.id,
         selectedJournalEntry: journal.selectedJournalEntry,
-        journalEntriesDataStatus: journal.journalEntriesDataStatus,
       };
-    });
+    },
+  );
 
   const { isDirty, control } = useAppForm({
     defaultValues: {
@@ -152,13 +150,6 @@ const Note: React.FC<Properties> = ({ className }) => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   }, [handleSaveNote, textValue, titleValue]);
-
-  if (
-    journalEntriesDataStatus === DataStatus.IDLE ||
-    journalEntriesDataStatus === DataStatus.PENDING
-  ) {
-    return <Loader />;
-  }
 
   return (
     <div className={getValidClassNames(styles['wrapper'], className)}>
