@@ -1,9 +1,4 @@
 import {
-  ErrorMessage,
-  type FieldValuesFromFieldErrors,
-} from '@hookform/error-message';
-
-import {
   EMPTY_ARRAY_LENGTH,
   FIRST_ARRAY_INDEX,
 } from '#libs/constants/constants.js';
@@ -16,9 +11,10 @@ import {
   type FormFieldName,
   type FormFieldPath,
   type FormFieldValues,
+  type FormFieldValuesFromFieldErrors,
 } from '#libs/types/types.js';
 
-import { Icon } from '../components.js';
+import { ErrorMessage, Icon } from '../components.js';
 import styles from './styles.module.scss';
 
 type Properties<T extends FormFieldValues> = {
@@ -93,7 +89,7 @@ const InputFile = <T extends FormFieldValues>({
           errors={errors}
           name={
             name.toString() as FormFieldName<
-              FieldValuesFromFieldErrors<FormFieldErrors<T>>
+              FormFieldValuesFromFieldErrors<FormFieldErrors<T>>
             >
           }
           render={displayError}
@@ -102,7 +98,7 @@ const InputFile = <T extends FormFieldValues>({
           errors={errors}
           name={
             `${name}.type` as FormFieldName<
-              FieldValuesFromFieldErrors<FormFieldErrors<T>>
+              FormFieldValuesFromFieldErrors<FormFieldErrors<T>>
             >
           }
           render={displayError}
@@ -111,7 +107,7 @@ const InputFile = <T extends FormFieldValues>({
           errors={errors}
           name={
             `${name}.size` as FormFieldName<
-              FieldValuesFromFieldErrors<FormFieldErrors<T>>
+              FormFieldValuesFromFieldErrors<FormFieldErrors<T>>
             >
           }
           render={displayError}
