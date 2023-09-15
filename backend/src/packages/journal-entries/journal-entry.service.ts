@@ -62,11 +62,8 @@ class JournalEntryService implements Service {
     }
 
     const item = await this.journalEntryRepository.create(
-      JournalEntryEntity.initialize({
-        id: null,
+      JournalEntryEntity.initializeNew({
         userId,
-        createdAt: null,
-        updatedAt: null,
         title: sanitizeInput(payload.title),
         text: sanitizeInput(payload.text),
       }),

@@ -15,10 +15,7 @@ class JournalEntryRepository implements Repository {
   }
 
   public async find(id: number): Promise<JournalEntryEntity | null> {
-    const journalEntry = await this.journalEntryModel
-      .query()
-      .findById(id)
-      .execute();
+    const journalEntry = await this.journalEntryModel.query().findById(id);
 
     if (!journalEntry) {
       return null;
