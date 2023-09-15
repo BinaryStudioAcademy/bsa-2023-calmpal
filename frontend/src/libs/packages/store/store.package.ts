@@ -10,11 +10,13 @@ import { type Config } from '#libs/packages/config/config.js';
 import { notification } from '#libs/packages/notification/notification.js';
 import { handleError } from '#libs/packages/store/middlewares/middlewares.js';
 import { authApi } from '#packages/auth/auth.js';
+import { chatApi } from '#packages/chats/chats.js';
 import { filesApi } from '#packages/files/files.js';
 import { journalApi } from '#packages/journal/journal.js';
 import { meditationApi } from '#packages/meditation/meditation.js';
 import { reducer as appReducer } from '#slices/app/app.js';
 import { reducer as authReducer } from '#slices/auth/auth.js';
+import { reducer as chatsReducer } from '#slices/chats/chats.js';
 import { reducer as journalReducer } from '#slices/journal/journal.js';
 import { reducer as meditationReducer } from '#slices/meditation/meditation.js';
 
@@ -25,6 +27,7 @@ type RootReducer = {
   app: ReturnType<typeof appReducer>;
   journal: ReturnType<typeof journalReducer>;
   meditation: ReturnType<typeof meditationReducer>;
+  chats: ReturnType<typeof chatsReducer>;
 };
 
 type ExtraArguments = {
@@ -32,6 +35,7 @@ type ExtraArguments = {
   journalApi: typeof journalApi;
   meditationApi: typeof meditationApi;
   filesApi: typeof filesApi;
+  chatApi: typeof chatApi;
   storage: typeof storage;
   notification: typeof notification;
 };
@@ -53,6 +57,7 @@ class Store {
         app: appReducer,
         journal: journalReducer,
         meditation: meditationReducer,
+        chats: chatsReducer,
       },
       middleware: (getDefaultMiddleware) => {
         return [
@@ -73,6 +78,7 @@ class Store {
       journalApi,
       meditationApi,
       filesApi,
+      chatApi,
       storage,
       notification,
     };

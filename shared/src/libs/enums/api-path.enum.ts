@@ -5,6 +5,7 @@ const APIPath = {
   FILES: '/files',
   JOURNAL: '/journal',
   MEDITATION: '/meditation',
+  CHATS: '/chats',
 } as const;
 
 export { APIPath };

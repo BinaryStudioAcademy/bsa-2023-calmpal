@@ -16,8 +16,6 @@ export { type ValueOf } from './value-of.type.js';
 export { type ClassValue } from 'clsx';
 export { type SetURLSearchParams } from 'react-router-dom';
 export {
-  type ChatMessage,
-  type Message,
   type ServerErrorDetail,
   type ServerErrorResponse,
   type ValidationSchema,
