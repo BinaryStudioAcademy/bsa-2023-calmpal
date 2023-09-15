@@ -55,15 +55,15 @@ class OpenAi {
     return response?.message.content ?? null;
   }
 
-  public async generateImage({
+  public async generateImages({
     prompt,
-    n = DEFAULT_IMAGE_GENERATE_REQUEST.n,
+    number = DEFAULT_IMAGE_GENERATE_REQUEST.n,
     size = DEFAULT_IMAGE_GENERATE_REQUEST.size,
   }: OpenAiImageGenerateRequestDto): Promise<string | null> {
     const data = await this.httpService.load<OpenAiImageGenerateResponseDto>({
       method: 'POST',
       url: `${this.baseUrl}images/generations`,
-      data: { prompt, n, size },
+      data: { prompt, number, size },
       token: this.apiKey,
     });
 

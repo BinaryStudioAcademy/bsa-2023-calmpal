@@ -4,7 +4,7 @@ import { type OpenAiImageSize } from '../enums/enums.js';
 
 type OpenAiImageGenerateRequestDto = {
   prompt: string;
-  n?: number;
+  number?: number;
   size?: ValueOf<typeof OpenAiImageSize>;
 };
 
