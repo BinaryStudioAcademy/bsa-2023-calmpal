@@ -11,14 +11,12 @@ import { type MeditationEntryCreateForm } from '../types/types.js';
 const createMeditationEntry = joi.object<MeditationEntryCreateForm, true>({
   title: joi.string().trim().required().messages({
     'any.required': MeditationEntryValidationMessage.TOPIC_REQUIRED,
-    'string.required': MeditationEntryValidationMessage.TOPIC_REQUIRED,
     'string.empty': MeditationEntryValidationMessage.TOPIC_REQUIRED,
   }),
   file: joi
     .object({
       name: joi.string().trim().required().messages({
         'any.required': MeditationEntryValidationMessage.FILE_NAME_REQUIRED,
-        'string.required': MeditationEntryValidationMessage.FILE_NAME_REQUIRED,
         'string.empty': MeditationEntryValidationMessage.FILE_NAME_REQUIRED,
       }),
       type: joi.string().valid(ContentType.MPEG).required().messages({

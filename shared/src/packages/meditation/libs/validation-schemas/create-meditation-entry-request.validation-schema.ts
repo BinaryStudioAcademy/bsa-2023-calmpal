@@ -11,7 +11,6 @@ const createMeditationEntryRequest = joi.object<
 >({
   mediaUrl: joi.string().trim().required().messages({
     'any.required': MeditationEntryValidationMessage.MEDIA_URL_REQUIRED,
-    'string.required': MeditationEntryValidationMessage.MEDIA_URL_REQUIRED,
     'string.empty': MeditationEntryValidationMessage.MEDIA_URL_REQUIRED,
   }),
   contentType: joi.string().valid(ContentType.MPEG).required().messages({
