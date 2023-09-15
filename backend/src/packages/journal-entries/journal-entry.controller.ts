@@ -65,7 +65,7 @@ class JournalEntryController extends BaseController {
 
   /**
    * @swagger
-   * /journal-entries:
+   * /journal:
    *    post:
    *      description: Creates a journal entry
    *      requestBody:
@@ -80,6 +80,8 @@ class JournalEntryController extends BaseController {
    *                  type: string
    *                text:
    *                  type: string
+   *      security:
+   *       - bearerAuth: []
    *      responses:
    *        201:
    *          description: Successful operation
@@ -105,9 +107,11 @@ class JournalEntryController extends BaseController {
 
   /**
    * @swagger
-   * /journal-entries:
+   * /journal:
    *    get:
    *      description: Get all a journal entries
+   *      security:
+   *       - bearerAuth: []
    *      responses:
    *        200:
    *          description: Successful operation

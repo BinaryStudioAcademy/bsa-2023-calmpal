@@ -1,0 +1,27 @@
+.container {
+  position: fixed;
+  width: 350px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    var(--transparent) 0,
+    var(--blue-100) 100%
+  );
+  box-shadow: inset 0 -7px 14px 0 var(--violet-100);
+}
+
+@media (width < 900px) {
+  .container {
+    width: 250px;
+  }
+}
+
+@media (width < 768px) {
+  .container {
+    width: 100%;
+  }
+
+  .hide {
+    display: none;
+  }
+}
