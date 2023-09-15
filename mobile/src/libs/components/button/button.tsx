@@ -1,11 +1,9 @@
 import React from 'react';
 
 import { Icon, Pressable, Text, View } from '#libs/components/components';
-import { AppColor } from '#libs/enums/enums';
-import { useEffect, useState } from '#libs/hooks/hooks';
+import { usePressState } from '#libs/hooks/hooks';
 import { type IconName } from '#libs/types/types';
 
-import { PRESS_TIMEOUT } from './libs/constants';
 import { styles } from './styles';
 
 type Properties = {
@@ -27,27 +25,7 @@ const Button: React.FC<Properties> = ({
   iconName,
   isVisuallyCentered,
 }) => {
-  const [isPressed, setIsPressed] = useState(false);
-
-  let color;
-  if (isPressed) {
-    color = AppColor.BLUE_200;
-  } else {
-    color = isRounded ? AppColor.BLUE_200 : AppColor.GRAY_400;
-  }
-
-  const handlePress = (): void => {
-    setIsPressed(true);
-    onPress();
-  };
-
-  useEffect(() => {
-    if (isPressed) {
-      setTimeout(() => {
-        setIsPressed(false);
-      }, PRESS_TIMEOUT);
-    }
-  }, [isPressed]);
+  const { handlePress, color } = usePressState({ onPress, isRounded });
 
   return (
     <Pressable
