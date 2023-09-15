@@ -1,6 +1,7 @@
 import { type ChangeEvent, type FC } from 'react';
 
 import { Button } from '#libs/components/components.js';
+import { Checkbox } from '#libs/components/components.js';
 import { useCallback, useState } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
@@ -12,10 +13,10 @@ type Properties = {
 
 const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
   const [isChecked, setIsChecked] = useState({
-    checkbox1: false,
-    checkbox2: false,
-    checkbox3: false,
-    checkbox4: false,
+    'checkbox1': false,
+    'checkbox2': false,
+    'checkbox3': false,
+    'checkbox4': false,
   });
 
   const [text, setText] = useState('');
@@ -43,48 +44,40 @@ const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
     <div className={styles['modal-body']}>
       <form className={styles['form']}>
         <div>
-          <label>
-            <input
-              type="checkbox"
-              name="checkbox1"
-              onChange={handleCheckboxChange}
-              checked={isChecked.checkbox1}
-            />
-            I&apos;ve chose another app
-          </label>
+          <Checkbox
+            label="I've chose another app"
+            name="checkbox1"
+            checked={isChecked.checkbox1}
+            onChange={handleCheckboxChange}
+            disableDefaultStyles
+          />
         </div>
         <div>
-          <label>
-            <input
-              type="checkbox"
-              name="checkbox2"
-              onChange={handleCheckboxChange}
-              checked={isChecked.checkbox2}
-            />
-            I&apos;ve reached my goal
-          </label>
+          <Checkbox
+            label="I've reached my goal"
+            name="checkbox2"
+            checked={isChecked.checkbox2}
+            onChange={handleCheckboxChange}
+            disableDefaultStyles
+          />
         </div>
         <div>
-          <label>
-            <input
-              type="checkbox"
-              name="checkbox3"
-              onChange={handleCheckboxChange}
-              checked={isChecked.checkbox3}
-            />
-            I can&apos;t afford the current pricing
-          </label>
+          <Checkbox
+            label="I can't afford the current pricing"
+            name="checkbox3"
+            checked={isChecked.checkbox3}
+            onChange={handleCheckboxChange}
+            disableDefaultStyles
+          />
         </div>
         <div>
-          <label>
-            <input
-              type="checkbox"
-              name="checkbox4"
-              onChange={handleCheckboxChange}
-              checked={isChecked.checkbox4}
-            />
-            Other
-          </label>
+          <Checkbox
+            label="Other"
+            name="checkbox4"
+            checked={isChecked.checkbox4}
+            onChange={handleCheckboxChange}
+            disableDefaultStyles
+          />
         </div>
         <input
           type="text"
