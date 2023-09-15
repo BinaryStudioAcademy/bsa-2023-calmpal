@@ -1,21 +1,11 @@
 .wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 99;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100%;
   padding-top: 150px;
   font-weight: 600;
-  background-color: var(--white);
   background-image: url("../../../../assets/img/meditation-player-background.png");
   background-repeat: no-repeat;
   background-size: cover;
-  backdrop-filter: blur(15px);
 }
 
 .meditation-player {
