@@ -30,22 +30,23 @@ const ChatLayout: React.FC = () => {
       };
     },
   );
+  const hasId = Boolean(id);
 
   const handleSend = useCallback(
     ({ message }: ChatInputValue): void => {
-      if (!id && currentChatMessages.length === EMPTY_ARRAY_LENGTH) {
+      if (!hasId && currentChatMessages.length === EMPTY_ARRAY_LENGTH) {
         void dispatch(chatActions.createChat({ message }));
       }
       // TODO: dispatch redux action to send message
     },
-    [dispatch, currentChatMessages.length, id],
+    [dispatch, currentChatMessages.length, hasId],
   );
 
   return (
     <>
       <ChatHeader />
       <div className={styles['chat-body']}>
-        {Boolean(id) &&
+        {hasId &&
           MOCK_MESSAGES.map((item) => {
             return (
               <ChatMessage
