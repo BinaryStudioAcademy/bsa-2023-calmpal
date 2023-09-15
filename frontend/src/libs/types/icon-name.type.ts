@@ -18,6 +18,7 @@ type IconName =
   | 'chat-sidebar'
   | 'send'
   | 'chatbot-avatar'
+  | 'back'
   | 'close'
   | 'delete';
 

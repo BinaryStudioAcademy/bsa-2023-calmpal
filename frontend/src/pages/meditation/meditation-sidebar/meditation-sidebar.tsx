@@ -1,8 +1,19 @@
 import meditationPlaceholder from '#assets/img/meditation-image-placeholder.png';
-import { Card, Search } from '#libs/components/components.js';
+import {
+  Card,
+  Search,
+  Sidebar,
+  SidebarBody,
+  SidebarHeader,
+} from '#libs/components/components.js';
 import { useCallback, useSearch } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
+
+type Properties = {
+  isSidebarShown: boolean;
+  setIsSidebarShown: (value: boolean) => void;
+};
 
 const mockedMeditations = [{ id: 1, name: 'Meditation' }];
 
@@ -10,24 +21,31 @@ const mockedSelectedMeditation = {
   id: 1,
 };
 
-const MeditationSidebar: React.FC = () => {
+const MeditationSidebar: React.FC<Properties> = ({
+  isSidebarShown,
+  setIsSidebarShown,
+}) => {
   const { filteredElements, setFilter } = useSearch(mockedMeditations, 'name');
 
-  const handleSelectChat = useCallback((id: number) => {
-    return () => {
-      mockedSelectedMeditation.id = id;
-      // TODO redux logic
-    };
-  }, []);
+  const handleSelectChat = useCallback(
+    (id: number) => {
+      return () => {
+        mockedSelectedMeditation.id = id;
+        setIsSidebarShown(false);
+        // TODO redux logic
+      };
+    },
+    [setIsSidebarShown],
+  );
 
   return (
-    <div className={styles['container']}>
-      <div className={styles['header']}>
+    <Sidebar isSidebarShown={isSidebarShown}>
+      <SidebarHeader>
         <div className={styles['info']}>
           <span>Meditation & Breathing</span>
         </div>
-      </div>
-      <div className={styles['list']}>
+      </SidebarHeader>
+      <SidebarBody>
         <div className={styles['search']}>
           <Search onValueChange={setFilter} />
         </div>
@@ -44,8 +62,8 @@ const MeditationSidebar: React.FC = () => {
             );
           })}
         </div>
-      </div>
-    </div>
+      </SidebarBody>
+    </Sidebar>
   );
 };
 

@@ -1,4 +1,11 @@
-import { Card, Icon, Modal } from '#libs/components/components.js';
+import {
+  Card,
+  Icon,
+  Modal,
+  Sidebar,
+  SidebarBody,
+  SidebarHeader,
+} from '#libs/components/components.js';
 import {
   DeleteAccountConfirmation,
   DeleteAccountForm,
@@ -17,7 +24,15 @@ import { actions as authActions } from '#slices/auth/auth.js';
 import { SETTINGS_OPTIONS } from './libs/constants.js';
 import styles from './styles.module.scss';
 
-const UserProfile: React.FC = () => {
+type Properties = {
+  isSidebarShown: boolean;
+  setIsSidebarShown: (value: boolean) => void;
+};
+
+const UserProfileSidebar: React.FC<Properties> = ({
+  isSidebarShown,
+  setIsSidebarShown,
+}) => {
   const dispatch = useAppDispatch();
 
   const { authenticatedUser } = useAppSelector(({ auth }) => {
@@ -29,11 +44,15 @@ const UserProfile: React.FC = () => {
   const [activeItem, setActiveItem] = useState<string>('notification');
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const handleClick = useCallback((key: string) => {
-    return () => {
-      setActiveItem(key);
-    };
-  }, []);
+  const handleClick = useCallback(
+    (key: string) => {
+      return () => {
+        setIsSidebarShown(false);
+        setActiveItem(key);
+      };
+    },
+    [setIsSidebarShown],
+  );
 
   const handleSignOut = useCallback((): void => {
     void dispatch(authActions.signOut());
@@ -59,12 +78,14 @@ const UserProfile: React.FC = () => {
   ];
 
   return (
-    <div className={styles['container']}>
-      <div className={styles['header']}>
-        <div className="visually-hidden">Profile settings</div>
-        <div className={styles['header-text']}>My Profile</div>
-      </div>
-      <div className={styles['body']}>
+    <Sidebar isSidebarShown={isSidebarShown}>
+      <SidebarHeader>
+        <div className={styles['info']}>
+          <span className="visually-hidden">Profile settings</span>
+          <span>My Profile</span>
+        </div>
+      </SidebarHeader>
+      <SidebarBody>
         <div className={styles['user']}>
           <div className="visually-hidden">User details</div>
           <div className={styles['user-details']}>
@@ -97,21 +118,15 @@ const UserProfile: React.FC = () => {
             iconName="sign-out"
             iconColor={IconColor.WHITE}
           />
-          <Card
-            title="Delete account"
-            onClick={toggleModal}
-            iconName="delete"
-            iconColor={IconColor.WHITE}
-          />
           <Modal
             isDisplayed={isModalOpen}
             steps={steps}
             onClose={toggleModal}
           />
         </div>
-      </div>
-    </div>
+      </SidebarBody>
+    </Sidebar>
   );
 };
 
-export { UserProfile };
+export { UserProfileSidebar };

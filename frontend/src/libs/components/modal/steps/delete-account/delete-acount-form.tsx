@@ -1,7 +1,6 @@
 import { type ChangeEvent, type FC } from 'react';
 
-import { Button } from '#libs/components/components.js';
-import { Checkbox } from '#libs/components/components.js';
+import { Button, Checkbox } from '#libs/components/components.js';
 import { useCallback, useState } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
