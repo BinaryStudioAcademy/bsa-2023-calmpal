@@ -13,6 +13,8 @@ const navigationItems = [{ name: 'Meditation', path: AppRoute.MEDITATION }];
 const DEFAULT_MEDITATION_PAYLOAD: MeditationEntryCreateForm = {
   title: '',
   file: null,
+  fileType: null,
+  fileSize: null,
 };
 
 const MOCKED_IMAGE = '../../src/assets/img/meditation-image-placeholder.jpg';
