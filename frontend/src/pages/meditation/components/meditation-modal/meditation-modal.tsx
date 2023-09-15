@@ -25,7 +25,7 @@ type Properties = {
   onSubmit: (title: string, file: File) => void;
 };
 
-const MeditationModal: React.FC<Properties> = ({ reference, onSubmit }) => {
+const AddMeditationModal: React.FC<Properties> = ({ reference, onSubmit }) => {
   const { meditationDataStatus } = useAppSelector(({ meditation }) => {
     return {
       meditationDataStatus: meditation.meditationEntriesDataStatus,
@@ -79,4 +79,4 @@ const MeditationModal: React.FC<Properties> = ({ reference, onSubmit }) => {
   );
 };
 
-export { MeditationModal };
+export { AddMeditationModal };
