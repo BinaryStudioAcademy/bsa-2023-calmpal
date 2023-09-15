@@ -1,47 +1,50 @@
 import { IconColor } from '#libs/enums/enums.js';
-import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { useHandleClickOutside, useRef } from '#libs/hooks/hooks.js';
+import {
+  useCallback,
+  useHandleClickOutside,
+  useRef,
+} from '#libs/hooks/hooks.js';
 
 import { Button } from '../components.js';
 import styles from './styles.module.scss';
 
 type Properties = {
   children: React.ReactNode;
-  isDisplayed: boolean;
   title: string;
-  onClose: () => void;
+  reference: React.RefObject<HTMLDialogElement>;
 };
 
-const Modal: React.FC<Properties> = ({
-  children,
-  isDisplayed,
-  title,
-  onClose,
-}) => {
-  const reference = useRef<HTMLDivElement>(null);
+const Modal: React.FC<Properties> = ({ children, title, reference }) => {
+  const modalReference = useRef<HTMLDivElement>(null);
 
-  useHandleClickOutside({ isHandle: isDisplayed, ref: reference, onClose });
+  const handleClose = useCallback(() => {
+    reference.current?.close();
+  }, [reference]);
+
+  useHandleClickOutside({
+    ref: modalReference,
+    onClose: handleClose,
+  });
 
   return (
-    <dialog
-      open={isDisplayed}
-      className={getValidClassNames(isDisplayed && styles['overlay'])}
-    >
-      <div className={styles['modal']} ref={reference}>
-        <div className={styles['header']}>
-          <span className={styles['title']}>{title}</span>
-          <div className={styles['icon-container']}>
-            <Button
-              label="Close modal"
-              iconName="close"
-              iconColor={IconColor.BLACK}
-              style="rounded-transparent"
-              onClick={onClose}
-              isLabelVisuallyHidden
-            />
+    <dialog ref={reference}>
+      <div className={styles['overlay']}>
+        <div className={styles['modal']} ref={modalReference}>
+          <div className={styles['header']}>
+            <span className={styles['title']}>{title}</span>
+            <form method="dialog" className={styles['icon-container']}>
+              <Button
+                label="Close modal"
+                iconName="close"
+                iconColor={IconColor.BLACK}
+                style="rounded-transparent"
+                onClick={handleClose}
+                isLabelVisuallyHidden
+              />
+            </form>
           </div>
+          {children}
         </div>
-        {children}
       </div>
     </dialog>
   );

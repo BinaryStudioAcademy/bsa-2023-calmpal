@@ -11,8 +11,8 @@ import { IconColor } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useCallback,
+  useRef,
   useSearch,
-  useState,
 } from '#libs/hooks/hooks.js';
 import { actions as meditationActions } from '#slices/meditation/meditation.js';
 
@@ -36,15 +36,11 @@ const MeditationSidebar: React.FC<Properties> = ({
 }) => {
   const dispatch = useAppDispatch();
   const { filteredElements, setFilter } = useSearch(mockedMeditations, 'name');
-  const [isDisplayed, setIsDisplayed] = useState<boolean>(false);
+  const dialogReference = useRef<HTMLDialogElement>(null);
 
   const handleOpen = useCallback(() => {
-    setIsDisplayed(true);
-  }, [setIsDisplayed]);
-
-  const handleClose = useCallback(() => {
-    setIsDisplayed(false);
-  }, [setIsDisplayed]);
+    dialogReference.current?.showModal();
+  }, [dialogReference]);
 
   const handleSubmit = useCallback(
     (title: string, file: File) => {
@@ -106,12 +102,7 @@ const MeditationSidebar: React.FC<Properties> = ({
         </SidebarBody>
       </Sidebar>
 
-      <MeditationModal
-        isDisplayed={isDisplayed}
-        setIsDisplayed={setIsDisplayed}
-        onClose={handleClose}
-        onSubmit={handleSubmit}
-      />
+      <MeditationModal reference={dialogReference} onSubmit={handleSubmit} />
     </>
   );
 };

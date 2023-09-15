@@ -21,18 +21,11 @@ import { DEFAULT_MEDITATION_PAYLOAD } from '#pages/meditation/libs/constants/con
 import styles from './styles.module.scss';
 
 type Properties = {
-  isDisplayed: boolean;
-  setIsDisplayed: React.Dispatch<React.SetStateAction<boolean>>;
+  reference: React.RefObject<HTMLDialogElement>;
   onSubmit: (title: string, file: File) => void;
-  onClose: () => void;
 };
 
-const MeditationModal: React.FC<Properties> = ({
-  isDisplayed,
-  setIsDisplayed,
-  onSubmit,
-  onClose,
-}) => {
+const MeditationModal: React.FC<Properties> = ({ reference, onSubmit }) => {
   const { meditationDataStatus } = useAppSelector(({ meditation }) => {
     return {
       meditationDataStatus: meditation.meditationEntriesDataStatus,
@@ -49,10 +42,10 @@ const MeditationModal: React.FC<Properties> = ({
 
   useEffect(() => {
     if (meditationDataStatus === DataStatus.FULFILLED) {
-      setIsDisplayed(false);
+      reference.current?.close();
       reset();
     }
-  }, [meditationDataStatus, reset, setIsDisplayed]);
+  }, [meditationDataStatus, reset, reference]);
 
   const handleFormSubmit = useCallback(
     (event_: React.FormEvent<HTMLFormElement>) => {
@@ -64,7 +57,7 @@ const MeditationModal: React.FC<Properties> = ({
   );
 
   return (
-    <Modal title="Add meditation" isDisplayed={isDisplayed} onClose={onClose}>
+    <Modal title="Add meditation" reference={reference}>
       <form className={styles['form']} onSubmit={handleFormSubmit}>
         <Input
           control={control}
