@@ -56,7 +56,7 @@ const ChatLayout: React.FC = () => {
             );
           })}
       </div>
-      <ChatFooter key={id} onSend={handleSend} />
+      <ChatFooter onSend={handleSend} />
     </>
   );
 };

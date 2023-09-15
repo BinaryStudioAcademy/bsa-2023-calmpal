@@ -1,7 +1,12 @@
 import { Icon } from '#libs/components/components.js';
 import { Input } from '#libs/components/input/input.js';
 import { IconColor } from '#libs/enums/enums.js';
-import { useAppForm, useCallback } from '#libs/hooks/hooks.js';
+import {
+  useAppForm,
+  useCallback,
+  useEffect,
+  useParams,
+} from '#libs/hooks/hooks.js';
 import { CHAT_INPUT_DEFAULT_VALUES } from '#pages/chat/libs/constants/constants.js';
 import { type ChatInputValue } from '#pages/chat/libs/types/types.js';
 
@@ -12,10 +17,15 @@ type Properties = {
 };
 
 const ChatFooter: React.FC<Properties> = ({ onSend }) => {
+  const { id } = useParams<{ id: string }>();
   const { control, handleSubmit, errors, reset } = useAppForm<ChatInputValue>({
     defaultValues: CHAT_INPUT_DEFAULT_VALUES,
     mode: 'onSubmit',
   });
+
+  useEffect(() => {
+    reset();
+  }, [id, reset]);
 
   const onSubmit = useCallback(
     ({ message }: ChatInputValue): void => {
