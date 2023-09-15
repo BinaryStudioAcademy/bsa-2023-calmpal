@@ -7,6 +7,7 @@ import {
   useEffect,
 } from '#libs/hooks/hooks.js';
 import { type ValueOf } from '#libs/types/value-of.type.js';
+import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { DEFAULT_NOTE_PAYLOAD } from '#pages/journal/libs/constants/constants.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
@@ -18,7 +19,7 @@ const JournalSidebar: React.FC = () => {
   const { allJournalEntries, selectedJournalEntry, userId } = useAppSelector(
     ({ journal, auth }) => {
       return {
-        userId: auth.authenticatedUser?.id,
+        userId: (auth.authenticatedUser as UserAuthResponseDto).id,
         allJournalEntries: journal.allJournalEntries,
         selectedJournalEntry: journal.selectedJournalEntry,
       };
