@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { type ImageSourcePropType } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
 
@@ -35,7 +35,7 @@ const Card: React.FC<Properties> = ({
     onPress(title);
   };
 
-  const rightSwipeActions = (): JSX.Element => {
+  const rightSwipeActions = (): ReactNode => {
     return (
       <View
         style={{
