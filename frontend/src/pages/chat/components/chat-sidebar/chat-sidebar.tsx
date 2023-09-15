@@ -1,5 +1,12 @@
 import cardPlaceholder from '#assets/img/card-image-placeholder.png';
-import { Card, Icon, Search } from '#libs/components/components.js';
+import {
+  Card,
+  Icon,
+  Search,
+  Sidebar,
+  SidebarBody,
+  SidebarHeader,
+} from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { useCallback, useSearch } from '#libs/hooks/hooks.js';
 
@@ -15,20 +22,30 @@ const mockedChats = [
 const mockedSelectedChat = {
   id: 1,
 };
+type Properties = {
+  isSidebarShown: boolean;
+  setIsSidebarShown: (value: boolean) => void;
+};
 
-const ChatSidebar: React.FC = () => {
+const ChatSidebar: React.FC<Properties> = ({
+  isSidebarShown,
+  setIsSidebarShown,
+}) => {
   const { filteredElements, setFilter } = useSearch(mockedChats, 'name');
-
-  const handleSelectChat = useCallback((id: number) => {
-    return () => {
-      mockedSelectedChat.id = id;
-      // TODO redux logic
-    };
-  }, []);
+  const handleSelectChat = useCallback(
+    (id: number) => {
+      return () => {
+        mockedSelectedChat.id = id;
+        setIsSidebarShown(false);
+        // TODO redux logic
+      };
+    },
+    [setIsSidebarShown],
+  );
 
   return (
-    <div className={styles['container']}>
-      <div className={styles['header']}>
+    <Sidebar isSidebarShown={isSidebarShown}>
+      <SidebarHeader>
         <div className={styles['info']}>
           <span>Chat</span>
           <span className={styles['chat-number']}>
@@ -38,8 +55,8 @@ const ChatSidebar: React.FC = () => {
         <div className={styles['plus']}>
           <Icon name={'plus'} color={IconColor.BLUE} />
         </div>
-      </div>
-      <div className={styles['list']}>
+      </SidebarHeader>
+      <SidebarBody>
         <div className={styles['search']}>
           <Search onValueChange={setFilter} />
         </div>
@@ -56,8 +73,8 @@ const ChatSidebar: React.FC = () => {
             );
           })}
         </div>
-      </div>
-    </div>
+      </SidebarBody>
+    </Sidebar>
   );
 };
 
