@@ -2,10 +2,10 @@ import { BackButton } from '#libs/components/components.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useSidebarState } from '#libs/hooks/hooks.js';
 
-import { JournalSidebar } from './components/journal-sidebar/journal-sidebar.js';
+import { UserProfileSidebar } from './components/components.js';
 import styles from './styles.module.scss';
 
-const Journal: React.FC = () => {
+const UserProfile: React.FC = () => {
   const { isSidebarShown, setIsSidebarShown } = useSidebarState();
 
   const handleBackButtonPress = useCallback(() => {
@@ -14,7 +14,7 @@ const Journal: React.FC = () => {
 
   return (
     <>
-      <JournalSidebar
+      <UserProfileSidebar
         isSidebarShown={isSidebarShown}
         setIsSidebarShown={setIsSidebarShown}
       />
@@ -31,4 +31,4 @@ const Journal: React.FC = () => {
   );
 };
 
-export { Journal };
+export { UserProfile };

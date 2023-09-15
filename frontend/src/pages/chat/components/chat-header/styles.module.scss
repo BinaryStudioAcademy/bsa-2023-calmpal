@@ -4,13 +4,14 @@
   z-index: 1;
   width: 100%;
   background-color: var(--white);
+  border-bottom: 1px solid var(--blue-100);
   box-shadow: 1px 15px 15px -15px var(--white);
 }
 
 .header-content {
   display: flex;
   align-items: center;
-  padding: 24.5px 36px;
+  padding: 25px 36px;
 }
 
 .logo {
@@ -25,7 +26,8 @@
   line-height: 1.5;
 }
 
-.separator {
-  margin: 0;
-  border: 1px solid var(--blue-100);
+@media (width < 768px) {
+  .header-content {
+    padding: 25px 95px;
+  }
 }
