@@ -62,10 +62,11 @@ const Modal: React.FC<Properties> = ({
     : null;
 
   return (
-    <div
+    <dialog
+      open={isDisplayed}
       className={getValidClassNames(
         styles['overlay'],
-        !isDisplayed && 'visually-hidden',
+        isDisplayed && 'visually-hidden',
       )}
     >
       <div className={styles['container']}>
@@ -85,7 +86,7 @@ const Modal: React.FC<Properties> = ({
           {renderedComponent}
         </div>
       </div>
-    </div>
+    </dialog>
   );
 };
 
