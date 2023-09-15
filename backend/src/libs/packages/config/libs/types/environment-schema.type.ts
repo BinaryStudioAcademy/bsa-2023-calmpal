@@ -32,6 +32,7 @@ type EnvironmentSchema = {
   };
   OPEN_AI: {
     API_KEY: string;
+    BASE_URL: string;
   };
 };
 
