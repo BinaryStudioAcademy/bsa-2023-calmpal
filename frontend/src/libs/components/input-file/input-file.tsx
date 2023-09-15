@@ -21,7 +21,7 @@ type Properties<T extends FormFieldValues> = {
   control: FormControl<T, null>;
   errors: FormFieldErrors<T>;
   name: FormFieldPath<T>;
-  fileName: string | null;
+  fileName: string | undefined;
   label: string;
   description: string;
   onChange?: (file: File) => void;
@@ -34,10 +34,10 @@ const InputFile = <T extends FormFieldValues>({
   fileName,
   label,
   description,
-  onChange,
 }: Properties<T>): JSX.Element => {
-  const { field } = useFormController({ name, control });
+  const { field } = useFormController<T>({ name, control });
 
+  const errorNames = [name.toString(), `${name}.type`, `${name}.size`];
   const inputErrors = errors[name];
   const hasError =
     inputErrors && Object.keys(inputErrors).length > EMPTY_ARRAY_LENGTH;
@@ -46,17 +46,13 @@ const InputFile = <T extends FormFieldValues>({
   const handleFileChange = useCallback(
     (event_: React.ChangeEvent<HTMLInputElement>) => {
       if (event_.target.files?.length) {
-        const currentFile = event_.target.files[FIRST_ARRAY_INDEX] as File;
+        const file = event_.target.files[FIRST_ARRAY_INDEX] as File;
 
-        if (onChange) {
-          onChange(currentFile);
-        }
-
-        const { name, type, size } = currentFile;
-        field.onChange({ name, type, size });
+        const { type, size } = file;
+        field.onChange({ type, size, data: file });
       }
     },
-    [field, onChange],
+    [field],
   );
 
   const displayError = useCallback(({ message }: { message: string }) => {
@@ -85,33 +81,20 @@ const InputFile = <T extends FormFieldValues>({
       </div>
 
       <div>
-        <ErrorMessage
-          errors={errors}
-          name={
-            name.toString() as FormFieldName<
-              FormFieldValuesFromFieldErrors<FormFieldErrors<T>>
-            >
-          }
-          render={displayError}
-        />
-        <ErrorMessage
-          errors={errors}
-          name={
-            `${name}.type` as FormFieldName<
-              FormFieldValuesFromFieldErrors<FormFieldErrors<T>>
-            >
-          }
-          render={displayError}
-        />
-        <ErrorMessage
-          errors={errors}
-          name={
-            `${name}.size` as FormFieldName<
-              FormFieldValuesFromFieldErrors<FormFieldErrors<T>>
-            >
-          }
-          render={displayError}
-        />
+        {errorNames.map((name) => {
+          return (
+            <ErrorMessage
+              key={name}
+              errors={errors}
+              name={
+                name as FormFieldName<
+                  FormFieldValuesFromFieldErrors<FormFieldErrors<T>>
+                >
+              }
+              render={displayError}
+            />
+          );
+        })}
       </div>
 
       {displayFile && (
