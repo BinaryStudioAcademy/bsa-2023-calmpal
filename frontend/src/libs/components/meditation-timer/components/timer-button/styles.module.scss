@@ -28,3 +28,14 @@
   opacity: 0;
   pointer-events: none;
 }
+
+.active-text {
+  color: inherit;
+}
+
+.button-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

@@ -7,7 +7,8 @@ type Properties = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
   name: string;
-  children: React.ReactNode;
+  duration: string;
+  unit: string;
 };
 
 const TimerButton: React.FC<Properties> = ({
@@ -15,7 +16,8 @@ const TimerButton: React.FC<Properties> = ({
   onChange,
   value,
   name,
-  children,
+  duration,
+  unit,
 }) => {
   return (
     <label
@@ -32,7 +34,15 @@ const TimerButton: React.FC<Properties> = ({
         onChange={onChange}
         className={styles['radio-hidden']}
       />
-      {children}
+      <div
+        className={getValidClassNames(
+          styles['button-content'],
+          isActive && styles['active-text'],
+        )}
+      >
+        <span>{duration}</span>
+        <span>{unit}</span>
+      </div>
     </label>
   );
 };

@@ -1,5 +1,4 @@
 import { Button } from '#libs/components/components.js';
-import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useState } from '#libs/hooks/hooks.js';
 
 import { TimerButton } from './components/timer-button/timer-button.js';
@@ -36,23 +35,13 @@ const MeditationTimer: React.FC<TimerProperties> = ({
               onChange={handleChange}
               value={duration}
               name="meditationDuration"
-            >
-              <div
-                className={getValidClassNames(
-                  styles['button-content'],
-                  selectedDuration === duration && styles['active-text'],
-                )}
-              >
-                <span>
-                  {
-                    MEDITATION_DURATION[
-                      duration as keyof typeof MEDITATION_DURATION
-                    ]
-                  }
-                </span>
-                <span>{DURATION_UNIT.MINUTES}</span>
-              </div>
-            </TimerButton>
+              duration={
+                MEDITATION_DURATION[
+                  duration as keyof typeof MEDITATION_DURATION
+                ]
+              }
+              unit={DURATION_UNIT.MINUTES}
+            />
           );
         })}
       </div>
