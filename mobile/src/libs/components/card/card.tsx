@@ -37,15 +37,7 @@ const Card: React.FC<Properties> = ({
 
   const rightSwipeActions = (): ReactNode => {
     return (
-      <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'flex-end',
-          paddingHorizontal: 10,
-
-          paddingVertical: 20,
-        }}
-      >
+      <View style={styles.deleteContainer}>
         <Icon name="delete" color={AppColor.BLUE_300} />
       </View>
     );
