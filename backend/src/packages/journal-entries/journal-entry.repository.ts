@@ -61,8 +61,8 @@ class JournalEntryRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public delete(): ReturnType<Repository['delete']> {
-    return Promise.resolve(true);
+  public async delete(id: number): ReturnType<Repository['delete']> {
+    return Boolean(await this.journalEntryModel.query().deleteById(id));
   }
 }
 

@@ -1,4 +1,8 @@
+import { ExceptionMessage } from '#libs/enums/enums.js';
+import { AuthError } from '#libs/exceptions/exceptions.js';
+import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Service } from '#libs/types/types.js';
+import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { JournalEntryEntity } from './journal-entry.entity.js';
 import { type JournalEntryRepository } from './journal-entry.repository.js';
@@ -46,8 +50,20 @@ class JournalEntryService implements Service {
     return Promise.resolve(null);
   }
 
-  public delete(): ReturnType<Service['delete']> {
-    return Promise.resolve(true);
+  public async delete(
+    id: number,
+    user: UserAuthResponseDto,
+  ): ReturnType<Service['delete']> {
+    // const journal = await this.find(); //TODO find(id)
+    const journal = { id: 1, userId: 32 };
+    if (journal.userId !== user.id) {
+      throw new AuthError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.INCORRECT_CREDENTIALS,
+      });
+    }
+
+    return await this.journalEntryRepository.delete(id);
   }
 }
 

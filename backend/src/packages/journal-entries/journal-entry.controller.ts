@@ -6,10 +6,14 @@ import {
 } from '#libs/packages/controller/controller.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
+import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { type JournalEntryService } from './journal-entry.service.js';
 import { JournalApiPath } from './libs/enums/enums.js';
-import { type JournalEntryCreateRequestDto } from './libs/types/types.js';
+import {
+  type JournalDeleteParameter,
+  type JournalEntryCreateRequestDto,
+} from './libs/types/types.js';
 
 /**
  * @swagger
@@ -59,6 +63,19 @@ class JournalEntryController extends BaseController {
       method: 'GET',
       handler: () => {
         return this.getAll();
+      },
+    });
+
+    this.addRoute({
+      path: JournalApiPath.$ID,
+      method: 'DELETE',
+      handler: (options) => {
+        return this.delete(
+          options as APIHandlerOptions<{
+            user: UserAuthResponseDto;
+            params: JournalDeleteParameter;
+          }>,
+        );
       },
     });
   }
@@ -130,6 +147,57 @@ class JournalEntryController extends BaseController {
     return {
       status: HTTPCode.OK,
       payload: await this.journalEntryService.findAll(),
+    };
+  }
+
+  /**
+   * @swagger
+   * /journal/{id}:
+   *   delete:
+   *     description: Delete a journal entry by ID
+   *     security:
+   *       - bearerAuth: []
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         description: ID of the journal entry to delete
+   *         required: true
+   *         schema:
+   *           type: integer
+   *     responses:
+   *       200:
+   *         description: Successfully deleted the journal entry
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 isDeleted:
+   *                   type: boolean
+   *                   description: Is successfully deleted
+   *       404:
+   *         description: Incorrect user credentials
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *             example:
+   *               message: "Incorrect credentials."
+   *               errorType: "AUTHORIZATION"
+   */
+
+  private async delete(
+    options: APIHandlerOptions<{
+      user: UserAuthResponseDto;
+      params: JournalDeleteParameter;
+    }>,
+  ): Promise<APIHandlerResponse> {
+    return {
+      status: HTTPCode.OK,
+      payload: await this.journalEntryService.delete(
+        options.params.id,
+        options.user,
+      ),
     };
   }
 }

@@ -1,3 +1,5 @@
+import { type UserAuthResponseDto } from '#packages/users/users.js';
+
 type Service<T = unknown> = {
   find(): Promise<T>;
   findAll(): Promise<{
@@ -5,7 +7,7 @@ type Service<T = unknown> = {
   }>;
   create(payload: unknown): Promise<T>;
   update(): Promise<T>;
-  delete(): Promise<boolean>;
+  delete(id: number, user: UserAuthResponseDto): Promise<boolean>;
 };
 
 export { type Service };
