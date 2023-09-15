@@ -3,17 +3,23 @@ import { type RefObject } from 'react';
 import { useEffect } from '#libs/hooks/hooks.js';
 
 type Properties = {
-  reference: RefObject<HTMLElement>;
+  isHandle: boolean;
+  ref: RefObject<HTMLElement>;
   onClose: () => void;
 };
 
-const useHandleClickOutside = ({ reference, onClose }: Properties): void => {
+const useHandleClickOutside = ({
+  isHandle,
+  ref,
+  onClose,
+}: Properties): void => {
   useEffect(() => {
+    if (!isHandle) {
+      return;
+    }
+
     const handleClickOutside = (event: MouseEvent): void => {
-      if (
-        reference.current &&
-        !reference.current.contains(event.target as Node)
-      ) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
         onClose();
       }
     };
@@ -23,7 +29,7 @@ const useHandleClickOutside = ({ reference, onClose }: Properties): void => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [reference, onClose]);
+  }, [isHandle, ref, onClose]);
 };
 
 export { useHandleClickOutside };

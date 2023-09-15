@@ -20,7 +20,7 @@ const Modal: React.FC<Properties> = ({
 }) => {
   const reference = useRef<HTMLDivElement>(null);
 
-  useHandleClickOutside({ reference, onClose });
+  useHandleClickOutside({ isHandle: isDisplayed, ref: reference, onClose });
 
   return (
     <dialog
