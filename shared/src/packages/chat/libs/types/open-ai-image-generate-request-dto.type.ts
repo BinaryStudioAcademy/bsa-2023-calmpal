@@ -1,6 +1,6 @@
-import { type ValueOf } from '#libs/types/value-of.type.js';
+import { type ValueOf } from '#libs/types/types.js';
 
-import { type OpenAiImageSize } from '../enums/open-ai-image-size.enum.js';
+import { type OpenAiImageSize } from '../enums/enums.js';
 
 type OpenAiImageGenerateRequestDto = {
   prompt: string;
