@@ -15,6 +15,7 @@ import {
   useParams,
   useRef,
 } from '#libs/hooks/hooks.js';
+import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
 import { NOTE_TIMEOUT } from './libs/constants.js';
@@ -29,7 +30,7 @@ const Note: React.FC<Properties> = ({ className }) => {
   const { userId, selectedJournalEntry } = useAppSelector(
     ({ auth, journal }) => {
       return {
-        userId: auth.authenticatedUser?.id,
+        userId: (auth.authenticatedUser as UserAuthResponseDto).id,
         selectedJournalEntry: journal.selectedJournalEntry,
       };
     },

@@ -32,7 +32,6 @@ const Journal: React.FC = () => {
   useEffect(() => {
     if (id) {
       setIsNoteVisible(true);
-      setIsSidebarShown(false);
     }
   }, [dispatch, id, selectedJournalEntry, setIsSidebarShown]);
 
