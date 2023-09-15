@@ -1,8 +1,4 @@
 export {
-  EMPTY_ARRAY_LENGTH,
-  FIRST_ARRAY_INDEX,
-} from './libs/constants/constants.js';
-export {
   APIPath,
   AppEnvironment,
   ContentType,
@@ -44,10 +40,12 @@ export {
 } from './libs/types/types.js';
 export { AuthApiPath } from './packages/auth/auth.js';
 export {
-  type ChatMessage,
-  type Message,
-  UserRole,
-} from './packages/chat/chat.js';
+  type ChatCreateRequestDto,
+  type ChatGetAllItemResponseDto,
+  type ChatGetAllResponseDto,
+  ChatsApiPath,
+  createChatValidationSchema,
+} from './packages/chats/chats.js';
 export {
   type FileGetAllItemResponseDto,
   type FileUploadRequestDto,
@@ -84,3 +82,11 @@ export {
   type UserSignUpResponseDto,
   userSignUpValidationSchema,
 } from './packages/users/users.js';
+export {
+  EMPTY_ARRAY_LENGTH,
+  FIRST_ARRAY_INDEX,
+} from '#libs/constants/constants.js';
+export {
+  type ChatMessageGetAllItemResponseDto,
+  type ChatMessageGetAllResponseDto,
+} from '#packages/chat-messages/chat-messages.js';

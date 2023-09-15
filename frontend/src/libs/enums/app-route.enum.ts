@@ -5,6 +5,7 @@ const AppRoute = {
   MEDITATION: '/meditation',
   SIGN_UP_SURVEY: '/sign-up/survey',
   CHATS: '/chats',
+  CHATS_$ID: '/chats/:id',
   JOURNAL: '/journal',
   JOURNAL_ENTRY_$ID: '/journal/:id',
   PROFILE: '/profile',

@@ -1,4 +1,3 @@
-export { generateUUID } from './generate-uuid.helper.js';
 export {
   changeCursorPosition,
   getCursorPosition,

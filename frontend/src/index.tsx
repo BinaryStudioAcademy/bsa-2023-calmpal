@@ -59,14 +59,6 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 ),
               },
               {
-                path: AppRoute.SIGN_IN,
-                element: <Auth />,
-              },
-              {
-                path: AppRoute.SIGN_UP,
-                element: <Auth />,
-              },
-              {
                 path: AppRoute.SIGN_UP_SURVEY,
                 element: (
                   <ProtectedRoute>
@@ -83,6 +75,16 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                     </NavigationMenuWrapper>
                   </ProtectedRoute>
                 ),
+                children: [
+                  {
+                    path: AppRoute.CHATS_$ID,
+                    element: (
+                      <ProtectedRoute>
+                        <Chat />
+                      </ProtectedRoute>
+                    ),
+                  },
+                ],
               },
               {
                 path: AppRoute.JOURNAL,
