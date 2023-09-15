@@ -35,7 +35,7 @@ const MeditationModal: React.FC<Properties> = ({
 }) => {
   const { meditationDataStatus } = useAppSelector(({ meditation }) => {
     return {
-      meditationDataStatus: meditation.dataStatus,
+      meditationDataStatus: meditation.meditationEntriesDataStatus,
     };
   });
   const { control, errors, handleSubmit, reset, watch } =

@@ -8,12 +8,12 @@ import { createMeditationEntry } from './actions.js';
 
 type State = {
   meditationEntries: MeditationEntryCreateResponseDto[];
-  dataStatus: ValueOf<typeof DataStatus>;
+  meditationEntriesDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
   meditationEntries: [],
-  dataStatus: DataStatus.IDLE,
+  meditationEntriesDataStatus: DataStatus.IDLE,
 };
 
 const { reducer, actions, name } = createSlice({
@@ -22,14 +22,14 @@ const { reducer, actions, name } = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(createMeditationEntry.pending, (state) => {
-      state.dataStatus = DataStatus.PENDING;
+      state.meditationEntriesDataStatus = DataStatus.PENDING;
     });
     builder.addCase(createMeditationEntry.fulfilled, (state, action) => {
       state.meditationEntries.push(action.payload);
-      state.dataStatus = DataStatus.FULFILLED;
+      state.meditationEntriesDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(createMeditationEntry.rejected, (state) => {
-      state.dataStatus = DataStatus.REJECTED;
+      state.meditationEntriesDataStatus = DataStatus.REJECTED;
     });
   },
 });
