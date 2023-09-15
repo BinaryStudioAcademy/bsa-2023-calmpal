@@ -36,7 +36,7 @@ const Journal: React.FC = () => {
   }, [dispatch, id, selectedJournalEntry, setIsSidebarShown]);
 
   return (
-    <div className={styles['wrapper']}>
+    <>
       <JournalSidebar
         isSidebarShown={isSidebarShown}
         setIsSidebarShown={setIsSidebarShown}
@@ -48,17 +48,17 @@ const Journal: React.FC = () => {
         )}
       >
         <BackButton onGoBack={handleBackButtonPress} />
+        <div className={styles['note-wrapper']}>
+          {isNoteVisible && (
+            <Note
+              className={getValidClassNames(
+                !selectedJournalEntry && 'visually-hidden',
+              )}
+            />
+          )}
+        </div>
       </div>
-      <div className={styles['note-wrapper']}>
-        {isNoteVisible && (
-          <Note
-            className={getValidClassNames(
-              !selectedJournalEntry && 'visually-hidden',
-            )}
-          />
-        )}
-      </div>
-    </div>
+    </>
   );
 };
 

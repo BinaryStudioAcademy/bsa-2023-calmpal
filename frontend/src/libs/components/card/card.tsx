@@ -1,5 +1,5 @@
 import { Icon } from '#libs/components/components.js';
-import { type AppRoute, type IconColor } from '#libs/enums/enums.js';
+import { type IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { type IconName, type ValueOf } from '#libs/types/types.js';
 
@@ -11,7 +11,6 @@ type Properties = {
   onClick: () => void;
   isActive?: boolean;
   iconName?: IconName;
-  linkTo?: ValueOf<typeof AppRoute>;
   iconColor?: ValueOf<typeof IconColor>;
 };
 
