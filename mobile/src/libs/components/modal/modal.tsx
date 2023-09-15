@@ -19,13 +19,13 @@ const Modal: React.FC<Properties> = ({
   type,
 }) => {
   return (
-    <RNModal visible={isVisible} transparent={true} animationType="slide">
+    <RNModal visible={isVisible} transparent={true} animationType="none">
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
           <Text style={styles.modalTitle}>{`Delete ${type}?`}</Text>
-          <View style={styles.buttonContainer}>
-            <Button label="Cancel" onPress={onClose} />
-            <Button label="Delete" onPress={onDelete} />
+          <View style={styles.buttonsContainer}>
+            <Button label="Cancel" onPress={onClose} type="modal-cancel" />
+            <Button label="Delete" onPress={onDelete} type="modal-delete" />
           </View>
         </View>
       </View>
