@@ -27,9 +27,7 @@ const DeleteAccountConfirmation: FC<Properties> = ({ onClose }) => {
   const handleDelete = useCallback(
     (payload: UserDeleteRequestDto): void => {
       void dispatch(authActions.deleteUser(payload));
-      if (onClose) {
-        onClose();
-      }
+      onClose?.();
     },
     [dispatch, onClose],
   );
