@@ -1,10 +1,12 @@
-import { Note } from '#libs/components/components.js';
+import { BackButton, Note } from '#libs/components/components.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useAppSelector,
+  useCallback,
   useEffect,
   useParams,
+  useSidebarState,
   useState,
 } from '#libs/hooks/hooks.js';
 
@@ -21,16 +23,33 @@ const Journal: React.FC = () => {
       selectedJournalEntry: journal.selectedJournalEntry,
     };
   });
+  const { isSidebarShown, setIsSidebarShown } = useSidebarState();
+
+  const handleBackButtonPress = useCallback(() => {
+    setIsSidebarShown(true);
+  }, [setIsSidebarShown]);
 
   useEffect(() => {
     if (id) {
       setIsNoteVisible(true);
+      setIsSidebarShown(false);
     }
-  }, [dispatch, id, selectedJournalEntry]);
+  }, [dispatch, id, selectedJournalEntry, setIsSidebarShown]);
 
   return (
     <div className={styles['wrapper']}>
-      <JournalSidebar />
+      <JournalSidebar
+        isSidebarShown={isSidebarShown}
+        setIsSidebarShown={setIsSidebarShown}
+      />
+      <div
+        className={getValidClassNames(
+          styles['container'],
+          isSidebarShown && styles['hide'],
+        )}
+      >
+        <BackButton onGoBack={handleBackButtonPress} />
+      </div>
       <div className={styles['note-wrapper']}>
         {isNoteVisible && (
           <Note

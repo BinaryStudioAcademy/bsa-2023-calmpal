@@ -1,4 +1,11 @@
-import { Button, Card, Link } from '#libs/components/components.js';
+import {
+  Button,
+  Card,
+  Link,
+  Sidebar,
+  SidebarBody,
+  SidebarHeader,
+} from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/app-route.enum.js';
 import {
   useAppDispatch,
@@ -12,7 +19,15 @@ import { actions as journalActions } from '#slices/journal/journal.js';
 
 import styles from './styles.module.scss';
 
-const JournalSidebar: React.FC = () => {
+type Properties = {
+  isSidebarShown: boolean;
+  setIsSidebarShown: (value: boolean) => void;
+};
+
+const JournalSidebar: React.FC<Properties> = ({
+  isSidebarShown,
+  setIsSidebarShown,
+}) => {
   const dispatch = useAppDispatch();
 
   const { allJournalEntries, selectedJournalEntry, userId } = useAppSelector(
@@ -43,15 +58,16 @@ const JournalSidebar: React.FC = () => {
   const handleSelectJournalEntry = useCallback(
     (id: number) => {
       return () => {
+        setIsSidebarShown(false);
         dispatch(journalActions.setSelectedJournalEntry(id));
       };
     },
-    [dispatch],
+    [dispatch, setIsSidebarShown],
   );
 
   return (
-    <div className={styles['container']}>
-      <div className={styles['header']}>
+    <Sidebar isSidebarShown={isSidebarShown}>
+      <SidebarHeader>
         <div className={styles['info']}>
           <span>Journal</span>
         </div>
@@ -62,14 +78,14 @@ const JournalSidebar: React.FC = () => {
           style="add"
           onClick={handlePlusButtonClick}
         />
-      </div>
-      <div className={styles['list']}>
+      </SidebarHeader>
+      <SidebarBody>
         <div className={styles['journal-entry-list']}>
           {allJournalEntries.map((journalEntry) => {
-            const noteLink = AppRoute.JOURNAL_ENTRY_$ID.replace(
+            const noteLink = (AppRoute.JOURNAL_ENTRY_$ID.replace(
               ':id',
               String(journalEntry.id),
-            ) as typeof AppRoute.JOURNAL_ENTRY_$ID;
+            ) + '?sidebarMode=hide') as typeof AppRoute.JOURNAL_ENTRY_$ID;
 
             return (
               <Link key={journalEntry.id} to={noteLink}>
@@ -82,8 +98,8 @@ const JournalSidebar: React.FC = () => {
             );
           })}
         </div>
-      </div>
-    </div>
+      </SidebarBody>
+    </Sidebar>
   );
 };
 

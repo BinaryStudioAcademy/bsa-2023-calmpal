@@ -2,10 +2,10 @@ import { BackButton } from '#libs/components/components.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useSidebarState } from '#libs/hooks/hooks.js';
 
-import { ChatLayout, ChatSidebar } from './components/components.js';
+import { UserProfileSidebar } from './components/components.js';
 import styles from './styles.module.scss';
 
-const Chat: React.FC = () => {
+const UserProfile: React.FC = () => {
   const { isSidebarShown, setIsSidebarShown } = useSidebarState();
 
   const handleBackButtonPress = useCallback(() => {
@@ -14,7 +14,7 @@ const Chat: React.FC = () => {
 
   return (
     <>
-      <ChatSidebar
+      <UserProfileSidebar
         isSidebarShown={isSidebarShown}
         setIsSidebarShown={setIsSidebarShown}
       />
@@ -25,10 +25,10 @@ const Chat: React.FC = () => {
         )}
       >
         <BackButton onGoBack={handleBackButtonPress} />
-        <ChatLayout />
+        hi there
       </div>
     </>
   );
 };
 
-export { Chat };
+export { UserProfile };

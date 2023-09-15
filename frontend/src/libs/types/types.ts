@@ -12,6 +12,7 @@ export { type Route } from './route/route.type.js';
 export { type SettingsOption } from './settings-option.type.js';
 export { type ValueOf } from './value-of.type.js';
 export { type ClassValue } from 'clsx';
+export { type SetURLSearchParams } from 'react-router-dom';
 export {
   type ChatMessage,
   type Message,
