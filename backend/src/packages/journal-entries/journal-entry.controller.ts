@@ -180,12 +180,15 @@ class JournalEntryController extends BaseController {
       body: JournalEntryCreateRequestDto;
     }>,
   ): Promise<APIHandlerResponse> {
+    const { id: userId } = options.user;
+    const { body } = options;
+
     return {
       status: HTTPCode.CREATED,
-      payload: await this.journalEntryService.create(
-        options.body,
-        options.user.id,
-      ),
+      payload: await this.journalEntryService.create({
+        userId,
+        body,
+      }),
     };
   }
 

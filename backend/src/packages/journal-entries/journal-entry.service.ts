@@ -8,7 +8,7 @@ import { userService } from '#packages/users/users.js';
 import { JournalEntryEntity } from './journal-entry.entity.js';
 import { type JournalEntryRepository } from './journal-entry.repository.js';
 import {
-  type JournalEntryCreateRequestDto,
+  type CreateJournalEntryPayload,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
   type JournalEntryUpdateRequestDto,
@@ -49,10 +49,10 @@ class JournalEntryService implements Service {
     };
   }
 
-  public async create(
-    payload: JournalEntryCreateRequestDto,
-    userId: number,
-  ): Promise<JournalEntryGetAllItemResponseDto> {
+  public async create({
+    body,
+    userId,
+  }: CreateJournalEntryPayload): Promise<JournalEntryGetAllItemResponseDto> {
     const user = await userService.findById(userId);
 
     if (!user) {
@@ -65,8 +65,8 @@ class JournalEntryService implements Service {
     const item = await this.journalEntryRepository.create(
       JournalEntryEntity.initializeNew({
         userId,
-        title: sanitizeInput(payload.title),
-        text: sanitizeInput(payload.text),
+        title: sanitizeInput(body.title),
+        text: sanitizeInput(body.text),
       }),
     );
 
