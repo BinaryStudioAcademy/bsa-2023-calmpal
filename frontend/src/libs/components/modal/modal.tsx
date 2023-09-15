@@ -44,9 +44,7 @@ const Modal: React.FC<Properties> = ({
 
   const handleClose = useCallback((): void => {
     setCurrentStep(INITIAL_STEP);
-    if (onClose) {
-      onClose();
-    }
+    onClose?.();
   }, [onClose]);
 
   const isMultiStep = Array.isArray(steps) && steps.length > INITIAL_STEP;
