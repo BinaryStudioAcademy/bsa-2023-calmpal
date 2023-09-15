@@ -77,6 +77,7 @@ const Journal: React.FC = () => {
         isVisible={isModalVisible}
         onClose={hanleCloseModal}
         onDelete={handleDeleteNote}
+        type="Note"
       />
       <View style={styles.container}>
         <InputSearch
