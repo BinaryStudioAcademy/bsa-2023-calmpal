@@ -37,7 +37,7 @@ const AddMeditationModal: React.FC<Properties> = ({ reference, onSubmit }) => {
       validationSchema: createMeditationEntryValidationSchema,
     });
 
-  const hasError = Boolean(Object.keys(errors).length > EMPTY_ARRAY_LENGTH);
+  const hasError = Object.keys(errors).length > EMPTY_ARRAY_LENGTH;
   const isLoading = meditationDataStatus === DataStatus.PENDING || hasError;
 
   useEffect(() => {
