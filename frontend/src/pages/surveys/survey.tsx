@@ -1,5 +1,5 @@
 import { Header, Loader, Navigate } from '#libs/components/components.js';
-import { SIDEBAR_ROUTES } from '#libs/components/sidebar-wrapper/libs/constants.js';
+import { SIDEBAR_ROUTES } from '#libs/components/navigation-menu-wrapper/libs/constants.js';
 import { AppRoute, DataStatus } from '#libs/enums/enums.js';
 import {
   useAppDispatch,

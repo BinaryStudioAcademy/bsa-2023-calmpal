@@ -10,7 +10,7 @@
   align-items: center;
 }
 
-.sidebar {
+.nav-menu {
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -65,7 +65,7 @@
 }
 
 @media (width < 768px) {
-  .sidebar {
+  .nav-menu {
     display: none;
   }
 }

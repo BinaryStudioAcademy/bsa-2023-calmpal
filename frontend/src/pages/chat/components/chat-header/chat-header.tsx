@@ -12,7 +12,6 @@ const ChatHeader: React.FC = () => {
         </div>
         <span className={styles['title']}>Doctor Freud.ai</span>
       </div>
-      <hr className={styles['separator']} />
     </header>
   );
 };
