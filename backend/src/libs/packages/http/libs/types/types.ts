@@ -1,2 +1,2 @@
 export { type HTTPLoadMethod } from './http-load-method.type.js';
-export { type HTTPMethod } from 'shared/build/index.js';
+export { HTTPHeader, type HTTPMethod } from 'shared/build/index.js';

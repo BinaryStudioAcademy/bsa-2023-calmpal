@@ -1,37 +1,45 @@
-import axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios';
-
 import { ContentType } from '#libs/enums/enums.js';
+import { type ValueOf } from '#libs/types/types.js';
 
-import { type HTTPLoadMethod } from './libs/types/types.js';
+import { HTTPHeader, type HTTPLoadMethod } from './libs/types/types.js';
 
 class HTTPService {
-  private _instance: AxiosInstance;
-
-  public constructor() {
-    this._instance = axios.create({
-      timeout: 5000,
-    });
-  }
-
   public async load<T>({
     method,
     url,
     data,
     token,
   }: HTTPLoadMethod): Promise<T> {
-    const axiosConfig: AxiosRequestConfig = {
+    const headers = this.getHeaders(ContentType.JSON, token);
+
+    const fetchConfig = {
       method,
-      url,
-      data,
-      headers: {
-        'Content-Type': ContentType.JSON,
-        Authorization: `Bearer ${token}`,
-      },
+      headers,
+      body: data ? JSON.stringify(data) : null,
     };
 
-    const response = await this._instance.request<T>(axiosConfig);
+    const response = await fetch(url, fetchConfig);
 
-    return response.data;
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    return (await response.json()) as T;
+  }
+
+  private getHeaders(
+    contentType: ValueOf<typeof ContentType>,
+    token?: string,
+  ): Headers {
+    const headers = new Headers();
+
+    headers.append(HTTPHeader.CONTENT_TYPE, contentType);
+
+    if (token) {
+      headers.append(HTTPHeader.AUTHORIZATION, `Bearer ${token}`);
+    }
+
+    return headers;
   }
 }
 
