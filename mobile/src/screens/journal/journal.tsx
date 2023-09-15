@@ -29,7 +29,7 @@ const Journal: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigation = useNavigation();
 
-  const [isModalVisible, setisModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const { allJournalEntries } = useAppSelector(({ journal }) => {
     return {
@@ -48,15 +48,15 @@ const Journal: React.FC = () => {
   }, []);
 
   const handleShowModal = (): void => {
-    setisModalVisible(false);
+    setIsModalVisible(true);
   };
 
   const hanleCloseModal = (): void => {
-    setisModalVisible(false);
+    setIsModalVisible(false);
   };
 
   const handleDeleteNote = (): void => {
-    setisModalVisible(false);
+    setIsModalVisible(false);
   };
 
   useEffect(() => {
