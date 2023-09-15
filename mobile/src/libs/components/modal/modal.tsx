@@ -9,6 +9,7 @@ type Properties = {
   isVisible: boolean;
   onClose: () => void;
   onDelete: () => void;
+  type?: 'note';
 };
 
 const Modal: React.FC<Properties> = ({ isVisible, onClose, onDelete }) => {
