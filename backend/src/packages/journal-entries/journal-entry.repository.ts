@@ -93,7 +93,7 @@ class JournalEntryRepository implements Repository {
       text: updatedJournalEntry.text,
       title: updatedJournalEntry.title,
       createdAt: new Date(updatedJournalEntry.createdAt),
-      updatedAt: new Date(),
+      updatedAt: new Date(updatedJournalEntry.updatedAt),
     });
   }
 
