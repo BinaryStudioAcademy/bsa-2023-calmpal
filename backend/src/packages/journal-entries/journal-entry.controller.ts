@@ -45,6 +45,24 @@ import { createJournalEntryValidationSchema } from './libs/validation-schemas/va
  *            type: string
  *          errorType:
  *            type: string
+ *      Unprocessable Journal Entity:
+ *        type: object
+ *        properties:
+ *          message:
+ *            type: string
+ *          errorType:
+ *            type: string
+ *          details:
+ *            type: array
+ *            items:
+ *              type: object
+ *              properties:
+ *                path:
+ *                  type: array
+ *                  items:
+ *                      - type: string
+ *                message:
+ *                  type: string
  */
 
 class JournalEntryController extends BaseController {
@@ -135,10 +153,7 @@ class JournalEntryController extends BaseController {
    *          content:
    *            application/json:
    *              schema:
-   *                type: object
-   *                properties:
-   *                  journalEntry:
-   *                    $ref: '#/components/schemas/Journal Entry'
+   *                  $ref: '#/components/schemas/Journal Entry'
    *        401:
    *          description: Unauthorized
    *          content:
@@ -272,10 +287,7 @@ class JournalEntryController extends BaseController {
    *          content:
    *            application/json:
    *              schema:
-   *                type: object
-   *                properties:
-   *                  journalEntry:
-   *                    $ref: '#/components/schemas/Journal Entry'
+   *                 $ref: '#/components/schemas/Journal Entry'
    *        401:
    *          description: Unauthorized
    *          content:
@@ -294,6 +306,12 @@ class JournalEntryController extends BaseController {
    *              example:
    *                message: "User with these credentials was not found."
    *                errorType: "USERS"
+   *        422:
+   *          description: Validation failed
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Unprocessable Journal Entity'
    */
 
   private async update(
