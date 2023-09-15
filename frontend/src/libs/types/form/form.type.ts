@@ -1,3 +1,4 @@
+export { type FieldValuesFromFieldErrors as FormFieldValuesFromFieldErrors } from '@hookform/error-message';
 export {
   type Control as FormControl,
   type ControllerRenderProps as FormControllerRenderProps,
