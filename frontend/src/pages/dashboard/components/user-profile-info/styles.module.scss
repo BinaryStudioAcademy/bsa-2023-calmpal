@@ -1,22 +1,7 @@
-.container {
-  max-width: 350px;
-  height: 100%;
-  background: linear-gradient(
-    to bottom,
-    var(--transparent) 0,
-    var(--blue-100) 100%
-  );
-}
-
-.header {
+.info {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 47px 20px;
-  font-weight: 600;
-  font-size: 20px;
-  border-bottom: 1px solid var(--blue-100);
 }
 
 .avatar-container {
@@ -41,17 +26,4 @@
   margin-top: 15px;
   font-weight: 600;
   font-size: 20px;
-}
-
-@media (width < 900px) {
-  .container {
-    width: 250px;
-  }
-}
-
-@media (width < 768px) {
-  .container {
-    width: 100%;
-    max-width: none;
-  }
 }
