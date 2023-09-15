@@ -2,7 +2,6 @@ import { type HTTPService } from '../http/http.js';
 import {
   BASE_OPEN_AI_URL,
   DEFAULT_IMAGE_GENERATE_REQUEST,
-  EMPTY_ARRAY_LENGTH,
 } from './libs/constants/constants.js';
 import {
   type OpenAiImageGenerateRequestDto,
@@ -34,7 +33,7 @@ class OpenAi {
 
   public async getMessageResponse({
     content,
-  }: OpenAiMessageGenerateRequestDto): Promise<string | undefined> {
+  }: OpenAiMessageGenerateRequestDto): Promise<string | null> {
     const data = await this.httpService.load<OpenAiMessageGenerateResponseDto>({
       method: 'POST',
       url: `${BASE_OPEN_AI_URL}chat/completions`,
@@ -50,16 +49,16 @@ class OpenAi {
       token: this.apiKey,
     });
 
-    return data.choices.length === EMPTY_ARRAY_LENGTH
-      ? undefined
-      : data.choices[EMPTY_ARRAY_LENGTH]?.message.content;
+    const [response] = data.choices;
+
+    return response?.message.content ?? null;
   }
 
   public async generateImage({
     prompt,
     n = DEFAULT_IMAGE_GENERATE_REQUEST.n,
     size = DEFAULT_IMAGE_GENERATE_REQUEST.size,
-  }: OpenAiImageGenerateRequestDto): Promise<string | undefined> {
+  }: OpenAiImageGenerateRequestDto): Promise<string | null> {
     const data = await this.httpService.load<OpenAiImageGenerateResponseDto>({
       method: 'POST',
       url: `${BASE_OPEN_AI_URL}images/generations`,
@@ -67,9 +66,9 @@ class OpenAi {
       token: this.apiKey,
     });
 
-    return data.data.length === EMPTY_ARRAY_LENGTH
-      ? undefined
-      : data.data[EMPTY_ARRAY_LENGTH]?.url;
+    const [response] = data.data;
+
+    return response?.url ?? null;
   }
 }
 
