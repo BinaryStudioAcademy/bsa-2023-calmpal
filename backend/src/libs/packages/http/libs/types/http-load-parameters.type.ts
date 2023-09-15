@@ -1,10 +1,10 @@
 import { type HTTPMethod } from './types.js';
 
-type HTTPLoadMethod = {
+type HTTPLoadParameters = {
   method: HTTPMethod;
   url: string;
   data?: object;
   token?: string;
 };
 
-export { type HTTPLoadMethod };
+export { type HTTPLoadParameters };

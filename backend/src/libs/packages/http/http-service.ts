@@ -1,7 +1,7 @@
 import { ContentType } from '#libs/enums/enums.js';
 import { type ValueOf } from '#libs/types/types.js';
 
-import { HTTPHeader, type HTTPLoadMethod } from './libs/types/types.js';
+import { HTTPHeader, type HTTPLoadParameters } from './libs/types/types.js';
 
 class HTTPService {
   public async load<T>({
@@ -9,7 +9,7 @@ class HTTPService {
     url,
     data,
     token,
-  }: HTTPLoadMethod): Promise<T> {
+  }: HTTPLoadParameters): Promise<T> {
     const headers = this.getHeaders(ContentType.JSON, token);
 
     const fetchConfig = {
