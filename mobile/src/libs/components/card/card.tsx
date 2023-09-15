@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { type ImageSourcePropType } from 'react-native';
+import { Swipeable } from 'react-native-gesture-handler';
 
 import imagePlaceholder from '#assets/img/card-image-placeholder.png';
 import {
@@ -9,6 +10,7 @@ import {
   Text,
   View,
 } from '#libs/components/components';
+import { AppColor } from '#libs/enums/enums';
 import { type IconName } from '#libs/types/types';
 
 import { DEFAULT_NUMBER_OF_LINES } from './libs/constants';
@@ -33,23 +35,42 @@ const Card: React.FC<Properties> = ({
     onPress(title);
   };
 
-  return (
-    <Pressable onPress={handlePress} style={styles.container}>
-      {iconName && iconColor ? (
-        <View style={styles.iconContainer}>
-          <Icon name={iconName} color={iconColor} />
-        </View>
-      ) : (
-        <Image source={image} style={styles.image} />
-      )}
-      <Text
-        style={styles.title}
-        numberOfLines={DEFAULT_NUMBER_OF_LINES}
-        ellipsizeMode="tail"
+  const rightSwipeActions = (): ReactNode => {
+    return (
+      <View
+        style={{
+          backgroundColor: '#ff8303',
+          justifyContent: 'center',
+          alignItems: 'flex-end',
+          paddingHorizontal: 10,
+
+          paddingVertical: 20,
+        }}
       >
-        {title}
-      </Text>
-    </Pressable>
+        <Icon name="delete" color={AppColor.GRAY_100} />
+      </View>
+    );
+  };
+
+  return (
+    <Swipeable renderRightActions={rightSwipeActions}>
+      <Pressable onPress={handlePress} style={styles.container}>
+        {iconName && iconColor ? (
+          <View style={styles.iconContainer}>
+            <Icon name={iconName} color={iconColor} />
+          </View>
+        ) : (
+          <Image source={image} style={styles.image} />
+        )}
+        <Text
+          style={styles.title}
+          numberOfLines={DEFAULT_NUMBER_OF_LINES}
+          ellipsizeMode="tail"
+        >
+          {title}
+        </Text>
+      </Pressable>
+    </Swipeable>
   );
 };
 
