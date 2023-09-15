@@ -189,8 +189,10 @@ class JournalEntryController extends BaseController {
    *              schema:
    *                type: object
    *                properties:
-   *                  journalEntry:
-   *                    $ref: '#/components/schemas/Journal Entry'
+   *                  items:
+   *                    type: array
+   *                    items:
+   *                      $ref: '#/components/schemas/Journal Entry'
    *        401:
    *          description: Unauthorized
    *          content:
@@ -224,10 +226,7 @@ class JournalEntryController extends BaseController {
    *          content:
    *            application/json:
    *              schema:
-   *                type: object
-   *                properties:
-   *                  journalEntry:
-   *                    $ref: '#/components/schemas/Journal Entry'
+   *                   $ref: '#/components/schemas/Journal Entry'
    *        401:
    *          description: Unauthorized
    *          content:
