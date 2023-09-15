@@ -35,11 +35,15 @@ const Card: React.FC<Properties> = ({
     onPress(title);
   };
 
+  const handleDelete = (): void => {
+    onPress(title);
+  };
+
   const rightSwipeActions = (): ReactNode => {
     return (
-      <View style={styles.deleteContainer}>
+      <Pressable style={styles.deleteContainer} onPress={handleDelete}>
         <Icon name="delete" color={AppColor.BLUE_300} />
-      </View>
+      </Pressable>
     );
   };
 
