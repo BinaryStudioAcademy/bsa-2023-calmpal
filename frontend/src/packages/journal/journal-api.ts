@@ -55,7 +55,7 @@ class JournalApi extends BaseHttpApi {
   ): Promise<JournalEntryGetAllItemResponseDto> {
     const response = await this.load(
       this.getFullEndpoint(JournalApiPath.$ID, {
-        id: payload.id,
+        id: payload.id.toString(),
       }),
       {
         method: 'PUT',

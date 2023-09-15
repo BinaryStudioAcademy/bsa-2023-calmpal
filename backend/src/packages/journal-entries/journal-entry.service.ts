@@ -11,6 +11,7 @@ import {
   type JournalEntryCreateRequestDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
+  type JournalEntryUpdateRequestDto,
 } from './libs/types/types.js';
 
 class JournalEntryService implements Service {
@@ -72,12 +73,12 @@ class JournalEntryService implements Service {
     return item.toObject();
   }
 
-  public async update(
-    id: number,
-    userId: number,
-    payload: JournalEntryCreateRequestDto,
-  ): Promise<JournalEntryGetAllItemResponseDto> {
-    const user = await userService.findById(userId);
+  public async update({
+    id,
+    userId,
+    body,
+  }: JournalEntryUpdateRequestDto): Promise<JournalEntryGetAllItemResponseDto> {
+    const user = await userService.findById(userId as number);
 
     if (!user) {
       throw new UsersError({
@@ -89,11 +90,11 @@ class JournalEntryService implements Service {
     const newJournalEntry = await this.journalEntryRepository.update(
       JournalEntryEntity.initialize({
         id,
-        userId,
+        userId: userId as number,
         createdAt: null,
         updatedAt: null,
-        title: sanitizeInput(payload.title),
-        text: sanitizeInput(payload.text),
+        title: sanitizeInput(body.title),
+        text: sanitizeInput(body.text),
       }),
     );
 

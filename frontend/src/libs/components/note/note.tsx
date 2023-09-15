@@ -61,7 +61,7 @@ const Note: React.FC<Properties> = ({ className }) => {
       if (data.title && data.text && id) {
         void dispatch(
           journalActions.updateJournalEntry({
-            id,
+            id: Number(id),
             body: {
               title: sanitizeInput(data.title),
               text: sanitizeInput(data.text),

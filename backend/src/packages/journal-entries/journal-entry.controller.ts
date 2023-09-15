@@ -309,7 +309,7 @@ class JournalEntryController extends BaseController {
 
     return {
       status: HTTPCode.OK,
-      payload: await this.journalEntryService.update(id, userId, body),
+      payload: await this.journalEntryService.update({ id, userId, body }),
     };
   }
 }
