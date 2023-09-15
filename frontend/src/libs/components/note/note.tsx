@@ -74,23 +74,27 @@ const Note: React.FC<Properties> = ({ className }) => {
     [dispatch, id],
   );
 
-  const handleTitleChange: React.FormEventHandler<HTMLDivElement> =
-    useCallback(() => {
-      if (titleReference.current) {
-        const newTitle = titleReference.current.textContent ?? '';
-        onTitleChange(newTitle);
+  const handleNoteChange = useCallback(
+    (
+      elementReference: React.MutableRefObject<HTMLDivElement | null>,
+      onChange: (value: string) => void,
+    ): void => {
+      if (elementReference.current) {
+        const newValue = elementReference.current.textContent ?? '';
+        onChange(newValue);
         changeCursorPosition(cursorPosition);
       }
-    }, [onTitleChange]);
+    },
+    [],
+  );
 
-  const handleTextChange: React.FormEventHandler<HTMLDivElement> =
-    useCallback(() => {
-      if (textReference.current) {
-        const newText = textReference.current.textContent ?? '';
-        onTextChange(newText);
-        changeCursorPosition(cursorPosition);
-      }
-    }, [onTextChange]);
+  const handleTitleChange = useCallback(() => {
+    handleNoteChange(titleReference, onTitleChange);
+  }, [handleNoteChange, onTitleChange]);
+
+  const handleTextChange = useCallback(() => {
+    handleNoteChange(textReference, onTextChange);
+  }, [handleNoteChange, onTextChange]);
 
   useEffect(() => {
     void dispatch(journalActions.getAllJournalEntries()).then(() => {
