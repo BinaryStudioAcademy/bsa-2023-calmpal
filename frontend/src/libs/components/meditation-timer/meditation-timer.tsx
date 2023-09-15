@@ -7,13 +7,13 @@ import { DURATION_UNIT, MEDITATION_DURATION } from './libs/constants.js';
 import styles from './styles.module.scss';
 
 type TimerProperties = {
-  onClose: () => void;
   defaultDuration: string;
+  onStartSession: () => void;
 };
 
 const MeditationTimer: React.FC<TimerProperties> = ({
-  onClose,
   defaultDuration,
+  onStartSession,
 }) => {
   const [selectedDuration, setSelectedDuration] = useState(defaultDuration);
 
@@ -59,7 +59,7 @@ const MeditationTimer: React.FC<TimerProperties> = ({
       <Button
         style="start-button"
         label="Start meditation session"
-        onClick={onClose}
+        onClick={onStartSession}
       />
     </div>
   );

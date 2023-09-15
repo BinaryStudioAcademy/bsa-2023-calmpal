@@ -2,6 +2,7 @@ import meditationListPlaceholder from '#assets/img/meditation-list-placeholder.j
 import { Button, MeditationTimer, Modal } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { useCallback, useState } from '#libs/hooks/hooks.js';
+import { MeditationPlayer } from '#pages/meditation/components/meditation-player/meditation-player.js';
 import {
   DURATION_UNIT,
   MEDITATION_DURATION,
@@ -16,6 +17,7 @@ type Properties = {
 
 const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
   const [isModalDisplayed, setIsModalDisplayed] = useState(false);
+  const [isPlayerDisplayed, setIsPlayerDisplayed] = useState(false);
 
   const displayedDuration = `${
     MEDITATION_DURATION[
@@ -31,38 +33,46 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
     setIsModalDisplayed(false);
   }, []);
 
+  const handleStartSession = useCallback(() => {
+    setIsPlayerDisplayed(true);
+    setIsModalDisplayed(false);
+  }, []);
+
   return (
-    <div className={styles['track']}>
-      <img
-        src={meditationListPlaceholder}
-        alt="Meditation entry"
-        className={styles['background-image']}
-      />
-      <div className={styles['content']}>
-        <div className={styles['info']}>
-          <h1 className={styles['title']}>{meditationEntry.title}</h1>
-          <span className={styles['duration']}>{displayedDuration}</span>
+    <>
+      {isPlayerDisplayed && <MeditationPlayer />}
+      <div className={styles['track']}>
+        <img
+          src={meditationListPlaceholder}
+          alt="Meditation entry"
+          className={styles['background-image']}
+        />
+        <div className={styles['content']}>
+          <div className={styles['info']}>
+            <h1 className={styles['title']}>{meditationEntry.title}</h1>
+            <span className={styles['duration']}>{displayedDuration}</span>
+          </div>
+          <Button
+            style="play-button"
+            onClick={handlePlayClick}
+            label="Play meditation"
+            isLabelVisuallyHidden={true}
+            iconName="play"
+            iconColor={IconColor.BLUE}
+          />
         </div>
-        <Button
-          style="play-button"
-          onClick={handlePlayClick}
-          label="Play meditation"
-          isLabelVisuallyHidden={true}
-          iconName="play"
-          iconColor={IconColor.BLUE}
-        />
-      </div>
-      <Modal
-        isDisplayed={isModalDisplayed}
-        title={meditationEntry.title}
-        onClose={handleModalClose}
-      >
-        <MeditationTimer
+        <Modal
+          isDisplayed={isModalDisplayed}
+          title={meditationEntry.title}
           onClose={handleModalClose}
-          defaultDuration={meditationEntry.durationKey}
-        />
-      </Modal>
-    </div>
+        >
+          <MeditationTimer
+            defaultDuration={meditationEntry.durationKey}
+            onStartSession={handleStartSession}
+          />
+        </Modal>
+      </div>
+    </>
   );
 };
 
