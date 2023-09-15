@@ -16,7 +16,7 @@ import {
 } from '#libs/hooks/hooks.js';
 import { actions as meditationActions } from '#slices/meditation/meditation.js';
 
-import { AddMeditationModal } from '../meditation-modal/meditation-modal.js';
+import { AddMeditationModal } from '../add-meditation-modal/add-meditation-modal.js';
 import styles from './styles.module.scss';
 
 const mockedMeditations = [{ id: 1, name: 'Meditation' }];

@@ -38,7 +38,7 @@ const AddMeditationModal: React.FC<Properties> = ({ reference, onSubmit }) => {
     });
 
   const hasError = Object.keys(errors).length > EMPTY_ARRAY_LENGTH;
-  const isLoading = meditationDataStatus === DataStatus.PENDING || hasError;
+  const isLoading = meditationDataStatus === DataStatus.PENDING;
 
   useEffect(() => {
     if (meditationDataStatus === DataStatus.FULFILLED) {
@@ -73,7 +73,12 @@ const AddMeditationModal: React.FC<Properties> = ({ reference, onSubmit }) => {
           label="Meditation audio file"
           description="Only MP3 extension is allowed"
         />
-        <Button type="submit" label="Submit" isLoading={isLoading} />
+        <Button
+          type="submit"
+          label="Submit"
+          isLoading={isLoading}
+          isDisabled={hasError}
+        />
       </form>
     </Modal>
   );
