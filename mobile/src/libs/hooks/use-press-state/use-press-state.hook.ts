@@ -16,12 +16,7 @@ type PressState = {
 const usePressState = ({ onPress, isRounded }: Properties): PressState => {
   const [isPressed, setIsPressed] = useState(false);
 
-  let color;
-  if (isPressed) {
-    color = AppColor.BLUE_200;
-  } else {
-    color = isRounded ? AppColor.BLUE_200 : AppColor.GRAY_400;
-  }
+  const color = isPressed || isRounded ? AppColor.BLUE_200 : AppColor.GRAY_400;
 
   const handlePress = (): void => {
     setIsPressed(true);
