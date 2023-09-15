@@ -19,7 +19,14 @@ const createJournalEntry = createAsyncThunk<
 >(`${sliceName}/create-journal-entry`, async (payload, { extra, dispatch }) => {
   const { journalApi } = extra;
   const journalEntry = await journalApi.createJournalEntry(payload);
-  dispatch(appActions.navigate(`${AppRoute.JOURNAL}/${journalEntry.id}`));
+  dispatch(
+    appActions.navigate(
+      AppRoute.JOURNAL_ENTRY_$ID.replace(
+        ':id',
+        String(journalEntry.id),
+      ) as typeof AppRoute.JOURNAL_ENTRY_$ID,
+    ),
+  );
 
   return journalEntry;
 });
