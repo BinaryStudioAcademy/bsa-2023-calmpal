@@ -5,10 +5,11 @@ import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useState } from '#libs/hooks/hooks.js';
 
 import { Icon } from '../components.js';
+import {
+  INITIAL_STEP,
+  NEXT_STEP_INCREMENT,
+} from './libs/constants/constants.js';
 import styles from './styles.module.scss';
-
-const INITIAL_STEP = 0;
-const NEXT_STEP_INCREMENT = 1;
 
 type StepComponentProperties = {
   onNext?: () => void;
