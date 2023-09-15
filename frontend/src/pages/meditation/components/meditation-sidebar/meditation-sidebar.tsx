@@ -14,16 +14,11 @@ import {
   useRef,
   useSearch,
 } from '#libs/hooks/hooks.js';
+import { navigationItems } from '#pages/meditation/libs/constants/constants.js';
 import { actions as meditationActions } from '#slices/meditation/meditation.js';
 
 import { AddMeditationModal } from '../add-meditation-modal/add-meditation-modal.js';
 import styles from './styles.module.scss';
-
-const mockedMeditations = [{ id: 1, name: 'Meditation' }];
-
-const mockedSelectedMeditation = {
-  id: 1,
-};
 
 type Properties = {
   isSidebarShown: boolean;
@@ -35,7 +30,7 @@ const MeditationSidebar: React.FC<Properties> = ({
   setIsSidebarShown,
 }) => {
   const dispatch = useAppDispatch();
-  const { filteredElements, setFilter } = useSearch(mockedMeditations, 'name');
+  const { filteredElements, setFilter } = useSearch(navigationItems, 'name');
   const dialogReference = useRef<HTMLDialogElement>(null);
 
   const handleOpen = useCallback(() => {
@@ -53,16 +48,9 @@ const MeditationSidebar: React.FC<Properties> = ({
     [dispatch],
   );
 
-  const handleSelectChat = useCallback(
-    (id: number) => {
-      return () => {
-        mockedSelectedMeditation.id = id;
-        setIsSidebarShown(false);
-        // TODO redux logic
-      };
-    },
-    [setIsSidebarShown],
-  );
+  const handleSelectChat = useCallback(() => {
+    setIsSidebarShown(false);
+  }, [setIsSidebarShown]);
 
   return (
     <>
@@ -92,9 +80,9 @@ const MeditationSidebar: React.FC<Properties> = ({
                 <Card
                   title={filteredElement.name}
                   imageUrl={meditationPlaceholder}
-                  onClick={handleSelectChat(filteredElement.id)}
-                  isActive={mockedSelectedMeditation.id === filteredElement.id}
-                  key={filteredElement.id}
+                  onClick={handleSelectChat}
+                  isActive={true}
+                  key={filteredElement.name}
                 />
               );
             })}
