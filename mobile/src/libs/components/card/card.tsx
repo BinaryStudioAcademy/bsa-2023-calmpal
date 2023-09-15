@@ -39,7 +39,6 @@ const Card: React.FC<Properties> = ({
     return (
       <View
         style={{
-          backgroundColor: '#ff8303',
           justifyContent: 'center',
           alignItems: 'flex-end',
           paddingHorizontal: 10,
@@ -47,7 +46,7 @@ const Card: React.FC<Properties> = ({
           paddingVertical: 20,
         }}
       >
-        <Icon name="delete" color={AppColor.GRAY_100} />
+        <Icon name="delete" color={AppColor.BLUE_300} />
       </View>
     );
   };
