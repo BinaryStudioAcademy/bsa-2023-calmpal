@@ -1,5 +1,6 @@
 import { type ChangeEvent, type FC } from 'react';
 
+import { Button } from '#libs/components/components.js';
 import { useCallback, useState } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
@@ -95,16 +96,15 @@ const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
         />
       </form>
       <div className={styles['footer']}>
-        <button onClick={onClose} className={styles['button']}>
-          Cancel
-        </button>
-        <button
-          onClick={onNext}
-          className={styles['button']}
-          disabled={isNextDisabled}
-        >
-          Continue
-        </button>
+        {onClose && <Button label="Cancel" style="primary" onClick={onClose} />}
+        {onNext && (
+          <Button
+            label="Continue"
+            style="primary"
+            isDisabled={isNextDisabled}
+            onClick={onNext}
+          />
+        )}
       </div>
     </div>
   );

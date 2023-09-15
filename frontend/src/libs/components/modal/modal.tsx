@@ -4,7 +4,7 @@ import { IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useState } from '#libs/hooks/hooks.js';
 
-import { Icon } from '../components.js';
+import { Button } from '../components.js';
 import {
   INITIAL_STEP,
   NEXT_STEP_INCREMENT,
@@ -72,12 +72,15 @@ const Modal: React.FC<Properties> = ({
         <div className={styles['modal']}>
           <div className={styles['header']}>
             <span className={styles['title']}>{currentTitle}</span>
-            <button
-              className={getValidClassNames(styles['icon-container'])}
-              onClick={handleClose}
-            >
-              <Icon name="close" color={IconColor.BLACK} />
-            </button>
+            <div className={styles['icon-container']}>
+              <Button
+                label=""
+                iconName="close"
+                iconColor={IconColor.BLACK}
+                style="rounded-transparent"
+                onClick={handleClose}
+              />
+            </div>
           </div>
           {renderedComponent}
         </div>

@@ -1,5 +1,7 @@
 import { type FC } from 'react';
 
+import { Button } from '#libs/components/components.js';
+
 import styles from './styles.module.scss';
 
 type Properties = {
@@ -17,12 +19,8 @@ const DeleteAccountMessage: FC<Properties> = ({ onNext, onClose }) => {
         <li>Your data and profile history will be deleted</li>
       </ul>
       <div className={styles['footer']}>
-        <button onClick={onClose} className={styles['button']}>
-          Cancel
-        </button>
-        <button onClick={onNext} className={styles['button']}>
-          Continue
-        </button>
+        {onClose && <Button label="Cancel" style="primary" onClick={onClose} />}
+        {onNext && <Button label="Continue" style="primary" onClick={onNext} />}
       </div>
     </div>
   );

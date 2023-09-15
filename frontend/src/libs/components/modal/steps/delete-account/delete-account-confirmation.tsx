@@ -1,5 +1,6 @@
 import { type FC } from 'react';
 
+import { Button } from '#libs/components/components.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -32,7 +33,7 @@ const DeleteAccountConfirmation: FC<Properties> = ({ onClose }) => {
     [dispatch, onClose],
   );
 
-  const handleclick = useCallback(() => {
+  const handleClick = useCallback(() => {
     if (authenticatedUserId) {
       handleDelete({ id: authenticatedUserId });
     }
@@ -47,9 +48,7 @@ const DeleteAccountConfirmation: FC<Properties> = ({ onClose }) => {
         are you sure you want to delete your account?
       </p>
       <div className={styles['footer']}>
-        <button onClick={handleclick} className={styles['button']}>
-          Confirm
-        </button>
+        <Button label="Confirm" style="primary" onClick={handleClick} />
       </div>
     </div>
   );
