@@ -18,7 +18,7 @@ import {
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
-import { NOTE_TIMEOUT } from './libs/constants.js';
+import { SAVE_NOTE_TIMEOUT } from './libs/constants.js';
 import { type NoteContent } from './libs/types.js';
 import styles from './styles.module.scss';
 
@@ -108,7 +108,7 @@ const Note: React.FC<Properties> = ({ className }) => {
       if (id && isDirty) {
         handleSaveNote(data);
       }
-    }, NOTE_TIMEOUT);
+    }, SAVE_NOTE_TIMEOUT);
 
     handleSaveNoteWithDebounce({ title: titleValue, text: textValue });
 
