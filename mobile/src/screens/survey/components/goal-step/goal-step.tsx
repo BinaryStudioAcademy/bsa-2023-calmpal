@@ -30,11 +30,11 @@ type GoalsStepProperties = {
 };
 
 type GoalsStepInitialParameters = {
-  setGoalSurvey: (payload: string[]) => void;
+  setGoalsSurvey: (payload: string[]) => void;
 };
 
 const GoalsStep: React.FC<GoalsStepProperties> = ({ route }) => {
-  const { setGoalSurvey } = route.params as GoalsStepInitialParameters;
+  const { setGoalsSurvey } = route.params as GoalsStepInitialParameters;
   const navigation =
     useNavigation<NativeStackNavigationProp<SurveyNavigationParameterList>>();
 
@@ -72,14 +72,14 @@ const GoalsStep: React.FC<GoalsStepProperties> = ({ route }) => {
 
   const handleSurveySubmit = useCallback(
     (payload: SurveyInputDto) => {
-      setGoalSurvey(getSurveyCategories(payload));
+      setGoalsSurvey(getSurveyCategories(payload));
     },
-    [setGoalSurvey],
+    [setGoalsSurvey],
   );
 
   const handleContinue = (): void => {
-    navigation.navigate(SurveyScreenName.WORRIES);
     void handleSubmit(handleSurveySubmit)();
+    navigation.navigate(SurveyScreenName.WORRIES);
   };
 
   const handleBack = (): void => {

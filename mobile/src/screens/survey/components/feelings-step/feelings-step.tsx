@@ -33,11 +33,11 @@ type FeelingsStepProperties = {
 };
 
 type FeelingsStepInitialParameters = {
-  setFeelingSurvey: (payload: string[]) => void;
+  setFeelingsSurvey: (payload: string[]) => void;
 };
 
 const FeelingsStep: React.FC<FeelingsStepProperties> = ({ route }) => {
-  const { setFeelingSurvey } = route.params as FeelingsStepInitialParameters;
+  const { setFeelingsSurvey } = route.params as FeelingsStepInitialParameters;
   const navigation =
     useNavigation<NativeStackNavigationProp<SurveyNavigationParameterList>>();
 
@@ -75,14 +75,14 @@ const FeelingsStep: React.FC<FeelingsStepProperties> = ({ route }) => {
 
   const handleSurveySubmit = useCallback(
     (payload: SurveyInputDto) => {
-      setFeelingSurvey(getSurveyCategories(payload));
+      setFeelingsSurvey(getSurveyCategories(payload));
     },
-    [setFeelingSurvey],
+    [setFeelingsSurvey],
   );
 
   const handleContinue = (): void => {
-    navigation.navigate(SurveyScreenName.GOAL);
     void handleSubmit(handleSurveySubmit)();
+    navigation.navigate(SurveyScreenName.GOAL);
   };
 
   const handleBack = (): void => {

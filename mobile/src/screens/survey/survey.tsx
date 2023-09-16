@@ -33,13 +33,14 @@ const Survey: React.FC = () => {
   const [feelingsSurvey, setFeelingsSurvey] = useState([]);
   const [goalsSurvey, setGoalsSurvey] = useState([]);
   const [worriesSurvey, setWorriesSurvey] = useState([]);
-  const [meditatienSurvey, setMeditationSurvey] = useState([]);
+  const [meditationSurvey, setMeditationSurvey] = useState([]);
   const { userId, surveyPreferencesDataStatus } = useAppSelector(({ auth }) => {
     return {
       userId: (auth.authenticatedUser as UserAuthResponseDto).id,
       surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
     };
   });
+
   const dispatch = useAppDispatch();
 
   const handleSubmitSurvey = (option: string[]): void => {
@@ -50,7 +51,7 @@ const Survey: React.FC = () => {
         feelings: feelingsSurvey,
         goals: goalsSurvey,
         worries: worriesSurvey,
-        meditation_experience: meditatienSurvey,
+        meditation_experience: meditationSurvey,
         journaling_experience: option,
       }),
     );

@@ -82,8 +82,8 @@ const MeditationStep: React.FC<MeditationStepProperties> = ({ route }) => {
   );
 
   const handleContinue = (): void => {
-    navigation.navigate(SurveyScreenName.JOURNALING_EXPERIENCE);
     void handleSubmit(handleSurveySubmit)();
+    navigation.navigate(SurveyScreenName.JOURNALING_EXPERIENCE);
   };
 
   const handleBack = (): void => {

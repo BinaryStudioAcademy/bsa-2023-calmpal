@@ -81,8 +81,8 @@ const WorriesStep: React.FC<WorriesStepProperties> = ({ route }) => {
   );
 
   const handleContinue = (): void => {
-    navigation.navigate(SurveyScreenName.MEDITATION_EXPERIENCE);
     void handleSubmit(handleSurveySubmit)();
+    navigation.navigate(SurveyScreenName.MEDITATION_EXPERIENCE);
   };
 
   const handleBack = (): void => {

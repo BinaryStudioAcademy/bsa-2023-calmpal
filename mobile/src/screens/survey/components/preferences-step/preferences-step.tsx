@@ -84,8 +84,8 @@ const PreferencesStep: React.FC<PreferencesStepProperties> = ({ route }) => {
   );
 
   const handleContinue = (): void => {
-    navigation.navigate(SurveyScreenName.FEELING);
     void handleSubmit(handleSurveySubmit)();
+    navigation.navigate(SurveyScreenName.FEELING);
   };
 
   return (
