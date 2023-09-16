@@ -1,9 +1,14 @@
-import sanitizeHtml, { type IOptions } from 'sanitize-html';
+import sanitizeHtml, {
+  type IOptions as SanitizeHtmlOptions,
+} from 'sanitize-html';
 
-const sanitizeInput = (input: string, options?: IOptions): string => {
+const sanitizeInput = (
+  input: string,
+  options?: SanitizeHtmlOptions,
+): string => {
   const charactersToRemove = /[&<>]/g;
   const cleanedInput = input.replaceAll(charactersToRemove, '');
-  const defaultOptions: IOptions = {
+  const defaultOptions: SanitizeHtmlOptions = {
     allowedTags: [],
     allowedAttributes: {},
   };
