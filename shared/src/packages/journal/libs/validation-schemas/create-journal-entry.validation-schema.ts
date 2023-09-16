@@ -6,10 +6,7 @@ import {
 } from '../enums/enums.js';
 import { type JournalEntryCreateRequestDto } from '../types/types.js';
 
-const createJournalEntryValidationSchema = joi.object<
-  JournalEntryCreateRequestDto,
-  true
->({
+const createJournalEntry = joi.object<JournalEntryCreateRequestDto, true>({
   title: joi
     .string()
     .trim()
@@ -27,4 +24,4 @@ const createJournalEntryValidationSchema = joi.object<
   }),
 });
 
-export { createJournalEntryValidationSchema };
+export { createJournalEntry };
