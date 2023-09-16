@@ -1,7 +1,7 @@
 import { type ChangeEvent, type FC } from 'react';
 
-import { Button, Checkbox } from '#libs/components/components.js';
-import { useCallback, useState } from '#libs/hooks/hooks.js';
+import { Button, Checkbox, Input } from '#libs/components/components.js';
+import { useAppForm, useCallback, useState } from '#libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
 
@@ -11,6 +11,13 @@ type Properties = {
 };
 
 const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
+  const { control, errors } = useAppForm({
+    defaultValues: {
+      describeYourSituation: '',
+    },
+    mode: 'onSubmit',
+  });
+
   const [isChecked, setIsChecked] = useState({
     'checkbox1': false,
     'checkbox2': false,
@@ -18,21 +25,12 @@ const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
     'checkbox4': false,
   });
 
-  const [text, setText] = useState('');
-
   const handleCheckboxChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>): void => {
       const { name, checked } = event.target;
       setIsChecked((previousState) => {
         return { ...previousState, [name]: checked };
       });
-    },
-    [],
-  );
-
-  const handleTextChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>): void => {
-      setText(event.target.value);
     },
     [],
   );
@@ -78,12 +76,13 @@ const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
             disableDefaultStyles
           />
         </div>
-        <input
-          type="text"
-          value={text}
-          className={styles['input']}
-          onChange={handleTextChange}
+        <Input
+          control={control}
+          errors={errors}
+          name="describeYourSituation"
           placeholder="Please describe your situation"
+          autoComplete="off"
+          maxLength={60}
           disabled={!isChecked.checkbox4}
         />
       </form>
