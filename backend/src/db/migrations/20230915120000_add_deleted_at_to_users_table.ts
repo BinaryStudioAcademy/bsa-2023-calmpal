@@ -7,7 +7,7 @@ const ColumnName = {
 
 function up(knex: Knex): Promise<void> {
   return knex.schema.table(TABLE_NAME, (table) => {
-    table.dateTime(ColumnName.DELETED_AT).nullable();
+    table.dateTime(ColumnName.DELETED_AT);
   });
 }
 
