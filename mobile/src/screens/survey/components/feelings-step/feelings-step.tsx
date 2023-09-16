@@ -25,19 +25,19 @@ import {
 import { SurveyCategory } from '../components';
 import { styles } from './styles';
 
-type PreferencesStepProperties = {
+type FeelingsStepProperties = {
   route: RouteProp<
     SurveyNavigationParameterList,
     typeof SurveyScreenName.FEELING
   >;
 };
 
-type PreferencesStepInitialParameters = {
+type FeelingsStepInitialParameters = {
   setFeelingSurvey: (payload: string[]) => void;
 };
 
-const FeelingsStep: React.FC<PreferencesStepProperties> = ({ route }) => {
-  const { setFeelingSurvey } = route.params as PreferencesStepInitialParameters;
+const FeelingsStep: React.FC<FeelingsStepProperties> = ({ route }) => {
+  const { setFeelingSurvey } = route.params as FeelingsStepInitialParameters;
   const navigation =
     useNavigation<NativeStackNavigationProp<SurveyNavigationParameterList>>();
 

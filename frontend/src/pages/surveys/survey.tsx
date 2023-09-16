@@ -32,6 +32,7 @@ const Survey: React.FC = () => {
           preferences: options,
           feelings: [],
           goals: [],
+          worries: [],
           journaling_experience: [],
         }),
       );

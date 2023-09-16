@@ -32,6 +32,7 @@ const Survey: React.FC = () => {
   const [preferencesSurvey, setPreferencesSurvey] = useState([]);
   const [feelingsSurvey, setFeelingsSurvey] = useState([]);
   const [goalsSurvey, setGoalsSurvey] = useState([]);
+  const [worriesSurvey, setWorriesSurvey] = useState([]);
   const { userId, surveyPreferencesDataStatus } = useAppSelector(({ auth }) => {
     return {
       userId: (auth.authenticatedUser as UserAuthResponseDto).id,
@@ -47,6 +48,7 @@ const Survey: React.FC = () => {
         preferences: preferencesSurvey,
         feelings: feelingsSurvey,
         goals: goalsSurvey,
+        worries: worriesSurvey,
         journaling_experience: option,
       }),
     );
@@ -84,6 +86,7 @@ const Survey: React.FC = () => {
         <SurveyStack.Screen
           name={SurveyScreenName.WORRIES}
           component={WorriesStep}
+          initialParams={{ setWorriesSurvey }}
         />
         <SurveyStack.Screen
           name={SurveyScreenName.MEDITATION_EXPERIENCE}

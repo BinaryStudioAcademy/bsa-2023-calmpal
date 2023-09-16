@@ -1,3 +1,4 @@
+import { type RouteProp } from '@react-navigation/native';
 import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
@@ -11,6 +12,7 @@ import {
 } from '#libs/hooks/hooks';
 import { type SurveyNavigationParameterList } from '#libs/types/types';
 import {
+  getSurveyCategories,
   type SurveyInputDto,
   surveyInputValidationSchema,
 } from '#packages/survey/survey';
@@ -23,14 +25,28 @@ import {
 import { SurveyCategory } from '../components';
 import { styles } from './styles';
 
-const WorriesStep: React.FC = () => {
+type WorriesStepProperties = {
+  route: RouteProp<
+    SurveyNavigationParameterList,
+    typeof SurveyScreenName.WORRIES
+  >;
+};
+
+type WorriesStepInitialParameters = {
+  setWorriesSurvey: (payload: string[]) => void;
+};
+
+const WorriesStep: React.FC<WorriesStepProperties> = ({ route }) => {
+  const { setWorriesSurvey } = route.params as WorriesStepInitialParameters;
   const navigation =
     useNavigation<NativeStackNavigationProp<SurveyNavigationParameterList>>();
 
-  const { control, errors, isValid } = useAppForm<SurveyInputDto>({
-    defaultValues: DEFAULT_SURVEY_PAYLOAD,
-    validationSchema: surveyInputValidationSchema,
-  });
+  const { control, errors, isValid, handleSubmit } = useAppForm<SurveyInputDto>(
+    {
+      defaultValues: DEFAULT_SURVEY_PAYLOAD,
+      validationSchema: surveyInputValidationSchema,
+    },
+  );
   const {
     field: { onChange: onCategoryChange, value: categoriesValue },
   } = useFormController({
@@ -57,8 +73,16 @@ const WorriesStep: React.FC = () => {
     [categoriesValue, onCategoryChange],
   );
 
+  const handleSurveySubmit = useCallback(
+    (payload: SurveyInputDto) => {
+      setWorriesSurvey(getSurveyCategories(payload));
+    },
+    [setWorriesSurvey],
+  );
+
   const handleContinue = (): void => {
     navigation.navigate(SurveyScreenName.MEDITATION_EXPERIENCE);
+    void handleSubmit(handleSurveySubmit)();
   };
 
   const handleBack = (): void => {

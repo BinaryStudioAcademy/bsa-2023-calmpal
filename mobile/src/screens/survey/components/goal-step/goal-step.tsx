@@ -25,16 +25,16 @@ import {
 import { SurveyCategory } from '../components';
 import { styles } from './styles';
 
-type PreferencesStepProperties = {
+type GoalsStepProperties = {
   route: RouteProp<SurveyNavigationParameterList, typeof SurveyScreenName.GOAL>;
 };
 
-type PreferencesStepInitialParameters = {
+type GoalsStepInitialParameters = {
   setGoalSurvey: (payload: string[]) => void;
 };
 
-const GoalsStep: React.FC<PreferencesStepProperties> = ({ route }) => {
-  const { setGoalSurvey } = route.params as PreferencesStepInitialParameters;
+const GoalsStep: React.FC<GoalsStepProperties> = ({ route }) => {
+  const { setGoalSurvey } = route.params as GoalsStepInitialParameters;
   const navigation =
     useNavigation<NativeStackNavigationProp<SurveyNavigationParameterList>>();
 
