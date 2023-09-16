@@ -1,6 +1,5 @@
-// export {
-//   type ChatGetAllItemResponseDto,
-//   type ChatGetAllResponseDto,
-//   type ChatRequestDto,
-// } from 'shared/build/index.js';
-export {};
+export {
+  type ChatCreateRequestDto,
+  type ChatGetAllItemResponseDto,
+  type ChatGetAllResponseDto,
+} from 'shared/build/index.js';

@@ -1,2 +1,1 @@
-// export { ChatsApiPath } from 'shared/build/index.js';
-export {};
+export { ChatsApiPath } from 'shared/build/index.js';

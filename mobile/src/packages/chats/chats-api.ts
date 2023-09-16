@@ -1,14 +1,14 @@
-import { APIPath } from '#libs/enums/enums';
+import { APIPath, ContentType } from '#libs/enums/enums';
 import { BaseHttpApi } from '#libs/packages/api/api';
 import { type HTTP } from '#libs/packages/http/http';
 import { type Storage } from '#libs/packages/storage/storage';
 
-// import { ChatsApiPath } from './libs/enums/enums';
-// import {
-//   type ChatGetAllItemResponseDto,
-//   type ChatGetAllResponseDto,
-//   type ChatRequestDto,
-// } from './libs/types/types';
+import { ChatsApiPath } from './libs/enums/enums';
+import {
+  type ChatCreateRequestDto,
+  type ChatGetAllItemResponseDto,
+  type ChatGetAllResponseDto,
+} from './libs/types/types';
 
 type Constructor = {
   baseUrl: string;
@@ -21,30 +21,30 @@ class ChatApi extends BaseHttpApi {
     super({ path: APIPath.CHATS, baseUrl, http, storage });
   }
 
-  // public async getAllChats(): Promise<ChatGetAllResponseDto> {
-  //   const response = await this.load(
-  //     this.getFullEndpoint(ChatsApiPath.ROOT, {}),
-  //     { method: 'GET', hasAuth: true },
-  //   );
+  public async getAllChats(): Promise<ChatGetAllResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(ChatsApiPath.ROOT, {}),
+      { method: 'GET', hasAuth: true },
+    );
 
-  //   return await response.json<ChatGetAllResponseDto>();
-  // }
+    return await response.json<ChatGetAllResponseDto>();
+  }
 
-  // public async createChat(
-  //   payload: ChatRequestDto,
-  // ): Promise<ChatGetAllItemResponseDto> {
-  //   const response = await this.load(
-  //     this.getFullEndpoint(ChatsApiPath.ROOT, {}),
-  //     {
-  //       method: 'POST',
-  //       contentType: ContentType.JSON,
-  //       payload: JSON.stringify(payload),
-  //       hasAuth: true,
-  //     },
-  //   );
+  public async createChat(
+    payload: ChatCreateRequestDto,
+  ): Promise<ChatGetAllItemResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(ChatsApiPath.ROOT, {}),
+      {
+        method: 'POST',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify(payload),
+        hasAuth: true,
+      },
+    );
 
-  // return await response.json<ChatGetAllItemResponseDto>();
-  // }
+    return await response.json<ChatGetAllItemResponseDto>();
+  }
 }
 
 export { ChatApi };
