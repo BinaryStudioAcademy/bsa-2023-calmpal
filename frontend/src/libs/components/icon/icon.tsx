@@ -17,13 +17,7 @@ const Icon: React.FC<Properties> = ({
 }) => {
   const SelectedIcon = iconNameToIcon[name];
 
-  const svgProperties = {
-    color,
-    width: width ? `${width}px` : undefined,
-    height: height ? `${height}px` : undefined,
-  };
-
-  return <SelectedIcon style={{ ...svgProperties }} />;
+  return <SelectedIcon style={{ color }} width={width} height={height} />;
 };
 
 export { Icon };
