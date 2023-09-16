@@ -87,7 +87,7 @@ class JournalEntryService implements Service {
       });
     }
 
-    const newJournalEntry = await this.journalEntryRepository.update(
+    const item = await this.journalEntryRepository.update(
       JournalEntryEntity.initialize({
         id,
         userId: userId as number,
@@ -98,7 +98,7 @@ class JournalEntryService implements Service {
       }),
     );
 
-    return newJournalEntry.toObject();
+    return item.toObject();
   }
 
   public delete(): ReturnType<Service['delete']> {
