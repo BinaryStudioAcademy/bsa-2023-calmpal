@@ -3,4 +3,6 @@ const DEFAULT_NOTE_PAYLOAD = {
   text: 'Type your text here',
 };
 
-export { DEFAULT_NOTE_PAYLOAD };
+const SAVE_NOTE_TIMEOUT = 2000;
+
+export { DEFAULT_NOTE_PAYLOAD, SAVE_NOTE_TIMEOUT };

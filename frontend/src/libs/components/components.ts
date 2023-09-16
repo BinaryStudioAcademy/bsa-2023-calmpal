@@ -12,7 +12,6 @@ export { Link } from './link/link.js';
 export { Loader } from './loader/loader.js';
 export { NavigationMenu } from './navigation-menu/navigation-menu.js';
 export { NavigationMenuWrapper } from './navigation-menu-wrapper/navigation-menu-wrapper.js';
-export { Note } from './note/note.js';
 export { ProtectedRoute } from './protected-route/protected-route.js';
 export { RouterProvider } from './router-provider/router-provider.jsx';
 export { Search } from './search/search.js';

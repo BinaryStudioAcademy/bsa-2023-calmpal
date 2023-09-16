@@ -15,10 +15,10 @@ import {
   useRef,
 } from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
+import { SAVE_NOTE_TIMEOUT } from '#pages/journal/libs/constants/constants.js';
+import { type NoteContent } from '#pages/journal/libs/types/types.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
-import { SAVE_NOTE_TIMEOUT } from './libs/constants.js';
-import { type NoteContent } from './libs/types.js';
 import styles from './styles.module.scss';
 
 const Note: React.FC = () => {

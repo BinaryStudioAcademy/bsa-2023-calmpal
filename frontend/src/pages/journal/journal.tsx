@@ -1,4 +1,4 @@
-import { BackButton, Note } from '#libs/components/components.js';
+import { BackButton } from '#libs/components/components.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
@@ -11,6 +11,7 @@ import {
 import { actions as journalActions } from '#slices/journal/journal.js';
 
 import { JournalSidebar } from './components/journal-sidebar/journal-sidebar.js';
+import { Note } from './components/note/note.js';
 import styles from './styles.module.scss';
 
 const Journal: React.FC = () => {
@@ -51,7 +52,11 @@ const Journal: React.FC = () => {
         )}
       >
         <BackButton onGoBack={handleBackButtonPress} />
-        <div className={styles['note-wrapper']}>{hasNoteId && <Note />}</div>
+        {hasNoteId && (
+          <div className={styles['note-wrapper']}>
+            <Note />
+          </div>
+        )}
       </div>
     </>
   );
