@@ -2,7 +2,6 @@ import {
   changeCursorPosition,
   debounce,
   getCursorPosition,
-  getValidClassNames,
   sanitizeInput,
 } from '#libs/helpers/helpers.js';
 import {
@@ -22,11 +21,7 @@ import { SAVE_NOTE_TIMEOUT } from './libs/constants.js';
 import { type NoteContent } from './libs/types.js';
 import styles from './styles.module.scss';
 
-type Properties = {
-  className: string;
-};
-
-const Note: React.FC<Properties> = ({ className }) => {
+const Note: React.FC = () => {
   const { userId, selectedJournalEntry } = useAppSelector(
     ({ auth, journal }) => {
       return {
@@ -94,14 +89,6 @@ const Note: React.FC<Properties> = ({ className }) => {
   }, [handleNoteChange, onTextChange]);
 
   useEffect(() => {
-    void dispatch(journalActions.getAllJournalEntries()).then(() => {
-      if (id) {
-        void dispatch(journalActions.setSelectedJournalEntry(Number(id)));
-      }
-    });
-  }, [dispatch, id]);
-
-  useEffect(() => {
     const handleSaveNoteWithDebounce = debounce((data: NoteContent) => {
       if (id && isDirty) {
         handleSaveNote(id, data);
@@ -151,7 +138,7 @@ const Note: React.FC<Properties> = ({ className }) => {
   }, [handleSaveNote, id, textValue, titleValue]);
 
   return (
-    <div className={getValidClassNames(styles['wrapper'], className)}>
+    <div className={styles['wrapper']}>
       <div
         contentEditable
         onInput={handleTitleChange}
