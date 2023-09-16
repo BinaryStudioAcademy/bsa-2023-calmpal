@@ -14,6 +14,7 @@ import {
   useParams,
   useRef,
 } from '#libs/hooks/hooks.js';
+import { type JournalEntryGetAllItemResponseDto } from '#packages/journal/journal.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { SAVE_NOTE_TIMEOUT } from '#pages/journal/libs/constants/constants.js';
 import { type NoteContent } from '#pages/journal/libs/types/types.js';
@@ -26,15 +27,16 @@ const Note: React.FC = () => {
     ({ auth, journal }) => {
       return {
         userId: (auth.authenticatedUser as UserAuthResponseDto).id,
-        selectedJournalEntry: journal.selectedJournalEntry,
+        selectedJournalEntry:
+          journal.selectedJournalEntry as JournalEntryGetAllItemResponseDto,
       };
     },
   );
 
   const { isDirty, control } = useAppForm({
     defaultValues: {
-      title: selectedJournalEntry?.title,
-      text: selectedJournalEntry?.text,
+      title: selectedJournalEntry.title,
+      text: selectedJournalEntry.text,
     },
     mode: 'onChange',
   });
@@ -103,10 +105,8 @@ const Note: React.FC = () => {
   }, [titleValue, textValue, isDirty, userId, id, handleSaveNote]);
 
   useEffect(() => {
-    if (selectedJournalEntry) {
-      onTitleChange(selectedJournalEntry.title);
-      onTextChange(selectedJournalEntry.text);
-    }
+    onTitleChange(selectedJournalEntry.title);
+    onTextChange(selectedJournalEntry.text);
   }, [onTitleChange, onTextChange, selectedJournalEntry, isDirty]);
 
   useEffect(() => {
@@ -125,8 +125,8 @@ const Note: React.FC = () => {
     const handleBeforeUnload = (event: BeforeUnloadEvent): void => {
       event.preventDefault();
       handleSaveNote(id as string, {
-        title: titleValue as string,
-        text: textValue as string,
+        title: titleValue,
+        text: textValue,
       });
     };
 
@@ -142,14 +142,14 @@ const Note: React.FC = () => {
       <div
         contentEditable
         onInput={handleTitleChange}
-        dangerouslySetInnerHTML={{ __html: titleValue ?? '' }}
+        dangerouslySetInnerHTML={{ __html: titleValue }}
         className={styles['title']}
         ref={titleReference}
       />
       <div
         contentEditable
         onInput={handleTextChange}
-        dangerouslySetInnerHTML={{ __html: textValue ?? '' }}
+        dangerouslySetInnerHTML={{ __html: textValue }}
         className={styles['text']}
         ref={textReference}
       />
