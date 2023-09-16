@@ -19,6 +19,7 @@ import {
   fileUpload as fileUploadPlugin,
 } from '#libs/plugins/plugins.js';
 import { type ValidationSchema } from '#libs/types/types.js';
+import { FileUploadValidationRule } from '#packages/files/files.js';
 import { userService } from '#packages/users/users.js';
 
 import { getErrorInfo } from './libs/helpers/helpers.js';
@@ -124,7 +125,7 @@ class BaseServerApplication implements ServerApplication {
 
     await this.app.register(fastifyMultipart, {
       limits: {
-        fileSize: 10_000_000,
+        fileSize: FileUploadValidationRule.MAXIMUM_FILE_SIZE,
       },
       attachFieldsToBody: true,
       throwFileSizeLimit: false,
