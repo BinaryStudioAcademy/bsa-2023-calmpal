@@ -101,7 +101,9 @@ class UserService implements Service {
       return false;
     }
 
-    return await this.userRepository.delete(id);
+    const deletedUser = await this.userRepository.delete(id);
+
+    return Boolean(deletedUser);
   }
 
   public async findByEmail(

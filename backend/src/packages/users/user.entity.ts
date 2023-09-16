@@ -13,6 +13,8 @@ class UserEntity implements Entity {
 
   private isSurveyCompleted: boolean;
 
+  private deletedAt: Date | null;
+
   public constructor({
     id,
     email,
@@ -20,6 +22,7 @@ class UserEntity implements Entity {
     createdAt,
     updatedAt,
     isSurveyCompleted,
+    deletedAt,
   }: {
     id: number | null;
     email: string;
@@ -27,6 +30,7 @@ class UserEntity implements Entity {
     createdAt: Date | null;
     updatedAt: Date | null;
     isSurveyCompleted: boolean;
+    deletedAt: Date | null;
   }) {
     this.id = id;
     this.email = email;
@@ -34,6 +38,7 @@ class UserEntity implements Entity {
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.isSurveyCompleted = isSurveyCompleted;
+    this.deletedAt = deletedAt;
   }
 
   public static initialize({
@@ -43,6 +48,7 @@ class UserEntity implements Entity {
     createdAt,
     updatedAt,
     isSurveyCompleted,
+    deletedAt,
   }: {
     id: number | null;
     email: string;
@@ -50,6 +56,7 @@ class UserEntity implements Entity {
     createdAt: Date | null;
     updatedAt: Date | null;
     isSurveyCompleted: boolean;
+    deletedAt: Date | null;
   }): UserEntity {
     return new UserEntity({
       id,
@@ -58,6 +65,7 @@ class UserEntity implements Entity {
       createdAt,
       updatedAt,
       isSurveyCompleted,
+      deletedAt,
     });
   }
 
@@ -77,6 +85,7 @@ class UserEntity implements Entity {
       createdAt: null,
       updatedAt: null,
       isSurveyCompleted,
+      deletedAt: null,
     });
   }
 
@@ -87,6 +96,7 @@ class UserEntity implements Entity {
     createdAt: Date;
     updatedAt: Date;
     isSurveyCompleted: boolean;
+    deletedAt: Date;
   } {
     return {
       id: this.id as number,
@@ -95,6 +105,7 @@ class UserEntity implements Entity {
       createdAt: this.createdAt as Date,
       updatedAt: this.updatedAt as Date,
       isSurveyCompleted: this.isSurveyCompleted,
+      deletedAt: this.deletedAt as Date,
     };
   }
 

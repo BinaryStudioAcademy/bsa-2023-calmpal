@@ -2,7 +2,6 @@ import { type Repository } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/users.js';
 
-import { ZERO_ROWS_DELETED } from './libs/constants/constants.js';
 import { UsersRelation } from './libs/enums/enums.js';
 import {
   type UserCommonQueryResponse,
@@ -27,6 +26,7 @@ class UserRepository implements Repository {
       .query()
       .modify('withoutPassword')
       .withGraphJoined(UsersRelation.DETAILS)
+      .whereNull('deletedAt')
       .findById(id)
       .castTo<UserCommonQueryResponse | undefined>()
       .execute();
@@ -42,6 +42,7 @@ class UserRepository implements Repository {
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
     });
   }
 
@@ -50,6 +51,7 @@ class UserRepository implements Repository {
       .query()
       .select()
       .withGraphJoined(UsersRelation.DETAILS)
+      .whereNull('deletedAt')
       .castTo<UserWithPasswordQueryResponse[]>()
       .execute();
 
@@ -63,6 +65,7 @@ class UserRepository implements Repository {
         updatedAt: new Date(user.updatedAt),
         fullName: user.details?.fullName ?? '',
         isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+        deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
       });
     });
   }
@@ -93,6 +96,7 @@ class UserRepository implements Repository {
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
     });
   }
 
@@ -107,10 +111,33 @@ class UserRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public async delete(id: number): Promise<boolean> {
-    const rowsDeleted = await this.userModel.query().deleteById(id);
+  public async delete(id: number): Promise<UserEntity | null> {
+    const user = await this.userModel
 
-    return rowsDeleted > ZERO_ROWS_DELETED;
+      .query()
+      .modify('withoutPassword')
+      .withGraphJoined(UsersRelation.DETAILS)
+      .findById(id)
+      .castTo<UserCommonQueryResponse | undefined>()
+      .execute();
+
+    if (!user) {
+      return null;
+    }
+
+    await this.userModel.query().patch({ deletedAt: new Date() }).where({ id });
+
+    user.deletedAt = new Date().toISOString();
+
+    return UserEntity.initialize({
+      id: user.id,
+      email: user.email,
+      createdAt: new Date(user.createdAt),
+      updatedAt: new Date(user.updatedAt),
+      fullName: user.details?.fullName ?? '',
+      isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
+    });
   }
 
   public async findByEmail(email: string): Promise<UserEntity | null> {
@@ -118,6 +145,7 @@ class UserRepository implements Repository {
       .query()
       .modify('withoutPassword')
       .withGraphJoined(UsersRelation.DETAILS)
+      .whereNull('deletedAt')
       .findOne({ email })
       .castTo<UserCommonQueryResponse | undefined>();
 
@@ -132,6 +160,7 @@ class UserRepository implements Repository {
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
     });
   }
 
@@ -141,6 +170,7 @@ class UserRepository implements Repository {
     const user = await this.userModel
       .query()
       .withGraphJoined(UsersRelation.DETAILS)
+      .whereNull('deletedAt')
       .findOne({ email })
       .castTo<UserWithPasswordQueryResponse | undefined>();
     if (!user) {
@@ -156,6 +186,7 @@ class UserRepository implements Repository {
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
     });
   }
 }
