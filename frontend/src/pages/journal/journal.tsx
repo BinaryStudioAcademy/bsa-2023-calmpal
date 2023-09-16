@@ -7,8 +7,8 @@ import {
   useEffect,
   useParams,
   useSidebarState,
-  useState,
 } from '#libs/hooks/hooks.js';
+import { actions as journalActions } from '#slices/journal/journal.js';
 
 import { JournalSidebar } from './components/journal-sidebar/journal-sidebar.js';
 import styles from './styles.module.scss';
@@ -16,24 +16,27 @@ import styles from './styles.module.scss';
 const Journal: React.FC = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const [isNoteVisible, setIsNoteVisible] = useState(false);
+  const { isSidebarShown, setIsSidebarShown } = useSidebarState();
 
   const { selectedJournalEntry } = useAppSelector(({ journal }) => {
     return {
       selectedJournalEntry: journal.selectedJournalEntry,
     };
   });
-  const { isSidebarShown, setIsSidebarShown } = useSidebarState();
+
+  const hasNoteId = Boolean(id) && selectedJournalEntry;
 
   const handleBackButtonPress = useCallback(() => {
     setIsSidebarShown(true);
   }, [setIsSidebarShown]);
 
   useEffect(() => {
-    if (id) {
-      setIsNoteVisible(true);
-    }
-  }, [dispatch, id, selectedJournalEntry, setIsSidebarShown]);
+    void dispatch(journalActions.getAllJournalEntries()).then(() => {
+      if (id) {
+        void dispatch(journalActions.setSelectedJournalEntry(Number(id)));
+      }
+    });
+  }, [dispatch, id]);
 
   return (
     <>
@@ -48,15 +51,7 @@ const Journal: React.FC = () => {
         )}
       >
         <BackButton onGoBack={handleBackButtonPress} />
-        <div className={styles['note-wrapper']}>
-          {isNoteVisible && (
-            <Note
-              className={getValidClassNames(
-                !selectedJournalEntry && 'visually-hidden',
-              )}
-            />
-          )}
-        </div>
+        <div className={styles['note-wrapper']}>{hasNoteId && <Note />}</div>
       </div>
     </>
   );
