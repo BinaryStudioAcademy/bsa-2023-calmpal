@@ -9,13 +9,14 @@ const createMeditationEntryRequest = joi.object<
   MeditationEntryCreateRequestDto,
   true
 >({
-  mediaUrl: joi.string().trim().required().messages({
-    'any.required': MeditationEntryValidationMessage.MEDIA_URL_REQUIRED,
-    'string.empty': MeditationEntryValidationMessage.MEDIA_URL_REQUIRED,
-  }),
-  contentType: joi.string().valid(ContentType.MPEG).required().messages({
-    'any.only': MeditationEntryValidationMessage.MPEG_REQUIRED,
-  }),
+  file: joi
+    .object({
+      mimetype: joi.string().valid(ContentType.MPEG).required().messages({
+        'any.only': MeditationEntryValidationMessage.MPEG_REQUIRED,
+      }),
+    })
+    .unknown(true)
+    .required(),
 });
 
 export { createMeditationEntryRequest };

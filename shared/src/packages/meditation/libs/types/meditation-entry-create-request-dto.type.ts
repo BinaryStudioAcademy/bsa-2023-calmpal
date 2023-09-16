@@ -1,9 +1,7 @@
-import { type ContentType } from '#libs/enums/enums.js';
-import { type ValueOf } from '#libs/types/value-of.type.js';
+import { type MultipartFile } from '@fastify/multipart';
 
 type MeditationEntryCreateRequestDto = {
-  mediaUrl: string;
-  contentType: ValueOf<typeof ContentType>;
+  file: MultipartFile;
 };
 
 export { type MeditationEntryCreateRequestDto };
