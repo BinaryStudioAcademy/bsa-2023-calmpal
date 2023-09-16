@@ -1,3 +1,3 @@
-type ChatInputValue = { text: string };
+type ChatInputValue = { message: string };
 
 export { type ChatInputValue };

@@ -1,4 +1,9 @@
-import { Card } from '#libs/components/components.js';
+import {
+  Card,
+  Sidebar,
+  SidebarBody,
+  SidebarHeader,
+} from '#libs/components/components.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -9,7 +14,15 @@ import { actions as journalActions } from '#slices/journal/journal.js';
 
 import styles from './styles.module.scss';
 
-const JournalSidebar: React.FC = () => {
+type Properties = {
+  isSidebarShown: boolean;
+  setIsSidebarShown: (value: boolean) => void;
+};
+
+const JournalSidebar: React.FC<Properties> = ({
+  isSidebarShown,
+  setIsSidebarShown,
+}) => {
   const dispatch = useAppDispatch();
   const { allJournalEntries, selectedJournalEntry } = useAppSelector(
     ({ journal }) => {
@@ -27,20 +40,21 @@ const JournalSidebar: React.FC = () => {
   const handleSelectJournalEntry = useCallback(
     (id: number) => {
       return () => {
+        setIsSidebarShown(false);
         dispatch(journalActions.setSelectedJournalEntry(id));
       };
     },
-    [dispatch],
+    [dispatch, setIsSidebarShown],
   );
 
   return (
-    <div className={styles['container']}>
-      <div className={styles['header']}>
+    <Sidebar isSidebarShown={isSidebarShown}>
+      <SidebarHeader>
         <div className={styles['info']}>
           <span>Journal</span>
         </div>
-      </div>
-      <div className={styles['list']}>
+      </SidebarHeader>
+      <SidebarBody>
         <div className={styles['journal-entry-list']}>
           {allJournalEntries.map((journalEntry) => {
             return (
@@ -53,8 +67,8 @@ const JournalSidebar: React.FC = () => {
             );
           })}
         </div>
-      </div>
-    </div>
+      </SidebarBody>
+    </Sidebar>
   );
 };
 
