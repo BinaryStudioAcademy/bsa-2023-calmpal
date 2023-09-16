@@ -11,7 +11,6 @@ import { notification } from '#libs/packages/notification/notification.js';
 import { handleError } from '#libs/packages/store/middlewares/middlewares.js';
 import { authApi } from '#packages/auth/auth.js';
 import { chatApi } from '#packages/chats/chats.js';
-import { filesApi } from '#packages/files/files.js';
 import { journalApi } from '#packages/journal/journal.js';
 import { meditationApi } from '#packages/meditation/meditation.js';
 import { reducer as appReducer } from '#slices/app/app.js';
@@ -34,7 +33,6 @@ type ExtraArguments = {
   authApi: typeof authApi;
   journalApi: typeof journalApi;
   meditationApi: typeof meditationApi;
-  filesApi: typeof filesApi;
   chatApi: typeof chatApi;
   storage: typeof storage;
   notification: typeof notification;
@@ -77,7 +75,6 @@ class Store {
       authApi,
       journalApi,
       meditationApi,
-      filesApi,
       chatApi,
       storage,
       notification,
