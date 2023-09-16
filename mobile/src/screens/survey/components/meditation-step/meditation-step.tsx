@@ -1,3 +1,4 @@
+import { type RouteProp } from '@react-navigation/native';
 import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
@@ -11,6 +12,7 @@ import {
 } from '#libs/hooks/hooks';
 import { type SurveyNavigationParameterList } from '#libs/types/types';
 import {
+  getSurveyCategories,
   type SurveyInputDto,
   surveyInputValidationSchema,
 } from '#packages/survey/survey';
@@ -23,14 +25,29 @@ import {
 import { SurveyCategory } from '../components';
 import { styles } from './styles';
 
-const MeditationStep: React.FC = () => {
+type MeditationStepProperties = {
+  route: RouteProp<
+    SurveyNavigationParameterList,
+    typeof SurveyScreenName.MEDITATION_EXPERIENCE
+  >;
+};
+
+type MeditationStepInitialParameters = {
+  setMeditationSurvey: (payload: string[]) => void;
+};
+
+const MeditationStep: React.FC<MeditationStepProperties> = ({ route }) => {
+  const { setMeditationSurvey } =
+    route.params as MeditationStepInitialParameters;
   const navigation =
     useNavigation<NativeStackNavigationProp<SurveyNavigationParameterList>>();
 
-  const { control, errors, isValid } = useAppForm<SurveyInputDto>({
-    defaultValues: DEFAULT_SURVEY_PAYLOAD,
-    validationSchema: surveyInputValidationSchema,
-  });
+  const { control, errors, isValid, handleSubmit } = useAppForm<SurveyInputDto>(
+    {
+      defaultValues: DEFAULT_SURVEY_PAYLOAD,
+      validationSchema: surveyInputValidationSchema,
+    },
+  );
   const {
     field: { onChange: onCategoryChange, value: categoriesValue },
   } = useFormController({
@@ -57,8 +74,16 @@ const MeditationStep: React.FC = () => {
     [categoriesValue, onCategoryChange],
   );
 
+  const handleSurveySubmit = useCallback(
+    (payload: SurveyInputDto) => {
+      setMeditationSurvey(getSurveyCategories(payload));
+    },
+    [setMeditationSurvey],
+  );
+
   const handleContinue = (): void => {
     navigation.navigate(SurveyScreenName.JOURNALING_EXPERIENCE);
+    void handleSubmit(handleSurveySubmit)();
   };
 
   const handleBack = (): void => {
