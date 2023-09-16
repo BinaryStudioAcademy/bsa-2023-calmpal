@@ -39,11 +39,7 @@ const MeditationSidebar: React.FC<Properties> = ({
 
   const handleSubmit = useCallback(
     (title: string, file: File) => {
-      void dispatch(
-        meditationActions.createMeditationEntry({
-          file: file,
-        }),
-      );
+      void dispatch(meditationActions.createMeditationEntry(file));
     },
     [dispatch],
   );

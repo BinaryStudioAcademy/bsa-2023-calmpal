@@ -1,13 +1,10 @@
-import { APIPath, ContentType } from '#libs/enums/enums.js';
+import { APIPath } from '#libs/enums/enums.js';
 import { BaseHttpApi } from '#libs/packages/api/api.js';
 import { type HTTP } from '#libs/packages/http/http.js';
 import { type Storage } from '#libs/packages/storage/storage.js';
 
 import { MeditationApiPath } from './libs/enums/enums.js';
-import {
-  type MeditationEntryCreateRequestDto,
-  type MeditationEntryCreateResponseDto,
-} from './libs/types/types.js';
+import { type MeditationEntryCreateResponseDto } from './libs/types/types.js';
 
 type Constructor = {
   baseUrl: string;
@@ -21,14 +18,16 @@ class MeditationApi extends BaseHttpApi {
   }
 
   public async createMeditationEntry(
-    payload: MeditationEntryCreateRequestDto,
+    file: File,
   ): Promise<MeditationEntryCreateResponseDto> {
+    const formData = new FormData();
+    formData.append('file', file);
+
     const response = await this.load(
       this.getFullEndpoint(MeditationApiPath.ROOT, {}),
       {
         method: 'POST',
-        contentType: ContentType.JSON,
-        payload: JSON.stringify(payload),
+        payload: formData,
         hasAuth: true,
       },
     );
