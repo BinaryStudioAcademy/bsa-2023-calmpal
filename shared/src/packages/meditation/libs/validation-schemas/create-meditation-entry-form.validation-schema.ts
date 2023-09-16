@@ -1,14 +1,12 @@
 import joi from 'joi';
 
 import { ContentType } from '#libs/enums/enums.js';
+import { FileUploadValidationRule } from '#packages/files/files.js';
 
-import {
-  MeditationEntryValidationMessage,
-  MeditationEntryValidationRule,
-} from '../enums/enums.js';
+import { MeditationEntryValidationMessage } from '../enums/enums.js';
 import { type MeditationEntryCreateForm } from '../types/types.js';
 
-const createMeditationEntry = joi.object<MeditationEntryCreateForm, true>({
+const createMeditationEntryForm = joi.object<MeditationEntryCreateForm, true>({
   title: joi.string().trim().required().messages({
     'any.required': MeditationEntryValidationMessage.TOPIC_REQUIRED,
     'string.empty': MeditationEntryValidationMessage.TOPIC_REQUIRED,
@@ -21,11 +19,11 @@ const createMeditationEntry = joi.object<MeditationEntryCreateForm, true>({
   }),
   fileSize: joi
     .number()
-    .max(MeditationEntryValidationRule.MAXIMUM_FILE_SIZE)
+    .max(FileUploadValidationRule.MAXIMUM_FILE_SIZE)
     .required()
     .messages({
       'number.max': MeditationEntryValidationMessage.SIZE_TOO_BIG,
     }),
 });
 
-export { createMeditationEntry };
+export { createMeditationEntryForm };
