@@ -1,17 +1,19 @@
 import { type Knex } from 'knex';
 
 const TABLE_NAME = 'users';
-const COLUMN_NAME = 'deleted_at';
+const ColumnName = {
+  DELETED_AT: 'deleted_at',
+} as const;
 
-async function up(knex: Knex): Promise<void> {
-  await knex.schema.table(TABLE_NAME, (table) => {
-    table.dateTime(COLUMN_NAME).nullable();
+function up(knex: Knex): Promise<void> {
+  return knex.schema.table(TABLE_NAME, (table) => {
+    table.dateTime(ColumnName.DELETED_AT).nullable();
   });
 }
 
-async function down(knex: Knex): Promise<void> {
-  await knex.schema.table(TABLE_NAME, (table) => {
-    table.dropColumn(COLUMN_NAME);
+function down(knex: Knex): Promise<void> {
+  return knex.schema.table(TABLE_NAME, (table) => {
+    table.dropColumn(ColumnName.DELETED_AT);
   });
 }
 
