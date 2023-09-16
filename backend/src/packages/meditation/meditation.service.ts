@@ -1,17 +1,22 @@
 import { type Service } from '#libs/types/types.js';
+import { type FileService } from '#packages/files/file.service.js';
+import { type FileUploadRequestDto } from '#packages/files/files.js';
 
-import {
-  type MeditationEntryCreateRequestDto,
-  type MeditationEntryCreateResponseDto,
-} from './libs/types/types.js';
+import { type MeditationEntryCreateResponseDto } from './libs/types/types.js';
 import { MeditationEntity } from './meditation.entity.js';
 import { type MeditationRepository } from './meditation.repository.js';
 
 class MeditationService implements Service {
   private meditationRepository: MeditationRepository;
 
-  public constructor(meditationRepository: MeditationRepository) {
+  private fileService: FileService;
+
+  public constructor(
+    meditationRepository: MeditationRepository,
+    fileService: FileService,
+  ) {
     this.meditationRepository = meditationRepository;
+    this.fileService = fileService;
   }
 
   public find(): ReturnType<Service['find']> {
@@ -22,12 +27,12 @@ class MeditationService implements Service {
     return await Promise.resolve({ items: [] });
   }
 
-  public async create({
-    mediaUrl,
-    contentType,
-  }: MeditationEntryCreateRequestDto): Promise<MeditationEntryCreateResponseDto> {
+  public async create(
+    payload: FileUploadRequestDto,
+  ): Promise<MeditationEntryCreateResponseDto> {
+    const { url, contentType } = await this.fileService.create(payload);
     const item = await this.meditationRepository.create(
-      MeditationEntity.initializeNew({ mediaUrl, contentType }),
+      MeditationEntity.initializeNew({ mediaUrl: url, contentType }),
     );
 
     return item.toObject();

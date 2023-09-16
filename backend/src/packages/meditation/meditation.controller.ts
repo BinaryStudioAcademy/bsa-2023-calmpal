@@ -6,9 +6,9 @@ import {
 } from '#libs/packages/controller/controller.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
+import { type FileUploadRequestDto } from '#packages/files/files.js';
 
 import { MeditationApiPath } from './libs/enums/enums.js';
-import { type MeditationEntryCreateRequestDto } from './libs/types/types.js';
 import { createMeditationEntryRequestValidationSchema } from './libs/validation-schemas/validation-schemas.js';
 import { type MeditationService } from './meditation.service.js';
 
@@ -56,7 +56,7 @@ class MeditationController extends BaseController {
       handler: (options) => {
         return this.create(
           options as APIHandlerOptions<{
-            body: MeditationEntryCreateRequestDto;
+            fileBuffer: FileUploadRequestDto;
           }>,
         );
       },
@@ -89,12 +89,12 @@ class MeditationController extends BaseController {
 
   private async create(
     options: APIHandlerOptions<{
-      body: MeditationEntryCreateRequestDto;
+      fileBuffer: FileUploadRequestDto;
     }>,
   ): Promise<APIHandlerResponse> {
     return {
       status: HTTPCode.CREATED,
-      payload: await this.meditationService.create(options.body),
+      payload: await this.meditationService.create(options.fileBuffer),
     };
   }
 }
