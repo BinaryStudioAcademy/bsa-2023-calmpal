@@ -13,7 +13,7 @@ type Properties = {
   type?: 'solid' | 'outlined' | 'transparent';
   isRounded?: boolean;
   iconName?: IconName;
-  isAddButton?: boolean;
+  color?: string;
 };
 
 const Button: React.FC<Properties> = ({
@@ -23,8 +23,22 @@ const Button: React.FC<Properties> = ({
   type = 'solid',
   isRounded,
   iconName,
-  isAddButton,
+  color,
 }) => {
+  const renderIcon = (): JSX.Element | null => {
+    if (iconName) {
+      return isRounded ? (
+        <View style={styles.buttonRounded}>
+          <Icon name={iconName} color={color ?? AppColor.BLUE_200} />
+        </View>
+      ) : (
+        <Icon name={iconName} color={color ?? AppColor.GRAY_400} />
+      );
+    }
+
+    return null;
+  };
+
   return (
     <Pressable
       style={[
@@ -37,23 +51,13 @@ const Button: React.FC<Properties> = ({
       onPress={onPress}
       disabled={isDisabled}
     >
-      {iconName &&
-        (isRounded ? (
-          <View style={styles.buttonRounded}>
-            <Icon name={iconName} color={AppColor.BLUE_200} />
-          </View>
-        ) : (
-          <Icon
-            name={iconName}
-            color={isAddButton ? AppColor.BLUE_300 : AppColor.GRAY_400}
-          />
-        ))}
+      {renderIcon()}
       <Text
         style={[
+          { color: color },
           styles.label,
           type === 'solid' && styles.labelSolid,
           type === 'outlined' && styles.labelOutlined,
-          isAddButton && styles.addButtonLabel,
           isDisabled && styles.labelDisabled,
         ]}
       >

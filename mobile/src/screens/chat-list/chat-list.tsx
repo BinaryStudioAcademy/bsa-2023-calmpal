@@ -10,7 +10,7 @@ import {
   ScrollView,
   View,
 } from '#libs/components/components';
-import { ChatScreenName } from '#libs/enums/enums';
+import { AppColor, ChatScreenName } from '#libs/enums/enums';
 import {
   useAppDispatch,
   useAppSelector,
@@ -94,7 +94,7 @@ const ChatList: React.FC = () => {
           iconName="plus"
           label="Add new chat"
           type="transparent"
-          isAddButton
+          color={AppColor.BLUE_200}
         />
       </View>
     </LinearGradient>

@@ -9,6 +9,7 @@ import {
   ScrollView,
   View,
 } from '#libs/components/components';
+import { AppColor } from '#libs/enums/enums';
 import {
   useAppDispatch,
   useAppSelector,
@@ -80,7 +81,7 @@ const Journal: React.FC = () => {
           iconName="plus"
           label="Add new note"
           type="transparent"
-          isAddButton
+          color={AppColor.BLUE_200}
         />
       </View>
     </LinearGradient>
