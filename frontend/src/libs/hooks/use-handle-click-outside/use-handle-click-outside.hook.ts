@@ -1,9 +1,7 @@
-import { type RefObject } from 'react';
-
 import { useEffect } from '#libs/hooks/hooks.js';
 
 type Properties = {
-  ref: RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement>;
   onClose: () => void;
 };
 
