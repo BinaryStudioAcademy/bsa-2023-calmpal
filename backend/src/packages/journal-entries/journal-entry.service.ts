@@ -76,7 +76,8 @@ class JournalEntryService implements Service {
   public async update({
     id,
     userId,
-    body,
+    title,
+    text,
   }: JournalEntryUpdateRequestDto): Promise<JournalEntryGetAllItemResponseDto> {
     const user = await userService.findById(userId as number);
 
@@ -93,8 +94,8 @@ class JournalEntryService implements Service {
         userId: userId as number,
         createdAt: null,
         updatedAt: null,
-        title: sanitizeInput(body.title),
-        text: sanitizeInput(body.text),
+        title: sanitizeInput(title),
+        text: sanitizeInput(text),
       }),
     );
 

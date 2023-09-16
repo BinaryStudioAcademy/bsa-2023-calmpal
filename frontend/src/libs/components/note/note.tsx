@@ -57,20 +57,18 @@ const Note: React.FC<Properties> = ({ className }) => {
   const cursorPosition = useRef<number | null>(null);
 
   const handleSaveNote = useCallback(
-    (data: NoteContent) => {
-      if (data.title && data.text && id) {
+    (id: string, data: NoteContent) => {
+      if (data.text && data.title) {
         void dispatch(
           journalActions.updateJournalEntry({
             id: Number(id),
-            body: {
-              title: sanitizeInput(data.title),
-              text: sanitizeInput(data.text),
-            },
+            title: sanitizeInput(data.title),
+            text: sanitizeInput(data.text),
           }),
         );
       }
     },
-    [dispatch, id],
+    [dispatch],
   );
 
   const handleNoteChange = useCallback(
@@ -106,7 +104,7 @@ const Note: React.FC<Properties> = ({ className }) => {
   useEffect(() => {
     const handleSaveNoteWithDebounce = debounce((data: NoteContent) => {
       if (id && isDirty) {
-        handleSaveNote(data);
+        handleSaveNote(id, data);
       }
     }, SAVE_NOTE_TIMEOUT);
 
@@ -139,7 +137,7 @@ const Note: React.FC<Properties> = ({ className }) => {
   useEffect(() => {
     const handleBeforeUnload = (event: BeforeUnloadEvent): void => {
       event.preventDefault();
-      handleSaveNote({
+      handleSaveNote(id as string, {
         title: titleValue as string,
         text: textValue as string,
       });
@@ -150,7 +148,7 @@ const Note: React.FC<Properties> = ({ className }) => {
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [handleSaveNote, textValue, titleValue]);
+  }, [handleSaveNote, id, textValue, titleValue]);
 
   return (
     <div className={getValidClassNames(styles['wrapper'], className)}>

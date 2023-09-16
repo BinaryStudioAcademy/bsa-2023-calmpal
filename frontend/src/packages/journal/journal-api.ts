@@ -60,7 +60,7 @@ class JournalApi extends BaseHttpApi {
       {
         method: 'PUT',
         contentType: ContentType.JSON,
-        payload: JSON.stringify(payload.body),
+        payload: JSON.stringify({ title: payload.title, text: payload.text }),
         hasAuth: true,
       },
     );

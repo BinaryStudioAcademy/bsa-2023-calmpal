@@ -326,11 +326,18 @@ class JournalEntryController extends BaseController {
   ): Promise<APIHandlerResponse> {
     const { id } = options.params;
     const { id: userId } = options.user;
-    const { body } = options;
+    const {
+      body: { title, text },
+    } = options;
 
     return {
       status: HTTPCode.OK,
-      payload: await this.journalEntryService.update({ id, userId, body }),
+      payload: await this.journalEntryService.update({
+        id,
+        userId,
+        text,
+        title,
+      }),
     };
   }
 }
