@@ -118,6 +118,12 @@ const UserProfileSidebar: React.FC<Properties> = ({
             iconName="sign-out"
             iconColor={IconColor.WHITE}
           />
+          <Card
+            title="Delete account"
+            onClick={toggleModal}
+            iconName="delete"
+            iconColor={IconColor.WHITE}
+          />
           <Modal
             isDisplayed={isModalOpen}
             steps={steps}

@@ -31,3 +31,8 @@
   color: var(--blue-700);
   background-color: var(--blue-alpha-70);
 }
+
+.checkbox-container {
+  display: flex;
+  flex-direction: row;
+}

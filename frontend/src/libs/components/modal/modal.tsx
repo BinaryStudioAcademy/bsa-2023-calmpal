@@ -66,7 +66,7 @@ const Modal: React.FC<Properties> = ({
       open={isDisplayed}
       className={getValidClassNames(
         styles['overlay'],
-        isDisplayed && 'visually-hidden',
+        !isDisplayed && 'visually-hidden',
       )}
     >
       <div className={styles['container']}>

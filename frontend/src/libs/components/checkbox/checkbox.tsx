@@ -18,9 +18,12 @@ const Checkbox: React.FC<Properties> = ({
   const checkboxClassName = disableDefaultStyles ? '' : styles['checkbox'];
   const containerClassName = disableDefaultStyles ? '' : styles['container'];
   const labelClassName = disableDefaultStyles ? '' : styles['label'];
+  const checkboxContainerClassName = disableDefaultStyles
+    ? styles['checkbox-container']
+    : '';
 
   return (
-    <label>
+    <label className={checkboxContainerClassName}>
       <input
         className={checkboxClassName}
         type="checkbox"
