@@ -10,9 +10,9 @@ const chatApi = new ChatApi({
   storage,
 });
 
-export {
-  type ChatGetAllItemResponseDto,
-  type ChatGetAllResponseDto,
-  type ChatRequestDto,
-} from './libs/types/types';
+// export {
+//   type ChatGetAllItemResponseDto,
+//   type ChatGetAllResponseDto,
+//   type ChatRequestDto,
+// } from './libs/types/types';
 export { chatApi };

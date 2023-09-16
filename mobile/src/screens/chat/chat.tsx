@@ -4,7 +4,7 @@ import React from 'react';
 import ChatAvatar from '#assets/img/icons/chat-avatar.svg';
 import { Header, ScrollView, Text, View } from '#libs/components/components';
 import {
-  useAppDispatch,
+  // useAppDispatch,
   useAppForm,
   useAppRoute,
   useCallback,
@@ -14,8 +14,8 @@ import {
   useState,
 } from '#libs/hooks/hooks';
 import { type ChatNavigationParameterList } from '#libs/types/types';
-import { actions as chatsActions } from '#slices/chats/chats';
 
+// import { actions as chatsActions } from '#slices/chats/chats';
 import { ChatInput, MessageItem } from './components/components';
 import {
   DEFAULT_VALUES,
@@ -35,7 +35,7 @@ type RouteParameters = {
 };
 
 const Chat: React.FC = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const navigation =
     useNavigation<NativeStackNavigationProp<ChatNavigationParameterList>>();
   const { title } = useAppRoute().params as RouteParameters;
@@ -53,7 +53,7 @@ const Chat: React.FC = () => {
   const handleFormSubmit = useCallback(
     (payload: { text: string }): void => {
       if (messagesLength === EMPTY_ARRAY_LENGTH) {
-        void dispatch(chatsActions.createChat({ name: 'New Chat' }));
+        // void dispatch(chatsActions.createChat({ name: 'New Chat' }));
       }
 
       setMessages((previous) => {
@@ -69,7 +69,7 @@ const Chat: React.FC = () => {
       scrollViewToEnd();
       reset();
     },
-    [setMessages, reset, dispatch, messagesLength],
+    [setMessages, reset, messagesLength],
   );
 
   const handleSend = useCallback((): void => {
