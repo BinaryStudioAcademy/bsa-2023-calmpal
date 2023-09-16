@@ -30,6 +30,7 @@ const SurveyStack = createNativeStackNavigator<SurveyNavigationParameterList>();
 
 const Survey: React.FC = () => {
   const [preferencesSurvey, setPreferencesSurvey] = useState([]);
+  const [feelingsSurvey, setFeelingsSurvey] = useState([]);
   const { userId, surveyPreferencesDataStatus } = useAppSelector(({ auth }) => {
     return {
       userId: (auth.authenticatedUser as UserAuthResponseDto).id,
@@ -43,6 +44,7 @@ const Survey: React.FC = () => {
       authActions.createUserSurvey({
         userId: userId,
         preferences: preferencesSurvey,
+        feelings: feelingsSurvey,
         journaling_experience: option,
       }),
     );
@@ -70,6 +72,7 @@ const Survey: React.FC = () => {
         <SurveyStack.Screen
           name={SurveyScreenName.FEELING}
           component={FeelingsStep}
+          initialParams={{ setFeelingsSurvey }}
         />
         <SurveyStack.Screen
           name={SurveyScreenName.GOAL}

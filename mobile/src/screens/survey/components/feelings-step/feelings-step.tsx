@@ -1,3 +1,4 @@
+import { type RouteProp } from '@react-navigation/native';
 import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
@@ -11,6 +12,7 @@ import {
 } from '#libs/hooks/hooks';
 import { type SurveyNavigationParameterList } from '#libs/types/types';
 import {
+  getSurveyCategories,
   type SurveyInputDto,
   surveyInputValidationSchema,
 } from '#packages/survey/survey';
@@ -23,14 +25,28 @@ import {
 import { SurveyCategory } from '../components';
 import { styles } from './styles';
 
-const FeelingsStep: React.FC = () => {
+type PreferencesStepProperties = {
+  route: RouteProp<
+    SurveyNavigationParameterList,
+    typeof SurveyScreenName.FEELING
+  >;
+};
+
+type PreferencesStepInitialParameters = {
+  setFeelingSurvey: (payload: string[]) => void;
+};
+
+const FeelingsStep: React.FC<PreferencesStepProperties> = ({ route }) => {
+  const { setFeelingSurvey } = route.params as PreferencesStepInitialParameters;
   const navigation =
     useNavigation<NativeStackNavigationProp<SurveyNavigationParameterList>>();
 
-  const { control, errors, isValid } = useAppForm<SurveyInputDto>({
-    defaultValues: DEFAULT_SURVEY_PAYLOAD,
-    validationSchema: surveyInputValidationSchema,
-  });
+  const { control, errors, isValid, handleSubmit } = useAppForm<SurveyInputDto>(
+    {
+      defaultValues: DEFAULT_SURVEY_PAYLOAD,
+      validationSchema: surveyInputValidationSchema,
+    },
+  );
   const {
     field: { onChange: onCategoryChange, value: categoriesValue },
   } = useFormController({
@@ -57,8 +73,16 @@ const FeelingsStep: React.FC = () => {
     [categoriesValue, onCategoryChange],
   );
 
+  const handleSurveySubmit = useCallback(
+    (payload: SurveyInputDto) => {
+      setFeelingSurvey(getSurveyCategories(payload));
+    },
+    [setFeelingSurvey],
+  );
+
   const handleContinue = (): void => {
     navigation.navigate(SurveyScreenName.GOAL);
+    void handleSubmit(handleSurveySubmit)();
   };
 
   const handleBack = (): void => {
