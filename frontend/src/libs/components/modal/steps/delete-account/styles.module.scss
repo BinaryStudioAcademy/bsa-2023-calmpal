@@ -59,10 +59,6 @@
 @media (width < 480px) {
   .modal-body {
     padding: 5px;
-    white-space: wrap;
-  }
-
-  .text {
-    width: 280px;
+    white-space: normal;
   }
 }
