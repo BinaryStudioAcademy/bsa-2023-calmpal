@@ -1,7 +1,12 @@
 import React from 'react';
 
-import { Icon, Pressable, Text, View } from '#libs/components/components';
-import { usePressState } from '#libs/hooks/hooks';
+import {
+  Icon,
+  Text,
+  TouchableOpacity,
+  View,
+} from '#libs/components/components';
+import { AppColor } from '#libs/enums/enums';
 import { type IconName } from '#libs/types/types';
 
 import { styles } from './styles';
@@ -25,10 +30,8 @@ const Button: React.FC<Properties> = ({
   iconName,
   isVisuallyCentered,
 }) => {
-  const { handlePress, color } = usePressState({ onPress, isRounded });
-
   return (
-    <Pressable
+    <TouchableOpacity
       style={[
         styles.button,
         type === 'solid' && styles.buttonSolid,
@@ -37,12 +40,16 @@ const Button: React.FC<Properties> = ({
         isRounded && styles.buttonRounded,
         isDisabled && styles.buttonDisabled,
       ]}
-      onPress={handlePress}
+      onPress={onPress}
       disabled={isDisabled}
+      activeOpacity={0.5}
     >
       {iconName ? (
         <View style={isVisuallyCentered && styles.visuallyCenteredButton}>
-          <Icon name={iconName} color={color} />
+          <Icon
+            name={iconName}
+            color={isRounded ? AppColor.BLUE_200 : AppColor.GRAY_400}
+          />
         </View>
       ) : (
         <Text
@@ -56,7 +63,7 @@ const Button: React.FC<Properties> = ({
           {label}
         </Text>
       )}
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
