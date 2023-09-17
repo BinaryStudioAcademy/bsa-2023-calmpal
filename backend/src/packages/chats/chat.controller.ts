@@ -139,6 +139,8 @@ class ChatController extends BaseController {
    * /chats:
    *   post:
    *     description: Create a new chat
+   *     security:
+   *      - bearerAuth: []
    *     responses:
    *       201:
    *         description: Successful operation
@@ -165,6 +167,21 @@ class ChatController extends BaseController {
       }),
     };
   }
+  /**
+   * @swagger
+   * /chats/:id:
+   *   delete:
+   *     description: Delete chat by id
+   *     security:
+   *      - bearerAuth: []
+   *     responses:
+   *       200:
+   *         description: Successful operation
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: boolean
+   */
 
   private async delete(
     options: APIHandlerOptions<{
