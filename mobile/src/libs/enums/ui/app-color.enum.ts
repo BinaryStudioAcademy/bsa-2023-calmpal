@@ -20,6 +20,7 @@ const AppColor = {
   BLUE_100_ALPHA_70: '#A6D4FFB2',
   GRAY_100_ALPHA_50: '#FFFFFF7F',
   GRAY_200_ALPHA_50: '#312F377F',
+  PURPLE_100_ALPHA_50: '#5244F37F',
 } as const;
 
 export { AppColor };
