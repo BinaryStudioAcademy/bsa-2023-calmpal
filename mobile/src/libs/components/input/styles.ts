@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColor.WHITE,
     marginBottom: 2,
     marginTop: 6,
+    color: AppColor.GRAY_600,
   },
 
   label: {
@@ -37,6 +38,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
     shadowOpacity: 0.25,
+    color: AppColor.GRAY_600,
   },
 
   disabledInput: {
@@ -45,6 +47,7 @@ const styles = StyleSheet.create({
 
   errorInput: {
     borderColor: AppColor.RED_100,
+    color: AppColor.GRAY_600,
   },
 
   errorText: {
