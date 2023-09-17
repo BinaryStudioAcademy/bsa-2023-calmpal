@@ -1,10 +1,15 @@
-import { createJournalEntry, getAllJournalEntries } from './actions.js';
+import {
+  createJournalEntry,
+  deleteJournal,
+  getAllJournalEntries,
+} from './actions.js';
 import { actions } from './journal.slice.js';
 
 const allActions = {
   ...actions,
   createJournalEntry,
   getAllJournalEntries,
+  deleteJournal,
 };
 
 export { allActions as actions };

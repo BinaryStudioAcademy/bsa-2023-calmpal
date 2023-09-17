@@ -29,4 +29,20 @@ const getAllJournalEntries = createAsyncThunk<
   return await journalApi.getAllJournalEntries();
 });
 
-export { createJournalEntry, getAllJournalEntries };
+const deleteJournal = createAsyncThunk<
+  JournalEntryGetAllItemResponseDto[],
+  number,
+  AsyncThunkConfig
+>(`${sliceName}/delete-journal-entry`, async (id, { extra, getState }) => {
+  const { journalApi } = extra;
+  await journalApi.deleteJournalEntry(id);
+  const {
+    journal: { allJournalEntries },
+  } = getState();
+
+  return allJournalEntries.filter((journal) => {
+    return journal.id !== id;
+  });
+});
+
+export { createJournalEntry, deleteJournal, getAllJournalEntries };
