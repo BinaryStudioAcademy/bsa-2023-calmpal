@@ -11,11 +11,11 @@ type Properties = {
   routes: Route[];
 };
 
-const Sidebar: React.FC<Properties> = ({ routes }) => {
+const NavigationMenu: React.FC<Properties> = ({ routes }) => {
   const { pathname } = useLocation();
 
   return (
-    <div className={styles['sidebar']}>
+    <div className={styles['nav-menu']}>
       <nav className={styles['nav']}>
         <Link to={AppRoute.ROOT}>
           <img src={logoS} alt="CalmPal logo" />
@@ -47,4 +47,4 @@ const Sidebar: React.FC<Properties> = ({ routes }) => {
   );
 };
 
-export { Sidebar };
+export { NavigationMenu };

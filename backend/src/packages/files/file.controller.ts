@@ -77,6 +77,8 @@ class FileController extends BaseController {
    *                file:
    *                  type: string
    *                  format: binary
+   *      security:
+   *       - bearerAuth: []
    *      responses:
    *        201:
    *          description: Successful operation
