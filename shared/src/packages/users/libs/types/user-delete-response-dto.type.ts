@@ -1,5 +1,5 @@
 type UserDeleteResponseDto = {
-  id: number;
+  id: number | null;
 };
 
 export { type UserDeleteResponseDto };
