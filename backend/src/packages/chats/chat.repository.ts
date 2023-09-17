@@ -17,6 +17,25 @@ class ChatRepository implements Repository {
     return Promise.resolve(null);
   }
 
+  public async findById(id: number): Promise<ChatEntity | null> {
+    const chat = await this.chatModel
+      .query()
+      .findById(id)
+      .castTo<ChatCommonQueryResponse | undefined>();
+
+    if (!chat) {
+      return null;
+    }
+
+    return ChatEntity.initialize({
+      id: chat.id,
+      name: chat.name,
+      createdAt: new Date(chat.createdAt),
+      updatedAt: new Date(chat.updatedAt),
+      members: chat.members,
+    });
+  }
+
   public findAll(): ReturnType<Repository['findAll']> {
     return Promise.resolve([]);
   }
@@ -74,8 +93,10 @@ class ChatRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public delete(): ReturnType<Repository['delete']> {
-    return Promise.resolve(false);
+  public async delete(id: number): Promise<boolean> {
+    await this.chatModel.query().deleteById(id);
+
+    return true;
   }
 }
 
