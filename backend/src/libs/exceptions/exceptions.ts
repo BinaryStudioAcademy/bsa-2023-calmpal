@@ -1,5 +1,6 @@
 export {
   AuthError,
+  ChatsError,
   FileError,
   UsersError,
   ValidationError,

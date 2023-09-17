@@ -1,3 +1,6 @@
+import { ExceptionMessage } from '#libs/enums/enums.js';
+import { ChatsError } from '#libs/exceptions/exceptions.js';
+import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Service } from '#libs/types/types.js';
 
 import { type ChatEntity } from './chat.entity.js';
@@ -56,7 +59,10 @@ class ChatService implements Service {
   public async delete(id: number): Promise<boolean> {
     const chat = await this.findById(id);
     if (!chat) {
-      return false;
+      throw new ChatsError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.CHAT_NOT_FOUND,
+      });
     }
 
     return await this.chatRepository.delete(id);
