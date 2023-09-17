@@ -9,14 +9,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginHorizontal: 12,
     borderRadius: 25,
-    shadowColor: AppColor.BLUE_300,
-    elevation: 4,
+    shadowColor: AppColor.PURPLE_100_ALPHA_50,
+    elevation: 20,
   },
   image: {
     width: 187,
     height: '100%',
-    backgroundColor: AppColor.PURPLE_100_ALPHA_50,
-    borderRadius: 20,
+    backgroundColor: AppColor.BLUE_200,
+    borderRadius: 25,
   },
   innerContainer: {
     position: 'absolute',
