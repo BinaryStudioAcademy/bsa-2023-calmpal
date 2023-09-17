@@ -6,6 +6,7 @@ import { type Storage } from '#libs/packages/storage/storage.js';
 import { JournalApiPath } from './libs/enums/enums.js';
 import {
   type JournalEntryCreateRequestDto,
+  type JournalEntryDeleteResponseDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
 } from './libs/types/types.js';
@@ -47,6 +48,22 @@ class JournalApi extends BaseHttpApi {
     );
 
     return await response.json<JournalEntryGetAllItemResponseDto>();
+  }
+
+  public async deleteJournalEntry(
+    id: number,
+  ): Promise<JournalEntryDeleteResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(JournalApiPath.ROOT, `${id}`, {}),
+      {
+        method: 'DELETE',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify({}),
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<JournalEntryDeleteResponseDto>();
   }
 }
 

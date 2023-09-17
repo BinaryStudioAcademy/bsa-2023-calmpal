@@ -52,6 +52,7 @@ export { FilesApiPath } from './packages/files/files.js';
 export {
   JournalApiPath,
   type JournalEntryCreateRequestDto,
+  type JournalEntryDeleteResponseDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
 } from './packages/journal/journal.js';
