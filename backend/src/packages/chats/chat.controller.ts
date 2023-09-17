@@ -144,6 +144,18 @@ class ChatController extends BaseController {
         );
       },
     });
+
+    this.addRoute({
+      path: ChatsApiPath.$ID,
+      method: 'DELETE',
+      handler: (options) => {
+        return this.delete(
+          options as APIHandlerOptions<{
+            params: { id: number };
+          }>,
+        );
+      },
+    });
   }
 
   /**
@@ -300,6 +312,19 @@ class ChatController extends BaseController {
       payload: await this.chatService.findAllMessagesByChatId(
         Number(options.params.id),
       ),
+    };
+  }
+
+  private async delete(
+    options: APIHandlerOptions<{
+      params: { id: number };
+    }>,
+  ): Promise<APIHandlerResponse> {
+    const { id } = options.params;
+
+    return {
+      status: HTTPCode.CREATED,
+      payload: await this.chatService.delete(id),
     };
   }
 }
