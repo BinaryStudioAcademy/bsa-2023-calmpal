@@ -1,5 +1,6 @@
 import { type Service } from '#libs/types/types.js';
 
+import { type ChatEntity } from './chat.entity.js';
 import { type ChatRepository } from './chat.repository.js';
 import {
   type ChatGetAllItemResponseDto,
@@ -16,6 +17,14 @@ class ChatService implements Service {
 
   public find(): ReturnType<Service['find']> {
     return Promise.resolve(null);
+  }
+
+  public async findById(
+    id: number,
+  ): Promise<ReturnType<ChatEntity['toObject']> | null> {
+    const chat = await this.chatRepository.findById(id);
+
+    return chat?.toObject() ?? null;
   }
 
   public async findAll(): ReturnType<Service['findAll']> {
@@ -44,8 +53,13 @@ class ChatService implements Service {
     return Promise.resolve(null);
   }
 
-  public delete(): ReturnType<Service['delete']> {
-    return Promise.resolve(true);
+  public async delete(id: number): Promise<boolean> {
+    const chat = await this.findById(id);
+    if (!chat) {
+      return false;
+    }
+
+    return await this.chatRepository.delete(id);
   }
 }
 
