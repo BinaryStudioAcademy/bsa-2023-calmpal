@@ -8,12 +8,15 @@ const styles = StyleSheet.create({
     position: 'relative',
     marginBottom: 10,
     marginHorizontal: 12,
+    borderRadius: 25,
+    shadowColor: AppColor.BLUE_300,
+    elevation: 4,
   },
   image: {
     width: 187,
     height: '100%',
-    backgroundColor: AppColor.BLUE_200,
-    borderRadius: 25,
+    backgroundColor: AppColor.PURPLE_100_ALPHA_50,
+    borderRadius: 20,
   },
   innerContainer: {
     position: 'absolute',
