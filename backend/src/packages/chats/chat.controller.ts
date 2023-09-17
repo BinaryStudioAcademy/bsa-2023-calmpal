@@ -59,6 +59,13 @@ import { createChatValidationSchema } from './libs/validation-schemas/validation
  *          updatedAt:
  *             type: string
  *             format: date-time
+ *        Error:
+ *          type: object
+ *          properties:
+ *            message:
+ *              type: string
+ *            errorType:
+ *              type: string
  */
 class ChatController extends BaseController {
   private chatService: ChatService;
@@ -181,6 +188,15 @@ class ChatController extends BaseController {
    *           application/json:
    *             schema:
    *               type: boolean
+   *       404:
+   *         description: User was not found
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *             example:
+   *               message: "Chat with such id was not found."
+   *               errorType: "COMMON"
    */
 
   private async delete(
