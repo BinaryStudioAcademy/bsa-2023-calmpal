@@ -1,4 +1,8 @@
 export {
+  EMPTY_ARRAY_LENGTH,
+  FIRST_ARRAY_INDEX,
+} from './libs/constants/constants.js';
+export {
   APIPath,
   AppEnvironment,
   ContentType,
@@ -47,16 +51,25 @@ export {
 } from './packages/chats/chats.js';
 export {
   type FileGetAllItemResponseDto,
+  FilesApiPath,
   type FileUploadRequestDto,
+  FileUploadValidationRule,
   type S3FileUploadRequestDto,
 } from './packages/files/files.js';
-export { FilesApiPath } from './packages/files/files.js';
 export {
   JournalApiPath,
   type JournalEntryCreateRequestDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
 } from './packages/journal/journal.js';
+export {
+  createMeditationEntryFormValidationSchema,
+  createMeditationEntryRequestValidationSchema,
+  MeditationApiPath,
+  type MeditationEntryCreateForm,
+  type MeditationEntryCreateRequestDto,
+  type MeditationEntryCreateResponseDto,
+} from './packages/meditation/meditation.js';
 export {
   createSurveyValidationSchema,
   getSurveyCategories,
@@ -79,7 +92,6 @@ export {
   type UserSignUpResponseDto,
   userSignUpValidationSchema,
 } from './packages/users/users.js';
-export { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants.js';
 export {
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
