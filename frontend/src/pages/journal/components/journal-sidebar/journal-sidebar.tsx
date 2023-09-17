@@ -9,9 +9,12 @@ import {
   useAppSelector,
   useCallback,
   useEffect,
+  useRef,
+  useState,
 } from '#libs/hooks/hooks.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
+import { DeleteJournalModal } from '../delete-journal-modal/delete-journal-modal.js';
 import styles from './styles.module.scss';
 
 type Properties = {
@@ -24,6 +27,13 @@ const JournalSidebar: React.FC<Properties> = ({
   setIsSidebarShown,
 }) => {
   const dispatch = useAppDispatch();
+
+  const [deletedChat, setDeleteChat] = useState<null | number>(null);
+  const dialogReference = useRef<HTMLDialogElement>(null);
+  const handleOpen = useCallback(() => {
+    dialogReference.current?.showModal();
+  }, [dialogReference]);
+
   const { allJournalEntries, selectedJournalEntry } = useAppSelector(
     ({ journal }) => {
       return {
@@ -31,6 +41,15 @@ const JournalSidebar: React.FC<Properties> = ({
         selectedJournalEntry: journal.selectedJournalEntry,
       };
     },
+  );
+  const handleIconClick = useCallback(
+    (id: number) => {
+      return () => {
+        setDeleteChat(id);
+        handleOpen();
+      };
+    },
+    [handleOpen],
   );
 
   useEffect(() => {
@@ -48,27 +67,32 @@ const JournalSidebar: React.FC<Properties> = ({
   );
 
   return (
-    <Sidebar isSidebarShown={isSidebarShown}>
-      <SidebarHeader>
-        <div className={styles['info']}>
-          <span>Journal</span>
-        </div>
-      </SidebarHeader>
-      <SidebarBody>
-        <div className={styles['journal-entry-list']}>
-          {allJournalEntries.map((journalEntry) => {
-            return (
-              <Card
-                title={journalEntry.title}
-                onClick={handleSelectJournalEntry(journalEntry.id)}
-                isActive={selectedJournalEntry?.id === journalEntry.id}
-                key={journalEntry.id}
-              />
-            );
-          })}
-        </div>
-      </SidebarBody>
-    </Sidebar>
+    <>
+      <Sidebar isSidebarShown={isSidebarShown}>
+        <SidebarHeader>
+          <div className={styles['info']}>
+            <span>Journal</span>
+          </div>
+        </SidebarHeader>
+        <SidebarBody>
+          <div className={styles['journal-entry-list']}>
+            {allJournalEntries.map((journalEntry) => {
+              return (
+                <Card
+                  title={journalEntry.title}
+                  onClick={handleSelectJournalEntry(journalEntry.id)}
+                  isActive={selectedJournalEntry?.id === journalEntry.id}
+                  key={journalEntry.id}
+                  iconRight="trash-box"
+                  onIconClick={handleIconClick(journalEntry.id)}
+                />
+              );
+            })}
+          </div>
+        </SidebarBody>
+      </Sidebar>
+      <DeleteJournalModal reference={dialogReference} id={deletedChat} />
+    </>
   );
 };
 
