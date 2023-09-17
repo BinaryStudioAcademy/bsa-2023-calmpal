@@ -18,6 +18,8 @@ type IconName =
   | 'chat-sidebar'
   | 'send'
   | 'chatbot-avatar'
-  | 'back';
+  | 'back'
+  | 'trash-box'
+  | 'close';
 
 export { type IconName };

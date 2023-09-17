@@ -10,6 +10,7 @@ export { Icon } from './icon/icon.js';
 export { Input } from './input/input.js';
 export { Link } from './link/link.js';
 export { Loader } from './loader/loader.js';
+export { Modal } from './modal/modal.js';
 export { NavigationMenu } from './navigation-menu/navigation-menu.js';
 export { NavigationMenuWrapper } from './navigation-menu-wrapper/navigation-menu-wrapper.js';
 export { ProtectedRoute } from './protected-route/protected-route.js';

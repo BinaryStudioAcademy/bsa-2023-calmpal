@@ -79,11 +79,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 52px;
-  height: 52px;
   color: var(--blue-200);
+  font-size: inherit;
   background-color: transparent;
-  border-color: transparent;
+  border: none;
   border-radius: 50%;
   cursor: pointer;
 }
