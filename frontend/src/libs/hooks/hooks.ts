@@ -6,5 +6,9 @@ export { useSearch } from './use-search/use-search.hook.js';
 export { useSidebarState } from './use-sidebar-show/use-sidebar-show.hook.js';
 export { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 export { useController as useFormController } from 'react-hook-form';
-export { useLocation, useNavigate } from 'react-router-dom';
-export { useSearchParams } from 'react-router-dom';
+export {
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
