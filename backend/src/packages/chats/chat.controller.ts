@@ -191,7 +191,7 @@ class ChatController extends BaseController {
    *             schema:
    *               type: boolean
    *       404:
-   *         description: User was not found
+   *         description: Chat was not found
    *         content:
    *           application/json:
    *             schema:
