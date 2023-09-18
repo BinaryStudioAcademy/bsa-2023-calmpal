@@ -6,7 +6,6 @@ import { iconNameToIcon } from './libs/maps/icon-name-to-icon.map.js';
 type Properties = {
   name: IconName;
   color?: ValueOf<typeof IconColor> | undefined;
-  color?: string;
   width?: number;
   height?: number;
 };
