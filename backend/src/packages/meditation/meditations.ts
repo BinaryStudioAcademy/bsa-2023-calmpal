@@ -18,6 +18,6 @@ const meditationController = new MeditationController(
 
 export { meditationController, meditationService };
 export {
-  type MeditationEntryCreateRequestDto,
+  type MeditationEntryCreateFormDataDto,
   type MeditationEntryCreateResponseDto,
 } from './libs/types/types.js';

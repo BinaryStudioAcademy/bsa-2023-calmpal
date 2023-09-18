@@ -2,6 +2,6 @@ export { type MeditationCommonQueryResponse } from './meditation-common-query-re
 export { type MeditationCreateQueryPayload } from './meditation-create-query-payload.js';
 export { type TopicCommonQueryResponse } from './topic-common-query-response.js';
 export {
-  type MeditationEntryCreateRequestDto,
+  type MeditationEntryCreateFormDataDto,
   type MeditationEntryCreateResponseDto,
 } from 'shared/build/index.js';
