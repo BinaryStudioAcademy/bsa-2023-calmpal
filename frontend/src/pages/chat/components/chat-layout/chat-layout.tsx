@@ -3,8 +3,6 @@ import {
   useAppSelector,
   useCallback,
   useEffect,
-  useLocation,
-  useMemo,
   useParams,
 } from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
@@ -20,22 +18,6 @@ import { actions as chatActions } from '#slices/chats/chats.js';
 import styles from './styles.module.scss';
 
 const ChatLayout: React.FC = () => {
-  const location = useLocation();
-
-  const LAST_INDEX_DIFFERENCE = 1;
-  const chatId = useMemo(() => {
-    const pathSegments = location.pathname.split('/');
-    const lastSegment = pathSegments.at(
-      pathSegments.length - LAST_INDEX_DIFFERENCE,
-    );
-    const chatId = Number.parseInt(lastSegment as string);
-    if (!Number.isNaN(chatId)) {
-      return chatId;
-    }
-
-    return null;
-  }, [location.pathname]);
-
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
   const { currentChatMessages, authenticatedUser } = useAppSelector(
@@ -52,17 +34,23 @@ const ChatLayout: React.FC = () => {
     ({ message }: ChatInputValue): void => {
       if (!hasId && currentChatMessages.length === EMPTY_ARRAY_LENGTH) {
         void dispatch(chatActions.createChat({ message }));
+      } else {
+        void dispatch(
+          chatActions.createMessage({
+            body: { message },
+            options: { chatId: id as string },
+          }),
+        );
       }
-      // TODO: dispatch redux action to send message
     },
-    [dispatch, currentChatMessages.length, hasId],
+    [dispatch, currentChatMessages.length, hasId, id],
   );
 
   useEffect(() => {
-    if (chatId) {
-      void dispatch(chatActions.getCurrentChatMessages(chatId.toString()));
+    if (id) {
+      void dispatch(chatActions.getCurrentChatMessages(id.toString()));
     }
-  }, [dispatch, chatId]);
+  }, [dispatch, id]);
 
   return (
     <>

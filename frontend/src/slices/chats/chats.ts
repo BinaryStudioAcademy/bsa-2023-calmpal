@@ -1,4 +1,9 @@
-import { createChat, getAllChats, getCurrentChatMessages } from './actions.js';
+import {
+  createChat,
+  createMessage,
+  getAllChats,
+  getCurrentChatMessages,
+} from './actions.js';
 import { actions } from './chats.slice.js';
 
 const allActions = {
@@ -6,6 +11,7 @@ const allActions = {
   getAllChats,
   createChat,
   getCurrentChatMessages,
+  createMessage,
 };
 
 export { allActions as actions };
