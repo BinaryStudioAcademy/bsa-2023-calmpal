@@ -1,7 +1,6 @@
 import { type Track } from '#libs/types/types';
 
 const TRACK_START_INDEX = 0;
-const EMPTY_ARRAY_LENGTH = 0;
 
 const MOCKED_PLAYLIST: Track[] = [
   {
@@ -20,4 +19,4 @@ const MOCKED_PLAYLIST: Track[] = [
   },
 ];
 
-export { EMPTY_ARRAY_LENGTH, MOCKED_PLAYLIST, TRACK_START_INDEX };
+export { MOCKED_PLAYLIST, TRACK_START_INDEX };

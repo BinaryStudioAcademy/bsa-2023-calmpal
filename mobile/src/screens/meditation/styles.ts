@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: AppColor.WHITE,
     flex: 1,
+    alignItems: 'center',
   },
   background: {
     position: 'absolute',
@@ -13,20 +14,22 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   contentWrapper: {
-    paddingHorizontal: 45,
     alignItems: 'center',
-    marginTop: 81,
+    justifyContent: 'center',
+    flex: 1,
+    width: 315,
   },
   imageWrapper: {
-    width: 315,
+    width: '100%',
     height: 315,
     paddingHorizontal: 12,
     paddingVertical: 12,
     backgroundColor: AppColor.WHITE,
     borderRadius: 20,
-    elevation: 1,
     marginTop: 37,
     marginBottom: 20,
+    shadowColor: AppColor.BLUE_200,
+    elevation: 20,
   },
   image: {
     width: '100%',
