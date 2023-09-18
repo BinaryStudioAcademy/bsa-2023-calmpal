@@ -1,6 +1,6 @@
 import joi from 'joi';
 
-import { ContentType } from '#libs/enums/enums.js';
+import { ContentType, ExceptionMessage } from '#libs/enums/enums.js';
 import { FileUploadValidationRule } from '#packages/files/files.js';
 
 import { MeditationEntryValidationMessage } from '../enums/enums.js';
@@ -21,7 +21,7 @@ const createMeditationEntryForm = joi.object<MeditationEntryCreateForm, true>({
         .max(FileUploadValidationRule.MAXIMUM_FILE_SIZE)
         .required()
         .messages({
-          'number.max': MeditationEntryValidationMessage.SIZE_TOO_BIG,
+          'number.max': ExceptionMessage.FILE_TOO_BIG,
         }),
     })
     .required()
