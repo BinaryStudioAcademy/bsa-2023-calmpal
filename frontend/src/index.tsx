@@ -42,7 +42,7 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 ),
                 children: [
                   {
-                    path: AppRoute.MEDITATION_SESSION,
+                    path: AppRoute.MEDITATION_$ID,
                     element: (
                       <ProtectedRoute>
                         <MeditationPlayer />
