@@ -13,6 +13,6 @@ const chatRepository = new ChatRepository(ChatModel, UserToChatModel);
 const chatService = new ChatService({ chatRepository, chatMessageService });
 const chatController = new ChatController(logger, chatService);
 
-const chatbotService = new ChatbotService(openAi);
+const chatbotService = new ChatbotService({ openAi });
 
 export { chatbotService, chatController, chatService };

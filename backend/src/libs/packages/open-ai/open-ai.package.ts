@@ -1,5 +1,7 @@
+import { type ValueOf } from '#libs/types/types.js';
+
 import { type HTTPService } from '../http/http.js';
-import { DEFAULT_IMAGE_GENERATE_REQUEST } from './libs/constants/constants.js';
+import { type OpenAiImageSize } from './libs/enums/enums.js';
 import {
   type OpenAiImageGenerateRequestDto,
   type OpenAiImageGenerateResponseDto,
@@ -19,6 +21,10 @@ class OpenAi {
   private httpService: HTTPService;
   private baseUrl: string;
   private model: string;
+  private defaultImageGenerateConfig = {
+    number: 1,
+    size: '512x512' as ValueOf<typeof OpenAiImageSize>,
+  };
 
   public constructor({
     httpService,
@@ -57,8 +63,8 @@ class OpenAi {
 
   public async generateImages({
     prompt,
-    number = DEFAULT_IMAGE_GENERATE_REQUEST.n,
-    size = DEFAULT_IMAGE_GENERATE_REQUEST.size,
+    number = this.defaultImageGenerateConfig.number,
+    size = this.defaultImageGenerateConfig.size,
   }: OpenAiImageGenerateRequestDto): Promise<string | null> {
     const data = await this.httpService.load<OpenAiImageGenerateResponseDto>({
       method: 'POST',
