@@ -6,6 +6,7 @@ const ExceptionMessage = {
   USER_ALREADY_EXISTS: 'User already exists.',
   INCORRECT_FILE_TYPE: 'Content type of the file is not in PNG or JPEG.',
   FILE_TOO_BIG: 'The inputted file is bigger than 10 MB.',
+  JOURNAL_NOT_FOUND: 'Journal with these credentials was not found.',
 } as const;
 
 export { ExceptionMessage };

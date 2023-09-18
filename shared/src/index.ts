@@ -10,6 +10,7 @@ export {
   AuthError,
   FileError,
   HTTPError,
+  JournalError,
   UsersError,
   ValidationError,
 } from './libs/exceptions/exceptions.js';
