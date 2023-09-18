@@ -1,3 +1,5 @@
+import { type MeditationEntryCreateForm } from 'shared/build/index.js';
+
 const mockedData = [
   { id: 1, title: 'Favorites' },
   { id: 2, title: 'Meditation' },
@@ -10,4 +12,11 @@ const mockedData = [
   { id: 9, title: 'Daily inspiration' },
   { id: 10, title: 'Breath exercise' },
 ];
-export { mockedData };
+
+const DEFAULT_MEDITATION_PAYLOAD: MeditationEntryCreateForm = {
+  title: '',
+  file: null,
+  fileType: null,
+  fileSize: null,
+};
+export { DEFAULT_MEDITATION_PAYLOAD, mockedData };

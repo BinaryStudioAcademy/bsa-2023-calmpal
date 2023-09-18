@@ -2,6 +2,7 @@ import BackArrowIcon from '#assets/img/icons/back-arrow.svg';
 import Backward from '#assets/img/icons/backward.svg';
 import BellIcon from '#assets/img/icons/bell.svg';
 import ChatIcon from '#assets/img/icons/chat.svg';
+import Close from '#assets/img/icons/close.svg';
 import Forward from '#assets/img/icons/forward.svg';
 import HomeIcon from '#assets/img/icons/home.svg';
 import Next from '#assets/img/icons/next.svg';
@@ -29,6 +30,7 @@ const iconNameToIcon: Record<IconName, SVGIcon> = {
   'play': Play as SVGIcon,
   'previous': Previous as SVGIcon,
   'sign-out': SignOutIcon as SVGIcon,
+  'close': Close as SVGIcon,
 };
 
 export { iconNameToIcon };
