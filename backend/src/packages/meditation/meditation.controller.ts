@@ -9,6 +9,7 @@ import { type Logger } from '#libs/packages/logger/logger.js';
 import { type FileUploadRequestDto } from '#packages/files/files.js';
 
 import { MeditationApiPath } from './libs/enums/enums.js';
+import { type MeditationEntryCreateFormDataDto } from './libs/types/types.js';
 import { createMeditationEntryRequestValidationSchema } from './libs/validation-schemas/validation-schemas.js';
 import { type MeditationService } from './meditation.service.js';
 
@@ -19,19 +20,21 @@ import { type MeditationService } from './meditation.service.js';
  *      MeditationEntryRequest:
  *        type: object
  *        properties:
- *          topicName:
+ *          name:
  *            type: string
- *          audioUrl:
+ *          file:
  *            type: string
- *            format: url
+ *            format: binary
  *      MeditationEntryResponse:
  *        type: object
  *        properties:
- *          topicName:
+ *          name:
  *            type: string
- *          audioUrl:
+ *          mediaUrl:
  *            type: string
  *            format: url
+ *          contentType:
+ *            type: string
  *          createdAt:
  *            type: string
  *            format: date-time
@@ -56,6 +59,7 @@ class MeditationController extends BaseController {
       handler: (options) => {
         return this.create(
           options as APIHandlerOptions<{
+            body: MeditationEntryCreateFormDataDto;
             fileBuffer: FileUploadRequestDto;
           }>,
         );
@@ -89,12 +93,16 @@ class MeditationController extends BaseController {
 
   private async create(
     options: APIHandlerOptions<{
+      body: MeditationEntryCreateFormDataDto;
       fileBuffer: FileUploadRequestDto;
     }>,
   ): Promise<APIHandlerResponse> {
     return {
       status: HTTPCode.CREATED,
-      payload: await this.meditationService.create(options.fileBuffer),
+      payload: await this.meditationService.create({
+        name: options.body.name.value,
+        file: options.fileBuffer,
+      }),
     };
   }
 }
