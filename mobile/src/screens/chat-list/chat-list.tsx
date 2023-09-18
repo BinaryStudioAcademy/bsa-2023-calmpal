@@ -40,7 +40,7 @@ const ChatList: React.FC = () => {
     'name',
   );
 
-  const badgeCount = chats.length;
+  const chatsLength = chats.length;
 
   const handleSelectChat = useCallback(
     (title: string) => {
@@ -56,16 +56,18 @@ const ChatList: React.FC = () => {
   useEffect(() => {
     navigation.setOptions({
       header: () => {
-        return <Header title="Chat" badgeCount={badgeCount} isProfileVisible />;
+        return (
+          <Header title="Chat" badgeCount={chatsLength} isProfileVisible />
+        );
       },
     });
-  }, [navigation, badgeCount]);
+  }, [navigation, chatsLength]);
 
   useEffect(() => {
-    if (chats.length === EMPTY_ARRAY_LENGTH) {
+    if (chatsLength === EMPTY_ARRAY_LENGTH) {
       handleRedirectToChat();
     }
-  }, [chats, handleRedirectToChat]);
+  }, [chatsLength, handleRedirectToChat]);
 
   useEffect(() => {
     void dispatch(chatsActions.getAllChats());
