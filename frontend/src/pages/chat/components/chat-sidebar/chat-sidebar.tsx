@@ -19,6 +19,7 @@ import {
   useSearch,
   useState,
 } from '#libs/hooks/hooks.js';
+import { type ValueOf } from '#libs/types/types.js';
 import { actions as chatsActions } from '#slices/chats/chats.js';
 
 import { DeleteChatModal } from '../components.js';
@@ -80,9 +81,7 @@ const ChatSidebar: React.FC<Properties> = ({
             </span>
           </div>
           <div className={styles['plus']}>
-            <Link
-              to={`${AppRoute.CHATS}?sidebarMode=hide` as typeof AppRoute.CHATS}
-            >
+            <Link to={`${AppRoute.CHATS}` as typeof AppRoute.CHATS}>
               <Icon name="plus" color={IconColor.BLUE} />
             </Link>
           </div>
@@ -93,10 +92,10 @@ const ChatSidebar: React.FC<Properties> = ({
           </div>
           <div className={styles['chat-list']}>
             {filteredElements.map((filteredChat) => {
-              const chatLink = (AppRoute.CHATS_$ID.replace(
+              const chatLink = AppRoute.CHATS_$ID.replace(
                 ':id',
                 String(filteredChat.id),
-              ) + '?sidebarMode=hide') as typeof AppRoute.CHATS_$ID;
+              ) as ValueOf<typeof AppRoute>;
 
               return (
                 <div className={styles['wrapper']} key={filteredChat.id}>
