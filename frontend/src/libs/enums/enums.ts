@@ -4,7 +4,7 @@ export { IconColor } from './icon-color.enum.js';
 export {
   AppQueryStringKey,
   SidebarModeQueryStringValue,
-} from './query-strings/query-strings.js';
+} from './query-strings/query-strings.enum.js';
 export {
   APIPath,
   AppEnvironment,
