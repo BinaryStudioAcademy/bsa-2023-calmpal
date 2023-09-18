@@ -26,9 +26,10 @@ const DeleteJournalModal: React.FC<Properties> = ({ reference, id }) => {
     };
   });
 
-  const handleDeleteJournalEntry = useCallback(async () => {
-    await dispatch(journalActions.deleteJournal(id as number));
-    reference.current?.close();
+  const handleDeleteJournalEntry = useCallback(() => {
+    void dispatch(journalActions.deleteJournal(id as number)).finally(() => {
+      reference.current?.close();
+    });
   }, [dispatch, id, reference]);
 
   return (
