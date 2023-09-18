@@ -4,7 +4,10 @@ import { type HTTP } from '#libs/packages/http/http.js';
 import { type Storage } from '#libs/packages/storage/storage.js';
 
 import { MeditationApiPath } from './libs/enums/enums.js';
-import { type MeditationEntryCreateResponseDto } from './libs/types/types.js';
+import {
+  type MeditationEntryCreateRequestDto,
+  type MeditationEntryCreateResponseDto,
+} from './libs/types/types.js';
 
 type Constructor = {
   baseUrl: string;
@@ -17,10 +20,12 @@ class MeditationApi extends BaseHttpApi {
     super({ path: APIPath.MEDITATION, baseUrl, http, storage });
   }
 
-  public async createMeditationEntry(
-    file: File,
-  ): Promise<MeditationEntryCreateResponseDto> {
+  public async createMeditationEntry({
+    name,
+    file,
+  }: MeditationEntryCreateRequestDto): Promise<MeditationEntryCreateResponseDto> {
     const formData = new FormData();
+    formData.append('name', name);
     formData.append('file', file);
 
     const response = await this.load(
