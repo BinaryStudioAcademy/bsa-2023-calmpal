@@ -1,5 +1,4 @@
-import { AudioPlayer, Loader } from '#libs/components/components.js';
-import { DataStatus } from '#libs/enums/data-status.enum.js';
+import { AudioPlayer } from '#libs/components/components.js';
 import { useAppSelector, useCallback, useState } from '#libs/hooks/hooks.js';
 import {
   MOCKED_IMAGE,
@@ -9,14 +8,11 @@ import {
 import styles from './styles.module.scss';
 
 const MeditationPlayer: React.FC = () => {
-  const { meditationEntries, meditationEntriesDataStatus } = useAppSelector(
-    ({ meditation }) => {
-      return {
-        meditationEntries: meditation.meditationEntries,
-        meditationEntriesDataStatus: meditation.meditationEntriesDataStatus,
-      };
-    },
-  );
+  const { meditationEntries } = useAppSelector(({ meditation }) => {
+    return {
+      meditationEntries: meditation.meditationEntries,
+    };
+  });
   const [trackIndex, setTrackIndex] = useState(TRACK_FIRST_INDEX);
   const [currentTrack, setCurrentTrack] = useState(
     meditationEntries[trackIndex],
@@ -29,13 +25,6 @@ const MeditationPlayer: React.FC = () => {
     },
     [meditationEntries],
   );
-
-  if (
-    meditationEntriesDataStatus === DataStatus.IDLE ||
-    meditationEntriesDataStatus === DataStatus.PENDING
-  ) {
-    return <Loader />;
-  }
 
   return (
     <div className={styles['wrapper']}>
