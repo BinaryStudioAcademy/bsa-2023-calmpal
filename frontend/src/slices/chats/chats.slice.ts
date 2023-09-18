@@ -5,7 +5,12 @@ import { type ValueOf } from '#libs/types/types.js';
 import { type ChatMessageGetAllItemResponseDto } from '#packages/chat-messages/chat-messages.js';
 import { type ChatGetAllItemResponseDto } from '#packages/chats/chats.js';
 
-import { createChat, getAllChats, getCurrentChatMessages } from './actions.js';
+import {
+  createChat,
+  createMessage,
+  getAllChats,
+  getCurrentChatMessages,
+} from './actions.js';
 
 type State = {
   chats: ChatGetAllItemResponseDto[];
@@ -13,6 +18,7 @@ type State = {
   chatsDataStatus: ValueOf<typeof DataStatus>;
   createChatDataStatus: ValueOf<typeof DataStatus>;
   currentChatMessagesDataStatus: ValueOf<typeof DataStatus>;
+  createMessageDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
@@ -21,6 +27,7 @@ const initialState: State = {
   chatsDataStatus: DataStatus.IDLE,
   createChatDataStatus: DataStatus.IDLE,
   currentChatMessagesDataStatus: DataStatus.IDLE,
+  createMessageDataStatus: DataStatus.IDLE,
 };
 
 const { reducer, actions, name } = createSlice({
@@ -65,6 +72,19 @@ const { reducer, actions, name } = createSlice({
 
     builder.addCase(getCurrentChatMessages.rejected, (state) => {
       state.currentChatMessagesDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(createMessage.pending, (state) => {
+      state.createMessageDataStatus = DataStatus.IDLE;
+    });
+
+    builder.addCase(createMessage.fulfilled, (state, action) => {
+      state.currentChatMessages.push(action.payload);
+      state.createMessageDataStatus = DataStatus.FULFILLED;
+    });
+
+    builder.addCase(createMessage.rejected, (state) => {
+      state.createMessageDataStatus = DataStatus.REJECTED;
     });
   },
 });
