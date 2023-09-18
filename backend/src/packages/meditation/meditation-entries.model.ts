@@ -15,6 +15,8 @@ import {
 import { MeditationTopicModel } from './meditation-topics.model.js';
 
 class MeditationEntriesModel extends AbstractModel {
+  public name!: string;
+
   public mediaUrl!: string;
 
   public contentType!: ValueOf<typeof ContentType>;
