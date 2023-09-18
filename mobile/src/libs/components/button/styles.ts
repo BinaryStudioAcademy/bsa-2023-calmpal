@@ -48,9 +48,13 @@ const styles = StyleSheet.create({
     elevation: 2,
     padding: 15,
     height: 55,
+    width: 55,
   },
   buttonTransparent: {
     backgroundColor: 'transparent',
+  },
+  visuallyCenteredButton: {
+    paddingLeft: 4,
   },
 
   buttonModalCancel: {
