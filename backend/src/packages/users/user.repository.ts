@@ -2,6 +2,7 @@ import { type Repository } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/users.js';
 
+import { ZERO_ROWS_DELETED } from './libs/constants/constants.js';
 import { UsersRelation } from './libs/enums/enums.js';
 import {
   type UserCommonQueryResponse,
@@ -111,33 +112,13 @@ class UserRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public async delete(id: number): Promise<UserEntity | null> {
-    const user = await this.userModel
-
+  public async delete(id: number): Promise<boolean> {
+    const updatedRows = await this.userModel
       .query()
-      .modify('withoutPassword')
-      .withGraphJoined(UsersRelation.DETAILS)
-      .findById(id)
-      .castTo<UserCommonQueryResponse | undefined>()
-      .execute();
+      .patch({ deletedAt: new Date() })
+      .where({ id });
 
-    if (!user) {
-      return null;
-    }
-
-    await this.userModel.query().patch({ deletedAt: new Date() }).where({ id });
-
-    user.deletedAt = new Date().toISOString();
-
-    return UserEntity.initialize({
-      id: user.id,
-      email: user.email,
-      createdAt: new Date(user.createdAt),
-      updatedAt: new Date(user.updatedAt),
-      fullName: user.details?.fullName ?? '',
-      isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
-      deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
-    });
+    return updatedRows > ZERO_ROWS_DELETED;
   }
 
   public async findByEmail(email: string): Promise<UserEntity | null> {

@@ -1,5 +1,8 @@
+import { ExceptionMessage } from '#libs/enums/enums.js';
+import { UsersError } from '#libs/exceptions/exceptions.js';
 import { type Config } from '#libs/packages/config/config.js';
 import { type Encrypt } from '#libs/packages/encrypt/encrypt.js';
+import { HTTPCode } from '#libs/packages/http/http.js';
 import { type JWTService } from '#libs/packages/jwt/jwt.service.js';
 import { type Service } from '#libs/types/types.js';
 import { type UserEntity } from '#packages/users/user.entity.js';
@@ -98,15 +101,18 @@ class UserService implements Service {
   public async delete(
     id: number,
   ): Promise<ReturnType<UserEntity['toObject']> | null> {
-    const user = await this.findById(id);
+    const deletedUser = await this.userRepository.findById(id);
 
-    if (!user) {
-      return null;
+    if (!deletedUser) {
+      throw new UsersError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.USER_NOT_FOUND,
+      });
     }
 
-    const deletedUser = await this.userRepository.delete(id);
+    const isDeleted = await this.userRepository.delete(id);
 
-    return deletedUser ? deletedUser.toObject() : null;
+    return isDeleted ? deletedUser.toObject() : null;
   }
 
   public async findByEmail(
