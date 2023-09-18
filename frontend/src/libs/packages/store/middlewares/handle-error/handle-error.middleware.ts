@@ -1,5 +1,4 @@
-import { type AnyAction, type Middleware } from '@reduxjs/toolkit';
-import { isRejected } from '@reduxjs/toolkit';
+import { type AnyAction, isRejected, type Middleware } from '@reduxjs/toolkit';
 
 import { NotificationType } from '#libs/packages/notification/libs/enums/enums.js';
 import { type AppDispatch } from '#libs/packages/store/libs/types/types.js';
