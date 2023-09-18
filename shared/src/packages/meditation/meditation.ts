@@ -1,6 +1,7 @@
 export { MeditationApiPath } from './libs/enums/enums.js';
 export {
   type MeditationEntryCreateForm,
+  type MeditationEntryCreateFormDataDto,
   type MeditationEntryCreateRequestDto,
   type MeditationEntryCreateResponseDto,
 } from './libs/types/types.js';

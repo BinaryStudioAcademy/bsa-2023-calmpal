@@ -67,6 +67,7 @@ export {
   createMeditationEntryRequestValidationSchema,
   MeditationApiPath,
   type MeditationEntryCreateForm,
+  type MeditationEntryCreateFormDataDto,
   type MeditationEntryCreateRequestDto,
   type MeditationEntryCreateResponseDto,
 } from './packages/meditation/meditation.js';
