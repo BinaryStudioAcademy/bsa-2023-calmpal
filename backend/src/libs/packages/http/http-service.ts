@@ -1,7 +1,12 @@
 import { ContentType } from '#libs/enums/enums.js';
 import { type ValueOf } from '#libs/types/types.js';
 
-import { HTTPHeader, type HTTPLoadParameters } from './libs/types/types.js';
+import {
+  type HTTPCode,
+  HTTPError,
+  HTTPHeader,
+  type HTTPLoadParameters,
+} from './libs/types/types.js';
 
 class HTTPService {
   public async load<T>({
@@ -21,7 +26,10 @@ class HTTPService {
     const response = await fetch(url, fetchConfig);
 
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      throw new HTTPError({
+        message: await response.text(),
+        status: response.status as ValueOf<typeof HTTPCode>,
+      });
     }
 
     return (await response.json()) as T;
