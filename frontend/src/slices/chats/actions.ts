@@ -29,4 +29,21 @@ const createChat = createAsyncThunk<
   return await chatApi.createChat(payload);
 });
 
-export { createChat, getAllChats };
+const deleteChat = createAsyncThunk<
+  ChatGetAllItemResponseDto[],
+  number,
+  AsyncThunkConfig
+>(`${sliceName}/delete-chat`, async (id, { extra, getState }) => {
+  const { chatApi } = extra;
+  await chatApi.deleteChat(id);
+
+  const {
+    chats: { chats },
+  } = getState();
+
+  return chats.filter((chat) => {
+    return chat.id !== id;
+  });
+});
+
+export { createChat, deleteChat, getAllChats };
