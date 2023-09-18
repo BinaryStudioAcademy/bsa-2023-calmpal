@@ -1,3 +1,5 @@
+import { ExceptionMessage, JournalError } from 'shared/build/index.js';
+
 import { APIPath } from '#libs/enums/enums.js';
 import {
   type APIHandlerOptions,
@@ -175,7 +177,7 @@ class JournalEntryController extends BaseController {
    *                 isDeleted:
    *                   type: boolean
    *                   description: Is successfully deleted
-   *       404:
+   *       400:
    *         description: Incorrect user credentials
    *         content:
    *           application/json:
@@ -183,7 +185,16 @@ class JournalEntryController extends BaseController {
    *               $ref: '#/components/schemas/Error'
    *             example:
    *               message: "Incorrect credentials."
-   *               errorType: "AUTHORIZATION"
+   *               errorType: "COMMON"
+   *       404:
+   *         description: Incorrect journal credentials
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *             example:
+   *               message: "Journal with these credentials was not found."
+   *               errorType: "COMMON"
    */
 
   private async delete(
@@ -192,12 +203,20 @@ class JournalEntryController extends BaseController {
       params: JournalDeleteParameter;
     }>,
   ): Promise<APIHandlerResponse> {
+    const result = await this.journalEntryService.delete(
+      options.params.id,
+      options.user,
+    );
+    if (!result) {
+      throw new JournalError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.JOURNAL_NOT_FOUND,
+      });
+    }
+
     return {
       status: HTTPCode.OK,
-      payload: await this.journalEntryService.delete(
-        options.params.id,
-        options.user,
-      ),
+      payload: result,
     };
   }
 }
