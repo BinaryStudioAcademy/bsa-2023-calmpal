@@ -3,7 +3,7 @@ import {
   FIRST_ARRAY_INDEX,
 } from '#libs/constants/constants.js';
 
-const getCursorPosition = (
+const setCursorPosition = (
   element: HTMLDivElement | null,
   cursorPosition: React.MutableRefObject<number | null>,
 ): void => {
@@ -13,12 +13,14 @@ const getCursorPosition = (
 
     let adjustedCursorPosition = cursorPosition.current;
 
-    if (
-      adjustedCursorPosition &&
-      adjustedCursorPosition > (element.textContent as string).length
-    ) {
-      adjustedCursorPosition = (element.textContent as string).length;
+    if (!adjustedCursorPosition) {
+      return;
     }
+
+    adjustedCursorPosition = Math.min(
+      adjustedCursorPosition,
+      (element.textContent as string).length,
+    );
 
     if (adjustedCursorPosition) {
       if (element.firstChild) {
@@ -41,10 +43,11 @@ const changeCursorPosition = (
   cursorPosition: React.MutableRefObject<number | null>,
 ): void => {
   const selection = window.getSelection() as Selection;
+
   if (selection.rangeCount > EMPTY_ARRAY_LENGTH) {
     const range = selection.getRangeAt(FIRST_ARRAY_INDEX);
     cursorPosition.current = range.startOffset;
   }
 };
 
-export { changeCursorPosition, getCursorPosition };
+export { changeCursorPosition, setCursorPosition };

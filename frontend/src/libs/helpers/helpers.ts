@@ -1,8 +1,8 @@
+export { getValidClassNames } from './get-valid-class-names.helper.js';
 export {
   changeCursorPosition,
-  getCursorPosition,
-} from './get-cursor-position.helper.js';
-export { getValidClassNames } from './get-valid-class-names.helper.js';
+  setCursorPosition,
+} from './set-cursor-position.helper.js';
 export {
   configureString,
   debounce,

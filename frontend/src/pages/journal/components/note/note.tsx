@@ -1,8 +1,8 @@
 import {
   changeCursorPosition,
   debounce,
-  getCursorPosition,
   sanitizeInput,
+  setCursorPosition,
 } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
@@ -15,7 +15,6 @@ import {
   useRef,
 } from '#libs/hooks/hooks.js';
 import { type JournalEntryGetAllItemResponseDto } from '#packages/journal/journal.js';
-import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { SAVE_NOTE_TIMEOUT } from '#pages/journal/libs/constants/constants.js';
 import { type NoteContent } from '#pages/journal/libs/types/types.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
@@ -23,15 +22,12 @@ import { actions as journalActions } from '#slices/journal/journal.js';
 import styles from './styles.module.scss';
 
 const Note: React.FC = () => {
-  const { userId, selectedJournalEntry } = useAppSelector(
-    ({ auth, journal }) => {
-      return {
-        userId: (auth.authenticatedUser as UserAuthResponseDto).id,
-        selectedJournalEntry:
-          journal.selectedJournalEntry as JournalEntryGetAllItemResponseDto,
-      };
-    },
-  );
+  const { selectedJournalEntry } = useAppSelector(({ journal }) => {
+    return {
+      selectedJournalEntry:
+        journal.selectedJournalEntry as JournalEntryGetAllItemResponseDto,
+    };
+  });
 
   const { isDirty, control } = useAppForm({
     defaultValues: {
@@ -102,22 +98,24 @@ const Note: React.FC = () => {
     return () => {
       handleSaveNoteWithDebounce.clear();
     };
-  }, [titleValue, textValue, isDirty, userId, id, handleSaveNote]);
+  }, [titleValue, textValue, isDirty, id, handleSaveNote]);
 
   useEffect(() => {
-    onTitleChange(selectedJournalEntry.title);
-    onTextChange(selectedJournalEntry.text);
-  }, [onTitleChange, onTextChange, selectedJournalEntry, isDirty]);
+    if (selectedJournalEntry.id) {
+      onTitleChange(selectedJournalEntry.title);
+      onTextChange(selectedJournalEntry.text);
+    }
+  }, [onTitleChange, onTextChange, selectedJournalEntry, isDirty, id]);
 
   useEffect(() => {
     if (titleReference.current && cursorPosition.current) {
-      getCursorPosition(titleReference.current, cursorPosition);
+      setCursorPosition(titleReference.current, cursorPosition);
     }
   }, [cursorPosition, titleValue]);
 
   useEffect(() => {
     if (textReference.current && cursorPosition.current) {
-      getCursorPosition(textReference.current, cursorPosition);
+      setCursorPosition(textReference.current, cursorPosition);
     }
   }, [cursorPosition, textValue]);
 
