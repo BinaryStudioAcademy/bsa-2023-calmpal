@@ -1,3 +1,5 @@
+import { forwardRef } from 'react';
+
 import { Button, Modal } from '#libs/components/components.js';
 import { DataStatus } from '#libs/enums/enums.js';
 import {
@@ -10,15 +12,19 @@ import { actions as journalActions } from '#slices/journal/journal.js';
 import styles from './styles.module.scss';
 
 type Properties = {
-  reference: React.RefObject<HTMLDialogElement>;
   id: number | null;
 };
 
-const DeleteJournalModal: React.FC<Properties> = ({ reference, id }) => {
+const DeleteJournalModal: React.ForwardRefRenderFunction<
+  HTMLDialogElement,
+  Properties
+> = ({ id }, reference) => {
+  const journalDeleteModalReference =
+    reference as React.RefObject<HTMLDialogElement | null>;
   const dispatch = useAppDispatch();
   const handleCancel = useCallback(() => {
-    reference.current?.close();
-  }, [reference]);
+    journalDeleteModalReference.current?.close();
+  }, [journalDeleteModalReference]);
 
   const { isLoading } = useAppSelector(({ journal }) => {
     return {
@@ -28,12 +34,16 @@ const DeleteJournalModal: React.FC<Properties> = ({ reference, id }) => {
 
   const handleDeleteJournalEntry = useCallback(() => {
     void dispatch(journalActions.deleteJournal(id as number)).finally(() => {
-      reference.current?.close();
+      journalDeleteModalReference.current?.close();
     });
-  }, [dispatch, id, reference]);
+  }, [dispatch, id, journalDeleteModalReference]);
 
   return (
-    <Modal title="Delete Note?" reference={reference} showCrossIcon={false}>
+    <Modal
+      title="Delete Note?"
+      ref={journalDeleteModalReference}
+      showCrossIcon={false}
+    >
       <div className={styles['content']}>
         <Button
           type="button"
@@ -52,4 +62,6 @@ const DeleteJournalModal: React.FC<Properties> = ({ reference, id }) => {
   );
 };
 
-export { DeleteJournalModal };
+const ForwardedDeleteJournalModal = forwardRef(DeleteJournalModal);
+
+export { ForwardedDeleteJournalModal as DeleteJournalModal };
