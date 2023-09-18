@@ -1,4 +1,5 @@
-import { APIPath } from '#libs/enums/enums.js';
+import { APIPath, ExceptionMessage } from '#libs/enums/enums.js';
+import { ChatsError } from '#libs/exceptions/exceptions.js';
 import {
   type APIHandlerOptions,
   type APIHandlerResponse,
@@ -209,9 +210,18 @@ class ChatController extends BaseController {
     const { id } = options.params;
     const { id: userId } = options.user;
 
+    const isDeleted = await this.chatService.delete({ id, userId });
+
+    if (!isDeleted) {
+      throw new ChatsError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.CHAT_NOT_FOUND,
+      });
+    }
+
     return {
       status: HTTPCode.CREATED,
-      payload: await this.chatService.delete({ id, userId }),
+      payload: isDeleted,
     };
   }
 }

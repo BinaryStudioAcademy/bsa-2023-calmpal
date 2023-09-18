@@ -1,6 +1,3 @@
-import { ExceptionMessage } from '#libs/enums/enums.js';
-import { ChatsError } from '#libs/exceptions/exceptions.js';
-import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Service } from '#libs/types/types.js';
 
 import { type ChatRepository } from './chat.repository.js';
@@ -61,10 +58,7 @@ class ChatService implements Service {
     });
 
     if (!chat) {
-      throw new ChatsError({
-        status: HTTPCode.NOT_FOUND,
-        message: ExceptionMessage.CHAT_NOT_FOUND,
-      });
+      return false;
     }
 
     return await this.chatRepository.delete(id);
