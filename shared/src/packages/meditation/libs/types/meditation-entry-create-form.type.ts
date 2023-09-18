@@ -1,5 +1,5 @@
 type MeditationEntryCreateForm = {
-  title: string;
+  name: string;
   file: File | null;
   fileType: string | null;
   fileSize: number | null;

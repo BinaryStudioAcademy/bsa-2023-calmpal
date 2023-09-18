@@ -7,7 +7,7 @@ import { MeditationEntryValidationMessage } from '../enums/enums.js';
 import { type MeditationEntryCreateForm } from '../types/types.js';
 
 const createMeditationEntryForm = joi.object<MeditationEntryCreateForm, true>({
-  title: joi.string().trim().required().messages({
+  name: joi.string().trim().required().messages({
     'any.required': MeditationEntryValidationMessage.NAME_REQUIRED,
     'string.empty': MeditationEntryValidationMessage.NAME_REQUIRED,
   }),
