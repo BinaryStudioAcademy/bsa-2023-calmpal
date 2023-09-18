@@ -110,6 +110,7 @@ erDiagram
       dateTime created_at
       dateTime updated_at
       int topic_id FK
+      varchar name
       varchar media_url
       varchar content_type
    }
