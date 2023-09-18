@@ -1,7 +1,7 @@
 const PREVIOUS_USER = 1;
 
 const DEFAULT_VALUES = {
-  text: '',
+  message: '',
 };
 
 const EMPTY_ARRAY_LENGTH = 0;

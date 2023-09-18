@@ -22,6 +22,7 @@ import {
   EMPTY_ARRAY_LENGTH,
   PREVIOUS_USER,
 } from './libs/constants';
+import { type ChatInputValue } from './libs/types/chat-input-value.type';
 import { styles } from './styles';
 
 type Message = {
@@ -51,9 +52,9 @@ const Chat: React.FC = () => {
   };
 
   const handleFormSubmit = useCallback(
-    (payload: { text: string }): void => {
+    (payload: ChatInputValue): void => {
       if (messagesLength === EMPTY_ARRAY_LENGTH) {
-        void dispatch(chatsActions.createChat({ message: 'New Chat' }));
+        void dispatch(chatsActions.createChat({ message: payload.message }));
       }
 
       setMessages((previous) => {
@@ -62,7 +63,7 @@ const Chat: React.FC = () => {
           {
             id: Date.now(),
             isUser: true,
-            message: payload.text,
+            message: payload.message,
           },
         ];
       });
@@ -113,7 +114,7 @@ const Chat: React.FC = () => {
         scrollViewToEnd={scrollViewToEnd}
         onSend={handleSend}
         control={control}
-        name="text"
+        name="message"
       />
     </View>
   );
