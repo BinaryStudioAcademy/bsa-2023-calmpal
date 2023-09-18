@@ -11,7 +11,7 @@ const PROGRESS_BAR = '--player-progress';
 const navigationItems = [{ name: 'Meditation', path: AppRoute.MEDITATION }];
 
 const DEFAULT_MEDITATION_PAYLOAD: MeditationEntryCreateForm = {
-  title: '',
+  name: '',
   file: null,
   fileType: null,
   fileSize: null,
