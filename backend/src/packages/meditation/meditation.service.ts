@@ -27,12 +27,20 @@ class MeditationService implements Service {
     return await Promise.resolve({ items: [] });
   }
 
-  public async create(
-    payload: FileUploadRequestDto,
-  ): Promise<MeditationEntryCreateResponseDto> {
-    const { url, contentType } = await this.fileService.create(payload);
+  public async create({
+    name,
+    file,
+  }: {
+    name: string;
+    file: FileUploadRequestDto;
+  }): Promise<MeditationEntryCreateResponseDto> {
+    const { url, contentType } = await this.fileService.create(file);
     const item = await this.meditationRepository.create(
-      MeditationEntity.initializeNew({ mediaUrl: url, contentType }),
+      MeditationEntity.initializeNew({
+        name: name,
+        mediaUrl: url,
+        contentType,
+      }),
     );
 
     return item.toObject();

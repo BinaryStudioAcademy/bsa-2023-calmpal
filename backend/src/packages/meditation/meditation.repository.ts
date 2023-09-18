@@ -24,11 +24,12 @@ class MeditationRepository implements Repository {
   }
 
   public async create(entity: MeditationEntity): Promise<MeditationEntity> {
-    const { mediaUrl, contentType } = entity.toObject();
+    const { name, mediaUrl, contentType } = entity.toObject();
 
     const meditation = await this.meditationEntryModel
       .query()
       .insertGraph({
+        name,
         mediaUrl,
         contentType,
         topicId: null,
@@ -38,6 +39,7 @@ class MeditationRepository implements Repository {
 
     return MeditationEntity.initialize({
       id: meditation.id,
+      name: meditation.name,
       mediaUrl: meditation.mediaUrl,
       contentType: meditation.contentType,
       createdAt: new Date(meditation.createdAt),
