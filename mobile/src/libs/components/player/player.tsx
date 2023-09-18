@@ -1,4 +1,5 @@
 import React from 'react';
+import KeepAwake from 'react-native-keep-awake';
 
 import { useEffect, useState } from '#libs/hooks/hooks';
 import {
@@ -10,11 +11,7 @@ import {
 import { type Track } from '#libs/types/types';
 
 import { Controls, ProgressBar } from './components/components';
-import {
-  EMPTY_ARRAY_LENGTH,
-  MOCKED_PLAYLIST,
-  TRACK_START_INDEX,
-} from './libs/constants';
+import { MOCKED_PLAYLIST, TRACK_START_INDEX } from './libs/constants';
 
 type Properties = {
   setCurrentTrack: React.Dispatch<React.SetStateAction<Track | null>>;
@@ -27,6 +24,11 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
   const handlePlaybackStateChange = async (): Promise<void> => {
     const state = await player.getState();
     setPlaybackState(state);
+    if (isPlaying) {
+      KeepAwake.activate();
+    } else {
+      KeepAwake.deactivate();
+    }
   };
 
   const handleNextTrack = async (nextTrack: number): Promise<void> => {
@@ -41,23 +43,21 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
     (event): void => {
       if (event.type === Event.PlaybackState) {
         void handlePlaybackStateChange();
-      } else if (typeof event.nextTrack === 'string') {
+      } else {
         void handleNextTrack(event.nextTrack);
       }
     },
   );
 
   useEffect(() => {
-    const addPlaylist = async (): Promise<void> => {
-      const trackQueue = await player.getQueue();
-      if (trackQueue.length === EMPTY_ARRAY_LENGTH) {
-        void player.setPlaylist(MOCKED_PLAYLIST);
-      }
-
-      setPlaybackState(await player.getState());
+    return () => {
+      void player.stopPlaying();
+      KeepAwake.deactivate();
     };
+  }, []);
 
-    void addPlaylist();
+  useEffect(() => {
+    void player.setPlaylist(MOCKED_PLAYLIST);
     setCurrentTrack(MOCKED_PLAYLIST[TRACK_START_INDEX] as Track);
   }, [setCurrentTrack]);
 
