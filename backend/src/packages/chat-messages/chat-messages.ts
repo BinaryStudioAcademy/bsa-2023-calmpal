@@ -12,5 +12,5 @@ export {
   type ChatMessageCreateRequestDto,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
-  type ChatMessagesUrlParameters,
+  type ChatMessagesUrlParameter,
 } from './libs/types/types.js';

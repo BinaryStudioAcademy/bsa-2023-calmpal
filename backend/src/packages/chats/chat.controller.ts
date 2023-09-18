@@ -9,7 +9,7 @@ import { type Logger } from '#libs/packages/logger/logger.js';
 import {
   type ChatMessageCreateData,
   type ChatMessageCreateRequestDto,
-  type ChatMessagesUrlParameters,
+  type ChatMessagesUrlParameter,
 } from '#packages/chat-messages/chat-messages.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 
@@ -127,7 +127,7 @@ class ChatController extends BaseController {
         return this.createMessage(
           options as APIHandlerOptions<{
             body: ChatMessageCreateRequestDto;
-            params: ChatMessagesUrlParameters;
+            params: ChatMessagesUrlParameter;
             user: UserAuthResponseDto;
           }>,
         );
@@ -140,7 +140,7 @@ class ChatController extends BaseController {
       handler: (options) => {
         return this.findAllMessagesByChatId(
           options as APIHandlerOptions<{
-            params: ChatMessagesUrlParameters;
+            params: ChatMessagesUrlParameter;
           }>,
         );
       },
@@ -250,7 +250,7 @@ class ChatController extends BaseController {
   private async createMessage(
     options: APIHandlerOptions<{
       body: ChatMessageCreateRequestDto;
-      params: ChatMessagesUrlParameters;
+      params: ChatMessagesUrlParameter;
       user: UserAuthResponseDto;
     }>,
   ): Promise<APIHandlerResponse> {
@@ -293,7 +293,7 @@ class ChatController extends BaseController {
    */
   private async findAllMessagesByChatId(
     options: APIHandlerOptions<{
-      params: ChatMessagesUrlParameters;
+      params: ChatMessagesUrlParameter;
     }>,
   ): Promise<APIHandlerResponse> {
     return {
