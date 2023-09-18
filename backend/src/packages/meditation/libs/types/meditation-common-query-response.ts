@@ -5,6 +5,7 @@ type MeditationCommonQueryResponse = {
   id: number;
   createdAt: string;
   updatedAt: string;
+  name: string;
   mediaUrl: string;
   contentType: ValueOf<typeof ContentType>;
   topic?: {
