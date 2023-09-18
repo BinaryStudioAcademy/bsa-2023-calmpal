@@ -11,12 +11,10 @@ const Meditation: React.FC = () => {
 
   return (
     <>
-      {isBaseMeditationRoute && (
-        <MeditationSidebar
-          isSidebarShown={isSidebarShown}
-          setIsSidebarShown={setIsSidebarShown}
-        />
-      )}
+      <MeditationSidebar
+        isSidebarShown={isSidebarShown}
+        setIsSidebarShown={setIsSidebarShown}
+      />
       {isBaseMeditationRoute && (
         <MeditationList
           isSidebarShown={isSidebarShown}
