@@ -8,7 +8,10 @@ import {
 import { AppEnvironment } from '#libs/enums/enums.js';
 import { type Config } from '#libs/packages/config/config.js';
 import { notification } from '#libs/packages/notification/notification.js';
-import { handleError } from '#libs/packages/store/middlewares/middlewares.js';
+import {
+  handleError,
+  handleUnauthorized,
+} from '#libs/packages/store/middlewares/middlewares.js';
 import { authApi } from '#packages/auth/auth.js';
 import { chatApi } from '#packages/chats/chats.js';
 import { journalApi } from '#packages/journal/journal.js';
@@ -64,6 +67,7 @@ class Store {
               extraArgument: this.extraArguments,
             },
           }),
+          handleUnauthorized,
           handleError,
         ];
       },
