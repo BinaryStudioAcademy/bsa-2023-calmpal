@@ -36,12 +36,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderRadius: 12,
     maxWidth: '85%',
-    backgroundColor: AppColor.GRAY_100,
-    color: AppColor.GRAY_600,
-  },
-  userMessage: {
     backgroundColor: AppColor.BLUE_300,
     color: AppColor.WHITE,
+    shadowColor: AppColor.BLUE_200,
+    elevation: 20,
+  },
+  userMessage: {
+    backgroundColor: AppColor.GRAY_100,
+    color: AppColor.GRAY_600,
+    elevation: 0,
   },
 });
 
