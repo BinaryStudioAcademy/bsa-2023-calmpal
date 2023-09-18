@@ -10,12 +10,7 @@ type Properties = {
   type?: 'button' | 'submit';
   iconName?: IconName;
   iconColor?: ValueOf<typeof IconColor>;
-  style?:
-    | 'primary'
-    | 'secondary'
-    | 'rounded'
-    | 'rounded-transparent'
-    | 'delete-icon';
+  style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent';
   isLoading?: boolean;
   isDisabled?: boolean;
   isLabelVisuallyHidden?: boolean;
