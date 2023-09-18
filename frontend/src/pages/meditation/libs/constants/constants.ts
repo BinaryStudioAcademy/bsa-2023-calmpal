@@ -19,34 +19,13 @@ const DEFAULT_MEDITATION_PAYLOAD: MeditationEntryCreateForm = {
 
 const MOCKED_IMAGE = '../../src/assets/img/meditation-image-placeholder.jpg';
 
-const mockedEntries = [
-  {
-    id: 1,
-    title: 'Meditation for deep sleep',
-    duration: '10 min',
-  },
-  {
-    id: 2,
-    title: 'Breathing meditation',
-    duration: '5 min',
-  },
-  {
-    id: 3,
-    title: 'Meditation for relax',
-    duration: '15 min',
-  },
-  {
-    id: 4,
-    title: 'Nature meditation',
-    duration: '45 min',
-  },
-] as const;
+const MOCKED_DURATION = '10 min';
 
 export {
   DEFAULT_MEDITATION_PAYLOAD,
   FULL_PERCENTAGE,
+  MOCKED_DURATION,
   MOCKED_IMAGE,
-  mockedEntries,
   navigationItems,
   PROGRESS_BAR,
   TRACK_FIRST_INDEX,
