@@ -55,7 +55,7 @@ class ChatMessageRepository implements Repository {
     });
   }
 
-  public update(): ReturnType<Repository['delete']> {
+  public update(): ReturnType<Repository['update']> {
     return Promise.resolve(true);
   }
 
