@@ -3,7 +3,7 @@ export { DataStatus } from './data-status.enum.js';
 export { IconColor } from './icon-color.enum.js';
 export {
   AppQueryStringKey,
-  SidebarModeQueryStringValue,
+  SidebarMode,
 } from './query-strings/query-strings.enum.js';
 export {
   APIPath,

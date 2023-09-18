@@ -1,7 +1,4 @@
-import {
-  AppQueryStringKey,
-  SidebarModeQueryStringValue,
-} from '#libs/enums/enums.js';
+import { AppQueryStringKey, SidebarMode } from '#libs/enums/enums.js';
 
 import { useSearchParams as useSearchParameters } from '../hooks.js';
 
@@ -14,16 +11,13 @@ const useSidebarState = (): UseSidebarStateReturn => {
   const [sidebarMode, setSidebarMode] = useSearchParameters();
 
   const isSidebarShown =
-    sidebarMode.get(AppQueryStringKey.SIDEBAR_MODE) ===
-    SidebarModeQueryStringValue.SHOW;
+    sidebarMode.get(AppQueryStringKey.SIDEBAR_MODE) === SidebarMode.SHOW;
 
   const setIsSidebarShown = (value: boolean): void => {
     setSidebarMode((previous) => {
       return {
         ...previous,
-        sidebarMode: value
-          ? SidebarModeQueryStringValue.SHOW
-          : SidebarModeQueryStringValue.HIDE,
+        sidebarMode: value ? SidebarMode.SHOW : SidebarMode.HIDE,
       };
     });
   };
