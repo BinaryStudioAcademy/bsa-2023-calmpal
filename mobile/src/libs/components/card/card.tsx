@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react';
+import React from 'react';
 import { type ImageSourcePropType } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
 
@@ -43,7 +43,7 @@ const Card: React.FC<Properties> = ({
     }
   };
 
-  const rightSwipeActions = (): ReactNode => {
+  const rightSwipeActions = (): React.ReactNode => {
     return (
       <Pressable style={styles.deleteContainer} onPress={handleDelete}>
         <Icon name="delete" color={AppColor.BLUE_300} />
