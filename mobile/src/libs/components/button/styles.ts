@@ -27,12 +27,20 @@ const styles = StyleSheet.create({
   labelDisabled: {
     color: AppColor.GRAY_100_ALPHA_50,
   },
+  labelOutlined: {
+    color: AppColor.BLUE_400,
+  },
+
+  labelModalCancel: {
+    color: AppColor.WHITE,
+  },
+
+  labelModalDelete: {
+    color: AppColor.WHITE,
+  },
   buttonOutlined: {
     borderRadius: 22,
     backgroundColor: AppColor.WHITE,
-  },
-  labelOutlined: {
-    color: AppColor.BLUE_400,
   },
   buttonRounded: {
     backgroundColor: AppColor.WHITE,
@@ -47,6 +55,20 @@ const styles = StyleSheet.create({
   },
   visuallyCenteredButton: {
     paddingLeft: 4,
+  },
+
+  buttonModalCancel: {
+    backgroundColor: AppColor.GRAY_400,
+    borderRadius: 8,
+    marginHorizontal: 10,
+    paddingHorizontal: 20,
+  },
+
+  buttonModalDelete: {
+    backgroundColor: AppColor.BLUE_300,
+    borderRadius: 8,
+    marginHorizontal: 10,
+    paddingHorizontal: 20,
   },
 });
 
