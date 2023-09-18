@@ -37,12 +37,17 @@ const styles = StyleSheet.create({
   },
   buttonRounded: {
     backgroundColor: AppColor.WHITE,
-    borderRadius: 30,
+    borderRadius: 27,
     elevation: 2,
     padding: 15,
+    height: 55,
+    width: 55,
   },
   buttonTransparent: {
     backgroundColor: 'transparent',
+  },
+  visuallyCenteredButton: {
+    paddingLeft: 18,
   },
   addButtonLabel: {
     color: AppColor.BLUE_300,

@@ -1,6 +1,11 @@
 import React from 'react';
 
-import { Icon, Pressable, Text, View } from '#libs/components/components';
+import {
+  Icon,
+  Text,
+  TouchableOpacity,
+  View,
+} from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
 import { type IconName } from '#libs/types/types';
 
@@ -13,6 +18,7 @@ type Properties = {
   type?: 'solid' | 'outlined' | 'transparent';
   isRounded?: boolean;
   iconName?: IconName;
+  isVisuallyCentered?: boolean;
   color?: string;
 };
 
@@ -23,16 +29,23 @@ const Button: React.FC<Properties> = ({
   type = 'solid',
   isRounded,
   iconName,
+  isVisuallyCentered,
   color,
 }) => {
   const renderIcon = (): JSX.Element | null => {
     if (iconName) {
-      return isRounded ? (
-        <View style={styles.buttonRounded}>
-          <Icon name={iconName} color={color ?? AppColor.BLUE_200} />
+      return (
+        <View
+          style={[
+            isVisuallyCentered && styles.visuallyCenteredButton,
+            isRounded && styles.buttonRounded,
+          ]}
+        >
+          <Icon
+            name={iconName}
+            color={color ?? isRounded ? AppColor.BLUE_200 : AppColor.GRAY_400}
+          />
         </View>
-      ) : (
-        <Icon name={iconName} color={color ?? AppColor.GRAY_400} />
       );
     }
 
@@ -40,7 +53,7 @@ const Button: React.FC<Properties> = ({
   };
 
   return (
-    <Pressable
+    <TouchableOpacity
       style={[
         styles.button,
         type === 'solid' && styles.buttonSolid,
@@ -50,6 +63,7 @@ const Button: React.FC<Properties> = ({
       ]}
       onPress={onPress}
       disabled={isDisabled}
+      activeOpacity={0.5}
     >
       {renderIcon()}
       <Text
@@ -63,7 +77,7 @@ const Button: React.FC<Properties> = ({
       >
         {label}
       </Text>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
