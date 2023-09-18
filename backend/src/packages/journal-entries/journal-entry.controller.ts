@@ -203,11 +203,11 @@ class JournalEntryController extends BaseController {
       params: JournalDeleteParameter;
     }>,
   ): Promise<APIHandlerResponse> {
-    const result = await this.journalEntryService.delete(
+    const isDeleted = await this.journalEntryService.delete(
       options.params.id,
       options.user,
     );
-    if (!result) {
+    if (!isDeleted) {
       throw new JournalError({
         status: HTTPCode.NOT_FOUND,
         message: ExceptionMessage.JOURNAL_NOT_FOUND,
@@ -216,7 +216,7 @@ class JournalEntryController extends BaseController {
 
     return {
       status: HTTPCode.OK,
-      payload: result,
+      payload: isDeleted,
     };
   }
 }
