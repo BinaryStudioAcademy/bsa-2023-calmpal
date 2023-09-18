@@ -6,6 +6,7 @@ const ExceptionMessage = {
   USER_ALREADY_EXISTS: 'User already exists.',
   INCORRECT_FILE_TYPE: 'Content type of the file is not in PNG or JPEG.',
   FILE_TOO_BIG: 'The inputted file is bigger than 10 MB.',
+  NOTE_NOT_FOUND: 'Note with such id was not found.',
 } as const;
 
 export { ExceptionMessage };

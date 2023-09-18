@@ -1,5 +1,5 @@
 import { ExceptionMessage } from '#libs/enums/enums.js';
-import { UsersError } from '#libs/exceptions/exceptions.js';
+import { JournalError, UsersError } from '#libs/exceptions/exceptions.js';
 import { sanitizeInput } from '#libs/helpers/helpers.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Service } from '#libs/types/types.js';
@@ -21,13 +21,13 @@ class JournalEntryService implements Service {
     this.journalEntryRepository = journalEntryRepository;
   }
 
-  public async find(
-    id: number,
-  ): Promise<JournalEntryGetAllItemResponseDto | null> {
+  public async find(id: number): Promise<JournalEntryGetAllItemResponseDto> {
     const journalEntry = await this.journalEntryRepository.find(id);
 
     if (!journalEntry) {
-      return null;
+      throw new JournalError({
+        message: ExceptionMessage.NOTE_NOT_FOUND,
+      });
     }
 
     return journalEntry.toObject();
