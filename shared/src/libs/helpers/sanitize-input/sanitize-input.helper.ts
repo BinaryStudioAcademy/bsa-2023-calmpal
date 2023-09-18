@@ -6,14 +6,12 @@ const sanitizeInput = (
   input: string,
   options?: SanitizeHtmlOptions,
 ): string => {
-  const charactersToRemove = /[&<>]/g;
-  const cleanedInput = input.replaceAll(charactersToRemove, '');
   const defaultOptions: SanitizeHtmlOptions = {
     allowedTags: [],
     allowedAttributes: {},
   };
 
-  return sanitizeHtml(cleanedInput, {
+  return sanitizeHtml(input, {
     ...defaultOptions,
     ...options,
   });
