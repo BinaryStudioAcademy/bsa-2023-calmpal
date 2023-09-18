@@ -10,6 +10,8 @@ type Properties = {
   type?: 'button' | 'submit';
   iconName?: IconName;
   iconColor?: ValueOf<typeof IconColor>;
+  iconWidth?: number;
+  iconHeight?: number;
   style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent';
   isLoading?: boolean;
   isDisabled?: boolean;
@@ -22,6 +24,8 @@ const Button: React.FC<Properties> = ({
   label,
   iconName,
   iconColor,
+  iconWidth,
+  iconHeight,
   style = 'primary',
   isLoading = false,
   isDisabled = false,
@@ -36,7 +40,14 @@ const Button: React.FC<Properties> = ({
       disabled={isDisabled || isLoading}
     >
       {isLoading && <span className={styles['loader']} />}
-      {iconName && <Icon name={iconName} color={iconColor} />}
+      {iconName && (
+        <Icon
+          name={iconName}
+          color={iconColor}
+          width={iconWidth}
+          height={iconHeight}
+        />
+      )}
       <span
         className={getValidClassNames(
           isLabelVisuallyHidden && 'visually-hidden',

@@ -6,8 +6,8 @@ import { iconNameToIcon } from './libs/maps/icon-name-to-icon.map.js';
 type Properties = {
   name: IconName;
   color?: ValueOf<typeof IconColor> | undefined;
-  width?: number;
-  height?: number;
+  width?: number | undefined;
+  height?: number | undefined;
 };
 
 const Icon: React.FC<Properties> = ({
