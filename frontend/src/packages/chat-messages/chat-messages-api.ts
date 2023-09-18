@@ -7,7 +7,7 @@ import { type Storage } from '#libs/packages/storage/storage.js';
 
 import { ChatsApiPath } from './libs/enums/enum.js';
 import {
-  type ChatMessageCreateRequestDto,
+  type ChatMessageCreatePayload,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
 } from './libs/types/types.js';
@@ -35,14 +35,16 @@ class ChatMessagesApi extends BaseHttpApi {
   }
 
   public async createChatMessage(
-    payload: ChatMessageCreateRequestDto,
+    payload: ChatMessageCreatePayload,
   ): Promise<ChatMessageGetAllItemResponseDto> {
     const response = await this.load(
-      this.getFullEndpoint(ChatsApiPath.$CHAT_ID_MESSAGES, {}),
+      this.getFullEndpoint(ChatsApiPath.$CHAT_ID_MESSAGES, {
+        ...payload.options,
+      }),
       {
         method: 'POST',
         contentType: ContentType.JSON,
-        payload: JSON.stringify(payload),
+        payload: JSON.stringify(payload.body),
         hasAuth: true,
       },
     );
