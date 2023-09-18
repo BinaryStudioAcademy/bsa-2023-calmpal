@@ -6,6 +6,11 @@ import {
 } from '#libs/packages/controller/controller.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
+import {
+  type ChatMessageCreateData,
+  type ChatMessageCreateRequestDto,
+  type ChatMessagesUrlParameters,
+} from '#packages/chat-messages/chat-messages.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { ChatEntity } from './chat.entity.js';
@@ -93,6 +98,32 @@ class ChatController extends BaseController {
         );
       },
     });
+
+    this.addRoute({
+      path: ChatsApiPath.$CHAT_ID_MESSAGES,
+      method: 'POST',
+      handler: (options) => {
+        return this.createMessage(
+          options as APIHandlerOptions<{
+            body: ChatMessageCreateRequestDto;
+            params: ChatMessagesUrlParameters;
+            user: UserAuthResponseDto;
+          }>,
+        );
+      },
+    });
+
+    this.addRoute({
+      path: ChatsApiPath.$CHAT_ID_MESSAGES,
+      method: 'GET',
+      handler: (options) => {
+        return this.findAllMessagesByChatId(
+          options as APIHandlerOptions<{
+            params: ChatMessagesUrlParameters;
+          }>,
+        );
+      },
+    });
   }
 
   /**
@@ -148,9 +179,42 @@ class ChatController extends BaseController {
     return {
       status: HTTPCode.CREATED,
       payload: await this.chatService.create({
-        members: [options.user.id],
         chatEntity,
+        userId: options.user.id,
+        message: options.body.message,
       }),
+    };
+  }
+
+  private async createMessage(
+    options: APIHandlerOptions<{
+      body: ChatMessageCreateRequestDto;
+      params: ChatMessagesUrlParameters;
+      user: UserAuthResponseDto;
+    }>,
+  ): Promise<APIHandlerResponse> {
+    const chatMessageToCreateData: ChatMessageCreateData = {
+      chatId: Number(options.params.chatId),
+      message: options.body.message,
+      senderId: options.user.id,
+    };
+
+    return {
+      status: HTTPCode.CREATED,
+      payload: await this.chatService.createMessage(chatMessageToCreateData),
+    };
+  }
+
+  private async findAllMessagesByChatId(
+    options: APIHandlerOptions<{
+      params: ChatMessagesUrlParameters;
+    }>,
+  ): Promise<APIHandlerResponse> {
+    return {
+      status: HTTPCode.OK,
+      payload: await this.chatService.findAllMessagesByChatId(
+        Number(options.params.chatId),
+      ),
     };
   }
 }

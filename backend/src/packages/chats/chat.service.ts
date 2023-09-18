@@ -1,4 +1,10 @@
 import { type Service } from '#libs/types/types.js';
+import {
+  type ChatMessageCreateData,
+  type ChatMessageGetAllItemResponseDto,
+  type ChatMessageGetAllResponseDto,
+  type ChatMessageService,
+} from '#packages/chat-messages/chat-messages.js';
 
 import { type ChatRepository } from './chat.repository.js';
 import {
@@ -7,11 +13,19 @@ import {
   type CreateChatPayload,
 } from './libs/types/types.js';
 
+type Constructor = {
+  chatRepository: ChatRepository;
+  chatMessageService: ChatMessageService;
+};
+
 class ChatService implements Service {
   private chatRepository: ChatRepository;
 
-  public constructor(chatRepository: ChatRepository) {
+  private chatMessageService: ChatMessageService;
+
+  public constructor({ chatRepository, chatMessageService }: Constructor) {
     this.chatRepository = chatRepository;
+    this.chatMessageService = chatMessageService;
   }
 
   public find(): ReturnType<Service['find']> {
@@ -32,12 +46,37 @@ class ChatService implements Service {
     };
   }
 
+  public findAllMessagesByChatId(
+    chatId: number,
+  ): Promise<ChatMessageGetAllResponseDto> {
+    return this.chatMessageService.findAllByChatId(chatId);
+  }
+
   public async create(
     payload: CreateChatPayload,
   ): Promise<ChatGetAllItemResponseDto> {
-    const item = await this.chatRepository.create(payload);
+    const { chatEntity, message, userId } = payload;
 
-    return item.toObject();
+    const createdChat = await this.chatRepository.create({
+      chatEntity,
+      members: [userId],
+    });
+
+    const chat = createdChat.toObject();
+
+    await this.chatMessageService.create({
+      message,
+      chatId: chat.id,
+      senderId: userId,
+    });
+
+    return chat;
+  }
+
+  public createMessage(
+    payload: ChatMessageCreateData,
+  ): Promise<ChatMessageGetAllItemResponseDto> {
+    return this.chatMessageService.create(payload);
   }
 
   public update(): ReturnType<Service['update']> {
