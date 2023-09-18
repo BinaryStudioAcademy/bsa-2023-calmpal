@@ -39,11 +39,15 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     padding: 15,
     height: 55,
+    width: 55,
     shadowColor: AppColor.BLUE_200,
     elevation: 5,
   },
   buttonTransparent: {
     backgroundColor: 'transparent',
+  },
+  visuallyCenteredButton: {
+    paddingLeft: 4,
   },
 });
 
