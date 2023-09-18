@@ -8,6 +8,7 @@ import { type ChatMessageRepository } from './chat-message.repository.js';
 import {
   type ChatMessageCreateData,
   type ChatMessageGetAllItemResponseDto,
+  type ChatMessageGetAllResponseDto,
 } from './libs/types/types.js';
 
 class ChatMessageService implements Service {
@@ -49,17 +50,16 @@ class ChatMessageService implements Service {
 
   public async findAllByChatId(
     chatId: number,
-  ): Promise<ReturnType<ChatMessageEntity['toObject']>[] | null> {
+  ): Promise<ChatMessageGetAllResponseDto> {
     const chatMessages = await this.chatMessageRepository.findAllByChatId(
       chatId,
     );
-    if (!chatMessages) {
-      return null;
-    }
 
-    return chatMessages.map((chatMessage) => {
-      return chatMessage.toObject();
-    });
+    return {
+      items: chatMessages.map((chatMessage) => {
+        return chatMessage.toObject();
+      }),
+    };
   }
 
   public update(): ReturnType<Service['update']> {

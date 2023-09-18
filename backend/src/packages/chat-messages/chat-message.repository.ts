@@ -1,4 +1,3 @@
-import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants.js';
 import { type Repository } from '#libs/types/types.js';
 
 import { ChatMessageEntity } from './chat-message.entity.js';
@@ -19,14 +18,8 @@ class ChatMessageRepository implements Repository {
     return await Promise.resolve([]);
   }
 
-  public async findAllByChatId(
-    chatId: number,
-  ): Promise<ChatMessageEntity[] | null> {
+  public async findAllByChatId(chatId: number): Promise<ChatMessageEntity[]> {
     const chatMessages = await this.chatMessageModel.query().where({ chatId });
-
-    if (chatMessages.length === EMPTY_ARRAY_LENGTH) {
-      return null;
-    }
 
     return chatMessages.map((chatMessage) => {
       return ChatMessageEntity.initialize({
