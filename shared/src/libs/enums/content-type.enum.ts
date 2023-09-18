@@ -3,6 +3,7 @@ const ContentType = {
   JPEG: 'image/jpeg',
   PNG: 'image/png',
   MPEG: 'audio/mpeg',
+  TEXT: 'text/plain',
 } as const;
 
 export { ContentType };
