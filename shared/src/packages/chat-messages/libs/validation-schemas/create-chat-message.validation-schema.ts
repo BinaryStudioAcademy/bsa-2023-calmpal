@@ -20,10 +20,6 @@ const createMessageValidationSchema = joi.object<
       'string.empty': ChatMessageValidationMessage.MESSAGE_REQUIRED,
       'string.max': ChatMessageValidationMessage.MAXIMUM_MESSAGE_LENGTH,
     }),
-  senderId: joi.number().integer().strict().required().messages({
-    'any.required': ChatMessageValidationMessage.USER_ID_IS_REQUIRED,
-    'number.base': ChatMessageValidationMessage.USER_ID_MUST_BE_NUMBER,
-  }),
 });
 
 export { createMessageValidationSchema };

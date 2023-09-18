@@ -1,3 +1,4 @@
+export { type ChatMessageCreatePayload } from './chat-message-create-payload.type.js';
 export {
   type ChatMessageCreateRequestDto,
   type ChatMessageGetAllItemResponseDto,

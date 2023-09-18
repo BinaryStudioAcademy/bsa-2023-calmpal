@@ -11,6 +11,7 @@ const chatMessagesApi = new ChatMessagesApi({
 });
 
 export {
+  type ChatMessageCreatePayload,
   type ChatMessageCreateRequestDto,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
