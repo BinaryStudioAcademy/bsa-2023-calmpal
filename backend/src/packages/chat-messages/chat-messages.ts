@@ -13,3 +13,11 @@ const chatMessagesController = new ChatMessageController(
 );
 export { chatMessageService };
 export { chatMessagesController };
+export { type ChatMessageService } from './chat-message.service.js';
+export {
+  type ChatMessageCreateData,
+  type ChatMessageCreateRequestDto,
+  type ChatMessageGetAllItemResponseDto,
+  type ChatMessageGetAllResponseDto,
+  type ChatMessagesUrlParameters,
+} from './libs/types/types.js';
