@@ -17,6 +17,7 @@ import {
   useParams,
   useSearch,
 } from '#libs/hooks/hooks.js';
+import { type ValueOf } from '#libs/types/types.js';
 import { actions as chatsActions } from '#slices/chats/chats.js';
 
 import styles from './styles.module.scss';
@@ -73,7 +74,7 @@ const ChatSidebar: React.FC<Properties> = ({
             const chatLink = AppRoute.CHATS_$ID.replace(
               ':id',
               String(filteredChat.id),
-            ) as typeof AppRoute.CHATS_$ID;
+            ) as ValueOf<typeof AppRoute>;
 
             return (
               <Link key={filteredChat.id} to={chatLink}>
