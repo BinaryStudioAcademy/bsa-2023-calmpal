@@ -115,7 +115,7 @@ const ChatSidebar: React.FC<Properties> = ({
           </div>
         </SidebarBody>
       </Sidebar>
-      <DeleteChatModal reference={dialogReference} id={deletedChat} />
+      <DeleteChatModal ref={dialogReference} id={deletedChat} />
     </>
   );
 };

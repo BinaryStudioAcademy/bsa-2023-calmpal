@@ -1,3 +1,5 @@
+import { forwardRef } from 'react';
+
 import { Button, Modal } from '#libs/components/components.js';
 import { DataStatus } from '#libs/enums/enums.js';
 import {
@@ -10,15 +12,19 @@ import { actions as chatActions } from '#slices/chats/chats.js';
 import styles from './styles.module.scss';
 
 type Properties = {
-  reference: React.RefObject<HTMLDialogElement>;
   id: number | null;
 };
 
-const DeleteChatModal: React.FC<Properties> = ({ reference, id }) => {
+const DeleteChatModal: React.ForwardRefRenderFunction<
+  HTMLDialogElement,
+  Properties
+> = ({ id }, reference) => {
+  const chatDeleteModalReference =
+    reference as React.RefObject<HTMLDialogElement | null>;
   const dispatch = useAppDispatch();
   const handleCancel = useCallback(() => {
-    reference.current?.close();
-  }, [reference]);
+    chatDeleteModalReference.current?.close();
+  }, [chatDeleteModalReference]);
 
   const { isLoading } = useAppSelector(({ chats }) => {
     return {
@@ -26,29 +32,36 @@ const DeleteChatModal: React.FC<Properties> = ({ reference, id }) => {
     };
   });
 
-  const handleDeleteChatEntry = useCallback(async () => {
-    await dispatch(chatActions.deleteChat(id as number));
-    reference.current?.close();
-  }, [dispatch, id, reference]);
+  const handleDeleteChatEntry = useCallback(() => {
+    void dispatch(chatActions.deleteChat(id as number)).finally(() => {
+      chatDeleteModalReference.current?.close();
+    });
+  }, [dispatch, id, chatDeleteModalReference]);
 
   return (
-    <Modal title="Delete Chat?" reference={reference} showCrossIcon={false}>
+    <Modal
+      title="Delete Note?"
+      ref={chatDeleteModalReference}
+      showCrossIcon={false}
+    >
       <div className={styles['content']}>
         <Button
           type="button"
           label="Cancel"
+          isDisabled={isLoading}
           onClick={handleCancel}
-          isLoading={isLoading}
         />
         <Button
           type="submit"
           label="Delete"
-          onClick={handleDeleteChatEntry}
           isLoading={isLoading}
+          onClick={handleDeleteChatEntry}
         />
       </div>
     </Modal>
   );
 };
 
-export { DeleteChatModal };
+const ForwardedDeleteChatModal = forwardRef(DeleteChatModal);
+
+export { ForwardedDeleteChatModal as DeleteChatModal };
