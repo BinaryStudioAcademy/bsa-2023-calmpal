@@ -1,4 +1,7 @@
-import { FIRST_ARRAY_INDEX } from '#libs/constants/constants.js';
+import {
+  EMPTY_ARRAY_LENGTH,
+  FIRST_ARRAY_INDEX,
+} from '#libs/constants/constants.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useFormController } from '#libs/hooks/hooks.js';
@@ -17,9 +20,9 @@ import styles from './styles.module.scss';
 type Properties<T extends FormFieldValues> = {
   control: FormControl<T, null>;
   errors: FormFieldErrors<T>;
-  fileName: FormFieldPath<T>;
-  fileTypeName: FormFieldPath<T>;
-  fileSizeName: FormFieldPath<T>;
+  name: FormFieldPath<T>;
+  fileTypeName: string;
+  fileSizeName: string;
   label: string;
   description: string;
   onChange?: (file: File) => void;
@@ -28,33 +31,22 @@ type Properties<T extends FormFieldValues> = {
 const InputFile = <T extends FormFieldValues>({
   control,
   errors,
-  fileName,
+  name,
   fileTypeName,
   fileSizeName,
   label,
   description,
 }: Properties<T>): JSX.Element => {
-  const { field: fileField } = useFormController<T>({
-    name: fileName,
-    control,
-  });
-  const { field: fileTypeField } = useFormController<T>({
-    name: fileTypeName,
-    control,
-  });
-  const { field: fileSizeField } = useFormController<T>({
-    name: fileSizeName,
-    control,
-  });
+  const { field } = useFormController<T>({ name, control });
 
-  const fileNaming = (fileField.value as File | null)?.name;
-  const errorNames = [fileName, fileTypeName, fileSizeName];
-  const hasError = Boolean(
-    errors[fileName]?.message ??
-      errors[fileTypeName]?.message ??
-      errors[fileSizeName]?.message,
-  );
-  const displayFile = Boolean(fileNaming) && !hasError;
+  const fileName = (field.value as { data: File } | null)?.data.name;
+  const errorNames = [
+    name.toString(),
+    `${name}.${fileTypeName}`,
+    `${name}.${fileSizeName}`,
+  ];
+  const hasError = Object.keys(errors[name] ?? {}).length > EMPTY_ARRAY_LENGTH;
+  const displayFile = Boolean(fileName) && !hasError;
 
   const handleFileChange = useCallback(
     (event_: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,12 +54,10 @@ const InputFile = <T extends FormFieldValues>({
         const file = event_.target.files[FIRST_ARRAY_INDEX] as File;
         const { type, size } = file;
 
-        fileField.onChange(file);
-        fileTypeField.onChange(type);
-        fileSizeField.onChange(size);
+        field.onChange({ type, size, data: file });
       }
     },
-    [fileField, fileTypeField, fileSizeField],
+    [field],
   );
 
   const displayError = useCallback(({ message }: { message: string }) => {
@@ -115,7 +105,7 @@ const InputFile = <T extends FormFieldValues>({
       {displayFile && (
         <div className={styles['file']}>
           <Icon name="download" color={IconColor.BLACK} />
-          <span className={styles['name']}>{fileNaming}</span>
+          <span className={styles['name']}>{fileName}</span>
         </div>
       )}
     </label>
