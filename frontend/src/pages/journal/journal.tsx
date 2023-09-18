@@ -28,7 +28,7 @@ const Journal: React.FC = () => {
     };
   });
 
-  const hasNoteId = Boolean(id) && selectedJournalEntry;
+  const hasSelectedNote = Boolean(id) && selectedJournalEntry;
 
   const handleBackButtonPress = useCallback(() => {
     navigate(AppRoute.JOURNAL);
@@ -56,7 +56,7 @@ const Journal: React.FC = () => {
         )}
       >
         <BackButton onGoBack={handleBackButtonPress} />
-        {hasNoteId && (
+        {hasSelectedNote && (
           <div className={styles['note-wrapper']}>
             <Note />
           </div>
