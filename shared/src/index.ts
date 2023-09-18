@@ -64,12 +64,11 @@ export {
 } from './packages/journal/journal.js';
 export {
   createMeditationEntryFormValidationSchema,
-  createMeditationEntryRequestValidationSchema,
   MeditationApiPath,
   type MeditationEntryCreateForm,
-  type MeditationEntryCreateFormDataDto,
   type MeditationEntryCreateRequestDto,
   type MeditationEntryCreateResponseDto,
+  MeditationEntryValidationMessage,
 } from './packages/meditation/meditation.js';
 export {
   createSurveyValidationSchema,
