@@ -15,6 +15,7 @@ import {
 import {
   createMeditationEntryFormValidationSchema,
   type MeditationEntryCreateForm,
+  type MeditationEntryCreateRequestDto,
 } from '#packages/meditation/meditation.js';
 import { DEFAULT_MEDITATION_PAYLOAD } from '#pages/meditation/libs/constants/constants.js';
 
@@ -22,7 +23,7 @@ import styles from './styles.module.scss';
 
 type Properties = {
   reference: React.RefObject<HTMLDialogElement>;
-  onSubmit: (title: string, file: File) => void;
+  onSubmit: (payload: MeditationEntryCreateRequestDto) => void;
 };
 
 const AddMeditationModal: React.FC<Properties> = ({ reference, onSubmit }) => {
@@ -49,8 +50,8 @@ const AddMeditationModal: React.FC<Properties> = ({ reference, onSubmit }) => {
 
   const handleFormSubmit = useCallback(
     (event_: React.FormEvent<HTMLFormElement>) => {
-      void handleSubmit(({ title, file }) => {
-        onSubmit(title, file as File);
+      void handleSubmit(({ name, file }) => {
+        onSubmit({ name, file } as MeditationEntryCreateRequestDto);
       })(event_);
     },
     [onSubmit, handleSubmit],
@@ -62,8 +63,8 @@ const AddMeditationModal: React.FC<Properties> = ({ reference, onSubmit }) => {
         <Input
           control={control}
           errors={errors}
-          label="Topic name"
-          name="title"
+          label="Meditation name"
+          name="name"
           placeholder="Enter topic name"
         />
         <InputFile
