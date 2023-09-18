@@ -1,5 +1,5 @@
 import { Icon } from '#libs/components/components.js';
-import { IconColor } from '#libs/enums/enums.js';
+import { type IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { type IconName, type ValueOf } from '#libs/types/types.js';
 
@@ -22,7 +22,7 @@ const Card: React.FC<Properties> = ({
   onClick,
   isActive = false,
   iconName,
-  iconColor,
+  iconColor = 'currentColor',
   iconRight,
   onIconClick,
 }) => {
@@ -64,7 +64,7 @@ const Card: React.FC<Properties> = ({
       </button>
       {iconRight && (
         <button className={styles['icon-right']} onClick={onIconClick}>
-          <Icon name={iconRight} color={IconColor.LIGHT_BLUE} />
+          <Icon name={iconRight} color={iconColor} />
         </button>
       )}
     </>

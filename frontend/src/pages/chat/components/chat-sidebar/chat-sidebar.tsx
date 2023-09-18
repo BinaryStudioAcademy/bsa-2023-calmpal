@@ -107,6 +107,7 @@ const ChatSidebar: React.FC<Properties> = ({
                       isActive={String(filteredChat.id) === id}
                       iconRight="trash"
                       onIconClick={handleDeleteChat(filteredChat.id)}
+                      iconColor={IconColor.LIGHT_BLUE}
                     />
                   </Link>
                 </div>

@@ -14,7 +14,7 @@ type Properties = {
   isLoading?: boolean;
   isDisabled?: boolean;
   isLabelVisuallyHidden?: boolean;
-  onClick?: (() => void) | (() => Promise<void>);
+  onClick?: () => void;
 };
 
 const Button: React.FC<Properties> = ({
@@ -36,7 +36,7 @@ const Button: React.FC<Properties> = ({
       disabled={isDisabled || isLoading}
     >
       {isLoading && <span className={styles['loader']} />}
-      {iconName && <Icon name={iconName} color={iconColor} />}
+      {iconName && <Icon name={iconName} color={iconColor as string} />}
       <span
         className={getValidClassNames(
           isLabelVisuallyHidden && 'visually-hidden',
