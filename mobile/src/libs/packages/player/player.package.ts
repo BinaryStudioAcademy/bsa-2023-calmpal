@@ -35,6 +35,10 @@ class Player {
     return (await TrackPlayer.getQueue()) as Track[];
   };
 
+  public stopPlaying = async (): Promise<void> => {
+    await TrackPlayer.pause();
+  };
+
   public playPause = async (isPlaying: boolean): Promise<void> => {
     await (isPlaying ? TrackPlayer.pause() : TrackPlayer.play());
   };
