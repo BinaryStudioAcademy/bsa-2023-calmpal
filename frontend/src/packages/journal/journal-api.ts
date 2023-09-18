@@ -53,8 +53,9 @@ class JournalApi extends BaseHttpApi {
   public async deleteJournalEntry(
     id: number,
   ): Promise<JournalEntryDeleteResponseDto> {
+    const idItem = String(id);
     const response = await this.load(
-      this.getFullEndpoint(JournalApiPath.ROOT, `${id}`, {}),
+      this.getFullEndpoint(JournalApiPath.ROOT, idItem, {}),
       {
         method: 'DELETE',
         contentType: ContentType.JSON,
