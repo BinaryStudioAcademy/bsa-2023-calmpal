@@ -24,7 +24,7 @@ class ChatMessageController extends BaseController {
     this.chatMessageService = chatMessageService;
 
     this.addRoute({
-      path: ChatsApiPath.CREATE_MESSAGE,
+      path: ChatsApiPath.$CHAT_ID_MESSAGES,
       method: 'POST',
       handler: (options) => {
         return this.create(
@@ -36,7 +36,7 @@ class ChatMessageController extends BaseController {
       },
     });
     this.addRoute({
-      path: ChatsApiPath.CREATE_MESSAGE,
+      path: ChatsApiPath.$CHAT_ID_MESSAGES,
       method: 'GET',
       handler: (options) => {
         return this.findAllByChatId(

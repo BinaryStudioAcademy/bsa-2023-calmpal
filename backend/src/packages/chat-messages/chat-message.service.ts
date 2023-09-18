@@ -10,6 +10,8 @@ import {
   type ChatMessageGetAllItemResponseDto,
 } from './libs/types/types.js';
 
+const MOCKED_SENDER_ID = 1;
+
 class ChatMessageService implements Service {
   private chatMessageRepository: ChatMessageRepository;
 
@@ -28,7 +30,7 @@ class ChatMessageService implements Service {
   public async create(
     payload: ChatMessageCreateData,
   ): Promise<ChatMessageGetAllItemResponseDto> {
-    const sender = await userService.findById(payload.senderId);
+    const sender = await userService.findById(MOCKED_SENDER_ID);
     if (!sender) {
       throw new UsersError({
         status: HTTPCode.NOT_FOUND,
@@ -40,7 +42,7 @@ class ChatMessageService implements Service {
       ChatMessageEntity.initializeNew({
         message: payload.message,
         chatId: payload.chatId,
-        senderId: payload.senderId,
+        senderId: MOCKED_SENDER_ID,
       }),
     );
 
