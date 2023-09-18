@@ -7,9 +7,10 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     paddingHorizontal: 55,
+    marginBottom: 55,
   },
   titleText: {
-    fontSize: 35,
+    fontSize: 30,
     color: AppColor.WHITE,
     marginBottom: 30,
     marginTop: 30,
