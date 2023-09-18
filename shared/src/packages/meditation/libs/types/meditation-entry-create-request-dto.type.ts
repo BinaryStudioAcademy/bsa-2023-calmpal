@@ -1,7 +1,6 @@
-import { type MultipartFile } from '@fastify/multipart';
-
 type MeditationEntryCreateRequestDto = {
-  file: MultipartFile;
+  name: string;
+  file: File;
 };
 
 export { type MeditationEntryCreateRequestDto };
