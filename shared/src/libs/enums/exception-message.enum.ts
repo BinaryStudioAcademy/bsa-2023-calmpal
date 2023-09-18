@@ -1,5 +1,7 @@
 import { FileUploadValidationRule } from '#packages/files/files.js';
 
+import { ExceptionRule } from './exception-rule.enum.js';
+
 const BYTES_IN_MEGABYTE = 1_000_000;
 
 const ExceptionMessage = {
@@ -8,7 +10,7 @@ const ExceptionMessage = {
   USER_NOT_FOUND: 'User with these credentials was not found.',
   INCORRECT_CREDENTIALS: 'Incorrect credentials.',
   USER_ALREADY_EXISTS: 'User already exists.',
-  INCORRECT_FILE_TYPE: 'Content type of the file is not in PNG, JPEG or MPEG.',
+  INCORRECT_FILE_TYPE: `Content type of the file is not in ${ExceptionRule.ALLOWED_FILE_EXTENSIONS}.`,
   FILE_TOO_BIG: `The inputted file is bigger than ${Math.floor(
     FileUploadValidationRule.MAXIMUM_FILE_SIZE / BYTES_IN_MEGABYTE,
   )} MB.`,
