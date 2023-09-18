@@ -6,6 +6,11 @@ import {
 } from '#libs/packages/controller/controller.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
+import {
+  type ChatMessageCreateData,
+  type ChatMessageCreateRequestDto,
+  type ChatMessagesUrlParameter,
+} from '#packages/chat-messages/chat-messages.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { ChatEntity } from './chat.entity.js';
@@ -59,6 +64,27 @@ import { createChatValidationSchema } from './libs/validation-schemas/validation
  *          updatedAt:
  *             type: string
  *             format: date-time
+ *      ChatMessage:
+ *        type: object
+ *        properties:
+ *          id:
+ *            type: number
+ *            format: number
+ *            minimum: 1
+ *          message:
+ *            type: string
+ *          senderId:
+ *            type: number
+ *            minimum: 1
+ *          chatId:
+ *            type: number
+ *            minimum: 1
+ *          createdAt:
+ *             type: string
+ *             format: date-time
+ *          updatedAt:
+ *             type: string
+ *             format: date-time
  */
 class ChatController extends BaseController {
   private chatService: ChatService;
@@ -89,6 +115,32 @@ class ChatController extends BaseController {
           options as APIHandlerOptions<{
             body: ChatCreateRequestDto;
             user: UserAuthResponseDto;
+          }>,
+        );
+      },
+    });
+
+    this.addRoute({
+      path: ChatsApiPath.$CHAT_ID_MESSAGES,
+      method: 'POST',
+      handler: (options) => {
+        return this.createMessage(
+          options as APIHandlerOptions<{
+            body: ChatMessageCreateRequestDto;
+            params: ChatMessagesUrlParameter;
+            user: UserAuthResponseDto;
+          }>,
+        );
+      },
+    });
+
+    this.addRoute({
+      path: ChatsApiPath.$CHAT_ID_MESSAGES,
+      method: 'GET',
+      handler: (options) => {
+        return this.findAllMessagesByChatId(
+          options as APIHandlerOptions<{
+            params: ChatMessagesUrlParameter;
           }>,
         );
       },
@@ -127,6 +179,16 @@ class ChatController extends BaseController {
    * /chats:
    *   post:
    *     description: Create a new chat
+   *     requestBody:
+   *       description: Create chat data
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               message:
+   *                 type: string
    *     responses:
    *       201:
    *         description: Successful operation
@@ -148,9 +210,97 @@ class ChatController extends BaseController {
     return {
       status: HTTPCode.CREATED,
       payload: await this.chatService.create({
-        members: [options.user.id],
         chatEntity,
+        userId: options.user.id,
+        message: options.body.message,
       }),
+    };
+  }
+
+  /**
+   * @swagger
+   * /chats/{chatId}/messages:
+   *   post:
+   *     description: Create a new chat message
+   *     parameters:
+   *       -  in: path
+   *          description: Chat id
+   *          name: chatId
+   *          required: true
+   *          type: number
+   *          minimum: 1
+   *     requestBody:
+   *       description: Create message data
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               message:
+   *                 type: string
+   *     responses:
+   *       201:
+   *         description: Successful operation
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/ChatMessage'
+   */
+  private async createMessage(
+    options: APIHandlerOptions<{
+      body: ChatMessageCreateRequestDto;
+      params: ChatMessagesUrlParameter;
+      user: UserAuthResponseDto;
+    }>,
+  ): Promise<APIHandlerResponse> {
+    const chatMessageToCreateData: ChatMessageCreateData = {
+      chatId: Number(options.params.chatId),
+      message: options.body.message,
+      senderId: options.user.id,
+    };
+
+    return {
+      status: HTTPCode.CREATED,
+      payload: await this.chatService.createMessage(chatMessageToCreateData),
+    };
+  }
+
+  /**
+   * @swagger
+   * /chats/{chatId}/messages:
+   *   get:
+   *     description: Returns all chat messages
+   *     parameters:
+   *       -  in: path
+   *          description: Chat id
+   *          name: chatId
+   *          required: true
+   *          type: number
+   *          minimum: 1
+   *     responses:
+   *       200:
+   *         description: Successful operation
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 items:
+   *                   type: array
+   *                   items:
+   *                     $ref: '#/components/schemas/ChatMessage'
+   */
+  private async findAllMessagesByChatId(
+    options: APIHandlerOptions<{
+      params: ChatMessagesUrlParameter;
+    }>,
+  ): Promise<APIHandlerResponse> {
+    return {
+      status: HTTPCode.OK,
+      payload: await this.chatService.findAllMessagesByChatId(
+        Number(options.params.chatId),
+      ),
     };
   }
 }

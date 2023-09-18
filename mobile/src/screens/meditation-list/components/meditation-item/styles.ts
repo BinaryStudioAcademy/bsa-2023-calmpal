@@ -8,6 +8,9 @@ const styles = StyleSheet.create({
     position: 'relative',
     marginBottom: 10,
     marginHorizontal: 12,
+    borderRadius: 25,
+    shadowColor: AppColor.PURPLE_100_ALPHA_50,
+    elevation: 20,
   },
   image: {
     width: 187,

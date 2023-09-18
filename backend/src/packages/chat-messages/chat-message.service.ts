@@ -1,5 +1,6 @@
-import { ExceptionMessage, HTTPCode, UsersError } from 'shared/build/index.js';
-
+import { ExceptionMessage } from '#libs/enums/enums.js';
+import { UsersError } from '#libs/exceptions/exceptions.js';
+import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Service } from '#libs/types/types.js';
 import { userService } from '#packages/users/users.js';
 
@@ -8,6 +9,7 @@ import { type ChatMessageRepository } from './chat-message.repository.js';
 import {
   type ChatMessageCreateData,
   type ChatMessageGetAllItemResponseDto,
+  type ChatMessageGetAllResponseDto,
 } from './libs/types/types.js';
 
 const MOCKED_SENDER_ID = 1;
@@ -51,17 +53,16 @@ class ChatMessageService implements Service {
 
   public async findAllByChatId(
     chatId: number,
-  ): Promise<ReturnType<ChatMessageEntity['toObject']>[] | null> {
+  ): Promise<ChatMessageGetAllResponseDto> {
     const chatMessages = await this.chatMessageRepository.findAllByChatId(
       chatId,
     );
-    if (!chatMessages) {
-      return null;
-    }
 
-    return chatMessages.map((chatMessage) => {
-      return chatMessage.toObject();
-    });
+    return {
+      items: chatMessages.map((chatMessage) => {
+        return chatMessage.toObject();
+      }),
+    };
   }
 
   public update(): ReturnType<Service['update']> {
