@@ -51,7 +51,7 @@ const AddMeditationModal: React.FC<Properties> = ({ reference, onSubmit }) => {
   const handleFormSubmit = useCallback(
     (event_: React.FormEvent<HTMLFormElement>) => {
       void handleSubmit(({ name, file }) => {
-        onSubmit({ name, file } as MeditationEntryCreateRequestDto);
+        onSubmit({ name, file: file?.data as File });
       })(event_);
     },
     [onSubmit, handleSubmit],
@@ -70,9 +70,9 @@ const AddMeditationModal: React.FC<Properties> = ({ reference, onSubmit }) => {
         <InputFile
           control={control}
           errors={errors}
-          fileName="file"
-          fileTypeName="fileType"
-          fileSizeName="fileSize"
+          name="file"
+          fileTypeName="type"
+          fileSizeName="size"
           label="Meditation audio file"
           description="Only MP3 extension is allowed"
         />
