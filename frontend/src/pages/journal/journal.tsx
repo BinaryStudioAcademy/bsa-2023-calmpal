@@ -1,10 +1,12 @@
 import { BackButton } from '#libs/components/components.js';
+import { AppRoute } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useAppSelector,
   useCallback,
   useEffect,
+  useNavigate,
   useParams,
   useSidebarState,
 } from '#libs/hooks/hooks.js';
@@ -16,6 +18,7 @@ import styles from './styles.module.scss';
 
 const Journal: React.FC = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { isSidebarShown, setIsSidebarShown } = useSidebarState();
 
@@ -28,8 +31,9 @@ const Journal: React.FC = () => {
   const hasNoteId = Boolean(id) && selectedJournalEntry;
 
   const handleBackButtonPress = useCallback(() => {
+    navigate(AppRoute.JOURNAL);
     setIsSidebarShown(true);
-  }, [setIsSidebarShown]);
+  }, [setIsSidebarShown, navigate]);
 
   useEffect(() => {
     void dispatch(journalActions.getAllJournalEntries()).then(() => {

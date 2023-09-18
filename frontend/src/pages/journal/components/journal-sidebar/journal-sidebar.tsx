@@ -13,6 +13,7 @@ import {
   useCallback,
   useEffect,
 } from '#libs/hooks/hooks.js';
+import { type ValueOf } from '#libs/types/types.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { DEFAULT_NOTE_PAYLOAD } from '#pages/journal/libs/constants/constants.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
@@ -82,10 +83,10 @@ const JournalSidebar: React.FC<Properties> = ({
       <SidebarBody>
         <div className={styles['journal-entry-list']}>
           {allJournalEntries.map((journalEntry) => {
-            const noteLink = (AppRoute.JOURNAL_ENTRY_$ID.replace(
+            const noteLink = AppRoute.JOURNAL_ENTRY_$ID.replace(
               ':id',
               String(journalEntry.id),
-            ) + '?sidebarMode=hide') as typeof AppRoute.JOURNAL_ENTRY_$ID;
+            ) as ValueOf<typeof AppRoute>;
 
             return (
               <Link key={journalEntry.id} to={noteLink}>
