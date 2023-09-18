@@ -108,10 +108,7 @@ class BaseHttpApi implements HTTPApi {
 
     if (response.status === HTTPCode.UNAUTHORIZED) {
       throw new AuthError({
-        status: HTTPCode.UNAUTHORIZED,
-        errorType: ServerErrorType.AUTHORIZATION,
         message: parsedException.message,
-        details: 'details' in parsedException ? parsedException.details : [],
       });
     }
 

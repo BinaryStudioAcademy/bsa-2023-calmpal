@@ -62,8 +62,8 @@ class Store {
               extraArgument: this.extraArguments,
             },
           }),
-          handleError,
           handleUnauthorized,
+          handleError,
         ];
       },
     });
