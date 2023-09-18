@@ -12,9 +12,15 @@ type Properties = {
   children: React.ReactNode;
   title: string;
   reference: React.RefObject<HTMLDialogElement>;
+  showCrossIcon: boolean;
 };
 
-const Modal: React.FC<Properties> = ({ children, title, reference }) => {
+const Modal: React.FC<Properties> = ({
+  children,
+  title,
+  reference,
+  showCrossIcon,
+}) => {
   const modalReference = useRef<HTMLDivElement>(null);
 
   const handleClose = useCallback(() => {
@@ -32,16 +38,18 @@ const Modal: React.FC<Properties> = ({ children, title, reference }) => {
         <div className={styles['modal']} ref={modalReference}>
           <div className={styles['header']}>
             <span className={styles['title']}>{title}</span>
-            <form method="dialog" className={styles['icon-container']}>
-              <Button
-                label="Close modal"
-                iconName="close"
-                iconColor={IconColor.BLACK}
-                style="rounded-transparent"
-                onClick={handleClose}
-                isLabelVisuallyHidden
-              />
-            </form>
+            {showCrossIcon && (
+              <form method="dialog" className={styles['icon-container']}>
+                <Button
+                  label="Close modal"
+                  iconName="close"
+                  iconColor={IconColor.BLACK}
+                  style="rounded-transparent"
+                  onClick={handleClose}
+                  isLabelVisuallyHidden
+                />
+              </form>
+            )}
           </div>
           {children}
         </div>

@@ -19,7 +19,7 @@ type Properties = {
   isLoading?: boolean;
   isDisabled?: boolean;
   isLabelVisuallyHidden?: boolean;
-  onClick?: () => void;
+  onClick?: (() => void) | (() => Promise<void>);
 };
 
 const Button: React.FC<Properties> = ({

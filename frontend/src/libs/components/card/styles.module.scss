@@ -10,7 +10,7 @@
   min-width: 317px;
   min-height: 83px;
   margin-top: 15px;
-  padding: 3px 67px 3px 3px;
+  padding: 3px 30px 3px 3px;
   font-weight: 600;
   font-size: 16px;
   font-family: Montserrat, sans-serif;
@@ -73,6 +73,26 @@
   text-align: left;
 }
 
+.icon-right {
+  position: absolute;
+  top: 41px;
+  right: 6%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  padding: 7px 6px;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.icon-right:hover {
+  background-color: var(--blue-300);
+  box-shadow: 0 4px 23px 0 var(--violet-100);
+}
+
 @media (width < 900px) {
   .item {
     width: 100%;
@@ -83,6 +103,10 @@
   .no-image {
     padding-left: 20px;
   }
+
+  .icon-right {
+    right: 10%;
+  }
 }
 
 @media (width < 768px) {
@@ -92,5 +116,9 @@
 
   .no-image {
     padding-left: 20px;
+  }
+
+  .icon-right {
+    right: 5%;
   }
 }
