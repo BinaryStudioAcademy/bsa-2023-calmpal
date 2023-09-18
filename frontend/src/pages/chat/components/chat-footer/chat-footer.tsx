@@ -1,25 +1,35 @@
 import { Icon } from '#libs/components/components.js';
 import { Input } from '#libs/components/input/input.js';
 import { IconColor } from '#libs/enums/enums.js';
-import { useAppForm, useCallback } from '#libs/hooks/hooks.js';
+import {
+  useAppForm,
+  useCallback,
+  useEffect,
+  useParams,
+} from '#libs/hooks/hooks.js';
 import { CHAT_INPUT_DEFAULT_VALUES } from '#pages/chat/libs/constants/constants.js';
 import { type ChatInputValue } from '#pages/chat/libs/types/types.js';
 
 import styles from './styles.module.scss';
 
 type Properties = {
-  onSend: ({ text }: { text: string }) => void;
+  onSend: ({ message }: ChatInputValue) => void;
 };
 
 const ChatFooter: React.FC<Properties> = ({ onSend }) => {
+  const { id } = useParams<{ id: string }>();
   const { control, handleSubmit, errors, reset } = useAppForm<ChatInputValue>({
     defaultValues: CHAT_INPUT_DEFAULT_VALUES,
     mode: 'onSubmit',
   });
 
+  useEffect(() => {
+    reset();
+  }, [id, reset]);
+
   const onSubmit = useCallback(
-    ({ text }: ChatInputValue): void => {
-      onSend({ text });
+    ({ message }: ChatInputValue): void => {
+      onSend({ message });
       reset();
     },
     [onSend, reset],
@@ -38,7 +48,7 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
           placeholder="Type a message"
           errors={errors}
           autoComplete="off"
-          name="text"
+          name="message"
           control={control}
           isChatInput
         />

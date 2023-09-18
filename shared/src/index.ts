@@ -41,18 +41,19 @@ export {
 } from './libs/types/types.js';
 export { AuthApiPath } from './packages/auth/auth.js';
 export {
-  type ChatMessage,
-  type Message,
-  UserRole,
-} from './packages/chat/chat.js';
-export {
   type ChatMessageCreateRequestDto,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
   ChatMessageValidationMessage,
   ChatMessageValidationRule,
-  ChatsApiPath,
 } from './packages/chat-messages/chat-messages.js';
+export {
+  type ChatCreateRequestDto,
+  type ChatGetAllItemResponseDto,
+  type ChatGetAllResponseDto,
+  ChatsApiPath,
+  createChatValidationSchema,
+} from './packages/chats/chats.js';
 export {
   type FileGetAllItemResponseDto,
   type FileUploadRequestDto,

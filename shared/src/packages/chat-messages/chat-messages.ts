@@ -1,7 +1,6 @@
 export {
   ChatMessageValidationMessage,
   ChatMessageValidationRule,
-  ChatsApiPath,
 } from './libs/enums/enums.js';
 export {
   type ChatMessageCreateRequestDto,
