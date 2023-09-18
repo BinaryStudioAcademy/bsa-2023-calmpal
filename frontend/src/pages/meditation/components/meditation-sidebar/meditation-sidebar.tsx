@@ -58,11 +58,11 @@ const MeditationSidebar: React.FC<Properties> = ({
             <div className="icon-container">
               <Button
                 label="Open modal"
-                isLabelVisuallyHidden={true}
                 iconName="plus"
                 iconColor={IconColor.BLUE}
                 style="rounded-transparent"
                 onClick={handleOpen}
+                isLabelVisuallyHidden
               />
             </div>
           </div>
@@ -78,8 +78,8 @@ const MeditationSidebar: React.FC<Properties> = ({
                   title={filteredElement.name}
                   imageUrl={meditationPlaceholder}
                   onClick={handleSelectChat}
-                  isActive={true}
                   key={filteredElement.name}
+                  isActive
                 />
               );
             })}
