@@ -46,7 +46,7 @@ const InputFile = <T extends FormFieldValues>({
     `${name}.${fileSizeName}`,
   ];
   const hasError = Object.keys(errors[name] ?? {}).length > EMPTY_ARRAY_LENGTH;
-  const displayFile = Boolean(fileName) && !hasError;
+  const isFileDisplayed = Boolean(fileName) && !hasError;
 
   const handleFileChange = useCallback(
     (event_: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,7 +102,7 @@ const InputFile = <T extends FormFieldValues>({
         })}
       </div>
 
-      {displayFile && (
+      {isFileDisplayed && (
         <div className={styles['file']}>
           <Icon name="download" color={IconColor.BLACK} />
           <span className={styles['name']}>{fileName}</span>
