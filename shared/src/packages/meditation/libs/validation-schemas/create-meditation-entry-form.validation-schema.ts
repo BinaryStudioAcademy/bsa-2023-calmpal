@@ -8,8 +8,8 @@ import { type MeditationEntryCreateForm } from '../types/types.js';
 
 const createMeditationEntryForm = joi.object<MeditationEntryCreateForm, true>({
   title: joi.string().trim().required().messages({
-    'any.required': MeditationEntryValidationMessage.TOPIC_REQUIRED,
-    'string.empty': MeditationEntryValidationMessage.TOPIC_REQUIRED,
+    'any.required': MeditationEntryValidationMessage.NAME_REQUIRED,
+    'string.empty': MeditationEntryValidationMessage.NAME_REQUIRED,
   }),
   file: joi.object().required().unknown(true).messages({
     'object.base': MeditationEntryValidationMessage.FILE_REQUIRED,
