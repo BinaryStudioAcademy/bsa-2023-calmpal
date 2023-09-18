@@ -20,25 +20,6 @@ class ChatRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public async findById(id: number): Promise<ChatEntity | null> {
-    const chat = await this.chatModel
-      .query()
-      .findById(id)
-      .castTo<ChatCommonQueryResponse | undefined>();
-
-    if (!chat) {
-      return null;
-    }
-
-    return ChatEntity.initialize({
-      id: chat.id,
-      name: chat.name,
-      createdAt: new Date(chat.createdAt),
-      updatedAt: new Date(chat.updatedAt),
-      members: chat.members,
-    });
-  }
-
   public findAll(): ReturnType<Repository['findAll']> {
     return Promise.resolve([]);
   }

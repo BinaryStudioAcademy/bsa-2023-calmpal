@@ -107,6 +107,7 @@ class ChatController extends BaseController {
       handler: (options) => {
         return this.delete(
           options as APIHandlerOptions<{
+            user: UserAuthResponseDto;
             params: { id: number };
           }>,
         );
@@ -202,13 +203,15 @@ class ChatController extends BaseController {
   private async delete(
     options: APIHandlerOptions<{
       params: { id: number };
+      user: UserAuthResponseDto;
     }>,
   ): Promise<APIHandlerResponse> {
     const { id } = options.params;
+    const { id: userId } = options.user;
 
     return {
       status: HTTPCode.CREATED,
-      payload: await this.chatService.delete(id),
+      payload: await this.chatService.delete({ id, userId }),
     };
   }
 }

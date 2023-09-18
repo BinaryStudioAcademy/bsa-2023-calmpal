@@ -3,7 +3,6 @@ import { ChatsError } from '#libs/exceptions/exceptions.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Service } from '#libs/types/types.js';
 
-import { type ChatEntity } from './chat.entity.js';
 import { type ChatRepository } from './chat.repository.js';
 import {
   type ChatGetAllItemResponseDto,
@@ -20,14 +19,6 @@ class ChatService implements Service {
 
   public find(): ReturnType<Service['find']> {
     return Promise.resolve(null);
-  }
-
-  public async findById(
-    id: number,
-  ): Promise<ReturnType<ChatEntity['toObject']> | null> {
-    const chat = await this.chatRepository.findById(id);
-
-    return chat?.toObject() ?? null;
   }
 
   public async findAll(): ReturnType<Service['findAll']> {
@@ -56,8 +47,19 @@ class ChatService implements Service {
     return Promise.resolve(null);
   }
 
-  public async delete(id: number): Promise<boolean> {
-    const chat = await this.findById(id);
+  public async delete({
+    id,
+    userId,
+  }: {
+    id: number;
+    userId: number;
+  }): Promise<boolean> {
+    const allChats = await this.findAllByUserId(userId);
+
+    const chat = allChats.items.find((chat) => {
+      return chat.id === Number(id);
+    });
+
     if (!chat) {
       throw new ChatsError({
         status: HTTPCode.NOT_FOUND,
