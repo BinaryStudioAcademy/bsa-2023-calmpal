@@ -8,6 +8,7 @@ import {
   InputSearch,
   LinearGradient,
   Link,
+  Modal,
   ScrollView,
   View,
 } from '#libs/components/components';
@@ -17,6 +18,7 @@ import {
   useEffect,
   useNavigation,
   useSearch,
+  useState,
 } from '#libs/hooks/hooks';
 import { type ChatNavigationParameterList } from '#libs/types/types';
 
@@ -27,6 +29,20 @@ const mockedCount = 12;
 const ChatList: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<ChatNavigationParameterList>>();
+
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+
+  const handleShowModal = (): void => {
+    setIsModalVisible(true);
+  };
+
+  const hanleCloseModal = (): void => {
+    setIsModalVisible(false);
+  };
+
+  const handleDeletChat = (): void => {
+    setIsModalVisible(false);
+  };
 
   useEffect(() => {
     navigation.setOptions({
@@ -52,6 +68,12 @@ const ChatList: React.FC = () => {
 
   return (
     <LinearGradient>
+      <Modal
+        isVisible={isModalVisible}
+        onClose={hanleCloseModal}
+        onDelete={handleDeletChat}
+        type="Note"
+      />
       <View style={styles.container}>
         <InputSearch
           placeholder="Search chat"
@@ -64,6 +86,7 @@ const ChatList: React.FC = () => {
                 title={item.title}
                 onPress={handleSelectChat}
                 key={item.id}
+                onDelete={handleShowModal}
               />
             );
           })}
