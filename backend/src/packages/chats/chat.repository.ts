@@ -75,7 +75,9 @@ class ChatRepository implements Repository {
   }
 
   public delete(): ReturnType<Repository['delete']> {
-    return Promise.resolve(false);
+    const deletedId = 0;
+
+    return Promise.resolve(deletedId);
   }
 }
 
