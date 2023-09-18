@@ -11,18 +11,23 @@ const createMeditationEntryForm = joi.object<MeditationEntryCreateForm, true>({
     'any.required': MeditationEntryValidationMessage.NAME_REQUIRED,
     'string.empty': MeditationEntryValidationMessage.NAME_REQUIRED,
   }),
-  file: joi.object().required().unknown(true).messages({
-    'object.base': MeditationEntryValidationMessage.FILE_REQUIRED,
-  }),
-  fileType: joi.string().valid(ContentType.MPEG).required().messages({
-    'any.only': MeditationEntryValidationMessage.MPEG_REQUIRED,
-  }),
-  fileSize: joi
-    .number()
-    .max(FileUploadValidationRule.MAXIMUM_FILE_SIZE)
+  file: joi
+    .object({
+      type: joi.string().valid(ContentType.MPEG).required().messages({
+        'any.only': MeditationEntryValidationMessage.MPEG_REQUIRED,
+      }),
+      size: joi
+        .number()
+        .max(FileUploadValidationRule.MAXIMUM_FILE_SIZE)
+        .required()
+        .messages({
+          'number.max': MeditationEntryValidationMessage.SIZE_TOO_BIG,
+        }),
+    })
     .required()
+    .unknown(true)
     .messages({
-      'number.max': MeditationEntryValidationMessage.SIZE_TOO_BIG,
+      'object.base': MeditationEntryValidationMessage.FILE_REQUIRED,
     }),
 });
 

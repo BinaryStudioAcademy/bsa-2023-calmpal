@@ -1,8 +1,10 @@
 type MeditationEntryCreateForm = {
   name: string;
-  file: File | null;
-  fileType: string | null;
-  fileSize: number | null;
+  file: {
+    data: File;
+    type: string;
+    size: number;
+  } | null;
 };
 
 export { type MeditationEntryCreateForm };
