@@ -12,6 +12,8 @@ type Properties = {
   isActive?: boolean;
   iconName?: IconName;
   iconColor?: ValueOf<typeof IconColor>;
+  iconWidth?: number;
+  iconHeight?: number;
 };
 
 const Card: React.FC<Properties> = ({
@@ -21,6 +23,8 @@ const Card: React.FC<Properties> = ({
   isActive = false,
   iconName,
   iconColor = 'currentColor',
+  iconWidth,
+  iconHeight,
 }) => {
   const hasNoImageOrIcon = !imageUrl && !iconName;
   const hasImage = Boolean(imageUrl);
@@ -47,6 +51,8 @@ const Card: React.FC<Properties> = ({
               <Icon
                 name={iconName as IconName}
                 color={iconColor as ValueOf<typeof IconColor>}
+                width={iconWidth as number}
+                height={iconHeight as number}
               />
             </div>
           )}

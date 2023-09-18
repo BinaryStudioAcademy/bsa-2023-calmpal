@@ -123,6 +123,8 @@ const UserProfileSidebar: React.FC<Properties> = ({
             onClick={toggleModal}
             iconName="delete"
             iconColor={IconColor.WHITE}
+            iconWidth={24}
+            iconHeight={24}
           />
           <Modal
             isDisplayed={isModalOpen}
