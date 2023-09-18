@@ -14,6 +14,7 @@ import {
   useRef,
   useSearch,
 } from '#libs/hooks/hooks.js';
+import { type MeditationEntryCreateRequestDto } from '#packages/meditation/meditation.js';
 import { navigationItems } from '#pages/meditation/libs/constants/constants.js';
 import { actions as meditationActions } from '#slices/meditation/meditation.js';
 
@@ -38,8 +39,8 @@ const MeditationSidebar: React.FC<Properties> = ({
   }, [dialogReference]);
 
   const handleSubmit = useCallback(
-    (title: string, file: File) => {
-      void dispatch(meditationActions.createMeditationEntry(file));
+    (payload: MeditationEntryCreateRequestDto) => {
+      void dispatch(meditationActions.createMeditationEntry(payload));
     },
     [dispatch],
   );
