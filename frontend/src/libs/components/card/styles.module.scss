@@ -89,8 +89,7 @@
 }
 
 .icon-right:hover {
-  background-color: var(--blue-300);
-  box-shadow: 0 4px 23px 0 var(--violet-100);
+  transform: scale(1.2);
 }
 
 @media (width < 900px) {
