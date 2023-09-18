@@ -74,7 +74,7 @@ const InputFile = <T extends FormFieldValues>({
         )}
       >
         <div className={styles['icon-container']}>
-          <Icon name="upload" color={IconColor.BLACK} />
+          <Icon name="upload" color={IconColor.BLACK} width={80} height={80} />
         </div>
         <span className={styles['primary-text']}>Drag file or click here</span>
         <span className={styles['secondary-text']}>{description}</span>
@@ -104,7 +104,12 @@ const InputFile = <T extends FormFieldValues>({
 
       {isFileDisplayed && (
         <div className={styles['file']}>
-          <Icon name="download" color={IconColor.BLACK} />
+          <Icon
+            name="download"
+            color={IconColor.BLACK}
+            width={16}
+            height={16}
+          />
           <span className={styles['name']}>{fileName}</span>
         </div>
       )}
