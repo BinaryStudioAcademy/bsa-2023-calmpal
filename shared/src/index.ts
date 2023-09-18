@@ -58,6 +58,7 @@ export {
   type JournalEntryCreateRequestDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
+  type JournalEntryUpdatePayloadDto,
   type JournalEntryUpdateRequestDto,
 } from './packages/journal/journal.js';
 export {

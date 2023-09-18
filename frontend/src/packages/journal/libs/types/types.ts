@@ -2,5 +2,5 @@ export {
   type JournalEntryCreateRequestDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
-  type JournalEntryUpdateRequestDto,
+  type JournalEntryUpdatePayloadDto,
 } from 'shared/build/index.js';

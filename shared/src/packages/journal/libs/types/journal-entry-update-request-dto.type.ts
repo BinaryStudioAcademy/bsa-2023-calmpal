@@ -1,6 +1,6 @@
 type JournalEntryUpdateRequestDto = {
   id: number;
-  userId?: number;
+  userId: number;
   title: string;
   text: string;
 };

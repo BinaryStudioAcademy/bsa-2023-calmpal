@@ -8,7 +8,7 @@ import {
   type JournalEntryCreateRequestDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
-  type JournalEntryUpdateRequestDto,
+  type JournalEntryUpdatePayloadDto,
 } from './libs/types/types.js';
 
 type Constructor = {
@@ -51,7 +51,7 @@ class JournalApi extends BaseHttpApi {
   }
 
   public async updateJournalEntry(
-    payload: JournalEntryUpdateRequestDto,
+    payload: JournalEntryUpdatePayloadDto,
   ): Promise<JournalEntryGetAllItemResponseDto> {
     const response = await this.load(
       this.getFullEndpoint(JournalApiPath.$ID, {

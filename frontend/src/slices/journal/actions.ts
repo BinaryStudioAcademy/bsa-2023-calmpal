@@ -6,7 +6,7 @@ import {
   type JournalEntryCreateRequestDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
-  type JournalEntryUpdateRequestDto,
+  type JournalEntryUpdatePayloadDto,
 } from '#packages/journal/journal.js';
 import { actions as appActions } from '#slices/app/app.js';
 
@@ -43,7 +43,7 @@ const getAllJournalEntries = createAsyncThunk<
 
 const updateJournalEntry = createAsyncThunk<
   JournalEntryGetAllItemResponseDto,
-  JournalEntryUpdateRequestDto,
+  JournalEntryUpdatePayloadDto,
   AsyncThunkConfig
 >(`${sliceName}/update-journal-entry`, async (payload, { extra }) => {
   const { journalApi } = extra;
