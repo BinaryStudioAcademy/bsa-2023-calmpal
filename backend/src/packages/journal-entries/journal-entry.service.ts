@@ -95,7 +95,7 @@ class JournalEntryService implements Service {
         createdAt: null,
         updatedAt: null,
         title: sanitizeInput(title),
-        text: sanitizeInput(text),
+        text: text ? sanitizeInput(text) : '',
       }),
     );
 

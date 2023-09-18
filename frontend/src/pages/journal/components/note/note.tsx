@@ -15,7 +15,10 @@ import {
   useRef,
 } from '#libs/hooks/hooks.js';
 import { type JournalEntryGetAllItemResponseDto } from '#packages/journal/journal.js';
-import { SAVE_NOTE_TIMEOUT } from '#pages/journal/libs/constants/constants.js';
+import {
+  DEFAULT_NOTE_PAYLOAD,
+  SAVE_NOTE_TIMEOUT,
+} from '#pages/journal/libs/constants/constants.js';
 import { type NoteContent } from '#pages/journal/libs/types/types.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
@@ -51,15 +54,13 @@ const Note: React.FC = () => {
 
   const handleSaveNote = useCallback(
     (id: string, data: NoteContent) => {
-      if (data.text && data.title) {
-        void dispatch(
-          journalActions.updateJournalEntry({
-            id: Number(id),
-            title: sanitizeInput(data.title),
-            text: sanitizeInput(data.text),
-          }),
-        );
-      }
+      void dispatch(
+        journalActions.updateJournalEntry({
+          id: Number(id),
+          title: sanitizeInput(data.title || DEFAULT_NOTE_PAYLOAD.title),
+          text: data.text ? sanitizeInput(data.text) : undefined,
+        }),
+      );
     },
     [dispatch],
   );

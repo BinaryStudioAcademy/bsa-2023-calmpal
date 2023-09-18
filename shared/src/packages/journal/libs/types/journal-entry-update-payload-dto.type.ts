@@ -1,7 +1,7 @@
 type JournalEntryUpdatePayloadDto = {
   id: number;
   title: string;
-  text: string;
+  text: string | undefined;
 };
 
 export { type JournalEntryUpdatePayloadDto };
