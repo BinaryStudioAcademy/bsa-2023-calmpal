@@ -32,24 +32,20 @@ const Button: React.FC<Properties> = ({
   isVisuallyCentered,
   color,
 }) => {
-  const renderIcon = (): JSX.Element | null => {
-    if (iconName) {
-      return (
-        <View
-          style={[
-            isVisuallyCentered && styles.visuallyCenteredButton,
-            isRounded && styles.buttonRounded,
-          ]}
-        >
-          <Icon
-            name={iconName}
-            color={color ?? isRounded ? AppColor.BLUE_200 : AppColor.GRAY_400}
-          />
-        </View>
-      );
-    }
-
-    return null;
+  const renderIcon = (): JSX.Element => {
+    return (
+      <View
+        style={[
+          isVisuallyCentered && styles.visuallyCenteredButton,
+          isRounded && styles.buttonRounded,
+        ]}
+      >
+        <Icon
+          name={iconName ?? 'play'}
+          color={color ?? isRounded ? AppColor.BLUE_200 : AppColor.GRAY_400}
+        />
+      </View>
+    );
   };
 
   return (
@@ -65,7 +61,7 @@ const Button: React.FC<Properties> = ({
       disabled={isDisabled}
       activeOpacity={0.5}
     >
-      {renderIcon()}
+      {iconName && renderIcon()}
       <Text
         style={[
           { color: color },
