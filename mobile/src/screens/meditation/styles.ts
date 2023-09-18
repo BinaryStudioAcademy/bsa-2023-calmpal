@@ -26,9 +26,10 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     backgroundColor: AppColor.WHITE,
     borderRadius: 20,
-    elevation: 1,
     marginTop: 37,
     marginBottom: 20,
+    shadowColor: AppColor.BLUE_200,
+    elevation: 20,
   },
   image: {
     width: '100%',

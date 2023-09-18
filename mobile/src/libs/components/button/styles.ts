@@ -37,11 +37,12 @@ const styles = StyleSheet.create({
   },
   buttonRounded: {
     backgroundColor: AppColor.WHITE,
-    borderRadius: 27,
-    elevation: 2,
+    borderRadius: 30,
     padding: 15,
     height: 55,
     width: 55,
+    shadowColor: AppColor.BLUE_200,
+    elevation: 5,
   },
   buttonTransparent: {
     backgroundColor: 'transparent',
