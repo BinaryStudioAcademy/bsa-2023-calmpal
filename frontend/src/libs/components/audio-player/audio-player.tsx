@@ -1,5 +1,4 @@
 import { useCallback, useRef, useState } from '#libs/hooks/hooks.js';
-import { type Meditation } from '#libs/types/types.js';
 import {
   TRACK_INCREMENT_INDEX,
   TRACK_START_TIME,
@@ -8,21 +7,21 @@ import {
 import { AudioControls } from './components/audio-controls/audio-controls.js';
 import { ProgressBar } from './components/progress-bar/progress-bar.js';
 
-type Properties = {
+type Properties<T> = {
   src: string;
   trackIndex: number;
   onSetTrackIndex: (index: number) => void;
-  onSetCurrentTrack: (track: Meditation) => void;
-  tracks: Meditation[];
+  onSetCurrentTrack: (track: T) => void;
+  tracks: T[];
 };
 
-const AudioPlayer: React.FC<Properties> = ({
+const AudioPlayer = <T,>({
   src,
   trackIndex,
   tracks,
   onSetCurrentTrack,
   onSetTrackIndex,
-}) => {
+}: Properties<T>): JSX.Element => {
   const [timeProgress, setTimeProgress] = useState(TRACK_START_TIME);
   const [duration, setDuration] = useState(TRACK_START_TIME);
 
@@ -47,7 +46,7 @@ const AudioPlayer: React.FC<Properties> = ({
   const handleNext = useCallback(() => {
     const nextTrackIndex = (trackIndex + TRACK_INCREMENT_INDEX) % tracks.length;
     onSetTrackIndex(nextTrackIndex);
-    onSetCurrentTrack(tracks[nextTrackIndex] as Meditation);
+    onSetCurrentTrack(tracks[nextTrackIndex] as T);
   }, [onSetCurrentTrack, onSetTrackIndex, trackIndex, tracks]);
 
   return (
