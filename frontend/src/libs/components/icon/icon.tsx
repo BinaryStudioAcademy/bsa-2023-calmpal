@@ -1,10 +1,11 @@
-import { type IconName } from '#libs/types/types.js';
+import { type IconColor } from '#libs/enums/icon-color.enum.js';
+import { type IconName, type ValueOf } from '#libs/types/types.js';
 
 import { iconNameToIcon } from './libs/maps/icon-name-to-icon.map.js';
 
 type Properties = {
   name: IconName;
-  color?: string;
+  color?: ValueOf<typeof IconColor> | undefined;
 };
 
 const Icon: React.FC<Properties> = ({ name, color = 'currentColor' }) => {

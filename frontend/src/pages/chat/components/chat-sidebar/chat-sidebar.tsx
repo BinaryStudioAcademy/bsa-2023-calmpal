@@ -1,5 +1,6 @@
 import cardPlaceholder from '#assets/img/card-image-placeholder.png';
 import {
+  Button,
   Card,
   Icon,
   Link,
@@ -49,6 +50,10 @@ const ChatSidebar: React.FC<Properties> = ({
     // TODO redux logic
   }, [setIsSidebarShown]);
 
+  const handleDeleteChat = useCallback(() => {
+    // TODO delete chat
+  }, []);
+
   return (
     <Sidebar isSidebarShown={isSidebarShown}>
       <SidebarHeader>
@@ -78,14 +83,25 @@ const ChatSidebar: React.FC<Properties> = ({
             ) + '?sidebarMode=hide') as typeof AppRoute.CHATS_$ID;
 
             return (
-              <Link key={filteredChat.id} to={chatLink}>
-                <Card
-                  title={filteredChat.name}
-                  imageUrl={cardPlaceholder}
-                  onClick={handleSelectChat}
-                  isActive={String(filteredChat.id) === id}
+              <div className={styles['wrapper']} key={filteredChat.id}>
+                <Link to={chatLink}>
+                  <Card
+                    title={filteredChat.name}
+                    imageUrl={cardPlaceholder}
+                    onClick={handleSelectChat}
+                    isActive={String(filteredChat.id) === id}
+                    iconRight="trash"
+                    onIconClick={handleDeleteChat}
+                  />
+                </Link>
+                <Button
+                  onClick={handleDeleteChat}
+                  style="delete-icon"
+                  iconName="trash"
+                  label="Delete chat"
+                  isLabelVisuallyHidden
                 />
-              </Link>
+              </div>
             );
           })}
         </div>

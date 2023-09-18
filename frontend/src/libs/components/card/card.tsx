@@ -12,6 +12,8 @@ type Properties = {
   isActive?: boolean;
   iconName?: IconName;
   iconColor?: ValueOf<typeof IconColor>;
+  iconRight?: string;
+  onIconClick?: () => void;
 };
 
 const Card: React.FC<Properties> = ({
@@ -20,37 +22,52 @@ const Card: React.FC<Properties> = ({
   onClick,
   isActive = false,
   iconName,
-  iconColor = 'currentColor',
+  iconColor,
 }) => {
   const hasNoImageOrIcon = !imageUrl && !iconName;
   const hasImage = Boolean(imageUrl);
   const hasIcon = Boolean(iconName);
 
   return (
-    <button
-      className={getValidClassNames(
-        styles['item'],
-        isActive && styles['selected'],
-        hasNoImageOrIcon && styles['no-image'],
-      )}
-      onClick={onClick}
-    >
-      {!hasNoImageOrIcon && (
-        <div className={styles['image-container']}>
-          {hasImage && (
-            <div className={styles['image-placeholder']}>
-              <img src={imageUrl} alt="not found" className={styles['image']} />
-            </div>
-          )}
-          {hasIcon && (
-            <div className={styles['icon-background']}>
-              <Icon name={iconName as IconName} color={iconColor} />
-            </div>
-          )}
-        </div>
-      )}
-      <div className={styles['title']}>{title}</div>
-    </button>
+    <div className={styles['wrapper']}>
+      <button
+        className={getValidClassNames(
+          styles['item'],
+          isActive && styles['selected'],
+          hasNoImageOrIcon && styles['no-image'],
+        )}
+        onClick={onClick}
+      >
+        {!hasNoImageOrIcon && (
+          <div className={styles['image-container']}>
+            {hasImage && (
+              <div className={styles['image-placeholder']}>
+                <img
+                  src={imageUrl}
+                  alt="not found"
+                  className={styles['image']}
+                />
+              </div>
+            )}
+            {hasIcon && (
+              <div className={styles['icon-background']}>
+                <Icon name={iconName as IconName} color={iconColor} />
+              </div>
+            )}
+          </div>
+        )}
+        <div className={styles['title']}>{title}</div>
+      </button>
+      {/* {iconRight && (
+        <Button
+          onClick={onIconClick as () => void}
+          style="delete-icon"
+          iconName="trash"
+          label="Delete chat"
+          isLabelVisuallyHidden
+        />
+      )} */}
+    </div>
   );
 };
 

@@ -93,6 +93,27 @@
   box-shadow: 0 4px 23px 0 var(--violet-100);
 }
 
+.delete-icon {
+  position: relative;
+  top: 8px;
+  right: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  color: var(--blue-200);
+  background-color: transparent;
+  border-color: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.delete-icon:hover {
+  background-color: var(--white-alpha-80);
+  box-shadow: 0 4px 23px 0 var(--violet-100);
+}
+
 .primary:has(.loader),
 .secondary:has(.loader) {
   display: flex;
