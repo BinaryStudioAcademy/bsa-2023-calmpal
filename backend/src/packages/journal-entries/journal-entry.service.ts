@@ -79,7 +79,7 @@ class JournalEntryService implements Service {
     title,
     text,
   }: JournalEntryUpdateRequestDto): Promise<JournalEntryGetAllItemResponseDto> {
-    const user = await userService.findById(userId as number);
+    const user = await userService.findById(userId);
 
     if (!user) {
       throw new UsersError({
@@ -91,7 +91,7 @@ class JournalEntryService implements Service {
     const item = await this.journalEntryRepository.update(
       JournalEntryEntity.initialize({
         id,
-        userId: userId as number,
+        userId,
         createdAt: null,
         updatedAt: null,
         title: sanitizeInput(title),
