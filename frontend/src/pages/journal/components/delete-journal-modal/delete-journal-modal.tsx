@@ -40,7 +40,7 @@ const DeleteJournalModal: React.ForwardRefRenderFunction<
 
   return (
     <Modal
-      title="Delete Note?"
+      title="Delete note?"
       ref={journalDeleteModalReference}
       showCrossIcon={false}
     >
