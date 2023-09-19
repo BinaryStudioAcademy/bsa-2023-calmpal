@@ -61,7 +61,7 @@ class ChatService implements Service {
       return false;
     }
 
-    return await this.chatRepository.delete(id);
+    return Boolean(await this.chatRepository.delete(id));
   }
 }
 
