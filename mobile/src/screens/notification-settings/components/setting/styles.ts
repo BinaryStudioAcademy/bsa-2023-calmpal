@@ -11,14 +11,6 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
     backgroundColor: AppColor.GRAY_100,
     borderRadius: 20,
-    shadowColor: AppColor.GRAY_600,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 6,
   },
   label: {
     fontWeight: '600',
