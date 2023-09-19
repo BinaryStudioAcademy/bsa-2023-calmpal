@@ -48,7 +48,7 @@ const ChatLayout: React.FC = () => {
 
   useEffect(() => {
     if (id) {
-      void dispatch(chatActions.getCurrentChatMessages(id.toString()));
+      void dispatch(chatActions.getCurrentChatMessages(id));
     }
   }, [dispatch, id]);
 
