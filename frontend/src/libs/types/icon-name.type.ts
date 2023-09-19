@@ -22,7 +22,6 @@ type IconName =
   | 'send'
   | 'chatbot-avatar'
   | 'back'
-  | 'trash-box'
-  | 'close';
+  | 'trash-box';
 
 export { type IconName };

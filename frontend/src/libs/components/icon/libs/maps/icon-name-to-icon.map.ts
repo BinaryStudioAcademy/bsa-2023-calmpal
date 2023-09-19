@@ -52,7 +52,6 @@ const iconNameToIcon: Record<
   'user': UserIcon,
   'notification': NotificationIcon,
   'trash-box': TrashBox,
-  'close': CloseIcon,
 };
 
 export { iconNameToIcon };

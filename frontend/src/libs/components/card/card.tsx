@@ -22,7 +22,6 @@ const Card: React.FC<Properties> = ({
   onClick,
   isActive = false,
   iconName,
-  iconColor = 'currentColor',
   iconRight,
   onIconClick,
   iconColor,

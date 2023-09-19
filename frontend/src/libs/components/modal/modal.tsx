@@ -12,7 +12,7 @@ import styles from './styles.module.scss';
 type Properties = {
   children: React.ReactNode;
   title: string;
-  showCrossIcon: boolean;
+  showCrossIcon?: boolean;
 };
 
 const Modal: React.ForwardRefRenderFunction<
