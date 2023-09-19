@@ -1,18 +1,14 @@
-import {
-  changeCursorPosition,
-  debounce,
-  sanitizeInput,
-  setCursorPosition,
-} from '#libs/helpers/helpers.js';
+import ContentEditable from 'react-contenteditable';
+
+import { debounce, sanitizeInput } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
-  useAppForm,
   useAppSelector,
   useCallback,
   useEffect,
-  useFormController,
   useParams,
   useRef,
+  useState,
 } from '#libs/hooks/hooks.js';
 import { type JournalEntryGetAllItemResponseDto } from '#packages/journal/journal.js';
 import {
@@ -32,25 +28,16 @@ const Note: React.FC = () => {
     };
   });
 
-  const { isDirty, control } = useAppForm({
-    defaultValues: {
-      title: selectedJournalEntry.title,
-      text: selectedJournalEntry.text,
-    },
-    mode: 'onChange',
-  });
-
-  const { field: titleField } = useFormController({ name: 'title', control });
-  const { field: textField } = useFormController({ name: 'text', control });
-  const { value: titleValue, onChange: onTitleChange } = titleField;
-  const { value: textValue, onChange: onTextChange } = textField;
+  const [titleValue, setTitleValue] = useState<string>(
+    selectedJournalEntry.title,
+  );
+  const [textValue, setTextValue] = useState<string>(selectedJournalEntry.text);
 
   const dispatch = useAppDispatch();
   const { id } = useParams();
 
   const titleReference = useRef<HTMLDivElement | null>(null);
   const textReference = useRef<HTMLDivElement | null>(null);
-  const cursorPosition = useRef<number | null>(null);
 
   const handleSaveNote = useCallback(
     (id: string, data: NoteContent) => {
@@ -65,31 +52,25 @@ const Note: React.FC = () => {
     [dispatch],
   );
 
-  const handleNoteChange = useCallback(
-    (
-      elementReference: React.MutableRefObject<HTMLDivElement | null>,
-      onChange: (value: string) => void,
-    ): void => {
-      if (elementReference.current) {
-        const newValue = elementReference.current.textContent ?? '';
-        onChange(newValue);
-        changeCursorPosition(cursorPosition);
-      }
+  const handleTitleChange = useCallback(
+    (event_: React.FormEvent<HTMLDivElement>): void => {
+      const newValue = event_.currentTarget.innerHTML;
+      setTitleValue(newValue);
     },
     [],
   );
 
-  const handleTitleChange = useCallback(() => {
-    handleNoteChange(titleReference, onTitleChange);
-  }, [handleNoteChange, onTitleChange]);
-
-  const handleTextChange = useCallback(() => {
-    handleNoteChange(textReference, onTextChange);
-  }, [handleNoteChange, onTextChange]);
+  const handleTextChange = useCallback(
+    (event_: React.FormEvent<HTMLDivElement>): void => {
+      const newValue = event_.currentTarget.innerHTML;
+      setTextValue(newValue);
+    },
+    [],
+  );
 
   useEffect(() => {
     const handleSaveNoteWithDebounce = debounce((data: NoteContent) => {
-      if (id && isDirty) {
+      if (id) {
         handleSaveNote(id, data);
       }
     }, SAVE_NOTE_TIMEOUT);
@@ -99,26 +80,18 @@ const Note: React.FC = () => {
     return () => {
       handleSaveNoteWithDebounce.clear();
     };
-  }, [titleValue, textValue, isDirty, id, handleSaveNote]);
+  }, [titleValue, textValue, id, handleSaveNote]);
 
   useEffect(() => {
     if (selectedJournalEntry.id) {
-      onTitleChange(selectedJournalEntry.title);
-      onTextChange(selectedJournalEntry.text);
+      setTitleValue(selectedJournalEntry.title);
+      setTextValue(selectedJournalEntry.text);
     }
-  }, [onTitleChange, onTextChange, selectedJournalEntry, isDirty, id]);
-
-  useEffect(() => {
-    if (titleReference.current && cursorPosition.current) {
-      setCursorPosition(titleReference.current, cursorPosition);
-    }
-  }, [cursorPosition, titleValue]);
-
-  useEffect(() => {
-    if (textReference.current && cursorPosition.current) {
-      setCursorPosition(textReference.current, cursorPosition);
-    }
-  }, [cursorPosition, textValue]);
+  }, [
+    selectedJournalEntry.id,
+    selectedJournalEntry.text,
+    selectedJournalEntry.title,
+  ]);
 
   useEffect(() => {
     const handleBeforeUnload = (event: BeforeUnloadEvent): void => {
@@ -138,19 +111,17 @@ const Note: React.FC = () => {
 
   return (
     <div className={styles['wrapper']}>
-      <div
-        contentEditable
-        onInput={handleTitleChange}
-        dangerouslySetInnerHTML={{ __html: titleValue }}
+      <ContentEditable
+        onChange={handleTitleChange}
+        html={titleValue}
+        innerRef={titleReference}
         className={styles['title']}
-        ref={titleReference}
       />
-      <div
-        contentEditable
-        onInput={handleTextChange}
-        dangerouslySetInnerHTML={{ __html: textValue }}
+      <ContentEditable
+        onChange={handleTextChange}
+        html={textValue}
+        innerRef={textReference}
         className={styles['text']}
-        ref={textReference}
       />
     </div>
   );

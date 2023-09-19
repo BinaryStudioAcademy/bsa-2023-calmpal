@@ -6,10 +6,10 @@ import {
   useAppSelector,
   useCallback,
   useEffect,
-  useNavigate,
   useParams,
   useSidebarState,
 } from '#libs/hooks/hooks.js';
+import { actions as appActions } from '#slices/app/app.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
 import { JournalSidebar } from './components/journal-sidebar/journal-sidebar.js';
@@ -18,7 +18,6 @@ import styles from './styles.module.scss';
 
 const Journal: React.FC = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { isSidebarShown, setIsSidebarShown } = useSidebarState();
 
@@ -31,9 +30,9 @@ const Journal: React.FC = () => {
   const hasSelectedNote = Boolean(id) && selectedJournalEntry;
 
   const handleBackButtonPress = useCallback(() => {
-    navigate(AppRoute.JOURNAL);
+    dispatch(appActions.navigate(AppRoute.JOURNAL));
     setIsSidebarShown(true);
-  }, [setIsSidebarShown, navigate]);
+  }, [dispatch, setIsSidebarShown]);
 
   const handleGetSelectedNote = useCallback(async () => {
     await dispatch(journalActions.getAllJournalEntries());
