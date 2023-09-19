@@ -1,7 +1,4 @@
-import {
-  EMPTY_ARRAY_LENGTH,
-  FIRST_ARRAY_INDEX,
-} from '#libs/constants/constants.js';
+import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useFormController } from '#libs/hooks/hooks.js';
@@ -39,7 +36,7 @@ const InputFile = <T extends FormFieldValues>({
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController<T>({ name, control });
 
-  const fileName = (field.value as { data: File } | null)?.data.name;
+  const { name: fileName } = (field.value as { data: File } | null)?.data ?? {};
   const errorNames = [
     name.toString(),
     `${name}.${fileTypeName}`,
@@ -50,10 +47,10 @@ const InputFile = <T extends FormFieldValues>({
 
   const handleFileChange = useCallback(
     (event_: React.ChangeEvent<HTMLInputElement>) => {
-      if (event_.target.files?.length) {
-        const file = event_.target.files[FIRST_ARRAY_INDEX] as File;
-        const { type, size } = file;
+      const [file = null] = event_.target.files ?? [];
 
+      if (file) {
+        const { type, size } = file;
         field.onChange({ type, size, data: file });
       }
     },
