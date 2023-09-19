@@ -10,7 +10,7 @@ import {
   MeditationTopicsRelation,
   MeditationTopicsTableColumn,
 } from './libs/enums/enums.js';
-import { MeditationEntriesModel } from './meditation-entries.model.js';
+import { MeditationEntryModel } from './meditation-entry.model.js';
 
 class MeditationTopicModel extends AbstractModel {
   public name!: string;
@@ -23,7 +23,7 @@ class MeditationTopicModel extends AbstractModel {
     return {
       [MeditationTopicsRelation.ENTRY]: {
         relation: Model.HasManyRelation,
-        modelClass: MeditationEntriesModel,
+        modelClass: MeditationEntryModel,
         join: {
           from: `${DatabaseTableName.MEDITATION_TOPICS}.${MeditationTopicsTableColumn.ID}`,
           to: `${DatabaseTableName.MEDITATION_ENTRIES}.${MeditationEntriesTableColumn.TOPIC_ID}`,
