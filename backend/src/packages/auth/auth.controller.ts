@@ -250,6 +250,45 @@ class AuthController extends BaseController {
     };
   }
 
+  /**
+   * @swagger
+   * /delete-user/{id}:
+   *   delete:
+   *     description: Delete an authenticated user
+   *     parameters:
+   *       - name: id
+   *         in: path
+   *         description: User ID to delete
+   *         required: true
+   *         schema:
+   *           type: integer
+   *           minimum: 1
+   *     responses:
+   *       200:
+   *         description: Successful deletion
+   *         content:
+   *           application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/UserDeleteResponseDto'
+   *       404:
+   *         description: User not found
+   *         content:
+   *           application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/Error'
+   *           example:
+   *            message: "User with these credentials was not found."
+   *            errorType: "USERS"
+   *       500:
+   *         description: Internal server error
+   *         content:
+   *           application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/Error'
+   *           example:
+   *            message: "Failed to delete user."
+   *            errorType: "INTERNAL_SERVER_ERROR"
+   */
   private async deleteAuthenticatedUser(
     options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
   ): Promise<APIHandlerResponse> {
