@@ -2,17 +2,19 @@ import { type Knex } from 'knex';
 
 const TABLE_NAME = 'chat_messages';
 
-const COLUMN_NAME_TO_DELETE = 'name';
+const ColumnName = {
+  NAME: 'name',
+} as const;
 
 function up(knex: Knex): Promise<void> {
   return knex.schema.alterTable(TABLE_NAME, (table) => {
-    table.dropColumn(COLUMN_NAME_TO_DELETE);
+    table.dropColumn(ColumnName.NAME);
   });
 }
 
 function down(knex: Knex): Promise<void> {
   return knex.schema.alterTable(TABLE_NAME, (table) => {
-    table.string(COLUMN_NAME_TO_DELETE).unique().notNullable();
+    table.string(ColumnName.NAME).unique().notNullable();
   });
 }
 
