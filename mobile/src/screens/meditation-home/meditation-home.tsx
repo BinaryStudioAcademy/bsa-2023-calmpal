@@ -1,5 +1,6 @@
 import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
+import { type MeditationEntryCreateRequestDto } from 'shared/build/index.js';
 
 import {
   Card,
@@ -12,18 +13,21 @@ import {
 } from '#libs/components/components';
 import { MeditationScreenName } from '#libs/enums/enums';
 import {
+  useAppDispatch,
   useCallback,
   useNavigation,
   useSearch,
   useState,
 } from '#libs/hooks/hooks';
 import { type MeditationNavigationParameterList } from '#libs/types/types';
+import { actions as meditationActions } from '#slices/meditation/meditation';
 
 import { AddMeditationModal } from './components/add-meditation-modal/add-meditation-modal';
 import { mockedData } from './libs/constants';
 import { styles } from './styles';
 
 const MeditationHome: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = (): void => {
@@ -51,9 +55,12 @@ const MeditationHome: React.FC = () => {
     [navigation],
   );
 
-  const handleAddMeditation = useCallback(() => {
-    showModal();
-  }, []);
+  const handleSubmit = useCallback(
+    (payload: MeditationEntryCreateRequestDto) => {
+      void dispatch(meditationActions.createMeditationEntry(payload));
+    },
+    [dispatch],
+  );
 
   return (
     <LinearGradient>
@@ -73,12 +80,13 @@ const MeditationHome: React.FC = () => {
             );
           })}
         </ScrollView>
-        <TouchableOpacity onPress={handleAddMeditation}>
+        <TouchableOpacity onPress={showModal}>
           <Text>add med</Text>
         </TouchableOpacity>
         <AddMeditationModal
           isVisible={isModalVisible}
           closeModal={closeModal}
+          onSubmit={handleSubmit}
         />
       </View>
     </LinearGradient>

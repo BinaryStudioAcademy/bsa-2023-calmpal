@@ -3,6 +3,9 @@ import { StyleSheet } from 'react-native';
 import { AppColor } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
+  container: {
+    width: 230,
+  },
   label: {
     fontSize: 14,
     fontWeight: 'bold',
@@ -10,7 +13,6 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   file: {
-    width: 230,
     height: 170,
     borderRadius: 8,
     borderWidth: 1,
@@ -32,10 +34,16 @@ const styles = StyleSheet.create({
   selectedFile: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   selectedFileName: {
     marginLeft: 5,
     color: AppColor.GRAY_500,
+  },
+  errorText: {
+    color: AppColor.RED_100,
+    fontSize: 14,
+    marginBottom: 4,
   },
 });
 

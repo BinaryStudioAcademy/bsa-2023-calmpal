@@ -7,9 +7,7 @@ const mockedData = [
 ];
 
 const DEFAULT_MEDITATION_PAYLOAD: MeditationEntryCreateForm = {
-  title: '',
+  name: '',
   file: null,
-  fileType: null,
-  fileSize: null,
 };
 export { DEFAULT_MEDITATION_PAYLOAD, mockedData };
