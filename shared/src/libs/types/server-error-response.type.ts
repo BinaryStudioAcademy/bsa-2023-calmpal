@@ -18,6 +18,11 @@ type ServerAuthErrorResponse = {
   message: string;
 };
 
+type ServerChatErrorResponse = {
+  errorType: typeof ServerErrorType.CHAT;
+  message: string;
+};
+
 type ServerUsersErrorResponse = {
   errorType: typeof ServerErrorType.USERS;
   message: string;
@@ -32,11 +37,13 @@ type ServerErrorResponse =
   | ServerValidationErrorResponse
   | ServerCommonErrorResponse
   | ServerAuthErrorResponse
+  | ServerChatErrorResponse
   | ServerUsersErrorResponse
   | ServerFileErrorResponse;
 
 export {
   type ServerAuthErrorResponse,
+  type ServerChatErrorResponse,
   type ServerCommonErrorResponse,
   type ServerErrorResponse,
   type ServerFileErrorResponse,
