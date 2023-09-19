@@ -279,15 +279,6 @@ class AuthController extends BaseController {
    *           example:
    *            message: "User with these credentials was not found."
    *            errorType: "USERS"
-   *       500:
-   *         description: Internal server error
-   *         content:
-   *           application/json:
-   *           schema:
-   *             $ref: '#/components/schemas/Error'
-   *           example:
-   *            message: "Failed to delete user."
-   *            errorType: "INTERNAL_SERVER_ERROR"
    */
   private async deleteAuthenticatedUser(
     options: APIHandlerOptions<{ user: UserAuthResponseDto }>,

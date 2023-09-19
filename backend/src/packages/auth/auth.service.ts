@@ -95,8 +95,8 @@ class AuthService {
 
     if (!deletedUser) {
       throw new UsersError({
-        status: HTTPCode.INTERNAL_SERVER_ERROR,
-        message: ExceptionMessage.DELETE_FAIL,
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.USER_NOT_FOUND,
       });
     }
 
