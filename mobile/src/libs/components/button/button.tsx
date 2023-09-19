@@ -41,7 +41,7 @@ const Button: React.FC<Properties> = ({
         ]}
       >
         <Icon
-          name={iconName ?? 'play'}
+          name={iconName as IconName}
           color={color ?? isRounded ? AppColor.BLUE_200 : AppColor.GRAY_400}
         />
       </View>
