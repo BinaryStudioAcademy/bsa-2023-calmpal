@@ -64,7 +64,7 @@
   padding: 14px;
   color: var(--blue-300);
   background-color: var(--white-alpha-80);
-  border-color: transparent;
+  border: none;
   border-radius: 50%;
   box-shadow: 0 4px 23px 0 var(--violet-100);
   cursor: pointer;
@@ -79,18 +79,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 52px;
-  height: 52px;
   color: var(--blue-200);
+  font-size: inherit;
   background-color: transparent;
-  border-color: transparent;
+  border: none;
   border-radius: 50%;
   cursor: pointer;
 }
 
 .rounded-transparent:hover {
-  background-color: var(--white-alpha-80);
-  box-shadow: 0 4px 23px 0 var(--violet-100);
+  filter: brightness(90%);
 }
 
 .add {
