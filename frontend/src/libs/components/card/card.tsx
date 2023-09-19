@@ -12,6 +12,8 @@ type Properties = {
   isActive?: boolean;
   iconName?: IconName;
   iconColor?: ValueOf<typeof IconColor>;
+  iconRight?: IconName;
+  onIconClick?: () => void;
 };
 
 const Card: React.FC<Properties> = ({
@@ -20,6 +22,8 @@ const Card: React.FC<Properties> = ({
   onClick,
   isActive = false,
   iconName,
+  iconRight,
+  onIconClick,
   iconColor,
 }) => {
   const hasNoImageOrIcon = !imageUrl && !iconName;
@@ -27,30 +31,43 @@ const Card: React.FC<Properties> = ({
   const hasIcon = Boolean(iconName);
 
   return (
-    <button
-      className={getValidClassNames(
-        styles['item'],
-        isActive && styles['selected'],
-        hasNoImageOrIcon && styles['no-image'],
-      )}
-      onClick={onClick}
-    >
-      {!hasNoImageOrIcon && (
-        <div className={styles['image-container']}>
-          {hasImage && (
-            <div className={styles['image-placeholder']}>
-              <img src={imageUrl} alt="not found" className={styles['image']} />
+    <>
+      <button
+        className={getValidClassNames(
+          styles['item'],
+          isActive && styles['selected'],
+          hasNoImageOrIcon && styles['no-image'],
+        )}
+        onClick={onClick}
+      >
+        <div className={styles['item-info']}>
+          {!hasNoImageOrIcon && (
+            <div className={styles['image-container']}>
+              {hasImage && (
+                <div className={styles['image-placeholder']}>
+                  <img
+                    src={imageUrl}
+                    alt="not found"
+                    className={styles['image']}
+                  />
+                </div>
+              )}
+              {hasIcon && (
+                <div className={styles['icon-background']}>
+                  <Icon name={iconName as IconName} color={iconColor} />
+                </div>
+              )}
             </div>
           )}
-          {hasIcon && (
-            <div className={styles['icon-background']}>
-              <Icon name={iconName as IconName} color={iconColor} />
-            </div>
-          )}
+          <div className={styles['title']}>{title}</div>
         </div>
+      </button>
+      {iconRight && (
+        <button className={styles['icon-right']} onClick={onIconClick}>
+          <Icon name={iconRight} color={iconColor} />
+        </button>
       )}
-      <div className={styles['title']}>{title}</div>
-    </button>
+    </>
   );
 };
 
