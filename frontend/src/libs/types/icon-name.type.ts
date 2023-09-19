@@ -14,13 +14,13 @@ type IconName =
   | 'home'
   | 'meditation'
   | 'chats'
-  | 'journal'
   | 'close'
+  | 'upload'
+  | 'download'
+  | 'journal'
   | 'chat-sidebar'
   | 'send'
   | 'chatbot-avatar'
-  | 'back'
-  | 'upload'
-  | 'download';
+  | 'back';
 
 export { type IconName };

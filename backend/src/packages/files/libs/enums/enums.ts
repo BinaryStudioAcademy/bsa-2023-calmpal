@@ -1,1 +1,5 @@
-export { FilesApiPath } from 'shared/build/index.js';
+export {
+  FilesApiPath,
+  FileUploadValidationMessage,
+  FileUploadValidationRule,
+} from 'shared/build/index.js';

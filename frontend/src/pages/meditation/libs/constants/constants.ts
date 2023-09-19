@@ -1,35 +1,30 @@
-const MEDITATION_ENTRIES = [
-  {
-    id: 1,
-    title: 'Meditation for deep sleep',
-    durationKey: 'MEDIUM',
-  },
-  {
-    id: 2,
-    title: 'Breathing meditation',
-    durationKey: 'SHORT',
-  },
-  {
-    id: 3,
-    title: 'Meditation for relax',
-    durationKey: 'LONG',
-  },
-  {
-    id: 4,
-    title: 'Nature meditation',
-    durationKey: 'EXTRA_LONG',
-  },
-] as const;
+import { AppRoute } from '#libs/enums/enums.js';
+import { type MeditationEntryCreateForm } from '#packages/meditation/libs/types/types.js';
 
-const MEDITATION_DURATION = {
-  SHORT: '5',
-  MEDIUM: '10',
-  LONG: '15',
-  EXTRA_LONG: '20',
+const TRACK_FIRST_INDEX = 0;
+const TRACK_START_TIME = 0;
+const FULL_PERCENTAGE = 100;
+const TRACK_INCREMENT_INDEX = 1;
+const TRACK_SKIP_SECONDS = 30;
+const PROGRESS_BAR = '--player-progress';
+
+const navigationItems = [{ name: 'Meditation', path: AppRoute.MEDITATION }];
+
+const DEFAULT_MEDITATION_PAYLOAD: MeditationEntryCreateForm = {
+  name: '',
+  file: null,
 };
 
-const DURATION_UNIT = {
-  MINUTES: 'min',
-};
+const MOCKED_DURATION = '10 min';
 
-export { DURATION_UNIT, MEDITATION_DURATION, MEDITATION_ENTRIES };
+export {
+  DEFAULT_MEDITATION_PAYLOAD,
+  FULL_PERCENTAGE,
+  MOCKED_DURATION,
+  navigationItems,
+  PROGRESS_BAR,
+  TRACK_FIRST_INDEX,
+  TRACK_INCREMENT_INDEX,
+  TRACK_SKIP_SECONDS,
+  TRACK_START_TIME,
+};
