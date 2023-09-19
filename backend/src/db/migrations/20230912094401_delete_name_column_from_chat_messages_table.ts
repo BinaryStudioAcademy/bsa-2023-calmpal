@@ -12,7 +12,7 @@ function up(knex: Knex): Promise<void> {
 
 function down(knex: Knex): Promise<void> {
   return knex.schema.alterTable(TABLE_NAME, (table) => {
-    table.string(COLUMN_NAME_TO_DELETE).unique().notNullable();
+    table.string(COLUMN_NAME_TO_DELETE).unique();
   });
 }
 
