@@ -45,6 +45,8 @@ const Modal: React.ForwardRefRenderFunction<
                   label="Close modal"
                   iconName="close"
                   iconColor={IconColor.BLACK}
+                  iconWidth={30}
+                  iconHeight={30}
                   style="rounded-transparent"
                   onClick={handleClose}
                   isLabelVisuallyHidden
