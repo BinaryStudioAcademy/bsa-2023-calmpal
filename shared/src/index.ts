@@ -53,6 +53,7 @@ export {
   type FileGetAllItemResponseDto,
   FilesApiPath,
   type FileUploadRequestDto,
+  FileUploadValidationMessage,
   FileUploadValidationRule,
   type S3FileUploadRequestDto,
 } from './packages/files/files.js';
@@ -68,6 +69,7 @@ export {
   type MeditationEntryCreateForm,
   type MeditationEntryCreateRequestDto,
   type MeditationEntryCreateResponseDto,
+  MeditationEntryValidationMessage,
 } from './packages/meditation/meditation.js';
 export {
   createSurveyValidationSchema,
