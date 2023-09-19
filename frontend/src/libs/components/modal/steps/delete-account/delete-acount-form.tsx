@@ -1,8 +1,16 @@
-import { type ChangeEvent, type FC } from 'react';
+import { type FC } from 'react';
 
 import { Button, Checkbox, Input } from '#libs/components/components.js';
-import { useAppForm, useCallback, useState } from '#libs/hooks/hooks.js';
+import {
+  useAppForm,
+  useCallback,
+  useFormController,
+} from '#libs/hooks/hooks.js';
 
+import {
+  DEFAULT_DELETE_ACCOUNT_PAYLOAD,
+  type DeleteAccountFormPayload,
+} from './libs/constants/constants.js';
 import styles from './styles.module.scss';
 
 type Properties = {
@@ -11,71 +19,66 @@ type Properties = {
 };
 
 const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
-  const { control, errors } = useAppForm({
-    defaultValues: {
-      describeYourSituation: '',
-    },
-    mode: 'onSubmit',
-  });
+  const { control, errors, handleSubmit } =
+    useAppForm<DeleteAccountFormPayload>({
+      defaultValues: DEFAULT_DELETE_ACCOUNT_PAYLOAD,
+      mode: 'onSubmit',
+    });
 
-  const [isChecked, setIsChecked] = useState({
-    'checkbox1': false,
-    'checkbox2': false,
-    'checkbox3': false,
-    'checkbox4': false,
+  const {
+    field: { onChange: onCheckboxChange, value: checkboxValues },
+  } = useFormController({
+    name: 'checkboxes',
+    control,
   });
 
   const handleCheckboxChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>): void => {
-      const { name, checked } = event.target;
-      setIsChecked((previousState) => {
-        return { ...previousState, [name]: checked };
-      });
+    (checkboxName: 'checkbox1' | 'checkbox2' | 'checkbox3' | 'checkbox4') => {
+      return () => {
+        const newValue = {
+          ...checkboxValues,
+          [checkboxName]: !checkboxValues[checkboxName],
+        };
+        onCheckboxChange(newValue);
+      };
     },
-    [],
+    [checkboxValues, onCheckboxChange],
   );
 
-  const isNextDisabled = !Object.values(isChecked).some(Boolean);
+  const isNextDisabled = !Object.values(checkboxValues).some(Boolean);
+
+  const checkboxes = [
+    { name: 'checkbox1', label: 'I have chosen another app' },
+    { name: 'checkbox2', label: 'I have reached my goal' },
+    { name: 'checkbox3', label: 'I can not afford the current pricing' },
+    { name: 'checkbox4', label: 'Other' },
+  ] as const;
+
+  const handleFormSubmit = useCallback(
+    (event_: React.BaseSyntheticEvent): void => {
+      void handleSubmit(() => {
+        onNext?.();
+      })(event_);
+    },
+    [handleSubmit, onNext],
+  );
 
   return (
     <div className={styles['modal-body']}>
-      <form className={styles['form']}>
-        <div>
-          <Checkbox
-            label="I've chose another app"
-            name="checkbox1"
-            checked={isChecked.checkbox1}
-            onChange={handleCheckboxChange}
-            disableDefaultStyles
-          />
-        </div>
-        <div>
-          <Checkbox
-            label="I've reached my goal"
-            name="checkbox2"
-            checked={isChecked.checkbox2}
-            onChange={handleCheckboxChange}
-            disableDefaultStyles
-          />
-        </div>
-        <div>
-          <Checkbox
-            label="I can't afford the current pricing"
-            name="checkbox3"
-            checked={isChecked.checkbox3}
-            onChange={handleCheckboxChange}
-            disableDefaultStyles
-          />
-        </div>
-        <div>
-          <Checkbox
-            label="Other"
-            name="checkbox4"
-            checked={isChecked.checkbox4}
-            onChange={handleCheckboxChange}
-            disableDefaultStyles
-          />
-        </div>
+      <form className={styles['form']} onSubmit={handleFormSubmit}>
+        {checkboxes.map((checkbox) => {
+          return (
+            <div key={checkbox.name}>
+              <Checkbox
+                label={checkbox.label}
+                name={checkbox.name}
+                checked={checkboxValues[checkbox.name] || false}
+                onChange={handleCheckboxChange(checkbox.name)}
+                disableDefaultStyles
+              />
+            </div>
+          );
+        })}
         <Input
           control={control}
           errors={errors}
@@ -83,20 +86,22 @@ const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
           placeholder="Please describe your situation"
           autoComplete="off"
           maxLength={60}
-          disabled={!isChecked.checkbox4}
+          disabled={isNextDisabled}
         />
+        <div className={styles['footer']}>
+          {onClose && (
+            <Button label="Cancel" style="primary" onClick={onClose} />
+          )}
+          {onNext && (
+            <Button
+              type="submit"
+              label="Continue"
+              style="primary"
+              isDisabled={isNextDisabled}
+            />
+          )}
+        </div>
       </form>
-      <div className={styles['footer']}>
-        {onClose && <Button label="Cancel" style="primary" onClick={onClose} />}
-        {onNext && (
-          <Button
-            label="Continue"
-            style="primary"
-            isDisabled={isNextDisabled}
-            onClick={onNext}
-          />
-        )}
-      </div>
     </div>
   );
 };
