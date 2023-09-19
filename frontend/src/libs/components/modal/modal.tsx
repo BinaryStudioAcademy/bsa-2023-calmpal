@@ -1,7 +1,6 @@
-import { forwardRef } from 'react';
-
 import { IconColor } from '#libs/enums/enums.js';
 import {
+  forwardRef,
   useCallback,
   useHandleClickOutside,
   useRef,
@@ -58,6 +57,7 @@ const Modal: React.ForwardRefRenderFunction<
     </dialog>
   );
 };
+
 const ForwardedModal = forwardRef(Modal);
 
 export { ForwardedModal as Modal };
