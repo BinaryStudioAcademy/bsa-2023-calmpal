@@ -1,4 +1,4 @@
-const JournalsEntriesTableColumn = {
+const JournalEntriesTableColumn = {
   ID: 'id',
   USER_ID: 'user_id',
   TITLE: 'title',
@@ -7,4 +7,4 @@ const JournalsEntriesTableColumn = {
   UPDATED_AT: 'updated_at',
 } as const;
 
-export { JournalsEntriesTableColumn };
+export { JournalEntriesTableColumn };

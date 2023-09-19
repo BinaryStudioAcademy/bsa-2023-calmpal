@@ -7,7 +7,7 @@ import {
 import { UsersTableColumn } from '#packages/users/libs/enums/enums.js';
 import { UserModel } from '#packages/users/user.model.js';
 
-import { JournalsEntriesTableColumn } from './libs/enums/enums.js';
+import { JournalEntriesTableColumn } from './libs/enums/enums.js';
 
 class JournalEntryModel extends AbstractModel {
   public title!: string;
@@ -26,7 +26,7 @@ class JournalEntryModel extends AbstractModel {
         relation: Model.HasOneRelation,
         modelClass: UserModel,
         join: {
-          from: `${DatabaseTableName.JOURNAL_ENTRIES}.${JournalsEntriesTableColumn.USER_ID}`,
+          from: `${DatabaseTableName.JOURNAL_ENTRIES}.${JournalEntriesTableColumn.USER_ID}`,
           to: `${DatabaseTableName.USERS}.${UsersTableColumn.ID}`,
         },
       },
