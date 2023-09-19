@@ -14,7 +14,6 @@ import {
   useEffect,
 } from '#libs/hooks/hooks.js';
 import { type ValueOf } from '#libs/types/types.js';
-import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { DEFAULT_NOTE_PAYLOAD } from '#pages/journal/libs/constants/constants.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
@@ -31,10 +30,9 @@ const JournalSidebar: React.FC<Properties> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const { allJournalEntries, selectedJournalEntry, userId } = useAppSelector(
-    ({ journal, auth }) => {
+  const { allJournalEntries, selectedJournalEntry } = useAppSelector(
+    ({ journal }) => {
       return {
-        userId: (auth.authenticatedUser as UserAuthResponseDto).id,
         allJournalEntries: journal.allJournalEntries,
         selectedJournalEntry: journal.selectedJournalEntry,
       };
@@ -42,15 +40,13 @@ const JournalSidebar: React.FC<Properties> = ({
   );
 
   const handlePlusButtonClick = useCallback(() => {
-    if (userId) {
-      void dispatch(
-        journalActions.createJournalEntry({
-          title: DEFAULT_NOTE_PAYLOAD.title,
-          text: DEFAULT_NOTE_PAYLOAD.text,
-        }),
-      );
-    }
-  }, [dispatch, userId]);
+    void dispatch(
+      journalActions.createJournalEntry({
+        title: DEFAULT_NOTE_PAYLOAD.title,
+        text: DEFAULT_NOTE_PAYLOAD.text,
+      }),
+    );
+  }, [dispatch]);
 
   useEffect(() => {
     void dispatch(journalActions.getAllJournalEntries());
