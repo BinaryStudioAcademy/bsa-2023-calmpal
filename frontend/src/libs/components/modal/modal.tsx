@@ -1,7 +1,6 @@
-import { forwardRef } from 'react';
-
 import { IconColor } from '#libs/enums/enums.js';
 import {
+  forwardRef,
   useCallback,
   useHandleClickOutside,
   useRef,
