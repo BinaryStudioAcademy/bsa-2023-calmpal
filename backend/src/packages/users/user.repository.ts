@@ -115,7 +115,7 @@ class UserRepository implements Repository {
   public async delete(id: number): Promise<boolean> {
     const updatedRows = await this.userModel
       .query()
-      .patch({ deletedAt: new Date() })
+      .patch({ deletedAt: new Date().toISOString() })
       .where({ id });
 
     return updatedRows > ZERO_ROWS_DELETED;

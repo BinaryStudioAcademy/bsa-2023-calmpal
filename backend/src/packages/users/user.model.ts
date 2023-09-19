@@ -23,7 +23,7 @@ class UserModel extends AbstractModel {
 
   public passwordSalt!: string;
 
-  public deletedAt?: Date;
+  public deletedAt?: Date | string;
 
   public static override get tableName(): string {
     return DatabaseTableName.USERS;
