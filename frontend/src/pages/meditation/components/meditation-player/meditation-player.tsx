@@ -1,20 +1,28 @@
+import deafultMeditationImage from '#assets/img/meditation-image-placeholder.jpg';
 import { AudioPlayer } from '#libs/components/components.js';
-import { useCallback, useState } from '#libs/hooks/hooks.js';
-import {
-  mockedPlaylist,
-  TRACK_FIRST_INDEX,
-} from '#pages/meditation/constants/constants.js';
+import { useAppSelector, useCallback, useState } from '#libs/hooks/hooks.js';
+import { TRACK_FIRST_INDEX } from '#pages/meditation/libs/constants/constants.js';
 
 import styles from './styles.module.scss';
 
 const MeditationPlayer: React.FC = () => {
+  const { meditationEntries } = useAppSelector(({ meditation }) => {
+    return {
+      meditationEntries: meditation.meditationEntries,
+    };
+  });
   const [trackIndex, setTrackIndex] = useState(TRACK_FIRST_INDEX);
-  const [currentTrack, setCurrentTrack] = useState(mockedPlaylist[trackIndex]);
+  const [currentTrack, setCurrentTrack] = useState(
+    meditationEntries[trackIndex],
+  );
 
-  const handleTrackIndex = useCallback((index: number): void => {
-    setTrackIndex(index);
-    setCurrentTrack(mockedPlaylist[index]);
-  }, []);
+  const handleTrackIndex = useCallback(
+    (index: number): void => {
+      setTrackIndex(index);
+      setCurrentTrack(meditationEntries[index]);
+    },
+    [meditationEntries],
+  );
 
   return (
     <div className={styles['wrapper']}>
@@ -22,20 +30,19 @@ const MeditationPlayer: React.FC = () => {
         <div className={styles['image-wrapper']}>
           <img
             className={styles['image']}
-            src={currentTrack?.img}
+            src={deafultMeditationImage}
             alt="Meditation"
             width={355}
             height={355}
           />
         </div>
-        <p className={styles['title']}>{currentTrack?.title}</p>
-        <p className={styles['purpose']}>{currentTrack?.purpose}</p>
+        <p className={styles['title']}>{currentTrack?.name}</p>
         <AudioPlayer
-          src={currentTrack?.src ?? ''}
+          src={currentTrack?.mediaUrl ?? ''}
           trackIndex={trackIndex}
           onSetTrackIndex={handleTrackIndex}
           onSetCurrentTrack={setCurrentTrack}
-          tracks={mockedPlaylist}
+          tracks={meditationEntries}
         />
       </div>
     </div>
