@@ -52,11 +52,11 @@ class ChatService implements Service {
     return this.chatMessageService.findAllByChatId(chatId);
   }
 
-  public async create(
-    payload: CreateChatPayload,
-  ): Promise<ChatGetAllItemResponseDto> {
-    const { chatEntity, message, userId } = payload;
-
+  public async create({
+    chatEntity,
+    message,
+    userId,
+  }: CreateChatPayload): Promise<ChatGetAllItemResponseDto> {
     const createdChat = await this.chatRepository.create({
       chatEntity,
       members: [userId],
