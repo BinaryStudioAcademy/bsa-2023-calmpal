@@ -64,7 +64,6 @@ export {
 } from './packages/journal/journal.js';
 export {
   createMeditationEntryFormValidationSchema,
-  createMeditationEntryRequestValidationSchema,
   MeditationApiPath,
   type MeditationEntryCreateForm,
   type MeditationEntryCreateRequestDto,
