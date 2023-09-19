@@ -40,7 +40,7 @@ const Card: React.FC<Properties> = ({
         )}
         onClick={onClick}
       >
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div className={styles['item-info']}>
           {!hasNoImageOrIcon && (
             <div className={styles['image-container']}>
               {hasImage && (

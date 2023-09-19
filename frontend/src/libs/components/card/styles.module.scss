@@ -29,6 +29,12 @@
   align-items: center;
 }
 
+.item-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .image-container .image-placeholder {
   display: flex;
   align-items: center;
@@ -118,6 +124,6 @@
   }
 
   .icon-right {
-    left: 40%;
+    left: 18%;
   }
 }
