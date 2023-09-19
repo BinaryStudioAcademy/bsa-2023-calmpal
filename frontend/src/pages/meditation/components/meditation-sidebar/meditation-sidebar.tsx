@@ -89,7 +89,7 @@ const MeditationSidebar: React.FC<Properties> = ({
         </SidebarBody>
       </Sidebar>
 
-      <AddMeditationModal reference={dialogReference} onSubmit={handleSubmit} />
+      <AddMeditationModal ref={dialogReference} onSubmit={handleSubmit} />
     </>
   );
 };

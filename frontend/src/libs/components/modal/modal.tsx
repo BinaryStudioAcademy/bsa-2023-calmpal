@@ -1,3 +1,5 @@
+import { forwardRef } from 'react';
+
 import { IconColor } from '#libs/enums/enums.js';
 import {
   useCallback,
@@ -11,14 +13,16 @@ import styles from './styles.module.scss';
 type Properties = {
   children: React.ReactNode;
   title: string;
-  reference: React.RefObject<HTMLDialogElement>;
 };
 
-const Modal: React.FC<Properties> = ({ children, title, reference }) => {
+const Modal: React.ForwardRefRenderFunction<
+  HTMLDialogElement | null,
+  Properties
+> = ({ children, title }, reference) => {
   const modalReference = useRef<HTMLDivElement>(null);
 
   const handleClose = useCallback(() => {
-    reference.current?.close();
+    (reference as React.RefObject<HTMLDialogElement | null>).current?.close();
   }, [reference]);
 
   useHandleClickOutside({
@@ -32,7 +36,7 @@ const Modal: React.FC<Properties> = ({ children, title, reference }) => {
         <div className={styles['modal']} ref={modalReference}>
           <div className={styles['header']}>
             <span className={styles['title']}>{title}</span>
-            <form method="dialog" className={styles['icon-container']}>
+            <div className={styles['icon-container']}>
               <Button
                 label="Close modal"
                 iconName="close"
@@ -43,7 +47,7 @@ const Modal: React.FC<Properties> = ({ children, title, reference }) => {
                 onClick={handleClose}
                 isLabelVisuallyHidden
               />
-            </form>
+            </div>
           </div>
           {children}
         </div>
@@ -52,4 +56,6 @@ const Modal: React.FC<Properties> = ({ children, title, reference }) => {
   );
 };
 
-export { Modal };
+const ForwardedModal = forwardRef(Modal);
+
+export { ForwardedModal as Modal };

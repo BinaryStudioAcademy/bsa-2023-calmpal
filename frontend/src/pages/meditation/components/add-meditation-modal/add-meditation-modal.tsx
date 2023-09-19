@@ -1,3 +1,5 @@
+import { forwardRef } from 'react';
+
 import {
   Button,
   Input,
@@ -22,11 +24,13 @@ import { DEFAULT_MEDITATION_PAYLOAD } from '#pages/meditation/libs/constants/con
 import styles from './styles.module.scss';
 
 type Properties = {
-  reference: React.RefObject<HTMLDialogElement>;
   onSubmit: (payload: MeditationEntryCreateRequestDto) => void;
 };
 
-const AddMeditationModal: React.FC<Properties> = ({ reference, onSubmit }) => {
+const AddMeditationModal: React.ForwardRefRenderFunction<
+  HTMLDialogElement,
+  Properties
+> = ({ onSubmit }, reference) => {
   const { meditationDataStatus } = useAppSelector(({ meditation }) => {
     return {
       meditationDataStatus: meditation.meditationEntriesDataStatus,
@@ -43,7 +47,7 @@ const AddMeditationModal: React.FC<Properties> = ({ reference, onSubmit }) => {
 
   useEffect(() => {
     if (meditationDataStatus === DataStatus.FULFILLED) {
-      reference.current?.close();
+      (reference as React.RefObject<HTMLDialogElement | null>).current?.close();
       reset();
     }
   }, [meditationDataStatus, reset, reference]);
@@ -58,7 +62,7 @@ const AddMeditationModal: React.FC<Properties> = ({ reference, onSubmit }) => {
   );
 
   return (
-    <Modal title="Add meditation" reference={reference}>
+    <Modal title="Add meditation" ref={reference}>
       <form className={styles['form']} onSubmit={handleFormSubmit}>
         <Input
           control={control}
@@ -87,4 +91,6 @@ const AddMeditationModal: React.FC<Properties> = ({ reference, onSubmit }) => {
   );
 };
 
-export { AddMeditationModal };
+const ForwardedAddMeditationModal = forwardRef(AddMeditationModal);
+
+export { ForwardedAddMeditationModal as AddMeditationModal };
