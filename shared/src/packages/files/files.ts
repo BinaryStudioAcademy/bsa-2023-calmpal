@@ -1,4 +1,8 @@
-export { FilesApiPath } from './libs/enums/enums.js';
+export {
+  FilesApiPath,
+  FileUploadValidationMessage,
+  FileUploadValidationRule,
+} from './libs/enums/enums.js';
 export {
   type FileGetAllItemResponseDto,
   type FileUploadRequestDto,
