@@ -16,7 +16,7 @@ const createJournalEntry = joi.object<JournalEntryCreateRequestDto, true>({
     .messages({
       'any.required': JournalEntryValidationMessage.TITLE_REQUIRED,
       'string.empty': JournalEntryValidationMessage.TITLE_REQUIRED,
-      'string.max': JournalEntryValidationMessage.TITLE_MUST_BE_LESS_THAN_255,
+      'string.max': JournalEntryValidationMessage.TITLE_MUST_BE_LESS_THAN,
     }),
   text: joi.string().trim(),
 });
