@@ -18,6 +18,11 @@ const styles = StyleSheet.create({
     color: AppColor.BLUE_300,
     fontSize: 16,
   },
+  titleText: {
+    fontSize: 22,
+    color: AppColor.WHITE,
+    marginBottom: 30,
+  },
   placeholder: {
     color: AppColor.WHITE,
   },
