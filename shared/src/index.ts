@@ -7,6 +7,7 @@ export {
   AppEnvironment,
   ContentType,
   ExceptionMessage,
+  ExceptionRule,
   ServerErrorType,
 } from './libs/enums/enums.js';
 export {
