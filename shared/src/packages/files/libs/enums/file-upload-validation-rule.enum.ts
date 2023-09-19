@@ -1,4 +1,4 @@
-import { FileUploadContentTypeToExtension } from './file-upload-content-type-to-extension.js';
+import { FileUploadContentTypeToExtension } from './file-upload-content-type-to-extension.enum.js';
 
 const FileUploadValidationRule = {
   MAXIMUM_FILE_SIZE: 10_000_000,
