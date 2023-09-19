@@ -12,6 +12,8 @@ type IconName =
   | 'play'
   | 'previous'
   | 'sign-out'
-  | 'close';
+  | 'close'
+  | 'upload'
+  | 'download';
 
 export { type IconName };

@@ -3,6 +3,7 @@ import Backward from '#assets/img/icons/backward.svg';
 import BellIcon from '#assets/img/icons/bell.svg';
 import ChatIcon from '#assets/img/icons/chat.svg';
 import Close from '#assets/img/icons/close.svg';
+import Download from '#assets/img/icons/download.svg';
 import Forward from '#assets/img/icons/forward.svg';
 import HomeIcon from '#assets/img/icons/home.svg';
 import Next from '#assets/img/icons/next.svg';
@@ -11,6 +12,7 @@ import Play from '#assets/img/icons/play.svg';
 import PlusIcon from '#assets/img/icons/plus.svg';
 import Previous from '#assets/img/icons/previous.svg';
 import SignOutIcon from '#assets/img/icons/sign-out.svg';
+import Upload from '#assets/img/icons/upload.svg';
 import UserIcon from '#assets/img/icons/user.svg';
 import { type IconName } from '#libs/types/types';
 
@@ -31,6 +33,8 @@ const iconNameToIcon: Record<IconName, SVGIcon> = {
   'previous': Previous as SVGIcon,
   'sign-out': SignOutIcon as SVGIcon,
   'close': Close as SVGIcon,
+  'upload': Upload as SVGIcon,
+  'download': Download as SVGIcon,
 };
 
 export { iconNameToIcon };

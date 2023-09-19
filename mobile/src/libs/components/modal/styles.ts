@@ -3,11 +3,22 @@ import { StyleSheet } from 'react-native';
 import { AppColor } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
-  centeredView: {
+  modalContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 22,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    alignSelf: 'center',
+    color: AppColor.GRAY_500,
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
   },
   modalView: {
     margin: 20,
@@ -19,13 +30,13 @@ const styles = StyleSheet.create({
     elevation: 20,
   },
   background: {
-    backgroundColor: AppColor.GRAY_300_ALPHA_10,
+    backgroundColor: AppColor.GRAY_200_ALPHA_50,
     flex: 1,
   },
   closeButton: {
-    right: 5,
+    position: 'absolute',
+    right: 7,
     top: 5,
   },
 });
-
 export { styles };
