@@ -6,12 +6,12 @@ import {
   type MeditationCreateQueryPayload,
 } from './libs/types/types.js';
 import { MeditationEntity } from './meditation.entity.js';
-import { type MeditationEntriesModel } from './meditation-entries.model.js';
+import { type MeditationEntryModel } from './meditation-entry.model.js';
 
 class MeditationRepository implements Repository {
-  private meditationEntryModel: typeof MeditationEntriesModel;
+  private meditationEntryModel: typeof MeditationEntryModel;
 
-  public constructor(meditationEntryModel: typeof MeditationEntriesModel) {
+  public constructor(meditationEntryModel: typeof MeditationEntryModel) {
     this.meditationEntryModel = meditationEntryModel;
   }
 

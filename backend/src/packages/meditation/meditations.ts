@@ -4,9 +4,9 @@ import { fileService } from '#packages/files/files.js';
 import { MeditationController } from './meditation.controller.js';
 import { MeditationRepository } from './meditation.repository.js';
 import { MeditationService } from './meditation.service.js';
-import { MeditationEntriesModel } from './meditation-entries.model.js';
+import { MeditationEntryModel } from './meditation-entry.model.js';
 
-const meditationRepository = new MeditationRepository(MeditationEntriesModel);
+const meditationRepository = new MeditationRepository(MeditationEntryModel);
 const meditationService = new MeditationService(
   meditationRepository,
   fileService,

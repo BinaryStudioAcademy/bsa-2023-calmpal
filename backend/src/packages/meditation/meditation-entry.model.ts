@@ -12,9 +12,9 @@ import {
   MeditationEntriesTableColumn,
   MeditationTopicsTableColumn,
 } from './libs/enums/enums.js';
-import { MeditationTopicModel } from './meditation-topics.model.js';
+import { MeditationTopicModel } from './meditation-topic.model.js';
 
-class MeditationEntriesModel extends AbstractModel {
+class MeditationEntryModel extends AbstractModel {
   public name!: string;
 
   public mediaUrl!: string;
@@ -39,4 +39,4 @@ class MeditationEntriesModel extends AbstractModel {
   }
 }
 
-export { MeditationEntriesModel };
+export { MeditationEntryModel };
