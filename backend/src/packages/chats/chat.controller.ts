@@ -121,7 +121,7 @@ class ChatController extends BaseController {
     });
 
     this.addRoute({
-      path: ChatsApiPath.$CHAT_ID_MESSAGES,
+      path: ChatsApiPath.$ID_MESSAGES,
       method: 'POST',
       handler: (options) => {
         return this.createMessage(
@@ -135,7 +135,7 @@ class ChatController extends BaseController {
     });
 
     this.addRoute({
-      path: ChatsApiPath.$CHAT_ID_MESSAGES,
+      path: ChatsApiPath.$ID_MESSAGES,
       method: 'GET',
       handler: (options) => {
         return this.findAllMessagesByChatId(
