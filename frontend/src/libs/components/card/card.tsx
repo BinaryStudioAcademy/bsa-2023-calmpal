@@ -22,9 +22,9 @@ const Card: React.FC<Properties> = ({
   onClick,
   isActive = false,
   iconName,
-  iconColor = 'currentColor',
   iconRight,
   onIconClick,
+  iconColor,
 }) => {
   const hasNoImageOrIcon = !imageUrl && !iconName;
   const hasImage = Boolean(imageUrl);
@@ -40,7 +40,7 @@ const Card: React.FC<Properties> = ({
         )}
         onClick={onClick}
       >
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div className={styles['item-info']}>
           {!hasNoImageOrIcon && (
             <div className={styles['image-container']}>
               {hasImage && (
@@ -64,7 +64,7 @@ const Card: React.FC<Properties> = ({
       </button>
       {iconRight && (
         <button className={styles['icon-right']} onClick={onIconClick}>
-          <Icon name={iconRight} color={iconColor} />
+          <Icon name={iconRight} />
         </button>
       )}
     </>

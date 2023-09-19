@@ -1,7 +1,6 @@
-import { forwardRef } from 'react';
-
 import { IconColor } from '#libs/enums/enums.js';
 import {
+  forwardRef,
   useCallback,
   useHandleClickOutside,
   useRef,
@@ -13,13 +12,13 @@ import styles from './styles.module.scss';
 type Properties = {
   children: React.ReactNode;
   title: string;
-  showCrossIcon: boolean;
+  showCrossIcon?: boolean;
 };
 
 const Modal: React.ForwardRefRenderFunction<
   HTMLDialogElement | null,
   Properties
-> = ({ children, title, showCrossIcon }, reference) => {
+> = ({ children, title, showCrossIcon = true }, reference) => {
   const childrenReference =
     reference as React.RefObject<HTMLDialogElement | null>;
   const modalReference = useRef<HTMLDivElement>(null);
@@ -59,6 +58,7 @@ const Modal: React.ForwardRefRenderFunction<
     </dialog>
   );
 };
+
 const ForwardedModal = forwardRef(Modal);
 
 export { ForwardedModal as Modal };
