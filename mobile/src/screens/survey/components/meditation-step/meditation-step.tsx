@@ -1,3 +1,4 @@
+import { type RouteProp } from '@react-navigation/native';
 import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
@@ -11,6 +12,7 @@ import {
 } from '#libs/hooks/hooks';
 import { type SurveyNavigationParameterList } from '#libs/types/types';
 import {
+  getSurveyCategories,
   type SurveyInputDto,
   surveyInputValidationSchema,
 } from '#packages/survey/survey';
@@ -23,14 +25,29 @@ import {
 import { SurveyCategory } from '../components';
 import { styles } from './styles';
 
-const MeditationStep: React.FC = () => {
+type MeditationStepProperties = {
+  route: RouteProp<
+    SurveyNavigationParameterList,
+    typeof SurveyScreenName.MEDITATION_EXPERIENCE
+  >;
+};
+
+type MeditationStepInitialParameters = {
+  setMeditationSurvey: (payload: string[]) => void;
+};
+
+const MeditationStep: React.FC<MeditationStepProperties> = ({ route }) => {
+  const { setMeditationSurvey } =
+    route.params as MeditationStepInitialParameters;
   const navigation =
     useNavigation<NativeStackNavigationProp<SurveyNavigationParameterList>>();
 
-  const { control, errors, isValid } = useAppForm<SurveyInputDto>({
-    defaultValues: DEFAULT_SURVEY_PAYLOAD,
-    validationSchema: surveyInputValidationSchema,
-  });
+  const { control, errors, isValid, handleSubmit } = useAppForm<SurveyInputDto>(
+    {
+      defaultValues: DEFAULT_SURVEY_PAYLOAD,
+      validationSchema: surveyInputValidationSchema,
+    },
+  );
   const {
     field: { onChange: onCategoryChange, value: categoriesValue },
   } = useFormController({
@@ -38,7 +55,6 @@ const MeditationStep: React.FC = () => {
     control,
   });
   const hasOther = categoriesValue.includes('Other');
-
   const handleFieldChange = useCallback(
     (option: string) => {
       if (categoriesValue.includes(option)) {
@@ -53,12 +69,19 @@ const MeditationStep: React.FC = () => {
 
       onCategoryChange([...categoriesValue, option]);
     },
-
     [categoriesValue, onCategoryChange],
+  );
+
+  const handleSurveySubmit = useCallback(
+    (payload: SurveyInputDto) => {
+      setMeditationSurvey(getSurveyCategories(payload));
+    },
+    [setMeditationSurvey],
   );
 
   const handleContinue = (): void => {
     navigation.navigate(SurveyScreenName.JOURNALING_EXPERIENCE);
+    void handleSubmit(handleSurveySubmit)();
   };
 
   const handleBack = (): void => {
@@ -71,7 +94,7 @@ const MeditationStep: React.FC = () => {
       showsVerticalScrollIndicator={false}
     >
       <Text style={styles.titleText}>
-        What&aposs your experience with meditation?
+        What&apos;s your experience with meditation?
       </Text>
       {MEDITATION_EXPERIENCE_CATEGORIES.map((category) => {
         return (
@@ -82,7 +105,6 @@ const MeditationStep: React.FC = () => {
           />
         );
       })}
-
       {hasOther && (
         <Input
           control={control}
@@ -102,5 +124,4 @@ const MeditationStep: React.FC = () => {
     </ScrollView>
   );
 };
-
 export { MeditationStep };
