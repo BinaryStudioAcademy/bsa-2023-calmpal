@@ -1,50 +1,62 @@
-import { Button } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
-import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { useHandleClickOutside, useRef } from '#libs/hooks/hooks.js';
+import {
+  forwardRef,
+  useCallback,
+  useHandleClickOutside,
+  useRef,
+} from '#libs/hooks/hooks.js';
 
+import { Button } from '../components.js';
 import styles from './styles.module.scss';
 
 type Properties = {
   children: React.ReactNode;
-  isDisplayed: boolean;
   title: string;
-  onClose: () => void;
 };
 
-const Modal: React.FC<Properties> = ({
-  children,
-  isDisplayed,
-  title,
-  onClose,
-}) => {
-  const reference = useRef<HTMLDivElement>(null);
+const Modal: React.ForwardRefRenderFunction<
+  HTMLDialogElement | null,
+  Properties
+> = ({ children, title }, reference) => {
+  const childrenReference =
+    reference as React.RefObject<HTMLDialogElement | null>;
+  const modalReference = useRef<HTMLDivElement>(null);
 
-  useHandleClickOutside({ reference, onClose });
+  const handleClose = useCallback(() => {
+    childrenReference.current?.close();
+  }, [childrenReference]);
+
+  useHandleClickOutside({
+    ref: modalReference,
+    onClose: handleClose,
+  });
 
   return (
-    <dialog
-      open={isDisplayed}
-      className={getValidClassNames(isDisplayed && styles['overlay'])}
-    >
-      <div className={styles['modal']} ref={reference}>
-        <div className={styles['header']}>
-          <span className={styles['title']}>{title}</span>
-          <div className={styles['icon-container']}>
-            <Button
-              label="Close modal"
-              iconName="close"
-              iconColor={IconColor.BLACK}
-              isLabelVisuallyHidden
-              style="rounded-transparent"
-              onClick={onClose}
-            />
+    <dialog ref={reference}>
+      <div className={styles['overlay']}>
+        <div className={styles['modal']} ref={modalReference}>
+          <div className={styles['header']}>
+            <span className={styles['title']}>{title}</span>
+            <div className={styles['icon-container']}>
+              <Button
+                label="Close modal"
+                iconName="close"
+                iconColor={IconColor.BLACK}
+                iconWidth={30}
+                iconHeight={30}
+                style="rounded-transparent"
+                onClick={handleClose}
+                isLabelVisuallyHidden
+              />
+            </div>
           </div>
+          {children}
         </div>
-        {children}
       </div>
     </dialog>
   );
 };
 
-export { Modal };
+const ForwardedModal = forwardRef(Modal);
+
+export { ForwardedModal as Modal };

@@ -1,7 +1,7 @@
 import meditationListPlaceholder from '#assets/img/meditation-list-placeholder.jpg';
 import { Button, Modal } from '#libs/components/components.js';
 import { AppRoute, IconColor } from '#libs/enums/enums.js';
-import { useAppDispatch, useCallback, useState } from '#libs/hooks/hooks.js';
+import { useAppDispatch, useCallback, useRef } from '#libs/hooks/hooks.js';
 import { MeditationTimer } from '#pages/meditation/components/meditation-timer/meditation-timer.js';
 import {
   DURATION_UNIT,
@@ -18,7 +18,7 @@ type Properties = {
 
 const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
   const dispatch = useAppDispatch();
-  const [isModalDisplayed, setIsModalDisplayed] = useState(false);
+  const dialogReference = useRef<HTMLDialogElement>(null);
 
   const displayedDuration = `${
     MEDITATION_DURATION[
@@ -27,19 +27,19 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
   } ${DURATION_UNIT.MINUTES}`;
 
   const handlePlayClick = useCallback(() => {
-    setIsModalDisplayed(true);
-  }, []);
+    dialogReference.current?.showModal();
+  }, [dialogReference]);
 
   const handleModalClose = useCallback(() => {
-    setIsModalDisplayed(false);
-  }, []);
+    dialogReference.current?.close();
+  }, [dialogReference]);
 
   const handleStartSession = useCallback(() => {
     dispatch(
       appActions.navigate(`${AppRoute.MEDITATION}/${meditationEntry.id}`),
     );
-    setIsModalDisplayed(false);
-  }, [meditationEntry.id, dispatch]);
+    handleModalClose();
+  }, [meditationEntry.id, dispatch, handleModalClose]);
 
   return (
     <div className={styles['track']}>
@@ -62,11 +62,7 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
           iconColor={IconColor.BLUE}
         />
       </div>
-      <Modal
-        isDisplayed={isModalDisplayed}
-        title={meditationEntry.title}
-        onClose={handleModalClose}
-      >
+      <Modal title={meditationEntry.title} ref={dialogReference}>
         <MeditationTimer
           defaultDuration={meditationEntry.durationKey}
           onStartSession={handleStartSession}

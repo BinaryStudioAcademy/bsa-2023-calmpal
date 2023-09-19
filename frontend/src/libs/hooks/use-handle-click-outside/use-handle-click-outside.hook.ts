@@ -1,19 +1,14 @@
-import { type RefObject } from 'react';
-
 import { useEffect } from '#libs/hooks/hooks.js';
 
 type Properties = {
-  reference: RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement>;
   onClose: () => void;
 };
 
-const useHandleClickOutside = ({ reference, onClose }: Properties): void => {
+const useHandleClickOutside = ({ ref, onClose }: Properties): void => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent): void => {
-      if (
-        reference.current &&
-        !reference.current.contains(event.target as Node)
-      ) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
         onClose();
       }
     };
@@ -23,7 +18,7 @@ const useHandleClickOutside = ({ reference, onClose }: Properties): void => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [reference, onClose]);
+  }, [ref, onClose]);
 };
 
 export { useHandleClickOutside };
