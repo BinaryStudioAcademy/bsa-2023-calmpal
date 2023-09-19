@@ -3,6 +3,7 @@
   align-items: center;
   width: 100%;
   min-width: 317px;
+  max-width: 317px;
   min-height: 83px;
   margin-top: 15px;
   font-weight: 600;
@@ -15,7 +16,8 @@
   cursor: pointer;
 }
 
-.item:hover {
+.item:hover,
+.item:focus {
   background: var(--white);
   box-shadow: 0 4px 20px 0 var(--blue-alpha-30);
 }
@@ -61,10 +63,13 @@
 }
 
 .title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: -webkit-box;
+  overflow: hidden;
   text-align: left;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 @media (width < 900px) {
