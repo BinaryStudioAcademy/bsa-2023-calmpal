@@ -24,8 +24,7 @@ class ChatMessageModel extends AbstractModel {
         relation: Model.BelongsToOneRelation,
         modelClass: UserDetailsModel,
         join: {
-          from: `${DatabaseTableName.CHAT_MESSAGES}
-                            .${ChatMessagesTableColumn.SENDER_ID}`,
+          from: `${DatabaseTableName.CHAT_MESSAGES}.${ChatMessagesTableColumn.SENDER_ID}`,
           to: `${DatabaseTableName.USERS}.${UsersTableColumn.ID}`,
         },
       },
