@@ -1,3 +1,5 @@
+import { getValidClassNames } from '#libs/helpers/helpers.js';
+
 import styles from './styles.module.scss';
 
 type Properties = {
@@ -15,12 +17,18 @@ const Checkbox: React.FC<Properties> = ({
   onChange,
   disableDefaultStyles,
 }) => {
-  const checkboxClassName = disableDefaultStyles ? '' : styles['checkbox'];
-  const containerClassName = disableDefaultStyles ? '' : styles['container'];
-  const labelClassName = disableDefaultStyles ? '' : styles['label'];
-  const checkboxContainerClassName = disableDefaultStyles
-    ? styles['checkbox-container']
-    : '';
+  const checkboxClassName = getValidClassNames(
+    disableDefaultStyles ? null : styles['checkbox'],
+  );
+  const containerClassName = getValidClassNames(
+    disableDefaultStyles ? null : styles['container'],
+  );
+  const labelClassName = getValidClassNames(
+    disableDefaultStyles ? null : styles['label'],
+  );
+  const checkboxContainerClassName = getValidClassNames(
+    disableDefaultStyles ? styles['checkbox-container'] : null,
+  );
 
   return (
     <label className={checkboxContainerClassName}>
