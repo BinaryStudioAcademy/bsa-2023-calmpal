@@ -41,10 +41,8 @@ const MeditationList: React.FC<Properties> = ({
     >
       <BackButton onGoBack={handleBackButtonPress} />
       <div className={styles['list']}>
-        {meditationEntries.map((entry, index) => {
-          return (
-            <MeditationEntry meditationEntry={entry} key={entry.name + index} />
-          );
+        {meditationEntries.map((entry) => {
+          return <MeditationEntry meditationEntry={entry} key={entry.id} />;
         })}
       </div>
     </div>
