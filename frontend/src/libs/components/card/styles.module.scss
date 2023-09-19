@@ -2,7 +2,6 @@
   display: flex;
   align-items: center;
   min-width: 317px;
-  max-width: 317px;
   min-height: 83px;
   margin-top: 15px;
   padding: 3px 67px 3px 3px;
@@ -70,6 +69,12 @@
   -webkit-box-orient: vertical;
   word-wrap: break-word;
   word-break: break-word;
+}
+
+@media (width >= 900px) {
+  .item {
+    max-width: 317px;
+  }
 }
 
 @media (width < 900px) {
