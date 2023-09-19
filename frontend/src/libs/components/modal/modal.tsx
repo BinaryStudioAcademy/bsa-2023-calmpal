@@ -17,12 +17,12 @@ type StepComponentProperties = {
 };
 
 type Step = {
-  component: React.ReactElement<StepComponentProperties>;
+  component: React.FC<StepComponentProperties>;
   title: string;
 };
 
 type Properties = {
-  children?: React.ReactElement<StepComponentProperties>;
+  children?: React.FC<StepComponentProperties>;
   steps?: Step[];
   isDisplayed: boolean;
   title?: string;
@@ -54,8 +54,8 @@ const Modal: React.FC<Properties> = ({
     : children;
   const currentTitle = isMultiStep ? steps[currentStep]?.title : title;
 
-  const renderedComponent = React.isValidElement(currentComponent)
-    ? React.cloneElement(currentComponent, {
+  const renderedComponent = currentComponent
+    ? React.createElement(currentComponent, {
         onNext: goToNextStep,
         onClose: handleClose,
       })

@@ -6,11 +6,7 @@ import {
   SidebarBody,
   SidebarHeader,
 } from '#libs/components/components.js';
-import {
-  DeleteAccountConfirmation,
-  DeleteAccountForm,
-  DeleteAccountMessage,
-} from '#libs/components/modal/steps/delete-account/delete-account.js';
+import { STEPS } from '#libs/components/modal/steps/delete-account/libs/constants/constants.js';
 import { IconColor } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
@@ -61,21 +57,6 @@ const UserProfileSidebar: React.FC<Properties> = ({
   const toggleModal = useCallback((): void => {
     setModalOpen(!isModalOpen);
   }, [isModalOpen]);
-
-  const steps = [
-    {
-      component: <DeleteAccountMessage />,
-      title: 'We are sad that you are leaving',
-    },
-    {
-      component: <DeleteAccountForm />,
-      title: 'Please tell us why',
-    },
-    {
-      component: <DeleteAccountConfirmation />,
-      title: 'Your account will be deleted',
-    },
-  ];
 
   return (
     <Sidebar isSidebarShown={isSidebarShown}>
@@ -128,7 +109,7 @@ const UserProfileSidebar: React.FC<Properties> = ({
           />
           <Modal
             isDisplayed={isModalOpen}
-            steps={steps}
+            steps={STEPS}
             onClose={toggleModal}
           />
         </div>
