@@ -1,7 +1,8 @@
 import meditationListPlaceholder from '#assets/img/meditation-list-placeholder.jpg';
-import { Button, MeditationTimer, Modal } from '#libs/components/components.js';
+import { Button, Modal } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { useCallback, useNavigate, useState } from '#libs/hooks/hooks.js';
+import { MeditationTimer } from '#pages/meditation/components/meditation-timer/meditation-timer.js';
 import {
   DURATION_UNIT,
   MEDITATION_DURATION,
