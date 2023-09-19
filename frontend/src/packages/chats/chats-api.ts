@@ -45,6 +45,20 @@ class ChatApi extends BaseHttpApi {
 
     return await response.json<ChatGetAllItemResponseDto>();
   }
+
+  public async deleteChat(id: number): Promise<boolean> {
+    const response = await this.load(
+      this.getFullEndpoint(ChatsApiPath.$ID, { id: id.toString() }),
+      {
+        method: 'DELETE',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify({}),
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<boolean>();
+  }
 }
 
 export { ChatApi };
