@@ -92,8 +92,19 @@ class ChatService implements Service {
     return Promise.resolve(null);
   }
 
-  public async delete(id: number): Promise<boolean> {
-    const chat = await this.findById(id);
+  public async delete({
+    id,
+    userId,
+  }: {
+    id: number;
+    userId: number;
+  }): Promise<boolean> {
+    const allChats = await this.findAllByUserId(userId);
+
+    const chat = allChats.items.find((chat) => {
+      return chat.id === Number(id);
+    });
+
     if (!chat) {
       return false;
     }
