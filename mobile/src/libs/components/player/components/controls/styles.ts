@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     width: '100%',
+    marginTop: 20,
   },
 });
 
