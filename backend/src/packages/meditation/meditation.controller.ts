@@ -10,7 +10,7 @@ import { type FileUploadRequestDto } from '#packages/files/files.js';
 
 import { MeditationApiPath } from './libs/enums/enums.js';
 import { type MeditationEntryCreateRequestDto } from './libs/types/types.js';
-import { createMeditationEntryRequestValidationSchema } from './libs/validation-schemas/validation-schemas.js';
+import { createMeditationEntryValidationSchema } from './libs/validation-schemas/validation-schemas.js';
 import { type MeditationService } from './meditation.service.js';
 
 /**
@@ -54,7 +54,7 @@ class MeditationController extends BaseController {
       path: MeditationApiPath.ROOT,
       method: 'POST',
       validation: {
-        body: createMeditationEntryRequestValidationSchema,
+        body: createMeditationEntryValidationSchema,
       },
       handler: (options) => {
         return this.create(

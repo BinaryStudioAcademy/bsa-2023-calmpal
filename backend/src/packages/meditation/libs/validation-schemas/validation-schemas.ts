@@ -1,1 +1,1 @@
-export { createMeditationEntryRequest as createMeditationEntryRequestValidationSchema } from './create-meditation-entry-request.validation-schema.js';
+export { createMeditationEntry as createMeditationEntryValidationSchema } from './create-meditation-entry-request.validation-schema.js';
