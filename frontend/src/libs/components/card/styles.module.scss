@@ -81,9 +81,9 @@
 }
 
 .icon-right {
-  position: absolute;
-  top: 41px;
-  right: 6%;
+  position: relative;
+  top: -60px;
+  left: 265px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -111,7 +111,8 @@
   }
 
   .icon-right {
-    right: 10%;
+    // right: 10%;
+    left: 180px;
   }
 }
 
@@ -125,6 +126,6 @@
   }
 
   .icon-right {
-    right: 5%;
+    left: 265px;
   }
 }

@@ -64,7 +64,7 @@ const Card: React.FC<Properties> = ({
       </button>
       {iconRight && (
         <button className={styles['icon-right']} onClick={onIconClick}>
-          <Icon name={iconRight} />
+          <Icon name={iconRight} color={iconColor} />
         </button>
       )}
     </>
