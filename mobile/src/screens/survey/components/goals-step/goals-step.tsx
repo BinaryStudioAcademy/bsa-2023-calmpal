@@ -16,14 +16,14 @@ import {
 } from '#packages/survey/survey';
 import {
   DEFAULT_SURVEY_PAYLOAD,
-  PREFERENCES_CATEGORIES,
+  GOALS_CATEGORIES,
   TEXTAREA_ROWS_COUNT,
 } from '#screens/survey/libs/constants';
 
 import { SurveyCategory } from '../components';
 import { styles } from './styles';
 
-const PreferencesStep: React.FC = () => {
+const GoalsStep: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<SurveyNavigationParameterList>>();
 
@@ -38,6 +38,7 @@ const PreferencesStep: React.FC = () => {
     control,
   });
   const hasOther = categoriesValue.includes('Other');
+
   const handleFieldChange = useCallback(
     (option: string) => {
       if (categoriesValue.includes(option)) {
@@ -52,10 +53,15 @@ const PreferencesStep: React.FC = () => {
 
       onCategoryChange([...categoriesValue, option]);
     },
+
     [categoriesValue, onCategoryChange],
   );
 
   const handleContinue = (): void => {
+    navigation.navigate(SurveyScreenName.WORRIES);
+  };
+
+  const handleBack = (): void => {
     navigation.navigate(SurveyScreenName.FEELINGS);
   };
 
@@ -64,8 +70,10 @@ const PreferencesStep: React.FC = () => {
       style={styles.surveyContainer}
       showsVerticalScrollIndicator={false}
     >
-      <Text style={styles.titleText}>What can we help you with?</Text>
-      {PREFERENCES_CATEGORIES.map((category) => {
+      <Text style={styles.titleText}>
+        What do you want to achive with CalmPal?
+      </Text>
+      {GOALS_CATEGORIES.map((category) => {
         return (
           <SurveyCategory
             key={category}
@@ -74,6 +82,7 @@ const PreferencesStep: React.FC = () => {
           />
         );
       })}
+
       {hasOther && (
         <Input
           control={control}
@@ -89,7 +98,9 @@ const PreferencesStep: React.FC = () => {
         isDisabled={!isValid}
         type="outlined"
       />
+      <Button label="Go back" onPress={handleBack} type="solid" />
     </ScrollView>
   );
 };
-export { PreferencesStep };
+
+export { GoalsStep };
