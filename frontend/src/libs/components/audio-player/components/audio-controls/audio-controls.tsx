@@ -1,28 +1,27 @@
 import { Button } from '#libs/components/components.js';
 import { useCallback, useEffect, useRef, useState } from '#libs/hooks/hooks.js';
-import { type Meditation } from '#libs/types/types.js';
 import {
   FULL_PERCENTAGE,
   PROGRESS_BAR,
   TRACK_INCREMENT_INDEX,
   TRACK_SKIP_SECONDS,
-} from '#pages/meditation/constants/constants.js';
+} from '#pages/meditation/libs/constants/constants.js';
 
 import styles from './styles.module.scss';
 
-type Properties = {
+type Properties<T> = {
   audioReference: React.RefObject<HTMLAudioElement | null>;
   progressBarReference: React.RefObject<HTMLInputElement | null>;
   duration: number;
   onTimeProgress: (currentTime: number) => void;
   trackIndex: number;
   onSetTrackIndex: (index: number) => void;
-  onSetCurrentTrack: (track: Meditation) => void;
-  tracks: Meditation[];
+  onSetCurrentTrack: (track: T) => void;
+  tracks: T[];
   onNextTrack: () => void;
 };
 
-const AudioControls: React.FC<Properties> = ({
+const AudioControls = <T,>({
   audioReference,
   progressBarReference,
   duration,
@@ -32,7 +31,7 @@ const AudioControls: React.FC<Properties> = ({
   onSetCurrentTrack,
   onSetTrackIndex,
   onNextTrack,
-}) => {
+}: Properties<T>): JSX.Element => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const playAnimationReference = useRef<number | null>(null);
@@ -72,7 +71,7 @@ const AudioControls: React.FC<Properties> = ({
     const previousTrackIndex =
       (trackIndex - TRACK_INCREMENT_INDEX + tracks.length) % tracks.length;
     onSetTrackIndex(previousTrackIndex);
-    onSetCurrentTrack(tracks[previousTrackIndex] as Meditation);
+    onSetCurrentTrack(tracks[previousTrackIndex] as T);
   }, [onSetCurrentTrack, onSetTrackIndex, trackIndex, tracks]);
 
   useEffect(() => {
