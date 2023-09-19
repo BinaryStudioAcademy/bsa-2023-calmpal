@@ -8,6 +8,7 @@ import {
 } from '#libs/hooks/hooks.js';
 
 import {
+  CHECKBOX_OPTIONS,
   DEFAULT_DELETE_ACCOUNT_PAYLOAD,
   type DeleteAccountFormPayload,
 } from './libs/constants/constants.js';
@@ -45,14 +46,8 @@ const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
     [checkboxValues, onCheckboxChange],
   );
 
+  const isInputDisabled = !checkboxValues['checkbox4'];
   const isNextDisabled = !Object.values(checkboxValues).some(Boolean);
-
-  const checkboxes = [
-    { name: 'checkbox1', label: 'I have chosen another app' },
-    { name: 'checkbox2', label: 'I have reached my goal' },
-    { name: 'checkbox3', label: 'I can not afford the current pricing' },
-    { name: 'checkbox4', label: 'Other' },
-  ] as const;
 
   const handleFormSubmit = useCallback(
     (event_: React.BaseSyntheticEvent): void => {
@@ -66,7 +61,7 @@ const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
   return (
     <div className={styles['modal-body']}>
       <form className={styles['form']} onSubmit={handleFormSubmit}>
-        {checkboxes.map((checkbox) => {
+        {CHECKBOX_OPTIONS.map((checkbox) => {
           return (
             <div key={checkbox.name}>
               <Checkbox
@@ -86,7 +81,7 @@ const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
           placeholder="Please describe your situation"
           autoComplete="off"
           maxLength={60}
-          disabled={isNextDisabled}
+          disabled={isInputDisabled}
         />
         <div className={styles['footer']}>
           {onClose && (
