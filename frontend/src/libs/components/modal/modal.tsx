@@ -18,7 +18,7 @@ type Properties = {
 const Modal: React.ForwardRefRenderFunction<
   HTMLDialogElement | null,
   Properties
-> = ({ children, title, showCrossIcon }, reference) => {
+> = ({ children, title, showCrossIcon = true }, reference) => {
   const childrenReference =
     reference as React.RefObject<HTMLDialogElement | null>;
   const modalReference = useRef<HTMLDivElement>(null);
@@ -44,6 +44,8 @@ const Modal: React.ForwardRefRenderFunction<
                   label="Close modal"
                   iconName="close"
                   iconColor={IconColor.BLACK}
+                  iconWidth={30}
+                  iconHeight={30}
                   style="rounded-transparent"
                   onClick={handleClose}
                   isLabelVisuallyHidden
