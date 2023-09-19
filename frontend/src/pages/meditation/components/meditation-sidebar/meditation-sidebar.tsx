@@ -45,7 +45,7 @@ const MeditationSidebar: React.FC<Properties> = ({
     [dispatch],
   );
 
-  const handleSelectChat = useCallback(() => {
+  const handleSelectMeidtationEntry = useCallback(() => {
     setIsSidebarShown(false);
   }, [setIsSidebarShown]);
 
@@ -79,7 +79,7 @@ const MeditationSidebar: React.FC<Properties> = ({
                 <Card
                   title={filteredElement.name}
                   imageUrl={meditationPlaceholder}
-                  onClick={handleSelectChat}
+                  onClick={handleSelectMeidtationEntry}
                   key={filteredElement.name}
                   isActive
                 />
