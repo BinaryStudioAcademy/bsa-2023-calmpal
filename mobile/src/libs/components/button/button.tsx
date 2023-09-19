@@ -40,10 +40,7 @@ const Button: React.FC<Properties> = ({
           isRounded && styles.buttonRounded,
         ]}
       >
-        <Icon
-          name={iconName as IconName}
-          color={color ?? isRounded ? AppColor.BLUE_200 : AppColor.GRAY_400}
-        />
+        <Icon name={iconName as IconName} color={color ?? AppColor.GRAY_400} />
       </View>
     );
   };
