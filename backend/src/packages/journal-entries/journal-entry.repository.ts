@@ -38,7 +38,7 @@ class JournalEntryRepository implements Repository {
   public async findAllByUserId(userId: number): Promise<JournalEntryEntity[]> {
     const journalEntries = await this.journalEntryModel
       .query()
-      .where('userId', userId)
+      .where({ userId })
       .orderBy('updatedAt', 'DESC')
       .castTo<JournalEntryCommonQueryResponse[]>();
 

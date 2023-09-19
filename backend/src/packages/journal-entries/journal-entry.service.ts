@@ -1,9 +1,7 @@
 import { ExceptionMessage } from '#libs/enums/enums.js';
-import { JournalError, UsersError } from '#libs/exceptions/exceptions.js';
+import { JournalError } from '#libs/exceptions/exceptions.js';
 import { sanitizeInput } from '#libs/helpers/helpers.js';
-import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Service } from '#libs/types/types.js';
-import { userService } from '#packages/users/users.js';
 
 import { JournalEntryEntity } from './journal-entry.entity.js';
 import { type JournalEntryRepository } from './journal-entry.repository.js';
@@ -53,15 +51,6 @@ class JournalEntryService implements Service {
     body,
     userId,
   }: CreateJournalEntryPayload): Promise<JournalEntryGetAllItemResponseDto> {
-    const user = await userService.findById(userId);
-
-    if (!user) {
-      throw new UsersError({
-        status: HTTPCode.NOT_FOUND,
-        message: ExceptionMessage.USER_NOT_FOUND,
-      });
-    }
-
     const item = await this.journalEntryRepository.create(
       JournalEntryEntity.initializeNew({
         userId,
@@ -79,15 +68,6 @@ class JournalEntryService implements Service {
     title,
     text,
   }: JournalEntryUpdateRequestDto): Promise<JournalEntryGetAllItemResponseDto> {
-    const user = await userService.findById(userId);
-
-    if (!user) {
-      throw new UsersError({
-        status: HTTPCode.NOT_FOUND,
-        message: ExceptionMessage.USER_NOT_FOUND,
-      });
-    }
-
     const item = await this.journalEntryRepository.update(
       JournalEntryEntity.initialize({
         id,
