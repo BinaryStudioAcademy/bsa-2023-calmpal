@@ -51,7 +51,7 @@ const AddMeditationModal: React.ForwardRefRenderFunction<
       AddMeditationModalReference.current?.close();
       reset();
     }
-  }, [meditationDataStatus, reset, reference]);
+  }, [meditationDataStatus, reset, AddMeditationModalReference]);
 
   const handleFormSubmit = useCallback(
     (event_: React.FormEvent<HTMLFormElement>) => {
