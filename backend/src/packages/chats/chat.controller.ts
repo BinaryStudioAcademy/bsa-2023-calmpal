@@ -9,7 +9,6 @@ import { type Logger } from '#libs/packages/logger/logger.js';
 import {
   type ChatMessageCreatePayload,
   type ChatMessageCreateRequestDto,
-  type ChatMessagesUrlParameter,
 } from '#packages/chat-messages/chat-messages.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 
@@ -127,7 +126,7 @@ class ChatController extends BaseController {
         return this.createMessage(
           options as APIHandlerOptions<{
             body: ChatMessageCreateRequestDto;
-            params: ChatMessagesUrlParameter;
+            params: { id: string };
             user: UserAuthResponseDto;
           }>,
         );
@@ -140,7 +139,7 @@ class ChatController extends BaseController {
       handler: (options) => {
         return this.findAllMessagesByChatId(
           options as APIHandlerOptions<{
-            params: ChatMessagesUrlParameter;
+            params: { id: string };
           }>,
         );
       },
@@ -219,13 +218,13 @@ class ChatController extends BaseController {
 
   /**
    * @swagger
-   * /chats/{chatId}/messages:
+   * /chats/{id}/messages:
    *   post:
    *     description: Create a new chat message
    *     parameters:
    *       -  in: path
    *          description: Chat id
-   *          name: chatId
+   *          name: id
    *          required: true
    *          type: number
    *          minimum: 1
@@ -250,12 +249,12 @@ class ChatController extends BaseController {
   private async createMessage(
     options: APIHandlerOptions<{
       body: ChatMessageCreateRequestDto;
-      params: ChatMessagesUrlParameter;
+      params: { id: string };
       user: UserAuthResponseDto;
     }>,
   ): Promise<APIHandlerResponse> {
     const chatMessageToCreateData: ChatMessageCreatePayload = {
-      chatId: Number(options.params.chatId),
+      chatId: Number(options.params.id),
       message: options.body.message,
       senderId: options.user.id,
     };
@@ -268,13 +267,13 @@ class ChatController extends BaseController {
 
   /**
    * @swagger
-   * /chats/{chatId}/messages:
+   * /chats/{id}/messages:
    *   get:
    *     description: Returns all chat messages
    *     parameters:
    *       -  in: path
    *          description: Chat id
-   *          name: chatId
+   *          name: id
    *          required: true
    *          type: number
    *          minimum: 1
@@ -293,13 +292,13 @@ class ChatController extends BaseController {
    */
   private async findAllMessagesByChatId(
     options: APIHandlerOptions<{
-      params: ChatMessagesUrlParameter;
+      params: { id: string };
     }>,
   ): Promise<APIHandlerResponse> {
     return {
       status: HTTPCode.OK,
       payload: await this.chatService.findAllMessagesByChatId(
-        Number(options.params.chatId),
+        Number(options.params.id),
       ),
     };
   }
