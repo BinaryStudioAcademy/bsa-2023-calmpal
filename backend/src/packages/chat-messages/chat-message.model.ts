@@ -7,7 +7,7 @@ import {
 import { UsersTableColumn } from '#packages/users/libs/enums/enums.js';
 import { UserDetailsModel } from '#packages/users/user-details.model.js';
 
-import { ChatMessagesTableColumn } from './libs/enums/chat-messages-table-column.enum.js';
+import { ChatMessagesTableColumn } from './libs/enums/enums.js';
 
 class ChatMessageModel extends AbstractModel {
   public message!: string;
