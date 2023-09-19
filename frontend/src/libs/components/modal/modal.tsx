@@ -40,7 +40,7 @@ const Modal: React.ForwardRefRenderFunction<
           <div className={styles['header']}>
             <span className={styles['title']}>{title}</span>
             {showCrossIcon && (
-              <form method="dialog" className={styles['icon-container']}>
+              <div className={styles['icon-container']}>
                 <Button
                   label="Close modal"
                   iconName="close"
@@ -49,7 +49,7 @@ const Modal: React.ForwardRefRenderFunction<
                   onClick={handleClose}
                   isLabelVisuallyHidden
                 />
-              </form>
+              </div>
             )}
           </div>
           {children}

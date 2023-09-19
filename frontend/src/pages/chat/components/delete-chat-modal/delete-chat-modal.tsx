@@ -40,7 +40,7 @@ const DeleteChatModal: React.ForwardRefRenderFunction<
 
   return (
     <Modal
-      title="Delete Note?"
+      title="Delete chat?"
       ref={chatDeleteModalReference}
       showCrossIcon={false}
     >
