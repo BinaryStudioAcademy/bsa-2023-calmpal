@@ -7,7 +7,7 @@ import {
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 import {
-  type ChatMessageCreateData,
+  type ChatMessageCreatePayload,
   type ChatMessageCreateRequestDto,
   type ChatMessagesUrlParameter,
 } from '#packages/chat-messages/chat-messages.js';
@@ -254,7 +254,7 @@ class ChatController extends BaseController {
       user: UserAuthResponseDto;
     }>,
   ): Promise<APIHandlerResponse> {
-    const chatMessageToCreateData: ChatMessageCreateData = {
+    const chatMessageToCreateData: ChatMessageCreatePayload = {
       chatId: Number(options.params.chatId),
       message: options.body.message,
       senderId: options.user.id,

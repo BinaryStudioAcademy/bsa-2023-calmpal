@@ -1,6 +1,6 @@
 import { type Service } from '#libs/types/types.js';
 import {
-  type ChatMessageCreateData,
+  type ChatMessageCreatePayload,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
   type ChatMessageService,
@@ -74,7 +74,7 @@ class ChatService implements Service {
   }
 
   public createMessage(
-    payload: ChatMessageCreateData,
+    payload: ChatMessageCreatePayload,
   ): Promise<ChatMessageGetAllItemResponseDto> {
     return this.chatMessageService.create(payload);
   }

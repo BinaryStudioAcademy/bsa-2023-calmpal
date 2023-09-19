@@ -8,7 +8,7 @@ const chatMessageService = new ChatMessageService(chatMessageRepository);
 export { chatMessageService };
 export { type ChatMessageService } from './chat-message.service.js';
 export {
-  type ChatMessageCreateData,
+  type ChatMessageCreatePayload,
   type ChatMessageCreateRequestDto,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,

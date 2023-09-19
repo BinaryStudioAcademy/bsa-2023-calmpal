@@ -1,4 +1,4 @@
-export { type ChatMessageCreateData } from './chat-message-create-data.type.js';
+export { type ChatMessageCreatePayload } from './chat-message-create-payload.type.js';
 export { type ChatMessagesUrlParameter } from './chat-messages-url-parameter.type.js';
 export {
   type ChatMessageCreateRequestDto,

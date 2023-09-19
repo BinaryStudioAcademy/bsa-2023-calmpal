@@ -7,7 +7,7 @@ import { userService } from '#packages/users/users.js';
 import { ChatMessageEntity } from './chat-message.entity.js';
 import { type ChatMessageRepository } from './chat-message.repository.js';
 import {
-  type ChatMessageCreateData,
+  type ChatMessageCreatePayload,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
 } from './libs/types/types.js';
@@ -28,7 +28,7 @@ class ChatMessageService implements Service {
   }
 
   public async create(
-    payload: ChatMessageCreateData,
+    payload: ChatMessageCreatePayload,
   ): Promise<ChatMessageGetAllItemResponseDto> {
     const sender = await userService.findById(payload.senderId);
     if (!sender) {
