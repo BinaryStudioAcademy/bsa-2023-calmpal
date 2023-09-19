@@ -1,6 +1,5 @@
-import { ExceptionMessage, JournalError } from 'shared/build/index.js';
-
-import { APIPath } from '#libs/enums/enums.js';
+import { APIPath, ExceptionMessage } from '#libs/enums/enums.js';
+import { JournalError } from '#libs/exceptions/exceptions.js';
 import {
   type APIHandlerOptions,
   type APIHandlerResponse,
