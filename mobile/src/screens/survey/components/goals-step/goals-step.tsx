@@ -1,3 +1,4 @@
+import { type RouteProp } from '@react-navigation/native';
 import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
@@ -11,6 +12,7 @@ import {
 } from '#libs/hooks/hooks';
 import { type SurveyNavigationParameterList } from '#libs/types/types';
 import {
+  getSurveyCategories,
   type SurveyInputDto,
   surveyInputValidationSchema,
 } from '#packages/survey/survey';
@@ -23,14 +25,28 @@ import {
 import { SurveyCategory } from '../components';
 import { styles } from './styles';
 
-const GoalsStep: React.FC = () => {
+type PreferencesStepProperties = {
+  route: RouteProp<
+    SurveyNavigationParameterList,
+    typeof SurveyScreenName.GOALS
+  >;
+};
+
+type PreferencesStepInitialParameters = {
+  setGoalsSurvey: (payload: string[]) => void;
+};
+
+const GoalsStep: React.FC<PreferencesStepProperties> = ({ route }) => {
+  const { setGoalsSurvey } = route.params as PreferencesStepInitialParameters;
   const navigation =
     useNavigation<NativeStackNavigationProp<SurveyNavigationParameterList>>();
 
-  const { control, errors, isValid } = useAppForm<SurveyInputDto>({
-    defaultValues: DEFAULT_SURVEY_PAYLOAD,
-    validationSchema: surveyInputValidationSchema,
-  });
+  const { control, errors, isValid, handleSubmit } = useAppForm<SurveyInputDto>(
+    {
+      defaultValues: DEFAULT_SURVEY_PAYLOAD,
+      validationSchema: surveyInputValidationSchema,
+    },
+  );
   const {
     field: { onChange: onCategoryChange, value: categoriesValue },
   } = useFormController({
@@ -38,7 +54,6 @@ const GoalsStep: React.FC = () => {
     control,
   });
   const hasOther = categoriesValue.includes('Other');
-
   const handleFieldChange = useCallback(
     (option: string) => {
       if (categoriesValue.includes(option)) {
@@ -53,12 +68,19 @@ const GoalsStep: React.FC = () => {
 
       onCategoryChange([...categoriesValue, option]);
     },
-
     [categoriesValue, onCategoryChange],
+  );
+
+  const handleSurveySubmit = useCallback(
+    (payload: SurveyInputDto) => {
+      setGoalsSurvey(getSurveyCategories(payload));
+    },
+    [setGoalsSurvey],
   );
 
   const handleContinue = (): void => {
     navigation.navigate(SurveyScreenName.WORRIES);
+    void handleSubmit(handleSurveySubmit)();
   };
 
   const handleBack = (): void => {
@@ -82,7 +104,6 @@ const GoalsStep: React.FC = () => {
           />
         );
       })}
-
       {hasOther && (
         <Input
           control={control}
@@ -102,5 +123,4 @@ const GoalsStep: React.FC = () => {
     </ScrollView>
   );
 };
-
 export { GoalsStep };
