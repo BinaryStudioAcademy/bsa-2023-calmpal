@@ -19,11 +19,13 @@ const Modal: React.ForwardRefRenderFunction<
   HTMLDialogElement | null,
   Properties
 > = ({ children, title }, reference) => {
+  const childrenReference =
+    reference as React.RefObject<HTMLDialogElement | null>;
   const modalReference = useRef<HTMLDivElement>(null);
 
   const handleClose = useCallback(() => {
     (reference as React.RefObject<HTMLDialogElement | null>).current?.close();
-  }, [reference]);
+  }, [childrenReference]);
 
   useHandleClickOutside({
     ref: modalReference,

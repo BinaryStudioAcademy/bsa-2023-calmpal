@@ -31,6 +31,8 @@ const AddMeditationModal: React.ForwardRefRenderFunction<
   HTMLDialogElement,
   Properties
 > = ({ onSubmit }, reference) => {
+  const AddMeditationModalReference =
+    reference as React.RefObject<HTMLDialogElement | null>;
   const { meditationDataStatus } = useAppSelector(({ meditation }) => {
     return {
       meditationDataStatus: meditation.meditationEntriesDataStatus,
@@ -47,7 +49,7 @@ const AddMeditationModal: React.ForwardRefRenderFunction<
 
   useEffect(() => {
     if (meditationDataStatus === DataStatus.FULFILLED) {
-      (reference as React.RefObject<HTMLDialogElement | null>).current?.close();
+      AddMeditationModalReference.current?.close();
       reset();
     }
   }, [meditationDataStatus, reset, reference]);
