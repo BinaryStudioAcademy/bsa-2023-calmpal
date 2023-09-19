@@ -7,7 +7,6 @@ export {
   AppEnvironment,
   ContentType,
   ExceptionMessage,
-  ExceptionRule,
   ServerErrorType,
 } from './libs/enums/enums.js';
 export {
@@ -54,6 +53,7 @@ export {
   type FileGetAllItemResponseDto,
   FilesApiPath,
   type FileUploadRequestDto,
+  FileUploadValidationMessage,
   FileUploadValidationRule,
   type S3FileUploadRequestDto,
 } from './packages/files/files.js';
