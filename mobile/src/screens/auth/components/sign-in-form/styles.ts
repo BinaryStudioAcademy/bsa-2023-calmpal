@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   formContainer: {
     height: '100%',
     width: '100%',
-    paddingHorizontal: 56,
+    paddingHorizontal: 55,
   },
   titleText: {
     fontSize: 30,
