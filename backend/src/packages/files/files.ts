@@ -12,10 +12,13 @@ const fileService = new FileService({
   s3,
 });
 const fileController = new FileController(logger, fileService);
-
 export { fileController, fileService };
 export { FileModel } from './file.model.js';
 export { type FileService } from './file.service.js';
+export {
+  FileUploadValidationMessage,
+  FileUploadValidationRule,
+} from './libs/enums/enums.js';
 export {
   type FileGetAllItemResponseDto,
   type FileUploadRequestDto,

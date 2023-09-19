@@ -1,7 +1,6 @@
 import { useSidebarState } from '#libs/hooks/hooks.js';
 
-import { MeditationList } from './meditation-list/meditation-list.js';
-import { MeditationSidebar } from './meditation-sidebar/meditation-sidebar.js';
+import { MeditationList, MeditationSidebar } from './components/components.js';
 
 const Meditation: React.FC = () => {
   const { isSidebarShown, setIsSidebarShown } = useSidebarState();

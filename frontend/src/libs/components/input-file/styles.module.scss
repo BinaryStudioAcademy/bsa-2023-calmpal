@@ -1,0 +1,89 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container .label {
+  font-weight: 600;
+}
+
+.drag-zone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 40px;
+  text-align: center;
+  background-color: var(--white);
+  border: 1px dashed var(--blue-200);
+  border-radius: 8px;
+}
+
+.drag-zone .icon-container {
+  margin: 20px;
+  font-size: 60px;
+  line-height: 1;
+}
+
+.drag-zone .primary-text {
+  color: var(--black);
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.drag-zone .secondary-text {
+  color: var(--gray-200);
+  font-size: 14px;
+}
+
+.drag-zone:hover {
+  border: 1px dashed var(--blue-300);
+  box-shadow: 0.1px 3px 3px var(--blue-alpha-30);
+}
+
+.input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--transparent);
+  background-color: var(--transparent);
+  border: none;
+  cursor: pointer;
+}
+
+.input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.file {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.file .name {
+  max-width: 290px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.error {
+  border: 1px dashed var(--red-300);
+}
+
+.error-text {
+  display: none;
+  color: var(--red-300);
+  font-size: 12px;
+  text-align: left;
+}
+
+.error-text:first-child {
+  display: initial;
+}
