@@ -1,10 +1,6 @@
 import React from 'react';
 
-import {
-  LinearGradient,
-  ScrollView,
-  Switch,
-} from '#libs/components/components';
+import { ScrollView, Switch } from '#libs/components/components';
 import { useAppForm } from '#libs/hooks/hooks';
 
 import { Setting } from './components/components';
@@ -17,14 +13,12 @@ const NotificationSettings: React.FC = () => {
   });
 
   return (
-    <LinearGradient>
-      <ScrollView contentContainerStyle={styles.container}>
-        <Setting
-          label="Allow Notifications"
-          controller={<Switch name="hasNotification" control={control} />}
-        />
-      </ScrollView>
-    </LinearGradient>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Setting
+        label="Allow Notifications"
+        controller={<Switch name="hasNotification" control={control} />}
+      />
+    </ScrollView>
   );
 };
 export { NotificationSettings };
