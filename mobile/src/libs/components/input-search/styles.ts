@@ -7,12 +7,13 @@ const styles = StyleSheet.create({
     backgroundColor: AppColor.BLUE_100,
     borderRadius: 12,
     borderWidth: 0,
-    fontSize: 14,
+    fontSize: 16,
     height: 48,
     marginBottom: 23,
     marginHorizontal: 24,
     paddingHorizontal: 20,
     paddingVertical: 10,
+    color: AppColor.GRAY_600,
   },
   focusedInput: {
     borderWidth: 1,
@@ -22,6 +23,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
     shadowOpacity: 0.25,
+    color: AppColor.GRAY_600,
   },
 });
 
