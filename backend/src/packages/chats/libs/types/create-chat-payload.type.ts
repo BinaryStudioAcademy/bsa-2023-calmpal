@@ -2,7 +2,8 @@ import { type ChatEntity } from '#packages/chats/chat.entity.js';
 
 type CreateChatPayload = {
   chatEntity: ChatEntity;
-  members: number[];
+  userId: number;
+  message: string;
 };
 
 export { type CreateChatPayload };

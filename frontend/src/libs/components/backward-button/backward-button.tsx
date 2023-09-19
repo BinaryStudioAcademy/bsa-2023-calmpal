@@ -10,7 +10,7 @@ type Properties = {
 const BackButton: React.FC<Properties> = ({ onGoBack }) => {
   return (
     <button className={styles['backward']} onClick={onGoBack}>
-      <Icon name="back" color={IconColor.BLUE} />
+      <Icon name="back" color={IconColor.BLUE} width={30} height={20} />
     </button>
   );
 };

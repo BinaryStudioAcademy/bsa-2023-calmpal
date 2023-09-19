@@ -13,6 +13,7 @@ import {
   handleUnauthorized,
 } from '#libs/packages/store/middlewares/middlewares.js';
 import { authApi } from '#packages/auth/auth.js';
+import { chatMessagesApi } from '#packages/chat-messages/chat-messages.js';
 import { chatApi } from '#packages/chats/chats.js';
 import { journalApi } from '#packages/journal/journal.js';
 import { meditationApi } from '#packages/meditation/meditation.js';
@@ -39,6 +40,7 @@ type ExtraArguments = {
   chatApi: typeof chatApi;
   storage: typeof storage;
   notification: typeof notification;
+  chatMessagesApi: typeof chatMessagesApi;
 };
 
 class Store {
@@ -82,6 +84,7 @@ class Store {
       chatApi,
       storage,
       notification,
+      chatMessagesApi,
     };
   }
 }

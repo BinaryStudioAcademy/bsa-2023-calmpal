@@ -12,6 +12,7 @@ export {
 export {
   ApplicationError,
   AuthError,
+  ChatError,
   FileError,
   HTTPError,
   JournalError,
@@ -44,6 +45,13 @@ export {
   type ValueOf,
 } from './libs/types/types.js';
 export { AuthApiPath } from './packages/auth/auth.js';
+export {
+  type ChatMessageCreateRequestDto,
+  type ChatMessageGetAllItemResponseDto,
+  type ChatMessageGetAllResponseDto,
+  ChatMessageValidationMessage,
+  ChatMessageValidationRule,
+} from './packages/chat-messages/chat-messages.js';
 export {
   type ChatCreateRequestDto,
   type ChatGetAllItemResponseDto,
@@ -98,7 +106,3 @@ export {
   type UserSignUpResponseDto,
   userSignUpValidationSchema,
 } from './packages/users/users.js';
-export {
-  type ChatMessageGetAllItemResponseDto,
-  type ChatMessageGetAllResponseDto,
-} from '#packages/chat-messages/chat-messages.js';
