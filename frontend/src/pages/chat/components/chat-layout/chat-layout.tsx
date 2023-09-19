@@ -37,8 +37,8 @@ const ChatLayout: React.FC = () => {
       } else {
         void dispatch(
           chatActions.createMessage({
-            body: { message },
-            options: { chatId: id as string },
+            message,
+            chatId: id as string,
           }),
         );
       }

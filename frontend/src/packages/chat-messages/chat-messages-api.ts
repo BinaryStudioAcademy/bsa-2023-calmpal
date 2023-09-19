@@ -39,12 +39,12 @@ class ChatMessagesApi extends BaseHttpApi {
   ): Promise<ChatMessageGetAllItemResponseDto> {
     const response = await this.load(
       this.getFullEndpoint(ChatsApiPath.$ID_MESSAGES, {
-        ...payload.options,
+        id: payload.chatId,
       }),
       {
         method: 'POST',
         contentType: ContentType.JSON,
-        payload: JSON.stringify(payload.body),
+        payload: JSON.stringify(payload.message),
         hasAuth: true,
       },
     );

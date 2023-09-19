@@ -1,11 +1,6 @@
-import {
-  type ChatMessageCreateRequestDto,
-  type ChatMessagesUrlParameters,
-} from './types.js';
-
 type ChatMessageCreatePayload = {
-  body: ChatMessageCreateRequestDto;
-  options: ChatMessagesUrlParameters;
+  message: string;
+  chatId: string;
 };
 
 export { type ChatMessageCreatePayload };
