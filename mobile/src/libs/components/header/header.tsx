@@ -20,6 +20,7 @@ type Properties = {
   isArrowVisible?: boolean;
   badgeCount?: number;
   isProfileVisible?: boolean;
+  isChat?: boolean;
 };
 
 const Header: React.FC<Properties> = ({
@@ -27,6 +28,7 @@ const Header: React.FC<Properties> = ({
   isArrowVisible = false,
   badgeCount = DEFAULT_BADGE_COUNT,
   isProfileVisible = false,
+  isChat = false,
 }) => {
   const navigation =
     useNavigation<NavigationProp<ProfileNavigationParameterList>>();
@@ -49,7 +51,7 @@ const Header: React.FC<Properties> = ({
       {isArrowVisible && <BackButton />}
 
       <View style={styles.titleBadgeContainer}>
-        <Text style={styles.title}>{title ?? name}</Text>
+        <Text style={isChat && styles.title}>{title ?? name}</Text>
         {hasValue && <Badge count={badgeCount} />}
       </View>
       {isProfileVisible && (
