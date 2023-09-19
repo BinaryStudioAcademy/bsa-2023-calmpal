@@ -2,11 +2,12 @@ import { type NativeStackNavigationOptions } from '@react-navigation/native-stac
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 
-import { Loader, SignBackground } from '#libs/components/components';
-import { DataStatus, SurveyScreenName } from '#libs/enums/enums';
-import { useAppSelector } from '#libs/hooks/hooks';
+import { SignBackground } from '#libs/components/components';
+import { SurveyScreenName } from '#libs/enums/enums';
+import { useAppDispatch, useAppSelector, useState } from '#libs/hooks/hooks';
 import { type SurveyNavigationParameterList } from '#libs/types/types';
 import { type UserAuthResponseDto } from '#packages/users/users';
+import { actions as authActions } from '#slices/auth/auth';
 
 import { PreferencesStep } from './components/components';
 import { FeelingsStep } from './components/feelings-step/feelings-step';
@@ -18,20 +19,27 @@ import { WorriesStep } from './components/worries-step/worries-step';
 const SurveyStack = createNativeStackNavigator<SurveyNavigationParameterList>();
 
 const Survey: React.FC = () => {
-  const { surveyPreferencesDataStatus } = useAppSelector(({ auth }) => {
+  const dispatch = useAppDispatch();
+  const [preferencesSurvey, setPreferencesSurvey] = useState([]);
+  const { userId } = useAppSelector(({ auth }) => {
     return {
       userId: (auth.authenticatedUser as UserAuthResponseDto).id,
-      surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
     };
   });
+
+  const handleSubmit = (option: string[]): void => {
+    void dispatch(
+      authActions.createUserSurvey({
+        userId: userId,
+        preferences: preferencesSurvey,
+        journaling_experience: option,
+      }),
+    );
+  };
 
   const screenOptions: NativeStackNavigationOptions = {
     headerShown: false,
   };
-
-  if (surveyPreferencesDataStatus === DataStatus.PENDING) {
-    return <Loader />;
-  }
 
   return (
     <SignBackground>
@@ -39,6 +47,7 @@ const Survey: React.FC = () => {
         <SurveyStack.Screen
           name={SurveyScreenName.PREFERENCES}
           component={PreferencesStep}
+          initialParams={{ setPreferencesSurvey }}
         />
         <SurveyStack.Screen
           name={SurveyScreenName.FEELINGS}
@@ -59,10 +68,12 @@ const Survey: React.FC = () => {
         <SurveyStack.Screen
           name={SurveyScreenName.JOURNALING_EXPERIENCE}
           component={JournalingStep}
+          initialParams={{
+            handleSubmitSurvey: handleSubmit,
+          }}
         />
       </SurveyStack.Navigator>
     </SignBackground>
   );
 };
-
 export { Survey };

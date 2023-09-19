@@ -1,3 +1,4 @@
+import { type RouteProp } from '@react-navigation/native';
 import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
@@ -11,6 +12,7 @@ import {
 } from '#libs/hooks/hooks';
 import { type SurveyNavigationParameterList } from '#libs/types/types';
 import {
+  getSurveyCategories,
   type SurveyInputDto,
   surveyInputValidationSchema,
 } from '#packages/survey/survey';
@@ -23,21 +25,39 @@ import {
 import { SurveyCategory } from '../components';
 import { styles } from './styles';
 
-const PreferencesStep: React.FC = () => {
+type PreferencesStepProperties = {
+  route: RouteProp<
+    SurveyNavigationParameterList,
+    typeof SurveyScreenName.PREFERENCES
+  >;
+};
+
+type PreferencesStepInitialParameters = {
+  setPreferencesSurvey: (payload: string[]) => void;
+};
+
+const PreferencesStep: React.FC<PreferencesStepProperties> = ({ route }) => {
+  const { setPreferencesSurvey } =
+    route.params as PreferencesStepInitialParameters;
   const navigation =
     useNavigation<NativeStackNavigationProp<SurveyNavigationParameterList>>();
 
-  const { control, errors, isValid } = useAppForm<SurveyInputDto>({
-    defaultValues: DEFAULT_SURVEY_PAYLOAD,
-    validationSchema: surveyInputValidationSchema,
-  });
+  const { control, errors, isValid, handleSubmit } = useAppForm<SurveyInputDto>(
+    {
+      defaultValues: DEFAULT_SURVEY_PAYLOAD,
+      validationSchema: surveyInputValidationSchema,
+    },
+  );
+
   const {
     field: { onChange: onCategoryChange, value: categoriesValue },
   } = useFormController({
     name: 'preferences',
     control,
   });
+
   const hasOther = categoriesValue.includes('Other');
+
   const handleFieldChange = useCallback(
     (option: string) => {
       if (categoriesValue.includes(option)) {
@@ -55,8 +75,16 @@ const PreferencesStep: React.FC = () => {
     [categoriesValue, onCategoryChange],
   );
 
+  const handleSurveySubmit = useCallback(
+    (payload: SurveyInputDto) => {
+      setPreferencesSurvey(getSurveyCategories(payload));
+    },
+    [setPreferencesSurvey],
+  );
+
   const handleContinue = (): void => {
     navigation.navigate(SurveyScreenName.FEELINGS);
+    void handleSubmit(handleSurveySubmit)();
   };
 
   return (

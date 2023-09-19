@@ -1,12 +1,11 @@
+import { type RouteProp } from '@react-navigation/native';
 import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
 import { Button, Input, ScrollView, Text } from '#libs/components/components';
 import { SurveyScreenName } from '#libs/enums/enums';
 import {
-  useAppDispatch,
   useAppForm,
-  useAppSelector,
   useCallback,
   useFormController,
   useNavigation,
@@ -17,18 +16,29 @@ import {
   type SurveyInputDto,
   surveyInputValidationSchema,
 } from '#packages/survey/survey';
-import { type UserAuthResponseDto } from '#packages/users/users';
 import {
   DEFAULT_SURVEY_PAYLOAD,
   JOURNALING_EXPERIENCE_CATEGORIES,
   TEXTAREA_ROWS_COUNT,
 } from '#screens/survey/libs/constants';
-import { actions as authActions } from '#slices/auth/auth';
 
 import { SurveyCategory } from '../components';
 import { styles } from './styles';
 
-const JournalingStep: React.FC = () => {
+type JournalingStepProperties = {
+  route: RouteProp<
+    SurveyNavigationParameterList,
+    typeof SurveyScreenName.JOURNALING_EXPERIENCE
+  >;
+};
+
+type JournalingStepInitialParameters = {
+  handleSubmitSurvey: (payload: string[]) => void;
+};
+
+const JournalingStep: React.FC<JournalingStepProperties> = ({ route }) => {
+  const { handleSubmitSurvey } =
+    route.params as JournalingStepInitialParameters;
   const navigation =
     useNavigation<NativeStackNavigationProp<SurveyNavigationParameterList>>();
 
@@ -38,12 +48,14 @@ const JournalingStep: React.FC = () => {
       validationSchema: surveyInputValidationSchema,
     },
   );
+
   const {
     field: { onChange: onCategoryChange, value: categoriesValue },
   } = useFormController({
     name: 'preferences',
     control,
   });
+
   const hasOther = categoriesValue.includes('Other');
 
   const handleFieldChange = useCallback(
@@ -60,41 +72,19 @@ const JournalingStep: React.FC = () => {
 
       onCategoryChange([...categoriesValue, option]);
     },
-
     [categoriesValue, onCategoryChange],
-  );
-
-  const dispatch = useAppDispatch();
-  const { userId } = useAppSelector(({ auth }) => {
-    return {
-      userId: (auth.authenticatedUser as UserAuthResponseDto).id,
-      surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
-    };
-  });
-
-  const handleSubmitf = useCallback(
-    (options: string[]) => {
-      void dispatch(
-        authActions.createUserSurvey({
-          userId: userId,
-          preferences: options,
-        }),
-      );
-    },
-    [dispatch, userId],
   );
 
   const handleSurveySubmit = useCallback(
     (payload: SurveyInputDto) => {
-      handleSubmitf(getSurveyCategories(payload));
+      handleSubmitSurvey(getSurveyCategories(payload));
     },
-    [handleSubmitf],
+    [handleSubmitSurvey],
   );
 
   const handleFormSubmit = useCallback((): void => {
     void handleSubmit(handleSurveySubmit)();
   }, [handleSubmit, handleSurveySubmit]);
-
   const handleBack = (): void => {
     navigation.navigate(SurveyScreenName.MEDITATION_EXPERIENCE);
   };
@@ -105,7 +95,7 @@ const JournalingStep: React.FC = () => {
       showsVerticalScrollIndicator={false}
     >
       <Text style={styles.titleText}>
-        What&aposs your experience with journaling?
+        What&apos;s your experience with journaling?
       </Text>
       {JOURNALING_EXPERIENCE_CATEGORIES.map((category) => {
         return (
@@ -116,7 +106,6 @@ const JournalingStep: React.FC = () => {
           />
         );
       })}
-
       {hasOther && (
         <Input
           control={control}
@@ -136,5 +125,4 @@ const JournalingStep: React.FC = () => {
     </ScrollView>
   );
 };
-
 export { JournalingStep };

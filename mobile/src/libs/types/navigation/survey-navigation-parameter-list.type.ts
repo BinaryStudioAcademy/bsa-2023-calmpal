@@ -1,12 +1,12 @@
 import { type SurveyScreenName } from '#libs/enums/enums';
 
 type SurveyNavigationParameterList = {
-  [SurveyScreenName.PREFERENCES]: undefined;
-  [SurveyScreenName.FEELINGS]: undefined;
-  [SurveyScreenName.GOALS]: undefined;
-  [SurveyScreenName.WORRIES]: undefined;
-  [SurveyScreenName.MEDITATION_EXPERIENCE]: undefined;
-  [SurveyScreenName.JOURNALING_EXPERIENCE]: undefined;
+  [SurveyScreenName.PREFERENCES]: undefined | object;
+  [SurveyScreenName.FEELINGS]: undefined | object;
+  [SurveyScreenName.GOALS]: undefined | object;
+  [SurveyScreenName.WORRIES]: undefined | object;
+  [SurveyScreenName.MEDITATION_EXPERIENCE]: undefined | object;
+  [SurveyScreenName.JOURNALING_EXPERIENCE]: undefined | object;
 };
 
 export { type SurveyNavigationParameterList };
