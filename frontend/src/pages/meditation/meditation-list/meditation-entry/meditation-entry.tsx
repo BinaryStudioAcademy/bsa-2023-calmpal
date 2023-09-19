@@ -1,12 +1,13 @@
 import meditationListPlaceholder from '#assets/img/meditation-list-placeholder.jpg';
 import { Button, Modal } from '#libs/components/components.js';
-import { IconColor } from '#libs/enums/enums.js';
-import { useCallback, useNavigate, useState } from '#libs/hooks/hooks.js';
+import { AppRoute, IconColor } from '#libs/enums/enums.js';
+import { useAppDispatch, useCallback, useState } from '#libs/hooks/hooks.js';
 import { MeditationTimer } from '#pages/meditation/components/meditation-timer/meditation-timer.js';
 import {
   DURATION_UNIT,
   MEDITATION_DURATION,
 } from '#pages/meditation/libs/constants/constants.js';
+import { actions as appActions } from '#slices/app/app.js';
 
 import { type MeditationEntry } from '../../libs/types/types.js';
 import styles from './styles.module.scss';
@@ -16,7 +17,7 @@ type Properties = {
 };
 
 const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [isModalDisplayed, setIsModalDisplayed] = useState(false);
 
   const displayedDuration = `${
@@ -34,9 +35,11 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
   }, []);
 
   const handleStartSession = useCallback(() => {
-    navigate(`/meditation/${meditationEntry.id}`);
+    dispatch(
+      appActions.navigate(`${AppRoute.MEDITATION}/${meditationEntry.id}`),
+    );
     setIsModalDisplayed(false);
-  }, [meditationEntry.id, navigate]);
+  }, [meditationEntry.id, dispatch]);
 
   return (
     <div className={styles['track']}>
