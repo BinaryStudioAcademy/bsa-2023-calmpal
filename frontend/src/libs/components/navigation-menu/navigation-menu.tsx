@@ -35,7 +35,12 @@ const NavigationMenu: React.FC<Properties> = ({ routes }) => {
                 <Link to={route.path}>
                   <span className={styles['link']}>
                     <span className="visually-hidden">Go to {route.name}</span>
-                    <Icon name={route.icon} color={IconColor.BLUE} />
+                    <Icon
+                      name={route.icon}
+                      color={IconColor.BLUE}
+                      width={24}
+                      height={24}
+                    />
                   </span>
                 </Link>
               </button>
