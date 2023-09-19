@@ -35,13 +35,15 @@ const Journal: React.FC = () => {
     setIsSidebarShown(true);
   }, [setIsSidebarShown, navigate]);
 
-  useEffect(() => {
-    void dispatch(journalActions.getAllJournalEntries()).then(() => {
-      if (id) {
-        void dispatch(journalActions.setSelectedJournalEntry(Number(id)));
-      }
-    });
+  const handleGetSelectedNote = useCallback(async () => {
+    await dispatch(journalActions.getAllJournalEntries());
+
+    dispatch(journalActions.setSelectedJournalEntry(Number(id)));
   }, [dispatch, id]);
+
+  useEffect(() => {
+    void handleGetSelectedNote();
+  }, [handleGetSelectedNote, id]);
 
   return (
     <>
