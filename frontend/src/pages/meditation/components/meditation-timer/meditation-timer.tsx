@@ -1,5 +1,9 @@
 import { Button } from '#libs/components/components.js';
-import { useCallback, useState } from '#libs/hooks/hooks.js';
+import {
+  useAppForm,
+  useCallback,
+  useFormController,
+} from '#libs/hooks/hooks.js';
 
 import { TimerButton } from './components/timer-button/timer-button.js';
 import { DURATION_UNIT, MEDITATION_DURATION } from './libs/constants.js';
@@ -14,14 +18,17 @@ const MeditationTimer: React.FC<TimerProperties> = ({
   defaultDuration,
   onStartSession,
 }) => {
-  const [selectedDuration, setSelectedDuration] = useState(defaultDuration);
+  const { control } = useAppForm({
+    defaultValues: { meditationDuration: defaultDuration },
+  });
 
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setSelectedDuration(event.target.value);
-    },
-    [],
-  );
+  const {
+    field: { onChange, value },
+  } = useFormController({ name: 'meditationDuration', control });
+
+  const handleStartSession = useCallback(() => {
+    onStartSession();
+  }, [onStartSession]);
 
   return (
     <div className={styles['timer']}>
@@ -31,8 +38,8 @@ const MeditationTimer: React.FC<TimerProperties> = ({
           return (
             <TimerButton
               key={duration}
-              isActive={selectedDuration === duration}
-              onChange={handleChange}
+              isActive={value === duration}
+              onChange={onChange}
               value={duration}
               name="meditationDuration"
               duration={
@@ -48,7 +55,7 @@ const MeditationTimer: React.FC<TimerProperties> = ({
       <Button
         style="start-button"
         label="Start meditation session"
-        onClick={onStartSession}
+        onClick={handleStartSession}
       />
     </div>
   );
