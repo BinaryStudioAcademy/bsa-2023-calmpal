@@ -15,15 +15,12 @@ const DEFAULT_MEDITATION_PAYLOAD: MeditationEntryCreateForm = {
   file: null,
 };
 
-const MOCKED_IMAGE = '../../src/assets/img/meditation-image-placeholder.jpg';
-
 const MOCKED_DURATION = '10 min';
 
 export {
   DEFAULT_MEDITATION_PAYLOAD,
   FULL_PERCENTAGE,
   MOCKED_DURATION,
-  MOCKED_IMAGE,
   navigationItems,
   PROGRESS_BAR,
   TRACK_FIRST_INDEX,

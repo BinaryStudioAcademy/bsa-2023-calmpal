@@ -1,9 +1,7 @@
+import deafultMeditationImage from '#assets/img/meditation-image-placeholder.jpg';
 import { AudioPlayer } from '#libs/components/components.js';
 import { useAppSelector, useCallback, useState } from '#libs/hooks/hooks.js';
-import {
-  MOCKED_IMAGE,
-  TRACK_FIRST_INDEX,
-} from '#pages/meditation/libs/constants/constants.js';
+import { TRACK_FIRST_INDEX } from '#pages/meditation/libs/constants/constants.js';
 
 import styles from './styles.module.scss';
 
@@ -32,7 +30,7 @@ const MeditationPlayer: React.FC = () => {
         <div className={styles['image-wrapper']}>
           <img
             className={styles['image']}
-            src={MOCKED_IMAGE}
+            src={deafultMeditationImage}
             alt="Meditation"
             width={355}
             height={355}
