@@ -38,9 +38,7 @@ const Card: React.FC<Properties> = ({
   };
 
   const handleDelete = (): void => {
-    if (onDelete) {
-      onDelete();
-    }
+    onDelete?.();
   };
 
   const rightSwipeActions = (): React.ReactNode => {
