@@ -31,9 +31,7 @@ const styles = StyleSheet.create({
     maxWidth: 300,
   },
   chatTitle: {
-    color: AppColor.GRAY_500,
     fontSize: 16,
-    fontWeight: '600',
     maxWidth: 230,
   },
 });
