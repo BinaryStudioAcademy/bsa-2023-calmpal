@@ -11,7 +11,7 @@ import {
   CHECKBOX_OPTIONS,
   DEFAULT_DELETE_ACCOUNT_PAYLOAD,
   type DeleteAccountFormPayload,
-} from './libs/constants/constants.js';
+} from '../../libs/constants/constants.js';
 import styles from './styles.module.scss';
 
 type Properties = {

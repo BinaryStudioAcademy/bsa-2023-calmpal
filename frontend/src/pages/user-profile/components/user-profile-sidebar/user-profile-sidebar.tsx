@@ -1,3 +1,5 @@
+import { type ReactElement } from 'react';
+
 import {
   Card,
   Icon,
@@ -6,12 +8,18 @@ import {
   SidebarBody,
   SidebarHeader,
 } from '#libs/components/components.js';
-import { STEPS } from '#libs/components/modal/steps/delete-account/libs/constants/constants.js';
+import {
+  INITIAL_STEP,
+  NEXT_STEP_INCREMENT,
+  STEPS,
+} from '#libs/components/modal/libs/constants/constants.js';
 import { IconColor } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
   useCallback,
+  useEffect,
+  useRef,
   useState,
 } from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
@@ -39,6 +47,10 @@ const UserProfileSidebar: React.FC<Properties> = ({
 
   const [activeItem, setActiveItem] = useState<string>('notification');
   const [isModalOpen, setModalOpen] = useState(false);
+  const [currentStepIndex, setCurrentStepIndex] = useState(INITIAL_STEP);
+
+  const modalReference = useRef<HTMLDialogElement | null>(null);
+  const currentStep = STEPS[currentStepIndex];
 
   const handleClick = useCallback(
     (key: string) => {
@@ -54,9 +66,45 @@ const UserProfileSidebar: React.FC<Properties> = ({
     void dispatch(authActions.signOut());
   }, [dispatch]);
 
-  const toggleModal = useCallback((): void => {
-    setModalOpen(!isModalOpen);
-  }, [isModalOpen]);
+  const handleCloseModal = useCallback((): void => {
+    setModalOpen(false);
+    setCurrentStepIndex(INITIAL_STEP);
+  }, []);
+
+  const goToNextStep = useCallback((): void => {
+    setCurrentStepIndex((previous) => {
+      return Math.min(
+        previous + NEXT_STEP_INCREMENT,
+        STEPS.length - NEXT_STEP_INCREMENT,
+      );
+    });
+  }, []);
+
+  const getCurrentStep = (): ReactElement | null => {
+    if (!currentStep) {
+      return null;
+    }
+
+    const StepComponent = currentStep.component;
+
+    return <StepComponent onClose={handleCloseModal} onNext={goToNextStep} />;
+  };
+
+  useEffect(() => {
+    if (modalReference.current) {
+      if (isModalOpen) {
+        modalReference.current.showModal();
+      } else {
+        modalReference.current.close();
+      }
+    }
+  }, [isModalOpen, modalReference]);
+
+  const toggleModal = useCallback(() => {
+    setModalOpen((previousState) => {
+      return !previousState;
+    });
+  }, []);
 
   return (
     <Sidebar isSidebarShown={isSidebarShown}>
@@ -107,11 +155,15 @@ const UserProfileSidebar: React.FC<Properties> = ({
             iconWidth={24}
             iconHeight={24}
           />
-          <Modal
-            isDisplayed={isModalOpen}
-            steps={STEPS}
-            onClose={toggleModal}
-          />
+          {currentStep && (
+            <Modal
+              ref={modalReference}
+              title={currentStep.title}
+              onClose={handleCloseModal}
+            >
+              {getCurrentStep()}
+            </Modal>
+          )}
         </div>
       </SidebarBody>
     </Sidebar>
