@@ -1,3 +1,4 @@
+import { SortType } from '#libs/enums/enums.js';
 import { type Repository } from '#libs/types/types.js';
 import { type JournalEntryModel } from '#packages/journal-entries/journal-entries.js';
 import { JournalEntryEntity } from '#packages/journal-entries/journal-entry.entity.js';
@@ -39,7 +40,7 @@ class JournalEntryRepository implements Repository {
     const journalEntries = await this.journalEntryModel
       .query()
       .where({ userId })
-      .orderBy('updatedAt', 'DESC')
+      .orderBy('updatedAt', SortType.DESC)
       .castTo<JournalEntryCommonQueryResponse[]>();
 
     return journalEntries.map((journalEntry) => {
