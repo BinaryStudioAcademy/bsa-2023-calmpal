@@ -60,7 +60,7 @@ const Journal: React.FC = () => {
         <BackButton onGoBack={handleBackButtonPress} />
         {hasSelectedNote && (
           <div className={styles['note-wrapper']}>
-            <Note />
+            <Note key={id} />
           </div>
         )}
       </div>
