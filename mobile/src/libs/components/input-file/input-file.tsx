@@ -66,15 +66,14 @@ const InputFile = <T extends FormFieldValues>({
     }
   };
 
+  const handlePress = (): void => {
+    void handlePickFile();
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      <Pressable
-        style={styles.file}
-        onPress={(): void => {
-          return void handlePickFile();
-        }}
-      >
+      <Pressable style={styles.file} onPress={handlePress}>
         <Icon name="upload" color={AppColor.GRAY_500} />
         <Text style={styles.primaryText}>CLICK HERE</Text>
         <Text style={styles.secondaryText}>Only MP3 extension is allowed</Text>
