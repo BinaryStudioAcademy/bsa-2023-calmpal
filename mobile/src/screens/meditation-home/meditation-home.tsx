@@ -29,11 +29,11 @@ const MeditationHome: React.FC = () => {
   const dispatch = useAppDispatch();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const showModal = (): void => {
+  const handleShowModal = (): void => {
     setIsModalVisible(true);
   };
 
-  const closeModal = (): void => {
+  const handleCloseModal = (): void => {
     setIsModalVisible(false);
   };
   const navigation =
@@ -80,7 +80,7 @@ const MeditationHome: React.FC = () => {
           })}
         </ScrollView>
         <Button
-          onPress={showModal}
+          onPress={handleShowModal}
           iconName="plus"
           label="Add new meditation"
           type="transparent"
@@ -88,7 +88,7 @@ const MeditationHome: React.FC = () => {
         />
         <AddMeditationModal
           isVisible={isModalVisible}
-          closeModal={closeModal}
+          onClose={handleCloseModal}
           onSubmit={handleSubmit}
         />
       </View>

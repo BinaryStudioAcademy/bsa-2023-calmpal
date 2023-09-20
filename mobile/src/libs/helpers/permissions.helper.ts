@@ -2,23 +2,27 @@ import { PermissionsAndroid } from 'react-native';
 
 const requestMediaPermissions = async (): Promise<boolean> => {
   try {
-    const readMediaAudio = 'android.permission.READ_MEDIA_AUDIO';
-    const readExternalStorage = 'android.permission.READ_EXTERNAL_STORAGE';
+    const READ_MEDIA_AUDIO_PERMISSION = 'android.permission.READ_MEDIA_AUDIO';
+    const READ_EXTERNAL_STORAGE = 'android.permission.READ_EXTERNAL_STORAGE';
 
-    const grantedReadAudio = await PermissionsAndroid.check(readMediaAudio);
+    const grantedReadAudio = await PermissionsAndroid.check(
+      READ_MEDIA_AUDIO_PERMISSION,
+    );
     const grantedReadStorage = await PermissionsAndroid.check(
-      readExternalStorage,
+      READ_EXTERNAL_STORAGE,
     );
 
     if (!grantedReadAudio || !grantedReadStorage) {
       const result = await PermissionsAndroid.requestMultiple([
-        readExternalStorage,
-        readMediaAudio,
+        READ_EXTERNAL_STORAGE,
+        READ_MEDIA_AUDIO_PERMISSION,
       ]);
 
       return (
-        result[readExternalStorage] === PermissionsAndroid.RESULTS['GRANTED'] ||
-        result[readMediaAudio] === PermissionsAndroid.RESULTS['GRANTED']
+        result[READ_EXTERNAL_STORAGE] ===
+          PermissionsAndroid.RESULTS['GRANTED'] ||
+        result[READ_MEDIA_AUDIO_PERMISSION] ===
+          PermissionsAndroid.RESULTS['GRANTED']
       );
     }
 

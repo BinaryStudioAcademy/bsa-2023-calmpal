@@ -22,13 +22,13 @@ import { styles } from './styles';
 
 type Properties = {
   isVisible: boolean;
-  closeModal: () => void;
+  onClose: () => void;
   onSubmit: (payload: MeditationEntryCreateRequestDto) => void;
 };
 
 const AddMeditationModal: React.FC<Properties> = ({
   isVisible,
-  closeModal,
+  onClose,
   onSubmit,
 }) => {
   const { control, errors, handleSubmit, reset } =
@@ -41,13 +41,13 @@ const AddMeditationModal: React.FC<Properties> = ({
   const handleFormSubmit = useCallback(() => {
     void handleSubmit(({ name, file }) => {
       onSubmit({ name, file: file?.data as File });
-      closeModal();
+      onClose();
       reset();
     })();
-  }, [onSubmit, handleSubmit, closeModal, reset]);
+  }, [onSubmit, handleSubmit, onClose, reset]);
 
   return (
-    <Modal isVisible={isVisible} onClose={closeModal}>
+    <Modal isVisible={isVisible} onClose={onClose}>
       <View style={styles.container}>
         <Text style={styles.title}>Add meditation</Text>
         <Input
