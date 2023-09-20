@@ -50,7 +50,7 @@ const Note: React.FC = () => {
 
   const titleReference = useRef<HTMLDivElement | null>(null);
   const textReference = useRef<HTMLDivElement | null>(null);
-  const cursorPosition = useRef<number | null>(null);
+  const cursorPosition = useRef(null);
 
   const handleSaveNote = useCallback(
     (id: string, data: NoteContent) => {
@@ -87,38 +87,38 @@ const Note: React.FC = () => {
     handleNoteChange(textReference, onTextChange);
   }, [handleNoteChange, onTextChange]);
 
-  useEffect(() => {
-    const handleSaveNoteWithDebounce = debounce((data: NoteContent) => {
-      if (id && isDirty) {
-        handleSaveNote(id, data);
-      }
-    }, SAVE_NOTE_TIMEOUT);
+  const handleSaveNoteWithDebounce = debounce((data: NoteContent) => {
+    if (id && isDirty) {
+      handleSaveNote(id, data);
+    }
+  }, SAVE_NOTE_TIMEOUT);
 
+  useEffect(() => {
     handleSaveNoteWithDebounce({ title: titleValue, text: textValue });
 
     return () => {
       handleSaveNoteWithDebounce.clear();
     };
-  }, [titleValue, textValue, isDirty, id, handleSaveNote]);
+  }, [titleValue, textValue]);
 
   useEffect(() => {
     if (selectedJournalEntry.id) {
       onTitleChange(selectedJournalEntry.title);
       onTextChange(selectedJournalEntry.text);
     }
-  }, [onTitleChange, onTextChange, selectedJournalEntry, isDirty, id]);
+  }, [onTitleChange, onTextChange, selectedJournalEntry]);
 
   useEffect(() => {
-    if (titleReference.current && cursorPosition.current) {
+    if (titleReference.current) {
       setCursorPosition(titleReference.current, cursorPosition);
     }
-  }, [cursorPosition, titleValue]);
+  }, [titleValue]);
 
   useEffect(() => {
-    if (textReference.current && cursorPosition.current) {
+    if (textReference.current) {
       setCursorPosition(textReference.current, cursorPosition);
     }
-  }, [cursorPosition, textValue]);
+  }, [textValue]);
 
   useEffect(() => {
     const handleBeforeUnload = (event: BeforeUnloadEvent): void => {
@@ -134,7 +134,7 @@ const Note: React.FC = () => {
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [handleSaveNote, id, textValue, titleValue]);
+  }, [id, textValue, titleValue]);
 
   return (
     <div className={styles['wrapper']}>
