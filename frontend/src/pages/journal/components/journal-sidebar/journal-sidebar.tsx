@@ -39,7 +39,7 @@ const JournalSidebar: React.FC<Properties> = ({
     },
   );
 
-  const handlePlusButtonClick = useCallback(() => {
+  const handleCreateJournalEntry = useCallback(() => {
     void dispatch(
       journalActions.createJournalEntry({
         title: DEFAULT_NOTE_PAYLOAD.title,
@@ -73,7 +73,7 @@ const JournalSidebar: React.FC<Properties> = ({
           isLabelVisuallyHidden
           iconName="plus"
           style="add"
-          onClick={handlePlusButtonClick}
+          onClick={handleCreateJournalEntry}
         />
       </SidebarHeader>
       <SidebarBody>
