@@ -32,14 +32,16 @@ const InputFile = <T extends FormFieldValues>({
   const { value, onChange } = field;
 
   const error = errors[name]?.message;
+  const fileData = value.data as File;
   const hasError = Boolean(error);
-  const hasValue = Boolean(value);
+  const hasValue = Boolean(fileData);
 
   const handlePickFile = async (): Promise<void> => {
     const result = await DocumentPicker.pick({
       type: [DocumentPicker.types.audio],
     });
-    onChange(result[FIRST_ARRAY_INDEX]);
+    const file = result[FIRST_ARRAY_INDEX];
+    onChange({ data: file, type: file?.type, size: file?.size });
   };
 
   return (
@@ -60,7 +62,7 @@ const InputFile = <T extends FormFieldValues>({
         <View style={styles.selectedFile}>
           <Icon name="download" color={AppColor.GRAY_600} />
           <Text style={styles.selectedFileName} numberOfLines={1}>
-            {value.name}
+            {fileData.name}
           </Text>
         </View>
       )}

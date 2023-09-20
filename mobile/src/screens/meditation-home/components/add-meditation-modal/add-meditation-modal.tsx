@@ -31,7 +31,7 @@ const AddMeditationModal: React.FC<Properties> = ({
   closeModal,
   onSubmit,
 }) => {
-  const { control, errors, handleSubmit } =
+  const { control, errors, handleSubmit, reset } =
     useAppForm<MeditationEntryCreateForm>({
       defaultValues: DEFAULT_MEDITATION_PAYLOAD,
       validationSchema: createMeditationEntryFormValidationSchema,
@@ -41,8 +41,10 @@ const AddMeditationModal: React.FC<Properties> = ({
   const handleFormSubmit = useCallback(() => {
     void handleSubmit(({ name, file }) => {
       onSubmit({ name, file: file?.data as File });
+      closeModal();
+      reset();
     })();
-  }, [onSubmit, handleSubmit]);
+  }, [onSubmit, handleSubmit, closeModal, reset]);
 
   return (
     <Modal isVisible={isVisible} onClose={closeModal}>

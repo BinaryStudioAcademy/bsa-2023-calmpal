@@ -4,7 +4,7 @@ import { AppColor } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   container: {
-    width: 230,
+    width: '100%',
   },
   label: {
     fontSize: 14,
@@ -13,7 +13,9 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   file: {
+    paddingHorizontal: 20,
     height: 170,
+    width: '100%',
     borderRadius: 8,
     borderWidth: 1,
     borderColor: AppColor.GRAY_400,
