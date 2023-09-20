@@ -43,14 +43,17 @@ const ChatList: React.FC = () => {
   const chatsLength = chats.length;
 
   const handleSelectChat = useCallback(
-    (title: string) => {
-      navigation.navigate(ChatScreenName.CHAT, { title });
+    (title: string, id: string | undefined) => {
+      navigation.navigate(ChatScreenName.CHAT, { title, id: id ?? '' });
     },
     [navigation],
   );
 
   const handleRedirectToChat = useCallback(() => {
-    navigation.navigate(ChatScreenName.CHAT, { title: 'New Chat' });
+    navigation.navigate(ChatScreenName.CHAT, {
+      title: 'New Chat',
+      id: undefined,
+    });
   }, [navigation]);
 
   useEffect(() => {
@@ -84,6 +87,7 @@ const ChatList: React.FC = () => {
           {filteredChats.map((item) => {
             return (
               <Card
+                id={item.id.toString()}
                 title={item.name}
                 onPress={handleSelectChat}
                 key={item.id}

@@ -16,21 +16,23 @@ import { styles } from './styles';
 
 type Properties = {
   title: string;
+  id?: string;
   image?: ImageSourcePropType;
   iconName?: IconName;
   iconColor?: string;
-  onPress: (title: string) => void;
+  onPress: (title: string, id?: string) => void;
 };
 
 const Card: React.FC<Properties> = ({
   title,
+  id = '',
   image = imagePlaceholder,
   iconName,
   iconColor,
   onPress,
 }) => {
   const handlePress = (): void => {
-    onPress(title);
+    onPress(title, id);
   };
 
   return (
