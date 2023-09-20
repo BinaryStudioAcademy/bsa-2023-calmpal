@@ -21,10 +21,10 @@ const createJournalEntry = createAsyncThunk<
   const journalEntry = await journalApi.createJournalEntry(payload);
   dispatch(
     appActions.navigate(
-      AppRoute.JOURNAL_ENTRY_$ID.replace(
+      AppRoute.JOURNAL_$ID.replace(
         ':id',
         String(journalEntry.id),
-      ) as typeof AppRoute.JOURNAL_ENTRY_$ID,
+      ) as typeof AppRoute.JOURNAL_$ID,
     ),
   );
 

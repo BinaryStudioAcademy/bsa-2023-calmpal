@@ -79,7 +79,7 @@ const JournalSidebar: React.FC<Properties> = ({
       <SidebarBody>
         <div className={styles['journal-entry-list']}>
           {allJournalEntries.map((journalEntry) => {
-            const noteLink = AppRoute.JOURNAL_ENTRY_$ID.replace(
+            const noteLink = AppRoute.JOURNAL_$ID.replace(
               ':id',
               String(journalEntry.id),
             ) as ValueOf<typeof AppRoute>;
