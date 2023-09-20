@@ -8,6 +8,7 @@ import {
   Text,
   View,
 } from '#libs/components/components';
+import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants';
 import { AppColor } from '#libs/enums/enums';
 import { useAppForm, useCallback } from '#libs/hooks/hooks';
 import {
@@ -17,7 +18,6 @@ import {
 } from '#packages/meditation/meditation';
 import { DEFAULT_MEDITATION_PAYLOAD } from '#screens/meditation-home/libs/constants';
 
-import { EMPTY_ARRAY_LENGTH } from './libs/constants';
 import { styles } from './styles';
 
 type Properties = {

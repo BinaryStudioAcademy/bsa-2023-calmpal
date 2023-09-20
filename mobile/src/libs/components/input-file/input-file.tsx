@@ -1,6 +1,7 @@
 import React from 'react';
 import DocumentPicker from 'react-native-document-picker';
 
+import { FIRST_ARRAY_INDEX } from '#libs/constants/constants';
 import { AppColor } from '#libs/enums/enums';
 import { requestMediaPermissions } from '#libs/helpers/helpers';
 import { useAppDispatch, useFormController } from '#libs/hooks/hooks';
@@ -13,7 +14,6 @@ import {
 import { appActions } from '#slices/app/notifications';
 
 import { Icon, Pressable, Text, View } from '../components';
-import { FIRST_ARRAY_INDEX } from './libs/constants';
 import { styles } from './styles';
 
 type Properties<T extends FormFieldValues> = {
