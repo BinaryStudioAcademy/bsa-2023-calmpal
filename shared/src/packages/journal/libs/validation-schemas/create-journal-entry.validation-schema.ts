@@ -12,7 +12,6 @@ const createJournalEntry = joi.object<JournalEntryCreateRequestDto, true>({
     .trim()
     .required()
     .max(JourneyEntryValidationRule.MAXIMUM_TITLE_LENGTH)
-    .min(JourneyEntryValidationRule.MINIMUM_TITLE_LENGTH)
     .messages({
       'any.required': JournalEntryValidationMessage.TITLE_REQUIRED,
       'string.empty': JournalEntryValidationMessage.TITLE_REQUIRED,
