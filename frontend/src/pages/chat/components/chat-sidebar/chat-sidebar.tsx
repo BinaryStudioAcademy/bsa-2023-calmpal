@@ -61,7 +61,7 @@ const ChatSidebar: React.FC<Properties> = ({
         </div>
         <div className={styles['plus']}>
           <Link to={AppRoute.CHATS}>
-            <Icon name="plus" color={IconColor.BLUE} />
+            <Icon name="plus" color={IconColor.BLUE} width={30} height={30} />
           </Link>
         </div>
       </SidebarHeader>

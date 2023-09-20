@@ -19,6 +19,7 @@ type Properties = {
   isRounded?: boolean;
   iconName?: IconName;
   isVisuallyCentered?: boolean;
+  color?: string;
 };
 
 const Button: React.FC<Properties> = ({
@@ -29,7 +30,21 @@ const Button: React.FC<Properties> = ({
   isRounded,
   iconName,
   isVisuallyCentered,
+  color,
 }) => {
+  const renderIcon = (): JSX.Element => {
+    return (
+      <View
+        style={[
+          isVisuallyCentered && styles.visuallyCenteredButton,
+          isRounded && styles.buttonRounded,
+        ]}
+      >
+        <Icon name={iconName as IconName} color={color ?? AppColor.GRAY_400} />
+      </View>
+    );
+  };
+
   return (
     <TouchableOpacity
       style={[
@@ -37,32 +52,24 @@ const Button: React.FC<Properties> = ({
         type === 'solid' && styles.buttonSolid,
         type === 'outlined' && styles.buttonOutlined,
         type === 'transparent' && styles.buttonTransparent,
-        isRounded && styles.buttonRounded,
         isDisabled && styles.buttonDisabled,
       ]}
       onPress={onPress}
       disabled={isDisabled}
       activeOpacity={0.5}
     >
-      {iconName ? (
-        <View style={isVisuallyCentered && styles.visuallyCenteredButton}>
-          <Icon
-            name={iconName}
-            color={isRounded ? AppColor.BLUE_200 : AppColor.GRAY_400}
-          />
-        </View>
-      ) : (
-        <Text
-          style={[
-            styles.label,
-            type === 'solid' && styles.labelSolid,
-            type === 'outlined' && styles.labelOutlined,
-            isDisabled && styles.labelDisabled,
-          ]}
-        >
-          {label}
-        </Text>
-      )}
+      {iconName && renderIcon()}
+      <Text
+        style={[
+          { color: color },
+          styles.label,
+          type === 'solid' && styles.labelSolid,
+          type === 'outlined' && styles.labelOutlined,
+          isDisabled && styles.labelDisabled,
+        ]}
+      >
+        {label}
+      </Text>
     </TouchableOpacity>
   );
 };
