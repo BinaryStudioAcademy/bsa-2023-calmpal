@@ -2,6 +2,7 @@ import {
   useAppDispatch,
   useAppSelector,
   useCallback,
+  useEffect,
   useParams,
 } from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
@@ -10,10 +11,7 @@ import {
   ChatHeader,
   ChatMessage,
 } from '#pages/chat/components/components.js';
-import {
-  EMPTY_ARRAY_LENGTH,
-  MOCK_MESSAGES,
-} from '#pages/chat/libs/constants/constants.js';
+import { EMPTY_ARRAY_LENGTH } from '#pages/chat/libs/constants/constants.js';
 import { type ChatInputValue } from '#pages/chat/libs/types/types.js';
 import { actions as chatActions } from '#slices/chats/chats.js';
 
@@ -34,20 +32,32 @@ const ChatLayout: React.FC = () => {
 
   const handleSend = useCallback(
     ({ message }: ChatInputValue): void => {
-      if (!hasId && currentChatMessages.length === EMPTY_ARRAY_LENGTH) {
+      if (!hasId || currentChatMessages.length === EMPTY_ARRAY_LENGTH) {
         void dispatch(chatActions.createChat({ message }));
+      } else {
+        void dispatch(
+          chatActions.createMessage({
+            message,
+            chatId: id as string,
+          }),
+        );
       }
-      // TODO: dispatch redux action to send message
     },
-    [dispatch, currentChatMessages.length, hasId],
+    [dispatch, currentChatMessages.length, hasId, id],
   );
+
+  useEffect(() => {
+    if (id) {
+      void dispatch(chatActions.getCurrentChatMessages(id));
+    }
+  }, [dispatch, id]);
 
   return (
     <>
       <ChatHeader />
       <div className={styles['chat-body']}>
         {hasId &&
-          MOCK_MESSAGES.map((item) => {
+          currentChatMessages.map((item) => {
             return (
               <ChatMessage
                 key={item.id}
