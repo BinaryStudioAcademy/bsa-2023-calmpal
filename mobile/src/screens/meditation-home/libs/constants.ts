@@ -1,4 +1,4 @@
-import { type MeditationEntryCreateForm } from 'shared/build/index.js';
+import { type MeditationEntryCreateForm } from '#packages/meditation/meditation';
 
 const mockedData = [
   { id: 1, title: 'Meditation' },
