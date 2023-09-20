@@ -1,6 +1,11 @@
 import deafultMeditationImage from '#assets/img/meditation-image-placeholder.jpg';
 import { AudioPlayer } from '#libs/components/components.js';
-import { useAppSelector, useCallback, useState } from '#libs/hooks/hooks.js';
+import {
+  useAppSelector,
+  useCallback,
+  useParams,
+  useState,
+} from '#libs/hooks/hooks.js';
 import { TRACK_FIRST_INDEX } from '#pages/meditation/libs/constants/constants.js';
 
 import styles from './styles.module.scss';
@@ -11,9 +16,18 @@ const MeditationPlayer: React.FC = () => {
       meditationEntries: meditation.meditationEntries,
     };
   });
-  const [trackIndex, setTrackIndex] = useState(TRACK_FIRST_INDEX);
+  const { id } = useParams<{ id: string }>();
+  const parsedId = Number(id);
+
+  const foundTrack = meditationEntries.find((entry) => {
+    return entry.id === parsedId;
+  });
+
   const [currentTrack, setCurrentTrack] = useState(
-    meditationEntries[trackIndex],
+    foundTrack ?? meditationEntries[TRACK_FIRST_INDEX],
+  );
+  const [trackIndex, setTrackIndex] = useState(
+    foundTrack ? meditationEntries.indexOf(foundTrack) : TRACK_FIRST_INDEX,
   );
 
   const handleTrackIndex = useCallback(
