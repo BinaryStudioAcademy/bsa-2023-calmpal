@@ -42,7 +42,7 @@ const DeleteJournalModal: React.ForwardRefRenderFunction<
     <Modal
       title="Delete note?"
       ref={journalDeleteModalReference}
-      showCrossIcon={false}
+      isCrossIconShown={false}
     >
       <div className={styles['content']}>
         <Button

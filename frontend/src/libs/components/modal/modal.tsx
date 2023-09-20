@@ -12,13 +12,13 @@ import styles from './styles.module.scss';
 type Properties = {
   children: React.ReactNode;
   title: string;
-  showCrossIcon?: boolean;
+  isCrossIconShown?: boolean;
 };
 
 const Modal: React.ForwardRefRenderFunction<
   HTMLDialogElement | null,
   Properties
-> = ({ children, title, showCrossIcon = true }, reference) => {
+> = ({ children, title, isCrossIconShown = true }, reference) => {
   const childrenReference =
     reference as React.RefObject<HTMLDialogElement | null>;
   const modalReference = useRef<HTMLDivElement>(null);
@@ -38,7 +38,7 @@ const Modal: React.ForwardRefRenderFunction<
         <div className={styles['modal']} ref={modalReference}>
           <div className={styles['header']}>
             <span className={styles['title']}>{title}</span>
-            {showCrossIcon && (
+            {isCrossIconShown && (
               <div className={styles['icon-container']}>
                 <Button
                   label="Close modal"
