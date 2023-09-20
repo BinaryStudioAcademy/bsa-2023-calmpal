@@ -235,9 +235,18 @@ class JournalEntryController extends BaseController {
 
   /**
    * @swagger
-   * /journal-entries/:id:
+   * /journal-entries/{id}:
    *    get:
    *      description: Get journal entry by id
+   *      security:
+   *       - bearerAuth: []
+   *      parameters:
+   *       -  in: path
+   *          description: Chat id
+   *          name: id
+   *          required: true
+   *          type: number
+   *          minimum: 1
    *      responses:
    *        201:
    *          description: Successful operation
@@ -269,9 +278,18 @@ class JournalEntryController extends BaseController {
 
   /**
    * @swagger
-   * /journal-entries/:id:
+   * /journal-entries/{id}:
    *    put:
    *      description: Update a journal entry
+   *      security:
+   *       - bearerAuth: []
+   *      parameters:
+   *       -  in: path
+   *          description: Chat id
+   *          name: id
+   *          required: true
+   *          type: number
+   *          minimum: 1
    *      requestBody:
    *        description: Journal Entry data
    *        required: true
