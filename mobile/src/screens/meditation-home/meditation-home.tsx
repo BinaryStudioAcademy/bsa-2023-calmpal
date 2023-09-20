@@ -1,6 +1,5 @@
 import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
-import { type MeditationEntryCreateRequestDto } from 'shared/build/index.js';
 
 import {
   Button,
@@ -19,9 +18,10 @@ import {
   useState,
 } from '#libs/hooks/hooks';
 import { type MeditationNavigationParameterList } from '#libs/types/types';
+import { type MeditationEntryCreateRequestDto } from '#packages/meditation/meditation';
 import { actions as meditationActions } from '#slices/meditation/meditation';
 
-import { AddMeditationModal } from './components/add-meditation-modal/add-meditation-modal';
+import { AddMeditationModal } from './components/components';
 import { mockedData } from './libs/constants';
 import { styles } from './styles';
 

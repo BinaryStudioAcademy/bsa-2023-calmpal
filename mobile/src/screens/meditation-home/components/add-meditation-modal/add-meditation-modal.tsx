@@ -1,9 +1,4 @@
 import React from 'react';
-import {
-  type MeditationEntryCreateForm,
-  type MeditationEntryCreateRequestDto,
-} from 'shared/build/index.js';
-import { createMeditationEntryFormValidationSchema } from 'shared/build/index.js';
 
 import {
   Button,
@@ -15,6 +10,11 @@ import {
 } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
 import { useAppForm, useCallback } from '#libs/hooks/hooks';
+import {
+  createMeditationEntryFormValidationSchema,
+  type MeditationEntryCreateForm,
+  type MeditationEntryCreateRequestDto,
+} from '#packages/meditation/meditation';
 import { DEFAULT_MEDITATION_PAYLOAD } from '#screens/meditation-home/libs/constants';
 
 import { EMPTY_ARRAY_LENGTH } from './libs/constants';
