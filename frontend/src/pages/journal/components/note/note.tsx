@@ -32,7 +32,7 @@ const Note: React.FC = () => {
     };
   });
 
-  const { isDirty, control } = useAppForm({
+  const { control } = useAppForm({
     defaultValues: {
       title: selectedJournalEntry.title,
       text: selectedJournalEntry.text,
@@ -87,19 +87,19 @@ const Note: React.FC = () => {
     handleNoteChange(textReference, onTextChange);
   }, [handleNoteChange, onTextChange]);
 
-  const handleSaveNoteWithDebounce = debounce((data: NoteContent) => {
-    if (id && isDirty) {
-      handleSaveNote(id, data);
-    }
-  }, SAVE_NOTE_TIMEOUT);
-
   useEffect(() => {
+    const handleSaveNoteWithDebounce = debounce((data: NoteContent) => {
+      if (id) {
+        handleSaveNote(id, data);
+      }
+    }, SAVE_NOTE_TIMEOUT);
+
     handleSaveNoteWithDebounce({ title: titleValue, text: textValue });
 
     return () => {
       handleSaveNoteWithDebounce.clear();
     };
-  }, [titleValue, textValue, handleSaveNoteWithDebounce]);
+  }, [titleValue, textValue, id, handleSaveNote]);
 
   useEffect(() => {
     if (selectedJournalEntry.id) {
