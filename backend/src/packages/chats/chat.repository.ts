@@ -3,10 +3,7 @@ import { type Repository } from '#libs/types/types.js';
 import { ChatEntity } from './chat.entity.js';
 import { type ChatModel } from './chat.model.js';
 import { ChatsRelation } from './libs/enums/enums.js';
-import {
-  type ChatCommonQueryResponse,
-  type CreateChatPayload,
-} from './libs/types/types.js';
+import { type ChatCommonQueryResponse } from './libs/types/types.js';
 import { UserToChatModel } from './user-to-chat.model.js';
 
 class ChatRepository implements Repository {
@@ -46,7 +43,10 @@ class ChatRepository implements Repository {
   public async create({
     chatEntity,
     members,
-  }: CreateChatPayload): Promise<ChatEntity> {
+  }: {
+    chatEntity: ChatEntity;
+    members: number[];
+  }): Promise<ChatEntity> {
     const { name } = chatEntity.toNewObject();
 
     const chat = await this.chatModel

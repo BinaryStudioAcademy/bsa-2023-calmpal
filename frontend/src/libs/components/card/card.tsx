@@ -20,7 +20,7 @@ const Card: React.FC<Properties> = ({
   onClick,
   isActive = false,
   iconName,
-  iconColor = 'currentColor',
+  iconColor,
 }) => {
   const hasNoImageOrIcon = !imageUrl && !iconName;
   const hasImage = Boolean(imageUrl);
