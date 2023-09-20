@@ -10,7 +10,6 @@ type Properties = {
   isVisible: boolean;
   onClose: () => void;
   onDelete?: () => void;
-  type?: 'Note';
   children?: React.ReactNode;
 };
 
