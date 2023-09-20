@@ -12,6 +12,7 @@ import {
   type ChatCreateRequestDto,
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
+  type UpdateChatImageRequestDto,
 } from '#packages/chats/chats.js';
 import { actions as appActions } from '#slices/app/app.js';
 
@@ -85,6 +86,16 @@ const generateReply = createAsyncThunk<
   return await chatMessagesApi.generateChatReply(payload);
 });
 
+const updateChatImage = createAsyncThunk<
+  ChatGetAllItemResponseDto,
+  UpdateChatImageRequestDto,
+  AsyncThunkConfig
+>(`${sliceName}/update-chat-image`, async (payload, { extra }) => {
+  const { chatApi } = extra;
+
+  return await chatApi.updateChatImage(payload);
+});
+
 export {
   createChat,
   createMessage,
@@ -92,4 +103,5 @@ export {
   generateReply,
   getAllChats,
   getCurrentChatMessages,
+  updateChatImage,
 };

@@ -1,6 +1,8 @@
 import { ExceptionMessage } from '#libs/enums/enums.js';
 import { ChatError } from '#libs/exceptions/exceptions.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
+import { type OpenAi } from '#libs/packages/open-ai/open-ai.js';
+import { type S3 } from '#libs/packages/s3/s3.js';
 import { type Service } from '#libs/types/types.js';
 import {
   type ChatMessageCreatePayload,
@@ -14,25 +16,49 @@ import {
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
   type CreateChatPayload,
+  type UpdateChatImagePayload,
 } from './libs/types/types.js';
 
-type Constructor = {
+type ChatServiceDependencies = {
   chatRepository: ChatRepository;
   chatMessageService: ChatMessageService;
+  s3Service: S3;
+  openAiService: OpenAi;
 };
 
 class ChatService implements Service {
   private chatRepository: ChatRepository;
+  private s3Service: S3;
+  private openAiService: OpenAi;
 
   private chatMessageService: ChatMessageService;
 
-  public constructor({ chatRepository, chatMessageService }: Constructor) {
+  public constructor({
+    chatRepository,
+    chatMessageService,
+    s3Service,
+    openAiService,
+  }: ChatServiceDependencies) {
     this.chatRepository = chatRepository;
     this.chatMessageService = chatMessageService;
+    this.s3Service = s3Service;
+    this.openAiService = openAiService;
   }
 
   public find(): ReturnType<Service['find']> {
     return Promise.resolve(null);
+  }
+
+  public async findById({
+    id,
+    userId,
+  }: {
+    id: number;
+    userId: number;
+  }): Promise<ChatGetAllItemResponseDto> {
+    const item = await this.chatRepository.findById(id, userId);
+
+    return item.toObject();
   }
 
   public async findAll(): ReturnType<Service['findAll']> {
@@ -45,10 +71,19 @@ class ChatService implements Service {
   ): Promise<ChatGetAllResponseDto> {
     const items = await this.chatRepository.findAllByUserId(userId, query);
 
+    const itemPromises = items.map(async (item) => {
+      const imageUrl = await this.s3Service.getPreSignedUrl(
+        this.s3Service.getFileKey(item.toObject().imageUrl) as string,
+      );
+
+      return {
+        ...item.toObject(),
+        imageUrl,
+      };
+    });
+
     return {
-      items: items.map((item) => {
-        return item.toObject();
-      }),
+      items: await Promise.all(itemPromises),
     };
   }
 
@@ -95,6 +130,33 @@ class ChatService implements Service {
     payload: ChatMessageCreatePayload,
   ): Promise<ChatMessageGetAllItemResponseDto> {
     return this.chatMessageService.generateReply(payload);
+  }
+
+  public async updateImage({
+    chat,
+    imageUrl,
+  }: UpdateChatImagePayload): Promise<ChatGetAllItemResponseDto> {
+    const item = await this.chatRepository.update({ chat, imageUrl });
+    const presignedImageUrl = await this.s3Service.getPreSignedUrl(
+      this.s3Service.getFileKey(imageUrl) as string,
+    );
+
+    return { ...item.toObject(), imageUrl: presignedImageUrl };
+  }
+
+  public async generateChatName(message: string): Promise<string> {
+    return (await this.openAiService.getMessageResponse([
+      {
+        role: 'user',
+        content: `Could you please give me a two-three word name for a chat that starts with this opening message '${message}' and exclude the word 'Chat' from it.`,
+      },
+    ])) as string;
+  }
+
+  public async generateChatImage(name: string): Promise<string> {
+    return (await this.openAiService.generateImages({
+      prompt: `Could you please generate me a very abstract not detailed image in pastel colors, colors of which can resonate with the following title: '${name}'`,
+    })) as string;
   }
 
   public update(): ReturnType<Service['update']> {

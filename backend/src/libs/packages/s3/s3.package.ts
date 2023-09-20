@@ -63,6 +63,23 @@ class S3 {
     await this.s3Client.send(putObjectCommand);
   }
 
+  public async getPreSignedUrl(fileKey: string | null): Promise<string | null> {
+    if (!fileKey) {
+      return null;
+    }
+
+    const command = new GetObjectCommand({
+      Bucket: this.bucketName,
+      Key: fileKey,
+    });
+
+    const signedUrl: string = await getSignedUrl(this.s3Client, command, {
+      expiresIn: SEC_IN_HOUR,
+    });
+
+    return signedUrl;
+  }
+
   public getUrl(fileKey: string): string {
     return replaceTemplateWithValue(
       'https://{bucket}.s3.{region}.amazonaws.com/{fileKey}',
@@ -72,6 +89,17 @@ class S3 {
         fileKey,
       },
     );
+  }
+
+  public getFileKey(url: string | null): string | null {
+    if (!url) {
+      return null;
+    }
+
+    const match = url.match(/https:\/\/[^/]+\/([^/]+)/);
+    const fileKeyIndex = 1;
+
+    return match ? match[fileKeyIndex] ?? '' : null;
   }
 
   private throwError(error: unknown): never {

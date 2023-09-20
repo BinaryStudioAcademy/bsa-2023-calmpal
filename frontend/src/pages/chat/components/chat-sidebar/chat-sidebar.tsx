@@ -100,7 +100,7 @@ const ChatSidebar: React.FC<Properties> = ({
                 <Link key={chat.id} to={chatLink}>
                   <Card
                     title={chat.name}
-                    imageUrl={cardPlaceholder}
+                    imageUrl={chat.imageUrl ?? cardPlaceholder}
                     onClick={handleSelectChat}
                     isActive={String(chat.id) === id}
                     iconRight="trash-box"

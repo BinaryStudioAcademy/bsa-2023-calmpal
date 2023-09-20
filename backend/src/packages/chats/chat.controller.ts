@@ -5,17 +5,18 @@ import {
   type APIHandlerResponse,
   BaseController,
 } from '#libs/packages/controller/controller.js';
-import { HTTPCode } from '#libs/packages/http/http.js';
+import { HTTPCode, type HTTPService } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 import {
   type ChatMessageCreatePayload,
   type ChatMessageCreateRequestDto,
 } from '#packages/chat-messages/chat-messages.js';
+import { type FileService } from '#packages/files/file.service.js';
+import { type FileUploadRequestDto } from '#packages/files/files.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { ChatEntity } from './chat.entity.js';
 import { type ChatService } from './chat.service.js';
-import { MOCKED_CHAT_NAME } from './libs/constants/constants.js';
 import { ChatsApiPath } from './libs/enums/enums.js';
 import {
   type ChatCreateRequestDto,
@@ -25,6 +26,13 @@ import {
   createChatValidationSchema,
   entitiesFilteringQueryValidationSchema,
 } from './libs/validation-schemas/validation-schemas.js';
+
+type ChatControllerDependencies = {
+  logger: Logger;
+  chatService: ChatService;
+  httpService: HTTPService;
+  fileService: FileService;
+};
 
 /**
  * @swagger
@@ -101,11 +109,20 @@ import {
  */
 class ChatController extends BaseController {
   private chatService: ChatService;
+  private httpService: HTTPService;
+  private fileService: FileService;
 
-  public constructor(logger: Logger, chatService: ChatService) {
+  public constructor({
+    logger,
+    chatService,
+    httpService,
+    fileService,
+  }: ChatControllerDependencies) {
     super(logger, APIPath.CHATS);
 
     this.chatService = chatService;
+    this.httpService = httpService;
+    this.fileService = fileService;
 
     this.addRoute({
       path: ChatsApiPath.ROOT,
@@ -161,6 +178,19 @@ class ChatController extends BaseController {
           options as APIHandlerOptions<{
             body: ChatMessageCreateRequestDto;
             params: { id: string };
+            user: UserAuthResponseDto;
+          }>,
+        );
+      },
+    });
+
+    this.addRoute({
+      path: ChatsApiPath.$ID,
+      method: 'PUT',
+      handler: (options) => {
+        return this.update(
+          options as APIHandlerOptions<{
+            params: { id: number };
             user: UserAuthResponseDto;
           }>,
         );
@@ -279,8 +309,11 @@ class ChatController extends BaseController {
       user: UserAuthResponseDto;
     }>,
   ): Promise<APIHandlerResponse> {
+    const name = await this.chatService.generateChatName(options.body.message);
+
     const chatEntity = ChatEntity.initializeNew({
-      name: MOCKED_CHAT_NAME,
+      name: name || options.body.message,
+      imageUrl: null,
     });
 
     return {
@@ -465,6 +498,34 @@ class ChatController extends BaseController {
    *               errorType: "COMMON"
    */
 
+  /**
+   * @swagger
+   * /chats:
+   *   post:
+   *     description: Update a chat
+   *     responses:
+   *       200:
+   *         description: Successful operation
+   *         content:
+   *           application/json:
+   *             schema:
+   *              type: object
+   *               properties:
+   *                 items:
+   *                   type: array
+   *                   items:
+   *                    $ref: '#/components/schemas/Chat'
+   *       404:
+   *         description: Chat was not found
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *             example:
+   *               message: "Chat with such id was not found."
+   *               errorType: "COMMON"
+   */
+
   private async delete(
     options: APIHandlerOptions<{
       params: { id: string };
@@ -486,6 +547,38 @@ class ChatController extends BaseController {
     return {
       status: HTTPCode.CREATED,
       payload: isDeleted,
+    };
+  }
+
+  private async update(
+    options: APIHandlerOptions<{
+      params: { id: number };
+      user: UserAuthResponseDto;
+    }>,
+  ): Promise<APIHandlerResponse> {
+    const chat = await this.chatService.findById({
+      id: options.params.id,
+      userId: options.user.id,
+    });
+
+    const imageUrl = await this.chatService.generateChatImage(chat.name);
+
+    const payload = await this.httpService.load<FileUploadRequestDto>({
+      method: 'GET',
+      url: imageUrl,
+      isBuffer: true,
+    });
+
+    const fileRecord = await this.fileService.create(payload);
+
+    const updatedChat = await this.chatService.updateImage({
+      chat,
+      imageUrl: fileRecord.url,
+    });
+
+    return {
+      status: HTTPCode.OK,
+      payload: updatedChat,
     };
   }
 }

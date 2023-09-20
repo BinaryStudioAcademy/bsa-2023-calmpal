@@ -5,6 +5,7 @@ import {
   generateReply,
   getAllChats,
   getCurrentChatMessages,
+  updateChatImage,
 } from './actions.js';
 import { actions } from './chats.slice.js';
 
@@ -16,6 +17,7 @@ const allActions = {
   generateReply,
   getCurrentChatMessages,
   createMessage,
+  updateChatImage,
 };
 
 export { allActions as actions };

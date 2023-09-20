@@ -4,8 +4,11 @@ import { type Repository } from '#libs/types/types.js';
 import { ChatEntity } from './chat.entity.js';
 import { type ChatModel } from './chat.model.js';
 import { ChatsRelation, UserToChatRelation } from './libs/enums/enums.js';
-import { type ChatCommonQueryResponse } from './libs/types/types.js';
-import { type UserToChatModel } from './user-to-chat.model.js';
+import {
+  type ChatCommonQueryResponse,
+  type ChatGetAllItemResponseDto,
+} from './libs/types/types.js';
+import { UserToChatModel } from './user-to-chat.model.js';
 
 class ChatRepository implements Repository {
   private chatModel: typeof ChatModel;
@@ -22,6 +25,25 @@ class ChatRepository implements Repository {
 
   public find(): ReturnType<Repository['find']> {
     return Promise.resolve(null);
+  }
+
+  public async findById(id: number, userId: number): Promise<ChatEntity> {
+    const chat = await this.chatModel
+      .query()
+      .findById(id)
+      .withGraphJoined(ChatsRelation.MEMBERS)
+      .whereExists(UserToChatModel.query().where('userId', userId))
+      .orderBy('createdAt', 'DESC')
+      .castTo<ChatCommonQueryResponse>();
+
+    return ChatEntity.initialize({
+      id: chat.id,
+      name: chat.name,
+      members: chat.members,
+      createdAt: new Date(chat.createdAt),
+      updatedAt: new Date(chat.updatedAt),
+      imageUrl: chat.imageUrl,
+    });
   }
 
   public findAll(): ReturnType<Repository['findAll']> {
@@ -52,6 +74,7 @@ class ChatRepository implements Repository {
         members: chat.members,
         createdAt: new Date(chat.createdAt),
         updatedAt: new Date(chat.updatedAt),
+        imageUrl: chat.imageUrl,
       });
     });
   }
@@ -63,7 +86,7 @@ class ChatRepository implements Repository {
     chatEntity: ChatEntity;
     members: number[];
   }): Promise<ChatEntity> {
-    const { name } = chatEntity.toNewObject();
+    const { name, imageUrl } = chatEntity.toNewObject();
 
     const chat = await this.chatModel
       .query()
@@ -74,6 +97,7 @@ class ChatRepository implements Repository {
             userId: member,
           };
         }),
+        imageUrl,
       })
       .castTo<ChatCommonQueryResponse>();
 
@@ -83,11 +107,32 @@ class ChatRepository implements Repository {
       members: chat.members,
       createdAt: new Date(chat.createdAt),
       updatedAt: new Date(chat.updatedAt),
+      imageUrl: chat.imageUrl,
     });
   }
 
-  public update(): ReturnType<Repository['update']> {
-    return Promise.resolve(null);
+  public async update({
+    chat,
+    imageUrl,
+  }: {
+    chat: ChatGetAllItemResponseDto;
+    imageUrl: string;
+  }): Promise<ChatEntity> {
+    const { name, id } = chat;
+
+    const updatedChat = await this.chatModel
+      .query()
+      .patchAndFetchById(id, { imageUrl, name })
+      .castTo<ChatCommonQueryResponse>();
+
+    return ChatEntity.initialize({
+      id: updatedChat.id,
+      name: updatedChat.name,
+      members: updatedChat.members,
+      createdAt: new Date(updatedChat.createdAt),
+      updatedAt: new Date(updatedChat.updatedAt),
+      imageUrl: updatedChat.imageUrl,
+    });
   }
 
   public delete({
