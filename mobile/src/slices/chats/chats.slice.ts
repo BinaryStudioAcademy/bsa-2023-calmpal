@@ -2,20 +2,32 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { DataStatus } from '#libs/enums/enums';
 import { type ValueOf } from '#libs/types/types';
+import { type ChatMessageGetAllItemResponseDto } from '#packages/chat-messages/chat-messages';
 import { type ChatGetAllItemResponseDto } from '#packages/chats/chats';
 
-import { createChat, getAllChats } from './actions';
+import {
+  createChat,
+  createMessage,
+  getAllChats,
+  getCurrentChatMessages,
+} from './actions';
 
 type State = {
   chats: ChatGetAllItemResponseDto[];
+  currentChatMessages: ChatMessageGetAllItemResponseDto[];
   chatsDataStatus: ValueOf<typeof DataStatus>;
   createChatDataStatus: ValueOf<typeof DataStatus>;
+  currentChatMessagesDataStatus: ValueOf<typeof DataStatus>;
+  createMessageDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
   chats: [],
+  currentChatMessages: [],
   chatsDataStatus: DataStatus.IDLE,
   createChatDataStatus: DataStatus.IDLE,
+  currentChatMessagesDataStatus: DataStatus.IDLE,
+  createMessageDataStatus: DataStatus.IDLE,
 };
 
 const { reducer, actions, name } = createSlice({
@@ -43,6 +55,28 @@ const { reducer, actions, name } = createSlice({
     });
     builder.addCase(createChat.rejected, (state) => {
       state.createChatDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(getCurrentChatMessages.pending, (state) => {
+      state.currentChatMessagesDataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(getCurrentChatMessages.fulfilled, (state, action) => {
+      state.currentChatMessages = action.payload.items;
+      state.currentChatMessagesDataStatus = DataStatus.FULFILLED;
+    });
+    builder.addCase(getCurrentChatMessages.rejected, (state) => {
+      state.currentChatMessagesDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(createMessage.pending, (state) => {
+      state.createMessageDataStatus = DataStatus.IDLE;
+    });
+    builder.addCase(createMessage.fulfilled, (state, action) => {
+      state.currentChatMessages.push(action.payload);
+      state.createMessageDataStatus = DataStatus.FULFILLED;
+    });
+    builder.addCase(createMessage.rejected, (state) => {
+      state.createMessageDataStatus = DataStatus.REJECTED;
     });
   },
 });

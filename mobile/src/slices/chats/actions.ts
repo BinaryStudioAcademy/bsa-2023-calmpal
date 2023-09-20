@@ -2,6 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { type AsyncThunkConfig } from '#libs/types/types';
 import {
+  type ChatMessageCreatePayload,
+  type ChatMessageGetAllItemResponseDto,
+  type ChatMessageGetAllResponseDto,
+} from '#packages/chat-messages/chat-messages';
+import {
   type ChatCreateRequestDto,
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
@@ -19,6 +24,16 @@ const getAllChats = createAsyncThunk<
   return await chatApi.getAllChats();
 });
 
+const getCurrentChatMessages = createAsyncThunk<
+  ChatMessageGetAllResponseDto,
+  string,
+  AsyncThunkConfig
+>(`${sliceName}/get-all-current-chat-messages`, async (chatId, { extra }) => {
+  const { chatMessagesApi } = extra;
+
+  return await chatMessagesApi.getAllMessagesByChatId(chatId);
+});
+
 const createChat = createAsyncThunk<
   ChatGetAllItemResponseDto,
   ChatCreateRequestDto,
@@ -29,4 +44,14 @@ const createChat = createAsyncThunk<
   return await chatApi.createChat(payload);
 });
 
-export { createChat, getAllChats };
+const createMessage = createAsyncThunk<
+  ChatMessageGetAllItemResponseDto,
+  ChatMessageCreatePayload,
+  AsyncThunkConfig
+>(`${sliceName}/create-chat-message`, async (payload, { extra }) => {
+  const { chatMessagesApi } = extra;
+
+  return await chatMessagesApi.createChatMessage(payload);
+});
+
+export { createChat, createMessage, getAllChats, getCurrentChatMessages };
