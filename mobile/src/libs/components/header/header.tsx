@@ -51,7 +51,7 @@ const Header: React.FC<Properties> = ({
       {isArrowVisible && <BackButton />}
 
       <View style={styles.titleBadgeContainer}>
-        <Text style={isChat ? styles.chatTitle : styles.title}>
+        <Text style={[styles.title, isChat && styles.chatTitle]}>
           {title ?? name}
         </Text>
         {hasValue && <Badge count={badgeCount} />}
