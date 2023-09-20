@@ -37,7 +37,7 @@ const InputFile = <T extends FormFieldValues>({
   const error = errors[name]?.message;
   const fileData = value?.data as File;
   const hasError = Boolean(error);
-  const hasValue = Boolean(fileData);
+  const hasFile = Boolean(fileData);
 
   const handlePickFile = async (): Promise<void> => {
     try {
@@ -79,7 +79,7 @@ const InputFile = <T extends FormFieldValues>({
         <Text style={styles.secondaryText}>Only MP3 extension is allowed</Text>
       </Pressable>
       {hasError && <Text style={styles.errorText}>{error as string}</Text>}
-      {hasValue && (
+      {hasFile && (
         <View style={styles.selectedFile}>
           <Icon name="download" color={AppColor.GRAY_600} />
           <Text style={styles.selectedFileName} numberOfLines={1}>
