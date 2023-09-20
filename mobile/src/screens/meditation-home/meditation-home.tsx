@@ -3,15 +3,14 @@ import React from 'react';
 import { type MeditationEntryCreateRequestDto } from 'shared/build/index.js';
 
 import {
+  Button,
   Card,
   InputSearch,
   LinearGradient,
   ScrollView,
-  Text,
-  TouchableOpacity,
   View,
 } from '#libs/components/components';
-import { MeditationScreenName } from '#libs/enums/enums';
+import { AppColor, MeditationScreenName } from '#libs/enums/enums';
 import {
   useAppDispatch,
   useCallback,
@@ -80,9 +79,13 @@ const MeditationHome: React.FC = () => {
             );
           })}
         </ScrollView>
-        <TouchableOpacity onPress={showModal}>
-          <Text>add med</Text>
-        </TouchableOpacity>
+        <Button
+          onPress={showModal}
+          iconName="plus"
+          label="Add new meditation"
+          type="transparent"
+          color={AppColor.BLUE_200}
+        />
         <AddMeditationModal
           isVisible={isModalVisible}
           closeModal={closeModal}
