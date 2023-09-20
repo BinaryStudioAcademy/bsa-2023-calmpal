@@ -99,7 +99,7 @@ const Note: React.FC = () => {
     return () => {
       handleSaveNoteWithDebounce.clear();
     };
-  }, [titleValue, textValue]);
+  }, [titleValue, textValue, handleSaveNoteWithDebounce]);
 
   useEffect(() => {
     if (selectedJournalEntry.id) {
@@ -134,7 +134,7 @@ const Note: React.FC = () => {
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [id, textValue, titleValue]);
+  }, [id, textValue, titleValue, handleSaveNote]);
 
   return (
     <div className={styles['wrapper']}>
