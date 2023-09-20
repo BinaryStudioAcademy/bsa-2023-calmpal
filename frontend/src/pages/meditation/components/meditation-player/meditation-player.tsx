@@ -16,7 +16,7 @@ const MeditationPlayer: React.FC = () => {
       meditationEntries: meditation.meditationEntries,
     };
   });
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string; duration: string }>();
   const parsedId = Number(id);
 
   const foundTrack = meditationEntries.find((entry) => {

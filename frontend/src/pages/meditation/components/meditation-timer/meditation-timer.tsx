@@ -9,12 +9,12 @@ import { TimerButton } from './components/timer-button/timer-button.js';
 import { DURATION_UNIT, MEDITATION_DURATION } from './libs/constants.js';
 import styles from './styles.module.scss';
 
-type TimerProperties = {
+type Properties = {
   defaultDuration: string;
-  onStartSession: () => void;
+  onStartSession: (duration: string) => void;
 };
 
-const MeditationTimer: React.FC<TimerProperties> = ({
+const MeditationTimer: React.FC<Properties> = ({
   defaultDuration,
   onStartSession,
 }) => {
@@ -27,8 +27,8 @@ const MeditationTimer: React.FC<TimerProperties> = ({
   } = useFormController({ name: 'meditationDuration', control });
 
   const handleStartSession = useCallback(() => {
-    onStartSession();
-  }, [onStartSession]);
+    onStartSession(value);
+  }, [onStartSession, value]);
 
   return (
     <div className={styles['timer']}>

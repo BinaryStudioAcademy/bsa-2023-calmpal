@@ -26,12 +26,17 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
     dialogReference.current?.close();
   }, [dialogReference]);
 
-  const handleStartSession = useCallback(() => {
-    dispatch(
-      appActions.navigate(`${AppRoute.MEDITATION}/${meditationEntry.id}`),
-    );
-    handleModalClose();
-  }, [meditationEntry.id, dispatch, handleModalClose]);
+  const handleStartSession = useCallback(
+    (duration: string) => {
+      dispatch(
+        appActions.navigate(
+          `${AppRoute.MEDITATION}/${meditationEntry.id}?duration=${duration}`,
+        ),
+      );
+      handleModalClose();
+    },
+    [meditationEntry.id, dispatch, handleModalClose],
+  );
 
   return (
     <div className={styles['track']}>
