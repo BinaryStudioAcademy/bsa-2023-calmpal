@@ -1,27 +1,39 @@
-import {
-  changeCursorPosition,
-  debounce,
-  sanitizeInput,
-  setCursorPosition,
-} from '#libs/helpers/helpers.js';
+import { sanitizeInput } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useAppForm,
   useAppSelector,
   useCallback,
+  useDebounce,
   useEffect,
   useFormController,
   useParams,
-  useRef,
 } from '#libs/hooks/hooks.js';
 import { type JournalEntryGetAllItemResponseDto } from '#packages/journal/journal.js';
 import {
   DEFAULT_NOTE_PAYLOAD,
   SAVE_NOTE_TIMEOUT,
 } from '#pages/journal/libs/constants/constants.js';
-import { type NoteContent } from '#pages/journal/libs/types/types.js';
+import {
+  convertTextToNode,
+  getTextContentFromEditorState,
+} from '#pages/journal/libs/helpers/helpers.js';
+import {
+  OnChangePlugin,
+  PlainTextPlugin,
+} from '#pages/journal/libs/plugins/plugins.js';
+import {
+  type EditorState,
+  type NoteContent,
+} from '#pages/journal/libs/types/types.js';
+import { appActions } from '#slices/app/app-notification.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
+import {
+  ContentEditable,
+  LexicalComposer,
+  NoteErrorBoundary,
+} from '../components.js';
 import styles from './styles.module.scss';
 
 const Note: React.FC = () => {
@@ -48,9 +60,17 @@ const Note: React.FC = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams();
 
-  const titleReference = useRef<HTMLDivElement | null>(null);
-  const textReference = useRef<HTMLDivElement | null>(null);
-  const cursorPosition = useRef(null);
+  const debouncedTitleValue = useDebounce(titleValue, SAVE_NOTE_TIMEOUT);
+  const debouncedTextValue = useDebounce(textValue, SAVE_NOTE_TIMEOUT);
+
+  const handleNoteError = useCallback(
+    (error: Error) => {
+      void dispatch(
+        appActions.notify({ type: 'error', message: error.message }),
+      );
+    },
+    [dispatch],
+  );
 
   const handleSaveNote = useCallback(
     (id: string, data: NoteContent) => {
@@ -65,64 +85,34 @@ const Note: React.FC = () => {
     [dispatch],
   );
 
-  const handleNoteChange = useCallback(
-    (
-      elementReference: React.MutableRefObject<HTMLDivElement | null>,
-      onChange: (value: string) => void,
-    ): void => {
-      if (elementReference.current) {
-        const newValue = elementReference.current.textContent ?? '';
-        onChange(newValue);
-        changeCursorPosition(cursorPosition);
-      }
+  const handleTitleChange = useCallback(
+    (editorState: EditorState) => {
+      const newValue = getTextContentFromEditorState(editorState);
+      onTitleChange(newValue);
     },
-    [],
+    [onTitleChange],
   );
 
-  const handleTitleChange = useCallback(() => {
-    handleNoteChange(titleReference, onTitleChange);
-  }, [handleNoteChange, onTitleChange]);
-
-  const handleTextChange = useCallback(() => {
-    handleNoteChange(textReference, onTextChange);
-  }, [handleNoteChange, onTextChange]);
-
-  useEffect(() => {
-    const handleSaveNoteWithDebounce = debounce((data: NoteContent) => {
-      if (id) {
-        handleSaveNote(id, data);
-      }
-    }, SAVE_NOTE_TIMEOUT);
-
-    handleSaveNoteWithDebounce({ title: titleValue, text: textValue });
-
-    return () => {
-      handleSaveNoteWithDebounce.clear();
-    };
-  }, [titleValue, textValue, id, handleSaveNote]);
+  const handleTextChange = useCallback(
+    (editorState: EditorState) => {
+      const newValue = editorState.toJSON();
+      const stringifiedValue = JSON.stringify(newValue);
+      onTextChange(stringifiedValue);
+    },
+    [onTextChange],
+  );
 
   useEffect(() => {
-    if (selectedJournalEntry.id) {
-      onTitleChange(selectedJournalEntry.title);
-      onTextChange(selectedJournalEntry.text);
+    if (id) {
+      handleSaveNote(id, {
+        title: debouncedTitleValue,
+        text: debouncedTextValue,
+      });
     }
-  }, [onTitleChange, onTextChange, selectedJournalEntry]);
+  }, [debouncedTextValue, debouncedTitleValue, handleSaveNote, id]);
 
   useEffect(() => {
-    if (titleReference.current) {
-      setCursorPosition(titleReference.current, cursorPosition);
-    }
-  }, [titleValue]);
-
-  useEffect(() => {
-    if (textReference.current) {
-      setCursorPosition(textReference.current, cursorPosition);
-    }
-  }, [textValue]);
-
-  useEffect(() => {
-    const handleBeforeUnload = (event: BeforeUnloadEvent): void => {
-      event.preventDefault();
+    const handleBeforeUnload = (): void => {
       handleSaveNote(id as string, {
         title: titleValue,
         text: textValue,
@@ -138,20 +128,50 @@ const Note: React.FC = () => {
 
   return (
     <div className={styles['wrapper']}>
-      <div
-        contentEditable
-        onInput={handleTitleChange}
-        dangerouslySetInnerHTML={{ __html: titleValue }}
-        className={styles['title']}
-        ref={titleReference}
-      />
-      <div
-        contentEditable
-        onInput={handleTextChange}
-        dangerouslySetInnerHTML={{ __html: textValue }}
-        className={styles['text']}
-        ref={textReference}
-      />
+      <div className={styles['text-area']}>
+        <LexicalComposer
+          initialConfig={{
+            namespace: 'NoteTitleEditor',
+            onError: handleNoteError,
+            theme: {
+              paragraph: styles['paragraph'] as string,
+            },
+            editorState: convertTextToNode(titleValue),
+          }}
+        >
+          <PlainTextPlugin
+            contentEditable={<ContentEditable className={styles['title']} />}
+            placeholder={
+              <div className={styles['placeholder']}>
+                {DEFAULT_NOTE_PAYLOAD.title}
+              </div>
+            }
+            ErrorBoundary={NoteErrorBoundary}
+          />
+          <OnChangePlugin onChange={handleTitleChange} />
+        </LexicalComposer>
+      </div>
+      <div className={styles['text-area']}>
+        <LexicalComposer
+          initialConfig={{
+            namespace: 'NoteTextEditor',
+            onError: handleNoteError,
+            theme: {
+              paragraph: styles['paragraph'] as string,
+            },
+            editorState: textValue,
+          }}
+        >
+          <PlainTextPlugin
+            contentEditable={<ContentEditable className={styles['text']} />}
+            placeholder={
+              <div className={styles['placeholder']}>Type your text here</div>
+            }
+            ErrorBoundary={NoteErrorBoundary}
+          />
+          <OnChangePlugin onChange={handleTextChange} />
+        </LexicalComposer>
+      </div>
     </div>
   );
 };
