@@ -36,8 +36,11 @@ class ChatService implements Service {
     return await Promise.resolve({ items: [] });
   }
 
-  public async findAllByUserId(userId: number): Promise<ChatGetAllResponseDto> {
-    const items = await this.chatRepository.findAllByUserId(userId);
+  public async findAllByUserId(
+    userId: number,
+    query: string,
+  ): Promise<ChatGetAllResponseDto> {
+    const items = await this.chatRepository.findAllByUserId(userId, query);
 
     return {
       items: items.map((item) => {

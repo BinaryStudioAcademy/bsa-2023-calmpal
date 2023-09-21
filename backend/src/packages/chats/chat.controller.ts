@@ -16,7 +16,10 @@ import { ChatEntity } from './chat.entity.js';
 import { type ChatService } from './chat.service.js';
 import { MOCKED_CHAT_NAME } from './libs/constants/constants.js';
 import { ChatsApiPath } from './libs/enums/enums.js';
-import { type ChatCreateRequestDto } from './libs/types/types.js';
+import {
+  type ChatCreateRequestDto,
+  type GetChatsByQueryDto,
+} from './libs/types/types.js';
 import { createChatValidationSchema } from './libs/validation-schemas/validation-schemas.js';
 
 /**
@@ -98,7 +101,10 @@ class ChatController extends BaseController {
       method: 'GET',
       handler: (options) => {
         return this.findAll(
-          options as APIHandlerOptions<{ user: UserAuthResponseDto }>,
+          options as APIHandlerOptions<{
+            user: UserAuthResponseDto;
+            query: GetChatsByQueryDto;
+          }>,
         );
       },
     });
@@ -165,11 +171,17 @@ class ChatController extends BaseController {
    *                     $ref: '#/components/schemas/Chat'
    */
   private async findAll(
-    options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
+    options: APIHandlerOptions<{
+      user: UserAuthResponseDto;
+      query: GetChatsByQueryDto;
+    }>,
   ): Promise<APIHandlerResponse> {
     return {
       status: HTTPCode.OK,
-      payload: await this.chatService.findAllByUserId(options.user.id),
+      payload: await this.chatService.findAllByUserId(
+        options.user.id,
+        options.query.query,
+      ),
     };
   }
 
