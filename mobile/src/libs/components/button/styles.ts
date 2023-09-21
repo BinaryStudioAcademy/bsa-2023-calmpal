@@ -53,6 +53,19 @@ const styles = StyleSheet.create({
   addButtonLabel: {
     color: AppColor.BLUE_300,
   },
+  buttonModalCancel: {
+    backgroundColor: AppColor.GRAY_400,
+    borderRadius: 8,
+    marginHorizontal: 10,
+    paddingHorizontal: 20,
+  },
+
+  buttonModalDelete: {
+    backgroundColor: AppColor.BLUE_300,
+    borderRadius: 8,
+    marginHorizontal: 10,
+    paddingHorizontal: 20,
+  },
 });
 
 export { styles };
