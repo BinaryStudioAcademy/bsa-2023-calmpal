@@ -12,7 +12,7 @@ type Properties = {
   iconColor?: ValueOf<typeof IconColor>;
   iconWidth?: number;
   iconHeight?: number;
-  style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent';
+  style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent' | 'add';
   isLoading?: boolean;
   isDisabled?: boolean;
   isLabelVisuallyHidden?: boolean;

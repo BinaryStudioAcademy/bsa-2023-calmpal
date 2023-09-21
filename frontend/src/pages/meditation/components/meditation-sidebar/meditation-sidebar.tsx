@@ -11,6 +11,7 @@ import { IconColor } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useCallback,
+  useEffect,
   useRef,
   useSearch,
 } from '#libs/hooks/hooks.js';
@@ -45,9 +46,13 @@ const MeditationSidebar: React.FC<Properties> = ({
     [dispatch],
   );
 
-  const handleSelectMeidtationEntry = useCallback(() => {
+  const handleSelectMeditationEntry = useCallback(() => {
     setIsSidebarShown(false);
   }, [setIsSidebarShown]);
+
+  useEffect(() => {
+    void dispatch(meditationActions.getAllMeditationEntries());
+  }, [dispatch]);
 
   return (
     <>
@@ -79,7 +84,7 @@ const MeditationSidebar: React.FC<Properties> = ({
                 <Card
                   title={filteredElement.name}
                   imageUrl={meditationPlaceholder}
-                  onClick={handleSelectMeidtationEntry}
+                  onClick={handleSelectMeditationEntry}
                   key={filteredElement.name}
                   isActive
                 />

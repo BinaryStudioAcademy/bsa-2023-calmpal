@@ -8,6 +8,7 @@ import {
   type JournalEntryCreateRequestDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
+  type JournalEntryUpdatePayloadDto,
 } from './libs/types/types.js';
 
 type Constructor = {
@@ -42,6 +43,24 @@ class JournalApi extends BaseHttpApi {
         method: 'POST',
         contentType: ContentType.JSON,
         payload: JSON.stringify(payload),
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<JournalEntryGetAllItemResponseDto>();
+  }
+
+  public async updateJournalEntry(
+    payload: JournalEntryUpdatePayloadDto,
+  ): Promise<JournalEntryGetAllItemResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(JournalApiPath.$ID, {
+        id: payload.id.toString(),
+      }),
+      {
+        method: 'PUT',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify({ title: payload.title, text: payload.text }),
         hasAuth: true,
       },
     );
