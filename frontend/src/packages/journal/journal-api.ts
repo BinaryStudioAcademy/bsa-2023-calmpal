@@ -21,9 +21,11 @@ class JournalApi extends BaseHttpApi {
     super({ path: APIPath.JOURNAL, baseUrl, http, storage });
   }
 
-  public async getAllJournalEntries(): Promise<JournalEntryGetAllResponseDto> {
+  public async getAllJournalEntries(
+    query: string,
+  ): Promise<JournalEntryGetAllResponseDto> {
     const response = await this.load(
-      this.getFullEndpoint(JournalApiPath.ROOT, {}),
+      this.getFullEndpoint(JournalApiPath.ROOT, `?query=${query}`, {}),
       {
         method: 'GET',
         hasAuth: true,

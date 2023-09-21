@@ -21,9 +21,9 @@ class ChatApi extends BaseHttpApi {
     super({ path: APIPath.CHATS, baseUrl, http, storage });
   }
 
-  public async getAllChats(): Promise<ChatGetAllResponseDto> {
+  public async getAllChats(query: string): Promise<ChatGetAllResponseDto> {
     const response = await this.load(
-      this.getFullEndpoint(ChatsApiPath.ROOT, {}),
+      this.getFullEndpoint(ChatsApiPath.ROOT, `?query=${query}`, {}),
       { method: 'GET', hasAuth: true },
     );
 
