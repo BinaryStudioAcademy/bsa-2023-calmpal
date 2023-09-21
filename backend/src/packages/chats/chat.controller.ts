@@ -339,6 +339,13 @@ class ChatController extends BaseController {
    *     description: Delete chat by id
    *     security:
    *      - bearerAuth: []
+   *     parameters:
+   *      -  in: path
+   *         description: Chat id
+   *         name: id
+   *         required: true
+   *         type: number
+   *         minimum: 1
    *     responses:
    *       200:
    *         description: Successful operation
