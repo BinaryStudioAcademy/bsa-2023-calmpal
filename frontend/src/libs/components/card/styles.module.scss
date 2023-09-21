@@ -71,7 +71,7 @@
   word-break: break-word;
 }
 
-@media (width >= 900px) {
+@media (900px <= width) {
   .item {
     max-width: 317px;
   }
