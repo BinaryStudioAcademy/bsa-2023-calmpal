@@ -99,21 +99,21 @@ class UserService implements Service {
   }
 
   public async delete(id: number): Promise<ReturnType<UserEntity['toObject']>> {
-    const isDeleted = await this.userRepository.delete(id);
-
-    if (!isDeleted) {
-      throw new UsersError({
-        status: HTTPCode.INTERNAL_SERVER_ERROR,
-        message: ExceptionMessage.DELETE_FAIL,
-      });
-    }
-
     const deletedUser = await this.userRepository.findById(id);
 
     if (deletedUser === null) {
       throw new UsersError({
         status: HTTPCode.NOT_FOUND,
         message: ExceptionMessage.USER_NOT_FOUND,
+      });
+    }
+
+    const isDeleted = await this.userRepository.delete(id);
+
+    if (!isDeleted) {
+      throw new UsersError({
+        status: HTTPCode.INTERNAL_SERVER_ERROR,
+        message: ExceptionMessage.DELETE_FAIL,
       });
     }
 
