@@ -4,6 +4,7 @@ import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useAppSelector, useCallback } from '#libs/hooks/hooks.js';
 
 import { MeditationEntry } from './meditation-entry/meditation-entry.js';
+import { mockedMeditationEntries } from './mocked-meditation-entries.js';
 import styles from './styles.module.scss';
 
 type Properties = {
@@ -42,6 +43,9 @@ const MeditationList: React.FC<Properties> = ({
       <BackButton onGoBack={handleBackButtonPress} />
       <div className={styles['list']}>
         {meditationEntries.map((entry) => {
+          return <MeditationEntry meditationEntry={entry} key={entry.id} />;
+        })}
+        {mockedMeditationEntries.map((entry) => {
           return <MeditationEntry meditationEntry={entry} key={entry.id} />;
         })}
       </div>
