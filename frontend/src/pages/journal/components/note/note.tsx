@@ -1,10 +1,11 @@
+import { debounce } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useAppForm,
   useAppSelector,
   useCallback,
-  useDebounce,
   useEffect,
+  useMemo,
   useParams,
 } from '#libs/hooks/hooks.js';
 import {
@@ -41,8 +42,6 @@ const Note: React.FC = () => {
   const { id } = useParams();
 
   const { title: titleValue, text: textValue } = watch();
-  const debouncedTitleValue = useDebounce(titleValue, SAVE_NOTE_TIMEOUT);
-  const debouncedTextValue = useDebounce(textValue, SAVE_NOTE_TIMEOUT);
 
   const handleNoteError = useCallback(
     (error: Error) => {
@@ -54,7 +53,7 @@ const Note: React.FC = () => {
   );
 
   const handleSaveNote = useCallback(
-    (id: string, data: JournalEntryCreateRequestDto) => {
+    (data: JournalEntryCreateRequestDto) => {
       void dispatch(
         journalActions.updateJournalEntry({
           id: Number(id),
@@ -63,21 +62,25 @@ const Note: React.FC = () => {
         }),
       );
     },
-    [dispatch],
+    [id, dispatch],
   );
+
+  const handleSaveNoteWithDebounce = useMemo(() => {
+    return debounce(handleSaveNote, SAVE_NOTE_TIMEOUT);
+  }, [handleSaveNote]);
 
   useEffect(() => {
     if (id && isDirty) {
-      handleSaveNote(id, {
-        title: debouncedTitleValue,
-        text: debouncedTextValue,
+      handleSaveNoteWithDebounce({
+        title: titleValue,
+        text: textValue,
       });
     }
-  }, [debouncedTextValue, debouncedTitleValue, handleSaveNote, id, isDirty]);
+  }, [titleValue, textValue, handleSaveNoteWithDebounce, id, isDirty]);
 
   useEffect(() => {
     const handleBeforeUnload = (): void => {
-      handleSaveNote(id as string, {
+      handleSaveNote({
         title: titleValue,
         text: textValue,
       });
