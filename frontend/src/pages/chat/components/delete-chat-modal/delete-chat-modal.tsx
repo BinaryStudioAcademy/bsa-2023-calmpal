@@ -33,9 +33,11 @@ const DeleteChatModal: React.ForwardRefRenderFunction<
   });
 
   const handleDeleteChatEntry = useCallback(() => {
-    void dispatch(chatActions.deleteChat(id as number)).finally(() => {
-      chatDeleteModalReference.current?.close();
-    });
+    void dispatch(chatActions.deleteChat(id as number))
+      .unwrap()
+      .finally(() => {
+        chatDeleteModalReference.current?.close();
+      });
   }, [dispatch, id, chatDeleteModalReference]);
 
   return (
