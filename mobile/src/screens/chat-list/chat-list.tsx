@@ -94,7 +94,7 @@ const ChatList: React.FC = () => {
         isVisible={isModalVisible}
         onClose={hanleCloseModal}
         onDelete={handleDeleteChat}
-        type="Note"
+        type="Chat"
       />
       <View style={styles.container}>
         <InputSearch
