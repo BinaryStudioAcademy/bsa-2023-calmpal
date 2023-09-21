@@ -74,6 +74,8 @@ type Constructor = {
  *          updatedAt:
  *             type: string
  *             format: date-time
+ *          imageUrl:
+ *             type: string
  *      ChatMessage:
  *        type: object
  *        properties:
@@ -270,7 +272,7 @@ class ChatController extends BaseController {
    *   post:
    *     description: Create a new chat
    *     security:
-   *      - bearerAuth: []
+   *       - bearerAuth: []
    *     requestBody:
    *       description: Create chat data
    *       required: true
@@ -318,7 +320,7 @@ class ChatController extends BaseController {
    *   post:
    *     description: Create a new chat message
    *     security:
-   *      - bearerAuth: []
+   *       - bearerAuth: []
    *     parameters:
    *       -  in: path
    *          description: Chat id
@@ -368,6 +370,8 @@ class ChatController extends BaseController {
    * /chats/{id}/generated-replies:
    *   post:
    *     description: Generate reply for a message
+   *     security:
+   *       - bearerAuth: []
    *     parameters:
    *       -  in: path
    *          description: Chat id
@@ -418,7 +422,7 @@ class ChatController extends BaseController {
    *   get:
    *     description: Returns all chat messages
    *     security:
-   *      - bearerAuth: []
+   *       - bearerAuth: []
    *     parameters:
    *       -  in: path
    *          description: Chat id
@@ -483,35 +487,6 @@ class ChatController extends BaseController {
    *               message: "Chat with such id was not found."
    *               errorType: "COMMON"
    */
-
-  /**
-   * @swagger
-   * /chats:
-   *   post:
-   *     description: Update a chat
-   *     responses:
-   *       200:
-   *         description: Successful operation
-   *         content:
-   *           application/json:
-   *             schema:
-   *              type: object
-   *               properties:
-   *                 items:
-   *                   type: array
-   *                   items:
-   *                    $ref: '#/components/schemas/Chat'
-   *       404:
-   *         description: Chat was not found
-   *         content:
-   *           application/json:
-   *             schema:
-   *               $ref: '#/components/schemas/Error'
-   *             example:
-   *               message: "Chat with such id was not found."
-   *               errorType: "COMMON"
-   */
-
   private async delete(
     options: APIHandlerOptions<{
       params: { id: string };
@@ -536,6 +511,40 @@ class ChatController extends BaseController {
     };
   }
 
+  /**
+   * @swagger
+   * /chats/{id}:
+   *    put:
+   *      description: Update a chat
+   *      security:
+   *       - bearerAuth: []
+   *      parameters:
+   *       -  in: path
+   *          description: Chat id
+   *          name: id
+   *          required: true
+   *          type: number
+   *          minimum: 1
+   *      requestBody:
+   *        description: Chat data
+   *        required: true
+   *        content:
+   *          application/json:
+   *             schema:
+   *                $ref: '#/components/schemas/Chat'
+   *      responses:
+   *        200:
+   *         description: Successful operation
+   *         content:
+   *           application/json:
+   *             schema:
+   *              type: object
+   *               properties:
+   *                 items:
+   *                   type: array
+   *                   items:
+   *                     $ref: '#/components/schemas/Chat'
+   */
   private async update(
     options: APIHandlerOptions<{
       params: { id: number };

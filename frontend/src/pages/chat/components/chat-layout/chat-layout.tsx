@@ -48,7 +48,7 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
 
   const handleSend = useCallback(
     ({ message }: ChatInputValue): void => {
-      if (!hasId && currentChatMessages.length === EMPTY_ARRAY_LENGTH) {
+      if (!hasId || currentChatMessages.length === EMPTY_ARRAY_LENGTH) {
         void dispatch(chatActions.createChat({ message })).then((action) => {
           const createdChat = action.payload as ChatGetAllItemResponseDto;
           handleImageUpdate({ id: createdChat.id.toString() });

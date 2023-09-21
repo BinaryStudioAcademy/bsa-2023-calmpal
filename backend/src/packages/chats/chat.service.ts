@@ -160,7 +160,7 @@ class ChatService implements Service {
       imageUrl: fileRecord.url,
     });
     const presignedImageUrl = await this.s3Service.getPreSignedUrl(
-      this.s3Service.getFileKey(imageUrl) as string,
+      this.s3Service.getFileKey(fileRecord.url) as string,
     );
 
     return { ...item.toObject(), imageUrl: presignedImageUrl };
