@@ -74,6 +74,13 @@ class ChatService implements Service {
       senderId: userId,
     });
 
+    await this.chatMessageService.generateReply({
+      message,
+      isGeneratedByChatbot: true,
+      chatId: chat.id,
+      senderId: userId,
+    });
+
     return chat;
   }
 
