@@ -19,7 +19,10 @@ class ChatMessageRepository implements Repository {
   }
 
   public async findAllByChatId(chatId: number): Promise<ChatMessageEntity[]> {
-    const chatMessages = await this.chatMessageModel.query().where({ chatId });
+    const chatMessages = await this.chatMessageModel
+      .query()
+      .where({ chatId })
+      .orderBy('created_at', 'ASC');
 
     return chatMessages.map((chatMessage) => {
       return ChatMessageEntity.initialize({
