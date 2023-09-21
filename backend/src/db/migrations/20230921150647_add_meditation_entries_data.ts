@@ -1,6 +1,10 @@
+import { type Knex } from 'knex';
+
+const DATABASE_TABLE_NAME = 'meditation_entries';
+
 const AUDIO_CONTENT_TYPE = 'audio/mpeg';
 
-const meditationEntries = [
+const MEDITATION_ENTRIES = [
   {
     name: 'Atwined',
     mediaUrl:
@@ -114,4 +118,13 @@ const meditationEntries = [
   },
 ];
 
-export { meditationEntries };
+const up = async (knex: Knex): Promise<void> => {
+  await knex(DATABASE_TABLE_NAME).del();
+  await knex(DATABASE_TABLE_NAME).insert(MEDITATION_ENTRIES);
+};
+
+const down = async (knex: Knex): Promise<void> => {
+  await knex(DATABASE_TABLE_NAME).del();
+};
+
+export { down, up };
