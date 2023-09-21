@@ -1,11 +1,16 @@
+import { ExceptionMessage } from '#libs/enums/enums.js';
+import { JournalError } from '#libs/exceptions/exceptions.js';
+import { sanitizeInput } from '#libs/helpers/helpers.js';
 import { type Service } from '#libs/types/types.js';
 
 import { JournalEntryEntity } from './journal-entry.entity.js';
 import { type JournalEntryRepository } from './journal-entry.repository.js';
+import { NOTE_SANITIZER_OPTIONS } from './libs/constants/constants.js';
 import {
-  type JournalEntryCreateRequestDto,
+  type CreateJournalEntryPayload,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
+  type JournalEntryUpdateRequestDto,
 } from './libs/types/types.js';
 
 class JournalEntryService implements Service {
@@ -15,12 +20,30 @@ class JournalEntryService implements Service {
     this.journalEntryRepository = journalEntryRepository;
   }
 
-  public find(): ReturnType<Service['find']> {
-    return Promise.resolve(null);
+  public async find(id: number): Promise<JournalEntryGetAllItemResponseDto> {
+    const journalEntry = await this.journalEntryRepository.find(id);
+
+    if (!journalEntry) {
+      throw new JournalError({
+        message: ExceptionMessage.NOTE_NOT_FOUND,
+      });
+    }
+
+    return journalEntry.toObject();
   }
 
-  public async findAll(query: string): Promise<JournalEntryGetAllResponseDto> {
-    const items = await this.journalEntryRepository.findAll(query);
+  public async findAll(): ReturnType<Service['findAll']> {
+    return await Promise.resolve({ items: [] });
+  }
+
+  public async findAllByUserId(
+    userId: number,
+    query: string,
+  ): Promise<JournalEntryGetAllResponseDto> {
+    const items = await this.journalEntryRepository.findAllByUserId(
+      userId,
+      query,
+    );
 
     return {
       items: items.map((item) => {
@@ -29,21 +52,39 @@ class JournalEntryService implements Service {
     };
   }
 
-  public async create(
-    payload: JournalEntryCreateRequestDto,
-  ): Promise<JournalEntryGetAllItemResponseDto> {
+  public async create({
+    body,
+    userId,
+  }: CreateJournalEntryPayload): Promise<JournalEntryGetAllItemResponseDto> {
     const item = await this.journalEntryRepository.create(
       JournalEntryEntity.initializeNew({
-        title: payload.title,
-        text: payload.text,
+        userId,
+        title: sanitizeInput(body.title, NOTE_SANITIZER_OPTIONS),
+        text: sanitizeInput(body.text, NOTE_SANITIZER_OPTIONS),
       }),
     );
 
     return item.toObject();
   }
 
-  public update(): ReturnType<Service['update']> {
-    return Promise.resolve(null);
+  public async update({
+    id,
+    userId,
+    title,
+    text,
+  }: JournalEntryUpdateRequestDto): Promise<JournalEntryGetAllItemResponseDto> {
+    const item = await this.journalEntryRepository.update(
+      JournalEntryEntity.initialize({
+        id,
+        userId,
+        createdAt: null,
+        updatedAt: null,
+        title: sanitizeInput(title, NOTE_SANITIZER_OPTIONS),
+        text: text ? sanitizeInput(text, NOTE_SANITIZER_OPTIONS) : '',
+      }),
+    );
+
+    return item.toObject();
   }
 
   public delete(): ReturnType<Service['delete']> {
