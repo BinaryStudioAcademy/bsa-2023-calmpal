@@ -1,4 +1,5 @@
 import { Button } from '#libs/components/components.js';
+import { IconColor } from '#libs/enums/icon-color.enum.js';
 import { useCallback, useEffect, useRef, useState } from '#libs/hooks/hooks.js';
 import {
   FULL_PERCENTAGE,
@@ -105,6 +106,9 @@ const AudioControls = <T,>({
           onClick={handlePrevious}
           style="rounded-transparent"
           iconName="previous"
+          iconColor={IconColor.BLUE_200}
+          iconHeight={24}
+          iconWidth={24}
           label="Play previous meditation"
           isLabelVisuallyHidden
         />
@@ -113,6 +117,9 @@ const AudioControls = <T,>({
             onClick={handleSkipBackward}
             style="rounded-transparent"
             iconName="backward"
+            iconColor={IconColor.BLUE_200}
+            iconHeight={40}
+            iconWidth={40}
             label="Back 30 seconds"
             isLabelVisuallyHidden
           />
@@ -128,6 +135,9 @@ const AudioControls = <T,>({
             onClick={handleSkipForward}
             style="rounded-transparent"
             iconName="forward"
+            iconColor={IconColor.BLUE_200}
+            iconHeight={40}
+            iconWidth={40}
             label="Forward 30 seconds"
             isLabelVisuallyHidden
           />
@@ -136,6 +146,9 @@ const AudioControls = <T,>({
           onClick={onNextTrack}
           style="rounded-transparent"
           iconName="next"
+          iconColor={IconColor.BLUE_200}
+          iconHeight={24}
+          iconWidth={24}
           label="Play next meditation"
           isLabelVisuallyHidden
         />
