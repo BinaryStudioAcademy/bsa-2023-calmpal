@@ -21,6 +21,7 @@ class ChatRepository implements Repository {
     const chat = await this.chatModel
       .query()
       .findById(id)
+      .withGraphJoined(ChatsRelation.MEMBERS)
       .castTo<ChatCommonQueryResponse | undefined>();
 
     if (!chat) {

@@ -1,3 +1,7 @@
+import { FIRST_ARRAY_INDEX } from '#libs/constants/constants.js';
+import { ExceptionMessage } from '#libs/enums/enums.js';
+import { ChatError } from '#libs/exceptions/exceptions.js';
+import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Service } from '#libs/types/types.js';
 import {
   type ChatMessageCreatePayload,
@@ -99,14 +103,16 @@ class ChatService implements Service {
     id: number;
     userId: number;
   }): Promise<boolean> {
-    const allChats = await this.findAllByUserId(userId);
-
-    const chat = allChats.items.find((chat) => {
-      return chat.id === id;
-    });
-
+    const chat = await this.findById(id);
     if (!chat) {
       return false;
+    }
+
+    if (chat.members[FIRST_ARRAY_INDEX]?.userId !== userId) {
+      throw new ChatError({
+        status: HTTPCode.BAD_REQUEST,
+        message: ExceptionMessage.INCORRECT_CREDENTIALS,
+      });
     }
 
     return Boolean(await this.chatRepository.delete(id));
