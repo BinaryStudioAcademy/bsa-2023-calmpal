@@ -12,7 +12,6 @@ import {
   useCallback,
   useEffect,
   useRef,
-  useSearch,
 } from '#libs/hooks/hooks.js';
 import { type MeditationEntryCreateRequestDto } from '#packages/meditation/meditation.js';
 import { navigationItems } from '#pages/meditation/libs/constants/constants.js';
