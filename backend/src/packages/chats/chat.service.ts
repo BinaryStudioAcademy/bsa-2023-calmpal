@@ -102,7 +102,7 @@ class ChatService implements Service {
     const allChats = await this.findAllByUserId(userId);
 
     const chat = allChats.items.find((chat) => {
-      return chat.id === Number(id);
+      return chat.id === id;
     });
 
     if (!chat) {

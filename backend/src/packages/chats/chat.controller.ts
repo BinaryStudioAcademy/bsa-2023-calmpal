@@ -160,7 +160,7 @@ class ChatController extends BaseController {
         return this.delete(
           options as APIHandlerOptions<{
             user: UserAuthResponseDto;
-            params: { id: number };
+            params: { id: string };
           }>,
         );
       },
@@ -359,14 +359,14 @@ class ChatController extends BaseController {
 
   private async delete(
     options: APIHandlerOptions<{
-      params: { id: number };
+      params: { id: string };
       user: UserAuthResponseDto;
     }>,
   ): Promise<APIHandlerResponse> {
     const { id } = options.params;
     const { id: userId } = options.user;
 
-    const isDeleted = await this.chatService.delete({ id, userId });
+    const isDeleted = await this.chatService.delete({ id: Number(id), userId });
 
     if (!isDeleted) {
       throw new ChatError({
