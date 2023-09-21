@@ -45,11 +45,7 @@ const Card: React.FC<Properties> = ({
             <div className={styles['image-container']}>
               {hasImage && (
                 <div className={styles['image-placeholder']}>
-                  <img
-                    src={imageUrl}
-                    alt="not found"
-                    className={styles['image']}
-                  />
+                  <img src={imageUrl} alt="Card" className={styles['image']} />
                 </div>
               )}
               {hasIcon && (
