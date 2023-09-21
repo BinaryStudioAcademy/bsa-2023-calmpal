@@ -1,4 +1,3 @@
-import { sanitizeInput } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useAppForm,
@@ -15,15 +14,18 @@ import {
   SAVE_NOTE_TIMEOUT,
 } from '#pages/journal/libs/constants/constants.js';
 import {
-  convertTextToNode,
-  getTextContentFromEditorState,
+  $createParagraphNode,
+  $createTextNode,
+  $generateNodesFromDOM,
+  $getRoot,
+  $insertNodes,
 } from '#pages/journal/libs/helpers/helpers.js';
 import {
   OnChangePlugin,
   PlainTextPlugin,
 } from '#pages/journal/libs/plugins/plugins.js';
 import {
-  type EditorState,
+  type LexicalEditor,
   type NoteContent,
 } from '#pages/journal/libs/types/types.js';
 import { appActions } from '#slices/app/app-notification.js';
@@ -77,8 +79,8 @@ const Note: React.FC = () => {
       void dispatch(
         journalActions.updateJournalEntry({
           id: Number(id),
-          title: sanitizeInput(data.title || DEFAULT_NOTE_PAYLOAD.title),
-          text: data.text ? sanitizeInput(data.text) : undefined,
+          title: data.title || DEFAULT_NOTE_PAYLOAD.title,
+          text: data.text,
         }),
       );
     },
@@ -86,18 +88,18 @@ const Note: React.FC = () => {
   );
 
   const handleTitleChange = useCallback(
-    (editorState: EditorState) => {
-      const newValue = getTextContentFromEditorState(editorState);
-      onTitleChange(newValue);
+    (newValue: string) => {
+      const parser = new DOMParser();
+      const dom = parser.parseFromString(newValue, 'text/html');
+
+      onTitleChange(dom.body.textContent);
     },
     [onTitleChange],
   );
 
   const handleTextChange = useCallback(
-    (editorState: EditorState) => {
-      const newValue = editorState.toJSON();
-      const stringifiedValue = JSON.stringify(newValue);
-      onTextChange(stringifiedValue);
+    (newValue: string) => {
+      onTextChange(newValue);
     },
     [onTextChange],
   );
@@ -136,7 +138,16 @@ const Note: React.FC = () => {
             theme: {
               paragraph: styles['paragraph'] as string,
             },
-            editorState: convertTextToNode(titleValue),
+            editorState: (editor: LexicalEditor): void => {
+              editor.update(() => {
+                const root = $getRoot();
+                const paragraphNode = $createParagraphNode();
+                const textNode = $createTextNode(titleValue);
+
+                paragraphNode.append(textNode);
+                root.append(paragraphNode);
+              });
+            },
           }}
         >
           <PlainTextPlugin
@@ -159,7 +170,16 @@ const Note: React.FC = () => {
             theme: {
               paragraph: styles['paragraph'] as string,
             },
-            editorState: textValue,
+            editorState: (editor: LexicalEditor): void => {
+              editor.update(() => {
+                const parser = new DOMParser();
+                const dom = parser.parseFromString(textValue, 'text/html');
+                const nodes = $generateNodesFromDOM(editor, dom);
+
+                $getRoot().select();
+                $insertNodes(nodes);
+              });
+            },
           }}
         >
           <PlainTextPlugin
