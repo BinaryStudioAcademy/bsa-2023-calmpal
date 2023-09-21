@@ -165,12 +165,18 @@
 
 @media (width < 900px) {
   .icon-right {
-    left: 180px;
+    left: 80%;
   }
 }
 
 @media (width < 768px) {
   .icon-right {
-    left: 265px;
+    left: 90%;
+  }
+}
+
+@media (width < 480px) {
+  .icon-right {
+    left: 85%;
   }
 }

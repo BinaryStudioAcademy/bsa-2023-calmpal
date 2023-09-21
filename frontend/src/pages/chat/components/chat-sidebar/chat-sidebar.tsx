@@ -98,8 +98,8 @@ const ChatSidebar: React.FC<Properties> = ({
               ) as ValueOf<typeof AppRoute>;
 
               return (
-                <div className={styles['wrapper']} key={filteredChat.id}>
-                  <Link to={chatLink}>
+                <Link to={chatLink} key={filteredChat.id}>
+                  <div className={styles['wrapper']}>
                     <Card
                       title={filteredChat.name}
                       imageUrl={cardPlaceholder}
@@ -109,8 +109,8 @@ const ChatSidebar: React.FC<Properties> = ({
                       onIconClick={handleDeleteChat(filteredChat.id)}
                       iconColor={IconColor.LIGHT_BLUE}
                     />
-                  </Link>
-                </div>
+                  </div>
+                </Link>
               );
             })}
           </div>
