@@ -50,8 +50,15 @@
   line-height: 1.25;
 }
 
+@media (width < 900px) {
+  .wrapper {
+    padding-left: 250px;
+  }
+}
+
 @media (width < 767px) {
   .wrapper {
+    padding: 150px 20px 0;
     background-image: url("../../../../assets/img/meditation-player-background-mobile.png");
   }
 
