@@ -35,12 +35,17 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
         )}
       >
         {routes.map((item) => {
+          const isRootPathSelected = pathname === item.path;
+          const isOtherPathSelected =
+            pathname !== '/' && item.path.startsWith(pathname);
+          const isSelected = isOtherPathSelected || isRootPathSelected;
+
           return (
             <div key={item.path}>
               <div
                 className={getValidClassNames(
                   styles['dropdown-item'],
-                  pathname === item.path && styles['selected'],
+                  isSelected && styles['selected'],
                 )}
               >
                 <Link to={item.path}>
