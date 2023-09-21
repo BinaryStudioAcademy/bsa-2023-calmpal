@@ -1,5 +1,6 @@
 import React from 'react';
 import { type ImageSourcePropType } from 'react-native';
+import { Swipeable } from 'react-native-gesture-handler';
 
 import imagePlaceholder from '#assets/img/card-image-placeholder.png';
 import {
@@ -9,6 +10,7 @@ import {
   Text,
   View,
 } from '#libs/components/components';
+import { AppColor } from '#libs/enums/enums';
 import { type IconName } from '#libs/types/types';
 
 import { DEFAULT_NUMBER_OF_LINES } from './libs/constants';
@@ -20,6 +22,7 @@ type Properties = {
   iconName?: IconName;
   iconColor?: string;
   onPress: (title: string) => void;
+  onDelete?: () => void;
 };
 
 const Card: React.FC<Properties> = ({
@@ -28,28 +31,43 @@ const Card: React.FC<Properties> = ({
   iconName,
   iconColor,
   onPress,
+  onDelete,
 }) => {
   const handlePress = (): void => {
     onPress(title);
   };
 
+  const handleDelete = (): void => {
+    onDelete?.();
+  };
+
+  const rightSwipeActions = (): React.ReactNode => {
+    return (
+      <Pressable style={styles.deleteContainer} onPress={handleDelete}>
+        <Icon name="delete" color={AppColor.BLUE_300} />
+      </Pressable>
+    );
+  };
+
   return (
-    <Pressable onPress={handlePress} style={styles.container}>
-      {iconName && iconColor ? (
-        <View style={styles.iconContainer}>
-          <Icon name={iconName} color={iconColor} />
-        </View>
-      ) : (
-        <Image source={image} style={styles.image} />
-      )}
-      <Text
-        style={styles.title}
-        numberOfLines={DEFAULT_NUMBER_OF_LINES}
-        ellipsizeMode="tail"
-      >
-        {title}
-      </Text>
-    </Pressable>
+    <Swipeable renderRightActions={rightSwipeActions}>
+      <Pressable onPress={handlePress} style={styles.container}>
+        {iconName && iconColor ? (
+          <View style={styles.iconContainer}>
+            <Icon name={iconName} color={iconColor} />
+          </View>
+        ) : (
+          <Image source={image} style={styles.image} />
+        )}
+        <Text
+          style={styles.title}
+          numberOfLines={DEFAULT_NUMBER_OF_LINES}
+          ellipsizeMode="tail"
+        >
+          {title}
+        </Text>
+      </Pressable>
+    </Swipeable>
   );
 };
 
