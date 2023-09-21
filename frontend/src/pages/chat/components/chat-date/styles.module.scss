@@ -1,0 +1,28 @@
+.date {
+  display: flex;
+  color: var(--blue-150);
+  font-weight: 500;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.date::before {
+  content: "";
+  display: inline-block;
+  align-items: center;
+  width: 100%;
+  height: 1px;
+  margin: auto 0;
+  margin-right: 45px;
+  background-color: var(--blue-100);
+}
+
+.date::after {
+  content: "";
+  display: inline-block;
+  width: 100%;
+  height: 1px;
+  margin: auto 0;
+  margin-left: 45px;
+  background-color: var(--blue-100);
+}
