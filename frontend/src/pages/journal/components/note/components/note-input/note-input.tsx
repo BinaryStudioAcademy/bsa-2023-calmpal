@@ -16,7 +16,7 @@ import {
   $createTextNode,
   $getRoot,
 } from './libs/helpers/helpers.js';
-import { OnChangePlugin } from './libs/plugins/plugins.js';
+import { useOnChangeEditor } from './libs/hooks/hooks.js';
 import {
   type ErrorBoundaryType,
   type LexicalEditor,
@@ -51,6 +51,8 @@ const NoteInput = <T extends FormFieldValues>({
     [onChange],
   );
 
+  useOnChangeEditor({ onChange: handleChange });
+
   return (
     <div className={styles['text-area']}>
       <LexicalComposer
@@ -77,7 +79,6 @@ const NoteInput = <T extends FormFieldValues>({
           }
           ErrorBoundary={LexicalErrorBoundary as unknown as ErrorBoundaryType}
         />
-        <OnChangePlugin onChange={handleChange} />
       </LexicalComposer>
     </div>
   );

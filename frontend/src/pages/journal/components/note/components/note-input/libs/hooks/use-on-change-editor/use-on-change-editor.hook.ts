@@ -3,13 +3,13 @@ import { useEffect } from '#libs/hooks/hooks.js';
 
 import { NOTE_SANITIZER_OPTIONS } from '../../constants/constants.js';
 import { $generateHtmlFromNodes } from '../../helpers/helpers.js';
-import { useLexicalComposerContext } from '../../hooks/hooks.js';
+import { useLexicalComposerContext } from '../hooks.js';
 
 type Properties = {
   onChange: (newValue: string) => void;
 };
 
-const OnChangePlugin: React.FC<Properties> = ({ onChange }) => {
+const useOnChangeEditor = ({ onChange }: Properties): void => {
   const [editor] = useLexicalComposerContext();
 
   useEffect(() => {
@@ -22,7 +22,6 @@ const OnChangePlugin: React.FC<Properties> = ({ onChange }) => {
       });
     });
   }, [editor, onChange]);
-
-  return null;
 };
-export { OnChangePlugin };
+
+export { useOnChangeEditor };
