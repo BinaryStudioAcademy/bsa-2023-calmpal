@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { DataStatus } from '#libs/enums/enums.js';
+import { groupChatMessage } from '#libs/helpers/helpers.js';
 import { type ValueOf } from '#libs/types/types.js';
 import { type ChatMessagesGroups } from '#packages/chat-messages/chat-messages.js';
 import { type ChatGetAllItemResponseDto } from '#packages/chats/chats.js';
@@ -66,13 +67,7 @@ const { reducer, actions, name } = createSlice({
     });
 
     builder.addCase(getCurrentChatMessages.fulfilled, (state, action) => {
-      state.currentChatMessages = {};
-
-      action.payload.items.forEach((item) => {
-        const date = new Date(item.createdAt).toDateString();
-        (state.currentChatMessages[date] =
-          state.currentChatMessages[date] ?? []).push(item);
-      });
+      state.currentChatMessages = action.payload.items;
       state.currentChatMessagesDataStatus = DataStatus.FULFILLED;
     });
 
@@ -85,9 +80,10 @@ const { reducer, actions, name } = createSlice({
     });
 
     builder.addCase(createMessage.fulfilled, (state, action) => {
-      const date = new Date(action.payload.createdAt).toDateString();
-      (state.currentChatMessages[date] =
-        state.currentChatMessages[date] ?? []).push(action.payload);
+      state.currentChatMessages = groupChatMessage(
+        state.currentChatMessages,
+        action.payload,
+      );
       state.createMessageDataStatus = DataStatus.FULFILLED;
     });
 

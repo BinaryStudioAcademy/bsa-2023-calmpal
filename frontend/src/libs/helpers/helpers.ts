@@ -5,5 +5,6 @@ export {
   debounce,
   getFormattedTime,
   getRelativeDate,
+  groupChatMessage,
   sanitizeInput,
 } from 'shared/build/index.js';
