@@ -269,11 +269,13 @@ You should use .env.example folder as a reference.
 
 4. Apply migrations: `npm run migrate:dev -w backend`
 
-5. Run backend: `npm run start:dev -w backend`
+5. Apply seeds: `npm run seed:dev -w backend`
 
-6. Run frontend: `npm run start:dev -w frontend`
+6. Run backend: `npm run start:dev -w backend`
 
-7. Run mobile: `npm run start:dev -w mobile`
+7. Run frontend: `npm run start:dev -w frontend`
+
+8. Run mobile: `npm run start:dev -w mobile`
 
 ## 7. Development Flow
 
