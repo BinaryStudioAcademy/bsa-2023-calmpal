@@ -38,12 +38,11 @@ const ChatSidebar: React.FC<Properties> = ({
       chats: chats.chats,
     };
   });
+  const { setFilter, filter } = useSearch();
 
   useEffect(() => {
-    void dispatch(chatsActions.getAllChats());
-  }, [dispatch]);
-
-  const { filteredElements, setFilter } = useSearch(chats, 'name');
+    void dispatch(chatsActions.getAllChats(filter));
+  }, [dispatch, filter]);
 
   const handleSelectChat = useCallback(() => {
     setIsSidebarShown(false);
@@ -55,9 +54,7 @@ const ChatSidebar: React.FC<Properties> = ({
       <SidebarHeader>
         <div className={styles['info']}>
           <span>Chat</span>
-          <span className={styles['chat-number']}>
-            {filteredElements.length}
-          </span>
+          <span className={styles['chat-number']}>{chats.length}</span>
         </div>
         <div className={styles['plus']}>
           <Link to={AppRoute.CHATS}>
@@ -67,22 +64,22 @@ const ChatSidebar: React.FC<Properties> = ({
       </SidebarHeader>
       <SidebarBody>
         <div className={styles['search']}>
-          <Search onValueChange={setFilter} />
+          <Search onValueChange={setFilter} defaultValue={filter} />
         </div>
         <div className={styles['chat-list']}>
-          {filteredElements.map((filteredChat) => {
+          {chats.map((chat) => {
             const chatLink = AppRoute.CHATS_$ID.replace(
               ':id',
-              String(filteredChat.id),
+              String(chat.id),
             ) as ValueOf<typeof AppRoute>;
 
             return (
-              <Link key={filteredChat.id} to={chatLink}>
+              <Link key={chat.id} to={chatLink}>
                 <Card
-                  title={filteredChat.name}
+                  title={chat.name}
                   imageUrl={cardPlaceholder}
                   onClick={handleSelectChat}
-                  isActive={String(filteredChat.id) === id}
+                  isActive={String(chat.id) === id}
                 />
               </Link>
             );
