@@ -1,7 +1,7 @@
 export { $generateHtmlFromNodes, $generateNodesFromDOM } from '@lexical/html';
 export {
-  $createParagraphNode,
-  $createTextNode,
-  $getRoot,
-  $insertNodes,
+  $createParagraphNode as createParagraphNode,
+  $createTextNode as createTextNode,
+  $getRoot as getRoot,
+  $insertNodes as insertNodes,
 } from 'lexical';

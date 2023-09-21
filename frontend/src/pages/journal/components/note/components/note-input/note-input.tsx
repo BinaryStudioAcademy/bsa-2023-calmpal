@@ -12,9 +12,9 @@ import {
   PlainTextPlugin,
 } from './components/components.js';
 import {
-  $createParagraphNode,
-  $createTextNode,
-  $getRoot,
+  createParagraphNode,
+  createTextNode,
+  getRoot,
 } from './libs/helpers/helpers.js';
 import { useOnChangeEditor } from './libs/hooks/hooks.js';
 import {
@@ -62,9 +62,9 @@ const NoteInput = <T extends FormFieldValues>({
           theme: { paragraph: styles['paragraph'] as string },
           editorState: (editor: LexicalEditor): void => {
             editor.update(() => {
-              const root = $getRoot();
-              const paragraphNode = $createParagraphNode();
-              const textNode = $createTextNode(value);
+              const root = getRoot();
+              const paragraphNode = createParagraphNode();
+              const textNode = createTextNode(value);
 
               paragraphNode.append(textNode);
               root.append(paragraphNode);
