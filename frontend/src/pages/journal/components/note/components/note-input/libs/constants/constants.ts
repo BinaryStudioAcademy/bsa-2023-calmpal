@@ -1,6 +1,6 @@
 const DEFAULT_NOTE_PAYLOAD = {
   title: 'New note',
-  text: '<p dir="ltr"><span style="white-space:pre-wrap">Type your text here</span></p>',
+  text: 'Type your text here',
 };
 
 const SAVE_NOTE_TIMEOUT = 2000;

@@ -22,22 +22,6 @@
   box-shadow: 0 4px 23px 0 var(--violet-100);
 }
 
-.text-area {
-  position: relative;
-}
-
-.paragraph {
-  margin: 0;
-}
-
-.placeholder {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  user-select: none;
-  pointer-events: none;
-}
-
 .title:focus,
 .text:focus {
   outline: none;

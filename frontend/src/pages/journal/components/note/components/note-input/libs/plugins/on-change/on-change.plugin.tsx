@@ -1,9 +1,9 @@
 import { sanitizeInput } from '#libs/helpers/helpers.js';
 import { useEffect } from '#libs/hooks/hooks.js';
 
-import { NOTE_SANITIZER_OPTIONS } from '../constants/constants.js';
-import { $generateHtmlFromNodes } from '../helpers/helpers.js';
-import { useLexicalComposerContext } from '../hooks/hooks.js';
+import { NOTE_SANITIZER_OPTIONS } from '../../constants/constants.js';
+import { $generateHtmlFromNodes } from '../../helpers/helpers.js';
+import { useLexicalComposerContext } from '../../hooks/hooks.js';
 
 type Properties = {
   onChange: (newValue: string) => void;

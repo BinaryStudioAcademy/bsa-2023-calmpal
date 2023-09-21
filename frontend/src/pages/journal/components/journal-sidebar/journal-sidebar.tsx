@@ -14,7 +14,7 @@ import {
   useEffect,
 } from '#libs/hooks/hooks.js';
 import { type ValueOf } from '#libs/types/types.js';
-import { DEFAULT_NOTE_PAYLOAD } from '#pages/journal/libs/constants/constants.js';
+import { DEFAULT_NOTE_PAYLOAD } from '#pages/journal/components/note/components/note-input/libs/constants/constants.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
 import styles from './styles.module.scss';

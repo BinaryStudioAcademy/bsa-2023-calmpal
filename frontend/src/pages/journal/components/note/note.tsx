@@ -5,37 +5,20 @@ import {
   useCallback,
   useDebounce,
   useEffect,
-  useFormController,
   useParams,
 } from '#libs/hooks/hooks.js';
-import { type JournalEntryGetAllItemResponseDto } from '#packages/journal/journal.js';
+import {
+  type JournalEntryCreateRequestDto,
+  type JournalEntryGetAllItemResponseDto,
+} from '#packages/journal/journal.js';
 import {
   DEFAULT_NOTE_PAYLOAD,
   SAVE_NOTE_TIMEOUT,
-} from '#pages/journal/libs/constants/constants.js';
-import {
-  $createParagraphNode,
-  $createTextNode,
-  $generateNodesFromDOM,
-  $getRoot,
-  $insertNodes,
-} from '#pages/journal/libs/helpers/helpers.js';
-import {
-  OnChangePlugin,
-  PlainTextPlugin,
-} from '#pages/journal/libs/plugins/plugins.js';
-import {
-  type LexicalEditor,
-  type NoteContent,
-} from '#pages/journal/libs/types/types.js';
+} from '#pages/journal/components/note/components/note-input/libs/constants/constants.js';
 import { appActions } from '#slices/app/app-notification.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
-import {
-  ContentEditable,
-  LexicalComposer,
-  NoteErrorBoundary,
-} from '../components.js';
+import { NoteInput } from './components/components.js';
 import styles from './styles.module.scss';
 
 const Note: React.FC = () => {
@@ -46,7 +29,7 @@ const Note: React.FC = () => {
     };
   });
 
-  const { control } = useAppForm({
+  const { control, watch } = useAppForm({
     defaultValues: {
       title: selectedJournalEntry.title,
       text: selectedJournalEntry.text,
@@ -54,14 +37,10 @@ const Note: React.FC = () => {
     mode: 'onChange',
   });
 
-  const { field: titleField } = useFormController({ name: 'title', control });
-  const { field: textField } = useFormController({ name: 'text', control });
-  const { value: titleValue, onChange: onTitleChange } = titleField;
-  const { value: textValue, onChange: onTextChange } = textField;
-
   const dispatch = useAppDispatch();
   const { id } = useParams();
 
+  const { title: titleValue, text: textValue } = watch();
   const debouncedTitleValue = useDebounce(titleValue, SAVE_NOTE_TIMEOUT);
   const debouncedTextValue = useDebounce(textValue, SAVE_NOTE_TIMEOUT);
 
@@ -75,7 +54,7 @@ const Note: React.FC = () => {
   );
 
   const handleSaveNote = useCallback(
-    (id: string, data: NoteContent) => {
+    (id: string, data: JournalEntryCreateRequestDto) => {
       void dispatch(
         journalActions.updateJournalEntry({
           id: Number(id),
@@ -85,23 +64,6 @@ const Note: React.FC = () => {
       );
     },
     [dispatch],
-  );
-
-  const handleTitleChange = useCallback(
-    (newValue: string) => {
-      const parser = new DOMParser();
-      const dom = parser.parseFromString(newValue, 'text/html');
-
-      onTitleChange(dom.body.textContent);
-    },
-    [onTitleChange],
-  );
-
-  const handleTextChange = useCallback(
-    (newValue: string) => {
-      onTextChange(newValue);
-    },
-    [onTextChange],
   );
 
   useEffect(() => {
@@ -130,68 +92,20 @@ const Note: React.FC = () => {
 
   return (
     <div className={styles['wrapper']}>
-      <div className={styles['text-area']}>
-        <LexicalComposer
-          initialConfig={{
-            namespace: 'NoteTitleEditor',
-            onError: handleNoteError,
-            theme: {
-              paragraph: styles['paragraph'] as string,
-            },
-            editorState: (editor: LexicalEditor): void => {
-              editor.update(() => {
-                const root = $getRoot();
-                const paragraphNode = $createParagraphNode();
-                const textNode = $createTextNode(titleValue);
-
-                paragraphNode.append(textNode);
-                root.append(paragraphNode);
-              });
-            },
-          }}
-        >
-          <PlainTextPlugin
-            contentEditable={<ContentEditable className={styles['title']} />}
-            placeholder={
-              <div className={styles['placeholder']}>
-                {DEFAULT_NOTE_PAYLOAD.title}
-              </div>
-            }
-            ErrorBoundary={NoteErrorBoundary}
-          />
-          <OnChangePlugin onChange={handleTitleChange} />
-        </LexicalComposer>
-      </div>
-      <div className={styles['text-area']}>
-        <LexicalComposer
-          initialConfig={{
-            namespace: 'NoteTextEditor',
-            onError: handleNoteError,
-            theme: {
-              paragraph: styles['paragraph'] as string,
-            },
-            editorState: (editor: LexicalEditor): void => {
-              editor.update(() => {
-                const parser = new DOMParser();
-                const dom = parser.parseFromString(textValue, 'text/html');
-                const nodes = $generateNodesFromDOM(editor, dom);
-
-                $getRoot().select();
-                $insertNodes(nodes);
-              });
-            },
-          }}
-        >
-          <PlainTextPlugin
-            contentEditable={<ContentEditable className={styles['text']} />}
-            placeholder={
-              <div className={styles['placeholder']}>Type your text here</div>
-            }
-            ErrorBoundary={NoteErrorBoundary}
-          />
-          <OnChangePlugin onChange={handleTextChange} />
-        </LexicalComposer>
-      </div>
+      <NoteInput
+        name="title"
+        placeholder={DEFAULT_NOTE_PAYLOAD.title}
+        control={control}
+        contentEditableStyle={styles['title']}
+        onError={handleNoteError}
+      />
+      <NoteInput
+        name="text"
+        placeholder={DEFAULT_NOTE_PAYLOAD.text}
+        control={control}
+        contentEditableStyle={styles['text']}
+        onError={handleNoteError}
+      />
     </div>
   );
 };
