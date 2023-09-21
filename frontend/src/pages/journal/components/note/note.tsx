@@ -1,10 +1,11 @@
+import { debounce } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useAppForm,
   useAppSelector,
   useCallback,
-  useDebounce,
   useEffect,
+  useMemo,
   useParams,
 } from '#libs/hooks/hooks.js';
 import {
@@ -29,7 +30,7 @@ const Note: React.FC = () => {
     };
   });
 
-  const { control, watch } = useAppForm({
+  const { control, watch, isDirty } = useAppForm({
     defaultValues: {
       title: selectedJournalEntry.title,
       text: selectedJournalEntry.text,
@@ -41,8 +42,6 @@ const Note: React.FC = () => {
   const { id } = useParams();
 
   const { title: titleValue, text: textValue } = watch();
-  const debouncedTitleValue = useDebounce(titleValue, SAVE_NOTE_TIMEOUT);
-  const debouncedTextValue = useDebounce(textValue, SAVE_NOTE_TIMEOUT);
 
   const handleNoteError = useCallback(
     (error: Error) => {
@@ -54,7 +53,7 @@ const Note: React.FC = () => {
   );
 
   const handleSaveNote = useCallback(
-    (id: string, data: JournalEntryCreateRequestDto) => {
+    (data: JournalEntryCreateRequestDto) => {
       void dispatch(
         journalActions.updateJournalEntry({
           id: Number(id),
@@ -63,21 +62,25 @@ const Note: React.FC = () => {
         }),
       );
     },
-    [dispatch],
+    [id, dispatch],
   );
 
+  const handleSaveNoteWithDebounce = useMemo(() => {
+    return debounce(handleSaveNote, SAVE_NOTE_TIMEOUT);
+  }, [handleSaveNote]);
+
   useEffect(() => {
-    if (id) {
-      handleSaveNote(id, {
-        title: debouncedTitleValue,
-        text: debouncedTextValue,
+    if (id && isDirty) {
+      handleSaveNoteWithDebounce({
+        title: titleValue,
+        text: textValue,
       });
     }
-  }, [debouncedTextValue, debouncedTitleValue, handleSaveNote, id]);
+  }, [titleValue, textValue, handleSaveNoteWithDebounce, id, isDirty]);
 
   useEffect(() => {
     const handleBeforeUnload = (): void => {
-      handleSaveNote(id as string, {
+      handleSaveNote({
         title: titleValue,
         text: textValue,
       });
@@ -96,6 +99,7 @@ const Note: React.FC = () => {
         name="title"
         placeholder={DEFAULT_NOTE_PAYLOAD.title}
         control={control}
+        shouldParseTextHTML
         contentEditableStyle={styles['title']}
         onError={handleNoteError}
       />

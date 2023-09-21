@@ -12,9 +12,8 @@ import {
   PlainTextPlugin,
 } from './components/components.js';
 import {
-  $createParagraphNode,
-  $createTextNode,
-  $getRoot,
+  getDOMParsedValueFromString,
+  updateEditorState,
 } from './libs/helpers/helpers.js';
 import { OnChangePlugin } from './libs/plugins/plugins.js';
 import {
@@ -27,6 +26,7 @@ type Properties<T extends FormFieldValues> = {
   name: FormFieldPath<T>;
   control: FormControl<T, null>;
   placeholder: string;
+  shouldParseTextHTML?: boolean;
   contentEditableStyle?: string | undefined;
   onError: (error: Error) => void;
 };
@@ -35,6 +35,7 @@ const NoteInput = <T extends FormFieldValues>({
   placeholder,
   name,
   control,
+  shouldParseTextHTML = false,
   contentEditableStyle,
   onError,
 }: Properties<T>): JSX.Element => {
@@ -43,12 +44,24 @@ const NoteInput = <T extends FormFieldValues>({
 
   const handleChange = useCallback(
     (newValue: string) => {
-      const parser = new DOMParser();
-      const dom = parser.parseFromString(newValue, 'text/html');
+      let valueToPass = newValue;
 
-      onChange(dom.body.textContent);
+      if (shouldParseTextHTML) {
+        const dom = getDOMParsedValueFromString(newValue);
+
+        valueToPass = dom.body.textContent as string;
+      }
+
+      onChange(valueToPass);
     },
-    [onChange],
+    [shouldParseTextHTML, onChange],
+  );
+
+  const handleEditorState = useCallback(
+    (editor: LexicalEditor) => {
+      updateEditorState({ value, shouldParseTextHTML })(editor);
+    },
+    [value, shouldParseTextHTML],
   );
 
   return (
@@ -58,16 +71,7 @@ const NoteInput = <T extends FormFieldValues>({
           namespace: `note-${name}`,
           onError,
           theme: { paragraph: styles['paragraph'] as string },
-          editorState: (editor: LexicalEditor): void => {
-            editor.update(() => {
-              const root = $getRoot();
-              const paragraphNode = $createParagraphNode();
-              const textNode = $createTextNode(value);
-
-              paragraphNode.append(textNode);
-              root.append(paragraphNode);
-            });
-          },
+          editorState: handleEditorState,
         }}
       >
         <PlainTextPlugin
