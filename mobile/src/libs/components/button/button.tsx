@@ -15,7 +15,7 @@ type Properties = {
   label?: string;
   onPress: () => void;
   isDisabled?: boolean;
-  type?: 'solid' | 'outlined' | 'transparent';
+  type?: 'solid' | 'outlined' | 'transparent' | 'modal-cancel' | 'modal-delete';
   isRounded?: boolean;
   iconName?: IconName;
   isVisuallyCentered?: boolean;
