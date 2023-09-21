@@ -67,8 +67,8 @@ const Button: React.FC<Properties> = ({
           styles.label,
           type === 'solid' && styles.labelSolid,
           type === 'outlined' && styles.labelOutlined,
-          // type === 'modal-cancel' && styles.labelModalCancel,
-          // type === 'modal-delete' && styles.labelModalDelete,
+          type === 'modal-cancel' && styles.labelModalCancel,
+          type === 'modal-delete' && styles.labelModalDelete,
           isDisabled && styles.labelDisabled,
         ]}
       >
