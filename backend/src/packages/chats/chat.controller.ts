@@ -333,6 +333,7 @@ class ChatController extends BaseController {
     }>,
   ): Promise<APIHandlerResponse> {
     const chatMessageToCreateData: ChatMessageCreatePayload = {
+      isGeneratedByChatbot: options.body.isGeneratedByChatbot,
       chatId: Number(options.params.id),
       message: options.body.message,
       senderId: options.user.id,
