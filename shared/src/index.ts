@@ -77,6 +77,8 @@ export {
   type MeditationEntryCreateForm,
   type MeditationEntryCreateRequestDto,
   type MeditationEntryCreateResponseDto,
+  type MeditationEntryGetAllItemResponseDto,
+  type MeditationEntryGetAllResponseDto,
   MeditationEntryValidationMessage,
 } from './packages/meditation/meditation.js';
 export {
