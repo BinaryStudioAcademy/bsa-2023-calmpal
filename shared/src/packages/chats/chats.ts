@@ -3,5 +3,6 @@ export {
   type ChatCreateRequestDto,
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
+  type GetChatsByQueryDto,
 } from './libs/types/types.js';
 export { createChat as createChatValidationSchema } from './libs/validation-schemas/create-chat.validation-schema.js';

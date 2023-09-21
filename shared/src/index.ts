@@ -56,6 +56,7 @@ export {
   type ChatGetAllResponseDto,
   ChatsApiPath,
   createChatValidationSchema,
+  type GetChatsByQueryDto,
 } from './packages/chats/chats.js';
 export {
   type FileGetAllItemResponseDto,
@@ -66,6 +67,7 @@ export {
   type S3FileUploadRequestDto,
 } from './packages/files/files.js';
 export {
+  type GetJournalsByQueryDto,
   JournalApiPath,
   type JournalEntryCreateRequestDto,
   type JournalEntryGetAllItemResponseDto,
