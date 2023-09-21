@@ -15,6 +15,7 @@ import {
 import {
   DEFAULT_NOTE_PAYLOAD,
   SAVE_NOTE_TIMEOUT,
+  TEXT_PLACEHOLDER,
 } from '#pages/journal/components/note/components/note-input/libs/constants/constants.js';
 import { appActions } from '#slices/app/app-notification.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
@@ -105,7 +106,7 @@ const Note: React.FC = () => {
       />
       <NoteInput
         name="text"
-        placeholder={DEFAULT_NOTE_PAYLOAD.text}
+        placeholder={TEXT_PLACEHOLDER}
         control={control}
         contentEditableStyle={styles['text']}
         onError={handleNoteError}
