@@ -6,7 +6,6 @@ import {
   type ChatMessageService,
 } from '#packages/chat-messages/chat-messages.js';
 
-import { type ChatEntity } from './chat.entity.js';
 import { type ChatRepository } from './chat.repository.js';
 import {
   type ChatGetAllItemResponseDto,
@@ -31,14 +30,6 @@ class ChatService implements Service {
 
   public find(): ReturnType<Service['find']> {
     return Promise.resolve(null);
-  }
-
-  public async findById(
-    id: number,
-  ): Promise<ReturnType<ChatEntity['toObject']> | null> {
-    const chat = await this.chatRepository.findById(id);
-
-    return chat?.toObject() ?? null;
   }
 
   public async findAll(): ReturnType<Service['findAll']> {
