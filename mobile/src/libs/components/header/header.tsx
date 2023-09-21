@@ -29,7 +29,7 @@ const Header: React.FC<Properties> = ({
   isArrowVisible = false,
   badgeCount = DEFAULT_BADGE_COUNT,
   isProfileVisible = false,
-  isChat = false,
+  fontSize,
 }) => {
   const navigation =
     useNavigation<NavigationProp<ProfileNavigationParameterList>>();
@@ -52,7 +52,7 @@ const Header: React.FC<Properties> = ({
       {isArrowVisible && <BackButton />}
 
       <View style={styles.titleBadgeContainer}>
-        <Text style={[styles.title, isChat && styles.chatTitle]}>
+        <Text style={fontSize === 'small' ? styles.chatTitle : styles.title}>
           {title ?? name}
         </Text>
         {hasValue && <Badge count={badgeCount} />}
