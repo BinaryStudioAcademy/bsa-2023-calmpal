@@ -1,6 +1,6 @@
 const DEFAULT_NOTE_PAYLOAD = {
   title: 'New note',
-  text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}',
+  text: '<p dir="ltr"><span style="white-space:pre-wrap">Type your text here</span></p>',
 };
 
 const SAVE_NOTE_TIMEOUT = 2000;
