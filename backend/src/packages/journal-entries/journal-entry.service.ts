@@ -89,8 +89,7 @@ class JournalEntryService implements Service {
     id: number,
     user: UserAuthResponseDto,
   ): ReturnType<Service['delete']> {
-    // const journal = await this.find(); //TODO find(id)
-    const journal = { id: 1, userId: 32 };
+    const journal = await this.find(id);
     if (journal.userId !== user.id) {
       throw new JournalError({
         status: HTTPCode.BAD_REQUEST,
