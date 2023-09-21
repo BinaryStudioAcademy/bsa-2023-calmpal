@@ -30,6 +30,7 @@ import { createJournalEntryValidationSchema } from './libs/validation-schemas/va
  *            minimum: 1
  *          title:
  *            type: string
+ *            maxLength: 255
  *          text:
  *            type: string
  *          createdAt:
