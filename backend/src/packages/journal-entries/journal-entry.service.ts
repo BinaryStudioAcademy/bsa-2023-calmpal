@@ -19,8 +19,8 @@ class JournalEntryService implements Service {
     return Promise.resolve(null);
   }
 
-  public async findAll(): Promise<JournalEntryGetAllResponseDto> {
-    const items = await this.journalEntryRepository.findAll();
+  public async findAll(query: string): Promise<JournalEntryGetAllResponseDto> {
+    const items = await this.journalEntryRepository.findAll(query);
 
     return {
       items: items.map((item) => {

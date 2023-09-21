@@ -18,10 +18,15 @@ class JournalEntryRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public async findAll(): Promise<JournalEntryEntity[]> {
+  public async findAll(query: string): Promise<JournalEntryEntity[]> {
     const journalEntries = await this.journalEntryModel
       .query()
       .select()
+      .modify((builder) => {
+        if (query) {
+          void builder.whereILike('title', `%${query}%`);
+        }
+      })
       .castTo<JournalEntryCommonQueryResponse[]>()
       .execute();
 

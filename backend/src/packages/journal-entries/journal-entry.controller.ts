@@ -9,7 +9,10 @@ import { type Logger } from '#libs/packages/logger/logger.js';
 
 import { type JournalEntryService } from './journal-entry.service.js';
 import { JournalApiPath } from './libs/enums/enums.js';
-import { type JournalEntryCreateRequestDto } from './libs/types/types.js';
+import {
+  type GetJournalsByQueryDto,
+  type JournalEntryCreateRequestDto,
+} from './libs/types/types.js';
 
 /**
  * @swagger
@@ -57,8 +60,12 @@ class JournalEntryController extends BaseController {
     this.addRoute({
       path: JournalApiPath.ROOT,
       method: 'GET',
-      handler: () => {
-        return this.getAll();
+      handler: (options) => {
+        return this.getAll(
+          options as APIHandlerOptions<{
+            query: GetJournalsByQueryDto;
+          }>,
+        );
       },
     });
   }
@@ -126,10 +133,14 @@ class JournalEntryController extends BaseController {
    *                      $ref: '#/components/schemas/Journal Entry'
    */
 
-  private async getAll(): Promise<APIHandlerResponse> {
+  private async getAll(
+    options: APIHandlerOptions<{
+      query: GetJournalsByQueryDto;
+    }>,
+  ): Promise<APIHandlerResponse> {
     return {
       status: HTTPCode.OK,
-      payload: await this.journalEntryService.findAll(),
+      payload: await this.journalEntryService.findAll(options.query.query),
     };
   }
 }
