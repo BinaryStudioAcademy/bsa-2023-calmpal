@@ -75,6 +75,7 @@ export {
   type JournalEntryGetAllResponseDto,
   type JournalEntryUpdatePayloadDto,
   type JournalEntryUpdateRequestDto,
+  NOTE_SANITIZER_OPTIONS,
 } from './packages/journal/journal.js';
 export {
   createMeditationEntryFormValidationSchema,

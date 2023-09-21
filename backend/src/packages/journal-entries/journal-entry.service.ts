@@ -5,6 +5,7 @@ import { type Service } from '#libs/types/types.js';
 
 import { JournalEntryEntity } from './journal-entry.entity.js';
 import { type JournalEntryRepository } from './journal-entry.repository.js';
+import { NOTE_SANITIZER_OPTIONS } from './libs/constants/constants.js';
 import {
   type CreateJournalEntryPayload,
   type JournalEntryGetAllItemResponseDto,
@@ -54,8 +55,8 @@ class JournalEntryService implements Service {
     const item = await this.journalEntryRepository.create(
       JournalEntryEntity.initializeNew({
         userId,
-        title: sanitizeInput(body.title),
-        text: sanitizeInput(body.text),
+        title: sanitizeInput(body.title, NOTE_SANITIZER_OPTIONS),
+        text: sanitizeInput(body.text, NOTE_SANITIZER_OPTIONS),
       }),
     );
 
@@ -74,8 +75,8 @@ class JournalEntryService implements Service {
         userId,
         createdAt: null,
         updatedAt: null,
-        title: sanitizeInput(title),
-        text: text ? sanitizeInput(text) : '',
+        title: sanitizeInput(title, NOTE_SANITIZER_OPTIONS),
+        text: text ? sanitizeInput(text, NOTE_SANITIZER_OPTIONS) : '',
       }),
     );
 
