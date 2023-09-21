@@ -53,7 +53,7 @@ const ChatList: React.FC = () => {
     setIsModalVisible(false);
   };
 
-  const handleDeleteNote = (): void => {
+  const handleDeleteChat = (): void => {
     setIsModalVisible(false);
   };
 
@@ -93,7 +93,7 @@ const ChatList: React.FC = () => {
       <Modal
         isVisible={isModalVisible}
         onClose={hanleCloseModal}
-        onDelete={handleDeleteNote}
+        onDelete={handleDeleteChat}
         type="Note"
       />
       <View style={styles.container}>
