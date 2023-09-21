@@ -9,7 +9,9 @@ const getRelativeDate = (datetime: Date): string => {
 
   if (date === dateToday) {
     return 'Today';
-  } else if (date === dateYesteday) {
+  }
+
+  if (date === dateYesteday) {
     return 'Yesterday';
   }
 
