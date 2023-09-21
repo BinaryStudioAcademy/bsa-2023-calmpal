@@ -2,7 +2,6 @@ import { $generateNodesFromDOM as generateNodesFromDOM } from '@lexical/html';
 import {
   $createParagraphNode as createParagraphNode,
   $createTextNode as createTextNode,
-  $getRoot as getRoot,
   $insertNodes as insertNodes,
 } from 'lexical';
 
@@ -17,19 +16,16 @@ type Parameters_ = {
 const updateEditorState = ({ value, shouldParseTextHTML }: Parameters_) => {
   return (editor: LexicalEditor): void => {
     editor.update(() => {
+      const nodes = [];
       if (shouldParseTextHTML) {
-        const root = getRoot();
-        const paragraphNode = createParagraphNode();
-        const textNode = createTextNode(value);
-
-        paragraphNode.append(textNode);
-        root.append(paragraphNode);
+        nodes.push(createParagraphNode(), createTextNode(value));
       } else {
         const dom = getDOMParsedValueFromString(value);
-        const nodes = generateNodesFromDOM(editor, dom);
 
-        insertNodes(nodes);
+        nodes.push(...generateNodesFromDOM(editor, dom));
       }
+
+      insertNodes(nodes);
     });
   };
 };

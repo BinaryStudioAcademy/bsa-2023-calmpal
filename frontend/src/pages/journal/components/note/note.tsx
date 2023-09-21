@@ -29,7 +29,7 @@ const Note: React.FC = () => {
     };
   });
 
-  const { control, watch } = useAppForm({
+  const { control, watch, isDirty } = useAppForm({
     defaultValues: {
       title: selectedJournalEntry.title,
       text: selectedJournalEntry.text,
@@ -67,13 +67,13 @@ const Note: React.FC = () => {
   );
 
   useEffect(() => {
-    if (id) {
+    if (id && isDirty) {
       handleSaveNote(id, {
         title: debouncedTitleValue,
         text: debouncedTextValue,
       });
     }
-  }, [debouncedTextValue, debouncedTitleValue, handleSaveNote, id]);
+  }, [debouncedTextValue, debouncedTitleValue, handleSaveNote, id, isDirty]);
 
   useEffect(() => {
     const handleBeforeUnload = (): void => {
@@ -96,6 +96,7 @@ const Note: React.FC = () => {
         name="title"
         placeholder={DEFAULT_NOTE_PAYLOAD.title}
         control={control}
+        shouldParseTextHTML
         contentEditableStyle={styles['title']}
         onError={handleNoteError}
       />
