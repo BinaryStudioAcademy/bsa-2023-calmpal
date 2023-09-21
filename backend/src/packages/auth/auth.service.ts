@@ -93,13 +93,6 @@ class AuthService {
   ): Promise<UserDeleteResponseDto> {
     const deletedUser = await this.userService.delete(id);
 
-    if (!deletedUser) {
-      throw new UsersError({
-        status: HTTPCode.NOT_FOUND,
-        message: ExceptionMessage.USER_NOT_FOUND,
-      });
-    }
-
     return { id: deletedUser.id };
   }
 }

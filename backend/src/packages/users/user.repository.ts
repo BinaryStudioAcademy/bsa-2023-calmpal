@@ -116,7 +116,7 @@ class UserRepository implements Repository {
     const updatedRows = await this.userModel
       .query()
       .patch({ deletedAt: new Date().toISOString() })
-      .where({ id });
+      .where({ id, deletedAt: null });
 
     return updatedRows > NO_UPDATES;
   }

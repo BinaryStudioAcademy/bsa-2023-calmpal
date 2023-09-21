@@ -98,21 +98,26 @@ class UserService implements Service {
     return Promise.resolve(null);
   }
 
-  public async delete(
-    id: number,
-  ): Promise<ReturnType<UserEntity['toObject']> | null> {
+  public async delete(id: number): Promise<ReturnType<UserEntity['toObject']>> {
+    const isDeleted = await this.userRepository.delete(id);
+
+    if (!isDeleted) {
+      throw new UsersError({
+        status: HTTPCode.INTERNAL_SERVER_ERROR,
+        message: ExceptionMessage.DELETE_FAIL,
+      });
+    }
+
     const deletedUser = await this.userRepository.findById(id);
 
-    if (!deletedUser) {
+    if (deletedUser === null) {
       throw new UsersError({
         status: HTTPCode.NOT_FOUND,
         message: ExceptionMessage.USER_NOT_FOUND,
       });
     }
 
-    const isDeleted = await this.userRepository.delete(id);
-
-    return isDeleted ? deletedUser.toObject() : null;
+    return deletedUser.toObject();
   }
 
   public async findByEmail(
