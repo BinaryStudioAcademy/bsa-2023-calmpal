@@ -20,7 +20,6 @@ type Properties = {
   isArrowVisible?: boolean;
   badgeCount?: number;
   isProfileVisible?: boolean;
-  isChat?: boolean;
   fontSize?: 'small' | 'large';
 };
 
