@@ -22,6 +22,7 @@
     "build:copy": "cp -r package.json build",
     "build": "tsc && npm run build:copy",
     "prestart": "cd build && npm run migrate",
+    "seed": "knex seed:run",
     "migrate": "knex migrate:latest",
     "start": "node ./build/src/index.js"
   },
