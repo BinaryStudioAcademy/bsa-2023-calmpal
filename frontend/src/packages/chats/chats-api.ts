@@ -1,4 +1,5 @@
 import { APIPath, ContentType } from '#libs/enums/enums.js';
+import { getUrlWithQueryString } from '#libs/helpers/helpers.js';
 import { BaseHttpApi } from '#libs/packages/api/api.js';
 import { type HTTP } from '#libs/packages/http/http.js';
 import { type Storage } from '#libs/packages/storage/storage.js';
@@ -23,7 +24,10 @@ class ChatApi extends BaseHttpApi {
 
   public async getAllChats(query: string): Promise<ChatGetAllResponseDto> {
     const response = await this.load(
-      this.getFullEndpoint(ChatsApiPath.ROOT, `?query=${query}`, {}),
+      this.getFullEndpoint(
+        getUrlWithQueryString(ChatsApiPath.ROOT, { query }),
+        {},
+      ),
       { method: 'GET', hasAuth: true },
     );
 
