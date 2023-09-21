@@ -119,7 +119,6 @@ const MEDITATION_ENTRIES = [
 ];
 
 const up = async (knex: Knex): Promise<void> => {
-  await knex(DATABASE_TABLE_NAME).del();
   await knex(DATABASE_TABLE_NAME).insert(MEDITATION_ENTRIES);
 };
 
