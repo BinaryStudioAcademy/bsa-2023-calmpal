@@ -7,6 +7,7 @@ import {
   Header,
   InputSearch,
   LinearGradient,
+  Modal,
   ScrollView,
   View,
 } from '#libs/components/components';
@@ -18,6 +19,7 @@ import {
   useEffect,
   useNavigation,
   useSearch,
+  useState,
 } from '#libs/hooks/hooks';
 import { type ChatNavigationParameterList } from '#libs/types/types';
 import { actions as chatsActions } from '#slices/chats/chats';
@@ -34,6 +36,7 @@ const ChatList: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigation =
     useNavigation<NativeStackNavigationProp<ChatNavigationParameterList>>();
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const { filteredData: filteredChats, setSearchQuery } = useSearch(
     chats,
@@ -41,6 +44,18 @@ const ChatList: React.FC = () => {
   );
 
   const chatsLength = chats.length;
+
+  const handleShowModal = (): void => {
+    setIsModalVisible(true);
+  };
+
+  const hanleCloseModal = (): void => {
+    setIsModalVisible(false);
+  };
+
+  const handleDeleteNote = (): void => {
+    setIsModalVisible(false);
+  };
 
   const handleSelectChat = useCallback(
     (title: string) => {
@@ -75,6 +90,12 @@ const ChatList: React.FC = () => {
 
   return (
     <LinearGradient>
+      <Modal
+        isVisible={isModalVisible}
+        onClose={hanleCloseModal}
+        onDelete={handleDeleteNote}
+        type="Note"
+      />
       <View style={styles.container}>
         <InputSearch
           placeholder="Search chat"
@@ -87,6 +108,7 @@ const ChatList: React.FC = () => {
                 title={item.name}
                 onPress={handleSelectChat}
                 key={item.id}
+                onDelete={handleShowModal}
               />
             );
           })}
