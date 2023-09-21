@@ -4,4 +4,5 @@ export {
   configureString,
   debounce,
   getFormattedTime,
+  getRelativeDate,
 } from 'shared/build/index.js';
