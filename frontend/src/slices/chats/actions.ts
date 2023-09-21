@@ -18,12 +18,12 @@ import { name as sliceName } from './chats.slice.js';
 
 const getAllChats = createAsyncThunk<
   ChatGetAllResponseDto,
-  undefined,
+  string,
   AsyncThunkConfig
->(`${sliceName}/get-all-chats`, async (_, { extra }) => {
+>(`${sliceName}/get-all-chats`, async (query, { extra }) => {
   const { chatApi } = extra;
 
-  return await chatApi.getAllChats();
+  return await chatApi.getAllChats(query);
 });
 
 const getCurrentChatMessages = createAsyncThunk<
