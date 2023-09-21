@@ -8,6 +8,7 @@ import {
   createJournalEntry,
   deleteJournal,
   getAllJournalEntries,
+  updateJournalEntry,
 } from './actions.js';
 
 type State = {
@@ -15,6 +16,7 @@ type State = {
   selectedJournalEntry: JournalEntryGetAllItemResponseDto | null;
   journalEntriesDataStatus: ValueOf<typeof DataStatus>;
   createJournalEntryDataStatus: ValueOf<typeof DataStatus>;
+  updateJournalEntryDataStatus: ValueOf<typeof DataStatus>;
   deleteJournalEntryDataStatus: ValueOf<typeof DataStatus>;
 };
 
@@ -23,6 +25,7 @@ const initialState: State = {
   selectedJournalEntry: null,
   journalEntriesDataStatus: DataStatus.IDLE,
   createJournalEntryDataStatus: DataStatus.IDLE,
+  updateJournalEntryDataStatus: DataStatus.IDLE,
   deleteJournalEntryDataStatus: DataStatus.IDLE,
 };
 
@@ -54,10 +57,29 @@ const { reducer, actions, name } = createSlice({
     });
     builder.addCase(createJournalEntry.fulfilled, (state, action) => {
       state.allJournalEntries.push(action.payload);
+      state.selectedJournalEntry = action.payload;
       state.createJournalEntryDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(createJournalEntry.rejected, (state) => {
       state.createJournalEntryDataStatus = DataStatus.REJECTED;
+    });
+    builder.addCase(updateJournalEntry.pending, (state) => {
+      state.updateJournalEntryDataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(updateJournalEntry.fulfilled, (state, action) => {
+      state.allJournalEntries = state.allJournalEntries.map((journalEntry) => {
+        if (journalEntry.id === action.payload.id) {
+          return action.payload;
+        }
+
+        return journalEntry;
+      });
+
+      state.updateJournalEntryDataStatus = DataStatus.FULFILLED;
+      state.selectedJournalEntry = action.payload;
+    });
+    builder.addCase(updateJournalEntry.rejected, (state) => {
+      state.updateJournalEntryDataStatus = DataStatus.REJECTED;
     });
     builder.addCase(deleteJournal.pending, (state) => {
       state.deleteJournalEntryDataStatus = DataStatus.PENDING;
