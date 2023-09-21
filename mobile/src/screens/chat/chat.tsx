@@ -18,7 +18,11 @@ import { type UserAuthResponseDto } from '#packages/users/users';
 import { actions as chatsActions } from '#slices/chats/chats';
 
 import { ChatInput, MessageItem } from './components/components';
-import { DEFAULT_VALUES, EMPTY_ARRAY_LENGTH } from './libs/constants';
+import {
+  DEFAULT_VALUES,
+  EMPTY_ARRAY_LENGTH,
+  PREVIOUS_USER,
+} from './libs/constants';
 import { type ChatInputValue } from './libs/types/chat-input-value.type';
 import { styles } from './styles';
 
@@ -56,15 +60,16 @@ const Chat: React.FC = () => {
   const handleFormSubmit = useCallback(
     ({ message }: ChatInputValue): void => {
       if (!hasId || messagesLength === EMPTY_ARRAY_LENGTH) {
-        void dispatch(chatsActions.createChat({ message }));
+        void dispatch(
+          chatsActions.createChat({ payload: { message }, navigation }),
+        );
       } else {
         void dispatch(chatsActions.createMessage({ message, chatId: id }));
       }
 
-      scrollViewToEnd();
       reset();
     },
-    [reset, dispatch, messagesLength, id, hasId],
+    [reset, dispatch, messagesLength, id, hasId, navigation],
   );
 
   const handleSend = useCallback((): void => {
@@ -84,9 +89,11 @@ const Chat: React.FC = () => {
   }, [navigation, title]);
 
   useEffect(() => {
-    if (hasId) {
-      void dispatch(chatsActions.getCurrentChatMessages(id));
-    }
+    scrollViewToEnd();
+  }, [messagesLength]);
+
+  useEffect(() => {
+    void dispatch(chatsActions.getCurrentChatMessages(id));
   }, [dispatch, id, hasId]);
 
   return (
@@ -96,15 +103,19 @@ const Chat: React.FC = () => {
         <Text style={styles.title}>Doctor Freud.ai</Text>
       </View>
       <ScrollView style={styles.chatWrapper} ref={scrollViewReference}>
-        {currentChatMessages.map((item) => {
+        {currentChatMessages.map((item, index) => {
           // const isDifferentUser =
           // item.isUser !== messages[index - PREVIOUS_USER]?.isUser;
+          const previousMessage = currentChatMessages[index - PREVIOUS_USER];
+          const isDifferentMessageOwner =
+            item.senderId !== previousMessage?.senderId ||
+            item.chatId !== previousMessage.chatId;
 
           return (
             <MessageItem
               text={item.message}
               isUser={item.senderId === authenticatedUser.id}
-              isAvatarVisible={true}
+              isAvatarVisible={isDifferentMessageOwner}
               key={item.id}
             />
           );

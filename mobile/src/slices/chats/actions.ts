@@ -1,5 +1,10 @@
+import {
+  type NavigationProp,
+  type ParamListBase,
+} from '@react-navigation/native';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+import { ChatScreenName } from '#libs/enums/enums';
 import { type AsyncThunkConfig } from '#libs/types/types';
 import {
   type ChatMessageCreatePayload,
@@ -36,12 +41,15 @@ const getCurrentChatMessages = createAsyncThunk<
 
 const createChat = createAsyncThunk<
   ChatGetAllItemResponseDto,
-  ChatCreateRequestDto,
+  { payload: ChatCreateRequestDto; navigation: NavigationProp<ParamListBase> },
   AsyncThunkConfig
->(`${sliceName}/create-chat`, async (payload, { extra }) => {
+>(`${sliceName}/create-chat`, async ({ payload, navigation }, { extra }) => {
   const { chatApi } = extra;
 
-  return await chatApi.createChat(payload);
+  const chat = await chatApi.createChat(payload);
+  navigation.navigate(ChatScreenName.CHAT, { title: chat.name, id: chat.id });
+
+  return chat;
 });
 
 const createMessage = createAsyncThunk<

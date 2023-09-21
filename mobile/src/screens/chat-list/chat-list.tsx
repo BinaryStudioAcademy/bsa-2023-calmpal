@@ -26,9 +26,10 @@ import { EMPTY_ARRAY_LENGTH } from './libs/constants';
 import { styles } from './styles';
 
 const ChatList: React.FC = () => {
-  const { chats } = useAppSelector(({ chats }) => {
+  const { chats, isLoaded } = useAppSelector(({ chats }) => {
     return {
       chats: chats.chats,
+      isLoaded: chats.chatsDataStatus === 'fulfilled',
     };
   });
   const dispatch = useAppDispatch();
@@ -52,7 +53,7 @@ const ChatList: React.FC = () => {
   const handleRedirectToChat = useCallback(() => {
     navigation.navigate(ChatScreenName.CHAT, {
       title: 'New Chat',
-      id: undefined,
+      id: '',
     });
   }, [navigation]);
 
@@ -67,10 +68,10 @@ const ChatList: React.FC = () => {
   }, [navigation, chatsLength]);
 
   useEffect(() => {
-    if (chatsLength === EMPTY_ARRAY_LENGTH) {
+    if (isLoaded && chatsLength === EMPTY_ARRAY_LENGTH) {
       handleRedirectToChat();
     }
-  }, [chatsLength, handleRedirectToChat]);
+  }, [chatsLength, handleRedirectToChat, isLoaded]);
 
   useEffect(() => {
     void dispatch(chatsActions.getAllChats());
