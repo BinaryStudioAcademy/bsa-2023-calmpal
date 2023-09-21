@@ -82,19 +82,10 @@ class ChatService implements Service {
   ): Promise<ChatGetAllResponseDto> {
     const items = await this.chatRepository.findAllByUserId(userId, query);
 
-    const itemPromises = items.map(async (item) => {
-      const imageUrl = await this.s3Service.getPreSignedUrl(
-        this.s3Service.getFileKey(item.toObject().imageUrl) as string,
-      );
-
-      return {
-        ...item.toObject(),
-        imageUrl,
-      };
-    });
-
     return {
-      items: await Promise.all(itemPromises),
+      items: items.map((item) => {
+        return item.toObject();
+      }),
     };
   }
 
@@ -159,11 +150,8 @@ class ChatService implements Service {
       chat,
       imageUrl: fileRecord.url,
     });
-    const presignedImageUrl = await this.s3Service.getPreSignedUrl(
-      this.s3Service.getFileKey(fileRecord.url) as string,
-    );
 
-    return { ...item.toObject(), imageUrl: presignedImageUrl };
+    return item.toObject();
   }
 
   public async generateChatName(message: string): Promise<string> {

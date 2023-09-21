@@ -1,19 +1,16 @@
 import {
-  GetObjectCommand,
   PutObjectCommand,
   type PutObjectCommandInput,
   S3Client,
   type S3ClientConfig,
   S3ServiceException,
 } from '@aws-sdk/client-s3';
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 import { FileError } from '#libs/exceptions/exceptions.js';
 import { replaceTemplateWithValue } from '#libs/helpers/helpers.js';
 import { type HTTPCode } from '#libs/packages/http/http.js';
 import { type ValueOf } from '#libs/types/types.js';
 
-import { FILE_KEY_INDEX, SEC_IN_HOUR } from './libs/constants/constants.js';
 import { type S3FileUploadRequestDto } from './libs/types/types.js';
 
 type S3Dependencies = {
@@ -66,23 +63,6 @@ class S3 {
     await this.s3Client.send(putObjectCommand);
   }
 
-  public async getPreSignedUrl(fileKey: string | null): Promise<string | null> {
-    if (!fileKey) {
-      return null;
-    }
-
-    const command = new GetObjectCommand({
-      Bucket: this.bucketName,
-      Key: fileKey,
-    });
-
-    const signedUrl: string = await getSignedUrl(this.s3Client, command, {
-      expiresIn: SEC_IN_HOUR,
-    });
-
-    return signedUrl;
-  }
-
   public getUrl(fileKey: string): string {
     return replaceTemplateWithValue(
       'https://{bucket}.s3.{region}.amazonaws.com/{fileKey}',
@@ -92,16 +72,6 @@ class S3 {
         fileKey,
       },
     );
-  }
-
-  public getFileKey(url: string | null): string | null {
-    if (!url) {
-      return null;
-    }
-
-    const match = url.match(/https:\/\/[^/]+\/([^/]+)/);
-
-    return match?.[FILE_KEY_INDEX] ?? null;
   }
 
   private throwError(error: unknown): never {
