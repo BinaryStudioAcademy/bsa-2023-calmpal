@@ -53,6 +53,20 @@ const NoteInput = <T extends FormFieldValues>({
 
   useOnChangeEditor({ onChange: handleChange });
 
+  const handleEditorState = useCallback(
+    (editor: LexicalEditor): void => {
+      editor.update(() => {
+        const root = getRoot();
+        const paragraphNode = createParagraphNode();
+        const textNode = createTextNode(value);
+
+        paragraphNode.append(textNode);
+        root.append(paragraphNode);
+      });
+    },
+    [value],
+  );
+
   return (
     <div className={styles['text-area']}>
       <LexicalComposer
@@ -60,16 +74,7 @@ const NoteInput = <T extends FormFieldValues>({
           namespace: `note-${name}`,
           onError,
           theme: { paragraph: styles['paragraph'] as string },
-          editorState: (editor: LexicalEditor): void => {
-            editor.update(() => {
-              const root = getRoot();
-              const paragraphNode = createParagraphNode();
-              const textNode = createTextNode(value);
-
-              paragraphNode.append(textNode);
-              root.append(paragraphNode);
-            });
-          },
+          editorState: handleEditorState,
         }}
       >
         <PlainTextPlugin
