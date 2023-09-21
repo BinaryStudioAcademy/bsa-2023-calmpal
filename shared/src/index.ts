@@ -47,6 +47,7 @@ export {
   type ChatMessageCreateRequestDto,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
+  type ChatMessagesGroups,
   ChatMessageValidationMessage,
   ChatMessageValidationRule,
 } from './packages/chat-messages/chat-messages.js';
