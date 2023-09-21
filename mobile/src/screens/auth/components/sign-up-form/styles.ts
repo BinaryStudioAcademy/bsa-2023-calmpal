@@ -6,13 +6,17 @@ const styles = StyleSheet.create({
   formContainer: {
     height: '100%',
     width: '100%',
-    paddingHorizontal: 55,
+    paddingHorizontal: 44,
+    marginBottom: 55,
   },
   titleText: {
-    fontSize: 35,
+    fontSize: 30,
     color: AppColor.WHITE,
     marginBottom: 30,
     marginTop: 30,
+  },
+  bottomText: {
+    fontSize: 14,
   },
   linkText: {
     fontWeight: 'bold',
