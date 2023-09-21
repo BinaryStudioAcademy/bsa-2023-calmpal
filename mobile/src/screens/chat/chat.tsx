@@ -67,6 +67,12 @@ const Chat: React.FC = () => {
         void dispatch(chatsActions.createMessage({ message, chatId: id }));
       }
 
+      void dispatch(
+        chatsActions.generateReply({
+          message,
+          chatId: id,
+        }),
+      );
       reset();
     },
     [reset, dispatch, messagesLength, id, hasId, navigation],
@@ -104,8 +110,6 @@ const Chat: React.FC = () => {
       </View>
       <ScrollView style={styles.chatWrapper} ref={scrollViewReference}>
         {currentChatMessages.map((item, index) => {
-          // const isDifferentUser =
-          // item.isUser !== messages[index - PREVIOUS_USER]?.isUser;
           const previousMessage = currentChatMessages[index - PREVIOUS_USER];
           const isDifferentMessageOwner =
             item.senderId !== previousMessage?.senderId ||

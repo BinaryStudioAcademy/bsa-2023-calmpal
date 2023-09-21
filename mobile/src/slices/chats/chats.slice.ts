@@ -8,6 +8,7 @@ import { type ChatGetAllItemResponseDto } from '#packages/chats/chats';
 import {
   createChat,
   createMessage,
+  generateReply,
   getAllChats,
   getCurrentChatMessages,
 } from './actions';
@@ -19,6 +20,7 @@ type State = {
   createChatDataStatus: ValueOf<typeof DataStatus>;
   currentChatMessagesDataStatus: ValueOf<typeof DataStatus>;
   createMessageDataStatus: ValueOf<typeof DataStatus>;
+  generateReplyDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
@@ -28,6 +30,7 @@ const initialState: State = {
   createChatDataStatus: DataStatus.IDLE,
   currentChatMessagesDataStatus: DataStatus.IDLE,
   createMessageDataStatus: DataStatus.IDLE,
+  generateReplyDataStatus: DataStatus.IDLE,
 };
 
 const { reducer, actions, name } = createSlice({
@@ -77,6 +80,17 @@ const { reducer, actions, name } = createSlice({
     });
     builder.addCase(createMessage.rejected, (state) => {
       state.createMessageDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(generateReply.pending, (state) => {
+      state.generateReplyDataStatus = DataStatus.IDLE;
+    });
+    builder.addCase(generateReply.fulfilled, (state, action) => {
+      state.currentChatMessages.push(action.payload);
+      state.generateReplyDataStatus = DataStatus.FULFILLED;
+    });
+    builder.addCase(generateReply.rejected, (state) => {
+      state.generateReplyDataStatus = DataStatus.REJECTED;
     });
   },
 });

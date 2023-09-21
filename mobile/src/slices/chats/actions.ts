@@ -62,4 +62,20 @@ const createMessage = createAsyncThunk<
   return await chatMessagesApi.createChatMessage(payload);
 });
 
-export { createChat, createMessage, getAllChats, getCurrentChatMessages };
+const generateReply = createAsyncThunk<
+  ChatMessageGetAllItemResponseDto,
+  ChatMessageCreatePayload,
+  AsyncThunkConfig
+>(`${sliceName}/generate-reply`, async (payload, { extra }) => {
+  const { chatMessagesApi } = extra;
+
+  return await chatMessagesApi.generateChatReply(payload);
+});
+
+export {
+  createChat,
+  createMessage,
+  generateReply,
+  getAllChats,
+  getCurrentChatMessages,
+};
