@@ -1,4 +1,4 @@
-import { Icon } from '#libs/components/components.js';
+import { Button, Icon } from '#libs/components/components.js';
 import { type IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { type IconName, type ValueOf } from '#libs/types/types.js';
@@ -59,9 +59,16 @@ const Card: React.FC<Properties> = ({
         </div>
       </button>
       {iconRight && (
-        <button className={styles['icon-right']} onClick={onIconClick}>
-          <Icon name={iconRight} color={iconColor} />
-        </button>
+        <Button
+          label="delete chat"
+          style="icon-right"
+          isLabelVisuallyHidden
+          onClick={onIconClick}
+          iconName={iconRight}
+          iconColor={iconColor}
+          iconWidth={25}
+          iconHeight={25}
+        />
       )}
     </>
   );

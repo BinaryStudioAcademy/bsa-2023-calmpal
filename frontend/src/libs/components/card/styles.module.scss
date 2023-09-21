@@ -80,25 +80,6 @@
   word-break: break-word;
 }
 
-.icon-right {
-  position: relative;
-  top: -60px;
-  left: 265px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 30px;
-  padding: 7px 6px;
-  background-color: transparent;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.icon-right:hover {
-  transform: scale(1.2);
-}
-
 @media (width < 900px) {
   .item {
     width: 100%;
@@ -109,10 +90,6 @@
   .no-image {
     padding-left: 20px;
   }
-
-  .icon-right {
-    left: 180px;
-  }
 }
 
 @media (width < 768px) {
@@ -122,9 +99,5 @@
 
   .no-image {
     padding-left: 20px;
-  }
-
-  .icon-right {
-    left: 265px;
   }
 }
