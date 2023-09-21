@@ -1,4 +1,5 @@
 type OpenAiMessageGenerateRequestDto = {
+  role: 'user' | 'assistant';
   content: string;
 };
 

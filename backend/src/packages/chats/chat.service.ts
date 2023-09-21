@@ -69,14 +69,12 @@ class ChatService implements Service {
 
     await this.chatMessageService.create({
       message,
-      isGeneratedByChatbot: false,
       chatId: chat.id,
       senderId: userId,
     });
 
     await this.chatMessageService.generateReply({
       message,
-      isGeneratedByChatbot: true,
       chatId: chat.id,
       senderId: userId,
     });
@@ -87,11 +85,13 @@ class ChatService implements Service {
   public createMessage(
     payload: ChatMessageCreatePayload,
   ): Promise<ChatMessageGetAllItemResponseDto> {
-    if (payload.isGeneratedByChatbot) {
-      return this.chatMessageService.generateReply(payload);
-    }
-
     return this.chatMessageService.create(payload);
+  }
+
+  public generateReply(
+    payload: ChatMessageCreatePayload,
+  ): Promise<ChatMessageGetAllItemResponseDto> {
+    return this.chatMessageService.generateReply(payload);
   }
 
   public update(): ReturnType<Service['update']> {

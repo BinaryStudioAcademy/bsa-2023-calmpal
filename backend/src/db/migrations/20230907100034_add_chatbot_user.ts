@@ -36,7 +36,7 @@ async function up(knex: Knex): Promise<void> {
 
   await knex(TABLE_NAME.USERS).insert({
     ...CHATBOT_USER,
-    roleId: chatbotRole?.id,
+    roleId: (chatbotRole as UserRole).id,
   });
 
   const chatbot = await knex(TABLE_NAME.USERS)
@@ -46,7 +46,7 @@ async function up(knex: Knex): Promise<void> {
 
   await knex(TABLE_NAME.USER_DETAILS).insert({
     ...CHATBOT_USER_DETAILS,
-    userId: chatbot?.id,
+    userId: (chatbot as UserRole).id,
   });
 }
 
@@ -56,7 +56,7 @@ async function down(knex: Knex): Promise<void> {
     .where({ email: CHATBOT_USER.email })
     .first();
   await knex(TABLE_NAME.USERS)
-    .where({ id: userToDelete?.id })
+    .where({ id: (userToDelete as UserRole).id })
     .del();
 }
 

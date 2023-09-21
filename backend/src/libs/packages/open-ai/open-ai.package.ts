@@ -37,20 +37,15 @@ class OpenAi {
     this.model = model;
   }
 
-  public async getMessageResponse({
-    content,
-  }: OpenAiMessageGenerateRequestDto): Promise<string | null> {
+  public async getMessageResponse(
+    messages: OpenAiMessageGenerateRequestDto[],
+  ): Promise<string | null> {
     const data = await this.httpService.load<OpenAiMessageGenerateResponseDto>({
       method: 'POST',
       url: `${this.baseUrl}chat/completions`,
       data: {
         model: this.model,
-        messages: [
-          {
-            role: 'user',
-            content,
-          },
-        ],
+        messages,
       },
       token: this.apiKey,
     });

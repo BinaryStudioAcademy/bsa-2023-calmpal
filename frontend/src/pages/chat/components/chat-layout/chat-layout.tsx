@@ -40,14 +40,13 @@ const ChatLayout: React.FC = () => {
           chatActions.createMessage({
             message,
             chatId: id as string,
-            isGeneratedByChatbot: false,
           }),
         );
+
         void dispatch(
-          chatActions.createMessage({
+          chatActions.generateReply({
             message,
             chatId: id as string,
-            isGeneratedByChatbot: true,
           }),
         );
       }

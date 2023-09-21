@@ -17,12 +17,10 @@ class ChatbotService {
     this.userService = userService;
   }
 
-  public async generateReply({
-    content,
-  }: OpenAiMessageGenerateRequestDto): Promise<string> {
-    const reply = await this.openAiService.getMessageResponse({
-      content: `Pretend that you a psychologist and you give mental support to the patient - answer this question: '${content}'.`,
-    });
+  public async generateReply(
+    payload: OpenAiMessageGenerateRequestDto[],
+  ): Promise<string> {
+    const reply = await this.openAiService.getMessageResponse(payload);
 
     return reply ?? NO_RESPONSE_MESSAGE;
   }

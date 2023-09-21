@@ -3,6 +3,7 @@ import { UsersError } from '#libs/exceptions/exceptions.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Service } from '#libs/types/types.js';
 import { type ChatbotService } from '#packages/chats/chats.js';
+import { type OpenAiMessageGenerateRequestDto } from '#packages/chats/libs/types/types.js';
 import { userService } from '#packages/users/users.js';
 
 import { ChatMessageEntity } from './chat-message.entity.js';
@@ -69,9 +70,28 @@ class ChatMessageService implements Service {
       });
     }
 
-    const generatedReply = await this.chatbotService.generateReply({
-      content: payload.message,
+    const chatMessages = await this.chatMessageRepository.findAllByChatId(
+      payload.chatId,
+    );
+
+    const openAiMessages = chatMessages.map((chatMessage) => {
+      return {
+        role:
+          payload.senderId === chatMessage.toObject().senderId
+            ? 'assistant'
+            : 'user',
+        content: chatMessage.toObject().message,
+      } as OpenAiMessageGenerateRequestDto;
     });
+
+    openAiMessages.push({
+      role: 'user',
+      content: `Pretend that you a psychologist and you give mental support to the patient - answer this question: '${payload.message}'. Don't mention that you are an AI model.`,
+    });
+
+    const generatedReply = await this.chatbotService.generateReply(
+      openAiMessages,
+    );
 
     const chatMessage = await this.chatMessageRepository.create(
       ChatMessageEntity.initializeNew({
