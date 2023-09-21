@@ -7,7 +7,13 @@ import {
   SidebarHeader,
 } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
-import { useAppDispatch, useCallback, useRef } from '#libs/hooks/hooks.js';
+import {
+  useAppDispatch,
+  useCallback,
+  useEffect,
+  useRef,
+  useSearch,
+} from '#libs/hooks/hooks.js';
 import { type MeditationEntryCreateRequestDto } from '#packages/meditation/meditation.js';
 import { navigationItems } from '#pages/meditation/libs/constants/constants.js';
 import { actions as meditationActions } from '#slices/meditation/meditation.js';
@@ -41,6 +47,10 @@ const MeditationSidebar: React.FC<Properties> = ({
   const handleSelectMeditationEntry = useCallback(() => {
     setIsSidebarShown(false);
   }, [setIsSidebarShown]);
+
+  useEffect(() => {
+    void dispatch(meditationActions.getAllMeditationEntries());
+  }, [dispatch]);
 
   return (
     <>
