@@ -1,6 +1,9 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["src"],
+  "include": [
+    "src",
+    "../shared/src/packages/users/libs/types/delete-account-form-payload.type.ts"
+  ],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "target": "ESNext",

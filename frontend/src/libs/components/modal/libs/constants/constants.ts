@@ -1,10 +1,10 @@
+import { type DeleteAccountFormPayload } from 'shared/build/packages/users/users.js';
+
 import {
   DeleteAccountConfirmation,
   DeleteAccountForm,
   DeleteAccountMessage,
 } from '#libs/components/modal/steps/delete-account/delete-account.js';
-
-import { type DeleteAccountFormPayload } from '../../steps/delete-account/libs/types/delete-account-form-payload.js';
 
 const STEPS = [
   {
@@ -48,4 +48,4 @@ export {
   NEXT_STEP_INCREMENT,
   STEPS,
 };
-export { type DeleteAccountFormPayload } from '../../steps/delete-account/libs/types/delete-account-form-payload.js';
+export { type DeleteAccountFormPayload } from 'shared/build/packages/users/users.js';

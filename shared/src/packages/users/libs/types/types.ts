@@ -1,3 +1,4 @@
+export { type DeleteAccountFormPayload } from './delete-account-form-payload.type.js';
 export { type UserAuthResponseDto } from './user-auth-response-dto.type.js';
 export { type UserDeleteRequestDto } from './user-delete-request-dto.type.js';
 export { type UserDeleteResponseDto } from './user-delete-response-dto.type.js';
