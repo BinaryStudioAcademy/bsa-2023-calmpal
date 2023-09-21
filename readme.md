@@ -116,6 +116,7 @@ erDiagram
    }
    journal_entries {
       int id PK
+      int user_id FK
       dateTime created_at
       dateTime updated_at
       varchar title
@@ -138,6 +139,7 @@ erDiagram
    chats ||--|| users_to_chats : chat_id
    users ||--|| users_to_chats : user_id
    users ||--|{ chat_messages : user_id
+   users ||--|{ journal_entries : user_id
    meditation_topics ||..|o files : meditation_topic_image_id
    meditation_topics ||--|{ meditation_entries : meditation_topic_id
    user_details |o--o| surveys : user_id

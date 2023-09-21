@@ -1,5 +1,6 @@
 type JournalEntryCommonQueryResponse = {
   id: number;
+  userId: number;
   createdAt: string;
   updatedAt: string;
   title: string;
