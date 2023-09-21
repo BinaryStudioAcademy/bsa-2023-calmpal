@@ -23,12 +23,7 @@ const STEPS = [
 
 const DEFAULT_DELETE_ACCOUNT_PAYLOAD: DeleteAccountFormPayload = {
   describeYourSituation: '',
-  checkboxes: {
-    checkbox1: false,
-    checkbox2: false,
-    checkbox3: false,
-    checkbox4: false,
-  },
+  checkboxes: [],
 };
 
 const CHECKBOX_OPTIONS = [
@@ -40,12 +35,14 @@ const CHECKBOX_OPTIONS = [
 
 const INITIAL_STEP = 0;
 const NEXT_STEP_INCREMENT = 1;
+const NO_CHECKED_BOXES = 0;
 
 export {
   CHECKBOX_OPTIONS,
   DEFAULT_DELETE_ACCOUNT_PAYLOAD,
   INITIAL_STEP,
   NEXT_STEP_INCREMENT,
+  NO_CHECKED_BOXES,
   STEPS,
 };
 export { type DeleteAccountFormPayload } from 'shared/build/packages/users/users.js';

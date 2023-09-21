@@ -11,6 +11,7 @@ import {
   CHECKBOX_OPTIONS,
   DEFAULT_DELETE_ACCOUNT_PAYLOAD,
   type DeleteAccountFormPayload,
+  NO_CHECKED_BOXES,
 } from '../../libs/constants/constants.js';
 import styles from './styles.module.scss';
 
@@ -27,27 +28,31 @@ const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
     });
 
   const {
-    field: { onChange: onCheckboxChange, value: checkboxValues },
+    field: { onChange: onCheckboxChange, value: checkedBoxes },
   } = useFormController({
     name: 'checkboxes',
     control,
   });
 
   const handleCheckboxChange = useCallback(
-    (checkboxName: 'checkbox1' | 'checkbox2' | 'checkbox3' | 'checkbox4') => {
+    (checkboxName: string) => {
       return () => {
-        const newValue = {
-          ...checkboxValues,
-          [checkboxName]: !checkboxValues[checkboxName],
-        };
-        onCheckboxChange(newValue);
+        if (checkedBoxes.includes(checkboxName)) {
+          onCheckboxChange(
+            checkedBoxes.filter((option) => {
+              return option !== checkboxName;
+            }),
+          );
+        } else {
+          onCheckboxChange([...checkedBoxes, checkboxName]);
+        }
       };
     },
-    [checkboxValues, onCheckboxChange],
+    [checkedBoxes, onCheckboxChange],
   );
 
-  const isInputDisabled = !checkboxValues['checkbox4'];
-  const isNextDisabled = !Object.values(checkboxValues).some(Boolean);
+  const isInputDisabled = !checkedBoxes.includes('checkbox4');
+  const isNextDisabled = checkedBoxes.length === NO_CHECKED_BOXES;
 
   const handleFormSubmit = useCallback(
     (event_: React.BaseSyntheticEvent): void => {
@@ -67,7 +72,7 @@ const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
               <Checkbox
                 label={checkbox.label}
                 name={checkbox.name}
-                checked={checkboxValues[checkbox.name] || false}
+                checked={checkedBoxes.includes(checkbox.name) || false}
                 onChange={handleCheckboxChange(checkbox.name)}
                 disableDefaultStyles
               />

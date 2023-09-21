@@ -6,7 +6,7 @@ type Properties = {
   label: string;
   checked?: boolean;
   name?: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: () => void;
   disableDefaultStyles?: boolean;
 };
 
