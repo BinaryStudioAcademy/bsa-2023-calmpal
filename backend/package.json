@@ -21,7 +21,7 @@
     "migrate:dev:rollback": "node --loader ts-paths-esm-loader ../node_modules/knex/bin/cli.js migrate:rollback --all",
     "build:copy": "cp -r package.json build",
     "build": "tsc && npm run build:copy",
-    "prestart": "cd build && npm run migrate",
+    "prestart": "cd build && npm run migrate && npm run seed",
     "seed": "knex seed:run",
     "migrate": "knex migrate:latest",
     "start": "node ./build/src/index.js"
