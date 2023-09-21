@@ -23,6 +23,7 @@ export {
   debounce,
   getFormattedDate,
   getFormattedTime,
+  getRelativeDate,
   replaceTemplateWithValue,
 } from './libs/helpers/helpers.js';
 export { type Config } from './libs/packages/config/config.js';
