@@ -65,6 +65,14 @@ class MeditationController extends BaseController {
         );
       },
     });
+
+    this.addRoute({
+      path: MeditationApiPath.ROOT,
+      method: 'GET',
+      handler: () => {
+        return this.getAll();
+      },
+    });
   }
 
   /**
@@ -103,6 +111,34 @@ class MeditationController extends BaseController {
         name: options.body.name.value,
         file: options.fileBuffer,
       }),
+    };
+  }
+
+  /**
+   * @swagger
+   * /journal:
+   *    get:
+   *      description: Get all meditation entries
+   *      security:
+   *       - bearerAuth: []
+   *      responses:
+   *        200:
+   *          description: Successful operation
+   *          content:
+   *            application/json:
+   *              schema:
+   *                type: object
+   *                properties:
+   *                  items:
+   *                    type: array
+   *                    items:
+   *                      $ref: '#/components/schemas/MeditationEntry'
+   */
+
+  private async getAll(): Promise<APIHandlerResponse> {
+    return {
+      status: HTTPCode.OK,
+      payload: await this.meditationService.findAll(),
     };
   }
 }
