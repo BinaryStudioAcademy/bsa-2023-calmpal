@@ -33,6 +33,8 @@ const styles = StyleSheet.create({
   smallTitle: {
     fontSize: 16,
     maxWidth: 230,
+    fontWeight: '600',
+    color: AppColor.GRAY_500,
   },
 });
 
