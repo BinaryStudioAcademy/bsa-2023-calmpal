@@ -1,42 +1,32 @@
 import deafultMeditationImage from '#assets/img/meditation-image-placeholder.jpg';
 import { AudioPlayer } from '#libs/components/components.js';
-import {
-  useAppSelector,
-  useCallback,
-  useParams,
-  useState,
-} from '#libs/hooks/hooks.js';
+import { useCallback, useParams, useState } from '#libs/hooks/hooks.js';
 import { TRACK_FIRST_INDEX } from '#pages/meditation/libs/constants/constants.js';
 
+import { mockedMeditationEntries } from '../meditation-list/mocked-meditation-entries.js';
 import styles from './styles.module.scss';
 
 const MeditationPlayer: React.FC = () => {
-  const { meditationEntries } = useAppSelector(({ meditation }) => {
-    return {
-      meditationEntries: meditation.meditationEntries,
-    };
-  });
   const { id } = useParams<{ id: string; duration: string }>();
   const parsedId = Number(id);
 
-  const foundTrack = meditationEntries.find((entry) => {
+  const foundTrack = mockedMeditationEntries.find((entry) => {
     return entry.id === parsedId;
   });
 
   const [currentTrack, setCurrentTrack] = useState(
-    foundTrack ?? meditationEntries[TRACK_FIRST_INDEX],
+    foundTrack ?? mockedMeditationEntries[TRACK_FIRST_INDEX],
   );
   const [trackIndex, setTrackIndex] = useState(
-    foundTrack ? meditationEntries.indexOf(foundTrack) : TRACK_FIRST_INDEX,
+    foundTrack
+      ? mockedMeditationEntries.indexOf(foundTrack)
+      : TRACK_FIRST_INDEX,
   );
 
-  const handleTrackIndex = useCallback(
-    (index: number): void => {
-      setTrackIndex(index);
-      setCurrentTrack(meditationEntries[index]);
-    },
-    [meditationEntries],
-  );
+  const handleTrackIndex = useCallback((index: number): void => {
+    setTrackIndex(index);
+    setCurrentTrack(mockedMeditationEntries[index]);
+  }, []);
 
   return (
     <div className={styles['wrapper']}>
@@ -56,7 +46,7 @@ const MeditationPlayer: React.FC = () => {
           trackIndex={trackIndex}
           onSetTrackIndex={handleTrackIndex}
           onSetCurrentTrack={setCurrentTrack}
-          tracks={meditationEntries}
+          tracks={mockedMeditationEntries}
         />
       </div>
     </div>
