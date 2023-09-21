@@ -9,14 +9,19 @@ type Properties = {
   label: string;
   type?: 'button' | 'submit';
   iconName?: IconName;
-  iconColor?: ValueOf<typeof IconColor>;
+  iconColor?: ValueOf<typeof IconColor> | undefined;
   iconWidth?: number;
   iconHeight?: number;
-  style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent';
+  style?:
+    | 'primary'
+    | 'secondary'
+    | 'rounded'
+    | 'rounded-transparent'
+    | 'icon-right';
   isLoading?: boolean;
   isDisabled?: boolean;
   isLabelVisuallyHidden?: boolean;
-  onClick?: () => void;
+  onClick?: (() => void) | undefined;
 };
 
 const Button: React.FC<Properties> = ({

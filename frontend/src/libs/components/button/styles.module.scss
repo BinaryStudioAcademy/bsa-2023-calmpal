@@ -91,6 +91,26 @@
   filter: brightness(90%);
 }
 
+.icon-right {
+  position: relative;
+  top: -60px;
+  left: 265px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  padding: 7px 6px;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.icon-right:hover {
+  transform: scale(1.1);
+  filter: brightness(90%);
+}
+
 .primary:has(.loader),
 .secondary:has(.loader) {
   display: flex;
@@ -123,5 +143,17 @@
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media (width < 900px) {
+  .icon-right {
+    left: 180px;
+  }
+}
+
+@media (width < 768px) {
+  .icon-right {
+    left: 265px;
   }
 }
