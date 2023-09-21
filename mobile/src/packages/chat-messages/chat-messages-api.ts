@@ -1,6 +1,4 @@
-import { ContentType } from 'shared/build/index.js';
-
-import { APIPath } from '#libs/enums/enums';
+import { APIPath, ContentType } from '#libs/enums/enums';
 import { BaseHttpApi } from '#libs/packages/api/api';
 import { type HTTP } from '#libs/packages/http/http';
 import { type Storage } from '#libs/packages/storage/storage';
