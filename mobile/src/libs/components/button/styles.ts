@@ -35,6 +35,12 @@ const styles = StyleSheet.create({
   labelOutlined: {
     color: AppColor.BLUE_400,
   },
+  labelModalCancel: {
+    color: AppColor.WHITE,
+  },
+  labelModalDelete: {
+    color: AppColor.WHITE,
+  },
   buttonRounded: {
     backgroundColor: AppColor.WHITE,
     borderRadius: 30,

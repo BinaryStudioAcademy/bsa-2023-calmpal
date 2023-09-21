@@ -52,6 +52,8 @@ const Button: React.FC<Properties> = ({
         type === 'solid' && styles.buttonSolid,
         type === 'outlined' && styles.buttonOutlined,
         type === 'transparent' && styles.buttonTransparent,
+        type === 'modal-cancel' && styles.buttonModalCancel,
+        type === 'modal-delete' && styles.buttonModalDelete,
         isDisabled && styles.buttonDisabled,
       ]}
       onPress={onPress}
@@ -65,6 +67,8 @@ const Button: React.FC<Properties> = ({
           styles.label,
           type === 'solid' && styles.labelSolid,
           type === 'outlined' && styles.labelOutlined,
+          // type === 'modal-cancel' && styles.labelModalCancel,
+          // type === 'modal-delete' && styles.labelModalDelete,
           isDisabled && styles.labelDisabled,
         ]}
       >
