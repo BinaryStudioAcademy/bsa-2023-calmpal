@@ -1,4 +1,4 @@
-import { Button, Checkbox, Input } from '#libs/components/components.js';
+import { Button, Checkbox } from '#libs/components/components.js';
 import {
   useAppForm,
   useCallback,
@@ -6,16 +6,12 @@ import {
   useFormController,
 } from '#libs/hooks/hooks.js';
 import {
-  //  getSurveyCategories,
-  preferenceStepInputValidationSchema,
-  type SurveyInputDto,
-  SurveyValidationRule,
+  //getSurveyCategories,
+  meditationExperienceStepInputValidationSchema,
 } from '#packages/survey/survey.js';
 import {
-  DEFAULT_SURVEY_PAYLOAD,
-  PREFERENCES_CATEGORIES,
-  PREFERENCES_QUESTION,
-  TEXTAREA_ROWS_COUNT,
+  MEDITATION_EXPERIENCE_CATEGORIES,
+  MEDITATION_EXPERIENCE_QUESTION,
 } from '#pages/surveys/libs/constants.js';
 
 import styles from './styles.module.scss';
@@ -25,46 +21,38 @@ type Properties = {
   isNextStepDisabled: boolean;
   setIsNextStepDisabled: (isDisabled: boolean) => void;
   handleNextStep: () => void;
+  handlePreviousStep: () => void;
 };
 
-const PreferencesStep: React.FC<Properties> = ({
+type SurveyInputDto = {
+  meditationExperience: string[];
+};
+
+const MeditationExperienceStep: React.FC<Properties> = ({
   //onSubmit,
-  setIsNextStepDisabled,
   isNextStepDisabled,
+  setIsNextStepDisabled,
   handleNextStep,
+  handlePreviousStep,
 }) => {
-  const { control, errors, isValid, handleSubmit } = useAppForm<SurveyInputDto>(
-    {
-      defaultValues: DEFAULT_SURVEY_PAYLOAD,
-      validationSchema: preferenceStepInputValidationSchema,
-    },
-  );
+  const { control, isValid, handleSubmit } = useAppForm<SurveyInputDto>({
+    defaultValues: { meditationExperience: [] },
+    validationSchema: meditationExperienceStepInputValidationSchema,
+  });
   const {
-    field: { onChange: onCategoryChange, value: categoriesValue },
+    field: { onChange: onCategoryChange },
   } = useFormController({
-    name: 'preferences',
+    name: 'meditationExperience',
     control,
   });
-
-  const hasOther = categoriesValue.includes('Other');
 
   const handleFieldChange = useCallback(
     (category: string) => {
       return () => {
-        if (categoriesValue.includes(category)) {
-          onCategoryChange(
-            categoriesValue.filter((option) => {
-              return option !== category;
-            }),
-          );
-
-          return;
-        }
-
-        onCategoryChange([...categoriesValue, category]);
+        onCategoryChange([category]);
       };
     },
-    [categoriesValue, onCategoryChange],
+    [onCategoryChange],
   );
 
   // const handlePreferencesSubmit = useCallback(
@@ -79,7 +67,7 @@ const PreferencesStep: React.FC<Properties> = ({
       // void handleSubmit(handlePreferencesSubmit)(event_);
       void handleSubmit(handleNextStep)(event_);
     },
-    // [handleSubmit, handlePreferencesSubmit],
+    //[handleSubmit, handlePreferencesSubmit],
     [handleSubmit, handleNextStep],
   );
 
@@ -89,28 +77,19 @@ const PreferencesStep: React.FC<Properties> = ({
 
   return (
     <form className={styles['form']} onSubmit={handleFormSubmit}>
-      <div className={styles['title']}>{PREFERENCES_QUESTION}</div>
+      <div className={styles['title']}>{MEDITATION_EXPERIENCE_QUESTION}</div>
 
       <div className={styles['select']}>
-        {PREFERENCES_CATEGORIES.map((category) => {
+        {MEDITATION_EXPERIENCE_CATEGORIES.map((category) => {
           return (
             <Checkbox
               key={category}
               label={category}
+              type="radio"
               onChange={handleFieldChange(category)}
             />
           );
         })}
-        {hasOther && (
-          <Input
-            control={control}
-            errors={errors}
-            name="other"
-            placeholder="Text"
-            maxLength={SurveyValidationRule.MAXIMUM_PREFERENCE_ITEM_LENGTH}
-            rowsCount={TEXTAREA_ROWS_COUNT}
-          />
-        )}
       </div>
 
       <Button
@@ -119,8 +98,10 @@ const PreferencesStep: React.FC<Properties> = ({
         style="secondary"
         isDisabled={isNextStepDisabled}
       />
+
+      <Button label="Back" style="outlined" onClick={handlePreviousStep} />
     </form>
   );
 };
 
-export { PreferencesStep };
+export { MeditationExperienceStep };

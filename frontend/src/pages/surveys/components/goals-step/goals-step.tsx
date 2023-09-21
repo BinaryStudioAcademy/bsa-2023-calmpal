@@ -6,15 +6,13 @@ import {
   useFormController,
 } from '#libs/hooks/hooks.js';
 import {
-  //  getSurveyCategories,
-  preferenceStepInputValidationSchema,
-  type SurveyInputDto,
+  //getSurveyCategories,
+  goalsStepInputValidationSchema,
   SurveyValidationRule,
 } from '#packages/survey/survey.js';
 import {
-  DEFAULT_SURVEY_PAYLOAD,
-  PREFERENCES_CATEGORIES,
-  PREFERENCES_QUESTION,
+  GOALS_CATEGORIES,
+  GOALS_QUESTION,
   TEXTAREA_ROWS_COUNT,
 } from '#pages/surveys/libs/constants.js';
 
@@ -25,24 +23,31 @@ type Properties = {
   isNextStepDisabled: boolean;
   setIsNextStepDisabled: (isDisabled: boolean) => void;
   handleNextStep: () => void;
+  handlePreviousStep: () => void;
 };
 
-const PreferencesStep: React.FC<Properties> = ({
+type SurveyInputDto = {
+  goals: string[];
+  other: string;
+};
+
+const GoalsStep: React.FC<Properties> = ({
   //onSubmit,
-  setIsNextStepDisabled,
   isNextStepDisabled,
+  setIsNextStepDisabled,
   handleNextStep,
+  handlePreviousStep,
 }) => {
   const { control, errors, isValid, handleSubmit } = useAppForm<SurveyInputDto>(
     {
-      defaultValues: DEFAULT_SURVEY_PAYLOAD,
-      validationSchema: preferenceStepInputValidationSchema,
+      defaultValues: { goals: [], other: '' },
+      validationSchema: goalsStepInputValidationSchema,
     },
   );
   const {
     field: { onChange: onCategoryChange, value: categoriesValue },
   } = useFormController({
-    name: 'preferences',
+    name: 'goals',
     control,
   });
 
@@ -79,7 +84,7 @@ const PreferencesStep: React.FC<Properties> = ({
       // void handleSubmit(handlePreferencesSubmit)(event_);
       void handleSubmit(handleNextStep)(event_);
     },
-    // [handleSubmit, handlePreferencesSubmit],
+    //[handleSubmit, handlePreferencesSubmit],
     [handleSubmit, handleNextStep],
   );
 
@@ -89,10 +94,10 @@ const PreferencesStep: React.FC<Properties> = ({
 
   return (
     <form className={styles['form']} onSubmit={handleFormSubmit}>
-      <div className={styles['title']}>{PREFERENCES_QUESTION}</div>
+      <div className={styles['title']}>{GOALS_QUESTION}</div>
 
       <div className={styles['select']}>
-        {PREFERENCES_CATEGORIES.map((category) => {
+        {GOALS_CATEGORIES.map((category) => {
           return (
             <Checkbox
               key={category}
@@ -119,8 +124,10 @@ const PreferencesStep: React.FC<Properties> = ({
         style="secondary"
         isDisabled={isNextStepDisabled}
       />
+
+      <Button label="Back" style="outlined" onClick={handlePreviousStep} />
     </form>
   );
 };
 
-export { PreferencesStep };
+export { GoalsStep };

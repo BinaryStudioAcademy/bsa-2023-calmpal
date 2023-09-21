@@ -6,4 +6,11 @@ export {
   type SurveyInputDto,
   type SurveyRequestDto,
 } from './libs/types/types.js';
-export { surveyInputValidationSchema } from './libs/validation-shemas/validation-schemas.js';
+export {
+  feelingsStepInputValidationSchema,
+  goalsStepInputValidationSchema,
+  journalingExperienceStepInputValidationSchema,
+  meditationExperienceStepInputValidationSchema,
+  preferenceStepInputValidationSchema,
+  worriesStepInputValidationSchema,
+} from './libs/validation-schemas/validation-schemas.js';

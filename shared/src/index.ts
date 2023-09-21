@@ -59,13 +59,19 @@ export {
 } from './packages/journal/journal.js';
 export {
   createSurveyValidationSchema,
+  feelingsStepInputValidationSchema,
   getSurveyCategories,
+  goalsStepInputValidationSchema,
+  journalingExperienceStepInputValidationSchema,
+  meditationExperienceStepInputValidationSchema,
   PREFERENCES_OTHER_CATEGORY,
+  preferenceStepInputValidationSchema,
   type SurveyGetAllItemResponseDto,
   type SurveyInputDto,
   surveyInputValidationSchema,
   type SurveyRequestDto,
   SurveyValidationRule,
+  worriesStepInputValidationSchema,
 } from './packages/surveys/surveys.js';
 export {
   type UserAuthResponseDto,

@@ -3,14 +3,20 @@ import styles from './styles.module.scss';
 type Properties = {
   label: string;
   onChange: () => void;
+  type?: 'checkbox' | 'radio';
 };
 
-const Checkbox: React.FC<Properties> = ({ label, onChange }) => {
+const Checkbox: React.FC<Properties> = ({
+  label,
+  onChange,
+  type = 'checkbox',
+}) => {
   return (
     <label>
       <input
+        name="checkbox"
         className={styles['checkbox']}
-        type="checkbox"
+        type={type}
         onChange={onChange}
       />
       <div className={styles['container']}>

@@ -6,16 +6,14 @@ import {
   useFormController,
 } from '#libs/hooks/hooks.js';
 import {
-  //  getSurveyCategories,
-  preferenceStepInputValidationSchema,
-  type SurveyInputDto,
+  // getSurveyCategories,
   SurveyValidationRule,
+  worriesStepInputValidationSchema,
 } from '#packages/survey/survey.js';
 import {
-  DEFAULT_SURVEY_PAYLOAD,
-  PREFERENCES_CATEGORIES,
-  PREFERENCES_QUESTION,
   TEXTAREA_ROWS_COUNT,
+  WORRIES_CATEGORIES,
+  WORRIES_QUESTION,
 } from '#pages/surveys/libs/constants.js';
 
 import styles from './styles.module.scss';
@@ -25,24 +23,31 @@ type Properties = {
   isNextStepDisabled: boolean;
   setIsNextStepDisabled: (isDisabled: boolean) => void;
   handleNextStep: () => void;
+  handlePreviousStep: () => void;
 };
 
-const PreferencesStep: React.FC<Properties> = ({
-  //onSubmit,
-  setIsNextStepDisabled,
+type SurveyInputDto = {
+  worries: string[];
+  other: string;
+};
+
+const WorriesStep: React.FC<Properties> = ({
+  // onSubmit,
   isNextStepDisabled,
+  setIsNextStepDisabled,
   handleNextStep,
+  handlePreviousStep,
 }) => {
   const { control, errors, isValid, handleSubmit } = useAppForm<SurveyInputDto>(
     {
-      defaultValues: DEFAULT_SURVEY_PAYLOAD,
-      validationSchema: preferenceStepInputValidationSchema,
+      defaultValues: { worries: [], other: '' },
+      validationSchema: worriesStepInputValidationSchema,
     },
   );
   const {
     field: { onChange: onCategoryChange, value: categoriesValue },
   } = useFormController({
-    name: 'preferences',
+    name: 'worries',
     control,
   });
 
@@ -89,10 +94,10 @@ const PreferencesStep: React.FC<Properties> = ({
 
   return (
     <form className={styles['form']} onSubmit={handleFormSubmit}>
-      <div className={styles['title']}>{PREFERENCES_QUESTION}</div>
+      <div className={styles['title']}>{WORRIES_QUESTION}</div>
 
       <div className={styles['select']}>
-        {PREFERENCES_CATEGORIES.map((category) => {
+        {WORRIES_CATEGORIES.map((category) => {
           return (
             <Checkbox
               key={category}
@@ -119,8 +124,10 @@ const PreferencesStep: React.FC<Properties> = ({
         style="secondary"
         isDisabled={isNextStepDisabled}
       />
+
+      <Button label="Back" style="outlined" onClick={handlePreviousStep} />
     </form>
   );
 };
 
-export { PreferencesStep };
+export { WorriesStep };

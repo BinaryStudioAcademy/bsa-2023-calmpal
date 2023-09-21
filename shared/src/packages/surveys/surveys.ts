@@ -11,5 +11,11 @@ export {
 } from './libs/types/types.js';
 export {
   createSurveyValidationSchema,
-  createSurveyForm as surveyInputValidationSchema,
+  createFeelingsSurveyForm as feelingsStepInputValidationSchema,
+  createGoalsSurveyForm as goalsStepInputValidationSchema,
+  createJournalingExperienceSurveyForm as journalingExperienceStepInputValidationSchema,
+  createMeditationExperienceSurveyForm as meditationExperienceStepInputValidationSchema,
+  createPreferenceStepSurveyForm as preferenceStepInputValidationSchema,
+  createSurveyValidationSchema as surveyInputValidationSchema,
+  createWorriesSurveyForm as worriesStepInputValidationSchema,
 } from './libs/validation-schemas/validation-schemas.js';
