@@ -17,6 +17,7 @@ type Properties = {
     | 'secondary'
     | 'rounded'
     | 'rounded-transparent'
+    | 'add'
     | 'icon-right';
   isLoading?: boolean;
   isDisabled?: boolean;

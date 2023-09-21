@@ -91,6 +91,23 @@
   filter: brightness(90%);
 }
 
+.add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 52px;
+  color: var(--blue-300);
+  background-color: transparent;
+  border-color: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.add:hover {
+  transform: scale(1.1);
+}
+
 .icon-right {
   position: relative;
   top: -60px;
