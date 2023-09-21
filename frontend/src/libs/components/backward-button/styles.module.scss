@@ -4,7 +4,7 @@
 
 @media (width < 768px) {
   .backward {
-    position: absolute;
+    position: fixed;
     top: 30px;
     left: 25px;
     z-index: 5;
