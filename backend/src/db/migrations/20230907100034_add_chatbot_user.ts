@@ -13,13 +13,13 @@ const COLUMN_NAME = {
 
 const CHATBOT_USER = {
   email: 'chatbot@example.com',
-  password_hash: 'password_hash',
-  password_salt: 'password_salt',
+  passwordHash: 'password_hash',
+  passwordSalt: 'password_salt',
 };
 
 const CHATBOT_USER_DETAILS = {
-  full_name: 'Chatbot',
-  is_survey_completed: false,
+  fullName: 'Chatbot',
+  isSurveyCompleted: false,
 };
 
 const CHATBOT_ROLE_KEY = 'chatbot';
@@ -36,7 +36,7 @@ async function up(knex: Knex): Promise<void> {
 
   await knex(TABLE_NAME.USERS).insert({
     ...CHATBOT_USER,
-    role_id: chatbotRole?.id,
+    roleId: chatbotRole?.id,
   });
 
   const chatbot = await knex(TABLE_NAME.USERS)
@@ -46,7 +46,7 @@ async function up(knex: Knex): Promise<void> {
 
   await knex(TABLE_NAME.USER_DETAILS).insert({
     ...CHATBOT_USER_DETAILS,
-    user_id: chatbot?.id,
+    userId: chatbot?.id,
   });
 }
 

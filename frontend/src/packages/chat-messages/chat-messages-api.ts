@@ -44,7 +44,10 @@ class ChatMessagesApi extends BaseHttpApi {
       {
         method: 'POST',
         contentType: ContentType.JSON,
-        payload: JSON.stringify({ message: payload.message }),
+        payload: JSON.stringify({
+          message: payload.message,
+          isGeneratedByChatbot: payload.isGeneratedByChatbot,
+        }),
         hasAuth: true,
       },
     );

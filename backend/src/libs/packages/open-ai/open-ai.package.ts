@@ -1,7 +1,6 @@
-import { type ValueOf } from '#libs/types/types.js';
-
 import { type HTTPService } from '../http/http.js';
-import { type OpenAiImageSize } from './libs/enums/enums.js';
+import { IMAGE_SIZE } from './libs/constants/constants.js';
+import { OpenAiImageSize } from './libs/enums/enums.js';
 import {
   type OpenAiImageGenerateRequestDto,
   type OpenAiImageGenerateResponseDto,
@@ -23,7 +22,7 @@ class OpenAi {
   private model: string;
   private defaultImageGenerateConfig = {
     number: 1,
-    size: '512x512' as ValueOf<typeof OpenAiImageSize>,
+    size: OpenAiImageSize[IMAGE_SIZE],
   };
 
   public constructor({

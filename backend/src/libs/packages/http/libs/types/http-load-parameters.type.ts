@@ -3,7 +3,7 @@ import { type HTTPMethod } from './types.js';
 type HTTPLoadParameters = {
   method: HTTPMethod;
   url: string;
-  data?: object;
+  data?: unknown;
   token?: string;
 };
 

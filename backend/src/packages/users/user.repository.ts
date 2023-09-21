@@ -44,6 +44,29 @@ class UserRepository implements Repository {
     });
   }
 
+  public async findByRoleId(roleId: number): Promise<UserEntity | null> {
+    const user = await this.userModel
+      .query()
+      .modify('withoutPassword')
+      .withGraphJoined(UsersRelation.DETAILS)
+      .findOne({ roleId })
+      .castTo<UserCommonQueryResponse | undefined>()
+      .execute();
+
+    if (!user) {
+      return null;
+    }
+
+    return UserEntity.initialize({
+      id: user.id,
+      email: user.email,
+      createdAt: new Date(user.createdAt),
+      updatedAt: new Date(user.updatedAt),
+      fullName: user.details?.fullName ?? '',
+      isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+    });
+  }
+
   public async findAll(): Promise<UserWithPasswordEntity[]> {
     const users = await this.userModel
       .query()
