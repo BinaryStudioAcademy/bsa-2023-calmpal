@@ -1,4 +1,7 @@
-export { $generateHtmlFromNodes, $generateNodesFromDOM } from '@lexical/html';
+export {
+  $generateHtmlFromNodes as generateHtmlFromNodes,
+  $generateNodesFromDOM as generateNodesFromDOM,
+} from '@lexical/html';
 export {
   $createParagraphNode as createParagraphNode,
   $createTextNode as createTextNode,
