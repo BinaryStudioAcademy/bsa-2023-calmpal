@@ -1,1 +1,5 @@
-export { replaceTemplateWithValue, sanitizeInput } from 'shared/build/index.js';
+export {
+  groupChatMessage,
+  replaceTemplateWithValue,
+  sanitizeInput,
+} from 'shared/build/index.js';

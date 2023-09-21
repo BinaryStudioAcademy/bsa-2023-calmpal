@@ -1,5 +1,6 @@
 import { ExceptionMessage } from '#libs/enums/enums.js';
 import { UsersError } from '#libs/exceptions/exceptions.js';
+import { groupChatMessage } from '#libs/helpers/helpers.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Service } from '#libs/types/types.js';
 import { userService } from '#packages/users/users.js';
@@ -10,6 +11,7 @@ import {
   type ChatMessageCreatePayload,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
+  type ChatMessagesGroups,
 } from './libs/types/types.js';
 
 class ChatMessageService implements Service {
@@ -56,10 +58,14 @@ class ChatMessageService implements Service {
       chatId,
     );
 
+    let group: ChatMessagesGroups = {};
+    chatMessages.forEach((chatMessage) => {
+      const chatData = chatMessage.toObject();
+      group = groupChatMessage(group, chatData);
+    });
+
     return {
-      items: chatMessages.map((chatMessage) => {
-        return chatMessage.toObject();
-      }),
+      items: group,
     };
   }
 
