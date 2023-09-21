@@ -21,6 +21,7 @@ type Properties = {
   badgeCount?: number;
   isProfileVisible?: boolean;
   isChat?: boolean;
+  fontSize?: 'small' | 'large';
 };
 
 const Header: React.FC<Properties> = ({
