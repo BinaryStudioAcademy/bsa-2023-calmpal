@@ -9,7 +9,7 @@ type Properties = {
   isVisible: boolean;
   onClose: () => void;
   onDelete?: () => void;
-  type?: 'Note';
+  type?: 'Note' | 'Chat';
   children?: React.ReactNode;
 };
 
