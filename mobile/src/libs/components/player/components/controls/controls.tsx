@@ -7,16 +7,17 @@ import { styles } from './styles';
 
 type Properties = {
   isPlaying: boolean;
+  duration: number;
 };
 
-const Controls: React.FC<Properties> = ({ isPlaying }) => {
+const Controls: React.FC<Properties> = ({ isPlaying, duration }) => {
   const {
     handleSkipToPrevious,
     handleSkipBackward,
     handlePlayPause,
     handleSkipForward,
     handleSkipToNext,
-  } = usePlayerControls({ isPlaying });
+  } = usePlayerControls({ isPlaying, duration });
 
   return (
     <View style={styles.container}>

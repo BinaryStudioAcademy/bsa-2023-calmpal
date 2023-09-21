@@ -2,7 +2,7 @@ import TrackPlayer, { RepeatMode, type State } from 'react-native-track-player';
 
 import { type Track } from '#libs/types/types';
 
-import { TRACK_SKIP_SECONDS } from './libs/constants';
+import { SECONDS_TO_MILLISECONDS, TRACK_SKIP_SECONDS } from './libs/constants';
 
 class Player {
   public getProgress = (): Promise<number> => {
@@ -35,8 +35,20 @@ class Player {
     return (await TrackPlayer.getQueue()) as Track[];
   };
 
-  public playPause = async (isPlaying: boolean): Promise<void> => {
+  public playPause = async (
+    isPlaying: boolean,
+    duration?: number,
+  ): Promise<void> => {
     await (isPlaying ? TrackPlayer.pause() : TrackPlayer.play());
+
+    if (duration) {
+      await new Promise<void>((resolve) => {
+        setTimeout(() => {
+          void TrackPlayer.pause();
+          resolve();
+        }, duration * SECONDS_TO_MILLISECONDS);
+      });
+    }
   };
 
   public skipToNext = async (): Promise<void> => {

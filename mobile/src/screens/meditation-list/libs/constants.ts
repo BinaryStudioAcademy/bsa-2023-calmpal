@@ -7,4 +7,6 @@ const mockedData = [
   { id: 5, title: '5Meditation for deep sleep', duration: 99 },
 ];
 
-export { mockedData };
+const DEFAULT_SONG_DURATION = 0;
+
+export { DEFAULT_SONG_DURATION, mockedData };

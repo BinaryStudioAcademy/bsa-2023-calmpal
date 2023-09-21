@@ -18,9 +18,10 @@ import {
 
 type Properties = {
   setCurrentTrack: React.Dispatch<React.SetStateAction<Track | null>>;
+  duration: number;
 };
 
-const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
+const Player: React.FC<Properties> = ({ setCurrentTrack, duration }) => {
   const [playbackState, setPlaybackState] = useState<State | null>(null);
   const isPlaying = playbackState === State.Playing;
 
@@ -64,7 +65,7 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
   return (
     <>
       <ProgressBar isPlaying={isPlaying} />
-      <Controls isPlaying={isPlaying} />
+      <Controls isPlaying={isPlaying} duration={duration} />
     </>
   );
 };

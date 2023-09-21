@@ -5,10 +5,11 @@ import {
   Header,
   InputSearch,
   LinearGradient,
-  Modal,
   ScrollView,
+  SetTimerModal,
   View,
 } from '#libs/components/components';
+import { MeditationScreenName } from '#libs/enums/enums';
 import {
   useAppDispatch,
   useAppRoute,
@@ -21,7 +22,7 @@ import { type MeditationNavigationParameterList } from '#libs/types/types';
 import { actions as meditationActions } from '#slices/meditation/meditation';
 
 import { MeditationItem } from './components/components';
-import { mockedData } from './libs/constants';
+import { DEFAULT_SONG_DURATION, mockedData } from './libs/constants';
 import { styles } from './styles';
 
 type RouteParameters = {
@@ -30,10 +31,6 @@ type RouteParameters = {
 
 const MeditationList: React.FC = () => {
   const dispatch = useAppDispatch();
-  const navigation =
-    useNavigation<
-      NativeStackNavigationProp<MeditationNavigationParameterList>
-    >();
   const route = useAppRoute();
   const { title } = route.params as RouteParameters;
 
@@ -43,6 +40,7 @@ const MeditationList: React.FC = () => {
   );
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [duration, setDuration] = useState(DEFAULT_SONG_DURATION);
 
   const handleClick = (): void => {
     setIsModalVisible(!isModalVisible);
@@ -50,6 +48,17 @@ const MeditationList: React.FC = () => {
 
   const handleClose = (): void => {
     setIsModalVisible(!isModalVisible);
+  };
+
+  const navigation =
+    useNavigation<
+      NativeStackNavigationProp<MeditationNavigationParameterList>
+    >();
+
+  const handleSetPlaylist = (): void => {
+    navigation.navigate(MeditationScreenName.MEDITATION, {
+      duration: duration,
+    });
   };
 
   useEffect(() => {
@@ -67,7 +76,13 @@ const MeditationList: React.FC = () => {
   return (
     <LinearGradient>
       <View style={styles.container}>
-        {isModalVisible && <Modal onClose={handleClose} />}
+        {isModalVisible && (
+          <SetTimerModal
+            onClose={handleClose}
+            setDuration={setDuration}
+            startMeditation={handleSetPlaylist}
+          />
+        )}
         <InputSearch
           placeholder="Search topic"
           setSearchQuery={setSearchQuery}
@@ -79,7 +94,6 @@ const MeditationList: React.FC = () => {
                 title={item.title}
                 duration={item.duration}
                 key={item.id}
-                id={item.id}
                 onClick={handleClick}
               />
             );

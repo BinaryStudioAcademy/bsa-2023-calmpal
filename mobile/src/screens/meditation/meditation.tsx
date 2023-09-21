@@ -1,3 +1,4 @@
+import { useRoute } from '@react-navigation/native';
 import React from 'react';
 
 import imagePlaceholder from '#assets/img/card-image-placeholder.png';
@@ -9,9 +10,16 @@ import { type Track } from '#libs/types/types';
 import { TITLE_LINE_COUNT } from './libs/constants';
 import { styles } from './styles';
 
+type RouteParameters = {
+  duration: number;
+};
+
 const Meditation: React.FC = () => {
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const trackArtwork = currentTrack?.artwork;
+
+  const route = useRoute();
+  const { duration }: RouteParameters = route.params as RouteParameters;
 
   return (
     <View style={styles.wrapper}>
@@ -28,7 +36,7 @@ const Meditation: React.FC = () => {
         </Text>
         <Text style={styles.purpose}>{currentTrack?.artist}</Text>
 
-        <Player setCurrentTrack={setCurrentTrack} />
+        <Player setCurrentTrack={setCurrentTrack} duration={duration} />
       </View>
     </View>
   );

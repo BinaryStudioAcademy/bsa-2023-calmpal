@@ -1,7 +1,7 @@
 const MEDITATION_DURATION = {
-  SHORT: '5',
-  MEDIUM: '10',
-  LONG: '20',
+  SHORT: 5,
+  MEDIUM: 10,
+  LONG: 20,
 };
 
 const DURATION_UNIT = {

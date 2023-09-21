@@ -16,10 +16,21 @@ import { styles } from './styles';
 
 type Properties = {
   onClose: () => void;
+  setDuration: (duration: number) => void;
+  startMeditation: () => void;
 };
 
-const Modal: React.FC<Properties> = ({ onClose }) => {
+const SetTimerModal: React.FC<Properties> = ({
+  onClose,
+  setDuration,
+  startMeditation,
+}) => {
   const [isPressed, setIsPressed] = useState('');
+
+  const handleStartMeditation = (): void => {
+    onClose();
+    startMeditation();
+  };
 
   return (
     <ReactModal
@@ -42,6 +53,11 @@ const Modal: React.FC<Properties> = ({ onClose }) => {
                   ]}
                   onPress={(): void => {
                     setIsPressed(duration);
+                    setDuration(
+                      MEDITATION_DURATION[
+                        duration as keyof typeof MEDITATION_DURATION
+                      ],
+                    );
                   }}
                 >
                   <Text
@@ -71,7 +87,7 @@ const Modal: React.FC<Properties> = ({ onClose }) => {
 
           <Button
             label="Start Session"
-            onPress={onClose}
+            onPress={handleStartMeditation}
             color={AppColor.BLUE_300}
             type="solid"
             styles={styles.button}
@@ -82,4 +98,4 @@ const Modal: React.FC<Properties> = ({ onClose }) => {
   );
 };
 
-export { Modal };
+export { SetTimerModal };
