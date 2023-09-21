@@ -74,6 +74,7 @@ const deleteChat = createAsyncThunk<number, number, AsyncThunkConfig>(
     return id;
   },
 );
+
 const generateReply = createAsyncThunk<
   ChatMessageGetAllItemResponseDto,
   ChatMessageCreatePayload,
