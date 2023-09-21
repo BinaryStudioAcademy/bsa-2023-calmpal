@@ -22,7 +22,11 @@ const Meditation: React.FC = () => {
         options={{
           header: (): React.ReactNode => {
             return (
-              <Header title={'Meditation \n& Breathing'} isProfileVisible />
+              <Header
+                title={'Meditation \n& Breathing'}
+                isProfileVisible
+                fontSize="large"
+              />
             );
           },
         }}

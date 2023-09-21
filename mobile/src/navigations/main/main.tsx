@@ -32,7 +32,7 @@ const Main: React.FC = () => {
         options={{
           tabBarIcon: HomeIcon,
           header: (): React.ReactNode => {
-            return <Header isProfileVisible />;
+            return <Header isProfileVisible fontSize="large" />;
           },
         }}
       />

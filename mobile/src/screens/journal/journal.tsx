@@ -49,7 +49,9 @@ const Journal: React.FC = () => {
   useEffect(() => {
     navigation.setOptions({
       header: () => {
-        return <Header badgeCount={badgeCount} isProfileVisible />;
+        return (
+          <Header badgeCount={badgeCount} isProfileVisible fontSize="large" />
+        );
       },
     });
   }, [navigation, badgeCount]);
