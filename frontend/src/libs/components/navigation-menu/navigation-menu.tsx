@@ -1,7 +1,7 @@
 import logoS from '#assets/img/logo-s.svg';
 import { Icon, Link } from '#libs/components/components.js';
 import { AppRoute, IconColor } from '#libs/enums/enums.js';
-import { getValidClassNames } from '#libs/helpers/helpers.js';
+import { getValidClassNames, isRouteSelected } from '#libs/helpers/helpers.js';
 import { useLocation } from '#libs/hooks/hooks.js';
 import { type Route } from '#libs/types/types.js';
 
@@ -24,10 +24,10 @@ const NavigationMenu: React.FC<Properties> = ({ routes }) => {
       <nav className={styles['nav']}>
         <div className={styles['icons-container']}>
           {routes.map((route) => {
-            const isRootPathSelected = pathname === route.path;
-            const isOtherPathSelected =
-              pathname !== '/' && route.path.startsWith(pathname);
-            const isSelected = isOtherPathSelected || isRootPathSelected;
+            const isSelected = isRouteSelected({
+              pathname,
+              routePath: route.path,
+            });
 
             return (
               <button
