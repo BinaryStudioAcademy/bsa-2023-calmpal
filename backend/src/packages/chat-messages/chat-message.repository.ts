@@ -22,7 +22,7 @@ class ChatMessageRepository implements Repository {
     const chatMessages = await this.chatMessageModel
       .query()
       .where({ chatId })
-      .orderBy('created_at', 'ASC');
+      .orderBy('createdAt', 'ASC');
 
     return chatMessages.map((chatMessage) => {
       return ChatMessageEntity.initialize({
