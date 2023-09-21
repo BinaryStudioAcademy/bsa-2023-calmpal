@@ -116,9 +116,16 @@ class JournalEntryController extends BaseController {
    * @swagger
    * /journal:
    *    get:
-   *      description: Get all a journal entries
+   *      description: Get all journal entries
    *      security:
    *       - bearerAuth: []
+   *      parameters:
+   *        - name: query
+   *          in: query
+   *          description: A string to search journal entries
+   *          required: false
+   *          schema:
+   *            type: string
    *      responses:
    *        200:
    *          description: Successful operation

@@ -157,6 +157,13 @@ class ChatController extends BaseController {
    * /chats:
    *   get:
    *     description: Returns all chats with authenticated user
+   *     parameters:
+   *       - name: query
+   *         in: query
+   *         description: A string to search chats
+   *         required: false
+   *         schema:
+   *           type: string
    *     responses:
    *       200:
    *         description: Successful operation
