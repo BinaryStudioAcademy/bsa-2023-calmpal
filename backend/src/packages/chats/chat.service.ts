@@ -10,6 +10,10 @@ import {
   type ChatMessageGetAllResponseDto,
   type ChatMessageService,
 } from '#packages/chat-messages/chat-messages.js';
+import {
+  type FileService,
+  type FileUploadRequestDto,
+} from '#packages/files/files.js';
 
 import { type ChatRepository } from './chat.repository.js';
 import {
@@ -19,30 +23,37 @@ import {
   type UpdateChatImagePayload,
 } from './libs/types/types.js';
 
-type ChatServiceDependencies = {
+type Constructor = {
   chatRepository: ChatRepository;
   chatMessageService: ChatMessageService;
   s3Service: S3;
   openAiService: OpenAi;
+  httpService: HTTPService;
+  fileService: FileService;
 };
 
 class ChatService implements Service {
   private chatRepository: ChatRepository;
   private s3Service: S3;
   private openAiService: OpenAi;
-
   private chatMessageService: ChatMessageService;
+  private httpService: HTTPService;
+  private fileService: FileService;
 
   public constructor({
     chatRepository,
     chatMessageService,
     s3Service,
     openAiService,
-  }: ChatServiceDependencies) {
+    httpService,
+    fileService,
+  }: Constructor) {
     this.chatRepository = chatRepository;
     this.chatMessageService = chatMessageService;
     this.s3Service = s3Service;
     this.openAiService = openAiService;
+    this.httpService = httpService;
+    this.fileService = fileService;
   }
 
   public find(): ReturnType<Service['find']> {
@@ -136,7 +147,18 @@ class ChatService implements Service {
     chat,
     imageUrl,
   }: UpdateChatImagePayload): Promise<ChatGetAllItemResponseDto> {
-    const item = await this.chatRepository.update({ chat, imageUrl });
+    const payload = await this.httpService.load<FileUploadRequestDto>({
+      method: 'GET',
+      url: imageUrl,
+      isBuffer: true,
+    });
+
+    const fileRecord = await this.fileService.create(payload);
+
+    const item = await this.chatRepository.update({
+      chat,
+      imageUrl: fileRecord.url,
+    });
     const presignedImageUrl = await this.s3Service.getPreSignedUrl(
       this.s3Service.getFileKey(imageUrl) as string,
     );

@@ -13,7 +13,7 @@ import { replaceTemplateWithValue } from '#libs/helpers/helpers.js';
 import { type HTTPCode } from '#libs/packages/http/http.js';
 import { type ValueOf } from '#libs/types/types.js';
 
-import { SEC_IN_HOUR } from './libs/constants/constants.js';
+import { FILE_KEY_INDEX, SEC_IN_HOUR } from './libs/constants/constants.js';
 import { type S3FileUploadRequestDto } from './libs/types/types.js';
 
 type S3Dependencies = {
@@ -100,9 +100,8 @@ class S3 {
     }
 
     const match = url.match(/https:\/\/[^/]+\/([^/]+)/);
-    const fileKeyIndex = 1;
 
-    return match ? match[fileKeyIndex] ?? '' : null;
+    return match?.[FILE_KEY_INDEX] ?? null;
   }
 
   private throwError(error: unknown): never {

@@ -5,14 +5,12 @@ import {
   type APIHandlerResponse,
   BaseController,
 } from '#libs/packages/controller/controller.js';
-import { HTTPCode, type HTTPService } from '#libs/packages/http/http.js';
+import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 import {
   type ChatMessageCreatePayload,
   type ChatMessageCreateRequestDto,
 } from '#packages/chat-messages/chat-messages.js';
-import { type FileService } from '#packages/files/file.service.js';
-import { type FileUploadRequestDto } from '#packages/files/files.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { ChatEntity } from './chat.entity.js';
@@ -27,11 +25,9 @@ import {
   entitiesFilteringQueryValidationSchema,
 } from './libs/validation-schemas/validation-schemas.js';
 
-type ChatControllerDependencies = {
+type Constructor = {
   logger: Logger;
   chatService: ChatService;
-  httpService: HTTPService;
-  fileService: FileService;
 };
 
 /**
@@ -109,20 +105,10 @@ type ChatControllerDependencies = {
  */
 class ChatController extends BaseController {
   private chatService: ChatService;
-  private httpService: HTTPService;
-  private fileService: FileService;
 
-  public constructor({
-    logger,
-    chatService,
-    httpService,
-    fileService,
-  }: ChatControllerDependencies) {
+  public constructor({ logger, chatService }: Constructor) {
     super(logger, APIPath.CHATS);
-
     this.chatService = chatService;
-    this.httpService = httpService;
-    this.fileService = fileService;
 
     this.addRoute({
       path: ChatsApiPath.ROOT,
@@ -563,22 +549,12 @@ class ChatController extends BaseController {
 
     const imageUrl = await this.chatService.generateChatImage(chat.name);
 
-    const payload = await this.httpService.load<FileUploadRequestDto>({
-      method: 'GET',
-      url: imageUrl,
-      isBuffer: true,
-    });
-
-    const fileRecord = await this.fileService.create(payload);
-
-    const updatedChat = await this.chatService.updateImage({
-      chat,
-      imageUrl: fileRecord.url,
-    });
-
     return {
       status: HTTPCode.OK,
-      payload: updatedChat,
+      payload: await this.chatService.updateImage({
+        chat,
+        imageUrl,
+      }),
     };
   }
 }

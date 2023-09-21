@@ -40,8 +40,8 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
   const hasId = Boolean(id);
 
   const handleImageUpdate = useCallback(
-    ({ id }: UpdateChatImageRequestDto): void => {
-      void dispatch(chatActions.updateChatImage({ id }));
+    (payload: UpdateChatImageRequestDto): void => {
+      void dispatch(chatActions.updateChatImage(payload));
     },
     [dispatch],
   );

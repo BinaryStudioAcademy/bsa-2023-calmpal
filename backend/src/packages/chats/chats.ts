@@ -18,13 +18,12 @@ const chatService = new ChatService({
   chatMessageService,
   s3Service: s3,
   openAiService: openAi,
+  httpService,
+  fileService,
 });
 const chatController = new ChatController({
   logger,
   chatService,
-
-  httpService,
-  fileService,
 });
 
 export { ChatbotService } from '../chat-messages/chatbot.service.js';
