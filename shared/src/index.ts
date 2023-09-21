@@ -25,6 +25,7 @@ export {
   getFormattedDate,
   getFormattedTime,
   getRelativeDate,
+  groupChatMessage,
   replaceTemplateWithValue,
   sanitizeInput,
 } from './libs/helpers/helpers.js';
