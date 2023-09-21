@@ -1,5 +1,6 @@
 import {
   Card,
+  Search,
   Sidebar,
   SidebarBody,
   SidebarHeader,
@@ -9,6 +10,7 @@ import {
   useAppSelector,
   useCallback,
   useEffect,
+  useSearch,
 } from '#libs/hooks/hooks.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
@@ -32,10 +34,10 @@ const JournalSidebar: React.FC<Properties> = ({
       };
     },
   );
-
+  const { filter, setFilter } = useSearch();
   useEffect(() => {
-    void dispatch(journalActions.getAllJournalEntries());
-  }, [dispatch]);
+    void dispatch(journalActions.getAllJournalEntries(filter));
+  }, [dispatch, filter]);
 
   const handleSelectJournalEntry = useCallback(
     (id: number) => {
@@ -55,6 +57,9 @@ const JournalSidebar: React.FC<Properties> = ({
         </div>
       </SidebarHeader>
       <SidebarBody>
+        <div className={styles['search']}>
+          <Search onValueChange={setFilter} defaultValue={filter} />
+        </div>
         <div className={styles['journal-entry-list']}>
           {allJournalEntries.map((journalEntry) => {
             return (
