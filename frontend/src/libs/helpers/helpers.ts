@@ -5,4 +5,5 @@ export {
   debounce,
   getFormattedTime,
   getRelativeDate,
+  sanitizeInput,
 } from 'shared/build/index.js';
