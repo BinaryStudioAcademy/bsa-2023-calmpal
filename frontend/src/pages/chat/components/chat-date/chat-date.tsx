@@ -3,11 +3,11 @@ import { getRelativeDate } from '#libs/helpers/helpers.js';
 import styles from './styles.module.scss';
 
 type Properties = {
-  date: string;
+  date: Date;
 };
 
 const ChatDate: React.FC<Properties> = ({ date }) => {
-  const relativeDate = getRelativeDate(new Date(date));
+  const relativeDate = getRelativeDate(date);
 
   return <div className={styles['date']}>{relativeDate}</div>;
 };

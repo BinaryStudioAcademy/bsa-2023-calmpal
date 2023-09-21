@@ -64,7 +64,7 @@ const ChatLayout: React.FC = () => {
           Object.entries(currentChatMessages).map(([date, group]) => {
             return (
               <React.Fragment key={date}>
-                <ChatDate date={date} />
+                <ChatDate date={new Date(date)} />
                 {group.map((item) => {
                   return (
                     <ChatMessage
