@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {
   useAppDispatch,
   useAppSelector,
@@ -7,6 +9,7 @@ import {
 } from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import {
+  ChatDate,
   ChatFooter,
   ChatHeader,
   ChatMessage,
@@ -29,10 +32,11 @@ const ChatLayout: React.FC = () => {
     },
   );
   const hasId = Boolean(id);
+  const currentChatMessagesLength = Object.keys(currentChatMessages).length;
 
   const handleSend = useCallback(
     ({ message }: ChatInputValue): void => {
-      if (!hasId || currentChatMessages.length === EMPTY_ARRAY_LENGTH) {
+      if (!hasId || currentChatMessagesLength === EMPTY_ARRAY_LENGTH) {
         void dispatch(chatActions.createChat({ message }));
       } else {
         void dispatch(
@@ -43,7 +47,7 @@ const ChatLayout: React.FC = () => {
         );
       }
     },
-    [dispatch, currentChatMessages.length, hasId, id],
+    [dispatch, currentChatMessagesLength, hasId, id],
   );
 
   useEffect(() => {
@@ -57,13 +61,20 @@ const ChatLayout: React.FC = () => {
       <ChatHeader />
       <div className={styles['chat-body']}>
         {hasId &&
-          currentChatMessages.map((item) => {
+          Object.entries(currentChatMessages).map(([date, group]) => {
             return (
-              <ChatMessage
-                key={item.id}
-                message={item.message}
-                isSender={item.senderId === authenticatedUser.id}
-              />
+              <React.Fragment key={date}>
+                <ChatDate date={date} />
+                {group.map((item) => {
+                  return (
+                    <ChatMessage
+                      key={item.id}
+                      message={item.message}
+                      isSender={item.senderId === authenticatedUser.id}
+                    />
+                  );
+                })}
+              </React.Fragment>
             );
           })}
       </div>
