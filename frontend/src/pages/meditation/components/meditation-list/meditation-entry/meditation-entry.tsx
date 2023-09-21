@@ -1,5 +1,5 @@
 import meditationListPlaceholder from '#assets/img/meditation-list-placeholder.jpg';
-import { Button, Modal } from '#libs/components/components.js';
+import { Button, Loader, Modal } from '#libs/components/components.js';
 import { AppRoute, IconColor } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
@@ -15,7 +15,6 @@ import {
 } from '#pages/meditation/libs/constants/constants.js';
 import { actions as appActions } from '#slices/app/app.slice.js';
 
-import { MEDITATION_DURATION } from '../../meditation-timer/libs/constants.js';
 import { MeditationTimer } from '../../meditation-timer/meditation-timer.js';
 import styles from './styles.module.scss';
 
@@ -94,10 +93,16 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
         />
       </div>
       <Modal title={meditationEntry.name} ref={dialogReference}>
-        <MeditationTimer
-          defaultDuration={MEDITATION_DURATION.SHORT}
-          onStartSession={handleStartSession}
-        />
+        {audioDuration ? (
+          <MeditationTimer
+            defaultDuration={audioDuration}
+            onStartSession={handleStartSession}
+          />
+        ) : (
+          <div className={styles['loader-wrapper']}>
+            <Loader />
+          </div>
+        )}
       </Modal>
     </div>
   );

@@ -39,3 +39,15 @@
   justify-content: center;
   align-items: center;
 }
+
+.default {
+  color: var(--black);
+  background-color: var(--white);
+  border: 2px solid var(--blue-alpha-30);
+}
+
+.active-default {
+  color: var(--white);
+  background-color: var(--blue-200);
+  border: none;
+}

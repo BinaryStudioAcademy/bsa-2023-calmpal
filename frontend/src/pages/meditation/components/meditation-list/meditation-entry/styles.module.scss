@@ -48,6 +48,14 @@
   border-radius: 14px;
 }
 
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 380px;
+  height: 210px;
+}
+
 @media (width < 900px) {
   .track {
     max-width: 350px;

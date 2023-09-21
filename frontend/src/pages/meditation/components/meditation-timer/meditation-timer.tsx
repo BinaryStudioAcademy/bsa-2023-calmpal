@@ -24,11 +24,19 @@ const MeditationTimer: React.FC<Properties> = ({
 
   const {
     field: { onChange, value },
-  } = useFormController({ name: 'meditationDuration', control });
+  } = useFormController({
+    name: 'meditationDuration',
+    control,
+  });
 
   const handleStartSession = useCallback(() => {
     onStartSession(value);
   }, [onStartSession, value]);
+
+  const startButtonText =
+    value === defaultDuration
+      ? 'Start with default duration'
+      : 'Start with selected duration';
 
   return (
     <div className={styles['timer']}>
@@ -41,7 +49,7 @@ const MeditationTimer: React.FC<Properties> = ({
               isActive={value === duration}
               onChange={onChange}
               value={duration}
-              name="meditationDuration"
+              name="Meditation Duration"
               duration={
                 MEDITATION_DURATION[
                   duration as keyof typeof MEDITATION_DURATION
@@ -51,10 +59,18 @@ const MeditationTimer: React.FC<Properties> = ({
             />
           );
         })}
+        <TimerButton
+          isActive={value === defaultDuration}
+          onChange={onChange}
+          value={defaultDuration}
+          name="Meditation Duration"
+          duration={defaultDuration}
+          unit={DURATION_UNIT.MINUTES}
+        />
       </div>
       <Button
         style="start-button"
-        label="Start meditation session"
+        label={startButtonText}
         onClick={handleStartSession}
       />
     </div>
