@@ -24,12 +24,17 @@ const NavigationMenu: React.FC<Properties> = ({ routes }) => {
       <nav className={styles['nav']}>
         <div className={styles['icons-container']}>
           {routes.map((route) => {
+            const isRootPathSelected = pathname === route.path;
+            const isOtherPathSelected =
+              pathname !== '/' && route.path.startsWith(pathname);
+            const isSelected = isOtherPathSelected || isRootPathSelected;
+
             return (
               <button
                 key={route.name}
                 className={getValidClassNames(
                   styles['icon-container'],
-                  pathname === route.path && styles['icon-selected'],
+                  isSelected && styles['icon-selected'],
                 )}
               >
                 <Link to={route.path}>
