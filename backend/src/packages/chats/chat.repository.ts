@@ -32,8 +32,7 @@ class ChatRepository implements Repository {
       .query()
       .findById(id)
       .withGraphJoined(ChatsRelation.MEMBERS)
-      .whereExists(UserToChatModel.query().where('userId', userId))
-      .orderBy('createdAt', 'DESC')
+      .whereExists(UserToChatModel.query().where({ userId }))
       .castTo<ChatCommonQueryResponse>();
 
     return ChatEntity.initialize({
@@ -65,6 +64,8 @@ class ChatRepository implements Repository {
           void builder.where('name', 'iLike', `%${query}%`);
         }
       })
+      .whereExists(UserToChatModel.query().where({ userId }))
+      .orderBy('createdAt', 'DESC')
       .castTo<ChatCommonQueryResponse[]>();
 
     return chats.map((chat) => {
