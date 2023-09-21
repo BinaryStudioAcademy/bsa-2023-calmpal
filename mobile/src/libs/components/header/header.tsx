@@ -52,7 +52,9 @@ const Header: React.FC<Properties> = ({
       {isArrowVisible && <BackButton />}
 
       <View style={styles.titleBadgeContainer}>
-        <Text style={fontSize === 'small' ? styles.chatTitle : styles.title}>
+        <Text
+          style={fontSize === 'small' ? styles.smallTitle : styles.largeTitle}
+        >
           {title ?? name}
         </Text>
         {hasValue && <Badge count={badgeCount} />}

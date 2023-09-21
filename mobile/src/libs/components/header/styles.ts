@@ -24,13 +24,13 @@ const styles = StyleSheet.create({
   settings: {
     justifyContent: 'space-between',
   },
-  title: {
+  largeTitle: {
     color: AppColor.GRAY_500,
     fontSize: 20,
     fontWeight: '600',
     maxWidth: 300,
   },
-  chatTitle: {
+  smallTitle: {
     fontSize: 16,
     maxWidth: 230,
   },
