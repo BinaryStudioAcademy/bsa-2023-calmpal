@@ -7,6 +7,7 @@ import { ReactComponent as ChatBotAvatarIcon } from '#assets/icons/chatbot-avata
 import { ReactComponent as ChatsIcon } from '#assets/icons/chats.svg';
 import { ReactComponent as CloseIcon } from '#assets/icons/close.svg';
 import { ReactComponent as DeleteIcon } from '#assets/icons/delete.svg';
+import { ReactComponent as DownloadIcon } from '#assets/icons/download.svg';
 import { ReactComponent as ForwardIcon } from '#assets/icons/forward.svg';
 import { ReactComponent as HomeIcon } from '#assets/icons/home.svg';
 import { ReactComponent as JournalIcon } from '#assets/icons/journal.svg';
@@ -19,6 +20,7 @@ import { ReactComponent as PlusIcon } from '#assets/icons/plus.svg';
 import { ReactComponent as PreviousIcon } from '#assets/icons/previous.svg';
 import { ReactComponent as SendIcon } from '#assets/icons/send.svg';
 import { ReactComponent as SignOutIcon } from '#assets/icons/sign-out.svg';
+import { ReactComponent as UploadIcon } from '#assets/icons/upload.svg';
 import { ReactComponent as UserIcon } from '#assets/icons/user.svg';
 import { type IconName } from '#libs/types/types.js';
 
@@ -38,6 +40,9 @@ const iconNameToIcon: Record<
   'play': PlayIcon,
   'home': HomeIcon,
   'chats': ChatsIcon,
+  'close': CloseIcon,
+  'upload': UploadIcon,
+  'download': DownloadIcon,
   'journal': JournalIcon,
   'chatbot-avatar': ChatBotAvatarIcon,
   'chat-sidebar': ChatSideBarIcon,
@@ -46,7 +51,6 @@ const iconNameToIcon: Record<
   'sign-out': SignOutIcon,
   'user': UserIcon,
   'notification': NotificationIcon,
-  'close': CloseIcon,
   'delete': DeleteIcon,
 };
 
