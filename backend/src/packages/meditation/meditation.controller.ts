@@ -111,8 +111,8 @@ class MeditationController extends BaseController {
    *              schema:
    *                $ref: '#/components/schemas/Error'
    *              example:
-   *                message: "Content type of the file is not in PNG or JPEG."
-   *                errorType: "INCORRECT_FILE_TYPE"
+   *                message: "File extension should be one of PNG, JPEG, MPEG."
+   *                errorType: "FILE"
    *         413:
    *          description: Payload too large (File size exceeds 10MB)
    *          content:
@@ -121,7 +121,7 @@ class MeditationController extends BaseController {
    *                $ref: '#/components/schemas/Error'
    *              example:
    *                message: "The inputted file is bigger than 10 MB."
-   *                errorType: "FILE_TOO_BIG"
+   *                errorType: "FILE"
    */
 
   private async create(
