@@ -113,7 +113,7 @@ class MeditationController extends BaseController {
    *              example:
    *                message: "File extension should be one of PNG, JPEG, MPEG."
    *                errorType: "FILE"
-   *         413:
+   *         400:
    *          description: Payload too large (File size exceeds 10MB)
    *          content:
    *            application/json:
