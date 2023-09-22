@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   },
   labelOutlined: {
     color: AppColor.BLUE_400,
+    fontFamily: 'Montserrat-SemiBold',
   },
   buttonRounded: {
     backgroundColor: AppColor.WHITE,
@@ -49,9 +50,6 @@ const styles = StyleSheet.create({
   },
   visuallyCenteredButton: {
     paddingLeft: 18,
-  },
-  addButtonLabel: {
-    color: AppColor.BLUE_300,
   },
 });
 
