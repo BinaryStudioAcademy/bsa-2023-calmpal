@@ -1,3 +1,3 @@
-const NO_UPDATES = 0;
+const ZERO_UPDATED_ROWS_SOFT_DELETED = 0;
 
-export { NO_UPDATES };
+export { ZERO_UPDATED_ROWS_SOFT_DELETED };

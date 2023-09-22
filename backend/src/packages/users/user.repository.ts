@@ -2,7 +2,7 @@ import { type Repository } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/users.js';
 
-import { NO_UPDATES } from './libs/constants/constants.js';
+import { ZERO_UPDATED_ROWS_SOFT_DELETED } from './libs/constants/constants.js';
 import { UsersRelation } from './libs/enums/enums.js';
 import {
   type UserCommonQueryResponse,
@@ -118,7 +118,7 @@ class UserRepository implements Repository {
       .patch({ deletedAt: new Date().toISOString() })
       .where({ id, deletedAt: null });
 
-    return updatedRows > NO_UPDATES;
+    return updatedRows > ZERO_UPDATED_ROWS_SOFT_DELETED;
   }
 
   public async findByEmail(email: string): Promise<UserEntity | null> {
