@@ -20,7 +20,7 @@ type Properties<T extends FormFieldValues> = {
   maxLength?: number;
   autoComplete?: 'off' | 'on';
   isChatInput?: boolean;
-  disabled?: boolean;
+  isDisabled?: boolean;
 };
 
 const Input = <T extends FormFieldValues>({
@@ -34,7 +34,7 @@ const Input = <T extends FormFieldValues>({
   maxLength,
   autoComplete,
   isChatInput,
-  disabled = false,
+  isDisabled = false,
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
 
@@ -52,7 +52,7 @@ const Input = <T extends FormFieldValues>({
           placeholder={placeholder}
           maxLength={maxLength}
           autoComplete={autoComplete}
-          disabled={disabled}
+          disabled={isDisabled}
           className={getValidClassNames(
             styles['textarea'],
             isChatInput && styles['chat-input'],
@@ -66,7 +66,7 @@ const Input = <T extends FormFieldValues>({
           placeholder={placeholder}
           maxLength={maxLength}
           autoComplete={autoComplete}
-          disabled={disabled}
+          disabled={isDisabled}
           className={getValidClassNames(
             styles['input'],
             isChatInput && styles['chat-input'],

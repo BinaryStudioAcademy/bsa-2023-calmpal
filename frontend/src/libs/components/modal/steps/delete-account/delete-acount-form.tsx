@@ -86,7 +86,7 @@ const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
           placeholder="Please describe your situation"
           autoComplete="off"
           maxLength={60}
-          disabled={isInputDisabled}
+          isDisabled={isInputDisabled}
         />
         <div className={styles['footer']}>
           {onClose && (
