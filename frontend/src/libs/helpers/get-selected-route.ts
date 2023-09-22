@@ -5,12 +5,12 @@ type Properties = {
   routePath: string;
 };
 
-const isRouteSelected = ({ pathname, routePath }: Properties): boolean => {
+const getSelectedRoute = ({ pathname, routePath }: Properties): boolean => {
   const isRootPathSelected = pathname === routePath;
-  const isOtherPathSelected =
+  const isChildPathSelected =
     pathname !== AppRoute.ROOT && routePath.startsWith(pathname);
 
-  return isOtherPathSelected || isRootPathSelected;
+  return isChildPathSelected || isRootPathSelected;
 };
 
-export { isRouteSelected };
+export { getSelectedRoute };

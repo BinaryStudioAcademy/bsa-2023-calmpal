@@ -1,6 +1,6 @@
 import { Icon, Link } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
-import { getValidClassNames, isRouteSelected } from '#libs/helpers/helpers.js';
+import { getSelectedRoute, getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useLocation, useState } from '#libs/hooks/hooks.js';
 import { type Route } from '#libs/types/types.js';
 
@@ -35,7 +35,7 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
         )}
       >
         {routes.map((item) => {
-          const isSelected = isRouteSelected({
+          const isSelected = getSelectedRoute({
             pathname,
             routePath: item.path,
           });
