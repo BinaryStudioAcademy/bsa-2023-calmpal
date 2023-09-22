@@ -80,15 +80,6 @@ class UserController extends BaseController {
    *           example:
    *            message: "User with these credentials was not found."
    *            errorType: "USERS"
-   *        500:
-   *          description: "Internal Server Error. Returns 'false' if there was an internal error."
-   *          content:
-   *            application/json:
-   *              schema:
-   *                 $ref: '#/components/schemas/Error'
-   *              example:
-   *                message: "Failed to delete user."
-   *                errorType: "INTERNAL"
    */
   private async deleteAuthenticatedUser(
     options: APIHandlerOptions<{
