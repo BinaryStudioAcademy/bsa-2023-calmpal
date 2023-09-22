@@ -49,10 +49,10 @@ const MeditationTimer: React.FC<Properties> = ({
 
           return (
             <TimerButton
-              key={duration}
-              isActive={value === duration}
+              key={MEDITATION_DURATION[duration]}
+              isActive={value === MEDITATION_DURATION[duration]}
               onChange={onChange}
-              value={duration}
+              value={MEDITATION_DURATION[duration]}
               name="Meditation Duration"
               duration={MEDITATION_DURATION[duration]}
               unit={DURATION_UNIT.MINUTES}
