@@ -1,5 +1,5 @@
 type DeleteAccountFormPayload = {
-  describeYourSituation: string;
+  description: string;
   checkboxes: string[];
 };
 

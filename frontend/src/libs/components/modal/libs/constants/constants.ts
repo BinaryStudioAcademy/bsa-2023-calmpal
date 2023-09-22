@@ -22,7 +22,7 @@ const STEPS = [
 ];
 
 const DEFAULT_DELETE_ACCOUNT_PAYLOAD: DeleteAccountFormPayload = {
-  describeYourSituation: '',
+  description: '',
   checkboxes: [],
 };
 

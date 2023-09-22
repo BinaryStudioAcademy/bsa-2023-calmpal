@@ -82,7 +82,7 @@ const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
         <Input
           control={control}
           errors={errors}
-          name="describeYourSituation"
+          name="description"
           placeholder="Please describe your situation"
           autoComplete="off"
           maxLength={60}
