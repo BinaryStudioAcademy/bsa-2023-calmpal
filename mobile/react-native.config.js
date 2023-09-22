@@ -1,4 +1,7 @@
-export const project = {
+module.exports = {
+  project: {
+    ios: {},
     android: {},
+  },
+  assets: ['./src/assets/fonts/'],
 };
-export const assets = ['./src/assets/fonts/'];
