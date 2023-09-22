@@ -43,7 +43,7 @@ const DeleteAccountConfirmation: React.FC<Properties> = ({ onClose }) => {
         Thank you for your feedback and for being with us
       </p>
       <p className={styles['text']}>
-        are you sure you want to delete your account?
+        Are you sure you want to delete your account?
       </p>
       <div className={styles['footer']}>
         <Button label="Confirm" style="primary" onClick={handleClick} />
