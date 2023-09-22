@@ -20,6 +20,7 @@ type Properties = {
   isArrowVisible?: boolean;
   badgeCount?: number;
   isProfileVisible?: boolean;
+  fontSize?: 'small' | 'large';
 };
 
 const Header: React.FC<Properties> = ({
@@ -27,6 +28,7 @@ const Header: React.FC<Properties> = ({
   isArrowVisible = false,
   badgeCount = DEFAULT_BADGE_COUNT,
   isProfileVisible = false,
+  fontSize = 'large',
 }) => {
   const navigation =
     useNavigation<NavigationProp<ProfileNavigationParameterList>>();
@@ -49,7 +51,11 @@ const Header: React.FC<Properties> = ({
       {isArrowVisible && <BackButton />}
 
       <View style={styles.titleBadgeContainer}>
-        <Text style={styles.title}>{title ?? name}</Text>
+        <Text
+          style={fontSize === 'small' ? styles.smallTitle : styles.largeTitle}
+        >
+          {title ?? name}
+        </Text>
         {hasValue && <Badge count={badgeCount} />}
       </View>
       {isProfileVisible && (

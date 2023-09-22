@@ -4,6 +4,7 @@ import { type AsyncThunkConfig } from '#libs/types/types';
 import {
   type MeditationEntryCreateRequestDto,
   type MeditationEntryCreateResponseDto,
+  type MeditationEntryGetAllResponseDto,
 } from '#packages/meditation/meditation';
 import { appActions } from '#slices/app/notifications';
 
@@ -17,6 +18,16 @@ const initPlayer = createAsyncThunk<unknown, undefined, AsyncThunkConfig>(
     void player.startPlayer();
   },
 );
+
+const getAllMeditationEntries = createAsyncThunk<
+  MeditationEntryGetAllResponseDto,
+  undefined,
+  AsyncThunkConfig
+>(`${sliceName}/get-all-meditation-entries`, async (_, { extra }) => {
+  const { meditationApi } = extra;
+
+  return await meditationApi.getAllMeditationEntries();
+});
 
 const createMeditationEntry = createAsyncThunk<
   MeditationEntryCreateResponseDto,
@@ -38,4 +49,4 @@ const createMeditationEntry = createAsyncThunk<
     return item;
   },
 );
-export { createMeditationEntry, initPlayer };
+export { createMeditationEntry, getAllMeditationEntries, initPlayer };

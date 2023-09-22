@@ -12,7 +12,9 @@ import {
 import { AppColor, MeditationScreenName } from '#libs/enums/enums';
 import {
   useAppDispatch,
+  useAppSelector,
   useCallback,
+  useEffect,
   useNavigation,
   useSearch,
   useState,
@@ -22,10 +24,14 @@ import { type MeditationEntryCreateRequestDto } from '#packages/meditation/medit
 import { actions as meditationActions } from '#slices/meditation/meditation';
 
 import { AddMeditationModal } from './components/components';
-import { mockedData } from './libs/constants';
 import { styles } from './styles';
 
 const MeditationHome: React.FC = () => {
+  const { meditationEntries } = useAppSelector(({ meditation }) => {
+    return {
+      meditationEntries: meditation.meditationEntries,
+    };
+  });
   const dispatch = useAppDispatch();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -36,13 +42,14 @@ const MeditationHome: React.FC = () => {
   const handleCloseModal = (): void => {
     setIsModalVisible(false);
   };
+
   const navigation =
     useNavigation<
       NativeStackNavigationProp<MeditationNavigationParameterList>
     >();
   const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
-    mockedData,
-    'title',
+    meditationEntries,
+    'name',
   );
 
   const handleSelectMeditation = useCallback(
@@ -61,6 +68,10 @@ const MeditationHome: React.FC = () => {
     [dispatch],
   );
 
+  useEffect(() => {
+    void dispatch(meditationActions.getAllMeditationEntries());
+  }, [dispatch]);
+
   return (
     <LinearGradient>
       <View style={styles.container}>
@@ -72,7 +83,7 @@ const MeditationHome: React.FC = () => {
           {filteredMeditationTopics.map((item) => {
             return (
               <Card
-                title={item.title}
+                title={item.name}
                 onPress={handleSelectMeditation}
                 key={item.id}
               />
