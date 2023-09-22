@@ -57,12 +57,7 @@ const ChatList: React.FC = () => {
     navigation.setOptions({
       header: () => {
         return (
-          <Header
-            title="Chat"
-            badgeCount={chatsLength}
-            isProfileVisible
-            fontSize="large"
-          />
+          <Header title="Chat" badgeCount={chatsLength} isProfileVisible />
         );
       },
     });

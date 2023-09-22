@@ -43,7 +43,7 @@ const MeditationList: React.FC = () => {
   useEffect(() => {
     navigation.setOptions({
       header: () => {
-        return <Header title={title} isArrowVisible fontSize="large" />;
+        return <Header title={title} isArrowVisible />;
       },
     });
   }, [navigation, title]);

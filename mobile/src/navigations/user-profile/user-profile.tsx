@@ -18,7 +18,7 @@ const UserProfile: React.FC = () => {
         component={Profile}
         options={{
           header: (): React.ReactNode => {
-            return <Header isArrowVisible fontSize="large" />;
+            return <Header isArrowVisible />;
           },
         }}
       />
@@ -27,7 +27,7 @@ const UserProfile: React.FC = () => {
         component={NotificationSettings}
         options={{
           header: (): React.ReactNode => {
-            return <Header isArrowVisible fontSize="large" />;
+            return <Header isArrowVisible />;
           },
         }}
       />
