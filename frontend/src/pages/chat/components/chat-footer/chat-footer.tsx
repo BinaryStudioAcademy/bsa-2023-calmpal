@@ -54,7 +54,7 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
         />
         <button type="submit" className={styles['send-button']}>
           <span className="visually-hidden">Send message</span>
-          <Icon name="send" color={IconColor.BLUE} />
+          <Icon name="send" color={IconColor.BLUE} width={24} height={24} />
         </button>
       </form>
     </footer>
