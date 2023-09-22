@@ -7,6 +7,8 @@ type Route = {
   path: ValueOf<typeof AppRoute>;
   name: string;
   icon: IconName;
+  iconWidth?: number;
+  iconHeight?: number;
 };
 
 export { type Route };

@@ -17,6 +17,8 @@ const SIDEBAR_ROUTES: Route[] = [
     path: getUrlWithQueryString(AppRoute.CHATS, QUERY_STRING_PARAMETERS),
     name: 'chats',
     icon: 'chats',
+    iconWidth: 22,
+    iconHeight: 22,
   },
   {
     path: getUrlWithQueryString(AppRoute.JOURNAL, QUERY_STRING_PARAMETERS),
@@ -27,6 +29,8 @@ const SIDEBAR_ROUTES: Route[] = [
     path: getUrlWithQueryString(AppRoute.PROFILE, QUERY_STRING_PARAMETERS),
     name: 'profile',
     icon: 'user',
+    iconWidth: 28,
+    iconHeight: 28,
   },
 ];
 
