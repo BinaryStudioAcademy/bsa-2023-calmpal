@@ -46,7 +46,7 @@ class JournalEntryRepository implements Repository {
       .orderBy('updatedAt', SortType.DESC)
       .modify((builder) => {
         if (query) {
-          void builder.whereILike('title', `%${query}%`);
+          void builder.where('title', 'iLike', `%${query}%`);
         }
       })
       .castTo<JournalEntryCommonQueryResponse[]>()

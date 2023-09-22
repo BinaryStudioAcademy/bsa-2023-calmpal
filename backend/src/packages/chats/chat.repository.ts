@@ -32,10 +32,9 @@ class ChatRepository implements Repository {
       .orderBy('createdAt', 'DESC')
       .modify((builder) => {
         if (query) {
-          void builder.whereILike('name', `%${query}%`);
+          void builder.where('name', 'iLike', `%${query}%`);
         }
       })
-
       .castTo<ChatCommonQueryResponse[]>();
 
     return chats.map((chat) => {
