@@ -6,7 +6,6 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import {
   createUserSurvey,
-  deleteUser,
   getAuthenticatedUser,
   signIn,
   signOut,
@@ -88,17 +87,6 @@ const { reducer, actions, name } = createSlice({
     });
     builder.addCase(createUserSurvey.rejected, (state) => {
       state.surveyPreferencesDataStatus = DataStatus.REJECTED;
-    });
-
-    builder.addCase(deleteUser.pending, (state) => {
-      state.authDataStatus = DataStatus.PENDING;
-    });
-    builder.addCase(deleteUser.fulfilled, (state) => {
-      state.authenticatedUser = null;
-      state.authDataStatus = DataStatus.FULFILLED;
-    });
-    builder.addCase(deleteUser.rejected, (state) => {
-      state.authDataStatus = DataStatus.REJECTED;
     });
   },
 });

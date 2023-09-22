@@ -8,8 +8,6 @@ import {
 } from '#packages/survey/survey.js';
 import {
   type UserAuthResponseDto,
-  type UserDeleteRequestDto,
-  type UserDeleteResponseDto,
   type UserSignInRequestDto,
   type UserSignInResponseDto,
   type UserSignUpRequestDto,
@@ -87,25 +85,6 @@ class AuthApi extends BaseHttpApi {
     );
 
     return await response.json<SurveyGetAllItemResponseDto>();
-  }
-
-  public async deleteUser(
-    payload: UserDeleteRequestDto,
-  ): Promise<UserDeleteResponseDto> {
-    const updatedPath = AuthApiPath.DELETE_USER.replace(
-      ':id',
-      payload.id.toString(),
-    );
-    const deleteUserUrl = this.getFullEndpoint(updatedPath, {});
-
-    const response = await this.load(deleteUserUrl, {
-      method: 'DELETE',
-      contentType: ContentType.JSON,
-      payload: JSON.stringify(payload),
-      hasAuth: true,
-    });
-
-    return await response.json<UserDeleteResponseDto>();
   }
 }
 

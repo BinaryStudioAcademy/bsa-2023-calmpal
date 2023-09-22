@@ -7,6 +7,7 @@ import { fileController } from '#packages/files/files.js';
 import { journalEntryController } from '#packages/journal-entries/journal-entries.js';
 import { meditationController } from '#packages/meditation/meditations.js';
 import { surveyController } from '#packages/surveys/surveys.js';
+import { userController } from '#packages/users/users.js';
 
 import { BaseServerApplication } from './base-server-application.js';
 import { BaseServerApplicationApi } from './base-server-application-api.js';
@@ -20,6 +21,7 @@ const apiV1 = new BaseServerApplicationApi(
   ...journalEntryController.routes,
   ...meditationController.routes,
   ...chatController.routes,
+  ...userController.routes,
 );
 const serverApplication = new BaseServerApplication({
   title: 'CalmPal',

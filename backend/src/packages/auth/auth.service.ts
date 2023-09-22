@@ -5,7 +5,6 @@ import { HTTPCode } from '#libs/packages/http/http.js';
 import { type JWTService } from '#libs/packages/jwt/jwt.js';
 import {
   type UserAuthResponseDto,
-  type UserDeleteResponseDto,
   type UserSignInRequestDto,
   type UserSignInResponseDto,
   type UserSignUpRequestDto,
@@ -86,21 +85,6 @@ class AuthService {
     }
 
     return user;
-  }
-
-  public async deleteAuthenticatedUser(
-    id: number,
-  ): Promise<UserDeleteResponseDto> {
-    const isDeleted = await this.userService.delete(id);
-
-    if (!isDeleted) {
-      throw new UsersError({
-        status: HTTPCode.INTERNAL_SERVER_ERROR,
-        message: ExceptionMessage.DELETE_FAIL,
-      });
-    }
-
-    return { id };
   }
 }
 

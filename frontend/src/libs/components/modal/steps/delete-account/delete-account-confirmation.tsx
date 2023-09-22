@@ -7,7 +7,7 @@ import {
   useCallback,
 } from '#libs/hooks/hooks.js';
 import { type UserDeleteRequestDto } from '#packages/users/users.js';
-import { actions as authActions } from '#slices/auth/auth.js';
+import { actions as userActions } from '#slices/users/users.js';
 
 import styles from './styles.module.scss';
 
@@ -27,7 +27,7 @@ const DeleteAccountConfirmation: FC<Properties> = ({ onClose }) => {
   const dispatch = useAppDispatch();
   const handleDelete = useCallback(
     (payload: UserDeleteRequestDto): void => {
-      void dispatch(authActions.deleteUser(payload));
+      void dispatch(userActions.deleteUser(payload));
       onClose?.();
     },
     [dispatch, onClose],

@@ -96,17 +96,6 @@ class AuthController extends BaseController {
         );
       },
     });
-    this.addRoute({
-      path: AuthApiPath.DELETE_USER,
-      method: 'DELETE',
-      handler: (options) => {
-        return this.deleteAuthenticatedUser(
-          options as APIHandlerOptions<{
-            user: UserAuthResponseDto;
-          }>,
-        );
-      },
-    });
   }
 
   /**
@@ -247,45 +236,6 @@ class AuthController extends BaseController {
     return {
       status: HTTPCode.OK,
       payload: await this.authService.getAuthenticatedUser(options.user.id),
-    };
-  }
-
-  /**
-   * @swagger
-   * /delete-user/{id}:
-   *   delete:
-   *     description: Delete an authenticated user
-   *     parameters:
-   *       - name: id
-   *         in: path
-   *         description: User ID to delete
-   *         required: true
-   *         schema:
-   *           type: integer
-   *           minimum: 1
-   *     responses:
-   *       200:
-   *         description: Successful deletion
-   *         content:
-   *           application/json:
-   *           schema:
-   *             $ref: '#/components/schemas/UserDeleteResponseDto'
-   *       404:
-   *         description: User not found
-   *         content:
-   *           application/json:
-   *           schema:
-   *             $ref: '#/components/schemas/Error'
-   *           example:
-   *            message: "User with these credentials was not found."
-   *            errorType: "USERS"
-   */
-  private async deleteAuthenticatedUser(
-    options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
-  ): Promise<APIHandlerResponse> {
-    return {
-      status: HTTPCode.OK,
-      payload: await this.authService.deleteAuthenticatedUser(options.user.id),
     };
   }
 }
