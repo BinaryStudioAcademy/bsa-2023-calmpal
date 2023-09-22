@@ -2,10 +2,8 @@
   display: flex;
   align-items: center;
   min-width: 317px;
-  max-width: 317px;
   min-height: 83px;
   margin-top: 15px;
-  padding: 3px 67px 3px 3px;
   font-weight: 600;
   font-size: 16px;
   font-family: Montserrat, sans-serif;
@@ -43,6 +41,7 @@
 }
 
 .selected {
+  color: var(--blue-300);
   background: var(--white);
   box-shadow: 0 4px 20px 0 var(--blue-alpha-30);
 }
