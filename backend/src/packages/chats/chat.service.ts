@@ -105,13 +105,16 @@ class ChatService implements Service {
   }): Promise<boolean> {
     const chat = await this.findById(id);
     if (!chat) {
-      return false;
+      throw new ChatError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.CHAT_NOT_FOUND,
+      });
     }
 
     if (chat.members[FIRST_ARRAY_INDEX]?.userId !== userId) {
       throw new ChatError({
-        status: HTTPCode.BAD_REQUEST,
-        message: ExceptionMessage.INCORRECT_CREDENTIALS,
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.CHAT_NOT_FOUND,
       });
     }
 
