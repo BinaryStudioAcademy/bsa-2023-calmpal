@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import { FontFamily } from '#libs/enums/enums';
+
 const styles = StyleSheet.create({
   formContainer: {
     height: '100%',
@@ -11,14 +13,14 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 30,
     marginTop: 30,
-    fontFamily: 'Montserrat-SemiBold',
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
   bottomText: {
     fontSize: 14,
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
   boldText: {
-    fontFamily: 'Montserrat-SemiBold',
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
 });
 
