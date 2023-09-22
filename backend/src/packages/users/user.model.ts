@@ -9,6 +9,8 @@ import {
   AbstractModel,
   DatabaseTableName,
 } from '#libs/packages/database/database.js';
+import { JournalEntryModel } from '#packages/journal-entries/journal-entry.model.js';
+import { JournalEntriesTableColumn } from '#packages/journal-entries/libs/enums/enums.js';
 
 import {
   UserDetailsTableColumn,
@@ -48,6 +50,15 @@ class UserModel extends AbstractModel {
         join: {
           from: `${DatabaseTableName.USERS}.${UsersTableColumn.ID}`,
           to: `${DatabaseTableName.USER_DETAILS}.${UserDetailsTableColumn.USER_ID}`,
+        },
+      },
+
+      journal: {
+        relation: Model.HasManyRelation,
+        modelClass: JournalEntryModel,
+        join: {
+          from: `${DatabaseTableName.USERS}.${UsersTableColumn.ID}`,
+          to: `${DatabaseTableName.JOURNAL_ENTRIES}.${JournalEntriesTableColumn.USER_ID}`,
         },
       },
     };
