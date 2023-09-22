@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 16,
     color: AppColor.GRAY_500,
+    fontFamily: 'Montserrat-SemiBold',
   },
 });
 
