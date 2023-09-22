@@ -14,12 +14,14 @@ const styles = StyleSheet.create({
     color: AppColor.WHITE,
     marginBottom: 30,
     marginTop: 30,
+    fontFamily: 'Montserrat-SemiBold',
   },
   bottomText: {
     fontSize: 14,
+    fontFamily: 'Montserrat-Regular',
   },
   linkText: {
-    fontWeight: 'bold',
+    fontFamily: 'Montserrat-SemiBold',
   },
 });
 
