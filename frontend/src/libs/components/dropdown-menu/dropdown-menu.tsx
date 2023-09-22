@@ -51,7 +51,12 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
                 <Link to={item.path}>
                   <span className={styles['item']}>
                     <span className="visually-hidden">Go to {item.name}</span>
-                    <Icon name={item.icon} color={IconColor.BLUE} />
+                    <Icon
+                      name={item.icon}
+                      color={IconColor.BLUE}
+                      width={24}
+                      height={24}
+                    />
                     <span className={styles['title']}>{item.name}</span>
                   </span>
                 </Link>
