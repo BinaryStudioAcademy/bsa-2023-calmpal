@@ -66,6 +66,7 @@ const MeditationTimer: React.FC<Properties> = ({
           name="Meditation Duration"
           duration={defaultDuration}
           unit={DURATION_UNIT.MINUTES}
+          isDefault
         />
       </div>
       <Button

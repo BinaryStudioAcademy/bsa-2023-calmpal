@@ -1,5 +1,5 @@
 import { Button } from '#libs/components/components.js';
-import { IconColor } from '#libs/enums/icon-color.enum.js';
+import { IconColor } from '#libs/enums/enums.js';
 import { useCallback, useEffect, useRef, useState } from '#libs/hooks/hooks.js';
 import {
   FULL_PERCENTAGE,

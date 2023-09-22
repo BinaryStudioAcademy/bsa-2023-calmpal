@@ -9,6 +9,7 @@ type Properties = {
   name: string;
   duration: string;
   unit: string;
+  isDefault?: boolean;
 };
 
 const TimerButton: React.FC<Properties> = ({
@@ -18,8 +19,9 @@ const TimerButton: React.FC<Properties> = ({
   name,
   duration,
   unit,
+  isDefault,
 }) => {
-  const isDefaultButton = value === duration;
+  const isDefaultButton = isDefault;
 
   const buttonStyle = isDefaultButton
     ? getValidClassNames(
