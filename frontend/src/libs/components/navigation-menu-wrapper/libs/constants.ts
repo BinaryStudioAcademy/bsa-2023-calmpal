@@ -12,25 +12,29 @@ const SIDEBAR_ROUTES: Route[] = [
     path: getUrlWithQueryString(AppRoute.MEDITATION, QUERY_STRING_PARAMETERS),
     name: 'meditation',
     icon: 'meditation',
+    iconWidth: 22,
+    iconHeight: 20,
   },
   {
     path: getUrlWithQueryString(AppRoute.CHATS, QUERY_STRING_PARAMETERS),
     name: 'chats',
     icon: 'chats',
-    iconWidth: 22,
-    iconHeight: 22,
+    iconWidth: 21,
+    iconHeight: 21,
   },
   {
     path: getUrlWithQueryString(AppRoute.JOURNAL, QUERY_STRING_PARAMETERS),
     name: 'journal',
     icon: 'journal',
+    iconWidth: 24,
+    iconHeight: 20,
   },
   {
     path: getUrlWithQueryString(AppRoute.PROFILE, QUERY_STRING_PARAMETERS),
     name: 'profile',
     icon: 'user',
-    iconWidth: 28,
-    iconHeight: 28,
+    iconWidth: 29,
+    iconHeight: 29,
   },
 ];
 
