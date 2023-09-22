@@ -30,10 +30,13 @@ const MeditationPlayer: React.FC = () => {
     foundTrack ? meditationEntries.indexOf(foundTrack) : TRACK_FIRST_INDEX,
   );
 
-  const handleTrackIndex = useCallback((index: number): void => {
-    setTrackIndex(index);
-    setCurrentTrack(meditationEntries[index]);
-  }, []);
+  const handleTrackIndex = useCallback(
+    (index: number): void => {
+      setTrackIndex(index);
+      setCurrentTrack(meditationEntries[index]);
+    },
+    [meditationEntries],
+  );
 
   return (
     <div className={styles['wrapper']}>
