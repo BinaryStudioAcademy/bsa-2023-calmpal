@@ -6,6 +6,7 @@ import {
   useAppDispatch,
   useAppSelector,
   useCallback,
+  useEffect,
 } from '#libs/hooks/hooks.js';
 import { actions as chatActions } from '#slices/chats/chats.js';
 
@@ -26,19 +27,22 @@ const DeleteChatModal: React.ForwardRefRenderFunction<
     chatDeleteModalReference.current?.close();
   }, [chatDeleteModalReference]);
 
-  const { isLoading } = useAppSelector(({ chats }) => {
+  const { isLoading, deleteChatDataStatus } = useAppSelector(({ chats }) => {
     return {
       isLoading: chats.deleteChatDataStatus === DataStatus.PENDING,
+      deleteChatDataStatus: chats.deleteChatDataStatus,
     };
   });
 
   const handleDeleteChatEntry = useCallback(() => {
-    void dispatch(chatActions.deleteChat(id as number))
-      .unwrap()
-      .finally(() => {
-        chatDeleteModalReference.current?.close();
-      });
-  }, [dispatch, id, chatDeleteModalReference]);
+    void dispatch(chatActions.deleteChat(id as number));
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    if (deleteChatDataStatus === DataStatus.FULFILLED) {
+      chatDeleteModalReference.current?.close();
+    }
+  }, [deleteChatDataStatus, chatDeleteModalReference]);
 
   return (
     <Modal
