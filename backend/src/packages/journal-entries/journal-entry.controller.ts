@@ -81,6 +81,9 @@ class JournalEntryController extends BaseController {
     this.addRoute({
       path: JournalApiPath.ROOT,
       method: 'POST',
+      validation: {
+        body: createJournalEntryValidationSchema,
+      },
       handler: (options) => {
         return this.create(
           options as APIHandlerOptions<{
@@ -190,6 +193,12 @@ class JournalEntryController extends BaseController {
    *              example:
    *                message: "User with these credentials was not found."
    *                errorType: "USERS"
+   *        422:
+   *          description: Validation failed
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Unprocessable Journal Entity'
    */
 
   private async create(
