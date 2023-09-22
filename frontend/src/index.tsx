@@ -108,6 +108,16 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                 ),
               },
               {
+                path: AppRoute.JOURNAL_$ID,
+                element: (
+                  <ProtectedRoute>
+                    <NavigationMenuWrapper>
+                      <Journal />
+                    </NavigationMenuWrapper>
+                  </ProtectedRoute>
+                ),
+              },
+              {
                 path: AppRoute.PROFILE,
                 element: (
                   <ProtectedRoute>

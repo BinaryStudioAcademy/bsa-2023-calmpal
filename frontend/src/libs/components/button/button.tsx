@@ -19,7 +19,8 @@ type Properties = {
     | 'rounded-transparent'
     | 'play-button'
     | 'active'
-    | 'start-button';
+    | 'start-button'
+    | 'add';
   isLoading?: boolean;
   isDisabled?: boolean;
   isLabelVisuallyHidden?: boolean;
