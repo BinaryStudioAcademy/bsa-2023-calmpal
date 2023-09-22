@@ -1,5 +1,3 @@
-import { type FC } from 'react';
-
 import { Button, Checkbox, Input } from '#libs/components/components.js';
 import {
   useAppForm,
@@ -20,7 +18,7 @@ type Properties = {
   onClose?: () => void;
 };
 
-const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
+const DeleteAccountForm: React.FC<Properties> = ({ onNext, onClose }) => {
   const { control, errors, handleSubmit } =
     useAppForm<DeleteAccountFormPayload>({
       defaultValues: DEFAULT_DELETE_ACCOUNT_PAYLOAD,
@@ -71,7 +69,7 @@ const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
             <div key={checkbox.label}>
               <Checkbox
                 label={checkbox.label}
-                checked={checkedBoxes.includes(checkbox.label) || false}
+                isChecked={checkedBoxes.includes(checkbox.label) || false}
                 onChange={handleCheckboxChange(checkbox.label)}
                 isDefaultStylesDisabled
               />

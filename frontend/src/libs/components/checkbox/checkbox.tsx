@@ -4,14 +4,14 @@ import styles from './styles.module.scss';
 
 type Properties = {
   label: string;
-  checked?: boolean;
+  isChecked?: boolean;
   onChange: () => void;
   isDefaultStylesDisabled?: boolean;
 };
 
 const Checkbox: React.FC<Properties> = ({
   label,
-  checked,
+  isChecked,
   onChange,
   isDefaultStylesDisabled,
 }) => {
@@ -33,7 +33,7 @@ const Checkbox: React.FC<Properties> = ({
       <input
         className={checkboxClassName}
         type="checkbox"
-        checked={checked}
+        checked={isChecked}
         onChange={onChange}
       />
       <div className={containerClassName}>

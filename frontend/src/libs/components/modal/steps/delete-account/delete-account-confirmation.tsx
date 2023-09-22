@@ -1,5 +1,3 @@
-import { type FC } from 'react';
-
 import { Button } from '#libs/components/components.js';
 import {
   useAppDispatch,
@@ -15,7 +13,7 @@ type Properties = {
   onClose?: () => void;
 };
 
-const DeleteAccountConfirmation: FC<Properties> = ({ onClose }) => {
+const DeleteAccountConfirmation: React.FC<Properties> = ({ onClose }) => {
   const { authenticatedUser } = useAppSelector(({ auth }) => {
     return {
       authenticatedUser: auth.authenticatedUser,

@@ -1,5 +1,3 @@
-import { type FC } from 'react';
-
 import { Button } from '#libs/components/components.js';
 
 import styles from './styles.module.scss';
@@ -9,7 +7,7 @@ type Properties = {
   onClose?: () => void;
 };
 
-const DeleteAccountMessage: FC<Properties> = ({ onNext, onClose }) => {
+const DeleteAccountMessage: React.FC<Properties> = ({ onNext, onClose }) => {
   return (
     <div className={styles['modal-body']}>
       <p>After deleting your account you will:</p>
