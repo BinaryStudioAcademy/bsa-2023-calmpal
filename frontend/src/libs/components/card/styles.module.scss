@@ -2,9 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
   min-width: 317px;
-  max-width: 317px;
   min-height: 83px;
   margin-top: 15px;
   padding: 3px 30px 3px 3px;
@@ -85,7 +83,6 @@
   .item {
     width: 100%;
     min-width: 0;
-    max-width: 100%;
     padding: 3px 24px 3px 3px;
   }
 
