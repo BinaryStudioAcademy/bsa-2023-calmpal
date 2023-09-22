@@ -11,6 +11,25 @@ import { type UserAuthResponseDto } from '#packages/users/libs/types/types.js';
 import { UsersApiPath } from './libs/enums/enums.js';
 import { type UserService } from './user.service.js';
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     UserDeleteResponseDto:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           nullable: true
+ *     Error:
+ *       type: object
+ *       properties:
+ *         message:
+ *           type: string
+ *         errorType:
+ *           type: string
+ */
+
 class UserController extends BaseController {
   private userService: UserService;
 
@@ -36,7 +55,7 @@ class UserController extends BaseController {
    * @swagger
    * /delete-user/{id}:
    *   delete:
-   *     description: Delete an authenticated user
+   *     description: Delete an authenticated user by their ID
    *     parameters:
    *       - name: id
    *         in: path
@@ -47,13 +66,13 @@ class UserController extends BaseController {
    *           minimum: 1
    *     responses:
    *       200:
-   *         description: Successful deletion
+   *         description: "Successful deletion. Returns 'true' if the user was deleted successfully."
    *         content:
    *           application/json:
    *           schema:
    *             $ref: '#/components/schemas/UserDeleteResponseDto'
    *       404:
-   *         description: User not found
+   *          description: "User not found. Returns 'false' if the user could not be found."
    *         content:
    *           application/json:
    *           schema:
@@ -61,6 +80,15 @@ class UserController extends BaseController {
    *           example:
    *            message: "User with these credentials was not found."
    *            errorType: "USERS"
+   *        500:
+   *          description: "Internal Server Error. Returns 'false' if there was an internal error."
+   *          content:
+   *            application/json:
+   *              schema:
+   *                 $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "Failed to delete user."
+   *                errorType: "INTERNAL"
    */
   private async deleteAuthenticatedUser(
     options: APIHandlerOptions<{
