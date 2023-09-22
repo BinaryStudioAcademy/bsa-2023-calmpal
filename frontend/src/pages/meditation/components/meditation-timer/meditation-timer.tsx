@@ -9,6 +9,8 @@ import { TimerButton } from './components/timer-button/timer-button.js';
 import { DURATION_UNIT, MEDITATION_DURATION } from './libs/constants.js';
 import styles from './styles.module.scss';
 
+type DurationKey = keyof typeof MEDITATION_DURATION;
+
 type Properties = {
   defaultDuration: string;
   onStartSession: (duration: string) => void;
@@ -42,7 +44,9 @@ const MeditationTimer: React.FC<Properties> = ({
     <div className={styles['timer']}>
       <p className={styles['title']}>Choose Your Duration</p>
       <div className={styles['duration-container']}>
-        {Object.keys(MEDITATION_DURATION).map((duration) => {
+        {Object.keys(MEDITATION_DURATION).map((durationKey) => {
+          const duration = durationKey as DurationKey;
+
           return (
             <TimerButton
               key={duration}
@@ -50,11 +54,7 @@ const MeditationTimer: React.FC<Properties> = ({
               onChange={onChange}
               value={duration}
               name="Meditation Duration"
-              duration={
-                MEDITATION_DURATION[
-                  duration as keyof typeof MEDITATION_DURATION
-                ]
-              }
+              duration={MEDITATION_DURATION[duration]}
               unit={DURATION_UNIT.MINUTES}
             />
           );
