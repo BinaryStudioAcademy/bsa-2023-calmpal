@@ -80,12 +80,11 @@ class OpenAi extends BaseHttpApi {
       ),
       {
         method: 'POST',
-        payload: JSON.stringify({ prompt, number, size }),
+        payload: JSON.stringify({ prompt, n: number, size }),
         token: this.apiKey,
         contentType: ContentType.JSON,
       },
     );
-
     const [response] = data.data;
 
     return response?.url ?? null;

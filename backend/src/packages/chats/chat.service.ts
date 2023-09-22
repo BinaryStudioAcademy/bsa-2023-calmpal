@@ -1,8 +1,9 @@
 import { ExceptionMessage } from '#libs/enums/enums.js';
 import { ChatError } from '#libs/exceptions/exceptions.js';
+import { BaseHttpApi } from '#libs/packages/api/base-http-api.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
+import { type BaseHttp } from '#libs/packages/http/http.js';
 import { type OpenAi } from '#libs/packages/open-ai/open-ai.js';
-import { type S3 } from '#libs/packages/s3/s3.js';
 import { type Service } from '#libs/types/types.js';
 import {
   type ChatMessageCreatePayload,
@@ -26,34 +27,30 @@ import {
 type Constructor = {
   chatRepository: ChatRepository;
   chatMessageService: ChatMessageService;
-  s3Service: S3;
   openAiService: OpenAi;
-  httpService: HTTPService;
   fileService: FileService;
+  http: BaseHttp;
 };
 
 class ChatService implements Service {
   private chatRepository: ChatRepository;
-  private s3Service: S3;
   private openAiService: OpenAi;
   private chatMessageService: ChatMessageService;
-  private httpService: HTTPService;
   private fileService: FileService;
+  private http: BaseHttp;
 
   public constructor({
     chatRepository,
     chatMessageService,
-    s3Service,
     openAiService,
-    httpService,
     fileService,
+    http,
   }: Constructor) {
     this.chatRepository = chatRepository;
     this.chatMessageService = chatMessageService;
-    this.s3Service = s3Service;
     this.openAiService = openAiService;
-    this.httpService = httpService;
     this.fileService = fileService;
+    this.http = http;
   }
 
   public find(): ReturnType<Service['find']> {
@@ -138,9 +135,9 @@ class ChatService implements Service {
     chat,
     imageUrl,
   }: UpdateChatImagePayload): Promise<ChatGetAllItemResponseDto> {
-    const payload = await this.httpService.load<FileUploadRequestDto>({
+    const httpApi = new BaseHttpApi({ baseUrl: '', path: '', http: this.http });
+    const payload = await httpApi.load<FileUploadRequestDto>(imageUrl, {
       method: 'GET',
-      url: imageUrl,
       isBuffer: true,
     });
 
@@ -158,7 +155,7 @@ class ChatService implements Service {
     return (await this.openAiService.getMessageResponse([
       {
         role: 'user',
-        content: `Could you please give me a two-three word name for a chat that starts with this opening message '${message}' and exclude the word 'Chat' from it.`,
+        content: `Could you please generate me ONE two-three word name for a chat that starts with this opening message '${message}' and exclude the word 'Chat' from it.`,
       },
     ])) as string;
   }
