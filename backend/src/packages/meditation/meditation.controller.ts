@@ -87,6 +87,8 @@ class MeditationController extends BaseController {
    * /meditation:
    *    post:
    *      description: Create a new meditation
+   *      security:
+   *       - bearerAuth: []
    *      requestBody:
    *        description: Meditation data
    *        required: true
@@ -97,6 +99,8 @@ class MeditationController extends BaseController {
    *      responses:
    *        201:
    *          description: Successful operation
+   *      security:
+   *       - bearerAuth: []
    *          content:
    *            application/json:
    *              schema:
@@ -106,6 +110,8 @@ class MeditationController extends BaseController {
    *                    $ref: '#/components/schemas/MeditationEntryResponse'
    *        400:
    *          description: Bad request (Invalid format)
+   *        security:
+   *         - bearerAuth: []
    *          content:
    *            application/json:
    *              schema:
