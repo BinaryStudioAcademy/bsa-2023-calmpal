@@ -1,9 +1,9 @@
-import { HTTPService } from './http-service.js';
+import { BaseHttp } from './base-http.package.js';
 
-const httpService = new HTTPService();
+const http = new BaseHttp();
 
-export { httpService };
-export { HTTPService } from './http-service.js';
+export { http };
+export { BaseHttp } from './base-http.package.js';
 export { HTTPCode } from './libs/enums/enums.js';
 export { HTTPError } from './libs/exceptions/exceptions.js';
-export { type HTTPMethod } from './libs/types/types.js';
+export { type HTTP, HTTPHeader, type HTTPMethod } from './libs/types/types.js';

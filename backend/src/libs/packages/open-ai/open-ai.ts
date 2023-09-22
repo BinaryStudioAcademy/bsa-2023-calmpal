@@ -1,12 +1,12 @@
 import { config } from '#libs/packages/config/config.js';
 
-import { httpService } from '../http/http.js';
+import { http } from '../http/http.js';
 import { OpenAi } from './open-ai.package.js';
 
 const openAi = new OpenAi({
-  httpService,
   apiKey: config.ENV.OPEN_AI.API_KEY,
   baseUrl: config.ENV.OPEN_AI.BASE_URL,
+  http,
 });
 
 export { openAi };
