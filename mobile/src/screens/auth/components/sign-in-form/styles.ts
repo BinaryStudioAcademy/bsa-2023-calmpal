@@ -11,12 +11,14 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 30,
     marginTop: 30,
+    fontFamily: 'Montserrat-SemiBold',
   },
   bottomText: {
     fontSize: 14,
+    fontFamily: 'Montserrat-Regular',
   },
   boldText: {
-    fontWeight: 'bold',
+    fontFamily: 'Montserrat-SemiBold',
   },
 });
 
