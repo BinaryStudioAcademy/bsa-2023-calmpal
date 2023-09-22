@@ -44,12 +44,15 @@ class UserRepository implements Repository {
     });
   }
 
-  public async findByRoleId(roleId: number): Promise<UserEntity | null> {
+  public async findByRoleKey(
+    key: 'chatbot' | 'user',
+  ): Promise<UserEntity | null> {
     const user = await this.userModel
       .query()
       .modify('withoutPassword')
       .withGraphJoined(UsersRelation.DETAILS)
-      .findOne({ roleId })
+      .withGraphJoined(UsersRelation.ROLES)
+      .findOne({ key })
       .castTo<UserCommonQueryResponse | undefined>()
       .execute();
 

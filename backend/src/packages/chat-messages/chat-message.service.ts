@@ -74,15 +74,16 @@ class ChatMessageService implements Service {
       payload.chatId,
     );
 
-    const openAiMessages = chatMessages.map((chatMessage) => {
-      return {
-        role:
-          payload.senderId === chatMessage.toObject().senderId
-            ? 'assistant'
-            : 'user',
-        content: chatMessage.toObject().message,
-      } as OpenAiMessageGenerateRequestDto;
-    });
+    const openAiMessages: OpenAiMessageGenerateRequestDto[] = chatMessages.map(
+      (chatMessage) => {
+        const { senderId, message } = chatMessage.toObject();
+
+        return {
+          role: payload.senderId === senderId ? 'assistant' : 'user',
+          content: message,
+        };
+      },
+    );
 
     openAiMessages.push({
       role: 'user',

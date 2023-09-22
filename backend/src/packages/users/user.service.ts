@@ -49,10 +49,10 @@ class UserService implements Service {
     return user?.toObject() ?? null;
   }
 
-  public async findByRoleId(
-    roleId: number,
+  public async findByRoleKey(
+    roleKey: 'chatbot' | 'user',
   ): Promise<ReturnType<UserEntity['toObject']> | null> {
-    const user = await this.userRepository.findByRoleId(roleId);
+    const user = await this.userRepository.findByRoleKey(roleKey);
 
     return user?.toObject() ?? null;
   }

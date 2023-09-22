@@ -28,9 +28,7 @@ class ChatbotService {
   public async getChatbotUser(): Promise<ReturnType<
     UserEntity['toObject']
   > | null> {
-    const CHATBOT_ROLE_ID = 1;
-
-    return await this.userService.findByRoleId(CHATBOT_ROLE_ID);
+    return await this.userService.findByRoleKey('chatbot');
   }
 }
 
