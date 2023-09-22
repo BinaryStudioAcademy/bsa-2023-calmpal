@@ -32,7 +32,7 @@ const JournalSidebar: React.FC<Properties> = ({
   setIsSidebarShown,
 }) => {
   const dispatch = useAppDispatch();
-  const [deletedChat, setDeleteChat] = useState<null | number>(null);
+  const [chatToDelete, setChatToDelete] = useState<null | number>(null);
   const dialogReference = useRef<HTMLDialogElement | null>(null);
   const handleOpen = useCallback(() => {
     dialogReference.current?.showModal();
@@ -58,7 +58,7 @@ const JournalSidebar: React.FC<Properties> = ({
   const handleIconClick = useCallback(
     (id: number) => {
       return () => {
-        setDeleteChat(id);
+        setChatToDelete(id);
         handleOpen();
       };
     },
@@ -117,7 +117,7 @@ const JournalSidebar: React.FC<Properties> = ({
           </div>
         </SidebarBody>
       </Sidebar>
-      <DeleteJournalModal ref={dialogReference} id={deletedChat} />
+      <DeleteJournalModal ref={dialogReference} id={chatToDelete} />
     </>
   );
 };
