@@ -43,10 +43,11 @@ class MeditationService implements Service {
     name: string;
     file: FileUploadRequestDto;
   }): Promise<MeditationEntryCreateResponseDto> {
-    const { url, contentType } = await this.fileService.create(file);
+    const { id, url, contentType } = await this.fileService.create(file);
     const item = await this.meditationRepository.create(
       MeditationEntity.initializeNew({
-        name: name,
+        id,
+        name,
         mediaUrl: url,
         contentType,
       }),
