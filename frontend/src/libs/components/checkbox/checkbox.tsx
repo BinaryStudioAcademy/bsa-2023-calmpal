@@ -5,7 +5,6 @@ import styles from './styles.module.scss';
 type Properties = {
   label: string;
   checked?: boolean;
-  name?: string;
   onChange: () => void;
   isDefaultStylesDisabled?: boolean;
 };
@@ -13,7 +12,6 @@ type Properties = {
 const Checkbox: React.FC<Properties> = ({
   label,
   checked,
-  name,
   onChange,
   isDefaultStylesDisabled,
 }) => {
@@ -35,7 +33,6 @@ const Checkbox: React.FC<Properties> = ({
       <input
         className={checkboxClassName}
         type="checkbox"
-        name={name}
         checked={checked}
         onChange={onChange}
       />

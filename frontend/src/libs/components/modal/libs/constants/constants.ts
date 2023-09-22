@@ -27,10 +27,10 @@ const DEFAULT_DELETE_ACCOUNT_PAYLOAD: DeleteAccountFormPayload = {
 };
 
 const CHECKBOX_OPTIONS = [
-  { name: 'checkbox1', label: 'I have chosen another app' },
-  { name: 'checkbox2', label: 'I have reached my goal' },
-  { name: 'checkbox3', label: 'I can not afford the current pricing' },
-  { name: 'checkbox4', label: 'Other' },
+  { label: 'I have chosen another app' },
+  { label: 'I have reached my goal' },
+  { label: 'I can not afford the current pricing' },
+  { label: 'Other' },
 ] as const;
 
 const INITIAL_STEP = 0;

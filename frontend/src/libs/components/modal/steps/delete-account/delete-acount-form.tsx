@@ -35,16 +35,16 @@ const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
   });
 
   const handleCheckboxChange = useCallback(
-    (checkboxName: string) => {
+    (checkboxLabel: string) => {
       return () => {
-        if (checkedBoxes.includes(checkboxName)) {
+        if (checkedBoxes.includes(checkboxLabel)) {
           onCheckboxChange(
             checkedBoxes.filter((option) => {
-              return option !== checkboxName;
+              return option !== checkboxLabel;
             }),
           );
         } else {
-          onCheckboxChange([...checkedBoxes, checkboxName]);
+          onCheckboxChange([...checkedBoxes, checkboxLabel]);
         }
       };
     },
@@ -68,12 +68,11 @@ const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
       <form className={styles['form']} onSubmit={handleFormSubmit}>
         {CHECKBOX_OPTIONS.map((checkbox) => {
           return (
-            <div key={checkbox.name}>
+            <div key={checkbox.label}>
               <Checkbox
                 label={checkbox.label}
-                name={checkbox.name}
-                checked={checkedBoxes.includes(checkbox.name) || false}
-                onChange={handleCheckboxChange(checkbox.name)}
+                checked={checkedBoxes.includes(checkbox.label) || false}
+                onChange={handleCheckboxChange(checkbox.label)}
                 isDefaultStylesDisabled
               />
             </div>
