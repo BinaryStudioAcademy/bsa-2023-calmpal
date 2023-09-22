@@ -16,4 +16,6 @@ export {
   type MeditationEntryCreateForm,
   type MeditationEntryCreateRequestDto,
   type MeditationEntryCreateResponseDto,
+  type MeditationEntryGetAllItemResponseDto,
+  type MeditationEntryGetAllResponseDto,
 } from './libs/types/types';
