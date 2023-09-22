@@ -10,6 +10,7 @@ import {
   DEFAULT_DELETE_ACCOUNT_PAYLOAD,
   type DeleteAccountFormPayload,
   NO_CHECKED_BOXES,
+  OTHER_OPTION_LABEL,
 } from '../../libs/constants/constants.js';
 import styles from './styles.module.scss';
 
@@ -49,7 +50,7 @@ const DeleteAccountForm: React.FC<Properties> = ({ onNext, onClose }) => {
     [checkedBoxes, onCheckboxChange],
   );
 
-  const isInputDisabled = !checkedBoxes.includes('checkbox4');
+  const isInputDisabled = !checkedBoxes.includes(OTHER_OPTION_LABEL);
   const isNextDisabled = checkedBoxes.length === NO_CHECKED_BOXES;
 
   const handleFormSubmit = useCallback(
@@ -69,7 +70,7 @@ const DeleteAccountForm: React.FC<Properties> = ({ onNext, onClose }) => {
             <div key={checkbox.label}>
               <Checkbox
                 label={checkbox.label}
-                isChecked={checkedBoxes.includes(checkbox.label) || false}
+                isChecked={checkedBoxes.includes(checkbox.label)}
                 onChange={handleCheckboxChange(checkbox.label)}
                 isDefaultStylesDisabled
               />
