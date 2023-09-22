@@ -28,7 +28,7 @@ const Header: React.FC<Properties> = ({
   isArrowVisible = false,
   badgeCount = DEFAULT_BADGE_COUNT,
   isProfileVisible = false,
-  fontSize,
+  fontSize = 'large',
 }) => {
   const navigation =
     useNavigation<NavigationProp<ProfileNavigationParameterList>>();
