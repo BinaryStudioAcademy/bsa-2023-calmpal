@@ -74,7 +74,7 @@ const DeleteAccountForm: FC<Properties> = ({ onNext, onClose }) => {
                 name={checkbox.name}
                 checked={checkedBoxes.includes(checkbox.name) || false}
                 onChange={handleCheckboxChange(checkbox.name)}
-                disableDefaultStyles
+                isDefaultStylesDisabled
               />
             </div>
           );

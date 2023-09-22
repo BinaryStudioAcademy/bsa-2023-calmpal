@@ -7,7 +7,7 @@ type Properties = {
   checked?: boolean;
   name?: string;
   onChange: () => void;
-  disableDefaultStyles?: boolean;
+  isDefaultStylesDisabled?: boolean;
 };
 
 const Checkbox: React.FC<Properties> = ({
@@ -15,19 +15,19 @@ const Checkbox: React.FC<Properties> = ({
   checked,
   name,
   onChange,
-  disableDefaultStyles,
+  isDefaultStylesDisabled,
 }) => {
   const checkboxClassName = getValidClassNames(
-    disableDefaultStyles ? null : styles['checkbox'],
+    isDefaultStylesDisabled ? null : styles['checkbox'],
   );
   const containerClassName = getValidClassNames(
-    disableDefaultStyles ? null : styles['container'],
+    isDefaultStylesDisabled ? null : styles['container'],
   );
   const labelClassName = getValidClassNames(
-    disableDefaultStyles ? null : styles['label'],
+    isDefaultStylesDisabled ? null : styles['label'],
   );
   const checkboxContainerClassName = getValidClassNames(
-    disableDefaultStyles ? styles['checkbox-container'] : null,
+    isDefaultStylesDisabled ? styles['checkbox-container'] : null,
   );
 
   return (
