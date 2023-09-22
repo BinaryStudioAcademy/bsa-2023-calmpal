@@ -7,6 +7,7 @@ const AppRoute = {
   CHATS: '/chats',
   CHATS_$ID: '/chats/:id',
   JOURNAL: '/journal',
+  JOURNAL_$ID: '/journal/:id',
   PROFILE: '/profile',
 } as const;
 
