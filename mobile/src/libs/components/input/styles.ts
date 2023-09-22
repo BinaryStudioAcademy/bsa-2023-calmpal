@@ -19,9 +19,9 @@ const styles = StyleSheet.create({
 
   label: {
     fontSize: 14,
-    fontWeight: 'bold',
     color: AppColor.GRAY_100,
     marginTop: 4,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
 
   placeholder: {
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   errorInput: {
     borderColor: AppColor.RED_100,
     color: AppColor.GRAY_600,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
 
   errorText: {
