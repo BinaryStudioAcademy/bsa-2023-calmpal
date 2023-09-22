@@ -4,6 +4,7 @@ import { type AsyncThunkConfig } from '#libs/types/types.js';
 import {
   type MeditationEntryCreateRequestDto,
   type MeditationEntryCreateResponseDto,
+  type MeditationEntryGetAllResponseDto,
 } from '#packages/meditation/meditation.js';
 import { appActions } from '#slices/app/app-notification.js';
 
@@ -30,4 +31,14 @@ const createMeditationEntry = createAsyncThunk<
   },
 );
 
-export { createMeditationEntry };
+const getAllMeditationEntries = createAsyncThunk<
+  MeditationEntryGetAllResponseDto,
+  undefined,
+  AsyncThunkConfig
+>(`${sliceName}/get-all-meditation-entries`, async (_, { extra }) => {
+  const { meditationApi } = extra;
+
+  return await meditationApi.getAllMeditationEntries();
+});
+
+export { createMeditationEntry, getAllMeditationEntries };

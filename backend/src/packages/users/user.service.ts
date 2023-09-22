@@ -98,7 +98,7 @@ class UserService implements Service {
     return Promise.resolve(null);
   }
 
-  public async delete(id: number): Promise<ReturnType<UserEntity['toObject']>> {
+  public async delete(id: number): Promise<boolean> {
     const deletedUser = await this.userRepository.findById(id);
 
     if (deletedUser === null) {
@@ -117,7 +117,7 @@ class UserService implements Service {
       });
     }
 
-    return deletedUser.toObject();
+    return isDeleted;
   }
 
   public async findByEmail(

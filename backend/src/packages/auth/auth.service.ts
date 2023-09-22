@@ -91,9 +91,16 @@ class AuthService {
   public async deleteAuthenticatedUser(
     id: number,
   ): Promise<UserDeleteResponseDto> {
-    const deletedUser = await this.userService.delete(id);
+    const isDeleted = await this.userService.delete(id);
 
-    return { id: deletedUser.id };
+    if (!isDeleted) {
+      throw new UsersError({
+        status: HTTPCode.INTERNAL_SERVER_ERROR,
+        message: ExceptionMessage.DELETE_FAIL,
+      });
+    }
+
+    return { id };
   }
 }
 
