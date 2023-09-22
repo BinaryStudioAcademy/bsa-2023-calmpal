@@ -73,10 +73,19 @@ class ChatService implements Service {
     return chat;
   }
 
-  public createMessage(
+  public async createMessage(
     payload: ChatMessageCreatePayload,
   ): Promise<ChatMessageGetAllItemResponseDto> {
-    return this.chatMessageService.create(payload);
+    const createdMessage = await this.chatMessageService.create(payload);
+
+    const { chatId, updatedAt } = createdMessage;
+
+    await this.chatRepository.update({
+      id: chatId,
+      updatedAt: updatedAt.toDateString(),
+    });
+
+    return createdMessage;
   }
 
   public update(): ReturnType<Service['update']> {
