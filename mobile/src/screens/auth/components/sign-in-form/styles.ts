@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { FontFamily } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   formContainer: {
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 30,
-    color: 'white',
+    color: AppColor.WHITE,
     marginBottom: 30,
     marginTop: 30,
     fontFamily: FontFamily.MONTSERRAT_600,
