@@ -1,25 +1,21 @@
-const DAY_DIFFERENCE_FROM_YESTERDAY = 1;
+import { formatRelative } from 'date-fns';
+import { enGB } from 'date-fns/locale';
 
-const getRelativeDate = (datetime: Date): string => {
-  const date = datetime.toDateString();
-  const dateToday = new Date().toDateString();
-  const dateYesteday = new Date(
-    new Date().setDate(new Date().getDate() - DAY_DIFFERENCE_FROM_YESTERDAY),
-  ).toDateString();
+import { type ValueOf } from '#libs/types/types.js';
 
-  if (date === dateToday) {
-    return 'Today';
-  }
+import { FormatRelativeLocale } from '../libs/enums/enums.js';
 
-  if (date === dateYesteday) {
-    return 'Yesterday';
-  }
+const getRelativeDate = (date: Date): string => {
+  const locale = {
+    ...enGB,
+    formatRelative: (
+      token: keyof typeof FormatRelativeLocale,
+    ): ValueOf<typeof FormatRelativeLocale> => {
+      return FormatRelativeLocale[token];
+    },
+  };
 
-  const month = datetime.toLocaleString('en-EN', { month: 'long' });
-  const day = datetime.getDate();
-  const year = datetime.getFullYear();
-
-  return `${day} ${month} ${year}`;
+  return formatRelative(date, new Date(), { locale });
 };
 
 export { getRelativeDate };
