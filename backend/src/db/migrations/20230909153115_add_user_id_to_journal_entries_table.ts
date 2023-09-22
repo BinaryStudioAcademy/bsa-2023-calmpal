@@ -12,8 +12,10 @@ const RelationRule = {
   CASCADE: 'CASCADE',
 } as const;
 
-function up(knex: Knex): Promise<void> {
-  return knex.schema.alterTable(TABLE_NAME, (table) => {
+const up = async (knex: Knex): Promise<void> => {
+  await knex(TABLE_NAME).del();
+
+  await knex.schema.alterTable(TABLE_NAME, (table) => {
     table
       .integer(ColumnName.USER_ID)
       .references(ColumnName.ID)
@@ -22,12 +24,12 @@ function up(knex: Knex): Promise<void> {
       .onDelete(RelationRule.CASCADE)
       .notNullable();
   });
-}
+};
 
-function down(knex: Knex): Promise<void> {
+const down = (knex: Knex): Promise<void> => {
   return knex.schema.alterTable(TABLE_NAME, (table) => {
     table.dropColumn(ColumnName.USER_ID);
   });
-}
+};
 
 export { down, up };
