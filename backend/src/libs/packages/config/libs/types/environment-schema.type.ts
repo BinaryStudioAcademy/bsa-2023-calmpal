@@ -30,6 +30,9 @@ type EnvironmentSchema = {
   ENCRYPT: {
     NUMBER_OF_ROUNDS: number;
   };
+  STRIPE: {
+    SECRET_KEY: string;
+  };
 };
 
 export { type EnvironmentSchema };
