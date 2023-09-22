@@ -108,16 +108,7 @@ class UserService implements Service {
       });
     }
 
-    const isDeleted = await this.userRepository.delete(id);
-
-    if (!isDeleted) {
-      throw new UsersError({
-        status: HTTPCode.INTERNAL_SERVER_ERROR,
-        message: ExceptionMessage.DELETE_FAIL,
-      });
-    }
-
-    return isDeleted;
+    return await this.userRepository.delete(id);
   }
 
   public async findByEmail(
