@@ -1,4 +1,6 @@
-import { APIPath } from '#libs/enums/enums.js';
+import { APIPath, ExceptionMessage } from '#libs/enums/enums.js';
+import { ChatError } from '#libs/exceptions/exceptions.js';
+import { checkQuery } from '#libs/helpers/helpers.js';
 import {
   type APIHandlerOptions,
   type APIHandlerResponse,
@@ -176,6 +178,19 @@ class ChatController extends BaseController {
    *                   type: array
    *                   items:
    *                     $ref: '#/components/schemas/Chat'
+   *       400:
+   *         description: Bad Request
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 status:
+   *                   type: integer
+   *                   example: 400
+   *                 message:
+   *                   type: string
+   *                   example: The data which was passed is incorrect.
    */
   private async findAll(
     options: APIHandlerOptions<{
@@ -183,6 +198,13 @@ class ChatController extends BaseController {
       query: GetChatsByQueryDto;
     }>,
   ): Promise<APIHandlerResponse> {
+    if (!checkQuery(options.query.query) && options.query.query) {
+      throw new ChatError({
+        message: ExceptionMessage.INCORRECT_DATA,
+        status: HTTPCode.BAD_REQUEST,
+      });
+    }
+
     return {
       status: HTTPCode.OK,
       payload: await this.chatService.findAllByUserId(
