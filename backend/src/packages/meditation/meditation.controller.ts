@@ -41,6 +41,13 @@ import { type MeditationService } from './meditation.service.js';
  *          updatedAt:
  *            type: string
  *            format: date-time
+ *      Error:
+ *        type: object
+ *        properties:
+ *          message:
+ *            type: string
+ *          errorType:
+ *            type: string
  */
 class MeditationController extends BaseController {
   private meditationService: MeditationService;
@@ -97,6 +104,24 @@ class MeditationController extends BaseController {
    *                properties:
    *                  message:
    *                    $ref: '#/components/schemas/MeditationEntryResponse'
+   *        400:
+   *          description: Bad request (Invalid format)
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "Content type of the file is not in PNG or JPEG."
+   *                errorType: "INCORRECT_FILE_TYPE"
+   *         413:
+   *          description: Payload too large (File size exceeds 10MB)
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "The inputted file is bigger than 10 MB."
+   *                errorType: "FILE_TOO_BIG"
    */
 
   private async create(
@@ -116,7 +141,7 @@ class MeditationController extends BaseController {
 
   /**
    * @swagger
-   * /journal:
+   * /meditation:
    *    get:
    *      description: Get all meditation entries
    *      security:
