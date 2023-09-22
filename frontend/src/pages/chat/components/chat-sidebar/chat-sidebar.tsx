@@ -36,7 +36,7 @@ const ChatSidebar: React.FC<Properties> = ({
 }) => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
-  const [deletedChat, setDeleteChat] = useState<null | number>(null);
+  const [chatToDelete, setChatToDelete] = useState<null | number>(null);
   const dialogReference = useRef<HTMLDialogElement>(null);
 
   const { chats } = useAppSelector(({ chats }) => {
@@ -63,7 +63,7 @@ const ChatSidebar: React.FC<Properties> = ({
   const handleDeleteChat = useCallback(
     (id: number) => {
       return () => {
-        setDeleteChat(id);
+        setChatToDelete(id);
         handleOpen();
       };
     },
@@ -116,7 +116,7 @@ const ChatSidebar: React.FC<Properties> = ({
           </div>
         </SidebarBody>
       </Sidebar>
-      <DeleteChatModal ref={dialogReference} id={deletedChat} />
+      <DeleteChatModal ref={dialogReference} id={chatToDelete} />
     </>
   );
 };
