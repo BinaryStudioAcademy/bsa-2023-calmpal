@@ -63,18 +63,16 @@ class MeditationEntity implements Entity {
   }
 
   public static initializeNew({
-    id,
     name,
     mediaUrl,
     contentType,
   }: {
-    id: number;
     name: string;
     mediaUrl: string;
     contentType: ValueOf<typeof ContentType>;
   }): MeditationEntity {
     return new MeditationEntity({
-      id,
+      id: null,
       name,
       mediaUrl,
       contentType,

@@ -28,6 +28,10 @@ import { type MeditationService } from './meditation.service.js';
  *      MeditationEntryResponse:
  *        type: object
  *        properties:
+ *          id:
+ *            type: number
+ *            format: number
+ *            minimum: 1
  *          name:
  *            type: string
  *          mediaUrl:
