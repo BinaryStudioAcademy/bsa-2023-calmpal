@@ -56,7 +56,10 @@ const Button: React.FC<Properties> = ({
           styles.buttonModal,
           styles.buttonModalCancel,
         ],
-        type === 'modal-delete' && styles.buttonModalDelete,
+        type === 'modal-delete' && [
+          styles.buttonModal,
+          styles.buttonModalDelete,
+        ],
         isDisabled && styles.buttonDisabled,
       ]}
       onPress={onPress}
