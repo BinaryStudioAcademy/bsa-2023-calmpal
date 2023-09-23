@@ -1,6 +1,6 @@
 const FontFamily = {
-  MONTSERRAT_400: 'Montserrat-Regular',
-  MONTSERRAT_600: 'Montserrat-SemiBold',
+  MONTSERRAT_400: 'montserrat-regular',
+  MONTSERRAT_600: 'montserrat-semi-bold',
 } as const;
 
 export { FontFamily };
