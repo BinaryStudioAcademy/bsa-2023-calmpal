@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     height: 55,
     width: 55,
     shadowColor: AppColor.BLUE_200,
-    elevation: 5,
+    elevation: 20,
   },
   buttonTransparent: {
     backgroundColor: 'transparent',
