@@ -15,7 +15,9 @@ export { ProtectedRoute } from './protected-route/protected-route';
 export { SignBackground } from './sign-background/sign-background';
 export { Switch } from './switch/switch';
 export { Toast } from './toast/toast';
+export { Controller as FormController } from 'react-hook-form';
 export {
+  BackHandler,
   Image,
   Pressable,
   ScrollView,

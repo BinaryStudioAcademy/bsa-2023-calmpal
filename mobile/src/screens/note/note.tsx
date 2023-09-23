@@ -1,9 +1,9 @@
 import { type RouteProp, useRoute } from '@react-navigation/native';
 import React from 'react';
-import { Controller } from 'react-hook-form';
-import { BackHandler } from 'react-native';
 
 import {
+  BackHandler,
+  FormController,
   LinearGradient,
   ScrollView,
   TextInput,
@@ -113,7 +113,7 @@ const Note: React.FC = () => {
     <LinearGradient>
       <ScrollView style={styles.container}>
         <View style={styles.textContainer}>
-          <Controller
+          <FormController
             control={control}
             render={({ field }): JSX.Element => {
               return (
@@ -128,8 +128,7 @@ const Note: React.FC = () => {
             name="title"
             defaultValue={DEFAULT_NOTE_PAYLOAD.title}
           />
-
-          <Controller
+          <FormController
             control={control}
             render={({ field }): JSX.Element => {
               return (
