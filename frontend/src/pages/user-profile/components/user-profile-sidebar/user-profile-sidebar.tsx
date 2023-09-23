@@ -51,6 +51,8 @@ const UserProfileSidebar: React.FC<Properties> = ({
 
   const modalReference = useRef<HTMLDialogElement | null>(null);
   const currentStep = STEPS[currentStepIndex];
+  const hasCurrentStep =
+    currentStep && typeof currentStep.component === 'function';
 
   const handleClick = useCallback(
     (key: string) => {
@@ -155,7 +157,7 @@ const UserProfileSidebar: React.FC<Properties> = ({
             iconWidth={24}
             iconHeight={24}
           />
-          {currentStep && (
+          {hasCurrentStep && (
             <Modal
               ref={modalReference}
               title={currentStep.title}

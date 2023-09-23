@@ -52,6 +52,8 @@ const DeleteAccountForm: React.FC<Properties> = ({ onNext, onClose }) => {
 
   const isInputDisabled = !checkedBoxes.includes(OTHER_OPTION_LABEL);
   const isNextDisabled = checkedBoxes.length === NO_CHECKED_BOXES;
+  const hasNextStep = onNext && typeof onNext === 'function';
+  const hasCloseButton = onClose && typeof onClose === 'function';
 
   const handleFormSubmit = useCallback(
     (event_: React.BaseSyntheticEvent): void => {
@@ -87,10 +89,10 @@ const DeleteAccountForm: React.FC<Properties> = ({ onNext, onClose }) => {
           isDisabled={isInputDisabled}
         />
         <div className={styles['footer']}>
-          {onClose && (
+          {hasCloseButton && (
             <Button label="Cancel" style="primary" onClick={onClose} />
           )}
-          {onNext && (
+          {hasNextStep && (
             <Button
               type="submit"
               label="Continue"
