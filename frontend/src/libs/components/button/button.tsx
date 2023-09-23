@@ -8,15 +8,21 @@ import styles from './styles.module.scss';
 type Properties = {
   label: string;
   type?: 'button' | 'submit';
-  iconName?: IconName;
-  iconColor?: ValueOf<typeof IconColor>;
+  iconName?: IconName | undefined;
+  iconColor?: ValueOf<typeof IconColor> | undefined;
   iconWidth?: number;
   iconHeight?: number;
-  style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent' | 'add';
+  style?:
+    | 'primary'
+    | 'secondary'
+    | 'rounded'
+    | 'rounded-transparent'
+    | 'add'
+    | 'icon-right';
   isLoading?: boolean;
   isDisabled?: boolean;
   isLabelVisuallyHidden?: boolean;
-  onClick?: () => void;
+  onClick?: (() => void) | undefined | (() => Promise<void>);
 };
 
 const Button: React.FC<Properties> = ({
