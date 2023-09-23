@@ -1,6 +1,8 @@
 import { type Billing } from '#libs/packages/billing/billing.js';
 import { type Service } from '#libs/types/types.js';
 
+import { type SubscriptionPaymentIntentCreateRequestDto } from './libs/types/types.js';
+
 type Constructor = {
   billing: Billing;
 };
@@ -26,9 +28,9 @@ class SubscriptionService implements Service {
 
   public async createPaymentIntent({
     price,
-  }: {
-    price: number;
-  }): Promise<{ clientSecret: string | null }> {
+  }: SubscriptionPaymentIntentCreateRequestDto): Promise<{
+    clientSecret: string | null;
+  }> {
     const { clientSecret } = await this.billing.createPaymentIntent({ price });
 
     return { clientSecret };
