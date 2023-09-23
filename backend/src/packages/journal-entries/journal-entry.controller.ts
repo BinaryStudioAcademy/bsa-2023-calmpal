@@ -1,6 +1,4 @@
-import { APIPath, ExceptionMessage } from '#libs/enums/enums.js';
-import { JournalError } from '#libs/exceptions/exceptions.js';
-import { checkQuery } from '#libs/helpers/helpers.js';
+import { APIPath } from '#libs/enums/enums.js';
 import {
   type APIHandlerOptions,
   type APIHandlerResponse,
@@ -16,7 +14,10 @@ import {
   type GetJournalsByQueryDto,
   type JournalEntryCreateRequestDto,
 } from './libs/types/types.js';
-import { createJournalEntryValidationSchema } from './libs/validation-schemas/validation-schemas.js';
+import {
+  createJournalEntryValidationSchema,
+  findByQueryJournalEntriesValidationSchema,
+} from './libs/validation-schemas/validation-schemas.js';
 
 /**
  * @swagger
@@ -98,6 +99,9 @@ class JournalEntryController extends BaseController {
     this.addRoute({
       path: JournalApiPath.ROOT,
       method: 'GET',
+      validation: {
+        query: findByQueryJournalEntriesValidationSchema,
+      },
       handler: (options) => {
         return this.getAll(
           options as APIHandlerOptions<{
@@ -253,12 +257,6 @@ class JournalEntryController extends BaseController {
     }>,
   ): Promise<APIHandlerResponse> {
     const { id } = options.user;
-    if (!checkQuery(options.query.query) && options.query.query) {
-      throw new JournalError({
-        message: ExceptionMessage.INCORRECT_DATA,
-        status: HTTPCode.BAD_REQUEST,
-      });
-    }
 
     return {
       status: HTTPCode.OK,

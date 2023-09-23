@@ -1,6 +1,4 @@
-import { APIPath, ExceptionMessage } from '#libs/enums/enums.js';
-import { ChatError } from '#libs/exceptions/exceptions.js';
-import { checkQuery } from '#libs/helpers/helpers.js';
+import { APIPath } from '#libs/enums/enums.js';
 import {
   type APIHandlerOptions,
   type APIHandlerResponse,
@@ -22,7 +20,10 @@ import {
   type ChatCreateRequestDto,
   type GetChatsByQueryDto,
 } from './libs/types/types.js';
-import { createChatValidationSchema } from './libs/validation-schemas/validation-schemas.js';
+import {
+  createChatValidationSchema,
+  findByQueryChatEntriesValidationSchema,
+} from './libs/validation-schemas/validation-schemas.js';
 
 /**
  * @swagger
@@ -101,6 +102,9 @@ class ChatController extends BaseController {
     this.addRoute({
       path: ChatsApiPath.ROOT,
       method: 'GET',
+      validation: {
+        query: findByQueryChatEntriesValidationSchema,
+      },
       handler: (options) => {
         return this.findAll(
           options as APIHandlerOptions<{
@@ -198,13 +202,6 @@ class ChatController extends BaseController {
       query: GetChatsByQueryDto;
     }>,
   ): Promise<APIHandlerResponse> {
-    if (!checkQuery(options.query.query) && options.query.query) {
-      throw new ChatError({
-        message: ExceptionMessage.INCORRECT_DATA,
-        status: HTTPCode.BAD_REQUEST,
-      });
-    }
-
     return {
       status: HTTPCode.OK,
       payload: await this.chatService.findAllByUserId(

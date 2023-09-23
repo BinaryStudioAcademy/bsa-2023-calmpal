@@ -1,1 +1,4 @@
-export { createChatValidationSchema } from 'shared/build/index.js';
+export {
+  createChatValidationSchema,
+  findByQueryChatEntriesValidationSchema,
+} from 'shared/build/index.js';
