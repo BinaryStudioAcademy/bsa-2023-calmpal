@@ -79,21 +79,6 @@
   word-break: break-word;
 }
 
-.icon-right {
-  position: relative;
-  top: -60px;
-  left: 260px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 30px;
-  padding: 7px 6px;
-  background-color: transparent;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
 .icon-right:hover {
   background-color: var(--blue-300);
 }
@@ -108,10 +93,6 @@
   .no-image {
     padding-left: 20px;
   }
-
-  .icon-right {
-    left: 190px;
-  }
 }
 
 @media (width < 768px) {
@@ -121,9 +102,5 @@
 
   .no-image {
     padding-left: 20px;
-  }
-
-  .icon-right {
-    left: 85%;
   }
 }
