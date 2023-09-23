@@ -3,6 +3,7 @@ import React from 'react';
 
 import ChatAvatar from '#assets/img/icons/chat-avatar.svg';
 import { Header, ScrollView, Text, View } from '#libs/components/components';
+import { messageItemProperties } from '#libs/helpers/message-item-properties';
 import {
   useAppDispatch,
   useAppForm,
@@ -18,11 +19,7 @@ import { type UserAuthResponseDto } from '#packages/users/users';
 import { actions as chatsActions } from '#slices/chats/chats';
 
 import { ChatInput, MessageItem } from './components/components';
-import {
-  DEFAULT_VALUES,
-  EMPTY_ARRAY_LENGTH,
-  PREVIOUS_USER,
-} from './libs/constants';
+import { DEFAULT_VALUES, EMPTY_ARRAY_LENGTH } from './libs/constants';
 import { type ChatInputValue } from './libs/types/chat-input-value.type';
 import { styles } from './styles';
 
@@ -110,16 +107,19 @@ const Chat: React.FC = () => {
       </View>
       <ScrollView style={styles.chatWrapper} ref={scrollViewReference}>
         {currentChatMessages.map((item, index) => {
-          const previousMessage = currentChatMessages[index - PREVIOUS_USER];
-          const isDifferentMessageOwner =
-            item.senderId !== previousMessage?.senderId ||
-            item.chatId !== previousMessage.chatId;
+          const { isTimeVisible, isDifferentMessageOwner, currentTime } =
+            messageItemProperties({
+              messages: currentChatMessages,
+              currentIndex: index,
+            });
 
           return (
             <MessageItem
               text={item.message}
+              time={currentTime ?? '00:00'}
+              isTimeVisible={isTimeVisible}
               isUser={item.senderId === authenticatedUser.id}
-              isAvatarVisible={isDifferentMessageOwner}
+              isAvatarVisible={isDifferentMessageOwner ?? true}
               key={item.id}
             />
           );
