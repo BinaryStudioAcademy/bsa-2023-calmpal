@@ -12,21 +12,19 @@ import styles from './styles.module.scss';
 type Properties = {
   children: React.ReactNode;
   title: string;
-  onClose?: () => void;
 };
 
 const Modal: React.ForwardRefRenderFunction<
   HTMLDialogElement | null,
   Properties
-> = ({ children, title, onClose }, reference) => {
+> = ({ children, title }, reference) => {
   const childrenReference =
     reference as React.RefObject<HTMLDialogElement | null>;
   const modalReference = useRef<HTMLDivElement>(null);
 
   const handleClose = useCallback(() => {
     childrenReference.current?.close();
-    onClose?.();
-  }, [childrenReference, onClose]);
+  }, [childrenReference]);
 
   useHandleClickOutside({
     ref: modalReference,

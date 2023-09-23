@@ -18,7 +18,6 @@ import {
   useAppDispatch,
   useAppSelector,
   useCallback,
-  useEffect,
   useRef,
   useState,
 } from '#libs/hooks/hooks.js';
@@ -46,10 +45,10 @@ const UserProfileSidebar: React.FC<Properties> = ({
   });
 
   const [activeItem, setActiveItem] = useState<string>('notification');
-  const [isModalOpen, setModalOpen] = useState(false);
   const [currentStepIndex, setCurrentStepIndex] = useState(INITIAL_STEP);
 
-  const modalReference = useRef<HTMLDialogElement | null>(null);
+  const dialogReference = useRef<HTMLDialogElement>(null);
+  const isDialogAvailable = dialogReference.current !== null;
   const currentStep = STEPS[currentStepIndex];
   const hasCurrentStep =
     currentStep && typeof currentStep.component === 'function';
@@ -68,10 +67,16 @@ const UserProfileSidebar: React.FC<Properties> = ({
     void dispatch(authActions.signOut());
   }, [dispatch]);
 
-  const handleCloseModal = useCallback((): void => {
-    setModalOpen(false);
+  const handleClose = useCallback((): void => {
+    if (isDialogAvailable && dialogReference.current.open) {
+      dialogReference.current.close();
+    }
+  }, [dialogReference]);
+
+  const handleOpen = useCallback(() => {
     setCurrentStepIndex(INITIAL_STEP);
-  }, []);
+    dialogReference.current?.showModal();
+  }, [dialogReference]);
 
   const goToNextStep = useCallback((): void => {
     setCurrentStepIndex((previous) => {
@@ -89,24 +94,8 @@ const UserProfileSidebar: React.FC<Properties> = ({
 
     const StepComponent = currentStep.component;
 
-    return <StepComponent onClose={handleCloseModal} onNext={goToNextStep} />;
+    return <StepComponent onClose={handleClose} onNext={goToNextStep} />;
   };
-
-  useEffect(() => {
-    if (modalReference.current) {
-      if (isModalOpen) {
-        modalReference.current.showModal();
-      } else {
-        modalReference.current.close();
-      }
-    }
-  }, [isModalOpen, modalReference]);
-
-  const toggleModal = useCallback(() => {
-    setModalOpen((previousState) => {
-      return !previousState;
-    });
-  }, []);
 
   return (
     <Sidebar isSidebarShown={isSidebarShown}>
@@ -151,18 +140,14 @@ const UserProfileSidebar: React.FC<Properties> = ({
           />
           <Card
             title="Delete account"
-            onClick={toggleModal}
+            onClick={handleOpen}
             iconName="delete"
             iconColor={IconColor.WHITE}
             iconWidth={24}
             iconHeight={24}
           />
           {hasCurrentStep && (
-            <Modal
-              ref={modalReference}
-              title={currentStep.title}
-              onClose={handleCloseModal}
-            >
+            <Modal ref={dialogReference} title={currentStep.title}>
               {getCurrentStep()}
             </Modal>
           )}
