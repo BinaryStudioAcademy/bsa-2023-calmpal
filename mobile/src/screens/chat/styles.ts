@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
   },
   chatWrapper: {
     paddingHorizontal: 20,
+    width: '100%',
   },
 });
 

@@ -4,6 +4,7 @@ import { AppColor } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   button: {
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     height: 44,
@@ -41,13 +42,16 @@ const styles = StyleSheet.create({
     height: 55,
     width: 55,
     shadowColor: AppColor.BLUE_200,
-    elevation: 5,
+    elevation: 20,
   },
   buttonTransparent: {
     backgroundColor: 'transparent',
   },
   visuallyCenteredButton: {
-    paddingLeft: 4,
+    paddingLeft: 18,
+  },
+  addButtonLabel: {
+    color: AppColor.BLUE_300,
   },
 });
 

@@ -8,7 +8,7 @@ import swaggerUi from '@fastify/swagger-ui';
 import Fastify, { type FastifyError } from 'fastify';
 import fastifyHealthcheck from 'fastify-healthcheck';
 
-import { APIPath, ContentType, ServerErrorType } from '#libs/enums/enums.js';
+import { APIPath, ServerErrorType } from '#libs/enums/enums.js';
 import { type ValidationError } from '#libs/exceptions/exceptions.js';
 import { type Config } from '#libs/packages/config/config.js';
 import { type Database } from '#libs/packages/database/database.js';
@@ -19,6 +19,7 @@ import {
   fileUpload as fileUploadPlugin,
 } from '#libs/plugins/plugins.js';
 import { type ValidationSchema } from '#libs/types/types.js';
+import { FileUploadValidationRule } from '#packages/files/files.js';
 import { userService } from '#packages/users/users.js';
 
 import { getErrorInfo } from './libs/helpers/helpers.js';
@@ -124,14 +125,14 @@ class BaseServerApplication implements ServerApplication {
 
     await this.app.register(fastifyMultipart, {
       limits: {
-        fileSize: 10_000_000,
+        fileSize: FileUploadValidationRule.MAXIMUM_FILE_SIZE,
       },
       attachFieldsToBody: true,
       throwFileSizeLimit: false,
     });
 
     await this.app.register(fileUploadPlugin, {
-      extensions: [ContentType.JPEG, ContentType.PNG],
+      extensions: FileUploadValidationRule.UPLOAD_FILE_CONTENT_TYPES,
     });
   }
 

@@ -27,10 +27,12 @@
   "dependencies": {
     "debounce": "1.2.1",
     "joi": "17.9.2",
-    "date-fns": "2.30.0"
+    "date-fns": "2.30.0",
+    "sanitize-html": "2.11.0"
   },
   "devDependencies": {
     "@types/debounce": "1.2.1",
+    "@types/sanitize-html": "2.9.0",
     "tsc-alias": "1.8.7"
   }
 }

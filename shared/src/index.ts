@@ -1,4 +1,8 @@
 export {
+  EMPTY_ARRAY_LENGTH,
+  FIRST_ARRAY_INDEX,
+} from './libs/constants/constants.js';
+export {
   APIPath,
   AppEnvironment,
   ContentType,
@@ -8,8 +12,10 @@ export {
 export {
   ApplicationError,
   AuthError,
+  ChatError,
   FileError,
   HTTPError,
+  JournalError,
   UsersError,
   ValidationError,
 } from './libs/exceptions/exceptions.js';
@@ -19,6 +25,7 @@ export {
   getFormattedDate,
   getFormattedTime,
   replaceTemplateWithValue,
+  sanitizeInput,
 } from './libs/helpers/helpers.js';
 export { type Config } from './libs/packages/config/config.js';
 export {
@@ -39,6 +46,13 @@ export {
 } from './libs/types/types.js';
 export { AuthApiPath } from './packages/auth/auth.js';
 export {
+  type ChatMessageCreateRequestDto,
+  type ChatMessageGetAllItemResponseDto,
+  type ChatMessageGetAllResponseDto,
+  ChatMessageValidationMessage,
+  ChatMessageValidationRule,
+} from './packages/chat-messages/chat-messages.js';
+export {
   type ChatCreateRequestDto,
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
@@ -47,16 +61,32 @@ export {
 } from './packages/chats/chats.js';
 export {
   type FileGetAllItemResponseDto,
+  FilesApiPath,
   type FileUploadRequestDto,
+  FileUploadValidationMessage,
+  FileUploadValidationRule,
   type S3FileUploadRequestDto,
 } from './packages/files/files.js';
-export { FilesApiPath } from './packages/files/files.js';
 export {
+  createJournalEntryValidationSchema,
   JournalApiPath,
   type JournalEntryCreateRequestDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
+  type JournalEntryUpdatePayloadDto,
+  type JournalEntryUpdateRequestDto,
+  NOTE_SANITIZER_OPTIONS,
 } from './packages/journal/journal.js';
+export {
+  createMeditationEntryFormValidationSchema,
+  MeditationApiPath,
+  type MeditationEntryCreateForm,
+  type MeditationEntryCreateRequestDto,
+  type MeditationEntryCreateResponseDto,
+  type MeditationEntryGetAllItemResponseDto,
+  type MeditationEntryGetAllResponseDto,
+  MeditationEntryValidationMessage,
+} from './packages/meditation/meditation.js';
 export {
   createSurveyValidationSchema,
   feelingsStepInputValidationSchema,
@@ -85,8 +115,3 @@ export {
   type UserSignUpResponseDto,
   userSignUpValidationSchema,
 } from './packages/users/users.js';
-export { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants.js';
-export {
-  type ChatMessageGetAllItemResponseDto,
-  type ChatMessageGetAllResponseDto,
-} from '#packages/chat-messages/chat-messages.js';
