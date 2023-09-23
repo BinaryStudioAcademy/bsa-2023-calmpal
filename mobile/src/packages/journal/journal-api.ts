@@ -5,7 +5,7 @@ import { type Storage } from '#libs/packages/storage/storage';
 
 import { JournalApiPath } from './libs/enums/enums';
 import {
-  // type JournalEntryCreateRequestDto,
+  type JournalEntryCreateRequestDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
   type JournalEntryUpdatePayloadDto,
@@ -32,6 +32,22 @@ class JournalApi extends BaseHttpApi {
     );
 
     return await response.json<JournalEntryGetAllResponseDto>();
+  }
+
+  public async createJournalEntry(
+    payload: JournalEntryCreateRequestDto,
+  ): Promise<JournalEntryGetAllItemResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(JournalApiPath.ROOT, {}),
+      {
+        method: 'POST',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify(payload),
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<JournalEntryGetAllItemResponseDto>();
   }
 
   public async updateJournalEntry(
