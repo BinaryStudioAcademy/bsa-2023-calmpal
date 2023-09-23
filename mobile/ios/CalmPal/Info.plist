@@ -53,8 +53,8 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>montserrat-regular.ttf</string>
 		<string>montserrat-semi-bold.ttf</string>
+		<string>ontserrat-egular.ttf</string>
 	</array>
 </dict>
 </plist>
