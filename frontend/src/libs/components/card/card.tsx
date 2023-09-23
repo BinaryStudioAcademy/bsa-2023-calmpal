@@ -31,7 +31,7 @@ const Card: React.FC<Properties> = ({
   const hasIcon = Boolean(iconName);
 
   return (
-    <>
+    <div className={styles['container']}>
       <button
         className={getValidClassNames(
           styles['item'],
@@ -74,7 +74,7 @@ const Card: React.FC<Properties> = ({
           iconHeight={25}
         />
       )}
-    </>
+    </div>
   );
 };
 

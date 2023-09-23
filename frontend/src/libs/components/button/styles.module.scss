@@ -134,9 +134,9 @@
 }
 
 .icon-right {
-  position: relative;
-  top: -60px;
-  left: 265px;
+  position: absolute;
+  top: 25%;
+  right: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -159,23 +159,5 @@
 
   100% {
     transform: rotate(360deg);
-  }
-}
-
-@media (width < 900px) {
-  .icon-right {
-    left: 80%;
-  }
-}
-
-@media (width < 768px) {
-  .icon-right {
-    left: 90%;
-  }
-}
-
-@media (width < 480px) {
-  .icon-right {
-    left: 85%;
   }
 }
