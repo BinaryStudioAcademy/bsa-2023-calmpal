@@ -94,7 +94,7 @@ const Note: React.FC = () => {
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [id, textValue, titleValue, handleSaveNote]);
+  }, [id, textValue, titleValue, handleSaveNote, isDirty]);
 
   return (
     <div className={styles['wrapper']}>
