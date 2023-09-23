@@ -2,9 +2,9 @@ import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
 import {
+  Button,
   Card,
   Header,
-  IconButton,
   InputSearch,
   LinearGradient,
   ScrollView,
@@ -96,10 +96,12 @@ const Journal: React.FC = () => {
           })}
         </ScrollView>
         <View style={styles.linkWrapper}>
-          <IconButton
-            iconName="plus"
-            color={AppColor.BLUE_300}
+          <Button
             onPress={handleAddNote}
+            iconName="plus"
+            label="Add new note"
+            type="transparent"
+            color={AppColor.BLUE_200}
           />
         </View>
       </View>
