@@ -29,6 +29,7 @@ const Card: React.FC<Properties> = ({
   const hasNoImageOrIcon = !imageUrl && !iconName;
   const hasImage = Boolean(imageUrl);
   const hasIcon = Boolean(iconName);
+  const hasIconRight = Boolean(iconRight);
 
   return (
     <>
@@ -58,7 +59,7 @@ const Card: React.FC<Properties> = ({
           <div className={styles['title']}>{title}</div>
         </div>
       </button>
-      {iconRight && (
+      {hasIconRight && (
         <Button
           label="delete chat"
           style="icon-right"

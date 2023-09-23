@@ -8,7 +8,7 @@ import styles from './styles.module.scss';
 type Properties = {
   label: string;
   type?: 'button' | 'submit';
-  iconName?: IconName;
+  iconName?: IconName | undefined;
   iconColor?: ValueOf<typeof IconColor> | undefined;
   iconWidth?: number;
   iconHeight?: number;
