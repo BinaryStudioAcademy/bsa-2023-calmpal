@@ -37,6 +37,7 @@ export {
 } from './libs/packages/http/http.js';
 export { type Storage } from './libs/packages/storage/storage.js';
 export {
+  type GetItemsByQueryDto,
   type ServerCommonErrorResponse,
   type ServerErrorDetail,
   type ServerErrorResponse,
@@ -44,6 +45,7 @@ export {
   type ValidationSchema,
   type ValueOf,
 } from './libs/types/types.js';
+export { findByQueryEntriesValidationSchema } from './libs/validation-schemas/validation-schemas.js';
 export { AuthApiPath } from './packages/auth/auth.js';
 export {
   type ChatMessageCreateRequestDto,
@@ -58,8 +60,6 @@ export {
   type ChatGetAllResponseDto,
   ChatsApiPath,
   createChatValidationSchema,
-  findByQueryChatEntriesValidationSchema,
-  type GetChatsByQueryDto,
 } from './packages/chats/chats.js';
 export {
   type FileGetAllItemResponseDto,
@@ -71,8 +71,6 @@ export {
 } from './packages/files/files.js';
 export {
   createJournalEntryValidationSchema,
-  findByQueryJournalEntriesValidationSchema,
-  type GetJournalsByQueryDto,
   JournalApiPath,
   type JournalEntryCreateRequestDto,
   type JournalEntryGetAllItemResponseDto,

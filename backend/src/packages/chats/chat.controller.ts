@@ -18,11 +18,11 @@ import { MOCKED_CHAT_NAME } from './libs/constants/constants.js';
 import { ChatsApiPath } from './libs/enums/enums.js';
 import {
   type ChatCreateRequestDto,
-  type GetChatsByQueryDto,
+  type GetItemsByQueryDto,
 } from './libs/types/types.js';
 import {
   createChatValidationSchema,
-  findByQueryChatEntriesValidationSchema,
+  findByQueryEntriesValidationSchema,
 } from './libs/validation-schemas/validation-schemas.js';
 
 /**
@@ -103,13 +103,13 @@ class ChatController extends BaseController {
       path: ChatsApiPath.ROOT,
       method: 'GET',
       validation: {
-        query: findByQueryChatEntriesValidationSchema,
+        query: findByQueryEntriesValidationSchema,
       },
       handler: (options) => {
         return this.findAll(
           options as APIHandlerOptions<{
             user: UserAuthResponseDto;
-            query: GetChatsByQueryDto;
+            query: GetItemsByQueryDto;
           }>,
         );
       },
@@ -199,7 +199,7 @@ class ChatController extends BaseController {
   private async findAll(
     options: APIHandlerOptions<{
       user: UserAuthResponseDto;
-      query: GetChatsByQueryDto;
+      query: GetItemsByQueryDto;
     }>,
   ): Promise<APIHandlerResponse> {
     return {
