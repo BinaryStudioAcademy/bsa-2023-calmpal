@@ -16,16 +16,16 @@ const Checkbox: React.FC<Properties> = ({
   isDefaultStylesDisabled,
 }) => {
   const checkboxClassName = getValidClassNames(
-    isDefaultStylesDisabled ? null : styles['checkbox'],
+    !isDefaultStylesDisabled && styles['checkbox'],
   );
   const containerClassName = getValidClassNames(
-    isDefaultStylesDisabled ? null : styles['container'],
+    !isDefaultStylesDisabled && styles['container'],
   );
   const labelClassName = getValidClassNames(
-    isDefaultStylesDisabled ? null : styles['label'],
+    !isDefaultStylesDisabled && styles['label'],
   );
   const checkboxContainerClassName = getValidClassNames(
-    isDefaultStylesDisabled ? styles['checkbox-container'] : null,
+    isDefaultStylesDisabled && styles['checkbox-container'],
   );
 
   return (
