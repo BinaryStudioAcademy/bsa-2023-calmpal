@@ -109,3 +109,7 @@ export {
   type UserSignUpResponseDto,
   userSignUpValidationSchema,
 } from './packages/users/users.js';
+export {
+  SubscriptionApiPath,
+  type SubscriptionPaymentIntentCreateRequestDto,
+} from '#packages/subscriptions/subscriptions.js';
