@@ -19,6 +19,9 @@ import {
   useNavigation,
   useSearch,
 } from '#libs/hooks/hooks';
+// import {
+//   DEFAULT_NOTE_PAYLOAD,
+// } from '#screens/journal/libs/constants';
 import { actions as journalActions } from '#slices/journal/journal';
 
 import { styles } from './styles';
@@ -40,10 +43,6 @@ const Journal: React.FC = () => {
   );
 
   const handleSelectJournal = useCallback(() => {
-    // TODO: Implement actual functionality for the onPress event
-  }, []);
-
-  const handleAddNote = useCallback(() => {
     // TODO: Implement actual functionality for the onPress event
   }, []);
 
@@ -78,7 +77,7 @@ const Journal: React.FC = () => {
           })}
         </ScrollView>
         <Button
-          onPress={handleAddNote}
+          onPress={handleSelectJournal}
           iconName="plus"
           label="Add new note"
           type="transparent"

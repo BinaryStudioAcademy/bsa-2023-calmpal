@@ -23,14 +23,14 @@ import {
   type JournalEntryCreateRequestDto,
   type JournalEntryGetAllItemResponseDto,
 } from '#packages/journal/journal';
-import { actions as journalActions } from '#slices/journal/journal';
-
 import {
   DEFAULT_NOTE_PAYLOAD,
   SAVE_NOTE_TIMEOUT,
   TEXT_PLACEHOLDER,
   //   NOTE_SANITIZER_OPTIONS,
-} from './libs/constants';
+} from '#screens/journal/libs/constants';
+import { actions as journalActions } from '#slices/journal/journal';
+
 import { styles } from './styles';
 
 type NoteScreenRouteProperty = RouteProp<
