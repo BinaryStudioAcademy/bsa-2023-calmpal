@@ -11,10 +11,7 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { type JournalEntryService } from './journal-entry.service.js';
 import { JournalApiPath } from './libs/enums/enums.js';
-import {
-  type JournalDeleteParameter,
-  type JournalEntryCreateRequestDto,
-} from './libs/types/types.js';
+import { type JournalEntryCreateRequestDto } from './libs/types/types.js';
 import { createJournalEntryValidationSchema } from './libs/validation-schemas/validation-schemas.js';
 
 /**
@@ -142,7 +139,7 @@ class JournalEntryController extends BaseController {
         return this.delete(
           options as APIHandlerOptions<{
             user: UserAuthResponseDto;
-            params: JournalDeleteParameter;
+            params: { id: number };
           }>,
         );
       },
@@ -434,13 +431,13 @@ class JournalEntryController extends BaseController {
   private async delete(
     options: APIHandlerOptions<{
       user: UserAuthResponseDto;
-      params: JournalDeleteParameter;
+      params: { id: number };
     }>,
   ): Promise<APIHandlerResponse> {
-    const isDeleted = await this.journalEntryService.delete(
-      options.params.id,
-      options.user,
-    );
+    const isDeleted = await this.journalEntryService.delete({
+      id: options.params.id,
+      user: options.user,
+    });
     if (!isDeleted) {
       throw new JournalError({
         status: HTTPCode.NOT_FOUND,

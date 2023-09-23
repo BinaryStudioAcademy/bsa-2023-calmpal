@@ -85,19 +85,19 @@ class JournalEntryService implements Service {
     return item.toObject();
   }
 
-  public async delete(
-    id: number,
-    user: UserAuthResponseDto,
-  ): ReturnType<Service['delete']> {
-    const journal = await this.find(id);
-    if (journal.userId !== user.id) {
+  public async delete(payload: {
+    id: number;
+    user: UserAuthResponseDto;
+  }): ReturnType<Service['delete']> {
+    const journal = await this.find(payload.id);
+    if (journal.userId !== payload.user.id) {
       throw new JournalError({
         status: HTTPCode.BAD_REQUEST,
         message: ExceptionMessage.INCORRECT_CREDENTIALS,
       });
     }
 
-    return Boolean(await this.journalEntryRepository.delete(id));
+    return Boolean(await this.journalEntryRepository.delete(payload.id));
   }
 }
 
