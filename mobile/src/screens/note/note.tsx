@@ -9,7 +9,7 @@ import {
   TextInput,
   View,
 } from '#libs/components/components';
-import { debounce } from '#libs/helpers/helpers';
+import { debounce, sanitizeInput } from '#libs/helpers/helpers';
 import {
   useAppDispatch,
   useAppForm,
@@ -24,9 +24,9 @@ import { actions as journalActions } from '#slices/journal/journal';
 
 import {
   DEFAULT_NOTE_PAYLOAD,
+  NOTE_SANITIZER_OPTIONS,
   SAVE_NOTE_TIMEOUT,
   TEXT_PLACEHOLDER,
-  //   NOTE_SANITIZER_OPTIONS,
 } from './libs/constants';
 import { styles } from './styles';
 
@@ -116,7 +116,7 @@ const Note: React.FC = () => {
                 <TextInput
                   placeholder={DEFAULT_NOTE_PAYLOAD.title}
                   onChangeText={field.onChange}
-                  value={field.value}
+                  value={sanitizeInput(titleValue, NOTE_SANITIZER_OPTIONS)}
                   style={styles.title}
                 />
               );
@@ -132,7 +132,7 @@ const Note: React.FC = () => {
                 <TextInput
                   placeholder={TEXT_PLACEHOLDER}
                   onChangeText={field.onChange}
-                  value={textValue}
+                  value={sanitizeInput(textValue, NOTE_SANITIZER_OPTIONS)}
                   multiline
                   style={styles.noteText}
                 />
