@@ -4,7 +4,12 @@ import { type HTTP } from '#libs/packages/http/http';
 import { type Storage } from '#libs/packages/storage/storage';
 
 import { JournalApiPath } from './libs/enums/enums';
-import { type JournalEntryGetAllResponseDto } from './libs/types/types';
+import {
+  // type JournalEntryCreateRequestDto,
+  // type JournalEntryGetAllItemResponseDto,
+  type JournalEntryGetAllResponseDto,
+  // type JournalEntryUpdatePayloadDto,
+} from './libs/types/types';
 
 type Constructor = {
   baseUrl: string;
