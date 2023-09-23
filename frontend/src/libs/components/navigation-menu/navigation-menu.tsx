@@ -26,7 +26,7 @@ const NavigationMenu: React.FC<Properties> = ({ routes }) => {
           {routes.map((route) => {
             const isSelected = getSelectedRoute({
               pathname,
-              routePath: route.path,
+              selectedRoute: route,
             });
 
             return (

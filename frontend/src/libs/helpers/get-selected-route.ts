@@ -1,14 +1,15 @@
 import { AppRoute } from '#libs/enums/app-route.enum.js';
+import { type Route } from '#libs/types/types.js';
 
 type Properties = {
   pathname: string;
-  routePath: string;
+  selectedRoute: Route;
 };
 
-const getSelectedRoute = ({ pathname, routePath }: Properties): boolean => {
-  const isRootPathSelected = pathname === routePath;
+const getSelectedRoute = ({ pathname, selectedRoute }: Properties): boolean => {
+  const isRootPathSelected = pathname === selectedRoute.path;
   const isChildPathSelected =
-    pathname !== AppRoute.ROOT && routePath.startsWith(pathname);
+    pathname !== AppRoute.ROOT && selectedRoute.path.startsWith(pathname);
 
   return isChildPathSelected || isRootPathSelected;
 };

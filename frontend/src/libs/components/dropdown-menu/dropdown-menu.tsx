@@ -37,7 +37,7 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
         {routes.map((item) => {
           const isSelected = getSelectedRoute({
             pathname,
-            routePath: item.path,
+            selectedRoute: item,
           });
 
           return (
