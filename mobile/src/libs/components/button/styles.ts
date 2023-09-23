@@ -31,20 +31,19 @@ const styles = StyleSheet.create({
     color: AppColor.GRAY_100_ALPHA_50,
     fontFamily: FontFamily.MONTSERRAT_600,
   },
-  labelOutlined: {
-    color: AppColor.BLUE_400,
-  },
-
-  labelModalCancel: {
-    color: AppColor.WHITE,
-  },
-
-  labelModalDelete: {
-    color: AppColor.WHITE,
-  },
   buttonOutlined: {
     borderRadius: 22,
     backgroundColor: AppColor.WHITE,
+  },
+  labelOutlined: {
+    color: AppColor.BLUE_400,
+    fontFamily: FontFamily.MONTSERRAT_600,
+  },
+  labelModalCancel: {
+    color: AppColor.WHITE,
+  },
+  labelModalDelete: {
+    color: AppColor.WHITE,
   },
   buttonRounded: {
     backgroundColor: AppColor.WHITE,
@@ -64,19 +63,16 @@ const styles = StyleSheet.create({
   addButtonLabel: {
     color: AppColor.BLUE_300,
   },
-
-  buttonModalCancel: {
-    backgroundColor: AppColor.GRAY_400,
+  buttonModal: {
     borderRadius: 8,
     marginHorizontal: 10,
     paddingHorizontal: 20,
   },
-
+  buttonModalCancel: {
+    backgroundColor: AppColor.GRAY_400,
+  },
   buttonModalDelete: {
     backgroundColor: AppColor.BLUE_300,
-    borderRadius: 8,
-    marginHorizontal: 10,
-    paddingHorizontal: 20,
   },
 });
 
