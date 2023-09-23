@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
   },
   buttonTransparent: {
     backgroundColor: 'transparent',
+    gap: 0,
   },
   visuallyCenteredButton: {
     paddingLeft: 18,
