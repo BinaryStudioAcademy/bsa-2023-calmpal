@@ -97,7 +97,9 @@ class JournalEntryService implements Service {
       });
     }
 
-    return Boolean(await this.journalEntryRepository.delete(payload.id));
+    const deletedCount = await this.journalEntryRepository.delete(payload.id);
+
+    return Boolean(deletedCount);
   }
 }
 
