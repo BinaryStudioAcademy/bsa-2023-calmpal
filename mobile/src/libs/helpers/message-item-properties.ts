@@ -36,12 +36,10 @@ const messageItemProperties = ({
   const nextMinutes = nextDate.getMinutes();
 
   const isDifferentOwnerFromPrevious =
-    currentMessage.senderId !== previousMessage?.senderId ||
-    currentMessage.chatId !== previousMessage.chatId;
+    currentMessage.senderId !== previousMessage?.senderId;
 
   const isDifferentOwnerFromNext =
-    currentMessage.senderId !== nextMessage?.senderId ||
-    currentMessage.chatId !== nextMessage.chatId;
+    currentMessage.senderId !== nextMessage?.senderId;
 
   if (currentMinutes === nextMinutes && !isDifferentOwnerFromNext) {
     return {
