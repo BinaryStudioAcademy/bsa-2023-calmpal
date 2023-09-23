@@ -15,6 +15,7 @@ export {
   ChatError,
   FileError,
   HTTPError,
+  JournalError,
   UsersError,
   ValidationError,
 } from './libs/exceptions/exceptions.js';
@@ -24,6 +25,7 @@ export {
   getFormattedDate,
   getFormattedTime,
   replaceTemplateWithValue,
+  sanitizeInput,
 } from './libs/helpers/helpers.js';
 export { type Config } from './libs/packages/config/config.js';
 export {
@@ -66,10 +68,14 @@ export {
   type S3FileUploadRequestDto,
 } from './packages/files/files.js';
 export {
+  createJournalEntryValidationSchema,
   JournalApiPath,
   type JournalEntryCreateRequestDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
+  type JournalEntryUpdatePayloadDto,
+  type JournalEntryUpdateRequestDto,
+  NOTE_SANITIZER_OPTIONS,
 } from './packages/journal/journal.js';
 export {
   createMeditationEntryFormValidationSchema,
@@ -77,6 +83,8 @@ export {
   type MeditationEntryCreateForm,
   type MeditationEntryCreateRequestDto,
   type MeditationEntryCreateResponseDto,
+  type MeditationEntryGetAllItemResponseDto,
+  type MeditationEntryGetAllResponseDto,
   MeditationEntryValidationMessage,
 } from './packages/meditation/meditation.js';
 export {

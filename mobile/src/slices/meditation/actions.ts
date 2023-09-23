@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { type AsyncThunkConfig } from '#libs/types/types';
+import { type MeditationEntryGetAllResponseDto } from '#packages/meditation/meditation';
 
 import { name as sliceName } from './meditation.slice';
 
@@ -13,4 +14,14 @@ const initPlayer = createAsyncThunk<unknown, undefined, AsyncThunkConfig>(
   },
 );
 
-export { initPlayer };
+const getAllMeditationEntries = createAsyncThunk<
+  MeditationEntryGetAllResponseDto,
+  undefined,
+  AsyncThunkConfig
+>(`${sliceName}/get-all-meditation-entries`, async (_, { extra }) => {
+  const { meditationApi } = extra;
+
+  return await meditationApi.getAllMeditationEntries();
+});
+
+export { getAllMeditationEntries, initPlayer };

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   button: {
@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
   label: {
     fontWeight: '600',
     fontSize: 16,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
   buttonSolid: {
     backgroundColor: AppColor.GRAY_500,
@@ -21,12 +22,14 @@ const styles = StyleSheet.create({
   },
   labelSolid: {
     color: AppColor.WHITE,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
   buttonDisabled: {
     backgroundColor: AppColor.GRAY_200_ALPHA_50,
   },
   labelDisabled: {
     color: AppColor.GRAY_100_ALPHA_50,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
   labelOutlined: {
     color: AppColor.BLUE_400,
@@ -50,7 +53,7 @@ const styles = StyleSheet.create({
     height: 55,
     width: 55,
     shadowColor: AppColor.BLUE_200,
-    elevation: 5,
+    elevation: 20,
   },
   buttonTransparent: {
     backgroundColor: 'transparent',
