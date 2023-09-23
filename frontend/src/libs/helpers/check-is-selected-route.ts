@@ -6,7 +6,10 @@ type Properties = {
   selectedRoute: Route;
 };
 
-const getSelectedRoute = ({ pathname, selectedRoute }: Properties): boolean => {
+const checkIsSelectedRoute = ({
+  pathname,
+  selectedRoute,
+}: Properties): boolean => {
   const isRootPathSelected = pathname === selectedRoute.path;
   const isChildPathSelected =
     pathname !== AppRoute.ROOT && selectedRoute.path.startsWith(pathname);
@@ -14,4 +17,4 @@ const getSelectedRoute = ({ pathname, selectedRoute }: Properties): boolean => {
   return isChildPathSelected || isRootPathSelected;
 };
 
-export { getSelectedRoute };
+export { checkIsSelectedRoute };
