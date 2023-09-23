@@ -1,4 +1,4 @@
-import { APIPath } from '#libs/enums/enums';
+import { APIPath, ContentType } from '#libs/enums/enums';
 import { BaseHttpApi } from '#libs/packages/api/api';
 import { type HTTP } from '#libs/packages/http/http';
 import { type Storage } from '#libs/packages/storage/storage';
@@ -6,9 +6,9 @@ import { type Storage } from '#libs/packages/storage/storage';
 import { JournalApiPath } from './libs/enums/enums';
 import {
   // type JournalEntryCreateRequestDto,
-  // type JournalEntryGetAllItemResponseDto,
+  type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
-  // type JournalEntryUpdatePayloadDto,
+  type JournalEntryUpdatePayloadDto,
 } from './libs/types/types';
 
 type Constructor = {
@@ -32,6 +32,24 @@ class JournalApi extends BaseHttpApi {
     );
 
     return await response.json<JournalEntryGetAllResponseDto>();
+  }
+
+  public async updateJournalEntry(
+    payload: JournalEntryUpdatePayloadDto,
+  ): Promise<JournalEntryGetAllItemResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(JournalApiPath.$ID, {
+        id: payload.id.toString(),
+      }),
+      {
+        method: 'PUT',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify({ title: payload.title, text: payload.text }),
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<JournalEntryGetAllItemResponseDto>();
   }
 }
 
