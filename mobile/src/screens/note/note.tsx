@@ -35,6 +35,10 @@ type NoteScreenRouteProperty = RouteProp<
   'Note'
 >;
 
+const handleSanitizeInput = (textInput: string): string => {
+  return sanitizeInput(textInput, NOTE_SANITIZER_OPTIONS);
+};
+
 const Note: React.FC = () => {
   const route = useRoute<NoteScreenRouteProperty>();
   const id = route.params.id;
@@ -116,7 +120,7 @@ const Note: React.FC = () => {
                 <TextInput
                   placeholder={DEFAULT_NOTE_PAYLOAD.title}
                   onChangeText={field.onChange}
-                  value={sanitizeInput(titleValue, NOTE_SANITIZER_OPTIONS)}
+                  value={handleSanitizeInput(titleValue)}
                   style={styles.title}
                 />
               );
@@ -132,7 +136,7 @@ const Note: React.FC = () => {
                 <TextInput
                   placeholder={TEXT_PLACEHOLDER}
                   onChangeText={field.onChange}
-                  value={sanitizeInput(textValue, NOTE_SANITIZER_OPTIONS)}
+                  value={handleSanitizeInput(textValue)}
                   multiline
                   style={styles.noteText}
                 />
