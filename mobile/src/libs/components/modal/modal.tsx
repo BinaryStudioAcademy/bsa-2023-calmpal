@@ -20,7 +20,7 @@ const Modal: React.FC<Properties> = ({
   type,
 }) => {
   return (
-    <RNModal visible={isVisible} transparent={true} animationType="none">
+    <RNModal visible={isVisible} transparent animationType="none">
       <Pressable onPress={onClose} style={styles.background}>
         <View style={styles.modalContainer}>
           <Pressable>
