@@ -48,7 +48,6 @@ const UserProfileSidebar: React.FC<Properties> = ({
   const [currentStepIndex, setCurrentStepIndex] = useState(INITIAL_STEP);
 
   const dialogReference = useRef<HTMLDialogElement>(null);
-  const isDialogAvailable = dialogReference.current !== null;
   const currentStep = STEPS[currentStepIndex];
   const hasCurrentStep =
     currentStep && typeof currentStep.component === 'function';
@@ -68,9 +67,7 @@ const UserProfileSidebar: React.FC<Properties> = ({
   }, [dispatch]);
 
   const handleClose = useCallback((): void => {
-    if (isDialogAvailable && dialogReference.current.open) {
-      dialogReference.current.close();
-    }
+    dialogReference.current?.open && dialogReference.current.close();
   }, [dialogReference]);
 
   const handleOpen = useCallback(() => {
