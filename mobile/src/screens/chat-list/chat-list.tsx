@@ -85,7 +85,7 @@ const ChatList: React.FC = () => {
             return (
               <Card
                 title={item.name}
-                onPress={handleSelectChat}
+                handlePassTitle={handleSelectChat}
                 key={item.id}
               />
             );

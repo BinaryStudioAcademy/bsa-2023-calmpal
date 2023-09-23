@@ -19,7 +19,10 @@ type Properties = {
   image?: ImageSourcePropType;
   iconName?: IconName;
   iconColor?: string;
-  onPress: (title: string) => void;
+  onPress?: () => void;
+  handlePassTitle?: (title: string) => void;
+  handlePassId?: (id: number) => void;
+  noteId?: number;
 };
 
 const Card: React.FC<Properties> = ({
@@ -28,9 +31,18 @@ const Card: React.FC<Properties> = ({
   iconName,
   iconColor,
   onPress,
+  handlePassTitle,
+  handlePassId,
+  noteId,
 }) => {
   const handlePress = (): void => {
-    onPress(title);
+    if (handlePassTitle) {
+      handlePassTitle(title);
+    } else if (handlePassId && noteId) {
+      handlePassId(noteId);
+    } else if (onPress) {
+      onPress();
+    }
   };
 
   return (

@@ -19,18 +19,15 @@ import {
   useMemo,
 } from '#libs/hooks/hooks';
 import { type JournalNavigationParameterList } from '#libs/types/types';
-import {
-  type JournalEntryCreateRequestDto,
-  type JournalEntryGetAllItemResponseDto,
-} from '#packages/journal/journal';
+import { type JournalEntryCreateRequestDto } from '#packages/journal/journal';
+import { actions as journalActions } from '#slices/journal/journal';
+
 import {
   DEFAULT_NOTE_PAYLOAD,
   SAVE_NOTE_TIMEOUT,
   TEXT_PLACEHOLDER,
   //   NOTE_SANITIZER_OPTIONS,
-} from '#screens/journal/libs/constants';
-import { actions as journalActions } from '#slices/journal/journal';
-
+} from './libs/constants';
 import { styles } from './styles';
 
 type NoteScreenRouteProperty = RouteProp<
@@ -46,16 +43,17 @@ const Note: React.FC = () => {
 
   const { selectedJournalEntry } = useAppSelector(({ journal }) => {
     return {
-      selectedJournalEntry:
-        journal.selectedJournalEntry as JournalEntryGetAllItemResponseDto,
+      selectedJournalEntry: journal.selectedJournalEntry,
     };
   });
 
   const { control, watch, isDirty } = useAppForm({
-    defaultValues: {
-      title: selectedJournalEntry.title,
-      text: selectedJournalEntry.text,
-    },
+    defaultValues: selectedJournalEntry
+      ? {
+          title: selectedJournalEntry.title || DEFAULT_NOTE_PAYLOAD.title,
+          text: selectedJournalEntry.text || DEFAULT_NOTE_PAYLOAD.text,
+        }
+      : DEFAULT_NOTE_PAYLOAD,
     mode: 'onChange',
   });
 
@@ -124,7 +122,7 @@ const Note: React.FC = () => {
               );
             }}
             name="title"
-            defaultValue=""
+            defaultValue={DEFAULT_NOTE_PAYLOAD.title}
           />
 
           <Controller
@@ -141,7 +139,7 @@ const Note: React.FC = () => {
               );
             }}
             name="text"
-            defaultValue=""
+            defaultValue={TEXT_PLACEHOLDER}
           />
         </View>
       </ScrollView>
