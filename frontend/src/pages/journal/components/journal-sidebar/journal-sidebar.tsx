@@ -117,7 +117,11 @@ const JournalSidebar: React.FC<Properties> = ({
           </div>
         </SidebarBody>
       </Sidebar>
-      <DeleteJournalModal ref={dialogReference} id={chatToDelete} />
+      <DeleteJournalModal
+        ref={dialogReference}
+        id={chatToDelete}
+        setIsSidebarShown={setIsSidebarShown}
+      />
     </>
   );
 };
