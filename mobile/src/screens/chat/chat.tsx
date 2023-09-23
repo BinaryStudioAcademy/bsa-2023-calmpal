@@ -89,7 +89,7 @@ const Chat: React.FC = () => {
   useEffect(() => {
     navigation.setOptions({
       header: () => {
-        return <Header title={title} isArrowVisible />;
+        return <Header title={title} isArrowVisible fontSize="small" />;
       },
     });
   }, [navigation, title]);

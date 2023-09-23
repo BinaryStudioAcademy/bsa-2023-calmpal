@@ -10,9 +10,11 @@ import { authApi } from '#packages/auth/auth';
 import { chatMessagesApi } from '#packages/chat-messages/chat-messages';
 import { chatApi } from '#packages/chats/chats';
 import { journalApi } from '#packages/journal/journal';
+import { meditationApi } from '#packages/meditation/meditation';
 import { reducer as authReducer } from '#slices/auth/auth';
 import { reducer as chatsReducer } from '#slices/chats/chats';
 import { reducer as journalReducer } from '#slices/journal/journal';
+import { reducer as meditationReducer } from '#slices/meditation/meditation';
 
 import { type Config } from '../config/config';
 import { notification } from '../notification/notification';
@@ -24,12 +26,14 @@ type RootReducer = {
   auth: ReturnType<typeof authReducer>;
   journal: ReturnType<typeof journalReducer>;
   chats: ReturnType<typeof chatsReducer>;
+  meditation: ReturnType<typeof meditationReducer>;
 };
 
 type ExtraArguments = {
   authApi: typeof authApi;
   journalApi: typeof journalApi;
   chatApi: typeof chatApi;
+  meditationApi: typeof meditationApi;
   notification: typeof notification;
   chatMessagesApi: typeof chatMessagesApi;
   player: typeof player;
@@ -52,6 +56,7 @@ class Store {
         auth: authReducer,
         journal: journalReducer,
         chats: chatsReducer,
+        meditation: meditationReducer,
       },
       middleware: (getDefaultMiddleware) => {
         return [
@@ -71,6 +76,7 @@ class Store {
       authApi,
       journalApi,
       chatApi,
+      meditationApi,
       notification,
       chatMessagesApi,
       player,
