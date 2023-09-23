@@ -7,6 +7,7 @@ import {
   SidebarHeader,
 } from '#libs/components/components.js';
 import { AppRoute } from '#libs/enums/app-route.enum.js';
+import { IconColor } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -110,6 +111,7 @@ const JournalSidebar: React.FC<Properties> = ({
                     isActive={selectedJournalEntry?.id === journalEntry.id}
                     iconRight="trash-box"
                     onIconClick={handleIconClick(journalEntry.id)}
+                    iconColor={IconColor.LIGHT_BLUE}
                   />
                 </Link>
               );
