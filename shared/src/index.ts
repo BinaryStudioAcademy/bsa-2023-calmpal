@@ -58,6 +58,7 @@ export {
   type ChatGetAllResponseDto,
   ChatsApiPath,
   createChatValidationSchema,
+  findByQueryChatEntriesValidationSchema,
   type GetChatsByQueryDto,
 } from './packages/chats/chats.js';
 export {
@@ -70,6 +71,7 @@ export {
 } from './packages/files/files.js';
 export {
   createJournalEntryValidationSchema,
+  findByQueryJournalEntriesValidationSchema,
   type GetJournalsByQueryDto,
   JournalApiPath,
   type JournalEntryCreateRequestDto,
