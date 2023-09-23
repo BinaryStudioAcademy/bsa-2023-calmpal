@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   formContainer: {
@@ -14,12 +14,14 @@ const styles = StyleSheet.create({
     color: AppColor.WHITE,
     marginBottom: 30,
     marginTop: 30,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
   bottomText: {
     fontSize: 14,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
   linkText: {
-    fontWeight: 'bold',
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
 });
 
