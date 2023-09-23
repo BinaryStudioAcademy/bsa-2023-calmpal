@@ -81,10 +81,12 @@ const Note: React.FC = () => {
 
   useEffect(() => {
     const handleBeforeUnload = (): void => {
-      handleSaveNote({
-        title: titleValue,
-        text: textValue,
-      });
+      if (isDirty) {
+        handleSaveNote({
+          title: titleValue,
+          text: textValue,
+        });
+      }
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
