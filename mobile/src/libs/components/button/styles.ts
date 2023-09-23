@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
   addButtonLabel: {
     color: AppColor.BLUE_300,
   },
-
   buttonModal: {
     borderRadius: 8,
     marginHorizontal: 10,
