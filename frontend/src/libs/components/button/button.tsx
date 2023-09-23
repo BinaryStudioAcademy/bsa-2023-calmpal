@@ -9,12 +9,16 @@ type Properties = {
   label: string;
   type?: 'button' | 'submit';
   iconName?: IconName;
+  iconColor?: ValueOf<typeof IconColor>;
+  iconWidth?: number;
+  iconHeight?: number;
   style?:
     | 'primary'
     | 'secondary'
     | 'rounded'
     | 'rounded-transparent'
-    | 'outlined';
+    | 'outlined'
+    | 'add';
   isLoading?: boolean;
   isDisabled?: boolean;
   isLabelVisuallyHidden?: boolean;

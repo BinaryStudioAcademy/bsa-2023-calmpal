@@ -21,8 +21,8 @@ import { reducer as appReducer } from '#slices/app/app.js';
 import { reducer as authReducer } from '#slices/auth/auth.js';
 import { reducer as chatsReducer } from '#slices/chats/chats.js';
 import { reducer as journalReducer } from '#slices/journal/journal.js';
-import { reducer as surveyReducer } from '#slices/survey/survey.js';
 import { reducer as meditationReducer } from '#slices/meditation/meditation.js';
+import { reducer as surveyReducer } from '#slices/survey/survey.js';
 
 import { storage } from '../storage/storage.js';
 
