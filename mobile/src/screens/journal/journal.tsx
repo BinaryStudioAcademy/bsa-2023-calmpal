@@ -1,4 +1,4 @@
-// import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
 import {
@@ -19,8 +19,10 @@ import {
   useNavigation,
   useSearch,
 } from '#libs/hooks/hooks';
+import { type JournalNavigationParameterList } from '#libs/types/types';
 // import {
 //   DEFAULT_NOTE_PAYLOAD,
+//   INCREMENT_DECREMENT_STEP,
 // } from '#screens/journal/libs/constants';
 import { actions as journalActions } from '#slices/journal/journal';
 
@@ -28,7 +30,8 @@ import { styles } from './styles';
 
 const Journal: React.FC = () => {
   const dispatch = useAppDispatch();
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<JournalNavigationParameterList>>();
 
   const { allJournalEntries } = useAppSelector(({ journal }) => {
     return {
