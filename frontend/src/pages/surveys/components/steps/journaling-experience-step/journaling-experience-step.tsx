@@ -2,35 +2,35 @@ import { Button, Checkbox } from '#libs/components/components.js';
 import {
   useAppForm,
   useCallback,
+  useEffect,
   useFormController,
 } from '#libs/hooks/hooks.js';
+import { type JournalingExperienceInputDto } from '#packages/survey/libs/types/types.js';
 import { journalingExperienceStepInputValidationSchema } from '#packages/survey/survey.js';
 import {
   JOURNALING_EXPERIENCE_CATEGORIES,
   JOURNALING_EXPERIENCE_QUESTION,
 } from '#pages/surveys/libs/constants.js';
+import { useSurvey } from '#pages/surveys/libs/hooks/survey.hooks.js';
 
-import styles from './styles.module.scss';
+import styles from '../styles.module.scss';
 
 type Properties = {
-  onSubmit: (options: string[]) => void;
+  onSubmit: () => void;
+  handlePreviousStep: () => void;
 };
 
-type SurveyInputDto = {
-  journalingExperience: string[];
-};
+const JournalingExperienceStep: React.FC<Properties> = ({
+  onSubmit,
+  handlePreviousStep,
+}) => {
+  const { journalingExperience, setJournalingExperience } = useSurvey();
 
-const getSurveyCategories: (payload: SurveyInputDto) => string[] = (
-  payload,
-) => {
-  return [...new Set(payload.journalingExperience)];
-};
-
-const JournalingExperienceStep: React.FC<Properties> = ({ onSubmit }) => {
-  const { control, isValid, handleSubmit } = useAppForm<SurveyInputDto>({
-    defaultValues: { journalingExperience: [] },
-    validationSchema: journalingExperienceStepInputValidationSchema,
-  });
+  const { control, isValid, handleSubmit } =
+    useAppForm<JournalingExperienceInputDto>({
+      defaultValues: { journalingExperience: journalingExperience },
+      validationSchema: journalingExperienceStepInputValidationSchema,
+    });
   const {
     field: { onChange: onCategoryChange },
   } = useFormController({
@@ -41,18 +41,15 @@ const JournalingExperienceStep: React.FC<Properties> = ({ onSubmit }) => {
   const handleFieldChange = useCallback(
     (category: string) => {
       return () => {
-        onCategoryChange([category]);
+        setJournalingExperience(category);
       };
     },
-    [onCategoryChange],
+    [setJournalingExperience],
   );
 
-  const handlePreferencesSubmit = useCallback(
-    (payload: SurveyInputDto) => {
-      onSubmit(getSurveyCategories(payload));
-    },
-    [onSubmit],
-  );
+  const handlePreferencesSubmit = useCallback(() => {
+    onSubmit();
+  }, [onSubmit]);
 
   const handleFormSubmit = useCallback(
     (event_: React.BaseSyntheticEvent): void => {
@@ -60,6 +57,10 @@ const JournalingExperienceStep: React.FC<Properties> = ({ onSubmit }) => {
     },
     [handleSubmit, handlePreferencesSubmit],
   );
+
+  useEffect(() => {
+    onCategoryChange(journalingExperience);
+  }, [journalingExperience, onCategoryChange]);
 
   return (
     <form className={styles['form']} onSubmit={handleFormSubmit}>
@@ -72,6 +73,7 @@ const JournalingExperienceStep: React.FC<Properties> = ({ onSubmit }) => {
               label={category}
               type="radio"
               onChange={handleFieldChange(category)}
+              isChecked={journalingExperience === category}
             />
           );
         })}
@@ -83,7 +85,7 @@ const JournalingExperienceStep: React.FC<Properties> = ({ onSubmit }) => {
         style="secondary"
         isDisabled={!isValid}
       />
-      <Button label="Back" style="outlined" />
+      <Button label="Back" style="outlined" onClick={handlePreviousStep} />
     </form>
   );
 };

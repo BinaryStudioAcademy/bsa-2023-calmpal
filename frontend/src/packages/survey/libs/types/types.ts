@@ -1,3 +1,13 @@
+export { type SurveyState } from './state.type.js';
+export {
+  type FeelingInputDto,
+  type GoalInputDto,
+  type JournalingExperienceInputDto,
+  type MeditationExperienceInputDto,
+  type PreferenceInputDto,
+  type Step,
+  type WorryInputDto,
+} from './steps.types.js';
 export {
   type SurveyGetAllItemResponseDto,
   type SurveyInputDto,

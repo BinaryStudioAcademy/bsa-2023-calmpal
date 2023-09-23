@@ -27,6 +27,20 @@ import { type SurveyService } from './survey.service.js';
  *            type: array
  *            items:
  *              type: string
+ *          feelings:
+ *            type: string
+ *          goals:
+ *            type: array
+ *            items:
+ *              type: string
+ *          worries:
+ *            type: array
+ *          items:
+ *            type: string
+ *          meditationExperience:
+ *            type: string
+ *          journalingExperience:
+ *            type: string
  *      SurveyResponse:
  *        type: object
  *        properties:
@@ -42,6 +56,20 @@ import { type SurveyService } from './survey.service.js';
  *            type: array
  *            items:
  *              type: string
+ *          feelings:
+ *            type: string
+ *          goals:
+ *            type: array
+ *            items:
+ *              type: string
+ *          worries:
+ *            type: array
+ *          items:
+ *            type: string
+ *          meditationExperience:
+ *            type: string
+ *          journalingExperience:
+ *            type: string
  *          createdAt:
  *             type: string
  *             format: date-time

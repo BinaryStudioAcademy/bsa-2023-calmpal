@@ -1,21 +1,6 @@
-import {
-  // GOALS_OTHER_CATEGORY,
-  PREFERENCES_OTHER_CATEGORY,
-  type SurveyInputDto,
-  // WORRIES_OTHER_CATEGORY,
-} from '#packages/survey/survey.js';
-
 const TEXTAREA_ROWS_COUNT = 3;
 
-const DEFAULT_SURVEY_PAYLOAD: SurveyInputDto = {
-  preferences: [],
-  // feelings: '',
-  // goals: [],
-  // worries: [],
-  // meditationExperience: '',
-  // journalingExperience: '',
-  other: '',
-};
+const ONE_INDEX = 1;
 
 const PREFERENCES_QUESTION = 'What can we help you with?';
 
@@ -25,7 +10,7 @@ const PREFERENCES_CATEGORIES: string[] = [
   'Improve sleep quality',
   'Get over with depression',
   'Improve focus',
-  PREFERENCES_OTHER_CATEGORY,
+  'Other',
 ];
 
 const FEELINGS_QUESTION = 'How have you been feeling lately?';
@@ -78,7 +63,6 @@ const JOURNALING_EXPERIENCE_CATEGORIES: string[] = [
 ];
 
 export {
-  DEFAULT_SURVEY_PAYLOAD,
   FEELINGS_CATEGORIES,
   FEELINGS_QUESTION,
   GOALS_CATEGORIES,
@@ -87,6 +71,7 @@ export {
   JOURNALING_EXPERIENCE_QUESTION,
   MEDITATION_EXPERIENCE_CATEGORIES,
   MEDITATION_EXPERIENCE_QUESTION,
+  ONE_INDEX,
   PREFERENCES_CATEGORIES,
   PREFERENCES_QUESTION,
   TEXTAREA_ROWS_COUNT,

@@ -1,12 +1,12 @@
 import { Button, Checkbox, Input } from '#libs/components/components.js';
+import { FIRST_INDEX } from '#libs/constants/index.constant.js';
 import {
   useAppForm,
   useCallback,
-  useEffect,
   useFormController,
 } from '#libs/hooks/hooks.js';
+import { type WorryInputDto } from '#packages/survey/libs/types/types.js';
 import {
-  // getSurveyCategories,
   SurveyValidationRule,
   worriesStepInputValidationSchema,
 } from '#packages/survey/survey.js';
@@ -15,35 +15,30 @@ import {
   WORRIES_CATEGORIES,
   WORRIES_QUESTION,
 } from '#pages/surveys/libs/constants.js';
+import { useSurvey } from '#pages/surveys/libs/hooks/survey.hooks.js';
+import {
+  getOtherDefault,
+  getOthersCategories,
+  hasOther,
+} from '#pages/surveys/libs/utils.js';
 
-import styles from './styles.module.scss';
+import styles from '../styles.module.scss';
 
 type Properties = {
-  onSubmit: (options: string[]) => void;
-  isNextStepDisabled: boolean;
-  setIsNextStepDisabled: (isDisabled: boolean) => void;
   handleNextStep: () => void;
   handlePreviousStep: () => void;
 };
 
-type SurveyInputDto = {
-  worries: string[];
-  other: string;
-};
-
 const WorriesStep: React.FC<Properties> = ({
-  // onSubmit,
-  isNextStepDisabled,
-  setIsNextStepDisabled,
   handleNextStep,
   handlePreviousStep,
 }) => {
-  const { control, errors, isValid, handleSubmit } = useAppForm<SurveyInputDto>(
-    {
-      defaultValues: { worries: [], other: '' },
-      validationSchema: worriesStepInputValidationSchema,
-    },
-  );
+  const { worries, setWorries } = useSurvey();
+
+  const { control, errors, isValid, handleSubmit } = useAppForm<WorryInputDto>({
+    defaultValues: { worries: worries },
+    validationSchema: worriesStepInputValidationSchema,
+  });
   const {
     field: { onChange: onCategoryChange, value: categoriesValue },
   } = useFormController({
@@ -51,14 +46,37 @@ const WorriesStep: React.FC<Properties> = ({
     control,
   });
 
-  const hasOther = categoriesValue.includes('Other');
-
   const handleFieldChange = useCallback(
     (category: string) => {
       return () => {
+        const otherCategories = getOthersCategories(
+          WORRIES_CATEGORIES,
+          categoriesValue,
+        );
+        if (category === 'Other' && otherCategories.length > FIRST_INDEX) {
+          otherCategories.push(category);
+          onCategoryChange(
+            categoriesValue.filter((option) => {
+              return !otherCategories.includes(option);
+            }),
+          );
+          setWorries(
+            worries.filter((option) => {
+              return !otherCategories.includes(option);
+            }),
+          );
+
+          return;
+        }
+
         if (categoriesValue.includes(category)) {
           onCategoryChange(
             categoriesValue.filter((option) => {
+              return option !== category;
+            }),
+          );
+          setWorries(
+            worries.filter((option) => {
               return option !== category;
             }),
           );
@@ -67,30 +85,32 @@ const WorriesStep: React.FC<Properties> = ({
         }
 
         onCategoryChange([...categoriesValue, category]);
+        setWorries([...worries, category]);
       };
     },
-    [categoriesValue, onCategoryChange],
+    [categoriesValue, onCategoryChange, setWorries, worries],
   );
 
-  // const handlePreferencesSubmit = useCallback(
-  //   (payload: SurveyInputDto) => {
-  //     onSubmit(getSurveyCategories(payload));
-  //   },
-  //   [onSubmit],
-  // );
+  const handleWorriesSubmit = useCallback(
+    (payload: WorryInputDto) => {
+      if (payload.other) {
+        payload.worries.push(payload.other);
+        setWorries(payload.worries);
+      } else {
+        setWorries(payload.worries);
+      }
+
+      handleNextStep();
+    },
+    [handleNextStep, setWorries],
+  );
 
   const handleFormSubmit = useCallback(
     (event_: React.BaseSyntheticEvent): void => {
-      // void handleSubmit(handlePreferencesSubmit)(event_);
-      void handleSubmit(handleNextStep)(event_);
+      void handleSubmit(handleWorriesSubmit)(event_);
     },
-    // [handleSubmit, handlePreferencesSubmit],
-    [handleSubmit, handleNextStep],
+    [handleSubmit, handleWorriesSubmit],
   );
-
-  useEffect(() => {
-    setIsNextStepDisabled(!isValid);
-  }, [isValid, setIsNextStepDisabled]);
 
   return (
     <form className={styles['form']} onSubmit={handleFormSubmit}>
@@ -103,10 +123,11 @@ const WorriesStep: React.FC<Properties> = ({
               key={category}
               label={category}
               onChange={handleFieldChange(category)}
+              isChecked={categoriesValue.includes(category)}
             />
           );
         })}
-        {hasOther && (
+        {hasOther(worries) && (
           <Input
             control={control}
             errors={errors}
@@ -114,6 +135,7 @@ const WorriesStep: React.FC<Properties> = ({
             placeholder="Text"
             maxLength={SurveyValidationRule.MAXIMUM_PREFERENCE_ITEM_LENGTH}
             rowsCount={TEXTAREA_ROWS_COUNT}
+            defaultValue={getOtherDefault(worries)}
           />
         )}
       </div>
@@ -122,7 +144,7 @@ const WorriesStep: React.FC<Properties> = ({
         type="submit"
         label="Continue"
         style="secondary"
-        isDisabled={isNextStepDisabled}
+        isDisabled={!isValid}
       />
 
       <Button label="Back" style="outlined" onClick={handlePreviousStep} />

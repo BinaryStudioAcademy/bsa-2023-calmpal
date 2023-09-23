@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Header, Loader, Navigate } from '#libs/components/components.js';
 import { SIDEBAR_ROUTES } from '#libs/components/navigation-menu-wrapper/libs/constants.js';
 import { AppRoute, DataStatus } from '#libs/enums/enums.js';
@@ -9,22 +7,40 @@ import {
   useCallback,
   useState,
 } from '#libs/hooks/hooks.js';
+import {
+  type Step,
+  STEPS,
+  Steps,
+  type SurveyRequestDto,
+  type SurveyState,
+} from '#packages/survey/survey.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
-import { SurveySteps } from './libs/survey-steps.map.js';
+import { renderSteps } from './components/steps/steps.js';
+import { ONE_INDEX } from './libs/constants.js';
+import { useSurvey } from './libs/hooks/survey.hooks.js';
 import styles from './styles.module.scss';
 
-const FIRST = 0;
-const ONE = 1;
-
-type SurveyStep = keyof typeof SurveySteps;
-
-const firstStep = Object.keys(SurveySteps)[FIRST] as SurveyStep;
+type SurveyForDispatch = SurveyState & { userId?: number };
 
 const Survey: React.FC = () => {
-  const [currentStep, setCurrentStep] = useState<SurveyStep>(firstStep);
-  const [isNextStepDisabled, setIsNextStepDisabled] = useState<boolean>(true);
+  const { survey } = useSurvey();
+  const [currentStep, setCurrentStep] = useState<Step>(Steps.PREFERENCES);
+
+  const handleNextStep = useCallback((): void => {
+    const index = STEPS.indexOf(currentStep);
+    const nextIndex = (index + ONE_INDEX) % STEPS.length;
+    const nextCategory = STEPS[nextIndex];
+    setCurrentStep(nextCategory as Step);
+  }, [currentStep]);
+
+  const handlePreviousStep = useCallback((): void => {
+    const index = STEPS.indexOf(currentStep);
+    const previousIndex = (index - ONE_INDEX) % STEPS.length;
+    const previousCategory = STEPS[previousIndex];
+    setCurrentStep(previousCategory as Step);
+  }, [currentStep]);
 
   const dispatch = useAppDispatch();
   const {
@@ -37,39 +53,17 @@ const Survey: React.FC = () => {
     };
   });
 
-  const handleSubmit = useCallback(
-    (options: string[]) => {
-      void dispatch(
-        authActions.createUserSurvey({
-          userId: userId,
-          preferences: options,
-        }),
-      );
-    },
-    [dispatch, userId],
-  );
+  const handleSubmit = useCallback(() => {
+    const surveyForDispatch: SurveyForDispatch = structuredClone(survey);
+    surveyForDispatch['userId'] = userId;
+    void dispatch(
+      authActions.createUserSurvey(surveyForDispatch as SurveyRequestDto),
+    );
+  }, [dispatch, survey, userId]);
 
   if (isSurveyCompleted) {
     return <Navigate to={AppRoute.ROOT} />;
   }
-
-  const handleNextStep = (): void => {
-    const steps = Object.keys(SurveySteps) as SurveyStep[];
-    const index = steps.indexOf(currentStep);
-    if (index < steps.length - ONE) {
-      setCurrentStep(steps[index + ONE] as SurveyStep);
-    } else {
-      setCurrentStep(steps[FIRST] as SurveyStep);
-    }
-  };
-
-  const handlePreviousStep = (): void => {
-    const steps = Object.keys(SurveySteps) as SurveyStep[];
-    const index = steps.indexOf(currentStep);
-    if (index > FIRST) {
-      setCurrentStep(steps[index - ONE] as SurveyStep);
-    }
-  };
 
   return (
     <div className={styles['container']}>
@@ -83,15 +77,12 @@ const Survey: React.FC = () => {
             well-being
           </div>
           <main>
-            <React.Suspense fallback={<Loader />}>
-              {React.createElement(SurveySteps[currentStep], {
-                handleNextStep,
-                handlePreviousStep,
-                onSubmit: handleSubmit,
-                setIsNextStepDisabled,
-                isNextStepDisabled,
-              })}
-            </React.Suspense>
+            {renderSteps({
+              currentStep,
+              handleNextStep,
+              handlePreviousStep,
+              handleSubmit,
+            })}
           </main>
         </div>
       )}

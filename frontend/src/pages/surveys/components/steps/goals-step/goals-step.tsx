@@ -1,12 +1,12 @@
 import { Button, Checkbox, Input } from '#libs/components/components.js';
+import { FIRST_INDEX } from '#libs/constants/index.constant.js';
 import {
   useAppForm,
   useCallback,
-  useEffect,
   useFormController,
 } from '#libs/hooks/hooks.js';
+import { type GoalInputDto } from '#packages/survey/libs/types/types.js';
 import {
-  //getSurveyCategories,
   goalsStepInputValidationSchema,
   SurveyValidationRule,
 } from '#packages/survey/survey.js';
@@ -15,35 +15,30 @@ import {
   GOALS_QUESTION,
   TEXTAREA_ROWS_COUNT,
 } from '#pages/surveys/libs/constants.js';
+import { useSurvey } from '#pages/surveys/libs/hooks/survey.hooks.js';
+import {
+  getOtherDefault,
+  getOthersCategories,
+  hasOther,
+} from '#pages/surveys/libs/utils.js';
 
-import styles from './styles.module.scss';
+import styles from '../styles.module.scss';
 
 type Properties = {
-  onSubmit: (options: string[]) => void;
-  isNextStepDisabled: boolean;
-  setIsNextStepDisabled: (isDisabled: boolean) => void;
   handleNextStep: () => void;
   handlePreviousStep: () => void;
 };
 
-type SurveyInputDto = {
-  goals: string[];
-  other: string;
-};
-
 const GoalsStep: React.FC<Properties> = ({
-  //onSubmit,
-  isNextStepDisabled,
-  setIsNextStepDisabled,
   handleNextStep,
   handlePreviousStep,
 }) => {
-  const { control, errors, isValid, handleSubmit } = useAppForm<SurveyInputDto>(
-    {
-      defaultValues: { goals: [], other: '' },
-      validationSchema: goalsStepInputValidationSchema,
-    },
-  );
+  const { goals, setGoals } = useSurvey();
+  const { control, errors, isValid, handleSubmit } = useAppForm<GoalInputDto>({
+    defaultValues: { goals: goals },
+    validationSchema: goalsStepInputValidationSchema,
+  });
+
   const {
     field: { onChange: onCategoryChange, value: categoriesValue },
   } = useFormController({
@@ -51,14 +46,37 @@ const GoalsStep: React.FC<Properties> = ({
     control,
   });
 
-  const hasOther = categoriesValue.includes('Other');
-
   const handleFieldChange = useCallback(
     (category: string) => {
       return () => {
+        const otherCategories = getOthersCategories(
+          GOALS_CATEGORIES,
+          categoriesValue,
+        );
+        if (category === 'Other' && otherCategories.length > FIRST_INDEX) {
+          otherCategories.push(category);
+          onCategoryChange(
+            categoriesValue.filter((option) => {
+              return !otherCategories.includes(option);
+            }),
+          );
+          setGoals(
+            goals.filter((option) => {
+              return !otherCategories.includes(option);
+            }),
+          );
+
+          return;
+        }
+
         if (categoriesValue.includes(category)) {
           onCategoryChange(
             categoriesValue.filter((option) => {
+              return option !== category;
+            }),
+          );
+          setGoals(
+            goals.filter((option) => {
               return option !== category;
             }),
           );
@@ -66,31 +84,33 @@ const GoalsStep: React.FC<Properties> = ({
           return;
         }
 
+        setGoals([...goals, category]);
         onCategoryChange([...categoriesValue, category]);
       };
     },
-    [categoriesValue, onCategoryChange],
+    [categoriesValue, goals, onCategoryChange, setGoals],
   );
 
-  // const handlePreferencesSubmit = useCallback(
-  //   (payload: SurveyInputDto) => {
-  //     onSubmit(getSurveyCategories(payload));
-  //   },
-  //   [onSubmit],
-  // );
+  const handleGoalsSubmit = useCallback(
+    (payload: GoalInputDto) => {
+      if (payload.other) {
+        payload.goals.push(payload.other);
+        setGoals(payload.goals);
+      } else {
+        setGoals(payload.goals);
+      }
+
+      handleNextStep();
+    },
+    [handleNextStep, setGoals],
+  );
 
   const handleFormSubmit = useCallback(
     (event_: React.BaseSyntheticEvent): void => {
-      // void handleSubmit(handlePreferencesSubmit)(event_);
-      void handleSubmit(handleNextStep)(event_);
+      void handleSubmit(handleGoalsSubmit)(event_);
     },
-    //[handleSubmit, handlePreferencesSubmit],
-    [handleSubmit, handleNextStep],
+    [handleSubmit, handleGoalsSubmit],
   );
-
-  useEffect(() => {
-    setIsNextStepDisabled(!isValid);
-  }, [isValid, setIsNextStepDisabled]);
 
   return (
     <form className={styles['form']} onSubmit={handleFormSubmit}>
@@ -102,11 +122,12 @@ const GoalsStep: React.FC<Properties> = ({
             <Checkbox
               key={category}
               label={category}
+              isChecked={categoriesValue.includes(category)}
               onChange={handleFieldChange(category)}
             />
           );
         })}
-        {hasOther && (
+        {hasOther(goals) && (
           <Input
             control={control}
             errors={errors}
@@ -114,6 +135,7 @@ const GoalsStep: React.FC<Properties> = ({
             placeholder="Text"
             maxLength={SurveyValidationRule.MAXIMUM_PREFERENCE_ITEM_LENGTH}
             rowsCount={TEXTAREA_ROWS_COUNT}
+            defaultValue={getOtherDefault(goals)}
           />
         )}
       </div>
@@ -122,7 +144,7 @@ const GoalsStep: React.FC<Properties> = ({
         type="submit"
         label="Continue"
         style="secondary"
-        isDisabled={isNextStepDisabled}
+        isDisabled={!isValid}
       />
 
       <Button label="Back" style="outlined" onClick={handlePreviousStep} />

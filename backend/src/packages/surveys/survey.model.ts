@@ -14,6 +14,16 @@ class SurveyModel extends AbstractModel {
 
   public preferences!: string[];
 
+  public feelings!: string[] | null;
+
+  public goals!: string[] | null;
+
+  public worries!: string[] | null;
+
+  public meditationExperience!: string | null;
+
+  public journalingExperience!: string | null;
+
   public static override get tableName(): string {
     return DatabaseTableName.SURVEYS;
   }

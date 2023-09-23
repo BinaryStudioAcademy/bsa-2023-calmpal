@@ -7,6 +7,16 @@ class SurveyEntity implements Entity {
 
   private preferences: string[];
 
+  private feelings: string[] | null;
+
+  private goals: string[] | null;
+
+  private worries: string[] | null;
+
+  private meditationExperience: string | null;
+
+  private journalingExperience: string | null;
+
   private createdAt: Date | null;
 
   private updatedAt: Date | null;
@@ -15,18 +25,33 @@ class SurveyEntity implements Entity {
     id,
     userId,
     preferences,
+    feelings,
+    goals,
+    worries,
+    meditationExperience,
+    journalingExperience,
     createdAt,
     updatedAt,
   }: {
     id: number | null;
     userId: number;
     preferences: string[];
+    feelings: string[] | null;
+    goals: string[] | null;
+    worries: string[] | null;
+    meditationExperience: string | null;
+    journalingExperience: string | null;
     createdAt: Date | null;
     updatedAt: Date | null;
   }) {
     this.id = id;
     this.userId = userId;
     this.preferences = preferences;
+    this.feelings = feelings;
+    this.goals = goals;
+    this.worries = worries;
+    this.meditationExperience = meditationExperience;
+    this.journalingExperience = journalingExperience;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
@@ -35,12 +60,22 @@ class SurveyEntity implements Entity {
     id,
     userId,
     preferences,
+    feelings,
+    goals,
+    worries,
+    meditationExperience,
+    journalingExperience,
     createdAt,
     updatedAt,
   }: {
     id: number;
     userId: number;
     preferences: string[];
+    feelings: string[] | null;
+    goals: string[] | null;
+    worries: string[] | null;
+    meditationExperience: string | null;
+    journalingExperience: string | null;
     createdAt: Date;
     updatedAt: Date;
   }): SurveyEntity {
@@ -48,6 +83,11 @@ class SurveyEntity implements Entity {
       id,
       userId,
       preferences,
+      feelings,
+      goals,
+      worries,
+      meditationExperience,
+      journalingExperience,
       createdAt,
       updatedAt,
     });
@@ -56,14 +96,29 @@ class SurveyEntity implements Entity {
   public static initializeNew({
     userId,
     preferences,
+    feelings,
+    goals,
+    worries,
+    meditationExperience,
+    journalingExperience,
   }: {
     userId: number;
     preferences: string[];
+    feelings: string[] | null;
+    goals: string[] | null;
+    worries: string[] | null;
+    meditationExperience: string | null;
+    journalingExperience: string | null;
   }): SurveyEntity {
     return new SurveyEntity({
       id: null,
       userId,
       preferences,
+      feelings,
+      goals,
+      worries,
+      meditationExperience,
+      journalingExperience,
       createdAt: null,
       updatedAt: null,
     });
@@ -73,6 +128,11 @@ class SurveyEntity implements Entity {
     id: number;
     userId: number;
     preferences: string[];
+    feelings: string[] | null;
+    goals: string[] | null;
+    worries: string[] | null;
+    meditationExperience: string | null;
+    journalingExperience: string | null;
     createdAt: Date;
     updatedAt: Date;
   } {
@@ -80,6 +140,11 @@ class SurveyEntity implements Entity {
       id: this.id as number,
       userId: this.userId as number,
       preferences: this.preferences,
+      feelings: this.feelings,
+      goals: this.goals,
+      worries: this.worries,
+      meditationExperience: this.meditationExperience,
+      journalingExperience: this.journalingExperience,
       createdAt: this.createdAt as Date,
       updatedAt: this.updatedAt as Date,
     };
@@ -88,10 +153,20 @@ class SurveyEntity implements Entity {
   public toNewObject(): {
     userId: number;
     preferences: string[];
+    feelings: string[] | null;
+    goals: string[] | null;
+    worries: string[] | null;
+    meditationExperience: string | null;
+    journalingExperience: string | null;
   } {
     return {
       userId: this.userId as number,
       preferences: this.preferences,
+      feelings: this.feelings,
+      goals: this.goals,
+      worries: this.worries,
+      meditationExperience: this.meditationExperience,
+      journalingExperience: this.journalingExperience,
     };
   }
 }

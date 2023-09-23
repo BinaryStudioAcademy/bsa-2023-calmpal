@@ -4,10 +4,7 @@ import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Service } from '#libs/types/types.js';
 import { userService } from '#packages/users/users.js';
 
-import {
-  type SurveyGetAllItemResponseDto,
-  type SurveyRequestDto,
-} from './libs/types/types.js';
+import { type SurveyRequestDto } from './libs/types/types.js';
 import { SurveyEntity } from './survey.entity.js';
 import { type SurveyRepository } from './survey.repository.js';
 
@@ -26,9 +23,7 @@ class SurveyService implements Service {
     return await Promise.resolve({ items: [] });
   }
 
-  public async create(
-    payload: SurveyRequestDto,
-  ): Promise<SurveyGetAllItemResponseDto | null> {
+  public async create(payload: SurveyRequestDto): Promise<SurveyEntity | null> {
     const user = await userService.findById(payload.userId);
 
     if (!user) {
@@ -41,19 +36,24 @@ class SurveyService implements Service {
     if (user.isSurveyCompleted) {
       const item = await this.surveyRepository.update(payload);
 
-      return item?.toObject() ?? null;
+      return item ?? null;
     }
 
     const item = await this.surveyRepository.create(
       SurveyEntity.initializeNew({
         userId: payload.userId,
         preferences: payload.preferences,
+        feelings: payload.feelings,
+        goals: payload.goals,
+        worries: payload.worries,
+        meditationExperience: payload.meditationExperience,
+        journalingExperience: payload.journalingExperience,
       }),
     );
 
     await userService.completeSurvey(payload.userId);
 
-    return item.toObject();
+    return item;
   }
 
   public update(): ReturnType<Service['update']> {

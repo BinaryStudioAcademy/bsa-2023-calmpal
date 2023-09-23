@@ -5,87 +5,72 @@ import {
   useEffect,
   useFormController,
 } from '#libs/hooks/hooks.js';
+import { type MeditationExperienceInputDto } from '#packages/survey/libs/types/types.js';
+import { meditationExperienceStepInputValidationSchema } from '#packages/survey/survey.js';
 import {
-  feelingsStepInputValidationSchema,
-  // getSurveyCategories,
-} from '#packages/survey/survey.js';
-import {
-  FEELINGS_CATEGORIES,
-  FEELINGS_QUESTION,
+  MEDITATION_EXPERIENCE_CATEGORIES,
+  MEDITATION_EXPERIENCE_QUESTION,
 } from '#pages/surveys/libs/constants.js';
+import { useSurvey } from '#pages/surveys/libs/hooks/survey.hooks.js';
 
-import styles from './styles.module.scss';
+import styles from '../styles.module.scss';
 
 type Properties = {
-  onSubmit: (options: string[]) => void;
-  isNextStepDisabled: boolean;
-  setIsNextStepDisabled: (isDisabled: boolean) => void;
   handleNextStep: () => void;
   handlePreviousStep: () => void;
 };
 
-type SurveyInputDto = {
-  feelings: string[];
-};
-
-const FeelingsStep: React.FC<Properties> = ({
-  //onSubmit,
-  isNextStepDisabled,
-  setIsNextStepDisabled,
+const MeditationExperienceStep: React.FC<Properties> = ({
   handleNextStep,
   handlePreviousStep,
 }) => {
-  const { control, isValid, handleSubmit } = useAppForm<SurveyInputDto>({
-    defaultValues: { feelings: [] },
-    validationSchema: feelingsStepInputValidationSchema,
-  });
+  const { meditationExperience, setMeditationExperience } = useSurvey();
+
+  const { control, isValid, handleSubmit } =
+    useAppForm<MeditationExperienceInputDto>({
+      defaultValues: { meditationExperience: meditationExperience },
+      validationSchema: meditationExperienceStepInputValidationSchema,
+    });
   const {
     field: { onChange: onCategoryChange },
   } = useFormController({
-    name: 'feelings',
+    name: 'meditationExperience',
     control,
   });
 
   const handleFieldChange = useCallback(
     (category: string) => {
       return () => {
-        onCategoryChange([category]);
+        setMeditationExperience(category);
       };
     },
-    [onCategoryChange],
+    [setMeditationExperience],
   );
-
-  // const handlePreferencesSubmit = useCallback(
-  //   (payload: SurveyInputDto) => {
-  //     onSubmit(getSurveyCategories(payload));
-  //   },
-  //   [onSubmit],
-  // );
 
   const handleFormSubmit = useCallback(
     (event_: React.BaseSyntheticEvent): void => {
-      //void handleSubmit(handlePreferencesSubmit)(event_);
       void handleSubmit(handleNextStep)(event_);
     },
-    // [handleSubmit, handlePreferencesSubmit],
     [handleSubmit, handleNextStep],
   );
+
   useEffect(() => {
-    setIsNextStepDisabled(!isValid);
-  }, [isValid, setIsNextStepDisabled]);
+    onCategoryChange(meditationExperience);
+  }, [meditationExperience, onCategoryChange]);
 
   return (
     <form className={styles['form']} onSubmit={handleFormSubmit}>
-      <div className={styles['title']}>{FEELINGS_QUESTION}</div>
+      <div className={styles['title']}>{MEDITATION_EXPERIENCE_QUESTION}</div>
 
       <div className={styles['select']}>
-        {FEELINGS_CATEGORIES.map((category) => {
+        {MEDITATION_EXPERIENCE_CATEGORIES.map((category) => {
           return (
             <Checkbox
               key={category}
               label={category}
               type="radio"
               onChange={handleFieldChange(category)}
+              isChecked={meditationExperience === category}
             />
           );
         })}
@@ -95,7 +80,7 @@ const FeelingsStep: React.FC<Properties> = ({
         type="submit"
         label="Continue"
         style="secondary"
-        isDisabled={isNextStepDisabled}
+        isDisabled={!isValid}
       />
 
       <Button label="Back" style="outlined" onClick={handlePreviousStep} />
@@ -103,4 +88,4 @@ const FeelingsStep: React.FC<Properties> = ({
   );
 };
 
-export { FeelingsStep };
+export { MeditationExperienceStep };

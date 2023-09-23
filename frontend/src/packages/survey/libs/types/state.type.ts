@@ -1,6 +1,4 @@
-type SurveyGetAllItemResponseDto = {
-  id: number;
-  userId: number;
+type SurveyState = {
   preferences: string[];
   feelings: string[];
   goals: string[];
@@ -9,4 +7,4 @@ type SurveyGetAllItemResponseDto = {
   journalingExperience: string;
 };
 
-export { type SurveyGetAllItemResponseDto };
+export { type SurveyState };

@@ -18,5 +18,6 @@ export { Search } from './search/search.js';
 export { Sidebar, SidebarBody, SidebarHeader } from './sidebar/components.js';
 export { Switch } from './switch/switch.js';
 export { Toast } from './toast/toast.js';
+export { Suspense } from 'react';
 export { Provider as StoreProvider } from 'react-redux';
 export { Navigate, Outlet as RouterOutlet } from 'react-router-dom';
