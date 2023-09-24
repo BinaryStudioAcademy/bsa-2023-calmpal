@@ -48,7 +48,7 @@ const DeleteChatModal: React.ForwardRefRenderFunction<
     <Modal
       title="Delete chat?"
       ref={chatDeleteModalReference}
-      isCloseIconShown={false}
+      isCloseEnabled={false}
     >
       <div className={styles['content']}>
         <Button

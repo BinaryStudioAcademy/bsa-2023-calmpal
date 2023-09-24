@@ -12,13 +12,13 @@ import styles from './styles.module.scss';
 type Properties = {
   children: React.ReactNode;
   title: string;
-  isCloseIconShown?: boolean;
+  isCloseEnabled?: boolean;
 };
 
 const Modal: React.ForwardRefRenderFunction<
   HTMLDialogElement | null,
   Properties
-> = ({ children, title, isCloseIconShown = true }, reference) => {
+> = ({ children, title, isCloseEnabled = true }, reference) => {
   const childrenReference =
     reference as React.RefObject<HTMLDialogElement | null>;
   const modalReference = useRef<HTMLDivElement>(null);
@@ -39,7 +39,7 @@ const Modal: React.ForwardRefRenderFunction<
           <div className={styles['header']}>
             <span className={styles['title']}>{title}</span>
 
-            {isCloseIconShown && (
+            {isCloseEnabled && (
               <div className={styles['icon-container']}>
                 <Button
                   label="Close modal"
