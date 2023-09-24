@@ -13,13 +13,13 @@ import styles from './styles.module.scss';
 
 type Properties = {
   id: number | null;
-  setIsSidebarShown: (value: boolean) => void;
+  setIsSidebarShow: (value: boolean) => void;
 };
 
 const DeleteJournalModal: React.ForwardRefRenderFunction<
   HTMLDialogElement,
   Properties
-> = ({ id, setIsSidebarShown }, reference) => {
+> = ({ id, setIsSidebarShow }, reference) => {
   const journalDeleteModalReference =
     reference as React.RefObject<HTMLDialogElement | null>;
   const dispatch = useAppDispatch();
@@ -36,8 +36,8 @@ const DeleteJournalModal: React.ForwardRefRenderFunction<
   const handleDeleteJournalEntry = useCallback(async (): Promise<void> => {
     await dispatch(journalActions.deleteJournal(id as number));
     journalDeleteModalReference.current?.close();
-    setIsSidebarShown(true);
-  }, [dispatch, id, journalDeleteModalReference, setIsSidebarShown]);
+    setIsSidebarShow(true);
+  }, [dispatch, id, journalDeleteModalReference, setIsSidebarShow]);
 
   return (
     <Modal

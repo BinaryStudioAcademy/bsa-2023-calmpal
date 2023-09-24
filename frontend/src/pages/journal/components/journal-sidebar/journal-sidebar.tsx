@@ -122,7 +122,7 @@ const JournalSidebar: React.FC<Properties> = ({
       <DeleteJournalModal
         ref={dialogReference}
         id={chatToDelete}
-        setIsSidebarShown={setIsSidebarShown}
+        setIsSidebarShow={setIsSidebarShown}
       />
     </>
   );
