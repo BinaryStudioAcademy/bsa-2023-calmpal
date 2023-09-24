@@ -4,10 +4,7 @@ import { type Repository } from '#libs/types/types.js';
 import { ChatEntity } from './chat.entity.js';
 import { type ChatModel } from './chat.model.js';
 import { ChatsRelation } from './libs/enums/enums.js';
-import {
-  type ChatCommonQueryResponse,
-  type UpdateChatPayload,
-} from './libs/types/types.js';
+import { type ChatCommonQueryResponse } from './libs/types/types.js';
 import { UserToChatModel } from './user-to-chat.model.js';
 
 class ChatRepository implements Repository {
@@ -29,8 +26,9 @@ class ChatRepository implements Repository {
     const chats = await this.chatModel
       .query()
       .withGraphJoined(ChatsRelation.MEMBERS)
-      .whereExists(UserToChatModel.query().where('userId', userId))
-      .orderBy('updatedAt', SortType.DESC)
+      .whereExists(UserToChatModel.query().where({ userId }))
+      .joinRelated('messages')
+      .orderBy('messages.updatedAt', SortType.DESC)
       .castTo<ChatCommonQueryResponse[]>();
 
     return chats.map((chat) => {
@@ -74,11 +72,8 @@ class ChatRepository implements Repository {
     });
   }
 
-  public update({ id, updatedAt }: UpdateChatPayload): Promise<ChatModel> {
-    return this.chatModel
-      .query()
-      .patchAndFetchById(id, { updatedAt })
-      .execute();
+  public update(): ReturnType<Repository['update']> {
+    return Promise.resolve(null);
   }
 
   public delete(): ReturnType<Repository['delete']> {
