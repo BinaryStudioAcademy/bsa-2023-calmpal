@@ -18,9 +18,7 @@ const Journal: React.FC = () => {
         component={JournalScreen}
         options={{
           header: (): React.ReactNode => {
-            return (
-              <Header title={'Meditation \n& Breathing'} isProfileVisible />
-            );
+            return <Header title="Meditation \n& Breathing" isProfileVisible />;
           },
         }}
       />
