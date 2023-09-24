@@ -11,7 +11,7 @@ import {
 import {
   useAppDispatch,
   useAppRoute,
-  // useAppSelector,
+  useAppSelector,
   useEffect,
   useNavigation,
   useSearch,
@@ -20,7 +20,7 @@ import { type MeditationNavigationParameterList } from '#libs/types/types';
 import { actions as meditationActions } from '#slices/meditation/meditation';
 
 import { MeditationItem } from './components/components';
-import { mockedData } from './libs/constants';
+import { MOCKED_DURATION } from './libs/constants';
 import { styles } from './styles';
 
 type RouteParameters = {
@@ -28,11 +28,11 @@ type RouteParameters = {
 };
 
 const MeditationList: React.FC = () => {
-  // const { meditationEntries } = useAppSelector(({ meditation }) => {
-  //   return {
-  //     meditationEntries: meditation.meditationEntries,
-  //   };
-  // });
+  const { meditationEntries } = useAppSelector(({ meditation }) => {
+    return {
+      meditationEntries: meditation.meditationEntries,
+    };
+  });
   // console.log(meditationEntries);
 
   const dispatch = useAppDispatch();
@@ -44,8 +44,8 @@ const MeditationList: React.FC = () => {
   const { title } = route.params as RouteParameters;
 
   const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
-    mockedData,
-    'title',
+    meditationEntries,
+    'name',
   );
 
   useEffect(() => {
@@ -71,8 +71,8 @@ const MeditationList: React.FC = () => {
           {filteredMeditationTopics.map((item) => {
             return (
               <MeditationItem
-                title={item.title}
-                duration={item.duration}
+                title={item.name}
+                duration={MOCKED_DURATION}
                 key={item.id}
               />
             );
