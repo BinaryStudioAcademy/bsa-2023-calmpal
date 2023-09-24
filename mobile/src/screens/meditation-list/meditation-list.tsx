@@ -11,6 +11,7 @@ import {
 import {
   useAppDispatch,
   useAppRoute,
+  // useAppSelector,
   useEffect,
   useNavigation,
   useSearch,
@@ -27,6 +28,13 @@ type RouteParameters = {
 };
 
 const MeditationList: React.FC = () => {
+  // const { meditationEntries } = useAppSelector(({ meditation }) => {
+  //   return {
+  //     meditationEntries: meditation.meditationEntries,
+  //   };
+  // });
+  // console.log(meditationEntries);
+
   const dispatch = useAppDispatch();
   const navigation =
     useNavigation<
