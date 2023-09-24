@@ -1,20 +1,16 @@
 import { SECONDS_IN_MINUTE, TARGET_STRING_LENGTH } from './libs/constants';
 
 const getFormattedTime = (time: number): string => {
-  if (time && !Number.isNaN(time)) {
-    const minutes = Math.floor(time / SECONDS_IN_MINUTE);
-    const formattedMinutes = minutes
-      .toString()
-      .padStart(TARGET_STRING_LENGTH, '0');
-    const seconds = Math.floor(time % SECONDS_IN_MINUTE);
-    const formattedSeconds = seconds
-      .toString()
-      .padStart(TARGET_STRING_LENGTH, '0');
+  const minutes = Math.floor(time / SECONDS_IN_MINUTE);
+  const formattedMinutes = minutes
+    .toString()
+    .padStart(TARGET_STRING_LENGTH, '0');
+  const seconds = Math.floor(time % SECONDS_IN_MINUTE);
+  const formattedSeconds = seconds
+    .toString()
+    .padStart(TARGET_STRING_LENGTH, '0');
 
-    return `${formattedMinutes}:${formattedSeconds}`;
-  }
-
-  return '00:00';
+  return `${formattedMinutes}:${formattedSeconds}`;
 };
 
 export { getFormattedTime };
