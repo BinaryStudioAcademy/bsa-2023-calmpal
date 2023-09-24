@@ -1,3 +1,5 @@
+import { type ForwardedRef, forwardRef, useImperativeHandle } from 'react';
+
 import { Button } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { useCallback, useEffect, useRef, useState } from '#libs/hooks/hooks.js';
@@ -8,6 +10,7 @@ import {
   TRACK_SKIP_SECONDS,
 } from '#pages/meditation/libs/constants/constants.js';
 
+import { type ReferenceProperties } from '../../libs/types/types.js';
 import styles from './styles.module.scss';
 
 type Properties<T> = {
@@ -17,25 +20,37 @@ type Properties<T> = {
   onTimeProgress: (currentTime: number) => void;
   trackIndex: number;
   onSetTrackIndex: (index: number) => void;
-  onSetCurrentTrack: (track: T) => void;
   tracks: T[];
   onNextTrack: () => void;
 };
 
-const AudioControls = <T,>({
-  audioReference,
-  progressBarReference,
-  duration,
-  onTimeProgress,
-  trackIndex,
-  tracks,
-  onSetCurrentTrack,
-  onSetTrackIndex,
-  onNextTrack,
-}: Properties<T>): JSX.Element => {
+const AudioControls = <T,>(
+  {
+    audioReference,
+    progressBarReference,
+    duration,
+    onTimeProgress,
+    trackIndex,
+    tracks,
+    onSetTrackIndex,
+    onNextTrack,
+  }: Properties<T>,
+  reference: ForwardedRef<ReferenceProperties>,
+): JSX.Element => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const playAnimationReference = useRef<number | null>(null);
+
+  useImperativeHandle(reference, () => {
+    return {
+      handlePausePlayer: (): void => {
+        setIsPlaying(false);
+      },
+      handleResumePlayer: (): void => {
+        setIsPlaying(true);
+      },
+    };
+  });
 
   const repeat = useCallback((): void => {
     if (!audioReference.current || !progressBarReference.current) {
@@ -72,8 +87,7 @@ const AudioControls = <T,>({
     const previousTrackIndex =
       (trackIndex - TRACK_INCREMENT_INDEX + tracks.length) % tracks.length;
     onSetTrackIndex(previousTrackIndex);
-    onSetCurrentTrack(tracks[previousTrackIndex] as T);
-  }, [onSetCurrentTrack, onSetTrackIndex, trackIndex, tracks]);
+  }, [onSetTrackIndex, trackIndex, tracks]);
 
   useEffect(() => {
     if (audioReference.current) {
@@ -123,7 +137,6 @@ const AudioControls = <T,>({
             label="Back 30 seconds"
             isLabelVisuallyHidden
           />
-
           <Button
             onClick={handlePlayToggle}
             style="rounded"
@@ -157,4 +170,6 @@ const AudioControls = <T,>({
   );
 };
 
-export { AudioControls };
+const ForwardedAudioControls = forwardRef(AudioControls);
+
+export { ForwardedAudioControls as AudioControls };

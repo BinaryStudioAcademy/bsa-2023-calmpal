@@ -1,13 +1,17 @@
 import deafultMeditationImage from '#assets/img/meditation-image-placeholder.jpg';
 import { AudioPlayer } from '#libs/components/components.js';
+import { AppQueryStringKey } from '#libs/enums/enums.js';
 import {
   useAppSelector,
   useCallback,
+  useEffect,
   useParams,
+  useSearchParams,
   useState,
 } from '#libs/hooks/hooks.js';
 import { TRACK_FIRST_INDEX } from '#pages/meditation/libs/constants/constants.js';
 
+import { TRACK_NOT_FOUND_INDEX } from './libs/constants/constants.js';
 import styles from './styles.module.scss';
 
 const MeditationPlayer: React.FC = () => {
@@ -16,27 +20,29 @@ const MeditationPlayer: React.FC = () => {
       meditationEntries: meditation.meditationEntries,
     };
   });
-  const { id } = useParams<{ id: string; duration: string }>();
-  const parsedId = Number(id);
-
-  const foundTrack = meditationEntries.find((entry) => {
-    return entry.id === parsedId;
-  });
-
-  const [currentTrack, setCurrentTrack] = useState(
-    foundTrack ?? meditationEntries[TRACK_FIRST_INDEX],
-  );
-  const [trackIndex, setTrackIndex] = useState(
-    foundTrack ? meditationEntries.indexOf(foundTrack) : TRACK_FIRST_INDEX,
+  const { id: meditationEntryId } = useParams<{ id: string }>();
+  const [searchParameters] = useSearchParams();
+  const durationTimer = Number(
+    searchParameters.get(AppQueryStringKey.DURATION_TIMER),
   );
 
-  const handleTrackIndex = useCallback(
-    (index: number): void => {
-      setTrackIndex(index);
-      setCurrentTrack(meditationEntries[index]);
-    },
-    [meditationEntries],
-  );
+  const [trackIndex, setTrackIndex] = useState(TRACK_FIRST_INDEX);
+
+  useEffect(() => {
+    const track = meditationEntries.find((entry) => {
+      return entry.id === Number(meditationEntryId);
+    });
+
+    setTrackIndex(
+      track ? meditationEntries.indexOf(track) : TRACK_NOT_FOUND_INDEX,
+    );
+  }, [meditationEntries, meditationEntryId]);
+
+  const handleTrackIndex = useCallback((index: number): void => {
+    setTrackIndex(index);
+  }, []);
+
+  const currentTrackName = meditationEntries[trackIndex]?.name;
 
   return (
     <div className={styles['wrapper']}>
@@ -50,12 +56,12 @@ const MeditationPlayer: React.FC = () => {
             height={355}
           />
         </div>
-        <p className={styles['title']}>{currentTrack?.name}</p>
+        <p className={styles['title']}>{currentTrackName}</p>
         <AudioPlayer
-          src={currentTrack?.mediaUrl ?? ''}
+          sourceName="mediaUrl"
+          durationTimer={durationTimer}
           trackIndex={trackIndex}
           onSetTrackIndex={handleTrackIndex}
-          onSetCurrentTrack={setCurrentTrack}
           tracks={meditationEntries}
         />
       </div>

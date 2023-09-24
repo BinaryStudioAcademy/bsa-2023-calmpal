@@ -6,14 +6,17 @@ import {
 } from '#libs/hooks/hooks.js';
 
 import { TimerButton } from './components/timer-button/timer-button.js';
-import { DURATION_UNIT, MEDITATION_DURATION } from './libs/constants.js';
+import {
+  DURATION_UNIT,
+  MEDITATION_DURATION,
+} from './libs/constants/constants.js';
 import styles from './styles.module.scss';
 
 type DurationKey = keyof typeof MEDITATION_DURATION;
 
 type Properties = {
-  defaultDuration: string;
-  onStartSession: (duration: string) => void;
+  defaultDuration: number;
+  onStartSession: (duration: number) => void;
 };
 
 const MeditationTimer: React.FC<Properties> = ({
@@ -35,8 +38,9 @@ const MeditationTimer: React.FC<Properties> = ({
     onStartSession(value);
   }, [onStartSession, value]);
 
+  const numberedValue = Number(value);
   const startButtonText =
-    value === defaultDuration
+    numberedValue === defaultDuration
       ? 'Start with default duration'
       : 'Start with selected duration';
 
@@ -45,22 +49,22 @@ const MeditationTimer: React.FC<Properties> = ({
       <p className={styles['title']}>Choose Your Duration</p>
       <div className={styles['duration-container']}>
         {Object.keys(MEDITATION_DURATION).map((durationKey) => {
-          const duration = durationKey as DurationKey;
+          const duration = MEDITATION_DURATION[durationKey as DurationKey];
 
           return (
             <TimerButton
-              key={MEDITATION_DURATION[duration]}
-              isActive={value === MEDITATION_DURATION[duration]}
+              key={duration}
+              isActive={numberedValue === duration}
               onChange={onChange}
-              value={MEDITATION_DURATION[duration]}
+              value={duration}
               name="Meditation Duration"
-              duration={MEDITATION_DURATION[duration]}
+              duration={duration}
               unit={DURATION_UNIT.MINUTES}
             />
           );
         })}
         <TimerButton
-          isActive={value === defaultDuration}
+          isActive={numberedValue === defaultDuration}
           onChange={onChange}
           value={defaultDuration}
           name="Meditation Duration"

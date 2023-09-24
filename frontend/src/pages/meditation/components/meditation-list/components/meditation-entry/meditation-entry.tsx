@@ -1,6 +1,7 @@
 import meditationListPlaceholder from '#assets/img/meditation-list-placeholder.jpg';
 import { Button, Loader, Modal } from '#libs/components/components.js';
-import { AppRoute, IconColor } from '#libs/enums/enums.js';
+import { IconColor } from '#libs/enums/enums.js';
+import { getFormattedTime } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useCallback,
@@ -9,13 +10,10 @@ import {
   useState,
 } from '#libs/hooks/hooks.js';
 import { type MeditationEntryCreateResponseDto } from '#packages/meditation/meditation.js';
-import {
-  MINUTES_FORMATTING_BASE,
-  SECONDS_IN_MINUTE,
-} from '#pages/meditation/libs/constants/constants.js';
 import { actions as appActions } from '#slices/app/app.slice.js';
 
-import { MeditationTimer } from '../../meditation-timer/meditation-timer.js';
+import { MeditationTimer } from '../../../meditation-timer/meditation-timer.js';
+import { generateMeditationEntryLink } from './libs/helpers/helpers.js';
 import styles from './styles.module.scss';
 
 type Properties = {
@@ -25,21 +23,13 @@ type Properties = {
 const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
   const dispatch = useAppDispatch();
   const dialogReference = useRef<HTMLDialogElement>(null);
-  const [audioDuration, setAudioDuration] = useState<string | null>(null);
+  const [audioDuration, setAudioDuration] = useState<number | null>(null);
 
   useEffect(() => {
     const audio = new Audio(meditationEntry.mediaUrl);
 
     const onMetadataLoaded = (): void => {
-      const durationInSeconds = audio.duration;
-      const minutes = Math.floor(durationInSeconds / SECONDS_IN_MINUTE);
-      const seconds = Math.floor(durationInSeconds % SECONDS_IN_MINUTE);
-
-      setAudioDuration(
-        `${minutes}:${seconds
-          .toString()
-          .padStart(MINUTES_FORMATTING_BASE, '0')}`,
-      );
+      setAudioDuration(audio.duration);
     };
 
     audio.addEventListener('loadedmetadata', onMetadataLoaded);
@@ -58,12 +48,13 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
   }, [dialogReference]);
 
   const handleStartSession = useCallback(
-    (duration: string) => {
-      dispatch(
-        appActions.navigate(
-          `${AppRoute.MEDITATION}/${meditationEntry.id}?duration=${duration}`,
-        ),
-      );
+    (durationTimer: number) => {
+      const redirectTo = generateMeditationEntryLink({
+        durationTimer,
+        meditationEntryId: meditationEntry.id,
+      });
+
+      dispatch(appActions.navigate(redirectTo));
       handleModalClose();
     },
     [meditationEntry.id, dispatch, handleModalClose],
@@ -80,7 +71,9 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
         <div className={styles['info']}>
           <h1 className={styles['title']}>{meditationEntry.name}</h1>
           <span className={styles['duration']}>
-            {audioDuration ? `${audioDuration} min` : 'Loading...'}
+            {audioDuration
+              ? `${getFormattedTime(audioDuration)} min`
+              : 'Loading...'}
           </span>
         </div>
         <Button

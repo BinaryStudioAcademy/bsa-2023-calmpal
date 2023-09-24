@@ -8,9 +8,6 @@ const TRACK_INCREMENT_INDEX = 1;
 const TRACK_SKIP_SECONDS = 30;
 const PROGRESS_BAR = '--player-progress';
 
-const SECONDS_IN_MINUTE = 60;
-const MINUTES_FORMATTING_BASE = 2;
-
 const navigationItems = [{ name: 'Meditation', path: AppRoute.MEDITATION }];
 
 const DEFAULT_MEDITATION_PAYLOAD: MeditationEntryCreateForm = {
@@ -21,10 +18,8 @@ const DEFAULT_MEDITATION_PAYLOAD: MeditationEntryCreateForm = {
 export {
   DEFAULT_MEDITATION_PAYLOAD,
   FULL_PERCENTAGE,
-  MINUTES_FORMATTING_BASE,
   navigationItems,
   PROGRESS_BAR,
-  SECONDS_IN_MINUTE,
   TRACK_FIRST_INDEX,
   TRACK_INCREMENT_INDEX,
   TRACK_SKIP_SECONDS,

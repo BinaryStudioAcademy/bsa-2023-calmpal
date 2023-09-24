@@ -1,13 +1,13 @@
-import { getValidClassNames } from '#libs/helpers/helpers.js';
+import { getFormattedTime, getValidClassNames } from '#libs/helpers/helpers.js';
 
 import styles from './styles.module.scss';
 
 type Properties = {
   isActive: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  value: string;
+  value: number;
   name: string;
-  duration: string;
+  duration: number;
   unit: string;
   isDefault?: boolean;
 };
@@ -46,7 +46,7 @@ const TimerButton: React.FC<Properties> = ({
           isActive && styles['active-text'],
         )}
       >
-        <span>{duration}</span>
+        <span>{getFormattedTime(duration)}</span>
         <span>{unit}</span>
       </div>
     </label>
