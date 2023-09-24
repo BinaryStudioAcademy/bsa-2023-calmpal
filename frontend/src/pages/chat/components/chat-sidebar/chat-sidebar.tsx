@@ -24,12 +24,12 @@ import styles from './styles.module.scss';
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: (value: boolean) => void;
+  setIsSidebarShow: (value: boolean) => void;
 };
 
 const ChatSidebar: React.FC<Properties> = ({
   isSidebarShown,
-  setIsSidebarShown,
+  setIsSidebarShow,
 }) => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
@@ -46,9 +46,9 @@ const ChatSidebar: React.FC<Properties> = ({
   const { filteredElements, setFilter } = useSearch(chats, 'name');
 
   const handleSelectChat = useCallback(() => {
-    setIsSidebarShown(false);
+    setIsSidebarShow(false);
     // TODO redux logic
-  }, [setIsSidebarShown]);
+  }, [setIsSidebarShow]);
 
   return (
     <Sidebar isSidebarShown={isSidebarShown}>

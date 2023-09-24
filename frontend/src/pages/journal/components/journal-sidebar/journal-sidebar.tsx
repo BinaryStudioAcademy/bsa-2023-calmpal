@@ -25,12 +25,12 @@ import styles from './styles.module.scss';
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: (value: boolean) => void;
+  setIsSidebarShow: (value: boolean) => void;
 };
 
 const JournalSidebar: React.FC<Properties> = ({
   isSidebarShown,
-  setIsSidebarShown,
+  setIsSidebarShow,
 }) => {
   const dispatch = useAppDispatch();
   const [chatToDelete, setChatToDelete] = useState<null | number>(null);
@@ -73,11 +73,11 @@ const JournalSidebar: React.FC<Properties> = ({
   const handleSelectJournalEntry = useCallback(
     (id: number) => {
       return () => {
-        setIsSidebarShown(false);
+        setIsSidebarShow(false);
         dispatch(journalActions.setSelectedJournalEntry(id));
       };
     },
-    [dispatch, setIsSidebarShown],
+    [dispatch, setIsSidebarShow],
   );
 
   return (
@@ -122,7 +122,7 @@ const JournalSidebar: React.FC<Properties> = ({
       <DeleteJournalModal
         ref={dialogReference}
         id={chatToDelete}
-        setIsSidebarShow={setIsSidebarShown}
+        setIsSidebarShow={setIsSidebarShow}
       />
     </>
   );

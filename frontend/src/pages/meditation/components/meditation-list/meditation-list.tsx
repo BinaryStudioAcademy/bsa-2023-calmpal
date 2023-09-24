@@ -8,12 +8,12 @@ import styles from './styles.module.scss';
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: (value: boolean) => void;
+  setIsSidebarShow: (value: boolean) => void;
 };
 
 const MeditationList: React.FC<Properties> = ({
   isSidebarShown,
-  setIsSidebarShown,
+  setIsSidebarShow,
 }) => {
   const { meditationEntries, meditationEntriesDataStatus } = useAppSelector(
     ({ meditation }) => {
@@ -25,8 +25,8 @@ const MeditationList: React.FC<Properties> = ({
   );
 
   const handleBackButtonPress = useCallback(() => {
-    setIsSidebarShown(true);
-  }, [setIsSidebarShown]);
+    setIsSidebarShow(true);
+  }, [setIsSidebarShow]);
 
   if (meditationEntriesDataStatus === DataStatus.PENDING) {
     return !isSidebarShown && <Loader />;
