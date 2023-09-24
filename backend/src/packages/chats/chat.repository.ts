@@ -74,8 +74,11 @@ class ChatRepository implements Repository {
     });
   }
 
-  public async update({ id, updatedAt }: UpdateChatPayload): Promise<void> {
-    await this.chatModel.query().patchAndFetchById(id, { updatedAt });
+  public update({ id, updatedAt }: UpdateChatPayload): Promise<ChatModel> {
+    return this.chatModel
+      .query()
+      .patchAndFetchById(id, { updatedAt })
+      .execute();
   }
 
   public delete(): ReturnType<Repository['delete']> {
