@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     maxWidth: 230,
     fontWeight: '600',
     color: AppColor.GRAY_500,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
 });
 

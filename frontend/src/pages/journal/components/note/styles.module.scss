@@ -24,5 +24,7 @@
 
 .title:focus,
 .text:focus {
+  border: 1px solid var(--blue-300);
   outline: none;
+  box-shadow: 0 3px 21px 0 var(--blue-300);
 }
