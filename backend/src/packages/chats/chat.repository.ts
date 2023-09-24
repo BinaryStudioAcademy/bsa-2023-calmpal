@@ -1,3 +1,4 @@
+import { SortType } from '#libs/enums/enums.js';
 import { type Repository } from '#libs/types/types.js';
 
 import { ChatEntity } from './chat.entity.js';
@@ -28,8 +29,9 @@ class ChatRepository implements Repository {
     const chats = await this.chatModel
       .query()
       .withGraphJoined(ChatsRelation.MEMBERS)
-      .whereExists(UserToChatModel.query().where('userId', userId))
-      .orderBy('createdAt', 'DESC')
+      .whereExists(UserToChatModel.query().where({ userId }))
+      .joinRelated('messages')
+      .orderBy('messages.updatedAt', SortType.DESC)
       .modify((builder) => {
         if (query) {
           void builder.where('name', 'iLike', `%${query}%`);
@@ -78,7 +80,7 @@ class ChatRepository implements Repository {
     });
   }
 
-  public update(): Promise<unknown> {
+  public update(): ReturnType<Repository['update']> {
     return Promise.resolve(null);
   }
 
