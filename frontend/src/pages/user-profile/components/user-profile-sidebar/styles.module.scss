@@ -17,10 +17,12 @@
 }
 
 .user-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 36px;
   height: 36px;
   margin-right: 8px;
-  padding: 8px;
   background-color: var(--blue-300);
   border-radius: 50%;
 }

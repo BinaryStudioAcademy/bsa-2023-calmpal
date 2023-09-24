@@ -5,7 +5,10 @@ import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useLocation } from '#libs/hooks/hooks.js';
 import { type Route } from '#libs/types/types.js';
 
-import { DEFAULT_ICON_HEIGHT, DEFAULT_ICON_WIDTH } from './libs/constants.js';
+import {
+  DEFAULT_ICON_HEIGHT,
+  DEFAULT_ICON_WIDTH,
+} from './libs/constants/constants.js';
 import styles from './styles.module.scss';
 
 type Properties = {
