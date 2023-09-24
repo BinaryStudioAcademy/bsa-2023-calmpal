@@ -48,9 +48,9 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
   }, [dialogReference]);
 
   const handleStartSession = useCallback(
-    (durationTimer: number) => {
+    (timerDuration: number) => {
       const redirectTo = generateMeditationEntryLink({
-        durationTimer,
+        timerDuration,
         meditationEntryId: meditationEntry.id,
       });
 

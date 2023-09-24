@@ -21,17 +21,15 @@ const TimerButton: React.FC<Properties> = ({
   unit,
   isDefault,
 }) => {
-  const isDefaultButton = isDefault;
-
-  const buttonStyle = isDefaultButton
-    ? getValidClassNames(
-        styles['default'],
-        isActive && styles['active-default'],
-      )
-    : getValidClassNames(isActive && styles['active']);
-
   return (
-    <label className={getValidClassNames(styles['timer-button'], buttonStyle)}>
+    <label
+      className={getValidClassNames(
+        styles['timer-button'],
+        isDefault && styles['default'],
+        isActive && isDefault && styles['active-default'],
+        isActive && !isDefault && styles['active'],
+      )}
+    >
       <input
         type="radio"
         value={value}

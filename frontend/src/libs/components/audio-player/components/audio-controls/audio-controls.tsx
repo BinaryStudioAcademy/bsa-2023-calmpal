@@ -1,8 +1,15 @@
-import { type ForwardedRef, forwardRef, useImperativeHandle } from 'react';
+import { type ForwardedRef } from 'react';
 
 import { Button } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
-import { useCallback, useEffect, useRef, useState } from '#libs/hooks/hooks.js';
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from '#libs/hooks/hooks.js';
 import {
   FULL_PERCENTAGE,
   PROGRESS_BAR,
@@ -10,32 +17,32 @@ import {
   TRACK_SKIP_SECONDS,
 } from '#pages/meditation/libs/constants/constants.js';
 
-import { type ReferenceProperties } from '../../libs/types/types.js';
+import { type AudioControlsHandle } from '../../libs/types/types.js';
 import styles from './styles.module.scss';
 
-type Properties<T> = {
+type Properties = {
   audioReference: React.RefObject<HTMLAudioElement | null>;
   progressBarReference: React.RefObject<HTMLInputElement | null>;
   duration: number;
   onTimeProgress: (currentTime: number) => void;
   trackIndex: number;
   onSetTrackIndex: (index: number) => void;
-  tracks: T[];
+  tracksCount: number;
   onNextTrack: () => void;
 };
 
-const AudioControls = <T,>(
+const AudioControls = (
   {
     audioReference,
     progressBarReference,
     duration,
     onTimeProgress,
     trackIndex,
-    tracks,
+    tracksCount,
     onSetTrackIndex,
     onNextTrack,
-  }: Properties<T>,
-  reference: ForwardedRef<ReferenceProperties>,
+  }: Properties,
+  reference: ForwardedRef<AudioControlsHandle>,
 ): JSX.Element => {
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -85,9 +92,9 @@ const AudioControls = <T,>(
 
   const handlePrevious = useCallback(() => {
     const previousTrackIndex =
-      (trackIndex - TRACK_INCREMENT_INDEX + tracks.length) % tracks.length;
+      (trackIndex - TRACK_INCREMENT_INDEX + tracksCount) % tracksCount;
     onSetTrackIndex(previousTrackIndex);
-  }, [onSetTrackIndex, trackIndex, tracks]);
+  }, [onSetTrackIndex, trackIndex, tracksCount]);
 
   useEffect(() => {
     if (audioReference.current) {

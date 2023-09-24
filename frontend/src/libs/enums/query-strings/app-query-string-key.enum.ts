@@ -1,6 +1,6 @@
 const AppQueryStringKey = {
   SIDEBAR_MODE: 'sidebarMode',
-  DURATION_TIMER: 'durationTimer',
+  TIMER_DURATION: 'timerDuration',
 } as const;
 
 export { AppQueryStringKey };

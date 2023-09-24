@@ -1,7 +1,7 @@
 const AudioOptionKey = {
   TIME_PROGRESS: 'timeProgress',
   DURATION: 'duration',
-  DURATION_TIMER: 'durationTimer',
+  TIMER_DURATION: 'timerDuration',
 } as const;
 
 export { AudioOptionKey };

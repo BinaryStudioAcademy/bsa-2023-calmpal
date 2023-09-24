@@ -1,6 +1,6 @@
-type ReferenceProperties = {
+type AudioControlsHandle = {
   handlePausePlayer: () => void;
   handleResumePlayer: () => void;
 };
 
-export { type ReferenceProperties };
+export { type AudioControlsHandle };

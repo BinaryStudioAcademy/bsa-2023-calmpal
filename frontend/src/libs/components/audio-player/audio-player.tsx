@@ -13,29 +13,29 @@ import { AudioControls } from './components/audio-controls/audio-controls.js';
 import { ProgressBar } from './components/progress-bar/progress-bar.js';
 import { DEFAULT_AUDIO_OPTIONS } from './libs/constants/constants.js';
 import { AudioOptionKey } from './libs/enums/enums.js';
-import { type ReferenceProperties } from './libs/types/types.js';
+import { type AudioControlsHandle } from './libs/types/types.js';
 
-type Properties<T> = {
-  sourceName: keyof T;
-  durationTimer: number | null;
+type Properties = {
+  mediaUrl: string;
+  timerDuration: number | null;
   trackIndex: number;
   onSetTrackIndex: (index: number) => void;
-  tracks: T[];
+  tracksCount: number;
 };
 
-const AudioPlayer = <T,>({
-  sourceName,
-  durationTimer,
+const AudioPlayer = ({
+  mediaUrl,
+  timerDuration,
   trackIndex,
-  tracks,
+  tracksCount,
   onSetTrackIndex,
-}: Properties<T>): JSX.Element => {
+}: Properties): JSX.Element => {
   const audioReference = useRef<HTMLAudioElement | null>(null);
   const progressBarReference = useRef<HTMLInputElement | null>(null);
-  const audioControlsReference = useRef<ReferenceProperties | null>(null);
+  const audioControlsReference = useRef<AudioControlsHandle | null>(null);
 
   const { watch, setValue } = useAppForm({
-    defaultValues: { ...DEFAULT_AUDIO_OPTIONS, durationTimer },
+    defaultValues: { ...DEFAULT_AUDIO_OPTIONS, timerDuration },
     mode: 'onChange',
   });
 
@@ -47,11 +47,11 @@ const AudioPlayer = <T,>({
   }, [setValue]);
 
   const handleNext = useCallback(() => {
-    const nextTrackIndex = (trackIndex + TRACK_INCREMENT_INDEX) % tracks.length;
+    const nextTrackIndex = (trackIndex + TRACK_INCREMENT_INDEX) % tracksCount;
     onSetTrackIndex(nextTrackIndex);
-  }, [trackIndex, tracks, onSetTrackIndex]);
+  }, [trackIndex, tracksCount, onSetTrackIndex]);
 
-  const currentDurationTimer = watch(AudioOptionKey.DURATION_TIMER);
+  const currentTimerDuration = watch(AudioOptionKey.TIMER_DURATION);
 
   const { timeProgress, duration } = watch();
 
@@ -59,40 +59,40 @@ const AudioPlayer = <T,>({
     (audioReference.current as HTMLAudioElement).currentTime = TRACK_START_TIME;
     setValue(AudioOptionKey.TIME_PROGRESS, TRACK_START_TIME);
     setValue(
-      AudioOptionKey.DURATION_TIMER,
-      (currentDurationTimer as number) - timeProgress,
+      AudioOptionKey.TIMER_DURATION,
+      (currentTimerDuration as number) - timeProgress,
     );
 
     void (audioReference.current as HTMLAudioElement).play();
-  }, [timeProgress, currentDurationTimer, setValue]);
+  }, [timeProgress, currentTimerDuration, setValue]);
 
   useEffect(() => {
     if (
-      currentDurationTimer !== null &&
-      currentDurationTimer - timeProgress <= TRACK_START_TIME
+      currentTimerDuration !== null &&
+      currentTimerDuration - timeProgress <= TRACK_START_TIME
     ) {
       (audioReference.current as HTMLAudioElement).pause();
       (
-        audioControlsReference.current as ReferenceProperties
+        audioControlsReference.current as AudioControlsHandle
       ).handlePausePlayer();
 
       setValue(
-        AudioOptionKey.DURATION_TIMER,
-        (durationTimer as number) + timeProgress,
+        AudioOptionKey.TIMER_DURATION,
+        (timerDuration as number) + timeProgress,
       );
     }
-  }, [timeProgress, durationTimer, currentDurationTimer, setValue]);
+  }, [timeProgress, timerDuration, currentTimerDuration, setValue]);
 
   const handleEndTrack = useCallback(() => {
     const lastDurationTimer =
-      (currentDurationTimer ?? TRACK_START_TIME) - duration;
+      (currentTimerDuration ?? TRACK_START_TIME) - duration;
 
     if (lastDurationTimer > TRACK_START_TIME) {
       handleLoopTrack();
     } else {
       handleNext();
     }
-  }, [currentDurationTimer, duration, handleNext, handleLoopTrack]);
+  }, [currentTimerDuration, duration, handleNext, handleLoopTrack]);
 
   const handleTimeProgress = useCallback(
     (currentTime: number): void => {
@@ -103,12 +103,10 @@ const AudioPlayer = <T,>({
     [timeProgress, setValue],
   );
 
-  const audioSource = tracks[trackIndex]?.[sourceName] as string;
-
   return (
     <>
       <audio
-        src={audioSource}
+        src={mediaUrl}
         ref={audioReference}
         onLoadedMetadata={handleLoadMetadata}
         onEnded={handleEndTrack}
@@ -129,7 +127,7 @@ const AudioPlayer = <T,>({
         onTimeProgress={handleTimeProgress}
         trackIndex={trackIndex}
         onSetTrackIndex={onSetTrackIndex}
-        tracks={tracks}
+        tracksCount={tracksCount}
         onNextTrack={handleNext}
       />
     </>

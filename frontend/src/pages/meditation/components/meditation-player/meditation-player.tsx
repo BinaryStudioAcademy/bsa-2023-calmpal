@@ -22,8 +22,8 @@ const MeditationPlayer: React.FC = () => {
   });
   const { id: meditationEntryId } = useParams<{ id: string }>();
   const [searchParameters] = useSearchParams();
-  const durationTimer = Number(
-    searchParameters.get(AppQueryStringKey.DURATION_TIMER),
+  const timerDuration = Number(
+    searchParameters.get(AppQueryStringKey.TIMER_DURATION),
   );
 
   const [trackIndex, setTrackIndex] = useState(TRACK_FIRST_INDEX);
@@ -42,7 +42,7 @@ const MeditationPlayer: React.FC = () => {
     setTrackIndex(index);
   }, []);
 
-  const currentTrackName = meditationEntries[trackIndex]?.name;
+  const { name, mediaUrl } = meditationEntries[trackIndex] ?? {};
 
   return (
     <div className={styles['wrapper']}>
@@ -56,13 +56,13 @@ const MeditationPlayer: React.FC = () => {
             height={355}
           />
         </div>
-        <p className={styles['title']}>{currentTrackName}</p>
+        <p className={styles['title']}>{name}</p>
         <AudioPlayer
-          sourceName="mediaUrl"
-          durationTimer={durationTimer}
+          mediaUrl={mediaUrl as string}
+          timerDuration={timerDuration}
           trackIndex={trackIndex}
           onSetTrackIndex={handleTrackIndex}
-          tracks={meditationEntries}
+          tracksCount={meditationEntries.length}
         />
       </div>
     </div>

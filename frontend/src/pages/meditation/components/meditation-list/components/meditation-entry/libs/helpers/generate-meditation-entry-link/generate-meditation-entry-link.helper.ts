@@ -3,12 +3,12 @@ import { getUrlWithQueryString } from '#libs/helpers/helpers.js';
 import { type ValueOf } from '#libs/types/types.js';
 
 type Parameters = {
-  durationTimer: number;
+  timerDuration: number;
   meditationEntryId: number;
 };
 
 const generateMeditationEntryLink = ({
-  durationTimer,
+  timerDuration,
   meditationEntryId,
 }: Parameters): string => {
   const path = AppRoute.MEDITATION_$ID.replace(
@@ -17,7 +17,7 @@ const generateMeditationEntryLink = ({
   );
 
   return getUrlWithQueryString(path as ValueOf<typeof AppRoute>, {
-    [AppQueryStringKey.DURATION_TIMER]: String(durationTimer),
+    [AppQueryStringKey.TIMER_DURATION]: String(timerDuration),
   });
 };
 
