@@ -46,7 +46,7 @@ class MeditationService implements Service {
     const { url, contentType } = await this.fileService.create(file);
     const item = await this.meditationRepository.create(
       MeditationEntity.initializeNew({
-        name: name,
+        name,
         mediaUrl: url,
         contentType,
       }),
