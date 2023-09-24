@@ -1,6 +1,7 @@
 import { Button, Radio } from '#libs/components/components.js';
 import {
   useAppForm,
+  useAppSelector,
   useCallback,
   useEffect,
   useFormController,
@@ -8,20 +9,23 @@ import {
 import { type JournalingExperienceInputDto } from '#packages/survey/libs/types/types.js';
 import { oneAnswerStepInputValidationSchema } from '#packages/survey/survey.js';
 import { JOURNALING_EXPERIENCE_CATEGORIES } from '#pages/surveys/libs/constants.js';
-import { useSurvey } from '#pages/surveys/libs/hooks/survey.hooks.js';
 
 import styles from '../styles.module.scss';
 
 type Properties = {
   onSubmit: () => void;
   onPreviousStep: () => void;
+  onSetJournalingExperience: (journalingExperience: string) => void;
 };
 
 const JournalingExperienceStep: React.FC<Properties> = ({
   onSubmit,
   onPreviousStep,
+  onSetJournalingExperience,
 }) => {
-  const { journalingExperience, setJournalingExperience } = useSurvey();
+  const journalingExperience = useAppSelector((state) => {
+    return state.survey.journalingExperience;
+  });
 
   const { control, isValid, handleSubmit } =
     useAppForm<JournalingExperienceInputDto>({
@@ -38,10 +42,10 @@ const JournalingExperienceStep: React.FC<Properties> = ({
   const handleFieldChange = useCallback(
     (category: string) => {
       return () => {
-        setJournalingExperience(category);
+        onSetJournalingExperience(category);
       };
     },
-    [setJournalingExperience],
+    [onSetJournalingExperience],
   );
 
   const handlePreferencesSubmit = useCallback(() => {

@@ -1,23 +1,30 @@
 import { Button, Checkbox } from '#libs/components/components.js';
 import {
   useAppForm,
+  useAppSelector,
   useCallback,
   useFormController,
 } from '#libs/hooks/hooks.js';
 import { type FeelingInputDto } from '#packages/survey/libs/types/types.js';
 import { stepInputValidationSchema } from '#packages/survey/survey.js';
 import { FEELINGS_CATEGORIES } from '#pages/surveys/libs/constants.js';
-import { useSurvey } from '#pages/surveys/libs/hooks/survey.hooks.js';
 
 import styles from '../styles.module.scss';
 
 type Properties = {
   onNextStep: () => void;
   onPreviousStep: () => void;
+  onSetFeelings: (feelings: string[]) => void;
 };
 
-const FeelingsStep: React.FC<Properties> = ({ onNextStep, onPreviousStep }) => {
-  const { feelings, setFeelings } = useSurvey();
+const FeelingsStep: React.FC<Properties> = ({
+  onNextStep,
+  onPreviousStep,
+  onSetFeelings,
+}) => {
+  const feelings = useAppSelector((state) => {
+    return state.survey.feelings;
+  });
 
   const { control, isValid, handleSubmit } = useAppForm<FeelingInputDto>({
     defaultValues: { feelings: feelings },
@@ -39,7 +46,7 @@ const FeelingsStep: React.FC<Properties> = ({ onNextStep, onPreviousStep }) => {
               return option !== category;
             }),
           );
-          setFeelings(
+          onSetFeelings(
             feelings.filter((option) => {
               return option !== category;
             }),
@@ -49,18 +56,18 @@ const FeelingsStep: React.FC<Properties> = ({ onNextStep, onPreviousStep }) => {
         }
 
         onCategoryChange([...categoriesValue, category]);
-        setFeelings([...feelings, category]);
+        onSetFeelings([...feelings, category]);
       };
     },
-    [categoriesValue, feelings, onCategoryChange, setFeelings],
+    [categoriesValue, feelings, onCategoryChange, onSetFeelings],
   );
 
   const handleFeelingsSubmit = useCallback(
     (payload: { feelings: string[] }) => {
-      setFeelings(payload.feelings);
+      onSetFeelings(payload.feelings);
       onNextStep();
     },
-    [onNextStep, setFeelings],
+    [onNextStep, onSetFeelings],
   );
 
   const handleFormSubmit = useCallback(

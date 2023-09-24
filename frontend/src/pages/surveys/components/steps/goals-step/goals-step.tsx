@@ -2,6 +2,7 @@ import { Button, Checkbox, Input } from '#libs/components/components.js';
 import { FIRST_INDEX } from '#libs/constants/index.constant.js';
 import {
   useAppForm,
+  useAppSelector,
   useCallback,
   useFormController,
 } from '#libs/hooks/hooks.js';
@@ -14,24 +15,35 @@ import {
   GOALS_CATEGORIES,
   TEXTAREA_ROWS_COUNT,
 } from '#pages/surveys/libs/constants.js';
-import { useSurvey } from '#pages/surveys/libs/hooks/survey.hooks.js';
-import {
-  getOtherDefault,
-  getOthersCategories,
-  hasOther,
-} from '#pages/surveys/libs/utils.js';
 
 import styles from '../styles.module.scss';
+
+type OnOther = {
+  getOtherDefault: (categories: string[]) => string;
+  getOthersCategories: (categories: string[], payload: string[]) => string[];
+  hasOther: (category: string[]) => boolean;
+};
 
 type Properties = {
   onNextStep: () => void;
   onPreviousStep: () => void;
+  onSetGoals: (goals: string[]) => void;
+  onOther: OnOther;
 };
 
-const GoalsStep: React.FC<Properties> = ({ onNextStep, onPreviousStep }) => {
-  const { goals, setGoals } = useSurvey();
+const GoalsStep: React.FC<Properties> = ({
+  onNextStep,
+  onSetGoals,
+  onPreviousStep,
+  onOther,
+}) => {
+  const { getOtherDefault, getOthersCategories, hasOther } = onOther;
+
+  const goals = useAppSelector((state) => {
+    return state.survey.goals;
+  });
   const { control, errors, isValid, handleSubmit } = useAppForm<GoalInputDto>({
-    defaultValues: { goals: goals },
+    defaultValues: { goals: goals, other: getOtherDefault(goals) },
     validationSchema: stepWithOtherInputValidationSchema,
   });
 
@@ -56,7 +68,7 @@ const GoalsStep: React.FC<Properties> = ({ onNextStep, onPreviousStep }) => {
               return !otherCategories.includes(option);
             }),
           );
-          setGoals(
+          onSetGoals(
             goals.filter((option) => {
               return !otherCategories.includes(option);
             }),
@@ -71,7 +83,7 @@ const GoalsStep: React.FC<Properties> = ({ onNextStep, onPreviousStep }) => {
               return option !== category;
             }),
           );
-          setGoals(
+          onSetGoals(
             goals.filter((option) => {
               return option !== category;
             }),
@@ -80,25 +92,25 @@ const GoalsStep: React.FC<Properties> = ({ onNextStep, onPreviousStep }) => {
           return;
         }
 
-        setGoals([...goals, category]);
+        onSetGoals([...goals, category]);
         onCategoryChange([...categoriesValue, category]);
       };
     },
-    [categoriesValue, goals, onCategoryChange, setGoals],
+    [categoriesValue, getOthersCategories, goals, onCategoryChange, onSetGoals],
   );
 
   const handleGoalsSubmit = useCallback(
     (payload: GoalInputDto) => {
       if (payload.other) {
         payload.goals.push(payload.other);
-        setGoals(payload.goals);
+        onSetGoals(payload.goals);
       } else {
-        setGoals(payload.goals);
+        onSetGoals(payload.goals);
       }
 
       onNextStep();
     },
-    [onNextStep, setGoals],
+    [onNextStep, onSetGoals],
   );
 
   const handleFormSubmit = useCallback(

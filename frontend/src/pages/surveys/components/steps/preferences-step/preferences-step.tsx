@@ -2,6 +2,7 @@ import { Button, Checkbox, Input } from '#libs/components/components.js';
 import { FIRST_INDEX } from '#libs/constants/index.constant.js';
 import {
   useAppForm,
+  useAppSelector,
   useCallback,
   useFormController,
 } from '#libs/hooks/hooks.js';
@@ -14,26 +15,36 @@ import {
   PREFERENCES_CATEGORIES,
   TEXTAREA_ROWS_COUNT,
 } from '#pages/surveys/libs/constants.js';
-import { useSurvey } from '#pages/surveys/libs/hooks/survey.hooks.js';
-import {
-  getOtherDefault,
-  getOthersCategories,
-  hasOther,
-} from '#pages/surveys/libs/utils.js';
 
 import styles from '../styles.module.scss';
 
-type Properties = {
-  onNextStep: () => void;
+type OnOther = {
+  getOtherDefault: (categories: string[]) => string;
+  getOthersCategories: (categories: string[], payload: string[]) => string[];
+  hasOther: (category: string[]) => boolean;
 };
 
-const PreferencesStep: React.FC<Properties> = ({ onNextStep }) => {
-  const { preferences, setPreferences } = useSurvey();
+type Properties = {
+  onNextStep: () => void;
+  onSetPreferences: (preferences: string[]) => void;
+  onOther: OnOther;
+};
 
+const PreferencesStep: React.FC<Properties> = ({
+  onNextStep,
+  onSetPreferences,
+  onOther,
+}) => {
+  const { getOtherDefault, getOthersCategories, hasOther } = onOther;
+
+  const preferences = useAppSelector((state) => {
+    return state.survey.preferences;
+  });
   const { control, errors, isValid, handleSubmit } =
     useAppForm<PreferenceInputDto>({
       defaultValues: {
         preferences: preferences,
+        other: getOtherDefault(preferences),
       },
       validationSchema: stepWithOtherInputValidationSchema,
     });
@@ -58,7 +69,7 @@ const PreferencesStep: React.FC<Properties> = ({ onNextStep }) => {
               return !otherCategories.includes(option);
             }),
           );
-          setPreferences(
+          onSetPreferences(
             preferences.filter((option) => {
               return !otherCategories.includes(option);
             }),
@@ -73,7 +84,7 @@ const PreferencesStep: React.FC<Properties> = ({ onNextStep }) => {
               return option !== category;
             }),
           );
-          setPreferences(
+          onSetPreferences(
             preferences.filter((option) => {
               return option !== category;
             }),
@@ -82,25 +93,31 @@ const PreferencesStep: React.FC<Properties> = ({ onNextStep }) => {
           return;
         }
 
-        setPreferences([...preferences, category]);
+        onSetPreferences([...preferences, category]);
         onCategoryChange([...categoriesValue, category]);
       };
     },
-    [categoriesValue, onCategoryChange, preferences, setPreferences],
+    [
+      getOthersCategories,
+      categoriesValue,
+      onSetPreferences,
+      preferences,
+      onCategoryChange,
+    ],
   );
 
   const handlePreferencesSubmit = useCallback(
     (payload: PreferenceInputDto) => {
       if (payload.other) {
         payload.preferences.push(payload.other);
-        setPreferences(payload.preferences);
+        onSetPreferences(payload.preferences);
       } else {
-        setPreferences(payload.preferences);
+        onSetPreferences(payload.preferences);
       }
 
       onNextStep();
     },
-    [onNextStep, setPreferences],
+    [onNextStep, onSetPreferences],
   );
 
   const handleFormSubmit = useCallback(

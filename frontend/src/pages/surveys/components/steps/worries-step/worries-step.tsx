@@ -2,6 +2,7 @@ import { Button, Checkbox, Input } from '#libs/components/components.js';
 import { FIRST_INDEX } from '#libs/constants/index.constant.js';
 import {
   useAppForm,
+  useAppSelector,
   useCallback,
   useFormController,
 } from '#libs/hooks/hooks.js';
@@ -14,25 +15,34 @@ import {
   TEXTAREA_ROWS_COUNT,
   WORRIES_CATEGORIES,
 } from '#pages/surveys/libs/constants.js';
-import { useSurvey } from '#pages/surveys/libs/hooks/survey.hooks.js';
-import {
-  getOtherDefault,
-  getOthersCategories,
-  hasOther,
-} from '#pages/surveys/libs/utils.js';
 
 import styles from '../styles.module.scss';
+
+type OnOther = {
+  getOtherDefault: (categories: string[]) => string;
+  getOthersCategories: (categories: string[], payload: string[]) => string[];
+  hasOther: (category: string[]) => boolean;
+};
 
 type Properties = {
   onNextStep: () => void;
   onPreviousStep: () => void;
+  onSetWorries: (worries: string[]) => void;
+  onOther: OnOther;
 };
 
-const WorriesStep: React.FC<Properties> = ({ onNextStep, onPreviousStep }) => {
-  const { worries, setWorries } = useSurvey();
-
+const WorriesStep: React.FC<Properties> = ({
+  onNextStep,
+  onPreviousStep,
+  onSetWorries,
+  onOther,
+}) => {
+  const { getOtherDefault, getOthersCategories, hasOther } = onOther;
+  const worries = useAppSelector((state) => {
+    return state.survey.worries;
+  });
   const { control, errors, isValid, handleSubmit } = useAppForm<WorryInputDto>({
-    defaultValues: { worries: worries },
+    defaultValues: { worries: worries, other: getOtherDefault(worries) },
     validationSchema: stepWithOtherInputValidationSchema,
   });
   const {
@@ -56,7 +66,7 @@ const WorriesStep: React.FC<Properties> = ({ onNextStep, onPreviousStep }) => {
               return !otherCategories.includes(option);
             }),
           );
-          setWorries(
+          onSetWorries(
             worries.filter((option) => {
               return !otherCategories.includes(option);
             }),
@@ -71,7 +81,7 @@ const WorriesStep: React.FC<Properties> = ({ onNextStep, onPreviousStep }) => {
               return option !== category;
             }),
           );
-          setWorries(
+          onSetWorries(
             worries.filter((option) => {
               return option !== category;
             }),
@@ -81,24 +91,30 @@ const WorriesStep: React.FC<Properties> = ({ onNextStep, onPreviousStep }) => {
         }
 
         onCategoryChange([...categoriesValue, category]);
-        setWorries([...worries, category]);
+        onSetWorries([...worries, category]);
       };
     },
-    [categoriesValue, onCategoryChange, setWorries, worries],
+    [
+      categoriesValue,
+      getOthersCategories,
+      onCategoryChange,
+      onSetWorries,
+      worries,
+    ],
   );
 
   const handleWorriesSubmit = useCallback(
     (payload: WorryInputDto) => {
       if (payload.other) {
         payload.worries.push(payload.other);
-        setWorries(payload.worries);
+        onSetWorries(payload.worries);
       } else {
-        setWorries(payload.worries);
+        onSetWorries(payload.worries);
       }
 
       onNextStep();
     },
-    [onNextStep, setWorries],
+    [onNextStep, onSetWorries],
   );
 
   const handleFormSubmit = useCallback(

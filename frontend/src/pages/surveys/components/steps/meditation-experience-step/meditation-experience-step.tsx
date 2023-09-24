@@ -1,6 +1,7 @@
 import { Button, Radio } from '#libs/components/components.js';
 import {
   useAppForm,
+  useAppSelector,
   useCallback,
   useEffect,
   useFormController,
@@ -8,20 +9,23 @@ import {
 import { type MeditationExperienceInputDto } from '#packages/survey/libs/types/types.js';
 import { oneAnswerStepInputValidationSchema } from '#packages/survey/survey.js';
 import { MEDITATION_EXPERIENCE_CATEGORIES } from '#pages/surveys/libs/constants.js';
-import { useSurvey } from '#pages/surveys/libs/hooks/survey.hooks.js';
 
 import styles from '../styles.module.scss';
 
 type Properties = {
   onNextStep: () => void;
   onPreviousStep: () => void;
+  onSetMeditationExperience: (meditationExperience: string) => void;
 };
 
 const MeditationExperienceStep: React.FC<Properties> = ({
   onNextStep,
   onPreviousStep,
+  onSetMeditationExperience,
 }) => {
-  const { meditationExperience, setMeditationExperience } = useSurvey();
+  const meditationExperience = useAppSelector((state) => {
+    return state.survey.meditationExperience;
+  });
 
   const { control, isValid, handleSubmit } =
     useAppForm<MeditationExperienceInputDto>({
@@ -38,10 +42,10 @@ const MeditationExperienceStep: React.FC<Properties> = ({
   const handleFieldChange = useCallback(
     (category: string) => {
       return () => {
-        setMeditationExperience(category);
+        onSetMeditationExperience(category);
       };
     },
-    [setMeditationExperience],
+    [onSetMeditationExperience],
   );
 
   const handleFormSubmit = useCallback(

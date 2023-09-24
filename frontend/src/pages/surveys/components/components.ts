@@ -1,3 +1,4 @@
+export { RenderSteps } from './steps/render-steps.js';
 export {
   FeelingsStep,
   GoalsStep,

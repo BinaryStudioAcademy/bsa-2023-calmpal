@@ -17,15 +17,16 @@ import {
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
-import { renderSteps } from './components/steps/steps.js';
+import { RenderSteps } from './components/components.js';
 import { ONE_INDEX } from './libs/constants.js';
-import { useSurvey } from './libs/hooks/survey.hooks.js';
 import styles from './styles.module.scss';
 
 type SurveyForDispatch = SurveyState & { userId?: number };
 
 const Survey: React.FC = () => {
-  const { survey } = useSurvey();
+  const { survey } = useAppSelector((state) => {
+    return state;
+  });
   const [currentStep, setCurrentStep] = useState<Step>(SurveySteps.PREFERENCES);
 
   const handleNextStep = useCallback((): void => {
@@ -77,12 +78,12 @@ const Survey: React.FC = () => {
             well-being
           </div>
           <main>
-            {renderSteps({
-              currentStep,
-              handleNextStep,
-              handlePreviousStep,
-              handleSubmit,
-            })}
+            <RenderSteps
+              currentStep={currentStep}
+              onNextStep={handleNextStep}
+              onPreviousStep={handlePreviousStep}
+              onSubmit={handleSubmit}
+            />
           </main>
         </div>
       )}
