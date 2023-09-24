@@ -1,6 +1,6 @@
-type AudioControlsHandle = {
+type AudioControlsHandler = {
   handlePausePlayer: () => void;
   handleResumePlayer: () => void;
 };
 
-export { type AudioControlsHandle };
+export { type AudioControlsHandler };

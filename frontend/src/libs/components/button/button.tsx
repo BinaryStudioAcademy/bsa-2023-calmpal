@@ -1,6 +1,10 @@
 import { type IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { type IconName, type ValueOf } from '#libs/types/types.js';
+import {
+  type ButtonStyle,
+  type IconName,
+  type ValueOf,
+} from '#libs/types/types.js';
 
 import { Icon } from '../components.js';
 import styles from './styles.module.scss';
@@ -12,15 +16,7 @@ type Properties = {
   iconColor?: ValueOf<typeof IconColor>;
   iconWidth?: number;
   iconHeight?: number;
-  style?:
-    | 'primary'
-    | 'secondary'
-    | 'rounded'
-    | 'rounded-transparent'
-    | 'play-button'
-    | 'active'
-    | 'start-button'
-    | 'add';
+  style?: ButtonStyle;
   isLoading?: boolean;
   isDisabled?: boolean;
   isLabelVisuallyHidden?: boolean;

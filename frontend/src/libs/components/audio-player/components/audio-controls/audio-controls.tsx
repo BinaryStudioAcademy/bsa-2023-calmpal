@@ -17,7 +17,7 @@ import {
   TRACK_SKIP_SECONDS,
 } from '#pages/meditation/libs/constants/constants.js';
 
-import { type AudioControlsHandle } from '../../libs/types/types.js';
+import { type AudioControlsHandler } from '../../libs/types/types.js';
 import styles from './styles.module.scss';
 
 type Properties = {
@@ -42,7 +42,7 @@ const AudioControls = (
     onSetTrackIndex,
     onNextTrack,
   }: Properties,
-  reference: ForwardedRef<AudioControlsHandle>,
+  reference: ForwardedRef<AudioControlsHandler>,
 ): JSX.Element => {
   const [isPlaying, setIsPlaying] = useState(false);
 

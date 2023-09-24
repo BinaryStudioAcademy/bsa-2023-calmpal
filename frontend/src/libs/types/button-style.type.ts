@@ -1,4 +1,5 @@
 type ButtonStyle =
+  | 'add'
   | 'primary'
   | 'secondary'
   | 'rounded'

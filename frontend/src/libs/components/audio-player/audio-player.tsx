@@ -13,7 +13,7 @@ import { AudioControls } from './components/audio-controls/audio-controls.js';
 import { ProgressBar } from './components/progress-bar/progress-bar.js';
 import { DEFAULT_AUDIO_OPTIONS } from './libs/constants/constants.js';
 import { AudioOptionKey } from './libs/enums/enums.js';
-import { type AudioControlsHandle } from './libs/types/types.js';
+import { type AudioControlsHandler } from './libs/types/types.js';
 
 type Properties = {
   mediaUrl: string;
@@ -23,7 +23,7 @@ type Properties = {
   tracksCount: number;
 };
 
-const AudioPlayer = ({
+const AudioPlayer: React.FC<Properties> = ({
   mediaUrl,
   timerDuration,
   trackIndex,
@@ -32,7 +32,7 @@ const AudioPlayer = ({
 }: Properties): JSX.Element => {
   const audioReference = useRef<HTMLAudioElement | null>(null);
   const progressBarReference = useRef<HTMLInputElement | null>(null);
-  const audioControlsReference = useRef<AudioControlsHandle | null>(null);
+  const audioControlsReference = useRef<AudioControlsHandler | null>(null);
 
   const { watch, setValue } = useAppForm({
     defaultValues: { ...DEFAULT_AUDIO_OPTIONS, timerDuration },
@@ -73,7 +73,7 @@ const AudioPlayer = ({
     ) {
       (audioReference.current as HTMLAudioElement).pause();
       (
-        audioControlsReference.current as AudioControlsHandle
+        audioControlsReference.current as AudioControlsHandler
       ).handlePausePlayer();
 
       setValue(

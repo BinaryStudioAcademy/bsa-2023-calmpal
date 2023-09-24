@@ -80,7 +80,7 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
           style="play-button"
           onClick={handlePlayClick}
           label="Play meditation"
-          isLabelVisuallyHidden={true}
+          isLabelVisuallyHidden
           iconName="play"
           iconColor={IconColor.BLUE}
         />
