@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   container: {
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: AppColor.BLACK,
     maxWidth: 151,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
   duration: {
     color: AppColor.PURPLE_200,
@@ -45,6 +46,7 @@ const styles = StyleSheet.create({
     borderRadius: 17,
     marginTop: 10,
     fontSize: 14,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
   playButton: {
     width: 48,
