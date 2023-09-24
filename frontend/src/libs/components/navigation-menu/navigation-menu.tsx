@@ -5,10 +5,6 @@ import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useLocation } from '#libs/hooks/hooks.js';
 import { type Route } from '#libs/types/types.js';
 
-import {
-  DEFAULT_ICON_HEIGHT,
-  DEFAULT_ICON_WIDTH,
-} from './libs/constants/constants.js';
 import styles from './styles.module.scss';
 
 type Properties = {
@@ -42,8 +38,8 @@ const NavigationMenu: React.FC<Properties> = ({ routes }) => {
                     <Icon
                       name={route.icon}
                       color={IconColor.BLUE}
-                      width={route.iconWidth ?? DEFAULT_ICON_WIDTH}
-                      height={route.iconHeight ?? DEFAULT_ICON_HEIGHT}
+                      width={24}
+                      height={24}
                     />
                   </span>
                 </Link>
