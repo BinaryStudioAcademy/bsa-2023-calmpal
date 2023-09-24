@@ -1,0 +1,68 @@
+name: Continuous Integration Run Latest Database Migration
+
+env:
+  NODE_ENV: local
+  HOST: localhost
+  PORT: 3001
+  DB_NAME: calmpal_db
+  DB_USERNAME: postgres
+  DB_PASSWORD: password
+  DB_HOST: host.docker.internal
+  DB_PORT: 5434
+  DB_DIALECT: pg
+  DB_POOL_MIN: 2
+  DB_POOL_MAX: 10
+  DUMP_FILE: environment-dump
+
+on:
+  pull_request:
+    branches:
+      - development
+    paths:
+      - backend/**/*.*
+
+  workflow_dispatch:
+
+concurrency:
+  group: ci-db-migration-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci-run-db-migration:
+    name: Run latest database migration on environment dump
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Step name
+        uses: aws-actions/aws-secretsmanager-get-secrets@v1
+        with:
+          secret-ids: |
+            ENVIRONMENT, development/calmpal
+            ENVIRONMENT_DB, ${{ secrets.AWS_DB_SECRET }}
+          parse-json-secrets: true
+
+      - name: Setup docker services
+        run: docker-compose -f docker-compose.services.yml up -d calmpal_db
+
+      - name: Figure out whether migrations can be applied to existing environment database
+        env:
+          JWT_SECRET_KEY: ${{ env.ENVIRONMENT_JWT_SECRET }}
+          AWS_REGION: ${{ env.ENVIRONMENT_AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ env.ENVIRONMENT_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.ENVIRONMENT_AWS_SECRET_ACCESS_KEY }}
+          AWS_BUCKET_NAME: ${{ env.ENVIRONMENT_AWS_BUCKET_NAME }}
+        run: |
+          env > .env
+          docker run -it --rm --env-file ./.env $(docker build -f ./backend/Dockerfile.db-migrations -q .)
+
+      - name: Stop docker services
+        run: docker-compose -f docker-compose.services.yml down
