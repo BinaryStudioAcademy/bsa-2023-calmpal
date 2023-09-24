@@ -95,7 +95,9 @@ const { reducer, actions, name } = createSlice({
     });
 
     builder.addCase(deleteChat.fulfilled, (state, action) => {
-      state.chats = action.payload;
+      state.chats = state.chats.filter((chat) => {
+        return chat.id !== action.payload;
+      });
       state.deleteChatDataStatus = DataStatus.FULFILLED;
     });
 

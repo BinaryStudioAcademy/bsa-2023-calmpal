@@ -60,24 +60,17 @@ const createMessage = createAsyncThunk<
   return await chatMessagesApi.createChatMessage(payload);
 });
 
-const deleteChat = createAsyncThunk<
-  ChatGetAllItemResponseDto[],
-  number,
-  AsyncThunkConfig
->(`${sliceName}/delete-chat`, async (id, { extra, getState, dispatch }) => {
-  const { chatApi } = extra;
-  await chatApi.deleteChat(id);
+const deleteChat = createAsyncThunk<number, number, AsyncThunkConfig>(
+  `${sliceName}/delete-chat`,
+  async (id, { extra, dispatch }) => {
+    const { chatApi } = extra;
+    await chatApi.deleteChat(id);
 
-  const {
-    chats: { chats },
-  } = getState();
+    dispatch(appActions.navigate(AppRoute.CHATS));
 
-  dispatch(appActions.navigate(AppRoute.CHATS));
-
-  return chats.filter((chat) => {
-    return chat.id !== id;
-  });
-});
+    return id;
+  },
+);
 
 export {
   createChat,
