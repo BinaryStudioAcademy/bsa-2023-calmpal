@@ -15,6 +15,13 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     restart: on-failure
+  backend_db_migrations:
+    container_name: backend_db_migrations
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.db-migrations
+    networks:
+      - calmpal_network
 
 networks:
   calmpal_network:

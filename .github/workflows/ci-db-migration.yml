@@ -7,7 +7,7 @@ env:
   DB_NAME: calmpal_db
   DB_USERNAME: postgres
   DB_PASSWORD: password
-  DB_HOST: localhost
+  DB_HOST: host.docker.internal
   DB_PORT: 5434
   DB_DIALECT: pg
   DB_POOL_MIN: 2
@@ -62,7 +62,7 @@ jobs:
           AWS_BUCKET_NAME: ${{ env.ENVIRONMENT_AWS_BUCKET_NAME }}
         run: |
           env > .env
-          docker run --rm --env-file ./.env $(docker build -f ./backend/Dockerfile.db-migrations -q .)
+          docker-compose -f docker-compose.services.yml --env-file ./.env up backend_db_migrations
 
       - name: Stop docker services
         run: docker-compose -f docker-compose.services.yml down
