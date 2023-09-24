@@ -17,6 +17,7 @@ import { Auth } from '#pages/auth/auth.js';
 import { Chat } from '#pages/chat/chat.js';
 import { Dashboard } from '#pages/dashboard/dashboard.js';
 import { Journal } from '#pages/journal/journal.js';
+import { MeditationPlayer } from '#pages/meditation/components/meditation-player/meditation-player.js';
 import { Meditation } from '#pages/meditation/meditation.js';
 import { Survey } from '#pages/surveys/survey.js';
 import { UserProfile } from '#pages/user-profile/user-profile.js';
@@ -39,6 +40,16 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                     </NavigationMenuWrapper>
                   </ProtectedRoute>
                 ),
+                children: [
+                  {
+                    path: AppRoute.MEDITATION_$ID,
+                    element: (
+                      <ProtectedRoute>
+                        <MeditationPlayer />
+                      </ProtectedRoute>
+                    ),
+                  },
+                ],
               },
               {
                 path: AppRoute.SIGN_IN,
