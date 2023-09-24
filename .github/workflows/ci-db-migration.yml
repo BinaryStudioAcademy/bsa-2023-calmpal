@@ -46,7 +46,7 @@ jobs:
         uses: aws-actions/aws-secretsmanager-get-secrets@v1
         with:
           secret-ids: |
-            ENVIRONMENT, ${{ github.ref_name }}/calmpal
+            ENVIRONMENT, ${{ github.base_ref }}/calmpal
             ENVIRONMENT_DB, ${{ secrets.AWS_DB_SECRET }}
           parse-json-secrets: true
 
