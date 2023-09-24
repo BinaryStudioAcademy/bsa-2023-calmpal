@@ -22,21 +22,13 @@
   margin-top: 15px;
 }
 
-.form-link {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
-}
-
-.form-link .text {
+.text {
   margin-left: 5px;
   color: var(--white);
   font-weight: 600;
   text-decoration: none;
 }
 
-.form-link .text:hover {
+.text:hover {
   color: var(--gray-100);
 }
