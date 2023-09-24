@@ -33,7 +33,6 @@ const MeditationList: React.FC = () => {
       meditationEntries: meditation.meditationEntries,
     };
   });
-  // console.log(meditationEntries);
 
   const dispatch = useAppDispatch();
   const navigation =
