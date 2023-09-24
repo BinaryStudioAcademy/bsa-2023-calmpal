@@ -3,7 +3,7 @@ import { DataStatus } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useAppSelector, useCallback } from '#libs/hooks/hooks.js';
 
-import { MeditationEntry } from './meditation-entry/meditation-entry.js';
+import { MeditationEntry } from './components/components.js';
 import styles from './styles.module.scss';
 
 type Properties = {

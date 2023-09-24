@@ -7,4 +7,5 @@ export {
   getRelativeDate,
   groupChatMessage,
   sanitizeInput,
+  SECONDS_IN_MINUTE,
 } from 'shared/build/index.js';

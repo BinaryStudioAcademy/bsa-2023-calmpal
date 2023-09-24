@@ -1,7 +1,9 @@
 import { type AppQueryStringKey, type AppRoute } from '#libs/enums/enums.js';
 import { type ValueOf } from '#libs/types/types.js';
 
-type QueryParameters = Record<ValueOf<typeof AppQueryStringKey>, string>;
+type QueryParameters = Partial<
+  Record<ValueOf<typeof AppQueryStringKey>, string>
+>;
 
 const getUrlWithQueryString = (
   path: ValueOf<typeof AppRoute>,
