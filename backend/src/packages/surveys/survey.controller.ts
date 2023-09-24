@@ -8,7 +8,7 @@ import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 import { AuthApiPath } from '#packages/auth/auth.js';
 
-import { type SurveyRequestDto } from './libs/types/types.js';
+import { type SurveyCreateRequestDto } from './libs/types/types.js';
 import { createSurveyValidationSchema } from './libs/validation-schemas/validation-schemas.js';
 import { type SurveyService } from './survey.service.js';
 
@@ -28,7 +28,9 @@ import { type SurveyService } from './survey.service.js';
  *            items:
  *              type: string
  *          feelings:
- *            type: string
+ *            type: array
+ *            items:
+ *              type: string
  *          goals:
  *            type: array
  *            items:
@@ -114,7 +116,7 @@ class SurveyController extends BaseController {
       handler: (options) => {
         return this.create(
           options as APIHandlerOptions<{
-            body: SurveyRequestDto;
+            body: SurveyCreateRequestDto;
           }>,
         );
       },
@@ -152,7 +154,7 @@ class SurveyController extends BaseController {
 
   private async create(
     options: APIHandlerOptions<{
-      body: SurveyRequestDto;
+      body: SurveyCreateRequestDto;
     }>,
   ): Promise<APIHandlerResponse> {
     return {

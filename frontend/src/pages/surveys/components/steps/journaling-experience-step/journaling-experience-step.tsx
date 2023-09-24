@@ -1,4 +1,4 @@
-import { Button, Checkbox } from '#libs/components/components.js';
+import { Button, Radio } from '#libs/components/components.js';
 import {
   useAppForm,
   useCallback,
@@ -6,30 +6,27 @@ import {
   useFormController,
 } from '#libs/hooks/hooks.js';
 import { type JournalingExperienceInputDto } from '#packages/survey/libs/types/types.js';
-import { journalingExperienceStepInputValidationSchema } from '#packages/survey/survey.js';
-import {
-  JOURNALING_EXPERIENCE_CATEGORIES,
-  JOURNALING_EXPERIENCE_QUESTION,
-} from '#pages/surveys/libs/constants.js';
+import { oneAnswerStepInputValidationSchema } from '#packages/survey/survey.js';
+import { JOURNALING_EXPERIENCE_CATEGORIES } from '#pages/surveys/libs/constants.js';
 import { useSurvey } from '#pages/surveys/libs/hooks/survey.hooks.js';
 
 import styles from '../styles.module.scss';
 
 type Properties = {
   onSubmit: () => void;
-  handlePreviousStep: () => void;
+  onPreviousStep: () => void;
 };
 
 const JournalingExperienceStep: React.FC<Properties> = ({
   onSubmit,
-  handlePreviousStep,
+  onPreviousStep,
 }) => {
   const { journalingExperience, setJournalingExperience } = useSurvey();
 
   const { control, isValid, handleSubmit } =
     useAppForm<JournalingExperienceInputDto>({
       defaultValues: { journalingExperience: journalingExperience },
-      validationSchema: journalingExperienceStepInputValidationSchema,
+      validationSchema: oneAnswerStepInputValidationSchema,
     });
   const {
     field: { onChange: onCategoryChange },
@@ -64,14 +61,17 @@ const JournalingExperienceStep: React.FC<Properties> = ({
 
   return (
     <form className={styles['form']} onSubmit={handleFormSubmit}>
-      <div className={styles['title']}>{JOURNALING_EXPERIENCE_QUESTION}</div>
+      <div className={styles['title']}>
+        What is your experience with journaling?
+      </div>
       <div className={styles['select']}>
         {JOURNALING_EXPERIENCE_CATEGORIES.map((category) => {
           return (
-            <Checkbox
+            <Radio
+              control={control}
+              name="journalingExperience"
               key={category}
               label={category}
-              type="radio"
               onChange={handleFieldChange(category)}
               isChecked={journalingExperience === category}
             />
@@ -85,7 +85,7 @@ const JournalingExperienceStep: React.FC<Properties> = ({
         style="secondary"
         isDisabled={!isValid}
       />
-      <Button label="Back" style="outlined" onClick={handlePreviousStep} />
+      <Button label="Back" style="outlined" onClick={onPreviousStep} />
     </form>
   );
 };

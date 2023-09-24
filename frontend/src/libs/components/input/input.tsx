@@ -53,7 +53,7 @@ const Input = <T extends FormFieldValues>({
           rows={rowsCount}
           placeholder={placeholder}
           maxLength={maxLength}
-          defaultValue={defaultValue ?? value}
+          defaultValue={value ?? defaultValue}
           autoComplete={autoComplete}
           className={getValidClassNames(
             styles['textarea'],

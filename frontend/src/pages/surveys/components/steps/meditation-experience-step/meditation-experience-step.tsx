@@ -1,4 +1,4 @@
-import { Button, Checkbox } from '#libs/components/components.js';
+import { Button, Radio } from '#libs/components/components.js';
 import {
   useAppForm,
   useCallback,
@@ -6,30 +6,27 @@ import {
   useFormController,
 } from '#libs/hooks/hooks.js';
 import { type MeditationExperienceInputDto } from '#packages/survey/libs/types/types.js';
-import { meditationExperienceStepInputValidationSchema } from '#packages/survey/survey.js';
-import {
-  MEDITATION_EXPERIENCE_CATEGORIES,
-  MEDITATION_EXPERIENCE_QUESTION,
-} from '#pages/surveys/libs/constants.js';
+import { oneAnswerStepInputValidationSchema } from '#packages/survey/survey.js';
+import { MEDITATION_EXPERIENCE_CATEGORIES } from '#pages/surveys/libs/constants.js';
 import { useSurvey } from '#pages/surveys/libs/hooks/survey.hooks.js';
 
 import styles from '../styles.module.scss';
 
 type Properties = {
-  handleNextStep: () => void;
-  handlePreviousStep: () => void;
+  onNextStep: () => void;
+  onPreviousStep: () => void;
 };
 
 const MeditationExperienceStep: React.FC<Properties> = ({
-  handleNextStep,
-  handlePreviousStep,
+  onNextStep,
+  onPreviousStep,
 }) => {
   const { meditationExperience, setMeditationExperience } = useSurvey();
 
   const { control, isValid, handleSubmit } =
     useAppForm<MeditationExperienceInputDto>({
       defaultValues: { meditationExperience: meditationExperience },
-      validationSchema: meditationExperienceStepInputValidationSchema,
+      validationSchema: oneAnswerStepInputValidationSchema,
     });
   const {
     field: { onChange: onCategoryChange },
@@ -49,9 +46,9 @@ const MeditationExperienceStep: React.FC<Properties> = ({
 
   const handleFormSubmit = useCallback(
     (event_: React.BaseSyntheticEvent): void => {
-      void handleSubmit(handleNextStep)(event_);
+      void handleSubmit(onNextStep)(event_);
     },
-    [handleSubmit, handleNextStep],
+    [handleSubmit, onNextStep],
   );
 
   useEffect(() => {
@@ -60,15 +57,18 @@ const MeditationExperienceStep: React.FC<Properties> = ({
 
   return (
     <form className={styles['form']} onSubmit={handleFormSubmit}>
-      <div className={styles['title']}>{MEDITATION_EXPERIENCE_QUESTION}</div>
+      <div className={styles['title']}>
+        What is your experience with meditation?
+      </div>
 
       <div className={styles['select']}>
         {MEDITATION_EXPERIENCE_CATEGORIES.map((category) => {
           return (
-            <Checkbox
+            <Radio
+              control={control}
+              name="meditationExperience"
               key={category}
               label={category}
-              type="radio"
               onChange={handleFieldChange(category)}
               isChecked={meditationExperience === category}
             />
@@ -83,7 +83,7 @@ const MeditationExperienceStep: React.FC<Properties> = ({
         isDisabled={!isValid}
       />
 
-      <Button label="Back" style="outlined" onClick={handlePreviousStep} />
+      <Button label="Back" style="outlined" onClick={onPreviousStep} />
     </form>
   );
 };

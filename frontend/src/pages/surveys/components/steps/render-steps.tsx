@@ -1,4 +1,4 @@
-import { type Step, Steps } from '#packages/survey/survey.js';
+import { type Step, SurveySteps } from '#packages/survey/survey.js';
 
 import { FeelingsStep } from './feelings-step/feelings-step.js';
 import { GoalsStep } from './goals-step/goals-step.js';
@@ -21,57 +21,57 @@ const renderSteps = ({
   handleSubmit,
 }: StepsProperties): React.ReactNode => {
   switch (currentStep) {
-    case Steps.PREFERENCES: {
+    case SurveySteps.PREFERENCES: {
       {
-        return <PreferencesStep handleNextStep={handleNextStep} />;
+        return <PreferencesStep onNextStep={handleNextStep} />;
       }
     }
-    case Steps.FEELINGS: {
+    case SurveySteps.FEELINGS: {
       {
         return (
           <FeelingsStep
-            handlePreviousStep={handlePreviousStep}
-            handleNextStep={handleNextStep}
+            onPreviousStep={handlePreviousStep}
+            onNextStep={handleNextStep}
           />
         );
       }
     }
-    case Steps.GOALS: {
+    case SurveySteps.GOALS: {
       {
         return (
           <GoalsStep
-            handlePreviousStep={handlePreviousStep}
-            handleNextStep={handleNextStep}
+            onPreviousStep={handlePreviousStep}
+            onNextStep={handleNextStep}
           />
         );
       }
     }
-    case Steps.WORRIES: {
+    case SurveySteps.WORRIES: {
       {
         return (
           <WorriesStep
-            handlePreviousStep={handlePreviousStep}
-            handleNextStep={handleNextStep}
+            onPreviousStep={handlePreviousStep}
+            onNextStep={handleNextStep}
           />
         );
       }
     }
-    case Steps.MEDITATION_EXPERIENCE: {
+    case SurveySteps.MEDITATION_EXPERIENCE: {
       {
         return (
           <MeditationExperienceStep
-            handlePreviousStep={handlePreviousStep}
-            handleNextStep={handleNextStep}
+            onPreviousStep={handlePreviousStep}
+            onNextStep={handleNextStep}
           />
         );
       }
     }
-    case Steps.JOURNALING_EXPERIENCE: {
+    case SurveySteps.JOURNALING_EXPERIENCE: {
       {
         return (
           <JournalingExperienceStep
             onSubmit={handleSubmit}
-            handlePreviousStep={handlePreviousStep}
+            onPreviousStep={handlePreviousStep}
           />
         );
       }

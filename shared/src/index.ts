@@ -89,19 +89,17 @@ export {
 } from './packages/meditation/meditation.js';
 export {
   createSurveyValidationSchema,
-  feelingsStepInputValidationSchema,
   getSurveyCategories,
-  goalsStepInputValidationSchema,
-  journalingExperienceStepInputValidationSchema,
-  meditationExperienceStepInputValidationSchema,
+  oneAnswerStepInputValidationSchema,
   PREFERENCES_OTHER_CATEGORY,
   preferenceStepInputValidationSchema,
+  stepInputValidationSchema,
+  stepWithOtherInputValidationSchema,
   type SurveyGetAllItemResponseDto,
   type SurveyInputDto,
   surveyInputValidationSchema,
   type SurveyRequestDto,
   SurveyValidationRule,
-  worriesStepInputValidationSchema,
 } from './packages/surveys/surveys.js';
 export {
   type UserAuthResponseDto,

@@ -7,11 +7,6 @@ const ColumnName = {
   ID: 'id',
   USER_ID: 'user_id',
   PREFERENCES: 'preferences',
-  FEELINGS: 'feelings',
-  GOALS: 'goals',
-  WORRIES: 'worries',
-  MEDITATION_EXPERIENCE: 'meditation_experience',
-  JOURNALING_EXPERIENCE: 'journaling_experience',
   CREATED_AT: 'created_at',
   UPDATED_AT: 'updated_at',
 } as const;
@@ -19,9 +14,6 @@ const ColumnName = {
 const RelationRule = {
   CASCADE: 'CASCADE',
 } as const;
-
-const POSTGRE_ARRAY_TYPE = 'varchar(1000)[]';
-const POSTGRE_STRING_TYPE = 'varchar(255)';
 
 function up(knex: Knex): Promise<void> {
   return knex.schema.createTable(TABLE_NAME, (table) => {
@@ -35,14 +27,9 @@ function up(knex: Knex): Promise<void> {
       .onDelete(RelationRule.CASCADE)
       .notNullable();
     table
-      .specificType(ColumnName.PREFERENCES, POSTGRE_ARRAY_TYPE)
+      .specificType(ColumnName.PREFERENCES, 'varchar(1000)[]')
       .notNullable()
       .defaultTo('{}');
-    table.specificType(ColumnName.FEELINGS, POSTGRE_STRING_TYPE);
-    table.specificType(ColumnName.GOALS, POSTGRE_ARRAY_TYPE).defaultTo('{}');
-    table.specificType(ColumnName.WORRIES, POSTGRE_ARRAY_TYPE).defaultTo('{}');
-    table.specificType(ColumnName.MEDITATION_EXPERIENCE, POSTGRE_STRING_TYPE);
-    table.specificType(ColumnName.JOURNALING_EXPERIENCE, POSTGRE_STRING_TYPE);
     table
       .dateTime(ColumnName.CREATED_AT)
       .notNullable()

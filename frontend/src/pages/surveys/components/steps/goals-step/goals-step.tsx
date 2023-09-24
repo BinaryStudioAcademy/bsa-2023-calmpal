@@ -7,12 +7,11 @@ import {
 } from '#libs/hooks/hooks.js';
 import { type GoalInputDto } from '#packages/survey/libs/types/types.js';
 import {
-  goalsStepInputValidationSchema,
+  stepWithOtherInputValidationSchema,
   SurveyValidationRule,
 } from '#packages/survey/survey.js';
 import {
   GOALS_CATEGORIES,
-  GOALS_QUESTION,
   TEXTAREA_ROWS_COUNT,
 } from '#pages/surveys/libs/constants.js';
 import { useSurvey } from '#pages/surveys/libs/hooks/survey.hooks.js';
@@ -25,18 +24,15 @@ import {
 import styles from '../styles.module.scss';
 
 type Properties = {
-  handleNextStep: () => void;
-  handlePreviousStep: () => void;
+  onNextStep: () => void;
+  onPreviousStep: () => void;
 };
 
-const GoalsStep: React.FC<Properties> = ({
-  handleNextStep,
-  handlePreviousStep,
-}) => {
+const GoalsStep: React.FC<Properties> = ({ onNextStep, onPreviousStep }) => {
   const { goals, setGoals } = useSurvey();
   const { control, errors, isValid, handleSubmit } = useAppForm<GoalInputDto>({
     defaultValues: { goals: goals },
-    validationSchema: goalsStepInputValidationSchema,
+    validationSchema: stepWithOtherInputValidationSchema,
   });
 
   const {
@@ -100,9 +96,9 @@ const GoalsStep: React.FC<Properties> = ({
         setGoals(payload.goals);
       }
 
-      handleNextStep();
+      onNextStep();
     },
-    [handleNextStep, setGoals],
+    [onNextStep, setGoals],
   );
 
   const handleFormSubmit = useCallback(
@@ -114,12 +110,16 @@ const GoalsStep: React.FC<Properties> = ({
 
   return (
     <form className={styles['form']} onSubmit={handleFormSubmit}>
-      <div className={styles['title']}>{GOALS_QUESTION}</div>
+      <div className={styles['title']}>
+        What do you want to achieve with this Serenity?
+      </div>
 
       <div className={styles['select']}>
         {GOALS_CATEGORIES.map((category) => {
           return (
             <Checkbox
+              control={control}
+              name="goals"
               key={category}
               label={category}
               isChecked={categoriesValue.includes(category)}
@@ -147,7 +147,7 @@ const GoalsStep: React.FC<Properties> = ({
         isDisabled={!isValid}
       />
 
-      <Button label="Back" style="outlined" onClick={handlePreviousStep} />
+      <Button label="Back" style="outlined" onClick={onPreviousStep} />
     </form>
   );
 };

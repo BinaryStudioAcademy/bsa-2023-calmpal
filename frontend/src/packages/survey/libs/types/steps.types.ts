@@ -1,4 +1,4 @@
-import { type STEPS } from '../constants/constants.js';
+import { type STEPS_DEFAULT_ORDER } from '../constants/constants.js';
 
 type FeelingInputDto = {
   feelings: string[];
@@ -27,7 +27,7 @@ type WorryInputDto = {
   other: string;
 };
 
-type Step = (typeof STEPS)[number];
+type Step = (typeof STEPS_DEFAULT_ORDER)[number];
 
 export {
   type FeelingInputDto,

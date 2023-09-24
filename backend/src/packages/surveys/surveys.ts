@@ -11,6 +11,6 @@ const surveyController = new SurveyController(logger, surveyService);
 
 export { surveyController, surveyService };
 export {
+  type SurveyCreateRequestDto,
   type SurveyGetAllItemResponseDto,
-  type SurveyRequestDto,
 } from './libs/types/types.js';

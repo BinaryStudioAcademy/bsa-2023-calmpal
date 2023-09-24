@@ -1,4 +1,4 @@
-const STEPS = [
+const STEPS_DEFAULT_ORDER = [
   'preferences',
   'feelings',
   'goals',
@@ -7,4 +7,4 @@ const STEPS = [
   'journalingExperience',
 ] as const;
 
-export { STEPS };
+export { STEPS_DEFAULT_ORDER };

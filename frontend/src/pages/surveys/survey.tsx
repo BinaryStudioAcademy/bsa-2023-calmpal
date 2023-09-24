@@ -9,10 +9,10 @@ import {
 } from '#libs/hooks/hooks.js';
 import {
   type Step,
-  STEPS,
-  Steps,
+  STEPS_DEFAULT_ORDER,
   type SurveyRequestDto,
   type SurveyState,
+  SurveySteps,
 } from '#packages/survey/survey.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { actions as authActions } from '#slices/auth/auth.js';
@@ -26,19 +26,19 @@ type SurveyForDispatch = SurveyState & { userId?: number };
 
 const Survey: React.FC = () => {
   const { survey } = useSurvey();
-  const [currentStep, setCurrentStep] = useState<Step>(Steps.PREFERENCES);
+  const [currentStep, setCurrentStep] = useState<Step>(SurveySteps.PREFERENCES);
 
   const handleNextStep = useCallback((): void => {
-    const index = STEPS.indexOf(currentStep);
-    const nextIndex = (index + ONE_INDEX) % STEPS.length;
-    const nextCategory = STEPS[nextIndex];
+    const index = STEPS_DEFAULT_ORDER.indexOf(currentStep);
+    const nextIndex = (index + ONE_INDEX) % STEPS_DEFAULT_ORDER.length;
+    const nextCategory = STEPS_DEFAULT_ORDER[nextIndex];
     setCurrentStep(nextCategory as Step);
   }, [currentStep]);
 
   const handlePreviousStep = useCallback((): void => {
-    const index = STEPS.indexOf(currentStep);
-    const previousIndex = (index - ONE_INDEX) % STEPS.length;
-    const previousCategory = STEPS[previousIndex];
+    const index = STEPS_DEFAULT_ORDER.indexOf(currentStep);
+    const previousIndex = (index - ONE_INDEX) % STEPS_DEFAULT_ORDER.length;
+    const previousCategory = STEPS_DEFAULT_ORDER[previousIndex];
     setCurrentStep(previousCategory as Step);
   }, [currentStep]);
 

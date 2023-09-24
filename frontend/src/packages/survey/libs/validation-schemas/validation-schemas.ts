@@ -1,8 +1,5 @@
 export {
-  feelingsStepInputValidationSchema,
-  goalsStepInputValidationSchema,
-  journalingExperienceStepInputValidationSchema,
-  meditationExperienceStepInputValidationSchema,
-  preferenceStepInputValidationSchema,
-  worriesStepInputValidationSchema,
+  oneAnswerStepInputValidationSchema,
+  stepInputValidationSchema,
+  stepWithOtherInputValidationSchema,
 } from 'shared/build/index.js';

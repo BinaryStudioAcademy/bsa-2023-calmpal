@@ -7,12 +7,11 @@ import {
 } from '#libs/hooks/hooks.js';
 import { type PreferenceInputDto } from '#packages/survey/libs/types/types.js';
 import {
-  preferenceStepInputValidationSchema,
+  stepWithOtherInputValidationSchema,
   SurveyValidationRule,
 } from '#packages/survey/survey.js';
 import {
   PREFERENCES_CATEGORIES,
-  PREFERENCES_QUESTION,
   TEXTAREA_ROWS_COUNT,
 } from '#pages/surveys/libs/constants.js';
 import { useSurvey } from '#pages/surveys/libs/hooks/survey.hooks.js';
@@ -25,10 +24,10 @@ import {
 import styles from '../styles.module.scss';
 
 type Properties = {
-  handleNextStep: () => void;
+  onNextStep: () => void;
 };
 
-const PreferencesStep: React.FC<Properties> = ({ handleNextStep }) => {
+const PreferencesStep: React.FC<Properties> = ({ onNextStep }) => {
   const { preferences, setPreferences } = useSurvey();
 
   const { control, errors, isValid, handleSubmit } =
@@ -36,7 +35,7 @@ const PreferencesStep: React.FC<Properties> = ({ handleNextStep }) => {
       defaultValues: {
         preferences: preferences,
       },
-      validationSchema: preferenceStepInputValidationSchema,
+      validationSchema: stepWithOtherInputValidationSchema,
     });
   const {
     field: { onChange: onCategoryChange, value: categoriesValue },
@@ -99,9 +98,9 @@ const PreferencesStep: React.FC<Properties> = ({ handleNextStep }) => {
         setPreferences(payload.preferences);
       }
 
-      handleNextStep();
+      onNextStep();
     },
-    [handleNextStep, setPreferences],
+    [onNextStep, setPreferences],
   );
 
   const handleFormSubmit = useCallback(
@@ -113,13 +112,14 @@ const PreferencesStep: React.FC<Properties> = ({ handleNextStep }) => {
 
   return (
     <form className={styles['form']} onSubmit={handleFormSubmit}>
-      <div className={styles['title']}>{PREFERENCES_QUESTION}</div>
+      <div className={styles['title']}>What can we help you with?</div>
 
       <div className={styles['select']}>
         {PREFERENCES_CATEGORIES.map((category) => {
           return (
             <Checkbox
-              groupName="preferences"
+              control={control}
+              name="preferences"
               isChecked={categoriesValue.includes(category)}
               key={category}
               label={category}

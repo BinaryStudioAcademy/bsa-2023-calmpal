@@ -4,7 +4,10 @@ import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Service } from '#libs/types/types.js';
 import { userService } from '#packages/users/users.js';
 
-import { type SurveyRequestDto } from './libs/types/types.js';
+import {
+  type SurveyCreateRequestDto,
+  type SurveyCreateResponseDto,
+} from './libs/types/types.js';
 import { SurveyEntity } from './survey.entity.js';
 import { type SurveyRepository } from './survey.repository.js';
 
@@ -23,7 +26,9 @@ class SurveyService implements Service {
     return await Promise.resolve({ items: [] });
   }
 
-  public async create(payload: SurveyRequestDto): Promise<SurveyEntity | null> {
+  public async create(
+    payload: SurveyCreateRequestDto,
+  ): Promise<SurveyCreateResponseDto | null> {
     const user = await userService.findById(payload.userId);
 
     if (!user) {
@@ -36,7 +41,7 @@ class SurveyService implements Service {
     if (user.isSurveyCompleted) {
       const item = await this.surveyRepository.update(payload);
 
-      return item ?? null;
+      return item?.toObject() ?? null;
     }
 
     const item = await this.surveyRepository.create(
@@ -53,7 +58,7 @@ class SurveyService implements Service {
 
     await userService.completeSurvey(payload.userId);
 
-    return item;
+    return item.toObject();
   }
 
   public update(): ReturnType<Service['update']> {

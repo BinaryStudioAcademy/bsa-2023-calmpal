@@ -15,6 +15,7 @@ export { Modal } from './modal/modal.js';
 export { NavigationMenu } from './navigation-menu/navigation-menu.js';
 export { NavigationMenuWrapper } from './navigation-menu-wrapper/navigation-menu-wrapper.js';
 export { ProtectedRoute } from './protected-route/protected-route.js';
+export { Radio } from './radio/radio.js';
 export { RouterProvider } from './router-provider/router-provider.jsx';
 export { Search } from './search/search.js';
 export { Sidebar, SidebarBody, SidebarHeader } from './sidebar/components.js';

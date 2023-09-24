@@ -4,8 +4,8 @@ type SurveyInputDto = {
   feelings: string[];
 };
 
-const createFeelingsSurveyForm = joi.object<SurveyInputDto, true>({
+const createStepSurveyForm = joi.object<SurveyInputDto, true>({
   feelings: joi.array().items(joi.string()),
 });
 
-export { createFeelingsSurveyForm };
+export { createStepSurveyForm };

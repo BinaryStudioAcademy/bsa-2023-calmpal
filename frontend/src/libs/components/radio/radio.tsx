@@ -15,7 +15,7 @@ type Properties<T extends FormFieldValues> = {
   isChecked?: boolean;
 };
 
-const Checkbox = <T extends FormFieldValues>({
+const Radio = <T extends FormFieldValues>({
   control,
   label,
   name,
@@ -29,8 +29,8 @@ const Checkbox = <T extends FormFieldValues>({
       <input
         {...field}
         name={name}
-        className={styles['checkbox']}
-        type="checkbox"
+        className={styles['radio']}
+        type="radio"
         onChange={onChange}
         checked={isChecked}
       />
@@ -41,4 +41,4 @@ const Checkbox = <T extends FormFieldValues>({
   );
 };
 
-export { Checkbox };
+export { Radio };

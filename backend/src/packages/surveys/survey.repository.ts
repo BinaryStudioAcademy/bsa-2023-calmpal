@@ -2,7 +2,7 @@ import { type Repository } from '#libs/types/types.js';
 
 import { SurveyEntity } from './survey.entity.js';
 import { type SurveyModel } from './survey.model.js';
-import { type SurveyRequestDto } from './surveys.js';
+import { type SurveyCreateRequestDto } from './surveys.js';
 
 class SurveyRepository implements Repository {
   private surveyModel: typeof SurveyModel;
@@ -81,7 +81,9 @@ class SurveyRepository implements Repository {
     });
   }
 
-  public async update(payload: SurveyRequestDto): Promise<SurveyEntity | null> {
+  public async update(
+    payload: SurveyCreateRequestDto,
+  ): Promise<SurveyEntity | null> {
     const survey = await this.findByUserId(payload.userId);
 
     if (survey) {

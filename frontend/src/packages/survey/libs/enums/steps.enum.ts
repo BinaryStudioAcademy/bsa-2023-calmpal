@@ -1,4 +1,4 @@
-const Steps = {
+const SurveySteps = {
   PREFERENCES: 'preferences',
   FEELINGS: 'feelings',
   GOALS: 'goals',
@@ -7,4 +7,4 @@ const Steps = {
   JOURNALING_EXPERIENCE: 'journalingExperience',
 } as const;
 
-export { Steps };
+export { SurveySteps };

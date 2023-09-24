@@ -7,13 +7,12 @@ import {
 } from '#libs/hooks/hooks.js';
 import { type WorryInputDto } from '#packages/survey/libs/types/types.js';
 import {
+  stepWithOtherInputValidationSchema,
   SurveyValidationRule,
-  worriesStepInputValidationSchema,
 } from '#packages/survey/survey.js';
 import {
   TEXTAREA_ROWS_COUNT,
   WORRIES_CATEGORIES,
-  WORRIES_QUESTION,
 } from '#pages/surveys/libs/constants.js';
 import { useSurvey } from '#pages/surveys/libs/hooks/survey.hooks.js';
 import {
@@ -25,19 +24,16 @@ import {
 import styles from '../styles.module.scss';
 
 type Properties = {
-  handleNextStep: () => void;
-  handlePreviousStep: () => void;
+  onNextStep: () => void;
+  onPreviousStep: () => void;
 };
 
-const WorriesStep: React.FC<Properties> = ({
-  handleNextStep,
-  handlePreviousStep,
-}) => {
+const WorriesStep: React.FC<Properties> = ({ onNextStep, onPreviousStep }) => {
   const { worries, setWorries } = useSurvey();
 
   const { control, errors, isValid, handleSubmit } = useAppForm<WorryInputDto>({
     defaultValues: { worries: worries },
-    validationSchema: worriesStepInputValidationSchema,
+    validationSchema: stepWithOtherInputValidationSchema,
   });
   const {
     field: { onChange: onCategoryChange, value: categoriesValue },
@@ -100,9 +96,9 @@ const WorriesStep: React.FC<Properties> = ({
         setWorries(payload.worries);
       }
 
-      handleNextStep();
+      onNextStep();
     },
-    [handleNextStep, setWorries],
+    [onNextStep, setWorries],
   );
 
   const handleFormSubmit = useCallback(
@@ -114,12 +110,16 @@ const WorriesStep: React.FC<Properties> = ({
 
   return (
     <form className={styles['form']} onSubmit={handleFormSubmit}>
-      <div className={styles['title']}>{WORRIES_QUESTION}</div>
+      <div className={styles['title']}>
+        What do you usually worry about most?
+      </div>
 
       <div className={styles['select']}>
         {WORRIES_CATEGORIES.map((category) => {
           return (
             <Checkbox
+              control={control}
+              name="worries"
               key={category}
               label={category}
               onChange={handleFieldChange(category)}
@@ -147,7 +147,7 @@ const WorriesStep: React.FC<Properties> = ({
         isDisabled={!isValid}
       />
 
-      <Button label="Back" style="outlined" onClick={handlePreviousStep} />
+      <Button label="Back" style="outlined" onClick={onPreviousStep} />
     </form>
   );
 };
