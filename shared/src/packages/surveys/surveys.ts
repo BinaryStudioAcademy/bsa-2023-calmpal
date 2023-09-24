@@ -12,7 +12,6 @@ export {
 export {
   createSurveyValidationSchema,
   createOneAnswerStepSurveyForm as oneAnswerStepInputValidationSchema,
-  createPreferenceStepSurveyForm as preferenceStepInputValidationSchema,
   createStepSurveyForm as stepInputValidationSchema,
   createStepWithOtherSurveyForm as stepWithOtherInputValidationSchema,
   createSurveyValidationSchema as surveyInputValidationSchema,

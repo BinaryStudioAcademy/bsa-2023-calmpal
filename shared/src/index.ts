@@ -93,7 +93,6 @@ export {
   getSurveyCategories,
   oneAnswerStepInputValidationSchema,
   PREFERENCES_OTHER_CATEGORY,
-  preferenceStepInputValidationSchema,
   stepInputValidationSchema,
   stepWithOtherInputValidationSchema,
   type SurveyGetAllItemResponseDto,

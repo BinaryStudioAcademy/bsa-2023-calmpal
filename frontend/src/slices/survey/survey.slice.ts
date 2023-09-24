@@ -1,5 +1,4 @@
-import { type PayloadAction } from '@reduxjs/toolkit';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import { type SurveyState } from '#packages/survey/libs/types/state.type.js';
 
