@@ -16,11 +16,6 @@ const Journal: React.FC = () => {
       <NativeStack.Screen
         name={JournalScreenName.JOURNAL}
         component={JournalScreen}
-        options={{
-          header: (): React.ReactNode => {
-            return <Header title="Meditation \n& Breathing" isProfileVisible />;
-          },
-        }}
       />
       <NativeStack.Screen
         name={JournalScreenName.NOTE}
