@@ -76,7 +76,6 @@ const { reducer, actions, name } = createSlice({
       });
 
       state.updateJournalEntryDataStatus = DataStatus.FULFILLED;
-      state.selectedJournalEntry = action.payload;
     });
     builder.addCase(updateJournalEntry.rejected, (state) => {
       state.updateJournalEntryDataStatus = DataStatus.REJECTED;
