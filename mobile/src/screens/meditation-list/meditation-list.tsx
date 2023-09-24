@@ -2,23 +2,28 @@ import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
 import {
+  Button,
   Header,
   InputSearch,
   LinearGradient,
   ScrollView,
   View,
 } from '#libs/components/components';
+import { AppColor } from '#libs/enums/enums';
 import {
   useAppDispatch,
   useAppRoute,
+  useCallback,
   useEffect,
   useNavigation,
   useSearch,
+  useState,
 } from '#libs/hooks/hooks';
 import { type MeditationNavigationParameterList } from '#libs/types/types';
+import { type MeditationEntryCreateRequestDto } from '#packages/meditation/meditation';
 import { actions as meditationActions } from '#slices/meditation/meditation';
 
-import { MeditationItem } from './components/components';
+import { AddMeditationModal, MeditationItem } from './components/components';
 import { mockedData } from './libs/constants';
 import { styles } from './styles';
 
@@ -38,6 +43,21 @@ const MeditationList: React.FC = () => {
   const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
     mockedData,
     'title',
+  );
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const handleShowModal = (): void => {
+    setIsModalVisible(true);
+  };
+
+  const handleCloseModal = (): void => {
+    setIsModalVisible(false);
+  };
+  const handleSubmit = useCallback(
+    (payload: MeditationEntryCreateRequestDto) => {
+      void dispatch(meditationActions.createMeditationEntry(payload));
+    },
+    [dispatch],
   );
 
   useEffect(() => {
@@ -70,6 +90,18 @@ const MeditationList: React.FC = () => {
             );
           })}
         </ScrollView>
+        <Button
+          onPress={handleShowModal}
+          iconName="plus"
+          label="Add new meditation"
+          type="transparent"
+          color={AppColor.BLUE_200}
+        />
+        <AddMeditationModal
+          isVisible={isModalVisible}
+          onClose={handleCloseModal}
+          onSubmit={handleSubmit}
+        />
       </View>
     </LinearGradient>
   );

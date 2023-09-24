@@ -2,14 +2,13 @@ import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
 import {
-  Button,
   Card,
   InputSearch,
   LinearGradient,
   ScrollView,
   View,
 } from '#libs/components/components';
-import { AppColor, MeditationScreenName } from '#libs/enums/enums';
+import { MeditationScreenName } from '#libs/enums/enums';
 import {
   useAppDispatch,
   useAppSelector,
@@ -17,13 +16,10 @@ import {
   useEffect,
   useNavigation,
   useSearch,
-  useState,
 } from '#libs/hooks/hooks';
 import { type MeditationNavigationParameterList } from '#libs/types/types';
-import { type MeditationEntryCreateRequestDto } from '#packages/meditation/meditation';
 import { actions as meditationActions } from '#slices/meditation/meditation';
 
-import { AddMeditationModal } from './components/components';
 import { styles } from './styles';
 
 const MeditationHome: React.FC = () => {
@@ -33,15 +29,6 @@ const MeditationHome: React.FC = () => {
     };
   });
   const dispatch = useAppDispatch();
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const handleShowModal = (): void => {
-    setIsModalVisible(true);
-  };
-
-  const handleCloseModal = (): void => {
-    setIsModalVisible(false);
-  };
 
   const navigation =
     useNavigation<
@@ -59,13 +46,6 @@ const MeditationHome: React.FC = () => {
       });
     },
     [navigation],
-  );
-
-  const handleSubmit = useCallback(
-    (payload: MeditationEntryCreateRequestDto) => {
-      void dispatch(meditationActions.createMeditationEntry(payload));
-    },
-    [dispatch],
   );
 
   useEffect(() => {
@@ -90,18 +70,6 @@ const MeditationHome: React.FC = () => {
             );
           })}
         </ScrollView>
-        <Button
-          onPress={handleShowModal}
-          iconName="plus"
-          label="Add new meditation"
-          type="transparent"
-          color={AppColor.BLUE_200}
-        />
-        <AddMeditationModal
-          isVisible={isModalVisible}
-          onClose={handleCloseModal}
-          onSubmit={handleSubmit}
-        />
       </View>
     </LinearGradient>
   );
