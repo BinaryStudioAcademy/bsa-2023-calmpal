@@ -1,6 +1,8 @@
 import { getFormattedDate } from '#libs/helpers/helpers';
 import { type ChatMessageGetAllItemResponseDto } from '#packages/chat-messages/chat-messages';
 
+import { NEXT_USER, PREVIOUS_USER } from './constants';
+
 type Properties = {
   messages: ChatMessageGetAllItemResponseDto[];
   currentIndex: number;
@@ -11,9 +13,6 @@ type MessageItemProperties = {
   isDifferentMessageOwner?: boolean;
   currentTime?: string;
 };
-
-const PREVIOUS_USER = 1;
-const NEXT_USER = 1;
 
 const messageItemProperties = ({
   messages,

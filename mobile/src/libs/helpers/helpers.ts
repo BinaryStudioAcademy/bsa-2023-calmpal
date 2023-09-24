@@ -1,4 +1,3 @@
-export { messageItemProperties } from './message-item-properties';
 export {
   configureString,
   debounce,
