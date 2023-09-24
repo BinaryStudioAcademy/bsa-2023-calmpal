@@ -37,3 +37,9 @@
   margin-top: 78px;
   padding: 0 16px;
 }
+
+@media (width < 768px) {
+  .buttons-container {
+    margin-top: 23px;
+  }
+}
