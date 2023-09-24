@@ -15,7 +15,6 @@ import {
   useCallback,
   useEffect,
   useParams,
-  useSearch,
 } from '#libs/hooks/hooks.js';
 import { type ValueOf } from '#libs/types/types.js';
 import { actions as chatsActions } from '#slices/chats/chats.js';
@@ -25,11 +24,15 @@ import styles from './styles.module.scss';
 type Properties = {
   isSidebarShown: boolean;
   setIsSidebarShown: (value: boolean) => void;
+  filter: string;
+  onSetFilter: (query: string) => void;
 };
 
 const ChatSidebar: React.FC<Properties> = ({
   isSidebarShown,
   setIsSidebarShown,
+  filter,
+  onSetFilter,
 }) => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
@@ -38,7 +41,6 @@ const ChatSidebar: React.FC<Properties> = ({
       chats: chats.chats,
     };
   });
-  const { setFilter, filter } = useSearch();
 
   useEffect(() => {
     void dispatch(chatsActions.getAllChats(filter));
@@ -64,7 +66,7 @@ const ChatSidebar: React.FC<Properties> = ({
       </SidebarHeader>
       <SidebarBody>
         <div className={styles['search']}>
-          <Search onValueChange={setFilter} defaultValue={filter} />
+          <Search onValueChange={onSetFilter} defaultValue={filter} />
         </div>
         <div className={styles['chat-list']}>
           {chats.map((chat) => {
