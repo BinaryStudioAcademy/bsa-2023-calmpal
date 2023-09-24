@@ -58,7 +58,7 @@ const MeditationHome: React.FC = () => {
             return (
               <Card
                 title={item.name}
-                handlePassTitle={handleSelectMeditation}
+                onPassTitle={handleSelectMeditation}
                 key={item.id}
               />
             );

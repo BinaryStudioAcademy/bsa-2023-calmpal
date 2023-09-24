@@ -20,8 +20,8 @@ type Properties = {
   iconName?: IconName;
   iconColor?: string;
   onPress?: () => void;
-  handlePassTitle?: (title: string) => void;
-  handlePassId?: (id: number) => void;
+  onPassTitle?: (title: string) => void;
+  onPassId?: (id: number) => void;
   noteId?: number;
 };
 
@@ -31,15 +31,15 @@ const Card: React.FC<Properties> = ({
   iconName,
   iconColor,
   onPress,
-  handlePassTitle,
-  handlePassId,
+  onPassTitle,
+  onPassId,
   noteId,
 }) => {
   const handlePress = (): void => {
-    if (handlePassTitle) {
-      handlePassTitle(title);
-    } else if (handlePassId && noteId) {
-      handlePassId(noteId);
+    if (onPassTitle) {
+      onPassTitle(title);
+    } else if (onPassId && noteId) {
+      onPassId(noteId);
     } else if (onPress) {
       onPress();
     }

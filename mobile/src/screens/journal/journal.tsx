@@ -88,7 +88,7 @@ const Journal: React.FC = () => {
             return (
               <Card
                 title={item.title}
-                handlePassId={handleSelectJournalEntry}
+                onPassId={handleSelectJournalEntry}
                 noteId={item.id}
                 key={item.id}
               />
