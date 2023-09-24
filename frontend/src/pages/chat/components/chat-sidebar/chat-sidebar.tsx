@@ -99,17 +99,15 @@ const ChatSidebar: React.FC<Properties> = ({
 
               return (
                 <Link to={chatLink} key={filteredChat.id}>
-                  <div className={styles['wrapper']}>
-                    <Card
-                      title={filteredChat.name}
-                      imageUrl={cardPlaceholder}
-                      onClick={handleSelectChat}
-                      isActive={String(filteredChat.id) === id}
-                      iconRight="trash"
-                      onIconClick={handleDeleteChat(filteredChat.id)}
-                      iconColor={IconColor.LIGHT_BLUE}
-                    />
-                  </div>
+                  <Card
+                    title={filteredChat.name}
+                    imageUrl={cardPlaceholder}
+                    onClick={handleSelectChat}
+                    isActive={String(filteredChat.id) === id}
+                    iconRight="trash"
+                    onIconClick={handleDeleteChat(filteredChat.id)}
+                    iconColor={IconColor.LIGHT_BLUE}
+                  />
                 </Link>
               );
             })}
