@@ -3,7 +3,7 @@ import { type Repository } from '#libs/types/types.js';
 
 import { ChatEntity } from './chat.entity.js';
 import { type ChatModel } from './chat.model.js';
-import { ChatsRelation } from './libs/enums/enums.js';
+import { ChatsRelation, UserToChatRelation } from './libs/enums/enums.js';
 import { type ChatCommonQueryResponse } from './libs/types/types.js';
 import { type UserToChatModel } from './user-to-chat.model.js';
 
@@ -29,17 +29,10 @@ class ChatRepository implements Repository {
   }
 
   public async findAllByUserId(userId: number): Promise<ChatEntity[]> {
-    const chats = await this.chatModel
-      .query()
+    const chats = await this.userToChatModel
+      .relatedQuery(UserToChatRelation.CHAT)
+      .for(this.userToChatModel.query().where('userId', userId))
       .withGraphJoined(ChatsRelation.MEMBERS)
-      .whereExists(
-        this.userToChatModel
-          .query()
-          .whereRaw(
-            `${this.userToChatModel.tableName}.chat_id = ${this.chatModel.tableName}.id`,
-          )
-          .andWhere('userId', userId),
-      )
       .orderBy('createdAt', SortType.DESC)
       .castTo<ChatCommonQueryResponse[]>();
 
