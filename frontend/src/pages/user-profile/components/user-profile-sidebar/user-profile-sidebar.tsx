@@ -20,12 +20,12 @@ import styles from './styles.module.scss';
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShow: (value: boolean) => void;
+  onSetIsSidebarShow: (value: boolean) => void;
 };
 
 const UserProfileSidebar: React.FC<Properties> = ({
   isSidebarShown,
-  setIsSidebarShow,
+  onSetIsSidebarShow,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -40,11 +40,11 @@ const UserProfileSidebar: React.FC<Properties> = ({
   const handleClick = useCallback(
     (key: string) => {
       return () => {
-        setIsSidebarShow(false);
+        onSetIsSidebarShow(false);
         setActiveItem(key);
       };
     },
-    [setIsSidebarShow],
+    [onSetIsSidebarShow],
   );
 
   const handleSignOut = useCallback((): void => {

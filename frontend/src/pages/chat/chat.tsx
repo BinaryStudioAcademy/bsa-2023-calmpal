@@ -23,7 +23,7 @@ const Chat: React.FC = () => {
     <>
       <ChatSidebar
         isSidebarShown={isSidebarShown}
-        setIsSidebarShow={setIsSidebarShow}
+        onSetIsSidebarShow={setIsSidebarShow}
       />
       <div
         className={getValidClassNames(

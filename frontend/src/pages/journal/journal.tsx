@@ -49,7 +49,7 @@ const Journal: React.FC = () => {
     <>
       <JournalSidebar
         isSidebarShown={isSidebarShown}
-        setIsSidebarShow={setIsSidebarShow}
+        onSetIsSidebarShow={setIsSidebarShow}
       />
       <div
         className={getValidClassNames(

@@ -16,7 +16,7 @@ const UserProfile: React.FC = () => {
     <>
       <UserProfileSidebar
         isSidebarShown={isSidebarShown}
-        setIsSidebarShow={setIsSidebarShow}
+        onSetIsSidebarShow={setIsSidebarShow}
       />
       <div
         className={getValidClassNames(

@@ -24,12 +24,12 @@ import styles from './styles.module.scss';
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShow: (value: boolean) => void;
+  onSetIsSidebarShow: (value: boolean) => void;
 };
 
 const MeditationSidebar: React.FC<Properties> = ({
   isSidebarShown,
-  setIsSidebarShow,
+  onSetIsSidebarShow,
 }) => {
   const dispatch = useAppDispatch();
   const { filteredElements, setFilter } = useSearch(navigationItems, 'name');
@@ -47,8 +47,8 @@ const MeditationSidebar: React.FC<Properties> = ({
   );
 
   const handleSelectMeditationEntry = useCallback(() => {
-    setIsSidebarShow(false);
-  }, [setIsSidebarShow]);
+    onSetIsSidebarShow(false);
+  }, [onSetIsSidebarShow]);
 
   useEffect(() => {
     void dispatch(meditationActions.getAllMeditationEntries());

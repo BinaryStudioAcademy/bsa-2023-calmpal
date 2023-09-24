@@ -12,12 +12,12 @@ const Meditation: React.FC = () => {
     <>
       <MeditationSidebar
         isSidebarShown={isSidebarShown}
-        setIsSidebarShow={setIsSidebarShow}
+        onSetIsSidebarShow={setIsSidebarShow}
       />
       {isBaseMeditationRoute && (
         <MeditationList
           isSidebarShown={isSidebarShown}
-          setIsSidebarShow={setIsSidebarShow}
+          onSetIsSidebarShow={setIsSidebarShow}
         />
       )}
       <RouterOutlet />
