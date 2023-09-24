@@ -51,8 +51,6 @@ class ChatApi extends BaseHttpApi {
       this.getFullEndpoint(ChatsApiPath.$ID, { id: id.toString() }),
       {
         method: 'DELETE',
-        contentType: ContentType.JSON,
-        payload: JSON.stringify({}),
         hasAuth: true,
       },
     );
