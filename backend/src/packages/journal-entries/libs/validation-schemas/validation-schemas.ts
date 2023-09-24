@@ -1,4 +1,4 @@
 export {
   createJournalEntryValidationSchema,
-  findByQueryEntriesValidationSchema,
+  entitiesFilteringQueryValidationSchema,
 } from 'shared/build/index.js';

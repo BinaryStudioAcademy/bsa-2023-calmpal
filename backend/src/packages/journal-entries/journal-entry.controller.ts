@@ -11,12 +11,12 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { type JournalEntryService } from './journal-entry.service.js';
 import { JournalApiPath } from './libs/enums/enums.js';
 import {
-  type GetItemsByQueryDto,
+  type EntitiesFilteringDto,
   type JournalEntryCreateRequestDto,
 } from './libs/types/types.js';
 import {
   createJournalEntryValidationSchema,
-  findByQueryEntriesValidationSchema,
+  entitiesFilteringQueryValidationSchema,
 } from './libs/validation-schemas/validation-schemas.js';
 
 /**
@@ -100,13 +100,13 @@ class JournalEntryController extends BaseController {
       path: JournalApiPath.ROOT,
       method: 'GET',
       validation: {
-        query: findByQueryEntriesValidationSchema,
+        query: entitiesFilteringQueryValidationSchema,
       },
       handler: (options) => {
         return this.getAll(
           options as APIHandlerOptions<{
             user: UserAuthResponseDto;
-            query: GetItemsByQueryDto;
+            query: EntitiesFilteringDto;
           }>,
         );
       },
@@ -253,7 +253,7 @@ class JournalEntryController extends BaseController {
   private async getAll(
     options: APIHandlerOptions<{
       user: UserAuthResponseDto;
-      query: GetItemsByQueryDto;
+      query: EntitiesFilteringDto;
     }>,
   ): Promise<APIHandlerResponse> {
     const { id } = options.user;

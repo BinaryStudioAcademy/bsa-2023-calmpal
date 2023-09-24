@@ -1,4 +1,4 @@
-export { type GetItemsByQueryDto } from './get-items-by-query-dto.type.js';
+export { type EntitiesFilteringDto } from './entities-filtering-dto.type.js';
 export { type ServerErrorDetail } from './server-error-detail.type.js';
 export {
   type ServerCommonErrorResponse,

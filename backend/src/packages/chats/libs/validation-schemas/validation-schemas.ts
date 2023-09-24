@@ -1,4 +1,4 @@
 export {
   createChatValidationSchema,
-  findByQueryEntriesValidationSchema,
+  entitiesFilteringQueryValidationSchema,
 } from 'shared/build/index.js';

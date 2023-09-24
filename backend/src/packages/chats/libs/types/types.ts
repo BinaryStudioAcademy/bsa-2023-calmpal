@@ -5,5 +5,5 @@ export {
   type ChatCreateRequestDto,
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
-  type GetItemsByQueryDto,
+  type EntitiesFilteringDto,
 } from 'shared/build/index.js';
