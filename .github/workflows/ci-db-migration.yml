@@ -1,4 +1,4 @@
-name: Continuous Integration Run Latest Database Migration
+name: Continuous Integration Database Migration
 
 env:
   NODE_ENV: local
@@ -46,7 +46,7 @@ jobs:
         uses: aws-actions/aws-secretsmanager-get-secrets@v1
         with:
           secret-ids: |
-            ENVIRONMENT, development/calmpal
+            ENVIRONMENT, ${{ github.ref_name }}/calmpal
             ENVIRONMENT_DB, ${{ secrets.AWS_DB_SECRET }}
           parse-json-secrets: true
 
@@ -62,7 +62,7 @@ jobs:
           AWS_BUCKET_NAME: ${{ env.ENVIRONMENT_AWS_BUCKET_NAME }}
         run: |
           env > .env
-          docker run -it --rm --env-file ./.env $(docker build -f ./backend/Dockerfile.db-migrations -q .)
+          docker run --rm --env-file ./.env $(docker build -f ./backend/Dockerfile.db-migrations -q .)
 
       - name: Stop docker services
         run: docker-compose -f docker-compose.services.yml down
