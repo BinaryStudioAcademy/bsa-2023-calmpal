@@ -1,5 +1,5 @@
 import { formatRelative } from 'date-fns';
-import { enGB } from 'date-fns/locale';
+import enGB from 'date-fns/locale/en-GB/index.js';
 
 import { type ValueOf } from '#libs/types/types.js';
 
