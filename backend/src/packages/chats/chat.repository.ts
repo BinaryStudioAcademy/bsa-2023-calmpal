@@ -31,9 +31,9 @@ class ChatRepository implements Repository {
   public async findAllByUserId(userId: number): Promise<ChatEntity[]> {
     const chats = await this.userToChatModel
       .relatedQuery(UserToChatRelation.CHAT)
-      .for(this.userToChatModel.query().where({ userId })
+      .for(this.userToChatModel.query().where({ userId }))
       .withGraphJoined(ChatsRelation.MEMBERS)
-      .joinRelated('messages')
+      .joinRelated(ChatsRelation.MESSAGES)
       .orderBy('messages.updatedAt', SortType.DESC)
       .castTo<ChatCommonQueryResponse[]>();
 
