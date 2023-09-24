@@ -58,14 +58,17 @@ class ChatMessageService implements Service {
       chatId,
     );
 
-    let group: ChatMessagesGroups = {};
-    chatMessages.forEach((chatMessage) => {
-      const chatData = chatMessage.toObject();
-      group = groupChatMessage(group, chatData);
-    });
+    const groups: ChatMessagesGroups = chatMessages.reduce(
+      (group, chatMessage) => {
+        const chatData = chatMessage.toObject();
+
+        return groupChatMessage(group, chatData);
+      },
+      {},
+    );
 
     return {
-      items: group,
+      items: groups,
     };
   }
 
