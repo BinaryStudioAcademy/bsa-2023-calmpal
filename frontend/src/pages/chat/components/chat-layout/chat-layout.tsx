@@ -61,7 +61,7 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
     if (createMessageDataStatus === DataStatus.FULFILLED) {
       void dispatch(chatActions.getAllChats(filter));
     }
-  }, [createMessageDataStatus, dispatch]);
+  }, [createMessageDataStatus, dispatch, filter]);
 
   return (
     <>
