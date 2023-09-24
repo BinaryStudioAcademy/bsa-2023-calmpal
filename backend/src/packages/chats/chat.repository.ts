@@ -1,4 +1,4 @@
-import { SortType } from '#libs/enums/sort-type.enum.js';
+import { SortType } from '#libs/enums/enums.js';
 import { type Repository } from '#libs/types/types.js';
 
 import { ChatEntity } from './chat.entity.js';
@@ -31,9 +31,10 @@ class ChatRepository implements Repository {
   public async findAllByUserId(userId: number): Promise<ChatEntity[]> {
     const chats = await this.userToChatModel
       .relatedQuery(UserToChatRelation.CHAT)
-      .for(this.userToChatModel.query().where('userId', userId))
+      .for(this.userToChatModel.query().where({ userId })
       .withGraphJoined(ChatsRelation.MEMBERS)
-      .orderBy('createdAt', SortType.DESC)
+      .joinRelated('messages')
+      .orderBy('messages.updatedAt', SortType.DESC)
       .castTo<ChatCommonQueryResponse[]>();
 
     return chats.map((chat) => {
@@ -77,7 +78,7 @@ class ChatRepository implements Repository {
     });
   }
 
-  public update(): Promise<unknown> {
+  public update(): ReturnType<Repository['update']> {
     return Promise.resolve(null);
   }
 
