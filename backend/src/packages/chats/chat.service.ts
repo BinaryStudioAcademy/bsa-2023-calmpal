@@ -118,9 +118,7 @@ class ChatService implements Service {
       });
     }
 
-    const deletedCount = await this.chatRepository.delete(id);
-
-    return Boolean(deletedCount);
+    return await this.chatRepository.delete(id);
   }
 }
 

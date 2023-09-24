@@ -94,8 +94,10 @@ class ChatRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public delete(id: number): Promise<number> {
-    return this.chatModel.query().deleteById(id).execute();
+  public async delete(id: number): Promise<boolean> {
+    const deletedCount = await this.chatModel.query().deleteById(id).execute();
+
+    return Boolean(deletedCount);
   }
 }
 
