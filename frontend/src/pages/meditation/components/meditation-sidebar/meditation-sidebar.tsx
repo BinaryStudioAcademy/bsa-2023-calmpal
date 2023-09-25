@@ -55,13 +55,13 @@ const MeditationSidebar: React.FC<Properties> = ({
         <SidebarHeader>
           <div className={styles['info']}>
             <span>Meditation & Breathing</span>
-            <div className="icon-container">
+            <div className={styles['icon-container']}>
               <Button
                 label="Open modal"
                 iconName="plus"
                 iconColor={IconColor.BLUE}
-                iconWidth={38}
-                iconHeight={38}
+                iconWidth={33}
+                iconHeight={33}
                 style="rounded-transparent"
                 onClick={handleOpen}
                 isLabelVisuallyHidden

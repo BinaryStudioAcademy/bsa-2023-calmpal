@@ -58,11 +58,11 @@ const ChatSidebar: React.FC<Properties> = ({
           <span className={styles['chat-number']}>
             {filteredElements.length}
           </span>
-        </div>
-        <div className={styles['plus']}>
-          <Link to={AppRoute.CHATS}>
-            <Icon name="plus" color={IconColor.BLUE} width={30} height={30} />
-          </Link>
+          <div className={styles['plus']}>
+            <Link to={AppRoute.CHATS}>
+              <Icon name="plus" color={IconColor.BLUE} width={33} height={33} />
+            </Link>
+          </div>
         </div>
       </SidebarHeader>
       <SidebarBody>
