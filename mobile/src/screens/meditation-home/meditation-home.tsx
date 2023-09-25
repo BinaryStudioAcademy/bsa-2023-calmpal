@@ -18,7 +18,7 @@ import {
 import { type MeditationNavigationParameterList } from '#libs/types/types';
 import { actions as meditationActions } from '#slices/meditation/meditation';
 
-import { mockedData } from './libs/constants';
+import { navigationItems } from './libs/constants';
 import { styles } from './styles';
 
 const MeditationHome: React.FC = () => {
@@ -28,7 +28,7 @@ const MeditationHome: React.FC = () => {
       NativeStackNavigationProp<MeditationNavigationParameterList>
     >();
   const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
-    mockedData,
+    navigationItems,
     'title',
   );
   const handleSelectMeditation = (title: string): void => {
