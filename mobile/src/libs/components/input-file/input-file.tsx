@@ -13,7 +13,7 @@ import {
 import { appActions } from '#slices/app/notifications';
 
 import { Icon, Pressable, Text, View } from '../components';
-import { requestMediaPermissions } from './libs/request-media-permissions.helper.ts';
+import { requestMediaPermissions } from './libs/helpers/helpers';
 import { styles } from './styles';
 
 type Properties<T extends FormFieldValues> = {
