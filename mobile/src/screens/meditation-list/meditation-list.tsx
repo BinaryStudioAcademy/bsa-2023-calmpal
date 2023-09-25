@@ -5,8 +5,8 @@ import {
   Header,
   InputSearch,
   LinearGradient,
+  MeditationTimerModal,
   ScrollView,
-  SetTimerModal,
   View,
 } from '#libs/components/components';
 import { MeditationScreenName } from '#libs/enums/enums';
@@ -77,7 +77,7 @@ const MeditationList: React.FC = () => {
     <LinearGradient>
       <View style={styles.container}>
         {isModalVisible && (
-          <SetTimerModal
+          <MeditationTimerModal
             onClose={handleClose}
             setDuration={setDuration}
             startMeditation={handleSetPlaylist}
