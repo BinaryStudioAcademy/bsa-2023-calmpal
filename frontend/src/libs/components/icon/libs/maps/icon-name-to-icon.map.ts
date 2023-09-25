@@ -5,6 +5,7 @@ import { ReactComponent as Back } from '#assets/icons/button-back.svg';
 import { ReactComponent as ChatSideBarIcon } from '#assets/icons/chat.svg';
 import { ReactComponent as ChatBotAvatarIcon } from '#assets/icons/chatbot-avatar.svg';
 import { ReactComponent as ChatsIcon } from '#assets/icons/chats.svg';
+import { ReactComponent as CheckIcon } from '#assets/icons/check.svg';
 import { ReactComponent as CloseIcon } from '#assets/icons/close.svg';
 import { ReactComponent as DownloadIcon } from '#assets/icons/download.svg';
 import { ReactComponent as ForwardIcon } from '#assets/icons/forward.svg';
@@ -52,6 +53,7 @@ const iconNameToIcon: Record<
   'user': UserIcon,
   'notification': NotificationIcon,
   'subscription': SubscriptionIcon,
+  'check': CheckIcon,
 };
 
 export { iconNameToIcon };
