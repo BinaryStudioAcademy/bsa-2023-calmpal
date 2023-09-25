@@ -1,1 +1,1 @@
-export { requestMediaPermissions } from './request-media-permissions.helper.ts';
+export { requestMediaPermissions } from './request-media-permissions.helper';
