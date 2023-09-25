@@ -1,4 +1,5 @@
 export { type AsyncThunkConfig } from './async-thunk-config.type.js';
+export { type ButtonStyle } from './button-style.type.js';
 export {
   type FormControl,
   type FormFieldErrors,

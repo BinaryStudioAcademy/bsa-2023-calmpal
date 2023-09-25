@@ -66,7 +66,7 @@ const SignUpForm: React.FC<Properties> = ({ onSubmit }) => {
           <Button type="submit" label="Sign up" isLoading={isLoading} />
         </div>
 
-        <span className={styles['form-link']}>
+        <span>
           Already have an account? Go to
           <Link to={AppRoute.SIGN_IN}>
             <span className={styles['text']}>Sign in</span>

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   messageWrapper: {
@@ -40,11 +40,13 @@ const styles = StyleSheet.create({
     color: AppColor.WHITE,
     shadowColor: AppColor.BLUE_200,
     elevation: 20,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
   userMessage: {
     backgroundColor: AppColor.GRAY_100,
     color: AppColor.GRAY_600,
     elevation: 0,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
 });
 
