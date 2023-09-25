@@ -16,7 +16,6 @@ import {
   useEffect,
   useParams,
   useRef,
-  useSearch,
   useState,
 } from '#libs/hooks/hooks.js';
 import { type ValueOf } from '#libs/types/types.js';
@@ -74,43 +73,46 @@ const ChatSidebar: React.FC<Properties> = ({
 
   return (
     <>
-          <Sidebar isSidebarShown={isSidebarShown}>
-      <SidebarHeader>
-        <div className={styles['info']}>
-          <span>Chat</span>
-          <span className={styles['chat-number']}>{chats.length}</span>
-        </div>
-        <div className={styles['plus']}>
-          <Link to={AppRoute.CHATS}>
-            <Icon name="plus" color={IconColor.BLUE} width={30} height={30} />
-          </Link>
-        </div>
-      </SidebarHeader>
-      <SidebarBody>
-        <div className={styles['search']}>
-          <Search onValueChange={onSetFilter} defaultValue={filter} />
-        </div>
-        <div className={styles['chat-list']}>
-          {chats.map((chat) => {
-            const chatLink = AppRoute.CHATS_$ID.replace(
-              ':id',
-              String(chat.id),
-            ) as ValueOf<typeof AppRoute>;
+      <Sidebar isSidebarShown={isSidebarShown}>
+        <SidebarHeader>
+          <div className={styles['info']}>
+            <span>Chat</span>
+            <span className={styles['chat-number']}>{chats.length}</span>
+          </div>
+          <div className={styles['plus']}>
+            <Link to={AppRoute.CHATS}>
+              <Icon name="plus" color={IconColor.BLUE} width={30} height={30} />
+            </Link>
+          </div>
+        </SidebarHeader>
+        <SidebarBody>
+          <div className={styles['search']}>
+            <Search onValueChange={onSetFilter} defaultValue={filter} />
+          </div>
+          <div className={styles['chat-list']}>
+            {chats.map((chat) => {
+              const chatLink = AppRoute.CHATS_$ID.replace(
+                ':id',
+                String(chat.id),
+              ) as ValueOf<typeof AppRoute>;
 
-            return (
-              <Link key={chat.id} to={chatLink}>
-                <Card
-                  title={chat.name}
-                  imageUrl={cardPlaceholder}
-                  onClick={handleSelectChat}
-                  isActive={String(chat.id) === id}
-                />
-              </Link>
-            );
-          })}
-        </div>
-      </SidebarBody>
-    </Sidebar>
+              return (
+                <Link key={chat.id} to={chatLink}>
+                  <Card
+                    title={chat.name}
+                    imageUrl={cardPlaceholder}
+                    onClick={handleSelectChat}
+                    isActive={String(chat.id) === id}
+                    iconRight="trash-box"
+                    onIconClick={handleDeleteChat(chat.id)}
+                    iconColor={IconColor.LIGHT_BLUE}
+                  />
+                </Link>
+              );
+            })}
+          </div>
+        </SidebarBody>
+      </Sidebar>
       <DeleteChatModal ref={dialogReference} id={chatToDelete} />
     </>
   );
