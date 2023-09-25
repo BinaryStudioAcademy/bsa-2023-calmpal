@@ -21,7 +21,11 @@ import { actions as chatActions } from '#slices/chats/chats.js';
 
 import styles from './styles.module.scss';
 
-const ChatLayout: React.FC = () => {
+type Properties = {
+  filter: string;
+};
+
+const ChatLayout: React.FC<Properties> = ({ filter }) => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
   const { currentChatMessages, authenticatedUser, createMessageDataStatus } =
@@ -59,9 +63,9 @@ const ChatLayout: React.FC = () => {
 
   useEffect(() => {
     if (createMessageDataStatus === DataStatus.FULFILLED) {
-      void dispatch(chatActions.getAllChats());
+      void dispatch(chatActions.getAllChats(filter));
     }
-  }, [createMessageDataStatus, dispatch]);
+  }, [createMessageDataStatus, dispatch, filter]);
 
   return (
     <>

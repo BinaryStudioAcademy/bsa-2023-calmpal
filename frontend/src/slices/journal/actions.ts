@@ -34,12 +34,12 @@ const createJournalEntry = createAsyncThunk<
 
 const getAllJournalEntries = createAsyncThunk<
   JournalEntryGetAllResponseDto,
-  undefined,
+  string,
   AsyncThunkConfig
->(`${sliceName}/get-all-journal-entries`, async (_, { extra }) => {
+>(`${sliceName}/get-all-journal-entries`, async (query, { extra }) => {
   const { journalApi } = extra;
 
-  return await journalApi.getAllJournalEntries();
+  return await journalApi.getAllJournalEntries(query);
 });
 
 const updateJournalEntry = createAsyncThunk<
