@@ -1,3 +1,4 @@
+import { DataStatus } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -20,14 +21,14 @@ import styles from './styles.module.scss';
 const ChatLayout: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
-  const { currentChatMessages, authenticatedUser } = useAppSelector(
-    ({ chats, auth }) => {
+  const { currentChatMessages, authenticatedUser, createMessageDataStatus } =
+    useAppSelector(({ chats, auth }) => {
       return {
         currentChatMessages: chats.currentChatMessages,
         authenticatedUser: auth.authenticatedUser as UserAuthResponseDto,
+        createMessageDataStatus: chats.createMessageDataStatus,
       };
-    },
-  );
+    });
   const hasId = Boolean(id);
 
   const handleSend = useCallback(
@@ -51,6 +52,12 @@ const ChatLayout: React.FC = () => {
       void dispatch(chatActions.getCurrentChatMessages(id));
     }
   }, [dispatch, id]);
+
+  useEffect(() => {
+    if (createMessageDataStatus === DataStatus.FULFILLED) {
+      void dispatch(chatActions.getAllChats());
+    }
+  }, [createMessageDataStatus, dispatch]);
 
   return (
     <>
