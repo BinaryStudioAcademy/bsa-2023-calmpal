@@ -117,7 +117,10 @@ const { reducer, actions, name } = createSlice({
     });
 
     builder.addCase(generateReply.fulfilled, (state, action) => {
-      state.currentChatMessages.push(action.payload);
+      state.currentChatMessages = groupChatMessage(
+        state.currentChatMessages,
+        action.payload,
+      );
       state.generateReplyDataStatus = DataStatus.FULFILLED;
     });
 
