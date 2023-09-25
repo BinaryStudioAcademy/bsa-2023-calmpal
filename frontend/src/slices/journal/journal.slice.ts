@@ -67,14 +67,12 @@ const { reducer, actions, name } = createSlice({
       state.updateJournalEntryDataStatus = DataStatus.PENDING;
     });
     builder.addCase(updateJournalEntry.fulfilled, (state, action) => {
-      state.allJournalEntries = state.allJournalEntries.map((journalEntry) => {
-        if (journalEntry.id === action.payload.id) {
-          return action.payload;
-        }
-
-        return journalEntry;
-      });
-
+      state.allJournalEntries = state.allJournalEntries.filter(
+        (journalEntry) => {
+          return journalEntry.id !== action.payload.id;
+        },
+      );
+      state.allJournalEntries.unshift(action.payload);
       state.updateJournalEntryDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(updateJournalEntry.rejected, (state) => {
