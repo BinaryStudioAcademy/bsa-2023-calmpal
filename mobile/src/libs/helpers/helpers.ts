@@ -1,4 +1,3 @@
-export { requestMediaPermissions } from './permissions.helper';
 export {
   configureString,
   debounce,
