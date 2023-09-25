@@ -67,12 +67,6 @@ const Chat: React.FC = () => {
         void dispatch(chatsActions.createMessage({ message, chatId: id }));
       }
 
-      void dispatch(
-        chatsActions.generateReply({
-          message,
-          chatId: id,
-        }),
-      );
       reset();
     },
     [reset, dispatch, messagesLength, id, hasId, navigation],
