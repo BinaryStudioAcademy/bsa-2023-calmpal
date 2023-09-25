@@ -1,6 +1,7 @@
 import {
   Card,
   Icon,
+  Link,
   Sidebar,
   SidebarBody,
   SidebarHeader,
@@ -75,15 +76,17 @@ const UserProfileSidebar: React.FC<Properties> = ({
         <div className={styles['buttons-container']}>
           <div className="visually-hidden">Profile settings options</div>
           {SETTINGS_OPTIONS.map((option) => {
+            // TODO: fix subscription icon proportions
             return (
-              <Card
-                key={option.key}
-                title={option.title}
-                onClick={handleClick(option.key)}
-                isActive={activeItem === option.key}
-                iconName={option.key}
-                iconColor={IconColor.WHITE}
-              />
+              <Link key={option.key} to={option.path}>
+                <Card
+                  title={option.title}
+                  onClick={handleClick(option.key)}
+                  isActive={activeItem === option.key}
+                  iconName={option.key}
+                  iconColor={IconColor.WHITE}
+                />
+              </Link>
             );
           })}
           <Card
