@@ -90,14 +90,16 @@ const JournalSidebar: React.FC<Properties> = ({
         <SidebarHeader>
           <div className={styles['info']}>
             <span>Journal</span>
-            <Button
-              label="Add note"
-              isLabelVisuallyHidden
-              iconName="plus"
-              style="add"
-              onClick={handleCreateJournalEntry}
-            />
           </div>
+          <Button
+            label="Add note"
+            isLabelVisuallyHidden
+            iconName="plus"
+            iconWidth={33}
+            iconHeight={33}
+            style="add"
+            onClick={handleCreateJournalEntry}
+          />
         </SidebarHeader>
         <SidebarBody>
           <div className={styles['search']}>
