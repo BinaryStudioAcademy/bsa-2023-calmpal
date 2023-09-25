@@ -25,14 +25,20 @@ class Billing {
     price,
   }: {
     price: number;
-  }): Promise<{ clientSecret: string }> {
-    const { client_secret: clientSecret } =
+  }): Promise<{ clientSecret: string; id: string }> {
+    const { client_secret: clientSecret, id } =
       await this.stripe.paymentIntents.create({
         amount: this.getPriceInSmallestUnit(price),
         currency: CURRENCY,
       });
 
-    return { clientSecret: clientSecret as string };
+    return { id, clientSecret: clientSecret as string };
+  }
+
+  public async cancelPaymentIntent(id: string): Promise<boolean> {
+    const { status } = await this.stripe.paymentIntents.cancel(id);
+
+    return status === 'canceled';
   }
 
   private getPriceInSmallestUnit(amount: number): number {
