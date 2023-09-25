@@ -1,10 +1,9 @@
-import { useRoute } from '@react-navigation/native';
 import React from 'react';
 
 import imagePlaceholder from '#assets/img/card-image-placeholder.png';
 import meditationBackground from '#assets/img/meditation-background.png';
 import { Image, Player, Text, View } from '#libs/components/components';
-import { useState } from '#libs/hooks/hooks';
+import { useAppRoute, useState } from '#libs/hooks/hooks';
 import { type Track } from '#libs/types/types';
 
 import { TITLE_LINE_COUNT } from './libs/constants';
@@ -18,7 +17,7 @@ const Meditation: React.FC = () => {
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const trackArtwork = currentTrack?.artwork;
 
-  const route = useRoute();
+  const route = useAppRoute();
   const { duration }: RouteParameters = route.params as RouteParameters;
 
   return (
