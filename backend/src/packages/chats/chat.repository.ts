@@ -82,11 +82,18 @@ class ChatRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public delete(): ReturnType<Repository['delete']> {
-    //TODO
-    const deletedCount = 0;
-
-    return Promise.resolve(deletedCount);
+  public delete({
+    id,
+    userId,
+  }: {
+    id: number;
+    userId: number;
+  }): Promise<number> {
+    return this.userToChatModel
+      .relatedQuery(UserToChatRelation.CHAT)
+      .for(this.userToChatModel.query().where({ userId }))
+      .deleteById(id)
+      .execute();
   }
 }
 

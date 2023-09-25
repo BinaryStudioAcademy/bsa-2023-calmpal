@@ -38,6 +38,7 @@ const Modal: React.ForwardRefRenderFunction<
         <div className={styles['modal']} ref={modalReference}>
           <div className={styles['header']}>
             <span className={styles['title']}>{title}</span>
+
             {isCloseEnabled && (
               <div className={styles['icon-container']}>
                 <Button
