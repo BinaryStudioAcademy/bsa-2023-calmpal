@@ -13,6 +13,10 @@
   gap: 20px;
 }
 
+.form > :last-child {
+  margin-top: 25px;
+}
+
 .footer {
   display: flex;
   flex-direction: row;
