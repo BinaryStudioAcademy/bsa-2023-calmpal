@@ -11,8 +11,14 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { type JournalEntryService } from './journal-entry.service.js';
 import { JournalApiPath } from './libs/enums/enums.js';
-import { type JournalEntryCreateRequestDto } from './libs/types/types.js';
-import { createJournalEntryValidationSchema } from './libs/validation-schemas/validation-schemas.js';
+import {
+  type EntitiesFilteringDto,
+  type JournalEntryCreateRequestDto,
+} from './libs/types/types.js';
+import {
+  createJournalEntryValidationSchema,
+  entitiesFilteringQueryValidationSchema,
+} from './libs/validation-schemas/validation-schemas.js';
 
 /**
  * @swagger
@@ -94,22 +100,14 @@ class JournalEntryController extends BaseController {
     this.addRoute({
       path: JournalApiPath.ROOT,
       method: 'GET',
+      validation: {
+        query: entitiesFilteringQueryValidationSchema,
+      },
       handler: (options) => {
         return this.getAll(
           options as APIHandlerOptions<{
             user: UserAuthResponseDto;
-          }>,
-        );
-      },
-    });
-
-    this.addRoute({
-      path: JournalApiPath.$ID,
-      method: 'GET',
-      handler: (options) => {
-        return this.getById(
-          options as APIHandlerOptions<{
-            params: { id: number };
+            query: EntitiesFilteringDto;
           }>,
         );
       },
@@ -220,9 +218,16 @@ class JournalEntryController extends BaseController {
    * @swagger
    * /journal:
    *    get:
-   *      description: Get all a journal entries
+   *      description: Get all journal entries
    *      security:
    *       - bearerAuth: []
+   *      parameters:
+   *        - name: query
+   *          in: query
+   *          description: A string to search journal entries
+   *          required: false
+   *          schema:
+   *            type: string
    *      responses:
    *        200:
    *          description: Successful operation
@@ -244,16 +249,35 @@ class JournalEntryController extends BaseController {
    *              example:
    *                message: "Incorrect credentials."
    *                errorType: "AUTHORIZATION"
+   *        400:
+   *          description: Bad Request
+   *          content:
+   *            application/json:
+   *              schema:
+   *                type: object
+   *                properties:
+   *                  status:
+   *                    type: integer
+   *                    example: 400
+   *                  message:
+   *                    type: string
+   *                    example: The data which was passed is incorrect.
    */
 
   private async getAll(
-    options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
+    options: APIHandlerOptions<{
+      user: UserAuthResponseDto;
+      query: EntitiesFilteringDto;
+    }>,
   ): Promise<APIHandlerResponse> {
     const { id } = options.user;
 
     return {
       status: HTTPCode.OK,
-      payload: await this.journalEntryService.findAllByUserId(id),
+      payload: await this.journalEntryService.findAllByUserId(
+        id,
+        options.query.query,
+      ),
     };
   }
 
