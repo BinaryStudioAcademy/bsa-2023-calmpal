@@ -7,7 +7,7 @@ type UserCommonQueryResponse = {
     fullName: string;
     isSurveyCompleted: boolean;
     subscriptionId: number | null;
-    subscription: {
+    subscription?: {
       endDate: string | null;
     };
   };

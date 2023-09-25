@@ -34,7 +34,7 @@ class UserRepository implements Repository {
       return null;
     }
 
-    const subscriptionEndDate = user.details?.subscription.endDate
+    const subscriptionEndDate = user.details?.subscription?.endDate
       ? new Date(user.details.subscription.endDate)
       : null;
 
@@ -54,12 +54,12 @@ class UserRepository implements Repository {
     const users = await this.userModel
       .query()
       .select()
-      .withGraphJoined(UsersRelation.DETAILS)
+      .withGraphJoined(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
       .castTo<UserWithPasswordQueryResponse[]>()
       .execute();
 
     return users.map((user) => {
-      const subscriptionEndDate = user.details?.subscription.endDate
+      const subscriptionEndDate = user.details?.subscription?.endDate
         ? new Date(user.details.subscription.endDate)
         : null;
 
@@ -93,11 +93,11 @@ class UserRepository implements Repository {
           isSurveyCompleted,
         },
       } as UserCreateQueryPayload)
-      .withGraphJoined(UsersRelation.DETAILS)
+      .withGraphJoined(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
       .castTo<UserWithPasswordQueryResponse>()
       .execute();
 
-    const subscriptionEndDate = user.details?.subscription.endDate
+    const subscriptionEndDate = user.details?.subscription?.endDate
       ? new Date(user.details.subscription.endDate)
       : null;
 
@@ -132,7 +132,7 @@ class UserRepository implements Repository {
     const user = await this.userModel
       .query()
       .modify('withoutPassword')
-      .withGraphJoined(UsersRelation.DETAILS)
+      .withGraphJoined(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
       .findOne({ email })
       .castTo<UserCommonQueryResponse | undefined>();
 
@@ -140,7 +140,7 @@ class UserRepository implements Repository {
       return null;
     }
 
-    const subscriptionEndDate = user.details?.subscription.endDate
+    const subscriptionEndDate = user.details?.subscription?.endDate
       ? new Date(user.details.subscription.endDate)
       : null;
 
@@ -161,14 +161,14 @@ class UserRepository implements Repository {
   ): Promise<UserWithPasswordEntity | null> {
     const user = await this.userModel
       .query()
-      .withGraphJoined(UsersRelation.DETAILS)
+      .withGraphJoined(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
       .findOne({ email })
       .castTo<UserWithPasswordQueryResponse | undefined>();
     if (!user) {
       return null;
     }
 
-    const subscriptionEndDate = user.details?.subscription.endDate
+    const subscriptionEndDate = user.details?.subscription?.endDate
       ? new Date(user.details.subscription.endDate)
       : null;
 
@@ -190,13 +190,34 @@ class UserRepository implements Repository {
     id,
     subscriptionId,
   }: {
-    id: string;
-    subscriptionId: string;
-  }): Promise<void> {
+    id: number;
+    subscriptionId: number;
+  }): Promise<UserEntity> {
     await this.userModel
-      .relatedQuery(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
+      .relatedQuery(UsersRelation.DETAILS)
       .for(id)
       .patch({ subscriptionId });
+
+    const user = await this.userModel
+      .query()
+      .withGraphJoined(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
+      .findById(id)
+      .castTo<UserCommonQueryResponse>();
+
+    const subscriptionEndDate = user.details?.subscription?.endDate
+      ? new Date(user.details.subscription.endDate)
+      : null;
+
+    return UserEntity.initialize({
+      id: user.id,
+      email: user.email,
+      createdAt: new Date(user.createdAt),
+      updatedAt: new Date(user.updatedAt),
+      fullName: user.details?.fullName ?? '',
+      isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      subscriptionId: user.details?.subscriptionId ?? null,
+      subscriptionEndDate,
+    });
   }
 }
 
