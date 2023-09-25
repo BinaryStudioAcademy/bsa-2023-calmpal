@@ -22,6 +22,9 @@ const styles = StyleSheet.create({
     color: AppColor.GRAY_500,
     fontFamily: FontFamily.MONTSERRAT_400,
   },
+  placeholder: {
+    color: AppColor.GRAY_400,
+  },
 });
 
 export { styles };
