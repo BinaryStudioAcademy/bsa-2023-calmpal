@@ -1,5 +1,6 @@
 import { ExceptionMessage } from '#libs/enums/enums.js';
 import { UsersError } from '#libs/exceptions/exceptions.js';
+import { replaceTemplateWithValue } from '#libs/helpers/helpers.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { OpenAiRoleKey } from '#libs/packages/open-ai/libs/enums/open-ai-role-key.enum.js';
 import { type OpenAiMessageGenerateRequestDto } from '#libs/packages/open-ai/libs/types/types.js';
@@ -9,6 +10,7 @@ import { userService } from '#packages/users/users.js';
 
 import { ChatMessageEntity } from './chat-message.entity.js';
 import { type ChatMessageRepository } from './chat-message.repository.js';
+import { PROMPT_TEMPLATE } from './libs/constants/constants.js';
 import {
   type ChatMessageCreatePayload,
   type ChatMessageGetAllItemResponseDto,
@@ -89,9 +91,13 @@ class ChatMessageService implements Service {
       },
     );
 
+    const content = replaceTemplateWithValue(PROMPT_TEMPLATE, {
+      message: payload.message,
+    });
+
     openAiMessages.push({
       role: 'user',
-      content: `Pretend that you a psychologist and you give mental support to the patient - Answer this question: '${payload.message}'. Don't mention that you are an AI model, be compassionate and short answers.`,
+      content,
     });
 
     const generatedReply = await this.chatbotService.generateReply(

@@ -26,10 +26,8 @@ class ChatbotService {
     return reply ?? NO_RESPONSE_MESSAGE;
   }
 
-  public async getChatbotUser(): Promise<ReturnType<
-    UserEntity['toObject']
-  > | null> {
-    return await this.userService.findByRoleKey(UserRoleKey.CHATBOT);
+  public getChatbotUser(): Promise<ReturnType<UserEntity['toObject']> | null> {
+    return this.userService.findByRoleKey(UserRoleKey.CHATBOT);
   }
 }
 
