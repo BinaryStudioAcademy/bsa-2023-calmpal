@@ -76,7 +76,6 @@ const UserProfileSidebar: React.FC<Properties> = ({
         <div className={styles['buttons-container']}>
           <div className="visually-hidden">Profile settings options</div>
           {SETTINGS_OPTIONS.map((option) => {
-            // TODO: fix subscription icon proportions
             // TODO: fix isActive to show proper result
             return (
               <Link key={option.key} to={option.path}>
