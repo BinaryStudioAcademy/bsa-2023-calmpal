@@ -7,6 +7,11 @@ const SETTINGS_OPTIONS: SettingsOption[] = [
     title: 'Notifications and Reminders',
     path: AppRoute.PROFILE,
   },
+  {
+    key: 'subscription',
+    title: 'My Subscription',
+    path: AppRoute.PROFILE_SUBSCRIPTION,
+  },
 ];
 
 export { SETTINGS_OPTIONS };
