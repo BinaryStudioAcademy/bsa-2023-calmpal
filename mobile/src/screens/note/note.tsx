@@ -120,6 +120,7 @@ const Note: React.FC = () => {
               return (
                 <TextInput
                   placeholder={NOTE_PLACEHOLDERS.title}
+                  placeholderTextColor={styles.placeholder.color}
                   onChangeText={field.onChange}
                   value={handleSanitizeInput(titleValue)}
                   style={styles.title}
@@ -134,6 +135,7 @@ const Note: React.FC = () => {
               return (
                 <TextInput
                   placeholder={NOTE_PLACEHOLDERS.text}
+                  placeholderTextColor={styles.placeholder.color}
                   onChangeText={field.onChange}
                   value={handleSanitizeInput(textValue)}
                   multiline
