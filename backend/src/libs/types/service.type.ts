@@ -5,7 +5,7 @@ type Service<T = unknown> = {
   }>;
   create(payload: unknown): Promise<T>;
   update(payload: unknown): Promise<T>;
-  delete(): Promise<boolean>;
+  delete(payload: unknown): Promise<boolean>;
 };
 
 export { type Service };

@@ -74,6 +74,7 @@ export {
   createJournalEntryValidationSchema,
   JournalApiPath,
   type JournalEntryCreateRequestDto,
+  type JournalEntryDeleteResponseDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
   type JournalEntryUpdatePayloadDto,

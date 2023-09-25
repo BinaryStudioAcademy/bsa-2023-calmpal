@@ -164,6 +164,25 @@
   box-shadow: 0 4px 20px 0 var(--blue-alpha-30);
 }
 
+.icon-right {
+  position: absolute;
+  top: 25%;
+  right: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  padding: 7px 6px;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.icon-right:hover {
+  filter: brightness(60%);
+}
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);

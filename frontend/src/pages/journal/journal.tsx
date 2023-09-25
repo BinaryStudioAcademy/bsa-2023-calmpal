@@ -21,7 +21,7 @@ const Journal: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { isSidebarShown, setIsSidebarShown } = useSidebarState();
+  const { isSidebarShown, setIsSidebarShow } = useSidebarState();
   const { filter, setFilter } = useSearch();
 
   const { selectedJournalEntry } = useAppSelector(({ journal }) => {
@@ -34,8 +34,8 @@ const Journal: React.FC = () => {
 
   const handleBackButtonPress = useCallback(() => {
     navigate(AppRoute.JOURNAL);
-    setIsSidebarShown(true);
-  }, [setIsSidebarShown, navigate]);
+    setIsSidebarShow(true);
+  }, [setIsSidebarShow, navigate]);
 
   const handleGetSelectedNote = useCallback(async () => {
     await dispatch(journalActions.getAllJournalEntries(filter));
@@ -51,7 +51,7 @@ const Journal: React.FC = () => {
     <>
       <JournalSidebar
         isSidebarShown={isSidebarShown}
-        setIsSidebarShown={setIsSidebarShown}
+        onSetIsSidebarShow={setIsSidebarShow}
         filter={filter}
         setFilter={setFilter}
       />

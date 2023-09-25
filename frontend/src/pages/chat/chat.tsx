@@ -13,19 +13,19 @@ import styles from './styles.module.scss';
 
 const Chat: React.FC = () => {
   const navigate = useNavigate();
-  const { isSidebarShown, setIsSidebarShown } = useSidebarState();
+  const { isSidebarShown, setIsSidebarShow } = useSidebarState();
   const { setFilter, filter } = useSearch();
 
   const handleBackButtonPress = useCallback(() => {
     navigate(AppRoute.CHATS);
-    setIsSidebarShown(true);
-  }, [setIsSidebarShown, navigate]);
+    setIsSidebarShow(true);
+  }, [setIsSidebarShow, navigate]);
 
   return (
     <>
       <ChatSidebar
         isSidebarShown={isSidebarShown}
-        setIsSidebarShown={setIsSidebarShown}
+        onSetIsSidebarShow={setIsSidebarShow}
         filter={filter}
         onSetFilter={setFilter}
       />
