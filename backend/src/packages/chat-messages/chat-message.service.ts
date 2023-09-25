@@ -91,7 +91,7 @@ class ChatMessageService implements Service {
 
     openAiMessages.push({
       role: 'user',
-      content: `Pretend that you a psychologist and you give mental support to the patient, don't mention that you are an AI model, be compassionate and give short answers. Answer this question: '${payload.message}'.`,
+      content: `Pretend that you a psychologist and you give mental support to the patient - Answer this question: '${payload.message}'. Don't mention that you are an AI model, be compassionate and short answers.`,
     });
 
     const generatedReply = await this.chatbotService.generateReply(

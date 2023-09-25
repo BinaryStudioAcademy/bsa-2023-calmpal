@@ -5,7 +5,6 @@ import { ChatController } from './chat.controller.js';
 import { ChatModel } from './chat.model.js';
 import { ChatRepository } from './chat.repository.js';
 import { ChatService } from './chat.service.js';
-import { ChatbotService } from './chatbot.service.js';
 import { UserToChatModel } from './user-to-chat.model.js';
 
 const chatRepository = new ChatRepository(ChatModel, UserToChatModel);
