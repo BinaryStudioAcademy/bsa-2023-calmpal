@@ -28,13 +28,21 @@ class ChatRepository implements Repository {
     return Promise.resolve([]);
   }
 
-  public async findAllByUserId(userId: number): Promise<ChatEntity[]> {
+  public async findAllByUserId(
+    userId: number,
+    query: string,
+  ): Promise<ChatEntity[]> {
     const chats = await this.userToChatModel
       .relatedQuery(UserToChatRelation.CHAT)
       .for(this.userToChatModel.query().where({ userId }))
       .withGraphJoined(ChatsRelation.MEMBERS)
       .joinRelated(ChatsRelation.MESSAGES)
       .orderBy('messages.updatedAt', SortType.DESC)
+      .modify((builder) => {
+        if (query) {
+          void builder.where('name', 'iLike', `%${query}%`);
+        }
+      })
       .castTo<ChatCommonQueryResponse[]>();
 
     return chats.map((chat) => {

@@ -17,8 +17,14 @@ import { ChatEntity } from './chat.entity.js';
 import { type ChatService } from './chat.service.js';
 import { MOCKED_CHAT_NAME } from './libs/constants/constants.js';
 import { ChatsApiPath } from './libs/enums/enums.js';
-import { type ChatCreateRequestDto } from './libs/types/types.js';
-import { createChatValidationSchema } from './libs/validation-schemas/validation-schemas.js';
+import {
+  type ChatCreateRequestDto,
+  type EntitiesFilteringDto,
+} from './libs/types/types.js';
+import {
+  createChatValidationSchema,
+  entitiesFilteringQueryValidationSchema,
+} from './libs/validation-schemas/validation-schemas.js';
 
 /**
  * @swagger
@@ -104,9 +110,15 @@ class ChatController extends BaseController {
     this.addRoute({
       path: ChatsApiPath.ROOT,
       method: 'GET',
+      validation: {
+        query: entitiesFilteringQueryValidationSchema,
+      },
       handler: (options) => {
         return this.findAll(
-          options as APIHandlerOptions<{ user: UserAuthResponseDto }>,
+          options as APIHandlerOptions<{
+            user: UserAuthResponseDto;
+            query: EntitiesFilteringDto;
+          }>,
         );
       },
     });
@@ -186,6 +198,13 @@ class ChatController extends BaseController {
    * /chats:
    *   get:
    *     description: Returns all chats with authenticated user
+   *     parameters:
+   *       - name: query
+   *         in: query
+   *         description: A string to search chats
+   *         required: false
+   *         schema:
+   *           type: string
    *     security:
    *      - bearerAuth: []
    *     responses:
@@ -200,13 +219,32 @@ class ChatController extends BaseController {
    *                   type: array
    *                   items:
    *                     $ref: '#/components/schemas/Chat'
+   *       400:
+   *         description: Bad Request
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 status:
+   *                   type: integer
+   *                   example: 400
+   *                 message:
+   *                   type: string
+   *                   example: The data which was passed is incorrect.
    */
   private async findAll(
-    options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
+    options: APIHandlerOptions<{
+      user: UserAuthResponseDto;
+      query: EntitiesFilteringDto;
+    }>,
   ): Promise<APIHandlerResponse> {
     return {
       status: HTTPCode.OK,
-      payload: await this.chatService.findAllByUserId(options.user.id),
+      payload: await this.chatService.findAllByUserId(
+        options.user.id,
+        options.query.query,
+      ),
     };
   }
 
