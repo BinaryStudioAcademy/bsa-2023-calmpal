@@ -83,7 +83,10 @@ class ChatRepository implements Repository {
   }
 
   public delete(): ReturnType<Repository['delete']> {
-    return Promise.resolve(false);
+    //TODO
+    const deletedCount = 0;
+
+    return Promise.resolve(deletedCount);
   }
 }
 
