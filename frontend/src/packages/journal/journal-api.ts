@@ -1,4 +1,5 @@
 import { APIPath, ContentType } from '#libs/enums/enums.js';
+import { getUrlWithQueryString } from '#libs/helpers/helpers.js';
 import { BaseHttpApi } from '#libs/packages/api/api.js';
 import { type HTTP } from '#libs/packages/http/http.js';
 import { type Storage } from '#libs/packages/storage/storage.js';
@@ -6,6 +7,7 @@ import { type Storage } from '#libs/packages/storage/storage.js';
 import { JournalApiPath } from './libs/enums/enums.js';
 import {
   type JournalEntryCreateRequestDto,
+  type JournalEntryDeleteResponseDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
   type JournalEntryUpdatePayloadDto,
@@ -22,9 +24,14 @@ class JournalApi extends BaseHttpApi {
     super({ path: APIPath.JOURNAL, baseUrl, http, storage });
   }
 
-  public async getAllJournalEntries(): Promise<JournalEntryGetAllResponseDto> {
+  public async getAllJournalEntries(
+    query: string,
+  ): Promise<JournalEntryGetAllResponseDto> {
     const response = await this.load(
-      this.getFullEndpoint(JournalApiPath.ROOT, {}),
+      this.getFullEndpoint(
+        getUrlWithQueryString(JournalApiPath.ROOT, { query }),
+        {},
+      ),
       {
         method: 'GET',
         hasAuth: true,
@@ -66,6 +73,22 @@ class JournalApi extends BaseHttpApi {
     );
 
     return await response.json<JournalEntryGetAllItemResponseDto>();
+  }
+
+  public async deleteJournalEntry(
+    id: number,
+  ): Promise<JournalEntryDeleteResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(JournalApiPath.$ID, { id: `${id}` }),
+      {
+        method: 'DELETE',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify({}),
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<JournalEntryDeleteResponseDto>();
   }
 }
 
