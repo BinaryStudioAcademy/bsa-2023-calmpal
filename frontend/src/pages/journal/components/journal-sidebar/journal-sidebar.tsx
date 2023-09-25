@@ -6,7 +6,7 @@ import {
   SidebarBody,
   SidebarHeader,
 } from '#libs/components/components.js';
-import { AppRoute } from '#libs/enums/app-route.enum.js';
+import { AppRoute } from '#libs/enums/enums.js';
 import { IconColor } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
