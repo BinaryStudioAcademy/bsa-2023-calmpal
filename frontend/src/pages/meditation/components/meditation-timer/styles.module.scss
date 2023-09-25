@@ -12,3 +12,9 @@
   gap: 20px;
   margin-bottom: 20px;
 }
+
+@media (width < 480px) {
+  .duration-container {
+    gap: 10px;
+  }
+}
