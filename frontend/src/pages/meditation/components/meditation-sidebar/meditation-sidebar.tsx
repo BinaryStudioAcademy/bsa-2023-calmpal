@@ -67,7 +67,7 @@ const MeditationSidebar: React.FC<Properties> = ({
               iconColor={IconColor.BLUE}
               iconWidth={33}
               iconHeight={33}
-              style="rounded-transparent"
+              style="add"
               onClick={handleOpen}
               isLabelVisuallyHidden
             />
