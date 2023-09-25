@@ -50,7 +50,6 @@ const FeelingsStep: React.FC<Properties> = ({
           currentCategories: categoriesValue,
           stateValue: feelings,
           defaultCategories: FEELINGS_CATEGORIES,
-          isOther: category === 'Other',
           categoryChange: onCategoryChange,
           stateChange: onSetFeelings,
         });

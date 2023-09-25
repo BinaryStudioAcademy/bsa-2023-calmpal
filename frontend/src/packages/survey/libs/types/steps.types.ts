@@ -41,7 +41,6 @@ type Step = (typeof STEPS_DEFAULT_ORDER)[number];
 
 type OnOther = {
   getOtherDefault: (categories: string[]) => string;
-  getOthersCategories: (categories: string[], payload: string[]) => string[];
   hasOther: (category: string[]) => boolean;
 };
 

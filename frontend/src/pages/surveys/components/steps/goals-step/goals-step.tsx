@@ -41,6 +41,7 @@ const GoalsStep: React.FC<Properties> = ({
   const goals = useAppSelector((state) => {
     return state.survey.goals;
   });
+
   const { control, errors, isValid, handleSubmit } = useAppForm<GoalInputDto>({
     defaultValues: { goals: goals, other: getOtherDefault(goals) },
     validationSchema: stepWithOtherInputValidationSchema,

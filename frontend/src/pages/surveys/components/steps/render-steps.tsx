@@ -1,4 +1,4 @@
-import { FIRST_INDEX, LAST_INDEX } from '#libs/constants/index.constant.js';
+import { FIRST_INDEX, LAST_INDEX } from '#libs/constants/constants.js';
 import { useAppDispatch, useCallback } from '#libs/hooks/hooks.js';
 import {
   type HandleFieldChangeType,
@@ -144,7 +144,6 @@ const useRenderSteps: React.FC<StepsProperties> = ({
 
   const onOther = {
     getOtherDefault,
-    getOthersCategories,
     hasOther,
   };
   switch (currentStep) {
