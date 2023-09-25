@@ -34,7 +34,7 @@ const SetTimerModal: React.FC<Properties> = ({
 
   return (
     <RNModal
-      animationType="slide"
+      animationType="none"
       transparent={true}
       visible={true}
       onRequestClose={onClose}
