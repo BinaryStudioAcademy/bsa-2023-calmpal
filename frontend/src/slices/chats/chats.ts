@@ -1,6 +1,8 @@
 import {
   createChat,
   createMessage,
+  deleteChat,
+  generateReply,
   getAllChats,
   getCurrentChatMessages,
 } from './actions.js';
@@ -10,6 +12,8 @@ const allActions = {
   ...actions,
   getAllChats,
   createChat,
+  deleteChat,
+  generateReply,
   getCurrentChatMessages,
   createMessage,
 };

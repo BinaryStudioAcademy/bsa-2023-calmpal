@@ -8,6 +8,7 @@ import {
   useEffect,
   useNavigate,
   useParams,
+  useSearch,
   useSidebarState,
 } from '#libs/hooks/hooks.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
@@ -20,7 +21,8 @@ const Journal: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { isSidebarShown, setIsSidebarShown } = useSidebarState();
+  const { isSidebarShown, setIsSidebarShow } = useSidebarState();
+  const { filter, setFilter } = useSearch();
 
   const { selectedJournalEntry } = useAppSelector(({ journal }) => {
     return {
@@ -32,14 +34,14 @@ const Journal: React.FC = () => {
 
   const handleBackButtonPress = useCallback(() => {
     navigate(AppRoute.JOURNAL);
-    setIsSidebarShown(true);
-  }, [setIsSidebarShown, navigate]);
+    setIsSidebarShow(true);
+  }, [setIsSidebarShow, navigate]);
 
   const handleGetSelectedNote = useCallback(async () => {
-    await dispatch(journalActions.getAllJournalEntries());
+    await dispatch(journalActions.getAllJournalEntries(filter));
 
     dispatch(journalActions.setSelectedJournalEntry(Number(id)));
-  }, [dispatch, id]);
+  }, [dispatch, filter, id]);
 
   useEffect(() => {
     void handleGetSelectedNote();
@@ -49,7 +51,9 @@ const Journal: React.FC = () => {
     <>
       <JournalSidebar
         isSidebarShown={isSidebarShown}
-        setIsSidebarShown={setIsSidebarShown}
+        onSetIsSidebarShow={setIsSidebarShow}
+        filter={filter}
+        onSetFilter={setFilter}
       />
       <div
         className={getValidClassNames(
