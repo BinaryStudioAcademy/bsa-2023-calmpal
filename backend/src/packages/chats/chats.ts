@@ -1,5 +1,5 @@
 import { logger } from '#libs/packages/logger/logger.js';
-import { openAi } from '#libs/packages/open-ai/open-ai.js';
+import { openAiService } from '#libs/packages/open-ai/open-ai.js';
 import { chatMessageService } from '#packages/chat-messages/chat-messages.js';
 import { fileService } from '#packages/files/files.js';
 
@@ -14,7 +14,7 @@ const chatRepository = new ChatRepository(ChatModel, UserToChatModel);
 const chatService = new ChatService({
   chatRepository,
   chatMessageService,
-  openAiService: openAi,
+  openAiService,
   fileService,
 });
 const chatController = new ChatController({
