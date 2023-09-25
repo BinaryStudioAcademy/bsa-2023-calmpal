@@ -56,14 +56,12 @@
   border-radius: 14px;
 }
 
-.play-button {
-  display: inline-block;
-  min-width: 48px;
-  min-height: 48px;
-}
-
-.play-button:hover {
-  transform: scale(1.1);
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 380px;
+  height: 210px;
 }
 
 @media (width < 900px) {

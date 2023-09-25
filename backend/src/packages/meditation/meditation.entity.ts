@@ -10,6 +10,8 @@ class MeditationEntity implements Entity {
 
   private contentType: ValueOf<typeof ContentType>;
 
+  private userId: number | null;
+
   private createdAt: Date | null;
 
   private updatedAt: Date | null;
@@ -19,6 +21,7 @@ class MeditationEntity implements Entity {
     name,
     mediaUrl,
     contentType,
+    userId,
     createdAt,
     updatedAt,
   }: {
@@ -26,6 +29,7 @@ class MeditationEntity implements Entity {
     name: string;
     mediaUrl: string;
     contentType: ValueOf<typeof ContentType>;
+    userId: number | null;
     createdAt: Date | null;
     updatedAt: Date | null;
   }) {
@@ -33,6 +37,7 @@ class MeditationEntity implements Entity {
     this.name = name;
     this.mediaUrl = mediaUrl;
     this.contentType = contentType;
+    this.userId = userId;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
@@ -42,6 +47,7 @@ class MeditationEntity implements Entity {
     name,
     mediaUrl,
     contentType,
+    userId,
     createdAt,
     updatedAt,
   }: {
@@ -49,6 +55,7 @@ class MeditationEntity implements Entity {
     name: string;
     mediaUrl: string;
     contentType: ValueOf<typeof ContentType>;
+    userId: number | null;
     createdAt: Date | null;
     updatedAt: Date | null;
   }): MeditationEntity {
@@ -57,6 +64,7 @@ class MeditationEntity implements Entity {
       name,
       mediaUrl,
       contentType,
+      userId,
       createdAt,
       updatedAt,
     });
@@ -66,16 +74,19 @@ class MeditationEntity implements Entity {
     name,
     mediaUrl,
     contentType,
+    userId,
   }: {
     name: string;
     mediaUrl: string;
     contentType: ValueOf<typeof ContentType>;
+    userId: number | null;
   }): MeditationEntity {
     return new MeditationEntity({
       id: null,
       name,
       mediaUrl,
       contentType,
+      userId,
       createdAt: null,
       updatedAt: null,
     });
@@ -86,6 +97,7 @@ class MeditationEntity implements Entity {
     name: string;
     mediaUrl: string;
     contentType: ValueOf<typeof ContentType>;
+    userId: number | null;
     createdAt: Date;
     updatedAt: Date;
   } {
@@ -94,6 +106,7 @@ class MeditationEntity implements Entity {
       name: this.name,
       mediaUrl: this.mediaUrl,
       contentType: this.contentType,
+      userId: this.userId,
       createdAt: this.createdAt as Date,
       updatedAt: this.updatedAt as Date,
     };
@@ -103,11 +116,13 @@ class MeditationEntity implements Entity {
     name: string;
     mediaUrl: string;
     contentType: ValueOf<typeof ContentType>;
+    userId: number | null;
   } {
     return {
       name: this.name,
       mediaUrl: this.mediaUrl,
       contentType: this.contentType,
+      userId: this.userId,
     };
   }
 }

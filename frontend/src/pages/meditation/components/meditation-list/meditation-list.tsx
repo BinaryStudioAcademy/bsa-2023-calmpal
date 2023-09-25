@@ -3,17 +3,17 @@ import { DataStatus } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useAppSelector, useCallback } from '#libs/hooks/hooks.js';
 
-import { MeditationEntry } from './meditation-entry/meditation-entry.js';
+import { MeditationEntry } from './components/components.js';
 import styles from './styles.module.scss';
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: (value: boolean) => void;
+  onSetIsSidebarShow: (value: boolean) => void;
 };
 
 const MeditationList: React.FC<Properties> = ({
   isSidebarShown,
-  setIsSidebarShown,
+  onSetIsSidebarShow,
 }) => {
   const { meditationEntries, meditationEntriesDataStatus } = useAppSelector(
     ({ meditation }) => {
@@ -25,8 +25,8 @@ const MeditationList: React.FC<Properties> = ({
   );
 
   const handleBackButtonPress = useCallback(() => {
-    setIsSidebarShown(true);
-  }, [setIsSidebarShown]);
+    onSetIsSidebarShow(true);
+  }, [onSetIsSidebarShow]);
 
   if (meditationEntriesDataStatus === DataStatus.PENDING) {
     return !isSidebarShown && <Loader />;
