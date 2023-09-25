@@ -36,6 +36,7 @@ const MeditationHome: React.FC = () => {
     meditationEntries,
     'name',
   );
+
   const handleSelectMeditation = (title: string): void => {
     navigation.navigate(MeditationScreenName.MEDITATION_LIST, {
       title,
@@ -58,7 +59,6 @@ const MeditationHome: React.FC = () => {
             return (
               <Card
                 title={item.name}
-                // onPassTitle={handleSelectMeditation}
                 onPress={(): void => {
                   handleSelectMeditation(item.name);
                 }}

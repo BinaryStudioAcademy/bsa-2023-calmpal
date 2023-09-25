@@ -85,7 +85,6 @@ const ChatList: React.FC = () => {
             return (
               <Card
                 title={item.name}
-                // onPassTitle={handleSelectChat}
                 onPress={(): void => {
                   handleSelectChat(item.name);
                 }}
