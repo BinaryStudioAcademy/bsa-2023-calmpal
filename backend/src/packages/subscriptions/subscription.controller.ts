@@ -13,6 +13,10 @@ import {
   type SubscriptionPaymentIntentCancelRequestDto,
   type SubscriptionPaymentIntentCreateRequestDto,
 } from './libs/types/types.js';
+import {
+  cancelPaymentIntentValidationSchema,
+  createPaymentIntentValidationSchema,
+} from './libs/validation-schemas/validation-schemas.js';
 import { type SubscriptionService } from './subscription.service.js';
 
 class SubscriptionController extends BaseController {
@@ -38,6 +42,9 @@ class SubscriptionController extends BaseController {
     this.addRoute({
       path: SubscriptionApiPath.PAYMENT_INTENT,
       method: 'POST',
+      validation: {
+        body: createPaymentIntentValidationSchema,
+      },
       handler: (options) => {
         return this.createPaymentIntent(
           options as APIHandlerOptions<{
@@ -50,6 +57,9 @@ class SubscriptionController extends BaseController {
     this.addRoute({
       path: SubscriptionApiPath.PAYMENT_INTENT,
       method: 'DELETE',
+      validation: {
+        body: cancelPaymentIntentValidationSchema,
+      },
       handler: (options) => {
         return this.cancelPaymentIntent(
           options as APIHandlerOptions<{

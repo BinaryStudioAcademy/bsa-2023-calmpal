@@ -114,6 +114,8 @@ export {
   userSignUpValidationSchema,
 } from './packages/users/users.js';
 export {
+  cancelPaymentIntentValidationSchema,
+  createPaymentIntentValidationSchema,
   SubscriptionApiPath,
   type SubscriptionPaymentIntentCancelRequestDto,
   type SubscriptionPaymentIntentCreateRequestDto,
