@@ -37,6 +37,7 @@ const ChatList: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<ChatNavigationParameterList>>();
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [chatId, setChatId] = useState<number>();
 
   const { filteredData: filteredChats, setSearchQuery } = useSearch(
     chats,
@@ -45,7 +46,8 @@ const ChatList: React.FC = () => {
 
   const chatsLength = chats.length;
 
-  const handleShowModal = (): void => {
+  const handleShowModal = (id: number): void => {
+    setChatId(id);
     setIsModalVisible(true);
   };
 
@@ -55,6 +57,7 @@ const ChatList: React.FC = () => {
 
   const handleDeleteChat = (): void => {
     setIsModalVisible(false);
+    void dispatch(chatsActions.deleteChat(chatId as number));
   };
 
   const handleSelectChat = useCallback(
@@ -106,6 +109,7 @@ const ChatList: React.FC = () => {
             return (
               <Card
                 title={item.name}
+                id={item.id}
                 onPress={handleSelectChat}
                 key={item.id}
                 onDelete={handleShowModal}
