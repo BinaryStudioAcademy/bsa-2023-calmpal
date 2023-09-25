@@ -48,6 +48,8 @@ const createChat = createAsyncThunk<
 
   dispatch(appActions.navigate(`${APIPath.CHATS}/${chat.id}`));
 
+  void dispatch(updateChatImage({ id: chat.id.toString() }));
+
   return chat;
 });
 

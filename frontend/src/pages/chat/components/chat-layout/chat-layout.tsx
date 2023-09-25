@@ -6,7 +6,6 @@ import {
   useEffect,
   useParams,
 } from '#libs/hooks/hooks.js';
-import { type UpdateChatImageRequestDto } from '#packages/chats/chats.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import {
   ChatFooter,
@@ -36,21 +35,10 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
     });
   const hasId = Boolean(id);
 
-  const handleImageUpdate = useCallback(
-    (payload: UpdateChatImageRequestDto): void => {
-      void dispatch(chatActions.updateChatImage(payload));
-    },
-    [dispatch],
-  );
-
   const handleSend = useCallback(
     ({ message }: ChatInputValue): void => {
       if (!hasId || currentChatMessages.length === EMPTY_ARRAY_LENGTH) {
-        void dispatch(chatActions.createChat({ message }))
-          .unwrap()
-          .then((payload) => {
-            handleImageUpdate({ id: payload.id.toString() });
-          });
+        void dispatch(chatActions.createChat({ message }));
       } else {
         void dispatch(
           chatActions.createMessage({
@@ -60,7 +48,7 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
         );
       }
     },
-    [dispatch, currentChatMessages.length, hasId, id, handleImageUpdate],
+    [dispatch, currentChatMessages.length, hasId, id],
   );
 
   useEffect(() => {
