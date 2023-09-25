@@ -1,4 +1,5 @@
 type SubscriptionPaymentIntentCreateResponseDto = {
+  id: string;
   clientSecret: string;
 };
 
