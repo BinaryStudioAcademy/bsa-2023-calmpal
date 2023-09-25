@@ -95,8 +95,8 @@ class JournalEntryRepository implements Repository {
     });
   }
 
-  public delete(): ReturnType<Repository['delete']> {
-    return Promise.resolve(true);
+  public delete(id: number): ReturnType<Repository['delete']> {
+    return this.journalEntryModel.query().deleteById(id).execute();
   }
 }
 

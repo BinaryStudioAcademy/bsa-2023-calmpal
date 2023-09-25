@@ -107,7 +107,10 @@ class UserRepository implements Repository {
   }
 
   public delete(): ReturnType<Repository['delete']> {
-    return Promise.resolve(true);
+    //TODO
+    const deletedCount = 0;
+
+    return Promise.resolve(deletedCount);
   }
 
   public async findByEmail(email: string): Promise<UserEntity | null> {
