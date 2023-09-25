@@ -6,6 +6,7 @@ type ButtonStyle =
   | 'rounded-transparent'
   | 'play-button'
   | 'active'
-  | 'start-button';
+  | 'start-button'
+  | 'primary-blue';
 
 export { type ButtonStyle };

@@ -1,4 +1,5 @@
-.primary {
+.primary,
+.primary-blue {
   display: inline-block;
   width: 100%;
   padding: 15px 0;
@@ -21,6 +22,18 @@
 .primary:disabled {
   background-color: var(--gray-400);
   opacity: 0.9;
+}
+
+.primary-blue {
+  background-color: var(--blue-300);
+}
+
+.primary-blue:hover {
+  background-color: var(--blue-400);
+}
+
+.primary-blue:disabled {
+  opacity: 0.8;
 }
 
 .secondary {
