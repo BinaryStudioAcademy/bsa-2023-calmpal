@@ -142,7 +142,7 @@ class ChatController extends BaseController {
     });
 
     this.addRoute({
-      path: ChatsApiPath.$ID_GENERATE_REPLIES,
+      path: ChatsApiPath.$ID_GENERATE_REPLY,
       method: 'POST',
       handler: (options) => {
         return this.generateReply(
