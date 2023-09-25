@@ -91,6 +91,8 @@ const JournalSidebar: React.FC<Properties> = ({
             label="Add note"
             isLabelVisuallyHidden
             iconName="plus"
+            iconWidth={33}
+            iconHeight={33}
             style="add"
             onClick={handleCreateJournalEntry}
           />
