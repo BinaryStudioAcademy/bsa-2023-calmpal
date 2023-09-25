@@ -8,7 +8,7 @@ import {
   type ChatCommonQueryResponse,
   type ChatGetAllItemResponseDto,
 } from './libs/types/types.js';
-import { UserToChatModel } from './user-to-chat.model.js';
+import { type UserToChatModel } from './user-to-chat.model.js';
 
 class ChatRepository implements Repository {
   private chatModel: typeof ChatModel;
@@ -28,12 +28,12 @@ class ChatRepository implements Repository {
   }
 
   public async findById(id: number, userId: number): Promise<ChatEntity> {
-    const chat = await this.chatModel
-      .query()
-      .findById(id)
+    const chat = await this.userToChatModel
+      .relatedQuery(UserToChatRelation.CHAT)
+      .for(this.userToChatModel.query().where({ userId, chatId: id }))
       .withGraphJoined(ChatsRelation.MEMBERS)
-      .whereExists(UserToChatModel.query().where({ userId }))
-      .castTo<ChatCommonQueryResponse>();
+      .castTo<ChatCommonQueryResponse>()
+      .first();
 
     return ChatEntity.initialize({
       id: chat.id,
@@ -64,8 +64,6 @@ class ChatRepository implements Repository {
           void builder.where('name', 'iLike', `%${query}%`);
         }
       })
-      .whereExists(UserToChatModel.query().where({ userId }))
-      .orderBy('createdAt', 'DESC')
       .castTo<ChatCommonQueryResponse[]>();
 
     return chats.map((chat) => {
