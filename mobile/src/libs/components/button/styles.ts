@@ -39,10 +39,7 @@ const styles = StyleSheet.create({
     color: AppColor.BLUE_400,
     fontFamily: FontFamily.MONTSERRAT_600,
   },
-  labelModalCancel: {
-    color: AppColor.WHITE,
-  },
-  labelModalDelete: {
+  labelModal: {
     color: AppColor.WHITE,
   },
   buttonRounded: {
