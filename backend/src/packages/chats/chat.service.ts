@@ -1,9 +1,7 @@
-import { ExceptionMessage } from '#libs/enums/enums.js';
+import { ContentType, ExceptionMessage } from '#libs/enums/enums.js';
 import { ChatError } from '#libs/exceptions/exceptions.js';
 import { replaceTemplateWithValue } from '#libs/helpers/helpers.js';
-import { BaseHttpApi } from '#libs/packages/api/base-http-api.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
-import { type BaseHttp } from '#libs/packages/http/http.js';
 import { OpenAiRoleKey } from '#libs/packages/open-ai/libs/enums/enums.js';
 import { type OpenAi } from '#libs/packages/open-ai/open-ai.js';
 import { type Service } from '#libs/types/types.js';
@@ -13,10 +11,7 @@ import {
   type ChatMessageGetAllResponseDto,
   type ChatMessageService,
 } from '#packages/chat-messages/chat-messages.js';
-import {
-  type FileService,
-  type FileUploadRequestDto,
-} from '#packages/files/files.js';
+import { type FileService } from '#packages/files/files.js';
 
 import { type ChatRepository } from './chat.repository.js';
 import {
@@ -35,7 +30,6 @@ type Constructor = {
   chatMessageService: ChatMessageService;
   openAiService: OpenAi;
   fileService: FileService;
-  http: BaseHttp;
 };
 
 class ChatService implements Service {
@@ -43,20 +37,17 @@ class ChatService implements Service {
   private openAiService: OpenAi;
   private chatMessageService: ChatMessageService;
   private fileService: FileService;
-  private http: BaseHttp;
 
   public constructor({
     chatRepository,
     chatMessageService,
     openAiService,
     fileService,
-    http,
   }: Constructor) {
     this.chatRepository = chatRepository;
     this.chatMessageService = chatMessageService;
     this.openAiService = openAiService;
     this.fileService = fileService;
-    this.http = http;
   }
 
   public find(): ReturnType<Service['find']> {
@@ -138,15 +129,12 @@ class ChatService implements Service {
 
   public async updateImage({
     chat,
-    imageUrl,
+    imageB64Json,
   }: UpdateChatImagePayload): Promise<ChatGetAllItemResponseDto> {
-    const httpApi = new BaseHttpApi({ baseUrl: '', path: '', http: this.http });
-    const payload = await httpApi.load<FileUploadRequestDto>(imageUrl, {
-      method: 'GET',
-      isBuffer: true,
+    const fileRecord = await this.fileService.create({
+      buffer: Buffer.from(imageB64Json, 'base64'),
+      contentType: ContentType.PNG,
     });
-
-    const fileRecord = await this.fileService.create(payload);
 
     const item = await this.chatRepository.update({
       chat,

@@ -1,4 +1,3 @@
-import { http } from '#libs/packages/http/http.js';
 import { logger } from '#libs/packages/logger/logger.js';
 import { openAi } from '#libs/packages/open-ai/open-ai.js';
 import { chatMessageService } from '#packages/chat-messages/chat-messages.js';
@@ -17,7 +16,6 @@ const chatService = new ChatService({
   chatMessageService,
   openAiService: openAi,
   fileService,
-  http,
 });
 const chatController = new ChatController({
   logger,

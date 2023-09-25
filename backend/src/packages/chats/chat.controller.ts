@@ -556,13 +556,13 @@ class ChatController extends BaseController {
       userId: options.user.id,
     });
 
-    const imageUrl = await this.chatService.generateChatImage(chat.name);
+    const imageB64Json = await this.chatService.generateChatImage(chat.name);
 
     return {
       status: HTTPCode.OK,
       payload: await this.chatService.updateImage({
         chat,
-        imageUrl,
+        imageB64Json,
       }),
     };
   }

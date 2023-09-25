@@ -1,4 +1,5 @@
 import { ContentType } from '#libs/enums/enums.js';
+import { type ValueOf } from '#libs/types/types.js';
 
 import { BaseHttpApi } from '../api/api.js';
 import { type BaseHttp } from '../http/http.js';
@@ -8,6 +9,7 @@ import {
   OpenAiChatApiPath,
   OpenAiImagesApiPath,
   OpenAiImageSize,
+  type OpenAiResponseFormat,
 } from './libs/enums/enums.js';
 import {
   type OpenAiImageGenerateRequestDto,
@@ -29,6 +31,7 @@ class OpenAi extends BaseHttpApi {
   private defaultImageGenerateConfig = {
     number: 1,
     size: OpenAiImageSize[IMAGE_SIZE],
+    response_format: 'b64_json' as ValueOf<typeof OpenAiResponseFormat>,
   };
 
   public constructor({
@@ -71,6 +74,7 @@ class OpenAi extends BaseHttpApi {
     prompt,
     number = this.defaultImageGenerateConfig.number,
     size = this.defaultImageGenerateConfig.size,
+    response_format = this.defaultImageGenerateConfig.response_format,
   }: OpenAiImageGenerateRequestDto): Promise<string | null> {
     const data = await this.load<OpenAiImageGenerateResponseDto>(
       this.getFullEndpoint(
@@ -80,14 +84,16 @@ class OpenAi extends BaseHttpApi {
       ),
       {
         method: 'POST',
-        payload: JSON.stringify({ prompt, n: number, size }),
+        payload: JSON.stringify({ prompt, n: number, size, response_format }),
         token: this.apiKey,
         contentType: ContentType.JSON,
       },
     );
     const [response] = data.data;
 
-    return response?.url ?? null;
+    return response
+      ? (response as Record<string, string>)[response_format] ?? null
+      : null;
   }
 }
 
