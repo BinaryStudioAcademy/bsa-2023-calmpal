@@ -1,6 +1,5 @@
 .info {
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
@@ -45,22 +44,11 @@
   box-shadow: 0 4px 23px 0 var(--violet-100);
 }
 
-.plus {
-  display: flex;
-  height: 30px;
-}
-
 @media (width < 900px) {
   .chat-list {
     align-items: stretch;
     padding: 0 15px;
   }
-
-  .search {
-    width: 100%;
-    padding: 0 15px;
-  }
-}
 
 @media (width < 768px) {
   .chat-list {
@@ -68,7 +56,7 @@
     padding: 0 20px;
   }
 
-  .search {
+.search {
     width: 100%;
     padding: 0 15px;
   }

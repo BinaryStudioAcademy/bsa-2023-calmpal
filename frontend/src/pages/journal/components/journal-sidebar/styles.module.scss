@@ -4,10 +4,6 @@
   align-items: center;
 }
 
-.search {
-  margin-top: 23px;
-}
-
 .journal-entry-list {
   display: flex;
   flex-direction: column;
@@ -25,13 +21,17 @@
 
 @media (width < 900px) {
   .journal-entry-list {
-    padding: 0 15px;
+    padding: 0 15px;x|
   }
-}
 
 @media (width < 768px) {
   .journal-entry-list {
     margin-top: 23px;
     padding: 0 20px;
+
+.search {
+    width: 100%;
+    margin-top: 23px;
+    padding: 0 15px;
   }
 }

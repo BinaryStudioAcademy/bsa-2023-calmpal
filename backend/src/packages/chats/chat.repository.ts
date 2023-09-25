@@ -3,15 +3,21 @@ import { type Repository } from '#libs/types/types.js';
 
 import { ChatEntity } from './chat.entity.js';
 import { type ChatModel } from './chat.model.js';
-import { ChatsRelation } from './libs/enums/enums.js';
+import { ChatsRelation, UserToChatRelation } from './libs/enums/enums.js';
 import { type ChatCommonQueryResponse } from './libs/types/types.js';
-import { UserToChatModel } from './user-to-chat.model.js';
+import { type UserToChatModel } from './user-to-chat.model.js';
 
 class ChatRepository implements Repository {
   private chatModel: typeof ChatModel;
 
-  public constructor(chatModel: typeof ChatModel) {
+  private userToChatModel: typeof UserToChatModel;
+
+  public constructor(
+    chatModel: typeof ChatModel,
+    userToChatModel: typeof UserToChatModel,
+  ) {
     this.chatModel = chatModel;
+    this.userToChatModel = userToChatModel;
   }
 
   public find(): ReturnType<Repository['find']> {
@@ -22,13 +28,21 @@ class ChatRepository implements Repository {
     return Promise.resolve([]);
   }
 
-  public async findAllByUserId(userId: number): Promise<ChatEntity[]> {
-    const chats = await this.chatModel
-      .query()
+  public async findAllByUserId(
+    userId: number,
+    query: string,
+  ): Promise<ChatEntity[]> {
+    const chats = await this.userToChatModel
+      .relatedQuery(UserToChatRelation.CHAT)
+      .for(this.userToChatModel.query().where({ userId }))
       .withGraphJoined(ChatsRelation.MEMBERS)
-      .whereExists(UserToChatModel.query().where({ userId }))
-      .joinRelated('messages')
+      .joinRelated(ChatsRelation.MESSAGES)
       .orderBy('messages.updatedAt', SortType.DESC)
+      .modify((builder) => {
+        if (query) {
+          void builder.where('name', 'iLike', `%${query}%`);
+        }
+      })
       .castTo<ChatCommonQueryResponse[]>();
 
     return chats.map((chat) => {
@@ -76,8 +90,18 @@ class ChatRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public delete(): ReturnType<Repository['delete']> {
-    return Promise.resolve(false);
+  public delete({
+    id,
+    userId,
+  }: {
+    id: number;
+    userId: number;
+  }): Promise<number> {
+    return this.userToChatModel
+      .relatedQuery(UserToChatRelation.CHAT)
+      .for(this.userToChatModel.query().where({ userId }))
+      .deleteById(id)
+      .execute();
   }
 }
 

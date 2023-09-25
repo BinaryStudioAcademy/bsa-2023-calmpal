@@ -1,4 +1,5 @@
-import { type Repository } from '#libs/types/types.js';
+import { type UserRoleKey } from '#libs/packages/open-ai/libs/enums/enums.js';
+import { type Repository, type ValueOf } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/users.js';
 
@@ -27,6 +28,32 @@ class UserRepository implements Repository {
       .modify('withoutPassword')
       .withGraphJoined(UsersRelation.DETAILS)
       .findById(id)
+      .castTo<UserCommonQueryResponse | undefined>()
+      .execute();
+
+    if (!user) {
+      return null;
+    }
+
+    return UserEntity.initialize({
+      id: user.id,
+      email: user.email,
+      createdAt: new Date(user.createdAt),
+      updatedAt: new Date(user.updatedAt),
+      fullName: user.details?.fullName ?? '',
+      isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+    });
+  }
+
+  public async findByRoleKey(
+    key: ValueOf<typeof UserRoleKey>,
+  ): Promise<UserEntity | null> {
+    const user = await this.userModel
+      .query()
+      .modify('withoutPassword')
+      .withGraphJoined(UsersRelation.DETAILS)
+      .withGraphJoined(UsersRelation.ROLES)
+      .findOne({ key })
       .castTo<UserCommonQueryResponse | undefined>()
       .execute();
 
@@ -107,7 +134,10 @@ class UserRepository implements Repository {
   }
 
   public delete(): ReturnType<Repository['delete']> {
-    return Promise.resolve(true);
+    //TODO
+    const deletedCount = 0;
+
+    return Promise.resolve(deletedCount);
   }
 
   public async findByEmail(email: string): Promise<UserEntity | null> {
