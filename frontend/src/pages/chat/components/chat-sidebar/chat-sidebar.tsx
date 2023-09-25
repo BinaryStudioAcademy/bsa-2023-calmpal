@@ -1,14 +1,14 @@
 import cardPlaceholder from '#assets/img/card-image-placeholder.png';
 import {
+  Button,
   Card,
-  Icon,
   Link,
   Search,
   Sidebar,
   SidebarBody,
   SidebarHeader,
 } from '#libs/components/components.js';
-import { AppRoute, IconColor } from '#libs/enums/enums.js';
+import { AppRoute } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -59,9 +59,17 @@ const ChatSidebar: React.FC<Properties> = ({
             {filteredElements.length}
           </span>
         </div>
+
         <div className={styles['plus']}>
           <Link to={AppRoute.CHATS}>
-            <Icon name="plus" color={IconColor.BLUE} width={33} height={33} />
+            <Button
+              label="Add note"
+              isLabelVisuallyHidden
+              iconName="plus"
+              iconWidth={33}
+              iconHeight={33}
+              style="add"
+            />
           </Link>
         </div>
       </SidebarHeader>
