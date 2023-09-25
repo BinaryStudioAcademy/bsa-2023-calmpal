@@ -60,7 +60,36 @@ class SubscriptionController extends BaseController {
     });
   }
 
-  // TODO: add swagger documentation
+  /**
+   * @swagger
+   * /subscription/create-payment-intent:
+   *   post:
+   *     description: Create a new payment intent
+   *     security:
+   *      - bearerAuth: []
+   *     requestBody:
+   *       description: Create payment intent data
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               price:
+   *                 type: number
+   *     responses:
+   *       201:
+   *         description: Successful operation
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 id:
+   *                   type: string
+   *                 clientSecret:
+   *                   type: string
+   */
   private async createPaymentIntent(
     options: APIHandlerOptions<{
       body: SubscriptionPaymentIntentCreateRequestDto;
@@ -74,7 +103,31 @@ class SubscriptionController extends BaseController {
     };
   }
 
-  // TODO: add swagger documentation
+  /**
+   * @swagger
+   * /subscription/payment-intent:
+   *   delete:
+   *     description: Cancel payment intent
+   *     security:
+   *      - bearerAuth: []
+   *     requestBody:
+   *       description: Cancel payment intent data
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               id:
+   *                 type: string
+   *     responses:
+   *       200:
+   *         description: Successful operation
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: boolean
+   */
   private async cancelPaymentIntent(
     options: APIHandlerOptions<{
       body: SubscriptionPaymentIntentCancelRequestDto;
@@ -88,7 +141,21 @@ class SubscriptionController extends BaseController {
     };
   }
 
-  // TODO: add swagger documentation
+  /**
+   * @swagger
+   * /subscription:
+   *   post:
+   *     description: Create a new subscription
+   *     security:
+   *      - bearerAuth: []
+   *     responses:
+   *       201:
+   *         description: Successful operation
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/User'
+   */
   private async subscribe(
     options: APIHandlerOptions<{
       user: UserAuthResponseDto;
