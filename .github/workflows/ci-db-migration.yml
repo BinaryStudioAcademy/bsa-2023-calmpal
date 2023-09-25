@@ -45,7 +45,7 @@ jobs:
         uses: aws-actions/aws-secretsmanager-get-secrets@v1
         with:
           secret-ids: |
-            ENVIRONMENT, ${{ github.base_ref }}/calmpal
+            ENVIRONMENT, ${{ secrets.AWS_APP_DEVELOPMENT_SECRET }}
             ENVIRONMENT_DB, ${{ secrets.AWS_DB_SECRET }}
           parse-json-secrets: true
 
@@ -64,11 +64,28 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ env.ENVIRONMENT_AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ env.ENVIRONMENT_AWS_SECRET_ACCESS_KEY }}
           AWS_BUCKET_NAME: ${{ env.ENVIRONMENT_AWS_BUCKET_NAME }}
+          OPEN_AI_API_KEY: ${{ env.ENVIRONMENT_OPEN_AI_API_KEY }}
+          BASE_OPEN_AI_URL: ${{ env.ENVIRONMENT_BASE_OPEN_AI_URL }}
           DB_HOST: ${{ env.HOST_IP }}
         run: |
           env > ./backend/.env
-          docker logs calmpal_db
-          docker run --rm  --env-file ./backend/.env $(docker build -f ./backend/Dockerfile.db-migrations -q .)
+
+          docker build -t db-migrations-image \
+          --build-arg ENVIRONMENT_DB_PASSWORD=$ENVIRONMENT_DB_PASSWORD \
+          --build-arg ENVIRONMENT_DB_USERNAME=$ENVIRONMENT_DB_USERNAME \
+          --build-arg ENVIRONMENT_DB_HOST=$ENVIRONMENT_DB_HOST \
+          --build-arg ENVIRONMENT_DB_PORT=$ENVIRONMENT_DB_PORT \
+          --build-arg ENVIRONMENT_DB_NAME=$ENVIRONMENT_DB_NAME \
+          --build-arg DUMP_FILE=$DUMP_FILE \
+          --build-arg DB_PASSWORD=$DB_PASSWORD \
+          --build-arg DB_PASSWORD=$DB_PASSWORD \
+          --build-arg DB_USERNAME=$DB_USERNAME \
+          --build-arg DB_HOST=$DB_HOST \
+          --build-arg DB_PORT=$DB_PORT \
+          --build-arg DB_NAME=$DB_NAME \
+          -f ./backend/Dockerfile.db-migrations .
+
+          docker run --rm --env-file ./backend/.env db-migrations-image
 
       - name: Stop docker services
         run: docker compose -f docker-compose.services.yml down
