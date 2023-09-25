@@ -107,7 +107,6 @@ class ChatService implements Service {
       chatEntity,
       members: [userId],
     });
-
     const chat = createdChat.toObject();
 
     await this.chatMessageService.create({
