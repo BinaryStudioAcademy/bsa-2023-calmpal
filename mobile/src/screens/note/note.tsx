@@ -23,10 +23,11 @@ import { type JournalEntryCreateRequestDto } from '#packages/journal/journal';
 import { actions as journalActions } from '#slices/journal/journal';
 
 import {
-  DEFAULT_NOTE_PAYLOAD,
+  DEFAULT_NOTE_VALUE,
+  EMPTY_NOTE_TITLE,
+  NOTE_PLACEHOLDERS,
   NOTE_SANITIZER_OPTIONS,
   SAVE_NOTE_TIMEOUT,
-  TEXT_PLACEHOLDER,
 } from './libs/constants';
 import { styles } from './styles';
 
@@ -64,13 +65,10 @@ const Note: React.FC = () => {
   const { control, watch, isDirty } = useAppForm({
     defaultValues: selectedJournalEntry
       ? {
-          title: selectedJournalEntry.title || '',
-          text: selectedJournalEntry.text || '',
+          title: selectedJournalEntry.title || DEFAULT_NOTE_VALUE.title,
+          text: selectedJournalEntry.text || DEFAULT_NOTE_VALUE.text,
         }
-      : {
-          title: '',
-          text: '',
-        },
+      : DEFAULT_NOTE_VALUE,
     mode: 'onChange',
   });
 
@@ -81,7 +79,7 @@ const Note: React.FC = () => {
       void dispatch(
         journalActions.updateJournalEntry({
           id: Number(id),
-          title: data.title || DEFAULT_NOTE_PAYLOAD.title,
+          title: data.title || EMPTY_NOTE_TITLE,
           text: data.text,
         }),
       );
@@ -131,7 +129,7 @@ const Note: React.FC = () => {
             render={({ field }): JSX.Element => {
               return (
                 <TextInput
-                  placeholder="Type your title here"
+                  placeholder={NOTE_PLACEHOLDERS.title}
                   onChangeText={field.onChange}
                   value={handleSanitizeInput(titleValue)}
                   style={styles.title}
@@ -139,14 +137,13 @@ const Note: React.FC = () => {
               );
             }}
             name="title"
-            defaultValue={DEFAULT_NOTE_PAYLOAD.title}
           />
           <FormController
             control={control}
             render={({ field }): JSX.Element => {
               return (
                 <TextInput
-                  placeholder="Type your text here"
+                  placeholder={NOTE_PLACEHOLDERS.text}
                   onChangeText={field.onChange}
                   value={handleSanitizeInput(textValue)}
                   multiline
@@ -155,7 +152,6 @@ const Note: React.FC = () => {
               );
             }}
             name="text"
-            defaultValue={TEXT_PLACEHOLDER}
           />
         </View>
       </ScrollView>
