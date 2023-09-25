@@ -34,7 +34,7 @@ class JournalApi extends BaseHttpApi {
     return await response.json<JournalEntryGetAllResponseDto>();
   }
 
-  public async createJournalEntry(
+  public async create(
     payload: JournalEntryCreateRequestDto,
   ): Promise<JournalEntryGetAllItemResponseDto> {
     const response = await this.load(
