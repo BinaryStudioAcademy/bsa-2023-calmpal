@@ -32,9 +32,15 @@ class SubscriptionService implements Service {
   public async createPaymentIntent({
     price,
   }: SubscriptionPaymentIntentCreateRequestDto): Promise<SubscriptionPaymentIntentCreateResponseDto> {
-    const { clientSecret } = await this.billing.createPaymentIntent({ price });
+    const { clientSecret, id } = await this.billing.createPaymentIntent({
+      price,
+    });
 
-    return { clientSecret };
+    return { clientSecret, id };
+  }
+
+  public cancelPaymentIntent(id: string): Promise<boolean> {
+    return this.billing.cancelPaymentIntent(id);
   }
 
   public update(): Promise<unknown> {
