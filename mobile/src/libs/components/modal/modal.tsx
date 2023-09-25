@@ -9,32 +9,20 @@ import { styles } from './styles';
 type Properties = {
   isVisible: boolean;
   onClose: () => void;
-  onDelete?: () => void;
   children?: React.ReactNode;
 };
 
-const Modal: React.FC<Properties> = ({
-  children,
-  isVisible,
-  onClose,
-  onDelete,
-}) => {
+const Modal: React.FC<Properties> = ({ children, isVisible, onClose }) => {
   return (
     <RNModal visible={isVisible} transparent animationType="none">
       <Pressable onPress={onClose} style={styles.background}>
         <View style={styles.modalContainer}>
           <Pressable>
             <View style={styles.modalView}>
-              {onDelete ? (
-                <></>
-              ) : (
-                <>
-                  <Pressable onPress={onClose} style={styles.closeButton}>
-                    <Icon name="close" color={AppColor.GRAY_500} />
-                  </Pressable>
-                  {children}
-                </>
-              )}
+              <Pressable onPress={onClose} style={styles.closeButton}>
+                <Icon name="close" color={AppColor.GRAY_500} />
+              </Pressable>
+              {children}
             </View>
           </Pressable>
         </View>
