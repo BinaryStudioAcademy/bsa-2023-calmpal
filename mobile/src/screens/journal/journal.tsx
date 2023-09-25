@@ -30,11 +30,15 @@ const Journal: React.FC = () => {
 
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
-  const { allJournalEntries } = useAppSelector(({ journal }) => {
-    return {
-      allJournalEntries: journal.allJournalEntries,
-    };
-  });
+  const { allJournalEntries, selectedJournalEntry } = useAppSelector(
+    ({ journal }) => {
+      return {
+        allJournalEntries: journal.allJournalEntries,
+        selectedJournalEntry: journal.selectedJournalEntry,
+      };
+    },
+  );
+
   const badgeCount = allJournalEntries.length;
 
   const { filteredData: filteredJournals, setSearchQuery } = useSearch(
@@ -46,7 +50,8 @@ const Journal: React.FC = () => {
     // TODO: Implement actual functionality for the onPress event
   }, []);
 
-  const handleShowModal = (): void => {
+  const handleShowModal = (id: number): void => {
+    dispatch(journalActions.setSelectedJournalEntry(id));
     setIsModalVisible(true);
   };
 
@@ -56,6 +61,9 @@ const Journal: React.FC = () => {
 
   const handleDeleteNote = (): void => {
     setIsModalVisible(false);
+    if (selectedJournalEntry) {
+      void dispatch(journalActions.deleteJournal(selectedJournalEntry.id));
+    }
   };
 
   const handleAddNote = useCallback(() => {
@@ -92,6 +100,7 @@ const Journal: React.FC = () => {
             return (
               <Card
                 title={item.title}
+                noteId={item.id}
                 onPress={handleSelectJournal}
                 key={item.id}
                 onDelete={handleShowModal}
