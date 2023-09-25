@@ -76,6 +76,12 @@ class ChatService implements Service {
       senderId: userId,
     });
 
+    await this.chatMessageService.generateReply({
+      message,
+      chatId: chat.id,
+      senderId: userId,
+    });
+
     return chat;
   }
 
@@ -83,6 +89,12 @@ class ChatService implements Service {
     payload: ChatMessageCreatePayload,
   ): Promise<ChatMessageGetAllItemResponseDto> {
     return this.chatMessageService.create(payload);
+  }
+
+  public generateReply(
+    payload: ChatMessageCreatePayload,
+  ): Promise<ChatMessageGetAllItemResponseDto> {
+    return this.chatMessageService.generateReply(payload);
   }
 
   public update(): ReturnType<Service['update']> {
