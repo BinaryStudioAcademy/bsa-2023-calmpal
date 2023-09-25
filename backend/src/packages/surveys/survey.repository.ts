@@ -81,7 +81,9 @@ class SurveyRepository implements Repository {
   }
 
   public delete(): ReturnType<Repository['delete']> {
-    return Promise.resolve(true);
+    const deletedCount = 0;
+
+    return Promise.resolve(deletedCount);
   }
 }
 
