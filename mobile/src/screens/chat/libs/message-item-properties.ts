@@ -1,3 +1,5 @@
+import { TimeFormat } from 'shared/build/index.js';
+
 import { getFormattedDate } from '#libs/helpers/helpers';
 import { type ChatMessageGetAllItemResponseDto } from '#packages/chat-messages/chat-messages';
 
@@ -29,7 +31,7 @@ const messageItemProperties = ({
   const currentDate = new Date(currentMessage.createdAt);
   const nextDate = new Date(nextMessage?.createdAt as Date);
 
-  const currentTime = getFormattedDate(currentDate, 'HH:mm');
+  const currentTime = getFormattedDate(currentDate, TimeFormat.MM_SS);
 
   const currentMinutes = currentDate.getMinutes();
   const nextMinutes = nextDate.getMinutes();
