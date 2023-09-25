@@ -27,12 +27,12 @@ import styles from './styles.module.scss';
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: (value: boolean) => void;
+  onSetIsSidebarShow: (value: boolean) => void;
 };
 
 const ChatSidebar: React.FC<Properties> = ({
   isSidebarShown,
-  setIsSidebarShown,
+  onSetIsSidebarShow,
 }) => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
@@ -56,9 +56,9 @@ const ChatSidebar: React.FC<Properties> = ({
   const { filteredElements, setFilter } = useSearch(chats, 'name');
 
   const handleSelectChat = useCallback(() => {
-    setIsSidebarShown(false);
+    onSetIsSidebarShow(false);
     // TODO redux logic
-  }, [setIsSidebarShown]);
+  }, [onSetIsSidebarShow]);
 
   const handleDeleteChat = useCallback(
     (id: number) => {
@@ -104,7 +104,7 @@ const ChatSidebar: React.FC<Properties> = ({
                     imageUrl={cardPlaceholder}
                     onClick={handleSelectChat}
                     isActive={String(filteredChat.id) === id}
-                    iconRight="trash"
+                    iconRight="trash-box"
                     onIconClick={handleDeleteChat(filteredChat.id)}
                     iconColor={IconColor.LIGHT_BLUE}
                   />

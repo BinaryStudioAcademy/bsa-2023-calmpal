@@ -3,15 +3,21 @@ import { type Repository } from '#libs/types/types.js';
 
 import { ChatEntity } from './chat.entity.js';
 import { type ChatModel } from './chat.model.js';
-import { ChatsRelation } from './libs/enums/enums.js';
+import { ChatsRelation, UserToChatRelation } from './libs/enums/enums.js';
 import { type ChatCommonQueryResponse } from './libs/types/types.js';
-import { UserToChatModel } from './user-to-chat.model.js';
+import { type UserToChatModel } from './user-to-chat.model.js';
 
 class ChatRepository implements Repository {
   private chatModel: typeof ChatModel;
 
-  public constructor(chatModel: typeof ChatModel) {
+  private userToChatModel: typeof UserToChatModel;
+
+  public constructor(
+    chatModel: typeof ChatModel,
+    userToChatModel: typeof UserToChatModel,
+  ) {
     this.chatModel = chatModel;
+    this.userToChatModel = userToChatModel;
   }
 
   public find(): ReturnType<Repository['find']> {
@@ -43,11 +49,11 @@ class ChatRepository implements Repository {
   }
 
   public async findAllByUserId(userId: number): Promise<ChatEntity[]> {
-    const chats = await this.chatModel
-      .query()
+    const chats = await this.userToChatModel
+      .relatedQuery(UserToChatRelation.CHAT)
+      .for(this.userToChatModel.query().where({ userId }))
       .withGraphJoined(ChatsRelation.MEMBERS)
-      .whereExists(UserToChatModel.query().where({ userId }))
-      .joinRelated('messages')
+      .joinRelated(ChatsRelation.MESSAGES)
       .orderBy('messages.updatedAt', SortType.DESC)
       .castTo<ChatCommonQueryResponse[]>();
 
