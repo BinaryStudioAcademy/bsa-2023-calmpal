@@ -2,7 +2,7 @@ import { type Repository } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/users.js';
 
-import { ZERO_UPDATED_ROWS_SOFT_DELETED } from './libs/constants/constants.js';
+import { ZERO_UPDATED_ROW_SOFT_DELETED } from './libs/constants/constants.js';
 import { UsersRelation } from './libs/enums/enums.js';
 import {
   type UserCommonQueryResponse,
@@ -113,12 +113,12 @@ class UserRepository implements Repository {
   }
 
   public async delete(id: number): Promise<boolean> {
-    const updatedRows = await this.userModel
+    const updatedRow = await this.userModel
       .query()
       .patch({ deletedAt: new Date().toISOString() })
       .where({ id, deletedAt: null });
 
-    return updatedRows > ZERO_UPDATED_ROWS_SOFT_DELETED;
+    return updatedRow > ZERO_UPDATED_ROW_SOFT_DELETED;
   }
 
   public async findByEmail(email: string): Promise<UserEntity | null> {
