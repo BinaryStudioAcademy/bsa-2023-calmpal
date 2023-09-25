@@ -57,8 +57,7 @@ const Journal: React.FC = () => {
       }),
     );
 
-    const lastJournalEntry =
-      allJournalEntries[allJournalEntries.length - INCREMENT_DECREMENT_STEP];
+    const lastJournalEntry = allJournalEntries.findLast(Boolean);
     if (lastJournalEntry?.id) {
       handleSelectJournalEntry(lastJournalEntry.id + INCREMENT_DECREMENT_STEP);
     }
