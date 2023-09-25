@@ -25,21 +25,31 @@ const confirmPaymentIntent = createAsyncThunk<
   unknown,
   ConfirmPaymentPayload,
   AsyncThunkConfig
->(`${sliceName}/confirm-payment-intent`, async (payload, { extra }) => {
-  const { stripe, elements } = payload;
-  const { notification } = extra;
+>(
+  `${sliceName}/confirm-payment-intent`,
+  async (payload, { extra, dispatch }) => {
+    const { stripe, elements } = payload;
+    const { notification, subscriptionApi } = extra;
 
-  const { error } = await stripe.confirmPayment({
-    elements,
-    confirmParams: {
-      return_url: `${window.location.origin}${AppRoute.PROFILE_SUBSCRIPTION}`,
-    },
-  });
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: `${window.location.origin}${AppRoute.PROFILE_SUBSCRIPTION}`,
+      },
+      redirect: 'if_required',
+    });
 
-  if (error.type === 'card_error' || error.type === 'validation_error') {
-    notification.error(error.message as string);
-  }
-});
+    if (
+      error &&
+      (error.type === 'card_error' || error.type === 'validation_error')
+    ) {
+      notification.error(error.message as string);
+    } else {
+      await subscriptionApi.subscribe();
+      dispatch(appActions.navigate(AppRoute.PROFILE_SUBSCRIPTION));
+    }
+  },
+);
 
 const cancelPaymentIntent = createAsyncThunk<
   unknown,
