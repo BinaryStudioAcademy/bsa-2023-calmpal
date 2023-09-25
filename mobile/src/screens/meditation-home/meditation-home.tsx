@@ -58,7 +58,10 @@ const MeditationHome: React.FC = () => {
             return (
               <Card
                 title={item.name}
-                onPassTitle={handleSelectMeditation}
+                // onPassTitle={handleSelectMeditation}
+                onPress={(): void => {
+                  handleSelectMeditation(item.name);
+                }}
                 key={item.id}
               />
             );

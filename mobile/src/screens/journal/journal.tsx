@@ -88,8 +88,9 @@ const Journal: React.FC = () => {
             return (
               <Card
                 title={item.title}
-                onPassId={handleSelectJournalEntry}
-                noteId={item.id}
+                onPress={(): void => {
+                  handleSelectJournalEntry(item.id);
+                }}
                 key={item.id}
               />
             );
