@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   modalContainer: {
@@ -10,10 +10,10 @@ const styles = StyleSheet.create({
   },
   modalTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
     marginBottom: 10,
     alignSelf: 'center',
     color: AppColor.GRAY_500,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
   buttonsContainer: {
     flexDirection: 'row',
