@@ -1,4 +1,5 @@
-import { APIPath } from '#libs/enums/enums.js';
+import { APIPath, ExceptionMessage } from '#libs/enums/enums.js';
+import { JournalError } from '#libs/exceptions/exceptions.js';
 import {
   type APIHandlerOptions,
   type APIHandlerResponse,
@@ -130,6 +131,19 @@ class JournalEntryController extends BaseController {
         );
       },
     });
+
+    this.addRoute({
+      path: JournalApiPath.$ID,
+      method: 'DELETE',
+      handler: (options) => {
+        return this.delete(
+          options as APIHandlerOptions<{
+            user: UserAuthResponseDto;
+            params: { id: number };
+          }>,
+        );
+      },
+    });
   }
 
   /**
@@ -210,7 +224,7 @@ class JournalEntryController extends BaseController {
    *      security:
    *       - bearerAuth: []
    *      responses:
-   *        201:
+   *        200:
    *          description: Successful operation
    *          content:
    *            application/json:
@@ -245,20 +259,20 @@ class JournalEntryController extends BaseController {
 
   /**
    * @swagger
-   * /journal-entries/{id}:
+   * /journal/{id}:
    *    get:
    *      description: Get journal entry by id
    *      security:
    *       - bearerAuth: []
    *      parameters:
    *       -  in: path
-   *          description: Chat id
+   *          description: Journal id
    *          name: id
    *          required: true
    *          type: number
    *          minimum: 1
    *      responses:
-   *        201:
+   *        200:
    *          description: Successful operation
    *          content:
    *            application/json:
@@ -288,14 +302,14 @@ class JournalEntryController extends BaseController {
 
   /**
    * @swagger
-   * /journal-entries/{id}:
+   * /journal/{id}:
    *    put:
    *      description: Update a journal entry
    *      security:
    *       - bearerAuth: []
    *      parameters:
    *       -  in: path
-   *          description: Chat id
+   *          description: Journal id
    *          name: id
    *          required: true
    *          type: number
@@ -366,6 +380,74 @@ class JournalEntryController extends BaseController {
         text,
         title,
       }),
+    };
+  }
+
+  /**
+   * @swagger
+   * /journal/{id}:
+   *   delete:
+   *     description: Delete a journal entry by ID
+   *     security:
+   *       - bearerAuth: []
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         description: ID of the journal entry to delete
+   *         required: true
+   *         schema:
+   *           type: integer
+   *     responses:
+   *       200:
+   *         description: Successfully deleted the journal entry
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 isDeleted:
+   *                   type: boolean
+   *                   description: Is successfully deleted
+   *       400:
+   *         description: Incorrect user credentials
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *             example:
+   *               message: "Incorrect credentials."
+   *               errorType: "COMMON"
+   *       404:
+   *         description: Incorrect journal credentials
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *             example:
+   *               message: "Journal with these credentials was not found."
+   *               errorType: "COMMON"
+   */
+
+  private async delete(
+    options: APIHandlerOptions<{
+      user: UserAuthResponseDto;
+      params: { id: number };
+    }>,
+  ): Promise<APIHandlerResponse> {
+    const isDeleted = await this.journalEntryService.delete({
+      id: options.params.id,
+      user: options.user,
+    });
+    if (!isDeleted) {
+      throw new JournalError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.JOURNAL_NOT_FOUND,
+      });
+    }
+
+    return {
+      status: HTTPCode.OK,
+      payload: isDeleted,
     };
   }
 }

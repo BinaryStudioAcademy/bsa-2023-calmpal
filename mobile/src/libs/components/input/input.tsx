@@ -64,6 +64,7 @@ const Input = <T extends FormFieldValues>({
           onFocus={handleFocus}
           onBlur={handeBlur}
           multiline={true}
+          textAlignVertical="top"
           numberOfLines={rowsCount}
           style={styles.otherTextInput}
           placeholder={placeholder}
