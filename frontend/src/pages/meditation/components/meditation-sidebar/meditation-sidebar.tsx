@@ -11,6 +11,7 @@ import { IconColor } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useCallback,
+  useEffect,
   useRef,
   useSearch,
 } from '#libs/hooks/hooks.js';
@@ -23,12 +24,12 @@ import styles from './styles.module.scss';
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: (value: boolean) => void;
+  onSetIsSidebarShow: (value: boolean) => void;
 };
 
 const MeditationSidebar: React.FC<Properties> = ({
   isSidebarShown,
-  setIsSidebarShown,
+  onSetIsSidebarShow,
 }) => {
   const dispatch = useAppDispatch();
   const { filteredElements, setFilter } = useSearch(navigationItems, 'name');
@@ -45,9 +46,13 @@ const MeditationSidebar: React.FC<Properties> = ({
     [dispatch],
   );
 
-  const handleSelectMeidtationEntry = useCallback(() => {
-    setIsSidebarShown(false);
-  }, [setIsSidebarShown]);
+  const handleSelectMeditationEntry = useCallback(() => {
+    onSetIsSidebarShow(false);
+  }, [onSetIsSidebarShow]);
+
+  useEffect(() => {
+    void dispatch(meditationActions.getAllMeditationEntries());
+  }, [dispatch]);
 
   return (
     <>
@@ -78,7 +83,7 @@ const MeditationSidebar: React.FC<Properties> = ({
                 <Card
                   title={filteredElement.name}
                   imageUrl={meditationPlaceholder}
-                  onClick={handleSelectMeidtationEntry}
+                  onClick={handleSelectMeditationEntry}
                   key={filteredElement.name}
                   isActive
                 />

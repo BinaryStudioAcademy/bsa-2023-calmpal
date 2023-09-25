@@ -6,8 +6,10 @@ import { type Storage } from '#libs/packages/storage/storage.js';
 import { JournalApiPath } from './libs/enums/enums.js';
 import {
   type JournalEntryCreateRequestDto,
+  type JournalEntryDeleteResponseDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
+  type JournalEntryUpdatePayloadDto,
 } from './libs/types/types.js';
 
 type Constructor = {
@@ -47,6 +49,40 @@ class JournalApi extends BaseHttpApi {
     );
 
     return await response.json<JournalEntryGetAllItemResponseDto>();
+  }
+
+  public async updateJournalEntry(
+    payload: JournalEntryUpdatePayloadDto,
+  ): Promise<JournalEntryGetAllItemResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(JournalApiPath.$ID, {
+        id: payload.id.toString(),
+      }),
+      {
+        method: 'PUT',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify({ title: payload.title, text: payload.text }),
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<JournalEntryGetAllItemResponseDto>();
+  }
+
+  public async deleteJournalEntry(
+    id: number,
+  ): Promise<JournalEntryDeleteResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(JournalApiPath.$ID, { id: `${id}` }),
+      {
+        method: 'DELETE',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify({}),
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<JournalEntryDeleteResponseDto>();
   }
 }
 
