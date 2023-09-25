@@ -51,13 +51,26 @@ const Note: React.FC = () => {
     };
   });
 
+  // const { control, watch, isDirty } = useAppForm({
+  //   defaultValues: selectedJournalEntry
+  //     ? {
+  //         title: selectedJournalEntry.title || DEFAULT_NOTE_PAYLOAD.title,
+  //         text: selectedJournalEntry.text || DEFAULT_NOTE_PAYLOAD.text,
+  //       }
+  //     : DEFAULT_NOTE_PAYLOAD,
+  //   mode: 'onChange',
+  // });
+
   const { control, watch, isDirty } = useAppForm({
     defaultValues: selectedJournalEntry
       ? {
-          title: selectedJournalEntry.title || DEFAULT_NOTE_PAYLOAD.title,
-          text: selectedJournalEntry.text || DEFAULT_NOTE_PAYLOAD.text,
+          title: selectedJournalEntry.title || '',
+          text: selectedJournalEntry.text || '',
         }
-      : DEFAULT_NOTE_PAYLOAD,
+      : {
+          title: '',
+          text: '',
+        },
     mode: 'onChange',
   });
 
@@ -118,7 +131,7 @@ const Note: React.FC = () => {
             render={({ field }): JSX.Element => {
               return (
                 <TextInput
-                  placeholder={DEFAULT_NOTE_PAYLOAD.title}
+                  placeholder="Type your title here"
                   onChangeText={field.onChange}
                   value={handleSanitizeInput(titleValue)}
                   style={styles.title}
@@ -133,7 +146,7 @@ const Note: React.FC = () => {
             render={({ field }): JSX.Element => {
               return (
                 <TextInput
-                  placeholder={TEXT_PLACEHOLDER}
+                  placeholder="Type your text here"
                   onChangeText={field.onChange}
                   value={handleSanitizeInput(textValue)}
                   multiline
