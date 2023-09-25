@@ -123,7 +123,7 @@ const { reducer, actions, name } = createSlice({
     builder.addCase(generateReply.rejected, (state) => {
       state.generateReplyDataStatus = DataStatus.REJECTED;
     });
-    
+
     builder.addCase(updateChatImage.pending, (state) => {
       state.updateChatImageStatus = DataStatus.PENDING;
     });

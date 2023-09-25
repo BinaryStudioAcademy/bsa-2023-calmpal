@@ -59,7 +59,7 @@ class ChatApi extends BaseHttpApi {
         hasAuth: true,
       },
     );
-    
+
     return await response.json<boolean>();
   }
 
