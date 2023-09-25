@@ -6,6 +6,7 @@ import {
 } from '#libs/packages/controller/controller.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
+import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { SubscriptionApiPath } from './libs/enums/enums.js';
 import {
@@ -21,6 +22,18 @@ class SubscriptionController extends BaseController {
     super(logger, APIPath.SUBSCRIPTION);
 
     this.subscriptionService = subscriptionService;
+
+    this.addRoute({
+      path: SubscriptionApiPath.ROOT,
+      method: 'POST',
+      handler: (options) => {
+        return this.subscribe(
+          options as APIHandlerOptions<{
+            user: UserAuthResponseDto;
+          }>,
+        );
+      },
+    });
 
     this.addRoute({
       path: SubscriptionApiPath.PAYMENT_INTENT,
@@ -72,6 +85,20 @@ class SubscriptionController extends BaseController {
       payload: await this.subscriptionService.cancelPaymentIntent(
         options.body.id,
       ),
+    };
+  }
+
+  // TODO: add swagger documentation
+  private async subscribe(
+    options: APIHandlerOptions<{
+      user: UserAuthResponseDto;
+    }>,
+  ): Promise<APIHandlerResponse> {
+    return {
+      status: HTTPCode.CREATED,
+      payload: await this.subscriptionService.subscribe({
+        userId: options.user.id,
+      }),
     };
   }
 }
