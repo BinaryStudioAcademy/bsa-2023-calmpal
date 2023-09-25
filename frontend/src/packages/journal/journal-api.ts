@@ -1,4 +1,5 @@
 import { APIPath, ContentType } from '#libs/enums/enums.js';
+import { getUrlWithQueryString } from '#libs/helpers/helpers.js';
 import { BaseHttpApi } from '#libs/packages/api/api.js';
 import { type HTTP } from '#libs/packages/http/http.js';
 import { type Storage } from '#libs/packages/storage/storage.js';
@@ -23,9 +24,14 @@ class JournalApi extends BaseHttpApi {
     super({ path: APIPath.JOURNAL, baseUrl, http, storage });
   }
 
-  public async getAllJournalEntries(): Promise<JournalEntryGetAllResponseDto> {
+  public async getAllJournalEntries(
+    query: string,
+  ): Promise<JournalEntryGetAllResponseDto> {
     const response = await this.load(
-      this.getFullEndpoint(JournalApiPath.ROOT, {}),
+      this.getFullEndpoint(
+        getUrlWithQueryString(JournalApiPath.ROOT, { query }),
+        {},
+      ),
       {
         method: 'GET',
         hasAuth: true,

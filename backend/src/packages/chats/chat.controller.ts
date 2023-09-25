@@ -1,4 +1,5 @@
-import { APIPath } from '#libs/enums/enums.js';
+import { APIPath, ExceptionMessage } from '#libs/enums/enums.js';
+import { ChatError } from '#libs/exceptions/exceptions.js';
 import {
   type APIHandlerOptions,
   type APIHandlerResponse,
@@ -16,8 +17,14 @@ import { ChatEntity } from './chat.entity.js';
 import { type ChatService } from './chat.service.js';
 import { MOCKED_CHAT_NAME } from './libs/constants/constants.js';
 import { ChatsApiPath } from './libs/enums/enums.js';
-import { type ChatCreateRequestDto } from './libs/types/types.js';
-import { createChatValidationSchema } from './libs/validation-schemas/validation-schemas.js';
+import {
+  type ChatCreateRequestDto,
+  type EntitiesFilteringDto,
+} from './libs/types/types.js';
+import {
+  createChatValidationSchema,
+  entitiesFilteringQueryValidationSchema,
+} from './libs/validation-schemas/validation-schemas.js';
 
 /**
  * @swagger
@@ -84,6 +91,13 @@ import { createChatValidationSchema } from './libs/validation-schemas/validation
  *          updatedAt:
  *             type: string
  *             format: date-time
+ *       Error:
+ *         type: object
+ *         properties:
+ *           message:
+ *             type: string
+ *           errorType:
+ *             type: string
  */
 class ChatController extends BaseController {
   private chatService: ChatService;
@@ -96,9 +110,15 @@ class ChatController extends BaseController {
     this.addRoute({
       path: ChatsApiPath.ROOT,
       method: 'GET',
+      validation: {
+        query: entitiesFilteringQueryValidationSchema,
+      },
       handler: (options) => {
         return this.findAll(
-          options as APIHandlerOptions<{ user: UserAuthResponseDto }>,
+          options as APIHandlerOptions<{
+            user: UserAuthResponseDto;
+            query: EntitiesFilteringDto;
+          }>,
         );
       },
     });
@@ -134,11 +154,38 @@ class ChatController extends BaseController {
     });
 
     this.addRoute({
+      path: ChatsApiPath.$ID_GENERATE_REPLY,
+      method: 'POST',
+      handler: (options) => {
+        return this.generateReply(
+          options as APIHandlerOptions<{
+            body: ChatMessageCreateRequestDto;
+            params: { id: string };
+            user: UserAuthResponseDto;
+          }>,
+        );
+      },
+    });
+
+    this.addRoute({
       path: ChatsApiPath.$ID_MESSAGES,
       method: 'GET',
       handler: (options) => {
         return this.findAllMessagesByChatId(
           options as APIHandlerOptions<{
+            params: { id: string };
+          }>,
+        );
+      },
+    });
+
+    this.addRoute({
+      path: ChatsApiPath.$ID,
+      method: 'DELETE',
+      handler: (options) => {
+        return this.delete(
+          options as APIHandlerOptions<{
+            user: UserAuthResponseDto;
             params: { id: string };
           }>,
         );
@@ -151,6 +198,15 @@ class ChatController extends BaseController {
    * /chats:
    *   get:
    *     description: Returns all chats with authenticated user
+   *     parameters:
+   *       - name: query
+   *         in: query
+   *         description: A string to search chats
+   *         required: false
+   *         schema:
+   *           type: string
+   *     security:
+   *      - bearerAuth: []
    *     responses:
    *       200:
    *         description: Successful operation
@@ -163,13 +219,32 @@ class ChatController extends BaseController {
    *                   type: array
    *                   items:
    *                     $ref: '#/components/schemas/Chat'
+   *       400:
+   *         description: Bad Request
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 status:
+   *                   type: integer
+   *                   example: 400
+   *                 message:
+   *                   type: string
+   *                   example: The data which was passed is incorrect.
    */
   private async findAll(
-    options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
+    options: APIHandlerOptions<{
+      user: UserAuthResponseDto;
+      query: EntitiesFilteringDto;
+    }>,
   ): Promise<APIHandlerResponse> {
     return {
       status: HTTPCode.OK,
-      payload: await this.chatService.findAllByUserId(options.user.id),
+      payload: await this.chatService.findAllByUserId(
+        options.user.id,
+        options.query.query,
+      ),
     };
   }
 
@@ -178,6 +253,8 @@ class ChatController extends BaseController {
    * /chats:
    *   post:
    *     description: Create a new chat
+   *     security:
+   *      - bearerAuth: []
    *     requestBody:
    *       description: Create chat data
    *       required: true
@@ -221,6 +298,8 @@ class ChatController extends BaseController {
    * /chats/{id}/messages:
    *   post:
    *     description: Create a new chat message
+   *     security:
+   *      - bearerAuth: []
    *     parameters:
    *       -  in: path
    *          description: Chat id
@@ -267,9 +346,60 @@ class ChatController extends BaseController {
 
   /**
    * @swagger
+   * /chats/{id}/generated-replies:
+   *   post:
+   *     description: Generate reply for a message
+   *     parameters:
+   *       -  in: path
+   *          description: Chat id
+   *          name: id
+   *          required: true
+   *          type: number
+   *          minimum: 1
+   *     requestBody:
+   *       description: Create message data
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               message:
+   *                 type: string
+   *     responses:
+   *       201:
+   *         description: Successful operation
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/ChatMessage'
+   */
+  private async generateReply(
+    options: APIHandlerOptions<{
+      body: ChatMessageCreateRequestDto;
+      params: { id: string };
+      user: UserAuthResponseDto;
+    }>,
+  ): Promise<APIHandlerResponse> {
+    const generateReplyToCreateData: ChatMessageCreatePayload = {
+      chatId: Number(options.params.id),
+      message: options.body.message,
+      senderId: options.user.id,
+    };
+
+    return {
+      status: HTTPCode.CREATED,
+      payload: await this.chatService.generateReply(generateReplyToCreateData),
+    };
+  }
+
+  /**
+   * @swagger
    * /chats/{id}/messages:
    *   get:
    *     description: Returns all chat messages
+   *     security:
+   *      - bearerAuth: []
    *     parameters:
    *       -  in: path
    *          description: Chat id
@@ -300,6 +430,62 @@ class ChatController extends BaseController {
       payload: await this.chatService.findAllMessagesByChatId(
         Number(options.params.id),
       ),
+    };
+  }
+
+  /**
+   * @swagger
+   * /chats/{id}:
+   *   delete:
+   *     description: Delete chat by id
+   *     security:
+   *      - bearerAuth: []
+   *     parameters:
+   *      -  in: path
+   *         description: Chat id
+   *         name: id
+   *         required: true
+   *         type: number
+   *         minimum: 1
+   *     responses:
+   *       200:
+   *         description: Successful operation
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: boolean
+   *       404:
+   *         description: Chat was not found
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *             example:
+   *               message: "Chat with such id was not found."
+   *               errorType: "COMMON"
+   */
+
+  private async delete(
+    options: APIHandlerOptions<{
+      params: { id: string };
+      user: UserAuthResponseDto;
+    }>,
+  ): Promise<APIHandlerResponse> {
+    const { id } = options.params;
+    const { id: userId } = options.user;
+
+    const isDeleted = await this.chatService.delete({ id: Number(id), userId });
+
+    if (!isDeleted) {
+      throw new ChatError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.CHAT_NOT_FOUND,
+      });
+    }
+
+    return {
+      status: HTTPCode.CREATED,
+      payload: isDeleted,
     };
   }
 }
