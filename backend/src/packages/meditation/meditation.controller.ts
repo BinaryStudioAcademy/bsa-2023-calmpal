@@ -7,6 +7,7 @@ import {
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 import { type FileUploadRequestDto } from '#packages/files/files.js';
+import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { MeditationApiPath } from './libs/enums/enums.js';
 import { type MeditationEntryCreateRequestDto } from './libs/types/types.js';
@@ -72,6 +73,7 @@ class MeditationController extends BaseController {
           options as APIHandlerOptions<{
             body: MeditationEntryCreateRequestDto;
             fileBuffer: FileUploadRequestDto;
+            user: UserAuthResponseDto;
           }>,
         );
       },
@@ -80,8 +82,12 @@ class MeditationController extends BaseController {
     this.addRoute({
       path: MeditationApiPath.ROOT,
       method: 'GET',
-      handler: () => {
-        return this.getAll();
+      handler: (options) => {
+        return this.getAll(
+          options as APIHandlerOptions<{
+            user: UserAuthResponseDto;
+          }>,
+        );
       },
     });
   }
@@ -138,6 +144,7 @@ class MeditationController extends BaseController {
     options: APIHandlerOptions<{
       body: MeditationEntryCreateRequestDto;
       fileBuffer: FileUploadRequestDto;
+      user: UserAuthResponseDto;
     }>,
   ): Promise<APIHandlerResponse> {
     return {
@@ -145,6 +152,7 @@ class MeditationController extends BaseController {
       payload: await this.meditationService.create({
         name: options.body.name.value,
         file: options.fileBuffer,
+        userId: options.user.id,
       }),
     };
   }
@@ -170,10 +178,14 @@ class MeditationController extends BaseController {
    *                      $ref: '#/components/schemas/MeditationEntry'
    */
 
-  private async getAll(): Promise<APIHandlerResponse> {
+  private async getAll(
+    options: APIHandlerOptions<{
+      user: UserAuthResponseDto;
+    }>,
+  ): Promise<APIHandlerResponse> {
     return {
       status: HTTPCode.OK,
-      payload: await this.meditationService.findAll(),
+      payload: await this.meditationService.findByUserId(options.user.id),
     };
   }
 }
