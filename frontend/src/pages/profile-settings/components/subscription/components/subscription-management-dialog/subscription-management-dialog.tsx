@@ -1,5 +1,9 @@
+import { useCallback } from 'react';
+
 import { Button, Icon } from '#libs/components/components.js';
-import { IconColor } from '#libs/enums/enums.js';
+import { AppRoute, IconColor } from '#libs/enums/enums.js';
+import { useAppDispatch } from '#libs/hooks/hooks.js';
+import { actions as appActions } from '#slices/app/app.js';
 
 import { PLAN_BENEFITS } from '../../libs/constants.js';
 import styles from './styles.module.scss';
@@ -17,6 +21,12 @@ const dialogStyles = {
 };
 
 const SubscriptionManagementDialog: React.FC = () => {
+  const dispatch = useAppDispatch();
+
+  const handleSubscribe = useCallback(() => {
+    dispatch(appActions.navigate(AppRoute.PROFILE_SUBSCRIPTION_CHECKOUT));
+  }, [dispatch]);
+
   return (
     <div className={dialogStyles.subscriptionManagement}>
       <h3 className={dialogStyles.heading}>Subscription Management</h3>
@@ -54,7 +64,12 @@ const SubscriptionManagementDialog: React.FC = () => {
           </ul>
         </div>
         <div>
-          <Button type="button" label="Subscribe" style="primary-blue" />
+          <Button
+            type="button"
+            label="Subscribe"
+            style="primary-blue"
+            onClick={handleSubscribe}
+          />
         </div>
       </div>
     </div>
