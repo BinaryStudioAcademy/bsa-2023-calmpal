@@ -19,7 +19,7 @@ import { ReactComponent as PlusIcon } from '#assets/icons/plus.svg';
 import { ReactComponent as PreviousIcon } from '#assets/icons/previous.svg';
 import { ReactComponent as SendIcon } from '#assets/icons/send.svg';
 import { ReactComponent as SignOutIcon } from '#assets/icons/sign-out.svg';
-import { ReactComponent as TrashBox } from '#assets/icons/trash-box.svg';
+import { ReactComponent as TrashBoxIcon } from '#assets/icons/trash-box.svg';
 import { ReactComponent as UploadIcon } from '#assets/icons/upload.svg';
 import { ReactComponent as UserIcon } from '#assets/icons/user.svg';
 import { type IconName } from '#libs/types/types.js';
@@ -51,7 +51,7 @@ const iconNameToIcon: Record<
   'sign-out': SignOutIcon,
   'user': UserIcon,
   'notification': NotificationIcon,
-  'trash-box': TrashBox,
+  'trash-box': TrashBoxIcon,
 };
 
 export { iconNameToIcon };
