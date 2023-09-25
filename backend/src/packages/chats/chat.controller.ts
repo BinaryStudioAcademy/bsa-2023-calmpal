@@ -154,6 +154,20 @@ class ChatController extends BaseController {
     });
 
     this.addRoute({
+      path: ChatsApiPath.$ID_GENERATE_REPLY,
+      method: 'POST',
+      handler: (options) => {
+        return this.generateReply(
+          options as APIHandlerOptions<{
+            body: ChatMessageCreateRequestDto;
+            params: { id: string };
+            user: UserAuthResponseDto;
+          }>,
+        );
+      },
+    });
+
+    this.addRoute({
       path: ChatsApiPath.$ID_MESSAGES,
       method: 'GET',
       handler: (options) => {
@@ -327,6 +341,55 @@ class ChatController extends BaseController {
     return {
       status: HTTPCode.CREATED,
       payload: await this.chatService.createMessage(chatMessageToCreateData),
+    };
+  }
+
+  /**
+   * @swagger
+   * /chats/{id}/generated-replies:
+   *   post:
+   *     description: Generate reply for a message
+   *     parameters:
+   *       -  in: path
+   *          description: Chat id
+   *          name: id
+   *          required: true
+   *          type: number
+   *          minimum: 1
+   *     requestBody:
+   *       description: Create message data
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               message:
+   *                 type: string
+   *     responses:
+   *       201:
+   *         description: Successful operation
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/ChatMessage'
+   */
+  private async generateReply(
+    options: APIHandlerOptions<{
+      body: ChatMessageCreateRequestDto;
+      params: { id: string };
+      user: UserAuthResponseDto;
+    }>,
+  ): Promise<APIHandlerResponse> {
+    const generateReplyToCreateData: ChatMessageCreatePayload = {
+      chatId: Number(options.params.id),
+      message: options.body.message,
+      senderId: options.user.id,
+    };
+
+    return {
+      status: HTTPCode.CREATED,
+      payload: await this.chatService.generateReply(generateReplyToCreateData),
     };
   }
 
