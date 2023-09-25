@@ -5,7 +5,10 @@ import {
   useCallback,
   useFormController,
 } from '#libs/hooks/hooks.js';
-import { type FeelingInputDto } from '#packages/survey/libs/types/types.js';
+import {
+  type FeelingInputDto,
+  type HandleFieldChangeType,
+} from '#packages/survey/libs/types/types.js';
 import { stepInputValidationSchema } from '#packages/survey/survey.js';
 import { FEELINGS_CATEGORIES } from '#pages/surveys/libs/constants.js';
 
@@ -15,12 +18,14 @@ type Properties = {
   onNextStep: () => void;
   onPreviousStep: () => void;
   onSetFeelings: (feelings: string[]) => void;
+  onFieldChange: (options: HandleFieldChangeType) => () => void;
 };
 
 const FeelingsStep: React.FC<Properties> = ({
   onNextStep,
   onPreviousStep,
   onSetFeelings,
+  onFieldChange,
 }) => {
   const feelings = useAppSelector((state) => {
     return state.survey.feelings;
@@ -40,26 +45,18 @@ const FeelingsStep: React.FC<Properties> = ({
   const handleFieldChange = useCallback(
     (category: string) => {
       return () => {
-        if (categoriesValue.includes(category)) {
-          onCategoryChange(
-            categoriesValue.filter((option) => {
-              return option !== category;
-            }),
-          );
-          onSetFeelings(
-            feelings.filter((option) => {
-              return option !== category;
-            }),
-          );
-
-          return;
-        }
-
-        onCategoryChange([...categoriesValue, category]);
-        onSetFeelings([...feelings, category]);
+        onFieldChange({
+          category,
+          currentCategories: categoriesValue,
+          stateValue: feelings,
+          defaultCategories: FEELINGS_CATEGORIES,
+          isOther: category === 'Other',
+          categoryChange: onCategoryChange,
+          stateChange: onSetFeelings,
+        });
       };
     },
-    [categoriesValue, feelings, onCategoryChange, onSetFeelings],
+    [categoriesValue, feelings, onCategoryChange, onFieldChange, onSetFeelings],
   );
 
   const handleFeelingsSubmit = useCallback(

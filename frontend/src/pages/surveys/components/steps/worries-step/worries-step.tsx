@@ -1,12 +1,15 @@
 import { Button, Checkbox, Input } from '#libs/components/components.js';
-import { FIRST_INDEX } from '#libs/constants/index.constant.js';
 import {
   useAppForm,
   useAppSelector,
   useCallback,
   useFormController,
 } from '#libs/hooks/hooks.js';
-import { type WorryInputDto } from '#packages/survey/libs/types/types.js';
+import {
+  type HandleFieldChangeType,
+  type OnOther,
+  type WorryInputDto,
+} from '#packages/survey/libs/types/types.js';
 import {
   stepWithOtherInputValidationSchema,
   SurveyValidationRule,
@@ -18,16 +21,11 @@ import {
 
 import styles from '../styles.module.scss';
 
-type OnOther = {
-  getOtherDefault: (categories: string[]) => string;
-  getOthersCategories: (categories: string[], payload: string[]) => string[];
-  hasOther: (category: string[]) => boolean;
-};
-
 type Properties = {
   onNextStep: () => void;
   onPreviousStep: () => void;
   onSetWorries: (worries: string[]) => void;
+  onFieldChange: (options: HandleFieldChangeType) => () => void;
   onOther: OnOther;
 };
 
@@ -35,9 +33,10 @@ const WorriesStep: React.FC<Properties> = ({
   onNextStep,
   onPreviousStep,
   onSetWorries,
+  onFieldChange,
   onOther,
 }) => {
-  const { getOtherDefault, getOthersCategories, hasOther } = onOther;
+  const { getOtherDefault, hasOther } = onOther;
   const worries = useAppSelector((state) => {
     return state.survey.worries;
   });
@@ -55,52 +54,18 @@ const WorriesStep: React.FC<Properties> = ({
   const handleFieldChange = useCallback(
     (category: string) => {
       return () => {
-        const otherCategories = getOthersCategories(
-          WORRIES_CATEGORIES,
-          categoriesValue,
-        );
-        if (category === 'Other' && otherCategories.length > FIRST_INDEX) {
-          otherCategories.push(category);
-          onCategoryChange(
-            categoriesValue.filter((option) => {
-              return !otherCategories.includes(option);
-            }),
-          );
-          onSetWorries(
-            worries.filter((option) => {
-              return !otherCategories.includes(option);
-            }),
-          );
-
-          return;
-        }
-
-        if (categoriesValue.includes(category)) {
-          onCategoryChange(
-            categoriesValue.filter((option) => {
-              return option !== category;
-            }),
-          );
-          onSetWorries(
-            worries.filter((option) => {
-              return option !== category;
-            }),
-          );
-
-          return;
-        }
-
-        onCategoryChange([...categoriesValue, category]);
-        onSetWorries([...worries, category]);
+        onFieldChange({
+          category,
+          currentCategories: categoriesValue,
+          stateValue: worries,
+          defaultCategories: WORRIES_CATEGORIES,
+          isOther: category === 'Other',
+          categoryChange: onCategoryChange,
+          stateChange: onSetWorries,
+        });
       };
     },
-    [
-      categoriesValue,
-      getOthersCategories,
-      onCategoryChange,
-      onSetWorries,
-      worries,
-    ],
+    [categoriesValue, onCategoryChange, onFieldChange, onSetWorries, worries],
   );
 
   const handleWorriesSubmit = useCallback(

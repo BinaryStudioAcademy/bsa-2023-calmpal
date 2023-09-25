@@ -7,8 +7,10 @@ export { getSurveyCategories } from './libs/helpers/helpers.js';
 export {
   type FeelingInputDto,
   type GoalInputDto,
+  type HandleFieldChangeType,
   type JournalingExperienceInputDto,
   type MeditationExperienceInputDto,
+  type OnOther,
   type PreferenceInputDto,
   type Step,
   type SurveyGetAllItemResponseDto,

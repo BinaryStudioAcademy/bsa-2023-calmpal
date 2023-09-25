@@ -1,12 +1,15 @@
 import { Button, Checkbox, Input } from '#libs/components/components.js';
-import { FIRST_INDEX } from '#libs/constants/index.constant.js';
 import {
   useAppForm,
   useAppSelector,
   useCallback,
   useFormController,
 } from '#libs/hooks/hooks.js';
-import { type GoalInputDto } from '#packages/survey/libs/types/types.js';
+import {
+  type GoalInputDto,
+  type HandleFieldChangeType,
+  type OnOther,
+} from '#packages/survey/libs/types/types.js';
 import {
   stepWithOtherInputValidationSchema,
   SurveyValidationRule,
@@ -18,16 +21,11 @@ import {
 
 import styles from '../styles.module.scss';
 
-type OnOther = {
-  getOtherDefault: (categories: string[]) => string;
-  getOthersCategories: (categories: string[], payload: string[]) => string[];
-  hasOther: (category: string[]) => boolean;
-};
-
 type Properties = {
   onNextStep: () => void;
   onPreviousStep: () => void;
   onSetGoals: (goals: string[]) => void;
+  onFieldChange: (options: HandleFieldChangeType) => () => void;
   onOther: OnOther;
 };
 
@@ -35,9 +33,10 @@ const GoalsStep: React.FC<Properties> = ({
   onNextStep,
   onSetGoals,
   onPreviousStep,
+  onFieldChange,
   onOther,
 }) => {
-  const { getOtherDefault, getOthersCategories, hasOther } = onOther;
+  const { getOtherDefault, hasOther } = onOther;
 
   const goals = useAppSelector((state) => {
     return state.survey.goals;
@@ -57,46 +56,18 @@ const GoalsStep: React.FC<Properties> = ({
   const handleFieldChange = useCallback(
     (category: string) => {
       return () => {
-        const otherCategories = getOthersCategories(
-          GOALS_CATEGORIES,
-          categoriesValue,
-        );
-        if (category === 'Other' && otherCategories.length > FIRST_INDEX) {
-          otherCategories.push(category);
-          onCategoryChange(
-            categoriesValue.filter((option) => {
-              return !otherCategories.includes(option);
-            }),
-          );
-          onSetGoals(
-            goals.filter((option) => {
-              return !otherCategories.includes(option);
-            }),
-          );
-
-          return;
-        }
-
-        if (categoriesValue.includes(category)) {
-          onCategoryChange(
-            categoriesValue.filter((option) => {
-              return option !== category;
-            }),
-          );
-          onSetGoals(
-            goals.filter((option) => {
-              return option !== category;
-            }),
-          );
-
-          return;
-        }
-
-        onSetGoals([...goals, category]);
-        onCategoryChange([...categoriesValue, category]);
+        onFieldChange({
+          category,
+          currentCategories: categoriesValue,
+          stateValue: goals,
+          defaultCategories: GOALS_CATEGORIES,
+          isOther: category === 'Other',
+          categoryChange: onCategoryChange,
+          stateChange: onSetGoals,
+        });
       };
     },
-    [categoriesValue, getOthersCategories, goals, onCategoryChange, onSetGoals],
+    [categoriesValue, goals, onCategoryChange, onFieldChange, onSetGoals],
   );
 
   const handleGoalsSubmit = useCallback(

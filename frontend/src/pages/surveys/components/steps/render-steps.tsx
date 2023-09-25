@@ -1,6 +1,10 @@
-import { LAST_INDEX } from '#libs/constants/index.constant.js';
+import { FIRST_INDEX, LAST_INDEX } from '#libs/constants/index.constant.js';
 import { useAppDispatch, useCallback } from '#libs/hooks/hooks.js';
-import { type Step, SurveySteps } from '#packages/survey/survey.js';
+import {
+  type HandleFieldChangeType,
+  type Step,
+} from '#packages/survey/survey.js';
+import { SurveySteps } from '#packages/survey/survey.js';
 import { actions } from '#slices/survey/survey.js';
 
 import { FeelingsStep } from './feelings-step/feelings-step.js';
@@ -27,6 +31,56 @@ const getOthersCategories = (
   return payload.filter((category) => {
     return !categories.includes(category);
   });
+};
+
+const onFieldChange = ({
+  category,
+  currentCategories,
+  stateValue,
+  defaultCategories,
+  isOther = false,
+  categoryChange,
+  stateChange,
+}: HandleFieldChangeType) => {
+  return (): void => {
+    const otherCategories = getOthersCategories(
+      defaultCategories,
+      currentCategories,
+    );
+    if (isOther && otherCategories.length > FIRST_INDEX) {
+      otherCategories.push(category);
+      categoryChange(
+        currentCategories.filter((option) => {
+          return !otherCategories.includes(option);
+        }),
+      );
+      stateChange(
+        stateValue.filter((option) => {
+          return !otherCategories.includes(option);
+        }),
+      );
+
+      return;
+    }
+
+    if (currentCategories.includes(category)) {
+      categoryChange(
+        currentCategories.filter((option) => {
+          return option !== category;
+        }),
+      );
+      stateChange(
+        stateValue.filter((option) => {
+          return option !== category;
+        }),
+      );
+
+      return;
+    }
+
+    stateChange([...stateValue, category]);
+    categoryChange([...currentCategories, category]);
+  };
 };
 
 type StepsProperties = {
@@ -84,6 +138,10 @@ const useRenderSteps: React.FC<StepsProperties> = ({
     [dispatch],
   );
 
+  const handleFieldChange = useCallback((options: HandleFieldChangeType) => {
+    return onFieldChange(options);
+  }, []);
+
   const onOther = {
     getOtherDefault,
     getOthersCategories,
@@ -97,6 +155,7 @@ const useRenderSteps: React.FC<StepsProperties> = ({
             onNextStep={onNextStep}
             onSetPreferences={setPreference}
             onOther={onOther}
+            onFieldChange={handleFieldChange}
           />
         );
       }
@@ -108,6 +167,7 @@ const useRenderSteps: React.FC<StepsProperties> = ({
             onPreviousStep={onPreviousStep}
             onNextStep={onNextStep}
             onSetFeelings={setFeelings}
+            onFieldChange={handleFieldChange}
           />
         );
       }
@@ -119,6 +179,7 @@ const useRenderSteps: React.FC<StepsProperties> = ({
             onPreviousStep={onPreviousStep}
             onNextStep={onNextStep}
             onSetGoals={setGoals}
+            onFieldChange={handleFieldChange}
             onOther={onOther}
           />
         );
@@ -131,6 +192,7 @@ const useRenderSteps: React.FC<StepsProperties> = ({
             onPreviousStep={onPreviousStep}
             onNextStep={onNextStep}
             onSetWorries={setWorries}
+            onFieldChange={handleFieldChange}
             onOther={onOther}
           />
         );

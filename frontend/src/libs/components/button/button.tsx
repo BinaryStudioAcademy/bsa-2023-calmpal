@@ -16,7 +16,7 @@ type Properties = {
   iconColor?: ValueOf<typeof IconColor>;
   iconWidth?: number;
   iconHeight?: number;
-  style?: ButtonStyle | 'outlined';
+  style?: ButtonStyle;
   isLoading?: boolean;
   isDisabled?: boolean;
   isLabelVisuallyHidden?: boolean;
