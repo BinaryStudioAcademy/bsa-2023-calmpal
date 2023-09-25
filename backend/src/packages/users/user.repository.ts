@@ -185,6 +185,19 @@ class UserRepository implements Repository {
       subscriptionEndDate,
     });
   }
+
+  public async updateSubscription({
+    id,
+    subscriptionId,
+  }: {
+    id: string;
+    subscriptionId: string;
+  }): Promise<void> {
+    await this.userModel
+      .relatedQuery(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
+      .for(id)
+      .patch({ subscriptionId });
+  }
 }
 
 export { UserRepository };
