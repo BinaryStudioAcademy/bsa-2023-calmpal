@@ -33,6 +33,7 @@
 }
 
 .primary-blue:disabled {
+  background-color: var(--blue-300);
   opacity: 0.8;
 }
 
@@ -122,6 +123,7 @@
 }
 
 .primary:has(.loader),
+.primary-blue:has(.loader),
 .secondary:has(.loader) {
   display: flex;
   justify-content: center;
