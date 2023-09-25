@@ -5,18 +5,18 @@ import { AppColor, FontFamily } from '#libs/enums/enums';
 const styles = StyleSheet.create({
   duration: {
     color: AppColor.GRAY_200_ALPHA_50,
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: FontFamily.MONTSERRAT_600,
   },
   durationItem: {
     alignItems: 'center',
     backgroundColor: AppColor.WHITE,
     borderColor: AppColor.GRAY_200_ALPHA_50,
-    borderRadius: 80,
+    borderRadius: 64,
     borderWidth: 1,
-    height: 80,
+    height: 64,
     justifyContent: 'center',
-    width: 80,
+    width: 64,
   },
   durationUnit: {
     color: AppColor.GRAY_200_ALPHA_50,

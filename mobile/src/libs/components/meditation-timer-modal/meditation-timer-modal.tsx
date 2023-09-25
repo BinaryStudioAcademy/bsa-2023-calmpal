@@ -74,6 +74,14 @@ const MeditationTimerModal: React.FC<Properties> = ({
                 />
               );
             })}
+            <TimerButton
+              key={DEFAULT_DURATION}
+              isActive={value === DEFAULT_DURATION}
+              onChange={onChange}
+              setDuration={setDuration}
+              duration={DEFAULT_DURATION}
+              unit={DURATION_UNIT.MINUTES}
+            />
           </View>
 
           <Button
