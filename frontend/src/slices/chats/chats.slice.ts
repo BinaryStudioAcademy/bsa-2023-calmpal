@@ -10,6 +10,7 @@ import {
   createChat,
   createMessage,
   deleteChat,
+  generateReply,
   getAllChats,
   getCurrentChatMessages,
 } from './actions.js';
@@ -22,6 +23,7 @@ type State = {
   currentChatMessagesDataStatus: ValueOf<typeof DataStatus>;
   createMessageDataStatus: ValueOf<typeof DataStatus>;
   deleteChatDataStatus: ValueOf<typeof DataStatus>;
+  generateReplyDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
@@ -32,6 +34,7 @@ const initialState: State = {
   currentChatMessagesDataStatus: DataStatus.IDLE,
   createMessageDataStatus: DataStatus.IDLE,
   deleteChatDataStatus: DataStatus.IDLE,
+  generateReplyDataStatus: DataStatus.IDLE,
 };
 
 const { reducer, actions, name } = createSlice({
@@ -107,6 +110,19 @@ const { reducer, actions, name } = createSlice({
 
     builder.addCase(deleteChat.rejected, (state) => {
       state.deleteChatDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(generateReply.pending, (state) => {
+      state.generateReplyDataStatus = DataStatus.IDLE;
+    });
+
+    builder.addCase(generateReply.fulfilled, (state, action) => {
+      state.currentChatMessages.push(action.payload);
+      state.generateReplyDataStatus = DataStatus.FULFILLED;
+    });
+
+    builder.addCase(generateReply.rejected, (state) => {
+      state.generateReplyDataStatus = DataStatus.REJECTED;
     });
   },
 });

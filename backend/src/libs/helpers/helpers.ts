@@ -1,4 +1,5 @@
 export {
+  configureString,
   groupChatMessage,
   replaceTemplateWithValue,
   sanitizeInput,
