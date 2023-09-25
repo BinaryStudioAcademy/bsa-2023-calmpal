@@ -112,6 +112,7 @@ export {
 } from './packages/users/users.js';
 export {
   SubscriptionApiPath,
+  type SubscriptionPaymentIntentCancelRequestDto,
   type SubscriptionPaymentIntentCreateRequestDto,
   type SubscriptionPaymentIntentCreateResponseDto,
 } from '#packages/subscriptions/subscriptions.js';
