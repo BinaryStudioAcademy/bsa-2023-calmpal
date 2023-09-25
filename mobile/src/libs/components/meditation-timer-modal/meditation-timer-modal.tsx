@@ -81,6 +81,7 @@ const MeditationTimerModal: React.FC<Properties> = ({
               setDuration={setDuration}
               duration={DEFAULT_DURATION}
               unit={DURATION_UNIT.MINUTES}
+              isDefault
             />
           </View>
 

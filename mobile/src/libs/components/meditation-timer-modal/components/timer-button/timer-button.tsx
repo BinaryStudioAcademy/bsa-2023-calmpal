@@ -19,7 +19,7 @@ const TimerButton: React.FC<Properties> = ({
   isActive,
   duration,
   unit,
-  // isDefault,
+  isDefault,
   setDuration,
   onChange,
 }) => {
@@ -31,7 +31,12 @@ const TimerButton: React.FC<Properties> = ({
   return (
     <TouchableOpacity
       key={duration}
-      style={[styles.durationItem, isActive && styles.activeDuration]}
+      style={[
+        styles.durationItem,
+        isDefault && styles.default,
+        isActive && !isDefault && styles.activeDuration,
+        isActive && isDefault && styles.activeDefault,
+      ]}
       onPress={handleChange}
     >
       <Text style={[styles.duration, isActive && styles.activeText]}>

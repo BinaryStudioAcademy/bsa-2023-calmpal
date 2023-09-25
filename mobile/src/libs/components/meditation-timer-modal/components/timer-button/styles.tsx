@@ -17,6 +17,8 @@ const styles = StyleSheet.create({
     height: 64,
     justifyContent: 'center',
     width: 64,
+    elevation: 2,
+    shadowColor: AppColor.PURPLE_200,
   },
   durationUnit: {
     color: AppColor.GRAY_200_ALPHA_50,
@@ -29,6 +31,14 @@ const styles = StyleSheet.create({
   },
   activeText: {
     color: AppColor.WHITE,
+  },
+  default: {
+    borderColor: AppColor.PURPLE_100,
+    borderWidth: 1,
+  },
+  activeDefault: {
+    backgroundColor: AppColor.GRAY_400,
+    borderWidth: 0,
   },
 });
 
