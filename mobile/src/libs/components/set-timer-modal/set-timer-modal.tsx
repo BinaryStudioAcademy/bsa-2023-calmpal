@@ -1,9 +1,9 @@
 import React from 'react';
+import { Modal as RNModal } from 'react-native';
 
 import {
   Button,
   Pressable,
-  ReactModal,
   Text,
   TouchableOpacity,
   View,
@@ -33,7 +33,7 @@ const SetTimerModal: React.FC<Properties> = ({
   };
 
   return (
-    <ReactModal
+    <RNModal
       animationType="slide"
       transparent={true}
       visible={true}
@@ -94,7 +94,7 @@ const SetTimerModal: React.FC<Properties> = ({
           />
         </Pressable>
       </TouchableOpacity>
-    </ReactModal>
+    </RNModal>
   );
 };
 

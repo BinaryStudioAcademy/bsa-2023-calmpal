@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-end',
+    backgroundColor: AppColor.GRAY_200_ALPHA_50,
   },
   modal: {
     backgroundColor: AppColor.WHITE,
@@ -15,7 +16,8 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     paddingHorizontal: 30,
     paddingTop: 30,
-    shadowColor: 'red',
+    elevation: 20,
+    shadowColor: AppColor.BLUE_300,
   },
   title: {
     alignSelf: 'center',
