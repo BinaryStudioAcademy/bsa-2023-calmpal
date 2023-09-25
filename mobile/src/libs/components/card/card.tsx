@@ -45,7 +45,7 @@ const Card: React.FC<Properties> = ({
     }
   };
 
-  const rightSwipeActions = (): React.ReactNode => {
+  const renderRightSwipeActions = (): React.ReactNode => {
     return (
       <Pressable style={styles.deleteContainer} onPress={handleDelete}>
         <Icon name="delete" color={AppColor.BLUE_300} />
@@ -54,7 +54,7 @@ const Card: React.FC<Properties> = ({
   };
 
   return (
-    <Swipeable renderRightActions={rightSwipeActions}>
+    <Swipeable renderRightActions={renderRightSwipeActions}>
       <Pressable onPress={handlePress} style={styles.container}>
         {iconName && iconColor ? (
           <View style={styles.iconContainer}>
