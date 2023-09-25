@@ -54,10 +54,13 @@ const createMessage = createAsyncThunk<
   ChatMessageGetAllItemResponseDto,
   ChatMessageCreatePayload,
   AsyncThunkConfig
->(`${sliceName}/create-chat-message`, async (payload, { extra }) => {
+>(`${sliceName}/create-chat-message`, async (payload, { extra, dispatch }) => {
   const { chatMessagesApi } = extra;
+  const message = await chatMessagesApi.createChatMessage(payload);
 
-  return await chatMessagesApi.createChatMessage(payload);
+  void dispatch(generateReply(payload));
+
+  return message;
 });
 
 const deleteChat = createAsyncThunk<number, number, AsyncThunkConfig>(

@@ -46,13 +46,6 @@ export {
   type ValueOf,
 } from './libs/types/types.js';
 export { AuthApiPath } from './packages/auth/auth.js';
-export { OpenAiImageSize } from './packages/chat/chat.js';
-export {
-  type OpenAiImageGenerateRequestDto,
-  type OpenAiImageGenerateResponseDto,
-  type OpenAiMessageGenerateRequestDto,
-  type OpenAiMessageGenerateResponseDto,
-} from './packages/chat/chat.js';
 export {
   type ChatMessageCreateRequestDto,
   type ChatMessageGetAllItemResponseDto,

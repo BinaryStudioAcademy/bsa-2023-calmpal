@@ -42,13 +42,6 @@ const ChatLayout: React.FC = () => {
             chatId: id as string,
           }),
         );
-
-        void dispatch(
-          chatActions.generateReply({
-            message,
-            chatId: id as string,
-          }),
-        );
       }
     },
     [dispatch, currentChatMessages.length, hasId, id],

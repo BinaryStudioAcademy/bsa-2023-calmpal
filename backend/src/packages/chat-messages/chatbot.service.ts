@@ -1,8 +1,9 @@
+import { UserRoleKey } from '#libs/packages/open-ai/libs/enums/enums.js';
+import { type OpenAiMessageGenerateRequestDto } from '#libs/packages/open-ai/libs/types/types.js';
 import { type OpenAi } from '#libs/packages/open-ai/open-ai.js';
 import { type UserEntity, type UserService } from '#packages/users/users.js';
 
 import { NO_RESPONSE_MESSAGE } from '../chats/libs/constants/constants.js';
-import { type OpenAiMessageGenerateRequestDto } from '../chats/libs/types/types.js';
 
 type Constructor = {
   openAiService: OpenAi;
@@ -28,7 +29,7 @@ class ChatbotService {
   public async getChatbotUser(): Promise<ReturnType<
     UserEntity['toObject']
   > | null> {
-    return await this.userService.findByRoleKey('chatbot');
+    return await this.userService.findByRoleKey(UserRoleKey.CHATBOT);
   }
 }
 

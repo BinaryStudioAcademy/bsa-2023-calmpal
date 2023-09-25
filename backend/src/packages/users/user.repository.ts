@@ -1,4 +1,5 @@
-import { type Repository } from '#libs/types/types.js';
+import { type UserRoleKey } from '#libs/packages/open-ai/libs/enums/enums.js';
+import { type Repository, type ValueOf } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/users.js';
 
@@ -45,7 +46,7 @@ class UserRepository implements Repository {
   }
 
   public async findByRoleKey(
-    key: 'chatbot' | 'user',
+    key: ValueOf<typeof UserRoleKey>,
   ): Promise<UserEntity | null> {
     const user = await this.userModel
       .query()

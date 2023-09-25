@@ -1,9 +1,10 @@
 import { ExceptionMessage } from '#libs/enums/enums.js';
 import { UsersError } from '#libs/exceptions/exceptions.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
+import { OpenAiRoleKey } from '#libs/packages/open-ai/libs/enums/open-ai-role-key.enum.js';
+import { type OpenAiMessageGenerateRequestDto } from '#libs/packages/open-ai/libs/types/types.js';
 import { type Service } from '#libs/types/types.js';
 import { type ChatbotService } from '#packages/chats/chats.js';
-import { type OpenAiMessageGenerateRequestDto } from '#packages/chats/libs/types/types.js';
 import { userService } from '#packages/users/users.js';
 
 import { ChatMessageEntity } from './chat-message.entity.js';
@@ -79,7 +80,10 @@ class ChatMessageService implements Service {
         const { senderId, message } = chatMessage.toObject();
 
         return {
-          role: payload.senderId === senderId ? 'assistant' : 'user',
+          role:
+            payload.senderId === senderId
+              ? OpenAiRoleKey.ASSISTANT
+              : OpenAiRoleKey.USER,
           content: message,
         };
       },
@@ -87,7 +91,7 @@ class ChatMessageService implements Service {
 
     openAiMessages.push({
       role: 'user',
-      content: `Pretend that you a psychologist and you give mental support to the patient, don't mention that you are an AI model, be compassionate and give short answers. Answer this question: '${payload.message}'. Don't mention that you are an AI model, be compassionate and short answers.`,
+      content: `Pretend that you a psychologist and you give mental support to the patient, don't mention that you are an AI model, be compassionate and give short answers. Answer this question: '${payload.message}'.`,
     });
 
     const generatedReply = await this.chatbotService.generateReply(

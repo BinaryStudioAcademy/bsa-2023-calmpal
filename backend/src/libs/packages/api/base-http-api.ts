@@ -39,6 +39,8 @@ class BaseHttpApi implements HTTPApi {
       payload,
     });
 
+    await this.checkResponse(response);
+
     if (isBuffer) {
       const buffer = await response.arrayBuffer();
       const contentType = response.headers.get(
@@ -47,8 +49,6 @@ class BaseHttpApi implements HTTPApi {
 
       return { buffer: Buffer.from(buffer), contentType } as T;
     }
-
-    await this.checkResponse(response);
 
     return (await response.json()) as T;
   }

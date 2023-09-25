@@ -5,8 +5,4 @@ export {
   type ChatCreateRequestDto,
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
-  type OpenAiImageGenerateRequestDto,
-  type OpenAiImageGenerateResponseDto,
-  type OpenAiMessageGenerateRequestDto,
-  type OpenAiMessageGenerateResponseDto,
 } from 'shared/build/index.js';
