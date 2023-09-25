@@ -38,6 +38,7 @@ export {
 } from './libs/packages/http/http.js';
 export { type Storage } from './libs/packages/storage/storage.js';
 export {
+  type EntitiesFilteringDto,
   type ServerCommonErrorResponse,
   type ServerErrorDetail,
   type ServerErrorResponse,
@@ -60,6 +61,7 @@ export {
   ChatsApiPath,
   createChatValidationSchema,
 } from './packages/chats/chats.js';
+export { entitiesFilteringQueryValidationSchema } from './packages/common-validation-schemas/validation-schemas.js';
 export {
   type FileGetAllItemResponseDto,
   FilesApiPath,
