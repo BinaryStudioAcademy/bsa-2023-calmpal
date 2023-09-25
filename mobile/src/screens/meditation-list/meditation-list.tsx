@@ -42,12 +42,10 @@ const MeditationList: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [duration, setDuration] = useState(DEFAULT_SONG_DURATION);
 
-  const handleClick = (): void => {
-    setIsModalVisible(!isModalVisible);
-  };
-
-  const handleClose = (): void => {
-    setIsModalVisible(!isModalVisible);
+  const handleToggleClick = (): void => {
+    setIsModalVisible((previous) => {
+      return !previous;
+    });
   };
 
   const navigation =
@@ -78,7 +76,7 @@ const MeditationList: React.FC = () => {
       <View style={styles.container}>
         {isModalVisible && (
           <MeditationTimerModal
-            onClose={handleClose}
+            onClose={handleToggleClick}
             setDuration={setDuration}
             startMeditation={handleSetPlaylist}
           />
@@ -94,7 +92,7 @@ const MeditationList: React.FC = () => {
                 title={item.title}
                 duration={item.duration}
                 key={item.id}
-                onClick={handleClick}
+                onClick={handleToggleClick}
               />
             );
           })}
