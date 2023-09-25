@@ -127,6 +127,16 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                   </ProtectedRoute>
                 ),
               },
+              {
+                path: AppRoute.PROFILE_SUBSCRIPTION,
+                element: (
+                  <ProtectedRoute>
+                    <NavigationMenuWrapper>
+                      <UserProfile />
+                    </NavigationMenuWrapper>
+                  </ProtectedRoute>
+                ),
+              },
             ],
           },
         ]}

@@ -10,6 +10,7 @@ const AppRoute = {
   JOURNAL: '/journal',
   JOURNAL_$ID: '/journal/:id',
   PROFILE: '/profile',
+  PROFILE_SUBSCRIPTION: '/profile/subscription',
 } as const;
 
 export { AppRoute };
