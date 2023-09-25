@@ -1,3 +1,6 @@
+import { ExceptionMessage } from '#libs/enums/enums.js';
+import { ChatError } from '#libs/exceptions/exceptions.js';
+import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Service } from '#libs/types/types.js';
 import {
   type ChatMessageCreatePayload,
@@ -36,8 +39,11 @@ class ChatService implements Service {
     return await Promise.resolve({ items: [] });
   }
 
-  public async findAllByUserId(userId: number): Promise<ChatGetAllResponseDto> {
-    const items = await this.chatRepository.findAllByUserId(userId);
+  public async findAllByUserId(
+    userId: number,
+    query: string,
+  ): Promise<ChatGetAllResponseDto> {
+    const items = await this.chatRepository.findAllByUserId(userId, query);
 
     return {
       items: items.map((item) => {
@@ -70,6 +76,12 @@ class ChatService implements Service {
       senderId: userId,
     });
 
+    await this.chatMessageService.generateReply({
+      message,
+      chatId: chat.id,
+      senderId: userId,
+    });
+
     return chat;
   }
 
@@ -79,12 +91,32 @@ class ChatService implements Service {
     return this.chatMessageService.create(payload);
   }
 
+  public generateReply(
+    payload: ChatMessageCreatePayload,
+  ): Promise<ChatMessageGetAllItemResponseDto> {
+    return this.chatMessageService.generateReply(payload);
+  }
+
   public update(): ReturnType<Service['update']> {
     return Promise.resolve(null);
   }
 
-  public delete(): ReturnType<Service['delete']> {
-    return Promise.resolve(true);
+  public async delete({
+    id,
+    userId,
+  }: {
+    id: number;
+    userId: number;
+  }): Promise<boolean> {
+    const deletedCount = await this.chatRepository.delete({ id, userId });
+    if (!deletedCount) {
+      throw new ChatError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.CHAT_NOT_FOUND,
+      });
+    }
+
+    return Boolean(deletedCount);
   }
 }
 
