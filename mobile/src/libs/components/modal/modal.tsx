@@ -14,7 +14,6 @@ type Properties = {
 };
 
 const Modal: React.FC<Properties> = ({
-  children,
   isVisible,
   onClose,
   onDelete,
@@ -43,12 +42,7 @@ const Modal: React.FC<Properties> = ({
                   </View>
                 </>
               ) : (
-                <>
-                  <Pressable onPress={onClose} style={styles.closeButton}>
-                    {/* add icon here */}
-                  </Pressable>
-                  {children}
-                </>
+                <></>
               )}
             </View>
           </Pressable>
