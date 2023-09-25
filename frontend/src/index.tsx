@@ -137,6 +137,16 @@ createRoot(document.querySelector('#root') as HTMLElement).render(
                   </ProtectedRoute>
                 ),
               },
+              {
+                path: AppRoute.PROFILE_SUBSCRIPTION_CHECKOUT,
+                element: (
+                  <ProtectedRoute>
+                    <NavigationMenuWrapper>
+                      <UserProfile />
+                    </NavigationMenuWrapper>
+                  </ProtectedRoute>
+                ),
+              },
             ],
           },
         ]}

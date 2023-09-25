@@ -1,7 +1,11 @@
 import { AppRoute } from '#libs/enums/enums.js';
 import { useLocation } from '#libs/hooks/hooks.js';
 
-import { Notifications, Subscription } from './components/components.js';
+import {
+  Notifications,
+  Subscription,
+  SubscriptionCheckout,
+} from './components/components.js';
 
 const ProfileSettings: React.FC = () => {
   const { pathname } = useLocation();
@@ -14,6 +18,10 @@ const ProfileSettings: React.FC = () => {
 
       case AppRoute.PROFILE_SUBSCRIPTION: {
         return <Subscription />;
+      }
+
+      case AppRoute.PROFILE_SUBSCRIPTION_CHECKOUT: {
+        return <SubscriptionCheckout />;
       }
 
       default: {
