@@ -1,8 +1,10 @@
 import { ExceptionMessage } from '#libs/enums/enums.js';
 import { ChatError } from '#libs/exceptions/exceptions.js';
+import { replaceTemplateWithValue } from '#libs/helpers/helpers.js';
 import { BaseHttpApi } from '#libs/packages/api/base-http-api.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type BaseHttp } from '#libs/packages/http/http.js';
+import { OpenAiRoleKey } from '#libs/packages/open-ai/libs/enums/enums.js';
 import { type OpenAi } from '#libs/packages/open-ai/open-ai.js';
 import { type Service } from '#libs/types/types.js';
 import {
@@ -17,6 +19,10 @@ import {
 } from '#packages/files/files.js';
 
 import { type ChatRepository } from './chat.repository.js';
+import {
+  CHAT_IMAGE_TEMPLATE,
+  CHAT_NAME_TEMPLATE,
+} from './libs/constants/constants.js';
 import {
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
@@ -154,15 +160,15 @@ class ChatService implements Service {
   public async generateChatName(message: string): Promise<string> {
     return (await this.openAiService.getMessageResponse([
       {
-        role: 'user',
-        content: `Could you please generate me ONE two-three word name for a chat that starts with this opening message '${message}' and exclude the word 'Chat' from it.`,
+        role: OpenAiRoleKey.USER,
+        content: replaceTemplateWithValue(CHAT_NAME_TEMPLATE, { message }),
       },
     ])) as string;
   }
 
   public async generateChatImage(name: string): Promise<string> {
     return (await this.openAiService.generateImages({
-      prompt: `Could you please generate me a very abstract not detailed image in pastel colors, colors of which can resonate with the following title: '${name}'`,
+      prompt: replaceTemplateWithValue(CHAT_IMAGE_TEMPLATE, { name }),
     })) as string;
   }
 
