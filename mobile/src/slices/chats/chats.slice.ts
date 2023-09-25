@@ -4,18 +4,20 @@ import { DataStatus } from '#libs/enums/enums';
 import { type ValueOf } from '#libs/types/types';
 import { type ChatGetAllItemResponseDto } from '#packages/chats/chats';
 
-import { createChat, getAllChats } from './actions';
+import { createChat, deleteChat, getAllChats } from './actions';
 
 type State = {
   chats: ChatGetAllItemResponseDto[];
   chatsDataStatus: ValueOf<typeof DataStatus>;
   createChatDataStatus: ValueOf<typeof DataStatus>;
+  deleteChatDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
   chats: [],
   chatsDataStatus: DataStatus.IDLE,
   createChatDataStatus: DataStatus.IDLE,
+  deleteChatDataStatus: DataStatus.IDLE,
 };
 
 const { reducer, actions, name } = createSlice({
@@ -43,6 +45,21 @@ const { reducer, actions, name } = createSlice({
     });
     builder.addCase(createChat.rejected, (state) => {
       state.createChatDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(deleteChat.pending, (state) => {
+      state.deleteChatDataStatus = DataStatus.PENDING;
+    });
+
+    builder.addCase(deleteChat.fulfilled, (state, action) => {
+      state.chats = state.chats.filter((chat) => {
+        return chat.id !== action.payload;
+      });
+      state.deleteChatDataStatus = DataStatus.FULFILLED;
+    });
+
+    builder.addCase(deleteChat.rejected, (state) => {
+      state.deleteChatDataStatus = DataStatus.REJECTED;
     });
   },
 });
