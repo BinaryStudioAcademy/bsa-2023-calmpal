@@ -14,3 +14,5 @@ const subscriptionController = new SubscriptionController(
 );
 
 export { subscriptionController };
+export { SubscriptionsTableColumn } from './libs/enums/enums.js';
+export { SubscriptionModel } from './subscription.model.js';

@@ -25,7 +25,7 @@ class UserRepository implements Repository {
     const user = await this.userModel
       .query()
       .modify('withoutPassword')
-      .withGraphJoined(UsersRelation.DETAILS)
+      .withGraphJoined(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
       .findById(id)
       .castTo<UserCommonQueryResponse | undefined>()
       .execute();
@@ -34,6 +34,10 @@ class UserRepository implements Repository {
       return null;
     }
 
+    const subscriptionEndDate = user.details?.subscription.endDate
+      ? new Date(user.details.subscription.endDate)
+      : null;
+
     return UserEntity.initialize({
       id: user.id,
       email: user.email,
@@ -41,6 +45,8 @@ class UserRepository implements Repository {
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      subscriptionId: user.details?.subscriptionId ?? null,
+      subscriptionEndDate,
     });
   }
 
@@ -53,6 +59,10 @@ class UserRepository implements Repository {
       .execute();
 
     return users.map((user) => {
+      const subscriptionEndDate = user.details?.subscription.endDate
+        ? new Date(user.details.subscription.endDate)
+        : null;
+
       return UserWithPasswordEntity.initialize({
         id: user.id,
         email: user.email,
@@ -62,6 +72,8 @@ class UserRepository implements Repository {
         updatedAt: new Date(user.updatedAt),
         fullName: user.details?.fullName ?? '',
         isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+        subscriptionId: user.details?.subscriptionId ?? null,
+        subscriptionEndDate,
       });
     });
   }
@@ -85,6 +97,10 @@ class UserRepository implements Repository {
       .castTo<UserWithPasswordQueryResponse>()
       .execute();
 
+    const subscriptionEndDate = user.details?.subscription.endDate
+      ? new Date(user.details.subscription.endDate)
+      : null;
+
     return UserEntity.initialize({
       id: user.id,
       email: user.email,
@@ -92,6 +108,8 @@ class UserRepository implements Repository {
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      subscriptionId: user.details?.subscriptionId ?? null,
+      subscriptionEndDate,
     });
   }
 
@@ -122,6 +140,10 @@ class UserRepository implements Repository {
       return null;
     }
 
+    const subscriptionEndDate = user.details?.subscription.endDate
+      ? new Date(user.details.subscription.endDate)
+      : null;
+
     return UserEntity.initialize({
       id: user.id,
       email: user.email,
@@ -129,6 +151,8 @@ class UserRepository implements Repository {
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      subscriptionId: user.details?.subscriptionId ?? null,
+      subscriptionEndDate,
     });
   }
 
@@ -144,6 +168,10 @@ class UserRepository implements Repository {
       return null;
     }
 
+    const subscriptionEndDate = user.details?.subscription.endDate
+      ? new Date(user.details.subscription.endDate)
+      : null;
+
     return UserWithPasswordEntity.initialize({
       id: user.id,
       email: user.email,
@@ -153,6 +181,8 @@ class UserRepository implements Repository {
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      subscriptionId: user.details?.subscriptionId ?? null,
+      subscriptionEndDate,
     });
   }
 }
