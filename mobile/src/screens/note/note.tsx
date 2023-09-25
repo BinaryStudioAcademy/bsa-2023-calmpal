@@ -52,16 +52,6 @@ const Note: React.FC = () => {
     };
   });
 
-  // const { control, watch, isDirty } = useAppForm({
-  //   defaultValues: selectedJournalEntry
-  //     ? {
-  //         title: selectedJournalEntry.title || DEFAULT_NOTE_PAYLOAD.title,
-  //         text: selectedJournalEntry.text || DEFAULT_NOTE_PAYLOAD.text,
-  //       }
-  //     : DEFAULT_NOTE_PAYLOAD,
-  //   mode: 'onChange',
-  // });
-
   const { control, watch, isDirty } = useAppForm({
     defaultValues: selectedJournalEntry
       ? {
