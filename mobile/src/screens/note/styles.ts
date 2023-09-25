@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,13 +13,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: AppColor.GRAY_600,
+    color: AppColor.GRAY_500,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
   noteText: {
     fontSize: 16,
     lineHeight: 24,
     color: AppColor.GRAY_500,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
 });
 
