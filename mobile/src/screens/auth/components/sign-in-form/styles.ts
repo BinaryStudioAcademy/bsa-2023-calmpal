@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   formContainer: {
     height: '100%',
     width: '100%',
-    paddingHorizontal: 44,
+    paddingHorizontal: 40,
   },
   titleText: {
     fontSize: 30,
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.MONTSERRAT_600,
   },
   bottomText: {
-    fontSize: 14,
+    fontSize: 13,
     fontFamily: FontFamily.MONTSERRAT_400,
   },
   boldText: {

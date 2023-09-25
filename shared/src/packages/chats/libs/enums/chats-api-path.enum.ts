@@ -1,7 +1,8 @@
 const ChatsApiPath = {
   ROOT: '/',
   $ID_MESSAGES: '/:id/messages',
-  $ID_GENERATED_REPLIES: '/:id/generated-replies',
+  $ID: '/:id',
+  $ID_GENERATE_REPLY: '/:id/generate-reply',
 } as const;
 
 export { ChatsApiPath };
