@@ -100,7 +100,7 @@ const Journal: React.FC = () => {
             return (
               <Card
                 title={item.title}
-                noteId={item.id}
+                id={item.id}
                 onPress={handleSelectJournal}
                 key={item.id}
                 onDelete={handleShowModal}

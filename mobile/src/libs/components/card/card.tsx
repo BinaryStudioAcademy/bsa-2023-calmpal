@@ -23,7 +23,7 @@ type Properties = {
   iconColor?: string;
   onPress: (title: string) => void;
   onDelete?: (id: number) => void;
-  noteId?: number;
+  id?: number;
 };
 
 const Card: React.FC<Properties> = ({
@@ -33,15 +33,15 @@ const Card: React.FC<Properties> = ({
   iconColor,
   onPress,
   onDelete,
-  noteId,
+  id,
 }) => {
   const handlePress = (): void => {
     onPress(title);
   };
 
   const handleDelete = (): void => {
-    if (onDelete && noteId) {
-      onDelete(noteId);
+    if (onDelete && id) {
+      onDelete(id);
     }
   };
 
