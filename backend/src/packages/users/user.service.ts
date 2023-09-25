@@ -122,6 +122,21 @@ class UserService implements Service {
 
     return userEntity.toObject();
   }
+
+  public async updateSubscription({
+    id,
+    subscriptionId,
+  }: {
+    id: number;
+    subscriptionId: number;
+  }): Promise<ReturnType<UserEntity['toObject']>> {
+    const userEntity = await this.userRepository.updateSubscription({
+      id,
+      subscriptionId,
+    });
+
+    return userEntity.toObject();
+  }
 }
 
 export { UserService };
