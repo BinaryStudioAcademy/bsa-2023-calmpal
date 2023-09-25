@@ -50,13 +50,19 @@
     padding: 0 15px;
   }
 
+  .search {
+    width: 100%;
+    padding: 0 15px;
+  }
+}
+
 @media (width < 768px) {
   .chat-list {
     margin-top: 23px;
     padding: 0 20px;
   }
 
-.search {
+  .search {
     width: 100%;
     padding: 0 15px;
   }
