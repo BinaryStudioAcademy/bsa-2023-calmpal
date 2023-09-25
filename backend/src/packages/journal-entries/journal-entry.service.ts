@@ -40,8 +40,12 @@ class JournalEntryService implements Service {
 
   public async findAllByUserId(
     userId: number,
+    query: string,
   ): Promise<JournalEntryGetAllResponseDto> {
-    const items = await this.journalEntryRepository.findAllByUserId(userId);
+    const items = await this.journalEntryRepository.findAllByUserId(
+      userId,
+      query,
+    );
 
     return {
       items: items.map((item) => {

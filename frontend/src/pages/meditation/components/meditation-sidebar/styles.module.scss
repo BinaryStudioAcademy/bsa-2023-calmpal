@@ -42,10 +42,6 @@
   height: 90%;
 }
 
-.search {
-  margin-top: 23px;
-}
-
 .meditation-list {
   display: flex;
   flex-direction: column;
@@ -64,20 +60,10 @@
   .meditation-list {
     padding: 0 15px;
   }
-
-  .search {
-    width: 100%;
-    padding: 0 15px;
-  }
 }
 
 @media (width < 768px) {
   .meditation-list {
-    padding: 0 15px;
-  }
-
-  .search {
-    width: 100%;
     padding: 0 15px;
   }
 }
