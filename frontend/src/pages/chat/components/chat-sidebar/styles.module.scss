@@ -1,6 +1,5 @@
 .info {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
 }
@@ -14,9 +13,7 @@
 }
 
 .plus {
-  display: flex;
-  height: 33px;
-  margin-left: auto;
+  max-height: 33px;
 }
 
 .search {
