@@ -21,6 +21,7 @@ import { ReactComponent as PreviousIcon } from '#assets/icons/previous.svg';
 import { ReactComponent as SendIcon } from '#assets/icons/send.svg';
 import { ReactComponent as SignOutIcon } from '#assets/icons/sign-out.svg';
 import { ReactComponent as SubscriptionIcon } from '#assets/icons/subscription.svg';
+import { ReactComponent as TrashBoxIcon } from '#assets/icons/trash-box.svg';
 import { ReactComponent as UploadIcon } from '#assets/icons/upload.svg';
 import { ReactComponent as UserIcon } from '#assets/icons/user.svg';
 import { type IconName } from '#libs/types/types.js';
@@ -54,6 +55,7 @@ const iconNameToIcon: Record<
   'notification': NotificationIcon,
   'subscription': SubscriptionIcon,
   'check': CheckIcon,
+  'trash-box': TrashBoxIcon,
 };
 
 export { iconNameToIcon };

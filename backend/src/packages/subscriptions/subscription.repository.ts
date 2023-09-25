@@ -41,8 +41,11 @@ class SubscriptionRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public delete(): Promise<boolean> {
-    return Promise.resolve(true);
+  public delete(): Promise<number> {
+    //TODO
+    const deletedCount = 0;
+
+    return Promise.resolve(deletedCount);
   }
 }
 

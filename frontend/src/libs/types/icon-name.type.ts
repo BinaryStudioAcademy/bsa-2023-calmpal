@@ -23,6 +23,7 @@ type IconName =
   | 'chatbot-avatar'
   | 'back'
   | 'subscription'
-  | 'check';
+  | 'check'
+  | 'trash-box';
 
 export { type IconName };

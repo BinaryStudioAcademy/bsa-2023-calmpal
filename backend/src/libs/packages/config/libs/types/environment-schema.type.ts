@@ -33,6 +33,10 @@ type EnvironmentSchema = {
   STRIPE: {
     SECRET_KEY: string;
   };
+  OPEN_AI: {
+    API_KEY: string;
+    BASE_URL: string;
+  };
 };
 
 export { type EnvironmentSchema };
