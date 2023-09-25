@@ -13,6 +13,7 @@ import {
 import { appActions } from '#slices/app/notifications';
 
 import { Icon, Pressable, Text, View } from '../components';
+import { NUMBER_OF_LINES } from './libs/constants';
 import { requestMediaPermissions } from './libs/helpers/helpers';
 import { styles } from './styles';
 
@@ -78,7 +79,7 @@ const InputFile = <T extends FormFieldValues>({
       {hasFile && (
         <View style={styles.selectedFile}>
           <Icon name="download" color={AppColor.GRAY_600} />
-          <Text style={styles.selectedFileName} numberOfLines={1}>
+          <Text style={styles.selectedFileName} numberOfLines={NUMBER_OF_LINES}>
             {fileData.name}
           </Text>
         </View>
