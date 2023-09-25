@@ -1,8 +1,9 @@
-import { createChat, getAllChats } from './actions';
+import { createChat, deleteChat, getAllChats } from './actions';
 import { actions } from './chats.slice';
 
 const allActions = {
   ...actions,
+  deleteChat,
   getAllChats,
   createChat,
 };
