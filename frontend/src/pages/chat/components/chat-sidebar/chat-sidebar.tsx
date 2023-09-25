@@ -15,10 +15,14 @@ import {
   useCallback,
   useEffect,
   useParams,
+  useRef,
+  useSearch,
+  useState,
 } from '#libs/hooks/hooks.js';
 import { type ValueOf } from '#libs/types/types.js';
 import { actions as chatsActions } from '#slices/chats/chats.js';
 
+import { DeleteChatModal } from '../components.js';
 import styles from './styles.module.scss';
 
 type Properties = {
@@ -36,11 +40,18 @@ const ChatSidebar: React.FC<Properties> = ({
 }) => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
+  const [chatToDelete, setChatToDelete] = useState<null | number>(null);
+  const dialogReference = useRef<HTMLDialogElement>(null);
+
   const { chats } = useAppSelector(({ chats }) => {
     return {
       chats: chats.chats,
     };
   });
+
+  const handleOpen = useCallback(() => {
+    dialogReference.current?.showModal();
+  }, [dialogReference]);
 
   useEffect(() => {
     void dispatch(chatsActions.getAllChats(filter));
@@ -51,8 +62,19 @@ const ChatSidebar: React.FC<Properties> = ({
     // TODO redux logic
   }, [onSetIsSidebarShow]);
 
+  const handleDeleteChat = useCallback(
+    (id: number) => {
+      return () => {
+        setChatToDelete(id);
+        handleOpen();
+      };
+    },
+    [handleOpen],
+  );
+
   return (
-    <Sidebar isSidebarShown={isSidebarShown}>
+    <>
+          <Sidebar isSidebarShown={isSidebarShown}>
       <SidebarHeader>
         <div className={styles['info']}>
           <span>Chat</span>
@@ -89,6 +111,8 @@ const ChatSidebar: React.FC<Properties> = ({
         </div>
       </SidebarBody>
     </Sidebar>
+      <DeleteChatModal ref={dialogReference} id={chatToDelete} />
+    </>
   );
 };
 
