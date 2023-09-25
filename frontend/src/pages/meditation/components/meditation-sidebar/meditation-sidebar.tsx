@@ -57,19 +57,17 @@ const MeditationSidebar: React.FC<Properties> = ({
         <SidebarHeader>
           <div className={styles['info']}>
             <span>Meditation & Breathing</span>
-            <div className="icon-container">
-              <Button
-                label="Open modal"
-                iconName="plus"
-                iconColor={IconColor.BLUE}
-                iconWidth={38}
-                iconHeight={38}
-                style="rounded-transparent"
-                onClick={handleOpen}
-                isLabelVisuallyHidden
-              />
-            </div>
           </div>
+          <Button
+            label="Open modal"
+            iconName="plus"
+            iconColor={IconColor.BLUE}
+            iconWidth={33}
+            iconHeight={33}
+            style="add"
+            onClick={handleOpen}
+            isLabelVisuallyHidden
+          />
         </SidebarHeader>
         <SidebarBody>
           <div className={styles['meditation-list']}>

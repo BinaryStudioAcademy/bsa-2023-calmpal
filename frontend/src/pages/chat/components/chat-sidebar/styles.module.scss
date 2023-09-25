@@ -1,6 +1,5 @@
 .info {
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
@@ -44,11 +43,6 @@
   background: var(--white-alpha-80);
   border-radius: 20px;
   box-shadow: 0 4px 23px 0 var(--violet-100);
-}
-
-.plus {
-  display: flex;
-  height: 30px;
 }
 
 @media (width < 900px) {
