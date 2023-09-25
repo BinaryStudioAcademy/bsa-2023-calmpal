@@ -8,18 +8,27 @@ import { getAllJournalEntries } from './actions';
 
 type State = {
   allJournalEntries: JournalEntryGetAllItemResponseDto[];
+  selectedJournalEntry: JournalEntryGetAllItemResponseDto | null;
   journalEntriesDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
   allJournalEntries: [],
+  selectedJournalEntry: null,
   journalEntriesDataStatus: DataStatus.IDLE,
 };
 
 const { reducer, actions, name } = createSlice({
   initialState,
   name: 'journal',
-  reducers: {},
+  reducers: {
+    setSelectedJournalEntry: (state, action) => {
+      state.selectedJournalEntry =
+        state.allJournalEntries.find((entry) => {
+          return entry.id === action.payload;
+        }) ?? null;
+    },
+  },
   extraReducers(builder) {
     builder.addCase(getAllJournalEntries.pending, (state) => {
       state.journalEntriesDataStatus = DataStatus.PENDING;
