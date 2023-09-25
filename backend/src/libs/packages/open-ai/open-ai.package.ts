@@ -93,6 +93,7 @@ class OpenAi extends BaseHttpApi {
         contentType: ContentType.JSON,
       },
     );
+
     const [response] = data.data;
 
     return response?.b64_json ?? null;
