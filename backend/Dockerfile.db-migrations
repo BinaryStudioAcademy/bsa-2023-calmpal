@@ -1,12 +1,5 @@
 FROM node:18.16.0 as backend-builder
 
-ARG NODE_ENV
-ENV NODE_ENV=$NODE_ENV
-ARG HOST
-ENV HOST=$HOST
-ARG PORT
-ENV PORT=$PORT
-
 WORKDIR /app
 
 RUN apt-get install wget ca-certificates
@@ -25,4 +18,4 @@ RUN npm run build -w backend
 RUN bash -c PGPASSWORD=$ENVIRONMENT_DB_PASSWORD pg_dump -Fc --username=$ENVIRONMENT_DB_USERNAME --host=$ENVIRONMENT_DB_HOST --port=$ENVIRONMENT_DB_PORT --dbname=$ENVIRONMENT_DB_NAME -E utf8 --file=$DUMP_FILE
 RUN bash -c PGPASSWORD=$DB_PASSWORD pg_restore --clean --dbname=$DB_NAME --username=$DB_USERNAME --host=$DB_HOST --port=$DB_PORT --file=$DUMP_FILE --no-privileges --no-owner
 
-CMD [ "npm", "run", "prestart", "-w", "backend" ]
+ENTRYPOINT ["bash", "-c", "npm run prestart -w backend"]

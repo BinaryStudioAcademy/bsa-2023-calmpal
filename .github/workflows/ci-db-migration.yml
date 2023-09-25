@@ -7,7 +7,6 @@ env:
   DB_NAME: calmpal_db
   DB_USERNAME: postgres
   DB_PASSWORD: password
-  DB_HOST: host.docker.internal
   DB_PORT: 5434
   DB_DIALECT: pg
   DB_POOL_MIN: 2
@@ -42,7 +41,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Step name
+      - name: Get AWS Secrets
         uses: aws-actions/aws-secretsmanager-get-secrets@v1
         with:
           secret-ids: |
@@ -51,7 +50,12 @@ jobs:
           parse-json-secrets: true
 
       - name: Setup docker services
-        run: docker-compose -f docker-compose.services.yml up -d calmpal_db
+        run: |
+          docker compose -f docker-compose.services.yml up -d calmpal_db
+
+      - name: Set Host IP environment variable
+        id: get-docker-ip
+        run: echo "HOST_IP=$(hostname -I | awk '{print $1}')" >> $GITHUB_ENV
 
       - name: Figure out whether migrations can be applied to existing environment database
         env:
@@ -60,9 +64,11 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ env.ENVIRONMENT_AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ env.ENVIRONMENT_AWS_SECRET_ACCESS_KEY }}
           AWS_BUCKET_NAME: ${{ env.ENVIRONMENT_AWS_BUCKET_NAME }}
+          DB_HOST: ${{ env.HOST_IP }}
         run: |
-          env > .env
-          docker-compose -f docker-compose.services.yml --env-file ./.env up backend_db_migrations
+          env > ./backend/.env
+          docker logs calmpal_db
+          docker run --rm  --env-file ./backend/.env $(docker build -f ./backend/Dockerfile.db-migrations -q .)
 
       - name: Stop docker services
-        run: docker-compose -f docker-compose.services.yml down
+        run: docker compose -f docker-compose.services.yml down
