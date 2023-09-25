@@ -56,8 +56,9 @@ const createMessage = createAsyncThunk<
   ChatMessageGetAllItemResponseDto,
   ChatMessageCreatePayload,
   AsyncThunkConfig
->(`${sliceName}/create-chat-message`, async (payload, { extra }) => {
+>(`${sliceName}/create-chat-message`, async (payload, { extra, dispatch }) => {
   const { chatMessagesApi } = extra;
+  void dispatch(generateReply(payload));
 
   return await chatMessagesApi.createChatMessage(payload);
 });

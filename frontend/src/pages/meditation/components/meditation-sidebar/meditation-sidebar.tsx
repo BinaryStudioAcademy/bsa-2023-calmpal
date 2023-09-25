@@ -2,7 +2,6 @@ import meditationPlaceholder from '#assets/img/meditation-image-placeholder.png'
 import {
   Button,
   Card,
-  Search,
   Sidebar,
   SidebarBody,
   SidebarHeader,
@@ -13,7 +12,6 @@ import {
   useCallback,
   useEffect,
   useRef,
-  useSearch,
 } from '#libs/hooks/hooks.js';
 import { type MeditationEntryCreateRequestDto } from '#packages/meditation/meditation.js';
 import { navigationItems } from '#pages/meditation/libs/constants/constants.js';
@@ -24,15 +22,14 @@ import styles from './styles.module.scss';
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: (value: boolean) => void;
+  onSetIsSidebarShow: (value: boolean) => void;
 };
 
 const MeditationSidebar: React.FC<Properties> = ({
   isSidebarShown,
-  setIsSidebarShown,
+  onSetIsSidebarShow,
 }) => {
   const dispatch = useAppDispatch();
-  const { filteredElements, setFilter } = useSearch(navigationItems, 'name');
   const dialogReference = useRef<HTMLDialogElement>(null);
 
   const handleOpen = useCallback(() => {
@@ -47,8 +44,8 @@ const MeditationSidebar: React.FC<Properties> = ({
   );
 
   const handleSelectMeditationEntry = useCallback(() => {
-    setIsSidebarShown(false);
-  }, [setIsSidebarShown]);
+    onSetIsSidebarShow(false);
+  }, [onSetIsSidebarShow]);
 
   useEffect(() => {
     void dispatch(meditationActions.getAllMeditationEntries());
@@ -75,17 +72,14 @@ const MeditationSidebar: React.FC<Properties> = ({
           </div>
         </SidebarHeader>
         <SidebarBody>
-          <div className={styles['search']}>
-            <Search onValueChange={setFilter} />
-          </div>
           <div className={styles['meditation-list']}>
-            {filteredElements.map((filteredElement) => {
+            {navigationItems.map((item) => {
               return (
                 <Card
-                  title={filteredElement.name}
+                  title={item.name}
                   imageUrl={meditationPlaceholder}
                   onClick={handleSelectMeditationEntry}
-                  key={filteredElement.name}
+                  key={item.name}
                   isActive
                 />
               );

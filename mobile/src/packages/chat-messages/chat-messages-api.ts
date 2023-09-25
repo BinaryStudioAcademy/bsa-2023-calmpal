@@ -53,7 +53,7 @@ class ChatMessagesApi extends BaseHttpApi {
     payload: ChatMessageCreatePayload,
   ): Promise<ChatMessageGetAllItemResponseDto> {
     const response = await this.load(
-      this.getFullEndpoint(ChatsApiPath.$ID_GENERATED_REPLIES, {
+      this.getFullEndpoint(ChatsApiPath.$ID_GENERATE_REPLY, {
         id: payload.chatId,
       }),
       {

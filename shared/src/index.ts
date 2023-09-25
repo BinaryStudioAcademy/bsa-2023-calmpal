@@ -27,6 +27,7 @@ export {
   getFormattedTime,
   replaceTemplateWithValue,
   sanitizeInput,
+  SECONDS_IN_MINUTE,
 } from './libs/helpers/helpers.js';
 export { type Config } from './libs/packages/config/config.js';
 export {
@@ -38,6 +39,7 @@ export {
 } from './libs/packages/http/http.js';
 export { type Storage } from './libs/packages/storage/storage.js';
 export {
+  type EntitiesFilteringDto,
   type ServerCommonErrorResponse,
   type ServerErrorDetail,
   type ServerErrorResponse,
@@ -60,6 +62,7 @@ export {
   ChatsApiPath,
   createChatValidationSchema,
 } from './packages/chats/chats.js';
+export { entitiesFilteringQueryValidationSchema } from './packages/common-validation-schemas/validation-schemas.js';
 export {
   type FileGetAllItemResponseDto,
   FilesApiPath,
@@ -72,6 +75,7 @@ export {
   createJournalEntryValidationSchema,
   JournalApiPath,
   type JournalEntryCreateRequestDto,
+  type JournalEntryDeleteResponseDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
   type JournalEntryUpdatePayloadDto,
