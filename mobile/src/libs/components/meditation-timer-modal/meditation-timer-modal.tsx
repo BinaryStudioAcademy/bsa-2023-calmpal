@@ -1,3 +1,4 @@
+import { type Dispatch, type SetStateAction } from 'react';
 import React from 'react';
 import { Modal as RNModal } from 'react-native';
 
@@ -9,23 +10,39 @@ import {
   View,
 } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
-import { useState } from '#libs/hooks/hooks';
+import { useAppForm, useFormController } from '#libs/hooks/hooks';
 
-import { DURATION_UNIT, MEDITATION_DURATION } from './libs/constants';
+import { TimerButton } from './components/components';
+import {
+  DEFAULT_DURATION,
+  DURATION_UNIT,
+  MEDITATION_DURATION,
+} from './libs/constants';
 import { styles } from './styles';
 
 type Properties = {
   onClose: () => void;
-  setDuration: (duration: number) => void;
+  setDuration: Dispatch<SetStateAction<number>>;
   startMeditation: () => void;
 };
+
+type DurationKey = keyof typeof MEDITATION_DURATION;
 
 const MeditationTimerModal: React.FC<Properties> = ({
   onClose,
   setDuration,
   startMeditation,
 }) => {
-  const [isPressed, setIsPressed] = useState('');
+  const { control } = useAppForm({
+    defaultValues: { meditationDuration: DEFAULT_DURATION },
+  });
+
+  const {
+    field: { onChange, value },
+  } = useFormController({
+    name: 'meditationDuration',
+    control,
+  });
 
   const handleStartMeditation = (): void => {
     onClose();
@@ -43,44 +60,18 @@ const MeditationTimerModal: React.FC<Properties> = ({
         <Pressable style={styles.modal}>
           <Text style={styles.title}>Choose Your Duration</Text>
           <View style={styles.durations}>
-            {Object.keys(MEDITATION_DURATION).map((duration) => {
+            {Object.keys(MEDITATION_DURATION).map((durationKey) => {
+              const duration = MEDITATION_DURATION[durationKey as DurationKey];
+
               return (
-                <TouchableOpacity
+                <TimerButton
                   key={duration}
-                  style={[
-                    styles.durationItem,
-                    isPressed === duration && styles.activeDuration,
-                  ]}
-                  onPress={(): void => {
-                    setIsPressed(duration);
-                    setDuration(
-                      MEDITATION_DURATION[
-                        duration as keyof typeof MEDITATION_DURATION
-                      ],
-                    );
-                  }}
-                >
-                  <Text
-                    style={[
-                      styles.duration,
-                      isPressed === duration && styles.activeText,
-                    ]}
-                  >
-                    {
-                      MEDITATION_DURATION[
-                        duration as keyof typeof MEDITATION_DURATION
-                      ]
-                    }
-                  </Text>
-                  <Text
-                    style={[
-                      styles.durationUnit,
-                      isPressed === duration && styles.activeText,
-                    ]}
-                  >
-                    {DURATION_UNIT.MINUTES}
-                  </Text>
-                </TouchableOpacity>
+                  isActive={value === duration}
+                  onChange={onChange}
+                  setDuration={setDuration}
+                  duration={duration}
+                  unit={DURATION_UNIT.MINUTES}
+                />
               );
             })}
           </View>

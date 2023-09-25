@@ -8,5 +8,6 @@ const mockedData = [
 ];
 
 const DEFAULT_SONG_DURATION = 0;
+// const DEFAULT_SONG_DURATION = '0';
 
 export { DEFAULT_SONG_DURATION, mockedData };

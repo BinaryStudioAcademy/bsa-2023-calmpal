@@ -1,4 +1,6 @@
-import { SECONDS_IN_MINUTE } from '#libs/helpers/helpers.js';
+import { SECONDS_IN_MINUTE } from '#libs/helpers/helpers';
+
+const DEFAULT_DURATION = 5;
 
 const SHORT_DURATION_IN_MINUTES = 5;
 const MEDIUM_DURATION_IN_MINUTES = 10;
@@ -14,4 +16,4 @@ const DURATION_UNIT = {
   MINUTES: 'min',
 } as const;
 
-export { DURATION_UNIT, MEDITATION_DURATION };
+export { DEFAULT_DURATION, DURATION_UNIT, MEDITATION_DURATION };
