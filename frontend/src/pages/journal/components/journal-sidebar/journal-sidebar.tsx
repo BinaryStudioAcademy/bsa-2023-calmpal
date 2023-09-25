@@ -28,14 +28,14 @@ type Properties = {
   isSidebarShown: boolean;
   onSetIsSidebarShow: (value: boolean) => void;
   filter: string;
-  setFilter: (query: string) => void;
+  onSetFilter: (query: string) => void;
 };
 
 const JournalSidebar: React.FC<Properties> = ({
   isSidebarShown,
   onSetIsSidebarShow,
   filter,
-  setFilter,
+  onSetFilter,
 }) => {
   const dispatch = useAppDispatch();
   const [chatToDelete, setChatToDelete] = useState<null | number>(null);
@@ -101,7 +101,7 @@ const JournalSidebar: React.FC<Properties> = ({
         </SidebarHeader>
         <SidebarBody>
           <div className={styles['search']}>
-            <Search onValueChange={setFilter} defaultValue={filter} />
+            <Search onValueChange={onSetFilter} defaultValue={filter} />
           </div>
           <div className={styles['journal-entry-list']}>
             {allJournalEntries.map((journalEntry) => {

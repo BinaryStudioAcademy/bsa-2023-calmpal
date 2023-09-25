@@ -53,7 +53,7 @@ const Journal: React.FC = () => {
         isSidebarShown={isSidebarShown}
         onSetIsSidebarShow={setIsSidebarShow}
         filter={filter}
-        setFilter={setFilter}
+        onSetFilter={setFilter}
       />
       <div
         className={getValidClassNames(
