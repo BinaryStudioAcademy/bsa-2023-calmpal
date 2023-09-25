@@ -10,7 +10,7 @@ import {
 } from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import {
-  ChatDate,
+  ChatDivider,
   ChatFooter,
   ChatHeader,
   ChatMessage,
@@ -75,7 +75,7 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
           Object.entries(currentChatMessages).map(([date, group]) => {
             return (
               <React.Fragment key={date}>
-                <ChatDate date={new Date(date)} />
+                <ChatDivider date={new Date(date)} />
                 {group.map((item) => {
                   return (
                     <ChatMessage
