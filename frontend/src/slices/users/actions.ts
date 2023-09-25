@@ -9,7 +9,7 @@ import { actions as appActions } from '#slices/app/app.js';
 import { name as sliceName } from './users.slice.js';
 
 const deleteUser = createAsyncThunk<
-  unknown,
+  number | null,
   UserDeleteRequestDto,
   AsyncThunkConfig
 >(`${sliceName}/deleteUser`, async (deletePayload, { extra, dispatch }) => {
