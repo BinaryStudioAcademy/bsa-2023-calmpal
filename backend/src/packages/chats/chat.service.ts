@@ -1,4 +1,3 @@
-import { FIRST_ARRAY_INDEX } from '#libs/constants/constants.js';
 import { ExceptionMessage } from '#libs/enums/enums.js';
 import { ChatError } from '#libs/exceptions/exceptions.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
@@ -10,7 +9,6 @@ import {
   type ChatMessageService,
 } from '#packages/chat-messages/chat-messages.js';
 
-import { type ChatEntity } from './chat.entity.js';
 import { type ChatRepository } from './chat.repository.js';
 import {
   type ChatGetAllItemResponseDto,
@@ -35,14 +33,6 @@ class ChatService implements Service {
 
   public find(): ReturnType<Service['find']> {
     return Promise.resolve(null);
-  }
-
-  public async findById(
-    id: number,
-  ): Promise<ReturnType<ChatEntity['toObject']> | null> {
-    const chat = await this.chatRepository.findById(id);
-
-    return chat?.toObject() ?? null;
   }
 
   public async findAll(): ReturnType<Service['findAll']> {
@@ -103,22 +93,13 @@ class ChatService implements Service {
     id: number;
     userId: number;
   }): Promise<boolean> {
-    const chat = await this.findById(id);
-    if (!chat) {
+    const deletedCount = await this.chatRepository.delete({ id, userId });
+    if (!deletedCount) {
       throw new ChatError({
         status: HTTPCode.NOT_FOUND,
         message: ExceptionMessage.CHAT_NOT_FOUND,
       });
     }
-
-    if (chat.members[FIRST_ARRAY_INDEX]?.userId !== userId) {
-      throw new ChatError({
-        status: HTTPCode.NOT_FOUND,
-        message: ExceptionMessage.CHAT_NOT_FOUND,
-      });
-    }
-
-    const deletedCount = await this.chatRepository.delete(id);
 
     return Boolean(deletedCount);
   }
