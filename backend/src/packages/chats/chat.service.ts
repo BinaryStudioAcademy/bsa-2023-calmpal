@@ -39,8 +39,11 @@ class ChatService implements Service {
     return await Promise.resolve({ items: [] });
   }
 
-  public async findAllByUserId(userId: number): Promise<ChatGetAllResponseDto> {
-    const items = await this.chatRepository.findAllByUserId(userId);
+  public async findAllByUserId(
+    userId: number,
+    query: string,
+  ): Promise<ChatGetAllResponseDto> {
+    const items = await this.chatRepository.findAllByUserId(userId, query);
 
     return {
       items: items.map((item) => {
@@ -73,6 +76,12 @@ class ChatService implements Service {
       senderId: userId,
     });
 
+    await this.chatMessageService.generateReply({
+      message,
+      chatId: chat.id,
+      senderId: userId,
+    });
+
     return chat;
   }
 
@@ -80,6 +89,12 @@ class ChatService implements Service {
     payload: ChatMessageCreatePayload,
   ): Promise<ChatMessageGetAllItemResponseDto> {
     return this.chatMessageService.create(payload);
+  }
+
+  public generateReply(
+    payload: ChatMessageCreatePayload,
+  ): Promise<ChatMessageGetAllItemResponseDto> {
+    return this.chatMessageService.generateReply(payload);
   }
 
   public update(): ReturnType<Service['update']> {

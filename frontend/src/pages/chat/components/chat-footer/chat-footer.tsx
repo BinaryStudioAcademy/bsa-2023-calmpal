@@ -18,10 +18,11 @@ type Properties = {
 
 const ChatFooter: React.FC<Properties> = ({ onSend }) => {
   const { id } = useParams<{ id: string }>();
-  const { control, handleSubmit, errors, reset } = useAppForm<ChatInputValue>({
-    defaultValues: CHAT_INPUT_DEFAULT_VALUES,
-    mode: 'onSubmit',
-  });
+  const { control, handleSubmit, errors, reset, watch } =
+    useAppForm<ChatInputValue>({
+      defaultValues: CHAT_INPUT_DEFAULT_VALUES,
+      mode: 'onSubmit',
+    });
 
   useEffect(() => {
     reset();
@@ -34,12 +35,17 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
     },
     [onSend, reset],
   );
+
+  const messageValue = watch('message');
+
   const handleFormSubmit = useCallback(
     (event_: React.BaseSyntheticEvent): void => {
       void handleSubmit(onSubmit)(event_);
     },
     [handleSubmit, onSubmit],
   );
+
+  const isMessageEmpty = messageValue.trim() === '';
 
   return (
     <footer className={styles['chat-footer']}>
@@ -52,7 +58,11 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
           control={control}
           isChatInput
         />
-        <button type="submit" className={styles['send-button']}>
+        <button
+          type="submit"
+          className={styles['send-button']}
+          disabled={isMessageEmpty}
+        >
           <span className="visually-hidden">Send message</span>
           <Icon name="send" color={IconColor.BLUE} width={24} height={24} />
         </button>
