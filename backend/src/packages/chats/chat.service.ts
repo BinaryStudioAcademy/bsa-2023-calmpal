@@ -129,10 +129,10 @@ class ChatService implements Service {
 
   public async updateImage({
     chat,
-    imageB64Json,
+    url,
   }: UpdateChatImagePayload): Promise<ChatGetAllItemResponseDto> {
     const fileRecord = await this.fileService.create({
-      buffer: Buffer.from(imageB64Json, 'base64'),
+      buffer: Buffer.from(url, 'base64'),
       contentType: ContentType.PNG,
     });
 

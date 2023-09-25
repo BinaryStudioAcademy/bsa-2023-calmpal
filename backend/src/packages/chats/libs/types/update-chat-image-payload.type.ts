@@ -2,7 +2,7 @@ import { type ChatGetAllItemResponseDto } from 'shared/build/index.js';
 
 type UpdateChatImagePayload = {
   chat: ChatGetAllItemResponseDto;
-  imageB64Json: string;
+  url: string;
 };
 
 export { type UpdateChatImagePayload };
