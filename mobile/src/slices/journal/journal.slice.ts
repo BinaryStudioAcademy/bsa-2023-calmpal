@@ -4,18 +4,20 @@ import { DataStatus } from '#libs/enums/enums';
 import { type ValueOf } from '#libs/types/types';
 import { type JournalEntryGetAllItemResponseDto } from '#packages/journal/journal';
 
-import { getAllJournalEntries } from './actions';
+import { deleteJournal, getAllJournalEntries } from './actions';
 
 type State = {
   allJournalEntries: JournalEntryGetAllItemResponseDto[];
   selectedJournalEntry: JournalEntryGetAllItemResponseDto | null;
   journalEntriesDataStatus: ValueOf<typeof DataStatus>;
+  deleteJournalEntryDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
   allJournalEntries: [],
   selectedJournalEntry: null,
   journalEntriesDataStatus: DataStatus.IDLE,
+  deleteJournalEntryDataStatus: DataStatus.IDLE,
 };
 
 const { reducer, actions, name } = createSlice({
@@ -39,6 +41,17 @@ const { reducer, actions, name } = createSlice({
     });
     builder.addCase(getAllJournalEntries.rejected, (state) => {
       state.journalEntriesDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(deleteJournal.pending, (state) => {
+      state.deleteJournalEntryDataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(deleteJournal.fulfilled, (state, action) => {
+      state.allJournalEntries = action.payload;
+      state.deleteJournalEntryDataStatus = DataStatus.FULFILLED;
+    });
+    builder.addCase(deleteJournal.rejected, (state) => {
+      state.deleteJournalEntryDataStatus = DataStatus.REJECTED;
     });
   },
 });
