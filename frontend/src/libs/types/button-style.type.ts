@@ -10,5 +10,4 @@ type ButtonStyle =
   | 'outlined'
   | 'icon-right';
 
-
 export { type ButtonStyle };
