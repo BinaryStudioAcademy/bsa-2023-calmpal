@@ -16,7 +16,6 @@ import {
   useEffect,
   useParams,
   useRef,
-  useSearch,
   useState,
 } from '#libs/hooks/hooks.js';
 import { type ValueOf } from '#libs/types/types.js';
@@ -28,11 +27,15 @@ import styles from './styles.module.scss';
 type Properties = {
   isSidebarShown: boolean;
   onSetIsSidebarShow: (value: boolean) => void;
+  filter: string;
+  onSetFilter: (query: string) => void;
 };
 
 const ChatSidebar: React.FC<Properties> = ({
   isSidebarShown,
   onSetIsSidebarShow,
+  filter,
+  onSetFilter,
 }) => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
@@ -50,10 +53,8 @@ const ChatSidebar: React.FC<Properties> = ({
   }, [dialogReference]);
 
   useEffect(() => {
-    void dispatch(chatsActions.getAllChats());
-  }, [dispatch]);
-
-  const { filteredElements, setFilter } = useSearch(chats, 'name');
+    void dispatch(chatsActions.getAllChats(filter));
+  }, [dispatch, filter]);
 
   const handleSelectChat = useCallback(() => {
     onSetIsSidebarShow(false);
@@ -76,9 +77,7 @@ const ChatSidebar: React.FC<Properties> = ({
         <SidebarHeader>
           <div className={styles['info']}>
             <span>Chat</span>
-            <span className={styles['chat-number']}>
-              {filteredElements.length}
-            </span>
+            <span className={styles['chat-number']}>{chats.length}</span>
           </div>
           <div className={styles['plus']}>
             <Link to={AppRoute.CHATS}>
@@ -88,24 +87,24 @@ const ChatSidebar: React.FC<Properties> = ({
         </SidebarHeader>
         <SidebarBody>
           <div className={styles['search']}>
-            <Search onValueChange={setFilter} />
+            <Search onValueChange={onSetFilter} defaultValue={filter} />
           </div>
           <div className={styles['chat-list']}>
-            {filteredElements.map((filteredChat) => {
+            {chats.map((chat) => {
               const chatLink = AppRoute.CHATS_$ID.replace(
                 ':id',
-                String(filteredChat.id),
+                String(chat.id),
               ) as ValueOf<typeof AppRoute>;
 
               return (
-                <Link to={chatLink} key={filteredChat.id}>
+                <Link key={chat.id} to={chatLink}>
                   <Card
-                    title={filteredChat.name}
+                    title={chat.name}
                     imageUrl={cardPlaceholder}
                     onClick={handleSelectChat}
-                    isActive={String(filteredChat.id) === id}
+                    isActive={String(chat.id) === id}
                     iconRight="trash-box"
-                    onIconClick={handleDeleteChat(filteredChat.id)}
+                    onIconClick={handleDeleteChat(chat.id)}
                     iconColor={IconColor.LIGHT_BLUE}
                   />
                 </Link>
