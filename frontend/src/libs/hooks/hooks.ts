@@ -8,6 +8,7 @@ export {
   forwardRef,
   useCallback,
   useEffect,
+  useImperativeHandle,
   useMemo,
   useRef,
   useState,
@@ -15,6 +16,7 @@ export {
 export { useController as useFormController } from 'react-hook-form';
 export {
   useLocation,
+  useMatch,
   useNavigate,
   useParams,
   useSearchParams,

@@ -12,18 +12,18 @@ import styles from './styles.module.scss';
 
 const Chat: React.FC = () => {
   const navigate = useNavigate();
-  const { isSidebarShown, setIsSidebarShown } = useSidebarState();
+  const { isSidebarShown, setIsSidebarShow } = useSidebarState();
 
   const handleBackButtonPress = useCallback(() => {
     navigate(AppRoute.CHATS);
-    setIsSidebarShown(true);
-  }, [setIsSidebarShown, navigate]);
+    setIsSidebarShow(true);
+  }, [setIsSidebarShow, navigate]);
 
   return (
     <>
       <ChatSidebar
         isSidebarShown={isSidebarShown}
-        setIsSidebarShown={setIsSidebarShown}
+        onSetIsSidebarShow={setIsSidebarShow}
       />
       <div
         className={getValidClassNames(

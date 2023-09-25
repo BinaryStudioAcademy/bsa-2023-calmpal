@@ -9,6 +9,7 @@ import {
   type JournalEntryUpdatePayloadDto,
 } from '#packages/journal/journal.js';
 import { actions as appActions } from '#slices/app/app.js';
+import { actions as journalActions } from '#slices/journal/journal.js';
 
 import { name as sliceName } from './journal.slice.js';
 
@@ -50,4 +51,33 @@ const updateJournalEntry = createAsyncThunk<
 
   return await journalApi.updateJournalEntry(payload);
 });
-export { createJournalEntry, getAllJournalEntries, updateJournalEntry };
+
+const deleteJournal = createAsyncThunk<
+  JournalEntryGetAllItemResponseDto[],
+  number,
+  AsyncThunkConfig
+>(
+  `${sliceName}/delete-journal-entry`,
+  async (id, { extra, getState, dispatch }) => {
+    const { journalApi } = extra;
+    await journalApi.deleteJournalEntry(id);
+    const {
+      journal: { allJournalEntries, selectedJournalEntry },
+    } = getState();
+
+    if (selectedJournalEntry?.id === id) {
+      dispatch(journalActions.setSelectedJournalEntry(null));
+    }
+
+    return allJournalEntries.filter((journal) => {
+      return journal.id !== id;
+    });
+  },
+);
+
+export {
+  createJournalEntry,
+  deleteJournal,
+  getAllJournalEntries,
+  updateJournalEntry,
+};
