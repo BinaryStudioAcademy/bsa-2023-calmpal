@@ -25,14 +25,14 @@ class Billing {
     price,
   }: {
     price: number;
-  }): Promise<{ clientSecret: string | null }> {
+  }): Promise<{ clientSecret: string }> {
     const { client_secret: clientSecret } =
       await this.stripe.paymentIntents.create({
         amount: this.getPriceInSmallestUnit(price),
         currency: CURRENCY,
       });
 
-    return { clientSecret };
+    return { clientSecret: clientSecret as string };
   }
 
   private getPriceInSmallestUnit(amount: number): number {

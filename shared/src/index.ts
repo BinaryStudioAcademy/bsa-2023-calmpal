@@ -113,4 +113,5 @@ export {
 export {
   SubscriptionApiPath,
   type SubscriptionPaymentIntentCreateRequestDto,
+  type SubscriptionPaymentIntentCreateResponseDto,
 } from '#packages/subscriptions/subscriptions.js';
