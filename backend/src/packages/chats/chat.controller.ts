@@ -1,4 +1,5 @@
-import { APIPath } from '#libs/enums/enums.js';
+import { APIPath, ExceptionMessage } from '#libs/enums/enums.js';
+import { ChatError } from '#libs/exceptions/exceptions.js';
 import {
   type APIHandlerOptions,
   type APIHandlerResponse,
@@ -84,6 +85,13 @@ import { createChatValidationSchema } from './libs/validation-schemas/validation
  *          updatedAt:
  *             type: string
  *             format: date-time
+ *       Error:
+ *         type: object
+ *         properties:
+ *           message:
+ *             type: string
+ *           errorType:
+ *             type: string
  */
 class ChatController extends BaseController {
   private chatService: ChatService;
@@ -144,6 +152,19 @@ class ChatController extends BaseController {
         );
       },
     });
+
+    this.addRoute({
+      path: ChatsApiPath.$ID,
+      method: 'DELETE',
+      handler: (options) => {
+        return this.delete(
+          options as APIHandlerOptions<{
+            user: UserAuthResponseDto;
+            params: { id: string };
+          }>,
+        );
+      },
+    });
   }
 
   /**
@@ -151,6 +172,8 @@ class ChatController extends BaseController {
    * /chats:
    *   get:
    *     description: Returns all chats with authenticated user
+   *     security:
+   *      - bearerAuth: []
    *     responses:
    *       200:
    *         description: Successful operation
@@ -178,6 +201,8 @@ class ChatController extends BaseController {
    * /chats:
    *   post:
    *     description: Create a new chat
+   *     security:
+   *      - bearerAuth: []
    *     requestBody:
    *       description: Create chat data
    *       required: true
@@ -221,6 +246,8 @@ class ChatController extends BaseController {
    * /chats/{id}/messages:
    *   post:
    *     description: Create a new chat message
+   *     security:
+   *      - bearerAuth: []
    *     parameters:
    *       -  in: path
    *          description: Chat id
@@ -270,6 +297,8 @@ class ChatController extends BaseController {
    * /chats/{id}/messages:
    *   get:
    *     description: Returns all chat messages
+   *     security:
+   *      - bearerAuth: []
    *     parameters:
    *       -  in: path
    *          description: Chat id
@@ -300,6 +329,62 @@ class ChatController extends BaseController {
       payload: await this.chatService.findAllMessagesByChatId(
         Number(options.params.id),
       ),
+    };
+  }
+
+  /**
+   * @swagger
+   * /chats/{id}:
+   *   delete:
+   *     description: Delete chat by id
+   *     security:
+   *      - bearerAuth: []
+   *     parameters:
+   *      -  in: path
+   *         description: Chat id
+   *         name: id
+   *         required: true
+   *         type: number
+   *         minimum: 1
+   *     responses:
+   *       200:
+   *         description: Successful operation
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: boolean
+   *       404:
+   *         description: Chat was not found
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *             example:
+   *               message: "Chat with such id was not found."
+   *               errorType: "COMMON"
+   */
+
+  private async delete(
+    options: APIHandlerOptions<{
+      params: { id: string };
+      user: UserAuthResponseDto;
+    }>,
+  ): Promise<APIHandlerResponse> {
+    const { id } = options.params;
+    const { id: userId } = options.user;
+
+    const isDeleted = await this.chatService.delete({ id: Number(id), userId });
+
+    if (!isDeleted) {
+      throw new ChatError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.CHAT_NOT_FOUND,
+      });
+    }
+
+    return {
+      status: HTTPCode.CREATED,
+      payload: isDeleted,
     };
   }
 }
