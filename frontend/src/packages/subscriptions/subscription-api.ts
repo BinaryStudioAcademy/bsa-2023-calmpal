@@ -5,6 +5,7 @@ import { type Storage } from '#libs/packages/storage/storage.js';
 
 import { SubscriptionApiPath } from './libs/enums/enums.js';
 import {
+  type SubscriptionPaymentIntentCancelRequestDto,
   type SubscriptionPaymentIntentCreateRequestDto,
   type SubscriptionPaymentIntentCreateResponseDto,
 } from './libs/types/types.js';
@@ -34,6 +35,22 @@ class SubscriptionApi extends BaseHttpApi {
     );
 
     return await response.json<SubscriptionPaymentIntentCreateResponseDto>();
+  }
+
+  public async cancelPaymentIntent(
+    payload: SubscriptionPaymentIntentCancelRequestDto,
+  ): Promise<boolean> {
+    const response = await this.load(
+      this.getFullEndpoint(SubscriptionApiPath.PAYMENT_INTENT, {}),
+      {
+        method: 'DELETE',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify(payload),
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<boolean>();
   }
 }
 
