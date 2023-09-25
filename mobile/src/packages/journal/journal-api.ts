@@ -50,7 +50,7 @@ class JournalApi extends BaseHttpApi {
     return await response.json<JournalEntryGetAllItemResponseDto>();
   }
 
-  public async updateJournalEntry(
+  public async update(
     payload: JournalEntryUpdatePayloadDto,
   ): Promise<JournalEntryGetAllItemResponseDto> {
     const response = await this.load(

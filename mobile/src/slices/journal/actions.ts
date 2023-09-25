@@ -37,7 +37,7 @@ const updateJournalEntry = createAsyncThunk<
 >(`${sliceName}/update-journal-entry`, async (payload, { extra }) => {
   const { journalApi } = extra;
 
-  return await journalApi.updateJournalEntry(payload);
+  return await journalApi.update(payload);
 });
 
 export { createJournalEntry, getAllJournalEntries, updateJournalEntry };
