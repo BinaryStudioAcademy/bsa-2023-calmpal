@@ -19,12 +19,12 @@ import { name as sliceName } from './chats.slice.js';
 
 const getAllChats = createAsyncThunk<
   ChatGetAllResponseDto,
-  undefined,
+  string,
   AsyncThunkConfig
->(`${sliceName}/get-all-chats`, async (_, { extra }) => {
+>(`${sliceName}/get-all-chats`, async (query, { extra }) => {
   const { chatApi } = extra;
 
-  return await chatApi.getAllChats();
+  return await chatApi.getAllChats(query);
 });
 
 const getCurrentChatMessages = createAsyncThunk<
@@ -54,10 +54,13 @@ const createMessage = createAsyncThunk<
   ChatMessageGetAllItemResponseDto,
   ChatMessageCreatePayload,
   AsyncThunkConfig
->(`${sliceName}/create-chat-message`, async (payload, { extra }) => {
+>(`${sliceName}/create-chat-message`, async (payload, { extra, dispatch }) => {
   const { chatMessagesApi } = extra;
+  const message = await chatMessagesApi.createChatMessage(payload);
 
-  return await chatMessagesApi.createChatMessage(payload);
+  void dispatch(generateReply(payload));
+
+  return message;
 });
 
 const deleteChat = createAsyncThunk<number, number, AsyncThunkConfig>(
@@ -71,11 +74,21 @@ const deleteChat = createAsyncThunk<number, number, AsyncThunkConfig>(
     return id;
   },
 );
+const generateReply = createAsyncThunk<
+  ChatMessageGetAllItemResponseDto,
+  ChatMessageCreatePayload,
+  AsyncThunkConfig
+>(`${sliceName}/generate-reply`, async (payload, { extra }) => {
+  const { chatMessagesApi } = extra;
+
+  return await chatMessagesApi.generateChatReply(payload);
+});
 
 export {
   createChat,
   createMessage,
   deleteChat,
+  generateReply,
   getAllChats,
   getCurrentChatMessages,
 };
