@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { APIPath } from 'shared/build/index.js';
 
+import { AppRoute } from '#libs/enums/enums.js';
 import { type AsyncThunkConfig } from '#libs/types/types.js';
 import {
   type ChatMessageCreatePayload,
@@ -18,12 +19,12 @@ import { name as sliceName } from './chats.slice.js';
 
 const getAllChats = createAsyncThunk<
   ChatGetAllResponseDto,
-  undefined,
+  string,
   AsyncThunkConfig
->(`${sliceName}/get-all-chats`, async (_, { extra }) => {
+>(`${sliceName}/get-all-chats`, async (query, { extra }) => {
   const { chatApi } = extra;
 
-  return await chatApi.getAllChats();
+  return await chatApi.getAllChats(query);
 });
 
 const getCurrentChatMessages = createAsyncThunk<
@@ -59,4 +60,22 @@ const createMessage = createAsyncThunk<
   return await chatMessagesApi.createChatMessage(payload);
 });
 
-export { createChat, createMessage, getAllChats, getCurrentChatMessages };
+const deleteChat = createAsyncThunk<number, number, AsyncThunkConfig>(
+  `${sliceName}/delete-chat`,
+  async (id, { extra, dispatch }) => {
+    const { chatApi } = extra;
+    await chatApi.deleteChat(id);
+
+    dispatch(appActions.navigate(AppRoute.CHATS));
+
+    return id;
+  },
+);
+
+export {
+  createChat,
+  createMessage,
+  deleteChat,
+  getAllChats,
+  getCurrentChatMessages,
+};

@@ -4,6 +4,7 @@ import {
   AbstractModel,
   DatabaseTableName,
 } from '#libs/packages/database/database.js';
+import { ChatMessageModel } from '#packages/chat-messages/chat-message.model.js';
 
 import {
   ChatsTableColumn,
@@ -26,6 +27,15 @@ class ChatModel extends AbstractModel {
         join: {
           from: `${DatabaseTableName.CHATS}.${ChatsTableColumn.ID}`,
           to: `${DatabaseTableName.USERS_TO_CHATS}.${UsersToChatsTableColumn.CHAT_ID}`,
+        },
+      },
+
+      messages: {
+        relation: Model.HasManyRelation,
+        modelClass: ChatMessageModel,
+        join: {
+          from: `${DatabaseTableName.CHATS}.${ChatsTableColumn.ID}`,
+          to: `${DatabaseTableName.CHAT_MESSAGES}.${UsersToChatsTableColumn.CHAT_ID}`,
         },
       },
     };
