@@ -1,5 +1,15 @@
+import { type ForwardedRef } from 'react';
+
 import { Button } from '#libs/components/components.js';
-import { useCallback, useEffect, useRef, useState } from '#libs/hooks/hooks.js';
+import { IconColor } from '#libs/enums/enums.js';
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from '#libs/hooks/hooks.js';
 import {
   FULL_PERCENTAGE,
   PROGRESS_BAR,
@@ -7,34 +17,47 @@ import {
   TRACK_SKIP_SECONDS,
 } from '#pages/meditation/libs/constants/constants.js';
 
+import { type AudioControlsHandler } from '../../libs/types/types.js';
 import styles from './styles.module.scss';
 
-type Properties<T> = {
+type Properties = {
   audioReference: React.RefObject<HTMLAudioElement | null>;
   progressBarReference: React.RefObject<HTMLInputElement | null>;
   duration: number;
   onTimeProgress: (currentTime: number) => void;
   trackIndex: number;
   onSetTrackIndex: (index: number) => void;
-  onSetCurrentTrack: (track: T) => void;
-  tracks: T[];
+  tracksCount: number;
   onNextTrack: () => void;
 };
 
-const AudioControls = <T,>({
-  audioReference,
-  progressBarReference,
-  duration,
-  onTimeProgress,
-  trackIndex,
-  tracks,
-  onSetCurrentTrack,
-  onSetTrackIndex,
-  onNextTrack,
-}: Properties<T>): JSX.Element => {
+const AudioControls = (
+  {
+    audioReference,
+    progressBarReference,
+    duration,
+    onTimeProgress,
+    trackIndex,
+    tracksCount,
+    onSetTrackIndex,
+    onNextTrack,
+  }: Properties,
+  reference: ForwardedRef<AudioControlsHandler>,
+): JSX.Element => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const playAnimationReference = useRef<number | null>(null);
+
+  useImperativeHandle(reference, () => {
+    return {
+      handlePausePlayer: (): void => {
+        setIsPlaying(false);
+      },
+      handleResumePlayer: (): void => {
+        setIsPlaying(true);
+      },
+    };
+  });
 
   const repeat = useCallback((): void => {
     if (!audioReference.current || !progressBarReference.current) {
@@ -69,10 +92,9 @@ const AudioControls = <T,>({
 
   const handlePrevious = useCallback(() => {
     const previousTrackIndex =
-      (trackIndex - TRACK_INCREMENT_INDEX + tracks.length) % tracks.length;
+      (trackIndex - TRACK_INCREMENT_INDEX + tracksCount) % tracksCount;
     onSetTrackIndex(previousTrackIndex);
-    onSetCurrentTrack(tracks[previousTrackIndex] as T);
-  }, [onSetCurrentTrack, onSetTrackIndex, trackIndex, tracks]);
+  }, [onSetTrackIndex, trackIndex, tracksCount]);
 
   useEffect(() => {
     if (audioReference.current) {
@@ -105,6 +127,9 @@ const AudioControls = <T,>({
           onClick={handlePrevious}
           style="rounded-transparent"
           iconName="previous"
+          iconColor={IconColor.BLUE_200}
+          iconHeight={24}
+          iconWidth={24}
           label="Play previous meditation"
           isLabelVisuallyHidden
         />
@@ -113,10 +138,12 @@ const AudioControls = <T,>({
             onClick={handleSkipBackward}
             style="rounded-transparent"
             iconName="backward"
+            iconColor={IconColor.BLUE_200}
+            iconHeight={40}
+            iconWidth={40}
             label="Back 30 seconds"
             isLabelVisuallyHidden
           />
-
           <Button
             onClick={handlePlayToggle}
             style="rounded"
@@ -128,6 +155,9 @@ const AudioControls = <T,>({
             onClick={handleSkipForward}
             style="rounded-transparent"
             iconName="forward"
+            iconColor={IconColor.BLUE_200}
+            iconHeight={40}
+            iconWidth={40}
             label="Forward 30 seconds"
             isLabelVisuallyHidden
           />
@@ -136,6 +166,9 @@ const AudioControls = <T,>({
           onClick={onNextTrack}
           style="rounded-transparent"
           iconName="next"
+          iconColor={IconColor.BLUE_200}
+          iconHeight={24}
+          iconWidth={24}
           label="Play next meditation"
           isLabelVisuallyHidden
         />
@@ -144,4 +177,6 @@ const AudioControls = <T,>({
   );
 };
 
-export { AudioControls };
+const ForwardedAudioControls = forwardRef(AudioControls);
+
+export { ForwardedAudioControls as AudioControls };

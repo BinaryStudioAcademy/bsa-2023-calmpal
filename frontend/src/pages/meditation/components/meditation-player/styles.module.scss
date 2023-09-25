@@ -1,6 +1,8 @@
 .wrapper {
+  width: 100%;
   height: 100%;
   padding-top: 150px;
+  padding-left: 350px;
   font-weight: 600;
   background-image: url("../../../../assets/img/meditation-player-background.png");
   background-repeat: no-repeat;
@@ -48,8 +50,15 @@
   line-height: 1.25;
 }
 
+@media (width < 900px) {
+  .wrapper {
+    padding-left: 250px;
+  }
+}
+
 @media (width < 767px) {
   .wrapper {
+    padding: 150px 20px 0;
     background-image: url("../../../../assets/img/meditation-player-background-mobile.png");
   }
 

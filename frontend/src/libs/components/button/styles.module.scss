@@ -133,6 +133,56 @@
   cursor: pointer;
 }
 
+.play-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 52px;
+  min-height: 52px;
+  background-color: var(--white);
+  border: none;
+}
+
+.play-button:hover {
+  transform: scale(1.1);
+}
+
+.start-button {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  background-color: var(--blue-300);
+  border: none;
+  border-radius: 80px;
+  cursor: pointer;
+}
+
+.start-button:hover {
+  box-shadow: 0 4px 20px 0 var(--blue-alpha-30);
+}
+
+.icon-right {
+  position: absolute;
+  top: 25%;
+  right: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  padding: 7px 6px;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.icon-right:hover {
+  filter: brightness(60%);
+}
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);

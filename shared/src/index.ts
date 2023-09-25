@@ -26,6 +26,7 @@ export {
   getFormattedTime,
   replaceTemplateWithValue,
   sanitizeInput,
+  SECONDS_IN_MINUTE,
 } from './libs/helpers/helpers.js';
 export { type Config } from './libs/packages/config/config.js';
 export {
@@ -71,6 +72,7 @@ export {
   createJournalEntryValidationSchema,
   JournalApiPath,
   type JournalEntryCreateRequestDto,
+  type JournalEntryDeleteResponseDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
   type JournalEntryUpdatePayloadDto,
