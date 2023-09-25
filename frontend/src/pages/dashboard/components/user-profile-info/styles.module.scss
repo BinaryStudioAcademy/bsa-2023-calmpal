@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--gray-400);
 }
 
 .avatar-container {
@@ -24,6 +25,7 @@
 
 .user-name {
   margin-top: 15px;
+  color: var(--gray-400);
   font-weight: 600;
   font-size: 20px;
 }
