@@ -20,13 +20,13 @@ import {
 } from './libs/constants';
 import { styles } from './styles';
 
+type DurationKey = keyof typeof MEDITATION_DURATION;
+
 type Properties = {
   onClose: () => void;
   setDuration: Dispatch<SetStateAction<number>>;
   startMeditation: () => void;
 };
-
-type DurationKey = keyof typeof MEDITATION_DURATION;
 
 const MeditationTimerModal: React.FC<Properties> = ({
   onClose,
