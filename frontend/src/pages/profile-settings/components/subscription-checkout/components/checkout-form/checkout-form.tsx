@@ -1,7 +1,9 @@
-import { useCallback } from 'react';
-
 import { Button } from '#libs/components/components.js';
-import { useAppDispatch, useAppSelector } from '#libs/hooks/hooks.js';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useCallback,
+} from '#libs/hooks/hooks.js';
 import {
   useElements,
   useStripe,
