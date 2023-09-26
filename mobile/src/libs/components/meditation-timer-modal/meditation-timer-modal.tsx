@@ -92,9 +92,7 @@ const MeditationTimerModal: React.FC<Properties> = ({
           <Button
             label={startButtonText}
             onPress={handleStartMeditation}
-            // color={AppColor.BLUE_300}
             type="timer"
-            // styles={styles.button}
           />
         </Pressable>
       </TouchableOpacity>
