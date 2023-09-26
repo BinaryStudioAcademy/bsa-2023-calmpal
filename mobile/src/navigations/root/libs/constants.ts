@@ -1,8 +1,7 @@
 import { RootScreenName } from '#libs/enums/enums';
 import { type NavigationItem } from '#libs/types/types';
-import { Main, UserProfile } from '#navigations/navigations';
+import { Main, Survey, UserProfile } from '#navigations/navigations';
 import { Auth } from '#screens/auth/auth';
-import { Survey } from '#screens/survey/survey';
 
 const NAVIGATION_ITEMS: NavigationItem[] = [
   {

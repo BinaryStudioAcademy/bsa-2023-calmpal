@@ -8,6 +8,7 @@ export {
   type NavigationScreenProperties,
   type ProfileNavigationParameterList,
   type RootNavigationParameterList,
+  type SurveyNavigationItem,
   type SurveyNavigationParameterList,
   type TabNavigationParameterList,
 } from './navigation/navigation';
