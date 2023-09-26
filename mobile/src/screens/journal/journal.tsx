@@ -60,7 +60,7 @@ const Journal: React.FC = () => {
   };
 
   const handleDeleteNote = (): void => {
-    setIsModalVisible(false);
+    hanleCloseModal();
     if (selectedJournalEntry) {
       void dispatch(journalActions.deleteJournal(selectedJournalEntry.id));
     }
