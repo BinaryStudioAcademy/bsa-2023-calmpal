@@ -1,6 +1,6 @@
 import { NavigationMenu } from '#libs/components/components.js';
 
-import { SIDEBAR_ROUTES } from './libs/constants.js';
+import { SIDEBAR_ROUTES } from './libs/constants/constants.js';
 import styles from './styles.module.scss';
 
 type Properties = {
