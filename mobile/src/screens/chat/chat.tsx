@@ -18,7 +18,7 @@ import { type ChatNavigationParameterList } from '#libs/types/types';
 import { actions as chatsActions } from '#slices/chats/chats';
 
 import { ChatInput, MessageItem } from './components/components';
-import { DEFAULT_VALUES, PREVIOUS_USER } from './libs/constants';
+import { DEFAULT_VALUES, PREVIOUS_USER } from './libs/constants/constants';
 import { type ChatInputValue } from './libs/types/chat-input-value.type';
 import { styles } from './styles';
 

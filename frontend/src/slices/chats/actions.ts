@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { APIPath } from 'shared/build/index.js';
 
+import { AppRoute } from '#libs/enums/enums.js';
 import { type AsyncThunkConfig } from '#libs/types/types.js';
 import {
   type ChatMessageCreatePayload,
@@ -11,6 +12,7 @@ import {
   type ChatCreateRequestDto,
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
+  type UpdateChatImageRequestDto,
 } from '#packages/chats/chats.js';
 import { actions as appActions } from '#slices/app/app.js';
 
@@ -18,12 +20,12 @@ import { name as sliceName } from './chats.slice.js';
 
 const getAllChats = createAsyncThunk<
   ChatGetAllResponseDto,
-  undefined,
+  string,
   AsyncThunkConfig
->(`${sliceName}/get-all-chats`, async (_, { extra }) => {
+>(`${sliceName}/get-all-chats`, async (query, { extra }) => {
   const { chatApi } = extra;
 
-  return await chatApi.getAllChats();
+  return await chatApi.getAll(query);
 });
 
 const getCurrentChatMessages = createAsyncThunk<
@@ -42,9 +44,11 @@ const createChat = createAsyncThunk<
   AsyncThunkConfig
 >(`${sliceName}/create-chat`, async (payload, { extra, dispatch }) => {
   const { chatApi } = extra;
-  const chat = await chatApi.createChat(payload);
+  const chat = await chatApi.create(payload);
 
   dispatch(appActions.navigate(`${APIPath.CHATS}/${chat.id}`));
+
+  void dispatch(updateChatImage({ id: chat.id.toString() }));
 
   return chat;
 });
@@ -53,10 +57,53 @@ const createMessage = createAsyncThunk<
   ChatMessageGetAllItemResponseDto,
   ChatMessageCreatePayload,
   AsyncThunkConfig
->(`${sliceName}/create-chat-message`, async (payload, { extra }) => {
+>(`${sliceName}/create-chat-message`, async (payload, { extra, dispatch }) => {
   const { chatMessagesApi } = extra;
+  const message = await chatMessagesApi.createChatMessage(payload);
 
-  return await chatMessagesApi.createChatMessage(payload);
+  void dispatch(generateReply(payload));
+
+  return message;
 });
 
-export { createChat, createMessage, getAllChats, getCurrentChatMessages };
+const deleteChat = createAsyncThunk<number, number, AsyncThunkConfig>(
+  `${sliceName}/delete-chat`,
+  async (id, { extra, dispatch }) => {
+    const { chatApi } = extra;
+    await chatApi.delete(id);
+
+    dispatch(appActions.navigate(AppRoute.CHATS));
+
+    return id;
+  },
+);
+
+const generateReply = createAsyncThunk<
+  ChatMessageGetAllItemResponseDto,
+  ChatMessageCreatePayload,
+  AsyncThunkConfig
+>(`${sliceName}/generate-reply`, async (payload, { extra }) => {
+  const { chatMessagesApi } = extra;
+
+  return await chatMessagesApi.generateReply(payload);
+});
+
+const updateChatImage = createAsyncThunk<
+  ChatGetAllItemResponseDto,
+  UpdateChatImageRequestDto,
+  AsyncThunkConfig
+>(`${sliceName}/update-chat-image`, async (payload, { extra }) => {
+  const { chatApi } = extra;
+
+  return await chatApi.updateChatImage(payload);
+});
+
+export {
+  createChat,
+  createMessage,
+  deleteChat,
+  generateReply,
+  getAllChats,
+  getCurrentChatMessages,
+  updateChatImage,
+};

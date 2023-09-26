@@ -2,6 +2,7 @@ import {
   Button,
   Card,
   Link,
+  Search,
   Sidebar,
   SidebarBody,
   SidebarHeader,
@@ -25,11 +26,15 @@ import styles from './styles.module.scss';
 type Properties = {
   isSidebarShown: boolean;
   onSetIsSidebarShow: (value: boolean) => void;
+  filter: string;
+  onSetFilter: (query: string) => void;
 };
 
 const JournalSidebar: React.FC<Properties> = ({
   isSidebarShown,
   onSetIsSidebarShow,
+  filter,
+  onSetFilter,
 }) => {
   const dispatch = useAppDispatch();
   const [chatToDelete, setChatToDelete] = useState<null | number>(null);
@@ -45,7 +50,6 @@ const JournalSidebar: React.FC<Properties> = ({
       };
     },
   );
-
   const handleCreateJournalEntry = useCallback(() => {
     void dispatch(
       journalActions.createJournalEntry({
@@ -66,8 +70,8 @@ const JournalSidebar: React.FC<Properties> = ({
   );
 
   useEffect(() => {
-    void dispatch(journalActions.getAllJournalEntries());
-  }, [dispatch]);
+    void dispatch(journalActions.getAllJournalEntries(filter));
+  }, [dispatch, filter]);
 
   const handleSelectJournalEntry = useCallback(
     (id: number) => {
@@ -90,11 +94,16 @@ const JournalSidebar: React.FC<Properties> = ({
             label="Add note"
             isLabelVisuallyHidden
             iconName="plus"
+            iconWidth={33}
+            iconHeight={33}
             style="add"
             onClick={handleCreateJournalEntry}
           />
         </SidebarHeader>
         <SidebarBody>
+          <div className={styles['search']}>
+            <Search onValueChange={onSetFilter} defaultValue={filter} />
+          </div>
           <div className={styles['journal-entry-list']}>
             {allJournalEntries.map((journalEntry) => {
               const noteLink = AppRoute.JOURNAL_$ID.replace(
