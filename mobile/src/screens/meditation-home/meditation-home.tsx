@@ -18,7 +18,7 @@ import {
 import { type MeditationNavigationParameterList } from '#libs/types/types';
 import { actions as meditationActions } from '#slices/meditation/meditation';
 
-import { navigationItems } from './libs/constants';
+import { navigationItems } from './libs/constants/constants';
 import { styles } from './styles';
 
 const MeditationHome: React.FC = () => {
