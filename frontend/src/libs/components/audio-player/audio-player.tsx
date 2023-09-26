@@ -9,8 +9,7 @@ import {
   TRACK_START_TIME,
 } from '#pages/meditation/libs/constants/constants.js';
 
-import { AudioControls } from './components/audio-controls/audio-controls.js';
-import { ProgressBar } from './components/progress-bar/progress-bar.js';
+import { AudioControls, ProgressBar } from './components/components.js';
 import { DEFAULT_AUDIO_OPTIONS } from './libs/constants/constants.js';
 import { AudioOptionKey } from './libs/enums/enums.js';
 import { type AudioControlsHandler } from './libs/types/types.js';
