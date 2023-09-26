@@ -17,7 +17,7 @@ import { type ChatNavigationParameterList } from '#libs/types/types';
 import { type UserAuthResponseDto } from '#packages/users/users';
 import { actions as chatsActions } from '#slices/chats/chats';
 
-import { ChatInput, MessageItem } from './components/components';
+import { ChatDivider, ChatInput, MessageItem } from './components/components';
 import {
   DEFAULT_VALUES,
   EMPTY_ARRAY_LENGTH,
@@ -110,12 +110,15 @@ const Chat: React.FC = () => {
             item.chatId !== previousMessage.chatId;
 
           return (
-            <MessageItem
-              text={item.message}
-              isUser={item.senderId === authenticatedUser.id}
-              isAvatarVisible={isDifferentMessageOwner}
-              key={item.id}
-            />
+            <>
+              <ChatDivider />
+              <MessageItem
+                text={item.message}
+                isUser={item.senderId === authenticatedUser.id}
+                isAvatarVisible={isDifferentMessageOwner}
+                key={item.id}
+              />
+            </>
           );
         })}
       </ScrollView>
