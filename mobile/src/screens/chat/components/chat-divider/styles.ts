@@ -9,14 +9,15 @@ const styles = StyleSheet.create({
   },
   date: {
     color: AppColor.GRAY_300,
+    paddingHorizontal: 10,
   },
   beforeElement: {
-    width: '45%',
+    flex: 1,
     height: 1,
     backgroundColor: AppColor.GRAY_200,
   },
   afterElement: {
-    width: '45%',
+    flex: 1,
     height: 1,
     backgroundColor: AppColor.GRAY_200,
   },

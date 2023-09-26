@@ -52,7 +52,8 @@ const Chat: React.FC = () => {
   );
 
   const scrollViewReference = useRef<ScrollView | null>(null);
-  const messagesLength = currentChatMessages.length;
+  const messagesLength = Object.keys(currentChatMessages).length;
+
   const scrollViewToEnd = (): void => {
     scrollViewReference.current?.scrollToEnd();
   };
@@ -103,22 +104,25 @@ const Chat: React.FC = () => {
         <Text style={styles.title}>Doctor Freud.ai</Text>
       </View>
       <ScrollView style={styles.chatWrapper} ref={scrollViewReference}>
-        {currentChatMessages.map((item, index) => {
-          const previousMessage = currentChatMessages[index - PREVIOUS_USER];
-          const isDifferentMessageOwner =
-            item.senderId !== previousMessage?.senderId ||
-            item.chatId !== previousMessage.chatId;
-
+        {Object.entries(currentChatMessages).map(([date, group]) => {
           return (
-            <>
-              <ChatDivider />
-              <MessageItem
-                text={item.message}
-                isUser={item.senderId === authenticatedUser.id}
-                isAvatarVisible={isDifferentMessageOwner}
-                key={item.id}
-              />
-            </>
+            <React.Fragment key={date}>
+              <ChatDivider date={new Date(date)} />
+              {group.map((item, index) => {
+                const previousMessage = group[index - PREVIOUS_USER];
+                const isDifferentMessageOwner =
+                  item.senderId !== previousMessage?.senderId;
+
+                return (
+                  <MessageItem
+                    text={item.message}
+                    isUser={item.senderId === authenticatedUser.id}
+                    isAvatarVisible={isDifferentMessageOwner}
+                    key={item.id}
+                  />
+                );
+              })}
+            </React.Fragment>
           );
         })}
       </ScrollView>
