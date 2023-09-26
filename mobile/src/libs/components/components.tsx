@@ -6,6 +6,7 @@ export { Header } from './header/header';
 export { Icon } from './icon/icon';
 export { IconButton } from './icon-button/icon-button';
 export { Input } from './input/input';
+export { InputFile } from './input-file/input-file';
 export { InputSearch } from './input-search/input-search';
 export { LinearGradient } from './linear-gradient/linear-gradient';
 export { Link } from './link/link';

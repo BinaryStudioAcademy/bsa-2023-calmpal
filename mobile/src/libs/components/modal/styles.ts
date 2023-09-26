@@ -34,8 +34,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   closeButton: {
-    right: 5,
-    top: 5,
+    position: 'absolute',
+    right: 10,
+    top: 12,
   },
 });
 export { styles };
