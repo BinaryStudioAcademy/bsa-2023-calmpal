@@ -8,8 +8,7 @@
   --background-color-hover: var(--blue-400);
 }
 
-.primary,
-.primary-blue {
+.primary {
   display: inline-block;
   width: 100%;
   padding: 15px 0;
@@ -118,7 +117,6 @@
 }
 
 .primary:has(.loader),
-.primary-blue:has(.loader),
 .secondary:has(.loader) {
   display: flex;
   justify-content: center;
