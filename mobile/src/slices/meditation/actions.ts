@@ -1,16 +1,24 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { type AsyncThunkConfig } from '#libs/types/types';
+import { type AsyncThunkConfig, type Track } from '#libs/types/types';
 import { type MeditationEntryGetAllResponseDto } from '#packages/meditation/meditation';
 
 import { name as sliceName } from './meditation.slice';
 
 const initPlayer = createAsyncThunk<unknown, undefined, AsyncThunkConfig>(
-  `${sliceName}/meditation`,
+  `${sliceName}/init-player`,
   (_, { extra }) => {
     const { player } = extra;
 
     void player.startPlayer();
+  },
+);
+
+const setPlaylist = createAsyncThunk<unknown, Track[], AsyncThunkConfig>(
+  `${sliceName}/set-playlist`,
+  (meditations, { extra }) => {
+    const { player } = extra;
+    void player.setPlaylist(meditations);
   },
 );
 
@@ -24,4 +32,4 @@ const getAllMeditationEntries = createAsyncThunk<
   return await meditationApi.getAllMeditationEntries();
 });
 
-export { getAllMeditationEntries, initPlayer };
+export { getAllMeditationEntries, initPlayer, setPlaylist };
