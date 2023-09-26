@@ -1,4 +1,4 @@
-import { openAi } from '#libs/packages/open-ai/open-ai.js';
+import { openAiService } from '#libs/packages/open-ai/open-ai.js';
 import { userService } from '#packages/users/users.js';
 
 import { ChatbotService } from '../chat-messages/chatbot.service.js';
@@ -7,7 +7,7 @@ import { ChatMessageRepository } from './chat-message.repository.js';
 import { ChatMessageService } from './chat-message.service.js';
 
 const chatbotService = new ChatbotService({
-  openAiService: openAi,
+  openAiService,
   userService,
 });
 

@@ -52,6 +52,7 @@
     "pg": "8.11.2",
     "pino": "8.15.0",
     "pino-pretty": "10.2.0",
+    "stripe": "13.7.0",
     "swagger-jsdoc": "6.2.8"
   }
 }

@@ -11,7 +11,7 @@ import {
   DEFAULT_SURVEY_PAYLOAD,
   PREFERENCES_CATEGORIES,
   TEXTAREA_ROWS_COUNT,
-} from '#screens/survey/libs/constants';
+} from '#screens/survey/libs/cosntants/constants';
 
 import { SurveyCategory } from '../components';
 import { styles } from './styles';
