@@ -1,26 +1,22 @@
 import React from 'react';
 import KeepAwake from 'react-native-keep-awake';
 
-import { useEffect, useState } from '#libs/hooks/hooks';
+import { useAppDispatch, useEffect, useState } from '#libs/hooks/hooks';
 import {
   Event,
   player,
   State,
   usePlayerEvents,
 } from '#libs/packages/player/player';
-import { type Track } from '#libs/types/types';
+import { actions as meditationActions } from '#slices/meditation/meditation';
 
 import { Controls, ProgressBar } from './components/components';
-import { MOCKED_PLAYLIST, TRACK_START_INDEX } from './libs/constants/constants';
+import { TRACK_START_TIME } from './libs/constants/constants';
 
-type Properties = {
-  setCurrentTrack: React.Dispatch<React.SetStateAction<Track | null>>;
-  duration: number;
-};
-
-const Player: React.FC<Properties> = ({ setCurrentTrack, duration }) => {
+const Player: React.FC = () => {
   const [playbackState, setPlaybackState] = useState<State | null>(null);
   const isPlaying = playbackState === State.Playing;
+  const dispatch = useAppDispatch();
 
   const handlePlaybackStateChange = async (): Promise<void> => {
     const state = await player.getState();
@@ -35,7 +31,7 @@ const Player: React.FC<Properties> = ({ setCurrentTrack, duration }) => {
   const handleNextTrack = async (nextTrack: number): Promise<void> => {
     const track = await player.getTrack(nextTrack);
     if (track) {
-      setCurrentTrack(track);
+      void dispatch(meditationActions.setSelectedMeditationEntry(track.id));
     }
   };
 
@@ -51,21 +47,18 @@ const Player: React.FC<Properties> = ({ setCurrentTrack, duration }) => {
   );
 
   useEffect(() => {
+    void player.seek(TRACK_START_TIME);
+
     return () => {
       void player.stopPlaying();
       KeepAwake.deactivate();
     };
   }, []);
 
-  useEffect(() => {
-    void player.setPlaylist(MOCKED_PLAYLIST);
-    setCurrentTrack(MOCKED_PLAYLIST[TRACK_START_INDEX] as Track);
-  }, [setCurrentTrack]);
-
   return (
     <>
       <ProgressBar isPlaying={isPlaying} />
-      <Controls isPlaying={isPlaying} duration={duration} />
+      <Controls isPlaying={isPlaying} />
     </>
   );
 };

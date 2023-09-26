@@ -9,31 +9,20 @@ import {
   View,
 } from '#libs/components/components';
 import { MeditationScreenName } from '#libs/enums/enums';
-import {
-  useAppDispatch,
-  useAppSelector,
-  useEffect,
-  useNavigation,
-  useSearch,
-} from '#libs/hooks/hooks';
+import { useNavigation, useSearch } from '#libs/hooks/hooks';
 import { type MeditationNavigationParameterList } from '#libs/types/types';
-import { actions as meditationActions } from '#slices/meditation/meditation';
 
 import { styles } from './styles';
 
+const MOCKED_DATA = [{ id: 1, name: 'Meditation' }];
+
 const MeditationHome: React.FC = () => {
-  const { meditationEntries } = useAppSelector(({ meditation }) => {
-    return {
-      meditationEntries: meditation.meditationEntries,
-    };
-  });
-  const dispatch = useAppDispatch();
   const navigation =
     useNavigation<
       NativeStackNavigationProp<MeditationNavigationParameterList>
     >();
   const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
-    meditationEntries,
+    MOCKED_DATA,
     'name',
   );
   const handleSelectMeditation = (title: string): void => {
@@ -41,10 +30,6 @@ const MeditationHome: React.FC = () => {
       title,
     });
   };
-
-  useEffect(() => {
-    void dispatch(meditationActions.getAllMeditationEntries());
-  }, [dispatch]);
 
   return (
     <LinearGradient>
