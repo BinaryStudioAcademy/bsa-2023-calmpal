@@ -31,7 +31,7 @@ class OpenAi extends BaseHttpApi {
   private defaultImageGenerateConfig = {
     number: 1,
     size: OpenAiImageSize[IMAGE_SIZE],
-    response_format: 'b64_json' as ValueOf<typeof OpenAiResponseFormat>,
+    responseFormat: 'b64_json' as ValueOf<typeof OpenAiResponseFormat>,
   };
 
   public constructor({
@@ -87,7 +87,7 @@ class OpenAi extends BaseHttpApi {
           prompt,
           n: number,
           size,
-          response_format: this.defaultImageGenerateConfig.response_format,
+          response_format: this.defaultImageGenerateConfig.responseFormat,
         }),
         token: this.apiKey,
         contentType: ContentType.JSON,
