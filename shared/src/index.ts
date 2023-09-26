@@ -117,6 +117,7 @@ export {
 export {
   cancelPaymentIntentValidationSchema,
   createPaymentIntentValidationSchema,
+  SUBSCRIPTION_PRICE,
   SubscriptionApiPath,
   type SubscriptionPaymentIntentCancelRequestDto,
   type SubscriptionPaymentIntentCreateRequestDto,

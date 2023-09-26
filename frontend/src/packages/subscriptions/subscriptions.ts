@@ -11,6 +11,7 @@ const subscriptionApi = new SubscriptionApi({
 });
 
 export { subscriptionApi };
+export { SUBSCRIPTION_PRICE } from './libs/constants/constants.js';
 export {
   type SubscriptionPaymentIntentCreateRequestDto,
   type SubscriptionPaymentIntentCreateResponseDto,
