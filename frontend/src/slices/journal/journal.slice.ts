@@ -68,13 +68,12 @@ const { reducer, actions, name } = createSlice({
       state.updateJournalEntryDataStatus = DataStatus.PENDING;
     });
     builder.addCase(updateJournalEntry.fulfilled, (state, action) => {
-      const sortedJournalEntries = state.allJournalEntries.filter(
+      const filteredJournalEntries = state.allJournalEntries.filter(
         (journalEntry) => {
           return journalEntry.id !== action.payload.id;
         },
       );
-      sortedJournalEntries.unshift(action.payload);
-      state.allJournalEntries = sortedJournalEntries;
+      state.allJournalEntries = [action.payload, ...filteredJournalEntries];
       state.updateJournalEntryDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(updateJournalEntry.rejected, (state) => {

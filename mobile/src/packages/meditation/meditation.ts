@@ -19,3 +19,4 @@ export {
   type MeditationEntryGetAllItemResponseDto,
   type MeditationEntryGetAllResponseDto,
 } from './libs/types/types';
+export { createMeditationEntryFormValidationSchema } from './libs/validation-schemas/validation-schemas';
