@@ -1,8 +1,6 @@
-import { useCallback } from 'react';
-
 import { Button, Icon } from '#libs/components/components.js';
 import { AppRoute, IconColor } from '#libs/enums/enums.js';
-import { useAppDispatch } from '#libs/hooks/hooks.js';
+import { useAppDispatch, useCallback } from '#libs/hooks/hooks.js';
 import { actions as appActions } from '#slices/app/app.js';
 
 import { PLAN_BENEFITS } from '../../libs/constants.js';
