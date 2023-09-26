@@ -1,6 +1,8 @@
 import { AppRoute } from '#libs/enums/enums.js';
 import { type SettingsOption } from '#libs/types/types.js';
 
+const SETTING_NAME_INDEX = 2;
+
 const SETTINGS_OPTIONS: SettingsOption[] = [
   {
     key: 'notification',
@@ -14,4 +16,4 @@ const SETTINGS_OPTIONS: SettingsOption[] = [
   },
 ];
 
-export { SETTINGS_OPTIONS };
+export { SETTING_NAME_INDEX, SETTINGS_OPTIONS };
