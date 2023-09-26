@@ -4,7 +4,11 @@ import { type HTTP } from '#libs/packages/http/http';
 import { type Storage } from '#libs/packages/storage/storage';
 
 import { MeditationApiPath } from './libs/enums/enums';
-import { type MeditationEntryGetAllResponseDto } from './libs/types/types';
+import {
+  type MeditationEntryCreateRequestDto,
+  type MeditationEntryCreateResponseDto,
+  type MeditationEntryGetAllResponseDto,
+} from './libs/types/types';
 
 type Constructor = {
   baseUrl: string;
@@ -27,6 +31,26 @@ class MeditationApi extends BaseHttpApi {
     );
 
     return await response.json<MeditationEntryGetAllResponseDto>();
+  }
+
+  public async createMeditationEntry({
+    name,
+    file,
+  }: MeditationEntryCreateRequestDto): Promise<MeditationEntryCreateResponseDto> {
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('file', file);
+
+    const response = await this.load(
+      this.getFullEndpoint(MeditationApiPath.ROOT, {}),
+      {
+        method: 'POST',
+        payload: formData,
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<MeditationEntryCreateResponseDto>();
   }
 }
 
