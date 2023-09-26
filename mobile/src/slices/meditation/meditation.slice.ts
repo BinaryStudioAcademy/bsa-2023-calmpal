@@ -1,17 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { DataStatus } from '#libs/enums/enums';
-import { type ValueOf } from '#libs/types/types';
-import { type MeditationEntryCreateResponseDto } from '#packages/meditation/meditation';
+import { meditationEntryToTrack } from '#libs/packages/player/player';
+import { type Track, type ValueOf } from '#libs/types/types';
 
 import { getAllMeditationEntries } from './actions';
 
 type State = {
-  meditationEntries: MeditationEntryCreateResponseDto[];
+  meditationEntries: Track[];
+  selectedMeditationEntry: Track;
   meditationEntriesDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
+  selectedMeditationEntry: {} as Track,
   meditationEntries: [],
   meditationEntriesDataStatus: DataStatus.IDLE,
 };
@@ -19,13 +21,19 @@ const initialState: State = {
 const { reducer, actions, name } = createSlice({
   initialState,
   name: 'meditation',
-  reducers: {},
+  reducers: {
+    setSelectedMeditationEntry: (state, action) => {
+      state.selectedMeditationEntry = state.meditationEntries.find((entry) => {
+        return entry.id === action.payload;
+      }) as Track;
+    },
+  },
   extraReducers(builder) {
     builder.addCase(getAllMeditationEntries.pending, (state) => {
       state.meditationEntriesDataStatus = DataStatus.PENDING;
     });
     builder.addCase(getAllMeditationEntries.fulfilled, (state, action) => {
-      state.meditationEntries = action.payload.items;
+      state.meditationEntries = meditationEntryToTrack(action.payload.items);
       state.meditationEntriesDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(getAllMeditationEntries.rejected, (state) => {
