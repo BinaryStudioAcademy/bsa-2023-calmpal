@@ -1,4 +1,4 @@
-export { ChatDivider } from './chat-date/chat-divider.js';
+export { ChatDivider } from './chat-divider/chat-divider.js';
 export { ChatFooter } from './chat-footer/chat-footer.js';
 export { ChatHeader } from './chat-header/chat-header.js';
 export { ChatLayout } from './chat-layout/chat-layout.js';
