@@ -7,6 +7,7 @@ import {
 
 import { AppEnvironment } from '#libs/enums/enums';
 import { authApi } from '#packages/auth/auth';
+import { chatMessagesApi } from '#packages/chat-messages/chat-messages';
 import { chatApi } from '#packages/chats/chats';
 import { journalApi } from '#packages/journal/journal';
 import { meditationApi } from '#packages/meditation/meditation';
@@ -34,6 +35,7 @@ type ExtraArguments = {
   chatApi: typeof chatApi;
   meditationApi: typeof meditationApi;
   notification: typeof notification;
+  chatMessagesApi: typeof chatMessagesApi;
   player: typeof player;
   storage: typeof storage;
 };
@@ -76,6 +78,7 @@ class Store {
       chatApi,
       meditationApi,
       notification,
+      chatMessagesApi,
       player,
       storage,
     };
