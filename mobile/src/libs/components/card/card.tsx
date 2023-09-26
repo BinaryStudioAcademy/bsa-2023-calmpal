@@ -11,7 +11,7 @@ import {
 } from '#libs/components/components';
 import { type IconName } from '#libs/types/types';
 
-import { DEFAULT_NUMBER_OF_LINES } from './libs/constants';
+import { DEFAULT_NUMBER_OF_LINES } from './libs/constants/constants';
 import { styles } from './styles';
 
 type Properties = {
