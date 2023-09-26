@@ -19,7 +19,6 @@ type Properties = {
   isRounded?: boolean;
   iconName?: IconName;
   color?: string;
-  styles?: { height?: number; borderRadius?: number };
   isVisuallyCentered?: boolean;
 };
 
