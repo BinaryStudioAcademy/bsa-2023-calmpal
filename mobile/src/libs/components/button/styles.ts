@@ -60,6 +60,10 @@ const styles = StyleSheet.create({
     height: 52,
     backgroundColor: AppColor.BLUE_300,
   },
+
+  labelTimer: {
+    color: AppColor.WHITE,
+  },
 });
 
 export { styles };

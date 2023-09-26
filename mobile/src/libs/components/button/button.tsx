@@ -31,10 +31,10 @@ const Button: React.FC<Properties> = ({
   isRounded,
   iconName,
   color,
-  styles: buttonStyles,
+  // styles: buttonStyles,
   isVisuallyCentered,
 }) => {
-  const isCustomColor = Boolean(color);
+  // const isCustomColor = Boolean(color);
 
   const renderIcon = (): JSX.Element => {
     return (
@@ -55,8 +55,8 @@ const Button: React.FC<Properties> = ({
         styles.button,
         type === 'solid' && styles.buttonSolid,
         type === 'outlined' && styles.buttonOutlined,
-        isCustomColor && { backgroundColor: color },
-        buttonStyles,
+        // isCustomColor && { backgroundColor: color },
+        // buttonStyles,
         type === 'timer' && styles.buttonTimer,
         type === 'transparent' && styles.buttonTransparent,
         isDisabled && styles.buttonDisabled,
@@ -72,6 +72,7 @@ const Button: React.FC<Properties> = ({
           styles.label,
           type === 'solid' && styles.labelSolid,
           type === 'outlined' && styles.labelOutlined,
+          type === 'timer' && styles.labelTimer,
           isDisabled && styles.labelDisabled,
         ]}
       >
