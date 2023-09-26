@@ -1,7 +1,14 @@
 import React from 'react';
 import { Modal as RNModal } from 'react-native';
 
-import { Button, Pressable, Text, View } from '#libs/components/components';
+import {
+  Button,
+  Icon,
+  Pressable,
+  Text,
+  View,
+} from '#libs/components/components';
+import { AppColor } from '#libs/enums/enums';
 
 import { styles } from './styles';
 
@@ -18,6 +25,7 @@ const Modal: React.FC<Properties> = ({
   onClose,
   onDelete,
   type,
+  children,
 }) => {
   return (
     <RNModal visible={isVisible} transparent animationType="none">
@@ -42,7 +50,12 @@ const Modal: React.FC<Properties> = ({
                   </View>
                 </>
               ) : (
-                <></>
+                <>
+                  <Pressable onPress={onClose} style={styles.closeButton}>
+                    <Icon name="close" color={AppColor.GRAY_500} />
+                  </Pressable>
+                  {children}
+                </>
               )}
             </View>
           </Pressable>

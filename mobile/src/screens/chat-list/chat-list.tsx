@@ -11,6 +11,7 @@ import {
   ScrollView,
   View,
 } from '#libs/components/components';
+import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants';
 import { AppColor, ChatScreenName } from '#libs/enums/enums';
 import {
   useAppDispatch,
@@ -24,7 +25,6 @@ import {
 import { type ChatNavigationParameterList } from '#libs/types/types';
 import { actions as chatsActions } from '#slices/chats/chats';
 
-import { EMPTY_ARRAY_LENGTH } from './libs/constants';
 import { styles } from './styles';
 
 const ChatList: React.FC = () => {

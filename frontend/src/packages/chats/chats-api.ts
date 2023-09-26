@@ -9,6 +9,7 @@ import {
   type ChatCreateRequestDto,
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
+  type UpdateChatImageRequestDto,
 } from './libs/types/types.js';
 
 type Constructor = {
@@ -22,7 +23,7 @@ class ChatApi extends BaseHttpApi {
     super({ path: APIPath.CHATS, baseUrl, http, storage });
   }
 
-  public async getAllChats(query: string): Promise<ChatGetAllResponseDto> {
+  public async getAll(query: string): Promise<ChatGetAllResponseDto> {
     const response = await this.load(
       this.getFullEndpoint(
         getUrlWithQueryString(ChatsApiPath.ROOT, { query }),
@@ -34,7 +35,7 @@ class ChatApi extends BaseHttpApi {
     return await response.json<ChatGetAllResponseDto>();
   }
 
-  public async createChat(
+  public async create(
     payload: ChatCreateRequestDto,
   ): Promise<ChatGetAllItemResponseDto> {
     const response = await this.load(
@@ -50,7 +51,7 @@ class ChatApi extends BaseHttpApi {
     return await response.json<ChatGetAllItemResponseDto>();
   }
 
-  public async deleteChat(id: number): Promise<boolean> {
+  public async delete(id: number): Promise<boolean> {
     const response = await this.load(
       this.getFullEndpoint(ChatsApiPath.$ID, { id: id.toString() }),
       {
@@ -60,6 +61,22 @@ class ChatApi extends BaseHttpApi {
     );
 
     return await response.json<boolean>();
+  }
+
+  public async updateChatImage({
+    id,
+  }: UpdateChatImageRequestDto): Promise<ChatGetAllItemResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(ChatsApiPath.$ID, { id }),
+      {
+        method: 'PUT',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify({ id }),
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<ChatGetAllItemResponseDto>();
   }
 }
 
