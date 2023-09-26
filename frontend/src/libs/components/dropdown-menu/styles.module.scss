@@ -120,7 +120,7 @@
   left: 0;
 }
 
-@media (width < 768px) {
+@media (width < 768px), (height < 530px) {
   .dropdown {
     display: flex;
   }
