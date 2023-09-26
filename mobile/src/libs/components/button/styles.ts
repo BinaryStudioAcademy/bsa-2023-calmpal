@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
   buttonTimer: {
     borderRadius: 40,
     height: 52,
+    backgroundColor: AppColor.BLUE_300,
   },
 });
 

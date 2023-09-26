@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   View,
 } from '#libs/components/components';
-import { AppColor } from '#libs/enums/enums';
 import { useAppForm, useFormController } from '#libs/hooks/hooks';
 
 import { TimerButton } from './components/components';
@@ -93,7 +92,7 @@ const MeditationTimerModal: React.FC<Properties> = ({
           <Button
             label={startButtonText}
             onPress={handleStartMeditation}
-            color={AppColor.BLUE_300}
+            // color={AppColor.BLUE_300}
             type="timer"
             // styles={styles.button}
           />
