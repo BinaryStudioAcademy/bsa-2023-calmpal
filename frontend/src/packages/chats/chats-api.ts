@@ -9,6 +9,7 @@ import {
   type ChatCreateRequestDto,
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
+  type UpdateChatImageRequestDto,
 } from './libs/types/types.js';
 
 type Constructor = {
@@ -60,6 +61,22 @@ class ChatApi extends BaseHttpApi {
     );
 
     return await response.json<boolean>();
+  }
+
+  public async updateChatImage({
+    id,
+  }: UpdateChatImageRequestDto): Promise<ChatGetAllItemResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(ChatsApiPath.$ID, { id }),
+      {
+        method: 'PUT',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify({ id }),
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<ChatGetAllItemResponseDto>();
   }
 }
 
