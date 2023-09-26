@@ -37,7 +37,7 @@ const SubscriptionCheckout: React.FC = () => {
 
   return (
     <section>
-      {clientSecret && (
+      {Boolean(clientSecret) && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />
         </Elements>
