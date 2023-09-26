@@ -1,4 +1,5 @@
-import { type Repository } from '#libs/types/types.js';
+import { type UserRoleKey } from '#libs/packages/open-ai/libs/enums/enums.js';
+import { type Repository, type ValueOf } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/users.js';
 
@@ -29,6 +30,34 @@ class UserRepository implements Repository {
       .withGraphJoined(UsersRelation.DETAILS)
       .whereNull('deletedAt')
       .findById(id)
+      .castTo<UserCommonQueryResponse | undefined>()
+      .execute();
+
+    if (!user) {
+      return null;
+    }
+
+    return UserEntity.initialize({
+      id: user.id,
+      email: user.email,
+      createdAt: new Date(user.createdAt),
+      updatedAt: new Date(user.updatedAt),
+      fullName: user.details?.fullName ?? '',
+      isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
+    });
+  }
+
+  public async findByRoleKey(
+    key: ValueOf<typeof UserRoleKey>,
+  ): Promise<UserEntity | null> {
+    const user = await this.userModel
+      .query()
+      .modify('withoutPassword')
+      .withGraphJoined(UsersRelation.DETAILS)
+      .whereNull('deletedAt')
+      .withGraphJoined(UsersRelation.ROLES)
+      .findOne({ key })
       .castTo<UserCommonQueryResponse | undefined>()
       .execute();
 

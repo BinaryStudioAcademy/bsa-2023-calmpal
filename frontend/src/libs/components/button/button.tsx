@@ -12,8 +12,8 @@ import styles from './styles.module.scss';
 type Properties = {
   label: string;
   type?: 'button' | 'submit';
-  iconName?: IconName;
-  iconColor?: ValueOf<typeof IconColor>;
+  iconName?: IconName | undefined;
+  iconColor?: ValueOf<typeof IconColor> | undefined;
   iconWidth?: number;
   iconHeight?: number;
   style?: ButtonStyle;
