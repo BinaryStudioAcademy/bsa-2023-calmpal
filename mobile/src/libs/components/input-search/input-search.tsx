@@ -12,7 +12,10 @@ import {
   useState,
 } from '#libs/hooks/hooks';
 
-import { DEFAULT_SEARCH_PAYLOAD, SEARCH_TIMEOUT } from './libs/constants';
+import {
+  DEFAULT_SEARCH_PAYLOAD,
+  SEARCH_TIMEOUT,
+} from './libs/constants/constants';
 import { styles } from './styles';
 
 type Properties = {
