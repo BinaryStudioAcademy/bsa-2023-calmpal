@@ -22,7 +22,7 @@ import { type MeditationNavigationParameterList } from '#libs/types/types';
 import { actions as meditationActions } from '#slices/meditation/meditation';
 
 import { MeditationItem } from './components/components';
-import { DEFAULT_SONG_DURATION, mockedData } from './libs/constants';
+import { DEFAULT_SONG_DURATION, MOCKED_DATA } from './libs/constants/constants';
 import { styles } from './styles';
 
 type RouteParameters = {
@@ -35,7 +35,7 @@ const MeditationList: React.FC = () => {
   const { title } = route.params as RouteParameters;
 
   const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
-    mockedData,
+    MOCKED_DATA,
     'title',
   );
 

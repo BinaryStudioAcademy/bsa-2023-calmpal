@@ -1,4 +1,4 @@
-const mockedData = [
+const MOCKED_DATA = [
   { id: 0, title: '1Meditation for deep sleep', duration: 10 },
   { id: 1, title: 'Breathing meditation', duration: 100 },
   { id: 2, title: '2Meditation for deep sleep', duration: 99 },
@@ -6,7 +6,5 @@ const mockedData = [
   { id: 4, title: '4Breathing meditation', duration: 100 },
   { id: 5, title: '5Meditation for deep sleep', duration: 99 },
 ];
-
-const DEFAULT_SONG_DURATION = 0;
-
-export { DEFAULT_SONG_DURATION, mockedData };
+const DEFAULT_SONG_DURATION = 10;
+export { DEFAULT_SONG_DURATION, MOCKED_DATA };
