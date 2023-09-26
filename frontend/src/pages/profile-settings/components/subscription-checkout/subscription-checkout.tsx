@@ -12,7 +12,7 @@ import { actions as subscriptionActions } from '#slices/subscription/subscriptio
 import { Elements } from '../components.js';
 import { CheckoutForm } from './components/components.js';
 
-const stripePromise = loadStripe(config.ENV.STRIPE.PUBLIC_KEY);
+const stripe = loadStripe(config.ENV.STRIPE.PUBLIC_KEY);
 
 const SubscriptionCheckout: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -38,7 +38,7 @@ const SubscriptionCheckout: React.FC = () => {
   return (
     <section>
       {Boolean(clientSecret) && (
-        <Elements options={options} stripe={stripePromise}>
+        <Elements options={options} stripe={stripe}>
           <CheckoutForm />
         </Elements>
       )}
