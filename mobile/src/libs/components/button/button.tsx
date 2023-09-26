@@ -31,11 +31,8 @@ const Button: React.FC<Properties> = ({
   isRounded,
   iconName,
   color,
-  // styles: buttonStyles,
   isVisuallyCentered,
 }) => {
-  // const isCustomColor = Boolean(color);
-
   const renderIcon = (): JSX.Element => {
     return (
       <View
@@ -55,8 +52,6 @@ const Button: React.FC<Properties> = ({
         styles.button,
         type === 'solid' && styles.buttonSolid,
         type === 'outlined' && styles.buttonOutlined,
-        // isCustomColor && { backgroundColor: color },
-        // buttonStyles,
         type === 'timer' && styles.buttonTimer,
         type === 'transparent' && styles.buttonTransparent,
         isDisabled && styles.buttonDisabled,
