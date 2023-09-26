@@ -14,6 +14,7 @@ const PreferencesStep: React.FC = () => {
 
   return (
     <SurveyStep
+      stepSurvey={SurveyScreenName.PREFERENCES}
       navigation={navigation}
       stepTitle="What can we help you with?"
       categories={PREFERENCES_CATEGORIES}

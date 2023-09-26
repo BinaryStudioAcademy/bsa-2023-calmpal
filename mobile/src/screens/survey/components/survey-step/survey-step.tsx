@@ -2,7 +2,11 @@ import { type NavigationProp } from '@react-navigation/native';
 import React, { useCallback } from 'react';
 
 import { Button, Input, ScrollView, Text } from '#libs/components/components';
-import { useAppForm, useFormController } from '#libs/hooks/hooks';
+import {
+  useAppDispatch,
+  useAppForm,
+  useFormController,
+} from '#libs/hooks/hooks';
 import { type SurveyNavigationParameterList } from '#libs/types/types';
 import {
   getSurveyCategories,
@@ -13,11 +17,13 @@ import {
   DEFAULT_SURVEY_PAYLOAD,
   TEXTAREA_ROWS_COUNT,
 } from '#screens/survey/libs/constants';
+import { actions } from '#slices/survey/survey';
 
 import { SurveyCategory } from '../components';
 import { styles } from './styles';
 
 type SurveyStepProperties = {
+  stepSurvey: string;
   navigation: NavigationProp<SurveyNavigationParameterList>;
   stepTitle: string;
   categories: string[];
@@ -27,6 +33,7 @@ type SurveyStepProperties = {
 };
 
 const SurveyStep: React.FC<SurveyStepProperties> = ({
+  stepSurvey,
   navigation,
   stepTitle,
   categories,
@@ -48,6 +55,8 @@ const SurveyStep: React.FC<SurveyStepProperties> = ({
     control,
   });
 
+  const dispatch = useAppDispatch();
+
   const hasOther = categoriesValue.includes('Other');
 
   const handleFieldChange = useCallback(
@@ -67,10 +76,13 @@ const SurveyStep: React.FC<SurveyStepProperties> = ({
     [categoriesValue, onCategoryChange],
   );
 
-  const handleSurveySubmit = useCallback((payload: SurveyInputDto) => {
-    getSurveyCategories(payload);
-    // console.log(getSurveyCategories(payload));
-  }, []);
+  const handleSurveySubmit = useCallback(
+    (payload: SurveyInputDto) => {
+      const data = { [stepSurvey]: getSurveyCategories(payload) };
+      dispatch(actions.updateSurveyData(data));
+    },
+    [dispatch, stepSurvey],
+  );
 
   const handleFormSubmit = useCallback(() => {
     void handleSubmit(handleSurveySubmit)();

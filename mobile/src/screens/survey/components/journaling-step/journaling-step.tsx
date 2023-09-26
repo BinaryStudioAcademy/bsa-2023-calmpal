@@ -14,6 +14,7 @@ const JournalingStep: React.FC = () => {
 
   return (
     <SurveyStep
+      stepSurvey={SurveyScreenName.JOURNALING_EXPERIENCE}
       navigation={navigation}
       stepTitle="What's your experience with journaling?"
       categories={JOURNALING_EXPERIENCE_CATEGORIES}
