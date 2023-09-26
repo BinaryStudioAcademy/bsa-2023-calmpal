@@ -19,6 +19,10 @@ const userController = new UserController(logger, userService);
 
 export { userController, userService };
 export {
+  UserDetailsTableColumn,
+  UsersTableColumn,
+} from './libs/enums/enums.js';
+export {
   type UserAuthResponseDto,
   type UserDeleteRequestDto,
   type UserDeleteResponseDto,
@@ -34,3 +38,4 @@ export {
 export { UserEntity } from './user.entity.js';
 export { UserModel } from './user.model.js';
 export { type UserService } from './user.service.js';
+export { UserDetailsModel } from './user-details.model.js';

@@ -11,26 +11,28 @@ import {
 } from '#libs/components/components';
 import { type IconName } from '#libs/types/types';
 
-import { DEFAULT_NUMBER_OF_LINES } from './libs/constants';
+import { DEFAULT_NUMBER_OF_LINES } from './libs/constants/constants';
 import { styles } from './styles';
 
 type Properties = {
   title: string;
+  id?: string;
   image?: ImageSourcePropType;
   iconName?: IconName;
   iconColor?: string;
-  onPress: (title: string) => void;
+  onPress: (title: string, id?: string) => void;
 };
 
 const Card: React.FC<Properties> = ({
   title,
+  id = '',
   image = imagePlaceholder,
   iconName,
   iconColor,
   onPress,
 }) => {
   const handlePress = (): void => {
-    onPress(title);
+    onPress(title, id);
   };
 
   return (

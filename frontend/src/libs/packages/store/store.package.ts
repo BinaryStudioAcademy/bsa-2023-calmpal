@@ -17,12 +17,14 @@ import { chatMessagesApi } from '#packages/chat-messages/chat-messages.js';
 import { chatApi } from '#packages/chats/chats.js';
 import { journalApi } from '#packages/journal/journal.js';
 import { meditationApi } from '#packages/meditation/meditation.js';
+import { subscriptionApi } from '#packages/subscriptions/subscriptions.js';
 import { usersApi } from '#packages/users/libs/api/users.js';
 import { reducer as appReducer } from '#slices/app/app.js';
 import { reducer as authReducer } from '#slices/auth/auth.js';
 import { reducer as chatsReducer } from '#slices/chats/chats.js';
 import { reducer as journalReducer } from '#slices/journal/journal.js';
 import { reducer as meditationReducer } from '#slices/meditation/meditation.js';
+import { reducer as subscriptionReducer } from '#slices/subscription/subscription.js';
 import { reducer as usersReducer } from '#slices/users/users.js';
 
 import { storage } from '../storage/storage.js';
@@ -33,6 +35,7 @@ type RootReducer = {
   journal: ReturnType<typeof journalReducer>;
   meditation: ReturnType<typeof meditationReducer>;
   chats: ReturnType<typeof chatsReducer>;
+  subscription: ReturnType<typeof subscriptionReducer>;
   users: ReturnType<typeof usersReducer>;
 };
 
@@ -44,6 +47,7 @@ type ExtraArguments = {
   storage: typeof storage;
   notification: typeof notification;
   chatMessagesApi: typeof chatMessagesApi;
+  subscriptionApi: typeof subscriptionApi;
   usersApi: typeof usersApi;
 };
 
@@ -65,6 +69,7 @@ class Store {
         journal: journalReducer,
         meditation: meditationReducer,
         chats: chatsReducer,
+        subscription: subscriptionReducer,
         users: usersReducer,
       },
       middleware: (getDefaultMiddleware) => {
@@ -90,6 +95,7 @@ class Store {
       storage,
       notification,
       chatMessagesApi,
+      subscriptionApi,
       usersApi,
     };
   }

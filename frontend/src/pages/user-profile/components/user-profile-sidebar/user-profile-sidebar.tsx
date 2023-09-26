@@ -3,6 +3,7 @@ import { type ReactElement } from 'react';
 import {
   Card,
   Icon,
+  Link,
   Modal,
   Sidebar,
   SidebarBody,
@@ -18,13 +19,14 @@ import {
   useAppDispatch,
   useAppSelector,
   useCallback,
+  useLocation,
   useRef,
   useState,
 } from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
-import { SETTINGS_OPTIONS } from './libs/constants.js';
+import { SETTING_NAME_INDEX, SETTINGS_OPTIONS } from './libs/constants.js';
 import styles from './styles.module.scss';
 
 type Properties = {
@@ -44,7 +46,12 @@ const UserProfileSidebar: React.FC<Properties> = ({
     };
   });
 
-  const [activeItem, setActiveItem] = useState<string>('notification');
+  const { pathname } = useLocation();
+  const setting = pathname.split('/')[SETTING_NAME_INDEX];
+
+  const [activeItem, setActiveItem] = useState<string>(
+    setting ?? 'notification',
+  );
   const [currentStepIndex, setCurrentStepIndex] = useState(INITIAL_STEP);
 
   const dialogReference = useRef<HTMLDialogElement>(null);
@@ -107,7 +114,12 @@ const UserProfileSidebar: React.FC<Properties> = ({
           <div className="visually-hidden">User details</div>
           <div className={styles['user-details']}>
             <div className={styles['user-icon']}>
-              <Icon name="user" color={IconColor.WHITE} />
+              <Icon
+                name="user"
+                color={IconColor.WHITE}
+                width={18}
+                height={18}
+              />
             </div>
             <div className={styles['user-name']}>
               {authenticatedUser.fullName}
@@ -119,14 +131,15 @@ const UserProfileSidebar: React.FC<Properties> = ({
           <div className="visually-hidden">Profile settings options</div>
           {SETTINGS_OPTIONS.map((option) => {
             return (
-              <Card
-                key={option.key}
-                title={option.title}
-                onClick={handleClick(option.key)}
-                isActive={activeItem === option.key}
-                iconName={option.key}
-                iconColor={IconColor.WHITE}
-              />
+              <Link key={option.key} to={option.path}>
+                <Card
+                  title={option.title}
+                  onClick={handleClick(option.key)}
+                  isActive={activeItem === option.key}
+                  iconName={option.key}
+                  iconColor={IconColor.WHITE}
+                />
+              </Link>
             );
           })}
           <Card
