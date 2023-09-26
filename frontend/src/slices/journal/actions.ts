@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants.js';
 import { AppRoute } from '#libs/enums/enums.js';
+import { NotificationType } from '#libs/packages/notification/notification.js';
 import { type AsyncThunkConfig } from '#libs/types/types.js';
 import {
   type JournalEntryCreateRequestDto,
@@ -9,8 +11,8 @@ import {
   type JournalEntryUpdatePayloadDto,
 } from '#packages/journal/journal.js';
 import { actions as appActions } from '#slices/app/app.js';
-import { actions as journalActions } from '#slices/journal/journal.js';
 
+import { actions as journalActions } from './journal.js';
 import { name as sliceName } from './journal.slice.js';
 
 const createJournalEntry = createAsyncThunk<
@@ -27,6 +29,12 @@ const createJournalEntry = createAsyncThunk<
         String(journalEntry.id),
       ) as typeof AppRoute.JOURNAL_$ID,
     ),
+  );
+  void dispatch(
+    appActions.notify({
+      type: NotificationType.SUCCESS,
+      message: 'New note was created.',
+    }),
   );
 
   return journalEntry;
@@ -65,13 +73,19 @@ const deleteJournal = createAsyncThunk<
       journal: { allJournalEntries, selectedJournalEntry },
     } = getState();
 
-    if (selectedJournalEntry?.id === id) {
-      dispatch(journalActions.setSelectedJournalEntry(null));
-    }
-
-    return allJournalEntries.filter((journal) => {
+    const filteredJournalEntries = allJournalEntries.filter((journal) => {
       return journal.id !== id;
     });
+
+    if (
+      selectedJournalEntry?.id === id ||
+      filteredJournalEntries.length === EMPTY_ARRAY_LENGTH
+    ) {
+      dispatch(journalActions.setSelectedJournalEntry(null));
+      dispatch(appActions.navigate(AppRoute.JOURNAL));
+    }
+
+    return filteredJournalEntries;
   },
 );
 
