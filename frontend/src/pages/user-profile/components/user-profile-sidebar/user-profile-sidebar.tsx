@@ -138,7 +138,7 @@ const UserProfileSidebar: React.FC<Properties> = ({
           <Card
             title="Delete account"
             onClick={handleOpen}
-            iconName="delete"
+            iconName="trash-box"
             iconColor={IconColor.WHITE}
             iconWidth={24}
             iconHeight={24}
