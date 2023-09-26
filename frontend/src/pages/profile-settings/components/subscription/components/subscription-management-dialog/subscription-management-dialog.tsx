@@ -7,15 +7,7 @@ import { PLAN_BENEFITS } from '../../libs/constants.js';
 import styles from './styles.module.scss';
 
 const dialogStyles = {
-  subscriptionManagement: styles['subscription-management'],
-  heading: styles['heading'],
-  benefits: styles['benefits'],
-  benefit: styles['benefit'],
-  content: styles['content'],
   sectionTitle: styles['section-title'],
-  subscriptionName: styles['subscription-name'],
-  metaWrapper: styles['meta-wrapper'],
-  meta: styles['meta'],
 };
 
 const SubscriptionManagementDialog: React.FC = () => {
@@ -26,29 +18,29 @@ const SubscriptionManagementDialog: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <div className={dialogStyles.subscriptionManagement}>
-      <h3 className={dialogStyles.heading}>Subscription Management</h3>
-      <div className={dialogStyles.content}>
+    <div className={styles['subscription-management']}>
+      <h3 className={styles['heading']}>Subscription Management</h3>
+      <div className={styles['content']}>
         <div>
           <p className={dialogStyles.sectionTitle}>Current Subscription Plan</p>
-          <p className={dialogStyles.subscriptionName}>Pro Monthly</p>
-          <div className={dialogStyles.metaWrapper}>
+          <p className={styles['subscription-name']}>Pro Monthly</p>
+          <div className={styles['meta-wrapper']}>
             <div>
               <p className={dialogStyles.sectionTitle}>Plan renews on</p>
-              <p className={dialogStyles.meta}>30 Sept 2023</p>
+              <p className={styles['meta']}>30 Sept 2023</p>
             </div>
             <div>
               <p className={dialogStyles.sectionTitle}>Payment</p>
-              <p className={dialogStyles.meta}>$7.5 / month</p>
+              <p className={styles['meta']}>$7.5 / month</p>
             </div>
           </div>
         </div>
         <div>
           <p className={dialogStyles.sectionTitle}>Plan benefits</p>
-          <ul className={dialogStyles.benefits}>
+          <ul className={styles['benefits']}>
             {PLAN_BENEFITS.map((benefit) => {
               return (
-                <li key={benefit} className={dialogStyles.benefit}>
+                <li key={benefit} className={styles['benefit']}>
                   <Icon
                     name="check"
                     width={12}
