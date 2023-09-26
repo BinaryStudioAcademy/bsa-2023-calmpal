@@ -5,6 +5,7 @@ import { Button, Input, ScrollView, Text } from '#libs/components/components';
 import { useAppForm, useFormController } from '#libs/hooks/hooks';
 import { type SurveyNavigationParameterList } from '#libs/types/types';
 import {
+  getSurveyCategories,
   type SurveyInputDto,
   surveyInputValidationSchema,
 } from '#packages/survey/survey';
@@ -33,10 +34,12 @@ const SurveyStep: React.FC<SurveyStepProperties> = ({
   previousScreen,
   isButtonBack = true,
 }) => {
-  const { control, errors, isValid } = useAppForm<SurveyInputDto>({
-    defaultValues: DEFAULT_SURVEY_PAYLOAD,
-    validationSchema: surveyInputValidationSchema,
-  });
+  const { control, errors, isValid, handleSubmit } = useAppForm<SurveyInputDto>(
+    {
+      defaultValues: DEFAULT_SURVEY_PAYLOAD,
+      validationSchema: surveyInputValidationSchema,
+    },
+  );
 
   const {
     field: { onChange: onCategoryChange, value: categoriesValue },
@@ -64,13 +67,14 @@ const SurveyStep: React.FC<SurveyStepProperties> = ({
     [categoriesValue, onCategoryChange],
   );
 
-  //   const handleSurveySubmit = useCallback((payload: SurveyInputDto) => {
-  //     getSurveyCategories(payload);
-  //   }, []);
+  const handleSurveySubmit = useCallback((payload: SurveyInputDto) => {
+    getSurveyCategories(payload);
+    // console.log(getSurveyCategories(payload));
+  }, []);
 
-  //   const handleFormSubmit = useCallback(() => {
-  //     void handleSubmit(handleSurveySubmit)();
-  //   }, [handleSubmit, handleSurveySubmit]);
+  const handleFormSubmit = useCallback(() => {
+    void handleSubmit(handleSurveySubmit)();
+  }, [handleSubmit, handleSurveySubmit]);
 
   const handleBack = (): void => {
     navigation.navigate(previousScreen);
@@ -78,7 +82,7 @@ const SurveyStep: React.FC<SurveyStepProperties> = ({
 
   const handleContinue = (): void => {
     navigation.navigate(nextScreen);
-    // handleFormSubmit();
+    handleFormSubmit();
   };
 
   return (
