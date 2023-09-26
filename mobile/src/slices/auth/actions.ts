@@ -10,7 +10,7 @@ import {
 } from '#packages/users/users';
 
 import { name as sliceName } from './auth.slice';
-import { EMPTY_ARRAY_LENGTH } from './libs/constants';
+import { EMPTY_ARRAY_LENGTH } from './libs/constants/constants';
 
 const signUp = createAsyncThunk<
   UserAuthResponseDto,

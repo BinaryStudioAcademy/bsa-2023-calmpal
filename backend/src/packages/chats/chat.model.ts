@@ -15,6 +15,8 @@ import { UserToChatModel } from './user-to-chat.model.js';
 class ChatModel extends AbstractModel {
   public name!: string;
 
+  public imageUrl!: string | null;
+
   public static override get tableName(): string {
     return DatabaseTableName.CHATS;
   }
