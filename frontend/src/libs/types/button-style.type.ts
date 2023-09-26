@@ -7,7 +7,6 @@ type ButtonStyle =
   | 'play-button'
   | 'active'
   | 'start-button'
-  | 'primary-blue'
   | 'icon-right';
 
 export { type ButtonStyle };
