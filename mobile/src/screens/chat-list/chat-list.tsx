@@ -22,7 +22,7 @@ import {
 import { type ChatNavigationParameterList } from '#libs/types/types';
 import { actions as chatsActions } from '#slices/chats/chats';
 
-import { EMPTY_ARRAY_LENGTH } from './libs/constants';
+import { EMPTY_ARRAY_LENGTH } from './libs/constants/constants';
 import { styles } from './styles';
 
 const ChatList: React.FC = () => {

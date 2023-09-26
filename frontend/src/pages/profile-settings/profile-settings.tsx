@@ -2,7 +2,7 @@ import { Switch } from '#libs/components/components.js';
 import { useAppForm } from '#libs/hooks/hooks.js';
 
 import { Setting } from './components/components.js';
-import { DEFAULT_NOTIFICATION_SETTINGS_VALUES } from './libs/constants.js';
+import { DEFAULT_NOTIFICATION_SETTINGS_VALUES } from './libs/constants/constants.js';
 import styles from './styles.module.scss';
 
 const ProfileSettings: React.FC = () => {

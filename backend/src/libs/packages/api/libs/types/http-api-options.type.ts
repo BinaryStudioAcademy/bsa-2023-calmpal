@@ -6,7 +6,6 @@ type HTTPApiOptions = Omit<HTTPOptions, 'headers' | 'payload'> & {
   token?: string;
   contentType?: ValueOf<typeof ContentType>;
   payload?: HTTPOptions['payload'];
-  isBuffer?: boolean;
 };
 
 export { type HTTPApiOptions };

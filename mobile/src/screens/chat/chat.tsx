@@ -21,7 +21,7 @@ import {
   DEFAULT_VALUES,
   EMPTY_ARRAY_LENGTH,
   PREVIOUS_USER,
-} from './libs/constants';
+} from './libs/constants/constants';
 import { type ChatInputValue } from './libs/types/chat-input-value.type';
 import { styles } from './styles';
 

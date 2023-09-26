@@ -12,6 +12,7 @@ import {
   type ChatCreateRequestDto,
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
+  type UpdateChatImageRequestDto,
 } from '#packages/chats/chats.js';
 import { actions as appActions } from '#slices/app/app.js';
 
@@ -24,7 +25,7 @@ const getAllChats = createAsyncThunk<
 >(`${sliceName}/get-all-chats`, async (query, { extra }) => {
   const { chatApi } = extra;
 
-  return await chatApi.getAllChats(query);
+  return await chatApi.getAll(query);
 });
 
 const getCurrentChatMessages = createAsyncThunk<
@@ -43,9 +44,11 @@ const createChat = createAsyncThunk<
   AsyncThunkConfig
 >(`${sliceName}/create-chat`, async (payload, { extra, dispatch }) => {
   const { chatApi } = extra;
-  const chat = await chatApi.createChat(payload);
+  const chat = await chatApi.create(payload);
 
   dispatch(appActions.navigate(`${APIPath.CHATS}/${chat.id}`));
+
+  void dispatch(updateChatImage({ id: chat.id.toString() }));
 
   return chat;
 });
@@ -67,13 +70,14 @@ const deleteChat = createAsyncThunk<number, number, AsyncThunkConfig>(
   `${sliceName}/delete-chat`,
   async (id, { extra, dispatch }) => {
     const { chatApi } = extra;
-    await chatApi.deleteChat(id);
+    await chatApi.delete(id);
 
     dispatch(appActions.navigate(AppRoute.CHATS));
 
     return id;
   },
 );
+
 const generateReply = createAsyncThunk<
   ChatMessageGetAllItemResponseDto,
   ChatMessageCreatePayload,
@@ -81,7 +85,17 @@ const generateReply = createAsyncThunk<
 >(`${sliceName}/generate-reply`, async (payload, { extra }) => {
   const { chatMessagesApi } = extra;
 
-  return await chatMessagesApi.generateChatReply(payload);
+  return await chatMessagesApi.generateReply(payload);
+});
+
+const updateChatImage = createAsyncThunk<
+  ChatGetAllItemResponseDto,
+  UpdateChatImageRequestDto,
+  AsyncThunkConfig
+>(`${sliceName}/update-chat-image`, async (payload, { extra }) => {
+  const { chatApi } = extra;
+
+  return await chatApi.updateChatImage(payload);
 });
 
 export {
@@ -91,4 +105,5 @@ export {
   generateReply,
   getAllChats,
   getCurrentChatMessages,
+  updateChatImage,
 };
