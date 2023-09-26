@@ -19,7 +19,7 @@ const createJournalEntry = createAsyncThunk<
   AsyncThunkConfig
 >(`${sliceName}/create-journal-entry`, async (payload, { extra, dispatch }) => {
   const { journalApi } = extra;
-  const journalEntry = await journalApi.createJournalEntry(payload);
+  const journalEntry = await journalApi.createEntry(payload);
   dispatch(
     appActions.navigate(
       AppRoute.JOURNAL_$ID.replace(
@@ -39,7 +39,7 @@ const getAllJournalEntries = createAsyncThunk<
 >(`${sliceName}/get-all-journal-entries`, async (query, { extra }) => {
   const { journalApi } = extra;
 
-  return await journalApi.getAllJournalEntries(query);
+  return await journalApi.getAllEntries(query);
 });
 
 const updateJournalEntry = createAsyncThunk<
@@ -49,7 +49,7 @@ const updateJournalEntry = createAsyncThunk<
 >(`${sliceName}/update-journal-entry`, async (payload, { extra }) => {
   const { journalApi } = extra;
 
-  return await journalApi.updateJournalEntry(payload);
+  return await journalApi.updateEntry(payload);
 });
 
 const deleteJournal = createAsyncThunk<
@@ -60,7 +60,7 @@ const deleteJournal = createAsyncThunk<
   `${sliceName}/delete-journal-entry`,
   async (id, { extra, getState, dispatch }) => {
     const { journalApi } = extra;
-    await journalApi.deleteJournalEntry(id);
+    await journalApi.deleteEntry(id);
     const {
       journal: { allJournalEntries, selectedJournalEntry },
     } = getState();

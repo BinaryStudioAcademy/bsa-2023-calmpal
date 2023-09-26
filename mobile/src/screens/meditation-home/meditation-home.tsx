@@ -28,6 +28,7 @@ const MeditationHome: React.FC = () => {
     };
   });
   const dispatch = useAppDispatch();
+
   const navigation =
     useNavigation<
       NativeStackNavigationProp<MeditationNavigationParameterList>

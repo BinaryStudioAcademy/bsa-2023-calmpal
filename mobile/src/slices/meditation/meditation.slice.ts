@@ -4,7 +4,7 @@ import { DataStatus } from '#libs/enums/enums';
 import { type ValueOf } from '#libs/types/types';
 import { type MeditationEntryCreateResponseDto } from '#packages/meditation/meditation';
 
-import { getAllMeditationEntries } from './actions';
+import { createMeditationEntry, getAllMeditationEntries } from './actions';
 
 type State = {
   meditationEntries: MeditationEntryCreateResponseDto[];
@@ -29,6 +29,17 @@ const { reducer, actions, name } = createSlice({
       state.meditationEntriesDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(getAllMeditationEntries.rejected, (state) => {
+      state.meditationEntriesDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(createMeditationEntry.pending, (state) => {
+      state.meditationEntriesDataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(createMeditationEntry.fulfilled, (state, action) => {
+      state.meditationEntries.push(action.payload);
+      state.meditationEntriesDataStatus = DataStatus.FULFILLED;
+    });
+    builder.addCase(createMeditationEntry.rejected, (state) => {
       state.meditationEntriesDataStatus = DataStatus.REJECTED;
     });
   },

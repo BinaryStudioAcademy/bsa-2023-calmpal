@@ -4,7 +4,7 @@ import { ScrollView, Switch } from '#libs/components/components';
 import { useAppForm } from '#libs/hooks/hooks';
 
 import { Setting } from './components/components';
-import { NOTIFICATION_SETTINGS_DEFAULT_VALUE } from './libs/constants';
+import { NOTIFICATION_SETTINGS_DEFAULT_VALUE } from './libs/cosntants/constants';
 import { styles } from './styles';
 
 const NotificationSettings: React.FC = () => {
