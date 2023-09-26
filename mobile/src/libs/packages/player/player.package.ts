@@ -2,7 +2,7 @@ import TrackPlayer, { RepeatMode, type State } from 'react-native-track-player';
 
 import { type Track } from '#libs/types/types';
 
-import { TRACK_SKIP_SECONDS } from './libs/constants';
+import { TRACK_SKIP_SECONDS } from './libs/constants/constants';
 
 class Player {
   public getProgress = (): Promise<number> => {

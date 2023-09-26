@@ -13,6 +13,7 @@ import {
   generateReply,
   getAllChats,
   getCurrentChatMessages,
+  updateChatImage,
 } from './actions.js';
 
 type State = {
@@ -24,6 +25,7 @@ type State = {
   createMessageDataStatus: ValueOf<typeof DataStatus>;
   deleteChatDataStatus: ValueOf<typeof DataStatus>;
   generateReplyDataStatus: ValueOf<typeof DataStatus>;
+  updateChatImageStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
@@ -35,6 +37,7 @@ const initialState: State = {
   createMessageDataStatus: DataStatus.IDLE,
   deleteChatDataStatus: DataStatus.IDLE,
   generateReplyDataStatus: DataStatus.IDLE,
+  updateChatImageStatus: DataStatus.IDLE,
 };
 
 const { reducer, actions, name } = createSlice({
@@ -126,6 +129,25 @@ const { reducer, actions, name } = createSlice({
 
     builder.addCase(generateReply.rejected, (state) => {
       state.generateReplyDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(updateChatImage.pending, (state) => {
+      state.updateChatImageStatus = DataStatus.PENDING;
+    });
+
+    builder.addCase(updateChatImage.fulfilled, (state, action) => {
+      state.chats = state.chats.map((chat) => {
+        if (chat.id === action.payload.id) {
+          return action.payload;
+        }
+
+        return chat;
+      });
+      state.updateChatImageStatus = DataStatus.FULFILLED;
+    });
+
+    builder.addCase(updateChatImage.rejected, (state) => {
+      state.updateChatImageStatus = DataStatus.REJECTED;
     });
   },
 });

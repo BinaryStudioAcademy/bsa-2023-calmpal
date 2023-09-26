@@ -15,7 +15,6 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { ChatEntity } from './chat.entity.js';
 import { type ChatService } from './chat.service.js';
-import { MOCKED_CHAT_NAME } from './libs/constants/constants.js';
 import { ChatsApiPath } from './libs/enums/enums.js';
 import {
   type ChatCreateRequestDto,
@@ -25,6 +24,11 @@ import {
   createChatValidationSchema,
   entitiesFilteringQueryValidationSchema,
 } from './libs/validation-schemas/validation-schemas.js';
+
+type Constructor = {
+  logger: Logger;
+  chatService: ChatService;
+};
 
 /**
  * @swagger
@@ -70,6 +74,8 @@ import {
  *          updatedAt:
  *             type: string
  *             format: date-time
+ *          imageUrl:
+ *             type: string
  *      ChatMessage:
  *        type: object
  *        properties:
@@ -102,9 +108,8 @@ import {
 class ChatController extends BaseController {
   private chatService: ChatService;
 
-  public constructor(logger: Logger, chatService: ChatService) {
+  public constructor({ logger, chatService }: Constructor) {
     super(logger, APIPath.CHATS);
-
     this.chatService = chatService;
 
     this.addRoute({
@@ -161,6 +166,19 @@ class ChatController extends BaseController {
           options as APIHandlerOptions<{
             body: ChatMessageCreateRequestDto;
             params: { id: string };
+            user: UserAuthResponseDto;
+          }>,
+        );
+      },
+    });
+
+    this.addRoute({
+      path: ChatsApiPath.$ID,
+      method: 'PUT',
+      handler: (options) => {
+        return this.update(
+          options as APIHandlerOptions<{
+            params: { id: number };
             user: UserAuthResponseDto;
           }>,
         );
@@ -254,7 +272,7 @@ class ChatController extends BaseController {
    *   post:
    *     description: Create a new chat
    *     security:
-   *      - bearerAuth: []
+   *       - bearerAuth: []
    *     requestBody:
    *       description: Create chat data
    *       required: true
@@ -279,8 +297,11 @@ class ChatController extends BaseController {
       user: UserAuthResponseDto;
     }>,
   ): Promise<APIHandlerResponse> {
+    const name = await this.chatService.generateChatName(options.body.message);
+
     const chatEntity = ChatEntity.initializeNew({
-      name: MOCKED_CHAT_NAME,
+      name: name || options.body.message,
+      imageUrl: null,
     });
 
     return {
@@ -299,7 +320,7 @@ class ChatController extends BaseController {
    *   post:
    *     description: Create a new chat message
    *     security:
-   *      - bearerAuth: []
+   *       - bearerAuth: []
    *     parameters:
    *       -  in: path
    *          description: Chat id
@@ -349,6 +370,8 @@ class ChatController extends BaseController {
    * /chats/{id}/generated-replies:
    *   post:
    *     description: Generate reply for a message
+   *     security:
+   *       - bearerAuth: []
    *     parameters:
    *       -  in: path
    *          description: Chat id
@@ -399,7 +422,7 @@ class ChatController extends BaseController {
    *   get:
    *     description: Returns all chat messages
    *     security:
-   *      - bearerAuth: []
+   *       - bearerAuth: []
    *     parameters:
    *       -  in: path
    *          description: Chat id
@@ -464,7 +487,6 @@ class ChatController extends BaseController {
    *               message: "Chat with such id was not found."
    *               errorType: "COMMON"
    */
-
   private async delete(
     options: APIHandlerOptions<{
       params: { id: string };
@@ -486,6 +508,62 @@ class ChatController extends BaseController {
     return {
       status: HTTPCode.CREATED,
       payload: isDeleted,
+    };
+  }
+
+  /**
+   * @swagger
+   * /chats/{id}:
+   *    put:
+   *      description: Update a chat
+   *      security:
+   *       - bearerAuth: []
+   *      parameters:
+   *       -  in: path
+   *          description: Chat id
+   *          name: id
+   *          required: true
+   *          type: number
+   *          minimum: 1
+   *      requestBody:
+   *        description: Chat data
+   *        required: true
+   *        content:
+   *          application/json:
+   *             schema:
+   *                $ref: '#/components/schemas/Chat'
+   *      responses:
+   *        200:
+   *         description: Successful operation
+   *         content:
+   *           application/json:
+   *             schema:
+   *              type: object
+   *               properties:
+   *                 items:
+   *                   type: array
+   *                   items:
+   *                     $ref: '#/components/schemas/Chat'
+   */
+  private async update(
+    options: APIHandlerOptions<{
+      params: { id: number };
+      user: UserAuthResponseDto;
+    }>,
+  ): Promise<APIHandlerResponse> {
+    const chat = await this.chatService.findById({
+      id: options.params.id,
+      userId: options.user.id,
+    });
+
+    const url = await this.chatService.generateChatImage(chat.name);
+
+    return {
+      status: HTTPCode.OK,
+      payload: await this.chatService.updateImage({
+        chat,
+        url,
+      }),
     };
   }
 }

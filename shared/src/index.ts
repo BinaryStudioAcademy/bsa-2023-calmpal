@@ -63,6 +63,7 @@ export {
   type ChatGetAllResponseDto,
   ChatsApiPath,
   createChatValidationSchema,
+  type UpdateChatImageRequestDto,
 } from './packages/chats/chats.js';
 export { entitiesFilteringQueryValidationSchema } from './packages/common-validation-schemas/validation-schemas.js';
 export {
