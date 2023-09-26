@@ -2,7 +2,6 @@ import { player } from '#libs/packages/player/player';
 
 type Properties = {
   isPlaying: boolean;
-  duration?: number;
 };
 
 type PlayerControls = {
@@ -14,13 +13,10 @@ type PlayerControls = {
   handleSeek: (value: number) => void;
 };
 
-const usePlayerControls = ({
-  isPlaying,
-  duration,
-}: Properties): PlayerControls => {
+const usePlayerControls = ({ isPlaying }: Properties): PlayerControls => {
   return {
     handlePlayPause: (): void => {
-      void player.playPause(isPlaying, duration);
+      void player.playPause(isPlaying);
     },
     handleSkipToNext: (): void => {
       void player.skipToNext();

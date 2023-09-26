@@ -8,20 +8,16 @@ import { styles } from './styles';
 
 type Properties = {
   isPlaying: boolean;
-  duration: number;
 };
 
-const Controls: React.FC<Properties> = ({
-  isPlaying: initialIsPlaying,
-  duration,
-}) => {
+const Controls: React.FC<Properties> = ({ isPlaying: initialIsPlaying }) => {
   const {
     handleSkipToPrevious,
     handleSkipBackward,
     handlePlayPause,
     handleSkipForward,
     handleSkipToNext,
-  } = usePlayerControls({ isPlaying: initialIsPlaying, duration });
+  } = usePlayerControls({ isPlaying: initialIsPlaying });
   const [isPlaying, setIsPlaying] = useState(initialIsPlaying);
 
   const togglePlayPause = (): void => {
