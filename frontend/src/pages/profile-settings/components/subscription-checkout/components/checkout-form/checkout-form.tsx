@@ -59,14 +59,16 @@ const CheckoutForm: React.FC = () => {
         <Button
           type="button"
           label="Cancel"
-          style="primary-blue"
+          style="primary"
+          styleColor="blue"
           onClick={handleCancelPayment}
           isDisabled={isDisabled}
         />
         <Button
           type="submit"
           label="Pay now"
-          style="primary-blue"
+          style="primary"
+          styleColor="blue"
           isDisabled={isDisabled}
           isLoading={isLoading}
         />

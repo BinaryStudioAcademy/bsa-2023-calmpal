@@ -57,7 +57,8 @@ const SubscriptionManagementDialog: React.FC = () => {
           <Button
             type="button"
             label="Subscribe"
-            style="primary-blue"
+            style="primary"
+            styleColor="blue"
             onClick={handleSubscribe}
           />
         </div>
