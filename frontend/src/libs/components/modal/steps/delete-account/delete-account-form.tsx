@@ -52,8 +52,8 @@ const DeleteAccountForm: React.FC<Properties> = ({ onNext, onClose }) => {
 
   const isInputDisabled = !checkedBoxes.includes(OTHER_OPTION_LABEL);
   const isNextDisabled = checkedBoxes.length === NO_CHECKED_BOXES;
-  const hasNextStep = onNext && typeof onNext === 'function';
-  const hasCloseButton = onClose && typeof onClose === 'function';
+  const hasNextStep = Boolean(onNext);
+  const hasCloseButton = Boolean(onClose);
 
   const handleFormSubmit = useCallback(
     (event_: React.BaseSyntheticEvent): void => {

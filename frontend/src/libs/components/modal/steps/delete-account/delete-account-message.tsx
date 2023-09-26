@@ -8,8 +8,8 @@ type Properties = {
 };
 
 const DeleteAccountMessage: React.FC<Properties> = ({ onNext, onClose }) => {
-  const hasNextStep = onNext && typeof onNext === 'function';
-  const hasCloseButton = onClose && typeof onClose === 'function';
+  const hasNextStep = Boolean(onNext);
+  const hasCloseButton = Boolean(onClose);
 
   return (
     <div className={styles['modal-body']}>
