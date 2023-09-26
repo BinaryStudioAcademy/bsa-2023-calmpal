@@ -56,7 +56,7 @@ const ChatList: React.FC = () => {
   };
 
   const handleDeleteChat = (): void => {
-    setIsModalVisible(false);
+    hanleCloseModal();
     void dispatch(chatsActions.deleteChat(chatId as number));
   };
 
