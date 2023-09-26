@@ -24,7 +24,7 @@ class JournalApi extends BaseHttpApi {
     super({ path: APIPath.JOURNAL, baseUrl, http, storage });
   }
 
-  public async getAllJournalEntries(
+  public async getAllEntries(
     query: string,
   ): Promise<JournalEntryGetAllResponseDto> {
     const response = await this.load(
@@ -41,7 +41,7 @@ class JournalApi extends BaseHttpApi {
     return await response.json<JournalEntryGetAllResponseDto>();
   }
 
-  public async createJournalEntry(
+  public async createEntry(
     payload: JournalEntryCreateRequestDto,
   ): Promise<JournalEntryGetAllItemResponseDto> {
     const response = await this.load(
@@ -57,7 +57,7 @@ class JournalApi extends BaseHttpApi {
     return await response.json<JournalEntryGetAllItemResponseDto>();
   }
 
-  public async updateJournalEntry(
+  public async updateEntry(
     payload: JournalEntryUpdatePayloadDto,
   ): Promise<JournalEntryGetAllItemResponseDto> {
     const response = await this.load(
@@ -75,9 +75,7 @@ class JournalApi extends BaseHttpApi {
     return await response.json<JournalEntryGetAllItemResponseDto>();
   }
 
-  public async deleteJournalEntry(
-    id: number,
-  ): Promise<JournalEntryDeleteResponseDto> {
+  public async deleteEntry(id: number): Promise<JournalEntryDeleteResponseDto> {
     const response = await this.load(
       this.getFullEndpoint(JournalApiPath.$ID, { id: `${id}` }),
       {

@@ -11,7 +11,7 @@ import {
 import { type Track } from '#libs/types/types';
 
 import { Controls, ProgressBar } from './components/components';
-import { MOCKED_PLAYLIST, TRACK_START_INDEX } from './libs/constants';
+import { MOCKED_PLAYLIST, TRACK_START_INDEX } from './libs/constants/constants';
 
 type Properties = {
   setCurrentTrack: React.Dispatch<React.SetStateAction<Track | null>>;
