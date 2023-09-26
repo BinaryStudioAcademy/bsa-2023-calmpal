@@ -1021,7 +1021,7 @@
                 {
                   "key": "file",
                   "type": "file",
-                  "src": ".postman/assets/SamplePNGImage_10mbmb.png"
+                  "src": ".postman/assets/sample-image-ten-mb.png"
                 }
               ]
             },
