@@ -15,7 +15,7 @@ type Properties = {
   label?: string;
   onPress: () => void;
   isDisabled?: boolean;
-  type?: 'solid' | 'outlined' | 'transparent';
+  type?: 'solid' | 'outlined' | 'transparent' | 'timer';
   isRounded?: boolean;
   iconName?: IconName;
   color?: string;
@@ -57,6 +57,7 @@ const Button: React.FC<Properties> = ({
         type === 'outlined' && styles.buttonOutlined,
         isCustomColor && { backgroundColor: color },
         buttonStyles,
+        type === 'timer' && styles.buttonTimer,
         type === 'transparent' && styles.buttonTransparent,
         isDisabled && styles.buttonDisabled,
       ]}

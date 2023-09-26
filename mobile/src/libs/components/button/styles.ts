@@ -54,6 +54,11 @@ const styles = StyleSheet.create({
   visuallyCenteredButton: {
     paddingLeft: 18,
   },
+
+  buttonTimer: {
+    borderRadius: 40,
+    height: 52,
+  },
 });
 
 export { styles };

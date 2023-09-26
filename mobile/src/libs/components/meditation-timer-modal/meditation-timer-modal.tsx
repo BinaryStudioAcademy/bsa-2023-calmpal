@@ -49,6 +49,11 @@ const MeditationTimerModal: React.FC<Properties> = ({
     startMeditation();
   };
 
+  const startButtonText =
+    value === DEFAULT_DURATION
+      ? 'Start with default duration'
+      : 'Start with selected duration';
+
   return (
     <RNModal
       animationType="none"
@@ -86,11 +91,11 @@ const MeditationTimerModal: React.FC<Properties> = ({
           </View>
 
           <Button
-            label="Start Session"
+            label={startButtonText}
             onPress={handleStartMeditation}
             color={AppColor.BLUE_300}
-            type="solid"
-            styles={styles.button}
+            type="timer"
+            // styles={styles.button}
           />
         </Pressable>
       </TouchableOpacity>
