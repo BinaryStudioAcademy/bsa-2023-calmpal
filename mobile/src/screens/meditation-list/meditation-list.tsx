@@ -13,6 +13,7 @@ import { MeditationScreenName } from '#libs/enums/enums';
 import {
   useAppDispatch,
   useAppRoute,
+  useAppSelector,
   useEffect,
   useNavigation,
   useSearch,
@@ -22,7 +23,7 @@ import { type MeditationNavigationParameterList } from '#libs/types/types';
 import { actions as meditationActions } from '#slices/meditation/meditation';
 
 import { MeditationItem } from './components/components';
-import { DEFAULT_SONG_DURATION, MOCKED_DATA } from './libs/constants/constants';
+import { DEFAULT_SONG_DURATION } from './libs/constants/constants';
 import { styles } from './styles';
 
 type RouteParameters = {
@@ -34,29 +35,38 @@ const MeditationList: React.FC = () => {
   const route = useAppRoute();
   const { title } = route.params as RouteParameters;
 
+  const { meditationEntries } = useAppSelector(({ meditation }) => {
+    return {
+      meditationEntries: meditation.meditationEntries,
+    };
+  });
+
   const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
-    MOCKED_DATA,
+    meditationEntries,
     'title',
   );
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isBottomModalVisible, setIsBottomModalVisible] = useState(false);
   const [duration, setDuration] = useState(DEFAULT_SONG_DURATION);
-
-  const handleToggleClick = (): void => {
-    setIsModalVisible((previous) => {
-      return !previous;
-    });
-  };
 
   const navigation =
     useNavigation<
       NativeStackNavigationProp<MeditationNavigationParameterList>
     >();
 
-  const handleSetPlaylist = (): void => {
-    navigation.navigate(MeditationScreenName.MEDITATION, {
-      duration: duration,
+  const handleToggleBottomModalVisibility = (): void => {
+    setIsBottomModalVisible((previous) => {
+      return !previous;
     });
+  };
+
+  const handleSelectMeditation = (id: string): void => {
+    void dispatch(meditationActions.setSelectedMeditationEntry(id));
+    handleToggleBottomModalVisibility();
+  };
+
+  const handleSetPlaylist = (): void => {
+    navigation.navigate(MeditationScreenName.MEDITATION);
   };
 
   useEffect(() => {
@@ -69,14 +79,19 @@ const MeditationList: React.FC = () => {
 
   useEffect(() => {
     void dispatch(meditationActions.initPlayer());
+    void dispatch(meditationActions.getAllMeditationEntries());
   }, [dispatch]);
+
+  useEffect(() => {
+    void dispatch(meditationActions.setPlaylist(meditationEntries));
+  }, [dispatch, meditationEntries]);
 
   return (
     <LinearGradient>
       <View style={styles.container}>
-        {isModalVisible && (
+        {isBottomModalVisible && (
           <MeditationTimerModal
-            onClose={handleToggleClick}
+            onClose={handleToggleBottomModalVisibility}
             setDuration={setDuration}
             startMeditation={handleSetPlaylist}
           />
@@ -90,9 +105,11 @@ const MeditationList: React.FC = () => {
             return (
               <MeditationItem
                 title={item.title}
-                duration={item.duration}
+                duration={duration}
                 key={item.id}
-                onClick={handleToggleClick}
+                onClick={(): void => {
+                  handleSelectMeditation(item.id);
+                }}
               />
             );
           })}
