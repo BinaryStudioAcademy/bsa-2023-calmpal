@@ -58,7 +58,7 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
           <Button type="submit" label="Sign in" isLoading={isLoading} />
         </div>
 
-        <span className={styles['form-link']}>
+        <span>
           Don&apos;t have an account? Go to
           <Link to={AppRoute.SIGN_UP}>
             <span className={styles['text']}>Sign up</span>

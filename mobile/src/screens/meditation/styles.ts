@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -26,9 +26,10 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     backgroundColor: AppColor.WHITE,
     borderRadius: 20,
-    elevation: 1,
     marginTop: 37,
     marginBottom: 20,
+    shadowColor: AppColor.BLUE_200,
+    elevation: 20,
   },
   image: {
     width: '100%',
@@ -39,11 +40,13 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: '600',
     color: AppColor.GRAY_600,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
   purpose: {
     fontWeight: '600',
     color: AppColor.GRAY_400,
     marginTop: 6,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
 });
 

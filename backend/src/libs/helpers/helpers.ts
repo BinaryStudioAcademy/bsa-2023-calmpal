@@ -1,1 +1,5 @@
-export { replaceTemplateWithValue } from 'shared/build/index.js';
+export {
+  configureString,
+  replaceTemplateWithValue,
+  sanitizeInput,
+} from 'shared/build/index.js';
