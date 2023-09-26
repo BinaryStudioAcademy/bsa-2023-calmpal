@@ -5,8 +5,8 @@ on:
     branches:
       - development
     paths:
-      - backend/*/*.*
-      - shared/*/*.*
+      - backend/**/*.*
+      - shared/**/*.*
 
   workflow_dispatch:
 
