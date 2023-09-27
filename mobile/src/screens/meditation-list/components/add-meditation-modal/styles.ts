@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   container: {
@@ -8,10 +8,10 @@ const styles = StyleSheet.create({
   },
   title: {
     color: AppColor.GRAY_600,
-    fontWeight: '600',
     fontSize: 20,
     textAlign: 'center',
     marginBottom: 20,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
 });
 
