@@ -9,7 +9,7 @@ const getRelativeDate = (date: Date): string => {
     return 'Today';
   }
 
-  if (daysDifference === DaysDifference.YESTARDAY) {
+  if (daysDifference === DaysDifference.YESTERDAY) {
     return 'Yesterday';
   }
 
