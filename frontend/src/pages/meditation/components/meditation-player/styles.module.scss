@@ -1,7 +1,7 @@
 .wrapper {
+  display: flex;
   width: 100%;
   height: 100%;
-  padding-top: 150px;
   padding-left: 350px;
   font-weight: 600;
   background-image: url("../../../../assets/img/meditation-player-background.png");
@@ -52,13 +52,7 @@
 
 @media (width < 900px) {
   .wrapper {
-    padding-left: 250px;
-  }
-}
-
-@media (width < 767px) {
-  .wrapper {
-    padding: 150px 20px 0;
+    padding-left: 280px;
     background-image: url("../../../../assets/img/meditation-player-background-mobile.png");
   }
 
@@ -79,5 +73,22 @@
   .image-wrapper {
     width: 315px;
     height: 315px;
+  }
+}
+
+@media (width < 767px) {
+  .wrapper {
+    padding-left: 0;
+  }
+}
+
+@media (width < 480px) {
+  .meditation-player {
+    max-width: 300px;
+  }
+
+  .image-wrapper {
+    width: 300px;
+    height: 300px;
   }
 }
