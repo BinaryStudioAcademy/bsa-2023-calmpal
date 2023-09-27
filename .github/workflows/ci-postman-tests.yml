@@ -73,7 +73,7 @@ jobs:
 
           docker build -t backend-image -f ./backend/Dockerfile.development .
 
-          docker run --rm --name backend-container --env-file ./backend/.env backend-image
+          docker run --rm -d --name backend-container --env-file ./backend/.env backend-image
 
       - name: Run postman collection tests
         run: |
