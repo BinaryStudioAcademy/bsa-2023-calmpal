@@ -23,6 +23,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  errorFile: {
+    borderColor: AppColor.RED_100,
+  },
   primaryText: {
     fontSize: 18,
     color: AppColor.GRAY_600,
