@@ -18,7 +18,7 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
 import { RenderSteps } from './components/components.js';
-import { ONE_INDEX } from './libs/constants.js';
+import { ONE_INDEX } from './libs/constants/constants.js';
 import styles from './styles.module.scss';
 
 type SurveyForDispatch = SurveyState & { userId?: number };

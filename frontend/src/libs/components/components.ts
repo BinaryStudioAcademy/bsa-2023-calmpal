@@ -18,7 +18,11 @@ export { ProtectedRoute } from './protected-route/protected-route.js';
 export { Radio } from './radio/radio.js';
 export { RouterProvider } from './router-provider/router-provider.jsx';
 export { Search } from './search/search.js';
-export { Sidebar, SidebarBody, SidebarHeader } from './sidebar/components.js';
+export {
+  Sidebar,
+  SidebarBody,
+  SidebarHeader,
+} from './sidebar/components/components.js';
 export { Switch } from './switch/switch.js';
 export { Toast } from './toast/toast.js';
 export { ErrorMessage } from '@hookform/error-message';

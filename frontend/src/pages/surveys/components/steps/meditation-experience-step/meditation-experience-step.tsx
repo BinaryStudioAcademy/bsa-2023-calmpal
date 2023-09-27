@@ -8,7 +8,7 @@ import {
 } from '#libs/hooks/hooks.js';
 import { type MeditationExperienceInputDto } from '#packages/survey/libs/types/types.js';
 import { oneAnswerStepInputValidationSchema } from '#packages/survey/survey.js';
-import { MEDITATION_EXPERIENCE_CATEGORIES } from '#pages/surveys/libs/constants.js';
+import { MEDITATION_EXPERIENCE_CATEGORIES } from '#pages/surveys/libs/constants/constants.js';
 
 import styles from '../styles.module.scss';
 

@@ -146,6 +146,14 @@ class BaseConfig implements Config {
           default: 10,
         },
       },
+      STRIPE: {
+        SECRET_KEY: {
+          doc: 'Stripe secret key',
+          format: String,
+          env: 'STRIPE_SECRET_KEY',
+          default: null,
+        },
+      },
       OPEN_AI: {
         API_KEY: {
           doc: 'Api key for the Open AI account',

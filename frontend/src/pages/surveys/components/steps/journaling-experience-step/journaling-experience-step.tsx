@@ -8,7 +8,7 @@ import {
 } from '#libs/hooks/hooks.js';
 import { type JournalingExperienceInputDto } from '#packages/survey/libs/types/types.js';
 import { oneAnswerStepInputValidationSchema } from '#packages/survey/survey.js';
-import { JOURNALING_EXPERIENCE_CATEGORIES } from '#pages/surveys/libs/constants.js';
+import { JOURNALING_EXPERIENCE_CATEGORIES } from '#pages/surveys/libs/constants/constants.js';
 
 import styles from '../styles.module.scss';
 

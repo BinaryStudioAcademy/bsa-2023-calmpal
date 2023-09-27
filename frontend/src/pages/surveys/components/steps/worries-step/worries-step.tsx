@@ -17,7 +17,7 @@ import {
 import {
   TEXTAREA_ROWS_COUNT,
   WORRIES_CATEGORIES,
-} from '#pages/surveys/libs/constants.js';
+} from '#pages/surveys/libs/constants/constants.js';
 
 import styles from '../styles.module.scss';
 

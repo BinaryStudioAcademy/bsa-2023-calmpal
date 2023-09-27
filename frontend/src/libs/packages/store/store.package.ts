@@ -17,11 +17,13 @@ import { chatMessagesApi } from '#packages/chat-messages/chat-messages.js';
 import { chatApi } from '#packages/chats/chats.js';
 import { journalApi } from '#packages/journal/journal.js';
 import { meditationApi } from '#packages/meditation/meditation.js';
+import { subscriptionApi } from '#packages/subscriptions/subscriptions.js';
 import { reducer as appReducer } from '#slices/app/app.js';
 import { reducer as authReducer } from '#slices/auth/auth.js';
 import { reducer as chatsReducer } from '#slices/chats/chats.js';
 import { reducer as journalReducer } from '#slices/journal/journal.js';
 import { reducer as meditationReducer } from '#slices/meditation/meditation.js';
+import { reducer as subscriptionReducer } from '#slices/subscription/subscription.js';
 import { reducer as surveyReducer } from '#slices/survey/survey.js';
 
 import { storage } from '../storage/storage.js';
@@ -33,6 +35,7 @@ type RootReducer = {
   meditation: ReturnType<typeof meditationReducer>;
   chats: ReturnType<typeof chatsReducer>;
   survey: ReturnType<typeof surveyReducer>;
+  subscription: ReturnType<typeof subscriptionReducer>;
 };
 
 type ExtraArguments = {
@@ -43,6 +46,7 @@ type ExtraArguments = {
   storage: typeof storage;
   notification: typeof notification;
   chatMessagesApi: typeof chatMessagesApi;
+  subscriptionApi: typeof subscriptionApi;
 };
 
 class Store {
@@ -64,6 +68,7 @@ class Store {
         meditation: meditationReducer,
         chats: chatsReducer,
         survey: surveyReducer,
+        subscription: subscriptionReducer,
       },
       middleware: (getDefaultMiddleware) => {
         return [
@@ -88,6 +93,7 @@ class Store {
       storage,
       notification,
       chatMessagesApi,
+      subscriptionApi,
     };
   }
 }

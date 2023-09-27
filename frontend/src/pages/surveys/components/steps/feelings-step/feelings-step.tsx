@@ -10,7 +10,7 @@ import {
   type HandleFieldChangeType,
 } from '#packages/survey/libs/types/types.js';
 import { stepInputValidationSchema } from '#packages/survey/survey.js';
-import { FEELINGS_CATEGORIES } from '#pages/surveys/libs/constants.js';
+import { FEELINGS_CATEGORIES } from '#pages/surveys/libs/constants/constants.js';
 
 import styles from '../styles.module.scss';
 

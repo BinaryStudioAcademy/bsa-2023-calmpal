@@ -30,7 +30,7 @@ class BaseHttpApi implements HTTPApi {
   }
 
   public async load<T>(path: string, options: HTTPApiOptions): Promise<T> {
-    const { method, contentType, payload = null, token, isBuffer } = options;
+    const { method, contentType, payload = null, token } = options;
 
     const headers = this.getHeaders(contentType, token);
     const response = await this.http.load(path, {
@@ -40,15 +40,6 @@ class BaseHttpApi implements HTTPApi {
     });
 
     await this.checkResponse(response);
-
-    if (isBuffer) {
-      const buffer = await response.arrayBuffer();
-      const contentType = response.headers.get(
-        HTTPHeader.CONTENT_TYPE,
-      ) as ValueOf<typeof ContentType>;
-
-      return { buffer: Buffer.from(buffer), contentType } as T;
-    }
 
     return (await response.json()) as T;
   }

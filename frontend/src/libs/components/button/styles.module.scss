@@ -1,3 +1,13 @@
+.default {
+  --background-color: var(--gray-400);
+  --background-color-hover: var(--gray-300);
+}
+
+.blue {
+  --background-color: var(--blue-300);
+  --background-color-hover: var(--blue-400);
+}
+
 .primary {
   display: inline-block;
   width: 100%;
@@ -8,18 +18,18 @@
   font-family: Montserrat, Arial, sans-serif;
   line-height: 1.25;
   white-space: nowrap;
-  background-color: var(--gray-400);
+  background-color: var(--background-color);
   border: none;
   border-radius: 8px;
   cursor: pointer;
 }
 
 .primary:hover {
-  background-color: var(--gray-300);
+  background-color: var(--background-color-hover);
 }
 
 .primary:disabled {
-  background-color: var(--gray-400);
+  background-color: var(--background-color);
   opacity: 0.9;
 }
 
@@ -128,8 +138,7 @@
   padding: 0;
   color: var(--blue-300);
   background-color: transparent;
-  border-color: transparent;
-  border-radius: 50%;
+  border: none;
   cursor: pointer;
 }
 
