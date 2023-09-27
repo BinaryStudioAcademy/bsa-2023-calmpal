@@ -24,19 +24,15 @@ const Journal: React.FC = () => {
   const { isSidebarShown, setIsSidebarShow } = useSidebarState();
   const { filter, setFilter } = useSearch();
 
-  const { selectedJournalEntry, journalEntriesDataStatus } = useAppSelector(
-    ({ journal }) => {
-      return {
-        selectedJournalEntry: journal.selectedJournalEntry,
-        journalEntriesDataStatus: journal.journalEntriesDataStatus,
-      };
-    },
-  );
+  const { journalEntriesDataStatus } = useAppSelector(({ journal }) => {
+    return {
+      journalEntriesDataStatus: journal.journalEntriesDataStatus,
+    };
+  });
 
   const isLoading =
     journalEntriesDataStatus === DataStatus.IDLE ||
-    journalEntriesDataStatus === DataStatus.PENDING ||
-    selectedJournalEntry?.id.toString() !== id;
+    journalEntriesDataStatus === DataStatus.PENDING;
 
   const handleBackButtonPress = useCallback(() => {
     dispatch(journalActions.setSelectedJournalEntry(null));
