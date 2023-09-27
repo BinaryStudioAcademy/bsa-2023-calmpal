@@ -13,12 +13,14 @@ const styles = StyleSheet.create({
     left: 17,
     bottom: 20,
     fontFamily: FontFamily.MONTSERRAT_400,
+    fontSize: 12,
   },
   duration: {
     position: 'absolute',
     right: 17,
     bottom: 20,
     fontFamily: FontFamily.MONTSERRAT_400,
+    fontSize: 12,
   },
 });
 
