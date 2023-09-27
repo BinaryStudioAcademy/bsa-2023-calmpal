@@ -5,7 +5,7 @@ import {
   checkIsSelectedRoute,
   getValidClassNames,
 } from '#libs/helpers/helpers.js';
-import { useLocation } from '#libs/hooks/hooks.js';
+import { useLocation, useParams } from '#libs/hooks/hooks.js';
 import { type Route } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
@@ -16,6 +16,7 @@ type Properties = {
 
 const NavigationMenu: React.FC<Properties> = ({ routes }) => {
   const { pathname } = useLocation();
+  const routerParameters = useParams<Record<string, string>>();
 
   return (
     <div className={styles['nav-menu']}>
@@ -29,8 +30,11 @@ const NavigationMenu: React.FC<Properties> = ({ routes }) => {
           {routes.map((route) => {
             const isSelected = checkIsSelectedRoute({
               pathname,
+              routerParameters,
               selectedRoute: route,
             });
+
+            const { wrapPathWith, path, icon } = route;
 
             return (
               <button
@@ -40,11 +44,11 @@ const NavigationMenu: React.FC<Properties> = ({ routes }) => {
                   isSelected && styles['icon-selected'],
                 )}
               >
-                <Link to={route.path}>
+                <Link to={wrapPathWith?.(path) ?? path}>
                   <span className={styles['link']}>
                     <span className="visually-hidden">Go to {route.name}</span>
                     <Icon
-                      name={route.icon}
+                      name={icon}
                       color={IconColor.BLUE}
                       width={24}
                       height={24}

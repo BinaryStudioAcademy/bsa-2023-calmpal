@@ -5,5 +5,6 @@ export {
   configureString,
   debounce,
   getFormattedTime,
+  replaceTemplateWithValue,
   sanitizeInput,
 } from 'shared/build/index.js';

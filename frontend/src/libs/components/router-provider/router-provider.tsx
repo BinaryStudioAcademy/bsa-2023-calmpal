@@ -7,7 +7,7 @@ import { AppRoute } from '#libs/enums/enums.js';
 
 import { App } from '../app/app.js';
 import { ROUTER_ITEMS } from './libs/constants/constants.js';
-import { iterateNestedRoute } from './libs/helpers/helpers.js';
+import { iterateNestedRouteElement } from './libs/helpers/helpers.js';
 
 const RouterProvider: React.FC = () => {
   const routes = [
@@ -15,7 +15,7 @@ const RouterProvider: React.FC = () => {
       path: AppRoute.ROOT,
       element: <App />,
       children: ROUTER_ITEMS.map((route) => {
-        return iterateNestedRoute(route);
+        return iterateNestedRouteElement(route);
       }),
     },
   ];

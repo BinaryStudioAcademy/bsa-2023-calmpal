@@ -6,7 +6,7 @@ import { type ValueOf } from '#libs/types/types.js';
 
 import { routerPathToElement } from '../../maps/maps.js';
 
-const iterateNestedRoute = (
+const iterateNestedRouteElement = (
   route: Pick<RouteObject, 'path' | 'children'>,
 ): RouteObject => {
   const { type, element } =
@@ -18,10 +18,10 @@ const iterateNestedRoute = (
   }
 
   route.children?.forEach((childRoute) => {
-    iterateNestedRoute(childRoute);
+    iterateNestedRouteElement(childRoute);
   });
 
   return route as RouteObject;
 };
 
-export { iterateNestedRoute };
+export { iterateNestedRouteElement };

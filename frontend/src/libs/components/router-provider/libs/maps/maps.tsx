@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 
-import { NavigationMenuWrapper } from '#libs/components/components.js';
+import { NavigationMenuWrapper } from '#libs/components/navigation-menu-wrapper/navigation-menu-wrapper.js';
 import { AppRoute } from '#libs/enums/enums.js';
 import { type ValueOf } from '#libs/types/types.js';
 import { Auth } from '#pages/auth/auth.js';
