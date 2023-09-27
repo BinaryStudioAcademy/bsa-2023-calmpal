@@ -82,7 +82,7 @@ const InputFile = <T extends FormFieldValues>({
           type="file"
           className={styles['input']}
           onChange={handleFileChange}
-          accept={extensions?.join(',')}
+          accept={extensions?.join(', ')}
         />
       </div>
 
