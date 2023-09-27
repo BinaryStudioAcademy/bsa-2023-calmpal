@@ -6,9 +6,7 @@ import {
   SidebarBody,
   SidebarHeader,
 } from '#libs/components/components.js';
-import { QUERY_STRING_PARAMETERS } from '#libs/constants/constants.js';
 import { IconColor } from '#libs/enums/enums.js';
-import { getUrlWithQueryString } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -90,10 +88,7 @@ const UserProfileSidebar: React.FC<Properties> = ({
           <div className="visually-hidden">Profile settings options</div>
           {SETTINGS_OPTIONS.map((option) => {
             return (
-              <Link
-                key={option.key}
-                to={getUrlWithQueryString(option.path, QUERY_STRING_PARAMETERS)}
-              >
+              <Link key={option.key} to={option.path}>
                 <Card
                   title={option.title}
                   onClick={handleClick(option.key)}

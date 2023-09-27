@@ -1,13 +1,16 @@
 import deafultMeditationImage from '#assets/img/meditation-image-placeholder.jpg';
 import { AudioPlayer, BackButtonWrapper } from '#libs/components/components.js';
+import { MOBILE_DIMENSION } from '#libs/constants/index.constant.js';
 import { AppQueryStringKey, AppRoute } from '#libs/enums/enums.js';
 import {
   useAppSelector,
   useCallback,
   useEffect,
+  useMediaQuery,
   useNavigate,
   useParams,
   useSearchParams,
+  useSidebarState,
   useState,
 } from '#libs/hooks/hooks.js';
 import { TRACK_FIRST_INDEX } from '#pages/meditation/libs/constants/constants.js';
@@ -23,12 +26,14 @@ const MeditationPlayer: React.FC = () => {
   });
   const { id: meditationEntryId } = useParams<{ id: string }>();
   const [searchParameters] = useSearchParams();
+  const { setIsSidebarShow } = useSidebarState();
   const navigate = useNavigate();
   const timerDuration = Number(
     searchParameters.get(AppQueryStringKey.TIMER_DURATION),
   );
 
   const [trackIndex, setTrackIndex] = useState(TRACK_FIRST_INDEX);
+  const isMobileDimension = useMediaQuery(MOBILE_DIMENSION);
 
   useEffect(() => {
     const track = meditationEntries.find((entry) => {
@@ -46,7 +51,13 @@ const MeditationPlayer: React.FC = () => {
 
   const handleBackButtonPress = useCallback(() => {
     navigate(AppRoute.MEDITATION);
-  }, [navigate]);
+
+    if (isMobileDimension) {
+      setIsSidebarShow(false);
+    } else {
+      setIsSidebarShow(true);
+    }
+  }, [isMobileDimension, navigate, setIsSidebarShow]);
 
   const { name, mediaUrl } = meditationEntries[trackIndex] ?? {};
 
