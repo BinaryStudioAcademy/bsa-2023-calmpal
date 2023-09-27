@@ -55,7 +55,7 @@ const AddMeditationModal: React.FC<Properties> = ({
           errors={errors}
           label="Topic name"
           name="name"
-          placeholder="Enter topic name"
+          placeholder="Enter meditation name"
           labelColor={AppColor.BLACK}
         />
         <InputFile
