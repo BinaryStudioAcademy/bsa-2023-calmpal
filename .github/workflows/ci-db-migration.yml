@@ -19,6 +19,7 @@ env:
   DB_POOL_MIN: 2
   DB_POOL_MAX: 10
   DUMP_FILE: environment-dump
+  STRIPE_SECRET_KEY: stripe_secret_key
 
 on:
   pull_request:
