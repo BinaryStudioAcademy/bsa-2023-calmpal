@@ -5,6 +5,7 @@ import {
   useCallback,
   useEffect,
   useParams,
+  useRef,
 } from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import {
@@ -24,6 +25,7 @@ type Properties = {
 
 const ChatLayout: React.FC<Properties> = ({ filter }) => {
   const { id } = useParams<{ id: string }>();
+  const bottomElementReference = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
   const { currentChatMessages, authenticatedUser, createMessageDataStatus } =
     useAppSelector(({ chats, auth }) => {
@@ -64,6 +66,13 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createMessageDataStatus, dispatch]);
 
+  useEffect(() => {
+    bottomElementReference.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
+  }, [dispatch, currentChatMessages.length]);
+
   return (
     <>
       <ChatHeader />
@@ -78,6 +87,7 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
               />
             );
           })}
+        <div ref={bottomElementReference} />
       </div>
       <ChatFooter onSend={handleSend} />
     </>

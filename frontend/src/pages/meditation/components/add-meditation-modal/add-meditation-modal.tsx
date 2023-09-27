@@ -70,7 +70,7 @@ const AddMeditationModal: React.ForwardRefRenderFunction<
           errors={errors}
           label="Meditation name"
           name="name"
-          placeholder="Enter topic name"
+          placeholder="Enter meditation name"
         />
         <InputFile
           control={control}
