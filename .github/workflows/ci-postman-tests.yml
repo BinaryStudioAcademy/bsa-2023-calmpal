@@ -71,14 +71,12 @@ jobs:
         run: |
           env > ./backend/.env
 
-          docker build -t backend-image -f ./backend/Dockerfile.development .
-
-          docker run --rm -d --network host --name backend-container --env-file ./backend/.env backend-image
+          docker run --rm -d --network host --env-file ./backend/.env $(docker build -f ./backend/Dockerfile.development -q .)
 
       - name: Run postman collection tests
         run: |
           docker run --rm --network host -v ./:/etc/newman \
-          --health-cmd="curl -s --fail http://localhost:3001/health || exit 1" \
+          --health-cmd="curl -s --fail http://${{ env.HOST }}:${{ env.PORT }}/health || exit 1" \
           --health-interval=5s \
           --health-retries=12 \
           --health-timeout=2s \
