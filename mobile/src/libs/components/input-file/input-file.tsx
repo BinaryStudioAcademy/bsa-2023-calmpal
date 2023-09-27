@@ -75,7 +75,7 @@ const InputFile = <T extends FormFieldValues>({
         onPress={handlePickFile as () => void}
       >
         <Icon name="upload" color={AppColor.GRAY_500} />
-        <Text style={styles.primaryText}>click here</Text>
+        <Text style={styles.primaryText}>Click here</Text>
         <Text style={styles.secondaryText}>Only MP3 extension is allowed</Text>
       </Pressable>
       {hasError && <Text style={styles.errorText}>{error as string}</Text>}
