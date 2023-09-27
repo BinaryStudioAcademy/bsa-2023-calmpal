@@ -32,78 +32,78 @@ type Constructor = {
 
 /**
  * @swagger
- * components:
- *    schemas:
- *      ChatMember:
- *        type: object
- *        properties:
- *         id:
- *           type: number
- *           format: number
- *           minimum: 1
- *         userId:
- *           type: number
- *           format: number
- *           minimum: 1
- *         chatId:
- *           type: number
- *           format: number
- *           minimum: 1
- *         createdAt:
- *           type: string
- *           format: date-time
- *         updatedAt:
- *           type: string
- *           format: date-time
- *      Chat:
- *        type: object
- *        properties:
- *          id:
- *            type: number
- *            format: number
- *            minimum: 1
- *          name:
- *            type: string
- *          members:
- *            type: array
- *            items:
- *              $ref: '#/components/schemas/ChatMember'
- *          createdAt:
- *             type: string
- *             format: date-time
- *          updatedAt:
- *             type: string
- *             format: date-time
- *          imageUrl:
- *             type: string
- *      ChatMessage:
- *        type: object
- *        properties:
- *          id:
- *            type: number
- *            format: number
- *            minimum: 1
- *          message:
- *            type: string
- *          senderId:
- *            type: number
- *            minimum: 1
- *          chatId:
- *            type: number
- *            minimum: 1
- *          createdAt:
- *             type: string
- *             format: date-time
- *          updatedAt:
- *             type: string
- *             format: date-time
- *       Error:
- *         type: object
- *         properties:
- *           message:
- *             type: string
- *           errorType:
- *             type: string
+ *  components:
+ *  schemas:
+ *    ChatMember:
+ *      type: object
+ *      properties:
+ *        id:
+ *          type: number
+ *          format: number
+ *          minimum: 1
+ *        userId:
+ *          type: number
+ *          format: number
+ *          minimum: 1
+ *        chatId:
+ *          type: number
+ *          format: number
+ *          minimum: 1
+ *        createdAt:
+ *          type: string
+ *          format: date-time
+ *        updatedAt:
+ *          type: string
+ *          format: date-time
+ *    Chat:
+ *      type: object
+ *      properties:
+ *        id:
+ *          type: number
+ *          format: number
+ *          minimum: 1
+ *        name:
+ *          type: string
+ *        members:
+ *          type: array
+ *          items:
+ *            $ref: '#/components/schemas/ChatMember'
+ *        createdAt:
+ *          type: string
+ *          format: date-time
+ *        updatedAt:
+ *          type: string
+ *          format: date-time
+ *        imageUrl:
+ *          type: string
+ *    ChatMessage:
+ *      type: object
+ *      properties:
+ *        id:
+ *          type: number
+ *          format: number
+ *          minimum: 1
+ *        message:
+ *          type: string
+ *        senderId:
+ *          type: number
+ *          minimum: 1
+ *        chatId:
+ *          type: number
+ *          minimum: 1
+ *        createdAt:
+ *          type: string
+ *          format: date-time
+ *        updatedAt:
+ *          type: string
+ *          format: date-time
+ *    Error:
+ *      type: object
+ *      properties:
+ *        message:
+ *          type: string
+ *        errorType:
+ *          type: string
  */
 class ChatController extends BaseController {
   private chatService: ChatService;
@@ -514,31 +514,31 @@ class ChatController extends BaseController {
   /**
    * @swagger
    * /chats/{id}:
-   *    put:
-   *      description: Update a chat
-   *      security:
+   *   put:
+   *     description: Update a chat
+   *     security:
    *       - bearerAuth: []
-   *      parameters:
-   *       -  in: path
-   *          description: Chat id
-   *          name: id
-   *          required: true
-   *          type: number
-   *          minimum: 1
-   *      requestBody:
-   *        description: Chat data
-   *        required: true
-   *        content:
-   *          application/json:
-   *             schema:
-   *                $ref: '#/components/schemas/Chat'
-   *      responses:
-   *        200:
+   *     parameters:
+   *       - in: path
+   *         description: Chat id
+   *         name: id
+   *         required: true
+   *         type: number
+   *         minimum: 1
+   *     requestBody:
+   *       description: Chat data
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/Chat'
+   *     responses:
+   *       200:
    *         description: Successful operation
    *         content:
    *           application/json:
    *             schema:
-   *              type: object
+   *               type: object
    *               properties:
    *                 items:
    *                   type: array
