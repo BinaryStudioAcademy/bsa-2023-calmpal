@@ -1,10 +1,11 @@
 import deafultMeditationImage from '#assets/img/meditation-image-placeholder.jpg';
-import { AudioPlayer } from '#libs/components/components.js';
-import { AppQueryStringKey } from '#libs/enums/enums.js';
+import { AudioPlayer, BackButton } from '#libs/components/components.js';
+import { AppQueryStringKey, AppRoute } from '#libs/enums/enums.js';
 import {
   useAppSelector,
   useCallback,
   useEffect,
+  useNavigate,
   useParams,
   useSearchParams,
   useState,
@@ -22,6 +23,7 @@ const MeditationPlayer: React.FC = () => {
   });
   const { id: meditationEntryId } = useParams<{ id: string }>();
   const [searchParameters] = useSearchParams();
+  const navigate = useNavigate();
   const timerDuration = Number(
     searchParameters.get(AppQueryStringKey.TIMER_DURATION),
   );
@@ -42,10 +44,15 @@ const MeditationPlayer: React.FC = () => {
     setTrackIndex(index);
   }, []);
 
+  const handleBackButtonPress = useCallback(() => {
+    navigate(AppRoute.MEDITATION);
+  }, [navigate]);
+
   const { name, mediaUrl } = meditationEntries[trackIndex] ?? {};
 
   return (
     <div className={styles['wrapper']}>
+      <BackButton onGoBack={handleBackButtonPress} isVisible />
       <div className={styles['meditation-player']}>
         <div className={styles['image-wrapper']}>
           <img
