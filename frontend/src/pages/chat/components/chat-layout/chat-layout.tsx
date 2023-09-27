@@ -65,6 +65,13 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
     }
   }, [createMessageDataStatus, dispatch, filter]);
 
+  useEffect(() => {
+    bottomElementReference.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
+  }, [currentChatMessages.length]);
+
   return (
     <>
       <ChatHeader />
