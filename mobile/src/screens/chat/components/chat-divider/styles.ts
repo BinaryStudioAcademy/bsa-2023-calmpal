@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingVertical: 10,
   },
   date: {
     color: AppColor.GRAY_300,
