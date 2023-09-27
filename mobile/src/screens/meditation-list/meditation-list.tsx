@@ -65,7 +65,7 @@ const MeditationList: React.FC = () => {
   };
 
   const handleSetPlaylist = (): void => {
-    navigation.navigate(MeditationScreenName.MEDITATION);
+    navigation.navigate(MeditationScreenName.MEDITATION, { duration });
   };
 
   useEffect(() => {
