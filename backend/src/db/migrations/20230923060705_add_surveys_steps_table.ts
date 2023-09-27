@@ -23,4 +23,14 @@ function up(knex: Knex): Promise<void> {
   });
 }
 
-export { up };
+function down(knex: Knex): Promise<void> {
+  return knex.schema.alterTable(TABLE_NAME, (table) => {
+    table.dropColumn(ColumnName.FEELINGS);
+    table.dropColumn(ColumnName.GOALS);
+    table.dropColumn(ColumnName.WORRIES);
+    table.dropColumn(ColumnName.MEDITATION_EXPERIENCE);
+    table.dropColumn(ColumnName.JOURNALING_EXPERIENCE);
+  });
+}
+
+export { down, up };
