@@ -9,6 +9,8 @@ const AppRoute = {
   CHATS_$ID: '/chats/:id',
   JOURNAL: '/journal',
   JOURNAL_$ID: '/journal/:id',
+  JOURNAL_$ID_QUERY: '/journal/:id?query=:query',
+  CHATS_$ID_QUERY: '/chats/:id?query=:query',
   PROFILE: '/profile',
   PROFILE_SUBSCRIPTION: '/profile/subscription',
   PROFILE_SUBSCRIPTION_CHECKOUT: '/profile/subscription/checkout',
