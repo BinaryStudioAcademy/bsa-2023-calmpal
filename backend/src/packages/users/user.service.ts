@@ -103,14 +103,16 @@ class UserService implements Service {
   public async delete(id: number): Promise<boolean> {
     const userToDelete = await this.userRepository.findById(id);
 
-    if (userToDelete === null) {
+    if (!userToDelete) {
       throw new UsersError({
         status: HTTPCode.NOT_FOUND,
         message: ExceptionMessage.USER_NOT_FOUND,
       });
     }
 
-    return await this.userRepository.delete(id);
+    const deletedCount = await this.userRepository.delete(id);
+
+    return Boolean(deletedCount);
   }
 
   public async findByEmail(

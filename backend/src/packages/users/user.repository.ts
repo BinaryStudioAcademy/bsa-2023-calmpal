@@ -3,7 +3,6 @@ import { type Repository, type ValueOf } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/users.js';
 
-import { ZERO_UPDATED_ROW_SOFT_DELETED } from './libs/constants/constants.js';
 import { UsersRelation } from './libs/enums/enums.js';
 import {
   type UserCommonQueryResponse,
@@ -139,13 +138,12 @@ class UserRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public async delete(id: number): Promise<boolean> {
-    const updatedRow = await this.userModel
+  public delete(id: number): Promise<number> {
+    return this.userModel
       .query()
       .patch({ deletedAt: new Date().toISOString() })
-      .where({ id, deletedAt: null });
-
-    return updatedRow > ZERO_UPDATED_ROW_SOFT_DELETED;
+      .where({ id, deletedAt: null })
+      .execute();
   }
 
   public async findByEmail(email: string): Promise<UserEntity | null> {
