@@ -1,7 +1,7 @@
 import { Icon, Link } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { useCallback, useLocation, useState } from '#libs/hooks/hooks.js';
+import { useCallback, useState } from '#libs/hooks/hooks.js';
 import { type Route } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
@@ -11,7 +11,6 @@ type Properties = {
 };
 
 const DropdownMenu: React.FC<Properties> = ({ routes }) => {
-  const { pathname } = useLocation();
   const [isOpen, setOpen] = useState(false);
 
   const handleDropdownToggle = useCallback((): void => {
@@ -37,12 +36,7 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
         {routes.map((item) => {
           return (
             <div key={item.path}>
-              <div
-                className={getValidClassNames(
-                  styles['dropdown-item'],
-                  pathname === item.path && styles['selected'],
-                )}
-              >
+              <div className={getValidClassNames(styles['dropdown-item'])}>
                 <Link to={item.path}>
                   <span className={styles['item']}>
                     <span className="visually-hidden">Go to {item.name}</span>
