@@ -27,15 +27,21 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
   const { id } = useParams<{ id: string }>();
   const bottomElementReference = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
-  const { currentChatMessages, authenticatedUser, createMessageDataStatus } =
-    useAppSelector(({ chats, auth }) => {
-      return {
-        currentChatMessages: chats.currentChatMessages,
-        authenticatedUser: auth.authenticatedUser as UserAuthResponseDto,
-        createMessageDataStatus: chats.createMessageDataStatus,
-      };
-    });
+  const {
+    currentChatMessages,
+    authenticatedUser,
+    createMessageDataStatus,
+    generateReplyDataStatus,
+  } = useAppSelector(({ chats, auth }) => {
+    return {
+      currentChatMessages: chats.currentChatMessages,
+      authenticatedUser: auth.authenticatedUser as UserAuthResponseDto,
+      createMessageDataStatus: chats.createMessageDataStatus,
+      generateReplyDataStatus: chats.generateReplyDataStatus,
+    };
+  });
   const hasId = Boolean(id);
+  const isBotMessageLoading = generateReplyDataStatus === 'pending';
 
   const handleSend = useCallback(
     ({ message }: ChatInputValue): void => {
@@ -86,6 +92,11 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
               />
             );
           })}
+        {isBotMessageLoading && (
+          <div>
+            <span className={styles['loader']} />
+          </div>
+        )}
         <div ref={bottomElementReference} />
       </div>
       <ChatFooter onSend={handleSend} />
