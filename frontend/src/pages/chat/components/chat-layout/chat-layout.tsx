@@ -61,7 +61,8 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
     if (createMessageDataStatus === DataStatus.FULFILLED) {
       void dispatch(chatActions.getAllChats(filter));
     }
-  }, [createMessageDataStatus, dispatch, filter]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [createMessageDataStatus, dispatch]);
 
   return (
     <>
