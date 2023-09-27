@@ -28,6 +28,7 @@ type Properties = {
   onSetIsSidebarShow: (value: boolean) => void;
   filter: string;
   onSetFilter: (query: string) => void;
+  id: string | undefined;
 };
 
 const JournalSidebar: React.FC<Properties> = ({
@@ -35,6 +36,7 @@ const JournalSidebar: React.FC<Properties> = ({
   onSetIsSidebarShow,
   filter,
   onSetFilter,
+  id,
 }) => {
   const dispatch = useAppDispatch();
   const [chatToDelete, setChatToDelete] = useState<null | number>(null);
@@ -69,9 +71,15 @@ const JournalSidebar: React.FC<Properties> = ({
     [handleOpen],
   );
 
+  const handleGetSelectedNote = useCallback(async () => {
+    await dispatch(journalActions.getAllJournalEntries(filter));
+
+    dispatch(journalActions.setSelectedJournalEntry(Number(id)));
+  }, [dispatch, filter, id]);
+
   useEffect(() => {
-    void dispatch(journalActions.getAllJournalEntries(filter));
-  }, [dispatch, filter]);
+    void handleGetSelectedNote();
+  }, [dispatch, filter, handleGetSelectedNote]);
 
   const handleSelectJournalEntry = useCallback(
     (id: number) => {
@@ -106,10 +114,10 @@ const JournalSidebar: React.FC<Properties> = ({
           </div>
           <div className={styles['journal-entry-list']}>
             {allJournalEntries.map((journalEntry) => {
-              const noteLink = AppRoute.JOURNAL_$ID.replace(
+              const noteLink = AppRoute.JOURNAL_$ID_QUERY.replace(
                 ':id',
                 String(journalEntry.id),
-              ) as ValueOf<typeof AppRoute>;
+              ).replace(':query', filter) as ValueOf<typeof AppRoute>;
 
               return (
                 <Link key={journalEntry.id} to={noteLink}>
