@@ -25,7 +25,7 @@ const createSurveyValidationSchema = joi.object<SurveyRequestDto, true>({
     .messages({
       'array.min': SurveyValidationMessage.MINIMUM_PREFERENCE_LENGTH,
     }),
-  journaling_experience: joi
+  journalingExperience: joi
     .array()
     .items(
       joi
@@ -85,7 +85,7 @@ const createSurveyValidationSchema = joi.object<SurveyRequestDto, true>({
     .messages({
       'array.min': SurveyValidationMessage.MINIMUM_PREFERENCE_LENGTH,
     }),
-  meditation_experience: joi
+  meditationExperience: joi
     .array()
     .items(
       joi

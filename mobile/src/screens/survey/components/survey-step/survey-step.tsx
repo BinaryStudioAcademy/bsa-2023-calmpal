@@ -1,10 +1,11 @@
 import { type NavigationProp } from '@react-navigation/native';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { Button, Input, ScrollView, Text } from '#libs/components/components';
 import {
   useAppDispatch,
   useAppForm,
+  useAppSelector,
   useFormController,
 } from '#libs/hooks/hooks';
 import { type SurveyNavigationParameterList } from '#libs/types/types';
@@ -13,10 +14,12 @@ import {
   type SurveyInputDto,
   surveyInputValidationSchema,
 } from '#packages/survey/survey';
+import { type UserAuthResponseDto } from '#packages/users/users';
 import {
   DEFAULT_SURVEY_PAYLOAD,
   TEXTAREA_ROWS_COUNT,
 } from '#screens/survey/libs/constants';
+import { actions as authActions } from '#slices/auth/auth';
 import { actions } from '#slices/survey/survey';
 
 import { SurveyCategory } from '../components';
@@ -30,6 +33,7 @@ type SurveyStepProperties = {
   nextScreen: keyof SurveyNavigationParameterList;
   previousScreen: keyof SurveyNavigationParameterList;
   isButtonBack?: boolean;
+  isLastStep?: boolean;
 };
 
 const SurveyStep: React.FC<SurveyStepProperties> = ({
@@ -40,6 +44,7 @@ const SurveyStep: React.FC<SurveyStepProperties> = ({
   nextScreen,
   previousScreen,
   isButtonBack = true,
+  isLastStep = false,
 }) => {
   const { control, errors, isValid, handleSubmit } = useAppForm<SurveyInputDto>(
     {
@@ -56,8 +61,16 @@ const SurveyStep: React.FC<SurveyStepProperties> = ({
   });
 
   const dispatch = useAppDispatch();
-
   const hasOther = categoriesValue.includes('Other');
+  const surveyData = useAppSelector((state) => {
+    return state.survey;
+  });
+
+  const { userId } = useAppSelector(({ auth }) => {
+    return {
+      userId: (auth.authenticatedUser as UserAuthResponseDto).id,
+    };
+  });
 
   const handleFieldChange = useCallback(
     (option: string) => {
@@ -76,7 +89,7 @@ const SurveyStep: React.FC<SurveyStepProperties> = ({
     [categoriesValue, onCategoryChange],
   );
 
-  const handleSurveySubmit = useCallback(
+  const handleStepSubmit = useCallback(
     (payload: SurveyInputDto) => {
       const data = { [stepSurvey]: getSurveyCategories(payload) };
       dispatch(actions.updateSurveyData(data));
@@ -84,17 +97,37 @@ const SurveyStep: React.FC<SurveyStepProperties> = ({
     [dispatch, stepSurvey],
   );
 
+  const [shouldRender, setShouldRender] = useState(false);
+
+  const handleSurveySubmit = useCallback(
+    (payload: SurveyInputDto) => {
+      handleStepSubmit(payload);
+      const user = { userId: userId };
+      dispatch(actions.updateSurveyData(user));
+      setShouldRender(true);
+    },
+    [dispatch, handleStepSubmit, userId],
+  );
+
+  useEffect(() => {
+    if (shouldRender && isLastStep) {
+      void dispatch(authActions.createUserSurvey(surveyData));
+    }
+  }, [shouldRender, isLastStep, surveyData, dispatch]);
+
   const handleFormSubmit = useCallback(() => {
-    void handleSubmit(handleSurveySubmit)();
-  }, [handleSubmit, handleSurveySubmit]);
+    void handleSubmit(isLastStep ? handleSurveySubmit : handleStepSubmit)();
+  }, [handleSubmit, handleStepSubmit, handleSurveySubmit, isLastStep]);
 
   const handleBack = (): void => {
     navigation.navigate(previousScreen);
   };
 
   const handleContinue = (): void => {
-    navigation.navigate(nextScreen);
     handleFormSubmit();
+    if (!isLastStep) {
+      navigation.navigate(nextScreen);
+    }
   };
 
   return (

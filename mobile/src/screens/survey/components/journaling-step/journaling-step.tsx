@@ -18,8 +18,9 @@ const JournalingStep: React.FC = () => {
       navigation={navigation}
       stepTitle="What's your experience with journaling?"
       categories={JOURNALING_EXPERIENCE_CATEGORIES}
-      nextScreen={SurveyScreenName.MEDITATION_EXPERIENCE}
+      nextScreen={SurveyScreenName.JOURNALING_EXPERIENCE}
       previousScreen={SurveyScreenName.PREFERENCES}
+      isLastStep
     />
   );
 };

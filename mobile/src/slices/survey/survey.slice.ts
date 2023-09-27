@@ -2,21 +2,23 @@ import { type PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
 type SurveyState = {
+  userId: number;
   preferences: string[];
   feelings: string[];
   goals: string[];
   worries: string[];
-  meditationExperience: string;
-  journalingExperience: string;
+  meditationExperience: string[];
+  journalingExperience: string[];
 };
 
 const initialState: SurveyState = {
+  userId: 0,
   preferences: [],
   feelings: [],
   goals: [],
   worries: [],
-  meditationExperience: '',
-  journalingExperience: '',
+  meditationExperience: [],
+  journalingExperience: [],
 };
 
 const { reducer, actions, name } = createSlice({

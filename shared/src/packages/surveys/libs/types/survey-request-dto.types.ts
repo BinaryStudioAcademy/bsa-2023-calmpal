@@ -4,8 +4,8 @@ type SurveyRequestDto = {
   feelings: string[];
   goals: string[];
   worries: string[];
-  meditation_experience: string[];
-  journaling_experience: string[];
+  meditationExperience: string[];
+  journalingExperience: string[];
 };
 
 export { type SurveyRequestDto };

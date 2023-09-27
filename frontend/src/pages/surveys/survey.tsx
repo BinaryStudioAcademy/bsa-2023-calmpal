@@ -29,11 +29,11 @@ const Survey: React.FC = () => {
       void dispatch(
         authActions.createUserSurvey({
           userId: userId,
-          journaling_experience: [],
+          journalingExperience: [],
           feelings: [],
           goals: [],
           worries: [],
-          meditation_experience: [],
+          meditationExperience: [],
           preferences: options,
         }),
       );

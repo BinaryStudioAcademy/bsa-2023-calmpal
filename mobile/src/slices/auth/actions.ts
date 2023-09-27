@@ -68,7 +68,7 @@ const createUserSurvey = createAsyncThunk<
   boolean,
   SurveyRequestDto,
   AsyncThunkConfig
->(`${sliceName}/create-user-survey-preferences`, async (payload, { extra }) => {
+>(`${sliceName}/create-user-survey`, async (payload, { extra }) => {
   const { authApi } = extra;
   const { preferences } = await authApi.createUserSurvey(payload);
 

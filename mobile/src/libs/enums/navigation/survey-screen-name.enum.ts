@@ -3,8 +3,8 @@ const SurveyScreenName = {
   FEELINGS: 'feeling',
   GOALS: 'goals',
   WORRIES: 'worries',
-  MEDITATION_EXPERIENCE: 'meditation experience',
-  JOURNALING_EXPERIENCE: 'journaling experience',
+  MEDITATION_EXPERIENCE: 'meditationExperience',
+  JOURNALING_EXPERIENCE: 'journalingExperience',
 } as const;
 
 export { SurveyScreenName };
