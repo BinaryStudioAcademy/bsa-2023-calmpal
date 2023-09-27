@@ -75,9 +75,12 @@ jobs:
 
           docker run --rm -d --name backend-container --env-file ./backend/.env backend-image
 
+      - name: Sleep for 30 seconds
+        run: sleep 30s
+        shell: bash
+
       - name: Run postman collection tests
         run: |
-          docker wait backend-container
           docker run --rm -v ./:/etc/newman -t postman/newman run ./.postman/Calmpal-development.postman_collection.json
 
       - name: Stop docker services
