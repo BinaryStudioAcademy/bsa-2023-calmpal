@@ -2,11 +2,12 @@ import meditationPlaceholder from '#assets/img/meditation-image-placeholder.png'
 import {
   Button,
   Card,
+  Link,
   Sidebar,
   SidebarBody,
   SidebarHeader,
 } from '#libs/components/components.js';
-import { IconColor } from '#libs/enums/enums.js';
+import { AppRoute, IconColor } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useCallback,
@@ -73,13 +74,14 @@ const MeditationSidebar: React.FC<Properties> = ({
           <div className={styles['meditation-list']}>
             {navigationItems.map((item) => {
               return (
-                <Card
-                  title={item.name}
-                  imageUrl={meditationPlaceholder}
-                  onClick={handleSelectMeditationEntry}
-                  key={item.name}
-                  isActive
-                />
+                <Link key={item.name} to={AppRoute.MEDITATION}>
+                  <Card
+                    title={item.name}
+                    imageUrl={meditationPlaceholder}
+                    onClick={handleSelectMeditationEntry}
+                    isActive
+                  />
+                </Link>
               );
             })}
           </div>
