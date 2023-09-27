@@ -1,4 +1,4 @@
-import { BackButton } from '#libs/components/components.js';
+import { BackButtonWrapper } from '#libs/components/components.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useSidebarState } from '#libs/hooks/hooks.js';
 import { ProfileSettings } from '#pages/profile-settings/profile-settings.js';
@@ -25,7 +25,10 @@ const UserProfile: React.FC = () => {
           isSidebarShown && styles['hide'],
         )}
       >
-        <BackButton onGoBack={handleBackButtonPress} />
+        <BackButtonWrapper
+          onGoBack={handleBackButtonPress}
+          isVisible={!isSidebarShown}
+        />
         <ProfileSettings />
       </div>
     </>

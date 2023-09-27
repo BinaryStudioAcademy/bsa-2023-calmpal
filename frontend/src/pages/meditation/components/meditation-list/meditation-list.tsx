@@ -1,4 +1,4 @@
-import { BackButton, Loader } from '#libs/components/components.js';
+import { BackButtonWrapper, Loader } from '#libs/components/components.js';
 import { DataStatus } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useAppSelector, useCallback } from '#libs/hooks/hooks.js';
@@ -39,7 +39,10 @@ const MeditationList: React.FC<Properties> = ({
         isSidebarShown && styles['hidden'],
       )}
     >
-      <BackButton onGoBack={handleBackButtonPress} />
+      <BackButtonWrapper
+        onGoBack={handleBackButtonPress}
+        isVisible={!isSidebarShown}
+      />
       <div className={styles['list']}>
         {meditationEntries.map((entry) => {
           return <MeditationEntry meditationEntry={entry} key={entry.id} />;

@@ -6,7 +6,9 @@ import {
   SidebarBody,
   SidebarHeader,
 } from '#libs/components/components.js';
-import { IconColor } from '#libs/enums/enums.js';
+import { QUERY_STRING_PARAMETERS } from '#libs/constants/constants.js';
+import { type AppRoute, IconColor } from '#libs/enums/enums.js';
+import { getUrlWithQueryString } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -14,6 +16,7 @@ import {
   useLocation,
   useState,
 } from '#libs/hooks/hooks.js';
+import { type ValueOf } from '#libs/types/types.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
@@ -88,7 +91,13 @@ const UserProfileSidebar: React.FC<Properties> = ({
           <div className="visually-hidden">Profile settings options</div>
           {SETTINGS_OPTIONS.map((option) => {
             return (
-              <Link key={option.key} to={option.path}>
+              <Link
+                key={option.key}
+                to={getUrlWithQueryString(
+                  option.path as ValueOf<typeof AppRoute>,
+                  QUERY_STRING_PARAMETERS,
+                )}
+              >
                 <Card
                   title={option.title}
                   onClick={handleClick(option.key)}

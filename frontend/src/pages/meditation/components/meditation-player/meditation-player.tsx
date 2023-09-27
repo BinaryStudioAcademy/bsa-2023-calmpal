@@ -1,5 +1,5 @@
 import deafultMeditationImage from '#assets/img/meditation-image-placeholder.jpg';
-import { AudioPlayer, BackButton } from '#libs/components/components.js';
+import { AudioPlayer, BackButtonWrapper } from '#libs/components/components.js';
 import { AppQueryStringKey, AppRoute } from '#libs/enums/enums.js';
 import {
   useAppSelector,
@@ -52,7 +52,7 @@ const MeditationPlayer: React.FC = () => {
 
   return (
     <div className={styles['wrapper']}>
-      <BackButton onGoBack={handleBackButtonPress} isVisible />
+      <BackButtonWrapper onGoBack={handleBackButtonPress} isVisible />
       <div className={styles['meditation-player']}>
         <div className={styles['image-wrapper']}>
           <img
