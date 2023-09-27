@@ -1,61 +1,114 @@
-import { useCallback, useRef, useState } from '#libs/hooks/hooks.js';
+import {
+  useAppForm,
+  useCallback,
+  useEffect,
+  useRef,
+} from '#libs/hooks/hooks.js';
 import {
   TRACK_INCREMENT_INDEX,
   TRACK_START_TIME,
 } from '#pages/meditation/libs/constants/constants.js';
 
-import { AudioControls } from './components/audio-controls/audio-controls.js';
-import { ProgressBar } from './components/progress-bar/progress-bar.js';
+import { AudioControls, ProgressBar } from './components/components.js';
+import { DEFAULT_AUDIO_OPTIONS } from './libs/constants/constants.js';
+import { AudioOptionKey } from './libs/enums/enums.js';
+import { type AudioControlsHandler } from './libs/types/types.js';
 
-type Properties<T> = {
-  src: string;
+type Properties = {
+  mediaUrl: string;
+  timerDuration: number | null;
   trackIndex: number;
   onSetTrackIndex: (index: number) => void;
-  onSetCurrentTrack: (track: T) => void;
-  tracks: T[];
+  tracksCount: number;
 };
 
-const AudioPlayer = <T,>({
-  src,
+const AudioPlayer: React.FC<Properties> = ({
+  mediaUrl,
+  timerDuration,
   trackIndex,
-  tracks,
-  onSetCurrentTrack,
+  tracksCount,
   onSetTrackIndex,
-}: Properties<T>): JSX.Element => {
-  const [timeProgress, setTimeProgress] = useState(TRACK_START_TIME);
-  const [duration, setDuration] = useState(TRACK_START_TIME);
-
+}: Properties): JSX.Element => {
   const audioReference = useRef<HTMLAudioElement | null>(null);
   const progressBarReference = useRef<HTMLInputElement | null>(null);
+  const audioControlsReference = useRef<AudioControlsHandler | null>(null);
+
+  const { watch, setValue } = useAppForm({
+    defaultValues: { ...DEFAULT_AUDIO_OPTIONS, timerDuration },
+    mode: 'onChange',
+  });
 
   const handleLoadMetadata = useCallback((): void => {
-    if (audioReference.current) {
-      const seconds = audioReference.current.duration;
-      setDuration(seconds);
+    const seconds = (audioReference.current as HTMLAudioElement).duration;
+    setValue(AudioOptionKey.DURATION, seconds);
 
-      if (progressBarReference.current) {
-        progressBarReference.current.max = seconds.toString();
-      }
-    }
-  }, []);
-
-  const handleTimeProgress = useCallback((currentTime: number): void => {
-    setTimeProgress(currentTime);
-  }, []);
+    (progressBarReference.current as HTMLInputElement).max = seconds.toString();
+  }, [setValue]);
 
   const handleNext = useCallback(() => {
-    const nextTrackIndex = (trackIndex + TRACK_INCREMENT_INDEX) % tracks.length;
+    const nextTrackIndex = (trackIndex + TRACK_INCREMENT_INDEX) % tracksCount;
     onSetTrackIndex(nextTrackIndex);
-    onSetCurrentTrack(tracks[nextTrackIndex] as T);
-  }, [onSetCurrentTrack, onSetTrackIndex, trackIndex, tracks]);
+  }, [trackIndex, tracksCount, onSetTrackIndex]);
+
+  const currentTimerDuration = watch(AudioOptionKey.TIMER_DURATION);
+
+  const { timeProgress, duration } = watch();
+
+  const handleLoopTrack = useCallback((): void => {
+    (audioReference.current as HTMLAudioElement).currentTime = TRACK_START_TIME;
+    setValue(AudioOptionKey.TIME_PROGRESS, TRACK_START_TIME);
+    setValue(
+      AudioOptionKey.TIMER_DURATION,
+      (currentTimerDuration as number) - timeProgress,
+    );
+
+    void (audioReference.current as HTMLAudioElement).play();
+  }, [timeProgress, currentTimerDuration, setValue]);
+
+  useEffect(() => {
+    if (
+      currentTimerDuration !== null &&
+      currentTimerDuration - timeProgress <= TRACK_START_TIME
+    ) {
+      (audioReference.current as HTMLAudioElement).pause();
+      (
+        audioControlsReference.current as AudioControlsHandler
+      ).handlePausePlayer();
+
+      setValue(
+        AudioOptionKey.TIMER_DURATION,
+        (timerDuration as number) + timeProgress,
+      );
+    }
+  }, [timeProgress, timerDuration, currentTimerDuration, setValue]);
+
+  const handleEndTrack = useCallback(() => {
+    const lastDurationTimer =
+      (currentTimerDuration ?? TRACK_START_TIME) - duration;
+
+    if (lastDurationTimer > TRACK_START_TIME) {
+      handleLoopTrack();
+    } else {
+      handleNext();
+    }
+  }, [currentTimerDuration, duration, handleNext, handleLoopTrack]);
+
+  const handleTimeProgress = useCallback(
+    (currentTime: number): void => {
+      if (timeProgress !== currentTime) {
+        setValue(AudioOptionKey.TIME_PROGRESS, currentTime);
+      }
+    },
+    [timeProgress, setValue],
+  );
 
   return (
     <>
       <audio
-        src={src}
+        src={mediaUrl}
         ref={audioReference}
         onLoadedMetadata={handleLoadMetadata}
-        onEnded={handleNext}
+        onEnded={handleEndTrack}
       >
         <track kind="captions" />
       </audio>
@@ -66,14 +119,14 @@ const AudioPlayer = <T,>({
         duration={duration}
       />
       <AudioControls
+        ref={audioControlsReference}
         audioReference={audioReference}
         progressBarReference={progressBarReference}
         duration={duration}
         onTimeProgress={handleTimeProgress}
         trackIndex={trackIndex}
         onSetTrackIndex={onSetTrackIndex}
-        onSetCurrentTrack={onSetCurrentTrack}
-        tracks={tracks}
+        tracksCount={tracksCount}
         onNextTrack={handleNext}
       />
     </>

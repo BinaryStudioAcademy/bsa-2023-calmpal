@@ -9,6 +9,7 @@ import {
   type JournalEntryUpdatePayloadDto,
 } from '#packages/journal/journal.js';
 import { actions as appActions } from '#slices/app/app.js';
+import { actions as journalActions } from '#slices/journal/journal.js';
 
 import { name as sliceName } from './journal.slice.js';
 
@@ -18,7 +19,7 @@ const createJournalEntry = createAsyncThunk<
   AsyncThunkConfig
 >(`${sliceName}/create-journal-entry`, async (payload, { extra, dispatch }) => {
   const { journalApi } = extra;
-  const journalEntry = await journalApi.createJournalEntry(payload);
+  const journalEntry = await journalApi.createEntry(payload);
   dispatch(
     appActions.navigate(
       AppRoute.JOURNAL_$ID.replace(
@@ -33,12 +34,12 @@ const createJournalEntry = createAsyncThunk<
 
 const getAllJournalEntries = createAsyncThunk<
   JournalEntryGetAllResponseDto,
-  undefined,
+  string,
   AsyncThunkConfig
->(`${sliceName}/get-all-journal-entries`, async (_, { extra }) => {
+>(`${sliceName}/get-all-journal-entries`, async (query, { extra }) => {
   const { journalApi } = extra;
 
-  return await journalApi.getAllJournalEntries();
+  return await journalApi.getAllEntries(query);
 });
 
 const updateJournalEntry = createAsyncThunk<
@@ -48,6 +49,35 @@ const updateJournalEntry = createAsyncThunk<
 >(`${sliceName}/update-journal-entry`, async (payload, { extra }) => {
   const { journalApi } = extra;
 
-  return await journalApi.updateJournalEntry(payload);
+  return await journalApi.updateEntry(payload);
 });
-export { createJournalEntry, getAllJournalEntries, updateJournalEntry };
+
+const deleteJournal = createAsyncThunk<
+  JournalEntryGetAllItemResponseDto[],
+  number,
+  AsyncThunkConfig
+>(
+  `${sliceName}/delete-journal-entry`,
+  async (id, { extra, getState, dispatch }) => {
+    const { journalApi } = extra;
+    await journalApi.deleteEntry(id);
+    const {
+      journal: { allJournalEntries, selectedJournalEntry },
+    } = getState();
+
+    if (selectedJournalEntry?.id === id) {
+      dispatch(journalActions.setSelectedJournalEntry(null));
+    }
+
+    return allJournalEntries.filter((journal) => {
+      return journal.id !== id;
+    });
+  },
+);
+
+export {
+  createJournalEntry,
+  deleteJournal,
+  getAllJournalEntries,
+  updateJournalEntry,
+};

@@ -12,11 +12,11 @@
 
 @media (width < 900px) {
   .container {
-    width: 250px;
+    width: 280px;
   }
 }
 
-@media (width < 768px) {
+@media (width < 768px), (height < 530px) {
   .container {
     width: 100%;
   }

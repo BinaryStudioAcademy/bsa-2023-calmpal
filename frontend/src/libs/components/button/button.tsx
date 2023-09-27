@@ -1,6 +1,11 @@
 import { type IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { type IconName, type ValueOf } from '#libs/types/types.js';
+import {
+  type ButtonStyle,
+  type ButtonStyleColor,
+  type IconName,
+  type ValueOf,
+} from '#libs/types/types.js';
 
 import { Icon } from '../components.js';
 import styles from './styles.module.scss';
@@ -8,15 +13,16 @@ import styles from './styles.module.scss';
 type Properties = {
   label: string;
   type?: 'button' | 'submit';
-  iconName?: IconName;
-  iconColor?: ValueOf<typeof IconColor>;
+  iconName?: IconName | undefined;
+  iconColor?: ValueOf<typeof IconColor> | undefined;
   iconWidth?: number;
   iconHeight?: number;
-  style?: 'primary' | 'secondary' | 'rounded' | 'rounded-transparent' | 'add';
+  style?: ButtonStyle;
+  styleColor?: ButtonStyleColor;
   isLoading?: boolean;
   isDisabled?: boolean;
   isLabelVisuallyHidden?: boolean;
-  onClick?: () => void;
+  onClick?: (() => void) | undefined | (() => Promise<void>);
 };
 
 const Button: React.FC<Properties> = ({
@@ -27,6 +33,7 @@ const Button: React.FC<Properties> = ({
   iconWidth,
   iconHeight,
   style = 'primary',
+  styleColor = 'default',
   isLoading = false,
   isDisabled = false,
   isLabelVisuallyHidden = false,
@@ -35,7 +42,7 @@ const Button: React.FC<Properties> = ({
   return (
     <button
       type={type}
-      className={styles[style]}
+      className={getValidClassNames(styles[style], styles[styleColor])}
       onClick={onClick}
       disabled={isDisabled || isLoading}
     >

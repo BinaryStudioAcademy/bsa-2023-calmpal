@@ -2,6 +2,7 @@ import React from 'react';
 import { TextInput } from 'react-native';
 
 import { Text, View } from '#libs/components/components';
+import { AppColor } from '#libs/enums/enums';
 import { useFormController, useState } from '#libs/hooks/hooks';
 import {
   type FormControl,
@@ -20,6 +21,7 @@ type Properties<T extends FormFieldValues> = {
   isSecure?: boolean;
   placeholder: string;
   rowsCount?: number;
+  labelColor?: string;
 };
 
 const Input = <T extends FormFieldValues>({
@@ -30,6 +32,7 @@ const Input = <T extends FormFieldValues>({
   isSecure = false,
   placeholder,
   rowsCount,
+  labelColor,
 }: Properties<T>): JSX.Element => {
   const [isFocused, setIsFocused] = useState(false);
   const { field } = useFormController({ name, control });
@@ -51,7 +54,9 @@ const Input = <T extends FormFieldValues>({
 
   return (
     <View>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={[styles.label, { color: labelColor ?? AppColor.GRAY_100 }]}>
+        {label}
+      </Text>
       {hasRows ? (
         <TextInput
           onChangeText={onChange}
@@ -59,6 +64,7 @@ const Input = <T extends FormFieldValues>({
           onFocus={handleFocus}
           onBlur={handeBlur}
           multiline={true}
+          textAlignVertical="top"
           numberOfLines={rowsCount}
           style={styles.otherTextInput}
           placeholder={placeholder}

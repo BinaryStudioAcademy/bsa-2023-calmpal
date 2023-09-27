@@ -7,6 +7,7 @@ import { Auth } from '#pages/auth/auth.js';
 import { Chat } from '#pages/chat/chat.js';
 import { Dashboard } from '#pages/dashboard/dashboard.js';
 import { Journal } from '#pages/journal/journal.js';
+import { MeditationPlayer } from '#pages/meditation/components/components.js';
 import { Meditation } from '#pages/meditation/meditation.js';
 import { Survey } from '#pages/surveys/survey.js';
 import { UserProfile } from '#pages/user-profile/user-profile.js';
@@ -25,6 +26,10 @@ const routerPathToElement: Record<
         <Meditation />
       </NavigationMenuWrapper>
     ),
+  },
+  [AppRoute.MEDITATION_$ID]: {
+    type: 'private',
+    element: <MeditationPlayer />,
   },
   [AppRoute.SIGN_IN]: {
     element: <Auth />,
@@ -73,6 +78,22 @@ const routerPathToElement: Record<
     ),
   },
   [AppRoute.PROFILE]: {
+    type: 'private',
+    element: (
+      <NavigationMenuWrapper>
+        <UserProfile />
+      </NavigationMenuWrapper>
+    ),
+  },
+  [AppRoute.PROFILE_SUBSCRIPTION]: {
+    type: 'private',
+    element: (
+      <NavigationMenuWrapper>
+        <UserProfile />
+      </NavigationMenuWrapper>
+    ),
+  },
+  [AppRoute.PROFILE_SUBSCRIPTION_CHECKOUT]: {
     type: 'private',
     element: (
       <NavigationMenuWrapper>

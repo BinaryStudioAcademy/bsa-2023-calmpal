@@ -73,7 +73,6 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
                   </span>
                 </Link>
               </div>
-              <hr className={styles['divider']} />
             </div>
           );
         })}

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   surveyContainer: {
@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     borderColor: AppColor.WHITE,
     color: AppColor.BLUE_300,
     fontSize: 16,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
   placeholder: {
     color: AppColor.WHITE,

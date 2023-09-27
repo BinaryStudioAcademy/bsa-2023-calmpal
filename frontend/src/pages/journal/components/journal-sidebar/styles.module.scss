@@ -1,11 +1,7 @@
 .info {
   display: flex;
-  justify-content: center;
   align-items: center;
-}
-
-.search {
-  margin-top: 23px;
+  width: 100%;
 }
 
 .journal-entry-list {
@@ -15,22 +11,33 @@
   width: 100%;
   height: 100%;
   margin-top: 83px;
-  padding: 0 16px 32px;
+  padding: 0 16px 130px;
   overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .journal-entry-list::-webkit-scrollbar {
   display: none;
 }
 
+.search {
+  margin-top: 23px;
+}
+
 @media (width < 900px) {
   .journal-entry-list {
+    padding: 0 15px 130px;
+  }
+
+  .search {
+    width: 100%;
     padding: 0 15px;
   }
 }
 
 @media (width < 768px) {
   .journal-entry-list {
-    padding: 0 15px;
+    margin-top: 23px;
+    padding: 0 20px;
   }
 }

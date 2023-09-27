@@ -1,0 +1,45 @@
+FROM node:18.16.0 as backend-builder
+
+ARG ENVIRONMENT_DB_PASSWORD
+ENV ENVIRONMENT_DB_PASSWORD=$ENVIRONMENT_DB_PASSWORD
+ARG ENVIRONMENT_DB_USERNAME
+ENV ENVIRONMENT_DB_USERNAME=$ENVIRONMENT_DB_USERNAME
+ARG ENVIRONMENT_DB_HOST
+ENV ENVIRONMENT_DB_HOST=$ENVIRONMENT_DB_HOST
+ARG ENVIRONMENT_DB_PORT
+ENV ENVIRONMENT_DB_PORT=$ENVIRONMENT_DB_PORT
+ARG ENVIRONMENT_DB_NAME
+ENV ENVIRONMENT_DB_NAME=$ENVIRONMENT_DB_NAME
+ARG DUMP_FILE
+ENV DUMP_FILE=$DUMP_FILE
+ARG DB_PASSWORD
+ENV DB_PASSWORD=$DB_PASSWORD
+ARG DB_USERNAME
+ENV DB_USERNAME=$DB_USERNAME
+ARG DB_HOST
+ENV DB_HOST=$DB_HOST
+ARG DB_PORT
+ENV DB_PORT=$DB_PORT
+ARG DB_NAME
+ENV DB_NAME=$DB_NAME
+
+WORKDIR /app
+
+RUN apt-get install wget ca-certificates
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ $(grep -oP 'VERSION_CODENAME=\K\w+' /etc/os-release)-pgdg main" | tee  /etc/apt/sources.list.d/pgdg.list
+RUN apt-get clean && apt-get update -qq && apt-get -y install postgresql-15 postgresql-client-15
+
+COPY ./package*.json ./tsconfig.json  ./
+COPY ./shared/ ./shared/
+COPY ./backend/package.json ./backend/package.json
+RUN npm ci
+
+COPY ./backend/ ./backend/
+RUN npm run build -w backend
+
+RUN bash -c "PGPASSWORD='$ENVIRONMENT_DB_PASSWORD' pg_dump -Fc --username=$ENVIRONMENT_DB_USERNAME --host=$ENVIRONMENT_DB_HOST --port=$ENVIRONMENT_DB_PORT --dbname=$ENVIRONMENT_DB_NAME -E utf8 > $DUMP_FILE"
+
+RUN bash -c "PGPASSWORD=$DB_PASSWORD pg_restore --dbname=$DB_NAME --username=$DB_USERNAME --host=$DB_HOST --port=$DB_PORT '$DUMP_FILE' --no-privileges --no-owner"
+
+CMD npm run prestart -w backend

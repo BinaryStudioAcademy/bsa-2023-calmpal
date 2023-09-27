@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants';
 import { storage, StorageKey } from '#libs/packages/storage/storage';
 import { type AsyncThunkConfig } from '#libs/types/types';
 import { type SurveyRequestDto } from '#packages/survey/survey';
@@ -10,7 +11,6 @@ import {
 } from '#packages/users/users';
 
 import { name as sliceName } from './auth.slice';
-import { EMPTY_ARRAY_LENGTH } from './libs/constants';
 
 const signUp = createAsyncThunk<
   UserAuthResponseDto,
