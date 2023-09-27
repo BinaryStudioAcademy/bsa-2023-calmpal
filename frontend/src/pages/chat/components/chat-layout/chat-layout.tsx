@@ -99,7 +99,10 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
         )}
         <div ref={bottomElementReference} />
       </div>
-      <ChatFooter onSend={handleSend} />
+      <ChatFooter
+        onSend={handleSend}
+        isChatbotReplyLoading={isChatbotReplyLoading}
+      />
     </>
   );
 };

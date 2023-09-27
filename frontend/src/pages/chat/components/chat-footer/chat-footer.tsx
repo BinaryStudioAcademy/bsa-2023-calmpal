@@ -14,9 +14,13 @@ import styles from './styles.module.scss';
 
 type Properties = {
   onSend: ({ message }: ChatInputValue) => void;
+  isChatbotReplyLoading: boolean;
 };
 
-const ChatFooter: React.FC<Properties> = ({ onSend }) => {
+const ChatFooter: React.FC<Properties> = ({
+  onSend,
+  isChatbotReplyLoading,
+}) => {
   const { id } = useParams<{ id: string }>();
   const { control, handleSubmit, errors, reset, watch } =
     useAppForm<ChatInputValue>({
@@ -30,10 +34,14 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
 
   const onSubmit = useCallback(
     ({ message }: ChatInputValue): void => {
+      if (isChatbotReplyLoading) {
+        return;
+      }
+
       onSend({ message });
       reset();
     },
-    [onSend, reset],
+    [onSend, reset, isChatbotReplyLoading],
   );
 
   const messageValue = watch('message');
