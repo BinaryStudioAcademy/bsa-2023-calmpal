@@ -52,6 +52,7 @@ jobs:
       - name: Setup docker services
         run: |
           docker compose -f docker-compose.services.yml up -d calmpal_db
+          docker network ls
 
       - name: Set Host IP environment variable
         id: get-docker-ip
@@ -59,7 +60,8 @@ jobs:
 
       - name: Run backend locally
         env:
-          DB_HOST: ${{ env.HOST_IP }}
+          # DB_HOST: ${{ env.HOST_IP }}
+          DB_HOST: localhost
           JWT_SECRET_KEY: ${{ env.ENVIRONMENT_JWT_SECRET_KEY }}
           AWS_REGION: ${{ env.ENVIRONMENT_AWS_REGION }}
           AWS_ACCESS_KEY_ID: ${{ env.ENVIRONMENT_AWS_ACCESS_KEY_ID }}
@@ -73,7 +75,7 @@ jobs:
 
           docker build -t backend-image -f ./backend/Dockerfile.development .
 
-          docker run --rm -d --network host --name backend-container --env-file ./backend/.env backend-image
+          docker run --rm --network bsa-2023-calmpal_calmpal_network --name backend-container --env-file ./backend/.env backend-image
 
       - name: Sleep for 30 seconds
         run: sleep 30s
@@ -81,7 +83,7 @@ jobs:
 
       - name: Run postman collection tests
         run: |
-          docker run --rm --network host -v ./:/etc/newman -t postman/newman run ./.postman/Calmpal.postman_collection.json
+          docker run --rm --network bsa-2023-calmpal_calmpal_network -v ./:/etc/newman -t postman/newman run ./.postman/Calmpal.postman_collection.json
 
       - name: Stop docker services
         run: docker compose -f docker-compose.services.yml down
