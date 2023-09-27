@@ -97,8 +97,6 @@ class MeditationController extends BaseController {
    * /meditation:
    *    post:
    *      description: Create a new meditation
-   *      security:
-   *       - bearerAuth: []
    *      requestBody:
    *        description: Meditation data
    *        required: true
@@ -106,11 +104,11 @@ class MeditationController extends BaseController {
    *          application/json:
    *            schema:
    *              $ref: '#/components/schemas/MeditationEntryRequest'
+   *      security:
+   *       - bearerAuth: []
    *      responses:
    *        201:
    *          description: Successful operation
-   *      security:
-   *       - bearerAuth: []
    *          content:
    *            application/json:
    *              schema:
@@ -120,8 +118,6 @@ class MeditationController extends BaseController {
    *                    $ref: '#/components/schemas/MeditationEntryResponse'
    *        400:
    *          description: Bad request (Invalid format)
-   *        security:
-   *         - bearerAuth: []
    *          content:
    *            application/json:
    *              schema:
@@ -129,7 +125,7 @@ class MeditationController extends BaseController {
    *              example:
    *                message: "File extension should be one of PNG, JPEG, MPEG."
    *                errorType: "FILE"
-   *         400:
+   *        400:
    *          description: Payload too large (File size exceeds 10MB)
    *          content:
    *            application/json:
