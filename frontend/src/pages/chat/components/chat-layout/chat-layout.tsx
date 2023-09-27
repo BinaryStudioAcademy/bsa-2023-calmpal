@@ -41,7 +41,7 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
     };
   });
   const hasId = Boolean(id);
-  const isBotMessageLoading = generateReplyDataStatus === 'pending';
+  const isChatbotReplyLoading = generateReplyDataStatus === 'pending';
 
   const handleSend = useCallback(
     ({ message }: ChatInputValue): void => {
@@ -92,7 +92,7 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
               />
             );
           })}
-        {isBotMessageLoading && (
+        {isChatbotReplyLoading && (
           <div>
             <span className={styles['loader']} />
           </div>
