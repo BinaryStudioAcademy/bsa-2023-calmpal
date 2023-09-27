@@ -70,7 +70,7 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
       behavior: 'smooth',
       block: 'end',
     });
-  }, [currentChatMessages.length]);
+  }, [dispatch, currentChatMessages.length]);
 
   return (
     <>
