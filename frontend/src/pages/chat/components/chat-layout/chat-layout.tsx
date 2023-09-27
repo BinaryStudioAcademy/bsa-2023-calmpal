@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { DataStatus } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
@@ -9,6 +11,7 @@ import {
 } from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import {
+  ChatDivider,
   ChatFooter,
   ChatHeader,
   ChatMessage,
@@ -42,10 +45,12 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
   });
   const hasId = Boolean(id);
   const isChatbotReplyLoading = generateReplyDataStatus === 'pending';
+  const currentChatMessagesLength =
+    Object.values(currentChatMessages).flat().length;
 
   const handleSend = useCallback(
     ({ message }: ChatInputValue): void => {
-      if (!hasId || currentChatMessages.length === EMPTY_ARRAY_LENGTH) {
+      if (!hasId || currentChatMessagesLength === EMPTY_ARRAY_LENGTH) {
         void dispatch(chatActions.createChat({ message }));
       } else {
         void dispatch(
@@ -56,7 +61,7 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
         );
       }
     },
-    [dispatch, currentChatMessages.length, hasId, id],
+    [dispatch, currentChatMessagesLength, hasId, id],
   );
 
   useEffect(() => {
@@ -76,20 +81,27 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
       behavior: 'smooth',
       block: 'end',
     });
-  }, [dispatch, currentChatMessages.length]);
+  }, [dispatch, currentChatMessagesLength]);
 
   return (
     <>
       <ChatHeader />
       <div className={styles['chat-body']}>
         {hasId &&
-          currentChatMessages.map((item) => {
+          Object.entries(currentChatMessages).map(([date, group]) => {
             return (
-              <ChatMessage
-                key={item.id}
-                message={item.message}
-                isSender={item.senderId === authenticatedUser.id}
-              />
+              <React.Fragment key={date}>
+                <ChatDivider date={new Date(date)} />
+                {group.map((item) => {
+                  return (
+                    <ChatMessage
+                      key={item.id}
+                      message={item.message}
+                      isSender={item.senderId === authenticatedUser.id}
+                    />
+                  );
+                })}
+              </React.Fragment>
             );
           })}
         {isChatbotReplyLoading && (
