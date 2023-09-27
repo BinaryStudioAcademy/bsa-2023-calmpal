@@ -75,13 +75,6 @@ jobs:
 
           docker run --rm -d --network host --name backend-container --env-file ./backend/.env backend-image
 
-      - name: Sleep for 30 seconds
-        run: sleep 15s
-        shell: bash
-
-      # - name: Wait for healthchecks
-      #   run: timeout 60s sh -c 'until docker ps | grep backend-container | grep -q healthy; do echo "Waiting for container to be healthy..."; sleep 2; done'
-
       - name: Run postman collection tests
         run: |
           docker run --rm --network host -v ./:/etc/newman \
