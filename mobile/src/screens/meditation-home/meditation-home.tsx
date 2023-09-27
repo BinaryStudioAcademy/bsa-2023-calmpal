@@ -12,6 +12,7 @@ import { MeditationScreenName } from '#libs/enums/enums';
 import {
   useAppDispatch,
   useAppSelector,
+  useCallback,
   useEffect,
   useNavigation,
   useSearch,
@@ -28,6 +29,7 @@ const MeditationHome: React.FC = () => {
     };
   });
   const dispatch = useAppDispatch();
+
   const navigation =
     useNavigation<
       NativeStackNavigationProp<MeditationNavigationParameterList>
@@ -36,11 +38,15 @@ const MeditationHome: React.FC = () => {
     meditationEntries,
     'name',
   );
-  const handleSelectMeditation = (title: string): void => {
-    navigation.navigate(MeditationScreenName.MEDITATION_LIST, {
-      title,
-    });
-  };
+
+  const handleSelectMeditation = useCallback(
+    (title: string): void => {
+      navigation.navigate(MeditationScreenName.MEDITATION_LIST, {
+        title,
+      });
+    },
+    [navigation],
+  );
 
   useEffect(() => {
     void dispatch(meditationActions.getAllMeditationEntries());
@@ -58,7 +64,9 @@ const MeditationHome: React.FC = () => {
             return (
               <Card
                 title={item.name}
-                onPress={handleSelectMeditation}
+                onPress={(): void => {
+                  handleSelectMeditation(item.name);
+                }}
                 key={item.id}
               />
             );

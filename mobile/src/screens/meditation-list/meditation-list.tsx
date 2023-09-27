@@ -2,6 +2,7 @@ import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
 import {
+  Button,
   Header,
   InputSearch,
   LinearGradient,
@@ -9,19 +10,21 @@ import {
   ScrollView,
   View,
 } from '#libs/components/components';
-import { MeditationScreenName } from '#libs/enums/enums';
+import { AppColor, MeditationScreenName } from '#libs/enums/enums';
 import {
   useAppDispatch,
   useAppRoute,
+  useCallback,
   useEffect,
   useNavigation,
   useSearch,
   useState,
 } from '#libs/hooks/hooks';
 import { type MeditationNavigationParameterList } from '#libs/types/types';
+import { type MeditationEntryCreateRequestDto } from '#packages/meditation/meditation';
 import { actions as meditationActions } from '#slices/meditation/meditation';
 
-import { MeditationItem } from './components/components';
+import { AddMeditationModal, MeditationItem } from './components/components';
 import { DEFAULT_SONG_DURATION, MOCKED_DATA } from './libs/constants/constants';
 import { styles } from './styles';
 
@@ -38,12 +41,26 @@ const MeditationList: React.FC = () => {
     MOCKED_DATA,
     'title',
   );
-
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isTimerModalVisible, setIsTimerModalVisible] = useState(false);
   const [duration, setDuration] = useState(DEFAULT_SONG_DURATION);
 
+  const handleShowModal = (): void => {
+    setIsModalVisible(true);
+  };
+
+  const handleCloseModal = (): void => {
+    setIsModalVisible(false);
+  };
+  const handleSubmit = useCallback(
+    (payload: MeditationEntryCreateRequestDto) => {
+      void dispatch(meditationActions.createMeditationEntry(payload));
+    },
+    [dispatch],
+  );
+
   const handleToggleClick = (): void => {
-    setIsModalVisible((previous) => {
+    setIsTimerModalVisible((previous) => {
       return !previous;
     });
   };
@@ -74,7 +91,7 @@ const MeditationList: React.FC = () => {
   return (
     <LinearGradient>
       <View style={styles.container}>
-        {isModalVisible && (
+        {isTimerModalVisible && (
           <MeditationTimerModal
             onClose={handleToggleClick}
             setDuration={setDuration}
@@ -97,6 +114,18 @@ const MeditationList: React.FC = () => {
             );
           })}
         </ScrollView>
+        <Button
+          onPress={handleShowModal}
+          iconName="plus"
+          label="Add new meditation"
+          type="transparent"
+          color={AppColor.BLUE_200}
+        />
+        <AddMeditationModal
+          isVisible={isModalVisible}
+          onClose={handleCloseModal}
+          onSubmit={handleSubmit}
+        />
       </View>
     </LinearGradient>
   );
