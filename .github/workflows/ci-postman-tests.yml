@@ -84,9 +84,6 @@ jobs:
 
       - name: Run postman collection tests
         run: |
-          docker ps
-          docker ps | grep -q healthy
-          docker ps | grep backend-container | grep -q healthy
           docker run --rm --network host -v ./:/etc/newman \
           --health-cmd="curl -s --fail http://localhost:3001/health || exit 1" \
           --health-interval=5s \
