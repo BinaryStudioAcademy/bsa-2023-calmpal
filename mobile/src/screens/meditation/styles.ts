@@ -38,12 +38,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    fontWeight: '600',
     color: AppColor.GRAY_600,
     fontFamily: FontFamily.MONTSERRAT_600,
   },
   purpose: {
-    fontWeight: '600',
     color: AppColor.GRAY_400,
     marginTop: 6,
     fontFamily: FontFamily.MONTSERRAT_600,
