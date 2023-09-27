@@ -22,16 +22,8 @@
 
 .info {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
-}
-
-.icon-container {
-  width: 100%;
-  height: 100%;
-  background-color: var(--blue-300);
-  border-radius: 50%;
 }
 
 .list {
@@ -39,6 +31,10 @@
   flex-direction: column;
   align-items: center;
   height: 90%;
+}
+
+.search {
+  margin-top: 23px;
 }
 
 .meditation-list {
@@ -59,10 +55,20 @@
   .meditation-list {
     padding: 0 15px;
   }
+
+  .search {
+    width: 100%;
+    padding: 0 15px;
+  }
 }
 
 @media (width < 768px) {
   .meditation-list {
+    padding: 0 20px;
+  }
+
+  .search {
+    width: 100%;
     padding: 0 15px;
   }
 }

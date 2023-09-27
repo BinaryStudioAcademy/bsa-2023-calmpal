@@ -3,7 +3,7 @@ import {
   MILLISECONDS_IN_SECOND,
   SECONDS_IN_MINUTE,
 } from '../libs/constants/constants.js';
-import { TimeFormat } from '../libs/enums/time-format.enum.js';
+import { TimeFormat } from '../libs/enums/enums.js';
 
 const getFormattedTime = (seconds: number): string => {
   const timeZoneOffsetInMinutes = new Date().getTimezoneOffset();

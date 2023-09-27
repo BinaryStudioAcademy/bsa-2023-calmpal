@@ -32,7 +32,7 @@ class ChatMessagesApi extends BaseHttpApi {
     return await response.json<ChatMessageGetAllResponseDto>();
   }
 
-  public async createChatMessage(
+  public async createMessage(
     payload: ChatMessageCreatePayload,
   ): Promise<ChatMessageGetAllItemResponseDto> {
     const response = await this.load(

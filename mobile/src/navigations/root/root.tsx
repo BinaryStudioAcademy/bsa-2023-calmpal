@@ -15,7 +15,7 @@ import {
 import { type RootNavigationParameterList } from '#libs/types/types';
 import { actions as authActions } from '#slices/auth/auth';
 
-import { NAVIGATION_ITEMS } from './libs/constants';
+import { NAVIGATION_ITEMS } from './libs/constants/constants';
 
 const NativeStack = createNativeStackNavigator<RootNavigationParameterList>();
 

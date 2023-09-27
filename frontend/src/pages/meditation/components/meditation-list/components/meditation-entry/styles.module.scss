@@ -17,7 +17,7 @@
 
 .content {
   display: flex;
-  flex-basis: 286px;
+  flex-basis: calc(100% - 165px);
   justify-content: space-between;
   align-items: center;
   padding: 48px 23px 44px 29px;
@@ -31,9 +31,16 @@
 }
 
 .title {
+  display: -webkit-box;
   margin: 0;
+  overflow: hidden;
   font-weight: 600;
   font-size: 16px;
+  text-align: left;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .duration {
@@ -61,6 +68,10 @@
   .track {
     max-width: 350px;
   }
+
+  .content {
+    flex-basis: calc(100% - 65px);
+  }
 }
 
 @media (width < 768px) {
@@ -71,5 +82,9 @@
 
   .content {
     flex-basis: 400px;
+  }
+
+  .background-image {
+    width: 95px;
   }
 }

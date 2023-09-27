@@ -60,7 +60,7 @@ const createMessage = createAsyncThunk<
   const { chatMessagesApi } = extra;
   void dispatch(generateReply(payload));
 
-  return await chatMessagesApi.createChatMessage(payload);
+  return await chatMessagesApi.createMessage(payload);
 });
 
 const generateReply = createAsyncThunk<
