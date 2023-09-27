@@ -27,7 +27,7 @@ const ProgressBar: React.FC<Properties> = ({ isPlaying }) => {
         maximumValue={duration}
         minimumTrackTintColor={AppColor.GRAY_400}
         maximumTrackTintColor={AppColor.GRAY_300}
-        thumbTintColor={AppColor.GRAY_400}
+        thumbTintColor="transparent"
         value={timeProgress}
         onValueChange={handleSeek}
       />
