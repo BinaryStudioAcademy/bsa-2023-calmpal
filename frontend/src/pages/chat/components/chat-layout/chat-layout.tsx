@@ -39,7 +39,8 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
       };
     });
   const hasId = Boolean(id);
-  const currentChatMessagesLength = Object.keys(currentChatMessages).length;
+  const currentChatMessagesLength =
+    Object.values(currentChatMessages).flat().length;
 
   const handleSend = useCallback(
     ({ message }: ChatInputValue): void => {
@@ -74,7 +75,7 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
       behavior: 'smooth',
       block: 'end',
     });
-  }, [dispatch, currentChatMessages.length]);
+  }, [dispatch, currentChatMessagesLength]);
 
   return (
     <>
