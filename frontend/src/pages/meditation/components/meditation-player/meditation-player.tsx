@@ -52,11 +52,7 @@ const MeditationPlayer: React.FC = () => {
   const handleBackButtonPress = useCallback(() => {
     navigate(AppRoute.MEDITATION);
 
-    if (isMobileDimension) {
-      setIsSidebarShow(false);
-    } else {
-      setIsSidebarShow(true);
-    }
+    setIsSidebarShow(!isMobileDimension);
   }, [isMobileDimension, navigate, setIsSidebarShow]);
 
   const { name, mediaUrl } = meditationEntries[trackIndex] ?? {};
