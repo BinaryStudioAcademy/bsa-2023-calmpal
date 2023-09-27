@@ -1,5 +1,5 @@
 const CHAT_RESPONSE_IS_LOADING_MESSAGE =
-  'Please wait until bot will generate an answer for you.';
+  'Please wait until bot generates an answer for you.';
 
 const CHAT_INPUT_DEFAULT_VALUES = {
   message: '',
