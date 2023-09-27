@@ -73,7 +73,7 @@ jobs:
 
           docker build -t backend-image -f ./backend/Dockerfile.development .
 
-          docker run --rm -d --name backend-container --env-file ./backend/.env backend-image
+          docker run --rm -d --network host --name backend-container --env-file ./backend/.env backend-image
 
       - name: Sleep for 30 seconds
         run: sleep 30s
