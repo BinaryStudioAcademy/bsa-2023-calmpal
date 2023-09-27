@@ -1,21 +1,19 @@
-import { formatRelative } from 'date-fns';
-import enGB from 'date-fns/locale/en-GB/index.js';
+import { differenceInCalendarDays, format } from 'date-fns';
 
-import { type ValueOf } from '#libs/types/types.js';
-
-import { FormatRelativeLocale } from '../libs/enums/enums.js';
+import { DaysDifference, TimeFormat } from '../libs/enums/enums.js';
 
 const getRelativeDate = (date: Date): string => {
-  const locale = {
-    ...enGB,
-    formatRelative: (
-      token: keyof typeof FormatRelativeLocale,
-    ): ValueOf<typeof FormatRelativeLocale> => {
-      return FormatRelativeLocale[token];
-    },
-  };
+  const daysDifference = differenceInCalendarDays(date, new Date());
 
-  return formatRelative(date, new Date(), { locale });
+  if (daysDifference === DaysDifference.TODAY) {
+    return 'Today';
+  }
+
+  if (daysDifference === DaysDifference.YESTARDAY) {
+    return 'Yesterday';
+  }
+
+  return format(date, TimeFormat.D_MMMM_YYYY);
 };
 
 export { getRelativeDate };
