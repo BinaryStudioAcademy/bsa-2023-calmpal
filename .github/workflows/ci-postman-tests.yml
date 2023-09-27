@@ -57,9 +57,10 @@ jobs:
         id: get-docker-ip
         run: echo "HOST_IP=$(hostname -I | awk '{print $1}')" >> $GITHUB_ENV
 
-      - name: Figure out whether migrations can be applied to existing environment database
+      - name: Run backend locally
         env:
           DB_HOST: ${{ env.HOST_IP }}
+          JWT_SECRET_KEY: ${{ env.ENVIRONMENT_JWT_SECRET_KEY }}
           AWS_REGION: ${{ env.ENVIRONMENT_AWS_REGION }}
           AWS_ACCESS_KEY_ID: ${{ env.ENVIRONMENT_AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ env.ENVIRONMENT_AWS_SECRET_ACCESS_KEY }}
