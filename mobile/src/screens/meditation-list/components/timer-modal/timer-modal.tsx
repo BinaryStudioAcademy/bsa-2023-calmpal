@@ -27,7 +27,7 @@ type Properties = {
   startMeditation: () => void;
 };
 
-const MeditationTimerModal: React.FC<Properties> = ({
+const TimerModal: React.FC<Properties> = ({
   onClose,
   setDuration,
   startMeditation,
@@ -100,4 +100,4 @@ const MeditationTimerModal: React.FC<Properties> = ({
   );
 };
 
-export { MeditationTimerModal };
+export { TimerModal };

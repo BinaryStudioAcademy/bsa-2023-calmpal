@@ -10,7 +10,6 @@ export { InputSearch } from './input-search/input-search';
 export { LinearGradient } from './linear-gradient/linear-gradient';
 export { Link } from './link/link';
 export { Loader } from './loader/loader';
-export { MeditationTimerModal } from './meditation-timer-modal/meditation-timer-modal';
 export { Player } from './player/player';
 export { ProtectedRoute } from './protected-route/protected-route';
 export { SignBackground } from './sign-background/sign-background';

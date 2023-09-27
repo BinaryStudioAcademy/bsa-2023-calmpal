@@ -5,7 +5,6 @@ import {
   Header,
   InputSearch,
   LinearGradient,
-  MeditationTimerModal,
   ScrollView,
   View,
 } from '#libs/components/components';
@@ -22,7 +21,7 @@ import {
 import { type MeditationNavigationParameterList } from '#libs/types/types';
 import { actions as meditationActions } from '#slices/meditation/meditation';
 
-import { MeditationItem } from './components/components';
+import { MeditationItem, TimerModal } from './components/components';
 import { DEFAULT_SONG_DURATION } from './libs/constants/constants';
 import { styles } from './styles';
 
@@ -90,7 +89,7 @@ const MeditationList: React.FC = () => {
     <LinearGradient>
       <View style={styles.container}>
         {isBottomModalVisible && (
-          <MeditationTimerModal
+          <TimerModal
             onClose={handleToggleBottomModalVisibility}
             setDuration={setDuration}
             startMeditation={handleSetPlaylist}
