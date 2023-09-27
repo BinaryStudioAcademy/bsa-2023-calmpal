@@ -12,7 +12,7 @@ import { useAppRoute, useNavigation } from '#libs/hooks/hooks';
 import { type ProfileNavigationParameterList } from '#libs/types/types';
 
 import { Badge } from './components/components';
-import { DEFAULT_BADGE_COUNT } from './libs/constants';
+import { DEFAULT_BADGE_COUNT } from './libs/constants/constants';
 import { styles } from './styles';
 
 type Properties = {
