@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { FontFamily } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     bottom: 20,
     fontFamily: FontFamily.MONTSERRAT_400,
     fontSize: 12,
+    color: AppColor.GRAY_400,
   },
   duration: {
     position: 'absolute',
@@ -21,6 +22,7 @@ const styles = StyleSheet.create({
     bottom: 20,
     fontFamily: FontFamily.MONTSERRAT_400,
     fontSize: 12,
+    color: AppColor.GRAY_400,
   },
 });
 
