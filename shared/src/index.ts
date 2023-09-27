@@ -61,6 +61,7 @@ export {
   type ChatGetAllResponseDto,
   ChatsApiPath,
   createChatValidationSchema,
+  type UpdateChatImageRequestDto,
 } from './packages/chats/chats.js';
 export { entitiesFilteringQueryValidationSchema } from './packages/common-validation-schemas/validation-schemas.js';
 export {
@@ -114,3 +115,12 @@ export {
   type UserSignUpResponseDto,
   userSignUpValidationSchema,
 } from './packages/users/users.js';
+export {
+  cancelPaymentIntentValidationSchema,
+  createPaymentIntentValidationSchema,
+  SUBSCRIPTION_PRICE,
+  SubscriptionApiPath,
+  type SubscriptionPaymentIntentCancelRequestDto,
+  type SubscriptionPaymentIntentCreateRequestDto,
+  type SubscriptionPaymentIntentCreateResponseDto,
+} from '#packages/subscriptions/subscriptions.js';

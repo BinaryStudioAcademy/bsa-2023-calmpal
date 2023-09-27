@@ -3,6 +3,7 @@ import React from 'react';
 
 import ChatAvatar from '#assets/img/icons/chat-avatar.svg';
 import { Header, ScrollView, Text, View } from '#libs/components/components';
+import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants';
 import {
   useAppDispatch,
   useAppForm,
@@ -18,8 +19,8 @@ import { type UserAuthResponseDto } from '#packages/users/users';
 import { actions as chatsActions } from '#slices/chats/chats';
 
 import { ChatInput, MessageItem } from './components/components';
-import { DEFAULT_VALUES, EMPTY_ARRAY_LENGTH } from './libs/constants';
-import { messageItemProperties } from './libs/message-item-properties';
+import { DEFAULT_VALUES } from './libs/constants/constants';
+import { messageItemProperties } from './libs/helpers/helpers';
 import { type ChatInputValue } from './libs/types/chat-input-value.type';
 import { styles } from './styles';
 

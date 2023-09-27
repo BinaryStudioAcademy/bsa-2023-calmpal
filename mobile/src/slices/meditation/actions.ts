@@ -1,7 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { type AsyncThunkConfig } from '#libs/types/types';
-import { type MeditationEntryGetAllResponseDto } from '#packages/meditation/meditation';
+import {
+  type MeditationEntryCreateRequestDto,
+  type MeditationEntryCreateResponseDto,
+  type MeditationEntryGetAllResponseDto,
+} from '#packages/meditation/meditation';
+import { appActions } from '#slices/app/notifications';
 
 import { name as sliceName } from './meditation.slice';
 
@@ -24,4 +29,24 @@ const getAllMeditationEntries = createAsyncThunk<
   return await meditationApi.getAllMeditationEntries();
 });
 
-export { getAllMeditationEntries, initPlayer };
+const createMeditationEntry = createAsyncThunk<
+  MeditationEntryCreateResponseDto,
+  MeditationEntryCreateRequestDto,
+  AsyncThunkConfig
+>(
+  `${sliceName}/create-meditation-entry`,
+  async (payload, { extra, dispatch }) => {
+    const { meditationApi } = extra;
+    const item = await meditationApi.createMeditationEntry(payload);
+
+    void dispatch(
+      appActions.notify({
+        type: 'success',
+        message: `Meditation ${payload.name} was added.`,
+      }),
+    );
+
+    return item;
+  },
+);
+export { createMeditationEntry, getAllMeditationEntries, initPlayer };

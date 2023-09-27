@@ -1,7 +1,7 @@
 import cardPlaceholder from '#assets/img/card-image-placeholder.png';
 import {
+  Button,
   Card,
-  Icon,
   Link,
   Search,
   Sidebar,
@@ -81,7 +81,14 @@ const ChatSidebar: React.FC<Properties> = ({
           </div>
           <div className={styles['plus']}>
             <Link to={AppRoute.CHATS}>
-              <Icon name="plus" color={IconColor.BLUE} width={30} height={30} />
+              <Button
+                label="Add note"
+                isLabelVisuallyHidden
+                iconName="plus"
+                iconWidth={33}
+                iconHeight={33}
+                style="add"
+              />
             </Link>
           </div>
         </SidebarHeader>
@@ -100,7 +107,7 @@ const ChatSidebar: React.FC<Properties> = ({
                 <Link key={chat.id} to={chatLink}>
                   <Card
                     title={chat.name}
-                    imageUrl={cardPlaceholder}
+                    imageUrl={chat.imageUrl ?? cardPlaceholder}
                     onClick={handleSelectChat}
                     isActive={String(chat.id) === id}
                     iconRight="trash-box"
