@@ -41,27 +41,18 @@ const InputFile = <T extends FormFieldValues>({
   const hasFile = Boolean(fileData);
 
   const handlePickFile = async (): Promise<void> => {
-    try {
-      const hasPermissions = await requestMediaPermissions();
-      if (hasPermissions) {
-        const result = await DocumentPicker.pick({
-          type: [DocumentPicker.types.audio],
-        });
-        const file = result[FIRST_ARRAY_INDEX];
-        onChange({ data: file, type: file?.type, size: file?.size });
-      } else {
-        void dispatch(
-          appActions.notify({
-            type: 'error',
-            message: 'Permissions denied.',
-          }),
-        );
-      }
-    } catch {
+    const hasPermissions = await requestMediaPermissions();
+    if (hasPermissions) {
+      const result = await DocumentPicker.pick({
+        type: [DocumentPicker.types.audio],
+      });
+      const file = result[FIRST_ARRAY_INDEX];
+      onChange({ data: file, type: file?.type, size: file?.size });
+    } else {
       void dispatch(
         appActions.notify({
           type: 'error',
-          message: 'Something went wrong',
+          message: 'Permissions denied.',
         }),
       );
     }
