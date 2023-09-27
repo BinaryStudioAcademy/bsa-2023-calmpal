@@ -41,6 +41,13 @@ import { AuthApiPath } from './libs/enums/enums.js';
  *            format: date-time
  *          isSurveyCompleted:
  *            type: boolean
+ *          subscriptionId:
+ *            type: number
+ *            format: number
+ *            minimum: 1
+ *          subscriptionEndDate:
+ *            type: string
+ *            format: date-time
  *      Error:
  *        type: object
  *        properties:

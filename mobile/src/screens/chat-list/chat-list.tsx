@@ -28,9 +28,10 @@ import { actions as chatsActions } from '#slices/chats/chats';
 import { styles } from './styles';
 
 const ChatList: React.FC = () => {
-  const { chats } = useAppSelector(({ chats }) => {
+  const { chats, isLoaded } = useAppSelector(({ chats }) => {
     return {
       chats: chats.chats,
+      isLoaded: chats.chatsDataStatus === 'fulfilled',
     };
   });
   const dispatch = useAppDispatch();
@@ -61,14 +62,17 @@ const ChatList: React.FC = () => {
   };
 
   const handleSelectChat = useCallback(
-    (title: string) => {
-      navigation.navigate(ChatScreenName.CHAT, { title });
+    (title: string, id: string | undefined) => {
+      navigation.navigate(ChatScreenName.CHAT, { title, id: id ?? '' });
     },
     [navigation],
   );
 
   const handleRedirectToChat = useCallback(() => {
-    navigation.navigate(ChatScreenName.CHAT, { title: 'New Chat' });
+    navigation.navigate(ChatScreenName.CHAT, {
+      title: 'New Chat',
+      id: '',
+    });
   }, [navigation]);
 
   useEffect(() => {
@@ -82,10 +86,10 @@ const ChatList: React.FC = () => {
   }, [navigation, chatsLength]);
 
   useEffect(() => {
-    if (chatsLength === EMPTY_ARRAY_LENGTH) {
+    if (isLoaded && chatsLength === EMPTY_ARRAY_LENGTH) {
       handleRedirectToChat();
     }
-  }, [chatsLength, handleRedirectToChat]);
+  }, [chatsLength, handleRedirectToChat, isLoaded]);
 
   useEffect(() => {
     void dispatch(chatsActions.getAllChats());
@@ -110,7 +114,9 @@ const ChatList: React.FC = () => {
               <Card
                 title={item.name}
                 id={item.id}
-                onPress={handleSelectChat}
+                onPress={(): void => {
+                  handleSelectChat(item.name, item.id.toString());
+                }}
                 key={item.id}
                 onDelete={handleShowModal}
               />
