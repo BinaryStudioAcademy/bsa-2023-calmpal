@@ -83,7 +83,7 @@
   word-break: break-word;
 }
 
-@media (width < 900px) {
+@media (width < 900px), (height < 530px) {
   .item {
     width: 100%;
     min-width: 0;
