@@ -56,8 +56,7 @@ const UserProfileSidebar: React.FC<Properties> = ({
 
   const dialogReference = useRef<HTMLDialogElement>(null);
   const currentStep = STEPS[currentStepIndex];
-  const hasCurrentStep =
-    currentStep && typeof currentStep.component === 'function';
+  const hasCurrentStep = currentStep;
 
   const handleClick = useCallback(
     (key: string) => {
@@ -92,13 +91,11 @@ const UserProfileSidebar: React.FC<Properties> = ({
   }, []);
 
   const getCurrentStep = (): ReactElement | null => {
-    if (!currentStep) {
-      return null;
-    }
+    const StepComponent = currentStep?.component;
 
-    const StepComponent = currentStep.component;
-
-    return <StepComponent onClose={handleClose} onNext={goToNextStep} />;
+    return StepComponent ? (
+      <StepComponent onClose={handleClose} onNext={goToNextStep} />
+    ) : null;
   };
 
   return (
