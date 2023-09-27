@@ -4,6 +4,10 @@ import {
   AbstractModel,
   DatabaseTableName,
 } from '#libs/packages/database/database.js';
+import {
+  SubscriptionModel,
+  SubscriptionsTableColumn,
+} from '#packages/subscriptions/subscriptions.js';
 import { SurveysTableColumn } from '#packages/surveys/libs/enums/enums.js';
 import { SurveyModel } from '#packages/surveys/survey.model.js';
 
@@ -38,6 +42,14 @@ class UserDetailsModel extends AbstractModel {
         join: {
           from: `${DatabaseTableName.USERS}.${UserDetailsTableColumn.USER_ID}`,
           to: `${DatabaseTableName.SURVEYS}.${SurveysTableColumn.USER_ID}`,
+        },
+      },
+      subscription: {
+        relation: Model.HasOneRelation,
+        modelClass: SubscriptionModel,
+        join: {
+          from: `${DatabaseTableName.USER_DETAILS}.${UserDetailsTableColumn.SUBSCRIPTION_ID}`,
+          to: `${DatabaseTableName.SUBSCRIPTIONS}.${SubscriptionsTableColumn.ID}`,
         },
       },
     };

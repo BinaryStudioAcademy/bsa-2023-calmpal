@@ -16,10 +16,12 @@ import { styles } from './styles';
 
 type Properties = {
   title: string;
+
   image?: ImageSourcePropType;
   iconName?: IconName;
   iconColor?: string;
   onPress?: () => void;
+  id?: number | string;
 };
 
 const Card: React.FC<Properties> = ({

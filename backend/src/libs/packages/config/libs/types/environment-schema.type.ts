@@ -30,6 +30,9 @@ type EnvironmentSchema = {
   ENCRYPT: {
     NUMBER_OF_ROUNDS: number;
   };
+  STRIPE: {
+    SECRET_KEY: string;
+  };
   OPEN_AI: {
     API_KEY: string;
     BASE_URL: string;
