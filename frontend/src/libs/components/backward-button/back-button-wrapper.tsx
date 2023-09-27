@@ -11,10 +11,6 @@ const BackButtonWrapper: React.FC<BackButtonWrapperProperties> = ({
   isVisible = false,
   onGoBack,
 }) => {
-  // if (!isVisible) {
-  //   return null;
-  // }
-
   return (
     <div className={getValidClassNames(!isVisible && 'visually-hidden')}>
       <BackButton onGoBack={onGoBack} />
