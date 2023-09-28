@@ -7,7 +7,6 @@ import { type UserEntity } from '#packages/users/user.entity.js';
 import { type UserRepository } from '#packages/users/user.repository.js';
 
 import {
-  type UserGetAllResponseDto,
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
 } from './libs/types/types.js';
@@ -58,14 +57,8 @@ class UserService implements Service {
     return user?.toObject() ?? null;
   }
 
-  public async findAll(): Promise<UserGetAllResponseDto> {
-    const items = await this.userRepository.findAll();
-
-    return {
-      items: items.map((item) => {
-        return item.toObject();
-      }),
-    };
+  public findAll(): Promise<{ items: [] }> {
+    return Promise.resolve({ items: [] });
   }
 
   public async create(
@@ -128,6 +121,21 @@ class UserService implements Service {
     if (!userEntity) {
       return null;
     }
+
+    return userEntity.toObject();
+  }
+
+  public async updateSubscription({
+    id,
+    subscriptionId,
+  }: {
+    id: number;
+    subscriptionId: number;
+  }): Promise<ReturnType<UserEntity['toObject']>> {
+    const userEntity = await this.userRepository.updateSubscription({
+      id,
+      subscriptionId,
+    });
 
     return userEntity.toObject();
   }

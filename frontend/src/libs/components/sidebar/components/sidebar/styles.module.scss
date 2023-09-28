@@ -16,7 +16,7 @@
   }
 }
 
-@media (width < 768px) {
+@media (width < 768px), (height < 530px) {
   .container {
     width: 100%;
   }

@@ -41,27 +41,18 @@ const InputFile = <T extends FormFieldValues>({
   const hasFile = Boolean(fileData);
 
   const handlePickFile = async (): Promise<void> => {
-    try {
-      const hasPermissions = await requestMediaPermissions();
-      if (hasPermissions) {
-        const result = await DocumentPicker.pick({
-          type: [DocumentPicker.types.audio],
-        });
-        const file = result[FIRST_ARRAY_INDEX];
-        onChange({ data: file, type: file?.type, size: file?.size });
-      } else {
-        void dispatch(
-          appActions.notify({
-            type: 'error',
-            message: 'Permissions denied.',
-          }),
-        );
-      }
-    } catch {
+    const hasPermissions = await requestMediaPermissions();
+    if (hasPermissions) {
+      const result = await DocumentPicker.pick({
+        type: [DocumentPicker.types.audio],
+      });
+      const file = result[FIRST_ARRAY_INDEX];
+      onChange({ data: file, type: file?.type, size: file?.size });
+    } else {
       void dispatch(
         appActions.notify({
           type: 'error',
-          message: 'Something went wrong',
+          message: 'Permissions denied.',
         }),
       );
     }
@@ -70,9 +61,12 @@ const InputFile = <T extends FormFieldValues>({
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      <Pressable style={styles.file} onPress={handlePickFile as () => void}>
+      <Pressable
+        style={[styles.file, hasError && styles.errorFile]}
+        onPress={handlePickFile as () => void}
+      >
         <Icon name="upload" color={AppColor.GRAY_500} />
-        <Text style={styles.primaryText}>click here</Text>
+        <Text style={styles.primaryText}>Click here</Text>
         <Text style={styles.secondaryText}>Only MP3 extension is allowed</Text>
       </Pressable>
       {hasError && <Text style={styles.errorText}>{error as string}</Text>}

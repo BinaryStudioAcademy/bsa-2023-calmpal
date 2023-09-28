@@ -2,6 +2,7 @@ import { type IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import {
   type ButtonStyle,
+  type ButtonStyleColor,
   type IconName,
   type ValueOf,
 } from '#libs/types/types.js';
@@ -17,6 +18,7 @@ type Properties = {
   iconWidth?: number;
   iconHeight?: number;
   style?: ButtonStyle;
+  styleColor?: ButtonStyleColor;
   isLoading?: boolean;
   isDisabled?: boolean;
   isLabelVisuallyHidden?: boolean;
@@ -31,6 +33,7 @@ const Button: React.FC<Properties> = ({
   iconWidth,
   iconHeight,
   style = 'primary',
+  styleColor = 'default',
   isLoading = false,
   isDisabled = false,
   isLabelVisuallyHidden = false,
@@ -39,7 +42,7 @@ const Button: React.FC<Properties> = ({
   return (
     <button
       type={type}
-      className={styles[style]}
+      className={getValidClassNames(styles[style], styles[styleColor])}
       onClick={onClick}
       disabled={isDisabled || isLoading}
     >

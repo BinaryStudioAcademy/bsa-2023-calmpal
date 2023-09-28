@@ -1,6 +1,7 @@
 import { BackButton } from '#libs/components/components.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useSidebarState } from '#libs/hooks/hooks.js';
+import { ProfileSettings } from '#pages/profile-settings/profile-settings.js';
 
 import { UserProfileSidebar } from './components/components.js';
 import styles from './styles.module.scss';
@@ -25,7 +26,7 @@ const UserProfile: React.FC = () => {
         )}
       >
         <BackButton onGoBack={handleBackButtonPress} />
-        hi there
+        <ProfileSettings />
       </div>
     </>
   );

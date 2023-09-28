@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   container: {
@@ -8,9 +8,9 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    fontWeight: 'bold',
     color: AppColor.BLACK,
     marginTop: 4,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
   file: {
     paddingHorizontal: 20,
@@ -23,15 +23,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  errorFile: {
+    borderColor: AppColor.RED_100,
+  },
   primaryText: {
     fontSize: 18,
-    fontWeight: '600',
     color: AppColor.GRAY_600,
     marginTop: 10,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
   secondaryText: {
     fontSize: 14,
     color: AppColor.GRAY_400,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
   selectedFile: {
     flexDirection: 'row',
@@ -41,11 +45,13 @@ const styles = StyleSheet.create({
   selectedFileName: {
     marginLeft: 5,
     color: AppColor.GRAY_500,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
   errorText: {
     color: AppColor.RED_100,
     fontSize: 14,
     marginBottom: 4,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
 });
 
