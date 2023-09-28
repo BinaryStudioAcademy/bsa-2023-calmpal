@@ -7,6 +7,9 @@ type Route = {
   path: ValueOf<typeof AppRoute>;
   name: string;
   icon: IconName;
+  wrapPathWith?: (
+    path: ValueOf<typeof AppRoute>,
+  ) => ValueOf<typeof AppRoute> | undefined;
 };
 
 export { type Route };

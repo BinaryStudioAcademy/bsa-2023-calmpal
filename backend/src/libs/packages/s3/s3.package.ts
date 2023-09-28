@@ -64,14 +64,14 @@ class S3 {
   }
 
   public getUrl(fileKey: string): string {
-    return replaceTemplateWithValue(
-      'https://{bucket}.s3.{region}.amazonaws.com/{fileKey}',
-      {
+    return replaceTemplateWithValue({
+      template: 'https://{bucket}.s3.{region}.amazonaws.com/{fileKey}',
+      replacements: {
         bucket: this.bucketName,
         region: this.region,
         fileKey,
       },
-    );
+    });
   }
 
   private throwError(error: unknown): never {
