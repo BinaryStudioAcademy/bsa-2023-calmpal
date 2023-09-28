@@ -26,10 +26,10 @@
   cursor: pointer;
 }
 
-.send-button:hover {
-  box-shadow: var(--shadow);
-}
-
 .send-button:disabled {
   opacity: 0.6;
+}
+
+.send-button:not(:disabled):hover {
+  box-shadow: var(--shadow);
 }
