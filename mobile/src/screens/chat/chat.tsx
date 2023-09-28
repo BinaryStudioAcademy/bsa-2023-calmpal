@@ -49,7 +49,7 @@ const Chat: React.FC = () => {
   );
 
   const scrollViewReference = useRef<ScrollView | null>(null);
-  const messagesLength = Object.keys(currentChatMessages).length;
+  const messagesLength = Object.values(currentChatMessages).flat().length;
 
   const scrollViewToEnd = (): void => {
     scrollViewReference.current?.scrollToEnd();
