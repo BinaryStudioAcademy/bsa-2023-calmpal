@@ -14,11 +14,12 @@ const getFormattedTime = (
   const timeZoneOffsetInMilliseconds =
     timeZoneOffsetInMinutes * SECONDS_IN_MINUTE * MILLISECONDS_IN_SECOND;
 
+  const offsetInMilliseconds = isTimeZoneIncluded
+    ? timeZoneOffsetInMilliseconds
+    : NO_OFFSET_IN_MILLISECONDS;
+
   const offset = new Date(
-    seconds * MILLISECONDS_IN_SECOND +
-      (isTimeZoneIncluded
-        ? timeZoneOffsetInMilliseconds
-        : NO_OFFSET_IN_MILLISECONDS),
+    seconds * MILLISECONDS_IN_SECOND + offsetInMilliseconds,
   );
   const hours = offset.getHours();
 
