@@ -22,8 +22,7 @@ type Properties = {
   iconName?: IconName;
   iconColor?: string;
   onPress: () => void;
-  onDelete?: (id: number) => void;
-  id?: number | string;
+  onIconPress?: () => void;
 };
 
 const Card: React.FC<Properties> = ({
@@ -32,20 +31,12 @@ const Card: React.FC<Properties> = ({
   iconName,
   iconColor,
   onPress,
-  onDelete,
-  id,
+
+  onIconPress,
 }) => {
-  // const handlePress = (): void => {
-  //   onPress(title);
-  // };
-
-  const handleDelete = (): void => {
-    onDelete?.(id as number);
-  };
-
   const renderRightSwipeActions = (): React.ReactNode => {
     return (
-      <Pressable style={styles.deleteContainer} onPress={handleDelete}>
+      <Pressable style={styles.deleteContainer} onPress={onIconPress}>
         <Icon name="delete" color={AppColor.BLUE_300} />
       </Pressable>
     );

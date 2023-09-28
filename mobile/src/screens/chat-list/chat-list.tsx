@@ -88,7 +88,6 @@ const ChatList: React.FC = () => {
           {filteredChats.map((item) => {
             return (
               <Card
-                id={item.id.toString()}
                 title={item.name}
                 onPress={(): void => {
                   handleSelectChat(item.name, item.id.toString());
