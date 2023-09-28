@@ -2,12 +2,12 @@ import { getValidClassNames } from '#libs/helpers/helpers.js';
 
 import { BackButton } from './back-button.js';
 
-type BackButtonWrapperProperties = {
+type Properties = {
   onGoBack: () => void;
   isVisible?: boolean;
 };
 
-const BackButtonWrapper: React.FC<BackButtonWrapperProperties> = ({
+const BackButtonWrapper: React.FC<Properties> = ({
   isVisible = false,
   onGoBack,
 }) => {

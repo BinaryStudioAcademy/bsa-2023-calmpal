@@ -7,7 +7,7 @@ const useMediaQuery = (query: string): boolean => {
     (event: MediaQueryListEvent): void => {
       setIsMatched(event.matches);
     },
-    [setIsMatched],
+    [],
   );
 
   useEffect(() => {
