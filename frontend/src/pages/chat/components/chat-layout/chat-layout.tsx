@@ -92,6 +92,7 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
                       key={item.id}
                       message={item.message}
                       isSender={item.senderId === authenticatedUser.id}
+                      sentTime={item.createdAt}
                     />
                   );
                 })}

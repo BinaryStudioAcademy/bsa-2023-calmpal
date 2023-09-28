@@ -4,6 +4,7 @@ export { getValidClassNames } from './get-valid-class-names/get-valid-class-name
 export {
   configureString,
   debounce,
+  getFormattedDate,
   getFormattedTime,
   getRelativeDate,
   groupChatMessage,

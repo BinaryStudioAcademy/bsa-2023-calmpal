@@ -2,7 +2,7 @@
   display: none;
 }
 
-@media (width < 768px) {
+@media (width < 768px), (height < 530px) {
   .backward {
     position: fixed;
     top: 30px;
