@@ -4,11 +4,11 @@ import {
   useCallback,
   useFormController,
 } from '#libs/hooks/hooks.js';
+import { type DeleteAccountFormPayload } from '#packages/users/users.js';
 
 import {
   CHECKBOX_OPTIONS,
   DEFAULT_DELETE_ACCOUNT_PAYLOAD,
-  type DeleteAccountFormPayload,
   NO_CHECKED_BOXES,
   OTHER_OPTION_LABEL,
 } from '../../libs/constants/constants.js';
