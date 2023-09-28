@@ -39,6 +39,9 @@ const styles = StyleSheet.create({
     color: AppColor.BLUE_400,
     fontFamily: FontFamily.MONTSERRAT_600,
   },
+  labelModal: {
+    color: AppColor.WHITE,
+  },
   buttonRounded: {
     backgroundColor: AppColor.WHITE,
     borderRadius: 30,
@@ -54,13 +57,19 @@ const styles = StyleSheet.create({
   visuallyCenteredButton: {
     paddingLeft: 18,
   },
-
+  addButtonLabel: {
+    color: AppColor.BLUE_300,
+  },
+  buttonModal: {
+    borderRadius: 8,
+    marginHorizontal: 10,
+    paddingHorizontal: 20,
+  },
   buttonTimer: {
     borderRadius: 40,
     height: 52,
     backgroundColor: AppColor.BLUE_300,
   },
-
   labelTimer: {
     color: AppColor.WHITE,
   },

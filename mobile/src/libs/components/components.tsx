@@ -25,6 +25,6 @@ export {
   Text,
   TextInput,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View,
 } from 'react-native';
+export { Swipeable } from 'react-native-gesture-handler';
