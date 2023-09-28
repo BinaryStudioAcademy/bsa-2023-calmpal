@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { type AsyncThunkConfig, type Track } from '#libs/types/types';
+import { type Track } from '#libs/packages/player/player';
+import { type AsyncThunkConfig } from '#libs/types/types';
 import {
   type MeditationEntryCreateRequestDto,
   type MeditationEntryCreateResponseDto,

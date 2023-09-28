@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { FIRST_ARRAY_INDEX } from '#libs/constants/constants';
 import { DataStatus } from '#libs/enums/enums';
 import { meditationEntryToTrack } from '#libs/packages/player/player';
-import { type Track, type ValueOf } from '#libs/types/types';
+import { type Track } from '#libs/packages/player/player';
+import { type ValueOf } from '#libs/types/types';
 import { type MeditationEntryGetAllItemResponseDto } from '#packages/meditation/meditation';
 
 import { createMeditationEntry, getAllMeditationEntries } from './actions';
