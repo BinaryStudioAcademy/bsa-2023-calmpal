@@ -34,3 +34,10 @@
     padding: 0 15px;
   }
 }
+
+@media (width < 768px) {
+  .journal-entry-list {
+    margin-top: 23px;
+    padding: 0 20px;
+  }
+}

@@ -25,6 +25,8 @@ export {
   debounce,
   getFormattedDate,
   getFormattedTime,
+  getRelativeDate,
+  groupChatMessage,
   replaceTemplateWithValue,
   sanitizeInput,
   SECONDS_IN_MINUTE,
@@ -52,6 +54,7 @@ export {
   type ChatMessageCreateRequestDto,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
+  type ChatMessagesGroups,
   ChatMessageValidationMessage,
   ChatMessageValidationRule,
 } from './packages/chat-messages/chat-messages.js';
