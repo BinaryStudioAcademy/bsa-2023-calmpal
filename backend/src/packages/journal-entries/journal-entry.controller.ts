@@ -284,49 +284,6 @@ class JournalEntryController extends BaseController {
   /**
    * @swagger
    * /journal/{id}:
-   *    get:
-   *      description: Get journal entry by id
-   *      security:
-   *       - bearerAuth: []
-   *      parameters:
-   *       -  in: path
-   *          description: Journal id
-   *          name: id
-   *          required: true
-   *          type: number
-   *          minimum: 1
-   *      responses:
-   *        200:
-   *          description: Successful operation
-   *          content:
-   *            application/json:
-   *              schema:
-   *                   $ref: '#/components/schemas/Journal Entry'
-   *        401:
-   *          description: Unauthorized
-   *          content:
-   *            application/json:
-   *              schema:
-   *                $ref: '#/components/schemas/Error'
-   *              example:
-   *                message: "Incorrect credentials."
-   *                errorType: "AUTHORIZATION"
-   */
-
-  private async getById(
-    options: APIHandlerOptions<{ params: { id: number } }>,
-  ): Promise<APIHandlerResponse> {
-    const { id } = options.params;
-
-    return {
-      status: HTTPCode.OK,
-      payload: await this.journalEntryService.find(id),
-    };
-  }
-
-  /**
-   * @swagger
-   * /journal/{id}:
    *    put:
    *      description: Update a journal entry
    *      security:
