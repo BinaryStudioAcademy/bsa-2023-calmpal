@@ -114,13 +114,13 @@ const JournalSidebar: React.FC<Properties> = ({
           </div>
           <div className={styles['journal-entry-list']}>
             {allJournalEntries.map((journalEntry) => {
-              const noteLink = AppRoute.JOURNAL_$ID_QUERY.replace(
+              const noteLink = AppRoute.JOURNAL_$ID.replace(
                 ':id',
                 String(journalEntry.id),
-              ).replace(':query', filter) as ValueOf<typeof AppRoute>;
+              ) as ValueOf<typeof AppRoute>;
 
               return (
-                <Link key={journalEntry.id} to={noteLink}>
+                <Link key={journalEntry.id} to={`${noteLink}?query=${filter}`}>
                   <Card
                     title={journalEntry.title}
                     onClick={handleSelectJournalEntry(journalEntry.id)}

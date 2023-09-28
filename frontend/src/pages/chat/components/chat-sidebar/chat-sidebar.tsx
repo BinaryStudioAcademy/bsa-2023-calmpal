@@ -98,13 +98,13 @@ const ChatSidebar: React.FC<Properties> = ({
           </div>
           <div className={styles['chat-list']}>
             {chats.map((chat) => {
-              const chatLink = AppRoute.CHATS_$ID_QUERY.replace(
+              const chatLink = AppRoute.CHATS_$ID.replace(
                 ':id',
                 String(chat.id),
-              ).replace(':query', filter) as ValueOf<typeof AppRoute>;
+              ) as ValueOf<typeof AppRoute>;
 
               return (
-                <Link key={chat.id} to={chatLink}>
+                <Link key={chat.id} to={`${chatLink}?query=${filter}`}>
                   <Card
                     title={chat.name}
                     imageUrl={chat.imageUrl ?? cardPlaceholder}
