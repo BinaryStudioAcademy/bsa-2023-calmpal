@@ -48,11 +48,6 @@ const TimerModal: React.FC<Properties> = ({
     startMeditation();
   };
 
-  const startButtonText =
-    value === DEFAULT_DURATION
-      ? 'Start with default duration'
-      : 'Start with selected duration';
-
   return (
     <RNModal
       animationType="none"
@@ -78,19 +73,10 @@ const TimerModal: React.FC<Properties> = ({
                 />
               );
             })}
-            <TimerButton
-              key={DEFAULT_DURATION}
-              isActive={value === DEFAULT_DURATION}
-              onChange={onChange}
-              setDuration={setDuration}
-              duration={DEFAULT_DURATION}
-              unit={DURATION_UNIT.MINUTES}
-              isDefault
-            />
           </View>
 
           <Button
-            label={startButtonText}
+            label="Start with selected duration"
             onPress={handleStartMeditation}
             type="timer"
           />

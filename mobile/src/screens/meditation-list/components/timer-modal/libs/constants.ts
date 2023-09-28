@@ -1,6 +1,6 @@
 import { SECONDS_IN_MINUTE } from '#libs/helpers/helpers';
 
-const DEFAULT_DURATION = 5;
+const DEFAULT_DURATION = 0;
 
 const SHORT_DURATION_IN_MINUTES = 5;
 const MEDIUM_DURATION_IN_MINUTES = 10;

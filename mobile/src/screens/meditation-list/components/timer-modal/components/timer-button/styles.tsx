@@ -32,14 +32,6 @@ const styles = StyleSheet.create({
   activeText: {
     color: AppColor.WHITE,
   },
-  default: {
-    borderColor: AppColor.PURPLE_100,
-    borderWidth: 1,
-  },
-  activeDefault: {
-    backgroundColor: AppColor.GRAY_400,
-    borderWidth: 0,
-  },
 });
 
 export { styles };

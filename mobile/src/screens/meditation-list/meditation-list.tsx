@@ -124,7 +124,6 @@ const MeditationList: React.FC = () => {
             return (
               <MeditationItem
                 title={item.title}
-                duration={duration}
                 key={item.id}
                 onClick={(): void => {
                   handleSelectMeditation(item.id);
