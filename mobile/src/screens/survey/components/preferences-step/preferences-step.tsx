@@ -1,10 +1,9 @@
 import { type NavigationProp } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-
 import { SurveyScreenName } from '#libs/enums/enums';
 import { type SurveyNavigationParameterList } from '#libs/types/types';
-import { PREFERENCES_CATEGORIES } from '#screens/survey/libs/constants';
+import { PREFERENCES_CATEGORIES } from '#screens/survey/libs/cosntants/constants';
 
 import { SurveyStep } from '../components';
 

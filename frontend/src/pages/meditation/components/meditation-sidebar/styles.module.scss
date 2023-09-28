@@ -22,16 +22,8 @@
 
 .info {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
-}
-
-.icon-container {
-  width: 100%;
-  height: 100%;
-  background-color: var(--blue-300);
-  border-radius: 50%;
 }
 
 .list {
@@ -72,7 +64,7 @@
 
 @media (width < 768px) {
   .meditation-list {
-    padding: 0 15px;
+    padding: 0 20px;
   }
 
   .search {

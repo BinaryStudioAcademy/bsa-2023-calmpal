@@ -7,6 +7,7 @@ import {
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 import { type FileUploadRequestDto } from '#packages/files/files.js';
+import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { MeditationApiPath } from './libs/enums/enums.js';
 import { type MeditationEntryCreateRequestDto } from './libs/types/types.js';
@@ -28,6 +29,10 @@ import { type MeditationService } from './meditation.service.js';
  *      MeditationEntryResponse:
  *        type: object
  *        properties:
+ *          id:
+ *            type: number
+ *            format: number
+ *            minimum: 1
  *          name:
  *            type: string
  *          mediaUrl:
@@ -41,6 +46,13 @@ import { type MeditationService } from './meditation.service.js';
  *          updatedAt:
  *            type: string
  *            format: date-time
+ *      Error:
+ *        type: object
+ *        properties:
+ *          message:
+ *            type: string
+ *          errorType:
+ *            type: string
  */
 class MeditationController extends BaseController {
   private meditationService: MeditationService;
@@ -61,6 +73,19 @@ class MeditationController extends BaseController {
           options as APIHandlerOptions<{
             body: MeditationEntryCreateRequestDto;
             fileBuffer: FileUploadRequestDto;
+            user: UserAuthResponseDto;
+          }>,
+        );
+      },
+    });
+
+    this.addRoute({
+      path: MeditationApiPath.ROOT,
+      method: 'GET',
+      handler: (options) => {
+        return this.getAll(
+          options as APIHandlerOptions<{
+            user: UserAuthResponseDto;
           }>,
         );
       },
@@ -79,6 +104,8 @@ class MeditationController extends BaseController {
    *          application/json:
    *            schema:
    *              $ref: '#/components/schemas/MeditationEntryRequest'
+   *      security:
+   *       - bearerAuth: []
    *      responses:
    *        201:
    *          description: Successful operation
@@ -89,12 +116,31 @@ class MeditationController extends BaseController {
    *                properties:
    *                  message:
    *                    $ref: '#/components/schemas/MeditationEntryResponse'
+   *        400:
+   *          description: Bad request (Invalid format)
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "File extension should be one of PNG, JPEG, MPEG."
+   *                errorType: "FILE"
+   *        400:
+   *          description: Payload too large (File size exceeds 10MB)
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Error'
+   *              example:
+   *                message: "The inputted file is bigger than 10 MB."
+   *                errorType: "FILE"
    */
 
   private async create(
     options: APIHandlerOptions<{
       body: MeditationEntryCreateRequestDto;
       fileBuffer: FileUploadRequestDto;
+      user: UserAuthResponseDto;
     }>,
   ): Promise<APIHandlerResponse> {
     return {
@@ -102,7 +148,40 @@ class MeditationController extends BaseController {
       payload: await this.meditationService.create({
         name: options.body.name.value,
         file: options.fileBuffer,
+        userId: options.user.id,
       }),
+    };
+  }
+
+  /**
+   * @swagger
+   * /meditation:
+   *    get:
+   *      description: Get all meditation entries
+   *      security:
+   *       - bearerAuth: []
+   *      responses:
+   *        200:
+   *          description: Successful operation
+   *          content:
+   *            application/json:
+   *              schema:
+   *                type: object
+   *                properties:
+   *                  items:
+   *                    type: array
+   *                    items:
+   *                      $ref: '#/components/schemas/MeditationEntry'
+   */
+
+  private async getAll(
+    options: APIHandlerOptions<{
+      user: UserAuthResponseDto;
+    }>,
+  ): Promise<APIHandlerResponse> {
+    return {
+      status: HTTPCode.OK,
+      payload: await this.meditationService.findByUserId(options.user.id),
     };
   }
 }

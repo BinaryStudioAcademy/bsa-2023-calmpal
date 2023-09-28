@@ -15,6 +15,7 @@ export {
   ChatError,
   FileError,
   HTTPError,
+  JournalError,
   UsersError,
   ValidationError,
 } from './libs/exceptions/exceptions.js';
@@ -23,7 +24,11 @@ export {
   debounce,
   getFormattedDate,
   getFormattedTime,
+  getRelativeDate,
+  groupChatMessage,
   replaceTemplateWithValue,
+  sanitizeInput,
+  SECONDS_IN_MINUTE,
 } from './libs/helpers/helpers.js';
 export { type Config } from './libs/packages/config/config.js';
 export {
@@ -35,6 +40,7 @@ export {
 } from './libs/packages/http/http.js';
 export { type Storage } from './libs/packages/storage/storage.js';
 export {
+  type EntitiesFilteringDto,
   type ServerCommonErrorResponse,
   type ServerErrorDetail,
   type ServerErrorResponse,
@@ -47,6 +53,7 @@ export {
   type ChatMessageCreateRequestDto,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
+  type ChatMessagesGroups,
   ChatMessageValidationMessage,
   ChatMessageValidationRule,
 } from './packages/chat-messages/chat-messages.js';
@@ -56,7 +63,9 @@ export {
   type ChatGetAllResponseDto,
   ChatsApiPath,
   createChatValidationSchema,
+  type UpdateChatImageRequestDto,
 } from './packages/chats/chats.js';
+export { entitiesFilteringQueryValidationSchema } from './packages/common-validation-schemas/validation-schemas.js';
 export {
   type FileGetAllItemResponseDto,
   FilesApiPath,
@@ -66,10 +75,15 @@ export {
   type S3FileUploadRequestDto,
 } from './packages/files/files.js';
 export {
+  createJournalEntryValidationSchema,
   JournalApiPath,
   type JournalEntryCreateRequestDto,
+  type JournalEntryDeleteResponseDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
+  type JournalEntryUpdatePayloadDto,
+  type JournalEntryUpdateRequestDto,
+  NOTE_SANITIZER_OPTIONS,
 } from './packages/journal/journal.js';
 export {
   createMeditationEntryFormValidationSchema,
@@ -77,6 +91,8 @@ export {
   type MeditationEntryCreateForm,
   type MeditationEntryCreateRequestDto,
   type MeditationEntryCreateResponseDto,
+  type MeditationEntryGetAllItemResponseDto,
+  type MeditationEntryGetAllResponseDto,
   MeditationEntryValidationMessage,
 } from './packages/meditation/meditation.js';
 export {
@@ -101,3 +117,12 @@ export {
   type UserSignUpResponseDto,
   userSignUpValidationSchema,
 } from './packages/users/users.js';
+export {
+  cancelPaymentIntentValidationSchema,
+  createPaymentIntentValidationSchema,
+  SUBSCRIPTION_PRICE,
+  SubscriptionApiPath,
+  type SubscriptionPaymentIntentCancelRequestDto,
+  type SubscriptionPaymentIntentCreateRequestDto,
+  type SubscriptionPaymentIntentCreateResponseDto,
+} from '#packages/subscriptions/subscriptions.js';

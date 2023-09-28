@@ -7,6 +7,7 @@ import { MeditationApiPath } from './libs/enums/enums.js';
 import {
   type MeditationEntryCreateRequestDto,
   type MeditationEntryCreateResponseDto,
+  type MeditationEntryGetAllResponseDto,
 } from './libs/types/types.js';
 
 type Constructor = {
@@ -20,7 +21,7 @@ class MeditationApi extends BaseHttpApi {
     super({ path: APIPath.MEDITATION, baseUrl, http, storage });
   }
 
-  public async createMeditationEntry({
+  public async createEntry({
     name,
     file,
   }: MeditationEntryCreateRequestDto): Promise<MeditationEntryCreateResponseDto> {
@@ -38,6 +39,18 @@ class MeditationApi extends BaseHttpApi {
     );
 
     return await response.json<MeditationEntryCreateResponseDto>();
+  }
+
+  public async getAllEntries(): Promise<MeditationEntryGetAllResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(MeditationApiPath.ROOT, {}),
+      {
+        method: 'GET',
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<MeditationEntryGetAllResponseDto>();
   }
 }
 

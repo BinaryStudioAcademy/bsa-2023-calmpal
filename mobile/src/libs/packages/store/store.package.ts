@@ -7,12 +7,15 @@ import {
 
 import { AppEnvironment } from '#libs/enums/enums';
 import { authApi } from '#packages/auth/auth';
+import { chatMessagesApi } from '#packages/chat-messages/chat-messages';
 import { chatApi } from '#packages/chats/chats';
 import { journalApi } from '#packages/journal/journal';
+import { meditationApi } from '#packages/meditation/meditation';
 import { reducer as authReducer } from '#slices/auth/auth';
 import { reducer as chatsReducer } from '#slices/chats/chats';
 import { reducer as journalReducer } from '#slices/journal/journal';
 import { reducer as surveyReducer } from '#slices/survey/survey';
+import { reducer as meditationReducer } from '#slices/meditation/meditation';
 
 import { type Config } from '../config/config';
 import { notification } from '../notification/notification';
@@ -25,13 +28,16 @@ type RootReducer = {
   journal: ReturnType<typeof journalReducer>;
   chats: ReturnType<typeof chatsReducer>;
   survey: ReturnType<typeof surveyReducer>;
+  meditation: ReturnType<typeof meditationReducer>;
 };
 
 type ExtraArguments = {
   authApi: typeof authApi;
   journalApi: typeof journalApi;
   chatApi: typeof chatApi;
+  meditationApi: typeof meditationApi;
   notification: typeof notification;
+  chatMessagesApi: typeof chatMessagesApi;
   player: typeof player;
   storage: typeof storage;
 };
@@ -53,6 +59,7 @@ class Store {
         journal: journalReducer,
         chats: chatsReducer,
         survey: surveyReducer,
+        meditation: meditationReducer,
       },
       middleware: (getDefaultMiddleware) => {
         return [
@@ -72,7 +79,9 @@ class Store {
       authApi,
       journalApi,
       chatApi,
+      meditationApi,
       notification,
+      chatMessagesApi,
       player,
       storage,
     };

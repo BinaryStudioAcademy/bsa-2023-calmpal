@@ -7,7 +7,7 @@ export {
   RootScreenName,
   SurveyScreenName,
 } from './navigation/navigation';
-export { AppColor } from './ui/ui';
+export { AppColor, FontFamily } from './ui/ui';
 export {
   APIPath,
   AppEnvironment,
