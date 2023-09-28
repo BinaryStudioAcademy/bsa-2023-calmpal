@@ -1,4 +1,4 @@
-import { BackButton, Loader } from '#libs/components/components.js';
+import { BackButtonWrapper, Loader } from '#libs/components/components.js';
 import { AppRoute, DataStatus } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import {
@@ -64,7 +64,7 @@ const Journal: React.FC = () => {
           isSidebarShown && styles['hide'],
         )}
       >
-        <BackButton onGoBack={handleBackButtonPress} />
+        <BackButtonWrapper onGoBack={handleBackButtonPress} />
         {isLoading ? (
           <Loader />
         ) : (

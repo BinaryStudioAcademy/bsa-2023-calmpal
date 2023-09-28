@@ -93,7 +93,7 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
           />
         ) : (
           <div className={styles['loader-wrapper']}>
-            <Loader />
+            <Loader isOverflow />
           </div>
         )}
       </Modal>
