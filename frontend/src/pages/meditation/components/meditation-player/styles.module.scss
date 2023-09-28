@@ -46,23 +46,9 @@
   line-height: 1.3;
 }
 
-.purpose {
-  margin-top: 8px;
-  margin-bottom: 24px;
-  color: var(--blue-200);
-  font-size: 16px;
-  line-height: 1.25;
-}
-
-@media (width < 900px) {
+@media (width < 900px), (height < 767px) {
   .wrapper {
-    padding-left: 250px;
-  }
-}
-
-@media (width < 767px), (height < 530px) {
-  .wrapper {
-    padding: 5px 20px 0;
+    padding-left: 280px;
     background-image: url("../../../../assets/img/meditation-player-background-mobile.png");
   }
 
@@ -75,26 +61,40 @@
     line-height: 1.5;
   }
 
-  .purpose {
-    margin-bottom: 20px;
-    font-size: 14px;
-  }
-
   .image-wrapper {
     width: 315px;
     height: 315px;
   }
 }
 
-@media (height < 509px) {
+@media (width < 767px), (height < 530px) {
+  .wrapper {
+    padding-left: 0;
+  }
+
   .image-wrapper {
     align-self: center;
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (height < 600px) {
+  .image-wrapper {
+    align-self: center;
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (width < 480px), (height < 530px) {
+  .image-wrapper {
     width: 200px;
     height: 200px;
   }
 }
 
-@media (height <400px) {
+@media (height < 480px) {
   .image-wrapper {
     display: none;
   }

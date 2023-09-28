@@ -1,7 +1,12 @@
-import { BackButton, Loader } from '#libs/components/components.js';
+import { BackButtonWrapper, Loader } from '#libs/components/components.js';
+import { MOBILE_DIMENSION } from '#libs/constants/constants.js';
 import { DataStatus } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { useAppSelector, useCallback } from '#libs/hooks/hooks.js';
+import {
+  useAppSelector,
+  useCallback,
+  useMediaQuery,
+} from '#libs/hooks/hooks.js';
 
 import { MeditationEntry } from './components/components.js';
 import styles from './styles.module.scss';
@@ -23,6 +28,7 @@ const MeditationList: React.FC<Properties> = ({
       };
     },
   );
+  const isMobileDimension = useMediaQuery(MOBILE_DIMENSION);
 
   const handleBackButtonPress = useCallback(() => {
     onSetIsSidebarShow(true);
@@ -39,7 +45,10 @@ const MeditationList: React.FC<Properties> = ({
         isSidebarShown && styles['hidden'],
       )}
     >
-      <BackButton onGoBack={handleBackButtonPress} />
+      <BackButtonWrapper
+        onGoBack={handleBackButtonPress}
+        isVisible={isMobileDimension}
+      />
       <div className={styles['list']}>
         {meditationEntries.map((entry) => {
           return <MeditationEntry meditationEntry={entry} key={entry.id} />;
