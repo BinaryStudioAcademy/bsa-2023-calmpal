@@ -25,7 +25,7 @@ ENV DB_NAME=$DB_NAME
 
 WORKDIR /app
 
-RUN apt-get install wget ca-certificates
+RUN apt-get install wget ca-certificates ffmpeg
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ $(grep -oP 'VERSION_CODENAME=\K\w+' /etc/os-release)-pgdg main" | tee  /etc/apt/sources.list.d/pgdg.list
 RUN apt-get clean && apt-get update -qq && apt-get -y install postgresql-15 postgresql-client-15
