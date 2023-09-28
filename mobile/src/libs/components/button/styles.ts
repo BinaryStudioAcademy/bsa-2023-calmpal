@@ -65,12 +65,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     paddingHorizontal: 20,
   },
-  buttonModalCancel: {
-    backgroundColor: AppColor.GRAY_400,
-  },
-  buttonModalDelete: {
-    backgroundColor: AppColor.BLUE_300,
-  },
 });
 
 export { styles };
