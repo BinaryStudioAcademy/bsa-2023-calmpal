@@ -4,8 +4,8 @@ import React from 'react';
 import { Text, View } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
 import { getFormattedTime } from '#libs/helpers/helpers';
-import { usePlayerControls } from '#libs/hooks/hooks';
-import { useProgress } from '#libs/packages/player/player';
+import { useEffect, usePlayerControls } from '#libs/hooks/hooks';
+import { player, useProgress } from '#libs/packages/player/player';
 
 import { TRACK_START_TIME } from './libs/constants';
 import { styles } from './styles';
@@ -17,16 +17,23 @@ type Properties = {
 
 const ProgressBar: React.FC<Properties> = ({ isPlaying, trackDuration }) => {
   const { position, duration } = useProgress();
-  trackDuration;
   const { handleSeek } = usePlayerControls({ isPlaying });
+
+  const currentDuration = duration < trackDuration ? duration : trackDuration;
+
+  useEffect(() => {
+    if (position >= currentDuration && currentDuration) {
+      void player.skipToNext();
+    }
+  }, [position, currentDuration]);
 
   return (
     <View style={styles.wrapper}>
       <Text style={styles.progress}>{getFormattedTime(position)}</Text>
-      <Text style={styles.duration}>{getFormattedTime(duration)}</Text>
+      <Text style={styles.duration}>{getFormattedTime(currentDuration)}</Text>
       <Slider
         minimumValue={TRACK_START_TIME}
-        maximumValue={duration}
+        maximumValue={currentDuration}
         minimumTrackTintColor={AppColor.GRAY_400}
         maximumTrackTintColor={AppColor.GRAY_300}
         thumbTintColor="transparent"
