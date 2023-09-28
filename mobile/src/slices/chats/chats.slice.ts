@@ -64,6 +64,7 @@ const { reducer, actions, name } = createSlice({
       state.currentChatMessagesDataStatus = DataStatus.PENDING;
     });
     builder.addCase(getCurrentChatMessages.fulfilled, (state) => {
+      // TODO: Implement ChatMessagesGroups
       state.currentChatMessages = [];
       state.currentChatMessagesDataStatus = DataStatus.FULFILLED;
     });

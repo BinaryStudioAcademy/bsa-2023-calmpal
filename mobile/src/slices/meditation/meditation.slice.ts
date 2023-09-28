@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { FIRST_ARRAY_INDEX } from '#libs/constants/constants';
 import { DataStatus } from '#libs/enums/enums';
 import { meditationEntryToTrack } from '#libs/packages/player/player';
 import { type Track, type ValueOf } from '#libs/types/types';
+import { type MeditationEntryGetAllItemResponseDto } from '#packages/meditation/meditation';
 
 import { createMeditationEntry, getAllMeditationEntries } from './actions';
 
@@ -43,8 +45,11 @@ const { reducer, actions, name } = createSlice({
     builder.addCase(createMeditationEntry.pending, (state) => {
       state.meditationEntriesDataStatus = DataStatus.PENDING;
     });
-    builder.addCase(createMeditationEntry.fulfilled, (state) => {
-      state.meditationEntries = [];
+    builder.addCase(createMeditationEntry.fulfilled, (state, action) => {
+      const trackArray = meditationEntryToTrack([
+        action.payload as MeditationEntryGetAllItemResponseDto,
+      ]);
+      state.meditationEntries.push(trackArray[FIRST_ARRAY_INDEX] as Track);
       state.meditationEntriesDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(createMeditationEntry.rejected, (state) => {
