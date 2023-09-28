@@ -1,12 +1,12 @@
 import React from 'react';
 import { type ImageSourcePropType } from 'react-native';
-import { Swipeable } from 'react-native-gesture-handler';
 
 import imagePlaceholder from '#assets/img/card-image-placeholder.png';
 import {
   Icon,
   Image,
   Pressable,
+  Swipeable,
   Text,
   View,
 } from '#libs/components/components';
