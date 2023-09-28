@@ -23,18 +23,15 @@ class UsersApi extends BaseHttpApi {
   public async deleteUser(
     payload: UserDeleteRequestDto,
   ): Promise<UserDeleteResponseDto> {
-    const updatedPath = UsersApiPath.DELETE_USER.replace(
-      ':id',
-      payload.id.toString(),
+    const response = await this.load(
+      this.getFullEndpoint(UsersApiPath.$ID, { id: payload.id.toString() }),
+      {
+        method: 'DELETE',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify(payload),
+        hasAuth: true,
+      },
     );
-    const deleteUserUrl = this.getFullEndpoint(updatedPath, {});
-
-    const response = await this.load(deleteUserUrl, {
-      method: 'DELETE',
-      contentType: ContentType.JSON,
-      payload: JSON.stringify(payload),
-      hasAuth: true,
-    });
 
     return await response.json<UserDeleteResponseDto>();
   }

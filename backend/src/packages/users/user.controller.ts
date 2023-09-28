@@ -2,8 +2,8 @@ import { APIPath } from '#libs/enums/enums.js';
 import {
   type APIHandlerOptions,
   type APIHandlerResponse,
+  BaseController,
 } from '#libs/packages/controller/controller.js';
-import { BaseController } from '#libs/packages/controller/controller.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 import { type UserAuthResponseDto } from '#packages/users/libs/types/types.js';
@@ -39,7 +39,7 @@ class UserController extends BaseController {
     this.userService = userService;
 
     this.addRoute({
-      path: UsersApiPath.DELETE_USER,
+      path: UsersApiPath.$ID,
       method: 'DELETE',
       handler: (options) => {
         return this.deleteAuthenticatedUser(
@@ -53,7 +53,7 @@ class UserController extends BaseController {
 
   /**
    * @swagger
-   * /delete-user/{id}:
+   * /{id}:
    *   delete:
    *     description: Delete an authenticated user by their ID
    *     parameters:

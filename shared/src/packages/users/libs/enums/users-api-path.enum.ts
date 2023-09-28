@@ -1,6 +1,6 @@
 const UsersApiPath = {
   ROOT: '/',
-  DELETE_USER: '/delete-user/:id',
+  $ID: '/:id',
 } as const;
 
 export { UsersApiPath };
