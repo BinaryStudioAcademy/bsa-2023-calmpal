@@ -1,4 +1,5 @@
 import { Icon, Link } from '#libs/components/components.js';
+import { SECOND_INDEX } from '#libs/constants/index.constant.js';
 import { IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useLocation, useState } from '#libs/hooks/hooks.js';
@@ -20,6 +21,20 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
     });
   }, []);
 
+  const checkIsCurrentRoot = useCallback(
+    (currentPath: string, itemPath: string): boolean => {
+      const currentPathWithoutSlash = currentPath.slice(SECOND_INDEX);
+      const itemPathWithoutSlash = itemPath.slice(SECOND_INDEX);
+
+      return (
+        currentPath === itemPath ||
+        (currentPathWithoutSlash !== '' &&
+          itemPathWithoutSlash.startsWith(currentPathWithoutSlash))
+      );
+    },
+    [],
+  );
+
   return (
     <div className={styles['dropdown']}>
       <button
@@ -37,14 +52,15 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
         {routes.map((item) => {
           return (
             <div key={item.path}>
-              <div
-                className={getValidClassNames(
-                  styles['dropdown-item'],
-                  pathname === item.path && styles['selected'],
-                )}
-              >
+              <div className={styles['dropdown-item']}>
                 <Link to={item.path}>
-                  <span className={styles['item']}>
+                  <span
+                    className={getValidClassNames(
+                      styles['item'],
+                      checkIsCurrentRoot(pathname, item.path) &&
+                        styles['selected'],
+                    )}
+                  >
                     <span className="visually-hidden">Go to {item.name}</span>
                     <Icon
                       name={item.icon}
