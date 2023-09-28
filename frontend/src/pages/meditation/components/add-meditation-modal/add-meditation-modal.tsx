@@ -5,7 +5,7 @@ import {
   Modal,
 } from '#libs/components/components.js';
 import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants.js';
-import { DataStatus } from '#libs/enums/enums.js';
+import { ContentType, DataStatus } from '#libs/enums/enums.js';
 import {
   forwardRef,
   useAppForm,
@@ -70,7 +70,7 @@ const AddMeditationModal: React.ForwardRefRenderFunction<
           errors={errors}
           label="Meditation name"
           name="name"
-          placeholder="Enter topic name"
+          placeholder="Enter meditation name"
         />
         <InputFile
           control={control}
@@ -80,6 +80,7 @@ const AddMeditationModal: React.ForwardRefRenderFunction<
           fileSizeName="size"
           label="Meditation audio file"
           description="Only MP3 extension is allowed"
+          extensions={[ContentType.MPEG]}
         />
         <Button
           type="submit"

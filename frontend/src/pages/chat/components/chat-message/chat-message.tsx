@@ -19,7 +19,12 @@ const ChatMessage: React.FC<Properties> = ({ message, isSender }) => {
     >
       {!isSender && (
         <div className={styles['avatar']}>
-          <Icon name="chatbot-avatar" color={IconColor.BLUE} />
+          <Icon
+            name="chatbot-avatar"
+            color={IconColor.BLUE}
+            width={40}
+            height={40}
+          />
         </div>
       )}
       <div
