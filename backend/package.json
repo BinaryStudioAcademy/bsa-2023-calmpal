@@ -39,6 +39,7 @@
     "@fastify/swagger": "8.8.0",
     "@fastify/swagger-ui": "1.9.3",
     "@ffmpeg-installer/ffmpeg": "1.1.0",
+    "@ffprobe-installer/ffprobe": "2.1.2",
     "bcryptjs": "2.4.3",
     "convict": "6.2.4",
     "cross-env": "7.0.3",
