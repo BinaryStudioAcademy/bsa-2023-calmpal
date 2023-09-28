@@ -6,7 +6,7 @@ import { type ValueOf } from '#libs/types/types.js';
 import styles from './styles.module.scss';
 
 type Properties = {
-  to: ValueOf<typeof AppRoute> | `${ValueOf<typeof AppRoute>}?query=${string}`;
+  to: ValueOf<typeof AppRoute>;
   children: React.ReactNode;
 };
 

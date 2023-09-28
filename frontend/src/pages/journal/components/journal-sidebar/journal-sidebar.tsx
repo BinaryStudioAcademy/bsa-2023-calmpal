@@ -8,11 +8,13 @@ import {
   SidebarHeader,
 } from '#libs/components/components.js';
 import { AppRoute, IconColor } from '#libs/enums/enums.js';
+import { getUrlWithQueryString } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useAppSelector,
   useCallback,
   useEffect,
+  useParams,
   useRef,
   useState,
 } from '#libs/hooks/hooks.js';
@@ -28,7 +30,6 @@ type Properties = {
   onSetIsSidebarShow: (value: boolean) => void;
   filter: string;
   onSetFilter: (query: string) => void;
-  id: string | undefined;
 };
 
 const JournalSidebar: React.FC<Properties> = ({
@@ -36,8 +37,8 @@ const JournalSidebar: React.FC<Properties> = ({
   onSetIsSidebarShow,
   filter,
   onSetFilter,
-  id,
 }) => {
+  const { id } = useParams();
   const dispatch = useAppDispatch();
   const [chatToDelete, setChatToDelete] = useState<null | number>(null);
   const dialogReference = useRef<HTMLDialogElement | null>(null);
@@ -120,7 +121,10 @@ const JournalSidebar: React.FC<Properties> = ({
               ) as ValueOf<typeof AppRoute>;
 
               return (
-                <Link key={journalEntry.id} to={`${noteLink}?query=${filter}`}>
+                <Link
+                  key={journalEntry.id}
+                  to={getUrlWithQueryString(noteLink, { query: filter })}
+                >
                   <Card
                     title={journalEntry.title}
                     onClick={handleSelectJournalEntry(journalEntry.id)}

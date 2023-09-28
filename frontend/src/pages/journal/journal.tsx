@@ -40,7 +40,6 @@ const Journal: React.FC = () => {
         onSetIsSidebarShow={setIsSidebarShow}
         filter={filter}
         onSetFilter={setFilter}
-        id={id}
       />
       <div
         className={getValidClassNames(
