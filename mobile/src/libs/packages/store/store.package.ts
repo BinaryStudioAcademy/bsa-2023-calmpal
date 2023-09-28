@@ -14,8 +14,8 @@ import { meditationApi } from '#packages/meditation/meditation';
 import { reducer as authReducer } from '#slices/auth/auth';
 import { reducer as chatsReducer } from '#slices/chats/chats';
 import { reducer as journalReducer } from '#slices/journal/journal';
-import { reducer as surveyReducer } from '#slices/survey/survey';
 import { reducer as meditationReducer } from '#slices/meditation/meditation';
+import { reducer as surveyReducer } from '#slices/survey/survey';
 
 import { type Config } from '../config/config';
 import { notification } from '../notification/notification';

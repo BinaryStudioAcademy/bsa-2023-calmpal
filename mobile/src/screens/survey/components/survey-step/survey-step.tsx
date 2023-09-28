@@ -18,7 +18,7 @@ import { type UserAuthResponseDto } from '#packages/users/users';
 import {
   DEFAULT_SURVEY_PAYLOAD,
   TEXTAREA_ROWS_COUNT,
-} from '#screens/survey/libs/constants';
+} from '#screens/survey/libs/constants/constants';
 import { actions as authActions } from '#slices/auth/auth';
 import { actions } from '#slices/survey/survey';
 
