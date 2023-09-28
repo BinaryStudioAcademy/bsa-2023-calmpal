@@ -1,15 +1,18 @@
 import { Icon } from '#libs/components/components.js';
-import { IconColor } from '#libs/enums/enums.js';
-import { getValidClassNames } from '#libs/helpers/helpers.js';
+import { IconColor, TimeFormat } from '#libs/enums/enums.js';
+import { getFormattedDate, getValidClassNames } from '#libs/helpers/helpers.js';
 
 import styles from './styles.module.scss';
 
 type Properties = {
   message: string;
   isSender: boolean;
+  sentTime: Date;
 };
 
-const ChatMessage: React.FC<Properties> = ({ message, isSender }) => {
+const ChatMessage: React.FC<Properties> = ({ message, isSender, sentTime }) => {
+  const formattedTime = getFormattedDate(new Date(sentTime), TimeFormat.HH_MM);
+
   return (
     <div
       className={getValidClassNames(
@@ -42,6 +45,7 @@ const ChatMessage: React.FC<Properties> = ({ message, isSender }) => {
         >
           {message}
         </p>
+        <span className={styles['time']}>{formattedTime}</span>
       </div>
       {isSender && (
         <div
