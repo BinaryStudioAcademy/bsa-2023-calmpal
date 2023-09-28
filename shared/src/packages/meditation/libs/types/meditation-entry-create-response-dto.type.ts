@@ -6,6 +6,7 @@ type MeditationEntryCreateResponseDto = {
   name: string;
   mediaUrl: string;
   contentType: ValueOf<typeof ContentType>;
+  duration: number;
   createdAt: Date;
   updatedAt: Date;
 };

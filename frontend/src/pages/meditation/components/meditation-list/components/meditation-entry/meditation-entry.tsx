@@ -26,18 +26,8 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
   const [audioDuration, setAudioDuration] = useState<number | null>(null);
 
   useEffect(() => {
-    const audio = new Audio(meditationEntry.mediaUrl);
-
-    const onMetadataLoaded = (): void => {
-      setAudioDuration(audio.duration);
-    };
-
-    audio.addEventListener('loadedmetadata', onMetadataLoaded);
-
-    return () => {
-      audio.removeEventListener('loadedmetadata', onMetadataLoaded);
-    };
-  }, [meditationEntry.mediaUrl]);
+    setAudioDuration(meditationEntry.duration);
+  }, [meditationEntry]);
 
   const handlePlayClick = useCallback(() => {
     dialogReference.current?.showModal();

@@ -31,6 +31,7 @@ class MeditationRepository implements Repository {
         id: meditationEntry.id,
         name: meditationEntry.name,
         mediaUrl: meditationEntry.mediaUrl,
+        duration: meditationEntry.duration,
         contentType: meditationEntry.contentType,
         userId: meditationEntry.userId,
         createdAt: new Date(meditationEntry.createdAt),
@@ -44,13 +45,14 @@ class MeditationRepository implements Repository {
   }
 
   public async create(entity: MeditationEntity): Promise<MeditationEntity> {
-    const { name, mediaUrl, contentType, userId } = entity.toObject();
+    const { name, mediaUrl, contentType, userId, duration } = entity.toObject();
 
     const meditationEntry = await this.meditationEntryModel
       .query()
       .insertGraph({
         name,
         mediaUrl,
+        duration,
         contentType,
         topicId: null,
         userId,
@@ -63,6 +65,7 @@ class MeditationRepository implements Repository {
       name: meditationEntry.name,
       mediaUrl: meditationEntry.mediaUrl,
       contentType: meditationEntry.contentType,
+      duration: meditationEntry.duration,
       userId: meditationEntry.userId,
       createdAt: new Date(meditationEntry.createdAt),
       updatedAt: new Date(meditationEntry.updatedAt),

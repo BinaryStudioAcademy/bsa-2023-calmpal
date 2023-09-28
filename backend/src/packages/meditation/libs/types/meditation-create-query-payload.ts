@@ -6,6 +6,7 @@ type MeditationCreateQueryPayload = {
   name: string;
   mediaUrl: string;
   contentType: ValueOf<typeof ContentType>;
+  duration: number;
   topicId: number | null;
   userId: number | null;
 };

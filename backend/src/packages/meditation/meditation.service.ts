@@ -1,3 +1,5 @@
+import { getAudioDurationInSeconds } from 'get-audio-duration';
+
 import { type Service } from '#libs/types/types.js';
 import { type FileService } from '#packages/files/file.service.js';
 import { type FileUploadRequestDto } from '#packages/files/files.js';
@@ -52,10 +54,13 @@ class MeditationService implements Service {
     userId: number;
   }): Promise<MeditationEntryCreateResponseDto> {
     const { url, contentType } = await this.fileService.create(file);
+    const duration = await getAudioDurationInSeconds(url);
+
     const item = await this.meditationRepository.create(
       MeditationEntity.initializeNew({
         name,
         mediaUrl: url,
+        duration,
         contentType,
         userId,
       }),

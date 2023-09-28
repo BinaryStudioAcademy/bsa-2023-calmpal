@@ -8,6 +8,7 @@ type MeditationCommonQueryResponse = {
   name: string;
   mediaUrl: string;
   contentType: ValueOf<typeof ContentType>;
+  duration: number;
   userId: number | null;
   topic?: {
     name: string;
