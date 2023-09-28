@@ -20,7 +20,7 @@ import { type ChatNavigationParameterList } from '#libs/types/types';
 import { type UserAuthResponseDto } from '#packages/users/users';
 import { actions as chatsActions } from '#slices/chats/chats';
 
-import { ChatInput, MessageItem } from './components/components';
+import { ChatDivider, ChatInput, MessageItem } from './components/components';
 import { DEFAULT_VALUES, PREVIOUS_USER } from './libs/constants/constants';
 import { type ChatInputValue } from './libs/types/chat-input-value.type';
 import { styles } from './styles';
@@ -51,7 +51,8 @@ const Chat: React.FC = () => {
   );
 
   const scrollViewReference = useRef<ScrollView | null>(null);
-  const messagesLength = currentChatMessages.length;
+  const messagesLength = Object.values(currentChatMessages).flat().length;
+
   const scrollViewToEnd = (): void => {
     scrollViewReference.current?.scrollToEnd();
   };
@@ -102,23 +103,30 @@ const Chat: React.FC = () => {
         <Text style={styles.title}>Doctor Freud.ai</Text>
       </View>
       <ScrollView style={styles.chatWrapper} ref={scrollViewReference}>
-        {currentChatMessages.map((item, index) => {
-          const previousMessage = currentChatMessages[index - PREVIOUS_USER];
-          const currentTime = getFormattedDate(
-            new Date(item.createdAt),
-            TimeFormat.HH_MM,
-          );
-          const isDifferentMessageOwner =
-            item.senderId !== previousMessage?.senderId;
-
+        {Object.entries(currentChatMessages).map(([date, group]) => {
           return (
-            <MessageItem
-              text={item.message}
-              time={currentTime}
-              isUser={item.senderId === authenticatedUser.id}
-              isAvatarVisible={isDifferentMessageOwner}
-              key={item.id}
-            />
+            <React.Fragment key={date}>
+              <ChatDivider date={new Date(date)} />
+              {group.map((item, index) => {
+                const previousMessage = group[index - PREVIOUS_USER];
+                const currentTime = getFormattedDate(
+                  new Date(item.createdAt),
+                  TimeFormat.HH_MM,
+                );
+                const isDifferentMessageOwner =
+                  item.senderId !== previousMessage?.senderId;
+
+                return (
+                  <MessageItem
+                    text={item.message}
+                    time={currentTime}
+                    isUser={item.senderId === authenticatedUser.id}
+                    isAvatarVisible={isDifferentMessageOwner}
+                    key={item.id}
+                  />
+                );
+              })}
+            </React.Fragment>
           );
         })}
       </ScrollView>

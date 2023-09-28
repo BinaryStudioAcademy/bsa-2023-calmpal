@@ -116,7 +116,7 @@ const { reducer, actions, name } = createSlice({
     });
 
     builder.addCase(generateReply.pending, (state) => {
-      state.generateReplyDataStatus = DataStatus.IDLE;
+      state.generateReplyDataStatus = DataStatus.PENDING;
     });
 
     builder.addCase(generateReply.fulfilled, (state, action) => {
