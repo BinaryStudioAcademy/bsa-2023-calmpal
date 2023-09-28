@@ -9,7 +9,6 @@ type Properties = {
   isUser: boolean;
   text: string;
   time: string;
-  isTimeVisible: boolean;
   isAvatarVisible: boolean;
 };
 
@@ -17,7 +16,6 @@ const MessageItem: React.FC<Properties> = ({
   isUser,
   text,
   time,
-  isTimeVisible,
   isAvatarVisible,
 }) => {
   return (
@@ -47,7 +45,7 @@ const MessageItem: React.FC<Properties> = ({
         <Text style={[styles.messageText, isUser && styles.userMessage]}>
           {text}
         </Text>
-        {isTimeVisible && <Text>{time}</Text>}
+        <Text>{time}</Text>
       </View>
     </View>
   );
