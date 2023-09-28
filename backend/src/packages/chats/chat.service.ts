@@ -148,14 +148,20 @@ class ChatService implements Service {
     return (await this.openAiService.getMessageResponse([
       {
         role: OpenAiRoleKey.USER,
-        content: replaceTemplateWithValue(CHAT_NAME_TEMPLATE, { message }),
+        content: replaceTemplateWithValue({
+          template: CHAT_NAME_TEMPLATE,
+          replacements: { message },
+        }),
       },
     ])) as string;
   }
 
   public async generateChatImage(name: string): Promise<string> {
     return (await this.openAiService.generateImages({
-      prompt: replaceTemplateWithValue(CHAT_IMAGE_TEMPLATE, { name }),
+      prompt: replaceTemplateWithValue({
+        template: CHAT_IMAGE_TEMPLATE,
+        replacements: { name },
+      }),
     })) as string;
   }
 

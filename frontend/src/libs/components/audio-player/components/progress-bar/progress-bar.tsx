@@ -41,7 +41,7 @@ const ProgressBar: React.ForwardRefRenderFunction<
           {getFormattedTime(duration, false)}
         </span>
       </div>
-      <label>
+      <label className={styles['label']}>
         <span className="visually-hidden">A Meditation duration</span>
         <input
           className={styles['progress']}
