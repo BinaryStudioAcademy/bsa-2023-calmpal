@@ -37,7 +37,7 @@ concurrency:
 jobs:
   ci-run-db-migration:
     name: Run latest database migration on environment dump
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v3
