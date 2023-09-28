@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from '../hooks.js';
 
 const useMediaQuery = (query: string): boolean => {
-  const [matches, setMatches] = useState(false);
+  const [isMatched, setIsMatched] = useState(false);
 
   const handleMediaQueryChange = useCallback(
     (event: MediaQueryListEvent): void => {
-      setMatches(event.matches);
+      setIsMatched(event.matches);
     },
     [],
   );
@@ -15,13 +15,13 @@ const useMediaQuery = (query: string): boolean => {
 
     mediaQueryList.addEventListener('change', handleMediaQueryChange);
 
-    setMatches(mediaQueryList.matches);
+    setIsMatched(mediaQueryList.matches);
 
     return () => {
       mediaQueryList.removeEventListener('change', handleMediaQueryChange);
     };
   }, [handleMediaQueryChange, query]);
 
-  return matches;
+  return isMatched;
 };
 export { useMediaQuery };
