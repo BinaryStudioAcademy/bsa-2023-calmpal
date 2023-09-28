@@ -15,7 +15,7 @@ type Properties = {
   label?: string;
   onPress: () => void;
   isDisabled?: boolean;
-  type?: 'solid' | 'outlined' | 'transparent' | 'modal-cancel' | 'modal-delete';
+  type?: 'solid' | 'outlined' | 'transparent' | 'modal';
   isRounded?: boolean;
   iconName?: IconName;
   isVisuallyCentered?: boolean;
@@ -52,14 +52,7 @@ const Button: React.FC<Properties> = ({
         type === 'solid' && styles.buttonSolid,
         type === 'outlined' && styles.buttonOutlined,
         type === 'transparent' && styles.buttonTransparent,
-        type === 'modal-cancel' && [
-          styles.buttonModal,
-          styles.buttonModalCancel,
-        ],
-        type === 'modal-delete' && [
-          styles.buttonModal,
-          styles.buttonModalDelete,
-        ],
+        type === 'modal' && [styles.buttonModal, { backgroundColor: color }],
         isDisabled && styles.buttonDisabled,
       ]}
       onPress={onPress}
@@ -73,8 +66,7 @@ const Button: React.FC<Properties> = ({
           styles.label,
           type === 'solid' && styles.labelSolid,
           type === 'outlined' && styles.labelOutlined,
-          type === 'modal-cancel' && styles.labelModal,
-          type === 'modal-delete' && styles.labelModal,
+          type === 'modal' && styles.labelModal,
           isDisabled && styles.labelDisabled,
         ]}
       >
