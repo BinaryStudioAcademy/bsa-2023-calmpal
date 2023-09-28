@@ -1,6 +1,7 @@
 export {
   configureString,
   debounce,
+  getFormattedDate,
   getFormattedTime,
   getRelativeDate,
   groupChatMessage,
