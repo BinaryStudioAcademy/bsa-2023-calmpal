@@ -47,7 +47,7 @@ const App: React.FC = () => {
     authenticatedUserDataStatus === DataStatus.PENDING ||
     authenticatedUserDataStatus === DataStatus.IDLE
   ) {
-    return <Loader />;
+    return <Loader isOverflow />;
   }
 
   return <RouterOutlet />;
