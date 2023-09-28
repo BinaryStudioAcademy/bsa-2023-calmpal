@@ -29,7 +29,7 @@ const MeditationHome: React.FC = () => {
     >();
   const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
     navigationItems,
-    'title',
+    'name',
   );
   const handleSelectMeditation = (title: string): void => {
     navigation.navigate(MeditationScreenName.MEDITATION_LIST, {
@@ -52,9 +52,9 @@ const MeditationHome: React.FC = () => {
           {filteredMeditationTopics.map((item) => {
             return (
               <Card
-                title={item.title}
+                title={item.name}
                 onPress={(): void => {
-                  handleSelectMeditation(item.title);
+                  handleSelectMeditation(item.name);
                 }}
                 key={item.id}
               />
