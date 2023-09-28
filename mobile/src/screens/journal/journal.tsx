@@ -1,12 +1,11 @@
 import React from 'react';
 
 import {
+  Button,
   Card,
   Header,
-  Icon,
   InputSearch,
   LinearGradient,
-  Link,
   ScrollView,
   View,
 } from '#libs/components/components';
@@ -43,6 +42,10 @@ const Journal: React.FC = () => {
     // TODO: Implement actual functionality for the onPress event
   }, []);
 
+  const handleAddNote = useCallback(() => {
+    // TODO: Implement actual functionality for the onPress event
+  }, []);
+
   useEffect(() => {
     navigation.setOptions({
       header: () => {
@@ -73,18 +76,13 @@ const Journal: React.FC = () => {
             );
           })}
         </ScrollView>
-        <View style={styles.linkWrapper}>
-          <Link
-            label="Add new note"
-            to={''}
-            style={styles.link}
-            icon={
-              <View style={styles.icon}>
-                <Icon name="plus" color={AppColor.BLUE_300} />
-              </View>
-            }
-          />
-        </View>
+        <Button
+          onPress={handleAddNote}
+          iconName="plus"
+          label="Add new note"
+          type="transparent"
+          color={AppColor.BLUE_200}
+        />
       </View>
     </LinearGradient>
   );
