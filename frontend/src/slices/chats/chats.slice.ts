@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import { DataStatus } from '#libs/enums/enums.js';
 import { groupChatMessage } from '#libs/helpers/helpers.js';
@@ -43,7 +43,14 @@ const initialState: State = {
 const { reducer, actions, name } = createSlice({
   initialState,
   name: 'chat',
-  reducers: {},
+  reducers: {
+    setCreateMessageDataStatus: (
+      state,
+      action: PayloadAction<ValueOf<typeof DataStatus>>,
+    ) => {
+      state.createMessageDataStatus = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder.addCase(getAllChats.pending, (state) => {
       state.chatsDataStatus = DataStatus.PENDING;

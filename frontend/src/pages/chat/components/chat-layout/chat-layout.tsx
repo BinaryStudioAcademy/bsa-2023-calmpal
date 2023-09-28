@@ -74,9 +74,9 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
   useEffect(() => {
     if (createMessageDataStatus === DataStatus.FULFILLED) {
       void dispatch(chatActions.getAllChats(filter));
+      dispatch(chatActions.setCreateMessageDataStatus(DataStatus.IDLE));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [createMessageDataStatus, dispatch]);
+  }, [createMessageDataStatus, dispatch, filter]);
 
   useEffect(() => {
     bottomElementReference.current?.scrollIntoView({
