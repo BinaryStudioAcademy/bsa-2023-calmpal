@@ -1,4 +1,9 @@
-import { getAllMeditationEntries, initPlayer, setPlaylist } from './actions';
+import {
+  createMeditationEntry,
+  getAllMeditationEntries,
+  initPlayer,
+  setPlaylist,
+} from './actions';
 import { actions } from './meditation.slice';
 
 const allActions = {
@@ -6,6 +11,7 @@ const allActions = {
   initPlayer,
   setPlaylist,
   getAllMeditationEntries,
+  createMeditationEntry,
 };
 
 export { allActions as actions };

@@ -1,7 +1,7 @@
 .info {
   display: flex;
-  justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .journal-entry-list {
@@ -32,5 +32,12 @@
   .search {
     width: 100%;
     padding: 0 15px;
+  }
+}
+
+@media (width < 768px) {
+  .journal-entry-list {
+    margin-top: 23px;
+    padding: 0 20px;
   }
 }

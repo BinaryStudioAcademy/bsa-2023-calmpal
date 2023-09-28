@@ -4,7 +4,7 @@ import { DataStatus } from '#libs/enums/enums';
 import { meditationEntryToTrack } from '#libs/packages/player/player';
 import { type Track, type ValueOf } from '#libs/types/types';
 
-import { getAllMeditationEntries } from './actions';
+import { createMeditationEntry, getAllMeditationEntries } from './actions';
 
 type State = {
   meditationEntries: Track[];
@@ -37,6 +37,17 @@ const { reducer, actions, name } = createSlice({
       state.meditationEntriesDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(getAllMeditationEntries.rejected, (state) => {
+      state.meditationEntriesDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(createMeditationEntry.pending, (state) => {
+      state.meditationEntriesDataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(createMeditationEntry.fulfilled, (state) => {
+      state.meditationEntries = [];
+      state.meditationEntriesDataStatus = DataStatus.FULFILLED;
+    });
+    builder.addCase(createMeditationEntry.rejected, (state) => {
       state.meditationEntriesDataStatus = DataStatus.REJECTED;
     });
   },

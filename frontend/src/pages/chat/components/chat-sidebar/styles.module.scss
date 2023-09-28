@@ -1,6 +1,7 @@
 .info {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .chat-number {
@@ -49,6 +50,18 @@
   .chat-list {
     align-items: stretch;
     padding: 0 15px 130px;
+  }
+
+  .search {
+    width: 100%;
+    padding: 0 15px;
+  }
+}
+
+@media (width < 768px) {
+  .chat-list {
+    margin-top: 23px;
+    padding: 0 20px;
   }
 
   .search {

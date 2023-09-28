@@ -19,7 +19,8 @@ type Properties = {
   image?: ImageSourcePropType;
   iconName?: IconName;
   iconColor?: string;
-  onPress: (title: string) => void;
+  onPress: () => void;
+  id?: number | string;
 };
 
 const Card: React.FC<Properties> = ({
@@ -29,12 +30,8 @@ const Card: React.FC<Properties> = ({
   iconColor,
   onPress,
 }) => {
-  const handlePress = (): void => {
-    onPress(title);
-  };
-
   return (
-    <Pressable onPress={handlePress} style={styles.container}>
+    <Pressable onPress={onPress} style={styles.container}>
       {iconName && iconColor ? (
         <View style={styles.iconContainer}>
           <Icon name={iconName} color={iconColor} />
