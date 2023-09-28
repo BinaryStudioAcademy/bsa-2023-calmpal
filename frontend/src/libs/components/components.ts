@@ -1,6 +1,7 @@
 export { App } from './app/app.js';
 export { AudioPlayer } from './audio-player/audio-player.js';
-export { BackButton } from './backward-button/backward-button.js';
+export { BackButton } from './back-button/back-button.js';
+export { BackButtonWrapper } from './back-button/back-button-wrapper.js';
 export { Button } from './button/button.js';
 export { Card } from './card/card.js';
 export { Checkbox } from './checkbox/checkbox.js';
@@ -13,7 +14,6 @@ export { Link } from './link/link.js';
 export { Loader } from './loader/loader.js';
 export { Modal } from './modal/modal.js';
 export { NavigationMenu } from './navigation-menu/navigation-menu.js';
-export { NavigationMenuWrapper } from './navigation-menu-wrapper/navigation-menu-wrapper.js';
 export { ProtectedRoute } from './protected-route/protected-route.js';
 export { Radio } from './radio/radio.js';
 export { RouterProvider } from './router-provider/router-provider.jsx';
