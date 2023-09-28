@@ -1,6 +1,6 @@
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 
-import { BackButton } from './components/backward-button.js';
+import { BackButton } from './back-button.js';
 
 type BackButtonWrapperProperties = {
   onGoBack: () => void;

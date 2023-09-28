@@ -1,6 +1,6 @@
 import { IconColor } from '#libs/enums/enums.js';
 
-import { Icon } from '../../components.js';
+import { Icon } from '../components.js';
 import styles from './styles.module.scss';
 
 type Properties = {

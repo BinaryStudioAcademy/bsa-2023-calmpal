@@ -1,7 +1,7 @@
 export { App } from './app/app.js';
 export { AudioPlayer } from './audio-player/audio-player.js';
-export { BackButtonWrapper } from './backward-button/back-button-wrapper.js';
-export { BackButton } from './backward-button/components/backward-button.js';
+export { BackButton } from './back-button/back-button.js';
+export { BackButtonWrapper } from './back-button/back-button-wrapper.js';
 export { Button } from './button/button.js';
 export { Card } from './card/card.js';
 export { Checkbox } from './checkbox/checkbox.js';
