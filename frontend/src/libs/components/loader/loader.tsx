@@ -1,10 +1,21 @@
+import { getValidClassNames } from '#libs/helpers/helpers.js';
+
 import styles from './styles.module.scss';
 
-const Loader: React.FC = () => {
+type Properties = {
+  isOverflow?: boolean;
+};
+
+const Loader: React.FC<Properties> = ({ isOverflow = false }) => {
   const { container, ellipsis, child } = styles;
 
   return (
-    <div className={container}>
+    <div
+      className={getValidClassNames(
+        container,
+        isOverflow && styles['overflow'],
+      )}
+    >
       <div className={ellipsis}>
         <div className={child} />
         <div className={child} />

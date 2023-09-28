@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { DataStatus } from '#libs/enums/enums';
+import { groupChatMessage } from '#libs/helpers/helpers';
 import { type ValueOf } from '#libs/types/types';
-import { type ChatMessageGetAllItemResponseDto } from '#packages/chat-messages/chat-messages';
+import { type ChatMessagesGroups } from '#packages/chat-messages/chat-messages';
 import { type ChatGetAllItemResponseDto } from '#packages/chats/chats';
 
 import {
@@ -15,7 +16,7 @@ import {
 
 type State = {
   chats: ChatGetAllItemResponseDto[];
-  currentChatMessages: ChatMessageGetAllItemResponseDto[];
+  currentChatMessages: ChatMessagesGroups;
   chatsDataStatus: ValueOf<typeof DataStatus>;
   createChatDataStatus: ValueOf<typeof DataStatus>;
   currentChatMessagesDataStatus: ValueOf<typeof DataStatus>;
@@ -25,7 +26,7 @@ type State = {
 
 const initialState: State = {
   chats: [],
-  currentChatMessages: [],
+  currentChatMessages: {},
   chatsDataStatus: DataStatus.IDLE,
   createChatDataStatus: DataStatus.IDLE,
   currentChatMessagesDataStatus: DataStatus.IDLE,
@@ -75,7 +76,10 @@ const { reducer, actions, name } = createSlice({
       state.createMessageDataStatus = DataStatus.IDLE;
     });
     builder.addCase(createMessage.fulfilled, (state, action) => {
-      state.currentChatMessages.push(action.payload);
+      state.currentChatMessages = groupChatMessage(
+        state.currentChatMessages,
+        action.payload,
+      );
       state.createMessageDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(createMessage.rejected, (state) => {
@@ -86,7 +90,10 @@ const { reducer, actions, name } = createSlice({
       state.generateReplyDataStatus = DataStatus.IDLE;
     });
     builder.addCase(generateReply.fulfilled, (state, action) => {
-      state.currentChatMessages.push(action.payload);
+      state.currentChatMessages = groupChatMessage(
+        state.currentChatMessages,
+        action.payload,
+      );
       state.generateReplyDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(generateReply.rejected, (state) => {

@@ -26,3 +26,4 @@ export {
   TouchableOpacity,
   View,
 } from 'react-native';
+export { Swipeable } from 'react-native-gesture-handler';

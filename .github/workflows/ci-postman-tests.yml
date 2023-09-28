@@ -1,0 +1,86 @@
+name: Continuous Integration Postman Run Tests
+
+env:
+  NODE_ENV: local
+  HOST: localhost
+  PORT: 3001
+  DB_NAME: calmpal_db
+  DB_USERNAME: postgres
+  DB_PASSWORD: password
+  DB_PORT: 5434
+  DB_DIALECT: pg
+  DB_POOL_MIN: 2
+  DB_POOL_MAX: 10
+
+on:
+  pull_request:
+    branches:
+      - development
+    paths:
+      - backend/**/*.*
+      - shared/**/*.*
+      - .github/workflows/ci-postman-tests.yml
+
+  workflow_dispatch:
+
+concurrency:
+  group: ci-postman-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci-postman-tests:
+    name: Run latest database migration on environment dump
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Get AWS Secrets
+        uses: aws-actions/aws-secretsmanager-get-secrets@v1
+        with:
+          secret-ids: |
+            ENVIRONMENT, ${{ secrets.AWS_APP_DEVELOPMENT_SECRET }}
+          parse-json-secrets: true
+
+      - name: Setup docker services
+        run: |
+          docker compose -f docker-compose.services.yml up -d calmpal_db
+
+      - name: Set Host IP environment variable
+        id: get-docker-ip
+        run: echo "HOST_IP=$(hostname -I | awk '{print $1}')" >> $GITHUB_ENV
+
+      - name: Run backend locally
+        env:
+          DB_HOST: ${{ env.HOST_IP }}
+          JWT_SECRET_KEY: ${{ env.ENVIRONMENT_JWT_SECRET_KEY }}
+          AWS_REGION: ${{ env.ENVIRONMENT_AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ env.ENVIRONMENT_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.ENVIRONMENT_AWS_SECRET_ACCESS_KEY }}
+          AWS_BUCKET_NAME: ${{ env.ENVIRONMENT_AWS_BUCKET_NAME }}
+          OPEN_AI_API_KEY: ${{ env.ENVIRONMENT_OPEN_AI_API_KEY }}
+          BASE_OPEN_AI_URL: ${{ env.ENVIRONMENT_BASE_OPEN_AI_URL }}
+          STRIPE_SECRET_KEY: ${{ env.ENVIRONMENT_STRIPE_SECRET_KEY }}
+        run: |
+          env > ./backend/.env
+
+          docker run --rm -d --network host --env-file ./backend/.env $(docker build -f ./backend/Dockerfile.development -q .)
+
+      - name: Run postman collection tests
+        run: |
+          docker run --rm --network host -v ./:/etc/newman \
+          --health-cmd="curl -s --fail http://${{ env.HOST }}:${{ env.PORT }}/health || exit 1" \
+          --health-interval=5s \
+          --health-retries=12 \
+          --health-timeout=2s \
+          -t postman/newman run ./.postman/Calmpal.postman_collection.json
+
+      - name: Stop docker services
+        run: docker compose -f docker-compose.services.yml down

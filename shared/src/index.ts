@@ -24,9 +24,12 @@ export {
   debounce,
   getFormattedDate,
   getFormattedTime,
+  getRelativeDate,
+  groupChatMessage,
   replaceTemplateWithValue,
   sanitizeInput,
   SECONDS_IN_MINUTE,
+  TimeFormat,
 } from './libs/helpers/helpers.js';
 export { type Config } from './libs/packages/config/config.js';
 export {
@@ -51,6 +54,7 @@ export {
   type ChatMessageCreateRequestDto,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
+  type ChatMessagesGroups,
   ChatMessageValidationMessage,
   ChatMessageValidationRule,
 } from './packages/chat-messages/chat-messages.js';
