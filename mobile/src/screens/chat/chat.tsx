@@ -4,6 +4,8 @@ import React from 'react';
 import ChatAvatar from '#assets/img/icons/chat-avatar.svg';
 import { Header, ScrollView, Text, View } from '#libs/components/components';
 import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants';
+import { TimeFormat } from '#libs/enums/enums';
+import { getFormattedDate } from '#libs/helpers/helpers';
 import {
   useAppDispatch,
   useAppForm,
@@ -107,12 +109,17 @@ const Chat: React.FC = () => {
               <ChatDivider date={new Date(date)} />
               {group.map((item, index) => {
                 const previousMessage = group[index - PREVIOUS_USER];
+                const currentTime = getFormattedDate(
+                  new Date(item.createdAt),
+                  TimeFormat.HH_MM,
+                );
                 const isDifferentMessageOwner =
                   item.senderId !== previousMessage?.senderId;
 
                 return (
                   <MessageItem
                     text={item.message}
+                    time={currentTime}
                     isUser={item.senderId === authenticatedUser.id}
                     isAvatarVisible={isDifferentMessageOwner}
                     key={item.id}
