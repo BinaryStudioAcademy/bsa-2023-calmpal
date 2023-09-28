@@ -79,7 +79,7 @@
   }
 }
 
-@media (width < 480px), (height < 530px) {
+@media (height < 600px) {
   .image-wrapper {
     align-self: center;
     width: 250px;
@@ -87,9 +87,8 @@
   }
 }
 
-@media (height < 530px) {
+@media (width < 480px), (height < 530px) {
   .image-wrapper {
-    align-self: center;
     width: 200px;
     height: 200px;
   }
