@@ -45,7 +45,7 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
     };
   });
   const hasId = Boolean(id);
-  const isChatbotReplyLoading = generateReplyDataStatus === 'pending';
+  const isChatbotReplyLoading = generateReplyDataStatus === DataStatus.PENDING;
   const currentChatMessagesLength =
     Object.values(currentChatMessages).flat().length;
 
