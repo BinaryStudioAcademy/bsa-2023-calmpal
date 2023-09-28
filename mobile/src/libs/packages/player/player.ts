@@ -7,4 +7,5 @@ export {
   Event,
   State,
   useTrackPlayerEvents as usePlayerEvents,
+  useProgress,
 } from './player.package';

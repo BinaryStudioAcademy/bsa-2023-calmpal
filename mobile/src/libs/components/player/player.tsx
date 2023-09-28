@@ -21,7 +21,6 @@ const Player: React.FC<Properties> = ({ duration }) => {
   const [playbackState, setPlaybackState] = useState<State | null>(null);
   const isPlaying = playbackState === State.Playing;
   const dispatch = useAppDispatch();
-  duration;
 
   const handlePlaybackStateChange = async (): Promise<void> => {
     const state = await player.getState();
@@ -62,7 +61,7 @@ const Player: React.FC<Properties> = ({ duration }) => {
 
   return (
     <>
-      <ProgressBar isPlaying={isPlaying} />
+      <ProgressBar isPlaying={isPlaying} trackDuration={duration} />
       <Controls isPlaying={isPlaying} />
     </>
   );

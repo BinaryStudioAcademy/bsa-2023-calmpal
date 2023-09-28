@@ -65,4 +65,9 @@ class Player {
 }
 
 export { Player };
-export { Event, State, useTrackPlayerEvents } from 'react-native-track-player';
+export {
+  Event,
+  State,
+  useProgress,
+  useTrackPlayerEvents,
+} from 'react-native-track-player';
