@@ -35,7 +35,7 @@ const MeditationList: React.FC<Properties> = ({
   }, [onSetIsSidebarShow]);
 
   if (meditationEntriesDataStatus === DataStatus.PENDING) {
-    return !isSidebarShown && <Loader />;
+    return !isSidebarShown && <Loader isOverflow />;
   }
 
   return (
