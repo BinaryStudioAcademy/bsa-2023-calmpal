@@ -7,11 +7,11 @@ import styles from './styles.module.scss';
 type Properties = {
   message: string;
   isSender: boolean;
-  sendTime: Date;
+  sentTime: Date;
 };
 
-const ChatMessage: React.FC<Properties> = ({ message, isSender, sendTime }) => {
-  const formattedTime = getFormattedDate(new Date(sendTime), TimeFormat.HH_MM);
+const ChatMessage: React.FC<Properties> = ({ message, isSender, sentTime }) => {
+  const formattedTime = getFormattedDate(new Date(sentTime), TimeFormat.HH_MM);
 
   return (
     <div
