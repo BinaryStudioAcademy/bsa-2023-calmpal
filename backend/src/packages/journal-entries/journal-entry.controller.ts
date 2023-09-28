@@ -427,11 +427,7 @@ class JournalEntryController extends BaseController {
    *         content:
    *           application/json:
    *             schema:
-   *               type: object
-   *               properties:
-   *                 isDeleted:
-   *                   type: boolean
-   *                   description: Is successfully deleted
+   *               type: boolean
    *       400:
    *         description: Incorrect user credentials
    *         content:
