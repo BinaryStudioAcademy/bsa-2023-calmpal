@@ -1,4 +1,4 @@
-import { type Track } from '#libs/types/types';
+import { type Track } from '#libs/packages/player/player';
 import { type MeditationEntryGetAllItemResponseDto } from '#packages/meditation/meditation';
 
 const meditationEntryToTrack = (

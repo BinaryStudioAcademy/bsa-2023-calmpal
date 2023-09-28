@@ -4,7 +4,6 @@ type Track = {
   title: string;
   artist: string;
   artwork: string;
-  duration: number;
 };
 
 export { type Track };
