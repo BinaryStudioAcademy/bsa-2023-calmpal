@@ -98,10 +98,8 @@ export {
 export {
   createSurveyValidationSchema,
   getSurveyCategories,
-  oneAnswerStepInputValidationSchema,
   PREFERENCES_OTHER_CATEGORY,
   stepInputValidationSchema,
-  stepWithOtherInputValidationSchema,
   type SurveyGetAllItemResponseDto,
   type SurveyInputDto,
   surveyInputValidationSchema,

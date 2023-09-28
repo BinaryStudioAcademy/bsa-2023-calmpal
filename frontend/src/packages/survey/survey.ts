@@ -5,21 +5,11 @@ export {
 export { SurveySteps, SurveyValidationRule } from './libs/enums/enums.js';
 export { getSurveyCategories } from './libs/helpers/helpers.js';
 export {
-  type FeelingInputDto,
-  type GoalInputDto,
   type HandleFieldChangeType,
-  type JournalingExperienceInputDto,
-  type MeditationExperienceInputDto,
-  type OnOther,
-  type PreferenceInputDto,
-  type Step,
+  type StepsType,
   type SurveyGetAllItemResponseDto,
   type SurveyInputDto,
   type SurveyRequestDto,
   type SurveyState,
 } from './libs/types/types.js';
-export {
-  oneAnswerStepInputValidationSchema,
-  stepInputValidationSchema,
-  stepWithOtherInputValidationSchema,
-} from './libs/validation-schemas/validation-schemas.js';
+export { stepInputValidationSchema } from './libs/validation-schemas/validation-schemas.js';

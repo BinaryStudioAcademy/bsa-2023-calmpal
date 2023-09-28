@@ -11,8 +11,6 @@ export {
 } from './libs/types/types.js';
 export {
   createSurveyValidationSchema,
-  createOneAnswerStepSurveyForm as oneAnswerStepInputValidationSchema,
   createStepSurveyForm as stepInputValidationSchema,
-  createStepWithOtherSurveyForm as stepWithOtherInputValidationSchema,
   createSurveyValidationSchema as surveyInputValidationSchema,
 } from './libs/validation-schemas/validation-schemas.js';

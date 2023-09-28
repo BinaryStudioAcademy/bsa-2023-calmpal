@@ -1,15 +1,6 @@
+export { type HandleFieldChangeType } from './handle.type.js';
 export { type SurveyState } from './state.type.js';
-export {
-  type FeelingInputDto,
-  type GoalInputDto,
-  type HandleFieldChangeType,
-  type JournalingExperienceInputDto,
-  type MeditationExperienceInputDto,
-  type OnOther,
-  type PreferenceInputDto,
-  type Step,
-  type WorryInputDto,
-} from './steps.types.js';
+export { type StepsType } from './steps.types.js';
 export {
   type SurveyGetAllItemResponseDto,
   type SurveyInputDto,

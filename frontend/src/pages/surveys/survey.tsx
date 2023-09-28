@@ -8,8 +8,8 @@ import {
   useState,
 } from '#libs/hooks/hooks.js';
 import {
-  type Step,
   STEPS_DEFAULT_ORDER,
+  type StepsType,
   type SurveyRequestDto,
   type SurveyState,
   SurveySteps,
@@ -27,20 +27,22 @@ const Survey: React.FC = () => {
   const { survey } = useAppSelector((state) => {
     return state;
   });
-  const [currentStep, setCurrentStep] = useState<Step>(SurveySteps.PREFERENCES);
+  const [currentStep, setCurrentStep] = useState<StepsType>(
+    SurveySteps.PREFERENCES,
+  );
 
   const handleNextStep = useCallback((): void => {
     const index = STEPS_DEFAULT_ORDER.indexOf(currentStep);
     const nextIndex = (index + ONE_INDEX) % STEPS_DEFAULT_ORDER.length;
     const nextCategory = STEPS_DEFAULT_ORDER[nextIndex];
-    setCurrentStep(nextCategory as Step);
+    setCurrentStep(nextCategory as StepsType);
   }, [currentStep]);
 
   const handlePreviousStep = useCallback((): void => {
     const index = STEPS_DEFAULT_ORDER.indexOf(currentStep);
     const previousIndex = (index - ONE_INDEX) % STEPS_DEFAULT_ORDER.length;
     const previousCategory = STEPS_DEFAULT_ORDER[previousIndex];
-    setCurrentStep(previousCategory as Step);
+    setCurrentStep(previousCategory as StepsType);
   }, [currentStep]);
 
   const dispatch = useAppDispatch();
