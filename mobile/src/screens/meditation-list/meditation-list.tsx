@@ -51,17 +51,15 @@ const MeditationList: React.FC = () => {
     meditationEntries,
     'title',
   );
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isAddModalVisible, setIsAddModalVisible] = useState(false);
   const [isTimerModalVisible, setIsTimerModalVisible] = useState(false);
   const [duration, setDuration] = useState(DEFAULT_SONG_DURATION);
 
-  const handleShowModal = (): void => {
-    setIsModalVisible(true);
-  };
+  const navigation =
+    useNavigation<
+      NativeStackNavigationProp<MeditationNavigationParameterList>
+    >();
 
-  const handleCloseModal = (): void => {
-    setIsModalVisible(false);
-  };
   const handleSubmit = useCallback(
     (payload: MeditationEntryCreateRequestDto) => {
       void dispatch(meditationActions.createMeditationEntry(payload));
@@ -69,20 +67,21 @@ const MeditationList: React.FC = () => {
     [dispatch],
   );
 
-  const handleToggleClick = (): void => {
+  const handleToggleAddModalVisibility = (): void => {
+    setIsAddModalVisible((previous) => {
+      return !previous;
+    });
+  };
+
+  const handleToggleTimerModalVisibility = (): void => {
     setIsTimerModalVisible((previous) => {
       return !previous;
     });
   };
 
-  const navigation =
-    useNavigation<
-      NativeStackNavigationProp<MeditationNavigationParameterList>
-    >();
-
   const handleSelectMeditation = (id: string): void => {
     void dispatch(meditationActions.setSelectedMeditationEntry(id));
-    handleToggleClick();
+    handleToggleTimerModalVisibility();
   };
 
   const handleSetPlaylist = (): void => {
@@ -111,7 +110,7 @@ const MeditationList: React.FC = () => {
       <View style={styles.container}>
         {isTimerModalVisible && (
           <TimerModal
-            onClose={handleToggleClick}
+            onClose={handleToggleTimerModalVisibility}
             setDuration={setDuration}
             startMeditation={handleSetPlaylist}
           />
@@ -135,15 +134,15 @@ const MeditationList: React.FC = () => {
           })}
         </ScrollView>
         <Button
-          onPress={handleShowModal}
+          onPress={handleToggleAddModalVisibility}
           iconName="plus"
           label="Add new meditation"
           type="transparent"
           color={AppColor.BLUE_200}
         />
         <AddMeditationModal
-          isVisible={isModalVisible}
-          onClose={handleCloseModal}
+          isVisible={isAddModalVisible}
+          onClose={handleToggleAddModalVisibility}
           onSubmit={handleSubmit}
         />
       </View>
