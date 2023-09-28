@@ -41,13 +41,13 @@ const Modal: React.FC<Properties> = ({
                       label="Cancel"
                       onPress={onClose}
                       type="modal"
-                      // color={AppColor.GRAY_400}
+                      color={AppColor.GRAY_400}
                     />
                     <Button
                       label="Delete"
                       onPress={onDelete}
                       type="modal"
-                      // color={AppColor.BLUE_300}
+                      color={AppColor.BLUE_300}
                     />
                   </View>
                 </>
