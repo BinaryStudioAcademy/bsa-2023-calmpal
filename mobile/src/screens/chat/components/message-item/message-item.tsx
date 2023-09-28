@@ -8,12 +8,14 @@ import { styles } from './styles';
 type Properties = {
   isUser: boolean;
   text: string;
+  time: string;
   isAvatarVisible: boolean;
 };
 
 const MessageItem: React.FC<Properties> = ({
   isUser,
   text,
+  time,
   isAvatarVisible,
 }) => {
   return (
@@ -37,10 +39,14 @@ const MessageItem: React.FC<Properties> = ({
           style={[styles.avatar, !isAvatarVisible && styles.transparentAvatar]}
         />
       )}
-
-      <Text style={[styles.messageText, isUser && styles.userMessage]}>
-        {text}
-      </Text>
+      <View
+        style={[styles.messageContainer, isUser && styles.userMessageContainer]}
+      >
+        <Text style={[styles.messageText, isUser && styles.userMessage]}>
+          {text}
+        </Text>
+        <Text>{time}</Text>
+      </View>
     </View>
   );
 };
