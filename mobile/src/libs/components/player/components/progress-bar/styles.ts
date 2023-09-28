@@ -26,13 +26,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const darkStyles = StyleSheet.create({
-  progress: {
-    color: AppColor.GRAY_400,
-  },
-  duration: {
-    color: AppColor.GRAY_400,
-  },
-});
-
-export { darkStyles, styles };
+export { styles };
