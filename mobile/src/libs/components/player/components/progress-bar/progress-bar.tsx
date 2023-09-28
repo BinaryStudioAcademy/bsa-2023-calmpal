@@ -8,7 +8,7 @@ import { getFormattedTime } from '#libs/helpers/helpers';
 import { usePlayerControls, usePlayerProgress } from '#libs/hooks/hooks';
 
 import { TRACK_START_TIME } from './libs/constants';
-import { darkStyles, lightStyles, styles } from './styles';
+import { darkStyles, styles } from './styles';
 
 type Properties = {
   isPlaying: boolean;
@@ -16,17 +16,20 @@ type Properties = {
 
 const ProgressBar: React.FC<Properties> = ({ isPlaying }) => {
   const colorScheme = useColorScheme();
-  const dayNigntStyles = colorScheme === 'dark' ? darkStyles : lightStyles;
   const [timeProgress, duration] = usePlayerProgress();
 
   const { handleSeek } = usePlayerControls({ isPlaying });
 
   return (
     <View style={styles.wrapper}>
-      <Text style={[styles.progress, dayNigntStyles.progress]}>
+      <Text
+        style={[styles.progress, colorScheme === 'dark' && darkStyles.progress]}
+      >
         {getFormattedTime(timeProgress)}
       </Text>
-      <Text style={[styles.duration, dayNigntStyles.duration]}>
+      <Text
+        style={[styles.duration, colorScheme === 'dark' && darkStyles.duration]}
+      >
         {getFormattedTime(duration)}
       </Text>
       <Slider
