@@ -1,6 +1,6 @@
 const SurveyScreenName = {
   PREFERENCES: 'preferences',
-  FEELINGS: 'feeling',
+  FEELINGS: 'feelings',
   GOALS: 'goals',
   WORRIES: 'worries',
   MEDITATION_EXPERIENCE: 'meditationExperience',
