@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Loader } from '#libs/components/components.js';
 import { DataStatus } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
@@ -104,11 +105,7 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
               </React.Fragment>
             );
           })}
-        {isChatbotReplyLoading && (
-          <div>
-            <span className={styles['loader']} />
-          </div>
-        )}
+        {isChatbotReplyLoading && <Loader />}
         <div ref={bottomElementReference} />
       </div>
       <ChatFooter
