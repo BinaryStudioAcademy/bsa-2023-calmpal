@@ -25,7 +25,7 @@
   }
 }
 
-@media (width < 768px) {
+@media (width < 768px), (height < 530px) {
   .backward {
     left: 25px;
   }
