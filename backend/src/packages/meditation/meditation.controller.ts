@@ -117,23 +117,20 @@ class MeditationController extends BaseController {
    *                  message:
    *                    $ref: '#/components/schemas/MeditationEntryResponse'
    *        400:
-   *          description: Bad request (Invalid format)
+   *          description: Bad request or Payload too large
    *          content:
    *            application/json:
    *              schema:
    *                $ref: '#/components/schemas/Error'
-   *              example:
-   *                message: "File extension should be one of PNG, JPEG, MPEG."
-   *                errorType: "FILE"
-   *        400:
-   *          description: Payload too large (File size exceeds 10MB)
-   *          content:
-   *            application/json:
-   *              schema:
-   *                $ref: '#/components/schemas/Error'
-   *              example:
-   *                message: "The inputted file is bigger than 10 MB."
-   *                errorType: "FILE"
+   *              examples:
+   *                invalidFormat:
+   *                  value:
+   *                    message: "File extension should be one of PNG, JPEG, MPEG."
+   *                    errorType: "FILE"
+   *                fileSizeExceedsLimit:
+   *                  value:
+   *                    message: "The inputted file is bigger than 10 MB."
+   *                    errorType: "FILE"
    */
 
   private async create(
