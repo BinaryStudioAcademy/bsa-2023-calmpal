@@ -506,7 +506,7 @@ class ChatController extends BaseController {
     }
 
     return {
-      status: HTTPCode.CREATED,
+      status: HTTPCode.OK,
       payload: isDeleted,
     };
   }
