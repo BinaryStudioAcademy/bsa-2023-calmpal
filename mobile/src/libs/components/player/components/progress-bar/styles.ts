@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
     bottom: 20,
     fontFamily: FontFamily.MONTSERRAT_400,
     fontSize: 12,
-    color: AppColor.GRAY_400,
   },
   duration: {
     position: 'absolute',
@@ -22,8 +21,25 @@ const styles = StyleSheet.create({
     bottom: 20,
     fontFamily: FontFamily.MONTSERRAT_400,
     fontSize: 12,
+  },
+});
+
+const lightStyles = StyleSheet.create({
+  progress: {
+    color: AppColor.GRAY_400,
+  },
+  duration: {
     color: AppColor.GRAY_400,
   },
 });
 
-export { styles };
+const darkStyles = StyleSheet.create({
+  progress: {
+    color: AppColor.GRAY_400,
+  },
+  duration: {
+    color: AppColor.GRAY_400,
+  },
+});
+
+export { darkStyles, lightStyles, styles };
