@@ -4,6 +4,7 @@ export {
   getFormattedTime,
   getRelativeDate,
   SECONDS_IN_MINUTE,
+  TimeFormat,
 } from './date/date.js';
 export { debounce } from './debounce/debounce.helper.js';
 export { getMegabytesFromBytes } from './get-megabytes-from-bytes/get-megabytes-from-bytes.helper.js';
