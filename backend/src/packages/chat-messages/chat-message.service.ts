@@ -1,6 +1,9 @@
 import { ExceptionMessage } from '#libs/enums/enums.js';
 import { UsersError } from '#libs/exceptions/exceptions.js';
-import { replaceTemplateWithValue } from '#libs/helpers/helpers.js';
+import {
+  groupChatMessage,
+  replaceTemplateWithValue,
+} from '#libs/helpers/helpers.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { OpenAiRoleKey } from '#libs/packages/open-ai/libs/enums/open-ai-role-key.enum.js';
 import { type OpenAiMessageGenerateRequestDto } from '#libs/packages/open-ai/libs/types/types.js';
@@ -15,6 +18,7 @@ import {
   type ChatMessageCreatePayload,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
+  type ChatMessagesGroups,
 } from './libs/types/types.js';
 
 type Constructor = {
@@ -122,10 +126,17 @@ class ChatMessageService implements Service {
       chatId,
     );
 
+    const groups: ChatMessagesGroups = chatMessages.reduce(
+      (group, chatMessage) => {
+        const chatData = chatMessage.toObject();
+
+        return groupChatMessage(group, chatData);
+      },
+      {},
+    );
+
     return {
-      items: chatMessages.map((chatMessage) => {
-        return chatMessage.toObject();
-      }),
+      items: groups,
     };
   }
 
