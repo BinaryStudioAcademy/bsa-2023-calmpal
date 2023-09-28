@@ -1,5 +1,5 @@
 import { BackButtonWrapper, Loader } from '#libs/components/components.js';
-import { MOBILE_DIMENSION } from '#libs/constants/index.constant.js';
+import { MOBILE_DIMENSION } from '#libs/constants/constants.js';
 import { DataStatus } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import {

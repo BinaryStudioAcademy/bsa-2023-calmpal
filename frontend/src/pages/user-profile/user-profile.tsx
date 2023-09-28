@@ -1,5 +1,5 @@
 import { BackButtonWrapper } from '#libs/components/components.js';
-import { MOBILE_DIMENSION } from '#libs/constants/index.constant.js';
+import { MOBILE_DIMENSION } from '#libs/constants/constants.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import {
   useCallback,

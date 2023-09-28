@@ -1,6 +1,6 @@
 import deafultMeditationImage from '#assets/img/meditation-image-placeholder.jpg';
 import { AudioPlayer, BackButtonWrapper } from '#libs/components/components.js';
-import { MOBILE_DIMENSION } from '#libs/constants/index.constant.js';
+import { MOBILE_DIMENSION } from '#libs/constants/constants.js';
 import { AppQueryStringKey, AppRoute } from '#libs/enums/enums.js';
 import {
   useAppSelector,
