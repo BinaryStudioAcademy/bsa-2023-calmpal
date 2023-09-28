@@ -42,6 +42,7 @@ const TimerModal: React.FC<Properties> = ({
     name: 'meditationDuration',
     control,
   });
+  const hasValue = Boolean(value);
 
   const handleStartMeditation = (): void => {
     onClose();
@@ -79,6 +80,7 @@ const TimerModal: React.FC<Properties> = ({
             label="Start with selected duration"
             onPress={handleStartMeditation}
             type="timer"
+            isDisabled={!hasValue}
           />
         </Pressable>
       </TouchableOpacity>
