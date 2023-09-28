@@ -7,15 +7,13 @@ const useMediaQuery = (query: string): boolean => {
     (event: MediaQueryListEvent): void => {
       setIsMatched(event.matches);
     },
-    [],
+    [setIsMatched],
   );
 
   useEffect(() => {
     const mediaQueryList = window.matchMedia(query);
-
-    mediaQueryList.addEventListener('change', handleMediaQueryChange);
-
     setIsMatched(mediaQueryList.matches);
+    mediaQueryList.addEventListener('change', handleMediaQueryChange);
 
     return () => {
       mediaQueryList.removeEventListener('change', handleMediaQueryChange);
