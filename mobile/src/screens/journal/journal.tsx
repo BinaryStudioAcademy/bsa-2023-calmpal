@@ -99,9 +99,10 @@ const Journal: React.FC = () => {
           {filteredJournals.map((item) => {
             return (
               <Card
-                title={item.title}
-                onPress={handleSelectJournal}
                 key={item.id}
+                title={item.title}
+                iconRight="delete"
+                onPress={handleSelectJournal}
                 onIconPress={(): void => {
                   handleShowModal(item.id);
                 }}

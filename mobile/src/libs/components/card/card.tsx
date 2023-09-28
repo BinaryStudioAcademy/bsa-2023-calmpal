@@ -22,6 +22,7 @@ type Properties = {
   iconName?: IconName;
   iconColor?: string;
   onPress: () => void;
+  iconRight?: IconName;
   onIconPress?: () => void;
 };
 
@@ -31,15 +32,15 @@ const Card: React.FC<Properties> = ({
   iconName,
   iconColor,
   onPress,
-
+  iconRight,
   onIconPress,
 }) => {
   const renderRightSwipeActions = (): React.ReactNode => {
-    return (
+    return iconRight ? (
       <Pressable style={styles.deleteContainer} onPress={onIconPress}>
-        <Icon name="delete" color={AppColor.BLUE_300} />
+        <Icon name={iconRight} color={AppColor.BLUE_300} />
       </Pressable>
-    );
+    ) : null;
   };
 
   return (
