@@ -69,9 +69,10 @@ const Journal: React.FC = () => {
           {filteredJournals.map((item) => {
             return (
               <Card
+                key={item.id}
                 title={item.title}
                 onPress={handleSelectJournal}
-                key={item.id}
+                iconRight="delete"
               />
             );
           })}

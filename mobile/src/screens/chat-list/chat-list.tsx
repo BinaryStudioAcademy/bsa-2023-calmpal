@@ -112,13 +112,15 @@ const ChatList: React.FC = () => {
           {filteredChats.map((item) => {
             return (
               <Card
+                key={item.id}
                 title={item.name}
-                id={item.id}
                 onPress={(): void => {
                   handleSelectChat(item.name, item.id.toString());
                 }}
-                key={item.id}
-                onDelete={handleShowModal}
+                iconRight="delete"
+                onIconPress={(): void => {
+                  handleShowModal(item.id);
+                }}
               />
             );
           })}

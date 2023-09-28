@@ -1,12 +1,12 @@
 import React from 'react';
 import { type ImageSourcePropType } from 'react-native';
+import { Swipeable } from 'react-native-gesture-handler';
 
 import imagePlaceholder from '#assets/img/card-image-placeholder.png';
 import {
   Icon,
   Image,
   Pressable,
-  Swipeable,
   Text,
   View,
 } from '#libs/components/components';
@@ -22,8 +22,8 @@ type Properties = {
   iconName?: IconName;
   iconColor?: string;
   onPress: () => void;
-  onDelete?: (id: number) => void;
-  id?: number | string;
+  iconRight?: IconName;
+  onIconPress?: () => void;
 };
 
 const Card: React.FC<Properties> = ({
@@ -32,23 +32,19 @@ const Card: React.FC<Properties> = ({
   iconName,
   iconColor,
   onPress,
-  onDelete,
-  id,
+  iconRight,
+  onIconPress,
 }) => {
-  const handleDelete = (): void => {
-    onDelete?.(id as number);
-  };
-
-  const rightSwipeActions = (): React.ReactNode => {
-    return (
-      <Pressable style={styles.deleteContainer} onPress={handleDelete}>
-        <Icon name="delete" color={AppColor.BLUE_300} />
+  const renderRightSwipeActions = (): React.ReactNode => {
+    return iconRight ? (
+      <Pressable style={styles.deleteContainer} onPress={onIconPress}>
+        <Icon name={iconRight} color={AppColor.BLUE_300} />
       </Pressable>
-    );
+    ) : null;
   };
 
   return (
-    <Swipeable renderRightActions={rightSwipeActions}>
+    <Swipeable renderRightActions={renderRightSwipeActions}>
       <Pressable onPress={onPress} style={styles.container}>
         {iconName && iconColor ? (
           <View style={styles.iconContainer}>
