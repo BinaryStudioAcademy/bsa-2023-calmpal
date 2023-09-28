@@ -12,9 +12,8 @@ type Properties = {
 };
 
 const DropdownMenu: React.FC<Properties> = ({ routes }) => {
-  const { pathname } = useLocation();
   const [isOpen, setOpen] = useState(false);
-
+  const { pathname } = useLocation();
   const handleDropdownToggle = useCallback((): void => {
     setOpen((previous) => {
       return !previous;
