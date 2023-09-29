@@ -15,21 +15,21 @@ import {
 } from '#libs/packages/player/player';
 
 import { TimerButton } from './components/components';
-import { DEFAULT_DURATION_VALUE } from './libs/constants';
+import { DEFAULT_DURATION_VALUE } from './libs/constants/constants';
 import { styles } from './styles';
 
 type DurationKey = keyof typeof MEDITATION_DURATION;
 
 type Properties = {
   onClose: () => void;
-  setDuration: Dispatch<SetStateAction<number>>;
-  startMeditation: () => void;
+  onSetDuration: Dispatch<SetStateAction<number>>;
+  onStartMeditation: () => void;
 };
 
 const TimerModal: React.FC<Properties> = ({
   onClose,
-  setDuration,
-  startMeditation,
+  onSetDuration,
+  onStartMeditation,
 }) => {
   const { control } = useAppForm({
     defaultValues: DEFAULT_DURATION_VALUE,
@@ -45,7 +45,7 @@ const TimerModal: React.FC<Properties> = ({
 
   const handleStartMeditation = (): void => {
     onClose();
-    startMeditation();
+    onStartMeditation();
   };
 
   return (
@@ -62,7 +62,7 @@ const TimerModal: React.FC<Properties> = ({
                   key={duration}
                   isActive={value === duration}
                   onChange={onChange}
-                  onSetDuration={setDuration}
+                  onSetDuration={onSetDuration}
                   duration={duration}
                   unit={DURATION_UNIT.MINUTES}
                 />
