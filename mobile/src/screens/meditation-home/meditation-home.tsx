@@ -19,7 +19,7 @@ import {
 import { type MeditationNavigationParameterList } from '#libs/types/types';
 import { actions as meditationActions } from '#slices/meditation/meditation';
 
-import { navigationItems } from './libs/constants/constants';
+import { NAVIGATION_ITEMS } from './libs/constants/constants';
 import { styles } from './styles';
 
 const MeditationHome: React.FC = () => {
@@ -29,7 +29,7 @@ const MeditationHome: React.FC = () => {
       NativeStackNavigationProp<MeditationNavigationParameterList>
     >();
   const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
-    navigationItems,
+    NAVIGATION_ITEMS,
     'name',
   );
   const handleSelectMeditation = useCallback(
