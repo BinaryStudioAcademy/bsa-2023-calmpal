@@ -1,9 +1,10 @@
+import { type DeleteAccountFormPayload } from '#packages/users/users.js';
+
 import {
   DeleteAccountConfirmation,
   DeleteAccountForm,
   DeleteAccountMessage,
-} from '#libs/components/modal/steps/delete-account/delete-account.js';
-import { type DeleteAccountFormPayload } from '#packages/users/users.js';
+} from '../components/components.js';
 
 const STEPS = [
   {

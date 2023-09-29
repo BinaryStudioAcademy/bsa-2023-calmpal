@@ -11,7 +11,7 @@ import {
   DEFAULT_DELETE_ACCOUNT_PAYLOAD,
   NO_CHECKED_BOXES,
   OTHER_OPTION_LABEL,
-} from '../../libs/constants/constants.js';
+} from '../../libs/contants.js';
 import styles from './styles.module.scss';
 
 type Properties = {

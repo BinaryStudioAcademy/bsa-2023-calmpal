@@ -1,15 +1,12 @@
 import { Modal } from '#libs/components/components.js';
 import {
-  INITIAL_STEP,
-  NEXT_STEP_INCREMENT,
-  STEPS,
-} from '#libs/components/modal/libs/constants/constants.js';
-import {
   forwardRef,
   useCallback,
   useEffect,
   useState,
 } from '#libs/hooks/hooks.js';
+
+import { INITIAL_STEP, NEXT_STEP_INCREMENT, STEPS } from './libs/contants.js';
 
 type Properties = {
   shouldReset: boolean;

@@ -17,7 +17,7 @@ import {
   useState,
 } from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
-import { DeleteAccountModal } from '#pages/profile-settings/components/delete-account-modal/delete-account-modal.js';
+import { DeleteAccountModal } from '#pages/profile-settings/components/components.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
 import { SETTING_NAME_INDEX, SETTINGS_OPTIONS } from './libs/constants.js';
