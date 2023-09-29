@@ -14,7 +14,7 @@ import {
   DEFAULT_SURVEY_PAYLOAD,
   PREFERENCES_CATEGORIES,
   TEXTAREA_ROWS_COUNT,
-} from '#pages/surveys/libs/constants.js';
+} from '#pages/surveys/libs/constants/constants.js';
 
 import styles from './styles.module.scss';
 

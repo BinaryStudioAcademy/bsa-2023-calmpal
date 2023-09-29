@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     lineHeight: 25,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
   icon: {
     marginRight: 28,
@@ -40,6 +41,10 @@ const styles = StyleSheet.create({
   titleContainer: {
     flex: 1,
     margin: 16,
+  },
+  deleteContainer: {
+    justifyContent: 'center',
+    paddingHorizontal: 30,
   },
 });
 

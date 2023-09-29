@@ -2,18 +2,17 @@ import meditationPlaceholder from '#assets/img/meditation-image-placeholder.png'
 import {
   Button,
   Card,
-  Search,
+  Link,
   Sidebar,
   SidebarBody,
   SidebarHeader,
 } from '#libs/components/components.js';
-import { IconColor } from '#libs/enums/enums.js';
+import { AppRoute, IconColor } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useCallback,
   useEffect,
   useRef,
-  useSearch,
 } from '#libs/hooks/hooks.js';
 import { type MeditationEntryCreateRequestDto } from '#packages/meditation/meditation.js';
 import { navigationItems } from '#pages/meditation/libs/constants/constants.js';
@@ -24,15 +23,14 @@ import styles from './styles.module.scss';
 
 type Properties = {
   isSidebarShown: boolean;
-  setIsSidebarShown: (value: boolean) => void;
+  onSetIsSidebarShow: (value: boolean) => void;
 };
 
 const MeditationSidebar: React.FC<Properties> = ({
   isSidebarShown,
-  setIsSidebarShown,
+  onSetIsSidebarShow,
 }) => {
   const dispatch = useAppDispatch();
-  const { filteredElements, setFilter } = useSearch(navigationItems, 'name');
   const dialogReference = useRef<HTMLDialogElement>(null);
 
   const handleOpen = useCallback(() => {
@@ -47,8 +45,8 @@ const MeditationSidebar: React.FC<Properties> = ({
   );
 
   const handleSelectMeditationEntry = useCallback(() => {
-    setIsSidebarShown(false);
-  }, [setIsSidebarShown]);
+    onSetIsSidebarShow(false);
+  }, [onSetIsSidebarShow]);
 
   useEffect(() => {
     void dispatch(meditationActions.getAllMeditationEntries());
@@ -60,34 +58,30 @@ const MeditationSidebar: React.FC<Properties> = ({
         <SidebarHeader>
           <div className={styles['info']}>
             <span>Meditation & Breathing</span>
-            <div className="icon-container">
-              <Button
-                label="Open modal"
-                iconName="plus"
-                iconColor={IconColor.BLUE}
-                iconWidth={38}
-                iconHeight={38}
-                style="rounded-transparent"
-                onClick={handleOpen}
-                isLabelVisuallyHidden
-              />
-            </div>
           </div>
+          <Button
+            label="Open modal"
+            iconName="plus"
+            iconColor={IconColor.BLUE}
+            iconWidth={33}
+            iconHeight={33}
+            style="add"
+            onClick={handleOpen}
+            isLabelVisuallyHidden
+          />
         </SidebarHeader>
         <SidebarBody>
-          <div className={styles['search']}>
-            <Search onValueChange={setFilter} />
-          </div>
           <div className={styles['meditation-list']}>
-            {filteredElements.map((filteredElement) => {
+            {navigationItems.map((item) => {
               return (
-                <Card
-                  title={filteredElement.name}
-                  imageUrl={meditationPlaceholder}
-                  onClick={handleSelectMeditationEntry}
-                  key={filteredElement.name}
-                  isActive
-                />
+                <Link key={item.name} to={AppRoute.MEDITATION}>
+                  <Card
+                    title={item.name}
+                    imageUrl={meditationPlaceholder}
+                    onClick={handleSelectMeditationEntry}
+                    isActive
+                  />
+                </Link>
               );
             })}
           </div>

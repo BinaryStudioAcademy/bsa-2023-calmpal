@@ -1,6 +1,7 @@
 .wrapper {
   display: flex;
   justify-content: space-between;
+  padding: 0 15px;
 }
 
 .time {
@@ -9,6 +10,10 @@
   font-size: 12px;
   line-height: 1.4;
   text-align: center;
+}
+
+.label {
+  padding: 0 15px;
 }
 
 .progress {

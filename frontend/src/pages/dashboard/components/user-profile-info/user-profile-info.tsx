@@ -3,7 +3,7 @@ import { Sidebar } from '#libs/components/components.js';
 import {
   SidebarBody,
   SidebarHeader,
-} from '#libs/components/sidebar/components.js';
+} from '#libs/components/sidebar/components/components.js';
 import { useAppSelector } from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 

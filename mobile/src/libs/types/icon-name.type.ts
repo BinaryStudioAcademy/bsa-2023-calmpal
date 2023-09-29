@@ -2,6 +2,7 @@ type IconName =
   | 'bell'
   | 'plus'
   | 'chat'
+  | 'delete'
   | 'home'
   | 'back-arrow'
   | 'user'
@@ -11,6 +12,9 @@ type IconName =
   | 'pause'
   | 'play'
   | 'previous'
-  | 'sign-out';
+  | 'sign-out'
+  | 'close'
+  | 'upload'
+  | 'download';
 
 export { type IconName };

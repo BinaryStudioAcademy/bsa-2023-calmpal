@@ -13,24 +13,29 @@ class ChatEntity implements Entity {
 
   private updatedAt: Date | null;
 
+  private imageUrl: string | null;
+
   private constructor({
     id,
     name,
     members,
     createdAt,
     updatedAt,
+    imageUrl,
   }: {
     id: number | null;
     name: string;
     members: UserToChatQueryResponse[];
     createdAt: Date | null;
     updatedAt: Date | null;
+    imageUrl: string | null;
   }) {
     this.id = id;
     this.name = name;
     this.members = members;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
+    this.imageUrl = imageUrl;
   }
 
   public static initialize({
@@ -39,12 +44,14 @@ class ChatEntity implements Entity {
     members,
     createdAt,
     updatedAt,
+    imageUrl,
   }: {
     id: number;
     name: string;
     members: UserToChatQueryResponse[];
     createdAt: Date;
     updatedAt: Date;
+    imageUrl: string | null;
   }): ChatEntity {
     return new ChatEntity({
       id,
@@ -52,16 +59,24 @@ class ChatEntity implements Entity {
       members,
       createdAt,
       updatedAt,
+      imageUrl,
     });
   }
 
-  public static initializeNew({ name }: { name: string }): ChatEntity {
+  public static initializeNew({
+    name,
+    imageUrl,
+  }: {
+    name: string;
+    imageUrl: string | null;
+  }): ChatEntity {
     return new ChatEntity({
       id: null,
       name,
       members: [],
       createdAt: null,
       updatedAt: null,
+      imageUrl,
     });
   }
 
@@ -71,6 +86,7 @@ class ChatEntity implements Entity {
     members: UserToChatQueryResponse[];
     createdAt: Date;
     updatedAt: Date;
+    imageUrl: string | null;
   } {
     return {
       id: this.id as number,
@@ -78,14 +94,17 @@ class ChatEntity implements Entity {
       members: this.members,
       createdAt: this.createdAt as Date,
       updatedAt: this.updatedAt as Date,
+      imageUrl: this.imageUrl,
     };
   }
 
   public toNewObject(): {
     name: string;
+    imageUrl: string | null;
   } {
     return {
       name: this.name,
+      imageUrl: this.imageUrl,
     };
   }
 }

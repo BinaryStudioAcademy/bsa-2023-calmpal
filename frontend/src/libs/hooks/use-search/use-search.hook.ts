@@ -1,25 +1,31 @@
-import { useMemo, useState } from '../hooks.js';
+import {
+  useCallback,
+  useSearchParams as useSearchParameters,
+} from '../hooks.js';
 
-type UseSearchReturn<T> = {
-  filteredElements: T[];
-  setFilter: React.Dispatch<React.SetStateAction<string>>;
+type UseSearchReturn = {
+  setFilter: (query: string) => void;
+  filter: string;
 };
 
-const useSearch = <T>(
-  elements: T[],
-  propertyName: keyof T,
-): UseSearchReturn<T> => {
-  const [filter, setFilter] = useState('');
+const useSearch = (): UseSearchReturn => {
+  const [filter, setFilterParameter] = useSearchParameters();
+  const queryParameter = filter.get('query') ?? '';
+  const setFilter = useCallback(
+    (query: string): void => {
+      setFilterParameter(
+        (previous) => {
+          previous.set('query', query);
 
-  const filteredElements = useMemo(() => {
-    return elements.filter((element) => {
-      return (element[propertyName] as string)
-        .toLowerCase()
-        .includes(filter.toLowerCase());
-    });
-  }, [filter, elements, propertyName]);
+          return previous;
+        },
+        { replace: true },
+      );
+    },
+    [setFilterParameter],
+  );
 
-  return { filteredElements, setFilter };
+  return { setFilter, filter: queryParameter };
 };
 
 export { useSearch };

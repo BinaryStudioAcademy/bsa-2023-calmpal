@@ -1,4 +1,5 @@
-import { APIPath } from '#libs/enums/enums.js';
+import { APIPath, ExceptionMessage } from '#libs/enums/enums.js';
+import { JournalError } from '#libs/exceptions/exceptions.js';
 import {
   type APIHandlerOptions,
   type APIHandlerResponse,
@@ -10,8 +11,14 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { type JournalEntryService } from './journal-entry.service.js';
 import { JournalApiPath } from './libs/enums/enums.js';
-import { type JournalEntryCreateRequestDto } from './libs/types/types.js';
-import { createJournalEntryValidationSchema } from './libs/validation-schemas/validation-schemas.js';
+import {
+  type EntitiesFilteringDto,
+  type JournalEntryCreateRequestDto,
+} from './libs/types/types.js';
+import {
+  createJournalEntryValidationSchema,
+  entitiesFilteringQueryValidationSchema,
+} from './libs/validation-schemas/validation-schemas.js';
 
 /**
  * @swagger
@@ -77,6 +84,9 @@ class JournalEntryController extends BaseController {
     this.addRoute({
       path: JournalApiPath.ROOT,
       method: 'POST',
+      validation: {
+        body: createJournalEntryValidationSchema,
+      },
       handler: (options) => {
         return this.create(
           options as APIHandlerOptions<{
@@ -90,22 +100,14 @@ class JournalEntryController extends BaseController {
     this.addRoute({
       path: JournalApiPath.ROOT,
       method: 'GET',
+      validation: {
+        query: entitiesFilteringQueryValidationSchema,
+      },
       handler: (options) => {
         return this.getAll(
           options as APIHandlerOptions<{
             user: UserAuthResponseDto;
-          }>,
-        );
-      },
-    });
-
-    this.addRoute({
-      path: JournalApiPath.$ID,
-      method: 'GET',
-      handler: (options) => {
-        return this.getById(
-          options as APIHandlerOptions<{
-            params: { id: number };
+            query: EntitiesFilteringDto;
           }>,
         );
       },
@@ -123,6 +125,19 @@ class JournalEntryController extends BaseController {
             user: UserAuthResponseDto;
             params: { id: number };
             body: JournalEntryCreateRequestDto;
+          }>,
+        );
+      },
+    });
+
+    this.addRoute({
+      path: JournalApiPath.$ID,
+      method: 'DELETE',
+      handler: (options) => {
+        return this.delete(
+          options as APIHandlerOptions<{
+            user: UserAuthResponseDto;
+            params: { id: number };
           }>,
         );
       },
@@ -173,6 +188,12 @@ class JournalEntryController extends BaseController {
    *              example:
    *                message: "User with these credentials was not found."
    *                errorType: "USERS"
+   *        422:
+   *          description: Validation failed
+   *          content:
+   *            application/json:
+   *              schema:
+   *                $ref: '#/components/schemas/Unprocessable Journal Entity'
    */
 
   private async create(
@@ -197,11 +218,18 @@ class JournalEntryController extends BaseController {
    * @swagger
    * /journal:
    *    get:
-   *      description: Get all a journal entries
+   *      description: Get all journal entries
    *      security:
    *       - bearerAuth: []
+   *      parameters:
+   *        - name: query
+   *          in: query
+   *          description: A string to search journal entries
+   *          required: false
+   *          schema:
+   *            type: string
    *      responses:
-   *        201:
+   *        200:
    *          description: Successful operation
    *          content:
    *            application/json:
@@ -221,35 +249,54 @@ class JournalEntryController extends BaseController {
    *              example:
    *                message: "Incorrect credentials."
    *                errorType: "AUTHORIZATION"
+   *        400:
+   *          description: Bad Request
+   *          content:
+   *            application/json:
+   *              schema:
+   *                type: object
+   *                properties:
+   *                  status:
+   *                    type: integer
+   *                    example: 400
+   *                  message:
+   *                    type: string
+   *                    example: The data which was passed is incorrect.
    */
 
   private async getAll(
-    options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
+    options: APIHandlerOptions<{
+      user: UserAuthResponseDto;
+      query: EntitiesFilteringDto;
+    }>,
   ): Promise<APIHandlerResponse> {
     const { id } = options.user;
 
     return {
       status: HTTPCode.OK,
-      payload: await this.journalEntryService.findAllByUserId(id),
+      payload: await this.journalEntryService.findAllByUserId(
+        id,
+        options.query.query,
+      ),
     };
   }
 
   /**
    * @swagger
-   * /journal-entries/{id}:
+   * /journal/{id}:
    *    get:
    *      description: Get journal entry by id
    *      security:
    *       - bearerAuth: []
    *      parameters:
    *       -  in: path
-   *          description: Chat id
+   *          description: Journal id
    *          name: id
    *          required: true
    *          type: number
    *          minimum: 1
    *      responses:
-   *        201:
+   *        200:
    *          description: Successful operation
    *          content:
    *            application/json:
@@ -279,14 +326,14 @@ class JournalEntryController extends BaseController {
 
   /**
    * @swagger
-   * /journal-entries/{id}:
+   * /journal/{id}:
    *    put:
    *      description: Update a journal entry
    *      security:
    *       - bearerAuth: []
    *      parameters:
    *       -  in: path
-   *          description: Chat id
+   *          description: Journal id
    *          name: id
    *          required: true
    *          type: number
@@ -357,6 +404,74 @@ class JournalEntryController extends BaseController {
         text,
         title,
       }),
+    };
+  }
+
+  /**
+   * @swagger
+   * /journal/{id}:
+   *   delete:
+   *     description: Delete a journal entry by ID
+   *     security:
+   *       - bearerAuth: []
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         description: ID of the journal entry to delete
+   *         required: true
+   *         schema:
+   *           type: integer
+   *     responses:
+   *       200:
+   *         description: Successfully deleted the journal entry
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 isDeleted:
+   *                   type: boolean
+   *                   description: Is successfully deleted
+   *       400:
+   *         description: Incorrect user credentials
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *             example:
+   *               message: "Incorrect credentials."
+   *               errorType: "COMMON"
+   *       404:
+   *         description: Incorrect journal credentials
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *             example:
+   *               message: "Journal with these credentials was not found."
+   *               errorType: "COMMON"
+   */
+
+  private async delete(
+    options: APIHandlerOptions<{
+      user: UserAuthResponseDto;
+      params: { id: number };
+    }>,
+  ): Promise<APIHandlerResponse> {
+    const isDeleted = await this.journalEntryService.delete({
+      id: options.params.id,
+      user: options.user,
+    });
+    if (!isDeleted) {
+      throw new JournalError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.JOURNAL_NOT_FOUND,
+      });
+    }
+
+    return {
+      status: HTTPCode.OK,
+      payload: isDeleted,
     };
   }
 }

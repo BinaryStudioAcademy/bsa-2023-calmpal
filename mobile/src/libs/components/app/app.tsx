@@ -11,7 +11,7 @@ import { useEffect } from '#libs/hooks/hooks';
 import { store } from '#libs/packages/store/store';
 import { Root as RootNavigation } from '#navigations/navigations';
 
-import { SPLASH_SCREEN_HIDE_TIMEOUT } from './libs/constants';
+import { SPLASH_SCREEN_HIDE_TIMEOUT } from './libs/constants/constants';
 import { styles } from './styles';
 
 const App: React.FC = () => {

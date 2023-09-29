@@ -14,5 +14,6 @@ export {
   type ChatCreateRequestDto,
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
+  type UpdateChatImageRequestDto,
 } from './libs/types/types.js';
 export { chatApi };

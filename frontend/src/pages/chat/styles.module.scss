@@ -11,11 +11,11 @@
 
 @media (width < 900px) {
   .container {
-    padding-left: 250px;
+    padding-left: 280px;
   }
 }
 
-@media (width < 768px) {
+@media (width < 768px), (height < 530px) {
   .container {
     width: 100%;
     padding-left: 0;

@@ -44,7 +44,29 @@ class ChatMessagesApi extends BaseHttpApi {
       {
         method: 'POST',
         contentType: ContentType.JSON,
-        payload: JSON.stringify({ message: payload.message }),
+        payload: JSON.stringify({
+          message: payload.message,
+        }),
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<ChatMessageGetAllItemResponseDto>();
+  }
+
+  public async generateReply(
+    payload: ChatMessageCreatePayload,
+  ): Promise<ChatMessageGetAllItemResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(ChatsApiPath.$ID_GENERATE_REPLY, {
+        id: payload.chatId,
+      }),
+      {
+        method: 'POST',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify({
+          message: payload.message,
+        }),
         hasAuth: true,
       },
     );

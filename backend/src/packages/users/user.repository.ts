@@ -1,4 +1,5 @@
-import { type Repository } from '#libs/types/types.js';
+import { type UserRoleKey } from '#libs/packages/open-ai/libs/enums/enums.js';
+import { type Repository, type ValueOf } from '#libs/types/types.js';
 import { UserEntity } from '#packages/users/user.entity.js';
 import { type UserModel } from '#packages/users/users.js';
 
@@ -25,7 +26,7 @@ class UserRepository implements Repository {
     const user = await this.userModel
       .query()
       .modify('withoutPassword')
-      .withGraphJoined(UsersRelation.DETAILS)
+      .withGraphJoined(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
       .findById(id)
       .castTo<UserCommonQueryResponse | undefined>()
       .execute();
@@ -34,6 +35,10 @@ class UserRepository implements Repository {
       return null;
     }
 
+    const subscriptionEndDate = user.details?.subscription?.endDate
+      ? new Date(user.details.subscription.endDate)
+      : null;
+
     return UserEntity.initialize({
       id: user.id,
       email: user.email,
@@ -41,29 +46,45 @@ class UserRepository implements Repository {
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      subscriptionId: user.details?.subscriptionId ?? null,
+      subscriptionEndDate,
     });
   }
 
-  public async findAll(): Promise<UserWithPasswordEntity[]> {
-    const users = await this.userModel
+  public async findByRoleKey(
+    key: ValueOf<typeof UserRoleKey>,
+  ): Promise<UserEntity | null> {
+    const user = await this.userModel
       .query()
-      .select()
-      .withGraphJoined(UsersRelation.DETAILS)
-      .castTo<UserWithPasswordQueryResponse[]>()
+      .modify('withoutPassword')
+      .withGraphJoined(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
+      .withGraphJoined(UsersRelation.ROLES)
+      .findOne({ key })
+      .castTo<UserCommonQueryResponse | undefined>()
       .execute();
 
-    return users.map((user) => {
-      return UserWithPasswordEntity.initialize({
-        id: user.id,
-        email: user.email,
-        passwordHash: user.passwordHash,
-        passwordSalt: user.passwordSalt,
-        createdAt: new Date(user.createdAt),
-        updatedAt: new Date(user.updatedAt),
-        fullName: user.details?.fullName ?? '',
-        isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
-      });
+    if (!user) {
+      return null;
+    }
+
+    const subscriptionEndDate = user.details?.subscription?.endDate
+      ? new Date(user.details.subscription.endDate)
+      : null;
+
+    return UserEntity.initialize({
+      id: user.id,
+      email: user.email,
+      createdAt: new Date(user.createdAt),
+      updatedAt: new Date(user.updatedAt),
+      fullName: user.details?.fullName ?? '',
+      isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      subscriptionId: user.details?.subscriptionId ?? null,
+      subscriptionEndDate,
     });
+  }
+
+  public findAll(): Promise<unknown[]> {
+    return Promise.resolve([]);
   }
 
   public async create(entity: UserWithPasswordEntity): Promise<UserEntity> {
@@ -81,9 +102,13 @@ class UserRepository implements Repository {
           isSurveyCompleted,
         },
       } as UserCreateQueryPayload)
-      .withGraphJoined(UsersRelation.DETAILS)
+      .withGraphJoined(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
       .castTo<UserWithPasswordQueryResponse>()
       .execute();
+
+    const subscriptionEndDate = user.details?.subscription?.endDate
+      ? new Date(user.details.subscription.endDate)
+      : null;
 
     return UserEntity.initialize({
       id: user.id,
@@ -92,6 +117,8 @@ class UserRepository implements Repository {
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      subscriptionId: user.details?.subscriptionId ?? null,
+      subscriptionEndDate,
     });
   }
 
@@ -107,20 +134,27 @@ class UserRepository implements Repository {
   }
 
   public delete(): ReturnType<Repository['delete']> {
-    return Promise.resolve(true);
+    //TODO
+    const deletedCount = 0;
+
+    return Promise.resolve(deletedCount);
   }
 
   public async findByEmail(email: string): Promise<UserEntity | null> {
     const user = await this.userModel
       .query()
       .modify('withoutPassword')
-      .withGraphJoined(UsersRelation.DETAILS)
+      .withGraphJoined(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
       .findOne({ email })
       .castTo<UserCommonQueryResponse | undefined>();
 
     if (!user) {
       return null;
     }
+
+    const subscriptionEndDate = user.details?.subscription?.endDate
+      ? new Date(user.details.subscription.endDate)
+      : null;
 
     return UserEntity.initialize({
       id: user.id,
@@ -129,6 +163,8 @@ class UserRepository implements Repository {
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      subscriptionId: user.details?.subscriptionId ?? null,
+      subscriptionEndDate,
     });
   }
 
@@ -137,12 +173,16 @@ class UserRepository implements Repository {
   ): Promise<UserWithPasswordEntity | null> {
     const user = await this.userModel
       .query()
-      .withGraphJoined(UsersRelation.DETAILS)
+      .withGraphJoined(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
       .findOne({ email })
       .castTo<UserWithPasswordQueryResponse | undefined>();
     if (!user) {
       return null;
     }
+
+    const subscriptionEndDate = user.details?.subscription?.endDate
+      ? new Date(user.details.subscription.endDate)
+      : null;
 
     return UserWithPasswordEntity.initialize({
       id: user.id,
@@ -153,6 +193,42 @@ class UserRepository implements Repository {
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      subscriptionId: user.details?.subscriptionId ?? null,
+      subscriptionEndDate,
+    });
+  }
+
+  public async updateSubscription({
+    id,
+    subscriptionId,
+  }: {
+    id: number;
+    subscriptionId: number;
+  }): Promise<UserEntity> {
+    await this.userModel
+      .relatedQuery(UsersRelation.DETAILS)
+      .for(id)
+      .patch({ subscriptionId });
+
+    const user = await this.userModel
+      .query()
+      .withGraphJoined(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
+      .findById(id)
+      .castTo<UserCommonQueryResponse>();
+
+    const subscriptionEndDate = user.details?.subscription?.endDate
+      ? new Date(user.details.subscription.endDate)
+      : null;
+
+    return UserEntity.initialize({
+      id: user.id,
+      email: user.email,
+      createdAt: new Date(user.createdAt),
+      updatedAt: new Date(user.updatedAt),
+      fullName: user.details?.fullName ?? '',
+      isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      subscriptionId: user.details?.subscriptionId ?? null,
+      subscriptionEndDate,
     });
   }
 }

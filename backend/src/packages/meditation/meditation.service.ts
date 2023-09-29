@@ -26,8 +26,10 @@ class MeditationService implements Service {
     return Promise.resolve(null);
   }
 
-  public async findAll(): Promise<MeditationEntryGetAllResponseDto> {
-    const items = await this.meditationRepository.findAll();
+  public async findByUserId(
+    userId: number,
+  ): Promise<MeditationEntryGetAllResponseDto> {
+    const items = await this.meditationRepository.findByUserId(userId);
 
     return {
       items: items.map((item) => {
@@ -36,19 +38,26 @@ class MeditationService implements Service {
     };
   }
 
+  public findAll(): ReturnType<Service['findAll']> {
+    return Promise.resolve({ items: [] });
+  }
+
   public async create({
     name,
     file,
+    userId,
   }: {
     name: string;
     file: FileUploadRequestDto;
+    userId: number;
   }): Promise<MeditationEntryCreateResponseDto> {
     const { url, contentType } = await this.fileService.create(file);
     const item = await this.meditationRepository.create(
       MeditationEntity.initializeNew({
-        name: name,
+        name,
         mediaUrl: url,
         contentType,
+        userId,
       }),
     );
 

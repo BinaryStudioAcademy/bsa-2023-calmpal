@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   input: {
@@ -14,13 +14,14 @@ const styles = StyleSheet.create({
     marginBottom: 2,
     marginTop: 6,
     color: AppColor.GRAY_600,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
 
   label: {
     fontSize: 14,
-    fontWeight: 'bold',
     color: AppColor.GRAY_100,
     marginTop: 4,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
 
   placeholder: {
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     shadowOpacity: 0.25,
     color: AppColor.GRAY_600,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
 
   disabledInput: {
@@ -48,12 +50,14 @@ const styles = StyleSheet.create({
   errorInput: {
     borderColor: AppColor.RED_100,
     color: AppColor.GRAY_600,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
 
   errorText: {
     color: AppColor.RED_100,
     fontSize: 14,
     marginBottom: 4,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
   otherTextInput: {
     backgroundColor: AppColor.BLUE_100_ALPHA_70,
@@ -64,6 +68,7 @@ const styles = StyleSheet.create({
     borderColor: AppColor.WHITE,
     color: AppColor.BLUE_400,
     fontSize: 16,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
   otherPlaceholder: {
     color: AppColor.WHITE,

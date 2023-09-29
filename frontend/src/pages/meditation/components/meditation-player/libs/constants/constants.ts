@@ -1,0 +1,3 @@
+const TRACK_NOT_FOUND_INDEX = -1;
+
+export { TRACK_NOT_FOUND_INDEX };

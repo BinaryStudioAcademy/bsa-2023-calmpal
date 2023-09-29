@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   input: {
@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     color: AppColor.GRAY_600,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
   focusedInput: {
     borderWidth: 1,
@@ -24,6 +25,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     shadowOpacity: 0.25,
     color: AppColor.GRAY_600,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
 });
 

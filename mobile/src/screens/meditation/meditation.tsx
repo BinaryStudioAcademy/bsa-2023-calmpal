@@ -6,7 +6,7 @@ import { Image, Player, Text, View } from '#libs/components/components';
 import { useState } from '#libs/hooks/hooks';
 import { type Track } from '#libs/types/types';
 
-import { TITLE_LINE_COUNT } from './libs/constants';
+import { TITLE_LINE_COUNT } from './libs/constants/constants';
 import { styles } from './styles';
 
 const Meditation: React.FC = () => {

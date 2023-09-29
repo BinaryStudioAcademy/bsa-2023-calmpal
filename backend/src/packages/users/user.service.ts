@@ -1,12 +1,12 @@
 import { type Config } from '#libs/packages/config/config.js';
 import { type Encrypt } from '#libs/packages/encrypt/encrypt.js';
 import { type JWTService } from '#libs/packages/jwt/jwt.service.js';
-import { type Service } from '#libs/types/types.js';
+import { type UserRoleKey } from '#libs/packages/open-ai/libs/enums/enums.js';
+import { type Service, type ValueOf } from '#libs/types/types.js';
 import { type UserEntity } from '#packages/users/user.entity.js';
 import { type UserRepository } from '#packages/users/user.repository.js';
 
 import {
-  type UserGetAllResponseDto,
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
 } from './libs/types/types.js';
@@ -49,14 +49,16 @@ class UserService implements Service {
     return user?.toObject() ?? null;
   }
 
-  public async findAll(): Promise<UserGetAllResponseDto> {
-    const items = await this.userRepository.findAll();
+  public async findByRoleKey(
+    roleKey: ValueOf<typeof UserRoleKey>,
+  ): Promise<ReturnType<UserEntity['toObject']> | null> {
+    const user = await this.userRepository.findByRoleKey(roleKey);
 
-    return {
-      items: items.map((item) => {
-        return item.toObject();
-      }),
-    };
+    return user?.toObject() ?? null;
+  }
+
+  public findAll(): Promise<{ items: [] }> {
+    return Promise.resolve({ items: [] });
   }
 
   public async create(
@@ -119,6 +121,21 @@ class UserService implements Service {
     if (!userEntity) {
       return null;
     }
+
+    return userEntity.toObject();
+  }
+
+  public async updateSubscription({
+    id,
+    subscriptionId,
+  }: {
+    id: number;
+    subscriptionId: number;
+  }): Promise<ReturnType<UserEntity['toObject']>> {
+    const userEntity = await this.userRepository.updateSubscription({
+      id,
+      subscriptionId,
+    });
 
     return userEntity.toObject();
   }

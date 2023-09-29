@@ -4,7 +4,7 @@ import {
   NO_OFFSET_IN_MILLISECONDS,
   SECONDS_IN_MINUTE,
 } from '../libs/constants/constants.js';
-import { TIME_FORMAT } from '../libs/enums/time-format.enum.js';
+import { TimeFormat } from '../libs/enums/enums.js';
 
 const getFormattedTime = (
   seconds: number,
@@ -25,7 +25,7 @@ const getFormattedTime = (
 
   return getFormattedDate(
     offset,
-    hours ? TIME_FORMAT.HH_MM_SS : TIME_FORMAT.MM_SS,
+    hours ? TimeFormat.HH_MM_SS : TimeFormat.MM_SS,
   );
 };
 

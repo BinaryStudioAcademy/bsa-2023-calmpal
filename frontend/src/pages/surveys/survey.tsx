@@ -1,5 +1,5 @@
 import { Header, Loader, Navigate } from '#libs/components/components.js';
-import { SIDEBAR_ROUTES } from '#libs/components/navigation-menu-wrapper/libs/constants.js';
+import { SIDEBAR_ROUTES } from '#libs/components/navigation-menu-wrapper/libs/constants/constants.js';
 import { AppRoute, DataStatus } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
@@ -44,7 +44,7 @@ const Survey: React.FC = () => {
     <div className={styles['container']}>
       <Header routes={SIDEBAR_ROUTES} />
       {surveyPreferencesDataStatus === DataStatus.PENDING ? (
-        <Loader />
+        <Loader isOverflow />
       ) : (
         <div className={styles['survey']}>
           <div className={styles['name']}>

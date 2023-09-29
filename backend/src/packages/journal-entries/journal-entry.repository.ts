@@ -36,12 +36,21 @@ class JournalEntryRepository implements Repository {
     return await Promise.resolve([]);
   }
 
-  public async findAllByUserId(userId: number): Promise<JournalEntryEntity[]> {
+  public async findAllByUserId(
+    userId: number,
+    query: string,
+  ): Promise<JournalEntryEntity[]> {
     const journalEntries = await this.journalEntryModel
       .query()
       .where({ userId })
       .orderBy('updatedAt', SortType.DESC)
-      .castTo<JournalEntryCommonQueryResponse[]>();
+      .modify((builder) => {
+        if (query) {
+          void builder.where('title', 'iLike', `%${query}%`);
+        }
+      })
+      .castTo<JournalEntryCommonQueryResponse[]>()
+      .execute();
 
     return journalEntries.map((journalEntry) => {
       return JournalEntryEntity.initialize({
@@ -95,8 +104,8 @@ class JournalEntryRepository implements Repository {
     });
   }
 
-  public delete(): ReturnType<Repository['delete']> {
-    return Promise.resolve(true);
+  public delete(id: number): ReturnType<Repository['delete']> {
+    return this.journalEntryModel.query().deleteById(id).execute();
   }
 }
 

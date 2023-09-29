@@ -15,5 +15,6 @@ export {
   type ChatMessageCreateRequestDto,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
+  type ChatMessagesGroups,
 } from './libs/types/types.js';
 export { chatMessagesApi };

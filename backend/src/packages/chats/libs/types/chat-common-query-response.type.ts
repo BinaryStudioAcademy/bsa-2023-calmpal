@@ -6,6 +6,7 @@ type ChatCommonQueryResponse = {
   createdAt: string;
   updatedAt: string;
   members: UserToChatQueryResponse[];
+  imageUrl: string | null;
 };
 
 export { type ChatCommonQueryResponse };

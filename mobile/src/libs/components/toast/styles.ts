@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   errorToast: {
@@ -11,9 +11,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 15,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
   message: {
     color: AppColor.GRAY_400,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
 });
 

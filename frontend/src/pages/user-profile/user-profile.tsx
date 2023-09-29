@@ -1,22 +1,29 @@
-import { BackButton } from '#libs/components/components.js';
+import { BackButtonWrapper } from '#libs/components/components.js';
+import { MOBILE_DIMENSION } from '#libs/constants/constants.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { useCallback, useSidebarState } from '#libs/hooks/hooks.js';
+import {
+  useCallback,
+  useMediaQuery,
+  useSidebarState,
+} from '#libs/hooks/hooks.js';
+import { ProfileSettings } from '#pages/profile-settings/profile-settings.js';
 
 import { UserProfileSidebar } from './components/components.js';
 import styles from './styles.module.scss';
 
 const UserProfile: React.FC = () => {
-  const { isSidebarShown, setIsSidebarShown } = useSidebarState();
+  const { isSidebarShown, setIsSidebarShow } = useSidebarState();
+  const isMobileDimension = useMediaQuery(MOBILE_DIMENSION);
 
   const handleBackButtonPress = useCallback(() => {
-    setIsSidebarShown(true);
-  }, [setIsSidebarShown]);
+    setIsSidebarShow(true);
+  }, [setIsSidebarShow]);
 
   return (
     <>
       <UserProfileSidebar
         isSidebarShown={isSidebarShown}
-        setIsSidebarShown={setIsSidebarShown}
+        onSetIsSidebarShow={setIsSidebarShow}
       />
       <div
         className={getValidClassNames(
@@ -24,8 +31,11 @@ const UserProfile: React.FC = () => {
           isSidebarShown && styles['hide'],
         )}
       >
-        <BackButton onGoBack={handleBackButtonPress} />
-        hi there
+        <BackButtonWrapper
+          onGoBack={handleBackButtonPress}
+          isVisible={isMobileDimension}
+        />
+        <ProfileSettings />
       </div>
     </>
   );

@@ -1,7 +1,9 @@
 import { ExceptionMessage } from '#libs/enums/enums.js';
 import { JournalError } from '#libs/exceptions/exceptions.js';
 import { sanitizeInput } from '#libs/helpers/helpers.js';
+import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Service } from '#libs/types/types.js';
+import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { JournalEntryEntity } from './journal-entry.entity.js';
 import { type JournalEntryRepository } from './journal-entry.repository.js';
@@ -38,8 +40,12 @@ class JournalEntryService implements Service {
 
   public async findAllByUserId(
     userId: number,
+    query: string,
   ): Promise<JournalEntryGetAllResponseDto> {
-    const items = await this.journalEntryRepository.findAllByUserId(userId);
+    const items = await this.journalEntryRepository.findAllByUserId(
+      userId,
+      query,
+    );
 
     return {
       items: items.map((item) => {
@@ -83,8 +89,21 @@ class JournalEntryService implements Service {
     return item.toObject();
   }
 
-  public delete(): ReturnType<Service['delete']> {
-    return Promise.resolve(true);
+  public async delete(payload: {
+    id: number;
+    user: UserAuthResponseDto;
+  }): ReturnType<Service['delete']> {
+    const journal = await this.find(payload.id);
+    if (journal.userId !== payload.user.id) {
+      throw new JournalError({
+        status: HTTPCode.BAD_REQUEST,
+        message: ExceptionMessage.INCORRECT_CREDENTIALS,
+      });
+    }
+
+    const deletedCount = await this.journalEntryRepository.delete(payload.id);
+
+    return Boolean(deletedCount);
   }
 }
 

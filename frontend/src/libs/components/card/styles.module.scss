@@ -1,11 +1,15 @@
+.container {
+  position: relative;
+}
+
 .item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
   min-width: 317px;
-  max-width: 317px;
   min-height: 83px;
   margin-top: 15px;
+  padding: 3px 60px 3px 3px;
   font-weight: 600;
   font-size: 16px;
   font-family: Montserrat, sans-serif;
@@ -25,6 +29,12 @@
 .item .image-container {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: row;
   align-items: center;
 }
 
@@ -73,12 +83,10 @@
   word-break: break-word;
 }
 
-@media (width < 900px) {
+@media (width < 900px), (height < 530px) {
   .item {
     width: 100%;
     min-width: 0;
-    max-width: 100%;
-    padding: 3px 24px 3px 3px;
   }
 
   .no-image {
@@ -87,10 +95,6 @@
 }
 
 @media (width < 768px) {
-  .item {
-    padding: 3px 30px 3px 3px;
-  }
-
   .no-image {
     padding-left: 20px;
   }

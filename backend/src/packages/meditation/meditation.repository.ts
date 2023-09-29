@@ -19,10 +19,11 @@ class MeditationRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public async findAll(): Promise<MeditationEntity[]> {
+  public async findByUserId(userId: number): Promise<MeditationEntity[]> {
     const meditationEntries = await this.meditationEntryModel
       .query()
-      .select()
+      .where({ userId })
+      .orWhere({ userId: null })
       .castTo<MeditationCommonQueryResponse[]>();
 
     return meditationEntries.map((meditationEntry) => {
@@ -31,33 +32,40 @@ class MeditationRepository implements Repository {
         name: meditationEntry.name,
         mediaUrl: meditationEntry.mediaUrl,
         contentType: meditationEntry.contentType,
+        userId: meditationEntry.userId,
         createdAt: new Date(meditationEntry.createdAt),
         updatedAt: new Date(meditationEntry.updatedAt),
       });
     });
   }
 
-  public async create(entity: MeditationEntity): Promise<MeditationEntity> {
-    const { name, mediaUrl, contentType } = entity.toObject();
+  public findAll(): ReturnType<Repository['findAll']> {
+    return Promise.resolve([]);
+  }
 
-    const meditation = await this.meditationEntryModel
+  public async create(entity: MeditationEntity): Promise<MeditationEntity> {
+    const { name, mediaUrl, contentType, userId } = entity.toObject();
+
+    const meditationEntry = await this.meditationEntryModel
       .query()
       .insertGraph({
         name,
         mediaUrl,
         contentType,
         topicId: null,
+        userId,
       } as MeditationCreateQueryPayload)
       .withGraphJoined(MeditationEntriesRelation.TOPIC)
       .castTo<MeditationCommonQueryResponse>();
 
     return MeditationEntity.initialize({
-      id: meditation.id,
-      name: meditation.name,
-      mediaUrl: meditation.mediaUrl,
-      contentType: meditation.contentType,
-      createdAt: new Date(meditation.createdAt),
-      updatedAt: new Date(meditation.updatedAt),
+      id: meditationEntry.id,
+      name: meditationEntry.name,
+      mediaUrl: meditationEntry.mediaUrl,
+      contentType: meditationEntry.contentType,
+      userId: meditationEntry.userId,
+      createdAt: new Date(meditationEntry.createdAt),
+      updatedAt: new Date(meditationEntry.updatedAt),
     });
   }
 
@@ -66,7 +74,10 @@ class MeditationRepository implements Repository {
   }
 
   public delete(): ReturnType<Repository['delete']> {
-    return Promise.resolve(true);
+    //TODO
+    const deletedCount = 0;
+
+    return Promise.resolve(deletedCount);
   }
 }
 

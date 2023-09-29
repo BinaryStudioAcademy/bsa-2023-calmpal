@@ -11,7 +11,7 @@
   margin-left: 88px;
 }
 
-@media (width < 768px) {
+@media (width < 768px), (height < 530px) {
   .body {
     margin-left: 0;
   }

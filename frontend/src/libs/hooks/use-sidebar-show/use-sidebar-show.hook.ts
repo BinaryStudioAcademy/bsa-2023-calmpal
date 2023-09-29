@@ -4,7 +4,7 @@ import { useSearchParams as useSearchParameters } from '../hooks.js';
 
 type UseSidebarStateReturn = {
   isSidebarShown: boolean;
-  setIsSidebarShown: (value: boolean) => void;
+  setIsSidebarShow: (value: boolean) => void;
 };
 
 const useSidebarState = (): UseSidebarStateReturn => {
@@ -13,7 +13,7 @@ const useSidebarState = (): UseSidebarStateReturn => {
   const isSidebarShown =
     sidebarMode.get(AppQueryStringKey.SIDEBAR_MODE) === SidebarMode.SHOW;
 
-  const setIsSidebarShown = (value: boolean): void => {
+  const setIsSidebarShow = (value: boolean): void => {
     setSidebarMode((previous) => {
       return {
         ...previous,
@@ -22,7 +22,7 @@ const useSidebarState = (): UseSidebarStateReturn => {
     });
   };
 
-  return { isSidebarShown, setIsSidebarShown };
+  return { isSidebarShown, setIsSidebarShow };
 };
 
 export { useSidebarState };

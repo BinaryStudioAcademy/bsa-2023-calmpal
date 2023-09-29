@@ -1,33 +1,43 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { DataStatus } from '#libs/enums/enums.js';
+import { groupChatMessage } from '#libs/helpers/helpers.js';
 import { type ValueOf } from '#libs/types/types.js';
-import { type ChatMessageGetAllItemResponseDto } from '#packages/chat-messages/chat-messages.js';
+import { type ChatMessagesGroups } from '#packages/chat-messages/chat-messages.js';
 import { type ChatGetAllItemResponseDto } from '#packages/chats/chats.js';
 
 import {
   createChat,
   createMessage,
+  deleteChat,
+  generateReply,
   getAllChats,
   getCurrentChatMessages,
+  updateChatImage,
 } from './actions.js';
 
 type State = {
   chats: ChatGetAllItemResponseDto[];
-  currentChatMessages: ChatMessageGetAllItemResponseDto[];
+  currentChatMessages: ChatMessagesGroups;
   chatsDataStatus: ValueOf<typeof DataStatus>;
   createChatDataStatus: ValueOf<typeof DataStatus>;
   currentChatMessagesDataStatus: ValueOf<typeof DataStatus>;
   createMessageDataStatus: ValueOf<typeof DataStatus>;
+  deleteChatDataStatus: ValueOf<typeof DataStatus>;
+  generateReplyDataStatus: ValueOf<typeof DataStatus>;
+  updateChatImageStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
   chats: [],
-  currentChatMessages: [],
+  currentChatMessages: {},
   chatsDataStatus: DataStatus.IDLE,
   createChatDataStatus: DataStatus.IDLE,
   currentChatMessagesDataStatus: DataStatus.IDLE,
   createMessageDataStatus: DataStatus.IDLE,
+  deleteChatDataStatus: DataStatus.IDLE,
+  generateReplyDataStatus: DataStatus.IDLE,
+  updateChatImageStatus: DataStatus.IDLE,
 };
 
 const { reducer, actions, name } = createSlice({
@@ -79,12 +89,65 @@ const { reducer, actions, name } = createSlice({
     });
 
     builder.addCase(createMessage.fulfilled, (state, action) => {
-      state.currentChatMessages.push(action.payload);
+      state.currentChatMessages = groupChatMessage(
+        state.currentChatMessages,
+        action.payload,
+      );
       state.createMessageDataStatus = DataStatus.FULFILLED;
     });
 
     builder.addCase(createMessage.rejected, (state) => {
       state.createMessageDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(deleteChat.pending, (state) => {
+      state.deleteChatDataStatus = DataStatus.PENDING;
+    });
+
+    builder.addCase(deleteChat.fulfilled, (state, action) => {
+      state.chats = state.chats.filter((chat) => {
+        return chat.id !== action.payload;
+      });
+      state.deleteChatDataStatus = DataStatus.FULFILLED;
+    });
+
+    builder.addCase(deleteChat.rejected, (state) => {
+      state.deleteChatDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(generateReply.pending, (state) => {
+      state.generateReplyDataStatus = DataStatus.PENDING;
+    });
+
+    builder.addCase(generateReply.fulfilled, (state, action) => {
+      state.currentChatMessages = groupChatMessage(
+        state.currentChatMessages,
+        action.payload,
+      );
+      state.generateReplyDataStatus = DataStatus.FULFILLED;
+    });
+
+    builder.addCase(generateReply.rejected, (state) => {
+      state.generateReplyDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(updateChatImage.pending, (state) => {
+      state.updateChatImageStatus = DataStatus.PENDING;
+    });
+
+    builder.addCase(updateChatImage.fulfilled, (state, action) => {
+      state.chats = state.chats.map((chat) => {
+        if (chat.id === action.payload.id) {
+          return action.payload;
+        }
+
+        return chat;
+      });
+      state.updateChatImageStatus = DataStatus.FULFILLED;
+    });
+
+    builder.addCase(updateChatImage.rejected, (state) => {
+      state.updateChatImageStatus = DataStatus.REJECTED;
     });
   },
 });

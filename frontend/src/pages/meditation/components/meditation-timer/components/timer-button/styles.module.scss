@@ -1,0 +1,54 @@
+.timer-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  font-weight: 500;
+  background-color: var(--white);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 23px 0 var(--violet-100);
+  cursor: pointer;
+}
+
+.timer-button:hover {
+  box-shadow: 0 4px 20px 0 var(--blue-alpha-30);
+}
+
+.active {
+  color: var(--white);
+  background-color: var(--blue-300);
+  border: none;
+  box-shadow: 0 4px 20px 0 var(--blue-alpha-30);
+}
+
+.radio-hidden {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.active-text {
+  color: inherit;
+}
+
+.button-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.default {
+  color: var(--black);
+  background-color: var(--white);
+  border: 2px solid var(--blue-alpha-30);
+}
+
+.active-default {
+  color: var(--white);
+  background-color: var(--blue-200);
+  border: none;
+}

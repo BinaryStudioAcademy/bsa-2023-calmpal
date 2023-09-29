@@ -1,3 +1,4 @@
+import { SortType } from '#libs/enums/enums.js';
 import { type Repository } from '#libs/types/types.js';
 
 import { ChatMessageEntity } from './chat-message.entity.js';
@@ -19,7 +20,10 @@ class ChatMessageRepository implements Repository {
   }
 
   public async findAllByChatId(chatId: number): Promise<ChatMessageEntity[]> {
-    const chatMessages = await this.chatMessageModel.query().where({ chatId });
+    const chatMessages = await this.chatMessageModel
+      .query()
+      .where({ chatId })
+      .orderBy('createdAt', SortType.ASC);
 
     return chatMessages.map((chatMessage) => {
       return ChatMessageEntity.initialize({
@@ -60,7 +64,10 @@ class ChatMessageRepository implements Repository {
   }
 
   public delete(): ReturnType<Repository['delete']> {
-    return Promise.resolve(true);
+    //TODO
+    const deletedCount = 0;
+
+    return Promise.resolve(deletedCount);
   }
 }
 

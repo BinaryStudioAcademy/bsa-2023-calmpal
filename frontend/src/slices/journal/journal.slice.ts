@@ -6,6 +6,7 @@ import { type JournalEntryGetAllItemResponseDto } from '#packages/journal/journa
 
 import {
   createJournalEntry,
+  deleteJournal,
   getAllJournalEntries,
   updateJournalEntry,
 } from './actions.js';
@@ -16,6 +17,7 @@ type State = {
   journalEntriesDataStatus: ValueOf<typeof DataStatus>;
   createJournalEntryDataStatus: ValueOf<typeof DataStatus>;
   updateJournalEntryDataStatus: ValueOf<typeof DataStatus>;
+  deleteJournalEntryDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
@@ -24,6 +26,7 @@ const initialState: State = {
   journalEntriesDataStatus: DataStatus.IDLE,
   createJournalEntryDataStatus: DataStatus.IDLE,
   updateJournalEntryDataStatus: DataStatus.IDLE,
+  deleteJournalEntryDataStatus: DataStatus.IDLE,
 };
 
 const { reducer, actions, name } = createSlice({
@@ -60,24 +63,31 @@ const { reducer, actions, name } = createSlice({
     builder.addCase(createJournalEntry.rejected, (state) => {
       state.createJournalEntryDataStatus = DataStatus.REJECTED;
     });
-
     builder.addCase(updateJournalEntry.pending, (state) => {
       state.updateJournalEntryDataStatus = DataStatus.PENDING;
     });
     builder.addCase(updateJournalEntry.fulfilled, (state, action) => {
-      state.allJournalEntries = state.allJournalEntries.map((journalEntry) => {
-        if (journalEntry.id === action.payload.id) {
-          return action.payload;
-        }
+      const filteredJournalEntries = state.allJournalEntries.filter(
+        (journalEntry) => {
+          return journalEntry.id !== action.payload.id;
+        },
+      );
 
-        return journalEntry;
-      });
-
+      state.allJournalEntries = [action.payload, ...filteredJournalEntries];
       state.updateJournalEntryDataStatus = DataStatus.FULFILLED;
-      state.selectedJournalEntry = action.payload;
     });
     builder.addCase(updateJournalEntry.rejected, (state) => {
       state.updateJournalEntryDataStatus = DataStatus.REJECTED;
+    });
+    builder.addCase(deleteJournal.pending, (state) => {
+      state.deleteJournalEntryDataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(deleteJournal.fulfilled, (state, action) => {
+      state.allJournalEntries = action.payload;
+      state.deleteJournalEntryDataStatus = DataStatus.FULFILLED;
+    });
+    builder.addCase(deleteJournal.rejected, (state) => {
+      state.deleteJournalEntryDataStatus = DataStatus.REJECTED;
     });
   },
 });

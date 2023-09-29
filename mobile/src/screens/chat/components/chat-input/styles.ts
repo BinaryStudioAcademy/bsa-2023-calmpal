@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     elevation: 2,
     color: AppColor.BLACK,
+    fontFamily: FontFamily.MONTSERRAT_400,
   },
   button: {
     position: 'absolute',

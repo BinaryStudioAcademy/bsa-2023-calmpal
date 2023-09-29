@@ -9,26 +9,48 @@ import {
   View,
 } from '#libs/components/components';
 import { MeditationScreenName } from '#libs/enums/enums';
-import { useNavigation, useSearch } from '#libs/hooks/hooks';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useCallback,
+  useEffect,
+  useNavigation,
+  useSearch,
+} from '#libs/hooks/hooks';
 import { type MeditationNavigationParameterList } from '#libs/types/types';
+import { actions as meditationActions } from '#slices/meditation/meditation';
 
-import { mockedData } from './libs/constants';
 import { styles } from './styles';
 
 const MeditationHome: React.FC = () => {
+  const { meditationEntries } = useAppSelector(({ meditation }) => {
+    return {
+      meditationEntries: meditation.meditationEntries,
+    };
+  });
+  const dispatch = useAppDispatch();
+
   const navigation =
     useNavigation<
       NativeStackNavigationProp<MeditationNavigationParameterList>
     >();
   const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
-    mockedData,
-    'title',
+    meditationEntries,
+    'name',
   );
-  const handleSelectMeditation = (title: string): void => {
-    navigation.navigate(MeditationScreenName.MEDITATION_LIST, {
-      title,
-    });
-  };
+
+  const handleSelectMeditation = useCallback(
+    (title: string): void => {
+      navigation.navigate(MeditationScreenName.MEDITATION_LIST, {
+        title,
+      });
+    },
+    [navigation],
+  );
+
+  useEffect(() => {
+    void dispatch(meditationActions.getAllMeditationEntries());
+  }, [dispatch]);
 
   return (
     <LinearGradient>
@@ -41,8 +63,10 @@ const MeditationHome: React.FC = () => {
           {filteredMeditationTopics.map((item) => {
             return (
               <Card
-                title={item.title}
-                onPress={handleSelectMeditation}
+                title={item.name}
+                onPress={(): void => {
+                  handleSelectMeditation(item.name);
+                }}
                 key={item.id}
               />
             );

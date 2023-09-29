@@ -21,7 +21,7 @@ class MeditationApi extends BaseHttpApi {
     super({ path: APIPath.MEDITATION, baseUrl, http, storage });
   }
 
-  public async createMeditationEntry({
+  public async createEntry({
     name,
     file,
   }: MeditationEntryCreateRequestDto): Promise<MeditationEntryCreateResponseDto> {
@@ -41,7 +41,7 @@ class MeditationApi extends BaseHttpApi {
     return await response.json<MeditationEntryCreateResponseDto>();
   }
 
-  public async getAllMeditationEntries(): Promise<MeditationEntryGetAllResponseDto> {
+  public async getAllEntries(): Promise<MeditationEntryGetAllResponseDto> {
     const response = await this.load(
       this.getFullEndpoint(MeditationApiPath.ROOT, {}),
       {

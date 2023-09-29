@@ -14,9 +14,11 @@ import { JournalEntriesTableColumn } from '#packages/journal-entries/libs/enums/
 
 import {
   UserDetailsTableColumn,
+  UserRolesTableColumn,
   UsersTableColumn,
 } from './libs/enums/enums.js';
 import { UserDetailsModel } from './user-details.model.js';
+import { UserRolesModel } from './user-roles.model.js';
 
 class UserModel extends AbstractModel {
   public email!: string;
@@ -50,6 +52,15 @@ class UserModel extends AbstractModel {
         join: {
           from: `${DatabaseTableName.USERS}.${UsersTableColumn.ID}`,
           to: `${DatabaseTableName.USER_DETAILS}.${UserDetailsTableColumn.USER_ID}`,
+        },
+      },
+
+      roles: {
+        relation: Model.HasOneRelation,
+        modelClass: UserRolesModel,
+        join: {
+          from: `${DatabaseTableName.USERS}.${UsersTableColumn.ROLE_ID}`,
+          to: `${DatabaseTableName.USER_ROLES}.${UserRolesTableColumn.ID}`,
         },
       },
 

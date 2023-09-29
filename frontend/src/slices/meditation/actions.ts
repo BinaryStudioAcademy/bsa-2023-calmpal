@@ -18,7 +18,7 @@ const createMeditationEntry = createAsyncThunk<
   `${sliceName}/create-meditation-entry`,
   async (payload, { extra, dispatch }) => {
     const { meditationApi } = extra;
-    const item = await meditationApi.createMeditationEntry(payload);
+    const item = await meditationApi.createEntry(payload);
 
     void dispatch(
       appActions.notify({
@@ -38,7 +38,7 @@ const getAllMeditationEntries = createAsyncThunk<
 >(`${sliceName}/get-all-meditation-entries`, async (_, { extra }) => {
   const { meditationApi } = extra;
 
-  return await meditationApi.getAllMeditationEntries();
+  return await meditationApi.getAllEntries();
 });
 
 export { createMeditationEntry, getAllMeditationEntries };

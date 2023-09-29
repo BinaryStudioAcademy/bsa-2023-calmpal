@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 16,
     color: AppColor.GRAY_500,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
 });
 

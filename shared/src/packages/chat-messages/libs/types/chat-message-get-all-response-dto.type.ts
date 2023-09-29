@@ -1,7 +1,7 @@
-import { type ChatMessageGetAllItemResponseDto } from './chat-message-get-all-item-response-dto.type.js';
+import { type ChatMessagesGroups } from './chat-messages-groups.type.js';
 
 type ChatMessageGetAllResponseDto = {
-  items: ChatMessageGetAllItemResponseDto[];
+  items: ChatMessagesGroups;
 };
 
 export { type ChatMessageGetAllResponseDto };

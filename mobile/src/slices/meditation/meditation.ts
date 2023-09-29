@@ -1,9 +1,15 @@
-import { initPlayer } from './actions';
+import {
+  createMeditationEntry,
+  getAllMeditationEntries,
+  initPlayer,
+} from './actions';
 import { actions } from './meditation.slice';
 
 const allActions = {
   ...actions,
   initPlayer,
+  getAllMeditationEntries,
+  createMeditationEntry,
 };
 
 export { allActions as actions };
