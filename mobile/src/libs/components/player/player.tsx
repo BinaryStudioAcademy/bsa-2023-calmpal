@@ -1,8 +1,15 @@
 import React from 'react';
+import { AppState } from 'react-native';
 import KeepAwake from 'react-native-keep-awake';
 
-import { useEffect, useState } from '#libs/hooks/hooks';
 import {
+  useCallback,
+  useEffect,
+  useFocusEffect,
+  useState,
+} from '#libs/hooks/hooks';
+import {
+  AppStatus,
   Event,
   player,
   State,
@@ -60,6 +67,33 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
     void player.setPlaylist(MOCKED_PLAYLIST);
     setCurrentTrack(MOCKED_PLAYLIST[TRACK_START_INDEX] as Track);
   }, [setCurrentTrack]);
+
+  useEffect(() => {
+    const handleAppStateChange = (nextAppState: string): void => {
+      void player.startPlaying();
+
+      if (nextAppState === AppStatus.Background) {
+        void player.stopPlaying();
+      }
+    };
+
+    const appStateSubscription = AppState.addEventListener(
+      'change',
+      handleAppStateChange,
+    );
+
+    return () => {
+      appStateSubscription.remove();
+    };
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        void player.stopPlaying();
+      };
+    }, []),
+  );
 
   return (
     <>

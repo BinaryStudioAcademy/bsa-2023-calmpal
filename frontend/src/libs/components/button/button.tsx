@@ -22,7 +22,10 @@ type Properties = {
   isLoading?: boolean;
   isDisabled?: boolean;
   isLabelVisuallyHidden?: boolean;
-  onClick?: (() => void) | undefined | (() => Promise<void>);
+  onClick?:
+    | ((event_: React.MouseEvent) => void)
+    | ((event_: React.MouseEvent) => Promise<void>)
+    | undefined;
 };
 
 const Button: React.FC<Properties> = ({

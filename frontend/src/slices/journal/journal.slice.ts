@@ -56,13 +56,14 @@ const { reducer, actions, name } = createSlice({
       state.createJournalEntryDataStatus = DataStatus.PENDING;
     });
     builder.addCase(createJournalEntry.fulfilled, (state, action) => {
-      state.allJournalEntries.push(action.payload);
+      state.allJournalEntries.unshift(action.payload);
       state.selectedJournalEntry = action.payload;
       state.createJournalEntryDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(createJournalEntry.rejected, (state) => {
       state.createJournalEntryDataStatus = DataStatus.REJECTED;
     });
+
     builder.addCase(updateJournalEntry.pending, (state) => {
       state.updateJournalEntryDataStatus = DataStatus.PENDING;
     });
@@ -72,13 +73,13 @@ const { reducer, actions, name } = createSlice({
           return journalEntry.id !== action.payload.id;
         },
       );
-
       state.allJournalEntries = [action.payload, ...filteredJournalEntries];
       state.updateJournalEntryDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(updateJournalEntry.rejected, (state) => {
       state.updateJournalEntryDataStatus = DataStatus.REJECTED;
     });
+
     builder.addCase(deleteJournal.pending, (state) => {
       state.deleteJournalEntryDataStatus = DataStatus.PENDING;
     });
