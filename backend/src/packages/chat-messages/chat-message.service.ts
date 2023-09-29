@@ -95,8 +95,9 @@ class ChatMessageService implements Service {
       },
     );
 
-    const content = replaceTemplateWithValue(PROMPT_TEMPLATE, {
-      message: payload.message,
+    const content = replaceTemplateWithValue({
+      template: PROMPT_TEMPLATE,
+      replacements: { message: payload.message },
     });
 
     openAiMessages.push({
