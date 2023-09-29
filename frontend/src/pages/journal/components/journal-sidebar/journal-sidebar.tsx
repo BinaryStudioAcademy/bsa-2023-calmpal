@@ -120,6 +120,7 @@ const JournalSidebar: React.FC<Properties> = ({
                     iconRight="trash-box"
                     onIconClick={handleIconClick(journalEntry.id)}
                     iconColor={IconColor.LIGHT_BLUE}
+                    isTooltipAvailable
                   />
                 </Link>
               );

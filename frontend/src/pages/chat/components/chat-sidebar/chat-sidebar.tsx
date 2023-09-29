@@ -113,6 +113,7 @@ const ChatSidebar: React.FC<Properties> = ({
                     iconRight="trash-box"
                     onIconClick={handleDeleteChat(chat.id)}
                     iconColor={IconColor.LIGHT_BLUE}
+                    isTooltipAvailable
                   />
                 </Link>
               );

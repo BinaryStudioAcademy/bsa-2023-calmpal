@@ -10,6 +10,7 @@ type Properties = {
   imageUrl?: string;
   onClick: () => void;
   isActive?: boolean;
+  isTooltipAvailable?: boolean;
   iconName?: IconName;
   iconColor?: ValueOf<typeof IconColor>;
   iconRight?: IconName;
@@ -25,6 +26,7 @@ const Card: React.FC<Properties> = ({
   iconRight,
   onIconClick,
   iconColor,
+  isTooltipAvailable = false,
 }) => {
   const hasNoImageOrIcon = !imageUrl && !iconName;
   const hasImage = Boolean(imageUrl);
@@ -60,9 +62,20 @@ const Card: React.FC<Properties> = ({
               )}
             </div>
           )}
-          <div className={styles['title']} data-tooltip={title}>
-            {title}
-          </div>
+          {isTooltipAvailable ? (
+            <div
+              className={getValidClassNames(styles['title'], styles['tooltip'])}
+              data-tooltip={
+                'Чтобы создать стрелку, которая должна появиться с определенной стороны подсказки, добавьте "пустое" содержимое после подсказки, с классом псевдо-элемента ::after вместе со свойством content . Сама стрелка создается с использованием границ. Это сделает всплывающую подсказку похожим на пузырь речи.Чтобы создать стрелку, которая должна появиться с определенной стороны подсказки, добавьте "пустое" содержимое после подсказки, с классом псевдо-элемента ::after вместе со свойством content . Сама стрелка создается с использованием границ. Это сделает всплывающую подсказку похожим на пузырь речи.'
+              }
+            >
+              {
+                'Чтобы создать стрелку, которая должна появиться с определенной стороны подсказки, добавьте "пустое" содержимое после подсказки, с классом псевдо-элемента ::after вместе со свойством content . Сама стрелка создается с использованием границ. Это сделает всплывающую подсказку похожим на пузырь речи.Чтобы создать стрелку, которая должна появиться с определенной стороны подсказки, добавьте "пустое" содержимое после подсказки, с классом псевдо-элемента ::after вместе со свойством content . Сама стрелка создается с использованием границ. Это сделает всплывающую подсказку похожим на пузырь речи.'
+              }
+            </div>
+          ) : (
+            <div className={styles['title']}>{title}</div>
+          )}
         </div>
       </button>
       {hasIconRight && (

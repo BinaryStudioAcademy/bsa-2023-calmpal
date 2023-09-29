@@ -3,7 +3,6 @@
 }
 
 .item {
-  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -84,27 +83,41 @@
   word-break: break-word;
 }
 
-.title::after {
+.tooltip::before {
+  content: "";
+  position: absolute;
+  top: 95%;
+  left: 40%;
+  z-index: 299;
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent var(--blue-300) transparent;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.tooltip::after {
   content: attr(data-tooltip);
   position: absolute;
-  top: 0;
-  left: 60%;
+  top: 110%;
+  left: 20%;
   z-index: 300;
   display: block;
-  min-width: 200px;
+  min-width: 65px;
+  max-width: 225px;
   padding: 3px 10px;
-  color: var(--gray-400);
+  color: var(--white);
   font-size: 12px;
-  background: var(--violet-100);
+  background: var(--blue-300);
   border-radius: 8px;
   box-shadow: 0 4px 20px 0 var(--white-alpha-20);
-  transform: translate(-50%);
   opacity: 0;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s ease;
   pointer-events: none;
 }
 
-.title:hover::after {
+.tooltip:hover::after,
+.tooltip:hover::before {
   opacity: 1;
 }
 
@@ -117,10 +130,19 @@
   .no-image {
     padding-left: 20px;
   }
+
+  .tooltip::after {
+    left: 0;
+  }
 }
 
 @media (width < 768px) {
   .no-image {
     padding-left: 20px;
+  }
+
+  .tooltip::after {
+    left: 20%;
+    max-width: 500px;
   }
 }
