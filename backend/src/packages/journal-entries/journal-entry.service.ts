@@ -80,7 +80,7 @@ class JournalEntryService implements Service {
     title,
     text,
   }: JournalEntryUpdateRequestDto): Promise<JournalEntryGetAllItemResponseDto> {
-    if (!Number(id)) {
+    if (!id) {
       throw new JournalError({
         status: HTTPCode.BAD_REQUEST,
         message: ExceptionMessage.JOURNAL_NOT_FOUND,
@@ -107,7 +107,7 @@ class JournalEntryService implements Service {
     id: number;
     user: UserAuthResponseDto;
   }): ReturnType<Service['delete']> {
-    if (!Number(payload.id)) {
+    if (!payload.id) {
       throw new JournalError({
         status: HTTPCode.BAD_REQUEST,
         message: ExceptionMessage.JOURNAL_NOT_FOUND,

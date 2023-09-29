@@ -168,7 +168,7 @@ class ChatService implements Service {
     id: number;
     userId: number;
   }): Promise<boolean> {
-    if (!Number(id)) {
+    if (!id) {
       throw new ChatError({
         status: HTTPCode.BAD_REQUEST,
         message: ExceptionMessage.CHAT_NOT_FOUND,

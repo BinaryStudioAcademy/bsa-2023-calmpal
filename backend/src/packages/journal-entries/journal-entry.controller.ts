@@ -123,7 +123,7 @@ class JournalEntryController extends BaseController {
         return this.update(
           options as APIHandlerOptions<{
             user: UserAuthResponseDto;
-            params: { id: number };
+            params: { id: string };
             body: JournalEntryCreateRequestDto;
           }>,
         );
@@ -137,7 +137,7 @@ class JournalEntryController extends BaseController {
         return this.delete(
           options as APIHandlerOptions<{
             user: UserAuthResponseDto;
-            params: { id: number };
+            params: { id: string };
           }>,
         );
       },
@@ -344,7 +344,7 @@ class JournalEntryController extends BaseController {
 
   private async update(
     options: APIHandlerOptions<{
-      params: { id: number };
+      params: { id: string };
       user: UserAuthResponseDto;
       body: JournalEntryCreateRequestDto;
     }>,
@@ -358,7 +358,7 @@ class JournalEntryController extends BaseController {
     return {
       status: HTTPCode.OK,
       payload: await this.journalEntryService.update({
-        id,
+        id: Number(id),
         userId,
         text,
         title,
@@ -410,13 +410,13 @@ class JournalEntryController extends BaseController {
   private async delete(
     options: APIHandlerOptions<{
       user: UserAuthResponseDto;
-      params: { id: number };
+      params: { id: string };
     }>,
   ): Promise<APIHandlerResponse> {
     const { id } = options.params;
 
     const isDeleted = await this.journalEntryService.delete({
-      id,
+      id: Number(id),
       user: options.user,
     });
 
