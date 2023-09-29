@@ -74,7 +74,7 @@ const DeleteAccountForm: React.FC<Properties> = ({ onNext, onClose }) => {
                 label={checkbox.label}
                 isChecked={checkedBoxes.includes(checkbox.label)}
                 onChange={handleCheckboxChange(checkbox.label)}
-                isDefaultStyleDisabled
+                style="secondary"
               />
             </div>
           );
