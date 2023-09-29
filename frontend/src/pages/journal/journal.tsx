@@ -12,8 +12,7 @@ import {
 } from '#libs/hooks/hooks.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
-import * as journalSidebarJs from './components/journal-sidebar/journal-sidebar.js';
-import { Note } from './components/note/note.js';
+import { JournalSidebar, Note } from './components/components.js';
 import styles from './styles.module.scss';
 
 const Journal: React.FC = () => {
@@ -41,7 +40,7 @@ const Journal: React.FC = () => {
 
   return (
     <>
-      <journalSidebarJs.JournalSidebar
+      <JournalSidebar
         isSidebarShown={isSidebarShown}
         onSetIsSidebarShow={setIsSidebarShow}
         filter={filter}
