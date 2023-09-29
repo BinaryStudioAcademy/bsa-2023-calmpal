@@ -14,8 +14,15 @@ import {
   userSignUpValidationSchema,
 } from '#packages/users/users.js';
 
+import { type UserService } from '../users/users.js';
 import { type AuthService } from './auth.service.js';
 import { AuthApiPath } from './libs/enums/enums.js';
+
+type Constructor = {
+  logger: Logger;
+  authService: AuthService;
+  userService: UserService;
+};
 
 /**
  * @swagger
@@ -58,11 +65,13 @@ import { AuthApiPath } from './libs/enums/enums.js';
  */
 class AuthController extends BaseController {
   private authService: AuthService;
+  private userService: UserService;
 
-  public constructor(logger: Logger, authService: AuthService) {
+  public constructor({ logger, authService, userService }: Constructor) {
     super(logger, APIPath.AUTH);
 
     this.authService = authService;
+    this.userService = userService;
 
     this.addRoute({
       path: AuthApiPath.SIGN_UP,
@@ -97,6 +106,17 @@ class AuthController extends BaseController {
       method: 'GET',
       handler: (options) => {
         return this.getAuthenticatedUser(
+          options as APIHandlerOptions<{
+            user: UserAuthResponseDto;
+          }>,
+        );
+      },
+    });
+    this.addRoute({
+      path: AuthApiPath.AUTHENTICATED_USER,
+      method: 'DELETE',
+      handler: (options) => {
+        return this.deleteAuthenticatedUser(
           options as APIHandlerOptions<{
             user: UserAuthResponseDto;
           }>,
@@ -243,6 +263,47 @@ class AuthController extends BaseController {
     return {
       status: HTTPCode.OK,
       payload: await this.authService.getAuthenticatedUser(options.user.id),
+    };
+  }
+
+  /**
+   * @swagger
+   * /{id}:
+   *   delete:
+   *     description: Delete an authenticated user by their ID
+   *     parameters:
+   *       - name: id
+   *         in: path
+   *         description: User ID to delete
+   *         required: true
+   *         schema:
+   *           type: integer
+   *           minimum: 1
+   *     responses:
+   *       200:
+   *         description: "Successful deletion. Returns 'true' if the user was deleted successfully."
+   *         content:
+   *           application/json:
+   *           schema:
+   *             type: boolean
+   *       404:
+   *          description: "User not found. Returns 'false' if the user could not be found."
+   *         content:
+   *           application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/Error'
+   *           example:
+   *            message: "User with these credentials was not found."
+   *            errorType: "USERS"
+   */
+  private async deleteAuthenticatedUser(
+    options: APIHandlerOptions<{
+      user: UserAuthResponseDto;
+    }>,
+  ): Promise<APIHandlerResponse> {
+    return {
+      status: HTTPCode.OK,
+      payload: await this.userService.delete(options.user.id),
     };
   }
 }

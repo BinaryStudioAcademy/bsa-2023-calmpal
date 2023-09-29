@@ -27,6 +27,7 @@ class UserRepository implements Repository {
       .query()
       .modify('withoutPassword')
       .withGraphJoined(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
+      .whereNull('deletedAt')
       .findById(id)
       .castTo<UserCommonQueryResponse | undefined>()
       .execute();
@@ -48,6 +49,7 @@ class UserRepository implements Repository {
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
       subscriptionId: user.details?.subscriptionId ?? null,
       subscriptionEndDate,
+      deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
     });
   }
 
@@ -58,6 +60,7 @@ class UserRepository implements Repository {
       .query()
       .modify('withoutPassword')
       .withGraphJoined(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
+      .whereNull('deletedAt')
       .withGraphJoined(UsersRelation.ROLES)
       .findOne({ key })
       .castTo<UserCommonQueryResponse | undefined>()
@@ -78,6 +81,7 @@ class UserRepository implements Repository {
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
       subscriptionId: user.details?.subscriptionId ?? null,
       subscriptionEndDate,
     });
@@ -117,6 +121,7 @@ class UserRepository implements Repository {
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
       subscriptionId: user.details?.subscriptionId ?? null,
       subscriptionEndDate,
     });
@@ -133,11 +138,12 @@ class UserRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public delete(): ReturnType<Repository['delete']> {
-    //TODO
-    const deletedCount = 0;
-
-    return Promise.resolve(deletedCount);
+  public delete(id: number): Promise<number> {
+    return this.userModel
+      .query()
+      .patch({ deletedAt: new Date().toISOString() })
+      .where({ id, deletedAt: null })
+      .execute();
   }
 
   public async findByEmail(email: string): Promise<UserEntity | null> {
@@ -163,6 +169,7 @@ class UserRepository implements Repository {
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
       subscriptionId: user.details?.subscriptionId ?? null,
       subscriptionEndDate,
     });
@@ -174,6 +181,7 @@ class UserRepository implements Repository {
     const user = await this.userModel
       .query()
       .withGraphJoined(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
+      .whereNull('deletedAt')
       .findOne({ email })
       .castTo<UserWithPasswordQueryResponse | undefined>();
     if (!user) {
@@ -192,6 +200,7 @@ class UserRepository implements Repository {
       createdAt: new Date(user.createdAt),
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
+      deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
       subscriptionId: user.details?.subscriptionId ?? null,
       subscriptionEndDate,
@@ -227,6 +236,7 @@ class UserRepository implements Repository {
       updatedAt: new Date(user.updatedAt),
       fullName: user.details?.fullName ?? '',
       isSurveyCompleted: user.details?.isSurveyCompleted ?? false,
+      deletedAt: user.deletedAt ? new Date(user.deletedAt) : null,
       subscriptionId: user.details?.subscriptionId ?? null,
       subscriptionEndDate,
     });

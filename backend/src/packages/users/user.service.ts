@@ -1,5 +1,8 @@
+import { ExceptionMessage } from '#libs/enums/enums.js';
+import { UsersError } from '#libs/exceptions/exceptions.js';
 import { type Config } from '#libs/packages/config/config.js';
 import { type Encrypt } from '#libs/packages/encrypt/encrypt.js';
+import { HTTPCode } from '#libs/packages/http/http.js';
 import { type JWTService } from '#libs/packages/jwt/jwt.service.js';
 import { type UserRoleKey } from '#libs/packages/open-ai/libs/enums/enums.js';
 import { type Service, type ValueOf } from '#libs/types/types.js';
@@ -97,8 +100,19 @@ class UserService implements Service {
     return Promise.resolve(null);
   }
 
-  public delete(): ReturnType<Service['delete']> {
-    return Promise.resolve(true);
+  public async delete(id: number): Promise<boolean> {
+    const userToDelete = await this.userRepository.findById(id);
+
+    if (!userToDelete) {
+      throw new UsersError({
+        status: HTTPCode.NOT_FOUND,
+        message: ExceptionMessage.USER_NOT_FOUND,
+      });
+    }
+
+    const deletedCount = await this.userRepository.delete(id);
+
+    return Boolean(deletedCount);
   }
 
   public async findByEmail(

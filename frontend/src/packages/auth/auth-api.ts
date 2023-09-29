@@ -71,6 +71,20 @@ class AuthApi extends BaseHttpApi {
     return await response.json<UserAuthResponseDto>();
   }
 
+  public async deleteAuthenticatedUser(id: number): Promise<boolean> {
+    const response = await this.load(
+      this.getFullEndpoint(AuthApiPath.AUTHENTICATED_USER, {
+        id: id.toString(),
+      }),
+      {
+        method: 'DELETE',
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<boolean>();
+  }
+
   public async createUserSurvey(
     payload: SurveyRequestDto,
   ): Promise<SurveyGetAllItemResponseDto> {
