@@ -51,9 +51,11 @@ class FileService implements Service {
   ): Promise<FileGetAllItemResponseDto> {
     const fileExtensionIndex = 1;
 
-    const fileKey = `${crypto.randomUUID()}.${
+    const customName = `${crypto.randomUUID()}.${
       payload.contentType.split('/')[fileExtensionIndex]
     }`;
+
+    const fileKey = payload.name ?? customName;
 
     await this.s3.sendFile({
       fileKey,
