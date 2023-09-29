@@ -10,8 +10,8 @@ import { name as sliceName } from './users.slice.js';
 const deleteUser = createAsyncThunk<boolean, number, AsyncThunkConfig>(
   `${sliceName}/deleteUser`,
   async (id, { extra, dispatch }) => {
-    const { usersApi, storage } = extra;
-    const isDeleted = await usersApi.deleteUser(id);
+    const { authApi, storage } = extra;
+    const isDeleted = await authApi.deleteAuthenticatedUser(id);
 
     await storage.drop(StorageKey.TOKEN);
 

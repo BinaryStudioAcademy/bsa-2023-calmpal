@@ -18,7 +18,6 @@ import { chatApi } from '#packages/chats/chats.js';
 import { journalApi } from '#packages/journal/journal.js';
 import { meditationApi } from '#packages/meditation/meditation.js';
 import { subscriptionApi } from '#packages/subscriptions/subscriptions.js';
-import { usersApi } from '#packages/users/libs/api/users.js';
 import { reducer as appReducer } from '#slices/app/app.js';
 import { reducer as authReducer } from '#slices/auth/auth.js';
 import { reducer as chatsReducer } from '#slices/chats/chats.js';
@@ -48,7 +47,6 @@ type ExtraArguments = {
   notification: typeof notification;
   chatMessagesApi: typeof chatMessagesApi;
   subscriptionApi: typeof subscriptionApi;
-  usersApi: typeof usersApi;
 };
 
 class Store {
@@ -96,7 +94,6 @@ class Store {
       notification,
       chatMessagesApi,
       subscriptionApi,
-      usersApi,
     };
   }
 }
