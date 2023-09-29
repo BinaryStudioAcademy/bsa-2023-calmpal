@@ -1,6 +1,12 @@
 import { Button, Icon } from '#libs/components/components.js';
-import { AppRoute, IconColor } from '#libs/enums/enums.js';
-import { useAppDispatch, useCallback } from '#libs/hooks/hooks.js';
+import { AppRoute, IconColor, TimeFormat } from '#libs/enums/enums.js';
+import { getFormattedDate } from '#libs/helpers/helpers.js';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useCallback,
+} from '#libs/hooks/hooks.js';
+import { SUBSCRIPTION_PRICE } from '#packages/subscriptions/subscriptions.js';
 import { actions as appActions } from '#slices/app/app.js';
 
 import { PLAN_BENEFITS } from '../../libs/constants.js';
@@ -12,6 +18,16 @@ const dialogStyles = {
 
 const SubscriptionManagementDialog: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { subscriptionEndDate } = useAppSelector(({ auth }) => {
+    return {
+      subscriptionEndDate: auth.authenticatedUser?.subscriptionEndDate as Date,
+    };
+  });
+
+  const formattedDate = getFormattedDate(
+    new Date(subscriptionEndDate),
+    TimeFormat.D_MMM_YYYY,
+  );
 
   const handleSubscribe = useCallback(() => {
     dispatch(appActions.navigate(AppRoute.PROFILE_SUBSCRIPTION_CHECKOUT));
@@ -27,11 +43,11 @@ const SubscriptionManagementDialog: React.FC = () => {
           <div className={styles['meta-wrapper']}>
             <div>
               <p className={dialogStyles.sectionTitle}>Plan renews on</p>
-              <p className={styles['meta']}>30 Sept 2023</p>
+              <p className={styles['meta']}>{formattedDate}</p>
             </div>
             <div>
               <p className={dialogStyles.sectionTitle}>Payment</p>
-              <p className={styles['meta']}>$7.5 / month</p>
+              <p className={styles['meta']}>${SUBSCRIPTION_PRICE} / month</p>
             </div>
           </div>
         </div>
