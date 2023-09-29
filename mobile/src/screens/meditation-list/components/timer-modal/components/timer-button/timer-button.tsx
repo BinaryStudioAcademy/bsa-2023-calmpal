@@ -10,7 +10,7 @@ type Properties = {
   isActive: boolean;
   duration: number;
   unit: string;
-  setDuration: (duration: number) => void;
+  onSetDuration: (duration: number) => void;
   onChange: (duration: number) => void;
 };
 
@@ -18,13 +18,13 @@ const TimerButton: React.FC<Properties> = ({
   isActive,
   duration,
   unit,
-  setDuration,
+  onSetDuration,
   onChange,
 }) => {
   const handleChange = useCallback(() => {
-    setDuration(duration);
+    onSetDuration(duration);
     onChange(duration);
-  }, [onChange, duration, setDuration]);
+  }, [onChange, duration, onSetDuration]);
 
   return (
     <TouchableOpacity

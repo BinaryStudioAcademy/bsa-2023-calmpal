@@ -62,7 +62,7 @@ const TimerModal: React.FC<Properties> = ({
                   key={duration}
                   isActive={value === duration}
                   onChange={onChange}
-                  setDuration={setDuration}
+                  onSetDuration={setDuration}
                   duration={duration}
                   unit={DURATION_UNIT.MINUTES}
                 />
