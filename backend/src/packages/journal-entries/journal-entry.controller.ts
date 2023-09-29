@@ -161,6 +161,7 @@ class JournalEntryController extends BaseController {
    *                  type: string
    *                text:
    *                  type: string
+   *                  example: "<p>Put your text here</p>"
    *      security:
    *       - bearerAuth: []
    *      responses:
@@ -307,6 +308,7 @@ class JournalEntryController extends BaseController {
    *                  type: string
    *                text:
    *                  type: string
+   *                  example: "<p>Put your text here</p>"
    *      responses:
    *        200:
    *          description: Successful operation
