@@ -15,7 +15,7 @@ import {
 } from '#libs/packages/player/player';
 
 import { TimerButton } from './components/components';
-import { DEFAULT_DURATION } from './libs/constants';
+import { DEFAULT_DURATION_VALUE } from './libs/constants';
 import { styles } from './styles';
 
 type DurationKey = keyof typeof MEDITATION_DURATION;
@@ -32,7 +32,7 @@ const TimerModal: React.FC<Properties> = ({
   startMeditation,
 }) => {
   const { control } = useAppForm({
-    defaultValues: { meditationDuration: DEFAULT_DURATION },
+    defaultValues: DEFAULT_DURATION_VALUE,
   });
 
   const {
