@@ -15,15 +15,13 @@ const RichTextEditor: React.FC<Properties> = ({
   placeholder,
 }) => {
   return (
-    <>
-      <RichEditor
-        onChange={onChange}
-        initialContentHTML={initialContent}
-        editorStyle={styles.editor}
-        placeholder={placeholder}
-        androidLayerType="software"
-      />
-    </>
+    <RichEditor
+      onChange={onChange}
+      initialContentHTML={initialContent}
+      editorStyle={styles.editor}
+      placeholder={placeholder}
+      androidLayerType="software"
+    />
   );
 };
 

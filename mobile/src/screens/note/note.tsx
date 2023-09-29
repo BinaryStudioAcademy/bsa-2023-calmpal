@@ -10,6 +10,7 @@ import {
   TextInput,
   View,
 } from '#libs/components/components';
+import { DEFAULT_NOTE_PAYLOAD } from '#libs/constants/constants';
 import { debounce, sanitizeInput } from '#libs/helpers/helpers';
 import {
   useAppDispatch,
@@ -21,7 +22,6 @@ import {
 } from '#libs/hooks/hooks';
 import { type JournalNavigationParameterList } from '#libs/types/types';
 import { type JournalEntryCreateRequestDto } from '#packages/journal/journal';
-import { DEFAULT_NOTE_PAYLOAD } from '#screens/journal/libs/constants/constants';
 import { actions as journalActions } from '#slices/journal/journal';
 
 import {

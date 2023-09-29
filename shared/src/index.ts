@@ -77,6 +77,7 @@ export {
 } from './packages/files/files.js';
 export {
   createJournalEntryValidationSchema,
+  DEFAULT_NOTE_PAYLOAD,
   JournalApiPath,
   type JournalEntryCreateRequestDto,
   type JournalEntryDeleteResponseDto,

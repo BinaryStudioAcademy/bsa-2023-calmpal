@@ -11,6 +11,7 @@ import {
   ScrollView,
   View,
 } from '#libs/components/components';
+import { DEFAULT_NOTE_PAYLOAD } from '#libs/constants/constants';
 import { AppColor, JournalScreenName } from '#libs/enums/enums';
 import {
   useAppDispatch,
@@ -23,10 +24,7 @@ import {
 import { type JournalNavigationParameterList } from '#libs/types/types';
 import { actions as journalActions } from '#slices/journal/journal';
 
-import {
-  DEFAULT_NOTE_PAYLOAD,
-  INCREMENT_DECREMENT_STEP,
-} from './libs/constants/constants';
+import { INCREMENT_DECREMENT_STEP } from './libs/constants/constants';
 import { styles } from './styles';
 
 const Journal: React.FC = () => {
