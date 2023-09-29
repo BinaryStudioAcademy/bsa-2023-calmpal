@@ -1,5 +1,4 @@
-import { type CheckboxStyle } from '#libs/types/types.js';
-
+import { type CheckboxStyle } from './libs/types/types.js';
 import styles from './styles.module.scss';
 
 type Properties = {
