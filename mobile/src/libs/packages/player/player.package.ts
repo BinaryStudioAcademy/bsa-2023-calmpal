@@ -39,7 +39,7 @@ class Player {
     await TrackPlayer.pause();
   };
 
-  public startPlayling = async (): Promise<void> => {
+  public startPlaying = async (): Promise<void> => {
     await TrackPlayer.play();
   };
 

@@ -70,7 +70,7 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
 
   useEffect(() => {
     const handleAppStateChange = (nextAppState: string): void => {
-      void player.startPlayling();
+      void player.startPlaying();
 
       if (nextAppState === AppStatus.Background) {
         void player.stopPlaying();
