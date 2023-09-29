@@ -1,7 +1,7 @@
 import meditationListPlaceholder from '#assets/img/meditation-list-placeholder.jpg';
 import { Button, Loader, Modal } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
-import { getFormattedTime } from '#libs/helpers/helpers.js';
+import { getFormattedTime, getValidClassNames } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useCallback,
@@ -69,7 +69,16 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
       />
       <div className={styles['content']}>
         <div className={styles['info']}>
-          <h1 className={styles['title']}>{meditationEntry.name}</h1>
+          <h1
+            className={getValidClassNames(styles['title'], styles['tooltip'])}
+            data-tooltip={
+              'Чтобы создать стрелку, которая должна появиться с определенной стороны подсказки, добавьте "пустое" содержимое после подсказки, с классом псевдо-элемента ::after вместе со свойством content . Сама стрелка создается с использованием границ. Это сделает всплывающую подсказку похожим на пузырь речи.'
+            }
+          >
+            {
+              'Чтобы создать стрелку, которая должна появиться с определенной стороны подсказки, добавьте "пустое" содержимое после подсказки, с классом псевдо-элемента ::after вместе со свойством content . Сама стрелка создается с использованием границ. Это сделает всплывающую подсказку похожим на пузырь речи.'
+            }
+          </h1>
           <span className={styles['duration']}>
             {audioDuration
               ? `${getFormattedTime(audioDuration, false)} min`
