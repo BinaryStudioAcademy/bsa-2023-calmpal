@@ -7,5 +7,6 @@ declare module 'fastify' {
   interface FastifyRequest {
     user?: UserAuthResponseDto;
     fileBuffer?: FileUploadRequestDto;
+    name: string;
   }
 }
