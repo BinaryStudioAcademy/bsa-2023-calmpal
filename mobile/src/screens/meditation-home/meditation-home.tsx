@@ -9,12 +9,11 @@ import {
   View,
 } from '#libs/components/components';
 import { MeditationScreenName } from '#libs/enums/enums';
-import { useNavigation, useSearch } from '#libs/hooks/hooks';
+import { useCallback, useNavigation, useSearch } from '#libs/hooks/hooks';
 import { type MeditationNavigationParameterList } from '#libs/types/types';
 
+import { NAVIGATION_ITEMS } from './libs/constants/constants';
 import { styles } from './styles';
-
-const MOCKED_DATA = [{ id: 1, name: 'Meditation' }];
 
 const MeditationHome: React.FC = () => {
   const navigation =
@@ -22,14 +21,17 @@ const MeditationHome: React.FC = () => {
       NativeStackNavigationProp<MeditationNavigationParameterList>
     >();
   const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
-    MOCKED_DATA,
+    NAVIGATION_ITEMS,
     'name',
   );
-  const handleSelectMeditation = (title: string): void => {
-    navigation.navigate(MeditationScreenName.MEDITATION_LIST, {
-      title,
-    });
-  };
+  const handleSelectMeditation = useCallback(
+    (title: string) => {
+      return () => {
+        navigation.navigate(MeditationScreenName.MEDITATION_LIST, { title });
+      };
+    },
+    [navigation],
+  );
 
   return (
     <LinearGradient>
@@ -43,9 +45,7 @@ const MeditationHome: React.FC = () => {
             return (
               <Card
                 title={item.name}
-                onPress={(): void => {
-                  handleSelectMeditation(item.name);
-                }}
+                onPress={handleSelectMeditation(item.name)}
                 key={item.id}
               />
             );

@@ -37,15 +37,15 @@ type RouteParameters = {
 };
 
 const MeditationList: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const route = useAppRoute();
-  const { title } = route.params as RouteParameters;
-
   const { meditationEntries } = useAppSelector(({ meditation }) => {
     return {
       meditationEntries: meditation.meditationEntries,
     };
   });
+
+  const dispatch = useAppDispatch();
+  const route = useAppRoute();
+  const { title } = route.params as RouteParameters;
 
   const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
     meditationEntries,

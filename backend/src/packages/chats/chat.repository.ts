@@ -113,11 +113,13 @@ class ChatRepository implements Repository {
   public async update({
     chat,
     imageUrl,
+    name,
   }: {
     chat: ChatGetAllItemResponseDto;
     imageUrl: string;
+    name: string;
   }): Promise<ChatEntity> {
-    const { name, id } = chat;
+    const { id } = chat;
 
     const updatedChat = await this.chatModel
       .query()
