@@ -1155,7 +1155,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"title\": \"New title\",\r\n  \"text\": \"New text\"\r\n}",
+              "raw": "{\r\n  \"title\": \"New title\",\r\n  \"text\": \"<p>New text</p>\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
