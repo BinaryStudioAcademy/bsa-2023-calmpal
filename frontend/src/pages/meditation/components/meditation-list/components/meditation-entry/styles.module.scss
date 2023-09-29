@@ -48,7 +48,7 @@
   content: "";
   position: absolute;
   top: 83%;
-  left: 40%;
+  left: 30%;
   z-index: 299;
   border-width: 8px;
   border-style: solid;
@@ -115,6 +115,11 @@
   .tooltip::after {
     left: 0;
   }
+
+  .tooltip::before {
+    top: 82%;
+    left: 5%;
+  }
 }
 
 @media (width < 768px) {
@@ -129,5 +134,15 @@
 
   .background-image {
     width: 95px;
+  }
+
+  .tooltip::before {
+    top: 85%;
+    left: 15%;
+  }
+
+  .tooltip::after {
+    top: 95%;
+    left: 10%;
   }
 }
