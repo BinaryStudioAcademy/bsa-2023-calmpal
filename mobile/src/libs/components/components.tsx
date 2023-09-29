@@ -20,6 +20,7 @@ export { Toast } from './toast/toast';
 export {
   Image,
   Pressable,
+  Modal as ReactModal,
   ScrollView,
   Text,
   TextInput,

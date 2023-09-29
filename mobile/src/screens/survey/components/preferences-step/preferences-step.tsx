@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Button, Input, ScrollView } from '#libs/components/components';
+import { AppColor } from '#libs/enums/enums';
 import { useAppForm, useCallback, useFormController } from '#libs/hooks/hooks';
 import {
   getSurveyCategories,
@@ -93,6 +94,7 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
         onPress={handleFormSubmit}
         isDisabled={!isValid}
         type="outlined"
+        color={AppColor.WHITE}
       />
     </ScrollView>
   );

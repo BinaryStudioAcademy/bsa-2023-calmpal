@@ -44,15 +44,16 @@ const styles = StyleSheet.create({
   },
   buttonRounded: {
     backgroundColor: AppColor.WHITE,
-    borderRadius: 30,
+    borderRadius: 27,
     padding: 15,
     height: 55,
     width: 55,
     shadowColor: AppColor.BLUE_200,
-    elevation: 20,
+    elevation: 5,
   },
   buttonTransparent: {
     backgroundColor: 'transparent',
+    gap: 0,
   },
   visuallyCenteredButton: {
     paddingLeft: 18,
@@ -62,8 +63,15 @@ const styles = StyleSheet.create({
   },
   buttonModal: {
     borderRadius: 8,
-    marginHorizontal: 10,
     paddingHorizontal: 20,
+  },
+  buttonTimer: {
+    borderRadius: 40,
+    height: 52,
+    backgroundColor: AppColor.BLUE_300,
+  },
+  labelTimer: {
+    color: AppColor.WHITE,
   },
 });
 

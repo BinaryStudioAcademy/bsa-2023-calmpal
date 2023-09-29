@@ -2,18 +2,13 @@ import { Icon } from '#libs/components/components.js';
 import { Input } from '#libs/components/input/input.js';
 import { IconColor } from '#libs/enums/enums.js';
 import {
-  useAppDispatch,
   useAppForm,
   useCallback,
   useEffect,
   useParams,
 } from '#libs/hooks/hooks.js';
-import {
-  CHAT_INPUT_DEFAULT_VALUES,
-  CHAT_RESPONSE_IS_LOADING_MESSAGE,
-} from '#pages/chat/libs/constants/constants.js';
+import { CHAT_INPUT_DEFAULT_VALUES } from '#pages/chat/libs/constants/constants.js';
 import { type ChatInputValue } from '#pages/chat/libs/types/types.js';
-import { appActions } from '#slices/app/app-notification.js';
 
 import styles from './styles.module.scss';
 
@@ -32,7 +27,6 @@ const ChatFooter: React.FC<Properties> = ({
       defaultValues: CHAT_INPUT_DEFAULT_VALUES,
       mode: 'onSubmit',
     });
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     reset();
@@ -40,21 +34,10 @@ const ChatFooter: React.FC<Properties> = ({
 
   const onSubmit = useCallback(
     ({ message }: ChatInputValue): void => {
-      if (isChatbotReplyLoading) {
-        void dispatch(
-          appActions.notify({
-            type: 'info',
-            message: CHAT_RESPONSE_IS_LOADING_MESSAGE,
-          }),
-        );
-
-        return;
-      }
-
       onSend({ message });
       reset();
     },
-    [onSend, reset, isChatbotReplyLoading, dispatch],
+    [onSend, reset],
   );
 
   const messageValue = watch('message');
@@ -67,6 +50,7 @@ const ChatFooter: React.FC<Properties> = ({
   );
 
   const isMessageEmpty = messageValue.trim() === '';
+  const isDisabled = isMessageEmpty || isChatbotReplyLoading;
 
   return (
     <footer className={styles['chat-footer']}>
@@ -82,7 +66,7 @@ const ChatFooter: React.FC<Properties> = ({
         <button
           type="submit"
           className={styles['send-button']}
-          disabled={isMessageEmpty}
+          disabled={isDisabled}
         >
           <span className="visually-hidden">Send message</span>
           <Icon name="send" color={IconColor.BLUE} width={24} height={24} />

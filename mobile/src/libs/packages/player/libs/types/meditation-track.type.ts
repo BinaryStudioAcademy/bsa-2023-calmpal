@@ -1,4 +1,3 @@
-//TODO: delete this type when backend part is ready
 type Track = {
   id: string;
   url: string;

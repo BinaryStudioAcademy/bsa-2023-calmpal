@@ -37,10 +37,9 @@ const Card: React.FC<Properties> = ({
 }) => {
   const renderRightSwipeActions = (): React.ReactNode => {
     return (
-      Boolean(iconRight) &&
-      iconRight && (
+      Boolean(iconRight) && (
         <Pressable style={styles.deleteContainer} onPress={onIconPress}>
-          <Icon name={iconRight} color={AppColor.BLUE_300} />
+          <Icon name={iconRight as IconName} color={AppColor.BLUE_300} />
         </Pressable>
       )
     );
