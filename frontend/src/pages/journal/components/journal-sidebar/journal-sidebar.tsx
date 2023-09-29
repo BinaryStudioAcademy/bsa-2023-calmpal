@@ -7,12 +7,14 @@ import {
   SidebarBody,
   SidebarHeader,
 } from '#libs/components/components.js';
+import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants.js';
 import { AppRoute, IconColor } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
   useCallback,
   useEffect,
+  useNavigate,
   useRef,
   useState,
 } from '#libs/hooks/hooks.js';
@@ -20,7 +22,6 @@ import { type ValueOf } from '#libs/types/types.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
 import { DeleteJournalModal } from '../delete-journal-modal/delete-journal-modal.js';
-import { DEFAULT_NOTE_PAYLOAD } from '../note/components/note-input/libs/constants/constants.js';
 import styles from './styles.module.scss';
 
 type Properties = {
@@ -36,6 +37,7 @@ const JournalSidebar: React.FC<Properties> = ({
   filter,
   onSetFilter,
 }) => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [chatToDelete, setChatToDelete] = useState<null | number>(null);
   const dialogReference = useRef<HTMLDialogElement | null>(null);
@@ -51,13 +53,10 @@ const JournalSidebar: React.FC<Properties> = ({
     },
   );
   const handleCreateJournalEntry = useCallback(() => {
-    void dispatch(
-      journalActions.createJournalEntry({
-        title: DEFAULT_NOTE_PAYLOAD.title,
-        text: DEFAULT_NOTE_PAYLOAD.text,
-      }),
-    );
-  }, [dispatch]);
+    dispatch(journalActions.setSelectedJournalEntry(null));
+    navigate(AppRoute.JOURNAL);
+    onSetIsSidebarShow(false);
+  }, [onSetIsSidebarShow, dispatch, navigate]);
 
   const handleIconClick = useCallback(
     (id: number) => {
@@ -105,25 +104,31 @@ const JournalSidebar: React.FC<Properties> = ({
             <Search onValueChange={onSetFilter} defaultValue={filter} />
           </div>
           <div className={styles['journal-entry-list']}>
-            {allJournalEntries.map((journalEntry) => {
-              const noteLink = AppRoute.JOURNAL_$ID.replace(
-                ':id',
-                String(journalEntry.id),
-              ) as ValueOf<typeof AppRoute>;
+            {allJournalEntries.length > EMPTY_ARRAY_LENGTH ? (
+              allJournalEntries.map((journalEntry) => {
+                const noteLink = AppRoute.JOURNAL_$ID.replace(
+                  ':id',
+                  String(journalEntry.id),
+                ) as ValueOf<typeof AppRoute>;
 
-              return (
-                <Link key={journalEntry.id} to={noteLink}>
-                  <Card
-                    title={journalEntry.title}
-                    onClick={handleSelectJournalEntry(journalEntry.id)}
-                    isActive={selectedJournalEntry?.id === journalEntry.id}
-                    iconRight="trash-box"
-                    onIconClick={handleIconClick(journalEntry.id)}
-                    iconColor={IconColor.LIGHT_BLUE}
-                  />
-                </Link>
-              );
-            })}
+                return (
+                  <Link key={journalEntry.id} to={noteLink}>
+                    <Card
+                      title={journalEntry.title}
+                      onClick={handleSelectJournalEntry(journalEntry.id)}
+                      isActive={selectedJournalEntry?.id === journalEntry.id}
+                      iconRight="trash-box"
+                      onIconClick={handleIconClick(journalEntry.id)}
+                      iconColor={IconColor.LIGHT_BLUE}
+                    />
+                  </Link>
+                );
+              })
+            ) : (
+              <span className={styles['no-card']}>
+                Create notes to use them
+              </span>
+            )}
           </div>
         </SidebarBody>
       </Sidebar>

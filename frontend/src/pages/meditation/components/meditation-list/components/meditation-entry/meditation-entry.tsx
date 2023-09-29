@@ -72,7 +72,7 @@ const MeditationEntry: React.FC<Properties> = ({ meditationEntry }) => {
           <h1 className={styles['title']}>{meditationEntry.name}</h1>
           <span className={styles['duration']}>
             {audioDuration
-              ? `${getFormattedTime(audioDuration)} min`
+              ? `${getFormattedTime(audioDuration, false)} min`
               : 'Loading...'}
           </span>
         </div>

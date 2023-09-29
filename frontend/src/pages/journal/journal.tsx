@@ -1,5 +1,5 @@
-import { BackButtonWrapper } from '#libs/components/components.js';
-import { AppRoute } from '#libs/enums/enums.js';
+import { BackButtonWrapper, Loader } from '#libs/components/components.js';
+import { AppRoute, DataStatus } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
@@ -24,18 +24,21 @@ const Journal: React.FC = () => {
   const { isSidebarShown, setIsSidebarShow } = useSidebarState();
   const { filter, setFilter } = useSearch();
 
-  const { selectedJournalEntry } = useAppSelector(({ journal }) => {
+  const { journalEntriesDataStatus } = useAppSelector(({ journal }) => {
     return {
-      selectedJournalEntry: journal.selectedJournalEntry,
+      journalEntriesDataStatus: journal.journalEntriesDataStatus,
     };
   });
 
-  const hasSelectedNote = Boolean(id) && selectedJournalEntry;
+  const isLoading =
+    journalEntriesDataStatus === DataStatus.IDLE ||
+    journalEntriesDataStatus === DataStatus.PENDING;
 
   const handleBackButtonPress = useCallback(() => {
+    dispatch(journalActions.setSelectedJournalEntry(null));
     navigate(AppRoute.JOURNAL);
     setIsSidebarShow(true);
-  }, [setIsSidebarShow, navigate]);
+  }, [setIsSidebarShow, dispatch, navigate]);
 
   const handleGetSelectedNote = useCallback(async () => {
     await dispatch(journalActions.getAllJournalEntries(filter));
@@ -62,7 +65,9 @@ const Journal: React.FC = () => {
         )}
       >
         <BackButtonWrapper onGoBack={handleBackButtonPress} />
-        {hasSelectedNote && (
+        {isLoading ? (
+          <Loader />
+        ) : (
           <div className={styles['note-wrapper']}>
             <Note key={id} />
           </div>
