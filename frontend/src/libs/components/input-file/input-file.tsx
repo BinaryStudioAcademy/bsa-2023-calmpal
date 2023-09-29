@@ -1,5 +1,5 @@
 import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants.js';
-import { IconColor } from '#libs/enums/enums.js';
+import { type ContentType, IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import { useCallback, useFormController } from '#libs/hooks/hooks.js';
 import {
@@ -9,6 +9,7 @@ import {
   type FormFieldPath,
   type FormFieldValues,
   type FormFieldValuesFromFieldErrors,
+  type ValueOf,
 } from '#libs/types/types.js';
 
 import { ErrorMessage, Icon } from '../components.js';
@@ -22,6 +23,7 @@ type Properties<T extends FormFieldValues> = {
   fileSizeName: string;
   label: string;
   description: string;
+  extensions?: ValueOf<typeof ContentType>[];
   onChange?: (file: File) => void;
 };
 
@@ -33,6 +35,7 @@ const InputFile = <T extends FormFieldValues>({
   fileSizeName,
   label,
   description,
+  extensions,
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController<T>({ name, control });
 
@@ -79,6 +82,7 @@ const InputFile = <T extends FormFieldValues>({
           type="file"
           className={styles['input']}
           onChange={handleFileChange}
+          accept={extensions?.join(', ')}
         />
       </div>
 

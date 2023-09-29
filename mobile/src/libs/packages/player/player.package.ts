@@ -1,8 +1,7 @@
 import TrackPlayer, { RepeatMode, type State } from 'react-native-track-player';
 
-import { type Track } from '#libs/types/types';
-
-import { TRACK_SKIP_SECONDS } from './libs/constants/constants';
+import { type Track } from './libs/types/types';
+import { TRACK_SKIP_SECONDS } from './player';
 
 class Player {
   public getProgress = (): Promise<number> => {
@@ -39,6 +38,10 @@ class Player {
     await TrackPlayer.pause();
   };
 
+  public startPlaying = async (): Promise<void> => {
+    await TrackPlayer.play();
+  };
+
   public playPause = async (isPlaying: boolean): Promise<void> => {
     await (isPlaying ? TrackPlayer.pause() : TrackPlayer.play());
   };
@@ -65,4 +68,9 @@ class Player {
 }
 
 export { Player };
-export { Event, State, useTrackPlayerEvents } from 'react-native-track-player';
+export {
+  Event,
+  State,
+  useProgress,
+  useTrackPlayerEvents,
+} from 'react-native-track-player';

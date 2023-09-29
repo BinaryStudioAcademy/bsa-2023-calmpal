@@ -1,8 +1,15 @@
 import { Icon, Link } from '#libs/components/components.js';
-import { SECOND_INDEX } from '#libs/constants/index.constant.js';
 import { IconColor } from '#libs/enums/enums.js';
-import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { useCallback, useLocation, useState } from '#libs/hooks/hooks.js';
+import {
+  checkIsSelectedRoute,
+  getValidClassNames,
+} from '#libs/helpers/helpers.js';
+import {
+  useCallback,
+  useLocation,
+  useParams,
+  useState,
+} from '#libs/hooks/hooks.js';
 import { type Route } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
@@ -12,27 +19,14 @@ type Properties = {
 };
 
 const DropdownMenu: React.FC<Properties> = ({ routes }) => {
-  const [isOpen, setOpen] = useState(false);
   const { pathname } = useLocation();
+  const routerParameters = useParams();
+  const [isOpen, setOpen] = useState(false);
   const handleDropdownToggle = useCallback((): void => {
     setOpen((previous) => {
       return !previous;
     });
   }, []);
-
-  const checkIsCurrentRoot = useCallback(
-    (currentPath: string, itemPath: string): boolean => {
-      const currentPathWithoutSlash = currentPath.slice(SECOND_INDEX);
-      const itemPathWithoutSlash = itemPath.slice(SECOND_INDEX);
-
-      return (
-        currentPath === itemPath ||
-        (currentPathWithoutSlash !== '' &&
-          itemPathWithoutSlash.startsWith(currentPathWithoutSlash))
-      );
-    },
-    [],
-  );
 
   return (
     <div className={styles['dropdown']}>
@@ -49,20 +43,27 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
         )}
       >
         {routes.map((item) => {
+          const isSelected = checkIsSelectedRoute({
+            pathname,
+            routerParameters,
+            selectedRoute: item,
+          });
+
+          const { wrapPathWith, path, icon } = item;
+
           return (
-            <div key={item.path}>
+            <div key={path}>
               <div className={styles['dropdown-item']}>
-                <Link to={item.path}>
+                <Link to={wrapPathWith?.(path) ?? path}>
                   <span
                     className={getValidClassNames(
                       styles['item'],
-                      checkIsCurrentRoot(pathname, item.path) &&
-                        styles['selected'],
+                      isSelected && styles['selected'],
                     )}
                   >
                     <span className="visually-hidden">Go to {item.name}</span>
                     <Icon
-                      name={item.icon}
+                      name={icon}
                       color={IconColor.BLUE}
                       width={24}
                       height={24}

@@ -19,6 +19,7 @@ import { ChatsApiPath } from './libs/enums/enums.js';
 import {
   type ChatCreateRequestDto,
   type EntitiesFilteringDto,
+  type UpdateChatDataRequestDto,
 } from './libs/types/types.js';
 import {
   createChatValidationSchema,
@@ -32,78 +33,78 @@ type Constructor = {
 
 /**
  * @swagger
- * components:
- *    schemas:
- *      ChatMember:
- *        type: object
- *        properties:
- *         id:
- *           type: number
- *           format: number
- *           minimum: 1
- *         userId:
- *           type: number
- *           format: number
- *           minimum: 1
- *         chatId:
- *           type: number
- *           format: number
- *           minimum: 1
- *         createdAt:
- *           type: string
- *           format: date-time
- *         updatedAt:
- *           type: string
- *           format: date-time
- *      Chat:
- *        type: object
- *        properties:
- *          id:
- *            type: number
- *            format: number
- *            minimum: 1
- *          name:
- *            type: string
- *          members:
- *            type: array
- *            items:
- *              $ref: '#/components/schemas/ChatMember'
- *          createdAt:
- *             type: string
- *             format: date-time
- *          updatedAt:
- *             type: string
- *             format: date-time
- *          imageUrl:
- *             type: string
- *      ChatMessage:
- *        type: object
- *        properties:
- *          id:
- *            type: number
- *            format: number
- *            minimum: 1
- *          message:
- *            type: string
- *          senderId:
- *            type: number
- *            minimum: 1
- *          chatId:
- *            type: number
- *            minimum: 1
- *          createdAt:
- *             type: string
- *             format: date-time
- *          updatedAt:
- *             type: string
- *             format: date-time
- *       Error:
- *         type: object
- *         properties:
- *           message:
- *             type: string
- *           errorType:
- *             type: string
+ *  components:
+ *  schemas:
+ *    ChatMember:
+ *      type: object
+ *      properties:
+ *        id:
+ *          type: number
+ *          format: number
+ *          minimum: 1
+ *        userId:
+ *          type: number
+ *          format: number
+ *          minimum: 1
+ *        chatId:
+ *          type: number
+ *          format: number
+ *          minimum: 1
+ *        createdAt:
+ *          type: string
+ *          format: date-time
+ *        updatedAt:
+ *          type: string
+ *          format: date-time
+ *    Chat:
+ *      type: object
+ *      properties:
+ *        id:
+ *          type: number
+ *          format: number
+ *          minimum: 1
+ *        name:
+ *          type: string
+ *        members:
+ *          type: array
+ *          items:
+ *            $ref: '#/components/schemas/ChatMember'
+ *        createdAt:
+ *          type: string
+ *          format: date-time
+ *        updatedAt:
+ *          type: string
+ *          format: date-time
+ *        imageUrl:
+ *          type: string
+ *    ChatMessage:
+ *      type: object
+ *      properties:
+ *        id:
+ *          type: number
+ *          format: number
+ *          minimum: 1
+ *        message:
+ *          type: string
+ *        senderId:
+ *          type: number
+ *          minimum: 1
+ *        chatId:
+ *          type: number
+ *          minimum: 1
+ *        createdAt:
+ *          type: string
+ *          format: date-time
+ *        updatedAt:
+ *          type: string
+ *          format: date-time
+ *    Error:
+ *      type: object
+ *      properties:
+ *        message:
+ *          type: string
+ *        errorType:
+ *          type: string
  */
 class ChatController extends BaseController {
   private chatService: ChatService;
@@ -178,6 +179,7 @@ class ChatController extends BaseController {
       handler: (options) => {
         return this.update(
           options as APIHandlerOptions<{
+            body: UpdateChatDataRequestDto;
             params: { id: number };
             user: UserAuthResponseDto;
           }>,
@@ -297,10 +299,8 @@ class ChatController extends BaseController {
       user: UserAuthResponseDto;
     }>,
   ): Promise<APIHandlerResponse> {
-    const name = await this.chatService.generateChatName(options.body.message);
-
     const chatEntity = ChatEntity.initializeNew({
-      name: name || options.body.message,
+      name: 'Chat',
       imageUrl: null,
     });
 
@@ -506,7 +506,7 @@ class ChatController extends BaseController {
     }
 
     return {
-      status: HTTPCode.CREATED,
+      status: HTTPCode.OK,
       payload: isDeleted,
     };
   }
@@ -514,31 +514,31 @@ class ChatController extends BaseController {
   /**
    * @swagger
    * /chats/{id}:
-   *    put:
-   *      description: Update a chat
-   *      security:
+   *   put:
+   *     description: Update a chat
+   *     security:
    *       - bearerAuth: []
-   *      parameters:
-   *       -  in: path
-   *          description: Chat id
-   *          name: id
-   *          required: true
-   *          type: number
-   *          minimum: 1
-   *      requestBody:
-   *        description: Chat data
-   *        required: true
-   *        content:
-   *          application/json:
-   *             schema:
-   *                $ref: '#/components/schemas/Chat'
-   *      responses:
-   *        200:
+   *     parameters:
+   *       - in: path
+   *         description: Chat id
+   *         name: id
+   *         required: true
+   *         type: number
+   *         minimum: 1
+   *     requestBody:
+   *       description: Chat data
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/Chat'
+   *     responses:
+   *       200:
    *         description: Successful operation
    *         content:
    *           application/json:
    *             schema:
-   *              type: object
+   *               type: object
    *               properties:
    *                 items:
    *                   type: array
@@ -547,6 +547,7 @@ class ChatController extends BaseController {
    */
   private async update(
     options: APIHandlerOptions<{
+      body: UpdateChatDataRequestDto;
       params: { id: number };
       user: UserAuthResponseDto;
     }>,
@@ -556,13 +557,15 @@ class ChatController extends BaseController {
       userId: options.user.id,
     });
 
-    const url = await this.chatService.generateChatImage(chat.name);
+    const name = await this.chatService.generateChatName(options.body.message);
+    const url = await this.chatService.generateChatImage(name);
 
     return {
       status: HTTPCode.OK,
-      payload: await this.chatService.updateImage({
+      payload: await this.chatService.update({
         chat,
         url,
+        name,
       }),
     };
   }

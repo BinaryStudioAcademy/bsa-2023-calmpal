@@ -1,6 +1,10 @@
 export {
+  DURATION_UNIT,
   EMPTY_ARRAY_LENGTH,
   FIRST_ARRAY_INDEX,
+  MEDITATION_DURATION,
+  TRACK_SKIP_SECONDS,
+  TRACK_START_TIME,
 } from './libs/constants/constants.js';
 export {
   APIPath,
@@ -19,11 +23,14 @@ export {
   UsersError,
   ValidationError,
 } from './libs/exceptions/exceptions.js';
+export { TimeFormat } from './libs/helpers/date/libs/enums/enums.js';
 export {
   configureString,
   debounce,
   getFormattedDate,
   getFormattedTime,
+  getRelativeDate,
+  groupChatMessage,
   replaceTemplateWithValue,
   sanitizeInput,
   SECONDS_IN_MINUTE,
@@ -51,6 +58,7 @@ export {
   type ChatMessageCreateRequestDto,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
+  type ChatMessagesGroups,
   ChatMessageValidationMessage,
   ChatMessageValidationRule,
 } from './packages/chat-messages/chat-messages.js';
@@ -60,7 +68,7 @@ export {
   type ChatGetAllResponseDto,
   ChatsApiPath,
   createChatValidationSchema,
-  type UpdateChatImageRequestDto,
+  type UpdateChatDataRequestDto,
 } from './packages/chats/chats.js';
 export { entitiesFilteringQueryValidationSchema } from './packages/common-validation-schemas/validation-schemas.js';
 export {

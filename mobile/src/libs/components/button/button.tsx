@@ -15,11 +15,11 @@ type Properties = {
   label?: string;
   onPress: () => void;
   isDisabled?: boolean;
-  type?: 'solid' | 'outlined' | 'transparent';
+  type?: 'solid' | 'outlined' | 'transparent' | 'modal' | 'timer';
   isRounded?: boolean;
   iconName?: IconName;
-  isVisuallyCentered?: boolean;
   color?: string;
+  isVisuallyCentered?: boolean;
 };
 
 const Button: React.FC<Properties> = ({
@@ -29,8 +29,8 @@ const Button: React.FC<Properties> = ({
   type = 'solid',
   isRounded,
   iconName,
-  isVisuallyCentered,
   color,
+  isVisuallyCentered = false,
 }) => {
   const renderIcon = (): JSX.Element => {
     return (
@@ -51,7 +51,9 @@ const Button: React.FC<Properties> = ({
         styles.button,
         type === 'solid' && styles.buttonSolid,
         type === 'outlined' && styles.buttonOutlined,
+        type === 'timer' && styles.buttonTimer,
         type === 'transparent' && styles.buttonTransparent,
+        type === 'modal' && [styles.buttonModal, { backgroundColor: color }],
         isDisabled && styles.buttonDisabled,
       ]}
       onPress={onPress}
@@ -65,6 +67,8 @@ const Button: React.FC<Properties> = ({
           styles.label,
           type === 'solid' && styles.labelSolid,
           type === 'outlined' && styles.labelOutlined,
+          type === 'modal' && styles.labelModal,
+          type === 'timer' && styles.labelTimer,
           isDisabled && styles.labelDisabled,
         ]}
       >

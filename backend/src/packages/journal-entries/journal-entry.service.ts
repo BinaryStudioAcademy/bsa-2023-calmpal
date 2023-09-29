@@ -7,7 +7,10 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { JournalEntryEntity } from './journal-entry.entity.js';
 import { type JournalEntryRepository } from './journal-entry.repository.js';
-import { NOTE_SANITIZER_OPTIONS } from './libs/constants/constants.js';
+import {
+  DEFAULT_NOTE_TEXT,
+  NOTE_SANITIZER_OPTIONS,
+} from './libs/constants/constants.js';
 import {
   type CreateJournalEntryPayload,
   type JournalEntryGetAllItemResponseDto,
@@ -62,7 +65,9 @@ class JournalEntryService implements Service {
       JournalEntryEntity.initializeNew({
         userId,
         title: sanitizeInput(body.title, NOTE_SANITIZER_OPTIONS),
-        text: sanitizeInput(body.text, NOTE_SANITIZER_OPTIONS),
+        text: body.text
+          ? sanitizeInput(body.text, NOTE_SANITIZER_OPTIONS)
+          : DEFAULT_NOTE_TEXT,
       }),
     );
 
@@ -75,6 +80,13 @@ class JournalEntryService implements Service {
     title,
     text,
   }: JournalEntryUpdateRequestDto): Promise<JournalEntryGetAllItemResponseDto> {
+    if (!id) {
+      throw new JournalError({
+        status: HTTPCode.BAD_REQUEST,
+        message: ExceptionMessage.JOURNAL_NOT_FOUND,
+      });
+    }
+
     const item = await this.journalEntryRepository.update(
       JournalEntryEntity.initialize({
         id,
@@ -82,7 +94,9 @@ class JournalEntryService implements Service {
         createdAt: null,
         updatedAt: null,
         title: sanitizeInput(title, NOTE_SANITIZER_OPTIONS),
-        text: text ? sanitizeInput(text, NOTE_SANITIZER_OPTIONS) : '',
+        text: text
+          ? sanitizeInput(text, NOTE_SANITIZER_OPTIONS)
+          : DEFAULT_NOTE_TEXT,
       }),
     );
 
@@ -93,6 +107,13 @@ class JournalEntryService implements Service {
     id: number;
     user: UserAuthResponseDto;
   }): ReturnType<Service['delete']> {
+    if (!payload.id) {
+      throw new JournalError({
+        status: HTTPCode.BAD_REQUEST,
+        message: ExceptionMessage.JOURNAL_NOT_FOUND,
+      });
+    }
+
     const journal = await this.find(payload.id);
     if (journal.userId !== payload.user.id) {
       throw new JournalError({

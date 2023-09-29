@@ -22,7 +22,7 @@ import {
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
   type CreateChatPayload,
-  type UpdateChatImagePayload,
+  type UpdateChatDataPayload,
 } from './libs/types/types.js';
 
 type Constructor = {
@@ -106,12 +106,6 @@ class ChatService implements Service {
       senderId: userId,
     });
 
-    await this.chatMessageService.generateReply({
-      message,
-      chatId: chat.id,
-      senderId: userId,
-    });
-
     return chat;
   }
 
@@ -127,10 +121,11 @@ class ChatService implements Service {
     return this.chatMessageService.generateReply(payload);
   }
 
-  public async updateImage({
+  public async update({
     chat,
     url,
-  }: UpdateChatImagePayload): Promise<ChatGetAllItemResponseDto> {
+    name,
+  }: UpdateChatDataPayload): Promise<ChatGetAllItemResponseDto> {
     const fileRecord = await this.fileService.create({
       buffer: Buffer.from(url, 'base64'),
       contentType: ContentType.PNG,
@@ -139,6 +134,7 @@ class ChatService implements Service {
     const item = await this.chatRepository.update({
       chat,
       imageUrl: fileRecord.url,
+      name,
     });
 
     return item.toObject();
@@ -148,19 +144,21 @@ class ChatService implements Service {
     return (await this.openAiService.getMessageResponse([
       {
         role: OpenAiRoleKey.USER,
-        content: replaceTemplateWithValue(CHAT_NAME_TEMPLATE, { message }),
+        content: replaceTemplateWithValue({
+          template: CHAT_NAME_TEMPLATE,
+          replacements: { message },
+        }),
       },
     ])) as string;
   }
 
   public async generateChatImage(name: string): Promise<string> {
     return (await this.openAiService.generateImages({
-      prompt: replaceTemplateWithValue(CHAT_IMAGE_TEMPLATE, { name }),
+      prompt: replaceTemplateWithValue({
+        template: CHAT_IMAGE_TEMPLATE,
+        replacements: { name },
+      }),
     })) as string;
-  }
-
-  public update(): ReturnType<Service['update']> {
-    return Promise.resolve(null);
   }
 
   public async delete({
@@ -170,6 +168,13 @@ class ChatService implements Service {
     id: number;
     userId: number;
   }): Promise<boolean> {
+    if (!id) {
+      throw new ChatError({
+        status: HTTPCode.BAD_REQUEST,
+        message: ExceptionMessage.CHAT_NOT_FOUND,
+      });
+    }
+
     const deletedCount = await this.chatRepository.delete({ id, userId });
     if (!deletedCount) {
       throw new ChatError({

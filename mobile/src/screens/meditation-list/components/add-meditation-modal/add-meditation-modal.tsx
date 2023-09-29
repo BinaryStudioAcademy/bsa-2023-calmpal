@@ -16,8 +16,8 @@ import {
   type MeditationEntryCreateForm,
   type MeditationEntryCreateRequestDto,
 } from '#packages/meditation/meditation';
-import { DEFAULT_MEDITATION_PAYLOAD } from '#screens/meditation-home/libs/constants';
 
+import { DEFAULT_MEDITATION_PAYLOAD } from './libs/constants/constants';
 import { styles } from './styles';
 
 type Properties = {
@@ -53,7 +53,7 @@ const AddMeditationModal: React.FC<Properties> = ({
         <Input
           control={control}
           errors={errors}
-          label="Topic name"
+          label="Meditation name"
           name="name"
           placeholder="Enter meditation name"
           labelColor={AppColor.BLACK}

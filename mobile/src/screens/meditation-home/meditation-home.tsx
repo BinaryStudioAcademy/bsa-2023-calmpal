@@ -9,48 +9,29 @@ import {
   View,
 } from '#libs/components/components';
 import { MeditationScreenName } from '#libs/enums/enums';
-import {
-  useAppDispatch,
-  useAppSelector,
-  useCallback,
-  useEffect,
-  useNavigation,
-  useSearch,
-} from '#libs/hooks/hooks';
+import { useCallback, useNavigation, useSearch } from '#libs/hooks/hooks';
 import { type MeditationNavigationParameterList } from '#libs/types/types';
-import { actions as meditationActions } from '#slices/meditation/meditation';
 
+import { NAVIGATION_ITEMS } from './libs/constants/constants';
 import { styles } from './styles';
 
 const MeditationHome: React.FC = () => {
-  const { meditationEntries } = useAppSelector(({ meditation }) => {
-    return {
-      meditationEntries: meditation.meditationEntries,
-    };
-  });
-  const dispatch = useAppDispatch();
-
   const navigation =
     useNavigation<
       NativeStackNavigationProp<MeditationNavigationParameterList>
     >();
   const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
-    meditationEntries,
+    NAVIGATION_ITEMS,
     'name',
   );
-
   const handleSelectMeditation = useCallback(
-    (title: string): void => {
-      navigation.navigate(MeditationScreenName.MEDITATION_LIST, {
-        title,
-      });
+    (title: string) => {
+      return () => {
+        navigation.navigate(MeditationScreenName.MEDITATION_LIST, { title });
+      };
     },
     [navigation],
   );
-
-  useEffect(() => {
-    void dispatch(meditationActions.getAllMeditationEntries());
-  }, [dispatch]);
 
   return (
     <LinearGradient>
@@ -64,7 +45,7 @@ const MeditationHome: React.FC = () => {
             return (
               <Card
                 title={item.name}
-                onPress={handleSelectMeditation}
+                onPress={handleSelectMeditation(item.name)}
                 key={item.id}
               />
             );

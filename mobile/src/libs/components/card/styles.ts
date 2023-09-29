@@ -42,6 +42,10 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 16,
   },
+  deleteContainer: {
+    justifyContent: 'center',
+    paddingHorizontal: 30,
+  },
 });
 
 export { styles };
