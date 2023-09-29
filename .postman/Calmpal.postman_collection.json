@@ -1133,7 +1133,7 @@
                   "pm.test(\"Response Data is correct\", () => {\r",
                   "  pm.expect(responseJson.userId).to.eql(JSON.parse(pm.collectionVariables.get(\"userID\")));\r",
                   "    pm.expect(responseJson.title).to.eql(\"New title\");\r",
-                  "    pm.expect(responseJson.text).to.eql(\"New text\");\r",
+                  "    pm.expect(responseJson.text).to.eql(\"<p>New text</p>\");\r",
                   "});"
                 ],
                 "type": "text/javascript"
