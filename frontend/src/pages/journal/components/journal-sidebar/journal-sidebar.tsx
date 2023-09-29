@@ -9,12 +9,14 @@ import {
 } from '#libs/components/components.js';
 import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants.js';
 import { AppRoute, IconColor } from '#libs/enums/enums.js';
+import { getUrlWithQueryString } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useAppSelector,
   useCallback,
   useEffect,
   useNavigate,
+  useParams,
   useRef,
   useState,
 } from '#libs/hooks/hooks.js';
@@ -38,6 +40,7 @@ const JournalSidebar: React.FC<Properties> = ({
   onSetFilter,
 }) => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const dispatch = useAppDispatch();
   const [chatToDelete, setChatToDelete] = useState<null | number>(null);
   const dialogReference = useRef<HTMLDialogElement | null>(null);
@@ -68,9 +71,15 @@ const JournalSidebar: React.FC<Properties> = ({
     [handleOpen],
   );
 
+  const handleGetSelectedNote = useCallback(async () => {
+    await dispatch(journalActions.getAllJournalEntries(filter));
+
+    dispatch(journalActions.setSelectedJournalEntry(Number(id)));
+  }, [dispatch, filter, id]);
+
   useEffect(() => {
-    void dispatch(journalActions.getAllJournalEntries(filter));
-  }, [dispatch, filter]);
+    void handleGetSelectedNote();
+  }, [dispatch, filter, handleGetSelectedNote]);
 
   const handleSelectJournalEntry = useCallback(
     (id: number) => {
@@ -112,7 +121,10 @@ const JournalSidebar: React.FC<Properties> = ({
                 ) as ValueOf<typeof AppRoute>;
 
                 return (
-                  <Link key={journalEntry.id} to={noteLink}>
+                  <Link
+                    key={journalEntry.id}
+                    to={getUrlWithQueryString(noteLink, { query: filter })}
+                  >
                     <Card
                       title={journalEntry.title}
                       onClick={handleSelectJournalEntry(journalEntry.id)}

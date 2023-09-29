@@ -7,6 +7,7 @@ import {
   Header,
   InputSearch,
   LinearGradient,
+  Modal,
   ScrollView,
   View,
 } from '#libs/components/components';
@@ -19,6 +20,7 @@ import {
   useEffect,
   useNavigation,
   useSearch,
+  useState,
 } from '#libs/hooks/hooks';
 import { type ChatNavigationParameterList } from '#libs/types/types';
 import { actions as chatsActions } from '#slices/chats/chats';
@@ -35,6 +37,9 @@ const ChatList: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigation =
     useNavigation<NativeStackNavigationProp<ChatNavigationParameterList>>();
+  const [isDeleteModalVisible, setIsDeleteModalVisible] =
+    useState<boolean>(false);
+  const [chatIdToDelete, setChatIdToDelete] = useState<number | null>(null);
 
   const { filteredData: filteredChats, setSearchQuery } = useSearch(
     chats,
@@ -42,6 +47,20 @@ const ChatList: React.FC = () => {
   );
 
   const chatsLength = chats.length;
+
+  const handleShowDeleteModal = (id: number): void => {
+    setChatIdToDelete(id);
+    setIsDeleteModalVisible(true);
+  };
+
+  const hanleCloseDeleteModal = (): void => {
+    setIsDeleteModalVisible(false);
+  };
+
+  const handleDeleteChat = (): void => {
+    hanleCloseDeleteModal();
+    void dispatch(chatsActions.deleteChat(chatIdToDelete as number));
+  };
 
   const handleSelectChat = useCallback(
     (title: string, id: string | undefined) => {
@@ -79,6 +98,12 @@ const ChatList: React.FC = () => {
 
   return (
     <LinearGradient>
+      <Modal
+        isVisible={isDeleteModalVisible}
+        onClose={hanleCloseDeleteModal}
+        onDelete={handleDeleteChat}
+        type="Chat"
+      />
       <View style={styles.container}>
         <InputSearch
           placeholder="Search chat"
@@ -88,11 +113,15 @@ const ChatList: React.FC = () => {
           {filteredChats.map((item) => {
             return (
               <Card
+                key={item.id}
                 title={item.name}
                 onPress={(): void => {
                   handleSelectChat(item.name, item.id.toString());
                 }}
-                key={item.id}
+                iconRight="delete"
+                onIconPress={(): void => {
+                  handleShowDeleteModal(item.id);
+                }}
               />
             );
           })}

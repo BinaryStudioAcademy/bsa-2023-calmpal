@@ -5,7 +5,6 @@ import {
   useAppDispatch,
   useAppSelector,
   useCallback,
-  useEffect,
   useNavigate,
   useParams,
   useSearch,
@@ -13,7 +12,7 @@ import {
 } from '#libs/hooks/hooks.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
-import { JournalSidebar } from './components/journal-sidebar/journal-sidebar.js';
+import * as journalSidebarJs from './components/journal-sidebar/journal-sidebar.js';
 import { Note } from './components/note/note.js';
 import styles from './styles.module.scss';
 
@@ -40,19 +39,9 @@ const Journal: React.FC = () => {
     setIsSidebarShow(true);
   }, [setIsSidebarShow, dispatch, navigate]);
 
-  const handleGetSelectedNote = useCallback(async () => {
-    await dispatch(journalActions.getAllJournalEntries(filter));
-
-    dispatch(journalActions.setSelectedJournalEntry(Number(id)));
-  }, [dispatch, filter, id]);
-
-  useEffect(() => {
-    void handleGetSelectedNote();
-  }, [handleGetSelectedNote, id]);
-
   return (
     <>
-      <JournalSidebar
+      <journalSidebarJs.JournalSidebar
         isSidebarShown={isSidebarShown}
         onSetIsSidebarShow={setIsSidebarShow}
         filter={filter}
