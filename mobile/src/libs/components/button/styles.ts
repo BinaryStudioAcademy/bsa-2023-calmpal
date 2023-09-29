@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
   },
   buttonModal: {
     borderRadius: 8,
-    marginHorizontal: 10,
     paddingHorizontal: 20,
   },
 });
