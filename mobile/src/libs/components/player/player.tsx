@@ -9,6 +9,7 @@ import {
   useState,
 } from '#libs/hooks/hooks';
 import {
+  AppStatus,
   Event,
   player,
   State,
@@ -17,7 +18,7 @@ import {
 import { type Track } from '#libs/types/types';
 
 import { Controls, ProgressBar } from './components/components';
-import { MOCKED_PLAYLIST, TRACK_START_INDEX } from './libs/constants';
+import { MOCKED_PLAYLIST, TRACK_START_INDEX } from './libs/constants/constants';
 
 type Properties = {
   setCurrentTrack: React.Dispatch<React.SetStateAction<Track | null>>;
@@ -71,7 +72,7 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
     const handleAppStateChange = (nextAppState: string): void => {
       void player.startPlayling();
 
-      if (nextAppState === 'background') {
+      if (nextAppState === AppStatus.Background) {
         void player.stopPlaying();
       }
     };
