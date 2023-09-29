@@ -5,7 +5,6 @@ import {
   useAppDispatch,
   useAppSelector,
   useCallback,
-  useEffect,
   useNavigate,
   useParams,
   useSearch,
@@ -13,8 +12,7 @@ import {
 } from '#libs/hooks/hooks.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
 
-import { JournalSidebar } from './components/journal-sidebar/journal-sidebar.js';
-import { Note } from './components/note/note.js';
+import { JournalSidebar, Note } from './components/components.js';
 import styles from './styles.module.scss';
 
 const Journal: React.FC = () => {
@@ -39,16 +37,6 @@ const Journal: React.FC = () => {
     navigate(AppRoute.JOURNAL);
     setIsSidebarShow(true);
   }, [setIsSidebarShow, dispatch, navigate]);
-
-  const handleGetSelectedNote = useCallback(async () => {
-    await dispatch(journalActions.getAllJournalEntries(filter));
-
-    dispatch(journalActions.setSelectedJournalEntry(Number(id)));
-  }, [dispatch, filter, id]);
-
-  useEffect(() => {
-    void handleGetSelectedNote();
-  }, [handleGetSelectedNote, id]);
 
   return (
     <>
