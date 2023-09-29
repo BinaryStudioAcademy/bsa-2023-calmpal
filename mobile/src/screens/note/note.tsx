@@ -5,6 +5,7 @@ import {
   BackHandler,
   FormController,
   LinearGradient,
+  RichTextEditor,
   ScrollView,
   TextInput,
   View,
@@ -20,15 +21,15 @@ import {
 } from '#libs/hooks/hooks';
 import { type JournalNavigationParameterList } from '#libs/types/types';
 import { type JournalEntryCreateRequestDto } from '#packages/journal/journal';
+import { DEFAULT_NOTE_PAYLOAD } from '#screens/journal/libs/constants/constants';
 import { actions as journalActions } from '#slices/journal/journal';
 
 import {
-  DEFAULT_NOTE_VALUE,
   EMPTY_NOTE_TITLE,
   NOTE_PLACEHOLDERS,
   NOTE_SANITIZER_OPTIONS,
   SAVE_NOTE_TIMEOUT,
-} from './libs/constants';
+} from './libs/constants/constants';
 import { styles } from './styles';
 
 type NoteScreenRouteProperty = RouteProp<
@@ -53,12 +54,10 @@ const Note: React.FC = () => {
   });
 
   const { control, watch, isDirty } = useAppForm({
-    defaultValues: selectedJournalEntry
-      ? {
-          title: selectedJournalEntry.title || DEFAULT_NOTE_VALUE.title,
-          text: selectedJournalEntry.text || DEFAULT_NOTE_VALUE.text,
-        }
-      : DEFAULT_NOTE_VALUE,
+    defaultValues: {
+      title: selectedJournalEntry?.title ?? DEFAULT_NOTE_PAYLOAD.title,
+      text: selectedJournalEntry?.text ?? DEFAULT_NOTE_PAYLOAD.text,
+    },
     mode: 'onChange',
   });
 
@@ -133,13 +132,10 @@ const Note: React.FC = () => {
             control={control}
             render={({ field }): JSX.Element => {
               return (
-                <TextInput
+                <RichTextEditor
+                  onChange={field.onChange}
+                  initialContent={handleSanitizeInput(textValue)}
                   placeholder={NOTE_PLACEHOLDERS.text}
-                  placeholderTextColor={styles.placeholder.color}
-                  onChangeText={field.onChange}
-                  value={handleSanitizeInput(textValue)}
-                  multiline
-                  style={styles.noteText}
                 />
               );
             }}

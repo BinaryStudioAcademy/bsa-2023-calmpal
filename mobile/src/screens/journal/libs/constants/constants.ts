@@ -1,6 +1,6 @@
 const DEFAULT_NOTE_PAYLOAD = {
-  title: 'New note',
-  text: 'Type your text here',
+  title: '',
+  text: '<p><br /></p>',
 };
 
 const INCREMENT_DECREMENT_STEP = 1;
