@@ -27,7 +27,7 @@
   display: none;
 }
 
-.checkbox-primary:checked + .container-Primary {
+.checkbox-primary:checked + .container-primary {
   color: var(--blue-700);
   background-color: var(--blue-alpha-70);
 }
