@@ -8,4 +8,9 @@ const NOTE_SANITIZER_OPTIONS: IOptions = {
   },
 };
 
-export { NOTE_SANITIZER_OPTIONS };
+const DEFAULT_NOTE_PAYLOAD = {
+  title: '',
+  text: '<p><br /></p>',
+};
+
+export { DEFAULT_NOTE_PAYLOAD, NOTE_SANITIZER_OPTIONS };

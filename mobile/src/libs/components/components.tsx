@@ -14,10 +14,13 @@ export { Loader } from './loader/loader';
 export { Modal } from './modal/modal';
 export { Player } from './player/player';
 export { ProtectedRoute } from './protected-route/protected-route';
+export { RichTextEditor } from './rich-text-editor/rich-text-editor';
 export { SignBackground } from './sign-background/sign-background';
 export { Switch } from './switch/switch';
 export { Toast } from './toast/toast';
+export { Controller as FormController } from 'react-hook-form';
 export {
+  BackHandler,
   Image,
   Pressable,
   Modal as ReactModal,
