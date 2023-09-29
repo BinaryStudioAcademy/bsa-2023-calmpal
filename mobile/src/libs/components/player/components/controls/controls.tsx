@@ -33,7 +33,7 @@ const Controls: React.FC<Properties> = ({ isPlaying: initialIsPlaying }) => {
   useFocusEffect(
     useCallback(() => {
       setIsPlaying(false);
-    }, []),
+    }, [setIsPlaying]),
   );
 
   return (
