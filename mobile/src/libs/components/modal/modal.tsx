@@ -37,18 +37,22 @@ const Modal: React.FC<Properties> = ({
                 <>
                   <Text style={styles.modalTitle}>{`Delete ${type}?`}</Text>
                   <View style={styles.buttonsContainer}>
-                    <Button
-                      label="Cancel"
-                      onPress={onClose}
-                      type="modal"
-                      color={AppColor.GRAY_400}
-                    />
-                    <Button
-                      label="Delete"
-                      onPress={onDelete}
-                      type="modal"
-                      color={AppColor.BLUE_300}
-                    />
+                    <View style={styles.button}>
+                      <Button
+                        label="Cancel"
+                        onPress={onClose}
+                        type="modal"
+                        color={AppColor.GRAY_400}
+                      />
+                    </View>
+                    <View style={styles.button}>
+                      <Button
+                        label="Delete"
+                        onPress={onDelete}
+                        type="modal"
+                        color={AppColor.BLUE_300}
+                      />
+                    </View>
                   </View>
                 </>
               ) : (

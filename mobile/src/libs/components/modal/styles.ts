@@ -20,6 +20,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 10,
   },
+  button: {
+    marginHorizontal: 10,
+  },
+
   modalView: {
     margin: 20,
     backgroundColor: AppColor.WHITE,
