@@ -1,6 +1,8 @@
 export {
+  DURATION_UNIT,
   EMPTY_ARRAY_LENGTH,
   FIRST_ARRAY_INDEX,
+  MEDITATION_DURATION,
 } from './libs/constants/constants.js';
 export {
   APIPath,

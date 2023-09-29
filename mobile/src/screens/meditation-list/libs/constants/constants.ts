@@ -1,3 +1,0 @@
-const DEFAULT_SONG_DURATION = 10;
-
-export { DEFAULT_SONG_DURATION };

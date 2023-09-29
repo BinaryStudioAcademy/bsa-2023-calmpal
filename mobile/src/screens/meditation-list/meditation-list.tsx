@@ -29,7 +29,7 @@ import {
   MeditationItem,
   TimerModal,
 } from './components/components';
-import { DEFAULT_SONG_DURATION } from './libs/constants/constants';
+import { DEFAULT_DURATION } from './components/timer-modal/libs/constants';
 import { styles } from './styles';
 
 type RouteParameters = {
@@ -53,7 +53,7 @@ const MeditationList: React.FC = () => {
   );
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
   const [isTimerModalVisible, setIsTimerModalVisible] = useState(false);
-  const [duration, setDuration] = useState(DEFAULT_SONG_DURATION);
+  const [duration, setDuration] = useState(DEFAULT_DURATION);
 
   const navigation =
     useNavigation<
