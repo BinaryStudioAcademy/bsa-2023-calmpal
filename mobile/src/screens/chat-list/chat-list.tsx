@@ -37,7 +37,8 @@ const ChatList: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigation =
     useNavigation<NativeStackNavigationProp<ChatNavigationParameterList>>();
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [isDeleteModalVisible, setIsDeleteModalVisible] =
+    useState<boolean>(false);
   const [chatIdToDelete, setChatIdToDelete] = useState<number | null>(null);
 
   const { filteredData: filteredChats, setSearchQuery } = useSearch(
@@ -47,17 +48,17 @@ const ChatList: React.FC = () => {
 
   const chatsLength = chats.length;
 
-  const handleShowModal = (id: number): void => {
+  const handleShowDeleteModal = (id: number): void => {
     setChatIdToDelete(id);
-    setIsModalVisible(true);
+    setIsDeleteModalVisible(true);
   };
 
-  const hanleCloseModal = (): void => {
-    setIsModalVisible(false);
+  const hanleCloseDeleteModal = (): void => {
+    setIsDeleteModalVisible(false);
   };
 
   const handleDeleteChat = (): void => {
-    hanleCloseModal();
+    hanleCloseDeleteModal();
     void dispatch(chatsActions.deleteChat(chatIdToDelete as number));
   };
 
@@ -98,8 +99,8 @@ const ChatList: React.FC = () => {
   return (
     <LinearGradient>
       <Modal
-        isVisible={isModalVisible}
-        onClose={hanleCloseModal}
+        isVisible={isDeleteModalVisible}
+        onClose={hanleCloseDeleteModal}
         onDelete={handleDeleteChat}
         type="Chat"
       />
@@ -119,7 +120,7 @@ const ChatList: React.FC = () => {
                 }}
                 iconRight="delete"
                 onIconPress={(): void => {
-                  handleShowModal(item.id);
+                  handleShowDeleteModal(item.id);
                 }}
               />
             );
