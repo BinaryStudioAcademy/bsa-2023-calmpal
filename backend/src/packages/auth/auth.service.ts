@@ -31,14 +31,21 @@ class AuthService {
     const { email } = userRequestDto;
 
     const user = await this.userService.findByEmail(email);
-    if (user) {
+    if (!user) {
+      return await this.userService.create(userRequestDto);
+    }
+
+    if (user.deletedAt) {
       throw new AuthError({
-        message: ExceptionMessage.USER_ALREADY_EXISTS,
+        message: ExceptionMessage.USER_WAS_DELETED,
         status: HTTPCode.BAD_REQUEST,
       });
     }
 
-    return await this.userService.create(userRequestDto);
+    throw new AuthError({
+      message: ExceptionMessage.USER_ALREADY_EXISTS,
+      status: HTTPCode.BAD_REQUEST,
+    });
   }
 
   public async verifyLoginCredentials({
@@ -77,7 +84,6 @@ class AuthService {
 
   public async getAuthenticatedUser(id: number): Promise<UserAuthResponseDto> {
     const user = await this.userService.findById(id);
-
     if (!user) {
       throw new UsersError({
         status: HTTPCode.NOT_FOUND,

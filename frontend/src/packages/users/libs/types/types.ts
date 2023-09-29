@@ -1,4 +1,5 @@
 export {
+  type DeleteAccountFormPayload,
   type UserAuthResponseDto,
   type UserSignInRequestDto,
   type UserSignInResponseDto,

@@ -17,6 +17,8 @@ class UserEntity implements Entity {
 
   private subscriptionEndDate: Date | null;
 
+  private deletedAt: Date | null;
+
   public constructor({
     id,
     email,
@@ -26,6 +28,7 @@ class UserEntity implements Entity {
     isSurveyCompleted,
     subscriptionId,
     subscriptionEndDate,
+    deletedAt,
   }: {
     id: number | null;
     email: string;
@@ -35,6 +38,7 @@ class UserEntity implements Entity {
     isSurveyCompleted: boolean;
     subscriptionId: number | null;
     subscriptionEndDate: Date | null;
+    deletedAt: Date | null;
   }) {
     this.id = id;
     this.email = email;
@@ -44,6 +48,7 @@ class UserEntity implements Entity {
     this.isSurveyCompleted = isSurveyCompleted;
     this.subscriptionId = subscriptionId;
     this.subscriptionEndDate = subscriptionEndDate;
+    this.deletedAt = deletedAt;
   }
 
   public static initialize({
@@ -55,6 +60,7 @@ class UserEntity implements Entity {
     isSurveyCompleted,
     subscriptionId,
     subscriptionEndDate,
+    deletedAt,
   }: {
     id: number | null;
     email: string;
@@ -64,6 +70,7 @@ class UserEntity implements Entity {
     isSurveyCompleted: boolean;
     subscriptionId: number | null;
     subscriptionEndDate: Date | null;
+    deletedAt: Date | null;
   }): UserEntity {
     return new UserEntity({
       id,
@@ -74,6 +81,7 @@ class UserEntity implements Entity {
       isSurveyCompleted,
       subscriptionId,
       subscriptionEndDate,
+      deletedAt,
     });
   }
 
@@ -95,6 +103,7 @@ class UserEntity implements Entity {
       isSurveyCompleted,
       subscriptionId: null,
       subscriptionEndDate: null,
+      deletedAt: null,
     });
   }
 
@@ -107,6 +116,7 @@ class UserEntity implements Entity {
     isSurveyCompleted: boolean;
     subscriptionId: number | null;
     subscriptionEndDate: Date | null;
+    deletedAt: Date | null;
   } {
     return {
       id: this.id as number,
@@ -117,6 +127,7 @@ class UserEntity implements Entity {
       isSurveyCompleted: this.isSurveyCompleted,
       subscriptionId: this.subscriptionId,
       subscriptionEndDate: this.subscriptionEndDate,
+      deletedAt: this.deletedAt as Date,
     };
   }
 

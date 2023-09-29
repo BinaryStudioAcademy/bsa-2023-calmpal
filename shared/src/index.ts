@@ -112,6 +112,7 @@ export {
   SurveyValidationRule,
 } from './packages/surveys/surveys.js';
 export {
+  type DeleteAccountFormPayload,
   type UserAuthResponseDto,
   type UserGetAllItemResponseDto,
   type UserGetAllResponseDto,
