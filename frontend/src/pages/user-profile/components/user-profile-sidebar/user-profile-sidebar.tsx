@@ -1,29 +1,23 @@
-import { type ReactElement } from 'react';
-
 import {
   Card,
   Icon,
   Link,
-  Modal,
   Sidebar,
   SidebarBody,
   SidebarHeader,
 } from '#libs/components/components.js';
-import {
-  INITIAL_STEP,
-  NEXT_STEP_INCREMENT,
-  STEPS,
-} from '#libs/components/modal/libs/constants/constants.js';
 import { IconColor } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
   useCallback,
+  useEffect,
   useLocation,
   useRef,
   useState,
 } from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
+import { DeleteAccountModal } from '#pages/profile-settings/components/delete-account-modal/delete-account-modal.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
 import { SETTING_NAME_INDEX, SETTINGS_OPTIONS } from './libs/constants.js';
@@ -52,10 +46,6 @@ const UserProfileSidebar: React.FC<Properties> = ({
   const [activeItem, setActiveItem] = useState<string>(
     setting ?? 'notification',
   );
-  const [currentStepIndex, setCurrentStepIndex] = useState(INITIAL_STEP);
-
-  const dialogReference = useRef<HTMLDialogElement>(null);
-  const currentStep = STEPS[currentStepIndex];
 
   const handleClick = useCallback(
     (key: string) => {
@@ -71,29 +61,19 @@ const UserProfileSidebar: React.FC<Properties> = ({
     void dispatch(authActions.signOut());
   }, [dispatch]);
 
-  const handleClose = useCallback((): void => {
-    dialogReference.current?.open && dialogReference.current.close();
-  }, [dialogReference]);
+  const dialogReference = useRef<HTMLDialogElement>(null);
+  const [shouldResetModal, setShouldResetModal] = useState(false);
 
   const handleOpen = useCallback(() => {
-    setCurrentStepIndex(INITIAL_STEP);
+    setShouldResetModal(true);
     dialogReference.current?.showModal();
   }, [dialogReference]);
 
-  const goToNextStep = useCallback((): void => {
-    setCurrentStepIndex((previous) => {
-      return Math.min(
-        previous + NEXT_STEP_INCREMENT,
-        STEPS.length - NEXT_STEP_INCREMENT,
-      );
-    });
-  }, []);
-
-  const getCurrentStep = (): ReactElement | null => {
-    const StepComponent = (currentStep as (typeof STEPS)[0]).component;
-
-    return <StepComponent onClose={handleClose} onNext={goToNextStep} />;
-  };
+  useEffect(() => {
+    if (shouldResetModal) {
+      setShouldResetModal(false);
+    }
+  }, [shouldResetModal]);
 
   return (
     <Sidebar isSidebarShown={isSidebarShown}>
@@ -150,14 +130,10 @@ const UserProfileSidebar: React.FC<Properties> = ({
             iconWidth={24}
             iconHeight={24}
           />
-          {Boolean(currentStep) && (
-            <Modal
-              ref={dialogReference}
-              title={(currentStep as (typeof STEPS)[0]).title}
-            >
-              {getCurrentStep()}
-            </Modal>
-          )}
+          <DeleteAccountModal
+            ref={dialogReference}
+            shouldReset={shouldResetModal}
+          />
         </div>
       </SidebarBody>
     </Sidebar>
