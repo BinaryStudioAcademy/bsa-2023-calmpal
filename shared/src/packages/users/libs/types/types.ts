@@ -1,7 +1,5 @@
 export { type DeleteAccountFormPayload } from './delete-account-form-payload.type.js';
 export { type UserAuthResponseDto } from './user-auth-response-dto.type.js';
-export { type UserDeleteRequestDto } from './user-delete-request-dto.type.js';
-export { type UserDeleteResponseDto } from './user-delete-response-dto.type.js';
 export { type UserGetAllItemResponseDto } from './user-get-all-item-response-dto.type.js';
 export { type UserGetAllResponseDto } from './user-get-all-response-dto.type.js';
 export { type UserSignInRequestDto } from './user-sign-in-request-dto.type.js';

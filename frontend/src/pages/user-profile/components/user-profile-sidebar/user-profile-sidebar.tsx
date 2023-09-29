@@ -18,6 +18,7 @@ import {
 } from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { DeleteAccountModal } from '#pages/profile-settings/components/components.js';
+import { type DeleteAccountModalHandler } from '#pages/profile-settings/components/delete-account-modal/libs/types/types.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
 import { SETTING_NAME_INDEX, SETTINGS_OPTIONS } from './libs/constants.js';
@@ -61,7 +62,9 @@ const UserProfileSidebar: React.FC<Properties> = ({
     void dispatch(authActions.signOut());
   }, [dispatch]);
 
-  const dialogReference = useRef<HTMLDialogElement>(null);
+  const dialogReference = useRef<HTMLDialogElement & DeleteAccountModalHandler>(
+    null,
+  );
   const [shouldResetModal, setShouldResetModal] = useState(false);
 
   const handleOpen = useCallback(() => {
@@ -130,10 +133,7 @@ const UserProfileSidebar: React.FC<Properties> = ({
             iconWidth={24}
             iconHeight={24}
           />
-          <DeleteAccountModal
-            ref={dialogReference}
-            shouldReset={shouldResetModal}
-          />
+          <DeleteAccountModal ref={dialogReference} />
         </div>
       </SidebarBody>
     </Sidebar>

@@ -3,8 +3,6 @@ export { type UserCreateQueryPayload } from './user-create-query-payload.js';
 export { type UserWithPasswordQueryResponse } from './user-with-password-query-response.js';
 export {
   type UserAuthResponseDto,
-  type UserDeleteRequestDto,
-  type UserDeleteResponseDto,
   type UserGetAllResponseDto,
   type UserSignInRequestDto,
   type UserSignInResponseDto,

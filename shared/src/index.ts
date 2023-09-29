@@ -109,8 +109,6 @@ export {
 export {
   type DeleteAccountFormPayload,
   type UserAuthResponseDto,
-  type UserDeleteRequestDto,
-  type UserDeleteResponseDto,
   type UserGetAllItemResponseDto,
   type UserGetAllResponseDto,
   UsersApiPath,

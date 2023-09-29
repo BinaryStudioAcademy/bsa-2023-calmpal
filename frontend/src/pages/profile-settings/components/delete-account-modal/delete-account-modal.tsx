@@ -1,32 +1,35 @@
+import { type RefObject, useImperativeHandle } from 'react';
+
 import { Modal } from '#libs/components/components.js';
+import { forwardRef, useCallback, useState } from '#libs/hooks/hooks.js';
+
 import {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useState,
-} from '#libs/hooks/hooks.js';
-
-import { INITIAL_STEP, NEXT_STEP_INCREMENT, STEPS } from './libs/contants.js';
-
-type Properties = {
-  shouldReset: boolean;
-};
+  INITIAL_STEP,
+  NEXT_STEP_INCREMENT,
+  STEPS,
+} from './libs/constants/contants.js';
+import { type DeleteAccountModalHandler } from './libs/types/types.js';
+import styles from './styles.module.scss';
 
 const DeleteAccountModal: React.ForwardRefRenderFunction<
-  HTMLDialogElement,
-  Properties
-> = ({ shouldReset }, reference) => {
+  HTMLDialogElement & DeleteAccountModalHandler
+> = (_, reference) => {
   const [currentStepIndex, setCurrentStepIndex] = useState(INITIAL_STEP);
-  const dialogReference = reference as React.RefObject<HTMLDialogElement>;
   const currentStep = STEPS[currentStepIndex];
 
-  useEffect(() => {
-    shouldReset && setCurrentStepIndex(INITIAL_STEP);
-  }, [shouldReset]);
+  useImperativeHandle(reference as RefObject<DeleteAccountModalHandler>, () => {
+    return {
+      handleResetStep: (): void => {
+        setCurrentStepIndex(INITIAL_STEP);
+      },
+    };
+  });
 
   const handleClose = useCallback((): void => {
-    dialogReference.current?.open && dialogReference.current.close();
-  }, [dialogReference]);
+    if ((reference as RefObject<HTMLDialogElement>).current?.open) {
+      (reference as RefObject<HTMLDialogElement>).current?.close();
+    }
+  }, [reference]);
 
   const goToNextStep = useCallback((): void => {
     setCurrentStepIndex((previous) => {
@@ -38,7 +41,8 @@ const DeleteAccountModal: React.ForwardRefRenderFunction<
   }, []);
 
   const getCurrentStep = (): React.ReactElement | null => {
-    const StepComponent = (currentStep as (typeof STEPS)[0]).component;
+    const StepComponent = (currentStep as NonNullable<typeof currentStep>)
+      .component;
 
     return <StepComponent onClose={handleClose} onNext={goToNextStep} />;
   };
@@ -47,10 +51,10 @@ const DeleteAccountModal: React.ForwardRefRenderFunction<
     <>
       {Boolean(currentStep) && (
         <Modal
-          ref={dialogReference}
-          title={(currentStep as (typeof STEPS)[0]).title}
+          ref={reference}
+          title={(currentStep as NonNullable<typeof currentStep>).title}
         >
-          {getCurrentStep()}
+          <div className={styles['modal-body']}>{getCurrentStep()}</div>
         </Modal>
       )}
     </>

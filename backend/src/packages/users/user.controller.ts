@@ -70,7 +70,7 @@ class UserController extends BaseController {
    *         content:
    *           application/json:
    *           schema:
-   *             $ref: '#/components/schemas/UserDeleteResponseDto'
+   *             type: boolean
    *       404:
    *          description: "User not found. Returns 'false' if the user could not be found."
    *         content:

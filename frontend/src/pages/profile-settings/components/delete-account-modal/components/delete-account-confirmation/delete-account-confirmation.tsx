@@ -4,7 +4,6 @@ import {
   useAppSelector,
   useCallback,
 } from '#libs/hooks/hooks.js';
-import { type UserDeleteRequestDto } from '#packages/users/users.js';
 import { actions as userActions } from '#slices/users/users.js';
 
 import styles from './styles.module.scss';
@@ -14,18 +13,16 @@ type Properties = {
 };
 
 const DeleteAccountConfirmation: React.FC<Properties> = ({ onClose }) => {
-  const { authenticatedUser } = useAppSelector(({ auth }) => {
+  const { authenticatedUserId } = useAppSelector(({ auth }) => {
     return {
-      authenticatedUser: auth.authenticatedUser,
+      authenticatedUserId: auth.authenticatedUser?.id,
     };
   });
 
-  const authenticatedUserId = authenticatedUser?.id;
-
   const dispatch = useAppDispatch();
   const handleDelete = useCallback(
-    (payload: UserDeleteRequestDto): void => {
-      void dispatch(userActions.deleteUser(payload));
+    (id: number): void => {
+      void dispatch(userActions.deleteUser(id));
       onClose?.();
     },
     [dispatch, onClose],
@@ -33,12 +30,12 @@ const DeleteAccountConfirmation: React.FC<Properties> = ({ onClose }) => {
 
   const handleClick = useCallback(() => {
     if (authenticatedUserId) {
-      handleDelete({ id: authenticatedUserId });
+      handleDelete(authenticatedUserId);
     }
   }, [handleDelete, authenticatedUserId]);
 
   return (
-    <div className={styles['modal-body']}>
+    <>
       <p className={styles['text']}>
         Thank you for your feedback and for being with us
       </p>
@@ -48,7 +45,7 @@ const DeleteAccountConfirmation: React.FC<Properties> = ({ onClose }) => {
       <div className={styles['footer']}>
         <Button label="Confirm" style="primary" onClick={handleClick} />
       </div>
-    </div>
+    </>
   );
 };
 

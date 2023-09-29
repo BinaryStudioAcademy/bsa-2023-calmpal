@@ -7,12 +7,12 @@ type Properties = {
   onClose?: () => void;
 };
 
-const DeleteAccountMessage: React.FC<Properties> = ({ onNext, onClose }) => {
+const DeleteAccountFinal: React.FC<Properties> = ({ onNext, onClose }) => {
   const hasNextStep = Boolean(onNext);
   const hasCloseButton = Boolean(onClose);
 
   return (
-    <div className={styles['modal-body']}>
+    <>
       <p>After deleting your account you will:</p>
       <ul className={styles['text']}>
         <li>Not be able to login to CalmPal</li>
@@ -27,8 +27,8 @@ const DeleteAccountMessage: React.FC<Properties> = ({ onNext, onClose }) => {
           <Button label="Continue" style="primary" onClick={onNext} />
         )}
       </div>
-    </div>
+    </>
   );
 };
 
-export { DeleteAccountMessage };
+export { DeleteAccountFinal };

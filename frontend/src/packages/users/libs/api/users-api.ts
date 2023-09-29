@@ -1,11 +1,7 @@
-import { APIPath, ContentType } from '#libs/enums/enums.js';
+import { APIPath } from '#libs/enums/enums.js';
 import { BaseHttpApi } from '#libs/packages/api/api.js';
 import { type HTTP } from '#libs/packages/http/http.js';
 import { type Storage } from '#libs/packages/storage/storage.js';
-import {
-  type UserDeleteRequestDto,
-  type UserDeleteResponseDto,
-} from '#packages/users/users.js';
 
 import { UsersApiPath } from '../enums/enums.js';
 
@@ -20,20 +16,16 @@ class UsersApi extends BaseHttpApi {
     super({ path: APIPath.USERS, baseUrl, http, storage });
   }
 
-  public async deleteUser(
-    payload: UserDeleteRequestDto,
-  ): Promise<UserDeleteResponseDto> {
+  public async deleteUser(id: number): Promise<boolean> {
     const response = await this.load(
-      this.getFullEndpoint(UsersApiPath.$ID, { id: payload.id.toString() }),
+      this.getFullEndpoint(UsersApiPath.$ID, { id: id.toString() }),
       {
         method: 'DELETE',
-        contentType: ContentType.JSON,
-        payload: JSON.stringify(payload),
         hasAuth: true,
       },
     );
 
-    return await response.json<UserDeleteResponseDto>();
+    return await response.json<boolean>();
   }
 }
 

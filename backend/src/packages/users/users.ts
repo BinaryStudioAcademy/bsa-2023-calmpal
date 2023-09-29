@@ -24,8 +24,6 @@ export {
 } from './libs/enums/enums.js';
 export {
   type UserAuthResponseDto,
-  type UserDeleteRequestDto,
-  type UserDeleteResponseDto,
   type UserSignInRequestDto,
   type UserSignInResponseDto,
   type UserSignUpRequestDto,

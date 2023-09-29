@@ -2,8 +2,6 @@ export { UsersApiPath, UserValidationMessage } from './libs/enums/enums.js';
 export {
   type DeleteAccountFormPayload,
   type UserAuthResponseDto,
-  type UserDeleteRequestDto,
-  type UserDeleteResponseDto,
   type UserGetAllItemResponseDto,
   type UserGetAllResponseDto,
   type UserSignInRequestDto,
