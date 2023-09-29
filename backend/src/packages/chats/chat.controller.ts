@@ -496,6 +496,13 @@ class ChatController extends BaseController {
     const { id } = options.params;
     const { id: userId } = options.user;
 
+    if (!Number(id)) {
+      throw new ChatError({
+        status: HTTPCode.BAD_REQUEST,
+        message: ExceptionMessage.CHAT_NOT_FOUND,
+      });
+    }
+
     const isDeleted = await this.chatService.delete({ id: Number(id), userId });
 
     if (!isDeleted) {

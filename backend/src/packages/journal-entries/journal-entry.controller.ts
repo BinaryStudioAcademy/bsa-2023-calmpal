@@ -355,6 +355,13 @@ class JournalEntryController extends BaseController {
       body: { title, text },
     } = options;
 
+    if (!Number(id)) {
+      throw new JournalError({
+        status: HTTPCode.BAD_REQUEST,
+        message: ExceptionMessage.JOURNAL_NOT_FOUND,
+      });
+    }
+
     return {
       status: HTTPCode.OK,
       payload: await this.journalEntryService.update({
@@ -413,10 +420,20 @@ class JournalEntryController extends BaseController {
       params: { id: number };
     }>,
   ): Promise<APIHandlerResponse> {
+    const { id } = options.params;
+
+    if (!Number(id)) {
+      throw new JournalError({
+        status: HTTPCode.BAD_REQUEST,
+        message: ExceptionMessage.JOURNAL_NOT_FOUND,
+      });
+    }
+
     const isDeleted = await this.journalEntryService.delete({
-      id: options.params.id,
+      id,
       user: options.user,
     });
+
     if (!isDeleted) {
       throw new JournalError({
         status: HTTPCode.NOT_FOUND,
