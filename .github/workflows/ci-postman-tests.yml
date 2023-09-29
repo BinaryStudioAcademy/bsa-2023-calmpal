@@ -20,6 +20,7 @@ on:
       - backend/**/*.*
       - shared/**/*.*
       - .github/workflows/ci-postman-tests.yml
+      - .postman/Calmpal.postman_collection.json
 
   workflow_dispatch:
 
@@ -29,7 +30,7 @@ concurrency:
 
 jobs:
   ci-postman-tests:
-    name: Run latest database migration on environment dump
+    name: Run postman prepared tests from config
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source Code

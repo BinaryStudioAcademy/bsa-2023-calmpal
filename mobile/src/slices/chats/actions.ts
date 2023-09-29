@@ -43,14 +43,21 @@ const createChat = createAsyncThunk<
   ChatGetAllItemResponseDto,
   { payload: ChatCreateRequestDto; navigation: NavigationProp<ParamListBase> },
   AsyncThunkConfig
->(`${sliceName}/create-chat`, async ({ payload, navigation }, { extra }) => {
-  const { chatApi } = extra;
+>(
+  `${sliceName}/create-chat`,
+  async ({ payload, navigation }, { extra, dispatch }) => {
+    const { chatApi } = extra;
 
-  const chat = await chatApi.createChat(payload);
-  navigation.navigate(ChatScreenName.CHAT, { title: chat.name, id: chat.id });
+    const chat = await chatApi.createChat(payload);
+    navigation.navigate(ChatScreenName.CHAT, { title: chat.name, id: chat.id });
 
-  return chat;
-});
+    void dispatch(
+      generateReply({ message: payload.message, chatId: chat.id.toString() }),
+    );
+
+    return chat;
+  },
+);
 
 const createMessage = createAsyncThunk<
   ChatMessageGetAllItemResponseDto,
@@ -73,9 +80,20 @@ const generateReply = createAsyncThunk<
   return await chatMessagesApi.generateChatReply(payload);
 });
 
+const deleteChat = createAsyncThunk<number, number, AsyncThunkConfig>(
+  `${sliceName}/delete-chat`,
+  async (id, { extra }) => {
+    const { chatApi } = extra;
+    await chatApi.deleteChat(id);
+
+    return id;
+  },
+);
+
 export {
   createChat,
   createMessage,
+  deleteChat,
   generateReply,
   getAllChats,
   getCurrentChatMessages,

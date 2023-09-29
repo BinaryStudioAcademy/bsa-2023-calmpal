@@ -1,3 +1,4 @@
+import { DEFAULT_NOTE_PAYLOAD } from '#libs/constants/constants.js';
 import { debounce } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
@@ -8,14 +9,11 @@ import {
   useMemo,
   useParams,
 } from '#libs/hooks/hooks.js';
+import { type JournalEntryCreateRequestDto } from '#packages/journal/journal.js';
 import {
-  type JournalEntryCreateRequestDto,
-  type JournalEntryGetAllItemResponseDto,
-} from '#packages/journal/journal.js';
-import {
-  DEFAULT_NOTE_PAYLOAD,
   SAVE_NOTE_TIMEOUT,
   TEXT_PLACEHOLDER,
+  TITLE_PLACEHOLDER,
 } from '#pages/journal/components/note/components/note-input/libs/constants/constants.js';
 import { appActions } from '#slices/app/app-notification.js';
 import { actions as journalActions } from '#slices/journal/journal.js';
@@ -26,15 +24,14 @@ import styles from './styles.module.scss';
 const Note: React.FC = () => {
   const { selectedJournalEntry } = useAppSelector(({ journal }) => {
     return {
-      selectedJournalEntry:
-        journal.selectedJournalEntry as JournalEntryGetAllItemResponseDto,
+      selectedJournalEntry: journal.selectedJournalEntry,
     };
   });
 
   const { control, watch, isDirty } = useAppForm({
     defaultValues: {
-      title: selectedJournalEntry.title,
-      text: selectedJournalEntry.text,
+      title: selectedJournalEntry?.title ?? DEFAULT_NOTE_PAYLOAD.title,
+      text: selectedJournalEntry?.text ?? DEFAULT_NOTE_PAYLOAD.text,
     },
     mode: 'onChange',
   });
@@ -55,10 +52,21 @@ const Note: React.FC = () => {
 
   const handleSaveNote = useCallback(
     (data: JournalEntryCreateRequestDto) => {
+      if (!id) {
+        void dispatch(
+          journalActions.createJournalEntry({
+            title: data.title,
+            text: data.text,
+          }),
+        );
+
+        return;
+      }
+
       void dispatch(
         journalActions.updateJournalEntry({
           id: Number(id),
-          title: data.title || DEFAULT_NOTE_PAYLOAD.title,
+          title: data.title,
           text: data.text,
         }),
       );
@@ -71,13 +79,13 @@ const Note: React.FC = () => {
   }, [handleSaveNote]);
 
   useEffect(() => {
-    if (id && isDirty) {
+    if (isDirty) {
       handleSaveNoteWithDebounce({
         title: titleValue,
         text: textValue,
       });
     }
-  }, [titleValue, textValue, handleSaveNoteWithDebounce, id, isDirty]);
+  }, [titleValue, textValue, handleSaveNoteWithDebounce, isDirty]);
 
   useEffect(() => {
     const handleBeforeUnload = (): void => {
@@ -100,7 +108,7 @@ const Note: React.FC = () => {
     <div className={styles['wrapper']}>
       <NoteInput
         name="title"
-        placeholder={DEFAULT_NOTE_PAYLOAD.title}
+        placeholder={TITLE_PLACEHOLDER}
         control={control}
         shouldParseTextHTML
         contentEditableStyle={styles['title']}

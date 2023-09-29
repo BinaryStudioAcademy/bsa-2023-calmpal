@@ -9,10 +9,11 @@ import {
   ScrollView,
   View,
 } from '#libs/components/components';
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, MeditationScreenName } from '#libs/enums/enums';
 import {
   useAppDispatch,
   useAppRoute,
+  useAppSelector,
   useCallback,
   useEffect,
   useNavigation,
@@ -23,8 +24,12 @@ import { type MeditationNavigationParameterList } from '#libs/types/types';
 import { type MeditationEntryCreateRequestDto } from '#packages/meditation/meditation';
 import { actions as meditationActions } from '#slices/meditation/meditation';
 
-import { AddMeditationModal, MeditationItem } from './components/components';
-import { MOCKED_DATA } from './libs/constants/constants';
+import {
+  AddMeditationModal,
+  MeditationItem,
+  TimerModal,
+} from './components/components';
+import { DEFAULT_DURATION } from './components/timer-modal/libs/constants/constants';
 import { styles } from './styles';
 
 type RouteParameters = {
@@ -32,33 +37,56 @@ type RouteParameters = {
 };
 
 const MeditationList: React.FC = () => {
+  const { meditationEntries } = useAppSelector(({ meditation }) => {
+    return {
+      meditationEntries: meditation.meditationEntries,
+    };
+  });
+
   const dispatch = useAppDispatch();
-  const navigation =
-    useNavigation<
-      NativeStackNavigationProp<MeditationNavigationParameterList>
-    >();
   const route = useAppRoute();
   const { title } = route.params as RouteParameters;
 
   const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
-    MOCKED_DATA,
+    meditationEntries,
     'title',
   );
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isAddModalVisible, setIsAddModalVisible] = useState(false);
+  const [isTimerModalVisible, setIsTimerModalVisible] = useState(false);
+  const [duration, setDuration] = useState(DEFAULT_DURATION);
 
-  const handleShowModal = (): void => {
-    setIsModalVisible(true);
-  };
+  const navigation =
+    useNavigation<
+      NativeStackNavigationProp<MeditationNavigationParameterList>
+    >();
 
-  const handleCloseModal = (): void => {
-    setIsModalVisible(false);
-  };
   const handleSubmit = useCallback(
     (payload: MeditationEntryCreateRequestDto) => {
       void dispatch(meditationActions.createMeditationEntry(payload));
     },
     [dispatch],
   );
+
+  const handleToggleAddModalVisibility = (): void => {
+    setIsAddModalVisible((previous) => {
+      return !previous;
+    });
+  };
+
+  const handleToggleTimerModalVisibility = (): void => {
+    setIsTimerModalVisible((previous) => {
+      return !previous;
+    });
+  };
+
+  const handleSelectMeditation = (id: string): void => {
+    void dispatch(meditationActions.setSelectedMeditationEntry(id));
+    handleToggleTimerModalVisibility();
+  };
+
+  const handleSetPlaylist = (): void => {
+    navigation.navigate(MeditationScreenName.MEDITATION, { duration });
+  };
 
   useEffect(() => {
     navigation.setOptions({
@@ -70,11 +98,23 @@ const MeditationList: React.FC = () => {
 
   useEffect(() => {
     void dispatch(meditationActions.initPlayer());
+    void dispatch(meditationActions.getAllMeditationEntries());
   }, [dispatch]);
+
+  useEffect(() => {
+    void dispatch(meditationActions.setPlaylist(meditationEntries));
+  }, [dispatch, meditationEntries]);
 
   return (
     <LinearGradient>
       <View style={styles.container}>
+        {isTimerModalVisible && (
+          <TimerModal
+            onClose={handleToggleTimerModalVisibility}
+            onSetDuration={setDuration}
+            onStartMeditation={handleSetPlaylist}
+          />
+        )}
         <InputSearch
           placeholder="Search topic"
           setSearchQuery={setSearchQuery}
@@ -84,22 +124,24 @@ const MeditationList: React.FC = () => {
             return (
               <MeditationItem
                 title={item.title}
-                duration={item.duration}
                 key={item.id}
+                onClick={(): void => {
+                  handleSelectMeditation(item.id);
+                }}
               />
             );
           })}
         </ScrollView>
         <Button
-          onPress={handleShowModal}
+          onPress={handleToggleAddModalVisibility}
           iconName="plus"
           label="Add new meditation"
           type="transparent"
           color={AppColor.BLUE_200}
         />
         <AddMeditationModal
-          isVisible={isModalVisible}
-          onClose={handleCloseModal}
+          isVisible={isAddModalVisible}
+          onClose={handleToggleAddModalVisibility}
           onSubmit={handleSubmit}
         />
       </View>
