@@ -131,6 +131,10 @@
     padding-left: 20px;
   }
 
+  .tooltip::before {
+    left: 5%;
+  }
+
   .tooltip::after {
     left: 0;
   }
@@ -139,6 +143,10 @@
 @media (width < 768px) {
   .no-image {
     padding-left: 20px;
+  }
+
+  .tooltip::before {
+    left: 25%;
   }
 
   .tooltip::after {
