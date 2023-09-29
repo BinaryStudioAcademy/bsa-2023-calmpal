@@ -5,8 +5,11 @@ import { type Storage } from '#libs/packages/storage/storage';
 
 import { JournalApiPath } from './libs/enums/enums';
 import {
+  type JournalEntryCreateRequestDto,
   type JournalEntryDeleteResponseDto,
+  type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
+  type JournalEntryUpdatePayloadDto,
 } from './libs/types/types';
 
 type Constructor = {
@@ -46,6 +49,40 @@ class JournalApi extends BaseHttpApi {
     );
 
     return await response.json<JournalEntryDeleteResponseDto>();
+  }
+
+  public async create(
+    payload: JournalEntryCreateRequestDto,
+  ): Promise<JournalEntryGetAllItemResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(JournalApiPath.ROOT, {}),
+      {
+        method: 'POST',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify(payload),
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<JournalEntryGetAllItemResponseDto>();
+  }
+
+  public async update(
+    payload: JournalEntryUpdatePayloadDto,
+  ): Promise<JournalEntryGetAllItemResponseDto> {
+    const response = await this.load(
+      this.getFullEndpoint(JournalApiPath.$ID, {
+        id: payload.id.toString(),
+      }),
+      {
+        method: 'PUT',
+        contentType: ContentType.JSON,
+        payload: JSON.stringify({ title: payload.title, text: payload.text }),
+        hasAuth: true,
+      },
+    );
+
+    return await response.json<JournalEntryGetAllItemResponseDto>();
   }
 }
 

@@ -1,4 +1,7 @@
-export { NOTE_SANITIZER_OPTIONS } from './libs/constants/constants.js';
+export {
+  DEFAULT_NOTE_PAYLOAD,
+  NOTE_SANITIZER_OPTIONS,
+} from './libs/constants/constants.js';
 export { JournalApiPath } from './libs/enums/enums.js';
 export {
   type JournalEntryCreateRequestDto,
