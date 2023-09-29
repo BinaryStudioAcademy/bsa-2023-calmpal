@@ -1,21 +1,28 @@
-import { Button, Icon } from '#libs/components/components.js';
-import { AppRoute, IconColor } from '#libs/enums/enums.js';
-import { useAppDispatch, useCallback } from '#libs/hooks/hooks.js';
-import { actions as appActions } from '#slices/app/app.js';
+import { Icon } from '#libs/components/components.js';
+import { IconColor, TimeFormat } from '#libs/enums/enums.js';
+import { getFormattedDate } from '#libs/helpers/helpers.js';
 
-import { PLAN_BENEFITS } from '../../libs/constants.js';
 import styles from './styles.module.scss';
 
 const dialogStyles = {
   sectionTitle: styles['section-title'],
 };
 
-const SubscriptionManagementDialog: React.FC = () => {
-  const dispatch = useAppDispatch();
+type Properties = {
+  price: number;
+  benefits: string[];
+  endDate: Date;
+};
 
-  const handleSubscribe = useCallback(() => {
-    dispatch(appActions.navigate(AppRoute.PROFILE_SUBSCRIPTION_CHECKOUT));
-  }, [dispatch]);
+const SubscriptionManagementDialog: React.FC<Properties> = ({
+  benefits,
+  price,
+  endDate,
+}) => {
+  const formattedDate = getFormattedDate(
+    new Date(endDate),
+    TimeFormat.D_MMM_YYYY,
+  );
 
   return (
     <div className={styles['subscription-management']}>
@@ -27,18 +34,18 @@ const SubscriptionManagementDialog: React.FC = () => {
           <div className={styles['meta-wrapper']}>
             <div>
               <p className={dialogStyles.sectionTitle}>Plan renews on</p>
-              <p className={styles['meta']}>30 Sept 2023</p>
+              <p className={styles['meta']}>{formattedDate}</p>
             </div>
             <div>
               <p className={dialogStyles.sectionTitle}>Payment</p>
-              <p className={styles['meta']}>$7.5 / month</p>
+              <p className={styles['meta']}>${price} / month</p>
             </div>
           </div>
         </div>
         <div>
           <p className={dialogStyles.sectionTitle}>Plan benefits</p>
           <ul className={styles['benefits']}>
-            {PLAN_BENEFITS.map((benefit) => {
+            {benefits.map((benefit) => {
               return (
                 <li key={benefit} className={styles['benefit']}>
                   <Icon
@@ -52,15 +59,6 @@ const SubscriptionManagementDialog: React.FC = () => {
               );
             })}
           </ul>
-        </div>
-        <div>
-          <Button
-            type="button"
-            label="Subscribe"
-            style="primary"
-            styleColor="blue"
-            onClick={handleSubscribe}
-          />
         </div>
       </div>
     </div>
