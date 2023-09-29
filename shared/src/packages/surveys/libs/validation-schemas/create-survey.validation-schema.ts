@@ -25,21 +25,6 @@ const createSurveyValidationSchema = joi.object<SurveyRequestDto, true>({
     .messages({
       'array.min': SurveyValidationMessage.MINIMUM_PREFERENCE_LENGTH,
     }),
-  journalingExperience: joi
-    .array()
-    .items(
-      joi
-        .string()
-        .max(SurveyValidationRule.MAXIMUM_PREFERENCE_ITEM_LENGTH)
-        .min(SurveyValidationRule.MINIMUM_PREFERENCE_LENGTH)
-        .messages({
-          'string.max': SurveyValidationMessage.MAXIMUM_PREFERENCE_ITEM_LENGTH,
-        }),
-    )
-    .required()
-    .messages({
-      'array.min': SurveyValidationMessage.MINIMUM_PREFERENCE_LENGTH,
-    }),
   feelings: joi
     .array()
     .items(
@@ -86,20 +71,13 @@ const createSurveyValidationSchema = joi.object<SurveyRequestDto, true>({
       'array.min': SurveyValidationMessage.MINIMUM_PREFERENCE_LENGTH,
     }),
   meditationExperience: joi
-    .array()
-    .items(
-      joi
-        .string()
-        .max(SurveyValidationRule.MAXIMUM_PREFERENCE_ITEM_LENGTH)
-        .min(SurveyValidationRule.MINIMUM_PREFERENCE_LENGTH)
-        .messages({
-          'string.max': SurveyValidationMessage.MAXIMUM_PREFERENCE_ITEM_LENGTH,
-        }),
-    )
-    .required()
-    .messages({
-      'array.min': SurveyValidationMessage.MINIMUM_PREFERENCE_LENGTH,
-    }),
+    .string()
+    .max(SurveyValidationRule.MAXIMUM_PREFERENCE_ITEM_LENGTH)
+    .allow(null),
+  journalingExperience: joi
+    .string()
+    .max(SurveyValidationRule.MAXIMUM_PREFERENCE_ITEM_LENGTH)
+    .allow(null),
 });
 
 export { createSurveyValidationSchema };

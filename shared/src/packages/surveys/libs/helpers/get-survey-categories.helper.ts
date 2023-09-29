@@ -1,7 +1,7 @@
 import { PREFERENCES_OTHER_CATEGORY } from '../constants/constants.js';
-import { type SurveyInputDto } from '../types/types.js';
+import { type SurveyMultipleInputDto } from '../types/types.js';
 
-const getSurveyCategories: (payload: SurveyInputDto) => string[] = (
+const getSurveyCategories: (payload: SurveyMultipleInputDto) => string[] = (
   payload,
 ) => {
   const { preferences, other } = payload;

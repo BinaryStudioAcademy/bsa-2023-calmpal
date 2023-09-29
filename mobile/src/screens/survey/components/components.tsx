@@ -4,5 +4,6 @@ export { JournalingStep } from './journaling-step/journaling-step';
 export { MeditationStep } from './meditation-step/meditation-step';
 export { PreferencesStep } from './preferences-step/preferences-step';
 export { SurveyCategory } from './survey-category/survey-category';
-export { SurveyStep } from './survey-step/survey-step';
+export { SurveyStepMultiple } from './survey-step/survey-step-multiple';
+export { SurveyStepOne } from './survey-step/survey-step-one';
 export { WorriesStep } from './worries-step/worries-step';

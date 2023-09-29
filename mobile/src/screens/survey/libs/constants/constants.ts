@@ -1,13 +1,18 @@
 import {
   PREFERENCES_OTHER_CATEGORY,
-  type SurveyInputDto,
+  type SurveyMultipleInputDto,
+  type SurveyOneInputDto,
 } from '#packages/survey/survey';
 
 const TEXTAREA_ROWS_COUNT = 3;
 
-const DEFAULT_SURVEY_PAYLOAD: SurveyInputDto = {
+const DEFAULT_SURVEY_MULTIPLE_PAYLOAD: SurveyMultipleInputDto = {
   preferences: [],
   other: '',
+};
+
+const DEFAULT_SURVEY_ONE_PAYLOAD: SurveyOneInputDto = {
+  preferences: '',
 };
 
 const PREFERENCES_CATEGORIES: string[] = [
@@ -58,7 +63,8 @@ const JOURNALING_EXPERIENCE_CATEGORIES: string[] = [
 ];
 
 export {
-  DEFAULT_SURVEY_PAYLOAD,
+  DEFAULT_SURVEY_MULTIPLE_PAYLOAD,
+  DEFAULT_SURVEY_ONE_PAYLOAD,
   FEELING_CATEGORIES,
   GOALS_CATEGORIES,
   JOURNALING_EXPERIENCE_CATEGORIES,

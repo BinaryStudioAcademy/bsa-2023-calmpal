@@ -11,12 +11,12 @@ import {
 import { type SurveyNavigationParameterList } from '#libs/types/types';
 import {
   getSurveyCategories,
-  type SurveyInputDto,
-  surveyInputValidationSchema,
+  surveyInputValidationSchemaMultiple,
+  type SurveyMultipleInputDto,
 } from '#packages/survey/survey';
 import { type UserAuthResponseDto } from '#packages/users/users';
 import {
-  DEFAULT_SURVEY_PAYLOAD,
+  DEFAULT_SURVEY_MULTIPLE_PAYLOAD,
   TEXTAREA_ROWS_COUNT,
 } from '#screens/survey/libs/constants/constants';
 import { actions as authActions } from '#slices/auth/auth';
@@ -36,7 +36,7 @@ type SurveyStepProperties = {
   isLastStep?: boolean;
 };
 
-const SurveyStep: React.FC<SurveyStepProperties> = ({
+const SurveyStepMultiple: React.FC<SurveyStepProperties> = ({
   stepSurvey,
   navigation,
   stepTitle,
@@ -46,12 +46,11 @@ const SurveyStep: React.FC<SurveyStepProperties> = ({
   isButtonBack = true,
   isLastStep = false,
 }) => {
-  const { control, errors, isValid, handleSubmit } = useAppForm<SurveyInputDto>(
-    {
-      defaultValues: DEFAULT_SURVEY_PAYLOAD,
-      validationSchema: surveyInputValidationSchema,
-    },
-  );
+  const { control, errors, isValid, handleSubmit } =
+    useAppForm<SurveyMultipleInputDto>({
+      defaultValues: DEFAULT_SURVEY_MULTIPLE_PAYLOAD,
+      validationSchema: surveyInputValidationSchemaMultiple,
+    });
 
   const {
     field: { onChange: onCategoryChange, value: categoriesValue },
@@ -90,7 +89,7 @@ const SurveyStep: React.FC<SurveyStepProperties> = ({
   );
 
   const handleStepSubmit = useCallback(
-    (payload: SurveyInputDto) => {
+    (payload: SurveyMultipleInputDto) => {
       const data = { [stepSurvey]: getSurveyCategories(payload) };
       dispatch(actions.updateSurveyData(data));
     },
@@ -100,7 +99,7 @@ const SurveyStep: React.FC<SurveyStepProperties> = ({
   const [shouldRender, setShouldRender] = useState(false);
 
   const handleSurveySubmit = useCallback(
-    (payload: SurveyInputDto) => {
+    (payload: SurveyMultipleInputDto) => {
       handleStepSubmit(payload);
       const user = { userId: userId };
       dispatch(actions.updateSurveyData(user));
@@ -167,4 +166,4 @@ const SurveyStep: React.FC<SurveyStepProperties> = ({
   );
 };
 
-export { SurveyStep };
+export { SurveyStepMultiple };

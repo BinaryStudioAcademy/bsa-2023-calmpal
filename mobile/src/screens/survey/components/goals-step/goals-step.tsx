@@ -6,14 +6,14 @@ import { SurveyScreenName } from '#libs/enums/enums';
 import { type SurveyNavigationParameterList } from '#libs/types/types';
 import { GOALS_CATEGORIES } from '#screens/survey/libs/constants/constants';
 
-import { SurveyStep } from '../components';
+import { SurveyStepMultiple } from '../components';
 
 const GoalsStep: React.FC = () => {
   const navigation =
     useNavigation<NavigationProp<SurveyNavigationParameterList>>();
 
   return (
-    <SurveyStep
+    <SurveyStepMultiple
       stepSurvey={SurveyScreenName.GOALS}
       navigation={navigation}
       stepTitle="What do you want to achieve with Calmpal?"

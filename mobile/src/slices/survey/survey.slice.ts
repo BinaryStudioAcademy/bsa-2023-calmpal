@@ -7,8 +7,8 @@ type SurveyState = {
   feelings: string[];
   goals: string[];
   worries: string[];
-  meditationExperience: string[];
-  journalingExperience: string[];
+  meditationExperience: string;
+  journalingExperience: string;
 };
 
 const initialState: SurveyState = {
@@ -17,8 +17,8 @@ const initialState: SurveyState = {
   feelings: [],
   goals: [],
   worries: [],
-  meditationExperience: [],
-  journalingExperience: [],
+  meditationExperience: '',
+  journalingExperience: '',
 };
 
 const { reducer, actions, name } = createSlice({

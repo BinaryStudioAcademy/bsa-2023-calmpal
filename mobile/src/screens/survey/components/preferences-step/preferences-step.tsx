@@ -6,14 +6,14 @@ import { SurveyScreenName } from '#libs/enums/enums';
 import { type SurveyNavigationParameterList } from '#libs/types/types';
 import { PREFERENCES_CATEGORIES } from '#screens/survey/libs/constants/constants';
 
-import { SurveyStep } from '../components';
+import { SurveyStepMultiple } from '../components';
 
 const PreferencesStep: React.FC = () => {
   const navigation =
     useNavigation<NavigationProp<SurveyNavigationParameterList>>();
 
   return (
-    <SurveyStep
+    <SurveyStepMultiple
       stepSurvey={SurveyScreenName.PREFERENCES}
       navigation={navigation}
       stepTitle="What can we help you with?"

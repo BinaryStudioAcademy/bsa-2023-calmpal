@@ -6,14 +6,14 @@ import { SurveyScreenName } from '#libs/enums/enums';
 import { type SurveyNavigationParameterList } from '#libs/types/types';
 import { WORRIES_CATEGORIES } from '#screens/survey/libs/constants/constants';
 
-import { SurveyStep } from '../components';
+import { SurveyStepMultiple } from '../components';
 
 const WorriesStep: React.FC = () => {
   const navigation =
     useNavigation<NavigationProp<SurveyNavigationParameterList>>();
 
   return (
-    <SurveyStep
+    <SurveyStepMultiple
       stepSurvey={SurveyScreenName.WORRIES}
       navigation={navigation}
       stepTitle="What do you usually worry about most?"
