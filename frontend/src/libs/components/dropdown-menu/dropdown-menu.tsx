@@ -22,7 +22,6 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
   const { pathname } = useLocation();
   const routerParameters = useParams();
   const [isOpen, setOpen] = useState(false);
-
   const handleDropdownToggle = useCallback((): void => {
     setOpen((previous) => {
       return !previous;
@@ -54,14 +53,14 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
 
           return (
             <div key={path}>
-              <div
-                className={getValidClassNames(
-                  styles['dropdown-item'],
-                  isSelected && styles['selected'],
-                )}
-              >
+              <div className={styles['dropdown-item']}>
                 <Link to={wrapPathWith?.(path) ?? path}>
-                  <span className={styles['item']}>
+                  <span
+                    className={getValidClassNames(
+                      styles['item'],
+                      isSelected && styles['selected'],
+                    )}
+                  >
                     <span className="visually-hidden">Go to {item.name}</span>
                     <Icon
                       name={icon}
