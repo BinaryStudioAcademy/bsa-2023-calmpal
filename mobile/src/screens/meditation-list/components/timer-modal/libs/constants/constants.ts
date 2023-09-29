@@ -1,0 +1,7 @@
+const DEFAULT_DURATION = 0;
+
+const DEFAULT_DURATION_VALUE = {
+  meditationDuration: DEFAULT_DURATION,
+};
+
+export { DEFAULT_DURATION, DEFAULT_DURATION_VALUE };

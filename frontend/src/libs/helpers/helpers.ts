@@ -10,5 +10,4 @@ export {
   groupChatMessage,
   replaceTemplateWithValue,
   sanitizeInput,
-  SECONDS_IN_MINUTE,
 } from 'shared/build/index.js';

@@ -1,3 +1,0 @@
-const MOCKED_DURATION = 10;
-
-export { MOCKED_DURATION };

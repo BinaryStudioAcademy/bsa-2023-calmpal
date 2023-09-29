@@ -3,6 +3,7 @@ import { AppState } from 'react-native';
 import KeepAwake from 'react-native-keep-awake';
 
 import {
+  useAppDispatch,
   useCallback,
   useEffect,
   useFocusEffect,
@@ -13,20 +14,21 @@ import {
   Event,
   player,
   State,
+  TRACK_START_TIME,
   usePlayerEvents,
 } from '#libs/packages/player/player';
-import { type Track } from '#libs/types/types';
+import { actions as meditationActions } from '#slices/meditation/meditation';
 
 import { Controls, ProgressBar } from './components/components';
-import { MOCKED_PLAYLIST, TRACK_START_INDEX } from './libs/constants/constants';
 
 type Properties = {
-  setCurrentTrack: React.Dispatch<React.SetStateAction<Track | null>>;
+  duration: number;
 };
 
-const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
+const Player: React.FC<Properties> = ({ duration }) => {
   const [playbackState, setPlaybackState] = useState<State | null>(null);
   const isPlaying = playbackState === State.Playing;
+  const dispatch = useAppDispatch();
 
   const handlePlaybackStateChange = async (): Promise<void> => {
     const state = await player.getState();
@@ -41,7 +43,7 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
   const handleNextTrack = async (nextTrack: number): Promise<void> => {
     const track = await player.getTrack(nextTrack);
     if (track) {
-      setCurrentTrack(track);
+      void dispatch(meditationActions.setSelectedMeditationEntry(track.id));
     }
   };
 
@@ -57,16 +59,13 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
   );
 
   useEffect(() => {
+    void player.seek(TRACK_START_TIME);
+
     return () => {
       void player.stopPlaying();
       KeepAwake.deactivate();
     };
   }, []);
-
-  useEffect(() => {
-    void player.setPlaylist(MOCKED_PLAYLIST);
-    setCurrentTrack(MOCKED_PLAYLIST[TRACK_START_INDEX] as Track);
-  }, [setCurrentTrack]);
 
   useEffect(() => {
     const handleAppStateChange = (nextAppState: string): void => {
@@ -97,7 +96,7 @@ const Player: React.FC<Properties> = ({ setCurrentTrack }) => {
 
   return (
     <>
-      <ProgressBar isPlaying={isPlaying} />
+      <ProgressBar isPlaying={isPlaying} trackDuration={duration} />
       <Controls isPlaying={isPlaying} />
     </>
   );

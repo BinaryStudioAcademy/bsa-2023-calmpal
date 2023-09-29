@@ -1,4 +1,4 @@
-import { SECONDS_IN_MINUTE } from '#libs/helpers/helpers.js';
+import { SECONDS_IN_MINUTE } from '../../helpers/helpers.js';
 
 const SHORT_DURATION_IN_MINUTES = 5;
 const MEDIUM_DURATION_IN_MINUTES = 10;
@@ -14,4 +14,12 @@ const DURATION_UNIT = {
   MINUTES: 'min',
 } as const;
 
-export { DURATION_UNIT, MEDITATION_DURATION };
+const TRACK_START_TIME = 0;
+const TRACK_SKIP_SECONDS = 30;
+
+export {
+  DURATION_UNIT,
+  MEDITATION_DURATION,
+  TRACK_SKIP_SECONDS,
+  TRACK_START_TIME,
+};
