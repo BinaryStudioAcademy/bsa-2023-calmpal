@@ -1,6 +1,7 @@
 import { Button, Icon } from '#libs/components/components.js';
 import { type IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
+import { useCallback } from '#libs/hooks/hooks.js';
 import { type IconName, type ValueOf } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
@@ -34,6 +35,14 @@ const Card: React.FC<Properties> = ({
   const hasImage = Boolean(imageUrl);
   const hasIcon = Boolean(iconName);
   const hasIconRight = Boolean(iconRight);
+
+  const handleIconClick = useCallback(
+    (event_: React.MouseEvent) => {
+      event_.preventDefault();
+      onIconClick?.();
+    },
+    [onIconClick],
+  );
 
   return (
     <div className={styles['container']}>
@@ -77,7 +86,7 @@ const Card: React.FC<Properties> = ({
           label="delete chat"
           style="icon-right"
           isLabelVisuallyHidden
-          onClick={onIconClick}
+          onClick={handleIconClick}
           iconName={iconRight}
           iconColor={iconColor}
           iconWidth={25}
