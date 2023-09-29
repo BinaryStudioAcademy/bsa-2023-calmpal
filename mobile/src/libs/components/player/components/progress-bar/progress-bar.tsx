@@ -20,8 +20,10 @@ const ProgressBar: React.FC<Properties> = ({ isPlaying }) => {
 
   return (
     <View style={styles.wrapper}>
-      <Text style={styles.progress}>{getFormattedTime(timeProgress)}</Text>
-      <Text style={styles.duration}>{getFormattedTime(duration)}</Text>
+      <Text style={styles.progress}>
+        {getFormattedTime(timeProgress, false)}
+      </Text>
+      <Text style={styles.duration}>{getFormattedTime(duration, false)}</Text>
       <Slider
         minimumValue={TRACK_START_TIME}
         maximumValue={duration}
