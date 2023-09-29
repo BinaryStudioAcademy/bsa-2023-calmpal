@@ -13,6 +13,7 @@ import { AppColor } from '#libs/enums/enums';
 import {
   useAppDispatch,
   useAppRoute,
+  useAppSelector,
   useCallback,
   useEffect,
   useNavigation,
@@ -24,7 +25,7 @@ import { type MeditationEntryCreateRequestDto } from '#packages/meditation/medit
 import { actions as meditationActions } from '#slices/meditation/meditation';
 
 import { AddMeditationModal, MeditationItem } from './components/components';
-import { MOCKED_DATA } from './libs/constants/constants';
+import { MOCKED_DURATION } from './libs/constants/constants';
 import { styles } from './styles';
 
 type RouteParameters = {
@@ -32,6 +33,12 @@ type RouteParameters = {
 };
 
 const MeditationList: React.FC = () => {
+  const { meditationEntries } = useAppSelector(({ meditation }) => {
+    return {
+      meditationEntries: meditation.meditationEntries,
+    };
+  });
+
   const dispatch = useAppDispatch();
   const navigation =
     useNavigation<
@@ -41,8 +48,8 @@ const MeditationList: React.FC = () => {
   const { title } = route.params as RouteParameters;
 
   const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
-    MOCKED_DATA,
-    'title',
+    meditationEntries,
+    'name',
   );
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -59,7 +66,6 @@ const MeditationList: React.FC = () => {
     },
     [dispatch],
   );
-
   useEffect(() => {
     navigation.setOptions({
       header: () => {
@@ -83,8 +89,8 @@ const MeditationList: React.FC = () => {
           {filteredMeditationTopics.map((item) => {
             return (
               <MeditationItem
-                title={item.title}
-                duration={item.duration}
+                title={item.name}
+                duration={MOCKED_DURATION}
                 key={item.id}
               />
             );
