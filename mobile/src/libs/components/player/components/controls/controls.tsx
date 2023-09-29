@@ -2,7 +2,12 @@ import React from 'react';
 
 import { Button, View } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
-import { usePlayerControls, useState } from '#libs/hooks/hooks';
+import {
+  useCallback,
+  useFocusEffect,
+  usePlayerControls,
+  useState,
+} from '#libs/hooks/hooks';
 
 import { styles } from './styles';
 
@@ -24,6 +29,12 @@ const Controls: React.FC<Properties> = ({ isPlaying: initialIsPlaying }) => {
     setIsPlaying(!isPlaying);
     handlePlayPause();
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      setIsPlaying(false);
+    }, [setIsPlaying]),
+  );
 
   return (
     <View style={styles.container}>
