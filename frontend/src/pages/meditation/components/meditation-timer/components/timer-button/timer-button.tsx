@@ -44,7 +44,7 @@ const TimerButton: React.FC<Properties> = ({
           isActive && styles['active-text'],
         )}
       >
-        <span>{getFormattedTime(duration)}</span>
+        <span>{getFormattedTime(duration, false)}</span>
         <span>{unit}</span>
       </div>
     </label>

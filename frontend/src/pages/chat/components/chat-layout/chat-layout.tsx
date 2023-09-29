@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Loader } from '#libs/components/components.js';
 import { DataStatus } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
@@ -30,15 +31,21 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
   const { id } = useParams<{ id: string }>();
   const bottomElementReference = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
-  const { currentChatMessages, authenticatedUser, createMessageDataStatus } =
-    useAppSelector(({ chats, auth }) => {
-      return {
-        currentChatMessages: chats.currentChatMessages,
-        authenticatedUser: auth.authenticatedUser as UserAuthResponseDto,
-        createMessageDataStatus: chats.createMessageDataStatus,
-      };
-    });
+  const {
+    currentChatMessages,
+    authenticatedUser,
+    createMessageDataStatus,
+    generateReplyDataStatus,
+  } = useAppSelector(({ chats, auth }) => {
+    return {
+      currentChatMessages: chats.currentChatMessages,
+      authenticatedUser: auth.authenticatedUser as UserAuthResponseDto,
+      createMessageDataStatus: chats.createMessageDataStatus,
+      generateReplyDataStatus: chats.generateReplyDataStatus,
+    };
+  });
   const hasId = Boolean(id);
+  const isChatbotReplyLoading = generateReplyDataStatus === DataStatus.PENDING;
   const currentChatMessagesLength =
     Object.values(currentChatMessages).flat().length;
 
@@ -67,6 +74,7 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
   useEffect(() => {
     if (createMessageDataStatus === DataStatus.FULFILLED) {
       void dispatch(chatActions.getAllChats(filter));
+      dispatch(chatActions.setCreateMessageDataStatus(DataStatus.IDLE));
     }
   }, [createMessageDataStatus, dispatch, filter]);
 
@@ -92,15 +100,20 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
                       key={item.id}
                       message={item.message}
                       isSender={item.senderId === authenticatedUser.id}
+                      sentTime={item.createdAt}
                     />
                   );
                 })}
               </React.Fragment>
             );
           })}
+        {isChatbotReplyLoading && <Loader />}
         <div ref={bottomElementReference} />
       </div>
-      <ChatFooter onSend={handleSend} />
+      <ChatFooter
+        onSend={handleSend}
+        isChatbotReplyLoading={isChatbotReplyLoading}
+      />
     </>
   );
 };

@@ -14,9 +14,13 @@ import styles from './styles.module.scss';
 
 type Properties = {
   onSend: ({ message }: ChatInputValue) => void;
+  isChatbotReplyLoading: boolean;
 };
 
-const ChatFooter: React.FC<Properties> = ({ onSend }) => {
+const ChatFooter: React.FC<Properties> = ({
+  onSend,
+  isChatbotReplyLoading,
+}) => {
   const { id } = useParams<{ id: string }>();
   const { control, handleSubmit, errors, reset, watch } =
     useAppForm<ChatInputValue>({
@@ -46,6 +50,7 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
   );
 
   const isMessageEmpty = messageValue.trim() === '';
+  const isDisabled = isMessageEmpty || isChatbotReplyLoading;
 
   return (
     <footer className={styles['chat-footer']}>
@@ -61,7 +66,7 @@ const ChatFooter: React.FC<Properties> = ({ onSend }) => {
         <button
           type="submit"
           className={styles['send-button']}
-          disabled={isMessageEmpty}
+          disabled={isDisabled}
         >
           <span className="visually-hidden">Send message</span>
           <Icon name="send" color={IconColor.BLUE} width={24} height={24} />

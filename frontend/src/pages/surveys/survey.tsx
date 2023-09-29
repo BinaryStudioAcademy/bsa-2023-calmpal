@@ -72,7 +72,7 @@ const Survey: React.FC = () => {
     <div className={styles['container']}>
       <Header routes={SIDEBAR_ROUTES} />
       {surveyPreferencesDataStatus === DataStatus.PENDING ? (
-        <Loader />
+        <Loader isOverflow />
       ) : (
         <div className={styles['survey']}>
           <div className={styles['name']}>

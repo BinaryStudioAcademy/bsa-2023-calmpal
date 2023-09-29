@@ -5,11 +5,11 @@ import {
   useFormController,
 } from '#libs/hooks/hooks.js';
 
-import { TimerButton } from './components/timer-button/timer-button.js';
 import {
   DURATION_UNIT,
   MEDITATION_DURATION,
-} from './libs/constants/constants.js';
+} from '../../libs/constants/constants.js';
+import { TimerButton } from './components/components.js';
 import styles from './styles.module.scss';
 
 type DurationKey = keyof typeof MEDITATION_DURATION;
