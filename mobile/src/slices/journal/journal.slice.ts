@@ -6,6 +6,7 @@ import { type JournalEntryGetAllItemResponseDto } from '#packages/journal/journa
 
 import {
   createJournalEntry,
+  deleteJournal,
   getAllJournalEntries,
   updateJournalEntry,
 } from './actions';
@@ -14,6 +15,7 @@ type State = {
   allJournalEntries: JournalEntryGetAllItemResponseDto[];
   selectedJournalEntry: JournalEntryGetAllItemResponseDto | null;
   journalEntriesDataStatus: ValueOf<typeof DataStatus>;
+  deleteJournalEntryDataStatus: ValueOf<typeof DataStatus>;
   createJournalEntryDataStatus: ValueOf<typeof DataStatus>;
   updateJournalEntryDataStatus: ValueOf<typeof DataStatus>;
 };
@@ -22,6 +24,7 @@ const initialState: State = {
   allJournalEntries: [],
   selectedJournalEntry: null,
   journalEntriesDataStatus: DataStatus.IDLE,
+  deleteJournalEntryDataStatus: DataStatus.IDLE,
   createJournalEntryDataStatus: DataStatus.IDLE,
   updateJournalEntryDataStatus: DataStatus.IDLE,
 };
@@ -47,6 +50,17 @@ const { reducer, actions, name } = createSlice({
     });
     builder.addCase(getAllJournalEntries.rejected, (state) => {
       state.journalEntriesDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(deleteJournal.pending, (state) => {
+      state.deleteJournalEntryDataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(deleteJournal.fulfilled, (state, action) => {
+      state.allJournalEntries = action.payload;
+      state.deleteJournalEntryDataStatus = DataStatus.FULFILLED;
+    });
+    builder.addCase(deleteJournal.rejected, (state) => {
+      state.deleteJournalEntryDataStatus = DataStatus.REJECTED;
     });
 
     builder.addCase(createJournalEntry.pending, (state) => {

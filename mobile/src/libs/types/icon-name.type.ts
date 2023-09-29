@@ -2,6 +2,7 @@ type IconName =
   | 'bell'
   | 'plus'
   | 'chat'
+  | 'delete'
   | 'home'
   | 'back-arrow'
   | 'user'

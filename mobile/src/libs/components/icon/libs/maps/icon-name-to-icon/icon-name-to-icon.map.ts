@@ -3,6 +3,7 @@ import Backward from '#assets/img/icons/backward.svg';
 import Bell from '#assets/img/icons/bell.svg';
 import Chat from '#assets/img/icons/chat.svg';
 import Close from '#assets/img/icons/close.svg';
+import Delete from '#assets/img/icons/delete.svg';
 import Download from '#assets/img/icons/download.svg';
 import Forward from '#assets/img/icons/forward.svg';
 import Home from '#assets/img/icons/home.svg';
@@ -22,6 +23,7 @@ const iconNameToIcon: Record<IconName, SVGIcon> = {
   'bell': Bell as SVGIcon,
   'plus': Plus as SVGIcon,
   'chat': Chat as SVGIcon,
+  'delete': Delete as SVGIcon,
   'home': Home as SVGIcon,
   'back-arrow': BackArrow as SVGIcon,
   'user': User as SVGIcon,

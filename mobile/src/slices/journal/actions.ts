@@ -7,6 +7,7 @@ import {
   type JournalEntryGetAllResponseDto,
   type JournalEntryUpdatePayloadDto,
 } from '#packages/journal/journal';
+import { actions as journalActions } from '#slices/journal/journal';
 
 import { name as sliceName } from './journal.slice';
 
@@ -30,6 +31,29 @@ const getAllJournalEntries = createAsyncThunk<
   return await journalApi.getAllJournalEntries();
 });
 
+const deleteJournal = createAsyncThunk<
+  JournalEntryGetAllItemResponseDto[],
+  number,
+  AsyncThunkConfig
+>(
+  `${sliceName}/delete-journal-entry`,
+  async (id, { extra, getState, dispatch }) => {
+    const { journalApi } = extra;
+    await journalApi.deleteJournalEntry(id);
+    const {
+      journal: { allJournalEntries, selectedJournalEntry },
+    } = getState();
+
+    if (selectedJournalEntry?.id === id) {
+      dispatch(journalActions.setSelectedJournalEntry(null));
+    }
+
+    return allJournalEntries.filter((journal) => {
+      return journal.id !== id;
+    });
+  },
+);
+
 const updateJournalEntry = createAsyncThunk<
   JournalEntryGetAllItemResponseDto,
   JournalEntryUpdatePayloadDto,
@@ -40,4 +64,9 @@ const updateJournalEntry = createAsyncThunk<
   return await journalApi.update(payload);
 });
 
-export { createJournalEntry, getAllJournalEntries, updateJournalEntry };
+export {
+  createJournalEntry,
+  deleteJournal,
+  getAllJournalEntries,
+  updateJournalEntry,
+};

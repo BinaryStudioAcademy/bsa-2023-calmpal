@@ -7,6 +7,7 @@ import {
   Header,
   InputSearch,
   LinearGradient,
+  Modal,
   ScrollView,
   View,
 } from '#libs/components/components';
@@ -17,6 +18,7 @@ import {
   useEffect,
   useNavigation,
   useSearch,
+  useState,
 } from '#libs/hooks/hooks';
 import { type JournalNavigationParameterList } from '#libs/types/types';
 import { actions as journalActions } from '#slices/journal/journal';
@@ -32,11 +34,17 @@ const Journal: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<JournalNavigationParameterList>>();
 
-  const { allJournalEntries } = useAppSelector(({ journal }) => {
-    return {
-      allJournalEntries: journal.allJournalEntries,
-    };
-  });
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+
+  const { allJournalEntries, selectedJournalEntry } = useAppSelector(
+    ({ journal }) => {
+      return {
+        allJournalEntries: journal.allJournalEntries,
+        selectedJournalEntry: journal.selectedJournalEntry,
+      };
+    },
+  );
+
   const badgeCount = allJournalEntries.length;
 
   const { filteredData: filteredJournals, setSearchQuery } = useSearch(
@@ -47,6 +55,22 @@ const Journal: React.FC = () => {
   const handleSelectJournalEntry = (id: number): void => {
     dispatch(journalActions.setSelectedJournalEntry(id));
     navigation.navigate(JournalScreenName.NOTE, { id });
+  };
+
+  const handleShowModal = (id: number): void => {
+    dispatch(journalActions.setSelectedJournalEntry(id));
+    setIsModalVisible(true);
+  };
+
+  const hanleCloseModal = (): void => {
+    setIsModalVisible(false);
+  };
+
+  const handleDeleteNote = (): void => {
+    hanleCloseModal();
+    if (selectedJournalEntry) {
+      void dispatch(journalActions.deleteJournal(selectedJournalEntry.id));
+    }
   };
 
   const handleAddNote = (): void => {
@@ -77,6 +101,12 @@ const Journal: React.FC = () => {
 
   return (
     <LinearGradient>
+      <Modal
+        isVisible={isModalVisible}
+        onClose={hanleCloseModal}
+        onDelete={handleDeleteNote}
+        type="Note"
+      />
       <View style={styles.container}>
         <InputSearch
           placeholder="Search note"
@@ -86,11 +116,15 @@ const Journal: React.FC = () => {
           {filteredJournals.map((item) => {
             return (
               <Card
+                key={item.id}
                 title={item.title}
                 onPress={(): void => {
                   handleSelectJournalEntry(item.id);
                 }}
-                key={item.id}
+                iconRight="delete"
+                onIconPress={(): void => {
+                  handleShowModal(item.id);
+                }}
               />
             );
           })}

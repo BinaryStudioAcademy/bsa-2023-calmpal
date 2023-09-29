@@ -1,5 +1,6 @@
 import {
   createJournalEntry,
+  deleteJournal,
   getAllJournalEntries,
   updateJournalEntry,
 } from './actions';
@@ -10,6 +11,7 @@ const allActions = {
   createJournalEntry,
   getAllJournalEntries,
   updateJournalEntry,
+  deleteJournal,
 };
 
 export { allActions as actions };
