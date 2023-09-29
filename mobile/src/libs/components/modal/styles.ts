@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
   button: {
     marginHorizontal: 10,
   },
-
   modalView: {
     margin: 20,
     backgroundColor: AppColor.WHITE,
