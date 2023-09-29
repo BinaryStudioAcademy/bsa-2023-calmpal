@@ -2,7 +2,7 @@ export {
   PREFERENCES_OTHER_CATEGORY,
   STEPS_DEFAULT_ORDER,
 } from './libs/constants/constants.js';
-export { SurveySteps, SurveyValidationRule } from './libs/enums/enums.js';
+export { SurveyStep, SurveyValidationRule } from './libs/enums/enums.js';
 export { getSurveyCategories } from './libs/helpers/helpers.js';
 export {
   type HandleFieldChangeType,

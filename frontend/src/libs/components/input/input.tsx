@@ -20,7 +20,6 @@ type Properties<T extends FormFieldValues> = {
   maxLength?: number;
   autoComplete?: 'off' | 'on';
   isChatInput?: boolean;
-  defaultValue?: string;
 };
 
 const Input = <T extends FormFieldValues>({
@@ -34,12 +33,8 @@ const Input = <T extends FormFieldValues>({
   maxLength,
   autoComplete,
   isChatInput,
-  defaultValue,
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
-
-  const { value, ...rest } = field;
-
   const error = errors[name]?.message;
   const hasError = Boolean(error);
   const hasRows = Boolean(rowsCount);
@@ -49,11 +44,10 @@ const Input = <T extends FormFieldValues>({
       <span className={styles['label']}>{label}</span>
       {hasRows ? (
         <textarea
-          {...rest}
+          {...field}
           rows={rowsCount}
           placeholder={placeholder}
           maxLength={maxLength}
-          defaultValue={value ?? defaultValue}
           autoComplete={autoComplete}
           className={getValidClassNames(
             styles['textarea'],

@@ -12,7 +12,6 @@ type Properties<T extends FormFieldValues> = {
   label: string;
   name: FormFieldPath<T>;
   onChange: () => void;
-  isChecked?: boolean;
 };
 
 const Radio = <T extends FormFieldValues>({
@@ -20,9 +19,9 @@ const Radio = <T extends FormFieldValues>({
   label,
   name,
   onChange,
-  isChecked,
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
+  const isRadioChecked = (field.value as string) === label;
 
   return (
     <label>
@@ -32,7 +31,7 @@ const Radio = <T extends FormFieldValues>({
         className={styles['radio']}
         type="radio"
         onChange={onChange}
-        checked={isChecked}
+        checked={isRadioChecked}
       />
       <div className={styles['container']}>
         <span className={styles['label']}>{label}</span>

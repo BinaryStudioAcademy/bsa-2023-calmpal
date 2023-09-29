@@ -1,6 +1,6 @@
 import { useAppDispatch, useCallback } from '#libs/hooks/hooks.js';
 import { type StepsType } from '#packages/survey/libs/types/types.js';
-import { SurveySteps } from '#packages/survey/survey.js';
+import { SurveyStep } from '#packages/survey/survey.js';
 import {
   FEELINGS_CATEGORIES,
   GOALS_CATEGORIES,
@@ -83,7 +83,7 @@ const RenderSteps: React.FC<StepsProperties> = ({
   );
 
   switch (currentStep) {
-    case SurveySteps.PREFERENCES: {
+    case SurveyStep.PREFERENCES: {
       return (
         <Step
           key={currentStep}
@@ -96,7 +96,7 @@ const RenderSteps: React.FC<StepsProperties> = ({
         />
       );
     }
-    case SurveySteps.FEELINGS: {
+    case SurveyStep.FEELINGS: {
       return (
         <Step
           key={currentStep}
@@ -110,7 +110,7 @@ const RenderSteps: React.FC<StepsProperties> = ({
         />
       );
     }
-    case SurveySteps.GOALS: {
+    case SurveyStep.GOALS: {
       return (
         <Step
           key={currentStep}
@@ -124,7 +124,7 @@ const RenderSteps: React.FC<StepsProperties> = ({
         />
       );
     }
-    case SurveySteps.WORRIES: {
+    case SurveyStep.WORRIES: {
       return (
         <Step
           key={currentStep}
@@ -138,7 +138,7 @@ const RenderSteps: React.FC<StepsProperties> = ({
         />
       );
     }
-    case SurveySteps.MEDITATION_EXPERIENCE: {
+    case SurveyStep.MEDITATION_EXPERIENCE: {
       return (
         <Step
           key={currentStep}
@@ -152,7 +152,7 @@ const RenderSteps: React.FC<StepsProperties> = ({
         />
       );
     }
-    case SurveySteps.JOURNALING_EXPERIENCE: {
+    case SurveyStep.JOURNALING_EXPERIENCE: {
       return (
         <Step
           key={currentStep}

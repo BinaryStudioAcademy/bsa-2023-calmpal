@@ -12,7 +12,7 @@ import {
   type StepsType,
   type SurveyRequestDto,
   type SurveyState,
-  SurveySteps,
+  SurveyStep,
 } from '#packages/survey/survey.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { actions as authActions } from '#slices/auth/auth.js';
@@ -28,7 +28,7 @@ const Survey: React.FC = () => {
     return state;
   });
   const [currentStep, setCurrentStep] = useState<StepsType>(
-    SurveySteps.PREFERENCES,
+    SurveyStep.PREFERENCES,
   );
 
   const handleNextStep = useCallback((): void => {

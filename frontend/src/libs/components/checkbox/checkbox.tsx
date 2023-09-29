@@ -12,7 +12,6 @@ type Properties<T extends FormFieldValues> = {
   label: string;
   name: FormFieldPath<T>;
   onChange: () => void;
-  isChecked?: boolean;
 };
 
 const Checkbox = <T extends FormFieldValues>({
@@ -20,9 +19,9 @@ const Checkbox = <T extends FormFieldValues>({
   label,
   name,
   onChange,
-  isChecked,
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
+  const isCheckboxChecked = Boolean((field.value as string[]).includes(label));
 
   return (
     <label>
@@ -32,7 +31,7 @@ const Checkbox = <T extends FormFieldValues>({
         className={styles['checkbox']}
         type="checkbox"
         onChange={onChange}
-        checked={isChecked}
+        checked={isCheckboxChecked}
       />
       <div className={styles['container']}>
         <span className={styles['label']}>{label}</span>

@@ -1,5 +1,5 @@
 import { Button, Checkbox, Input, Radio } from '#libs/components/components.js';
-import { FIRST_INDEX, LAST_INDEX } from '#libs/constants/constants.js';
+import { FIRST_ARRAY_INDEX, LAST_INDEX } from '#libs/constants/constants.js';
 import {
   useAppForm,
   useAppSelector,
@@ -60,7 +60,7 @@ const onFieldChange = ({
     defaultCategories,
     currentCategories,
   );
-  if (isOther && otherCategories.length > FIRST_INDEX) {
+  if (isOther && otherCategories.length > FIRST_ARRAY_INDEX) {
     otherCategories.push(category);
     categoryChange(
       currentCategories.filter((option) => {
@@ -211,7 +211,6 @@ const Step: React.FC<Properties> = ({
                   name={step}
                   key={category}
                   label={category}
-                  isChecked={(categoriesValue as string[]).includes(category)}
                   onChange={handleFieldChange(category)}
                 />
               );
@@ -224,7 +223,6 @@ const Step: React.FC<Properties> = ({
                   key={category}
                   label={category}
                   onChange={handleFieldChange(category)}
-                  isChecked={currentStep === category}
                 />
               );
             })}
@@ -236,7 +234,6 @@ const Step: React.FC<Properties> = ({
             placeholder="Text"
             maxLength={SurveyValidationRule.MAXIMUM_PREFERENCE_ITEM_LENGTH}
             rowsCount={TEXTAREA_ROWS_COUNT}
-            defaultValue={getOtherDefault([...currentStep])}
           />
         )}
       </div>
