@@ -1561,7 +1561,7 @@
               "script": {
                 "exec": [
                   "pm.test(\"Status code is 200 OK\", function () {\r",
-                  "    pm.response.to.have.status(201);\r",
+                  "    pm.response.to.have.status(200);\r",
                   "});"
                 ],
                 "type": "text/javascript"
@@ -1748,7 +1748,7 @@
           "",
           "pm.collectionVariables.set(\"sampleJournalTitleText\", journalTitle);",
           "",
-          "const journalBody = \"Today, the sky painted itself in soft shades of pink and gold, a serene backdrop to the tumultuous sea of emotions within. As I sit here with pen in hand, I find solace in the act of putting these thoughts to paper. There's a certain liberation in allowing my innermost feelings to flow freely, unburdening my soul. The day began with a peculiar heaviness, a cloud that settled over my spirit like a shroud. It felt as though I was wading through a sea of molasses, every step weighed down by unseen anchors. It's days like these that remind me of the intricate dance between mind and heart, how they synchronize their steps or trip over each other, leaving me to find my own rhythm. And so, as the day draws to a close, I find myself leaning into acceptance. This mood, like all others, is but a passing visitor in the grand theater of my life. It whispers lessons, offers perspective, and gently guides me toward a deeper understanding of self.\"",
+          "const journalBody = \"<p>Today, the sky painted itself in soft shades of pink and gold, a serene backdrop to the tumultuous sea of emotions within. As I sit here with pen in hand, I find solace in the act of putting these thoughts to paper. There's a certain liberation in allowing my innermost feelings to flow freely, unburdening my soul. The day began with a peculiar heaviness, a cloud that settled over my spirit like a shroud. It felt as though I was wading through a sea of molasses, every step weighed down by unseen anchors. It's days like these that remind me of the intricate dance between mind and heart, how they synchronize their steps or trip over each other, leaving me to find my own rhythm. And so, as the day draws to a close, I find myself leaning into acceptance. This mood, like all others, is but a passing visitor in the grand theater of my life. It whispers lessons, offers perspective, and gently guides me toward a deeper understanding of self.</p>\"",
           "",
           "pm.collectionVariables.set(\"sampleJournalBodyText\", journalBody);"
         ]
