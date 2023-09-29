@@ -29,7 +29,7 @@ import {
   MeditationItem,
   TimerModal,
 } from './components/components';
-import { DEFAULT_DURATION } from './components/timer-modal/libs/constants';
+import { DEFAULT_DURATION } from './components/timer-modal/libs/constants/constants';
 import { styles } from './styles';
 
 type RouteParameters = {
@@ -111,8 +111,8 @@ const MeditationList: React.FC = () => {
         {isTimerModalVisible && (
           <TimerModal
             onClose={handleToggleTimerModalVisibility}
-            setDuration={setDuration}
-            startMeditation={handleSetPlaylist}
+            onSetDuration={setDuration}
+            onStartMeditation={handleSetPlaylist}
           />
         )}
         <InputSearch
