@@ -65,6 +65,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 20,
   },
+  buttonTimer: {
+    borderRadius: 40,
+    height: 52,
+    backgroundColor: AppColor.BLUE_300,
+  },
+  labelTimer: {
+    color: AppColor.WHITE,
+  },
 });
 
 export { styles };

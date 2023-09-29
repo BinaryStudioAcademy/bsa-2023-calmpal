@@ -3,4 +3,5 @@ const NAVIGATION_ITEMS = [
   { id: 2, name: 'Relaxing sounds' },
   { id: 3, name: 'Breath exercise' },
 ];
+
 export { NAVIGATION_ITEMS };
