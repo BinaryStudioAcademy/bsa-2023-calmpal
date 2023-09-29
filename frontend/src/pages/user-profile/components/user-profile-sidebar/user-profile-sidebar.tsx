@@ -11,7 +11,6 @@ import {
   useAppDispatch,
   useAppSelector,
   useCallback,
-  useEffect,
   useLocation,
   useRef,
   useState,
@@ -62,21 +61,11 @@ const UserProfileSidebar: React.FC<Properties> = ({
     void dispatch(authActions.signOut());
   }, [dispatch]);
 
-  const dialogReference = useRef<HTMLDialogElement & DeleteAccountModalHandler>(
-    null,
-  );
-  const [shouldResetModal, setShouldResetModal] = useState(false);
+  const dialogReference = useRef<DeleteAccountModalHandler>(null);
 
   const handleOpen = useCallback(() => {
-    setShouldResetModal(true);
-    dialogReference.current?.showModal();
+    dialogReference.current?.handleShowModal();
   }, [dialogReference]);
-
-  useEffect(() => {
-    if (shouldResetModal) {
-      setShouldResetModal(false);
-    }
-  }, [shouldResetModal]);
 
   return (
     <Sidebar isSidebarShown={isSidebarShown}>

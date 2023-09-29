@@ -52,7 +52,7 @@ const DeleteAccountForm: React.FC<Properties> = ({ onNext, onClose }) => {
   );
 
   const isInputDisabled = !checkboxesValue.includes(OTHER_OPTION_LABEL);
-  const isNextDisabled = checkboxesValue.length > NO_CHECKBOXES;
+  const isNextDisabled = checkboxesValue.length === NO_CHECKBOXES;
 
   const hasNextStep = Boolean(onNext);
   const hasCloseButton = Boolean(onClose);

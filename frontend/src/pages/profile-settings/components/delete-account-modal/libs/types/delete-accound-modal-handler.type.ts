@@ -1,5 +1,5 @@
 type DeleteAccountModalHandler = {
-  handleResetStep: () => void;
+  handleShowModal: () => void;
 };
 
 export { type DeleteAccountModalHandler };

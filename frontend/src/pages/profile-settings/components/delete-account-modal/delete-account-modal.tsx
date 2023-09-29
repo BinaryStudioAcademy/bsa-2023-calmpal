@@ -1,7 +1,12 @@
 import { type RefObject, useImperativeHandle } from 'react';
 
 import { Modal } from '#libs/components/components.js';
-import { forwardRef, useCallback, useState } from '#libs/hooks/hooks.js';
+import {
+  forwardRef,
+  useCallback,
+  useRef,
+  useState,
+} from '#libs/hooks/hooks.js';
 
 import {
   INITIAL_STEP,
@@ -12,24 +17,33 @@ import { type DeleteAccountModalHandler } from './libs/types/types.js';
 import styles from './styles.module.scss';
 
 const DeleteAccountModal: React.ForwardRefRenderFunction<
-  HTMLDialogElement & DeleteAccountModalHandler
+  DeleteAccountModalHandler
 > = (_, reference) => {
   const [currentStepIndex, setCurrentStepIndex] = useState(INITIAL_STEP);
   const currentStep = STEPS[currentStepIndex];
 
+  const modalReference = useRef<HTMLDialogElement>(null);
+
+  const handleClose = useCallback((): void => {
+    if (modalReference.current?.open) {
+      modalReference.current.close();
+    }
+  }, [modalReference]);
+
+  const handleShow = useCallback((): void => {
+    if (!modalReference.current?.open) {
+      modalReference.current?.showModal();
+    }
+  }, [modalReference]);
+
   useImperativeHandle(reference as RefObject<DeleteAccountModalHandler>, () => {
     return {
-      handleResetStep: (): void => {
+      handleShowModal: (): void => {
         setCurrentStepIndex(INITIAL_STEP);
+        handleShow();
       },
     };
   });
-
-  const handleClose = useCallback((): void => {
-    if ((reference as RefObject<HTMLDialogElement>).current?.open) {
-      (reference as RefObject<HTMLDialogElement>).current?.close();
-    }
-  }, [reference]);
 
   const goToNextStep = useCallback((): void => {
     setCurrentStepIndex((previous) => {
@@ -51,7 +65,7 @@ const DeleteAccountModal: React.ForwardRefRenderFunction<
     <>
       {Boolean(currentStep) && (
         <Modal
-          ref={reference}
+          ref={modalReference}
           title={(currentStep as NonNullable<typeof currentStep>).title}
         >
           <div className={styles['modal-body']}>{getCurrentStep()}</div>
