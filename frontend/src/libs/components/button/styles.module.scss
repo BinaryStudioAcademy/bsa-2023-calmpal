@@ -5,7 +5,7 @@
 
 .blue {
   --background-color: var(--blue-300);
-  --background-color-hover: var(--blue-400);
+  --background-color-hover: var(--blue-250);
 }
 
 .primary {
@@ -121,7 +121,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 }
 
 .loader {
@@ -149,6 +149,7 @@
   min-height: 52px;
   background-color: var(--white);
   border: none;
+  cursor: pointer;
 }
 
 .play-button:hover {

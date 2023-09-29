@@ -123,7 +123,7 @@ class JournalEntryController extends BaseController {
         return this.update(
           options as APIHandlerOptions<{
             user: UserAuthResponseDto;
-            params: { id: number };
+            params: { id: string };
             body: JournalEntryCreateRequestDto;
           }>,
         );
@@ -137,7 +137,7 @@ class JournalEntryController extends BaseController {
         return this.delete(
           options as APIHandlerOptions<{
             user: UserAuthResponseDto;
-            params: { id: number };
+            params: { id: string };
           }>,
         );
       },
@@ -161,6 +161,7 @@ class JournalEntryController extends BaseController {
    *                  type: string
    *                text:
    *                  type: string
+   *                  example: "<p>Put your text here</p>"
    *      security:
    *       - bearerAuth: []
    *      responses:
@@ -284,49 +285,6 @@ class JournalEntryController extends BaseController {
   /**
    * @swagger
    * /journal/{id}:
-   *    get:
-   *      description: Get journal entry by id
-   *      security:
-   *       - bearerAuth: []
-   *      parameters:
-   *       -  in: path
-   *          description: Journal id
-   *          name: id
-   *          required: true
-   *          type: number
-   *          minimum: 1
-   *      responses:
-   *        200:
-   *          description: Successful operation
-   *          content:
-   *            application/json:
-   *              schema:
-   *                   $ref: '#/components/schemas/Journal Entry'
-   *        401:
-   *          description: Unauthorized
-   *          content:
-   *            application/json:
-   *              schema:
-   *                $ref: '#/components/schemas/Error'
-   *              example:
-   *                message: "Incorrect credentials."
-   *                errorType: "AUTHORIZATION"
-   */
-
-  private async getById(
-    options: APIHandlerOptions<{ params: { id: number } }>,
-  ): Promise<APIHandlerResponse> {
-    const { id } = options.params;
-
-    return {
-      status: HTTPCode.OK,
-      payload: await this.journalEntryService.find(id),
-    };
-  }
-
-  /**
-   * @swagger
-   * /journal/{id}:
    *    put:
    *      description: Update a journal entry
    *      security:
@@ -350,6 +308,7 @@ class JournalEntryController extends BaseController {
    *                  type: string
    *                text:
    *                  type: string
+   *                  example: "<p>Put your text here</p>"
    *      responses:
    *        200:
    *          description: Successful operation
@@ -385,7 +344,7 @@ class JournalEntryController extends BaseController {
 
   private async update(
     options: APIHandlerOptions<{
-      params: { id: number };
+      params: { id: string };
       user: UserAuthResponseDto;
       body: JournalEntryCreateRequestDto;
     }>,
@@ -399,7 +358,7 @@ class JournalEntryController extends BaseController {
     return {
       status: HTTPCode.OK,
       payload: await this.journalEntryService.update({
-        id,
+        id: Number(id),
         userId,
         text,
         title,
@@ -427,11 +386,7 @@ class JournalEntryController extends BaseController {
    *         content:
    *           application/json:
    *             schema:
-   *               type: object
-   *               properties:
-   *                 isDeleted:
-   *                   type: boolean
-   *                   description: Is successfully deleted
+   *               type: boolean
    *       400:
    *         description: Incorrect user credentials
    *         content:
@@ -455,13 +410,16 @@ class JournalEntryController extends BaseController {
   private async delete(
     options: APIHandlerOptions<{
       user: UserAuthResponseDto;
-      params: { id: number };
+      params: { id: string };
     }>,
   ): Promise<APIHandlerResponse> {
+    const { id } = options.params;
+
     const isDeleted = await this.journalEntryService.delete({
-      id: options.params.id,
+      id: Number(id),
       user: options.user,
     });
+
     if (!isDeleted) {
       throw new JournalError({
         status: HTTPCode.NOT_FOUND,

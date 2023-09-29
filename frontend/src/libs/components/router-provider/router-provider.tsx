@@ -1,14 +1,25 @@
 import {
   createBrowserRouter,
-  type RouteObject,
   RouterProvider as LibraryRouterProvider,
 } from 'react-router-dom';
 
-type Properties = {
-  routes: RouteObject[];
-};
+import { AppRoute } from '#libs/enums/enums.js';
 
-const RouterProvider: React.FC<Properties> = ({ routes }) => {
+import { App } from '../app/app.js';
+import { ROUTER_ITEMS } from './libs/constants/constants.js';
+import { iterateNestedRouteElement } from './libs/helpers/helpers.js';
+
+const RouterProvider: React.FC = () => {
+  const routes = [
+    {
+      path: AppRoute.ROOT,
+      element: <App />,
+      children: ROUTER_ITEMS.map((route) => {
+        return iterateNestedRouteElement(route);
+      }),
+    },
+  ];
+
   return <LibraryRouterProvider router={createBrowserRouter(routes)} />;
 };
 

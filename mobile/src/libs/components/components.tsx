@@ -20,9 +20,11 @@ export { Toast } from './toast/toast';
 export {
   Image,
   Pressable,
+  Modal as ReactModal,
   ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
+export { Swipeable } from 'react-native-gesture-handler';
