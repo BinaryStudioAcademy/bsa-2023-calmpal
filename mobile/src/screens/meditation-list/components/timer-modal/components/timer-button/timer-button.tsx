@@ -33,7 +33,7 @@ const TimerButton: React.FC<Properties> = ({
       onPress={handleChange}
     >
       <Text style={[styles.duration, isActive && styles.activeText]}>
-        {getFormattedTime(duration)}
+        {getFormattedTime(duration, false)}
       </Text>
       <Text style={[styles.durationUnit, isActive && styles.activeText]}>
         {unit}
