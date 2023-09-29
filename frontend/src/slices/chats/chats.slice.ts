@@ -13,7 +13,7 @@ import {
   generateReply,
   getAllChats,
   getCurrentChatMessages,
-  updateChatImage,
+  updateChatData,
 } from './actions.js';
 
 type State = {
@@ -131,11 +131,11 @@ const { reducer, actions, name } = createSlice({
       state.generateReplyDataStatus = DataStatus.REJECTED;
     });
 
-    builder.addCase(updateChatImage.pending, (state) => {
+    builder.addCase(updateChatData.pending, (state) => {
       state.updateChatImageStatus = DataStatus.PENDING;
     });
 
-    builder.addCase(updateChatImage.fulfilled, (state, action) => {
+    builder.addCase(updateChatData.fulfilled, (state, action) => {
       state.chats = state.chats.map((chat) => {
         if (chat.id === action.payload.id) {
           return action.payload;
@@ -146,7 +146,7 @@ const { reducer, actions, name } = createSlice({
       state.updateChatImageStatus = DataStatus.FULFILLED;
     });
 
-    builder.addCase(updateChatImage.rejected, (state) => {
+    builder.addCase(updateChatData.rejected, (state) => {
       state.updateChatImageStatus = DataStatus.REJECTED;
     });
   },
