@@ -41,6 +41,7 @@ class UserModel extends AbstractModel {
           'users.email',
           'users.created_at',
           'users.updated_at',
+          'users.deleted_at',
         );
       },
     };

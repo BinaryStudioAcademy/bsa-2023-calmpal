@@ -116,7 +116,7 @@ class UserEntity implements Entity {
     isSurveyCompleted: boolean;
     subscriptionId: number | null;
     subscriptionEndDate: Date | null;
-    deletedAt: Date;
+    deletedAt: Date | null;
   } {
     return {
       id: this.id as number,

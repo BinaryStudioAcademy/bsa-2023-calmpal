@@ -6,6 +6,7 @@ const ExceptionMessage = {
   USER_NOT_FOUND: 'User with these credentials was not found.',
   INCORRECT_CREDENTIALS: 'Incorrect credentials.',
   USER_ALREADY_EXISTS: 'User already exists.',
+  USER_WAS_DELETED: 'User was deleted.',
   INCORRECT_FILE_TYPE: 'Content type of the file is not in PNG or JPEG.',
   FILE_TOO_BIG: 'The inputted file is bigger than 10 MB.',
   NOTE_NOT_FOUND: 'Note with such id was not found.',

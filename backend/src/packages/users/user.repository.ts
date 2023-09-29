@@ -151,7 +151,6 @@ class UserRepository implements Repository {
       .query()
       .modify('withoutPassword')
       .withGraphJoined(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
-      .whereNull('deletedAt')
       .findOne({ email })
       .castTo<UserCommonQueryResponse | undefined>();
 

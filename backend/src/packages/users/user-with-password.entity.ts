@@ -86,7 +86,7 @@ class UserWithPasswordEntity extends UserEntity {
     isSurveyCompleted: boolean;
     subscriptionId: number | null;
     subscriptionEndDate: Date | null;
-    deletedAt: Date;
+    deletedAt: Date | null;
   } {
     const baseObject = super.toObject();
 
