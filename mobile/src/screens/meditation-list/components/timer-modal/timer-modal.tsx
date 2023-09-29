@@ -49,12 +49,7 @@ const TimerModal: React.FC<Properties> = ({
   };
 
   return (
-    <RNModal
-      animationType="none"
-      transparent
-      visible={true}
-      onRequestClose={onClose}
-    >
+    <RNModal animationType="none" transparent visible onRequestClose={onClose}>
       <TouchableOpacity onPress={onClose} style={styles.container}>
         <Pressable style={styles.modal}>
           <Text style={styles.title}>Choose Your Duration</Text>

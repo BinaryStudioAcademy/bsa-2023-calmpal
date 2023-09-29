@@ -25,7 +25,7 @@ const ProgressBar: React.FC<Properties> = ({ isPlaying, trackDuration }) => {
   const currentDuration = duration < trackDuration ? duration : trackDuration;
 
   useEffect(() => {
-    if (position >= currentDuration && currentDuration) {
+    if (position >= currentDuration && Boolean(currentDuration)) {
       void player.skipToNext();
     }
   }, [position, currentDuration]);

@@ -30,7 +30,7 @@ const Button: React.FC<Properties> = ({
   isRounded,
   iconName,
   color,
-  isVisuallyCentered,
+  isVisuallyCentered = false,
 }) => {
   const renderIcon = (): JSX.Element => {
     return (
