@@ -30,7 +30,7 @@ const Meditation: React.FC = () => {
           <Image source={imagePlaceholder} style={styles.image} />
         </View>
         <Text style={styles.title} numberOfLines={TITLE_LINE_COUNT}>
-          {selectedMeditationEntry.title}
+          {selectedMeditationEntry?.title}
         </Text>
         <Text style={styles.purpose}>Meditation</Text>
 

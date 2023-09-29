@@ -11,12 +11,12 @@ import { createMeditationEntry, getAllMeditationEntries } from './actions';
 
 type State = {
   meditationEntries: Track[];
-  selectedMeditationEntry: Track;
+  selectedMeditationEntry: Track | null;
   meditationEntriesDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
-  selectedMeditationEntry: {} as Track,
+  selectedMeditationEntry: null,
   meditationEntries: [],
   meditationEntriesDataStatus: DataStatus.IDLE,
 };
