@@ -6,14 +6,11 @@ import { actions as appActions } from '#slices/app/app.js';
 import styles from './styles.module.scss';
 
 type Properties = {
-  subscriptionPrice: number;
+  price: number;
   benefits: string[];
 };
 
-const SubscriptionPlan: React.FC<Properties> = ({
-  benefits,
-  subscriptionPrice,
-}) => {
+const SubscriptionPlan: React.FC<Properties> = ({ benefits, price }) => {
   const dispatch = useAppDispatch();
 
   const handleSubscribe = useCallback(() => {
@@ -24,7 +21,7 @@ const SubscriptionPlan: React.FC<Properties> = ({
     <article className={styles['plan']}>
       <h3 className={styles['heading']}>Monthly</h3>
       <p className={styles['price-wrapper']}>
-        <span className={styles['price']}>${subscriptionPrice}</span> / month
+        <span className={styles['price']}>${price}</span> / month
       </p>
       <div className={styles['benefits-section']}>
         <span className={styles['section-title']}>Plan benefits</span>

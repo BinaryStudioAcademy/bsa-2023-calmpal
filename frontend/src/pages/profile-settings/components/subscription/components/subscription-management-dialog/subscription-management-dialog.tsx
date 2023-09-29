@@ -9,18 +9,18 @@ const dialogStyles = {
 };
 
 type Properties = {
-  subscriptionPrice: number;
+  price: number;
   benefits: string[];
-  subscriptionEndDate: Date;
+  endDate: Date;
 };
 
 const SubscriptionManagementDialog: React.FC<Properties> = ({
   benefits,
-  subscriptionPrice,
-  subscriptionEndDate,
+  price,
+  endDate,
 }) => {
   const formattedDate = getFormattedDate(
-    new Date(subscriptionEndDate),
+    new Date(endDate),
     TimeFormat.D_MMM_YYYY,
   );
 
@@ -38,7 +38,7 @@ const SubscriptionManagementDialog: React.FC<Properties> = ({
             </div>
             <div>
               <p className={dialogStyles.sectionTitle}>Payment</p>
-              <p className={styles['meta']}>${subscriptionPrice} / month</p>
+              <p className={styles['meta']}>${price} / month</p>
             </div>
           </div>
         </div>

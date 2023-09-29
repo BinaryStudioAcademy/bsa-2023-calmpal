@@ -21,14 +21,11 @@ const Subscription: React.FC = () => {
       {hasSubscription ? (
         <SubscriptionManagementDialog
           benefits={PLAN_BENEFITS}
-          subscriptionPrice={SUBSCRIPTION_PRICE}
-          subscriptionEndDate={subscriptionEndDate as Date}
+          price={SUBSCRIPTION_PRICE}
+          endDate={subscriptionEndDate as Date}
         />
       ) : (
-        <SubscriptionPlan
-          benefits={PLAN_BENEFITS}
-          subscriptionPrice={SUBSCRIPTION_PRICE}
-        />
+        <SubscriptionPlan benefits={PLAN_BENEFITS} price={SUBSCRIPTION_PRICE} />
       )}
     </section>
   );
