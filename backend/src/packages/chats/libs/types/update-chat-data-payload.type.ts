@@ -1,8 +1,9 @@
 import { type ChatGetAllItemResponseDto } from 'shared/build/index.js';
 
-type UpdateChatImagePayload = {
+type UpdateChatDataPayload = {
   chat: ChatGetAllItemResponseDto;
   url: string;
+  name: string;
 };
 
-export { type UpdateChatImagePayload };
+export { type UpdateChatDataPayload };

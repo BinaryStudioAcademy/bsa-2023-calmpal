@@ -2,5 +2,5 @@ export {
   type ChatCreateRequestDto,
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
-  type UpdateChatImageRequestDto,
+  type UpdateChatDataRequestDto,
 } from 'shared/build/index.js';
