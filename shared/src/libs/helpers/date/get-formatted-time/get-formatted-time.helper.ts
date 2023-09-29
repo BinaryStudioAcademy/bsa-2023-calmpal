@@ -21,7 +21,7 @@ const getFormattedTime = (
   const offset = new Date(
     seconds * MILLISECONDS_IN_SECOND + offsetInMilliseconds,
   );
-  const hours = offset.getHours();
+  const hours = isTimeZoneIncluded ? offset.getHours() : offset.getUTCHours();
 
   return getFormattedDate(
     offset,
