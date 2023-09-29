@@ -29,8 +29,10 @@ const ProgressBar: React.FC<Properties> = ({ isPlaying, trackDuration }) => {
 
   return (
     <View style={styles.wrapper}>
-      <Text style={styles.progress}>{getFormattedTime(position)}</Text>
-      <Text style={styles.duration}>{getFormattedTime(currentDuration)}</Text>
+      <Text style={styles.progress}>{getFormattedTime(position, false)}</Text>
+      <Text style={styles.duration}>
+        {getFormattedTime(currentDuration, false)}
+      </Text>
       <Slider
         minimumValue={TRACK_START_TIME}
         maximumValue={currentDuration}

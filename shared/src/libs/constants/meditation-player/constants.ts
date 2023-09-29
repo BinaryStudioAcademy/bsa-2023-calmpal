@@ -1,4 +1,4 @@
-import { SECONDS_IN_MINUTE } from '#index.js';
+import { SECONDS_IN_MINUTE } from '../../helpers/helpers.js';
 
 const SHORT_DURATION_IN_MINUTES = 5;
 const MEDIUM_DURATION_IN_MINUTES = 10;

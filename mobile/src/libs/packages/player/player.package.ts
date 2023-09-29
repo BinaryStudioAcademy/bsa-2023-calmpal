@@ -38,6 +38,10 @@ class Player {
     await TrackPlayer.pause();
   };
 
+  public startPlaying = async (): Promise<void> => {
+    await TrackPlayer.play();
+  };
+
   public playPause = async (isPlaying: boolean): Promise<void> => {
     await (isPlaying ? TrackPlayer.pause() : TrackPlayer.play());
   };
