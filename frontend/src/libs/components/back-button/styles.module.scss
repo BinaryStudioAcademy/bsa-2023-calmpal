@@ -1,0 +1,32 @@
+.backward {
+  position: fixed;
+  top: 30px;
+  left: 455px;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 30px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.backward:hover {
+  background-color: var(--gray-100);
+}
+
+@media (width < 900px) {
+  .backward {
+    left: 385px;
+  }
+}
+
+@media (width < 768px), (height < 530px) {
+  .backward {
+    left: 25px;
+  }
+}

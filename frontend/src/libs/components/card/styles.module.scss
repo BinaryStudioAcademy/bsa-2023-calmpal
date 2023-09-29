@@ -83,7 +83,7 @@
   word-break: break-word;
 }
 
-@media (width < 900px) {
+@media (width < 900px), (height < 530px) {
   .item {
     width: 100%;
     min-width: 0;
@@ -97,5 +97,9 @@
 @media (width < 768px) {
   .no-image {
     padding-left: 20px;
+  }
+
+  .container {
+    width: 100%;
   }
 }
