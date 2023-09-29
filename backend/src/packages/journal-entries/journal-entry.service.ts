@@ -80,6 +80,13 @@ class JournalEntryService implements Service {
     title,
     text,
   }: JournalEntryUpdateRequestDto): Promise<JournalEntryGetAllItemResponseDto> {
+    if (!Number(id)) {
+      throw new JournalError({
+        status: HTTPCode.BAD_REQUEST,
+        message: ExceptionMessage.JOURNAL_NOT_FOUND,
+      });
+    }
+
     const item = await this.journalEntryRepository.update(
       JournalEntryEntity.initialize({
         id,
@@ -100,6 +107,13 @@ class JournalEntryService implements Service {
     id: number;
     user: UserAuthResponseDto;
   }): ReturnType<Service['delete']> {
+    if (!Number(payload.id)) {
+      throw new JournalError({
+        status: HTTPCode.BAD_REQUEST,
+        message: ExceptionMessage.JOURNAL_NOT_FOUND,
+      });
+    }
+
     const journal = await this.find(payload.id);
     if (journal.userId !== payload.user.id) {
       throw new JournalError({
