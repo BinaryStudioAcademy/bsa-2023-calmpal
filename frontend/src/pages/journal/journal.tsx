@@ -2,6 +2,7 @@ import { BackButtonWrapper, Loader } from '#libs/components/components.js';
 import { AppRoute, DataStatus } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
 import {
+  useAppDispatch,
   useAppSelector,
   useCallback,
   useNavigate,
@@ -9,14 +10,16 @@ import {
   useSearch,
   useSidebarState,
 } from '#libs/hooks/hooks.js';
+import { actions as journalActions } from '#slices/journal/journal.js';
 
-import { JournalSidebar } from './components/journal-sidebar/journal-sidebar.js';
+import * as journalSidebarJs from './components/journal-sidebar/journal-sidebar.js';
 import { Note } from './components/note/note.js';
 import styles from './styles.module.scss';
 
 const Journal: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { isSidebarShown, setIsSidebarShow } = useSidebarState();
   const { filter, setFilter } = useSearch();
 
@@ -38,7 +41,7 @@ const Journal: React.FC = () => {
 
   return (
     <>
-      <JournalSidebar
+      <journalSidebarJs.JournalSidebar
         isSidebarShown={isSidebarShown}
         onSetIsSidebarShow={setIsSidebarShow}
         filter={filter}
