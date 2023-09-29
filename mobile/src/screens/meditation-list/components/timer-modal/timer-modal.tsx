@@ -10,13 +10,13 @@ import {
   View,
 } from '#libs/components/components';
 import { useAppForm, useFormController } from '#libs/hooks/hooks';
-
-import { TimerButton } from './components/components';
 import {
-  DEFAULT_DURATION,
   DURATION_UNIT,
   MEDITATION_DURATION,
-} from './libs/constants';
+} from '#libs/packages/player/player';
+
+import { TimerButton } from './components/components';
+import { DEFAULT_DURATION } from './libs/constants';
 import { styles } from './styles';
 
 type DurationKey = keyof typeof MEDITATION_DURATION;

@@ -14,12 +14,12 @@ import {
   Event,
   player,
   State,
+  TRACK_START_TIME,
   usePlayerEvents,
 } from '#libs/packages/player/player';
 import { actions as meditationActions } from '#slices/meditation/meditation';
 
 import { Controls, ProgressBar } from './components/components';
-import { TRACK_START_TIME } from './libs/constants/constants';
 
 type Properties = {
   duration: number;

@@ -5,9 +5,12 @@ import { Text, View } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
 import { getFormattedTime } from '#libs/helpers/helpers';
 import { useEffect, usePlayerControls } from '#libs/hooks/hooks';
-import { player, useProgress } from '#libs/packages/player/player';
+import {
+  player,
+  TRACK_START_TIME,
+  useProgress,
+} from '#libs/packages/player/player';
 
-import { TRACK_START_TIME } from './libs/constants';
 import { styles } from './styles';
 
 type Properties = {
