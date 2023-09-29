@@ -11,7 +11,6 @@ import {
 import { MeditationScreenName } from '#libs/enums/enums';
 import {
   useAppDispatch,
-  useAppSelector,
   useCallback,
   useEffect,
   useNavigation,
@@ -20,30 +19,24 @@ import {
 import { type MeditationNavigationParameterList } from '#libs/types/types';
 import { actions as meditationActions } from '#slices/meditation/meditation';
 
+import { NAVIGATION_ITEMS } from './libs/constants/constants';
 import { styles } from './styles';
 
 const MeditationHome: React.FC = () => {
-  const { meditationEntries } = useAppSelector(({ meditation }) => {
-    return {
-      meditationEntries: meditation.meditationEntries,
-    };
-  });
   const dispatch = useAppDispatch();
-
   const navigation =
     useNavigation<
       NativeStackNavigationProp<MeditationNavigationParameterList>
     >();
   const { filteredData: filteredMeditationTopics, setSearchQuery } = useSearch(
-    meditationEntries,
+    NAVIGATION_ITEMS,
     'name',
   );
-
   const handleSelectMeditation = useCallback(
-    (title: string): void => {
-      navigation.navigate(MeditationScreenName.MEDITATION_LIST, {
-        title,
-      });
+    (title: string) => {
+      return () => {
+        navigation.navigate(MeditationScreenName.MEDITATION_LIST, { title });
+      };
     },
     [navigation],
   );
@@ -64,9 +57,7 @@ const MeditationHome: React.FC = () => {
             return (
               <Card
                 title={item.name}
-                onPress={(): void => {
-                  handleSelectMeditation(item.name);
-                }}
+                onPress={handleSelectMeditation(item.name)}
                 key={item.id}
               />
             );

@@ -74,6 +74,7 @@ const ChatLayout: React.FC<Properties> = ({ filter }) => {
   useEffect(() => {
     if (createMessageDataStatus === DataStatus.FULFILLED) {
       void dispatch(chatActions.getAllChats(filter));
+      dispatch(chatActions.setCreateMessageDataStatus(DataStatus.IDLE));
     }
   }, [createMessageDataStatus, dispatch, filter]);
 

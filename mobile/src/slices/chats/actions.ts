@@ -73,9 +73,20 @@ const generateReply = createAsyncThunk<
   return await chatMessagesApi.generateChatReply(payload);
 });
 
+const deleteChat = createAsyncThunk<number, number, AsyncThunkConfig>(
+  `${sliceName}/delete-chat`,
+  async (id, { extra }) => {
+    const { chatApi } = extra;
+    await chatApi.deleteChat(id);
+
+    return id;
+  },
+);
+
 export {
   createChat,
   createMessage,
+  deleteChat,
   generateReply,
   getAllChats,
   getCurrentChatMessages,

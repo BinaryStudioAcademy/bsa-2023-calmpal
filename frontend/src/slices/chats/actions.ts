@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { APIPath } from 'shared/build/index.js';
 
 import { AppRoute } from '#libs/enums/enums.js';
 import { type AsyncThunkConfig } from '#libs/types/types.js';
@@ -12,7 +11,7 @@ import {
   type ChatCreateRequestDto,
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
-  type UpdateChatImageRequestDto,
+  type UpdateChatDataRequestDto,
 } from '#packages/chats/chats.js';
 import { actions as appActions } from '#slices/app/app.js';
 
@@ -46,9 +45,16 @@ const createChat = createAsyncThunk<
   const { chatApi } = extra;
   const chat = await chatApi.create(payload);
 
-  dispatch(appActions.navigate(`${APIPath.CHATS}/${chat.id}`));
+  dispatch(
+    appActions.navigate(AppRoute.CHATS_$ID.replace(':id', chat.id.toString())),
+  );
 
-  void dispatch(updateChatImage({ id: chat.id.toString() }));
+  void dispatch(
+    generateReply({ message: payload.message, chatId: chat.id.toString() }),
+  );
+  void dispatch(
+    updateChatData({ message: payload.message, id: chat.id.toString() }),
+  );
 
   return chat;
 });
@@ -88,14 +94,14 @@ const generateReply = createAsyncThunk<
   return await chatMessagesApi.generateReply(payload);
 });
 
-const updateChatImage = createAsyncThunk<
+const updateChatData = createAsyncThunk<
   ChatGetAllItemResponseDto,
-  UpdateChatImageRequestDto,
+  UpdateChatDataRequestDto,
   AsyncThunkConfig
->(`${sliceName}/update-chat-image`, async (payload, { extra }) => {
+>(`${sliceName}/update-chat-data`, async (payload, { extra }) => {
   const { chatApi } = extra;
 
-  return await chatApi.updateChatImage(payload);
+  return await chatApi.updateChatData(payload);
 });
 
 export {
@@ -105,5 +111,5 @@ export {
   generateReply,
   getAllChats,
   getCurrentChatMessages,
-  updateChatImage,
+  updateChatData,
 };

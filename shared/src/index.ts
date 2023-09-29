@@ -19,6 +19,7 @@ export {
   UsersError,
   ValidationError,
 } from './libs/exceptions/exceptions.js';
+export { TimeFormat } from './libs/helpers/date/libs/enums/enums.js';
 export {
   configureString,
   debounce,
@@ -29,7 +30,6 @@ export {
   replaceTemplateWithValue,
   sanitizeInput,
   SECONDS_IN_MINUTE,
-  TimeFormat,
 } from './libs/helpers/helpers.js';
 export { type Config } from './libs/packages/config/config.js';
 export {
@@ -64,7 +64,7 @@ export {
   type ChatGetAllResponseDto,
   ChatsApiPath,
   createChatValidationSchema,
-  type UpdateChatImageRequestDto,
+  type UpdateChatDataRequestDto,
 } from './packages/chats/chats.js';
 export { entitiesFilteringQueryValidationSchema } from './packages/common-validation-schemas/validation-schemas.js';
 export {
