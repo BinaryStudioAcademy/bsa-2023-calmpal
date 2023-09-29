@@ -8,8 +8,4 @@ const NOTE_SANITIZER_OPTIONS: IOptions = {
   },
 };
 
-const TEXT_PATTERN = /^<p\b[^>]*>.*<\/p>$/;
-
-const TEXT_PATTERN_NAME = 'textFormat';
-
-export { NOTE_SANITIZER_OPTIONS, TEXT_PATTERN, TEXT_PATTERN_NAME };
+export { NOTE_SANITIZER_OPTIONS };

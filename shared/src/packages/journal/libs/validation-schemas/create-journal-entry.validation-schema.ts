@@ -1,6 +1,5 @@
 import joi from 'joi';
 
-import { TEXT_PATTERN, TEXT_PATTERN_NAME } from '../constants/constants.js';
 import {
   JournalEntryValidationMessage,
   JourneyEntryValidationRule,
@@ -22,9 +21,9 @@ const createJournalEntry = joi.object<JournalEntryCreateRequestDto, true>({
     .string()
     .trim()
     .allow('')
-    .pattern(TEXT_PATTERN, { name: TEXT_PATTERN_NAME })
+    .pattern(JourneyEntryValidationRule.TEXT_PATTERN)
     .messages({
-      'string.pattern': JournalEntryValidationMessage.INVALID_TEXT_FORMAT,
+      'string.pattern.base': JournalEntryValidationMessage.INVALID_TEXT_FORMAT,
     }),
 });
 
