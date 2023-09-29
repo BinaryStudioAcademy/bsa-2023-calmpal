@@ -60,7 +60,9 @@ const Card: React.FC<Properties> = ({
               )}
             </div>
           )}
-          <div className={styles['title']}>{title}</div>
+          <div className={styles['title']} data-tooltip={title}>
+            {title}
+          </div>
         </div>
       </button>
       {hasIconRight && (
