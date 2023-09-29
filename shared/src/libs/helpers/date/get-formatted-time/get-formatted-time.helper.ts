@@ -21,11 +21,13 @@ const getFormattedTime = (
   const offset = new Date(
     seconds * MILLISECONDS_IN_SECOND + offsetInMilliseconds,
   );
-  const hours = isTimeZoneIncluded ? offset.getHours() : offset.getUTCHours();
+  const hasHours = Boolean(
+    isTimeZoneIncluded ? offset.getHours() : offset.getUTCHours(),
+  );
 
   return getFormattedDate(
     offset,
-    hours ? TimeFormat.HH_MM_SS : TimeFormat.MM_SS,
+    hasHours ? TimeFormat.HH_MM_SS : TimeFormat.MM_SS,
   );
 };
 
