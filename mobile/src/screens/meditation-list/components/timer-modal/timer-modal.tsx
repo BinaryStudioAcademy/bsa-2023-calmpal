@@ -1,5 +1,4 @@
-import { type Dispatch, type SetStateAction } from 'react';
-import React from 'react';
+import React, { type Dispatch, type SetStateAction } from 'react';
 import { Modal as RNModal } from 'react-native';
 
 import {
