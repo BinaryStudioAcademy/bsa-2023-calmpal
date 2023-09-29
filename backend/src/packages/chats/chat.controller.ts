@@ -19,6 +19,7 @@ import { ChatsApiPath } from './libs/enums/enums.js';
 import {
   type ChatCreateRequestDto,
   type EntitiesFilteringDto,
+  type UpdateChatDataRequestDto,
 } from './libs/types/types.js';
 import {
   createChatValidationSchema,
@@ -178,6 +179,7 @@ class ChatController extends BaseController {
       handler: (options) => {
         return this.update(
           options as APIHandlerOptions<{
+            body: UpdateChatDataRequestDto;
             params: { id: number };
             user: UserAuthResponseDto;
           }>,
@@ -297,10 +299,8 @@ class ChatController extends BaseController {
       user: UserAuthResponseDto;
     }>,
   ): Promise<APIHandlerResponse> {
-    const name = await this.chatService.generateChatName(options.body.message);
-
     const chatEntity = ChatEntity.initializeNew({
-      name: name || options.body.message,
+      name: 'Chat',
       imageUrl: null,
     });
 
@@ -547,6 +547,7 @@ class ChatController extends BaseController {
    */
   private async update(
     options: APIHandlerOptions<{
+      body: UpdateChatDataRequestDto;
       params: { id: number };
       user: UserAuthResponseDto;
     }>,
@@ -556,13 +557,15 @@ class ChatController extends BaseController {
       userId: options.user.id,
     });
 
-    const url = await this.chatService.generateChatImage(chat.name);
+    const name = await this.chatService.generateChatName(options.body.message);
+    const url = await this.chatService.generateChatImage(name);
 
     return {
       status: HTTPCode.OK,
-      payload: await this.chatService.updateImage({
+      payload: await this.chatService.update({
         chat,
         url,
+        name,
       }),
     };
   }
