@@ -1,3 +1,4 @@
+import { DEFAULT_NOTE_PAYLOAD } from '#libs/constants/constants.js';
 import { debounce } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
@@ -10,7 +11,6 @@ import {
 } from '#libs/hooks/hooks.js';
 import { type JournalEntryCreateRequestDto } from '#packages/journal/journal.js';
 import {
-  DEFAULT_NOTE_PAYLOAD,
   SAVE_NOTE_TIMEOUT,
   TEXT_PLACEHOLDER,
   TITLE_PLACEHOLDER,

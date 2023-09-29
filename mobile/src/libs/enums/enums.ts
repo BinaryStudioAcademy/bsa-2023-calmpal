@@ -1,6 +1,7 @@
 export { DataStatus } from './app/app';
 export {
   ChatScreenName,
+  JournalScreenName,
   MainScreenName,
   MeditationScreenName,
   ProfileScreenName,
