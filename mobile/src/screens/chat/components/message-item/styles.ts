@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
   messageContainer: {
     alignItems: 'flex-start',
-    maxWidth: '84%',
+    maxWidth: '82%',
   },
   userMessageContainer: {
     alignItems: 'flex-end',
