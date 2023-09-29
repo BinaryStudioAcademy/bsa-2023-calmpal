@@ -38,7 +38,7 @@ const ChatList: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<ChatNavigationParameterList>>();
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-  const [chatId, setChatId] = useState<number>();
+  const [chatIdToDelete, setChatIdToDelete] = useState<number | null>(null);
 
   const { filteredData: filteredChats, setSearchQuery } = useSearch(
     chats,
@@ -48,7 +48,7 @@ const ChatList: React.FC = () => {
   const chatsLength = chats.length;
 
   const handleShowModal = (id: number): void => {
-    setChatId(id);
+    setChatIdToDelete(id);
     setIsModalVisible(true);
   };
 
@@ -58,7 +58,7 @@ const ChatList: React.FC = () => {
 
   const handleDeleteChat = (): void => {
     hanleCloseModal();
-    void dispatch(chatsActions.deleteChat(chatId as number));
+    void dispatch(chatsActions.deleteChat(chatIdToDelete as number));
   };
 
   const handleSelectChat = useCallback(
