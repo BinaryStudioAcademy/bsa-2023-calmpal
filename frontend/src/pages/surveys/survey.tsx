@@ -1,5 +1,4 @@
-import { Header, Loader, Navigate } from '#libs/components/components.js';
-import { SIDEBAR_ROUTES } from '#libs/components/navigation-menu-wrapper/libs/constants/constants.js';
+import { Loader, Navigate } from '#libs/components/components.js';
 import { AppRoute, DataStatus } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
@@ -71,16 +70,15 @@ const Survey: React.FC = () => {
 
   return (
     <div className={styles['container']}>
-      <Header routes={SIDEBAR_ROUTES} />
       {surveyPreferencesDataStatus === DataStatus.PENDING ? (
         <Loader isOverflow />
       ) : (
         <div className={styles['survey']}>
-          <div className={styles['name']}>
+          <h2 className={styles['title']}>
             CalmPal is your trusted companion on the journey to mental
             well-being
-          </div>
-          <main>
+          </h2>
+           <main>
             <SurveySteps
               currentStep={currentStep}
               onNextStep={handleNextStep}

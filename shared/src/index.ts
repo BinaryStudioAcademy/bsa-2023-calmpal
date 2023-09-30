@@ -30,6 +30,7 @@ export {
   getFormattedDate,
   getFormattedTime,
   getRelativeDate,
+  getShiftedDate,
   groupChatMessage,
   replaceTemplateWithValue,
   sanitizeInput,
@@ -81,6 +82,7 @@ export {
 } from './packages/files/files.js';
 export {
   createJournalEntryValidationSchema,
+  DEFAULT_NOTE_PAYLOAD,
   JournalApiPath,
   type JournalEntryCreateRequestDto,
   type JournalEntryDeleteResponseDto,
@@ -111,6 +113,7 @@ export {
   SurveyValidationRule,
 } from './packages/surveys/surveys.js';
 export {
+  type DeleteAccountFormPayload,
   type UserAuthResponseDto,
   type UserGetAllItemResponseDto,
   type UserGetAllResponseDto,

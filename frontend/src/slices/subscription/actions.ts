@@ -7,6 +7,7 @@ import {
   type SubscriptionPaymentIntentCreateResponseDto,
 } from '#packages/subscriptions/subscriptions.js';
 import { actions as appActions } from '#slices/app/app.js';
+import { actions as authActions } from '#slices/auth/auth.js';
 
 import { type ConfirmPaymentPayload } from './libs/types/types.js';
 import { name as sliceName } from './subscription.slice.js';
@@ -46,6 +47,7 @@ const confirmPaymentIntent = createAsyncThunk<
       notification.error(error.message as string);
     } else {
       await subscriptionApi.subscribe();
+      await dispatch(authActions.getAuthenticatedUser());
       dispatch(appActions.navigate(AppRoute.PROFILE_SUBSCRIPTION));
     }
   },

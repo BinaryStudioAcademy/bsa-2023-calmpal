@@ -1,0 +1,11 @@
+.container {
+  --toastify-color-progress-error: var(--red-300);
+  --toastify-icon-color-error: var(--red-300);
+
+  color: var(--gray-400);
+  font-weight: 400;
+  font-size: 12px;
+  font-family: Montserrat, Arial, sans-serif;
+  line-height: 1.3;
+  border-radius: 15px;
+}

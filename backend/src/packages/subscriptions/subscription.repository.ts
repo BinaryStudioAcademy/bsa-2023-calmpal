@@ -11,11 +11,11 @@ class SubscriptionRepository implements Repository {
     this.subscriptionModel = subscriptionModel;
   }
 
-  public find(): Promise<unknown> {
+  public findById(): ReturnType<Repository['findById']> {
     return Promise.resolve(null);
   }
 
-  public findAll(): Promise<unknown[]> {
+  public findAll(): ReturnType<Repository['findAll']> {
     return Promise.resolve([]);
   }
 
@@ -37,15 +37,14 @@ class SubscriptionRepository implements Repository {
     });
   }
 
-  public update(): Promise<unknown> {
+  public update(): ReturnType<Repository['update']> {
     return Promise.resolve(null);
   }
 
-  public delete(): Promise<number> {
-    //TODO
-    const deletedCount = 0;
+  public delete(): ReturnType<Repository['delete']> {
+    const DELETED_COUNT = 0;
 
-    return Promise.resolve(deletedCount);
+    return Promise.resolve(DELETED_COUNT);
   }
 }
 

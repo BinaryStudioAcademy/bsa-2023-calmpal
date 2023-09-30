@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: AppColor.WHITE,
-    alignItems: 'center',
     paddingBottom: 1,
   },
   header: {
@@ -25,7 +24,6 @@ const styles = StyleSheet.create({
   },
   chatWrapper: {
     paddingHorizontal: 20,
-    width: '100%',
   },
 });
 

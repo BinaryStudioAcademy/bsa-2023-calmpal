@@ -18,12 +18,12 @@ class SurveyService implements Service {
     this.surveyRepository = surveyRepository;
   }
 
-  public find(): ReturnType<Service['find']> {
+  public findById(): ReturnType<Service['findById']> {
     return Promise.resolve(null);
   }
 
-  public async findAll(): ReturnType<Service['findAll']> {
-    return await Promise.resolve({ items: [] });
+  public findAll(): ReturnType<Service['findAll']> {
+    return Promise.resolve({ items: [] });
   }
 
   public async create(

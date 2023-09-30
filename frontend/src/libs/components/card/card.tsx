@@ -13,6 +13,8 @@ type Properties = {
   isActive?: boolean;
   iconName?: IconName;
   iconColor?: ValueOf<typeof IconColor>;
+  iconWidth?: number;
+  iconHeight?: number;
   iconRight?: IconName;
   onIconClick?: () => void;
 };
@@ -24,6 +26,8 @@ const Card: React.FC<Properties> = ({
   isActive = false,
   iconName,
   iconRight,
+  iconWidth,
+  iconHeight,
   onIconClick,
   iconColor,
 }) => {
@@ -64,7 +68,12 @@ const Card: React.FC<Properties> = ({
               )}
               {hasIcon && (
                 <div className={styles['icon-background']}>
-                  <Icon name={iconName as IconName} color={iconColor} />
+                  <Icon
+                    name={iconName as IconName}
+                    color={iconColor}
+                    width={iconWidth as number}
+                    height={iconHeight as number}
+                  />
                 </div>
               )}
             </div>

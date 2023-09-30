@@ -1,3 +1,4 @@
+import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
 import {
@@ -10,23 +11,24 @@ import {
   ScrollView,
   View,
 } from '#libs/components/components';
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, JournalScreenName } from '#libs/enums/enums';
 import {
   useAppDispatch,
   useAppSelector,
-  useCallback,
   useEffect,
   useNavigation,
   useSearch,
   useState,
 } from '#libs/hooks/hooks';
+import { type JournalNavigationParameterList } from '#libs/types/types';
 import { actions as journalActions } from '#slices/journal/journal';
 
 import { styles } from './styles';
 
 const Journal: React.FC = () => {
   const dispatch = useAppDispatch();
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<JournalNavigationParameterList>>();
 
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
@@ -46,9 +48,10 @@ const Journal: React.FC = () => {
     'title',
   );
 
-  const handleSelectJournal = useCallback(() => {
-    // TODO: Implement actual functionality for the onPress event
-  }, []);
+  const handleSelectJournalEntry = (id: number | null): void => {
+    dispatch(journalActions.setSelectedJournalEntry(id));
+    navigation.navigate(JournalScreenName.NOTE, { id });
+  };
 
   const handleShowModal = (id: number): void => {
     dispatch(journalActions.setSelectedJournalEntry(id));
@@ -66,9 +69,9 @@ const Journal: React.FC = () => {
     }
   };
 
-  const handleAddNote = useCallback(() => {
-    // TODO: Implement actual functionality for the onPress event
-  }, []);
+  const handleAddNote = (): void => {
+    handleSelectJournalEntry(null);
+  };
 
   useEffect(() => {
     navigation.setOptions({
@@ -101,8 +104,10 @@ const Journal: React.FC = () => {
               <Card
                 key={item.id}
                 title={item.title}
+                onPress={(): void => {
+                  handleSelectJournalEntry(item.id);
+                }}
                 iconRight="delete"
-                onPress={handleSelectJournal}
                 onIconPress={(): void => {
                   handleShowModal(item.id);
                 }}
@@ -110,13 +115,15 @@ const Journal: React.FC = () => {
             );
           })}
         </ScrollView>
-        <Button
-          onPress={handleAddNote}
-          iconName="plus"
-          label="Add new note"
-          type="transparent"
-          color={AppColor.BLUE_200}
-        />
+        <View style={styles.linkWrapper}>
+          <Button
+            onPress={handleAddNote}
+            iconName="plus"
+            label="Add new note"
+            type="transparent"
+            color={AppColor.BLUE_200}
+          />
+        </View>
       </View>
     </LinearGradient>
   );

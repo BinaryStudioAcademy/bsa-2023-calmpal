@@ -15,8 +15,12 @@ class MeditationRepository implements Repository {
     this.meditationEntryModel = meditationEntryModel;
   }
 
-  public find(): ReturnType<Repository['find']> {
+  public findById(): ReturnType<Repository['findById']> {
     return Promise.resolve(null);
+  }
+
+  public findAll(): ReturnType<Repository['findAll']> {
+    return Promise.resolve([]);
   }
 
   public async findByUserId(userId: number): Promise<MeditationEntity[]> {
@@ -37,10 +41,6 @@ class MeditationRepository implements Repository {
         updatedAt: new Date(meditationEntry.updatedAt),
       });
     });
-  }
-
-  public findAll(): ReturnType<Repository['findAll']> {
-    return Promise.resolve([]);
   }
 
   public async create(entity: MeditationEntity): Promise<MeditationEntity> {
@@ -74,10 +74,9 @@ class MeditationRepository implements Repository {
   }
 
   public delete(): ReturnType<Repository['delete']> {
-    //TODO
-    const deletedCount = 0;
+    const DELETED_COUNT = 0;
 
-    return Promise.resolve(deletedCount);
+    return Promise.resolve(DELETED_COUNT);
   }
 }
 

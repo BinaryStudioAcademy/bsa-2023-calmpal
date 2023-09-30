@@ -25,6 +25,7 @@ import { reducer as journalReducer } from '#slices/journal/journal.js';
 import { reducer as meditationReducer } from '#slices/meditation/meditation.js';
 import { reducer as subscriptionReducer } from '#slices/subscription/subscription.js';
 import { reducer as surveyReducer } from '#slices/survey/survey.js';
+import { reducer as usersReducer } from '#slices/users/users.js';
 
 import { storage } from '../storage/storage.js';
 
@@ -36,6 +37,7 @@ type RootReducer = {
   chats: ReturnType<typeof chatsReducer>;
   survey: ReturnType<typeof surveyReducer>;
   subscription: ReturnType<typeof subscriptionReducer>;
+  users: ReturnType<typeof usersReducer>;
 };
 
 type ExtraArguments = {
@@ -69,6 +71,7 @@ class Store {
         chats: chatsReducer,
         survey: surveyReducer,
         subscription: subscriptionReducer,
+        users: usersReducer,
       },
       middleware: (getDefaultMiddleware) => {
         return [

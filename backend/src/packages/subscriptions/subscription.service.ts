@@ -1,3 +1,4 @@
+import { getShiftedDate } from '#libs/helpers/helpers.js';
 import { type Billing } from '#libs/packages/billing/billing.js';
 import { type Service } from '#libs/types/types.js';
 import {
@@ -5,6 +6,7 @@ import {
   userService,
 } from '#packages/users/users.js';
 
+import { SUBSCRIPTION_MONTH_DURATION } from './libs/constants/constants.js';
 import {
   type SubscriptionPaymentIntentCreateRequestDto,
   type SubscriptionPaymentIntentCreateResponseDto,
@@ -27,16 +29,16 @@ class SubscriptionService implements Service {
     this.subscriptionRepository = subscriptionRepository;
   }
 
-  public find(): Promise<unknown> {
-    return Promise.resolve();
+  public findById(): ReturnType<Service['findById']> {
+    return Promise.resolve(null);
   }
 
-  public findAll(): Promise<{ items: unknown[] }> {
+  public findAll(): ReturnType<Service['findAll']> {
     return Promise.resolve({ items: [] });
   }
 
-  public create(): Promise<unknown> {
-    return Promise.resolve();
+  public create(): ReturnType<Service['create']> {
+    return Promise.resolve(null);
   }
 
   public async subscribe({
@@ -46,7 +48,9 @@ class SubscriptionService implements Service {
   }): Promise<UserAuthResponseDto> {
     const subscriptionEntity = await this.subscriptionRepository.create(
       SubscriptionEntity.initializeNew({
-        endDate: new Date(),
+        endDate: getShiftedDate(new Date(), {
+          month: SUBSCRIPTION_MONTH_DURATION,
+        }),
       }),
     );
 
@@ -68,15 +72,15 @@ class SubscriptionService implements Service {
     return { clientSecret, id };
   }
 
-  public cancelPaymentIntent(id: string): Promise<boolean> {
-    return this.billing.cancelPaymentIntent(id);
+  public async cancelPaymentIntent(id: string): Promise<boolean> {
+    return await this.billing.cancelPaymentIntent(id);
   }
 
-  public update(): Promise<unknown> {
-    return Promise.resolve();
+  public update(): ReturnType<Service['update']> {
+    return Promise.resolve(null);
   }
 
-  public delete(): Promise<boolean> {
+  public delete(): ReturnType<Service['delete']> {
     return Promise.resolve(true);
   }
 }

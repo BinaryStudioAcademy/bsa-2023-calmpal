@@ -20,6 +20,7 @@ class UserWithPasswordEntity extends UserEntity {
     isSurveyCompleted: boolean;
     subscriptionId: number | null;
     subscriptionEndDate: Date | null;
+    deletedAt: Date | null;
   }) {
     super(baseData);
     this.passwordHash = passwordHash;
@@ -41,6 +42,7 @@ class UserWithPasswordEntity extends UserEntity {
     isSurveyCompleted: boolean;
     subscriptionId: number | null;
     subscriptionEndDate: Date | null;
+    deletedAt: Date | null;
   }): UserWithPasswordEntity {
     return new UserWithPasswordEntity({
       ...baseData,
@@ -69,6 +71,7 @@ class UserWithPasswordEntity extends UserEntity {
       updatedAt: null,
       subscriptionId: null,
       subscriptionEndDate: null,
+      deletedAt: null,
     });
   }
 
@@ -83,6 +86,7 @@ class UserWithPasswordEntity extends UserEntity {
     isSurveyCompleted: boolean;
     subscriptionId: number | null;
     subscriptionEndDate: Date | null;
+    deletedAt: Date | null;
   } {
     const baseObject = super.toObject();
 

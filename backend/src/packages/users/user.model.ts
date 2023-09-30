@@ -27,6 +27,8 @@ class UserModel extends AbstractModel {
 
   public passwordSalt!: string;
 
+  public deletedAt!: string | null;
+
   public static override get tableName(): string {
     return DatabaseTableName.USERS;
   }
@@ -39,6 +41,7 @@ class UserModel extends AbstractModel {
           'users.email',
           'users.created_at',
           'users.updated_at',
+          'users.deleted_at',
         );
       },
     };

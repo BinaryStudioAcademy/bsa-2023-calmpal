@@ -12,9 +12,12 @@ import {
   useAppSelector,
   useCallback,
   useLocation,
+  useRef,
   useState,
 } from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
+import { DeleteAccountModal } from '#pages/profile-settings/components/components.js';
+import { type DeleteAccountModalHandler } from '#pages/profile-settings/components/delete-account-modal/libs/types/types.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
 import { SETTING_NAME_INDEX, SETTINGS_OPTIONS } from './libs/constants.js';
@@ -57,6 +60,12 @@ const UserProfileSidebar: React.FC<Properties> = ({
   const handleSignOut = useCallback((): void => {
     void dispatch(authActions.signOut());
   }, [dispatch]);
+
+  const dialogReference = useRef<DeleteAccountModalHandler>(null);
+
+  const handleOpen = useCallback(() => {
+    dialogReference.current?.handleShowModal();
+  }, [dialogReference]);
 
   return (
     <Sidebar isSidebarShown={isSidebarShown}>
@@ -105,6 +114,15 @@ const UserProfileSidebar: React.FC<Properties> = ({
             iconName="sign-out"
             iconColor={IconColor.WHITE}
           />
+          <Card
+            title="Delete account"
+            onClick={handleOpen}
+            iconName="trash-box"
+            iconColor={IconColor.WHITE}
+            iconWidth={24}
+            iconHeight={24}
+          />
+          <DeleteAccountModal ref={dialogReference} />
         </div>
       </SidebarBody>
     </Sidebar>

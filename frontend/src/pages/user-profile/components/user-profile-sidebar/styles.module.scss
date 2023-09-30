@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--gray-400);
 }
 
 .user {
@@ -28,7 +29,7 @@
 }
 
 .user-name {
-  color: var(--black);
+  color: var(--gray-400);
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;

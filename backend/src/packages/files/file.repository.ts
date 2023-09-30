@@ -14,10 +14,6 @@ class FileRepository implements Repository {
     this.fileModel = fileModel;
   }
 
-  public find(): ReturnType<Repository['find']> {
-    return Promise.resolve(null);
-  }
-
   public async findById(id: number): Promise<FileEntity | null> {
     const file = await this.fileModel
       .query()
@@ -38,8 +34,8 @@ class FileRepository implements Repository {
     });
   }
 
-  public async findAll(): ReturnType<Repository['findAll']> {
-    return await Promise.resolve([]);
+  public findAll(): ReturnType<Repository['findAll']> {
+    return Promise.resolve([]);
   }
 
   public async create(entity: FileEntity): Promise<FileEntity> {
@@ -67,10 +63,9 @@ class FileRepository implements Repository {
   }
 
   public delete(): ReturnType<Repository['delete']> {
-    //TODO
-    const deletedCount = 0;
+    const DELETED_COUNT = 0;
 
-    return Promise.resolve(deletedCount);
+    return Promise.resolve(DELETED_COUNT);
   }
 }
 

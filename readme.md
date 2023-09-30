@@ -1,6 +1,6 @@
 # CalmPal
 
-AI-powered mental health app.
+AI-powered Mental Health app.
 
 ## 1. Introduction
 
@@ -8,11 +8,11 @@ AI-powered mental health app.
 
 - Pay attention, that we have certain [quality criteria](https://github.com/BinaryStudioAcademy/quality-criteria/blob/production/src/javascript.md), which we should follow during application development.
 
-TODO: Add development deployment link
-
 ## 2. Domain
 
-The product is an AI-based mental health app with the main feature being a highly engaged and supportive chatbot, along with additional features like a meditation function, journal, and mood tracker.
+CalmPal is an AI-powered Mental Health app designed to be a trusted companion on the path to inner peace. The app offers a comprehensive approach to mental well-being, combining AI-driven therapy through a highly responsive chatbot and personalized mindfulness practices (meditation, mood tracking, and journaling).
+
+The CalmPal goal is to be the best tool for people who have mental health problems and want to manage stress and keep their emotions balanced.
 
 ## 3. Requirements
 
@@ -148,7 +148,13 @@ erDiagram
 
 ## 5. Architecture
 
-![Application schema](./docs/application-architecture/application-schema.drawio.svg)
+### Application schema:
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/application-architecture/calmpal-dark-theme.drawio.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./docs/application-architecture/calmpal-light-theme.drawio.svg">
+  <img alt="Application schema" src="./docs/application-architecture/calmpal-dark-theme.drawio.svg">
+</picture>
 
 ### 5.1 Global
 

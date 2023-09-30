@@ -13,7 +13,7 @@ const wrapPathWith = (
 };
 
 const SIDEBAR_ROUTES: Route[] = [
-  { path: AppRoute.ROOT, name: 'home', icon: 'home' },
+  // { path: AppRoute.ROOT, name: 'home', icon: 'home' },
   {
     path: AppRoute.MEDITATION,
     wrapPathWith,

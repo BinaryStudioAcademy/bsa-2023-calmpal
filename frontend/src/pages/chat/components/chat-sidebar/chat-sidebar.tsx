@@ -59,7 +59,6 @@ const ChatSidebar: React.FC<Properties> = ({
 
   const handleSelectChat = useCallback(() => {
     onSetIsSidebarShow(false);
-    // TODO redux logic
   }, [onSetIsSidebarShow]);
 
   const handleDeleteChat = useCallback(

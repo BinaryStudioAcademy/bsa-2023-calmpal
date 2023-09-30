@@ -1,0 +1,13 @@
+.modal-body {
+  padding: 10px;
+  font-size: 16px;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+@media (width < 480px) {
+  .modal-body {
+    padding: 5px;
+    white-space: normal;
+  }
+}
