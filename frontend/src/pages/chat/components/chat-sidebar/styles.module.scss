@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   width: 100%;
+  color: var(--gray-400);
 }
 
 .chat-number {
@@ -40,7 +41,7 @@
   margin-top: 15px;
   font-weight: 600;
   font-size: 16px;
-  font-family: Montserrat, sans-serif;
+  font-family: Montserrat, Arial, sans-serif;
   background: var(--white-alpha-80);
   border-radius: 20px;
   box-shadow: 0 4px 23px 0 var(--violet-100);
