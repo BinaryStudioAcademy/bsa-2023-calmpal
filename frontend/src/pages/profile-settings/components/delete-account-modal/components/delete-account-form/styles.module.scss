@@ -6,10 +6,6 @@
   gap: 20px;
 }
 
-.form > :last-child {
-  margin-top: 25px;
-}
-
 .footer {
   display: flex;
   flex-direction: row;
@@ -17,5 +13,11 @@
   align-items: center;
   gap: 25px;
   width: 100%;
-  margin-top: 45px;
+  margin-top: 15px;
+}
+
+.error-message {
+  color: var(--red-300);
+  font-size: 12px;
+  text-align: left;
 }
