@@ -1,5 +1,6 @@
 import {
   type StepsConfiguration,
+  SURVEY_OTHER_CATEGORY,
   SurveyStep,
 } from '#packages/survey/survey.js';
 
@@ -13,7 +14,7 @@ const PREFERENCES_CATEGORIES: string[] = [
   'Improve sleep quality',
   'Get over with depression',
   'Improve focus',
-  'Other',
+  SURVEY_OTHER_CATEGORY,
 ];
 
 const FEELINGS_CATEGORIES: string[] = [
@@ -29,7 +30,7 @@ const GOALS_CATEGORIES: string[] = [
   'Improve sleep quality',
   'Cultivate a positive mindset',
   'Enhance emotional well-being',
-  'Other',
+  SURVEY_OTHER_CATEGORY,
 ];
 
 const WORRIES_CATEGORIES: string[] = [
@@ -38,7 +39,7 @@ const WORRIES_CATEGORIES: string[] = [
   'Relationships',
   'Health',
   'Family responsibilities',
-  'Other',
+  SURVEY_OTHER_CATEGORY,
 ];
 
 const MEDITATION_EXPERIENCE_CATEGORIES: string[] = [
@@ -115,14 +116,4 @@ const STEPS_CONFIGURATION = new Map([
   ],
 ]) as StepsConfiguration;
 
-export {
-  FEELINGS_CATEGORIES,
-  GOALS_CATEGORIES,
-  JOURNALING_EXPERIENCE_CATEGORIES,
-  MEDITATION_EXPERIENCE_CATEGORIES,
-  ONE_INDEX,
-  PREFERENCES_CATEGORIES,
-  STEPS_CONFIGURATION,
-  TEXTAREA_ROWS_COUNT,
-  WORRIES_CATEGORIES,
-};
+export { ONE_INDEX, STEPS_CONFIGURATION, TEXTAREA_ROWS_COUNT };
