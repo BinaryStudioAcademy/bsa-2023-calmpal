@@ -1,0 +1,33 @@
+.chat-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--blue-100);
+  box-shadow: 1px 15px 15px -15px var(--white);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  padding: 25px 36px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+}
+
+.title {
+  margin: 0 16px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+@media (width < 768px), (height < 530px) {
+  .header-content {
+    padding: 25px 95px;
+  }
+}

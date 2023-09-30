@@ -5,6 +5,8 @@ type FileGetAllItemResponseDto = {
   id: number;
   url: string;
   contentType: ValueOf<typeof ContentType>;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export { type FileGetAllItemResponseDto };

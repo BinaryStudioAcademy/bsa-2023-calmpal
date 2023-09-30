@@ -1,4 +1,5 @@
 type JournalEntryCreateQueryPayload = {
+  userId: number;
   title: string;
   text: string;
 };

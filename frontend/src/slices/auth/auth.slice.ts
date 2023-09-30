@@ -8,6 +8,7 @@ import {
   createUserSurvey,
   getAuthenticatedUser,
   signIn,
+  signOut,
   signUp,
 } from './actions.js';
 
@@ -51,6 +52,17 @@ const { reducer, actions, name } = createSlice({
     });
     builder.addCase(signIn.rejected, (state) => {
       state.authenticatedUser = null;
+      state.authDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(signOut.pending, (state) => {
+      state.authDataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(signOut.fulfilled, (state) => {
+      state.authenticatedUser = null;
+      state.authDataStatus = DataStatus.FULFILLED;
+    });
+    builder.addCase(signOut.rejected, (state) => {
       state.authDataStatus = DataStatus.REJECTED;
     });
 

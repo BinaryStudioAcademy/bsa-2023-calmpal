@@ -20,7 +20,7 @@ scripts:
     name: Create .env file and set variables
     script: |
       cat >> .env << EOF
-      API_ORIGIN_URL = $API_ORIGIN_URL
+      API_URL = $API_URL
       APP_HOST = $APP_HOST
       APP_SCHEME = $APP_SCHEME
       EOF

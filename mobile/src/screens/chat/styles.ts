@@ -1,12 +1,11 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: AppColor.WHITE,
-    alignItems: 'center',
     paddingBottom: 1,
   },
   header: {
@@ -21,6 +20,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: AppColor.GRAY_600,
     marginLeft: 17,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
   chatWrapper: {
     paddingHorizontal: 20,

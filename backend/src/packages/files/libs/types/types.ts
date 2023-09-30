@@ -3,6 +3,5 @@ export { type FileCreateQueryPayload } from './file-create-query-payload.js';
 export {
   type FileGetAllItemResponseDto,
   type FileUploadRequestDto,
-  type FileUploadResponseDto,
   type S3FileUploadRequestDto,
 } from 'shared/build/index.js';

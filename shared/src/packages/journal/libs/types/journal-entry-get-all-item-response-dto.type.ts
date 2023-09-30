@@ -1,5 +1,6 @@
 type JournalEntryGetAllItemResponseDto = {
   id: number;
+  userId: number;
   title: string;
   text: string;
   createdAt: Date;

@@ -1,9 +1,9 @@
 type Repository<T = unknown> = {
-  find(): Promise<T>;
-  findAll(): Promise<T[]>;
+  findById(id: number): Promise<T>;
+  findAll(payload?: unknown): Promise<T[]>;
   create(payload: unknown): Promise<T>;
   update(payload: unknown): Promise<T>;
-  delete(): Promise<boolean>;
+  delete(payload: unknown): Promise<number>;
 };
 
 export { type Repository };

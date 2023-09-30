@@ -1,0 +1,75 @@
+.container {
+  position: fixed;
+  width: 350px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    var(--transparent) 0,
+    var(--blue-100) 100%
+  );
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 47px 20px;
+  font-weight: 600;
+  font-size: 20px;
+  border-bottom: 1px solid var(--blue-100);
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 90%;
+}
+
+.search {
+  margin-top: 23px;
+}
+
+.meditation-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin-top: 83px;
+  padding: 0 16px;
+  overflow-y: scroll;
+}
+
+.meditation-list::-webkit-scrollbar {
+  display: none;
+}
+
+@media (width < 900px) {
+  .meditation-list {
+    padding: 0 15px;
+  }
+
+  .search {
+    width: 100%;
+    padding: 0 15px;
+  }
+}
+
+@media (width < 768px) {
+  .meditation-list {
+    padding: 0 20px;
+  }
+
+  .search {
+    width: 100%;
+    padding: 0 15px;
+  }
+}

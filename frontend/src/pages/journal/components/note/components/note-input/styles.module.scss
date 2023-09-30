@@ -1,0 +1,16 @@
+.text-area {
+  position: relative;
+}
+
+.paragraph {
+  margin: 0;
+}
+
+.placeholder {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  user-select: none;
+  pointer-events: none;
+  color: var(--blue-200);
+}

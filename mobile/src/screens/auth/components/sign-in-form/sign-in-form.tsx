@@ -53,10 +53,10 @@ const SignInForm: React.FC<Properties> = ({ onSubmit }) => {
         <Button label="Sign in" onPress={handleFormSubmit} />
         <Link
           label={
-            <React.Fragment>
+            <Text style={styles.bottomText}>
               Don&apos;t have an account? Go to{' '}
               <Text style={styles.boldText}>Sign up</Text>
-            </React.Fragment>
+            </Text>
           }
           to={`/${RootScreenName.SIGN_UP}`}
         />

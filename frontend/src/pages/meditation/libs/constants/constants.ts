@@ -1,24 +1,29 @@
-const mockedEntries = [
-  {
-    id: 1,
-    title: 'Meditation for deep sleep',
-    duration: '10 min',
-  },
-  {
-    id: 2,
-    title: 'Breathing meditation',
-    duration: '5 min',
-  },
-  {
-    id: 3,
-    title: 'Meditation for relax',
-    duration: '15 min',
-  },
-  {
-    id: 4,
-    title: 'Nature meditation',
-    duration: '45 min',
-  },
-] as const;
+import { AppRoute } from '#libs/enums/enums.js';
+import { type MeditationEntryCreateForm } from '#packages/meditation/libs/types/types.js';
 
-export { mockedEntries };
+const TRACK_FIRST_INDEX = 0;
+const FULL_PERCENTAGE = 100;
+const TRACK_INCREMENT_INDEX = 1;
+const PROGRESS_BAR = '--player-progress';
+
+const navigationItems = [{ name: 'Meditation', path: AppRoute.MEDITATION }];
+
+const DEFAULT_MEDITATION_PAYLOAD: MeditationEntryCreateForm = {
+  name: '',
+  file: null,
+};
+
+export {
+  DEFAULT_MEDITATION_PAYLOAD,
+  FULL_PERCENTAGE,
+  navigationItems,
+  PROGRESS_BAR,
+  TRACK_FIRST_INDEX,
+  TRACK_INCREMENT_INDEX,
+};
+export {
+  DURATION_UNIT,
+  MEDITATION_DURATION,
+  TRACK_SKIP_SECONDS,
+  TRACK_START_TIME,
+} from 'shared/build/index.js';

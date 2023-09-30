@@ -15,14 +15,14 @@ import { styles } from './styles';
 
 type Properties = {
   title: string;
-  duration: number;
   img?: ImageSourcePropType;
+  onClick: () => void;
 };
 
 const MeditationItem: React.FC<Properties> = ({
   title,
-  duration,
   img = cardImagePlaceholder,
+  onClick,
 }) => {
   return (
     <View style={styles.container}>
@@ -30,11 +30,10 @@ const MeditationItem: React.FC<Properties> = ({
       <View style={styles.innerContainer}>
         <View>
           <Text style={styles.title}>{title}</Text>
-          <Text style={styles.duration}>{duration} min</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onClick}>
           <View style={styles.playButton}>
-            <Play color={AppColor.WHITE} />
+            <Play color={AppColor.WHITE} width={12} />
           </View>
         </TouchableOpacity>
       </View>

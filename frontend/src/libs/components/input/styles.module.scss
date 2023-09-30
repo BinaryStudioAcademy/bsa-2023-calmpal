@@ -60,3 +60,18 @@
   font-size: 12px;
   text-align: left;
 }
+
+.chat-input {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.chat-input:focus {
+  border: none;
+  box-shadow: none;
+}

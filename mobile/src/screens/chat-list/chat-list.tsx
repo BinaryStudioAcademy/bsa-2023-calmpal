@@ -1,57 +1,109 @@
 import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
-import PlusIcon from '#assets/img/icons/plus.svg';
 import {
+  Button,
   Card,
   Header,
   InputSearch,
   LinearGradient,
-  Link,
+  Modal,
   ScrollView,
   View,
 } from '#libs/components/components';
-import { AppColor, ChatScreenName, RootScreenName } from '#libs/enums/enums';
+import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants';
+import { AppColor, ChatScreenName } from '#libs/enums/enums';
 import {
+  useAppDispatch,
+  useAppSelector,
   useCallback,
   useEffect,
   useNavigation,
   useSearch,
+  useState,
 } from '#libs/hooks/hooks';
 import { type ChatNavigationParameterList } from '#libs/types/types';
+import { actions as chatsActions } from '#slices/chats/chats';
 
-import mockedChats from './libs/data.json';
 import { styles } from './styles';
 
-const mockedCount = 12;
 const ChatList: React.FC = () => {
+  const { chats, isLoaded } = useAppSelector(({ chats }) => {
+    return {
+      chats: chats.chats,
+      isLoaded: chats.chatsDataStatus === 'fulfilled',
+    };
+  });
+  const dispatch = useAppDispatch();
   const navigation =
     useNavigation<NativeStackNavigationProp<ChatNavigationParameterList>>();
+  const [isDeleteModalVisible, setIsDeleteModalVisible] =
+    useState<boolean>(false);
+  const [chatIdToDelete, setChatIdToDelete] = useState<number | null>(null);
+
+  const { filteredData: filteredChats, setSearchQuery } = useSearch(
+    chats,
+    'name',
+  );
+
+  const chatsLength = chats.length;
+
+  const handleShowDeleteModal = (id: number): void => {
+    setChatIdToDelete(id);
+    setIsDeleteModalVisible(true);
+  };
+
+  const hanleCloseDeleteModal = (): void => {
+    setIsDeleteModalVisible(false);
+  };
+
+  const handleDeleteChat = (): void => {
+    hanleCloseDeleteModal();
+    void dispatch(chatsActions.deleteChat(chatIdToDelete as number));
+  };
+
+  const handleSelectChat = useCallback(
+    (title: string, id: string | undefined) => {
+      navigation.navigate(ChatScreenName.CHAT, { title, id: id ?? '' });
+    },
+    [navigation],
+  );
+
+  const handleRedirectToChat = useCallback(() => {
+    navigation.navigate(ChatScreenName.CHAT, {
+      title: 'New Chat',
+      id: '',
+    });
+  }, [navigation]);
 
   useEffect(() => {
     navigation.setOptions({
       header: () => {
         return (
-          <Header title="Chat" badgeCount={mockedCount} isProfileVisible />
+          <Header title="Chat" badgeCount={chatsLength} isProfileVisible />
         );
       },
     });
-  }, [navigation]);
+  }, [navigation, chatsLength]);
 
-  const handleSelectChat = useCallback(
-    (title: string) => {
-      navigation.navigate(ChatScreenName.CHAT, { title });
-    },
-    [navigation],
-  );
+  useEffect(() => {
+    if (isLoaded && chatsLength === EMPTY_ARRAY_LENGTH) {
+      handleRedirectToChat();
+    }
+  }, [chatsLength, handleRedirectToChat, isLoaded]);
 
-  const { filteredData: filteredChats, setSearchQuery } = useSearch(
-    mockedChats,
-    'title',
-  );
+  useEffect(() => {
+    void dispatch(chatsActions.getAllChats());
+  }, [dispatch]);
 
   return (
     <LinearGradient>
+      <Modal
+        isVisible={isDeleteModalVisible}
+        onClose={hanleCloseDeleteModal}
+        onDelete={handleDeleteChat}
+        type="Chat"
+      />
       <View style={styles.container}>
         <InputSearch
           placeholder="Search chat"
@@ -61,21 +113,26 @@ const ChatList: React.FC = () => {
           {filteredChats.map((item) => {
             return (
               <Card
-                title={item.title}
-                onPress={handleSelectChat}
                 key={item.id}
+                title={item.name}
+                onPress={(): void => {
+                  handleSelectChat(item.name, item.id.toString());
+                }}
+                iconRight="delete"
+                onIconPress={(): void => {
+                  handleShowDeleteModal(item.id);
+                }}
               />
             );
           })}
         </ScrollView>
-        <View style={styles.linkWrapper}>
-          <Link
-            label="Add new chat"
-            to={`/${RootScreenName.SIGN_IN}`}
-            style={styles.link}
-            icon={<PlusIcon style={styles.icon} color={AppColor.BLUE_300} />}
-          />
-        </View>
+        <Button
+          onPress={handleRedirectToChat}
+          iconName="plus"
+          label="Add new chat"
+          type="transparent"
+          color={AppColor.BLUE_200}
+        />
       </View>
     </LinearGradient>
   );

@@ -1,0 +1,25 @@
+.date {
+  display: flex;
+  color: var(--blue-200);
+  font-weight: 500;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.date::before,
+.date::after {
+  content: "";
+  display: inline-block;
+  width: 100%;
+  height: 1px;
+  margin: auto 0;
+  background-color: var(--blue-100);
+}
+
+.date::before {
+  margin-right: 45px;
+}
+
+.date::after {
+  margin-left: 45px;
+}

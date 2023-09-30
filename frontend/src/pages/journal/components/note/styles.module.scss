@@ -1,0 +1,28 @@
+.wrapper {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  color: var(--blue-700);
+  font-weight: 500;
+}
+
+.title,
+.text {
+  padding: 15px;
+  background-color: var(--blue-100);
+  border-radius: 12px;
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.text {
+  min-height: 400px;
+}
+
+.title:focus,
+.text:focus {
+  border: 1px solid var(--blue-300);
+  outline: none;
+}

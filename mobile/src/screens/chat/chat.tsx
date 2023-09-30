@@ -3,62 +3,73 @@ import React from 'react';
 
 import ChatAvatar from '#assets/img/icons/chat-avatar.svg';
 import { Header, ScrollView, Text, View } from '#libs/components/components';
+import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants';
+import { TimeFormat } from '#libs/enums/enums';
+import { getFormattedDate } from '#libs/helpers/helpers';
 import {
+  useAppDispatch,
   useAppForm,
   useAppRoute,
+  useAppSelector,
   useCallback,
   useEffect,
   useNavigation,
   useRef,
-  useState,
 } from '#libs/hooks/hooks';
 import { type ChatNavigationParameterList } from '#libs/types/types';
+import { type UserAuthResponseDto } from '#packages/users/users';
+import { actions as chatsActions } from '#slices/chats/chats';
 
-import { ChatInput, MessageItem } from './components/components';
-import { DEFAULT_VALUES, MOCKED_DATA, PREVIOUS_USER } from './libs/constants';
+import { ChatDivider, ChatInput, MessageItem } from './components/components';
+import { DEFAULT_VALUES, PREVIOUS_USER } from './libs/constants/constants';
+import { type ChatInputValue } from './libs/types/chat-input-value.type';
 import { styles } from './styles';
-
-type Message = {
-  id: number;
-  isUser: boolean;
-  message: string;
-};
 
 type RouteParameters = {
   title: string;
+  id: string;
 };
 
 const Chat: React.FC = () => {
+  const dispatch = useAppDispatch();
   const navigation =
     useNavigation<NativeStackNavigationProp<ChatNavigationParameterList>>();
-  const { title } = useAppRoute().params as RouteParameters;
+  const { title, id } = useAppRoute().params as RouteParameters;
+  const hasId = Boolean(id);
+
   const { control, handleSubmit, reset } = useAppForm({
     defaultValues: DEFAULT_VALUES,
   });
 
-  const [messages, setMessages] = useState<Message[]>(MOCKED_DATA);
+  const { currentChatMessages, authenticatedUser } = useAppSelector(
+    ({ chats, auth }) => {
+      return {
+        currentChatMessages: chats.currentChatMessages,
+        authenticatedUser: auth.authenticatedUser as UserAuthResponseDto,
+      };
+    },
+  );
+
   const scrollViewReference = useRef<ScrollView | null>(null);
+  const messagesLength = Object.values(currentChatMessages).flat().length;
 
   const scrollViewToEnd = (): void => {
     scrollViewReference.current?.scrollToEnd();
   };
 
   const handleFormSubmit = useCallback(
-    (payload: { text: string }): void => {
-      setMessages((previous) => {
-        return [
-          ...previous,
-          {
-            id: Date.now(),
-            isUser: true,
-            message: payload.text,
-          },
-        ];
-      });
-      scrollViewToEnd();
+    ({ message }: ChatInputValue): void => {
+      if (!hasId || messagesLength === EMPTY_ARRAY_LENGTH) {
+        void dispatch(
+          chatsActions.createChat({ payload: { message }, navigation }),
+        );
+      } else {
+        void dispatch(chatsActions.createMessage({ message, chatId: id }));
+      }
+
       reset();
     },
-    [setMessages, reset],
+    [reset, dispatch, messagesLength, id, hasId, navigation],
   );
 
   const handleSend = useCallback((): void => {
@@ -72,10 +83,18 @@ const Chat: React.FC = () => {
   useEffect(() => {
     navigation.setOptions({
       header: () => {
-        return <Header title={title} isArrowVisible />;
+        return <Header title={title} isArrowVisible fontSize="small" />;
       },
     });
   }, [navigation, title]);
+
+  useEffect(() => {
+    scrollViewToEnd();
+  }, [messagesLength]);
+
+  useEffect(() => {
+    void dispatch(chatsActions.getCurrentChatMessages(id));
+  }, [dispatch, id, hasId]);
 
   return (
     <View style={styles.wrapper}>
@@ -84,17 +103,30 @@ const Chat: React.FC = () => {
         <Text style={styles.title}>Doctor Freud.ai</Text>
       </View>
       <ScrollView style={styles.chatWrapper} ref={scrollViewReference}>
-        {messages.map((item, index) => {
-          const isDifferentUser =
-            item.isUser !== messages[index - PREVIOUS_USER]?.isUser;
-
+        {Object.entries(currentChatMessages).map(([date, group]) => {
           return (
-            <MessageItem
-              text={item.message}
-              isUser={item.isUser}
-              isAvatarVisible={isDifferentUser}
-              key={item.id}
-            />
+            <React.Fragment key={date}>
+              <ChatDivider date={new Date(date)} />
+              {group.map((item, index) => {
+                const previousMessage = group[index - PREVIOUS_USER];
+                const currentTime = getFormattedDate(
+                  new Date(item.createdAt),
+                  TimeFormat.HH_MM,
+                );
+                const isDifferentMessageOwner =
+                  item.senderId !== previousMessage?.senderId;
+
+                return (
+                  <MessageItem
+                    text={item.message}
+                    time={currentTime}
+                    isUser={item.senderId === authenticatedUser.id}
+                    isAvatarVisible={isDifferentMessageOwner}
+                    key={item.id}
+                  />
+                );
+              })}
+            </React.Fragment>
           );
         })}
       </ScrollView>
@@ -102,7 +134,7 @@ const Chat: React.FC = () => {
         scrollViewToEnd={scrollViewToEnd}
         onSend={handleSend}
         control={control}
-        name="text"
+        name="message"
       />
     </View>
   );

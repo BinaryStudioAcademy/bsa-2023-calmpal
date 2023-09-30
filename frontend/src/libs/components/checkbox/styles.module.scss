@@ -1,4 +1,4 @@
-.container {
+.container-primary {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,24 +11,46 @@
   cursor: pointer;
 }
 
-.container:hover {
+.container-primary:hover {
   background-color: var(--blue-alpha-70);
 }
 
-.container > .label {
+.label-primary {
   display: block;
   color: inherit;
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
-  text-align: center;
 }
 
-.container .checkbox {
+.checkbox-primary {
   display: none;
 }
 
-.container:has(.checkbox:checked) {
+.checkbox-primary:checked + .container-primary {
   color: var(--blue-700);
   background-color: var(--blue-alpha-70);
+}
+
+.checkbox-container-primary {
+  display: flex;
+  flex-direction: row;
+}
+
+.container-secondary {
+  display: block;
+  cursor: pointer;
+}
+
+.label-secondary {
+  display: block;
+}
+
+.checkbox-secondary {
+  display: block;
+}
+
+.checkbox-container-secondary {
+  display: flex;
+  gap: 3px;
 }

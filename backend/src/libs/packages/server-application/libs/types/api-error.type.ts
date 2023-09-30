@@ -2,6 +2,7 @@ import { type FastifyError } from 'fastify';
 
 import {
   type AuthError,
+  type ChatError,
   type UsersError,
   type ValidationError,
 } from '#libs/exceptions/exceptions.js';
@@ -12,6 +13,7 @@ type APIError =
   | ValidationError
   | HTTPError
   | AuthError
+  | ChatError
   | UsersError;
 
 export { type APIError };

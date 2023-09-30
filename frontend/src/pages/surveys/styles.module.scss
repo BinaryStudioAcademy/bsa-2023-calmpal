@@ -1,8 +1,9 @@
 .container {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 80px;
-  height: 100vh;
+  padding: 120px 0;
   background-image: url("../../assets/img/auth-background.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -16,16 +17,21 @@
   padding: 0% max(12%, 50px);
 }
 
-.survey .name {
+.title {
   flex: 1;
+  margin: 0;
   color: var(--white);
   font-weight: 600;
   font-size: 30px;
-  line-height: 125%;
+  line-height: 1.25;
 }
 
 @media (width < 768px) {
-  .survey .name {
+  .container {
+    padding: 50px 0;
+  }
+
+  .title {
     display: none;
   }
 }

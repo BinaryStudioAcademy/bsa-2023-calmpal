@@ -1,4 +1,5 @@
 const UserRolesTableColumn = {
+  ID: 'id',
   NAME: 'name',
   KEY: 'key',
   CREATED_AT: 'created_at',

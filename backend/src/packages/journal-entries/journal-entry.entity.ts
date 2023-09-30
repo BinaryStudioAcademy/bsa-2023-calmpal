@@ -3,6 +3,8 @@ import { type Entity } from '#libs/types/types.js';
 class JournalEntryEntity implements Entity {
   private id: number | null;
 
+  private userId: number;
+
   private createdAt: Date | null;
 
   private updatedAt: Date | null;
@@ -13,18 +15,21 @@ class JournalEntryEntity implements Entity {
 
   public constructor({
     id,
+    userId,
     title,
     text,
     createdAt,
     updatedAt,
   }: {
     id: number | null;
+    userId: number;
     title: string;
     text: string;
     createdAt: Date | null;
     updatedAt: Date | null;
   }) {
     this.id = id;
+    this.userId = userId;
     this.title = title;
     this.text = text;
     this.createdAt = createdAt;
@@ -33,12 +38,14 @@ class JournalEntryEntity implements Entity {
 
   public static initialize({
     id,
+    userId,
     title,
     text,
     createdAt,
     updatedAt,
   }: {
     id: number | null;
+    userId: number;
     title: string;
     text: string;
     createdAt: Date | null;
@@ -46,6 +53,7 @@ class JournalEntryEntity implements Entity {
   }): JournalEntryEntity {
     return new JournalEntryEntity({
       id,
+      userId,
       title,
       text,
       createdAt,
@@ -54,14 +62,17 @@ class JournalEntryEntity implements Entity {
   }
 
   public static initializeNew({
+    userId,
     title,
     text,
   }: {
+    userId: number;
     title: string;
     text: string;
   }): JournalEntryEntity {
     return new JournalEntryEntity({
       id: null,
+      userId,
       title,
       text,
       createdAt: null,
@@ -71,6 +82,7 @@ class JournalEntryEntity implements Entity {
 
   public toObject(): {
     id: number;
+    userId: number;
     title: string;
     text: string;
     createdAt: Date;
@@ -78,6 +90,7 @@ class JournalEntryEntity implements Entity {
   } {
     return {
       id: this.id as number,
+      userId: this.userId,
       title: this.title,
       text: this.text,
       createdAt: this.createdAt as Date,
@@ -86,10 +99,12 @@ class JournalEntryEntity implements Entity {
   }
 
   public toNewObject(): {
+    userId: number;
     title: string;
     text: string;
   } {
     return {
+      userId: this.userId,
       title: this.title,
       text: this.text,
     };

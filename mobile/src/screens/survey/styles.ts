@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   titleText: {
@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     paddingBottom: 4,
     alignSelf: 'center',
     color: AppColor.WHITE,
+    fontFamily: FontFamily.MONTSERRAT_600,
   },
 });
 

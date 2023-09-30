@@ -6,8 +6,8 @@ import { FileEntity } from '#packages/files/file.entity.js';
 import { type FileRepository } from '#packages/files/file.repository.js';
 
 import {
+  type FileGetAllItemResponseDto,
   type FileUploadRequestDto,
-  type FileUploadResponseDto,
 } from './libs/types/types.js';
 
 type FileServiceDependencies = {
@@ -24,36 +24,24 @@ class FileService implements Service {
     this.s3 = s3;
   }
 
-  public find(): ReturnType<Service['find']> {
+  public findById(): ReturnType<Service['findById']> {
     return Promise.resolve(null);
   }
 
-  //TODO: create controller for findById
-
-  public async findById(
-    id: number,
-  ): Promise<ReturnType<FileEntity['toObject']> | null> {
-    const file = await this.fileRepository.findById(id);
-
-    if (!file) {
-      return null;
-    }
-
-    return file.toObject();
-  }
-
-  public async findAll(): ReturnType<Service['findAll']> {
-    return await Promise.resolve({ items: [] });
+  public findAll(): ReturnType<Service['findAll']> {
+    return Promise.resolve({ items: [] });
   }
 
   public async create(
     payload: FileUploadRequestDto,
-  ): Promise<FileUploadResponseDto> {
+  ): Promise<FileGetAllItemResponseDto> {
     const fileExtensionIndex = 1;
 
-    const fileKey = `${crypto.randomUUID()}.${
+    const customName = `${crypto.randomUUID()}.${
       payload.contentType.split('/')[fileExtensionIndex]
     }`;
+
+    const fileKey = payload.name ?? customName;
 
     await this.s3.sendFile({
       fileKey,
@@ -62,15 +50,14 @@ class FileService implements Service {
     });
 
     const url = this.s3.getUrl(fileKey);
-    const presignedUrl = await this.s3.getPreSignedUrl(fileKey);
-    await this.fileRepository.create(
+    const file = await this.fileRepository.create(
       FileEntity.initializeNew({
         url,
         contentType: payload.contentType,
       }),
     );
 
-    return { url: presignedUrl };
+    return file.toObject();
   }
 
   public update(): ReturnType<Service['update']> {

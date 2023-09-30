@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor, FontFamily } from '#libs/enums/enums';
 
 const styles = StyleSheet.create({
   messageWrapper: {
@@ -35,13 +35,24 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 12,
-    maxWidth: '85%',
-    backgroundColor: AppColor.GRAY_100,
-    color: AppColor.GRAY_600,
-  },
-  userMessage: {
     backgroundColor: AppColor.BLUE_300,
     color: AppColor.WHITE,
+    shadowColor: AppColor.BLUE_200,
+    elevation: 20,
+    fontFamily: FontFamily.MONTSERRAT_400,
+  },
+  userMessage: {
+    backgroundColor: AppColor.GRAY_100,
+    color: AppColor.GRAY_600,
+    elevation: 0,
+    fontFamily: FontFamily.MONTSERRAT_400,
+  },
+  messageContainer: {
+    alignItems: 'flex-start',
+    maxWidth: '82%',
+  },
+  userMessageContainer: {
+    alignItems: 'flex-end',
   },
 });
 

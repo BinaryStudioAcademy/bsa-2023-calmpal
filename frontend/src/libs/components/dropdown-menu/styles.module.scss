@@ -4,7 +4,6 @@
   align-items: end;
   width: 50px;
   background-color: var(--white);
-  border-radius: 10px;
 }
 
 .dropdown-header {
@@ -13,6 +12,7 @@
   justify-content: center;
   align-items: center;
   width: 50px;
+  padding: 10px 0;
   background-color: var(--white);
   border: 0;
   cursor: pointer;
@@ -27,9 +27,10 @@
   width: 200px;
   min-width: 160px;
   margin-top: -3px;
+  padding: 10px 5px;
   overflow: hidden;
   background-color: var(--white);
-  border-radius: 5px;
+  border-radius: 30px;
   box-shadow: var(--shadow);
 }
 
@@ -41,7 +42,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 10px;
+  padding: 5px;
+  text-transform: capitalize;
   background-color: var(--white);
   border: 0;
 }
@@ -49,24 +51,20 @@
 .item {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-self: baseline;
-  gap: 5px;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 30px;
 }
 
-.divider {
-  width: 100%;
-  margin: 0;
-  border: 0.5px solid var(--gray-100);
-}
-
-.divider:not(:last-child) {
-  border: 0.5px solid var(--gray-100);
-}
-
-.dropdown-item:hover {
-  background-color: var(--gray-100);
+.item:hover {
+  box-shadow: 0 4px 23px 0 var(--violet-100);
   cursor: pointer;
+}
+
+.item:active {
+  box-shadow: 0 4px 10px 0 var(--violet-100);
 }
 
 .icon {
@@ -76,9 +74,9 @@
     brightness(93%) contrast(86%);
 }
 
-.icon-selected {
-  filter: invert(43%) sepia(94%) saturate(426%) hue-rotate(185deg)
-    brightness(94%) contrast(97%);
+.selected {
+  box-shadow: 0 4px 10px 0 var(--violet-100);
+  cursor: pointer;
 }
 
 .title {
@@ -91,7 +89,7 @@
   position: relative;
   z-index: 1;
   width: 33px;
-  height: 2px;
+  height: 3px;
   background-color: var(--gray-200);
   border-radius: 3px;
   transform-origin: 4px 0;
@@ -102,7 +100,7 @@
   content: "";
   position: absolute;
   width: 33px;
-  height: 2px;
+  height: 3px;
   background-color: var(--gray-200);
   border-radius: 3px;
   transform-origin: 4px 0;
@@ -118,7 +116,7 @@
   left: 0;
 }
 
-@media (width < 480px) {
+@media (width < 768px), (height < 530px) {
   .dropdown {
     display: flex;
   }

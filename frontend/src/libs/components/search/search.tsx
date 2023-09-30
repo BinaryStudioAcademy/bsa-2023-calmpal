@@ -6,19 +6,22 @@ import {
   useFormController,
 } from '#libs/hooks/hooks.js';
 
-import { DEFAULT_SEARCH_PAYLOAD } from './libs/constants.js';
 import styles from './styles.module.scss';
 
 type Properties = {
   onValueChange: (search: string) => void;
+  defaultValue: string;
 };
 
-const Search: React.FC<Properties> = ({ onValueChange }) => {
+const Search: React.FC<Properties> = ({ onValueChange, defaultValue }) => {
   const { control } = useAppForm({
-    defaultValues: DEFAULT_SEARCH_PAYLOAD,
+    defaultValues: { search: defaultValue },
     mode: 'onChange',
   });
-  const { field } = useFormController({ name: 'search', control });
+  const { field } = useFormController({
+    name: 'search',
+    control,
+  });
   const { value, onChange } = field;
   useEffect(() => {
     const debouncedOnValueChange = debounce(() => {

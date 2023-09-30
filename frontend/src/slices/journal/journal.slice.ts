@@ -4,13 +4,20 @@ import { DataStatus } from '#libs/enums/enums.js';
 import { type ValueOf } from '#libs/types/types.js';
 import { type JournalEntryGetAllItemResponseDto } from '#packages/journal/journal.js';
 
-import { createJournalEntry, getAllJournalEntries } from './actions.js';
+import {
+  createJournalEntry,
+  deleteJournal,
+  getAllJournalEntries,
+  updateJournalEntry,
+} from './actions.js';
 
 type State = {
   allJournalEntries: JournalEntryGetAllItemResponseDto[];
   selectedJournalEntry: JournalEntryGetAllItemResponseDto | null;
   journalEntriesDataStatus: ValueOf<typeof DataStatus>;
   createJournalEntryDataStatus: ValueOf<typeof DataStatus>;
+  updateJournalEntryDataStatus: ValueOf<typeof DataStatus>;
+  deleteJournalEntryDataStatus: ValueOf<typeof DataStatus>;
 };
 
 const initialState: State = {
@@ -18,6 +25,8 @@ const initialState: State = {
   selectedJournalEntry: null,
   journalEntriesDataStatus: DataStatus.IDLE,
   createJournalEntryDataStatus: DataStatus.IDLE,
+  updateJournalEntryDataStatus: DataStatus.IDLE,
+  deleteJournalEntryDataStatus: DataStatus.IDLE,
 };
 
 const { reducer, actions, name } = createSlice({
@@ -47,11 +56,39 @@ const { reducer, actions, name } = createSlice({
       state.createJournalEntryDataStatus = DataStatus.PENDING;
     });
     builder.addCase(createJournalEntry.fulfilled, (state, action) => {
-      state.allJournalEntries.push(action.payload);
+      state.allJournalEntries.unshift(action.payload);
+      state.selectedJournalEntry = action.payload;
       state.createJournalEntryDataStatus = DataStatus.FULFILLED;
     });
     builder.addCase(createJournalEntry.rejected, (state) => {
       state.createJournalEntryDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(updateJournalEntry.pending, (state) => {
+      state.updateJournalEntryDataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(updateJournalEntry.fulfilled, (state, action) => {
+      const filteredJournalEntries = state.allJournalEntries.filter(
+        (journalEntry) => {
+          return journalEntry.id !== action.payload.id;
+        },
+      );
+      state.allJournalEntries = [action.payload, ...filteredJournalEntries];
+      state.updateJournalEntryDataStatus = DataStatus.FULFILLED;
+    });
+    builder.addCase(updateJournalEntry.rejected, (state) => {
+      state.updateJournalEntryDataStatus = DataStatus.REJECTED;
+    });
+
+    builder.addCase(deleteJournal.pending, (state) => {
+      state.deleteJournalEntryDataStatus = DataStatus.PENDING;
+    });
+    builder.addCase(deleteJournal.fulfilled, (state, action) => {
+      state.allJournalEntries = action.payload;
+      state.deleteJournalEntryDataStatus = DataStatus.FULFILLED;
+    });
+    builder.addCase(deleteJournal.rejected, (state) => {
+      state.deleteJournalEntryDataStatus = DataStatus.REJECTED;
     });
   },
 });

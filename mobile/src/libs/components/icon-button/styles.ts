@@ -11,13 +11,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: AppColor.BLUE_300,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 10,
-    elevation: 6,
+    elevation: 20,
   },
 });
 

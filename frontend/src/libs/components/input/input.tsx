@@ -18,6 +18,9 @@ type Properties<T extends FormFieldValues> = {
   type?: 'text' | 'email' | 'password';
   rowsCount?: number;
   maxLength?: number;
+  autoComplete?: 'off' | 'on';
+  isChatInput?: boolean;
+  isDisabled?: boolean;
 };
 
 const Input = <T extends FormFieldValues>({
@@ -29,6 +32,9 @@ const Input = <T extends FormFieldValues>({
   type = 'text',
   rowsCount,
   maxLength,
+  autoComplete,
+  isChatInput,
+  isDisabled = false,
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
 
@@ -45,8 +51,11 @@ const Input = <T extends FormFieldValues>({
           rows={rowsCount}
           placeholder={placeholder}
           maxLength={maxLength}
+          autoComplete={autoComplete}
+          disabled={isDisabled}
           className={getValidClassNames(
             styles['textarea'],
+            isChatInput && styles['chat-input'],
             hasError && styles['error'],
           )}
         />
@@ -56,8 +65,11 @@ const Input = <T extends FormFieldValues>({
           type={type}
           placeholder={placeholder}
           maxLength={maxLength}
+          autoComplete={autoComplete}
+          disabled={isDisabled}
           className={getValidClassNames(
             styles['input'],
+            isChatInput && styles['chat-input'],
             hasError && styles['error'],
           )}
         />

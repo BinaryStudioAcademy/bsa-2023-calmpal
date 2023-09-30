@@ -16,7 +16,12 @@ const config = ({ mode }: ConfigEnv): ReturnType<typeof defineConfig> => {
     },
     plugins: [
       reactPlugin(),
-      vitePWAPlugin({ registerType: 'autoUpdate' }),
+      vitePWAPlugin({
+        registerType: 'autoUpdate',
+        workbox: {
+          navigateFallbackDenylist: [new RegExp(`^${VITE_APP_API_ORIGIN_URL}`)],
+        },
+      }),
       svgrPlugin(),
     ],
     server: {

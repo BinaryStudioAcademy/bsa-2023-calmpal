@@ -1,0 +1,92 @@
+name: Continuous Integration Database Migration
+
+env:
+  NODE_ENV: local
+  HOST: localhost
+  PORT: 3001
+  JWT_SECRET_KEY: secret
+  AWS_REGION: region
+  AWS_ACCESS_KEY_ID: aws_access_key_id
+  AWS_SECRET_ACCESS_KEY: aws_secret_access_key
+  AWS_BUCKET_NAME: aws_bucket_name
+  OPEN_AI_API_KEY: open_ai_api_key
+  BASE_OPEN_AI_URL: base_open_ai_url
+  DB_NAME: calmpal_db
+  DB_USERNAME: postgres
+  DB_PASSWORD: password
+  DB_PORT: 5434
+  DB_DIALECT: pg
+  DB_POOL_MIN: 2
+  DB_POOL_MAX: 10
+  DUMP_FILE: environment-dump
+  STRIPE_SECRET_KEY: stripe_secret_key
+
+on:
+  pull_request:
+    branches:
+      - development
+    paths:
+      - backend/src/db/migrations/*.ts
+
+  workflow_dispatch:
+
+concurrency:
+  group: ci-db-migration-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci-run-db-migration:
+    name: Run latest database migration on environment dump
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Get AWS Secrets
+        uses: aws-actions/aws-secretsmanager-get-secrets@v1
+        with:
+          secret-ids: |
+            ENVIRONMENT, ${{ secrets.AWS_APP_DEVELOPMENT_SECRET }}
+            ENVIRONMENT_DB, ${{ secrets.AWS_DB_SECRET }}
+          parse-json-secrets: true
+
+      - name: Setup docker services
+        run: |
+          docker compose -f docker-compose.services.yml up -d calmpal_db
+
+      - name: Set Host IP environment variable
+        id: get-docker-ip
+        run: echo "HOST_IP=$(hostname -I | awk '{print $1}')" >> $GITHUB_ENV
+
+      - name: Figure out whether migrations can be applied to existing environment database
+        env:
+          DB_HOST: ${{ env.HOST_IP }}
+        run: |
+          env > ./backend/.env
+
+          docker build -t db-migrations-image \
+          --build-arg ENVIRONMENT_DB_PASSWORD=$ENVIRONMENT_DB_PASSWORD \
+          --build-arg ENVIRONMENT_DB_USERNAME=$ENVIRONMENT_DB_USERNAME \
+          --build-arg ENVIRONMENT_DB_HOST=$ENVIRONMENT_DB_HOST \
+          --build-arg ENVIRONMENT_DB_PORT=$ENVIRONMENT_DB_PORT \
+          --build-arg ENVIRONMENT_DB_NAME=$ENVIRONMENT_DB_NAME \
+          --build-arg DUMP_FILE=$DUMP_FILE \
+          --build-arg DB_PASSWORD=$DB_PASSWORD \
+          --build-arg DB_PASSWORD=$DB_PASSWORD \
+          --build-arg DB_USERNAME=$DB_USERNAME \
+          --build-arg DB_HOST=$DB_HOST \
+          --build-arg DB_PORT=$DB_PORT \
+          --build-arg DB_NAME=$DB_NAME \
+          -f ./backend/Dockerfile.db-migrations .
+
+          docker run --rm --env-file ./backend/.env db-migrations-image
+
+      - name: Stop docker services
+        run: docker compose -f docker-compose.services.yml down

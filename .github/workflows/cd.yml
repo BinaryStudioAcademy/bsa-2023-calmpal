@@ -28,7 +28,7 @@ jobs:
           map: |
             {
               "development": {
-                "DEVELOPMENT_APP_URL": "http://calmpal-alb-development-453467742.eu-west-1.elb.amazonaws.com/"
+                "APP_URL": "https://development.app.calmpal.com/"
               }
             }
 
@@ -37,7 +37,7 @@ jobs:
         id: deployment
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          environment-url: ${{ env.DEVELOPMENT_APP_URL }}
+          environment-url: ${{ env.APP_URL }}
           environment: ${{ github.ref_name }}
 
       - name: Checkout Source Code
@@ -55,6 +55,13 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
         with:
           mask-password: true
+
+      - name: Get AWS Secrets
+        uses: aws-actions/aws-secretsmanager-get-secrets@v1
+        with:
+          secret-ids: |
+            ENVIRONMENT, ${{ secrets.AWS_APP_DEVELOPMENT_SECRET }}
+          parse-json-secrets: true
 
       - name: Build, tag, and push backend image
         id: build-backend-image
@@ -75,7 +82,7 @@ jobs:
           image_tag: latest
           context: ./
           dockerfile: ./frontend/Dockerfile.development
-          build_extra_args: '--build-arg VITE_APP_NODE_ENV=${{ github.ref_name }} --build-arg VITE_APP_API_ORIGIN_URL=/api/v1 --build-arg VITE_APP_PROXY_SERVER_URL=http://localhost:3001'
+          build_extra_args: '--build-arg VITE_APP_NODE_ENV=${{ github.ref_name }} --build-arg VITE_APP_API_ORIGIN_URL=/api/v1 --build-arg VITE_APP_PROXY_SERVER_URL=http://localhost:3001 --build-arg VITE_APP_STRIPE_PUBLIC_KEY=${{ env.ENVIRONMENT_STRIPE_PUBLIC_KEY }}'
 
       - name: Download task definition
         run: |

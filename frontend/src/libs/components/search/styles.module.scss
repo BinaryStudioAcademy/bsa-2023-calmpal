@@ -10,7 +10,9 @@
 }
 
 .input-search:focus {
+  border: solid var(--blue-300) 1px;
   outline: none;
+  box-shadow: 0.1px 3px 3px var(--blue-alpha-30);
 }
 
 @media (width < 900px) {
