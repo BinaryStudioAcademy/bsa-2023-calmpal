@@ -49,6 +49,14 @@ const Card: React.FC<Properties> = ({
     [id],
   );
 
+  const handleCloseOtherSwipeables = useCallback(() => {
+    [...rowReferences.entries()].forEach(([key, reference]) => {
+      if (key !== id && reference) {
+        (reference as Swipeable).close();
+      }
+    });
+  }, [id, rowReferences]);
+
   const renderRightSwipeActions = (): React.ReactNode => {
     return (
       Boolean(iconRight) && (
@@ -64,13 +72,7 @@ const Card: React.FC<Properties> = ({
       renderRightActions={renderRightSwipeActions}
       key={id}
       ref={handleSwipeableReference}
-      onSwipeableWillOpen={(): void => {
-        [...rowReferences.entries()].forEach(([key, reference]) => {
-          if (key !== id && reference) {
-            (reference as Swipeable).close();
-          }
-        });
-      }}
+      onSwipeableWillOpen={handleCloseOtherSwipeables}
     >
       <Pressable onPress={onPress} style={styles.container}>
         {iconName && iconColor ? (
