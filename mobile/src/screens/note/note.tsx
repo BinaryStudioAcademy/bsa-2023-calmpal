@@ -116,7 +116,7 @@ const Note: React.FC = () => {
     return () => {
       backHandler.remove();
     };
-  }, [id, titleValue, textValue, handleSaveNote]);
+  }, [titleValue, textValue, handleSaveNote]);
 
   return (
     <LinearGradient>
