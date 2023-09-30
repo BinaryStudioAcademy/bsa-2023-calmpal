@@ -31,7 +31,7 @@ const Meditation: React.FC = () => {
       const currentTrackIndex = meditationEntries.findIndex((item) => {
         return item.id === selectedMeditationEntry.id;
       });
-      void player.setFirstTrack(Number(currentTrackIndex));
+      void player.setFirstTrack(currentTrackIndex);
     }
   }, [selectedMeditationEntry, meditationEntries]);
 
