@@ -30,6 +30,7 @@
 
 .primary:disabled {
   background-color: var(--background-color);
+  cursor: default;
   opacity: 0.9;
 }
 
