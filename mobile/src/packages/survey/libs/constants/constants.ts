@@ -1,1 +1,1 @@
-export { PREFERENCES_OTHER_CATEGORY } from 'shared/build/index.js';
+export { OTHER_CATEGORY } from 'shared/build/index.js';

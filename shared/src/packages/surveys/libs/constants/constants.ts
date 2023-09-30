@@ -1,3 +1,3 @@
-const PREFERENCES_OTHER_CATEGORY = 'Other';
+const OTHER_CATEGORY = 'Other';
 
-export { PREFERENCES_OTHER_CATEGORY };
+export { OTHER_CATEGORY };

@@ -7,10 +7,12 @@ import {
   useFormController,
 } from '#libs/hooks/hooks.js';
 import {
-  type HandleFieldChangeType,
+  type StepsActions,
   type StepsType,
+  type SurveyStatePayload,
 } from '#packages/survey/libs/types/types.js';
 import {
+  OTHER_CATEGORY,
   stepInputValidationSchema,
   SurveyValidationRule,
 } from '#packages/survey/survey.js';
@@ -18,91 +20,14 @@ import { TEXTAREA_ROWS_COUNT } from '#pages/surveys/libs/constants/constants.js'
 
 import styles from './styles.module.scss';
 
-type SurveyState = {
-  preferences?: string[];
-  feelings?: string[];
-  goals?: string[];
-  worries?: string[];
-  meditationExperience?: string;
-  journalingExperience?: string;
-  other?: string;
-};
-
-const hasOther = (category: string[]): boolean => {
-  return category.includes('Other');
-};
-
-const getOtherDefault = (categories: string[]): string => {
-  return hasOther(categories) && categories.at(LAST_INDEX) !== 'Other'
-    ? (categories.at(LAST_INDEX) as string)
-    : '';
-};
-
-const getOthersCategories = (
-  categories: string[],
-  payload: string[],
-): string[] => {
-  return payload.filter((category) => {
-    return !categories.includes(category);
-  });
-};
-
-const onFieldChange = ({
-  category,
-  currentCategories,
-  stateValue,
-  defaultCategories,
-  isOther = false,
-  categoryChange,
-  stateChange,
-}: HandleFieldChangeType): void => {
-  const otherCategories = getOthersCategories(
-    defaultCategories,
-    currentCategories,
-  );
-  if (isOther && otherCategories.length > FIRST_ARRAY_INDEX) {
-    otherCategories.push(category);
-    categoryChange(
-      currentCategories.filter((option) => {
-        return !otherCategories.includes(option);
-      }),
-    );
-    stateChange(
-      stateValue.filter((option) => {
-        return !otherCategories.includes(option);
-      }),
-    );
-
-    return;
-  }
-
-  if (currentCategories.includes(category)) {
-    categoryChange(
-      currentCategories.filter((option) => {
-        return option !== category;
-      }),
-    );
-    stateChange(
-      stateValue.filter((option) => {
-        return option !== category;
-      }),
-    );
-
-    return;
-  }
-
-  stateChange([...stateValue, category]);
-  categoryChange([...currentCategories, category]);
-};
-
 type Properties = {
   stepCategories: string[];
   question: string;
   step: StepsType;
   type: 'checkbox' | 'radio';
-  onSubmit?: () => void;
-  onNextStep?: () => void;
-  onPreviousStep?: () => void;
+  onSubmit?: StepsActions;
+  onNextStep?: StepsActions;
+  onPreviousStep?: StepsActions;
   onSetState: (state: string[] | string) => void;
 };
 
@@ -122,15 +47,22 @@ const Step: React.FC<Properties> = ({
 
   const isCheckbox = type === 'checkbox' && Array.isArray(currentStep);
 
-  const defaultValues: SurveyState = {
+  const otherDefault =
+    currentStep.includes(OTHER_CATEGORY) &&
+    currentStep.at(LAST_INDEX) !== OTHER_CATEGORY
+      ? currentStep.at(LAST_INDEX)
+      : '';
+
+  const defaultValues: SurveyStatePayload = {
     [step]: currentStep,
-    other: Array.isArray(currentStep) ? getOtherDefault(currentStep) : '',
+    other: otherDefault as string,
   };
 
-  const { control, errors, isValid, handleSubmit } = useAppForm<SurveyState>({
-    defaultValues,
-    validationSchema: stepInputValidationSchema,
-  });
+  const { control, errors, isValid, handleSubmit } =
+    useAppForm<SurveyStatePayload>({
+      defaultValues,
+      validationSchema: stepInputValidationSchema,
+    });
 
   const {
     field: { onChange: onCategoryChange, value: categoriesValue },
@@ -143,15 +75,37 @@ const Step: React.FC<Properties> = ({
     (category: string): (() => void) => {
       return (): void => {
         if (isCheckbox) {
-          onFieldChange({
-            category,
-            currentCategories: categoriesValue as string[],
-            stateValue: currentStep,
-            defaultCategories: stepCategories,
-            isOther: category === 'Other',
-            categoryChange: onCategoryChange,
-            stateChange: onSetState,
-          });
+          const otherCategories = (categoriesValue as string[]).filter(
+            (option: string) => {
+              return !stepCategories.includes(option);
+            },
+          );
+          const isOther = category === OTHER_CATEGORY;
+
+          if (isOther && otherCategories.length > FIRST_ARRAY_INDEX) {
+            otherCategories.push(category);
+            const valuesWithoutOthers = (categoriesValue as string[]).filter(
+              (option: string) => {
+                return !otherCategories.includes(option);
+              },
+            );
+            onCategoryChange(valuesWithoutOthers);
+
+            return;
+          }
+
+          if ((categoriesValue as string[]).includes(category)) {
+            const valuesWithoutCategory = (categoriesValue as string[]).filter(
+              (option: string) => {
+                return option !== category;
+              },
+            );
+            onCategoryChange(valuesWithoutCategory);
+
+            return;
+          }
+
+          onCategoryChange([...(categoriesValue as string[]), category]);
 
           return;
         }
@@ -160,18 +114,11 @@ const Step: React.FC<Properties> = ({
         onCategoryChange(category);
       };
     },
-    [
-      categoriesValue,
-      currentStep,
-      isCheckbox,
-      onCategoryChange,
-      onSetState,
-      stepCategories,
-    ],
+    [categoriesValue, isCheckbox, onCategoryChange, onSetState, stepCategories],
   );
 
   const handleStepsSubmit = useCallback(
-    (payload: SurveyState) => {
+    (payload: SurveyStatePayload) => {
       if (onSubmit) {
         onSubmit();
 
@@ -179,14 +126,12 @@ const Step: React.FC<Properties> = ({
       }
 
       if (payload.other && Array.isArray(payload[step])) {
-        const categories: string[] = payload[step] as string[];
-        categories.push(payload.other);
-        onSetState(categories);
-      } else {
-        onSetState(payload[step] as string);
+        onSetState([...(payload[step] as string), payload.other]);
       }
 
-      onNextStep && onNextStep();
+      onSetState(payload[step] as string);
+
+      onNextStep?.();
     },
     [onNextStep, onSetState, onSubmit, step],
   );
@@ -226,7 +171,7 @@ const Step: React.FC<Properties> = ({
                 />
               );
             })}
-        {hasOther([...currentStep]) && (
+        {categoriesValue.includes(OTHER_CATEGORY) && (
           <Input
             control={control}
             errors={errors}

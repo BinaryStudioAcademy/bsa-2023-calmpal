@@ -1,6 +1,6 @@
 import joi from 'joi';
 
-import { PREFERENCES_OTHER_CATEGORY } from '../constants/constants.js';
+import { OTHER_CATEGORY } from '../constants/constants.js';
 import {
   SurveyValidationMessage,
   SurveyValidationRule,
@@ -35,7 +35,7 @@ const createStepSurveyForm = joi.object<SurveyInputDto, true>({
     .string()
     .optional()
     .when('preferences', {
-      is: joi.array().has(joi.string().valid(PREFERENCES_OTHER_CATEGORY)),
+      is: joi.array().has(joi.string().valid(OTHER_CATEGORY)),
       then: joi
         .string()
         .trim()
@@ -52,7 +52,7 @@ const createStepSurveyForm = joi.object<SurveyInputDto, true>({
       then: joi.allow(''),
     })
     .when('goals', {
-      is: joi.array().has(joi.string().valid(PREFERENCES_OTHER_CATEGORY)),
+      is: joi.array().has(joi.string().valid(OTHER_CATEGORY)),
       then: joi
         .string()
         .trim()
@@ -66,7 +66,7 @@ const createStepSurveyForm = joi.object<SurveyInputDto, true>({
       otherwise: joi.allow(''),
     })
     .when('worries', {
-      is: joi.array().has(joi.string().valid(PREFERENCES_OTHER_CATEGORY)),
+      is: joi.array().has(joi.string().valid(OTHER_CATEGORY)),
       then: joi
         .string()
         .trim()

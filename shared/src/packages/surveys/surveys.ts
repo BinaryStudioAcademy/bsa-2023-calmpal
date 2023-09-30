@@ -1,4 +1,4 @@
-export { PREFERENCES_OTHER_CATEGORY } from './libs/constants/constants.js';
+export { OTHER_CATEGORY } from './libs/constants/constants.js';
 export {
   SurveyValidationMessage,
   SurveyValidationRule,

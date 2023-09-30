@@ -1,4 +1,4 @@
-import { PREFERENCES_OTHER_CATEGORY } from '../constants/constants.js';
+import { OTHER_CATEGORY } from '../constants/constants.js';
 import { type SurveyInputDto } from '../types/types.js';
 
 const getSurveyCategories: (payload: SurveyInputDto) => string[] = (
@@ -9,7 +9,7 @@ const getSurveyCategories: (payload: SurveyInputDto) => string[] = (
   return [
     ...new Set(
       preferences.map((category) => {
-        return category === PREFERENCES_OTHER_CATEGORY ? other : category;
+        return category === OTHER_CATEGORY ? other : category;
       }),
     ),
   ];

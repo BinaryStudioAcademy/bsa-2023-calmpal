@@ -103,7 +103,7 @@ export {
 export {
   createSurveyValidationSchema,
   getSurveyCategories,
-  PREFERENCES_OTHER_CATEGORY,
+  OTHER_CATEGORY,
   stepInputValidationSchema,
   type SurveyGetAllItemResponseDto,
   type SurveyInputDto,

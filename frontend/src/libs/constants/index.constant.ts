@@ -1,4 +1,4 @@
-const FIRST_INDEX = 0;
+const NUMBER_ONE_INDEX = 1;
 const LAST_INDEX = -1;
 
-export { FIRST_INDEX, LAST_INDEX };
+export { LAST_INDEX, NUMBER_ONE_INDEX };
