@@ -36,6 +36,7 @@
   width: fit-content;
   margin: 0;
   padding: 8px 16px;
+  color: var(--gray-400);
   font-weight: 400;
   font-size: 14px;
   line-height: 1.4;
@@ -50,7 +51,7 @@
 }
 
 .user-message-item {
-  color: var(--black);
+  color: var(--gray-400);
   background-color: var(--blue-100);
   animation: slide-in-left 0.5s forwards;
 }

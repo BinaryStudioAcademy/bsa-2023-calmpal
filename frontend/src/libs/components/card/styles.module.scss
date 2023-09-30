@@ -12,7 +12,7 @@
   padding: 3px 60px 3px 3px;
   font-weight: 600;
   font-size: 16px;
-  font-family: Montserrat, sans-serif;
+  font-family: Montserrat, Arial, sans-serif;
   background: var(--white-alpha-80);
   border: none;
   border-radius: 20px;
@@ -53,7 +53,6 @@
 }
 
 .selected {
-  color: var(--blue-300);
   background: var(--white);
   box-shadow: 0 4px 20px 0 var(--blue-alpha-30);
 }
@@ -76,11 +75,16 @@
 .title {
   display: -webkit-box;
   overflow: hidden;
+  color: var(--gray-400);
   text-align: left;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   word-wrap: break-word;
   word-break: break-word;
+}
+
+.selected .title {
+  color: var(--blue-300);
 }
 
 .tooltip::before {

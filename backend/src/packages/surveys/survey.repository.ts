@@ -11,7 +11,7 @@ class SurveyRepository implements Repository {
     this.surveyModel = surveyModel;
   }
 
-  public find(): ReturnType<Repository['find']> {
+  public findById(): ReturnType<Repository['findById']> {
     return Promise.resolve(null);
   }
 
@@ -34,8 +34,8 @@ class SurveyRepository implements Repository {
     });
   }
 
-  public async findAll(): ReturnType<Repository['findAll']> {
-    return await Promise.resolve([]);
+  public findAll(): ReturnType<Repository['findAll']> {
+    return Promise.resolve([]);
   }
 
   public async create(entity: SurveyEntity): Promise<SurveyEntity> {
@@ -81,9 +81,9 @@ class SurveyRepository implements Repository {
   }
 
   public delete(): ReturnType<Repository['delete']> {
-    const deletedCount = 0;
+    const DELETED_COUNT = 0;
 
-    return Promise.resolve(deletedCount);
+    return Promise.resolve(DELETED_COUNT);
   }
 }
 

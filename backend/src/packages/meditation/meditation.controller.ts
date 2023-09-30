@@ -101,9 +101,18 @@ class MeditationController extends BaseController {
    *        description: Meditation data
    *        required: true
    *        content:
-   *          application/json:
+   *          multipart/form-data:
    *            schema:
-   *              $ref: '#/components/schemas/MeditationEntryRequest'
+   *              type: object
+   *              required:
+   *                - name
+   *                - file
+   *              properties:
+   *                name:
+   *                  type: string
+   *                file:
+   *                  type: string
+   *                  format: binary
    *      security:
    *       - bearerAuth: []
    *      responses:

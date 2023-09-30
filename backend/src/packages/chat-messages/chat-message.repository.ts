@@ -11,12 +11,12 @@ class ChatMessageRepository implements Repository {
     this.chatMessageModel = chatMessageModel;
   }
 
-  public find(): ReturnType<Repository['find']> {
+  public findById(): ReturnType<Repository['findById']> {
     return Promise.resolve(null);
   }
 
-  public async findAll(): ReturnType<Repository['findAll']> {
-    return await Promise.resolve([]);
+  public findAll(): ReturnType<Repository['findAll']> {
+    return Promise.resolve([]);
   }
 
   public async findAllByChatId(chatId: number): Promise<ChatMessageEntity[]> {
@@ -64,10 +64,9 @@ class ChatMessageRepository implements Repository {
   }
 
   public delete(): ReturnType<Repository['delete']> {
-    //TODO
-    const deletedCount = 0;
+    const DELETED_COUNT = 0;
 
-    return Promise.resolve(deletedCount);
+    return Promise.resolve(DELETED_COUNT);
   }
 }
 

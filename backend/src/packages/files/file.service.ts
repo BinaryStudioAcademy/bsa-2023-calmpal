@@ -24,26 +24,12 @@ class FileService implements Service {
     this.s3 = s3;
   }
 
-  public find(): ReturnType<Service['find']> {
+  public findById(): ReturnType<Service['findById']> {
     return Promise.resolve(null);
   }
 
-  //TODO: create controller for findById
-
-  public async findById(
-    id: number,
-  ): Promise<ReturnType<FileEntity['toObject']> | null> {
-    const file = await this.fileRepository.findById(id);
-
-    if (!file) {
-      return null;
-    }
-
-    return file.toObject();
-  }
-
-  public async findAll(): ReturnType<Service['findAll']> {
-    return await Promise.resolve({ items: [] });
+  public findAll(): ReturnType<Service['findAll']> {
+    return Promise.resolve({ items: [] });
   }
 
   public async create(

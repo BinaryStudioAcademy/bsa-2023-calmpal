@@ -22,8 +22,12 @@ class MeditationService implements Service {
     this.fileService = fileService;
   }
 
-  public find(): ReturnType<Service['find']> {
+  public findById(): ReturnType<Service['findById']> {
     return Promise.resolve(null);
+  }
+
+  public findAll(): ReturnType<Service['findAll']> {
+    return Promise.resolve({ items: [] });
   }
 
   public async findByUserId(
@@ -36,10 +40,6 @@ class MeditationService implements Service {
         return item.toObject();
       }),
     };
-  }
-
-  public findAll(): ReturnType<Service['findAll']> {
-    return Promise.resolve({ items: [] });
   }
 
   public async create({

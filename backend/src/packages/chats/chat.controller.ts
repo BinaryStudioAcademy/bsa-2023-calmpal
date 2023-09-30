@@ -552,7 +552,7 @@ class ChatController extends BaseController {
       user: UserAuthResponseDto;
     }>,
   ): Promise<APIHandlerResponse> {
-    const chat = await this.chatService.findById({
+    const chat = await this.chatService.findByIdAndUserId({
       id: options.params.id,
       userId: options.user.id,
     });

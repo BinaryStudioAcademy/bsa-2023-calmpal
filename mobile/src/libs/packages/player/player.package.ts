@@ -65,6 +65,10 @@ class Player {
   public seek = async (value: number): Promise<void> => {
     await TrackPlayer.seekTo(value);
   };
+
+  public setFirstTrack = async (trackId: number): Promise<void> => {
+    await TrackPlayer.skip(trackId);
+  };
 }
 
 export { Player };

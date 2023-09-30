@@ -40,10 +40,6 @@ class UserService implements Service {
     this.config = config;
   }
 
-  public find(): ReturnType<Service['find']> {
-    return Promise.resolve(null);
-  }
-
   public async findById(
     id: number,
   ): Promise<ReturnType<UserEntity['toObject']> | null> {
@@ -60,7 +56,7 @@ class UserService implements Service {
     return user?.toObject() ?? null;
   }
 
-  public findAll(): Promise<{ items: [] }> {
+  public findAll(): ReturnType<Service['findAll']> {
     return Promise.resolve({ items: [] });
   }
 

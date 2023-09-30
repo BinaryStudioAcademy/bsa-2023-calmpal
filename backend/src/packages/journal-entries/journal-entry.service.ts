@@ -25,8 +25,10 @@ class JournalEntryService implements Service {
     this.journalEntryRepository = journalEntryRepository;
   }
 
-  public async find(id: number): Promise<JournalEntryGetAllItemResponseDto> {
-    const journalEntry = await this.journalEntryRepository.find(id);
+  public async findById(
+    id: number,
+  ): Promise<JournalEntryGetAllItemResponseDto> {
+    const journalEntry = await this.journalEntryRepository.findById(id);
 
     if (!journalEntry) {
       throw new JournalError({
@@ -37,15 +39,15 @@ class JournalEntryService implements Service {
     return journalEntry.toObject();
   }
 
-  public async findAll(): ReturnType<Service['findAll']> {
-    return await Promise.resolve({ items: [] });
+  public findAll(): ReturnType<Service['findAll']> {
+    return Promise.resolve({ items: [] });
   }
 
-  public async findAllByUserId(
+  public async searchByUserId(
     userId: number,
     query: string,
   ): Promise<JournalEntryGetAllResponseDto> {
-    const items = await this.journalEntryRepository.findAllByUserId(
+    const items = await this.journalEntryRepository.searchByUserId(
       userId,
       query,
     );
@@ -114,7 +116,7 @@ class JournalEntryService implements Service {
       });
     }
 
-    const journal = await this.find(payload.id);
+    const journal = await this.findById(payload.id);
     if (journal.userId !== payload.user.id) {
       throw new JournalError({
         status: HTTPCode.BAD_REQUEST,
