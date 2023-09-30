@@ -1,7 +1,7 @@
 import { Button, Icon } from '#libs/components/components.js';
 import { type IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { useCallback } from '#libs/hooks/hooks.js';
+import { forwardRef, useCallback } from '#libs/hooks/hooks.js';
 import { type IconName, type ValueOf } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
@@ -19,18 +19,24 @@ type Properties = {
   onIconClick?: () => void;
 };
 
-const Card: React.FC<Properties> = ({
-  title,
-  imageUrl,
-  onClick,
-  isActive = false,
-  iconName,
-  iconRight,
-  iconWidth,
-  iconHeight,
-  onIconClick,
-  iconColor,
-}) => {
+const Card: React.ForwardRefRenderFunction<
+  HTMLDivElement | null,
+  Properties
+> = (
+  {
+    title,
+    imageUrl,
+    onClick,
+    isActive = false,
+    iconName,
+    iconRight,
+    iconWidth,
+    iconHeight,
+    onIconClick,
+    iconColor,
+  },
+  reference,
+) => {
   const hasNoImageOrIcon = !imageUrl && !iconName;
   const hasImage = Boolean(imageUrl);
   const hasIcon = Boolean(iconName);
@@ -45,7 +51,7 @@ const Card: React.FC<Properties> = ({
   );
 
   return (
-    <div className={styles['container']}>
+    <div ref={reference} className={styles['container']}>
       <button
         className={getValidClassNames(
           styles['item'],
@@ -97,4 +103,6 @@ const Card: React.FC<Properties> = ({
   );
 };
 
-export { Card };
+const ForwardedCard = forwardRef(Card);
+
+export { ForwardedCard as Card };
