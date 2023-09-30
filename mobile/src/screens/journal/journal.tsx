@@ -115,6 +115,7 @@ const Journal: React.FC = () => {
             return (
               <Card
                 key={item.id}
+                id={item.id}
                 title={item.title}
                 onPress={(): void => {
                   handleSelectJournalEntry(item.id);
