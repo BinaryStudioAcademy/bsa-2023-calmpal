@@ -24,7 +24,10 @@ type Properties = {
   onPress: () => void;
   iconRight?: IconName;
   onIconPress?: () => void;
+  id?: number;
 };
+
+const rowReferences = new Map();
 
 const Card: React.FC<Properties> = ({
   title,
@@ -34,6 +37,7 @@ const Card: React.FC<Properties> = ({
   onPress,
   iconRight,
   onIconPress,
+  id,
 }) => {
   const renderRightSwipeActions = (): React.ReactNode => {
     return (
@@ -46,7 +50,22 @@ const Card: React.FC<Properties> = ({
   };
 
   return (
-    <Swipeable renderRightActions={renderRightSwipeActions}>
+    <Swipeable
+      renderRightActions={renderRightSwipeActions}
+      key={id}
+      ref={(reference: Swipeable | null): void => {
+        if (reference && !rowReferences.get(id)) {
+          rowReferences.set(id, reference);
+        }
+      }}
+      onSwipeableWillOpen={(): void => {
+        [...rowReferences.entries()].forEach(([key, reference]) => {
+          if (key !== id && reference) {
+            (reference as Swipeable).close();
+          }
+        });
+      }}
+    >
       <Pressable onPress={onPress} style={styles.container}>
         {iconName && iconColor ? (
           <View style={styles.iconContainer}>
