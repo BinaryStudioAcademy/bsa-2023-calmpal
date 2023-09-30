@@ -1,8 +1,9 @@
 import { ContentType } from '#libs/enums/enums.js';
+import { ChatError } from '#libs/exceptions/exceptions.js';
 import { type ValueOf } from '#libs/types/types.js';
 
 import { BaseHttpApi } from '../api/api.js';
-import { type BaseHttp } from '../http/http.js';
+import { type BaseHttp, HTTPCode, HTTPError } from '../http/http.js';
 import { IMAGE_SIZE } from './libs/constants/constants.js';
 import {
   OpenAiApiPath,
@@ -47,27 +48,31 @@ class OpenAi extends BaseHttpApi {
 
   public async getMessageResponse(
     messages: OpenAiMessageGenerateRequestDto[],
-  ): Promise<string | null> {
-    const data = await this.load<OpenAiMessageGenerateResponseDto>(
-      this.getFullEndpoint(
-        OpenAiApiPath.CHAT,
-        OpenAiChatApiPath.COMPLETIONS,
-        {},
-      ),
-      {
-        method: 'POST',
-        payload: JSON.stringify({
-          model: this.model,
-          messages,
-        }),
-        token: this.apiKey,
-        contentType: ContentType.JSON,
-      },
-    );
+  ): Promise<string | null | undefined> {
+    try {
+      const data = await this.load<OpenAiMessageGenerateResponseDto>(
+        this.getFullEndpoint(
+          OpenAiApiPath.CHAT,
+          OpenAiChatApiPath.COMPLETIONS,
+          {},
+        ),
+        {
+          method: 'POST',
+          payload: JSON.stringify({
+            model: this.model,
+            messages,
+          }),
+          token: this.apiKey,
+          contentType: ContentType.JSON,
+        },
+      );
 
-    const [response] = data.choices;
+      const [response] = data.choices;
 
-    return response?.message.content ?? null;
+      return response?.message.content ?? null;
+    } catch (error: unknown) {
+      this.throwError(error);
+    }
   }
 
   public async generateImages({
@@ -75,28 +80,47 @@ class OpenAi extends BaseHttpApi {
     number = this.defaultImageGenerateConfig.number,
     size = this.defaultImageGenerateConfig.size,
   }: OpenAiImageGenerateRequestDto): Promise<string | null> {
-    const data = await this.load<OpenAiImageGenerateResponseDto>(
-      this.getFullEndpoint(
-        OpenAiApiPath.IMAGES,
-        OpenAiImagesApiPath.GENERATIONS,
-        {},
-      ),
-      {
-        method: 'POST',
-        payload: JSON.stringify({
-          prompt,
-          n: number,
-          size,
-          response_format: this.defaultImageGenerateConfig.responseFormat,
-        }),
-        token: this.apiKey,
-        contentType: ContentType.JSON,
-      },
-    );
+    try {
+      const data = await this.load<OpenAiImageGenerateResponseDto>(
+        this.getFullEndpoint(
+          OpenAiApiPath.IMAGES,
+          OpenAiImagesApiPath.GENERATIONS,
+          {},
+        ),
+        {
+          method: 'POST',
+          payload: JSON.stringify({
+            prompt,
+            n: number,
+            size,
+            response_format: this.defaultImageGenerateConfig.responseFormat,
+          }),
+          token: this.apiKey,
+          contentType: ContentType.JSON,
+        },
+      );
 
-    const [response] = data.data;
+      const [response] = data.data;
 
-    return response?.b64_json ?? null;
+      return response?.b64_json ?? null;
+    } catch (error: unknown) {
+      this.throwError(error);
+    }
+  }
+
+  private throwError(error: unknown): never {
+    if (error instanceof HTTPError) {
+      if (error.status === HTTPCode.UNAUTHORIZED) {
+        throw new ChatError({
+          message: error.message,
+          status: HTTPCode.BAD_REQUEST,
+        });
+      }
+
+      throw new ChatError({ message: error.message, status: error.status });
+    }
+
+    throw new ChatError({});
   }
 }
 
