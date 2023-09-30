@@ -114,6 +114,7 @@ const ChatList: React.FC = () => {
             return (
               <Card
                 key={item.id}
+                id={item.id}
                 title={item.name}
                 onPress={(): void => {
                   handleSelectChat(item.name, item.id.toString());
