@@ -6,8 +6,6 @@ import {
 
 const TEXTAREA_ROWS_COUNT = 3;
 
-const ONE_INDEX = 1;
-
 const PREFERENCES_CATEGORIES: string[] = [
   'Get emotional support',
   'Reduce stress or anxiety',
@@ -116,4 +114,4 @@ const STEPS_CONFIGURATION = new Map([
   ],
 ]) as StepsConfiguration;
 
-export { ONE_INDEX, STEPS_CONFIGURATION, TEXTAREA_ROWS_COUNT };
+export { STEPS_CONFIGURATION, TEXTAREA_ROWS_COUNT };

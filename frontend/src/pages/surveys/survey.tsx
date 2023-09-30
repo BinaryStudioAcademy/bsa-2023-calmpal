@@ -1,4 +1,5 @@
 import { Loader, Navigate } from '#libs/components/components.js';
+import { NUMBER_ONE_INDEX } from '#libs/constants/constants.js';
 import { AppRoute, DataStatus } from '#libs/enums/enums.js';
 import {
   useAppDispatch,
@@ -16,7 +17,6 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
 import { SurveySteps } from './components/components.js';
-import { ONE_INDEX } from './libs/constants/constants.js';
 import styles from './styles.module.scss';
 
 type SurveyForDispatch = SurveyState & { userId?: number };
@@ -33,14 +33,14 @@ const Survey: React.FC = () => {
 
   const handleNextStep = useCallback((): void => {
     const index = defaultOrder.indexOf(currentStep);
-    const nextIndex = (index + ONE_INDEX) % defaultOrder.length;
+    const nextIndex = (index + NUMBER_ONE_INDEX) % defaultOrder.length;
     const nextCategory = defaultOrder[nextIndex];
     setCurrentStep(nextCategory as SurveyStepsType);
   }, [currentStep, defaultOrder]);
 
   const handlePreviousStep = useCallback((): void => {
     const index = defaultOrder.indexOf(currentStep);
-    const previousIndex = (index - ONE_INDEX) % defaultOrder.length;
+    const previousIndex = (index - NUMBER_ONE_INDEX) % defaultOrder.length;
     const previousCategory = defaultOrder[previousIndex];
     setCurrentStep(previousCategory as SurveyStepsType);
   }, [currentStep, defaultOrder]);
