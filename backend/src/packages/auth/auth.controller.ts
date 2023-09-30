@@ -284,17 +284,17 @@ class AuthController extends BaseController {
    *         description: "Successful deletion. Returns 'true' if the user was deleted successfully."
    *         content:
    *           application/json:
-   *           schema:
-   *             type: boolean
+   *             schema:
+   *               type: boolean
    *       404:
-   *          description: "User not found. Returns 'false' if the user could not be found."
+   *         description: "User not found. Returns 'false' if the user could not be found."
    *         content:
    *           application/json:
-   *           schema:
-   *             $ref: '#/components/schemas/Error'
-   *           example:
-   *            message: "User with these credentials was not found."
-   *            errorType: "USERS"
+   *             schema:
+   *               $ref: '#/components/schemas/Error'
+   *             example:
+   *               message: "User with these credentials was not found."
+   *               errorType: "USERS"
    */
   private async deleteAuthenticatedUser(
     options: APIHandlerOptions<{
