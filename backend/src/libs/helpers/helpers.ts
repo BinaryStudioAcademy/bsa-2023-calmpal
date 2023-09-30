@@ -1,5 +1,6 @@
 export {
   configureString,
+  getShiftedDate,
   groupChatMessage,
   replaceTemplateWithValue,
   sanitizeInput,

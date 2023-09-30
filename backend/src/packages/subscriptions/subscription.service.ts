@@ -1,3 +1,4 @@
+import { getShiftedDate } from '#libs/helpers/helpers.js';
 import { type Billing } from '#libs/packages/billing/billing.js';
 import { type Service } from '#libs/types/types.js';
 import {
@@ -5,6 +6,7 @@ import {
   userService,
 } from '#packages/users/users.js';
 
+import { SUBSCRIPTION_MONTH_DURATION } from './libs/constants/constants.js';
 import {
   type SubscriptionPaymentIntentCreateRequestDto,
   type SubscriptionPaymentIntentCreateResponseDto,
@@ -46,7 +48,9 @@ class SubscriptionService implements Service {
   }): Promise<UserAuthResponseDto> {
     const subscriptionEntity = await this.subscriptionRepository.create(
       SubscriptionEntity.initializeNew({
-        endDate: new Date(),
+        endDate: getShiftedDate(new Date(), {
+          month: SUBSCRIPTION_MONTH_DURATION,
+        }),
       }),
     );
 
