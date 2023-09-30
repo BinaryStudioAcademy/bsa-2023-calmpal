@@ -23,11 +23,14 @@ class ChatRepository implements Repository {
     this.userToChatModel = userToChatModel;
   }
 
-  public find(): ReturnType<Repository['find']> {
+  public findById(): ReturnType<Repository['findById']> {
     return Promise.resolve(null);
   }
 
-  public async findById(id: number, userId: number): Promise<ChatEntity> {
+  public async findByIdAndUserId(
+    id: number,
+    userId: number,
+  ): Promise<ChatEntity> {
     const chat = await this.userToChatModel
       .relatedQuery(UserToChatRelation.CHAT)
       .for(this.userToChatModel.query().where({ userId, chatId: id }))
@@ -113,11 +116,13 @@ class ChatRepository implements Repository {
   public async update({
     chat,
     imageUrl,
+    name,
   }: {
     chat: ChatGetAllItemResponseDto;
     imageUrl: string;
+    name: string;
   }): Promise<ChatEntity> {
-    const { name, id } = chat;
+    const { id } = chat;
 
     const updatedChat = await this.chatModel
       .query()

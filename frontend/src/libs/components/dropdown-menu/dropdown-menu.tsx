@@ -1,7 +1,15 @@
 import { Icon, Link } from '#libs/components/components.js';
 import { IconColor } from '#libs/enums/enums.js';
-import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { useCallback, useLocation, useState } from '#libs/hooks/hooks.js';
+import {
+  checkIsSelectedRoute,
+  getValidClassNames,
+} from '#libs/helpers/helpers.js';
+import {
+  useCallback,
+  useLocation,
+  useParams,
+  useState,
+} from '#libs/hooks/hooks.js';
 import { type Route } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
@@ -12,8 +20,8 @@ type Properties = {
 
 const DropdownMenu: React.FC<Properties> = ({ routes }) => {
   const { pathname } = useLocation();
+  const routerParameters = useParams();
   const [isOpen, setOpen] = useState(false);
-
   const handleDropdownToggle = useCallback((): void => {
     setOpen((previous) => {
       return !previous;
@@ -35,19 +43,27 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
         )}
       >
         {routes.map((item) => {
+          const isSelected = checkIsSelectedRoute({
+            pathname,
+            routerParameters,
+            selectedRoute: item,
+          });
+
+          const { wrapPathWith, path, icon } = item;
+
           return (
-            <div key={item.path}>
-              <div
-                className={getValidClassNames(
-                  styles['dropdown-item'],
-                  pathname === item.path && styles['selected'],
-                )}
-              >
-                <Link to={item.path}>
-                  <span className={styles['item']}>
+            <div key={path}>
+              <div className={styles['dropdown-item']}>
+                <Link to={wrapPathWith?.(path) ?? path}>
+                  <span
+                    className={getValidClassNames(
+                      styles['item'],
+                      isSelected && styles['selected'],
+                    )}
+                  >
                     <span className="visually-hidden">Go to {item.name}</span>
                     <Icon
-                      name={item.icon}
+                      name={icon}
                       color={IconColor.BLUE}
                       width={24}
                       height={24}
@@ -56,7 +72,6 @@ const DropdownMenu: React.FC<Properties> = ({ routes }) => {
                   </span>
                 </Link>
               </div>
-              <hr className={styles['divider']} />
             </div>
           );
         })}

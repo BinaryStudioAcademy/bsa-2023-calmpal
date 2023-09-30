@@ -64,8 +64,14 @@
   border-radius: 50%;
 }
 
-@media (width < 768px) {
+@media (width < 768px), (height < 530px) {
   .nav-menu {
     display: none;
+  }
+}
+
+@media (height < 720px) {
+  .nav-menu {
+    gap: 35px;
   }
 }

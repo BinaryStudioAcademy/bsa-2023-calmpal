@@ -11,5 +11,6 @@ const DatabaseTableName = {
   USER_ROLES: 'user_roles',
   FILES: 'files',
   JOURNAL_ENTRIES: 'journal_entries',
+  SUBSCRIPTIONS: 'subscriptions',
 } as const;
 export { DatabaseTableName };

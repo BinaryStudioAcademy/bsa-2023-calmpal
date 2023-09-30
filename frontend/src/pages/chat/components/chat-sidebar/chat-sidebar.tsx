@@ -9,6 +9,7 @@ import {
   SidebarHeader,
 } from '#libs/components/components.js';
 import { AppRoute, IconColor } from '#libs/enums/enums.js';
+import { getUrlWithQueryString } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -58,7 +59,6 @@ const ChatSidebar: React.FC<Properties> = ({
 
   const handleSelectChat = useCallback(() => {
     onSetIsSidebarShow(false);
-    // TODO redux logic
   }, [onSetIsSidebarShow]);
 
   const handleDeleteChat = useCallback(
@@ -104,7 +104,10 @@ const ChatSidebar: React.FC<Properties> = ({
               ) as ValueOf<typeof AppRoute>;
 
               return (
-                <Link key={chat.id} to={chatLink}>
+                <Link
+                  key={chat.id}
+                  to={getUrlWithQueryString(chatLink, { query: filter })}
+                >
                   <Card
                     title={chat.name}
                     imageUrl={chat.imageUrl ?? cardPlaceholder}

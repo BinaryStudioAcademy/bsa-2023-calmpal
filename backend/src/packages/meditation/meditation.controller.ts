@@ -97,20 +97,27 @@ class MeditationController extends BaseController {
    * /meditation:
    *    post:
    *      description: Create a new meditation
-   *      security:
-   *       - bearerAuth: []
    *      requestBody:
    *        description: Meditation data
    *        required: true
    *        content:
-   *          application/json:
+   *          multipart/form-data:
    *            schema:
-   *              $ref: '#/components/schemas/MeditationEntryRequest'
+   *              type: object
+   *              required:
+   *                - name
+   *                - file
+   *              properties:
+   *                name:
+   *                  type: string
+   *                file:
+   *                  type: string
+   *                  format: binary
+   *      security:
+   *       - bearerAuth: []
    *      responses:
    *        201:
    *          description: Successful operation
-   *      security:
-   *       - bearerAuth: []
    *          content:
    *            application/json:
    *              schema:
@@ -119,25 +126,20 @@ class MeditationController extends BaseController {
    *                  message:
    *                    $ref: '#/components/schemas/MeditationEntryResponse'
    *        400:
-   *          description: Bad request (Invalid format)
-   *        security:
-   *         - bearerAuth: []
+   *          description: Bad request or Payload too large
    *          content:
    *            application/json:
    *              schema:
    *                $ref: '#/components/schemas/Error'
-   *              example:
-   *                message: "File extension should be one of PNG, JPEG, MPEG."
-   *                errorType: "FILE"
-   *         400:
-   *          description: Payload too large (File size exceeds 10MB)
-   *          content:
-   *            application/json:
-   *              schema:
-   *                $ref: '#/components/schemas/Error'
-   *              example:
-   *                message: "The inputted file is bigger than 10 MB."
-   *                errorType: "FILE"
+   *              examples:
+   *                invalidFormat:
+   *                  value:
+   *                    message: "File extension should be one of PNG, JPEG, MPEG."
+   *                    errorType: "FILE"
+   *                fileSizeExceedsLimit:
+   *                  value:
+   *                    message: "The inputted file is bigger than 10 MB."
+   *                    errorType: "FILE"
    */
 
   private async create(

@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 12,
-    maxWidth: '85%',
     backgroundColor: AppColor.BLUE_300,
     color: AppColor.WHITE,
     shadowColor: AppColor.BLUE_200,
@@ -47,6 +46,13 @@ const styles = StyleSheet.create({
     color: AppColor.GRAY_600,
     elevation: 0,
     fontFamily: FontFamily.MONTSERRAT_400,
+  },
+  messageContainer: {
+    alignItems: 'flex-start',
+    maxWidth: '82%',
+  },
+  userMessageContainer: {
+    alignItems: 'flex-end',
   },
 });
 

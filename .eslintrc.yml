@@ -126,6 +126,8 @@ rules:
     - off
   unicorn/no-array-for-each:
     - off
+  unicorn/no-array-reduce:
+    - off
   unicorn/no-thenable:
     - off
   simple-import-sort/imports:

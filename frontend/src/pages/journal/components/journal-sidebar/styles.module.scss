@@ -25,6 +25,10 @@
   margin-top: 23px;
 }
 
+.no-card {
+  color: var(--blue-200);
+}
+
 @media (width < 900px) {
   .journal-entry-list {
     padding: 0 15px 130px;
@@ -33,5 +37,12 @@
   .search {
     width: 100%;
     padding: 0 15px;
+  }
+}
+
+@media (width < 768px) {
+  .journal-entry-list {
+    margin-top: 23px;
+    padding: 0 20px;
   }
 }

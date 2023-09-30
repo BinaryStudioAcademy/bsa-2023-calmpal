@@ -1,6 +1,7 @@
 import { Button, Icon } from '#libs/components/components.js';
 import { type IconColor } from '#libs/enums/enums.js';
 import { getValidClassNames } from '#libs/helpers/helpers.js';
+import { useCallback } from '#libs/hooks/hooks.js';
 import { type IconName, type ValueOf } from '#libs/types/types.js';
 
 import styles from './styles.module.scss';
@@ -12,6 +13,8 @@ type Properties = {
   isActive?: boolean;
   iconName?: IconName;
   iconColor?: ValueOf<typeof IconColor>;
+  iconWidth?: number;
+  iconHeight?: number;
   iconRight?: IconName;
   onIconClick?: () => void;
 };
@@ -23,6 +26,8 @@ const Card: React.FC<Properties> = ({
   isActive = false,
   iconName,
   iconRight,
+  iconWidth,
+  iconHeight,
   onIconClick,
   iconColor,
 }) => {
@@ -30,6 +35,14 @@ const Card: React.FC<Properties> = ({
   const hasImage = Boolean(imageUrl);
   const hasIcon = Boolean(iconName);
   const hasIconRight = Boolean(iconRight);
+
+  const handleIconClick = useCallback(
+    (event_: React.MouseEvent) => {
+      event_.preventDefault();
+      onIconClick?.();
+    },
+    [onIconClick],
+  );
 
   return (
     <div className={styles['container']}>
@@ -55,7 +68,12 @@ const Card: React.FC<Properties> = ({
               )}
               {hasIcon && (
                 <div className={styles['icon-background']}>
-                  <Icon name={iconName as IconName} color={iconColor} />
+                  <Icon
+                    name={iconName as IconName}
+                    color={iconColor}
+                    width={iconWidth as number}
+                    height={iconHeight as number}
+                  />
                 </div>
               )}
             </div>
@@ -68,7 +86,7 @@ const Card: React.FC<Properties> = ({
           label="delete chat"
           style="icon-right"
           isLabelVisuallyHidden
-          onClick={onIconClick}
+          onClick={handleIconClick}
           iconName={iconRight}
           iconColor={iconColor}
           iconWidth={25}

@@ -1,6 +1,9 @@
 import { ExceptionMessage } from '#libs/enums/enums.js';
 import { UsersError } from '#libs/exceptions/exceptions.js';
-import { replaceTemplateWithValue } from '#libs/helpers/helpers.js';
+import {
+  groupChatMessage,
+  replaceTemplateWithValue,
+} from '#libs/helpers/helpers.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { OpenAiRoleKey } from '#libs/packages/open-ai/libs/enums/open-ai-role-key.enum.js';
 import { type OpenAiMessageGenerateRequestDto } from '#libs/packages/open-ai/libs/types/types.js';
@@ -15,6 +18,7 @@ import {
   type ChatMessageCreatePayload,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
+  type ChatMessagesGroups,
 } from './libs/types/types.js';
 
 type Constructor = {
@@ -32,12 +36,12 @@ class ChatMessageService implements Service {
     this.chatbotService = chatbotService;
   }
 
-  public find(): ReturnType<Service['find']> {
+  public findById(): ReturnType<Service['findById']> {
     return Promise.resolve(null);
   }
 
-  public async findAll(): ReturnType<Service['findAll']> {
-    return await Promise.resolve({ items: [] });
+  public findAll(): ReturnType<Service['findAll']> {
+    return Promise.resolve({ items: [] });
   }
 
   public async create(
@@ -91,8 +95,9 @@ class ChatMessageService implements Service {
       },
     );
 
-    const content = replaceTemplateWithValue(PROMPT_TEMPLATE, {
-      message: payload.message,
+    const content = replaceTemplateWithValue({
+      template: PROMPT_TEMPLATE,
+      replacements: { message: payload.message },
     });
 
     openAiMessages.push({
@@ -122,10 +127,17 @@ class ChatMessageService implements Service {
       chatId,
     );
 
+    const groups: ChatMessagesGroups = chatMessages.reduce(
+      (group, chatMessage) => {
+        const chatData = chatMessage.toObject();
+
+        return groupChatMessage(group, chatData);
+      },
+      {},
+    );
+
     return {
-      items: chatMessages.map((chatMessage) => {
-        return chatMessage.toObject();
-      }),
+      items: groups,
     };
   }
 

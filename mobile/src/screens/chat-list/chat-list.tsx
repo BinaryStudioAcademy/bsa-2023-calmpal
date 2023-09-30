@@ -7,6 +7,7 @@ import {
   Header,
   InputSearch,
   LinearGradient,
+  Modal,
   ScrollView,
   View,
 } from '#libs/components/components';
@@ -19,6 +20,7 @@ import {
   useEffect,
   useNavigation,
   useSearch,
+  useState,
 } from '#libs/hooks/hooks';
 import { type ChatNavigationParameterList } from '#libs/types/types';
 import { actions as chatsActions } from '#slices/chats/chats';
@@ -26,14 +28,18 @@ import { actions as chatsActions } from '#slices/chats/chats';
 import { styles } from './styles';
 
 const ChatList: React.FC = () => {
-  const { chats } = useAppSelector(({ chats }) => {
+  const { chats, isLoaded } = useAppSelector(({ chats }) => {
     return {
       chats: chats.chats,
+      isLoaded: chats.chatsDataStatus === 'fulfilled',
     };
   });
   const dispatch = useAppDispatch();
   const navigation =
     useNavigation<NativeStackNavigationProp<ChatNavigationParameterList>>();
+  const [isDeleteModalVisible, setIsDeleteModalVisible] =
+    useState<boolean>(false);
+  const [chatIdToDelete, setChatIdToDelete] = useState<number | null>(null);
 
   const { filteredData: filteredChats, setSearchQuery } = useSearch(
     chats,
@@ -42,15 +48,32 @@ const ChatList: React.FC = () => {
 
   const chatsLength = chats.length;
 
+  const handleShowDeleteModal = (id: number): void => {
+    setChatIdToDelete(id);
+    setIsDeleteModalVisible(true);
+  };
+
+  const hanleCloseDeleteModal = (): void => {
+    setIsDeleteModalVisible(false);
+  };
+
+  const handleDeleteChat = (): void => {
+    hanleCloseDeleteModal();
+    void dispatch(chatsActions.deleteChat(chatIdToDelete as number));
+  };
+
   const handleSelectChat = useCallback(
-    (title: string) => {
-      navigation.navigate(ChatScreenName.CHAT, { title });
+    (title: string, id: string | undefined) => {
+      navigation.navigate(ChatScreenName.CHAT, { title, id: id ?? '' });
     },
     [navigation],
   );
 
   const handleRedirectToChat = useCallback(() => {
-    navigation.navigate(ChatScreenName.CHAT, { title: 'New Chat' });
+    navigation.navigate(ChatScreenName.CHAT, {
+      title: 'New Chat',
+      id: '',
+    });
   }, [navigation]);
 
   useEffect(() => {
@@ -64,10 +87,10 @@ const ChatList: React.FC = () => {
   }, [navigation, chatsLength]);
 
   useEffect(() => {
-    if (chatsLength === EMPTY_ARRAY_LENGTH) {
+    if (isLoaded && chatsLength === EMPTY_ARRAY_LENGTH) {
       handleRedirectToChat();
     }
-  }, [chatsLength, handleRedirectToChat]);
+  }, [chatsLength, handleRedirectToChat, isLoaded]);
 
   useEffect(() => {
     void dispatch(chatsActions.getAllChats());
@@ -75,6 +98,12 @@ const ChatList: React.FC = () => {
 
   return (
     <LinearGradient>
+      <Modal
+        isVisible={isDeleteModalVisible}
+        onClose={hanleCloseDeleteModal}
+        onDelete={handleDeleteChat}
+        type="Chat"
+      />
       <View style={styles.container}>
         <InputSearch
           placeholder="Search chat"
@@ -84,9 +113,15 @@ const ChatList: React.FC = () => {
           {filteredChats.map((item) => {
             return (
               <Card
-                title={item.name}
-                onPress={handleSelectChat}
                 key={item.id}
+                title={item.name}
+                onPress={(): void => {
+                  handleSelectChat(item.name, item.id.toString());
+                }}
+                iconRight="delete"
+                onIconPress={(): void => {
+                  handleShowDeleteModal(item.id);
+                }}
               />
             );
           })}

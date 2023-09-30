@@ -1,6 +1,7 @@
 import {
   Card,
   Icon,
+  Link,
   Sidebar,
   SidebarBody,
   SidebarHeader,
@@ -10,12 +11,16 @@ import {
   useAppDispatch,
   useAppSelector,
   useCallback,
+  useLocation,
+  useRef,
   useState,
 } from '#libs/hooks/hooks.js';
 import { type UserAuthResponseDto } from '#packages/users/users.js';
+import { DeleteAccountModal } from '#pages/profile-settings/components/components.js';
+import { type DeleteAccountModalHandler } from '#pages/profile-settings/components/delete-account-modal/libs/types/types.js';
 import { actions as authActions } from '#slices/auth/auth.js';
 
-import { SETTINGS_OPTIONS } from './libs/constants.js';
+import { SETTING_NAME_INDEX, SETTINGS_OPTIONS } from './libs/constants.js';
 import styles from './styles.module.scss';
 
 type Properties = {
@@ -35,7 +40,12 @@ const UserProfileSidebar: React.FC<Properties> = ({
     };
   });
 
-  const [activeItem, setActiveItem] = useState<string>('notification');
+  const { pathname } = useLocation();
+  const setting = pathname.split('/')[SETTING_NAME_INDEX];
+
+  const [activeItem, setActiveItem] = useState<string>(
+    setting ?? 'notification',
+  );
 
   const handleClick = useCallback(
     (key: string) => {
@@ -50,6 +60,12 @@ const UserProfileSidebar: React.FC<Properties> = ({
   const handleSignOut = useCallback((): void => {
     void dispatch(authActions.signOut());
   }, [dispatch]);
+
+  const dialogReference = useRef<DeleteAccountModalHandler>(null);
+
+  const handleOpen = useCallback(() => {
+    dialogReference.current?.handleShowModal();
+  }, [dialogReference]);
 
   return (
     <Sidebar isSidebarShown={isSidebarShown}>
@@ -81,14 +97,15 @@ const UserProfileSidebar: React.FC<Properties> = ({
           <div className="visually-hidden">Profile settings options</div>
           {SETTINGS_OPTIONS.map((option) => {
             return (
-              <Card
-                key={option.key}
-                title={option.title}
-                onClick={handleClick(option.key)}
-                isActive={activeItem === option.key}
-                iconName={option.key}
-                iconColor={IconColor.WHITE}
-              />
+              <Link key={option.key} to={option.path}>
+                <Card
+                  title={option.title}
+                  onClick={handleClick(option.key)}
+                  isActive={activeItem === option.key}
+                  iconName={option.key}
+                  iconColor={IconColor.WHITE}
+                />
+              </Link>
             );
           })}
           <Card
@@ -97,6 +114,15 @@ const UserProfileSidebar: React.FC<Properties> = ({
             iconName="sign-out"
             iconColor={IconColor.WHITE}
           />
+          <Card
+            title="Delete account"
+            onClick={handleOpen}
+            iconName="trash-box"
+            iconColor={IconColor.WHITE}
+            iconWidth={24}
+            iconHeight={24}
+          />
+          <DeleteAccountModal ref={dialogReference} />
         </div>
       </SidebarBody>
     </Sidebar>

@@ -29,18 +29,21 @@ const Root: React.FC = () => {
     authenticatedUser,
     authenticatedUserDataStatus,
     surveyPreferencesDataStatus,
-  } = useAppSelector(({ auth }) => {
+    currentChatMessagesDataStatus,
+  } = useAppSelector(({ auth, chats }) => {
     return {
       authenticatedUser: auth.authenticatedUser,
       authenticatedUserDataStatus: auth.authenticatedUserDataStatus,
       surveyPreferencesDataStatus: auth.surveyPreferencesDataStatus,
+      currentChatMessagesDataStatus: chats.currentChatMessagesDataStatus,
     };
   });
 
   const isLoaderVisible =
     authenticatedUserDataStatus === DataStatus.IDLE ||
     authenticatedUserDataStatus === DataStatus.PENDING ||
-    surveyPreferencesDataStatus === DataStatus.PENDING;
+    surveyPreferencesDataStatus === DataStatus.PENDING ||
+    currentChatMessagesDataStatus === DataStatus.PENDING;
 
   const filteredNavigationItems = useMemo(() => {
     return NAVIGATION_ITEMS.filter((screen) => {

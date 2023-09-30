@@ -1,6 +1,7 @@
 export { DataStatus } from './app/app';
 export {
   ChatScreenName,
+  JournalScreenName,
   MainScreenName,
   MeditationScreenName,
   ProfileScreenName,
@@ -12,4 +13,5 @@ export {
   AppEnvironment,
   ContentType,
   ServerErrorType,
+  TimeFormat,
 } from 'shared/build/index.js';

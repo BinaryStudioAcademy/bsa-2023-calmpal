@@ -15,7 +15,7 @@ class JournalEntryRepository implements Repository {
     this.journalEntryModel = journalEntryModel;
   }
 
-  public async find(id: number): Promise<JournalEntryEntity | null> {
+  public async findById(id: number): Promise<JournalEntryEntity | null> {
     const journalEntry = await this.journalEntryModel.query().findById(id);
 
     if (!journalEntry) {
@@ -32,11 +32,11 @@ class JournalEntryRepository implements Repository {
     });
   }
 
-  public async findAll(): ReturnType<Repository['findAll']> {
-    return await Promise.resolve([]);
+  public findAll(): ReturnType<Repository['findAll']> {
+    return Promise.resolve([]);
   }
 
-  public async findAllByUserId(
+  public async searchByUserId(
     userId: number,
     query: string,
   ): Promise<JournalEntryEntity[]> {

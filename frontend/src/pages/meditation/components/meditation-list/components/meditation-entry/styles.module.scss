@@ -17,7 +17,7 @@
 
 .content {
   display: flex;
-  flex-basis: 286px;
+  flex-basis: calc(100% - 165px);
   justify-content: space-between;
   align-items: center;
   padding: 48px 23px 44px 29px;
@@ -69,6 +69,10 @@
   .track {
     max-width: 350px;
   }
+
+  .content {
+    flex-basis: calc(100% - 65px);
+  }
 }
 
 @media (width < 768px) {
@@ -79,5 +83,9 @@
 
   .content {
     flex-basis: 400px;
+  }
+
+  .background-image {
+    width: 95px;
   }
 }

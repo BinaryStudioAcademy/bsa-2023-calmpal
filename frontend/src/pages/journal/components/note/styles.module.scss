@@ -6,25 +6,23 @@
   font-weight: 500;
 }
 
-.title {
-  margin-bottom: 20px;
+.title,
+.text {
   padding: 15px;
   background-color: var(--blue-100);
-  border-radius: 5px;
-  box-shadow: 0 4px 23px 0 var(--violet-100);
+  border-radius: 12px;
+}
+
+.title {
+  margin-bottom: 20px;
 }
 
 .text {
   min-height: 400px;
-  padding: 15px;
-  background-color: var(--blue-100);
-  border-radius: 5px;
-  box-shadow: 0 4px 23px 0 var(--violet-100);
 }
 
 .title:focus,
 .text:focus {
   border: 1px solid var(--blue-300);
   outline: none;
-  box-shadow: 0 3px 21px 0 var(--blue-300);
 }

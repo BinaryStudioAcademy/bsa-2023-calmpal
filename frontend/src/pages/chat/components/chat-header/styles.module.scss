@@ -27,7 +27,7 @@
   line-height: 1.5;
 }
 
-@media (width < 768px) {
+@media (width < 768px), (height < 530px) {
   .header-content {
     padding: 25px 95px;
   }
