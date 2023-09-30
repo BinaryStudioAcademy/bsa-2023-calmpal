@@ -48,7 +48,7 @@ class OpenAi extends BaseHttpApi {
 
   public async getMessageResponse(
     messages: OpenAiMessageGenerateRequestDto[],
-  ): Promise<string | null | undefined> {
+  ): Promise<string | null> {
     try {
       const data = await this.load<OpenAiMessageGenerateResponseDto>(
         this.getFullEndpoint(
