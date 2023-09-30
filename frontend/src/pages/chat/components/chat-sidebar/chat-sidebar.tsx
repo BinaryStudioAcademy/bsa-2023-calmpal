@@ -8,7 +8,7 @@ import {
   SidebarBody,
   SidebarHeader,
 } from '#libs/components/components.js';
-import { AppRoute, IconColor } from '#libs/enums/enums.js';
+import { AppRoute, DataStatus, IconColor } from '#libs/enums/enums.js';
 import { getUrlWithQueryString } from '#libs/helpers/helpers.js';
 import {
   useAppDispatch,
@@ -41,11 +41,14 @@ const ChatSidebar: React.FC<Properties> = ({
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
   const [chatToDelete, setChatToDelete] = useState<null | number>(null);
+  const [isChatsLoaded, setIsChatsLoaded] = useState(false);
   const dialogReference = useRef<HTMLDialogElement>(null);
+  const selectedChatReference = useRef<HTMLDivElement | null>(null);
 
-  const { chats } = useAppSelector(({ chats }) => {
+  const { chats, chatsDataStatus } = useAppSelector(({ chats }) => {
     return {
       chats: chats.chats,
+      chatsDataStatus: chats.chatsDataStatus,
     };
   });
 
@@ -56,6 +59,16 @@ const ChatSidebar: React.FC<Properties> = ({
   useEffect(() => {
     void dispatch(chatsActions.getAllChats(filter));
   }, [dispatch, filter]);
+
+  useEffect(() => {
+    if (chatsDataStatus === DataStatus.FULFILLED) {
+      setIsChatsLoaded(true);
+    }
+  }, [chatsDataStatus, setIsChatsLoaded]);
+
+  if (selectedChatReference.current && !isChatsLoaded) {
+    selectedChatReference.current.scrollIntoView({ behavior: 'instant' });
+  }
 
   const handleSelectChat = useCallback(() => {
     onSetIsSidebarShow(false);
@@ -109,6 +122,7 @@ const ChatSidebar: React.FC<Properties> = ({
                   to={getUrlWithQueryString(chatLink, { query: filter })}
                 >
                   <Card
+                    ref={String(chat.id) === id ? selectedChatReference : null}
                     title={chat.name}
                     imageUrl={chat.imageUrl ?? cardPlaceholder}
                     onClick={handleSelectChat}
