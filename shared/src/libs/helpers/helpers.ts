@@ -3,6 +3,7 @@ export {
   getFormattedDate,
   getFormattedTime,
   getRelativeDate,
+  getShiftedDate,
   SECONDS_IN_MINUTE,
 } from './date/date.js';
 export { debounce } from './debounce/debounce.helper.js';
