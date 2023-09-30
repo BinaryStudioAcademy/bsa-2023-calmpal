@@ -16,6 +16,7 @@
 }
 
 .content {
+  position: relative;
   display: flex;
   flex-basis: calc(100% - 165px);
   justify-content: space-between;
@@ -42,6 +43,44 @@
   -webkit-box-orient: vertical;
   word-wrap: break-word;
   word-break: break-word;
+}
+
+.tooltip::before {
+  content: "";
+  position: absolute;
+  top: 83%;
+  left: 30%;
+  z-index: 299;
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent var(--blue-300) transparent;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 90%;
+  left: 25%;
+  z-index: 300;
+  display: block;
+  min-width: 65px;
+  max-width: 400px;
+  padding: 3px 10px;
+  color: var(--white);
+  font-size: 12px;
+  background: var(--blue-300);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px 0 var(--white-alpha-20);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.tooltip:hover::after,
+.tooltip:hover::before {
+  opacity: 1;
 }
 
 .duration {
@@ -73,6 +112,15 @@
   .content {
     flex-basis: calc(100% - 65px);
   }
+
+  .tooltip::after {
+    left: 0;
+  }
+
+  .tooltip::before {
+    top: 82%;
+    left: 5%;
+  }
 }
 
 @media (width < 768px) {
@@ -87,5 +135,15 @@
 
   .background-image {
     width: 95px;
+  }
+
+  .tooltip::before {
+    top: 85%;
+    left: 15%;
+  }
+
+  .tooltip::after {
+    top: 95%;
+    left: 10%;
   }
 }

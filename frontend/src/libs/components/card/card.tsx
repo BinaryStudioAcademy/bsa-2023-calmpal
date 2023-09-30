@@ -11,6 +11,7 @@ type Properties = {
   imageUrl?: string;
   onClick: () => void;
   isActive?: boolean;
+  isTooltipAvailable?: boolean;
   iconName?: IconName;
   iconColor?: ValueOf<typeof IconColor>;
   iconWidth?: number;
@@ -30,6 +31,7 @@ const Card: React.FC<Properties> = ({
   iconHeight,
   onIconClick,
   iconColor,
+  isTooltipAvailable = false,
 }) => {
   const hasNoImageOrIcon = !imageUrl && !iconName;
   const hasImage = Boolean(imageUrl);
@@ -78,7 +80,16 @@ const Card: React.FC<Properties> = ({
               )}
             </div>
           )}
-          <div className={styles['title']}>{title}</div>
+          {isTooltipAvailable ? (
+            <div
+              className={getValidClassNames(styles['title'], styles['tooltip'])}
+              data-tooltip={title}
+            >
+              {title}
+            </div>
+          ) : (
+            <div className={styles['title']}>{title}</div>
+          )}
         </div>
       </button>
       {hasIconRight && (
