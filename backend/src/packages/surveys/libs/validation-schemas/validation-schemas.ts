@@ -1,1 +1,1 @@
-export { createSurveyValidationSchema } from 'shared/build/index.js';
+export { surveyInputValidationSchema } from 'shared/build/index.js';

@@ -5,8 +5,8 @@ import { type Service } from '#libs/types/types.js';
 import { userService } from '#packages/users/users.js';
 
 import {
-  type SurveyGetAllItemResponseDto,
-  type SurveyRequestDto,
+  type SurveyCreateRequestDto,
+  type SurveyCreateResponseDto,
 } from './libs/types/types.js';
 import { SurveyEntity } from './survey.entity.js';
 import { type SurveyRepository } from './survey.repository.js';
@@ -27,8 +27,8 @@ class SurveyService implements Service {
   }
 
   public async create(
-    payload: SurveyRequestDto,
-  ): Promise<SurveyGetAllItemResponseDto | null> {
+    payload: SurveyCreateRequestDto,
+  ): Promise<SurveyCreateResponseDto | null> {
     const user = await userService.findById(payload.userId);
 
     if (!user) {
@@ -48,6 +48,11 @@ class SurveyService implements Service {
       SurveyEntity.initializeNew({
         userId: payload.userId,
         preferences: payload.preferences,
+        feelings: payload.feelings,
+        goals: payload.goals,
+        worries: payload.worries,
+        meditationExperience: payload.meditationExperience,
+        journalingExperience: payload.journalingExperience,
       }),
     );
 

@@ -37,7 +37,6 @@ const Input = <T extends FormFieldValues>({
   isDisabled = false,
 }: Properties<T>): JSX.Element => {
   const { field } = useFormController({ name, control });
-
   const error = errors[name]?.message;
   const hasError = Boolean(error);
   const hasRows = Boolean(rowsCount);

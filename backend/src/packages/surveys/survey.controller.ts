@@ -8,8 +8,8 @@ import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Logger } from '#libs/packages/logger/logger.js';
 import { AuthApiPath } from '#packages/auth/auth.js';
 
-import { type SurveyRequestDto } from './libs/types/types.js';
-import { createSurveyValidationSchema } from './libs/validation-schemas/validation-schemas.js';
+import { type SurveyCreateRequestDto } from './libs/types/types.js';
+import { surveyInputValidationSchema } from './libs/validation-schemas/validation-schemas.js';
 import { type SurveyService } from './survey.service.js';
 
 /**
@@ -27,6 +27,22 @@ import { type SurveyService } from './survey.service.js';
  *            type: array
  *            items:
  *              type: string
+ *          feelings:
+ *            type: array
+ *            items:
+ *              type: string
+ *          goals:
+ *            type: array
+ *            items:
+ *              type: string
+ *          worries:
+ *            type: array
+ *          items:
+ *            type: string
+ *          meditationExperience:
+ *            type: string
+ *          journalingExperience:
+ *            type: string
  *      SurveyResponse:
  *        type: object
  *        properties:
@@ -42,6 +58,20 @@ import { type SurveyService } from './survey.service.js';
  *            type: array
  *            items:
  *              type: string
+ *          feelings:
+ *            type: string
+ *          goals:
+ *            type: array
+ *            items:
+ *              type: string
+ *          worries:
+ *            type: array
+ *          items:
+ *            type: string
+ *          meditationExperience:
+ *            type: string
+ *          journalingExperience:
+ *            type: string
  *          createdAt:
  *             type: string
  *             format: date-time
@@ -81,12 +111,12 @@ class SurveyController extends BaseController {
       path: AuthApiPath.SIGN_UP_SURVEY,
       method: 'POST',
       validation: {
-        body: createSurveyValidationSchema,
+        body: surveyInputValidationSchema,
       },
       handler: (options) => {
         return this.create(
           options as APIHandlerOptions<{
-            body: SurveyRequestDto;
+            body: SurveyCreateRequestDto;
           }>,
         );
       },
@@ -124,7 +154,7 @@ class SurveyController extends BaseController {
 
   private async create(
     options: APIHandlerOptions<{
-      body: SurveyRequestDto;
+      body: SurveyCreateRequestDto;
     }>,
   ): Promise<APIHandlerResponse> {
     return {

@@ -1,5 +1,5 @@
 import {
-  PREFERENCES_OTHER_CATEGORY,
+  SURVEY_OTHER_CATEGORY,
   type SurveyInputDto,
 } from '#packages/survey/survey';
 
@@ -16,7 +16,7 @@ const PREFERENCES_CATEGORIES: string[] = [
   'Improve sleep quality',
   'Get over with depression',
   'Improve focus',
-  PREFERENCES_OTHER_CATEGORY,
+  SURVEY_OTHER_CATEGORY,
 ];
 
 export { DEFAULT_SURVEY_PAYLOAD, PREFERENCES_CATEGORIES, TEXTAREA_ROWS_COUNT };

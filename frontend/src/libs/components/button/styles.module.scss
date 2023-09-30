@@ -65,6 +65,36 @@
   cursor: default;
 }
 
+.outlined {
+  display: inline-block;
+  width: 100%;
+  padding: 15px 0;
+  color: var(--black);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  background-color: var(--white);
+  border: 2px solid var(--gray-200);
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.outlined:hover,
+.outlined:focus {
+  background-color: var(--blue-alpha-70);
+  border: 2px solid var(--black);
+  box-shadow:
+    0 2px 4px -2px #002c840f,
+    0 4px 8px -2px #0055ff29;
+}
+
+.outlined:disabled {
+  color: var(--gray-alpha-50);
+  background-color: var(--white-alpha-80);
+  cursor: default;
+}
+
 .rounded {
   display: flex;
   justify-content: center;

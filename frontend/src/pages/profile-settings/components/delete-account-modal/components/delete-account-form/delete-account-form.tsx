@@ -72,8 +72,9 @@ const DeleteAccountForm: React.FC<Properties> = ({ onNext, onClose }) => {
         return (
           <div key={checkbox.label}>
             <Checkbox
+              control={control}
+              name={DeleteAccountPayloadKey.CHECKBOXES}
               label={checkbox.label}
-              isChecked={checkboxesValue.includes(checkbox.label)}
               onChange={handleCheckboxChange(checkbox.label)}
               style="secondary"
             />

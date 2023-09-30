@@ -12,7 +12,7 @@ import {
   DEFAULT_SURVEY_PAYLOAD,
   PREFERENCES_CATEGORIES,
   TEXTAREA_ROWS_COUNT,
-} from '#screens/survey/libs/cosntants/constants';
+} from '#screens/survey/libs/constants/constants';
 
 import { SurveyCategory } from '../components';
 import { styles } from './styles';
@@ -70,7 +70,7 @@ const PreferencesStep: React.FC<Properties> = ({ onSubmit }) => {
       style={styles.surveyContainer}
       showsVerticalScrollIndicator={false}
     >
-      {PREFERENCES_CATEGORIES.map((category) => {
+      {PREFERENCES_CATEGORIES.map((category: string) => {
         return (
           <SurveyCategory
             key={category}

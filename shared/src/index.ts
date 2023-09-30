@@ -103,9 +103,9 @@ export {
   MeditationEntryValidationMessage,
 } from './packages/meditation/meditation.js';
 export {
-  createSurveyValidationSchema,
   getSurveyCategories,
-  PREFERENCES_OTHER_CATEGORY,
+  stepInputValidationSchema,
+  SURVEY_OTHER_CATEGORY,
   type SurveyGetAllItemResponseDto,
   type SurveyInputDto,
   surveyInputValidationSchema,

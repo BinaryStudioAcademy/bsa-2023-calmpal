@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 15px 0;
+  color: var(--white);
+  background-color: transparent;
+  border: 1px solid var(--white);
+  border-radius: 26px;
+  cursor: pointer;
+}
+
+.container:hover {
+  background-color: var(--blue-alpha-70);
+}
+
+.label {
+  display: block;
+  color: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.radio {
+  display: none;
+}
+
+.radio:checked + .container {
+  color: var(--blue-700);
+  background-color: var(--blue-alpha-70);
+}
