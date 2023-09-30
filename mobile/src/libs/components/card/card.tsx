@@ -11,6 +11,7 @@ import {
   View,
 } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
+import { useCallback } from '#libs/hooks/hooks';
 import { type IconName } from '#libs/types/types';
 
 import { DEFAULT_NUMBER_OF_LINES } from './libs/constants/constants';
@@ -39,6 +40,15 @@ const Card: React.FC<Properties> = ({
   onIconPress,
   id,
 }) => {
+  const handleSwipeableReference = useCallback(
+    (reference: Swipeable | null) => {
+      if (reference && !rowReferences.get(id)) {
+        rowReferences.set(id, reference);
+      }
+    },
+    [id],
+  );
+
   const renderRightSwipeActions = (): React.ReactNode => {
     return (
       Boolean(iconRight) && (
@@ -53,11 +63,7 @@ const Card: React.FC<Properties> = ({
     <Swipeable
       renderRightActions={renderRightSwipeActions}
       key={id}
-      ref={(reference: Swipeable | null): void => {
-        if (reference && !rowReferences.get(id)) {
-          rowReferences.set(id, reference);
-        }
-      }}
+      ref={handleSwipeableReference}
       onSwipeableWillOpen={(): void => {
         [...rowReferences.entries()].forEach(([key, reference]) => {
           if (key !== id && reference) {
