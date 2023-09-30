@@ -21,10 +21,6 @@ type ServerAuthErrorResponse = {
 type ServerChatErrorResponse = {
   errorType: typeof ServerErrorType.CHAT;
   message: string;
-  error?: {
-    code: string;
-    message: string;
-  };
 };
 
 type ServerUsersErrorResponse = {
