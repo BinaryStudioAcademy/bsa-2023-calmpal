@@ -16,7 +16,7 @@ const DeleteAccountFinal: React.FC<Properties> = ({ onNext, onClose }) => {
       <p>After deleting your account you will:</p>
       <ul className={styles['text']}>
         <li>Not be able to login to CalmPal</li>
-        <li>Lose acces to your meditations</li>
+        <li>Lose access to your meditations</li>
         <li>Your data and profile history will be deleted</li>
       </ul>
       <div className={styles['footer']}>
