@@ -26,6 +26,7 @@ type Properties = {
   iconRight?: IconName;
   onIconPress?: () => void;
   id?: number;
+  isModalVisible?: boolean;
 };
 
 const rowReferences = new Map();
@@ -39,6 +40,7 @@ const Card: React.FC<Properties> = ({
   iconRight,
   onIconPress,
   id,
+  isModalVisible,
 }) => {
   const handleSwipeableReference = useCallback(
     (reference: Swipeable | null) => {
@@ -56,6 +58,8 @@ const Card: React.FC<Properties> = ({
       }
     });
   }, [id, rowReferences]);
+
+  !isModalVisible && handleCloseOtherSwipeables();
 
   const renderRightSwipeActions = (): React.ReactNode => {
     return (

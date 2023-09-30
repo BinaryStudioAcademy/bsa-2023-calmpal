@@ -123,6 +123,7 @@ const ChatList: React.FC = () => {
                 onIconPress={(): void => {
                   handleShowDeleteModal(item.id);
                 }}
+                isModalVisible={isDeleteModalVisible}
               />
             );
           })}
