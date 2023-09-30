@@ -30,6 +30,7 @@ export {
   getFormattedDate,
   getFormattedTime,
   getRelativeDate,
+  getShiftedDate,
   groupChatMessage,
   replaceTemplateWithValue,
   sanitizeInput,
