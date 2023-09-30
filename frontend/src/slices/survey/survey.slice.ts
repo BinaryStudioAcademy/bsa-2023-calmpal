@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import { type SurveyState } from '#packages/survey/libs/types/state.type.js';
+import { type SurveyState } from '#packages/survey/libs/types/survey-state.type.js';
 
 const initialState: SurveyState = {
   preferences: [],

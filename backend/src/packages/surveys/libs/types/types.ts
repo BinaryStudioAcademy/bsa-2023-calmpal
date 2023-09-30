@@ -1,4 +1,4 @@
-export { type SurveyCreateResponseDto } from './create-response.type.js';
+export { type SurveyCreateResponseDto } from './survey-create-response-dto.type.js';
 export {
   type SurveyRequestDto as SurveyCreateRequestDto,
   type SurveyGetAllItemResponseDto,

@@ -1,6 +1,11 @@
 type SurveyInputDto = {
-  preferences: string[];
-  other: string;
+  preferences?: string[];
+  feelings?: string[];
+  goals?: string[];
+  worries?: string[];
+  journalingExperience?: string;
+  meditationExperience?: string;
+  other?: string;
 };
 
 export { type SurveyInputDto };

@@ -8,12 +8,12 @@ import {
 } from '#libs/hooks/hooks.js';
 import {
   type StepsActions,
-  type StepsType,
   type SurveyStatePayload,
+  type SurveyStepsType,
 } from '#packages/survey/libs/types/types.js';
 import {
-  OTHER_CATEGORY,
   stepInputValidationSchema,
+  SURVEY_OTHER_CATEGORY,
   SurveyValidationRule,
 } from '#packages/survey/survey.js';
 import { TEXTAREA_ROWS_COUNT } from '#pages/surveys/libs/constants/constants.js';
@@ -23,7 +23,7 @@ import styles from './styles.module.scss';
 type Properties = {
   stepCategories: string[];
   question: string;
-  step: StepsType;
+  step: SurveyStepsType;
   type: 'checkbox' | 'radio';
   onSubmit?: StepsActions;
   onNextStep?: StepsActions;
@@ -48,8 +48,8 @@ const Step: React.FC<Properties> = ({
   const isCheckbox = type === 'checkbox' && Array.isArray(currentStep);
 
   const otherDefault =
-    currentStep.includes(OTHER_CATEGORY) &&
-    currentStep.at(LAST_INDEX) !== OTHER_CATEGORY
+    currentStep.includes(SURVEY_OTHER_CATEGORY) &&
+    currentStep.at(LAST_INDEX) !== SURVEY_OTHER_CATEGORY
       ? currentStep.at(LAST_INDEX)
       : '';
 
@@ -80,7 +80,7 @@ const Step: React.FC<Properties> = ({
               return !stepCategories.includes(option);
             },
           );
-          const isOther = category === OTHER_CATEGORY;
+          const isOther = category === SURVEY_OTHER_CATEGORY;
 
           if (isOther && otherCategories.length > FIRST_ARRAY_INDEX) {
             otherCategories.push(category);
@@ -171,7 +171,7 @@ const Step: React.FC<Properties> = ({
                 />
               );
             })}
-        {categoriesValue.includes(OTHER_CATEGORY) && (
+        {categoriesValue.includes(SURVEY_OTHER_CATEGORY) && (
           <Input
             control={control}
             errors={errors}

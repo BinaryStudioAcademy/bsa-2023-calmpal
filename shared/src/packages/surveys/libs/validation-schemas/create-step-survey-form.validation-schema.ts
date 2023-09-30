@@ -1,20 +1,11 @@
 import joi from 'joi';
 
-import { OTHER_CATEGORY } from '../constants/constants.js';
+import { SURVEY_OTHER_CATEGORY } from '../constants/constants.js';
 import {
   SurveyValidationMessage,
   SurveyValidationRule,
 } from '../enums/enums.js';
-
-type SurveyInputDto = {
-  preferences?: string[];
-  feelings?: string[];
-  goals?: string[];
-  worries?: string[];
-  journalingExperience?: string;
-  meditationExperience?: string;
-  other?: string;
-};
+import { type SurveyInputDto } from '../types/types.js';
 
 const createStepSurveyForm = joi.object<SurveyInputDto, true>({
   preferences: joi
@@ -35,7 +26,7 @@ const createStepSurveyForm = joi.object<SurveyInputDto, true>({
     .string()
     .optional()
     .when('preferences', {
-      is: joi.array().has(joi.string().valid(OTHER_CATEGORY)),
+      is: joi.array().has(joi.string().valid(SURVEY_OTHER_CATEGORY)),
       then: joi
         .string()
         .trim()
@@ -52,7 +43,7 @@ const createStepSurveyForm = joi.object<SurveyInputDto, true>({
       then: joi.allow(''),
     })
     .when('goals', {
-      is: joi.array().has(joi.string().valid(OTHER_CATEGORY)),
+      is: joi.array().has(joi.string().valid(SURVEY_OTHER_CATEGORY)),
       then: joi
         .string()
         .trim()
@@ -66,7 +57,7 @@ const createStepSurveyForm = joi.object<SurveyInputDto, true>({
       otherwise: joi.allow(''),
     })
     .when('worries', {
-      is: joi.array().has(joi.string().valid(OTHER_CATEGORY)),
+      is: joi.array().has(joi.string().valid(SURVEY_OTHER_CATEGORY)),
       then: joi
         .string()
         .trim()

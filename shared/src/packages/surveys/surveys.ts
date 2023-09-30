@@ -1,4 +1,4 @@
-export { OTHER_CATEGORY } from './libs/constants/constants.js';
+export { SURVEY_OTHER_CATEGORY } from './libs/constants/constants.js';
 export {
   SurveyValidationMessage,
   SurveyValidationRule,
@@ -10,7 +10,6 @@ export {
   type SurveyRequestDto,
 } from './libs/types/types.js';
 export {
-  createSurveyValidationSchema,
   createStepSurveyForm as stepInputValidationSchema,
   createSurveyValidationSchema as surveyInputValidationSchema,
 } from './libs/validation-schemas/validation-schemas.js';
