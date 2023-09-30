@@ -1,6 +1,9 @@
 import React from 'react';
 import { RichEditor } from 'react-native-pell-rich-editor';
 
+import { useState } from '#libs/hooks/hooks';
+
+import { Text } from '../components';
 import { styles } from './styles';
 
 type Properties = {
@@ -14,14 +17,26 @@ const RichTextEditor: React.FC<Properties> = ({
   initialContent,
   placeholder,
 }) => {
+  const [isPlaceholderVisible, setIsPlaceholderVisible] = useState(true);
+
+  const handleChange = (content: string): void => {
+    onChange(content);
+    setIsPlaceholderVisible(content === '<p><br></p>');
+  };
+
   return (
-    <RichEditor
-      onChange={onChange}
-      initialContentHTML={initialContent}
-      editorStyle={styles.editor}
-      placeholder={placeholder}
-      androidLayerType="software"
-    />
+    <>
+      {isPlaceholderVisible && (
+        <Text style={styles.placeholder}>{placeholder}</Text>
+      )}
+
+      <RichEditor
+        onChange={handleChange}
+        initialContentHTML={initialContent}
+        editorStyle={styles.editor}
+        androidLayerType="software"
+      />
+    </>
   );
 };
 
