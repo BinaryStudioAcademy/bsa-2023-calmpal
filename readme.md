@@ -82,6 +82,13 @@ erDiagram
       varchar name
       int topic_id FK
    }
+   users_to_chats {
+     int id PK
+     dateTime created_at
+     dateTime updated_at
+     int user_id FK
+     int chat_id FK
+   }
    chat_messages {
       int id PK
       varchar name
@@ -103,9 +110,13 @@ erDiagram
       dateTime created_at
       dateTime updated_at
       int topic_id FK
+      varchar name
+      varchar media_url
+      varchar content_type
    }
    journal_entries {
       int id PK
+      int user_id FK
       dateTime created_at
       dateTime updated_at
       varchar title
@@ -125,7 +136,10 @@ erDiagram
    chat_topics ||--|{ chats : chat_topic_id
    chat_topics ||..|o files : chat_topic_image_id
    chats ||--|{ chat_messages : chat_id
+   chats ||--|| users_to_chats : chat_id
+   users ||--|| users_to_chats : user_id
    users ||--|{ chat_messages : user_id
+   users ||--|{ journal_entries : user_id
    meditation_topics ||..|o files : meditation_topic_image_id
    meditation_topics ||--|{ meditation_entries : meditation_topic_id
    user_details |o--o| surveys : user_id
@@ -134,7 +148,13 @@ erDiagram
 
 ## 5. Architecture
 
-![Application schema](./docs/application-architecture/application-schema.drawio.svg)
+### Application schema:
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/application-architecture/calmpal-dark-theme.drawio.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./docs/application-architecture/calmpal-light-theme.drawio.svg">
+  <img alt="Application schema" src="./docs/application-architecture/calmpal-dark-theme.drawio.svg">
+</picture>
 
 ### 5.1 Global
 
