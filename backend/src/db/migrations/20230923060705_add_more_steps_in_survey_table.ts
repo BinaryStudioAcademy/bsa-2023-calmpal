@@ -14,11 +14,11 @@ const ARRAY_COLUMN_TYPE = 'varchar(1000)[]';
 
 function up(knex: Knex): Promise<void> {
   return knex.schema.alterTable(TABLE_NAME, (table) => {
-    table.specificType(ColumnName.FEELINGS, ARRAY_COLUMN_TYPE);
-    table.specificType(ColumnName.GOALS, ARRAY_COLUMN_TYPE);
-    table.specificType(ColumnName.WORRIES, ARRAY_COLUMN_TYPE);
-    table.string(ColumnName.MEDITATION_EXPERIENCE);
-    table.string(ColumnName.JOURNALING_EXPERIENCE);
+    table.specificType(ColumnName.FEELINGS, ARRAY_COLUMN_TYPE).defaultTo('{}');
+    table.specificType(ColumnName.GOALS, ARRAY_COLUMN_TYPE).defaultTo('{}');
+    table.specificType(ColumnName.WORRIES, ARRAY_COLUMN_TYPE).defaultTo('{}');
+    table.string(ColumnName.MEDITATION_EXPERIENCE).defaultTo('');
+    table.string(ColumnName.JOURNALING_EXPERIENCE).defaultTo('');
   });
 }
 
