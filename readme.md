@@ -148,7 +148,13 @@ erDiagram
 
 ## 5. Architecture
 
-![Application schema](./docs/application-architecture/application-schema.drawio.svg)
+### Application schema:
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/application-architecture/calmpal-dark-theme.drawio.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./docs/application-architecture/calmpal-light-theme.drawio.svg">
+  <img alt="Application schema" src="./docs/application-architecture/calmpal-dark-theme.drawio.svg">
+</picture>
 
 ### 5.1 Global
 
