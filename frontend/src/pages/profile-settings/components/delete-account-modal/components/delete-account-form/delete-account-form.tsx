@@ -1,16 +1,19 @@
 import { Button, Checkbox, Input } from '#libs/components/components.js';
+import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants.js';
 import {
   useAppForm,
   useCallback,
   useFormController,
 } from '#libs/hooks/hooks.js';
-import { type DeleteAccountFormPayload } from '#packages/users/users.js';
+import {
+  DELETE_ACCOUNT_OTHER_CATEGORY,
+  type DeleteAccountFormPayload,
+  deleteAccountFormValidationSchema,
+} from '#packages/users/users.js';
 
 import {
   CHECKBOX_OPTIONS,
   DEFAULT_DELETE_ACCOUNT_PAYLOAD,
-  NO_CHECKBOXES,
-  OTHER_OPTION_LABEL,
 } from './libs/constants/constants.js';
 import { DeleteAccountPayloadKey } from './libs/enums/enums.js';
 import styles from './styles.module.scss';
@@ -24,6 +27,7 @@ const DeleteAccountForm: React.FC<Properties> = ({ onNext, onClose }) => {
   const { control, errors, handleSubmit } =
     useAppForm<DeleteAccountFormPayload>({
       defaultValues: DEFAULT_DELETE_ACCOUNT_PAYLOAD,
+      validationSchema: deleteAccountFormValidationSchema,
       mode: 'onSubmit',
     });
 
@@ -51,8 +55,10 @@ const DeleteAccountForm: React.FC<Properties> = ({ onNext, onClose }) => {
     [checkboxesValue, onCheckboxChange],
   );
 
-  const isInputDisabled = !checkboxesValue.includes(OTHER_OPTION_LABEL);
-  const isNextDisabled = checkboxesValue.length === NO_CHECKBOXES;
+  const hasError = Object.keys(errors).length > EMPTY_ARRAY_LENGTH;
+  const isInputDisplayed = checkboxesValue.includes(
+    DELETE_ACCOUNT_OTHER_CATEGORY,
+  );
 
   const hasNextStep = Boolean(onNext);
   const hasCloseButton = Boolean(onClose);
@@ -80,15 +86,16 @@ const DeleteAccountForm: React.FC<Properties> = ({ onNext, onClose }) => {
           </div>
         );
       })}
-      <Input
-        control={control}
-        errors={errors}
-        name="description"
-        placeholder="Please describe your situation"
-        autoComplete="off"
-        maxLength={60}
-        isDisabled={isInputDisabled}
-      />
+      {isInputDisplayed && (
+        <Input
+          control={control}
+          errors={errors}
+          name="description"
+          placeholder="Please describe your situation"
+          autoComplete="off"
+          maxLength={60}
+        />
+      )}
       <div className={styles['footer']}>
         {hasCloseButton && (
           <Button label="Cancel" style="primary" onClick={onClose} />
@@ -98,7 +105,7 @@ const DeleteAccountForm: React.FC<Properties> = ({ onNext, onClose }) => {
             type="submit"
             label="Continue"
             style="primary"
-            isDisabled={isNextDisabled}
+            isDisabled={hasError}
           />
         )}
       </div>
