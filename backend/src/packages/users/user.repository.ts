@@ -18,10 +18,6 @@ class UserRepository implements Repository {
     this.userModel = userModel;
   }
 
-  public find(): ReturnType<Repository['find']> {
-    return Promise.resolve(null);
-  }
-
   public async findById(id: number): Promise<UserEntity | null> {
     const user = await this.userModel
       .query()
@@ -87,7 +83,7 @@ class UserRepository implements Repository {
     });
   }
 
-  public findAll(): Promise<unknown[]> {
+  public findAll(): ReturnType<Repository['findAll']> {
     return Promise.resolve([]);
   }
 

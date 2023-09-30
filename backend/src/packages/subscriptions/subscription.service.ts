@@ -27,16 +27,16 @@ class SubscriptionService implements Service {
     this.subscriptionRepository = subscriptionRepository;
   }
 
-  public find(): Promise<unknown> {
-    return Promise.resolve();
+  public findById(): ReturnType<Service['findById']> {
+    return Promise.resolve(null);
   }
 
-  public findAll(): Promise<{ items: unknown[] }> {
+  public findAll(): ReturnType<Service['findAll']> {
     return Promise.resolve({ items: [] });
   }
 
-  public create(): Promise<unknown> {
-    return Promise.resolve();
+  public create(): ReturnType<Service['create']> {
+    return Promise.resolve(null);
   }
 
   public async subscribe({
@@ -68,15 +68,15 @@ class SubscriptionService implements Service {
     return { clientSecret, id };
   }
 
-  public cancelPaymentIntent(id: string): Promise<boolean> {
-    return this.billing.cancelPaymentIntent(id);
+  public async cancelPaymentIntent(id: string): Promise<boolean> {
+    return await this.billing.cancelPaymentIntent(id);
   }
 
-  public update(): Promise<unknown> {
-    return Promise.resolve();
+  public update(): ReturnType<Service['update']> {
+    return Promise.resolve(null);
   }
 
-  public delete(): Promise<boolean> {
+  public delete(): ReturnType<Service['delete']> {
     return Promise.resolve(true);
   }
 }

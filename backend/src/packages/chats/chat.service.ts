@@ -50,24 +50,24 @@ class ChatService implements Service {
     this.fileService = fileService;
   }
 
-  public find(): ReturnType<Service['find']> {
+  public findById(): ReturnType<Service['findById']> {
     return Promise.resolve(null);
   }
 
-  public async findById({
+  public async findByIdAndUserId({
     id,
     userId,
   }: {
     id: number;
     userId: number;
   }): Promise<ChatGetAllItemResponseDto> {
-    const item = await this.chatRepository.findById(id, userId);
+    const item = await this.chatRepository.findByIdAndUserId(id, userId);
 
     return item.toObject();
   }
 
-  public async findAll(): ReturnType<Service['findAll']> {
-    return await Promise.resolve({ items: [] });
+  public findAll(): ReturnType<Service['findAll']> {
+    return Promise.resolve({ items: [] });
   }
 
   public async findAllByUserId(

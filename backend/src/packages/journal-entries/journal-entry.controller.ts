@@ -275,7 +275,7 @@ class JournalEntryController extends BaseController {
 
     return {
       status: HTTPCode.OK,
-      payload: await this.journalEntryService.findAllByUserId(
+      payload: await this.journalEntryService.searchByUserId(
         id,
         options.query.query,
       ),
