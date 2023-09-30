@@ -11,7 +11,6 @@ import {
   ScrollView,
   View,
 } from '#libs/components/components';
-import { DEFAULT_NOTE_PAYLOAD } from '#libs/constants/constants';
 import { AppColor, JournalScreenName } from '#libs/enums/enums';
 import {
   useAppDispatch,
@@ -24,7 +23,6 @@ import {
 import { type JournalNavigationParameterList } from '#libs/types/types';
 import { actions as journalActions } from '#slices/journal/journal';
 
-import { INCREMENT_DECREMENT_STEP } from './libs/constants/constants';
 import { styles } from './styles';
 
 const Journal: React.FC = () => {
@@ -50,7 +48,7 @@ const Journal: React.FC = () => {
     'title',
   );
 
-  const handleSelectJournalEntry = (id: number): void => {
+  const handleSelectJournalEntry = (id: number | null): void => {
     dispatch(journalActions.setSelectedJournalEntry(id));
     navigation.navigate(JournalScreenName.NOTE, { id });
   };
@@ -72,17 +70,7 @@ const Journal: React.FC = () => {
   };
 
   const handleAddNote = (): void => {
-    void dispatch(
-      journalActions.createJournalEntry({
-        title: DEFAULT_NOTE_PAYLOAD.title,
-        text: DEFAULT_NOTE_PAYLOAD.text,
-      }),
-    );
-
-    const lastJournalEntry = allJournalEntries.findLast(Boolean);
-    if (lastJournalEntry?.id) {
-      handleSelectJournalEntry(lastJournalEntry.id + INCREMENT_DECREMENT_STEP);
-    }
+    handleSelectJournalEntry(null);
   };
 
   useEffect(() => {
