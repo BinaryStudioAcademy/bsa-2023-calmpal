@@ -11,6 +11,7 @@ import {
   View,
 } from '#libs/components/components';
 import { AppColor } from '#libs/enums/enums';
+import { useCallback } from '#libs/hooks/hooks';
 import { type IconName } from '#libs/types/types';
 
 import { DEFAULT_NUMBER_OF_LINES } from './libs/constants/constants';
@@ -24,7 +25,11 @@ type Properties = {
   onPress: () => void;
   iconRight?: IconName;
   onIconPress?: () => void;
+  id?: number;
+  isModalVisible?: boolean;
 };
+
+const rowReferences = new Map();
 
 const Card: React.FC<Properties> = ({
   title,
@@ -34,7 +39,28 @@ const Card: React.FC<Properties> = ({
   onPress,
   iconRight,
   onIconPress,
+  id,
+  isModalVisible,
 }) => {
+  const handleSwipeableReference = useCallback(
+    (reference: Swipeable | null) => {
+      if (reference && !rowReferences.get(id)) {
+        rowReferences.set(id, reference);
+      }
+    },
+    [id],
+  );
+
+  const handleCloseOtherSwipeables = useCallback(() => {
+    [...rowReferences.entries()].forEach(([key, reference]) => {
+      if (key !== id && reference) {
+        (reference as Swipeable).close();
+      }
+    });
+  }, [id, rowReferences]);
+
+  !isModalVisible && handleCloseOtherSwipeables();
+
   const renderRightSwipeActions = (): React.ReactNode => {
     return (
       Boolean(iconRight) && (
@@ -46,7 +72,12 @@ const Card: React.FC<Properties> = ({
   };
 
   return (
-    <Swipeable renderRightActions={renderRightSwipeActions}>
+    <Swipeable
+      renderRightActions={renderRightSwipeActions}
+      key={id}
+      ref={handleSwipeableReference}
+      onSwipeableWillOpen={handleCloseOtherSwipeables}
+    >
       <Pressable onPress={onPress} style={styles.container}>
         {iconName && iconColor ? (
           <View style={styles.iconContainer}>

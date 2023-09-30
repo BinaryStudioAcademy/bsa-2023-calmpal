@@ -30,7 +30,8 @@ const Journal: React.FC = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<JournalNavigationParameterList>>();
 
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [isDeleteModalVisible, setIsDeleteModalVisible] =
+    useState<boolean>(false);
 
   const { allJournalEntries, selectedJournalEntry } = useAppSelector(
     ({ journal }) => {
@@ -55,11 +56,11 @@ const Journal: React.FC = () => {
 
   const handleShowModal = (id: number): void => {
     dispatch(journalActions.setSelectedJournalEntry(id));
-    setIsModalVisible(true);
+    setIsDeleteModalVisible(true);
   };
 
   const hanleCloseModal = (): void => {
-    setIsModalVisible(false);
+    setIsDeleteModalVisible(false);
   };
 
   const handleDeleteNote = (): void => {
@@ -88,7 +89,7 @@ const Journal: React.FC = () => {
   return (
     <LinearGradient>
       <Modal
-        isVisible={isModalVisible}
+        isVisible={isDeleteModalVisible}
         onClose={hanleCloseModal}
         onDelete={handleDeleteNote}
         type="Note"
@@ -103,6 +104,7 @@ const Journal: React.FC = () => {
             return (
               <Card
                 key={item.id}
+                id={item.id}
                 title={item.title}
                 onPress={(): void => {
                   handleSelectJournalEntry(item.id);
@@ -111,6 +113,7 @@ const Journal: React.FC = () => {
                 onIconPress={(): void => {
                   handleShowModal(item.id);
                 }}
+                isModalVisible={isDeleteModalVisible}
               />
             );
           })}
