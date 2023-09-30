@@ -6,7 +6,7 @@ import {
   HTTPHeader,
 } from '#libs/packages/http/http.js';
 import { HTTPError } from '#libs/packages/http/http.js';
-import { type ServerErrorResponse, type ValueOf } from '#libs/types/types.js';
+import { type ValueOf } from '#libs/types/types.js';
 
 import { type HTTPApi, type HTTPApiOptions } from './libs/types/types.js';
 
@@ -83,17 +83,11 @@ class BaseHttpApi implements HTTPApi {
     return response;
   }
 
-  private async handleError(response: Response): Promise<never> {
-    let parsedException: ServerErrorResponse;
-
-    try {
-      parsedException = (await response.json()) as ServerErrorResponse;
-    } catch {
-      parsedException = {
-        errorType: ServerErrorType.COMMON,
-        message: response.statusText,
-      };
-    }
+  private handleError(response: Response): Promise<never> {
+    const parsedException = {
+      errorType: ServerErrorType.COMMON,
+      message: response.statusText,
+    };
 
     throw new HTTPError({
       status: response.status as ValueOf<typeof HTTPCode>,
