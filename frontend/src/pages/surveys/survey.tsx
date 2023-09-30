@@ -78,7 +78,7 @@ const Survey: React.FC = () => {
             CalmPal is your trusted companion on the journey to mental
             well-being
           </h2>
-           <main>
+          <main>
             <SurveySteps
               currentStep={currentStep}
               onNextStep={handleNextStep}
