@@ -65,13 +65,22 @@ const Note: React.FC = () => {
 
   const handleSaveNote = useCallback(
     (data: JournalEntryCreateRequestDto) => {
-      void dispatch(
-        journalActions.updateJournalEntry({
-          id: Number(id),
-          title: data.title || EMPTY_NOTE_TITLE,
-          text: data.text,
-        }),
-      );
+      if (id) {
+        void dispatch(
+          journalActions.updateJournalEntry({
+            id: Number(id),
+            title: data.title || EMPTY_NOTE_TITLE,
+            text: data.text,
+          }),
+        );
+      } else {
+        void dispatch(
+          journalActions.createJournalEntry({
+            title: data.title,
+            text: data.text,
+          }),
+        );
+      }
     },
     [id, dispatch],
   );
@@ -81,7 +90,7 @@ const Note: React.FC = () => {
   }, [handleSaveNote]);
 
   useEffect(() => {
-    if (id && isDirty) {
+    if (isDirty) {
       handleSaveNoteWithDebounce({
         title: titleValue,
         text: textValue,
