@@ -55,12 +55,10 @@ const DeleteAccountForm: React.FC<Properties> = ({ onNext, onClose }) => {
     [checkboxesValue, onCheckboxChange],
   );
 
-  const isNextDisabled = Object.keys(errors).length > EMPTY_ARRAY_LENGTH;
+  const hasError = Object.keys(errors).length > EMPTY_ARRAY_LENGTH;
   const isInputDisplayed = checkboxesValue.includes(
     DELETE_ACCOUNT_OTHER_CATEGORY,
   );
-  const optionsErrorMessage = errors['checkboxes']?.message;
-  const hasOptionsError = Boolean(optionsErrorMessage);
 
   const hasNextStep = Boolean(onNext);
   const hasCloseButton = Boolean(onClose);
@@ -98,9 +96,6 @@ const DeleteAccountForm: React.FC<Properties> = ({ onNext, onClose }) => {
           maxLength={60}
         />
       )}
-      {hasOptionsError && (
-        <span className={styles['error-message']}>{optionsErrorMessage}</span>
-      )}
       <div className={styles['footer']}>
         {hasCloseButton && (
           <Button label="Cancel" style="primary" onClick={onClose} />
@@ -110,7 +105,7 @@ const DeleteAccountForm: React.FC<Properties> = ({ onNext, onClose }) => {
             type="submit"
             label="Continue"
             style="primary"
-            isDisabled={isNextDisabled}
+            isDisabled={hasError}
           />
         )}
       </div>
