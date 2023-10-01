@@ -15,6 +15,7 @@ import { reducer as authReducer } from '#slices/auth/auth';
 import { reducer as chatsReducer } from '#slices/chats/chats';
 import { reducer as journalReducer } from '#slices/journal/journal';
 import { reducer as meditationReducer } from '#slices/meditation/meditation';
+import { reducer as surveyReducer } from '#slices/survey/survey';
 
 import { type Config } from '../config/config';
 import { notification } from '../notification/notification';
@@ -26,6 +27,7 @@ type RootReducer = {
   auth: ReturnType<typeof authReducer>;
   journal: ReturnType<typeof journalReducer>;
   chats: ReturnType<typeof chatsReducer>;
+  survey: ReturnType<typeof surveyReducer>;
   meditation: ReturnType<typeof meditationReducer>;
 };
 
@@ -56,6 +58,7 @@ class Store {
         auth: authReducer,
         journal: journalReducer,
         chats: chatsReducer,
+        survey: surveyReducer,
         meditation: meditationReducer,
       },
       middleware: (getDefaultMiddleware) => {

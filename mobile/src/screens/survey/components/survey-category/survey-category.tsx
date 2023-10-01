@@ -8,14 +8,28 @@ import { styles } from './styles';
 type Properties = {
   label: string;
   onChange: (label: string) => void;
+  isOneOption?: boolean;
+  isSelectedOne?: boolean;
 };
 
-const SurveyCategory: React.FC<Properties> = ({ label, onChange }) => {
+const SurveyCategory: React.FC<Properties> = ({
+  label,
+  onChange,
+  isSelectedOne,
+  isOneOption,
+}) => {
   const [isSelected, setIsSelected] = useState(false);
+
   const handleChange = useCallback(() => {
-    onChange(label);
-    setIsSelected(!isSelected);
-  }, [label, onChange, isSelected]);
+    if (isOneOption) {
+      if (!isSelectedOne) {
+        onChange(label);
+      }
+    } else {
+      onChange(label);
+      setIsSelected(!isSelected);
+    }
+  }, [label, onChange, isSelected, isOneOption, isSelectedOne]);
 
   return (
     <View style={styles.container}>
@@ -23,13 +37,13 @@ const SurveyCategory: React.FC<Properties> = ({ label, onChange }) => {
         <View
           style={[
             styles.categoryButton,
-            isSelected && styles.selectedCategoryButton,
+            (isSelected || isSelectedOne) && styles.selectedCategoryButton,
           ]}
         >
           <Text
             style={[
               styles.categoryText,
-              isSelected && styles.selectedCategoryText,
+              isSelected && isSelectedOne && styles.categoryText,
             ]}
           >
             {label}

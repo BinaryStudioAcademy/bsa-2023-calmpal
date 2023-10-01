@@ -1,5 +1,6 @@
 export {
   type SurveyGetAllItemResponseDto,
-  type SurveyInputDto,
+  type SurveyMultipleInputDto,
+  type SurveyOneInputDto,
   type SurveyRequestDto,
 } from 'shared/build/index.js';

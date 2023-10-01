@@ -13,6 +13,11 @@ const styles = StyleSheet.create({
     color: AppColor.WHITE,
     fontFamily: FontFamily.MONTSERRAT_600,
   },
+  surveyContainer: {
+    flex: 1,
+    marginTop: 40,
+    paddingHorizontal: 55,
+  },
 });
 
 export { styles };

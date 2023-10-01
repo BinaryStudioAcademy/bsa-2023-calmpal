@@ -4,3 +4,4 @@ export { MainScreenName } from './main-screen-name.enum';
 export { MeditationScreenName } from './meditation-screen-name.enum';
 export { ProfileScreenName } from './profile-screen-name.enum';
 export { RootScreenName } from './root-screen-name.enum';
+export { SurveyScreenName } from './survey-screen-name.enum';

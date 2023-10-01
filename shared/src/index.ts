@@ -109,6 +109,10 @@ export {
   type SurveyGetAllItemResponseDto,
   type SurveyInputDto,
   surveyInputValidationSchema,
+  surveyInputValidationSchemaMultiple,
+  surveyInputValidationSchemaOne,
+  type SurveyMultipleInputDto,
+  type SurveyOneInputDto,
   type SurveyRequestDto,
   SurveyValidationRule,
 } from './packages/surveys/surveys.js';

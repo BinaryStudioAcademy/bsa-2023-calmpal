@@ -6,6 +6,7 @@ export {
   MeditationScreenName,
   ProfileScreenName,
   RootScreenName,
+  SurveyScreenName,
 } from './navigation/navigation';
 export { AppColor, FontFamily } from './ui/ui';
 export {

@@ -4,25 +4,24 @@ import React from 'react';
 
 import { SurveyScreenName } from '#libs/enums/enums';
 import { type SurveyNavigationParameterList } from '#libs/types/types';
-import { PREFERENCES_CATEGORIES } from '#screens/survey/libs/constants/constants';
+import { GOALS_CATEGORIES } from '#screens/survey/libs/constants/constants';
 
 import { SurveyStepMultiple } from '../components';
 
-const PreferencesStep: React.FC = () => {
+const GoalsStep: React.FC = () => {
   const navigation =
     useNavigation<NavigationProp<SurveyNavigationParameterList>>();
 
   return (
     <SurveyStepMultiple
-      stepSurvey={SurveyScreenName.PREFERENCES}
+      stepSurvey={SurveyScreenName.GOALS}
       navigation={navigation}
-      stepTitle="What can we help you with?"
-      categories={PREFERENCES_CATEGORIES}
-      nextScreen={SurveyScreenName.FEELINGS}
-      previousScreen={SurveyScreenName.PREFERENCES}
-      isButtonBack={false}
+      stepTitle="What do you want to achieve with Calmpal?"
+      categories={GOALS_CATEGORIES}
+      nextScreen={SurveyScreenName.WORRIES}
+      previousScreen={SurveyScreenName.FEELINGS}
     />
   );
 };
 
-export { PreferencesStep };
+export { GoalsStep };
