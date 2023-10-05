@@ -80,7 +80,7 @@ const AddMeditationModal: React.ForwardRefRenderFunction<
           fileSizeName="size"
           label="Meditation audio file"
           description="Only MP3 extension is allowed"
-          extensions={[ContentType.MPEG]}
+          extensions={[ContentType.MP3]}
         />
         <Button
           type="submit"

@@ -16,7 +16,7 @@ const createMeditationEntryForm = joi.object<MeditationEntryCreateForm, true>({
   }),
   file: joi
     .object({
-      type: joi.string().valid(ContentType.MPEG).required().messages({
+      type: joi.string().valid(ContentType.MP3).required().messages({
         'any.only': MeditationEntryValidationMessage.MPEG_REQUIRED,
       }),
       size: joi
@@ -24,7 +24,7 @@ const createMeditationEntryForm = joi.object<MeditationEntryCreateForm, true>({
         .max(FileUploadValidationRule.MAXIMUM_FILE_SIZE)
         .required()
         .messages({
-          'number.max': FileUploadValidationMessage.FILE_TOO_BIG,
+          'number.max': FileUploadValidationMessage.FILE_TOO_LARGE,
         }),
     })
     .required()

@@ -128,6 +128,7 @@ class ChatService implements Service {
   }: UpdateChatDataPayload): Promise<ChatGetAllItemResponseDto> {
     const fileRecord = await this.fileService.create({
       buffer: Buffer.from(url, 'base64'),
+      fileName: `chat-${chat.id}.png`,
       contentType: ContentType.PNG,
     });
 

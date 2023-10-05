@@ -17,7 +17,6 @@ export {
   ApplicationError,
   AuthError,
   ChatError,
-  FileError,
   HTTPError,
   JournalError,
   UsersError,
@@ -75,10 +74,8 @@ export { entitiesFilteringQueryValidationSchema } from './packages/common-valida
 export {
   type FileGetAllItemResponseDto,
   FilesApiPath,
-  type FileUploadRequestDto,
   FileUploadValidationMessage,
   FileUploadValidationRule,
-  type S3FileUploadRequestDto,
 } from './packages/files/files.js';
 export {
   createJournalEntryValidationSchema,

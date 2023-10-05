@@ -1,10 +1,10 @@
 import {
   AuthError,
   ChatError,
-  FileError,
   UsersError,
 } from '#libs/exceptions/exceptions.js';
 import { HTTPError } from '#libs/packages/http/http.js';
+import { FileError } from '#packages/files/files.js';
 
 import { type APIError, type ErrorInfo } from '../../types/types.js';
 import { getAuthErrorInfo } from './get-auth-error-info.helper.js';

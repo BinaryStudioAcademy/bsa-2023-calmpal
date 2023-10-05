@@ -19,6 +19,7 @@ export {
   FileUploadValidationMessage,
   FileUploadValidationRule,
 } from './libs/enums/enums.js';
+export { FileError } from './libs/exceptions/exceptions.js';
 export {
   type FileGetAllItemResponseDto,
   type FileUploadRequestDto,

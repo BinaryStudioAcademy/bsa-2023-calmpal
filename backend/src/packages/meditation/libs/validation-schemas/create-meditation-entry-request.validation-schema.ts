@@ -24,7 +24,7 @@ const createMeditationEntry = joi.object<MeditationEntryCreateRequestDto, true>(
       }),
     file: joi
       .object({
-        mimetype: joi.string().valid(ContentType.MPEG).required().messages({
+        mimetype: joi.string().valid(ContentType.MP3).required().messages({
           'any.only': MeditationEntryValidationMessage.MPEG_REQUIRED,
         }),
       })

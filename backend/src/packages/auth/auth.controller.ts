@@ -1,4 +1,5 @@
-import { APIPath } from '#libs/enums/enums.js';
+import { APIPath, ExceptionMessage } from '#libs/enums/enums.js';
+import { AuthError } from '#libs/exceptions/exceptions.js';
 import {
   type APIHandlerOptions,
   type APIHandlerResponse,
@@ -260,9 +261,18 @@ class AuthController extends BaseController {
   private async getAuthenticatedUser(
     options: APIHandlerOptions<{ user: UserAuthResponseDto }>,
   ): Promise<APIHandlerResponse> {
+    const user = await this.userService.findById(options.user.id);
+
+    if (!user) {
+      throw new AuthError({
+        message: ExceptionMessage.USER_NOT_FOUND,
+        status: HTTPCode.UNAUTHORIZED,
+      });
+    }
+
     return {
       status: HTTPCode.OK,
-      payload: await this.authService.getAuthenticatedUser(options.user.id),
+      payload: await this.userService.findById(options.user.id),
     };
   }
 

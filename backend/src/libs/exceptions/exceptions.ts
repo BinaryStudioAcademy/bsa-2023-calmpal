@@ -1,7 +1,7 @@
 export {
+  ApplicationError,
   AuthError,
   ChatError,
-  FileError,
   JournalError,
   UsersError,
   ValidationError,

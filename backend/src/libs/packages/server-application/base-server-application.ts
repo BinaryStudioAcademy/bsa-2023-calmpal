@@ -132,7 +132,8 @@ class BaseServerApplication implements ServerApplication {
     });
 
     await this.app.register(fileUploadPlugin, {
-      extensions: FileUploadValidationRule.UPLOAD_FILE_CONTENT_TYPES,
+      extensions:
+        FileUploadValidationRule.UPLOAD_FILE_CONTENT_TYPES as unknown as string[],
     });
   }
 
