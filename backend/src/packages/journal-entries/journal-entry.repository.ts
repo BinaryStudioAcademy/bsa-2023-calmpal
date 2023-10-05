@@ -49,8 +49,7 @@ class JournalEntryRepository implements Repository {
           void builder.where('title', 'iLike', `%${query}%`);
         }
       })
-      .castTo<JournalEntryCommonQueryResponse[]>()
-      .execute();
+      .castTo<JournalEntryCommonQueryResponse[]>();
 
     return journalEntries.map((journalEntry) => {
       return JournalEntryEntity.initialize({
