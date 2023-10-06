@@ -40,14 +40,11 @@ class ChatMessageRepository implements Repository {
   public async create(entity: ChatMessageEntity): Promise<ChatMessageEntity> {
     const { message, chatId, senderId } = entity.toNewObject();
 
-    const chatMessage = await this.chatMessageModel
-      .query()
-      .insertGraph({
-        message,
-        chatId,
-        senderId,
-      })
-      .execute();
+    const chatMessage = await this.chatMessageModel.query().insertGraph({
+      message,
+      chatId,
+      senderId,
+    });
 
     return ChatMessageEntity.initialize({
       id: chatMessage.id,

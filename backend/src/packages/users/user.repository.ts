@@ -25,8 +25,7 @@ class UserRepository implements Repository {
       .withGraphJoined(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
       .whereNull('deletedAt')
       .findById(id)
-      .castTo<UserCommonQueryResponse | undefined>()
-      .execute();
+      .castTo<UserCommonQueryResponse | undefined>();
 
     if (!user) {
       return null;
@@ -59,8 +58,7 @@ class UserRepository implements Repository {
       .whereNull('deletedAt')
       .withGraphJoined(UsersRelation.ROLES)
       .findOne({ key })
-      .castTo<UserCommonQueryResponse | undefined>()
-      .execute();
+      .castTo<UserCommonQueryResponse | undefined>();
 
     if (!user) {
       return null;
@@ -103,8 +101,7 @@ class UserRepository implements Repository {
         },
       } as UserCreateQueryPayload)
       .withGraphJoined(UsersRelation.DETAILS_WITH_SUBSCRIPTION)
-      .castTo<UserWithPasswordQueryResponse>()
-      .execute();
+      .castTo<UserWithPasswordQueryResponse>();
 
     const subscriptionEndDate = user.details?.subscription?.endDate
       ? new Date(user.details.subscription.endDate)
@@ -134,12 +131,11 @@ class UserRepository implements Repository {
     return Promise.resolve(null);
   }
 
-  public delete(id: number): Promise<number> {
-    return this.userModel
+  public async delete(id: number): Promise<number> {
+    return await this.userModel
       .query()
       .patch({ deletedAt: new Date().toISOString() })
-      .where({ id, deletedAt: null })
-      .execute();
+      .where({ id, deletedAt: null });
   }
 
   public async findByEmail(email: string): Promise<UserEntity | null> {

@@ -103,8 +103,8 @@ class JournalEntryRepository implements Repository {
     });
   }
 
-  public delete(id: number): ReturnType<Repository['delete']> {
-    return this.journalEntryModel.query().deleteById(id).execute();
+  public async delete(id: number): ReturnType<Repository['delete']> {
+    return await this.journalEntryModel.query().deleteById(id);
   }
 }
 
