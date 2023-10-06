@@ -48,6 +48,7 @@ class ChatMessageService implements Service {
     payload: ChatMessageCreatePayload,
   ): Promise<ChatMessageGetAllItemResponseDto> {
     const sender = await userService.findById(payload.senderId);
+
     if (!sender) {
       throw new UsersError({
         status: HTTPCode.NOT_FOUND,
@@ -70,6 +71,7 @@ class ChatMessageService implements Service {
     payload: ChatMessageCreatePayload,
   ): Promise<ChatMessageGetAllItemResponseDto> {
     const sender = await this.chatbotService.getChatbotUser();
+
     if (!sender) {
       throw new UsersError({
         status: HTTPCode.NOT_FOUND,

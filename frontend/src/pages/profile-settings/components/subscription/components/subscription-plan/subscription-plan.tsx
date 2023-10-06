@@ -51,4 +51,5 @@ const SubscriptionPlan: React.FC<Properties> = ({ benefits, price }) => {
     </article>
   );
 };
+
 export { SubscriptionPlan };

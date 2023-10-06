@@ -65,4 +65,5 @@ const Controls: React.FC<Properties> = ({ isPlaying: initialIsPlaying }) => {
     </View>
   );
 };
+
 export { Controls };

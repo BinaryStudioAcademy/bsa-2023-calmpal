@@ -64,4 +64,5 @@ const SubscriptionManagementDialog: React.FC<Properties> = ({
     </div>
   );
 };
+
 export { SubscriptionManagementDialog };

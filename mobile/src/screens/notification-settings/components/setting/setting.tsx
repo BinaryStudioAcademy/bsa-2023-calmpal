@@ -17,4 +17,5 @@ const Setting: React.FC<Properties> = ({ label, controller }) => {
     </View>
   );
 };
+
 export { Setting };

@@ -30,6 +30,7 @@ class AuthService {
     const { email } = userRequestDto;
 
     const user = await this.userService.findByEmail(email);
+
     if (!user) {
       return await this.userService.create(userRequestDto);
     }

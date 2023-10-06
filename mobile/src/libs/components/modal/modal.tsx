@@ -70,4 +70,5 @@ const Modal: React.FC<Properties> = ({
     </RNModal>
   );
 };
+
 export { Modal };

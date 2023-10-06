@@ -64,6 +64,7 @@ class BaseHttpApi implements HTTPApi {
     token: string | undefined,
   ): Headers {
     const headers = new Headers();
+
     if (contentType) {
       headers.append(HTTPHeader.CONTENT_TYPE, contentType);
     }

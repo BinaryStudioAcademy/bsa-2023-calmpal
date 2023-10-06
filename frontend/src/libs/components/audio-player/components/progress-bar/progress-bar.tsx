@@ -23,6 +23,7 @@ const ProgressBar: React.ForwardRefRenderFunction<
       (event) => {
         if (audioReference.current && progressBarReference.current) {
           const newTime = Number.parseFloat(event.target.value);
+
           if (!Number.isNaN(newTime)) {
             audioReference.current.currentTime = newTime;
           }

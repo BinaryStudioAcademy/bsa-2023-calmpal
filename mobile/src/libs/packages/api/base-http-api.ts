@@ -75,6 +75,7 @@ class BaseHttpApi implements HTTPApi {
     hasAuth: boolean,
   ): Promise<Headers> {
     const headers = new Headers();
+
     if (contentType) {
       headers.append(HTTPHeader.CONTENT_TYPE, contentType);
     }

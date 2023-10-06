@@ -45,4 +45,5 @@ const SubscriptionCheckout: React.FC = () => {
     </section>
   );
 };
+
 export { SubscriptionCheckout };

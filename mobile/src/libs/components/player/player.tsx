@@ -33,6 +33,7 @@ const Player: React.FC<Properties> = ({ duration }) => {
   const handlePlaybackStateChange = async (): Promise<void> => {
     const state = await player.getState();
     setPlaybackState(state);
+
     if (isPlaying) {
       KeepAwake.activate();
     } else {
@@ -42,6 +43,7 @@ const Player: React.FC<Properties> = ({ duration }) => {
 
   const handleNextTrack = async (nextTrack: number): Promise<void> => {
     const track = await player.getTrack(nextTrack);
+
     if (track) {
       void dispatch(meditationActions.setSelectedMeditationEntry(track.id));
     }

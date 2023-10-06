@@ -30,4 +30,5 @@ const Subscription: React.FC = () => {
     </section>
   );
 };
+
 export { Subscription };

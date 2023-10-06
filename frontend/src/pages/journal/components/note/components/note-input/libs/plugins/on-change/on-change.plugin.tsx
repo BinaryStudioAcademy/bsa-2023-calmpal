@@ -25,4 +25,5 @@ const OnChangePlugin: React.FC<Properties> = ({ onChange }) => {
 
   return null;
 };
+
 export { OnChangePlugin };

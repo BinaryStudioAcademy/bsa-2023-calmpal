@@ -21,4 +21,5 @@ const NotificationSettings: React.FC = () => {
     </ScrollView>
   );
 };
+
 export { NotificationSettings };

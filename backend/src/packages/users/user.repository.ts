@@ -176,6 +176,7 @@ class UserRepository implements Repository {
       .whereNull('deletedAt')
       .findOne({ email })
       .castTo<UserWithPasswordQueryResponse | undefined>();
+
     if (!user) {
       return null;
     }

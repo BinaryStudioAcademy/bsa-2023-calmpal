@@ -42,6 +42,7 @@ const InputFile = <T extends FormFieldValues>({
 
   const handlePickFile = async (): Promise<void> => {
     const hasPermissions = await requestMediaPermissions();
+
     if (hasPermissions) {
       const result = await DocumentPicker.pick({
         type: [DocumentPicker.types.audio],

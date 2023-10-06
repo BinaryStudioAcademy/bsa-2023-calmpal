@@ -24,4 +24,5 @@ const Meditation: React.FC = () => {
     </>
   );
 };
+
 export { Meditation };

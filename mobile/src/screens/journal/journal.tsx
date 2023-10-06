@@ -64,6 +64,7 @@ const Journal: React.FC = () => {
 
   const handleDeleteNote = (): void => {
     hanleCloseModal();
+
     if (selectedJournalEntry) {
       void dispatch(journalActions.deleteJournal(selectedJournalEntry.id));
     }
@@ -128,4 +129,5 @@ const Journal: React.FC = () => {
     </LinearGradient>
   );
 };
+
 export { Journal };

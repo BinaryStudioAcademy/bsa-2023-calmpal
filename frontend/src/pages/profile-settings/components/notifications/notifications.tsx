@@ -25,4 +25,5 @@ const Notifications: React.FC = () => {
     </section>
   );
 };
+
 export { Notifications };

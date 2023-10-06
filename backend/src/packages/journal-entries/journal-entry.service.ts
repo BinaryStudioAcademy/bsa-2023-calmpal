@@ -117,6 +117,7 @@ class JournalEntryService implements Service {
     }
 
     const journal = await this.findById(payload.id);
+
     if (journal.userId !== payload.user.id) {
       throw new JournalError({
         status: HTTPCode.BAD_REQUEST,

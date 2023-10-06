@@ -78,4 +78,5 @@ const CheckoutForm: React.FC = () => {
     </form>
   );
 };
+
 export { CheckoutForm };

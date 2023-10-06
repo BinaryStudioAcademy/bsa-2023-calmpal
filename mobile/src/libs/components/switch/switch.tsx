@@ -36,4 +36,5 @@ const Switch = <T extends FormFieldValues>({
     />
   );
 };
+
 export { Switch };

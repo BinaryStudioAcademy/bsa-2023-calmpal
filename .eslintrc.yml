@@ -72,12 +72,8 @@ rules:
       next: export
     - blankLine: always
       prev:
-        - switch
-        - class
-        - function
-        - if
-        - return
-        - try
+        - 'block-like'
+        - throw
         - interface
         - type
       next: '*'
@@ -85,6 +81,10 @@ rules:
       prev: '*'
       next:
         - return
+        - 'block-like'
+        - throw
+        - interface
+        - type
   '@typescript-eslint/consistent-type-definitions':
     - error
     - type

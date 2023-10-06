@@ -177,6 +177,7 @@ class ChatService implements Service {
     }
 
     const deletedCount = await this.chatRepository.delete({ id, userId });
+
     if (!deletedCount) {
       throw new ChatError({
         status: HTTPCode.NOT_FOUND,

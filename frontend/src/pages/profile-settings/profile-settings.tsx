@@ -32,4 +32,5 @@ const ProfileSettings: React.FC = () => {
 
   return getScreen(pathname);
 };
+
 export { ProfileSettings };

@@ -11,6 +11,7 @@ const iterateNestedRouteElement = (
 ): RouteObject => {
   const { type, element } =
     routerPathToElement[route.path as ValueOf<typeof AppRoute>];
+
   if (type === 'private') {
     (route as RouteObject).element = <ProtectedRoute>{element}</ProtectedRoute>;
   } else {

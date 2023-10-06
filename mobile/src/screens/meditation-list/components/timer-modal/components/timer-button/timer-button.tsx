@@ -41,4 +41,5 @@ const TimerButton: React.FC<Properties> = ({
     </TouchableOpacity>
   );
 };
+
 export { TimerButton };
