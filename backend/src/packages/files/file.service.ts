@@ -21,6 +21,7 @@ type FileServiceDependencies = {
 
 class FileService implements Service {
   private fileRepository: FileRepository;
+
   private s3: S3;
 
   public constructor({ fileRepository, s3 }: FileServiceDependencies) {

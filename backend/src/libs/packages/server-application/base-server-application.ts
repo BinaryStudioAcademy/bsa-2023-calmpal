@@ -115,6 +115,7 @@ class BaseServerApplication implements ServerApplication {
       }),
     );
   }
+
   private async initPlugins(): Promise<void> {
     await this.app.register(authorizationPlugin, {
       services: {

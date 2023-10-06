@@ -24,8 +24,11 @@ type UserServiceDependencies = {
 
 class UserService implements Service {
   private userRepository: UserRepository;
+
   private jwtService: JWTService;
+
   private encryptService: Encrypt;
+
   private config: Config;
 
   public constructor({

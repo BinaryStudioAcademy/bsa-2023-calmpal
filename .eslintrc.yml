@@ -40,7 +40,7 @@ rules:
     - selector: ExportNamedDeclaration[declaration!=null]
       message: Exports should be at the end of the file.
     - selector: TSEnumDeclaration,ClassDeclaration[abstract=true]
-      message: TS features are forbidden.
+      message: Avoid using TS enum declarations and abstract class declarations.
     - selector: ImportDeclaration[importKind=type],ExportNamedDeclaration[exportKind=type]
       message: Avoid import/export type { Type } from './module'. Prefer import/export { type Type } from './module'.
   no-console:
@@ -54,6 +54,9 @@ rules:
   curly:
     - error
     - all
+  lines-between-class-members:
+    - error
+    - always
   import/no-unresolved:
     - off
   import/extensions:

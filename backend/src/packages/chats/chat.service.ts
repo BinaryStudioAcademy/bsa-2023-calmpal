@@ -34,8 +34,11 @@ type Constructor = {
 
 class ChatService implements Service {
   private chatRepository: ChatRepository;
+
   private openAiService: OpenAi;
+
   private chatMessageService: ChatMessageService;
+
   private fileService: FileService;
 
   public constructor({

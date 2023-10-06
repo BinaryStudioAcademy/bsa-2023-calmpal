@@ -66,6 +66,7 @@ type Constructor = {
  */
 class AuthController extends BaseController {
   private authService: AuthService;
+
   private userService: UserService;
 
   public constructor({ logger, authService, userService }: Constructor) {

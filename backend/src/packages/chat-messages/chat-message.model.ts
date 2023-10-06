@@ -13,7 +13,9 @@ import { ChatMessagesTableColumn } from './libs/enums/enums.js';
 
 class ChatMessageModel extends AbstractModel {
   public message!: string;
+
   public chatId!: number;
+
   public senderId!: number;
 
   public static override get tableName(): string {

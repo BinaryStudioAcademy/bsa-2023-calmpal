@@ -49,6 +49,7 @@ class ChatMessagesApi extends BaseHttpApi {
 
     return await response.json<ChatMessageGetAllItemResponseDto>();
   }
+
   public async generateChatReply(
     payload: ChatMessageCreatePayload,
   ): Promise<ChatMessageGetAllItemResponseDto> {

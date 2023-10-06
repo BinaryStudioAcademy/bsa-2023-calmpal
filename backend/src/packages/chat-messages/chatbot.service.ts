@@ -12,7 +12,9 @@ type Constructor = {
 
 class ChatbotService {
   private openAiService: OpenAi;
+
   private userService: UserService;
+
   public constructor({ openAiService, userService }: Constructor) {
     this.openAiService = openAiService;
     this.userService = userService;

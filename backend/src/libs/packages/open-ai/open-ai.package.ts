@@ -27,7 +27,9 @@ type Constructor = {
 
 class OpenAi extends BaseHttpApi {
   private apiKey: string;
+
   private model: string;
+
   private defaultImageGenerateConfig = {
     number: 1,
     size: OpenAiImageSize[IMAGE_SIZE],
