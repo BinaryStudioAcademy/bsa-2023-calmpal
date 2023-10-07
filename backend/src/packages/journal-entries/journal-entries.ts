@@ -13,4 +13,5 @@ const journalEntryController = new JournalEntryController(
 );
 export { JournalEntryModel } from './journal-entry.model.js';
 export { JournalEntryRepository } from './journal-entry.repository.js';
+export { JournalError } from './libs/exceptions/exceptions.js';
 export { journalEntryController };

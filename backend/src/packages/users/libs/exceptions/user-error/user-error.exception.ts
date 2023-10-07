@@ -1,7 +1,5 @@
-import { type HTTPCode } from '#libs/packages/http/http.js';
+import { type HTTPCode, HTTPError } from '#libs/packages/http/http.js';
 import { type ValueOf } from '#libs/types/types.js';
-
-import { ApplicationError } from '../exceptions.js';
 
 type Constructor = {
   message: string;
@@ -9,17 +7,14 @@ type Constructor = {
   cause?: unknown;
 };
 
-class UsersError extends ApplicationError {
-  public status: ValueOf<typeof HTTPCode>;
-
+class UserError extends HTTPError {
   public constructor({ message, cause, status }: Constructor) {
     super({
       message,
       cause,
+      status,
     });
-
-    this.status = status;
   }
 }
 
-export { UsersError };
+export { UserError };

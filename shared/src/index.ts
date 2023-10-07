@@ -16,10 +16,7 @@ export {
 export {
   ApplicationError,
   AuthError,
-  ChatError,
   HTTPError,
-  JournalError,
-  UsersError,
   ValidationError,
 } from './libs/exceptions/exceptions.js';
 export { TimeFormat } from './libs/helpers/date/libs/enums/enums.js';

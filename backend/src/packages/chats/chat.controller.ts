@@ -1,5 +1,4 @@
 import { APIPath, ExceptionMessage } from '#libs/enums/enums.js';
-import { ChatError } from '#libs/exceptions/exceptions.js';
 import {
   type APIHandlerOptions,
   type APIHandlerResponse,
@@ -16,6 +15,7 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 import { ChatEntity } from './chat.entity.js';
 import { type ChatService } from './chat.service.js';
 import { ChatsApiPath } from './libs/enums/enums.js';
+import { ChatError } from './libs/exceptions/exceptions.js';
 import {
   type ChatCreateRequestDto,
   type EntitiesFilteringDto,

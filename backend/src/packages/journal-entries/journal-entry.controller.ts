@@ -1,5 +1,4 @@
 import { APIPath, ExceptionMessage } from '#libs/enums/enums.js';
-import { JournalError } from '#libs/exceptions/exceptions.js';
 import {
   type APIHandlerOptions,
   type APIHandlerResponse,
@@ -11,6 +10,7 @@ import { type UserAuthResponseDto } from '#packages/users/users.js';
 
 import { type JournalEntryService } from './journal-entry.service.js';
 import { JournalApiPath } from './libs/enums/enums.js';
+import { JournalError } from './libs/exceptions/exceptions.js';
 import {
   type EntitiesFilteringDto,
   type JournalEntryCreateRequestDto,

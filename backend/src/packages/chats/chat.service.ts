@@ -1,5 +1,4 @@
 import { ContentType, ExceptionMessage } from '#libs/enums/enums.js';
-import { ChatError } from '#libs/exceptions/exceptions.js';
 import { replaceTemplateWithValue } from '#libs/helpers/helpers.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { OpenAiRoleKey } from '#libs/packages/open-ai/libs/enums/enums.js';
@@ -18,6 +17,7 @@ import {
   CHAT_IMAGE_TEMPLATE,
   CHAT_NAME_TEMPLATE,
 } from './libs/constants/constants.js';
+import { ChatError } from './libs/exceptions/exceptions.js';
 import {
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,

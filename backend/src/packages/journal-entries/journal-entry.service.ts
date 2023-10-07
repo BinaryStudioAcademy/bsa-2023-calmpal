@@ -1,5 +1,4 @@
 import { ExceptionMessage } from '#libs/enums/enums.js';
-import { JournalError } from '#libs/exceptions/exceptions.js';
 import { sanitizeInput } from '#libs/helpers/helpers.js';
 import { HTTPCode } from '#libs/packages/http/http.js';
 import { type Service } from '#libs/types/types.js';
@@ -11,6 +10,7 @@ import {
   DEFAULT_NOTE_TEXT,
   NOTE_SANITIZER_OPTIONS,
 } from './libs/constants/constants.js';
+import { JournalError } from './libs/exceptions/exceptions.js';
 import {
   type CreateJournalEntryPayload,
   type JournalEntryGetAllItemResponseDto,

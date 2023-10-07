@@ -1,9 +1,9 @@
 import { ServerErrorType } from '#libs/enums/enums.js';
-import { type UsersError } from '#libs/exceptions/exceptions.js';
+import { type UserError } from '#packages/users/users.js';
 
 import { type ErrorInfo } from '../../types/types.js';
 
-const getUsersErrorInfo = (error: UsersError): ErrorInfo => {
+const getUsersErrorInfo = (error: UserError): ErrorInfo => {
   const { message } = error;
   const status = error.status;
 

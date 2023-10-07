@@ -23,4 +23,5 @@ const chatController = new ChatController({
 });
 
 export { ChatbotService } from '../chat-messages/chatbot.service.js';
+export { ChatError } from './libs/exceptions/exceptions.js';
 export { chatController, chatService };
