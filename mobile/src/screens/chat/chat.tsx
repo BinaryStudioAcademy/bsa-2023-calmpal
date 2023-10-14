@@ -1,11 +1,11 @@
 import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
 
-import ChatAvatar from '#assets/img/icons/chat-avatar.svg';
-import { Header, ScrollView, Text, View } from '#libs/components/components';
-import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants';
-import { TimeFormat } from '#libs/enums/enums';
-import { getFormattedDate } from '#libs/helpers/helpers';
+import ChatAvatar from '~/assets/img/icons/chat-avatar.svg';
+import { Header, ScrollView, Text, View } from '~/libs/components/components';
+import { EMPTY_ARRAY_LENGTH } from '~/libs/constants/constants';
+import { TimeFormat } from '~/libs/enums/enums';
+import { getFormattedDate } from '~/libs/helpers/helpers';
 import {
   useAppDispatch,
   useAppForm,
@@ -15,10 +15,10 @@ import {
   useEffect,
   useNavigation,
   useRef,
-} from '#libs/hooks/hooks';
-import { type ChatNavigationParameterList } from '#libs/types/types';
-import { type UserAuthResponseDto } from '#packages/users/users';
-import { actions as chatsActions } from '#slices/chats/chats';
+} from '~/libs/hooks/hooks';
+import { type ChatNavigationParameterList } from '~/libs/types/types';
+import { type UserAuthResponseDto } from '~/packages/users/users';
+import { actions as chatsActions } from '~/slices/chats/chats';
 
 import { ChatDivider, ChatInput, MessageItem } from './components/components';
 import { DEFAULT_VALUES, PREVIOUS_USER } from './libs/constants/constants';

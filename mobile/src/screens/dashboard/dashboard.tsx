@@ -1,9 +1,14 @@
 import React from 'react';
 
-import userImagePlaceholder from '#assets/img/user-placeholder.png';
-import { Image, LinearGradient, Text, View } from '#libs/components/components';
-import { useAppSelector } from '#libs/hooks/hooks';
-import { type UserAuthResponseDto } from '#packages/users/users';
+import userImagePlaceholder from '~/assets/img/user-placeholder.png';
+import {
+  Image,
+  LinearGradient,
+  Text,
+  View,
+} from '~/libs/components/components';
+import { useAppSelector } from '~/libs/hooks/hooks';
+import { type UserAuthResponseDto } from '~/packages/users/users';
 
 import { styles } from './styles';
 

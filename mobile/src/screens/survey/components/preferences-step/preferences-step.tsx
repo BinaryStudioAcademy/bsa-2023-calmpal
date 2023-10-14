@@ -1,18 +1,18 @@
 import React from 'react';
 
-import { Button, Input, ScrollView } from '#libs/components/components';
-import { AppColor } from '#libs/enums/enums';
-import { useAppForm, useCallback, useFormController } from '#libs/hooks/hooks';
+import { Button, Input, ScrollView } from '~/libs/components/components';
+import { AppColor } from '~/libs/enums/enums';
+import { useAppForm, useCallback, useFormController } from '~/libs/hooks/hooks';
 import {
   getSurveyCategories,
   type SurveyInputDto,
   surveyInputValidationSchema,
-} from '#packages/survey/survey';
+} from '~/packages/survey/survey';
 import {
   DEFAULT_SURVEY_PAYLOAD,
   PREFERENCES_CATEGORIES,
   TEXTAREA_ROWS_COUNT,
-} from '#screens/survey/libs/cosntants/constants';
+} from '~/screens/survey/libs/cosntants/constants';
 
 import { SurveyCategory } from '../components';
 import { styles } from './styles';

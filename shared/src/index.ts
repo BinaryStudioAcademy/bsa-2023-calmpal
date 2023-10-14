@@ -127,4 +127,4 @@ export {
   type SubscriptionPaymentIntentCancelRequestDto,
   type SubscriptionPaymentIntentCreateRequestDto,
   type SubscriptionPaymentIntentCreateResponseDto,
-} from '#packages/subscriptions/subscriptions.js';
+} from '~/packages/subscriptions/subscriptions.js';

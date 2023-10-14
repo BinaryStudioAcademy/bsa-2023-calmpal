@@ -7,9 +7,6 @@
     "node": "18.x.x",
     "npm": "9.x.x"
   },
-  "imports": {
-    "#*": "./src/*"
-  },
   "exports": {
     "./build/*": {
       "import": "./build/esm/*",

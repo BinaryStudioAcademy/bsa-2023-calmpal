@@ -1,6 +1,6 @@
-import { Switch } from '#libs/components/components.js';
-import { useAppForm } from '#libs/hooks/hooks.js';
-import { DEFAULT_NOTIFICATION_SETTINGS_VALUES } from '#pages/profile-settings/libs/constants/constants.js';
+import { Switch } from '~/libs/components/components.js';
+import { useAppForm } from '~/libs/hooks/hooks.js';
+import { DEFAULT_NOTIFICATION_SETTINGS_VALUES } from '~/pages/profile-settings/libs/constants/constants.js';
 
 import { Setting } from '../components.js';
 import styles from './styles.module.scss';

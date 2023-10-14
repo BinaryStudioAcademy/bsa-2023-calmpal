@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { DataStatus } from '#libs/enums/enums';
-import { type ValueOf } from '#libs/types/types';
-import { type UserAuthResponseDto } from '#packages/users/users';
+import { DataStatus } from '~/libs/enums/enums';
+import { type ValueOf } from '~/libs/types/types';
+import { type UserAuthResponseDto } from '~/packages/users/users';
 
 import {
   createUserSurvey,

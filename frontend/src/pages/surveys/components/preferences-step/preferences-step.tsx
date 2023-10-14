@@ -1,20 +1,20 @@
-import { Button, Checkbox, Input } from '#libs/components/components.js';
+import { Button, Checkbox, Input } from '~/libs/components/components.js';
 import {
   useAppForm,
   useCallback,
   useFormController,
-} from '#libs/hooks/hooks.js';
+} from '~/libs/hooks/hooks.js';
 import {
   getSurveyCategories,
   type SurveyInputDto,
   surveyInputValidationSchema,
   SurveyValidationRule,
-} from '#packages/survey/survey.js';
+} from '~/packages/survey/survey.js';
 import {
   DEFAULT_SURVEY_PAYLOAD,
   PREFERENCES_CATEGORIES,
   TEXTAREA_ROWS_COUNT,
-} from '#pages/surveys/libs/constants/constants.js';
+} from '~/pages/surveys/libs/constants/constants.js';
 
 import styles from './styles.module.scss';
 

@@ -1,6 +1,6 @@
-import { config } from '#libs/packages/config/config';
-import { http } from '#libs/packages/http/http';
-import { storage } from '#libs/packages/storage/storage';
+import { config } from '~/libs/packages/config/config';
+import { http } from '~/libs/packages/http/http';
+import { storage } from '~/libs/packages/storage/storage';
 
 import { ChatMessagesApi } from './chat-messages-api';
 

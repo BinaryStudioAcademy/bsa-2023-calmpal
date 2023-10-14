@@ -1,5 +1,5 @@
-import { billing } from '#libs/packages/billing/billing.js';
-import { logger } from '#libs/packages/logger/logger.js';
+import { billing } from '~/libs/packages/billing/billing.js';
+import { logger } from '~/libs/packages/logger/logger.js';
 
 import { SubscriptionController } from './subscription.controller.js';
 import { SubscriptionModel } from './subscription.model.js';

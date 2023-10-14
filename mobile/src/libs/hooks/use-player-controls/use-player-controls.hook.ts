@@ -1,4 +1,4 @@
-import { player } from '#libs/packages/player/player';
+import { player } from '~/libs/packages/player/player';
 
 type Properties = {
   isPlaying: boolean;

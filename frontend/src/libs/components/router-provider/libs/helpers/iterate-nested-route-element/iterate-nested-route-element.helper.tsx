@@ -1,8 +1,8 @@
 import { type RouteObject } from 'react-router-dom';
 
-import { ProtectedRoute } from '#libs/components/components.js';
-import { type AppRoute } from '#libs/enums/enums.js';
-import { type ValueOf } from '#libs/types/types.js';
+import { ProtectedRoute } from '~/libs/components/components.js';
+import { type AppRoute } from '~/libs/enums/enums.js';
+import { type ValueOf } from '~/libs/types/types.js';
 
 import { routerPathToElement } from '../../maps/maps.js';
 

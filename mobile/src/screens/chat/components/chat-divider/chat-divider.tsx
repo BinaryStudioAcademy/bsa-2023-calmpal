@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Text, View } from '#libs/components/components';
-import { getRelativeDate } from '#libs/helpers/helpers';
+import { Text, View } from '~/libs/components/components';
+import { getRelativeDate } from '~/libs/helpers/helpers';
 
 import { styles } from './styles';
 

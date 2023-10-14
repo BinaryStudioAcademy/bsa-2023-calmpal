@@ -6,10 +6,10 @@ import {
   IconButton,
   Text,
   View,
-} from '#libs/components/components';
-import { AppColor, ProfileScreenName } from '#libs/enums/enums';
-import { useAppRoute, useNavigation } from '#libs/hooks/hooks';
-import { type ProfileNavigationParameterList } from '#libs/types/types';
+} from '~/libs/components/components';
+import { AppColor, ProfileScreenName } from '~/libs/enums/enums';
+import { useAppRoute, useNavigation } from '~/libs/hooks/hooks';
+import { type ProfileNavigationParameterList } from '~/libs/types/types';
 
 import { Badge } from './components/components';
 import { DEFAULT_BADGE_COUNT } from './libs/constants/constants';

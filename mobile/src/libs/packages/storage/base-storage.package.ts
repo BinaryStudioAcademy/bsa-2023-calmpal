@@ -1,6 +1,6 @@
 import { MMKV } from 'react-native-mmkv';
 
-import { type ValueOf } from '#libs/types/types';
+import { type ValueOf } from '~/libs/types/types';
 
 import { type StorageKey } from './libs/enums/enums';
 import { type Storage } from './libs/types/types';

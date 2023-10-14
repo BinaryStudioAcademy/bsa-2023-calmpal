@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 
-import { type ValueOf } from '#libs/types/types.js';
+import { type ValueOf } from '~/libs/types/types.js';
 
 import { NotificationType } from './libs/enums/enums.js';
 

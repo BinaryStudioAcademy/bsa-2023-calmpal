@@ -6,10 +6,10 @@ import {
   Sidebar,
   SidebarBody,
   SidebarHeader,
-} from '#libs/components/components.js';
-import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants.js';
-import { AppRoute, IconColor } from '#libs/enums/enums.js';
-import { getUrlWithQueryString } from '#libs/helpers/helpers.js';
+} from '~/libs/components/components.js';
+import { EMPTY_ARRAY_LENGTH } from '~/libs/constants/constants.js';
+import { AppRoute, IconColor } from '~/libs/enums/enums.js';
+import { getUrlWithQueryString } from '~/libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -19,9 +19,9 @@ import {
   useParams,
   useRef,
   useState,
-} from '#libs/hooks/hooks.js';
-import { type ValueOf } from '#libs/types/types.js';
-import { actions as journalActions } from '#slices/journal/journal.js';
+} from '~/libs/hooks/hooks.js';
+import { type ValueOf } from '~/libs/types/types.js';
+import { actions as journalActions } from '~/slices/journal/journal.js';
 
 import { DeleteJournalModal } from '../delete-journal-modal/delete-journal-modal.js';
 import styles from './styles.module.scss';

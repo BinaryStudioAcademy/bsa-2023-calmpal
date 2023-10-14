@@ -1,5 +1,5 @@
-import { ContentType } from '#libs/enums/enums.js';
-import { type ValueOf } from '#libs/types/types.js';
+import { ContentType } from '~/libs/enums/enums.js';
+import { type ValueOf } from '~/libs/types/types.js';
 
 import { BaseHttpApi } from '../api/api.js';
 import { type BaseHttp } from '../http/http.js';

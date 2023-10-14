@@ -1,10 +1,10 @@
-import { getShiftedDate } from '#libs/helpers/helpers.js';
-import { type Billing } from '#libs/packages/billing/billing.js';
-import { type Service } from '#libs/types/types.js';
+import { getShiftedDate } from '~/libs/helpers/helpers.js';
+import { type Billing } from '~/libs/packages/billing/billing.js';
+import { type Service } from '~/libs/types/types.js';
 import {
   type UserAuthResponseDto,
   userService,
-} from '#packages/users/users.js';
+} from '~/packages/users/users.js';
 
 import { SUBSCRIPTION_MONTH_DURATION } from './libs/constants/constants.js';
 import {

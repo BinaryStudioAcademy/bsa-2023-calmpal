@@ -1,4 +1,4 @@
-import cardPlaceholder from '#assets/img/card-image-placeholder.png';
+import cardPlaceholder from '~/assets/img/card-image-placeholder.png';
 import {
   Button,
   Card,
@@ -7,9 +7,9 @@ import {
   Sidebar,
   SidebarBody,
   SidebarHeader,
-} from '#libs/components/components.js';
-import { AppRoute, IconColor } from '#libs/enums/enums.js';
-import { getUrlWithQueryString } from '#libs/helpers/helpers.js';
+} from '~/libs/components/components.js';
+import { AppRoute, IconColor } from '~/libs/enums/enums.js';
+import { getUrlWithQueryString } from '~/libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -18,9 +18,9 @@ import {
   useParams,
   useRef,
   useState,
-} from '#libs/hooks/hooks.js';
-import { type ValueOf } from '#libs/types/types.js';
-import { actions as chatsActions } from '#slices/chats/chats.js';
+} from '~/libs/hooks/hooks.js';
+import { type ValueOf } from '~/libs/types/types.js';
+import { actions as chatsActions } from '~/slices/chats/chats.js';
 
 import { DeleteChatModal } from '../components.js';
 import styles from './styles.module.scss';

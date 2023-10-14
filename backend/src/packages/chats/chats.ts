@@ -1,7 +1,7 @@
-import { logger } from '#libs/packages/logger/logger.js';
-import { openAiService } from '#libs/packages/open-ai/open-ai.js';
-import { chatMessageService } from '#packages/chat-messages/chat-messages.js';
-import { fileService } from '#packages/files/files.js';
+import { logger } from '~/libs/packages/logger/logger.js';
+import { openAiService } from '~/libs/packages/open-ai/open-ai.js';
+import { chatMessageService } from '~/packages/chat-messages/chat-messages.js';
+import { fileService } from '~/packages/files/files.js';
 
 import { ChatController } from './chat.controller.js';
 import { ChatModel } from './chat.model.js';

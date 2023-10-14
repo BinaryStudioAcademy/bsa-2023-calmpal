@@ -4,18 +4,18 @@ import {
 } from '@react-navigation/native';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { ChatScreenName } from '#libs/enums/enums';
-import { type AsyncThunkConfig } from '#libs/types/types';
+import { ChatScreenName } from '~/libs/enums/enums';
+import { type AsyncThunkConfig } from '~/libs/types/types';
 import {
   type ChatMessageCreatePayload,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
-} from '#packages/chat-messages/chat-messages';
+} from '~/packages/chat-messages/chat-messages';
 import {
   type ChatCreateRequestDto,
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
-} from '#packages/chats/chats';
+} from '~/packages/chats/chats';
 
 import { name as sliceName } from './chats.slice';
 

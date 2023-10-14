@@ -1,7 +1,10 @@
-import deafultMeditationImage from '#assets/img/meditation-image-placeholder.jpg';
-import { AudioPlayer, BackButtonWrapper } from '#libs/components/components.js';
-import { MOBILE_DIMENSION } from '#libs/constants/constants.js';
-import { AppQueryStringKey, AppRoute } from '#libs/enums/enums.js';
+import deafultMeditationImage from '~/assets/img/meditation-image-placeholder.jpg';
+import {
+  AudioPlayer,
+  BackButtonWrapper,
+} from '~/libs/components/components.js';
+import { MOBILE_DIMENSION } from '~/libs/constants/constants.js';
+import { AppQueryStringKey, AppRoute } from '~/libs/enums/enums.js';
 import {
   useAppSelector,
   useCallback,
@@ -12,8 +15,8 @@ import {
   useSearchParams,
   useSidebarState,
   useState,
-} from '#libs/hooks/hooks.js';
-import { TRACK_FIRST_INDEX } from '#pages/meditation/libs/constants/constants.js';
+} from '~/libs/hooks/hooks.js';
+import { TRACK_FIRST_INDEX } from '~/pages/meditation/libs/constants/constants.js';
 
 import { TRACK_NOT_FOUND_INDEX } from './libs/constants/constants.js';
 import styles from './styles.module.scss';

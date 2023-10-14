@@ -1,5 +1,5 @@
-import { ServerErrorType } from '#libs/enums/enums.js';
-import { type UserError } from '#packages/users/users.js';
+import { ServerErrorType } from '~/libs/enums/enums.js';
+import { type UserError } from '~/packages/users/users.js';
 
 import { type ErrorInfo } from '../../types/types.js';
 

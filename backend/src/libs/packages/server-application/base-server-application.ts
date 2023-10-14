@@ -8,19 +8,19 @@ import swaggerUi from '@fastify/swagger-ui';
 import Fastify, { type FastifyError } from 'fastify';
 import fastifyHealthcheck from 'fastify-healthcheck';
 
-import { APIPath, ServerErrorType } from '#libs/enums/enums.js';
-import { type ValidationError } from '#libs/exceptions/exceptions.js';
-import { type Config } from '#libs/packages/config/config.js';
-import { type Database } from '#libs/packages/database/database.js';
-import { jwtService } from '#libs/packages/jwt/jwt.js';
-import { type Logger } from '#libs/packages/logger/logger.js';
+import { APIPath, ServerErrorType } from '~/libs/enums/enums.js';
+import { type ValidationError } from '~/libs/exceptions/exceptions.js';
+import { type Config } from '~/libs/packages/config/config.js';
+import { type Database } from '~/libs/packages/database/database.js';
+import { jwtService } from '~/libs/packages/jwt/jwt.js';
+import { type Logger } from '~/libs/packages/logger/logger.js';
 import {
   authorization as authorizationPlugin,
   fileUpload as fileUploadPlugin,
-} from '#libs/plugins/plugins.js';
-import { type ValidationSchema } from '#libs/types/types.js';
-import { FileUploadValidationRule } from '#packages/files/files.js';
-import { userService } from '#packages/users/users.js';
+} from '~/libs/plugins/plugins.js';
+import { type ValidationSchema } from '~/libs/types/types.js';
+import { FileUploadValidationRule } from '~/packages/files/files.js';
+import { userService } from '~/packages/users/users.js';
 
 import { getErrorInfo } from './libs/helpers/helpers.js';
 import {

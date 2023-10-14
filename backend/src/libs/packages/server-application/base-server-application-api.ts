@@ -1,7 +1,7 @@
 import swaggerJsdoc from 'swagger-jsdoc';
 
-import { AppEnvironment } from '#libs/enums/enums.js';
-import { type Config } from '#libs/packages/config/config.js';
+import { AppEnvironment } from '~/libs/enums/enums.js';
+import { type Config } from '~/libs/packages/config/config.js';
 
 import {
   type ServerApplicationApi,

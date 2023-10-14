@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Icon, TouchableOpacity } from '#libs/components/components';
-import { AppColor } from '#libs/enums/enums';
-import { useNavigation } from '#libs/hooks/hooks';
+import { Icon, TouchableOpacity } from '~/libs/components/components';
+import { AppColor } from '~/libs/enums/enums';
+import { useNavigation } from '~/libs/hooks/hooks';
 
 import { styles } from './styles';
 

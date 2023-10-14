@@ -1,10 +1,10 @@
 import joi from 'joi';
 
-import { ContentType } from '#libs/enums/enums.js';
+import { ContentType } from '~/libs/enums/enums.js';
 import {
   FileUploadValidationMessage,
   FileUploadValidationRule,
-} from '#packages/files/files.js';
+} from '~/packages/files/files.js';
 
 import { MeditationEntryValidationMessage } from '../enums/enums.js';
 import { type MeditationEntryCreateForm } from '../types/types.js';

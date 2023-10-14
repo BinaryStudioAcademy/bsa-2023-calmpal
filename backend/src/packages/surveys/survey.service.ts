@@ -1,7 +1,7 @@
-import { ExceptionMessage } from '#libs/enums/enums.js';
-import { HTTPCode } from '#libs/packages/http/http.js';
-import { type Service } from '#libs/types/types.js';
-import { UserError, userService } from '#packages/users/users.js';
+import { ExceptionMessage } from '~/libs/enums/enums.js';
+import { HTTPCode } from '~/libs/packages/http/http.js';
+import { type Service } from '~/libs/types/types.js';
+import { UserError, userService } from '~/packages/users/users.js';
 
 import {
   type SurveyGetAllItemResponseDto,

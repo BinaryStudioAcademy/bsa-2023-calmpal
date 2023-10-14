@@ -1,6 +1,6 @@
-import { type Repository } from '#libs/types/types.js';
-import { FileEntity } from '#packages/files/file.entity.js';
-import { type FileModel } from '#packages/files/file.model.js';
+import { type Repository } from '~/libs/types/types.js';
+import { FileEntity } from '~/packages/files/file.entity.js';
+import { type FileModel } from '~/packages/files/file.model.js';
 
 import {
   type FileCommonQueryResponse,

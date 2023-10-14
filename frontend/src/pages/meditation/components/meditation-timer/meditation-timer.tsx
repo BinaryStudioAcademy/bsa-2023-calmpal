@@ -1,9 +1,9 @@
-import { Button } from '#libs/components/components.js';
+import { Button } from '~/libs/components/components.js';
 import {
   useAppForm,
   useCallback,
   useFormController,
-} from '#libs/hooks/hooks.js';
+} from '~/libs/hooks/hooks.js';
 
 import {
   DURATION_UNIT,

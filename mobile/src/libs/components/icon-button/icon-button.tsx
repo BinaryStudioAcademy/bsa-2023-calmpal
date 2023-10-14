@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Icon, Pressable } from '#libs/components/components';
-import { type IconName } from '#libs/types/types';
+import { Icon, Pressable } from '~/libs/components/components';
+import { type IconName } from '~/libs/types/types';
 
 import { styles } from './styles';
 

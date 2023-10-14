@@ -1,9 +1,13 @@
 import React from 'react';
 
-import { SignBackground, Text } from '#libs/components/components';
-import { useAppDispatch, useAppSelector, useCallback } from '#libs/hooks/hooks';
-import { type UserAuthResponseDto } from '#packages/users/users';
-import { actions as authActions } from '#slices/auth/auth';
+import { SignBackground, Text } from '~/libs/components/components';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useCallback,
+} from '~/libs/hooks/hooks';
+import { type UserAuthResponseDto } from '~/packages/users/users';
+import { actions as authActions } from '~/slices/auth/auth';
 
 import { PreferencesStep } from './components/components';
 import { styles } from './styles';

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { ScrollView, Switch } from '#libs/components/components';
-import { useAppForm } from '#libs/hooks/hooks';
+import { ScrollView, Switch } from '~/libs/components/components';
+import { useAppForm } from '~/libs/hooks/hooks';
 
 import { Setting } from './components/components';
 import { NOTIFICATION_SETTINGS_DEFAULT_VALUE } from './libs/cosntants/constants';

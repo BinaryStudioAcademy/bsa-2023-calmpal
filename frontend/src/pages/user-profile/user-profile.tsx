@@ -1,12 +1,12 @@
-import { BackButtonWrapper } from '#libs/components/components.js';
-import { MOBILE_DIMENSION } from '#libs/constants/constants.js';
-import { getValidClassNames } from '#libs/helpers/helpers.js';
+import { BackButtonWrapper } from '~/libs/components/components.js';
+import { MOBILE_DIMENSION } from '~/libs/constants/constants.js';
+import { getValidClassNames } from '~/libs/helpers/helpers.js';
 import {
   useCallback,
   useMediaQuery,
   useSidebarState,
-} from '#libs/hooks/hooks.js';
-import { ProfileSettings } from '#pages/profile-settings/profile-settings.js';
+} from '~/libs/hooks/hooks.js';
+import { ProfileSettings } from '~/pages/profile-settings/profile-settings.js';
 
 import { UserProfileSidebar } from './components/components.js';
 import styles from './styles.module.scss';

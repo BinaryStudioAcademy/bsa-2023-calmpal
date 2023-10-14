@@ -1,7 +1,7 @@
-import { APIPath, ContentType } from '#libs/enums/enums';
-import { BaseHttpApi } from '#libs/packages/api/api';
-import { type HTTP } from '#libs/packages/http/http';
-import { type Storage } from '#libs/packages/storage/storage';
+import { APIPath, ContentType } from '~/libs/enums/enums';
+import { BaseHttpApi } from '~/libs/packages/api/api';
+import { type HTTP } from '~/libs/packages/http/http';
+import { type Storage } from '~/libs/packages/storage/storage';
 
 import { ChatsApiPath } from './libs/enums/enum';
 import {

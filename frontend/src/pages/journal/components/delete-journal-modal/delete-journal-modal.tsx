@@ -1,13 +1,13 @@
 import { forwardRef } from 'react';
 
-import { Button, Modal } from '#libs/components/components.js';
-import { DataStatus } from '#libs/enums/enums.js';
+import { Button, Modal } from '~/libs/components/components.js';
+import { DataStatus } from '~/libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
   useCallback,
-} from '#libs/hooks/hooks.js';
-import { actions as journalActions } from '#slices/journal/journal.js';
+} from '~/libs/hooks/hooks.js';
+import { actions as journalActions } from '~/slices/journal/journal.js';
 
 import styles from './styles.module.scss';
 

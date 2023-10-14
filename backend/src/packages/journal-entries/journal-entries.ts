@@ -1,4 +1,4 @@
-import { logger } from '#libs/packages/logger/logger.js';
+import { logger } from '~/libs/packages/logger/logger.js';
 
 import { JournalEntryController } from './journal-entry.controller.js';
 import { JournalEntryModel } from './journal-entry.model.js';

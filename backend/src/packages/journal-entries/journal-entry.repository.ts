@@ -1,7 +1,7 @@
-import { SortType } from '#libs/enums/enums.js';
-import { type Repository } from '#libs/types/types.js';
-import { type JournalEntryModel } from '#packages/journal-entries/journal-entries.js';
-import { JournalEntryEntity } from '#packages/journal-entries/journal-entry.entity.js';
+import { SortType } from '~/libs/enums/enums.js';
+import { type Repository } from '~/libs/types/types.js';
+import { type JournalEntryModel } from '~/packages/journal-entries/journal-entries.js';
+import { JournalEntryEntity } from '~/packages/journal-entries/journal-entry.entity.js';
 
 import {
   type JournalEntryCommonQueryResponse,

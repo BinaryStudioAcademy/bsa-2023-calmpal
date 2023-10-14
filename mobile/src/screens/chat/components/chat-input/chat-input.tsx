@@ -1,15 +1,15 @@
 import React from 'react';
 import { Keyboard } from 'react-native';
 
-import SendIcon from '#assets/img/icons/send.svg';
-import { Pressable, TextInput, View } from '#libs/components/components';
-import { AppColor } from '#libs/enums/enums';
-import { useEffect, useFormController, useRef } from '#libs/hooks/hooks';
+import SendIcon from '~/assets/img/icons/send.svg';
+import { Pressable, TextInput, View } from '~/libs/components/components';
+import { AppColor } from '~/libs/enums/enums';
+import { useEffect, useFormController, useRef } from '~/libs/hooks/hooks';
 import {
   type FormControl,
   type FormFieldPath,
   type FormFieldValues,
-} from '#libs/types/types';
+} from '~/libs/types/types';
 
 import { styles } from './styles';
 

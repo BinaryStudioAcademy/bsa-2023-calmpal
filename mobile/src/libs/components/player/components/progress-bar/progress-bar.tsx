@@ -1,15 +1,15 @@
 import Slider from '@react-native-community/slider';
 import React from 'react';
 
-import { Text, View } from '#libs/components/components';
-import { AppColor } from '#libs/enums/enums';
-import { getFormattedTime } from '#libs/helpers/helpers';
-import { useEffect, usePlayerControls } from '#libs/hooks/hooks';
+import { Text, View } from '~/libs/components/components';
+import { AppColor } from '~/libs/enums/enums';
+import { getFormattedTime } from '~/libs/helpers/helpers';
+import { useEffect, usePlayerControls } from '~/libs/hooks/hooks';
 import {
   player,
   TRACK_START_TIME,
   useProgress,
-} from '#libs/packages/player/player';
+} from '~/libs/packages/player/player';
 
 import { styles } from './styles';
 

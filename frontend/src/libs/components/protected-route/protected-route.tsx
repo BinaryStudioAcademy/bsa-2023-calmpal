@@ -1,8 +1,8 @@
 import { type ReactNode } from 'react';
 
-import { AppRoute } from '#libs/enums/enums.js';
-import { useAppSelector } from '#libs/hooks/hooks.js';
-import { type ValueOf } from '#libs/types/types.js';
+import { AppRoute } from '~/libs/enums/enums.js';
+import { useAppSelector } from '~/libs/hooks/hooks.js';
+import { type ValueOf } from '~/libs/types/types.js';
 
 import { Navigate } from '../components.js';
 

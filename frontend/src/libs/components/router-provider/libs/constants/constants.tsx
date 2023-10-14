@@ -1,6 +1,6 @@
 import { type RouteObject } from 'react-router-dom';
 
-import { AppRoute } from '#libs/enums/enums.js';
+import { AppRoute } from '~/libs/enums/enums.js';
 
 const ROUTER_ITEMS: Pick<RouteObject, 'path' | 'children'>[] = [
   {

@@ -1,5 +1,5 @@
-import { APIPath } from '#libs/enums/enums.js';
-import { AuthApiPath } from '#packages/auth/auth.js';
+import { APIPath } from '~/libs/enums/enums.js';
+import { AuthApiPath } from '~/packages/auth/auth.js';
 
 const WHITE_ROUTES = [
   {

@@ -1,10 +1,10 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import { DataStatus } from '#libs/enums/enums.js';
-import { groupChatMessage } from '#libs/helpers/helpers.js';
-import { type ValueOf } from '#libs/types/types.js';
-import { type ChatMessagesGroups } from '#packages/chat-messages/chat-messages.js';
-import { type ChatGetAllItemResponseDto } from '#packages/chats/chats.js';
+import { DataStatus } from '~/libs/enums/enums.js';
+import { groupChatMessage } from '~/libs/helpers/helpers.js';
+import { type ValueOf } from '~/libs/types/types.js';
+import { type ChatMessagesGroups } from '~/packages/chat-messages/chat-messages.js';
+import { type ChatGetAllItemResponseDto } from '~/packages/chats/chats.js';
 
 import {
   createChat,

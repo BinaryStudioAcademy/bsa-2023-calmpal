@@ -1,4 +1,4 @@
-import { type Entity } from '#libs/types/types.js';
+import { type Entity } from '~/libs/types/types.js';
 
 class UserEntity implements Entity {
   private id: number | null;

@@ -1,9 +1,9 @@
-import { useCallback, useFormController } from '#libs/hooks/hooks.js';
+import { useCallback, useFormController } from '~/libs/hooks/hooks.js';
 import {
   type FormControl,
   type FormFieldPath,
   type FormFieldValues,
-} from '#libs/types/types.js';
+} from '~/libs/types/types.js';
 
 import {
   ContentEditable,

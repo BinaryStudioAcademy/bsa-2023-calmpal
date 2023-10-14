@@ -1,6 +1,6 @@
 import { type RouteObject } from 'react-router-dom';
 
-import { replaceTemplateWithValue } from '#libs/helpers/helpers.js';
+import { replaceTemplateWithValue } from '~/libs/helpers/helpers.js';
 
 const wrapWithDynamicRouteString = (value: string): string => {
   return `:${value}`;

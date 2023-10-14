@@ -3,9 +3,9 @@ import { Model, type RelationMappings } from 'objection';
 import {
   AbstractModel,
   DatabaseTableName,
-} from '#libs/packages/database/database.js';
-import { UsersTableColumn } from '#packages/users/libs/enums/enums.js';
-import { UserModel } from '#packages/users/user.model.js';
+} from '~/libs/packages/database/database.js';
+import { UsersTableColumn } from '~/packages/users/libs/enums/enums.js';
+import { UserModel } from '~/packages/users/user.model.js';
 
 import { JournalEntriesTableColumn } from './libs/enums/enums.js';
 

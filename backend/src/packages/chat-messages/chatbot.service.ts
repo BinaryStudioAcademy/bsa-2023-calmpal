@@ -1,7 +1,7 @@
-import { UserRoleKey } from '#libs/packages/open-ai/libs/enums/enums.js';
-import { type OpenAiMessageGenerateRequestDto } from '#libs/packages/open-ai/libs/types/types.js';
-import { type OpenAi } from '#libs/packages/open-ai/open-ai.js';
-import { type UserEntity, type UserService } from '#packages/users/users.js';
+import { UserRoleKey } from '~/libs/packages/open-ai/libs/enums/enums.js';
+import { type OpenAiMessageGenerateRequestDto } from '~/libs/packages/open-ai/libs/types/types.js';
+import { type OpenAi } from '~/libs/packages/open-ai/open-ai.js';
+import { type UserEntity, type UserService } from '~/packages/users/users.js';
 
 import { NO_RESPONSE_MESSAGE } from '../chats/libs/constants/constants.js';
 

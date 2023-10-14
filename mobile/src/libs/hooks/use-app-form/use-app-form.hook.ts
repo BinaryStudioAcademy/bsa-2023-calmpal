@@ -13,7 +13,7 @@ import {
   type ValidationMode,
 } from 'react-hook-form';
 
-import { type ValidationSchema } from '#libs/types/types';
+import { type ValidationSchema } from '~/libs/types/types';
 
 type Parameters<T extends FieldValues = FieldValues> = {
   defaultValues: DefaultValues<T>;

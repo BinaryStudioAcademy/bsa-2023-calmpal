@@ -1,10 +1,10 @@
-import { IconColor } from '#libs/enums/enums.js';
+import { IconColor } from '~/libs/enums/enums.js';
 import {
   forwardRef,
   useCallback,
   useHandleClickOutside,
   useRef,
-} from '#libs/hooks/hooks.js';
+} from '~/libs/hooks/hooks.js';
 
 import { Button } from '../components.js';
 import styles from './styles.module.scss';

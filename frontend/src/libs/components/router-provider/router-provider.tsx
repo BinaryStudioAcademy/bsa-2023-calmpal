@@ -3,7 +3,7 @@ import {
   RouterProvider as LibraryRouterProvider,
 } from 'react-router-dom';
 
-import { AppRoute } from '#libs/enums/enums.js';
+import { AppRoute } from '~/libs/enums/enums.js';
 
 import { App } from '../app/app.js';
 import { ROUTER_ITEMS } from './libs/constants/constants.js';

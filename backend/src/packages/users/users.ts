@@ -1,6 +1,6 @@
-import { config } from '#libs/packages/config/config.js';
-import { encrypt as encryptService } from '#libs/packages/encrypt/encrypt.js';
-import { jwtService } from '#libs/packages/jwt/jwt.js';
+import { config } from '~/libs/packages/config/config.js';
+import { encrypt as encryptService } from '~/libs/packages/encrypt/encrypt.js';
+import { jwtService } from '~/libs/packages/jwt/jwt.js';
 
 import { UserModel } from './user.model.js';
 import { UserRepository } from './user.repository.js';

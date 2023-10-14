@@ -1,12 +1,12 @@
 import crypto from 'node:crypto';
 
-import { ExceptionMessage } from '#libs/enums/enums.js';
-import { ApplicationError } from '#libs/exceptions/exceptions.js';
-import { HTTPCode } from '#libs/packages/http/http.js';
-import { type S3 } from '#libs/packages/s3/s3.js';
-import { type Service } from '#libs/types/types.js';
-import { FileEntity } from '#packages/files/file.entity.js';
-import { type FileRepository } from '#packages/files/file.repository.js';
+import { ExceptionMessage } from '~/libs/enums/enums.js';
+import { ApplicationError } from '~/libs/exceptions/exceptions.js';
+import { HTTPCode } from '~/libs/packages/http/http.js';
+import { type S3 } from '~/libs/packages/s3/s3.js';
+import { type Service } from '~/libs/types/types.js';
+import { FileEntity } from '~/packages/files/file.entity.js';
+import { type FileRepository } from '~/packages/files/file.repository.js';
 
 import { FileError } from './libs/exceptions/exceptions.js';
 import {

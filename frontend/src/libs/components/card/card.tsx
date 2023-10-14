@@ -1,8 +1,8 @@
-import { Button, Icon } from '#libs/components/components.js';
-import { type IconColor } from '#libs/enums/enums.js';
-import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { useCallback } from '#libs/hooks/hooks.js';
-import { type IconName, type ValueOf } from '#libs/types/types.js';
+import { Button, Icon } from '~/libs/components/components.js';
+import { type IconColor } from '~/libs/enums/enums.js';
+import { getValidClassNames } from '~/libs/helpers/helpers.js';
+import { useCallback } from '~/libs/hooks/hooks.js';
+import { type IconName, type ValueOf } from '~/libs/types/types.js';
 
 import styles from './styles.module.scss';
 

@@ -1,12 +1,12 @@
-import { Loader, Navigate } from '#libs/components/components.js';
-import { AppRoute, DataStatus } from '#libs/enums/enums.js';
+import { Loader, Navigate } from '~/libs/components/components.js';
+import { AppRoute, DataStatus } from '~/libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
   useCallback,
-} from '#libs/hooks/hooks.js';
-import { type UserAuthResponseDto } from '#packages/users/users.js';
-import { actions as authActions } from '#slices/auth/auth.js';
+} from '~/libs/hooks/hooks.js';
+import { type UserAuthResponseDto } from '~/packages/users/users.js';
+import { actions as authActions } from '~/slices/auth/auth.js';
 
 import { PreferencesStep } from './components/components.js';
 import styles from './styles.module.scss';

@@ -1,13 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { type AsyncThunkConfig } from '#libs/types/types';
+import { type AsyncThunkConfig } from '~/libs/types/types';
 import {
   type JournalEntryCreateRequestDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
   type JournalEntryUpdatePayloadDto,
-} from '#packages/journal/journal';
-import { actions as journalActions } from '#slices/journal/journal';
+} from '~/packages/journal/journal';
+import { actions as journalActions } from '~/slices/journal/journal';
 
 import { name as sliceName } from './journal.slice';
 

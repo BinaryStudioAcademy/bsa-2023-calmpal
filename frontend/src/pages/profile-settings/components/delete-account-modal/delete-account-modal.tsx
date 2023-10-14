@@ -1,12 +1,12 @@
 import { type RefObject, useImperativeHandle } from 'react';
 
-import { Modal } from '#libs/components/components.js';
+import { Modal } from '~/libs/components/components.js';
 import {
   forwardRef,
   useCallback,
   useRef,
   useState,
-} from '#libs/hooks/hooks.js';
+} from '~/libs/hooks/hooks.js';
 
 import {
   INITIAL_STEP,

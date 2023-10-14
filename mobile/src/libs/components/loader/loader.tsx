@@ -1,7 +1,7 @@
 import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor } from '~/libs/enums/enums';
 
 import { styles } from './styles';
 

@@ -1,6 +1,6 @@
-import { ServerErrorType } from '#libs/enums/enums.js';
-import { type ValidationError } from '#libs/exceptions/exceptions.js';
-import { HTTPCode } from '#libs/packages/http/http.js';
+import { ServerErrorType } from '~/libs/enums/enums.js';
+import { type ValidationError } from '~/libs/exceptions/exceptions.js';
+import { HTTPCode } from '~/libs/packages/http/http.js';
 
 import { type ErrorInfo } from '../../types/types.js';
 

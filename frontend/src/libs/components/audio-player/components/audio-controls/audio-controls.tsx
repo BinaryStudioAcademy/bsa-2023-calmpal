@@ -1,7 +1,7 @@
 import { type ForwardedRef } from 'react';
 
-import { Button } from '#libs/components/components.js';
-import { IconColor } from '#libs/enums/enums.js';
+import { Button } from '~/libs/components/components.js';
+import { IconColor } from '~/libs/enums/enums.js';
 import {
   forwardRef,
   useCallback,
@@ -9,13 +9,13 @@ import {
   useImperativeHandle,
   useRef,
   useState,
-} from '#libs/hooks/hooks.js';
+} from '~/libs/hooks/hooks.js';
 import {
   FULL_PERCENTAGE,
   PROGRESS_BAR,
   TRACK_INCREMENT_INDEX,
   TRACK_SKIP_SECONDS,
-} from '#pages/meditation/libs/constants/constants.js';
+} from '~/pages/meditation/libs/constants/constants.js';
 
 import { type AudioControlsHandler } from '../../libs/types/types.js';
 import styles from './styles.module.scss';

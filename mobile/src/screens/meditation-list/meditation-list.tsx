@@ -8,8 +8,8 @@ import {
   LinearGradient,
   ScrollView,
   View,
-} from '#libs/components/components';
-import { AppColor, MeditationScreenName } from '#libs/enums/enums';
+} from '~/libs/components/components';
+import { AppColor, MeditationScreenName } from '~/libs/enums/enums';
 import {
   useAppDispatch,
   useAppRoute,
@@ -19,10 +19,10 @@ import {
   useNavigation,
   useSearch,
   useState,
-} from '#libs/hooks/hooks';
-import { type MeditationNavigationParameterList } from '#libs/types/types';
-import { type MeditationEntryCreateRequestDto } from '#packages/meditation/meditation';
-import { actions as meditationActions } from '#slices/meditation/meditation';
+} from '~/libs/hooks/hooks';
+import { type MeditationNavigationParameterList } from '~/libs/types/types';
+import { type MeditationEntryCreateRequestDto } from '~/packages/meditation/meditation';
+import { actions as meditationActions } from '~/slices/meditation/meditation';
 
 import {
   AddMeditationModal,

@@ -1,4 +1,7 @@
-import { getFormattedTime, getValidClassNames } from '#libs/helpers/helpers.js';
+import {
+  getFormattedTime,
+  getValidClassNames,
+} from '~/libs/helpers/helpers.js';
 
 import styles from './styles.module.scss';
 

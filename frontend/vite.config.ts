@@ -1,6 +1,7 @@
 import reactPlugin from '@vitejs/plugin-react';
 import { type ConfigEnv, defineConfig, loadEnv } from 'vite';
 import { VitePWA as vitePWAPlugin } from 'vite-plugin-pwa';
+import tsconfigPathsPlugin from 'vite-tsconfig-paths';
 import svgrPlugin from 'vite-plugin-svgr';
 
 const config = ({ mode }: ConfigEnv): ReturnType<typeof defineConfig> => {
@@ -15,6 +16,7 @@ const config = ({ mode }: ConfigEnv): ReturnType<typeof defineConfig> => {
       outDir: 'build',
     },
     plugins: [
+      tsconfigPathsPlugin(),
       reactPlugin(),
       vitePWAPlugin({
         registerType: 'autoUpdate',

@@ -3,13 +3,13 @@ import { Model, type RelationMappings } from 'objection';
 import {
   AbstractModel,
   DatabaseTableName,
-} from '#libs/packages/database/database.js';
+} from '~/libs/packages/database/database.js';
 import {
   SubscriptionModel,
   SubscriptionsTableColumn,
-} from '#packages/subscriptions/subscriptions.js';
-import { SurveysTableColumn } from '#packages/surveys/libs/enums/enums.js';
-import { SurveyModel } from '#packages/surveys/survey.model.js';
+} from '~/packages/subscriptions/subscriptions.js';
+import { SurveysTableColumn } from '~/packages/surveys/libs/enums/enums.js';
+import { SurveyModel } from '~/packages/surveys/survey.model.js';
 
 import {
   UserDetailsTableColumn,

@@ -1,5 +1,5 @@
-import { type IconColor } from '#libs/enums/enums.js';
-import { type IconName, type ValueOf } from '#libs/types/types.js';
+import { type IconColor } from '~/libs/enums/enums.js';
+import { type IconName, type ValueOf } from '~/libs/types/types.js';
 
 import { iconNameToIcon } from './libs/maps/maps.js';
 

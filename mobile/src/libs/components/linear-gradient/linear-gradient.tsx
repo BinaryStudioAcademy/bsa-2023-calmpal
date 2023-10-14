@@ -1,7 +1,7 @@
 import React from 'react';
 import Gradient from 'react-native-linear-gradient';
 
-import { AppColor } from '#libs/enums/enums';
+import { AppColor } from '~/libs/enums/enums';
 
 import { styles } from './styles';
 

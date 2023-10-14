@@ -7,10 +7,10 @@ import {
   LinearGradient,
   ScrollView,
   View,
-} from '#libs/components/components';
-import { MeditationScreenName } from '#libs/enums/enums';
-import { useCallback, useNavigation, useSearch } from '#libs/hooks/hooks';
-import { type MeditationNavigationParameterList } from '#libs/types/types';
+} from '~/libs/components/components';
+import { MeditationScreenName } from '~/libs/enums/enums';
+import { useCallback, useNavigation, useSearch } from '~/libs/hooks/hooks';
+import { type MeditationNavigationParameterList } from '~/libs/types/types';
 
 import { NAVIGATION_ITEMS } from './libs/constants/constants';
 import { styles } from './styles';

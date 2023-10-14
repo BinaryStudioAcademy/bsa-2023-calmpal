@@ -1,6 +1,6 @@
 import React, { type ReactNode } from 'react';
 
-import { Text, View } from '#libs/components/components';
+import { Text, View } from '~/libs/components/components';
 
 import { styles } from './styles';
 

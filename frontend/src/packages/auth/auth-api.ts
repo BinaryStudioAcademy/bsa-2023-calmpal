@@ -1,18 +1,18 @@
-import { APIPath, ContentType } from '#libs/enums/enums.js';
-import { BaseHttpApi } from '#libs/packages/api/api.js';
-import { type HTTP } from '#libs/packages/http/http.js';
-import { type Storage } from '#libs/packages/storage/storage.js';
+import { APIPath, ContentType } from '~/libs/enums/enums.js';
+import { BaseHttpApi } from '~/libs/packages/api/api.js';
+import { type HTTP } from '~/libs/packages/http/http.js';
+import { type Storage } from '~/libs/packages/storage/storage.js';
 import {
   type SurveyGetAllItemResponseDto,
   type SurveyRequestDto,
-} from '#packages/survey/survey.js';
+} from '~/packages/survey/survey.js';
 import {
   type UserAuthResponseDto,
   type UserSignInRequestDto,
   type UserSignInResponseDto,
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
-} from '#packages/users/users.js';
+} from '~/packages/users/users.js';
 
 import { AuthApiPath } from './libs/enums/enums.js';
 

@@ -8,9 +8,9 @@ import {
 import {
   AbstractModel,
   DatabaseTableName,
-} from '#libs/packages/database/database.js';
-import { JournalEntryModel } from '#packages/journal-entries/journal-entry.model.js';
-import { JournalEntriesTableColumn } from '#packages/journal-entries/libs/enums/enums.js';
+} from '~/libs/packages/database/database.js';
+import { JournalEntryModel } from '~/packages/journal-entries/journal-entry.model.js';
+import { JournalEntriesTableColumn } from '~/packages/journal-entries/libs/enums/enums.js';
 
 import {
   UserDetailsTableColumn,

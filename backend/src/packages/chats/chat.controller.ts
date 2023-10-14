@@ -1,16 +1,16 @@
-import { APIPath, ExceptionMessage } from '#libs/enums/enums.js';
+import { APIPath, ExceptionMessage } from '~/libs/enums/enums.js';
 import {
   type APIHandlerOptions,
   type APIHandlerResponse,
   BaseController,
-} from '#libs/packages/controller/controller.js';
-import { HTTPCode } from '#libs/packages/http/http.js';
-import { type Logger } from '#libs/packages/logger/logger.js';
+} from '~/libs/packages/controller/controller.js';
+import { HTTPCode } from '~/libs/packages/http/http.js';
+import { type Logger } from '~/libs/packages/logger/logger.js';
 import {
   type ChatMessageCreatePayload,
   type ChatMessageCreateRequestDto,
-} from '#packages/chat-messages/chat-messages.js';
-import { type UserAuthResponseDto } from '#packages/users/users.js';
+} from '~/packages/chat-messages/chat-messages.js';
+import { type UserAuthResponseDto } from '~/packages/users/users.js';
 
 import { ChatEntity } from './chat.entity.js';
 import { type ChatService } from './chat.service.js';

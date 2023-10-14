@@ -1,11 +1,11 @@
-import avatar from '#assets/img/avatar-placeholder.png';
-import { Sidebar } from '#libs/components/components.js';
+import avatar from '~/assets/img/avatar-placeholder.png';
+import { Sidebar } from '~/libs/components/components.js';
 import {
   SidebarBody,
   SidebarHeader,
-} from '#libs/components/sidebar/components/components.js';
-import { useAppSelector } from '#libs/hooks/hooks.js';
-import { type UserAuthResponseDto } from '#packages/users/users.js';
+} from '~/libs/components/sidebar/components/components.js';
+import { useAppSelector } from '~/libs/hooks/hooks.js';
+import { type UserAuthResponseDto } from '~/packages/users/users.js';
 
 import styles from './styles.module.scss';
 

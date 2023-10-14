@@ -6,8 +6,8 @@ import LibraryToast, {
   type ToastConfigParams,
 } from 'react-native-toast-message';
 
-import { type NotificationType } from '#libs/packages/notification/notification';
-import { type ValueOf } from '#libs/types/types';
+import { type NotificationType } from '~/libs/packages/notification/notification';
+import { type ValueOf } from '~/libs/types/types';
 
 import { styles } from './styles';
 

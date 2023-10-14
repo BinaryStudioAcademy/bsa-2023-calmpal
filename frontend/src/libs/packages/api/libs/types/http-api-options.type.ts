@@ -1,6 +1,6 @@
-import { type ContentType } from '#libs/enums/enums.js';
-import { type HTTPOptions } from '#libs/packages/http/http.js';
-import { type ValueOf } from '#libs/types/types.js';
+import { type ContentType } from '~/libs/enums/enums.js';
+import { type HTTPOptions } from '~/libs/packages/http/http.js';
+import { type ValueOf } from '~/libs/types/types.js';
 
 type HTTPApiOptions = Omit<HTTPOptions, 'headers' | 'payload'> & {
   hasAuth: boolean;

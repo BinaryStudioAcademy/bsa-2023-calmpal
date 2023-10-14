@@ -8,7 +8,7 @@ import {
   useEffect,
   useFocusEffect,
   useState,
-} from '#libs/hooks/hooks';
+} from '~/libs/hooks/hooks';
 import {
   AppStatus,
   Event,
@@ -16,8 +16,8 @@ import {
   State,
   TRACK_START_TIME,
   usePlayerEvents,
-} from '#libs/packages/player/player';
-import { actions as meditationActions } from '#slices/meditation/meditation';
+} from '~/libs/packages/player/player';
+import { actions as meditationActions } from '~/slices/meditation/meditation';
 
 import { Controls, ProgressBar } from './components/components';
 

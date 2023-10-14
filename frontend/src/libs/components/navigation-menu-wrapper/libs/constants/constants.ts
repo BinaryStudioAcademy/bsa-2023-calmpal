@@ -1,6 +1,6 @@
-import { AppRoute, SidebarMode } from '#libs/enums/enums.js';
-import { getUrlWithQueryString } from '#libs/helpers/helpers.js';
-import { type Route, type ValueOf } from '#libs/types/types.js';
+import { AppRoute, SidebarMode } from '~/libs/enums/enums.js';
+import { getUrlWithQueryString } from '~/libs/helpers/helpers.js';
+import { type Route, type ValueOf } from '~/libs/types/types.js';
 
 const QUERY_STRING_PARAMETERS = {
   sidebarMode: SidebarMode.SHOW,

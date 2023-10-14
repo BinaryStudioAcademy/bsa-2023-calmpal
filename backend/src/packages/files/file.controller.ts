@@ -1,11 +1,11 @@
-import { APIPath } from '#libs/enums/enums.js';
+import { APIPath } from '~/libs/enums/enums.js';
 import {
   type APIHandlerOptions,
   type APIHandlerResponse,
   BaseController,
-} from '#libs/packages/controller/controller.js';
-import { HTTPCode } from '#libs/packages/http/http.js';
-import { type Logger } from '#libs/packages/logger/logger.js';
+} from '~/libs/packages/controller/controller.js';
+import { HTTPCode } from '~/libs/packages/http/http.js';
+import { type Logger } from '~/libs/packages/logger/logger.js';
 
 import { type FileService } from './file.service.js';
 import { FilesApiPath } from './libs/enums/enums.js';

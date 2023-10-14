@@ -1,4 +1,4 @@
-import { ContentType } from '#libs/enums/enums.js';
+import { ContentType } from '~/libs/enums/enums.js';
 
 const FileUploadValidationRule = {
   MAXIMUM_FILE_SIZE: 20_000_000,

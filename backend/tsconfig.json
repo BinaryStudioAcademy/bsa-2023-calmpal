@@ -10,7 +10,7 @@
     "moduleResolution": "NodeNext",
     "baseUrl": ".",
     "paths": {
-      "#*": ["./src/*"]
+      "~/*": ["./src/*"]
     },
     "outDir": "build",
     "skipLibCheck": true

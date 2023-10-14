@@ -1,4 +1,4 @@
-import { getMegabytesFromBytes } from '#libs/helpers/helpers.js';
+import { getMegabytesFromBytes } from '~/libs/helpers/helpers.js';
 
 import { FileUploadValidationRule } from './file-upload-validation-rule.enum.js';
 

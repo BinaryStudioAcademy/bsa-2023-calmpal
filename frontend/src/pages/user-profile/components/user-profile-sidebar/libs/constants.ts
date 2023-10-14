@@ -1,5 +1,5 @@
-import { AppRoute } from '#libs/enums/enums.js';
-import { type SettingsOption } from '#libs/types/types.js';
+import { AppRoute } from '~/libs/enums/enums.js';
+import { type SettingsOption } from '~/libs/types/types.js';
 
 const SETTING_NAME_INDEX = 2;
 

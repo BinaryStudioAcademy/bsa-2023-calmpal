@@ -1,4 +1,4 @@
-import { type JournalScreenName } from '#libs/enums/enums';
+import { type JournalScreenName } from '~/libs/enums/enums';
 
 type JournalNavigationParameterList = {
   [JournalScreenName.JOURNAL]: undefined;

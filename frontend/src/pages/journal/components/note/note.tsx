@@ -1,5 +1,5 @@
-import { DEFAULT_NOTE_PAYLOAD } from '#libs/constants/constants.js';
-import { debounce } from '#libs/helpers/helpers.js';
+import { DEFAULT_NOTE_PAYLOAD } from '~/libs/constants/constants.js';
+import { debounce } from '~/libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useAppForm,
@@ -8,15 +8,15 @@ import {
   useEffect,
   useMemo,
   useParams,
-} from '#libs/hooks/hooks.js';
-import { type JournalEntryCreateRequestDto } from '#packages/journal/journal.js';
+} from '~/libs/hooks/hooks.js';
+import { type JournalEntryCreateRequestDto } from '~/packages/journal/journal.js';
 import {
   SAVE_NOTE_TIMEOUT,
   TEXT_PLACEHOLDER,
   TITLE_PLACEHOLDER,
-} from '#pages/journal/components/note/components/note-input/libs/constants/constants.js';
-import { appActions } from '#slices/app/app-notification.js';
-import { actions as journalActions } from '#slices/journal/journal.js';
+} from '~/pages/journal/components/note/components/note-input/libs/constants/constants.js';
+import { appActions } from '~/slices/app/app-notification.js';
+import { actions as journalActions } from '~/slices/journal/journal.js';
 
 import { NoteInput } from './components/components.js';
 import styles from './styles.module.scss';

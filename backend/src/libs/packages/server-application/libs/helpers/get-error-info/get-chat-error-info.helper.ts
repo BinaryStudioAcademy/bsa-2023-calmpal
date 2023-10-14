@@ -1,5 +1,5 @@
-import { ServerErrorType } from '#libs/enums/enums.js';
-import { type ChatError } from '#packages/chats/chats.js';
+import { ServerErrorType } from '~/libs/enums/enums.js';
+import { type ChatError } from '~/packages/chats/chats.js';
 
 import { type ErrorInfo } from '../../types/types.js';
 

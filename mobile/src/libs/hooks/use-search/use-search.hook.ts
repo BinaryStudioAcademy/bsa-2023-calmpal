@@ -1,6 +1,6 @@
 import { type Dispatch, type SetStateAction } from 'react';
 
-import { useEffect, useState } from '#libs/hooks/hooks';
+import { useEffect, useState } from '~/libs/hooks/hooks';
 
 import { DEFAULT_SEARCH_PAYLOAD } from './libs/constants';
 

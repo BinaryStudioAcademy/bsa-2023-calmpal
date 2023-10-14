@@ -1,5 +1,5 @@
-import { ServerErrorType } from '#libs/enums/enums.js';
-import { type HTTPError } from '#libs/packages/http/http.js';
+import { ServerErrorType } from '~/libs/enums/enums.js';
+import { type HTTPError } from '~/libs/packages/http/http.js';
 
 import { type ErrorInfo } from '../../types/types.js';
 

@@ -1,4 +1,4 @@
-import { type MeditationScreenName } from '#libs/enums/enums';
+import { type MeditationScreenName } from '~/libs/enums/enums';
 
 type MeditationNavigationParameterList = {
   [MeditationScreenName.MEDITATION_MENU]: undefined;

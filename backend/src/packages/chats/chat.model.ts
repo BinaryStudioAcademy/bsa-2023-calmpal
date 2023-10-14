@@ -3,8 +3,8 @@ import { Model, type RelationMappings } from 'objection';
 import {
   AbstractModel,
   DatabaseTableName,
-} from '#libs/packages/database/database.js';
-import { ChatMessageModel } from '#packages/chat-messages/chat-message.model.js';
+} from '~/libs/packages/database/database.js';
+import { ChatMessageModel } from '~/packages/chat-messages/chat-message.model.js';
 
 import {
   ChatsTableColumn,

@@ -4,12 +4,12 @@ import {
   S3ServiceException,
 } from '@aws-sdk/client-s3';
 
-import { type ContentType } from '#libs/enums/enums.js';
-import { ExceptionMessage } from '#libs/enums/enums.js';
-import { ApplicationError } from '#libs/exceptions/exceptions.js';
-import { replaceTemplateWithValue } from '#libs/helpers/helpers.js';
-import { type HTTPCode, HTTPError } from '#libs/packages/http/http.js';
-import { type ValueOf } from '#libs/types/types.js';
+import { type ContentType } from '~/libs/enums/enums.js';
+import { ExceptionMessage } from '~/libs/enums/enums.js';
+import { ApplicationError } from '~/libs/exceptions/exceptions.js';
+import { replaceTemplateWithValue } from '~/libs/helpers/helpers.js';
+import { type HTTPCode, HTTPError } from '~/libs/packages/http/http.js';
+import { type ValueOf } from '~/libs/types/types.js';
 
 type Constructor = {
   region: string;

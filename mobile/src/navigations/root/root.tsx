@@ -4,16 +4,16 @@ import {
 } from '@react-navigation/native-stack';
 import React from 'react';
 
-import { Loader } from '#libs/components/components';
-import { DataStatus } from '#libs/enums/enums';
+import { Loader } from '~/libs/components/components';
+import { DataStatus } from '~/libs/enums/enums';
 import {
   useAppDispatch,
   useAppSelector,
   useEffect,
   useMemo,
-} from '#libs/hooks/hooks';
-import { type RootNavigationParameterList } from '#libs/types/types';
-import { actions as authActions } from '#slices/auth/auth';
+} from '~/libs/hooks/hooks';
+import { type RootNavigationParameterList } from '~/libs/types/types';
+import { actions as authActions } from '~/slices/auth/auth';
 
 import { NAVIGATION_ITEMS } from './libs/constants/constants';
 

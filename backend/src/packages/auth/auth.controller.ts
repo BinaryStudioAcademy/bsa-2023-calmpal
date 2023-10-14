@@ -1,19 +1,19 @@
-import { APIPath, ExceptionMessage } from '#libs/enums/enums.js';
-import { AuthError } from '#libs/exceptions/exceptions.js';
+import { APIPath, ExceptionMessage } from '~/libs/enums/enums.js';
+import { AuthError } from '~/libs/exceptions/exceptions.js';
 import {
   type APIHandlerOptions,
   type APIHandlerResponse,
   BaseController,
-} from '#libs/packages/controller/controller.js';
-import { HTTPCode } from '#libs/packages/http/http.js';
-import { type Logger } from '#libs/packages/logger/logger.js';
+} from '~/libs/packages/controller/controller.js';
+import { HTTPCode } from '~/libs/packages/http/http.js';
+import { type Logger } from '~/libs/packages/logger/logger.js';
 import {
   type UserAuthResponseDto,
   type UserSignInRequestDto,
   userSignInValidationSchema,
   type UserSignUpRequestDto,
   userSignUpValidationSchema,
-} from '#packages/users/users.js';
+} from '~/packages/users/users.js';
 
 import { type UserService } from '../users/users.js';
 import { type AuthService } from './auth.service.js';

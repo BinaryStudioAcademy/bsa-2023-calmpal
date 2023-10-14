@@ -1,14 +1,14 @@
 import { type MultipartFile } from '@fastify/multipart';
 import fp from 'fastify-plugin';
 
-import { type ContentType } from '#libs/enums/enums.js';
-import { ControllerHook } from '#libs/packages/controller/controller.js';
-import { HTTPCode } from '#libs/packages/http/http.js';
-import { type ValueOf } from '#libs/types/types.js';
+import { type ContentType } from '~/libs/enums/enums.js';
+import { ControllerHook } from '~/libs/packages/controller/controller.js';
+import { HTTPCode } from '~/libs/packages/http/http.js';
+import { type ValueOf } from '~/libs/types/types.js';
 import {
   FileError,
   FileUploadValidationMessage,
-} from '#packages/files/files.js';
+} from '~/packages/files/files.js';
 
 type Options = {
   extensions: string[];

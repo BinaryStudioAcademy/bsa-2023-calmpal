@@ -1,5 +1,5 @@
-import { SortType } from '#libs/enums/enums.js';
-import { type Repository } from '#libs/types/types.js';
+import { SortType } from '~/libs/enums/enums.js';
+import { type Repository } from '~/libs/types/types.js';
 
 import { ChatMessageEntity } from './chat-message.entity.js';
 import { type ChatMessageModel } from './chat-message.model.js';

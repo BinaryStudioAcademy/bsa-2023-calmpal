@@ -1,5 +1,5 @@
-import { type FileUploadRequestDto } from '#packages/files/libs/types/types.js';
-import { type UserAuthResponseDto } from '#packages/users/users.js';
+import { type FileUploadRequestDto } from '~/packages/files/libs/types/types.js';
+import { type UserAuthResponseDto } from '~/packages/users/users.js';
 
 type DefaultApiHandlerOptions = {
   body?: unknown;

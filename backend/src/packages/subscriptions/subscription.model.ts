@@ -3,11 +3,11 @@ import { Model, type RelationMappings } from 'objection';
 import {
   AbstractModel,
   DatabaseTableName,
-} from '#libs/packages/database/database.js';
+} from '~/libs/packages/database/database.js';
 import {
   UserDetailsModel,
   UserDetailsTableColumn,
-} from '#packages/users/users.js';
+} from '~/packages/users/users.js';
 
 import { SubscriptionsTableColumn } from './libs/enums/enums.js';
 

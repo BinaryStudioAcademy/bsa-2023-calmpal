@@ -7,9 +7,6 @@
     "node": "18.x.x",
     "npm": "9.x.x"
   },
-  "imports": {
-    "#*": "./src/*"
-  },
   "scripts": {
     "lint:css": "npx stylelint \"src/**/*.scss\"",
     "lint:js": "npx eslint \"src/**/*.{ts,tsx}\"",
@@ -45,6 +42,7 @@
     "stylelint-config-standard-scss": "10.0.0",
     "vite": "4.4.9",
     "vite-plugin-pwa": "0.16.4",
-    "vite-plugin-svgr": "3.2.0"
+    "vite-plugin-svgr": "3.2.0",
+    "vite-tsconfig-paths": "4.2.1"
   }
 }

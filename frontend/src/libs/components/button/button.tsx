@@ -1,11 +1,11 @@
-import { type IconColor } from '#libs/enums/enums.js';
-import { getValidClassNames } from '#libs/helpers/helpers.js';
+import { type IconColor } from '~/libs/enums/enums.js';
+import { getValidClassNames } from '~/libs/helpers/helpers.js';
 import {
   type ButtonStyle,
   type ButtonStyleColor,
   type IconName,
   type ValueOf,
-} from '#libs/types/types.js';
+} from '~/libs/types/types.js';
 
 import { Icon } from '../components.js';
 import styles from './styles.module.scss';

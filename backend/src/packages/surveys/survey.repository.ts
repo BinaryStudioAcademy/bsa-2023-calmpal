@@ -1,4 +1,4 @@
-import { type Repository } from '#libs/types/types.js';
+import { type Repository } from '~/libs/types/types.js';
 
 import { SurveyEntity } from './survey.entity.js';
 import { type SurveyModel } from './survey.model.js';

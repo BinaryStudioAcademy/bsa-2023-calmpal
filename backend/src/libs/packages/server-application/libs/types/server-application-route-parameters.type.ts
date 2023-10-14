@@ -1,7 +1,7 @@
 import { type FastifyReply, type FastifyRequest } from 'fastify';
 
-import { type HTTPMethod } from '#libs/packages/http/http.js';
-import { type ValidationSchema } from '#libs/types/types.js';
+import { type HTTPMethod } from '~/libs/packages/http/http.js';
+import { type ValidationSchema } from '~/libs/types/types.js';
 
 type ServerApplicationRouteParameters = {
   path: string;

@@ -1,4 +1,4 @@
-import { type store } from '#libs/packages/store/store.js';
+import { type store } from '~/libs/packages/store/store.js';
 
 type AppDispatch = typeof store.instance.dispatch;
 

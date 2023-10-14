@@ -1,4 +1,4 @@
-import { type Repository } from '#libs/types/types.js';
+import { type Repository } from '~/libs/types/types.js';
 
 import { type SubscriptionCommonQueryResponse } from './libs/types/types.js';
 import { SubscriptionEntity } from './subscription.entity.js';

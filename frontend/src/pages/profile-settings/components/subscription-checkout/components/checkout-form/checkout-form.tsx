@@ -1,17 +1,17 @@
-import { Button } from '#libs/components/components.js';
+import { Button } from '~/libs/components/components.js';
 import {
   useAppDispatch,
   useAppSelector,
   useCallback,
-} from '#libs/hooks/hooks.js';
+} from '~/libs/hooks/hooks.js';
 import {
   useElements,
   useStripe,
-} from '#pages/profile-settings/libs/hooks/hooks.js';
+} from '~/pages/profile-settings/libs/hooks/hooks.js';
 import {
   cancelPaymentIntent,
   confirmPaymentIntent,
-} from '#slices/subscription/actions.js';
+} from '~/slices/subscription/actions.js';
 
 import { PaymentElement } from '../components.js';
 import styles from './styles.module.scss';

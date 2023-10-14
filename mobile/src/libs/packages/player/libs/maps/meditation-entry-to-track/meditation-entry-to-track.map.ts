@@ -1,5 +1,5 @@
-import { type Track } from '#libs/packages/player/player';
-import { type MeditationEntryGetAllItemResponseDto } from '#packages/meditation/meditation';
+import { type Track } from '~/libs/packages/player/player';
+import { type MeditationEntryGetAllItemResponseDto } from '~/packages/meditation/meditation';
 
 const meditationEntryToTrack = (
   meditations: MeditationEntryGetAllItemResponseDto[],
