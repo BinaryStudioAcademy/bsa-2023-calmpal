@@ -1,16 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants.js';
-import { AppRoute } from '#libs/enums/enums.js';
-import { NotificationType } from '#libs/packages/notification/notification.js';
-import { type AsyncThunkConfig } from '#libs/types/types.js';
+import { EMPTY_ARRAY_LENGTH } from '~/libs/constants/constants.js';
+import { AppRoute } from '~/libs/enums/enums.js';
+import { NotificationType } from '~/libs/packages/notification/notification.js';
+import { type AsyncThunkConfig } from '~/libs/types/types.js';
 import {
   type JournalEntryCreateRequestDto,
   type JournalEntryGetAllItemResponseDto,
   type JournalEntryGetAllResponseDto,
   type JournalEntryUpdatePayloadDto,
-} from '#packages/journal/journal.js';
-import { actions as appActions } from '#slices/app/app.js';
+} from '~/packages/journal/journal.js';
+import { actions as appActions } from '~/slices/app/app.js';
 
 import { actions as journalActions } from './journal.js';
 import { name as sliceName } from './journal.slice.js';

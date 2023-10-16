@@ -1,5 +1,5 @@
-import { type HTTPMethod } from '#libs/packages/http/http.js';
-import { type ValidationSchema } from '#libs/types/types.js';
+import { type HTTPMethod } from '~/libs/packages/http/http.js';
+import { type ValidationSchema } from '~/libs/types/types.js';
 
 import { type APIHandler } from './api-handler.type.js';
 

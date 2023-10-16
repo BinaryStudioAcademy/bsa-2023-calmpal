@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Loader } from '#libs/components/components.js';
-import { DataStatus } from '#libs/enums/enums.js';
+import { Loader } from '~/libs/components/components.js';
+import { DataStatus } from '~/libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -9,17 +9,17 @@ import {
   useEffect,
   useParams,
   useRef,
-} from '#libs/hooks/hooks.js';
-import { type UserAuthResponseDto } from '#packages/users/users.js';
+} from '~/libs/hooks/hooks.js';
+import { type UserAuthResponseDto } from '~/packages/users/users.js';
 import {
   ChatDivider,
   ChatFooter,
   ChatHeader,
   ChatMessage,
-} from '#pages/chat/components/components.js';
-import { EMPTY_ARRAY_LENGTH } from '#pages/chat/libs/constants/constants.js';
-import { type ChatInputValue } from '#pages/chat/libs/types/types.js';
-import { actions as chatActions } from '#slices/chats/chats.js';
+} from '~/pages/chat/components/components.js';
+import { EMPTY_ARRAY_LENGTH } from '~/pages/chat/libs/constants/constants.js';
+import { type ChatInputValue } from '~/pages/chat/libs/types/types.js';
+import { actions as chatActions } from '~/slices/chats/chats.js';
 
 import styles from './styles.module.scss';
 

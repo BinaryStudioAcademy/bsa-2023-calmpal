@@ -1,4 +1,4 @@
-import { useEffect } from '#libs/hooks/hooks.js';
+import { useEffect } from '~/libs/hooks/hooks.js';
 
 type Properties = {
   ref: React.RefObject<HTMLElement>;

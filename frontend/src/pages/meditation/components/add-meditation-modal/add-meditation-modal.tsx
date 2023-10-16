@@ -3,22 +3,22 @@ import {
   Input,
   InputFile,
   Modal,
-} from '#libs/components/components.js';
-import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants.js';
-import { ContentType, DataStatus } from '#libs/enums/enums.js';
+} from '~/libs/components/components.js';
+import { EMPTY_ARRAY_LENGTH } from '~/libs/constants/constants.js';
+import { ContentType, DataStatus } from '~/libs/enums/enums.js';
 import {
   forwardRef,
   useAppForm,
   useAppSelector,
   useCallback,
   useEffect,
-} from '#libs/hooks/hooks.js';
+} from '~/libs/hooks/hooks.js';
 import {
   createMeditationEntryFormValidationSchema,
   type MeditationEntryCreateForm,
   type MeditationEntryCreateRequestDto,
-} from '#packages/meditation/meditation.js';
-import { DEFAULT_MEDITATION_PAYLOAD } from '#pages/meditation/libs/constants/constants.js';
+} from '~/packages/meditation/meditation.js';
+import { DEFAULT_MEDITATION_PAYLOAD } from '~/pages/meditation/libs/constants/constants.js';
 
 import styles from './styles.module.scss';
 
@@ -80,7 +80,7 @@ const AddMeditationModal: React.ForwardRefRenderFunction<
           fileSizeName="size"
           label="Meditation audio file"
           description="Only MP3 extension is allowed"
-          extensions={[ContentType.MPEG]}
+          extensions={[ContentType.MP3]}
         />
         <Button
           type="submit"

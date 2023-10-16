@@ -1,5 +1,5 @@
-import { type HTTPMethod } from '#libs/packages/http/http.js';
-import { WHITE_ROUTES } from '#libs/packages/server-application/server-application.js';
+import { type HTTPMethod } from '~/libs/packages/http/http.js';
+import { WHITE_ROUTES } from '~/libs/packages/server-application/server-application.js';
 
 type Parameters = {
   path: string;

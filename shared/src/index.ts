@@ -16,11 +16,7 @@ export {
 export {
   ApplicationError,
   AuthError,
-  ChatError,
-  FileError,
   HTTPError,
-  JournalError,
-  UsersError,
   ValidationError,
 } from './libs/exceptions/exceptions.js';
 export { TimeFormat } from './libs/helpers/date/libs/enums/enums.js';
@@ -75,10 +71,8 @@ export { entitiesFilteringQueryValidationSchema } from './packages/common-valida
 export {
   type FileGetAllItemResponseDto,
   FilesApiPath,
-  type FileUploadRequestDto,
   FileUploadValidationMessage,
   FileUploadValidationRule,
-  type S3FileUploadRequestDto,
 } from './packages/files/files.js';
 export {
   createJournalEntryValidationSchema,
@@ -133,4 +127,4 @@ export {
   type SubscriptionPaymentIntentCancelRequestDto,
   type SubscriptionPaymentIntentCreateRequestDto,
   type SubscriptionPaymentIntentCreateResponseDto,
-} from '#packages/subscriptions/subscriptions.js';
+} from '~/packages/subscriptions/subscriptions.js';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { type IconName } from '#libs/types/types';
+import { type IconName } from '~/libs/types/types';
 
 import { iconNameToIcon } from './libs/maps/maps';
 

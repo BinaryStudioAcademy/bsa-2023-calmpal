@@ -1,10 +1,10 @@
-import { debounce } from '#libs/helpers/helpers.js';
+import { debounce } from '~/libs/helpers/helpers.js';
 import {
   useAppForm,
   useCallback,
   useEffect,
   useFormController,
-} from '#libs/hooks/hooks.js';
+} from '~/libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
 

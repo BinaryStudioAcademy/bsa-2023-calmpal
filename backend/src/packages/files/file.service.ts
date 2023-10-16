@@ -1,10 +1,14 @@
 import crypto from 'node:crypto';
 
-import { type S3 } from '#libs/packages/s3/s3.js';
-import { type Service } from '#libs/types/types.js';
-import { FileEntity } from '#packages/files/file.entity.js';
-import { type FileRepository } from '#packages/files/file.repository.js';
+import { ExceptionMessage } from '~/libs/enums/enums.js';
+import { ApplicationError } from '~/libs/exceptions/exceptions.js';
+import { HTTPCode } from '~/libs/packages/http/http.js';
+import { type S3 } from '~/libs/packages/s3/s3.js';
+import { type Service } from '~/libs/types/types.js';
+import { FileEntity } from '~/packages/files/file.entity.js';
+import { type FileRepository } from '~/packages/files/file.repository.js';
 
+import { FileError } from './libs/exceptions/exceptions.js';
 import {
   type FileGetAllItemResponseDto,
   type FileUploadRequestDto,
@@ -17,6 +21,7 @@ type FileServiceDependencies = {
 
 class FileService implements Service {
   private fileRepository: FileRepository;
+
   private s3: S3;
 
   public constructor({ fileRepository, s3 }: FileServiceDependencies) {
@@ -35,29 +40,37 @@ class FileService implements Service {
   public async create(
     payload: FileUploadRequestDto,
   ): Promise<FileGetAllItemResponseDto> {
-    const fileExtensionIndex = 1;
+    try {
+      const fileKey = `${crypto.randomUUID()}.${payload.fileName}`;
 
-    const customName = `${crypto.randomUUID()}.${
-      payload.contentType.split('/')[fileExtensionIndex]
-    }`;
-
-    const fileKey = payload.name ?? customName;
-
-    await this.s3.sendFile({
-      fileKey,
-      buffer: payload.buffer,
-      contentType: payload.contentType,
-    });
-
-    const url = this.s3.getUrl(fileKey);
-    const file = await this.fileRepository.create(
-      FileEntity.initializeNew({
-        url,
+      const url = await this.s3.uploadFile({
+        fileKey,
+        buffer: payload.buffer,
         contentType: payload.contentType,
-      }),
-    );
+      });
+      const file = await this.fileRepository.create(
+        FileEntity.initializeNew({
+          url,
+          contentType: payload.contentType,
+        }),
+      );
 
-    return file.toObject();
+      return file.toObject();
+    } catch (error) {
+      if (error instanceof ApplicationError) {
+        throw new FileError({
+          message: error.message,
+          status: HTTPCode.BAD_REQUEST,
+          cause: error,
+        });
+      }
+
+      throw new FileError({
+        message: ExceptionMessage.FILE_UPLOAD_FAILED,
+        status: HTTPCode.BAD_REQUEST,
+        cause: error,
+      });
+    }
   }
 
   public update(): ReturnType<Service['update']> {

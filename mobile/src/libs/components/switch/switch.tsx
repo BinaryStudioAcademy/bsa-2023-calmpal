@@ -1,12 +1,12 @@
 import React from 'react';
 import { Switch as RNSwitch } from 'react-native';
 
-import { useFormController } from '#libs/hooks/hooks';
+import { useFormController } from '~/libs/hooks/hooks';
 import {
   type FormControl,
   type FormFieldPath,
   type FormFieldValues,
-} from '#libs/types/types';
+} from '~/libs/types/types';
 
 import { styles } from './styles';
 
@@ -36,4 +36,5 @@ const Switch = <T extends FormFieldValues>({
     />
   );
 };
+
 export { Switch };

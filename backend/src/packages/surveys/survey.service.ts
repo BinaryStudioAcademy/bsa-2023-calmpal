@@ -1,8 +1,7 @@
-import { ExceptionMessage } from '#libs/enums/enums.js';
-import { UsersError } from '#libs/exceptions/exceptions.js';
-import { HTTPCode } from '#libs/packages/http/http.js';
-import { type Service } from '#libs/types/types.js';
-import { userService } from '#packages/users/users.js';
+import { ExceptionMessage } from '~/libs/enums/enums.js';
+import { HTTPCode } from '~/libs/packages/http/http.js';
+import { type Service } from '~/libs/types/types.js';
+import { UserError, userService } from '~/packages/users/users.js';
 
 import {
   type SurveyGetAllItemResponseDto,
@@ -32,7 +31,7 @@ class SurveyService implements Service {
     const user = await userService.findById(payload.userId);
 
     if (!user) {
-      throw new UsersError({
+      throw new UserError({
         status: HTTPCode.NOT_FOUND,
         message: ExceptionMessage.USER_NOT_FOUND,
       });

@@ -1,5 +1,5 @@
-import { ContentType } from '#libs/enums/enums.js';
-import { type ValueOf } from '#libs/types/types.js';
+import { ContentType } from '~/libs/enums/enums.js';
+import { type ValueOf } from '~/libs/types/types.js';
 
 import { BaseHttpApi } from '../api/api.js';
 import { type BaseHttp } from '../http/http.js';
@@ -27,7 +27,9 @@ type Constructor = {
 
 class OpenAi extends BaseHttpApi {
   private apiKey: string;
+
   private model: string;
+
   private defaultImageGenerateConfig = {
     number: 1,
     size: OpenAiImageSize[IMAGE_SIZE],

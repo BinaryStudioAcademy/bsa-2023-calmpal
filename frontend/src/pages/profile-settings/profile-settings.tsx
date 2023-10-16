@@ -1,5 +1,5 @@
-import { AppRoute } from '#libs/enums/enums.js';
-import { useLocation } from '#libs/hooks/hooks.js';
+import { AppRoute } from '~/libs/enums/enums.js';
+import { useLocation } from '~/libs/hooks/hooks.js';
 
 import {
   Notifications,
@@ -32,4 +32,5 @@ const ProfileSettings: React.FC = () => {
 
   return getScreen(pathname);
 };
+
 export { ProfileSettings };

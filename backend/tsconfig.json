@@ -5,12 +5,12 @@
   "exclude": ["node_modules"],
   "compilerOptions": {
     "target": "ESNext",
-    "module": "ESNext",
+    "module": "NodeNext",
     "esModuleInterop": true,
     "moduleResolution": "NodeNext",
     "baseUrl": ".",
     "paths": {
-      "#*": ["./src/*"]
+      "~/*": ["./src/*"]
     },
     "outDir": "build",
     "skipLibCheck": true

@@ -1,7 +1,7 @@
 import React from 'react';
 import { type ImageSourcePropType } from 'react-native';
 
-import imagePlaceholder from '#assets/img/card-image-placeholder.png';
+import imagePlaceholder from '~/assets/img/card-image-placeholder.png';
 import {
   Icon,
   Image,
@@ -9,9 +9,9 @@ import {
   Swipeable,
   Text,
   View,
-} from '#libs/components/components';
-import { AppColor } from '#libs/enums/enums';
-import { type IconName } from '#libs/types/types';
+} from '~/libs/components/components';
+import { AppColor } from '~/libs/enums/enums';
+import { type IconName } from '~/libs/types/types';
 
 import { DEFAULT_NUMBER_OF_LINES } from './libs/constants/constants';
 import { styles } from './styles';

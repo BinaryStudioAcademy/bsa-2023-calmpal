@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { DataStatus } from '#libs/enums/enums.js';
-import { type ValueOf } from '#libs/types/types.js';
-import { type MeditationEntryCreateResponseDto } from '#packages/meditation/meditation.js';
+import { DataStatus } from '~/libs/enums/enums.js';
+import { type ValueOf } from '~/libs/types/types.js';
+import { type MeditationEntryCreateResponseDto } from '~/packages/meditation/meditation.js';
 
 import { createMeditationEntry, getAllMeditationEntries } from './actions.js';
 

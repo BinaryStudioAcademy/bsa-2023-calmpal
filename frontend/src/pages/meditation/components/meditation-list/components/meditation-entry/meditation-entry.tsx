@@ -1,16 +1,16 @@
-import meditationListPlaceholder from '#assets/img/meditation-list-placeholder.jpg';
-import { Button, Loader, Modal } from '#libs/components/components.js';
-import { IconColor } from '#libs/enums/enums.js';
-import { getFormattedTime } from '#libs/helpers/helpers.js';
+import meditationListPlaceholder from '~/assets/img/meditation-list-placeholder.jpg';
+import { Button, Loader, Modal } from '~/libs/components/components.js';
+import { IconColor } from '~/libs/enums/enums.js';
+import { getFormattedTime } from '~/libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useCallback,
   useEffect,
   useRef,
   useState,
-} from '#libs/hooks/hooks.js';
-import { type MeditationEntryCreateResponseDto } from '#packages/meditation/meditation.js';
-import { actions as appActions } from '#slices/app/app.slice.js';
+} from '~/libs/hooks/hooks.js';
+import { type MeditationEntryCreateResponseDto } from '~/packages/meditation/meditation.js';
+import { actions as appActions } from '~/slices/app/app.slice.js';
 
 import { MeditationTimer } from '../../../meditation-timer/meditation-timer.js';
 import { generateMeditationEntryLink } from './libs/helpers/helpers.js';

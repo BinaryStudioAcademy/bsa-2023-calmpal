@@ -1,5 +1,5 @@
-import { openAiService } from '#libs/packages/open-ai/open-ai.js';
-import { userService } from '#packages/users/users.js';
+import { openAiService } from '~/libs/packages/open-ai/open-ai.js';
+import { userService } from '~/packages/users/users.js';
 
 import { ChatbotService } from '../chat-messages/chatbot.service.js';
 import { ChatMessageModel } from './chat-message.model.js';

@@ -10,8 +10,8 @@ import {
   Modal,
   ScrollView,
   View,
-} from '#libs/components/components';
-import { AppColor, JournalScreenName } from '#libs/enums/enums';
+} from '~/libs/components/components';
+import { AppColor, JournalScreenName } from '~/libs/enums/enums';
 import {
   useAppDispatch,
   useAppSelector,
@@ -19,9 +19,9 @@ import {
   useNavigation,
   useSearch,
   useState,
-} from '#libs/hooks/hooks';
-import { type JournalNavigationParameterList } from '#libs/types/types';
-import { actions as journalActions } from '#slices/journal/journal';
+} from '~/libs/hooks/hooks';
+import { type JournalNavigationParameterList } from '~/libs/types/types';
+import { actions as journalActions } from '~/slices/journal/journal';
 
 import { styles } from './styles';
 
@@ -64,6 +64,7 @@ const Journal: React.FC = () => {
 
   const handleDeleteNote = (): void => {
     hanleCloseModal();
+
     if (selectedJournalEntry) {
       void dispatch(journalActions.deleteJournal(selectedJournalEntry.id));
     }
@@ -128,4 +129,5 @@ const Journal: React.FC = () => {
     </LinearGradient>
   );
 };
+
 export { Journal };

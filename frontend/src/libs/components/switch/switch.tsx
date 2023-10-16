@@ -1,9 +1,9 @@
-import { useFormController } from '#libs/hooks/hooks.js';
+import { useFormController } from '~/libs/hooks/hooks.js';
 import {
   type FormControl,
   type FormFieldPath,
   type FormFieldValues,
-} from '#libs/types/types.js';
+} from '~/libs/types/types.js';
 
 import styles from './styles.module.scss';
 
@@ -33,4 +33,5 @@ const Switch = <T extends FormFieldValues>({
     </label>
   );
 };
+
 export { Switch };

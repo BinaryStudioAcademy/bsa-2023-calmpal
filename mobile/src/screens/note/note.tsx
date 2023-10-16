@@ -9,9 +9,9 @@ import {
   ScrollView,
   TextInput,
   View,
-} from '#libs/components/components';
-import { DEFAULT_NOTE_PAYLOAD } from '#libs/constants/constants';
-import { debounce, sanitizeInput } from '#libs/helpers/helpers';
+} from '~/libs/components/components';
+import { DEFAULT_NOTE_PAYLOAD } from '~/libs/constants/constants';
+import { debounce, sanitizeInput } from '~/libs/helpers/helpers';
 import {
   useAppDispatch,
   useAppForm,
@@ -19,10 +19,10 @@ import {
   useCallback,
   useEffect,
   useMemo,
-} from '#libs/hooks/hooks';
-import { type JournalNavigationParameterList } from '#libs/types/types';
-import { type JournalEntryCreateRequestDto } from '#packages/journal/journal';
-import { actions as journalActions } from '#slices/journal/journal';
+} from '~/libs/hooks/hooks';
+import { type JournalNavigationParameterList } from '~/libs/types/types';
+import { type JournalEntryCreateRequestDto } from '~/packages/journal/journal';
+import { actions as journalActions } from '~/slices/journal/journal';
 
 import {
   EMPTY_NOTE_TITLE,

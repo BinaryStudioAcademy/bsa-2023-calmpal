@@ -1,7 +1,7 @@
-import { Button, Icon } from '#libs/components/components.js';
-import { AppRoute, IconColor } from '#libs/enums/enums.js';
-import { useAppDispatch, useCallback } from '#libs/hooks/hooks.js';
-import { actions as appActions } from '#slices/app/app.js';
+import { Button, Icon } from '~/libs/components/components.js';
+import { AppRoute, IconColor } from '~/libs/enums/enums.js';
+import { useAppDispatch, useCallback } from '~/libs/hooks/hooks.js';
+import { actions as appActions } from '~/slices/app/app.js';
 
 import styles from './styles.module.scss';
 
@@ -51,4 +51,5 @@ const SubscriptionPlan: React.FC<Properties> = ({ benefits, price }) => {
     </article>
   );
 };
+
 export { SubscriptionPlan };

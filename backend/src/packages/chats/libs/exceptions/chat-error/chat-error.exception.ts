@@ -1,7 +1,5 @@
-import { HTTPCode } from '#index.js';
-import { type ValueOf } from '#libs/types/types.js';
-
-import { HTTPError } from '../http-error/http-error.exception.js';
+import { HTTPCode, HTTPError } from '~/libs/packages/http/http.js';
+import { type ValueOf } from '~/libs/types/types.js';
 
 type Constructor = {
   message?: string;

@@ -10,9 +10,9 @@ import {
   Modal,
   ScrollView,
   View,
-} from '#libs/components/components';
-import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants';
-import { AppColor, ChatScreenName } from '#libs/enums/enums';
+} from '~/libs/components/components';
+import { EMPTY_ARRAY_LENGTH } from '~/libs/constants/constants';
+import { AppColor, ChatScreenName } from '~/libs/enums/enums';
 import {
   useAppDispatch,
   useAppSelector,
@@ -21,9 +21,9 @@ import {
   useNavigation,
   useSearch,
   useState,
-} from '#libs/hooks/hooks';
-import { type ChatNavigationParameterList } from '#libs/types/types';
-import { actions as chatsActions } from '#slices/chats/chats';
+} from '~/libs/hooks/hooks';
+import { type ChatNavigationParameterList } from '~/libs/types/types';
+import { actions as chatsActions } from '~/slices/chats/chats';
 
 import { styles } from './styles';
 

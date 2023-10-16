@@ -7,6 +7,7 @@ type Constructor = {
 
 class JWTService {
   private secret: Buffer;
+
   private alg: string;
 
   public constructor({ secret, alg }: Constructor) {

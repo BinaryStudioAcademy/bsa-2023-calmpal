@@ -1,9 +1,9 @@
-import { type ContentType, ServerErrorType } from '#libs/enums/enums.js';
-import { configureString } from '#libs/helpers/helpers.js';
-import { type HTTP, HTTPCode } from '#libs/packages/http/http.js';
-import { AuthError, HTTPError, HTTPHeader } from '#libs/packages/http/http.js';
-import { type Storage, StorageKey } from '#libs/packages/storage/storage.js';
-import { type ServerErrorResponse, type ValueOf } from '#libs/types/types.js';
+import { type ContentType, ServerErrorType } from '~/libs/enums/enums.js';
+import { configureString } from '~/libs/helpers/helpers.js';
+import { type HTTP, HTTPCode } from '~/libs/packages/http/http.js';
+import { AuthError, HTTPError, HTTPHeader } from '~/libs/packages/http/http.js';
+import { type Storage, StorageKey } from '~/libs/packages/storage/storage.js';
+import { type ServerErrorResponse, type ValueOf } from '~/libs/types/types.js';
 
 import {
   type HTTPApi,

@@ -1,5 +1,5 @@
-import { type AppEnvironment } from '#libs/enums/enums.js';
-import { type ValueOf } from '#libs/types/types.js';
+import { type AppEnvironment } from '~/libs/enums/enums.js';
+import { type ValueOf } from '~/libs/types/types.js';
 
 import { type Config, type EnvironmentSchema } from './libs/types/types.js';
 

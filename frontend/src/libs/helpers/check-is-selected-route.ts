@@ -1,6 +1,6 @@
-import { ROUTER_ITEMS } from '#libs/components/router-provider/libs/constants/constants.js';
-import { findNestedChildRoute } from '#libs/components/router-provider/libs/helpers/helpers.js';
-import { type Route } from '#libs/types/types.js';
+import { ROUTER_ITEMS } from '~/libs/components/router-provider/libs/constants/constants.js';
+import { findNestedChildRoute } from '~/libs/components/router-provider/libs/helpers/helpers.js';
+import { type Route } from '~/libs/types/types.js';
 
 type Properties = {
   pathname: string;

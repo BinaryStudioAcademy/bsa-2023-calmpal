@@ -1,10 +1,10 @@
-import { Button, Checkbox, Input } from '#libs/components/components.js';
+import { Button, Checkbox, Input } from '~/libs/components/components.js';
 import {
   useAppForm,
   useCallback,
   useFormController,
-} from '#libs/hooks/hooks.js';
-import { type DeleteAccountFormPayload } from '#packages/users/users.js';
+} from '~/libs/hooks/hooks.js';
+import { type DeleteAccountFormPayload } from '~/packages/users/users.js';
 
 import {
   CHECKBOX_OPTIONS,

@@ -1,6 +1,6 @@
-import { AppQueryStringKey, AppRoute } from '#libs/enums/enums.js';
-import { getUrlWithQueryString } from '#libs/helpers/helpers.js';
-import { type ValueOf } from '#libs/types/types.js';
+import { AppQueryStringKey, AppRoute } from '~/libs/enums/enums.js';
+import { getUrlWithQueryString } from '~/libs/helpers/helpers.js';
+import { type ValueOf } from '~/libs/types/types.js';
 
 type Parameters = {
   timerDuration: number;

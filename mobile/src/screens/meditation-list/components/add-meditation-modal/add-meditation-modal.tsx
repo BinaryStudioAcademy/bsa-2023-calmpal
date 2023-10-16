@@ -7,15 +7,15 @@ import {
   Modal,
   Text,
   View,
-} from '#libs/components/components';
-import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants';
-import { AppColor } from '#libs/enums/enums';
-import { useAppForm, useCallback } from '#libs/hooks/hooks';
+} from '~/libs/components/components';
+import { EMPTY_ARRAY_LENGTH } from '~/libs/constants/constants';
+import { AppColor } from '~/libs/enums/enums';
+import { useAppForm, useCallback } from '~/libs/hooks/hooks';
 import {
   createMeditationEntryFormValidationSchema,
   type MeditationEntryCreateForm,
   type MeditationEntryCreateRequestDto,
-} from '#packages/meditation/meditation';
+} from '~/packages/meditation/meditation';
 
 import { DEFAULT_MEDITATION_PAYLOAD } from './libs/constants/constants';
 import { styles } from './styles';

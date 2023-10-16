@@ -1,4 +1,4 @@
-import { config } from '#libs/packages/config/config.js';
+import { config } from '~/libs/packages/config/config.js';
 
 import { http } from '../http/http.js';
 import { OpenAi } from './open-ai.package.js';

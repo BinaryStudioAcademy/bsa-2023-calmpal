@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { type AsyncThunkConfig } from '#libs/types/types.js';
+import { type AsyncThunkConfig } from '~/libs/types/types.js';
 import {
   type MeditationEntryCreateRequestDto,
   type MeditationEntryCreateResponseDto,
   type MeditationEntryGetAllResponseDto,
-} from '#packages/meditation/meditation.js';
-import { appActions } from '#slices/app/app-notification.js';
+} from '~/packages/meditation/meditation.js';
+import { appActions } from '~/slices/app/app-notification.js';
 
 import { name as sliceName } from './meditation.slice.js';
 

@@ -1,27 +1,33 @@
 import {
   PutObjectCommand,
-  type PutObjectCommandInput,
   S3Client,
   type S3ClientConfig,
   S3ServiceException,
 } from '@aws-sdk/client-s3';
 
-import { FileError } from '#libs/exceptions/exceptions.js';
-import { replaceTemplateWithValue } from '#libs/helpers/helpers.js';
-import { type HTTPCode } from '#libs/packages/http/http.js';
-import { type ValueOf } from '#libs/types/types.js';
+import { type ContentType } from '~/libs/enums/enums.js';
+import { ExceptionMessage } from '~/libs/enums/enums.js';
+import { ApplicationError } from '~/libs/exceptions/exceptions.js';
+import { replaceTemplateWithValue } from '~/libs/helpers/helpers.js';
+import { type HTTPCode, HTTPError } from '~/libs/packages/http/http.js';
+import { type ValueOf } from '~/libs/types/types.js';
 
-import { type S3FileUploadRequestDto } from './libs/types/types.js';
-
-type S3Dependencies = {
+type Constructor = {
   region: string;
   accessKeyId?: string | undefined;
   secretAccessKey?: string | undefined;
   bucketName: string;
 };
 
+type UploadFilePayload = {
+  fileKey: string;
+  buffer: Buffer;
+  contentType: ValueOf<typeof ContentType>;
+};
+
 class S3 {
   private region: string;
+
   private bucketName: string;
 
   private s3Client: S3Client;
@@ -31,7 +37,7 @@ class S3 {
     accessKeyId,
     secretAccessKey,
     bucketName,
-  }: S3Dependencies) {
+  }: Constructor) {
     this.region = region;
     this.bucketName = bucketName;
 
@@ -50,22 +56,28 @@ class S3 {
     return this.s3Client;
   }
 
-  public async sendFile({
+  public async uploadFile({
     fileKey,
     buffer,
     contentType,
-  }: S3FileUploadRequestDto): Promise<void> {
-    const putObjectCommand = new PutObjectCommand({
-      Bucket: this.bucketName,
-      Key: fileKey,
-      Body: buffer,
-      ContentType: contentType,
-    } as PutObjectCommandInput);
+  }: UploadFilePayload): Promise<string> {
+    try {
+      const putObjectCommand = new PutObjectCommand({
+        Bucket: this.bucketName,
+        Key: fileKey,
+        Body: buffer,
+        ContentType: contentType,
+      });
 
-    await this.s3Client.send(putObjectCommand);
+      await this.s3Client.send(putObjectCommand);
+
+      return this.getFileUrl(fileKey);
+    } catch (error) {
+      this.throwError(error);
+    }
   }
 
-  public getUrl(fileKey: string): string {
+  private getFileUrl(fileKey: string): string {
     return replaceTemplateWithValue({
       template: 'https://{bucket}.s3.{region}.amazonaws.com/{fileKey}',
       replacements: {
@@ -78,13 +90,16 @@ class S3 {
 
   private throwError(error: unknown): never {
     if (error instanceof S3ServiceException) {
-      throw new FileError({
+      throw new HTTPError({
         message: error.message,
         status: error.$response?.statusCode as ValueOf<typeof HTTPCode>,
       });
     }
 
-    throw new FileError({});
+    throw new ApplicationError({
+      message: ExceptionMessage.FILE_UPLOAD_FAILED,
+      cause: error,
+    });
   }
 }
 

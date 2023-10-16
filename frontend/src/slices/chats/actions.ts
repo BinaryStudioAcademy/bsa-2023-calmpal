@@ -1,19 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { AppRoute } from '#libs/enums/enums.js';
-import { type AsyncThunkConfig } from '#libs/types/types.js';
+import { AppRoute } from '~/libs/enums/enums.js';
+import { type AsyncThunkConfig } from '~/libs/types/types.js';
 import {
   type ChatMessageCreatePayload,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
-} from '#packages/chat-messages/chat-messages.js';
+} from '~/packages/chat-messages/chat-messages.js';
 import {
   type ChatCreateRequestDto,
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
   type UpdateChatDataRequestDto,
-} from '#packages/chats/chats.js';
-import { actions as appActions } from '#slices/app/app.js';
+} from '~/packages/chats/chats.js';
+import { actions as appActions } from '~/slices/app/app.js';
 
 import { name as sliceName } from './chats.slice.js';
 

@@ -1,5 +1,5 @@
-import { type AppRoute } from '#libs/enums/enums.js';
-import { type IconName, type ValueOf } from '#libs/types/types.js';
+import { type AppRoute } from '~/libs/enums/enums.js';
+import { type IconName, type ValueOf } from '~/libs/types/types.js';
 
 type SettingsOption = {
   key: IconName;

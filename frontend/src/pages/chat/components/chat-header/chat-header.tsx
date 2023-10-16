@@ -1,5 +1,5 @@
-import { Icon } from '#libs/components/components.js';
-import { IconColor } from '#libs/enums/enums.js';
+import { Icon } from '~/libs/components/components.js';
+import { IconColor } from '~/libs/enums/enums.js';
 
 import styles from './styles.module.scss';
 

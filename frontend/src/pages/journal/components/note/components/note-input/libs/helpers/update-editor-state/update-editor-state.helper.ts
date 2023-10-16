@@ -17,6 +17,7 @@ const updateEditorState = ({ value, shouldParseTextHTML }: Parameters_) => {
   return (editor: LexicalEditor): void => {
     editor.update(() => {
       const nodes = [];
+
       if (shouldParseTextHTML) {
         nodes.push(createParagraphNode(), createTextNode(value));
       } else {

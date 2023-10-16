@@ -1,14 +1,14 @@
 import { forwardRef } from 'react';
 
-import { Button, Modal } from '#libs/components/components.js';
-import { DataStatus } from '#libs/enums/enums.js';
+import { Button, Modal } from '~/libs/components/components.js';
+import { DataStatus } from '~/libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
   useCallback,
   useEffect,
-} from '#libs/hooks/hooks.js';
-import { actions as chatActions } from '#slices/chats/chats.js';
+} from '~/libs/hooks/hooks.js';
+import { actions as chatActions } from '~/slices/chats/chats.js';
 
 import styles from './styles.module.scss';
 

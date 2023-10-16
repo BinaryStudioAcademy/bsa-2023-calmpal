@@ -1,15 +1,14 @@
-import { ExceptionMessage } from '#libs/enums/enums.js';
-import { UsersError } from '#libs/exceptions/exceptions.js';
+import { ExceptionMessage } from '~/libs/enums/enums.js';
 import {
   groupChatMessage,
   replaceTemplateWithValue,
-} from '#libs/helpers/helpers.js';
-import { HTTPCode } from '#libs/packages/http/http.js';
-import { OpenAiRoleKey } from '#libs/packages/open-ai/libs/enums/open-ai-role-key.enum.js';
-import { type OpenAiMessageGenerateRequestDto } from '#libs/packages/open-ai/libs/types/types.js';
-import { type Service } from '#libs/types/types.js';
-import { type ChatbotService } from '#packages/chats/chats.js';
-import { userService } from '#packages/users/users.js';
+} from '~/libs/helpers/helpers.js';
+import { HTTPCode } from '~/libs/packages/http/http.js';
+import { OpenAiRoleKey } from '~/libs/packages/open-ai/libs/enums/open-ai-role-key.enum.js';
+import { type OpenAiMessageGenerateRequestDto } from '~/libs/packages/open-ai/libs/types/types.js';
+import { type Service } from '~/libs/types/types.js';
+import { type ChatbotService } from '~/packages/chats/chats.js';
+import { UserError, userService } from '~/packages/users/users.js';
 
 import { ChatMessageEntity } from './chat-message.entity.js';
 import { type ChatMessageRepository } from './chat-message.repository.js';
@@ -48,8 +47,9 @@ class ChatMessageService implements Service {
     payload: ChatMessageCreatePayload,
   ): Promise<ChatMessageGetAllItemResponseDto> {
     const sender = await userService.findById(payload.senderId);
+
     if (!sender) {
-      throw new UsersError({
+      throw new UserError({
         status: HTTPCode.NOT_FOUND,
         message: ExceptionMessage.USER_NOT_FOUND,
       });
@@ -70,8 +70,9 @@ class ChatMessageService implements Service {
     payload: ChatMessageCreatePayload,
   ): Promise<ChatMessageGetAllItemResponseDto> {
     const sender = await this.chatbotService.getChatbotUser();
+
     if (!sender) {
-      throw new UsersError({
+      throw new UserError({
         status: HTTPCode.NOT_FOUND,
         message: ExceptionMessage.USER_NOT_FOUND,
       });

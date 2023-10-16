@@ -22,4 +22,5 @@ const useMediaQuery = (query: string): boolean => {
 
   return isMatched;
 };
+
 export { useMediaQuery };

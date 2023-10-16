@@ -1,6 +1,6 @@
-import { type Service } from '#libs/types/types.js';
-import { type FileService } from '#packages/files/file.service.js';
-import { type FileUploadRequestDto } from '#packages/files/files.js';
+import { type Service } from '~/libs/types/types.js';
+import { type FileService } from '~/packages/files/file.service.js';
+import { type FileUploadRequestDto } from '~/packages/files/files.js';
 
 import {
   type MeditationEntryCreateResponseDto,

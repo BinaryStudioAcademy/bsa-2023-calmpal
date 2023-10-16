@@ -1,4 +1,4 @@
-import { type ChatEntity } from '#packages/chats/chat.entity.js';
+import { type ChatEntity } from '~/packages/chats/chat.entity.js';
 
 type CreateChatPayload = {
   chatEntity: ChatEntity;

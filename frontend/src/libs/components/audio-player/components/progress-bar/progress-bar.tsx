@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 
-import { getFormattedTime } from '#libs/helpers/helpers.js';
-import { useCallback } from '#libs/hooks/hooks.js';
+import { getFormattedTime } from '~/libs/helpers/helpers.js';
+import { useCallback } from '~/libs/hooks/hooks.js';
 
 import styles from './styles.module.scss';
 
@@ -23,6 +23,7 @@ const ProgressBar: React.ForwardRefRenderFunction<
       (event) => {
         if (audioReference.current && progressBarReference.current) {
           const newTime = Number.parseFloat(event.target.value);
+
           if (!Number.isNaN(newTime)) {
             audioReference.current.currentTime = newTime;
           }

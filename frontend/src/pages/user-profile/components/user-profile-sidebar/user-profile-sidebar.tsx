@@ -5,8 +5,8 @@ import {
   Sidebar,
   SidebarBody,
   SidebarHeader,
-} from '#libs/components/components.js';
-import { IconColor } from '#libs/enums/enums.js';
+} from '~/libs/components/components.js';
+import { IconColor } from '~/libs/enums/enums.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -14,11 +14,11 @@ import {
   useLocation,
   useRef,
   useState,
-} from '#libs/hooks/hooks.js';
-import { type UserAuthResponseDto } from '#packages/users/users.js';
-import { DeleteAccountModal } from '#pages/profile-settings/components/components.js';
-import { type DeleteAccountModalHandler } from '#pages/profile-settings/components/delete-account-modal/libs/types/types.js';
-import { actions as authActions } from '#slices/auth/auth.js';
+} from '~/libs/hooks/hooks.js';
+import { type UserAuthResponseDto } from '~/packages/users/users.js';
+import { DeleteAccountModal } from '~/pages/profile-settings/components/components.js';
+import { type DeleteAccountModalHandler } from '~/pages/profile-settings/components/delete-account-modal/libs/types/types.js';
+import { actions as authActions } from '~/slices/auth/auth.js';
 
 import { SETTING_NAME_INDEX, SETTINGS_OPTIONS } from './libs/constants.js';
 import styles from './styles.module.scss';

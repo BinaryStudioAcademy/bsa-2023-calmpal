@@ -1,7 +1,7 @@
-import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants.js';
-import { type ContentType, IconColor } from '#libs/enums/enums.js';
-import { getValidClassNames } from '#libs/helpers/helpers.js';
-import { useCallback, useFormController } from '#libs/hooks/hooks.js';
+import { EMPTY_ARRAY_LENGTH } from '~/libs/constants/constants.js';
+import { type ContentType, IconColor } from '~/libs/enums/enums.js';
+import { getValidClassNames } from '~/libs/helpers/helpers.js';
+import { useCallback, useFormController } from '~/libs/hooks/hooks.js';
 import {
   type FormControl,
   type FormFieldErrors,
@@ -10,7 +10,7 @@ import {
   type FormFieldValues,
   type FormFieldValuesFromFieldErrors,
   type ValueOf,
-} from '#libs/types/types.js';
+} from '~/libs/types/types.js';
 
 import { ErrorMessage, Icon } from '../components.js';
 import styles from './styles.module.scss';

@@ -1,23 +1,23 @@
-import { ContentType, ExceptionMessage } from '#libs/enums/enums.js';
-import { ChatError } from '#libs/exceptions/exceptions.js';
-import { replaceTemplateWithValue } from '#libs/helpers/helpers.js';
-import { HTTPCode } from '#libs/packages/http/http.js';
-import { OpenAiRoleKey } from '#libs/packages/open-ai/libs/enums/enums.js';
-import { type OpenAi } from '#libs/packages/open-ai/open-ai.js';
-import { type Service } from '#libs/types/types.js';
+import { ContentType, ExceptionMessage } from '~/libs/enums/enums.js';
+import { replaceTemplateWithValue } from '~/libs/helpers/helpers.js';
+import { HTTPCode } from '~/libs/packages/http/http.js';
+import { OpenAiRoleKey } from '~/libs/packages/open-ai/libs/enums/enums.js';
+import { type OpenAi } from '~/libs/packages/open-ai/open-ai.js';
+import { type Service } from '~/libs/types/types.js';
 import {
   type ChatMessageCreatePayload,
   type ChatMessageGetAllItemResponseDto,
   type ChatMessageGetAllResponseDto,
   type ChatMessageService,
-} from '#packages/chat-messages/chat-messages.js';
-import { type FileService } from '#packages/files/files.js';
+} from '~/packages/chat-messages/chat-messages.js';
+import { type FileService } from '~/packages/files/files.js';
 
 import { type ChatRepository } from './chat.repository.js';
 import {
   CHAT_IMAGE_TEMPLATE,
   CHAT_NAME_TEMPLATE,
 } from './libs/constants/constants.js';
+import { ChatError } from './libs/exceptions/exceptions.js';
 import {
   type ChatGetAllItemResponseDto,
   type ChatGetAllResponseDto,
@@ -34,8 +34,11 @@ type Constructor = {
 
 class ChatService implements Service {
   private chatRepository: ChatRepository;
+
   private openAiService: OpenAi;
+
   private chatMessageService: ChatMessageService;
+
   private fileService: FileService;
 
   public constructor({
@@ -128,6 +131,7 @@ class ChatService implements Service {
   }: UpdateChatDataPayload): Promise<ChatGetAllItemResponseDto> {
     const fileRecord = await this.fileService.create({
       buffer: Buffer.from(url, 'base64'),
+      fileName: `chat-${chat.id}.png`,
       contentType: ContentType.PNG,
     });
 
@@ -176,6 +180,7 @@ class ChatService implements Service {
     }
 
     const deletedCount = await this.chatRepository.delete({ id, userId });
+
     if (!deletedCount) {
       throw new ChatError({
         status: HTTPCode.NOT_FOUND,

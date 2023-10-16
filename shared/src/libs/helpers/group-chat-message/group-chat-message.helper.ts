@@ -1,7 +1,7 @@
 import {
   type ChatMessageGetAllItemResponseDto,
   type ChatMessagesGroups,
-} from '#packages/chat-messages/chat-messages.js';
+} from '~/packages/chat-messages/chat-messages.js';
 
 const groupChatMessage = (
   group: ChatMessagesGroups,

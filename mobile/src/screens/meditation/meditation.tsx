@@ -1,10 +1,10 @@
 import React from 'react';
 
-import imagePlaceholder from '#assets/img/card-image-placeholder.png';
-import meditationBackground from '#assets/img/meditation-background.png';
-import { Image, Player, Text, View } from '#libs/components/components';
-import { useAppRoute, useAppSelector, useEffect } from '#libs/hooks/hooks';
-import { player } from '#libs/packages/player/player';
+import imagePlaceholder from '~/assets/img/card-image-placeholder.png';
+import meditationBackground from '~/assets/img/meditation-background.png';
+import { Image, Player, Text, View } from '~/libs/components/components';
+import { useAppRoute, useAppSelector, useEffect } from '~/libs/hooks/hooks';
+import { player } from '~/libs/packages/player/player';
 
 import { TITLE_LINE_COUNT } from './libs/constants/constants';
 import { styles } from './styles';

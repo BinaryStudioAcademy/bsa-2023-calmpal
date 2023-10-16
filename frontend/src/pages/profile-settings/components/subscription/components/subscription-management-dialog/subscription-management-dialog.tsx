@@ -1,6 +1,6 @@
-import { Icon } from '#libs/components/components.js';
-import { IconColor, TimeFormat } from '#libs/enums/enums.js';
-import { getFormattedDate } from '#libs/helpers/helpers.js';
+import { Icon } from '~/libs/components/components.js';
+import { IconColor, TimeFormat } from '~/libs/enums/enums.js';
+import { getFormattedDate } from '~/libs/helpers/helpers.js';
 
 import styles from './styles.module.scss';
 
@@ -64,4 +64,5 @@ const SubscriptionManagementDialog: React.FC<Properties> = ({
     </div>
   );
 };
+
 export { SubscriptionManagementDialog };

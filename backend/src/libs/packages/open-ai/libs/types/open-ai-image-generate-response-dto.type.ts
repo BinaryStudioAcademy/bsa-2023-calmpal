@@ -1,4 +1,4 @@
-import { type ValueOf } from '#libs/types/types.js';
+import { type ValueOf } from '~/libs/types/types.js';
 
 import { type OpenAiResponseFormat } from '../enums/enums.js';
 

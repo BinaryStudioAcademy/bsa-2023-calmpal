@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { Button, View } from '#libs/components/components';
-import { AppColor } from '#libs/enums/enums';
+import { Button, View } from '~/libs/components/components';
+import { AppColor } from '~/libs/enums/enums';
 import {
   useCallback,
   useFocusEffect,
   usePlayerControls,
   useState,
-} from '#libs/hooks/hooks';
+} from '~/libs/hooks/hooks';
 
 import { styles } from './styles';
 
@@ -65,4 +65,5 @@ const Controls: React.FC<Properties> = ({ isPlaying: initialIsPlaying }) => {
     </View>
   );
 };
+
 export { Controls };

@@ -1,5 +1,5 @@
-import { sanitizeInput } from '#libs/helpers/helpers.js';
-import { useEffect } from '#libs/hooks/hooks.js';
+import { sanitizeInput } from '~/libs/helpers/helpers.js';
+import { useEffect } from '~/libs/hooks/hooks.js';
 
 import { NOTE_SANITIZER_OPTIONS } from '../../constants/constants.js';
 import { generateHtmlFromNodes } from '../../helpers/helpers.js';
@@ -25,4 +25,5 @@ const OnChangePlugin: React.FC<Properties> = ({ onChange }) => {
 
   return null;
 };
+
 export { OnChangePlugin };

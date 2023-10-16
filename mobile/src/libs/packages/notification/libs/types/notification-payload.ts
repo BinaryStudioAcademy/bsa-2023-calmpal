@@ -1,4 +1,4 @@
-import { type ValueOf } from '#libs/types/types';
+import { type ValueOf } from '~/libs/types/types';
 
 import { type NotificationType } from '../enums/enums';
 

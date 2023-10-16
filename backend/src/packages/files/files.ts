@@ -1,5 +1,5 @@
-import { logger } from '#libs/packages/logger/logger.js';
-import { s3 } from '#libs/packages/s3/s3.js';
+import { logger } from '~/libs/packages/logger/logger.js';
+import { s3 } from '~/libs/packages/s3/s3.js';
 
 import { FileController } from './file.controller.js';
 import { FileModel } from './file.model.js';
@@ -19,6 +19,7 @@ export {
   FileUploadValidationMessage,
   FileUploadValidationRule,
 } from './libs/enums/enums.js';
+export { FileError } from './libs/exceptions/exceptions.js';
 export {
   type FileGetAllItemResponseDto,
   type FileUploadRequestDto,

@@ -1,7 +1,7 @@
-import { SortType } from '#libs/enums/enums.js';
-import { type Repository } from '#libs/types/types.js';
-import { type JournalEntryModel } from '#packages/journal-entries/journal-entries.js';
-import { JournalEntryEntity } from '#packages/journal-entries/journal-entry.entity.js';
+import { SortType } from '~/libs/enums/enums.js';
+import { type Repository } from '~/libs/types/types.js';
+import { type JournalEntryModel } from '~/packages/journal-entries/journal-entries.js';
+import { JournalEntryEntity } from '~/packages/journal-entries/journal-entry.entity.js';
 
 import {
   type JournalEntryCommonQueryResponse,
@@ -49,8 +49,7 @@ class JournalEntryRepository implements Repository {
           void builder.where('title', 'iLike', `%${query}%`);
         }
       })
-      .castTo<JournalEntryCommonQueryResponse[]>()
-      .execute();
+      .castTo<JournalEntryCommonQueryResponse[]>();
 
     return journalEntries.map((journalEntry) => {
       return JournalEntryEntity.initialize({
@@ -104,8 +103,8 @@ class JournalEntryRepository implements Repository {
     });
   }
 
-  public delete(id: number): ReturnType<Repository['delete']> {
-    return this.journalEntryModel.query().deleteById(id).execute();
+  public async delete(id: number): ReturnType<Repository['delete']> {
+    return await this.journalEntryModel.query().deleteById(id);
   }
 }
 

@@ -1,5 +1,5 @@
-import { type AppQueryStringKey, type AppRoute } from '#libs/enums/enums.js';
-import { type ValueOf } from '#libs/types/types.js';
+import { type AppQueryStringKey, type AppRoute } from '~/libs/enums/enums.js';
+import { type ValueOf } from '~/libs/types/types.js';
 
 type QueryParameters = Partial<
   Record<ValueOf<typeof AppQueryStringKey>, string>

@@ -1,7 +1,7 @@
 import {
   PREFERENCES_OTHER_CATEGORY,
   type SurveyInputDto,
-} from '#packages/survey/survey.js';
+} from '~/packages/survey/survey.js';
 
 const TEXTAREA_ROWS_COUNT = 3;
 

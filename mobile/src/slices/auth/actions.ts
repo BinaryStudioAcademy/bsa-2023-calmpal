@@ -1,14 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants';
-import { storage, StorageKey } from '#libs/packages/storage/storage';
-import { type AsyncThunkConfig } from '#libs/types/types';
-import { type SurveyRequestDto } from '#packages/survey/survey';
+import { EMPTY_ARRAY_LENGTH } from '~/libs/constants/constants';
+import { storage, StorageKey } from '~/libs/packages/storage/storage';
+import { type AsyncThunkConfig } from '~/libs/types/types';
+import { type SurveyRequestDto } from '~/packages/survey/survey';
 import {
   type UserAuthResponseDto,
   type UserSignInRequestDto,
   type UserSignUpRequestDto,
-} from '#packages/users/users';
+} from '~/packages/users/users';
 
 import { name as sliceName } from './auth.slice';
 

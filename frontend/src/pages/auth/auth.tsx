@@ -1,13 +1,17 @@
-import logoM from '#assets/img/logo-m.svg';
-import logoXl from '#assets/img/logo-xl.svg';
-import logoXs from '#assets/img/logo-xs.svg';
-import { AppRoute } from '#libs/enums/enums.js';
-import { useAppDispatch, useCallback, useLocation } from '#libs/hooks/hooks.js';
+import logoM from '~/assets/img/logo-m.svg';
+import logoXl from '~/assets/img/logo-xl.svg';
+import logoXs from '~/assets/img/logo-xs.svg';
+import { AppRoute } from '~/libs/enums/enums.js';
+import {
+  useAppDispatch,
+  useCallback,
+  useLocation,
+} from '~/libs/hooks/hooks.js';
 import {
   type UserSignInRequestDto,
   type UserSignUpRequestDto,
-} from '#packages/users/users.js';
-import { actions as authActions } from '#slices/auth/auth.js';
+} from '~/packages/users/users.js';
+import { actions as authActions } from '~/slices/auth/auth.js';
 
 import { SignInForm, SignUpForm } from './components/components.js';
 import styles from './styles.module.scss';
@@ -35,6 +39,7 @@ const Auth: React.FC = () => {
       case AppRoute.SIGN_IN: {
         return <SignInForm onSubmit={handleSignInSubmit} />;
       }
+
       case AppRoute.SIGN_UP: {
         return <SignUpForm onSubmit={handleSignUpSubmit} />;
       }

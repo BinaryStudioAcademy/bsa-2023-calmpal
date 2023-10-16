@@ -1,10 +1,8 @@
-import {
-  AuthError,
-  ChatError,
-  FileError,
-  UsersError,
-} from '#libs/exceptions/exceptions.js';
-import { HTTPError } from '#libs/packages/http/http.js';
+import { AuthError } from '~/libs/exceptions/exceptions.js';
+import { HTTPError } from '~/libs/packages/http/http.js';
+import { ChatError } from '~/packages/chats/chats.js';
+import { FileError } from '~/packages/files/files.js';
+import { UserError } from '~/packages/users/users.js';
 
 import { type APIError, type ErrorInfo } from '../../types/types.js';
 import { getAuthErrorInfo } from './get-auth-error-info.helper.js';
@@ -20,7 +18,7 @@ const getErrorInfo = (error: APIError): ErrorInfo => {
     return getValidationErrorInfo(error);
   }
 
-  if (error instanceof UsersError) {
+  if (error instanceof UserError) {
     return getUsersErrorInfo(error);
   }
 

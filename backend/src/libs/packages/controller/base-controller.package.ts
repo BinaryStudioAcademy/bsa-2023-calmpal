@@ -1,5 +1,5 @@
-import { type Logger } from '#libs/packages/logger/logger.js';
-import { type ServerApplicationRouteParameters } from '#libs/packages/server-application/server-application.js';
+import { type Logger } from '~/libs/packages/logger/logger.js';
+import { type ServerApplicationRouteParameters } from '~/libs/packages/server-application/server-application.js';
 
 import {
   type APIHandler,

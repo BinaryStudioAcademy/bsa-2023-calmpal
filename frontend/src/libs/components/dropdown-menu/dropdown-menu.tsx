@@ -1,16 +1,16 @@
-import { Icon, Link } from '#libs/components/components.js';
-import { IconColor } from '#libs/enums/enums.js';
+import { Icon, Link } from '~/libs/components/components.js';
+import { IconColor } from '~/libs/enums/enums.js';
 import {
   checkIsSelectedRoute,
   getValidClassNames,
-} from '#libs/helpers/helpers.js';
+} from '~/libs/helpers/helpers.js';
 import {
   useCallback,
   useLocation,
   useParams,
   useState,
-} from '#libs/hooks/hooks.js';
-import { type Route } from '#libs/types/types.js';
+} from '~/libs/hooks/hooks.js';
+import { type Route } from '~/libs/types/types.js';
 
 import styles from './styles.module.scss';
 

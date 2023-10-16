@@ -7,12 +7,12 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from '#libs/components/components';
-import { useAppForm, useFormController } from '#libs/hooks/hooks';
+} from '~/libs/components/components';
+import { useAppForm, useFormController } from '~/libs/hooks/hooks';
 import {
   DURATION_UNIT,
   MEDITATION_DURATION,
-} from '#libs/packages/player/player';
+} from '~/libs/packages/player/player';
 
 import { TimerButton } from './components/components';
 import { DEFAULT_DURATION_VALUE } from './libs/constants/constants';

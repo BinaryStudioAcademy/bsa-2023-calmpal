@@ -1,7 +1,7 @@
-import { APIPath } from '#libs/enums/enums.js';
-import { BaseHttpApi } from '#libs/packages/api/api.js';
-import { type HTTP } from '#libs/packages/http/http.js';
-import { type Storage } from '#libs/packages/storage/storage.js';
+import { APIPath } from '~/libs/enums/enums.js';
+import { BaseHttpApi } from '~/libs/packages/api/api.js';
+import { type HTTP } from '~/libs/packages/http/http.js';
+import { type Storage } from '~/libs/packages/storage/storage.js';
 
 import { MeditationApiPath } from './libs/enums/enums.js';
 import {

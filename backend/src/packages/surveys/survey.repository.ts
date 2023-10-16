@@ -1,4 +1,4 @@
-import { type Repository } from '#libs/types/types.js';
+import { type Repository } from '~/libs/types/types.js';
 
 import { SurveyEntity } from './survey.entity.js';
 import { type SurveyModel } from './survey.model.js';
@@ -41,13 +41,10 @@ class SurveyRepository implements Repository {
   public async create(entity: SurveyEntity): Promise<SurveyEntity> {
     const { userId, preferences } = entity.toNewObject();
 
-    const survey = await this.surveyModel
-      .query()
-      .insertGraph({
-        userId,
-        preferences,
-      })
-      .execute();
+    const survey = await this.surveyModel.query().insertGraph({
+      userId,
+      preferences,
+    });
 
     return SurveyEntity.initialize({
       id: survey.id,

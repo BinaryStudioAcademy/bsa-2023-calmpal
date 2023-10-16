@@ -1,13 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { type Track } from '#libs/packages/player/player';
-import { type AsyncThunkConfig } from '#libs/types/types';
+import { type Track } from '~/libs/packages/player/player';
+import { type AsyncThunkConfig } from '~/libs/types/types';
 import {
   type MeditationEntryCreateRequestDto,
   type MeditationEntryCreateResponseDto,
   type MeditationEntryGetAllResponseDto,
-} from '#packages/meditation/meditation';
-import { appActions } from '#slices/app/notifications';
+} from '~/packages/meditation/meditation';
+import { appActions } from '~/slices/app/notifications';
 
 import { name as sliceName } from './meditation.slice';
 

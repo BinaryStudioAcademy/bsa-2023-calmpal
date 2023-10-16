@@ -1,7 +1,7 @@
 import React from 'react';
 import { RichEditor } from 'react-native-pell-rich-editor';
 
-import { useState } from '#libs/hooks/hooks';
+import { useState } from '~/libs/hooks/hooks';
 
 import { Text } from '../components';
 import { styles } from './styles';

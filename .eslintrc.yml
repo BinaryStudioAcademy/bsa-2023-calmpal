@@ -40,7 +40,7 @@ rules:
     - selector: ExportNamedDeclaration[declaration!=null]
       message: Exports should be at the end of the file.
     - selector: TSEnumDeclaration,ClassDeclaration[abstract=true]
-      message: TS features are forbidden.
+      message: Avoid using TS enum declarations and abstract class declarations.
     - selector: ImportDeclaration[importKind=type],ExportNamedDeclaration[exportKind=type]
       message: Avoid import/export type { Type } from './module'. Prefer import/export { type Type } from './module'.
   no-console:
@@ -54,6 +54,9 @@ rules:
   curly:
     - error
     - all
+  lines-between-class-members:
+    - error
+    - always
   import/no-unresolved:
     - off
   import/extensions:
@@ -72,12 +75,8 @@ rules:
       next: export
     - blankLine: always
       prev:
-        - switch
-        - class
-        - function
-        - if
-        - return
-        - try
+        - 'block-like'
+        - throw
         - interface
         - type
       next: '*'
@@ -85,6 +84,10 @@ rules:
       prev: '*'
       next:
         - return
+        - 'block-like'
+        - throw
+        - interface
+        - type
   '@typescript-eslint/consistent-type-definitions':
     - error
     - type
@@ -98,6 +101,7 @@ rules:
     - single
   '@typescript-eslint/consistent-type-imports':
     - error
+    - fixStyle: 'inline-type-imports'
   '@typescript-eslint/consistent-type-exports':
     - error
   '@typescript-eslint/explicit-function-return-type':

@@ -1,6 +1,6 @@
-import { config } from '#libs/packages/config/config.js';
-import { encrypt as encryptService } from '#libs/packages/encrypt/encrypt.js';
-import { jwtService } from '#libs/packages/jwt/jwt.js';
+import { config } from '~/libs/packages/config/config.js';
+import { encrypt as encryptService } from '~/libs/packages/encrypt/encrypt.js';
+import { jwtService } from '~/libs/packages/jwt/jwt.js';
 
 import { UserModel } from './user.model.js';
 import { UserRepository } from './user.repository.js';
@@ -19,6 +19,7 @@ export {
   UserDetailsTableColumn,
   UsersTableColumn,
 } from './libs/enums/enums.js';
+export { UserError } from './libs/exceptions/exceptions.js';
 export {
   type UserAuthResponseDto,
   type UserSignInRequestDto,

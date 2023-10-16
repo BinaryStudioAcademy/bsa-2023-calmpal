@@ -1,5 +1,5 @@
-import { logger } from '#libs/packages/logger/logger.js';
-import { fileService } from '#packages/files/files.js';
+import { logger } from '~/libs/packages/logger/logger.js';
+import { fileService } from '~/packages/files/files.js';
 
 import { MeditationController } from './meditation.controller.js';
 import { MeditationRepository } from './meditation.repository.js';

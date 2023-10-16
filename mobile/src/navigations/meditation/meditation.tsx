@@ -1,12 +1,12 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 
-import { BackButton, Header, View } from '#libs/components/components';
-import { MeditationScreenName } from '#libs/enums/enums';
-import { type MeditationNavigationParameterList } from '#libs/types/types';
-import { Meditation as MeditationPlayer } from '#screens/meditation/meditation';
-import { MeditationHome } from '#screens/meditation-home/meditation-home';
-import { MeditationList } from '#screens/meditation-list/meditation-list';
+import { BackButton, Header, View } from '~/libs/components/components';
+import { MeditationScreenName } from '~/libs/enums/enums';
+import { type MeditationNavigationParameterList } from '~/libs/types/types';
+import { Meditation as MeditationPlayer } from '~/screens/meditation/meditation';
+import { MeditationHome } from '~/screens/meditation-home/meditation-home';
+import { MeditationList } from '~/screens/meditation-list/meditation-list';
 
 import { styles } from './styles';
 

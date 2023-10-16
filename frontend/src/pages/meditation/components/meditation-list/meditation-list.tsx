@@ -1,12 +1,12 @@
-import { BackButtonWrapper, Loader } from '#libs/components/components.js';
-import { MOBILE_DIMENSION } from '#libs/constants/constants.js';
-import { DataStatus } from '#libs/enums/enums.js';
-import { getValidClassNames } from '#libs/helpers/helpers.js';
+import { BackButtonWrapper, Loader } from '~/libs/components/components.js';
+import { MOBILE_DIMENSION } from '~/libs/constants/constants.js';
+import { DataStatus } from '~/libs/enums/enums.js';
+import { getValidClassNames } from '~/libs/helpers/helpers.js';
 import {
   useAppSelector,
   useCallback,
   useMediaQuery,
-} from '#libs/hooks/hooks.js';
+} from '~/libs/hooks/hooks.js';
 
 import { MeditationEntry } from './components/components.js';
 import styles from './styles.module.scss';

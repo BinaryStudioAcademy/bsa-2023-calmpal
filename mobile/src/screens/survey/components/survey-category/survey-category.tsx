@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Text, TouchableOpacity, View } from '#libs/components/components';
-import { useCallback, useState } from '#libs/hooks/hooks';
+import { Text, TouchableOpacity, View } from '~/libs/components/components';
+import { useCallback, useState } from '~/libs/hooks/hooks';
 
 import { styles } from './styles';
 

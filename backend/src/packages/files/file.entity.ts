@@ -1,5 +1,5 @@
-import { type ContentType } from '#libs/enums/enums.js';
-import { type Entity, type ValueOf } from '#libs/types/types.js';
+import { type ContentType } from '~/libs/enums/enums.js';
+import { type Entity, type ValueOf } from '~/libs/types/types.js';
 
 class FileEntity implements Entity {
   private id: number | null;

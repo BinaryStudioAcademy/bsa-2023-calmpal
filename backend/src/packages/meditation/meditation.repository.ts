@@ -1,4 +1,5 @@
-import { type Repository } from '#libs/types/types.js';
+import { SortType } from '~/libs/enums/enums.js';
+import { type Repository } from '~/libs/types/types.js';
 
 import { MeditationEntriesRelation } from './libs/enums/enums.js';
 import {
@@ -28,6 +29,7 @@ class MeditationRepository implements Repository {
       .query()
       .where({ userId })
       .orWhere({ userId: null })
+      .orderBy('createdAt', SortType.DESC)
       .castTo<MeditationCommonQueryResponse[]>();
 
     return meditationEntries.map((meditationEntry) => {

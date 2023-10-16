@@ -1,16 +1,16 @@
 import React from 'react';
 import DocumentPicker from 'react-native-document-picker';
 
-import { FIRST_ARRAY_INDEX } from '#libs/constants/constants';
-import { AppColor } from '#libs/enums/enums';
-import { useAppDispatch, useFormController } from '#libs/hooks/hooks';
+import { FIRST_ARRAY_INDEX } from '~/libs/constants/constants';
+import { AppColor } from '~/libs/enums/enums';
+import { useAppDispatch, useFormController } from '~/libs/hooks/hooks';
 import {
   type FormControl,
   type FormFieldErrors,
   type FormFieldPath,
   type FormFieldValues,
-} from '#libs/types/types';
-import { appActions } from '#slices/app/notifications';
+} from '~/libs/types/types';
+import { appActions } from '~/slices/app/notifications';
 
 import { Icon, Pressable, Text, View } from '../components';
 import { NUMBER_OF_LINES } from './libs/constants';
@@ -42,6 +42,7 @@ const InputFile = <T extends FormFieldValues>({
 
   const handlePickFile = async (): Promise<void> => {
     const hasPermissions = await requestMediaPermissions();
+
     if (hasPermissions) {
       const result = await DocumentPicker.pick({
         type: [DocumentPicker.types.audio],

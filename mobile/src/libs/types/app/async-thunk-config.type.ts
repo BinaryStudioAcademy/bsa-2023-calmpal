@@ -1,4 +1,4 @@
-import { type store } from '#libs/packages/store/store';
+import { type store } from '~/libs/packages/store/store';
 
 type AsyncThunkConfig = {
   state: ReturnType<typeof store.instance.getState>;

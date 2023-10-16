@@ -1,4 +1,4 @@
-import { type DeleteAccountFormPayload } from '#packages/users/users.js';
+import { type DeleteAccountFormPayload } from '~/packages/users/users.js';
 
 import { DeleteAccountPayloadKey } from '../enums/enums.js';
 

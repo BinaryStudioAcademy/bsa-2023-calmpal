@@ -1,4 +1,4 @@
-import { TRACK_START_TIME } from '#pages/meditation/libs/constants/constants.js';
+import { TRACK_START_TIME } from '~/pages/meditation/libs/constants/constants.js';
 
 import { AudioOptionKey } from '../enums/enums.js';
 

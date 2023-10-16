@@ -1,4 +1,4 @@
-import { config } from '#libs/packages/config/config.js';
+import { config } from '~/libs/packages/config/config.js';
 
 import { S3 } from './s3.package.js';
 

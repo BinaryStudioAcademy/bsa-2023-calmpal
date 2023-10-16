@@ -1,4 +1,4 @@
-import { logger } from '#libs/packages/logger/logger.js';
+import { logger } from '~/libs/packages/logger/logger.js';
 
 import { BaseConfig } from './base-config.package.js';
 

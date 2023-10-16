@@ -1,16 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { EMPTY_ARRAY_LENGTH } from '#libs/constants/constants.js';
-import { AppRoute } from '#libs/enums/enums.js';
-import { storage, StorageKey } from '#libs/packages/storage/storage.js';
-import { type AsyncThunkConfig } from '#libs/types/types.js';
-import { type SurveyRequestDto } from '#packages/survey/survey.js';
+import { EMPTY_ARRAY_LENGTH } from '~/libs/constants/constants.js';
+import { AppRoute } from '~/libs/enums/enums.js';
+import { storage, StorageKey } from '~/libs/packages/storage/storage.js';
+import { type AsyncThunkConfig } from '~/libs/types/types.js';
+import { type SurveyRequestDto } from '~/packages/survey/survey.js';
 import {
   type UserAuthResponseDto,
   type UserSignInRequestDto,
   type UserSignUpRequestDto,
-} from '#packages/users/users.js';
-import { actions as appActions } from '#slices/app/app.js';
+} from '~/packages/users/users.js';
+import { actions as appActions } from '~/slices/app/app.js';
 
 import { name as sliceName } from './auth.slice.js';
 
@@ -57,6 +57,7 @@ const getAuthenticatedUser = createAsyncThunk<
 >(`${sliceName}/get-authenticated-user`, async (_, { extra }) => {
   const { authApi } = extra;
   const hasToken = await storage.has(StorageKey.TOKEN);
+
   if (hasToken) {
     return await authApi.getAuthenticatedUser();
   }

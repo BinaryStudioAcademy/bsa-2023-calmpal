@@ -1,9 +1,8 @@
-import { ExceptionMessage } from '#libs/enums/enums.js';
-import { JournalError } from '#libs/exceptions/exceptions.js';
-import { sanitizeInput } from '#libs/helpers/helpers.js';
-import { HTTPCode } from '#libs/packages/http/http.js';
-import { type Service } from '#libs/types/types.js';
-import { type UserAuthResponseDto } from '#packages/users/users.js';
+import { ExceptionMessage } from '~/libs/enums/enums.js';
+import { sanitizeInput } from '~/libs/helpers/helpers.js';
+import { HTTPCode } from '~/libs/packages/http/http.js';
+import { type Service } from '~/libs/types/types.js';
+import { type UserAuthResponseDto } from '~/packages/users/users.js';
 
 import { JournalEntryEntity } from './journal-entry.entity.js';
 import { type JournalEntryRepository } from './journal-entry.repository.js';
@@ -11,6 +10,7 @@ import {
   DEFAULT_NOTE_TEXT,
   NOTE_SANITIZER_OPTIONS,
 } from './libs/constants/constants.js';
+import { JournalError } from './libs/exceptions/exceptions.js';
 import {
   type CreateJournalEntryPayload,
   type JournalEntryGetAllItemResponseDto,
@@ -117,6 +117,7 @@ class JournalEntryService implements Service {
     }
 
     const journal = await this.findById(payload.id);
+
     if (journal.userId !== payload.user.id) {
       throw new JournalError({
         status: HTTPCode.BAD_REQUEST,

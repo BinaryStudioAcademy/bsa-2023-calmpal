@@ -1,10 +1,10 @@
-import { Button } from '#libs/components/components.js';
+import { Button } from '~/libs/components/components.js';
 import {
   useAppDispatch,
   useAppSelector,
   useCallback,
-} from '#libs/hooks/hooks.js';
-import { actions as userActions } from '#slices/users/users.js';
+} from '~/libs/hooks/hooks.js';
+import { actions as userActions } from '~/slices/users/users.js';
 
 import styles from './styles.module.scss';
 

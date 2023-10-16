@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Text, TouchableOpacity } from '#libs/components/components';
-import { getFormattedTime } from '#libs/helpers/helpers';
-import { useCallback } from '#libs/hooks/hooks';
+import { Text, TouchableOpacity } from '~/libs/components/components';
+import { getFormattedTime } from '~/libs/helpers/helpers';
+import { useCallback } from '~/libs/hooks/hooks';
 
 import { styles } from './styles';
 
@@ -41,4 +41,5 @@ const TimerButton: React.FC<Properties> = ({
     </TouchableOpacity>
   );
 };
+
 export { TimerButton };

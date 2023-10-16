@@ -2,7 +2,7 @@ const ContentType = {
   JSON: 'application/json',
   JPEG: 'image/jpeg',
   PNG: 'image/png',
-  MPEG: 'audio/mpeg',
+  MP3: 'audio/mpeg',
   TEXT: 'text/plain',
 } as const;
 

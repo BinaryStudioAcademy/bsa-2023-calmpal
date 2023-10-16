@@ -1,8 +1,8 @@
-import { APIPath, ContentType } from '#libs/enums/enums.js';
-import { BaseHttpApi } from '#libs/packages/api/api.js';
-import { type HTTP } from '#libs/packages/http/http.js';
-import { type Storage } from '#libs/packages/storage/storage.js';
-import { type UserAuthResponseDto } from '#packages/users/users.js';
+import { APIPath, ContentType } from '~/libs/enums/enums.js';
+import { BaseHttpApi } from '~/libs/packages/api/api.js';
+import { type HTTP } from '~/libs/packages/http/http.js';
+import { type Storage } from '~/libs/packages/storage/storage.js';
+import { type UserAuthResponseDto } from '~/packages/users/users.js';
 
 import { SubscriptionApiPath } from './libs/enums/enums.js';
 import {

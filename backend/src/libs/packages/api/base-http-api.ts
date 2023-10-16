@@ -1,12 +1,12 @@
-import { type ContentType, ServerErrorType } from '#libs/enums/enums.js';
-import { configureString } from '#libs/helpers/helpers.js';
+import { type ContentType, ServerErrorType } from '~/libs/enums/enums.js';
+import { configureString } from '~/libs/helpers/helpers.js';
 import {
   type HTTP,
   type HTTPCode,
   HTTPHeader,
-} from '#libs/packages/http/http.js';
-import { HTTPError } from '#libs/packages/http/http.js';
-import { type ServerErrorResponse, type ValueOf } from '#libs/types/types.js';
+} from '~/libs/packages/http/http.js';
+import { HTTPError } from '~/libs/packages/http/http.js';
+import { type ServerErrorResponse, type ValueOf } from '~/libs/types/types.js';
 
 import { type HTTPApi, type HTTPApiOptions } from './libs/types/types.js';
 
@@ -64,6 +64,7 @@ class BaseHttpApi implements HTTPApi {
     token: string | undefined,
   ): Headers {
     const headers = new Headers();
+
     if (contentType) {
       headers.append(HTTPHeader.CONTENT_TYPE, contentType);
     }

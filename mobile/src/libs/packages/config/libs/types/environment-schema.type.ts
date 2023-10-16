@@ -1,5 +1,5 @@
-import { type AppEnvironment } from '#libs/enums/enums';
-import { type ValueOf } from '#libs/types/types';
+import { type AppEnvironment } from '~/libs/enums/enums';
+import { type ValueOf } from '~/libs/types/types';
 
 type EnvironmentSchema = {
   APP: {

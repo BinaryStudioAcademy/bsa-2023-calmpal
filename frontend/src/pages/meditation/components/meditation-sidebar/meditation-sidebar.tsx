@@ -1,4 +1,4 @@
-import meditationPlaceholder from '#assets/img/meditation-image-placeholder.png';
+import meditationPlaceholder from '~/assets/img/meditation-image-placeholder.png';
 import {
   Button,
   Card,
@@ -6,17 +6,17 @@ import {
   Sidebar,
   SidebarBody,
   SidebarHeader,
-} from '#libs/components/components.js';
-import { AppRoute, IconColor } from '#libs/enums/enums.js';
+} from '~/libs/components/components.js';
+import { AppRoute, IconColor } from '~/libs/enums/enums.js';
 import {
   useAppDispatch,
   useCallback,
   useEffect,
   useRef,
-} from '#libs/hooks/hooks.js';
-import { type MeditationEntryCreateRequestDto } from '#packages/meditation/meditation.js';
-import { navigationItems } from '#pages/meditation/libs/constants/constants.js';
-import { actions as meditationActions } from '#slices/meditation/meditation.js';
+} from '~/libs/hooks/hooks.js';
+import { type MeditationEntryCreateRequestDto } from '~/packages/meditation/meditation.js';
+import { navigationItems } from '~/pages/meditation/libs/constants/constants.js';
+import { actions as meditationActions } from '~/slices/meditation/meditation.js';
 
 import { AddMeditationModal } from '../add-meditation-modal/add-meditation-modal.js';
 import styles from './styles.module.scss';

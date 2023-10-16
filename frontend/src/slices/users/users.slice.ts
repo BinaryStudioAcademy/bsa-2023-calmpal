@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { DataStatus } from '#libs/enums/enums.js';
-import { type ValueOf } from '#libs/types/types.js';
+import { DataStatus } from '~/libs/enums/enums.js';
+import { type ValueOf } from '~/libs/types/types.js';
 
 import { deleteUser } from './actions.js';
 

@@ -1,7 +1,7 @@
 import EnvConfig from 'react-native-config';
 
-import { type AppEnvironment } from '#libs/enums/enums';
-import { type ValueOf } from '#libs/types/types';
+import { type AppEnvironment } from '~/libs/enums/enums';
+import { type ValueOf } from '~/libs/types/types';
 
 import { type Config, type EnvironmentSchema } from './libs/types/types';
 

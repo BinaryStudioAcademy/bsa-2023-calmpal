@@ -6,10 +6,10 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SplashScreen from 'react-native-splash-screen';
 import { Provider as StoreProvider } from 'react-redux';
 
-import { Toast } from '#libs/components/components';
-import { useEffect } from '#libs/hooks/hooks';
-import { store } from '#libs/packages/store/store';
-import { Root as RootNavigation } from '#navigations/navigations';
+import { Toast } from '~/libs/components/components';
+import { useEffect } from '~/libs/hooks/hooks';
+import { store } from '~/libs/packages/store/store';
+import { Root as RootNavigation } from '~/navigations/navigations';
 
 import { SPLASH_SCREEN_HIDE_TIMEOUT } from './libs/constants/constants';
 import { styles } from './styles';

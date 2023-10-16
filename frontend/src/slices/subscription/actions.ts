@@ -1,13 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { AppRoute } from '#libs/enums/enums.js';
-import { type AsyncThunkConfig } from '#libs/types/types.js';
+import { AppRoute } from '~/libs/enums/enums.js';
+import { type AsyncThunkConfig } from '~/libs/types/types.js';
 import {
   type SubscriptionPaymentIntentCreateRequestDto,
   type SubscriptionPaymentIntentCreateResponseDto,
-} from '#packages/subscriptions/subscriptions.js';
-import { actions as appActions } from '#slices/app/app.js';
-import { actions as authActions } from '#slices/auth/auth.js';
+} from '~/packages/subscriptions/subscriptions.js';
+import { actions as appActions } from '~/slices/app/app.js';
+import { actions as authActions } from '~/slices/auth/auth.js';
 
 import { type ConfirmPaymentPayload } from './libs/types/types.js';
 import { name as sliceName } from './subscription.slice.js';

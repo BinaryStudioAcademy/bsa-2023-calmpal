@@ -1,5 +1,5 @@
-import { AppRoute } from '#libs/enums/enums.js';
-import { type MeditationEntryCreateForm } from '#packages/meditation/libs/types/types.js';
+import { AppRoute } from '~/libs/enums/enums.js';
+import { type MeditationEntryCreateForm } from '~/packages/meditation/libs/types/types.js';
 
 const TRACK_FIRST_INDEX = 0;
 const FULL_PERCENTAGE = 100;

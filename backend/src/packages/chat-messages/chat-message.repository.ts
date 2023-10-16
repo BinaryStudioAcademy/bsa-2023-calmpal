@@ -1,5 +1,5 @@
-import { SortType } from '#libs/enums/enums.js';
-import { type Repository } from '#libs/types/types.js';
+import { SortType } from '~/libs/enums/enums.js';
+import { type Repository } from '~/libs/types/types.js';
 
 import { ChatMessageEntity } from './chat-message.entity.js';
 import { type ChatMessageModel } from './chat-message.model.js';
@@ -40,14 +40,11 @@ class ChatMessageRepository implements Repository {
   public async create(entity: ChatMessageEntity): Promise<ChatMessageEntity> {
     const { message, chatId, senderId } = entity.toNewObject();
 
-    const chatMessage = await this.chatMessageModel
-      .query()
-      .insertGraph({
-        message,
-        chatId,
-        senderId,
-      })
-      .execute();
+    const chatMessage = await this.chatMessageModel.query().insertGraph({
+      message,
+      chatId,
+      senderId,
+    });
 
     return ChatMessageEntity.initialize({
       id: chatMessage.id,

@@ -1,5 +1,5 @@
-import { SortType } from '#libs/enums/enums.js';
-import { type Repository } from '#libs/types/types.js';
+import { SortType } from '~/libs/enums/enums.js';
+import { type Repository } from '~/libs/types/types.js';
 
 import { ChatEntity } from './chat.entity.js';
 import { type ChatModel } from './chat.model.js';
@@ -139,18 +139,17 @@ class ChatRepository implements Repository {
     });
   }
 
-  public delete({
+  public async delete({
     id,
     userId,
   }: {
     id: number;
     userId: number;
   }): Promise<number> {
-    return this.userToChatModel
+    return await this.userToChatModel
       .relatedQuery(UserToChatRelation.CHAT)
       .for(this.userToChatModel.query().where({ userId }))
-      .deleteById(id)
-      .execute();
+      .deleteById(id);
   }
 }
 

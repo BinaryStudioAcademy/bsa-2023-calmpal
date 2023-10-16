@@ -1,4 +1,4 @@
-import { type RootScreenName } from '#libs/enums/enums';
+import { type RootScreenName } from '~/libs/enums/enums';
 
 type RootNavigationParameterList = {
   [RootScreenName.MAIN]: undefined;

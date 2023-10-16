@@ -6,11 +6,11 @@ import {
   Link,
   ScrollView,
   Text,
-} from '#libs/components/components';
-import { RootScreenName } from '#libs/enums/enums';
-import { useAppForm, useCallback } from '#libs/hooks/hooks';
-import { type UserSignInRequestDto } from '#packages/users/users';
-import { userSignInValidationSchema } from '#packages/users/users';
+} from '~/libs/components/components';
+import { RootScreenName } from '~/libs/enums/enums';
+import { useAppForm, useCallback } from '~/libs/hooks/hooks';
+import { type UserSignInRequestDto } from '~/packages/users/users';
+import { userSignInValidationSchema } from '~/packages/users/users';
 
 import { Label } from '../label/label';
 import { USER_SIGN_IN_DEFAULT_VALUE } from './libs/constants';

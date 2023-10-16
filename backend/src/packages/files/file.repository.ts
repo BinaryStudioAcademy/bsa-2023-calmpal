@@ -1,6 +1,6 @@
-import { type Repository } from '#libs/types/types.js';
-import { FileEntity } from '#packages/files/file.entity.js';
-import { type FileModel } from '#packages/files/file.model.js';
+import { type Repository } from '~/libs/types/types.js';
+import { FileEntity } from '~/packages/files/file.entity.js';
+import { type FileModel } from '~/packages/files/file.model.js';
 
 import {
   type FileCommonQueryResponse,
@@ -18,8 +18,7 @@ class FileRepository implements Repository {
     const file = await this.fileModel
       .query()
       .findById(id)
-      .castTo<FileCommonQueryResponse | undefined>()
-      .execute();
+      .castTo<FileCommonQueryResponse | undefined>();
 
     if (!file) {
       return null;
@@ -46,8 +45,7 @@ class FileRepository implements Repository {
         url,
         contentType,
       } as FileCreateQueryPayload)
-      .castTo<FileCommonQueryResponse>()
-      .execute();
+      .castTo<FileCommonQueryResponse>();
 
     return FileEntity.initialize({
       id: file.id,

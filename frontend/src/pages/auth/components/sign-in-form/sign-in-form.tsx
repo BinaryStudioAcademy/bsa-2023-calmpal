@@ -1,10 +1,10 @@
-import { Button, Input, Link } from '#libs/components/components.js';
-import { AppRoute, DataStatus } from '#libs/enums/enums.js';
-import { useAppForm, useAppSelector, useCallback } from '#libs/hooks/hooks.js';
+import { Button, Input, Link } from '~/libs/components/components.js';
+import { AppRoute, DataStatus } from '~/libs/enums/enums.js';
+import { useAppForm, useAppSelector, useCallback } from '~/libs/hooks/hooks.js';
 import {
   type UserSignInRequestDto,
   userSignInValidationSchema,
-} from '#packages/users/users.js';
+} from '~/packages/users/users.js';
 
 import { DEFAULT_SIGN_IN_PAYLOAD } from './libs/constants.js';
 import styles from './styles.module.scss';

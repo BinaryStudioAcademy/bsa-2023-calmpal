@@ -1,6 +1,6 @@
-import { BackButtonWrapper, Loader } from '#libs/components/components.js';
-import { AppRoute, DataStatus } from '#libs/enums/enums.js';
-import { getValidClassNames } from '#libs/helpers/helpers.js';
+import { BackButtonWrapper, Loader } from '~/libs/components/components.js';
+import { AppRoute, DataStatus } from '~/libs/enums/enums.js';
+import { getValidClassNames } from '~/libs/helpers/helpers.js';
 import {
   useAppDispatch,
   useAppSelector,
@@ -9,8 +9,8 @@ import {
   useParams,
   useSearch,
   useSidebarState,
-} from '#libs/hooks/hooks.js';
-import { actions as journalActions } from '#slices/journal/journal.js';
+} from '~/libs/hooks/hooks.js';
+import { actions as journalActions } from '~/slices/journal/journal.js';
 
 import { JournalSidebar, Note } from './components/components.js';
 import styles from './styles.module.scss';

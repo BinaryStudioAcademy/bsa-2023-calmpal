@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { DataStatus } from '#libs/enums/enums';
-import { type ValueOf } from '#libs/types/types';
-import { type JournalEntryGetAllItemResponseDto } from '#packages/journal/journal';
+import { DataStatus } from '~/libs/enums/enums';
+import { type ValueOf } from '~/libs/types/types';
+import { type JournalEntryGetAllItemResponseDto } from '~/packages/journal/journal';
 
 import {
   createJournalEntry,

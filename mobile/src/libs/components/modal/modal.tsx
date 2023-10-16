@@ -7,8 +7,8 @@ import {
   Pressable,
   Text,
   View,
-} from '#libs/components/components';
-import { AppColor } from '#libs/enums/enums';
+} from '~/libs/components/components';
+import { AppColor } from '~/libs/enums/enums';
 
 import { styles } from './styles';
 
@@ -70,4 +70,5 @@ const Modal: React.FC<Properties> = ({
     </RNModal>
   );
 };
+
 export { Modal };

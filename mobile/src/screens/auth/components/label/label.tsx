@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Logo from '#assets/img/logo.svg';
-import { AppColor } from '#libs/enums/enums';
+import Logo from '~/assets/img/logo.svg';
+import { AppColor } from '~/libs/enums/enums';
 
 import { styles } from './styles';
 

@@ -1,4 +1,4 @@
-import { ServerErrorType } from '#libs/enums/enums.js';
+import { ServerErrorType } from '~/libs/enums/enums.js';
 
 type Constructor = {
   message: string;

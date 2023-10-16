@@ -8,7 +8,7 @@ import {
   useEffect,
   useFocusEffect,
   useState,
-} from '#libs/hooks/hooks';
+} from '~/libs/hooks/hooks';
 import {
   AppStatus,
   Event,
@@ -16,8 +16,8 @@ import {
   State,
   TRACK_START_TIME,
   usePlayerEvents,
-} from '#libs/packages/player/player';
-import { actions as meditationActions } from '#slices/meditation/meditation';
+} from '~/libs/packages/player/player';
+import { actions as meditationActions } from '~/slices/meditation/meditation';
 
 import { Controls, ProgressBar } from './components/components';
 
@@ -33,6 +33,7 @@ const Player: React.FC<Properties> = ({ duration }) => {
   const handlePlaybackStateChange = async (): Promise<void> => {
     const state = await player.getState();
     setPlaybackState(state);
+
     if (isPlaying) {
       KeepAwake.activate();
     } else {
@@ -42,6 +43,7 @@ const Player: React.FC<Properties> = ({ duration }) => {
 
   const handleNextTrack = async (nextTrack: number): Promise<void> => {
     const track = await player.getTrack(nextTrack);
+
     if (track) {
       void dispatch(meditationActions.setSelectedMeditationEntry(track.id));
     }

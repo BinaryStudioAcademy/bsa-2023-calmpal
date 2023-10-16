@@ -1,4 +1,4 @@
-import { getValidClassNames } from '#libs/helpers/helpers.js';
+import { getValidClassNames } from '~/libs/helpers/helpers.js';
 
 import { BackButton } from './back-button.js';
 

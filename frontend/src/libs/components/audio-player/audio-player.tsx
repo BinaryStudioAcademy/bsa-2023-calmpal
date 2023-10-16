@@ -3,11 +3,11 @@ import {
   useCallback,
   useEffect,
   useRef,
-} from '#libs/hooks/hooks.js';
+} from '~/libs/hooks/hooks.js';
 import {
   TRACK_INCREMENT_INDEX,
   TRACK_START_TIME,
-} from '#pages/meditation/libs/constants/constants.js';
+} from '~/pages/meditation/libs/constants/constants.js';
 
 import { AudioControls, ProgressBar } from './components/components.js';
 import { DEFAULT_AUDIO_OPTIONS } from './libs/constants/constants.js';

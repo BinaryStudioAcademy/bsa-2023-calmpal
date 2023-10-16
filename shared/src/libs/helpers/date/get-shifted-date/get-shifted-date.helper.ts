@@ -5,6 +5,7 @@ const getShiftedDate = (
   { month }: { month?: number },
 ): Date => {
   let date = baseDate;
+
   if (month) {
     date = addMonths(date, month);
   }

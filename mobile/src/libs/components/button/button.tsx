@@ -5,9 +5,9 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from '#libs/components/components';
-import { AppColor } from '#libs/enums/enums';
-import { type IconName } from '#libs/types/types';
+} from '~/libs/components/components';
+import { AppColor } from '~/libs/enums/enums';
+import { type IconName } from '~/libs/types/types';
 
 import { styles } from './styles';
 

@@ -1,7 +1,7 @@
 import { Link as UILink } from '@react-navigation/native';
 import React, { type ComponentProps, type ReactNode } from 'react';
 
-import { View } from '#libs/components/components';
+import { View } from '~/libs/components/components';
 
 import { styles } from './styles';
 

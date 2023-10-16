@@ -1,9 +1,9 @@
 import { type NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { type ReactNode } from 'react';
 
-import { RootScreenName } from '#libs/enums/enums';
-import { useAppSelector, useEffect, useNavigation } from '#libs/hooks/hooks';
-import { type RootNavigationParameterList } from '#libs/types/types';
+import { RootScreenName } from '~/libs/enums/enums';
+import { useAppSelector, useEffect, useNavigation } from '~/libs/hooks/hooks';
+import { type RootNavigationParameterList } from '~/libs/types/types';
 
 type Properties = {
   children: ReactNode;

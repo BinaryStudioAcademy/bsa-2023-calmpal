@@ -1,7 +1,7 @@
 import React from 'react';
 
-import ChatAvatar from '#assets/img/icons/chat-avatar.svg';
-import { Text, View } from '#libs/components/components';
+import ChatAvatar from '~/assets/img/icons/chat-avatar.svg';
+import { Text, View } from '~/libs/components/components';
 
 import { styles } from './styles';
 

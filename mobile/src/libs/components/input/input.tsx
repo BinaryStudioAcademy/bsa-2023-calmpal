@@ -1,15 +1,15 @@
 import React from 'react';
 import { TextInput } from 'react-native';
 
-import { Text, View } from '#libs/components/components';
-import { AppColor } from '#libs/enums/enums';
-import { useFormController, useState } from '#libs/hooks/hooks';
+import { Text, View } from '~/libs/components/components';
+import { AppColor } from '~/libs/enums/enums';
+import { useFormController, useState } from '~/libs/hooks/hooks';
 import {
   type FormControl,
   type FormFieldErrors,
   type FormFieldPath,
   type FormFieldValues,
-} from '#libs/types/types';
+} from '~/libs/types/types';
 
 import { styles } from './styles';
 

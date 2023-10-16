@@ -1,18 +1,18 @@
-import { APIPath, ContentType } from '#libs/enums/enums';
-import { BaseHttpApi } from '#libs/packages/api/api';
-import { type HTTP } from '#libs/packages/http/http';
-import { type Storage } from '#libs/packages/storage/storage';
+import { APIPath, ContentType } from '~/libs/enums/enums';
+import { BaseHttpApi } from '~/libs/packages/api/api';
+import { type HTTP } from '~/libs/packages/http/http';
+import { type Storage } from '~/libs/packages/storage/storage';
 import {
   type SurveyGetAllItemResponseDto,
   type SurveyRequestDto,
-} from '#packages/survey/survey';
+} from '~/packages/survey/survey';
 import {
   type UserAuthResponseDto,
   type UserSignInRequestDto,
   type UserSignInResponseDto,
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
-} from '#packages/users/users';
+} from '~/packages/users/users';
 
 import { AuthApiPath } from './libs/enums/enums';
 

@@ -1,4 +1,4 @@
-import { type ValueOf } from '#libs/types/types.js';
+import { type ValueOf } from '~/libs/types/types.js';
 
 import { type NotificationType } from '../enums/enums.js';
 

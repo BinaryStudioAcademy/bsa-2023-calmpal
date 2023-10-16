@@ -1,4 +1,4 @@
-import { AppQueryStringKey, SidebarMode } from '#libs/enums/enums.js';
+import { AppQueryStringKey, SidebarMode } from '~/libs/enums/enums.js';
 
 import { useSearchParams as useSearchParameters } from '../hooks.js';
 

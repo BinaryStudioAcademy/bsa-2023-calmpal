@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { TextInput } from '#libs/components/components';
-import { AppColor } from '#libs/enums/enums';
-import { debounce } from '#libs/helpers/helpers';
+import { TextInput } from '~/libs/components/components';
+import { AppColor } from '~/libs/enums/enums';
+import { debounce } from '~/libs/helpers/helpers';
 import {
   useAppForm,
   useCallback,
@@ -10,7 +10,7 @@ import {
   useFocusEffect,
   useFormController,
   useState,
-} from '#libs/hooks/hooks';
+} from '~/libs/hooks/hooks';
 
 import {
   DEFAULT_SEARCH_PAYLOAD,

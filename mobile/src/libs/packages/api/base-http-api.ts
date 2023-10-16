@@ -1,5 +1,5 @@
-import { type ContentType, ServerErrorType } from '#libs/enums/enums';
-import { configureString } from '#libs/helpers/helpers';
+import { type ContentType, ServerErrorType } from '~/libs/enums/enums';
+import { configureString } from '~/libs/helpers/helpers';
 import {
   type HTTP,
   type HTTPApi,
@@ -7,9 +7,9 @@ import {
   type HTTPApiResponse,
   type HTTPCode,
   HTTPHeader,
-} from '#libs/packages/http/http';
-import { HTTPError } from '#libs/packages/http/libs/exceptions/http-error.exception';
-import { type ServerErrorResponse, type ValueOf } from '#libs/types/types';
+} from '~/libs/packages/http/http';
+import { HTTPError } from '~/libs/packages/http/libs/exceptions/http-error.exception';
+import { type ServerErrorResponse, type ValueOf } from '~/libs/types/types';
 
 import { type Storage, StorageKey } from '../storage/storage';
 
@@ -75,6 +75,7 @@ class BaseHttpApi implements HTTPApi {
     hasAuth: boolean,
   ): Promise<Headers> {
     const headers = new Headers();
+
     if (contentType) {
       headers.append(HTTPHeader.CONTENT_TYPE, contentType);
     }

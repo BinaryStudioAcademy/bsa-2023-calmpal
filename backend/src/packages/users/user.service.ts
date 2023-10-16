@@ -1,14 +1,14 @@
-import { ExceptionMessage } from '#libs/enums/enums.js';
-import { UsersError } from '#libs/exceptions/exceptions.js';
-import { type Config } from '#libs/packages/config/config.js';
-import { type Encrypt } from '#libs/packages/encrypt/encrypt.js';
-import { HTTPCode } from '#libs/packages/http/http.js';
-import { type JWTService } from '#libs/packages/jwt/jwt.service.js';
-import { type UserRoleKey } from '#libs/packages/open-ai/libs/enums/enums.js';
-import { type Service, type ValueOf } from '#libs/types/types.js';
-import { type UserEntity } from '#packages/users/user.entity.js';
-import { type UserRepository } from '#packages/users/user.repository.js';
+import { ExceptionMessage } from '~/libs/enums/enums.js';
+import { type Config } from '~/libs/packages/config/config.js';
+import { type Encrypt } from '~/libs/packages/encrypt/encrypt.js';
+import { HTTPCode } from '~/libs/packages/http/http.js';
+import { type JWTService } from '~/libs/packages/jwt/jwt.service.js';
+import { type UserRoleKey } from '~/libs/packages/open-ai/libs/enums/enums.js';
+import { type Service, type ValueOf } from '~/libs/types/types.js';
+import { type UserEntity } from '~/packages/users/user.entity.js';
+import { type UserRepository } from '~/packages/users/user.repository.js';
 
+import { UserError } from './libs/exceptions/exceptions.js';
 import {
   type UserSignUpRequestDto,
   type UserSignUpResponseDto,
@@ -24,8 +24,11 @@ type UserServiceDependencies = {
 
 class UserService implements Service {
   private userRepository: UserRepository;
+
   private jwtService: JWTService;
+
   private encryptService: Encrypt;
+
   private config: Config;
 
   public constructor({
@@ -100,7 +103,7 @@ class UserService implements Service {
     const userToDelete = await this.userRepository.findById(id);
 
     if (!userToDelete) {
-      throw new UsersError({
+      throw new UserError({
         status: HTTPCode.NOT_FOUND,
         message: ExceptionMessage.USER_NOT_FOUND,
       });

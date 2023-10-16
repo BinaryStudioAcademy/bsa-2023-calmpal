@@ -1,6 +1,6 @@
 import joi from 'joi';
 
-import { ContentType } from '#libs/enums/enums.js';
+import { ContentType } from '~/libs/enums/enums.js';
 
 import { MeditationEntryValidationMessage } from '../enums/enums.js';
 import { type MeditationEntryCreateRequestDto } from '../types/types.js';
@@ -24,7 +24,7 @@ const createMeditationEntry = joi.object<MeditationEntryCreateRequestDto, true>(
       }),
     file: joi
       .object({
-        mimetype: joi.string().valid(ContentType.MPEG).required().messages({
+        mimetype: joi.string().valid(ContentType.MP3).required().messages({
           'any.only': MeditationEntryValidationMessage.MPEG_REQUIRED,
         }),
       })

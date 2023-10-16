@@ -1,5 +1,5 @@
-import { useAppSelector } from '#libs/hooks/hooks.js';
-import { SUBSCRIPTION_PRICE } from '#packages/subscriptions/subscriptions.js';
+import { useAppSelector } from '~/libs/hooks/hooks.js';
+import { SUBSCRIPTION_PRICE } from '~/packages/subscriptions/subscriptions.js';
 
 import {
   SubscriptionManagementDialog,
@@ -30,4 +30,5 @@ const Subscription: React.FC = () => {
     </section>
   );
 };
+
 export { Subscription };

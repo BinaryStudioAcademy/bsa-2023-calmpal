@@ -1,4 +1,4 @@
-import { logger } from '#libs/packages/logger/logger.js';
+import { logger } from '~/libs/packages/logger/logger.js';
 
 import { SurveyController } from './survey.controller.js';
 import { SurveyModel } from './survey.model.js';
