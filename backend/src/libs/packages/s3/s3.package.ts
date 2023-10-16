@@ -15,8 +15,8 @@ import { type S3FileUploadRequestDto } from './libs/types/types.js';
 
 type S3Dependencies = {
   region: string;
-  accessKeyId: string;
-  secretAccessKey: string;
+  accessKeyId?: string | undefined;
+  secretAccessKey?: string | undefined;
   bucketName: string;
 };
 
@@ -37,10 +37,12 @@ class S3 {
 
     this.s3Client = new S3Client({
       region: this.region,
-      credentials: {
-        accessKeyId: accessKeyId,
-        secretAccessKey: secretAccessKey,
-      },
+      ...(Boolean(accessKeyId && secretAccessKey) && {
+        credentials: {
+          accessKeyId,
+          secretAccessKey,
+        },
+      }),
     } as S3ClientConfig);
   }
 

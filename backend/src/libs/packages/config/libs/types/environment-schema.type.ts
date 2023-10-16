@@ -23,8 +23,8 @@ type EnvironmentSchema = {
   };
   AWS: {
     REGION: string;
-    ACCESS_KEY_ID: string;
-    SECRET_ACCESS_KEY: string;
+    ACCESS_KEY_ID?: string;
+    SECRET_ACCESS_KEY?: string;
     BUCKET_NAME: string;
   };
   ENCRYPT: {

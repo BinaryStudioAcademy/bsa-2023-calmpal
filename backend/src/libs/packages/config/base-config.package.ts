@@ -124,13 +124,13 @@ class BaseConfig implements Config {
           doc: 'Access key ID for the AWS account',
           format: String,
           env: 'AWS_ACCESS_KEY_ID',
-          default: null,
+          default: undefined,
         },
         SECRET_ACCESS_KEY: {
           doc: 'Secret access key for the AWS account',
           format: String,
           env: 'AWS_SECRET_ACCESS_KEY',
-          default: null,
+          default: undefined,
         },
         BUCKET_NAME: {
           doc: 'Name of the S3 Bucket in the the AWS account',
